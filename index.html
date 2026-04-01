@@ -1,30 +1,2882 @@
-## Tiny demo `index.html`
-
-```html
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="sv">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Swedol UI Prototype</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swedol – Användare</title>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+    /* ── Material Symbols base class ──────────────────────────── */
+    .ms {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .ms--24 { font-size: 24px; }
+    .ms--filled { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .ms--white  { color: #fff; }
+    .ms--grey   { color: #939595; }
+    .ms--muted  { color: #ccc; }
+
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      background: var(--color-background-secondary);
+      color: var(--color-text-primary);
+      min-width: 320px;
+    }
+
+    /* ── Design Tokens ────────────────────────────────────────── */
+    :root {
+      /* Legacy primitives (kept for compatibility) */
+      --brand:             #c7d300;
+      --black:             #000;
+      --white:             #fff;
+      --grey-90:           #222;
+      --grey-20:           #939595;
+      --grey-15:           #dad9d7;
+      --grey-10:           #e5e5e5;
+      --text-secondary:    #4f4f4f;
+      --surface-secondary: #f6f6f6;
+      --danger:            #d90000;
+
+      /* Spacing & layout */
+      --px-page: 16px;   /* xs – mobile */
+      --max-w:   1200px;
+      --px-full: max(var(--px-page), calc((100vw - var(--max-w)) / 2));
+
+      /* ── Semantic Color Tokens ──────────────────────────────── */
+      /* Accent */
+      --color-accent-default: #c7d300;
+      --color-accent-light:   #f4f6cc;
+      --color-accent-dark:    #8b9400;
+
+      /* Text */
+      --color-text-primary:             #000000;
+      --color-text-primary-inverted:    #ffffff;
+      --color-text-secondary:           #4f4f4f;
+      --color-text-secondary-inverted:  rgba(255,255,255,0.78);
+      --color-text-tertiary:            #737373;
+      --color-text-tertiary-inverted:   #999999;
+      --color-text-disabled:            #939595;
+      --color-text-danger-default:      #d90000;
+      --color-text-success:             #248616;
+      --color-text-information-default: #0066ff;
+
+      /* Background */
+      --color-background-primary:   #ffffff;
+      --color-background-secondary: #f6f6f6;
+
+      /* Surface – neutrals */
+      --color-surface-02:  #fafafa;
+      --color-surface-05:  #f6f6f6;
+      --color-surface-10:  #e5e5e5;
+      --color-surface-15:  #dad9d7;
+      --color-surface-20:  #cccccc;
+      --color-surface-40:  #939595;
+      --color-surface-50:  #737373;
+      --color-surface-60:  #595959;
+      --color-surface-80:  #333333;
+      --color-surface-90:  #222222;
+      --color-surface-100: #000000;
+      --color-surface-raised-primary:   #ffffff;
+      --color-surface-raised-secondary: #f6f6f6;
+      --color-surface-disabled:         #e5e5e5;
+      --color-surface-navigation-hover: #fafafa;
+
+      /* Surface – semantic status */
+      --color-surface-danger-default:       #d90000;
+      --color-surface-danger-weak:          #ffbdc0;
+      --color-surface-danger-weaker:        #ffebeb;
+      --color-surface-success-default:      #248616;
+      --color-surface-success-weak:         #daf6d0;
+      --color-surface-success-weaker:       #edffe7;
+      --color-surface-warning-default:      #fac000;
+      --color-surface-warning-weak:         #ffe167;
+      --color-surface-warning-weaker:       #fff5c2;
+      --color-surface-information-default:  #0066ff;
+      --color-surface-information-weak:     #d0e9ff;
+      --color-surface-information-weaker:   #e2f1ff;
+
+      /* Surface – opacity */
+      --color-surface-opacity-black-05: rgba(0,0,0,0.05);
+      --color-surface-opacity-black-10: rgba(0,0,0,0.10);
+      --color-surface-opacity-black-20: rgba(0,0,0,0.20);
+      --color-surface-opacity-black-50: rgba(0,0,0,0.50);
+      --color-surface-opacity-white-20: rgba(255,255,255,0.20);
+
+      /* Border */
+      --color-border-primary:       #e5e5e5;
+      --color-border-secondary:     #f6f6f6;
+      --color-border-tertiary:      #dad9d7;
+      --color-border-dark:          #333333;
+      --color-border-selected:      #000000;
+      --color-border-hover:         #333333;
+      --color-border-disabled:      #dad9d7;
+      --color-border-input-default: #939595;
+      --color-border-focus:         #455efb;
+
+      /* ── Elevation / Shadows ────────────────────────────────── */
+      --elevation-b-20:  0px 1px 3px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-b-40:  0px 2px 4px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-b-60:  0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-b-80:  0px 8px 16px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-b-100: 0px 16px 24px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-t-60:  0px -4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-t-80:  0px -8px 16px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-drawer-left:  25px 0px 25px 0px rgba(0,0,0,0.03);
+      --elevation-drawer-right: -25px 0px 25px 0px rgba(0,0,0,0.03);
+
+      /* ── Motion – Easing ────────────────────────────────────── */
+      --ease-decelerate-generic:    cubic-bezier(.16,.38,.58,1);
+      --ease-decelerate-emphasized: cubic-bezier(.16,0,.16,1);
+      --ease-accelerate-generic:    cubic-bezier(.36,.09,1,.58);
+      --ease-standard:              cubic-bezier(.35,0,.35,1);
+
+      /* ── Motion – Duration ──────────────────────────────────── */
+      --duration-fast-1:   50ms;
+      --duration-fast-2:   100ms;
+      --duration-fast-3:   150ms;
+      --duration-fast-4:   200ms;
+      --duration-medium-1: 250ms;
+      --duration-medium-2: 300ms;
+      --duration-medium-3: 350ms;
+      --duration-medium-4: 400ms;
+      --duration-slow-1:   450ms;
+      --duration-slow-2:   500ms;
+      --duration-slow-3:   550ms;
+      --duration-slow-4:   600ms;
+    }
+
+    @media (min-width: 640px) {   /* sm – tablet */
+      :root { --px-page: 32px; }
+    }
+
+    @media (min-width: 1024px) {  /* lg – desktop */
+      :root { --px-page: 40px; }
+    }
+
+    /* ── Typography ───────────────────────────────────────────── */
+    .font-bold   { font-weight: 700; }
+    .font-regular{ font-weight: 400; }
+    .uppercase   { text-transform: uppercase; }
+    .tracking-sm { letter-spacing: 0.32px; }
+
+    /* ── Utilities ────────────────────────────────────────────── */
+    .flex        { display: flex; }
+    .flex-col    { flex-direction: column; }
+    .items-center{ align-items: center; }
+    .items-start { align-items: flex-start; }
+    .justify-between { justify-content: space-between; }
+    .justify-center  { justify-content: center; }
+    .gap-4  { gap: 4px; }
+    .gap-8  { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .gap-24 { gap: 24px; }
+    .shrink-0 { flex-shrink: 0; }
+    .flex-1   { flex: 1; }
+    .w-full   { width: 100%; }
+    .relative { position: relative; }
+
+    /* ── Page wrapper ─────────────────────────────────────── */
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       HEADER (black top bar)
+    ══════════════════════════════════════════════════════════ */
+    .site-header {
+      background: var(--black);
+    }
+    .site-header--fixed {
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      transform: translateY(-100%);
+      transition: transform var(--duration-fast-4) var(--ease-standard);
+    }
+    .site-header--fixed.site-header--visible {
+      transform: translateY(0);
+    }
+
+    /* Top row: logo + search + user icons */
+    .site-header__top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px var(--px-full);
+      background: var(--black);
+      border-bottom: 1px solid #232500;
+      box-shadow: var(--elevation-b-80);
+      transition: none;
+    }
+
+    .site-header__menu-btn {
+      width: 48px;
+      height: 48px;
+      padding: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+    .site-header__menu-btn:hover { background: var(--color-surface-opacity-white-20); }
+    .site-header__menu-btn .ms { color: var(--color-accent-default); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    .site-header__logo {
+      width: 119px;
+      height: 22.777px;
+      flex-shrink: 0;
+    }
+    .site-header__logo svg { width: 100%; height: 100%; }
+
+    .site-header__search {
+      flex: 1;
+      position: relative;
+      background: var(--color-background-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      height: 48px;
+      border: 1px solid transparent;
+      box-sizing: border-box;
+      transition: border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .site-header__search::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 2px solid var(--color-border-focus);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-fast-2) var(--ease-standard);
+    }
+    .site-header__search:hover { border-color: var(--color-border-dark); }
+    .site-header__search.is-active { border-color: var(--color-border-selected); }
+    .site-header__search:focus-within::after { opacity: 0; }
+    body.keyboard-nav :focus-within::after { opacity: 1; }
+    .site-header__search .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; flex-shrink: 0; }
+    .site-header__search input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-weight: 400;
+      color: var(--color-text-primary);
+      letter-spacing: 0.32px;
+      line-height: 24px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .site-header__search input::placeholder { color: var(--color-text-tertiary); }
+    .site-header__search-right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .site-header__search-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--color-border-tertiary);
+    }
+    .search-scan-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .search-scan-btn:hover { background: var(--color-surface-opacity-black-05); }
+    .search-scan-btn .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    .site-header__right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      box-sizing: border-box;
+    }
+    .icon-btn .ms { color: var(--color-text-primary-inverted); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .icon-btn:hover { background: var(--color-surface-opacity-white-20); }
+    .icon-btn--sm {
+      width: 32px;
+      height: 32px;
+      padding: 6px;
+    }
+    .icon-btn--sm .ms { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .icon-btn--sm:hover { background: var(--color-surface-opacity-black-05); }
+
+    .badge {
+      position: absolute;
+      top: 4px;
+      right: 2px;
+      background: var(--color-surface-danger-default);
+      color: var(--color-text-primary-inverted);
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 14px;
+      letter-spacing: 0.56px;
+      text-transform: uppercase;
+      border-radius: 100px;
+      min-width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      box-sizing: border-box;
+    }
+    .badge--white {
+      background: #fff;
+      color: var(--black);
+    }
+
+    .account-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 48px;
+      padding: 0 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-align: left;
+      line-height: normal;
+      box-sizing: border-box;
+    }
+    .account-info:hover { background: var(--color-surface-opacity-white-20); }
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 100px;
+      border: 1px solid var(--grey-90);
+      background: var(--grey-20);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .account-info__name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text-primary-inverted);
+      line-height: 24px;
+      white-space: nowrap;
+    }
+    .account-info__sub {
+      font-size: 14px;
+      color: var(--color-text-secondary-inverted);
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    /* Bottom row: main nav */
+    .site-header__nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--px-full);
+      height: 48px;
+      background: var(--black);
+      border-bottom: 1px solid var(--brand);
+      box-shadow: var(--elevation-b-60);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--color-text-primary-inverted);
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+      line-height: 20px;
+      padding: 14px 0;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { opacity: 0.8; }
+
+    .store-btn {
+      background: var(--black);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      gap: 4px;
+      color: var(--color-text-primary-inverted);
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.56px;
+      line-height: 14px;
+    }
+    .store-btn:hover {
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
+    }
+    .store-btn .ms {
+      color: var(--color-text-primary-inverted);
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .store-btn__text-regular { font-weight: 400; letter-spacing: 0.56px; }
+
+    /* ══════════════════════════════════════════════════════════
+       ACCOUNT NAV (white bar with tabs)
+    ══════════════════════════════════════════════════════════ */
+    .account-nav {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px var(--px-full);
+      border-bottom: 1px solid var(--color-border-primary);
+    }
+
+    .account-nav__profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar--lg {
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      border: 1px solid var(--grey-90);
+      background: var(--grey-20);
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: var(--elevation-b-40);
+    }
+    .avatar--lg img { width: 100%; height: 100%; object-fit: cover; }
+
+    .account-nav__name {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--black);
+    }
+    .account-nav__sub {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      color: var(--text-secondary);
+      letter-spacing: 0.32px;
+    }
+
+    .tab-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      height: 48px;
+    }
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding-bottom: 0;
+      position: relative;
+    }
+    .tab-item__label {
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18px;
+      color: var(--black);
+      white-space: nowrap;
+      line-height: 18px;
+    }
+    .tab-item__indicator {
+      height: 3px;
+      width: 100%;
+      background: transparent;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform var(--duration-medium-2) var(--ease-decelerate-generic), background var(--duration-medium-2) var(--ease-standard);
+    }
+    .tab-item--active .tab-item__indicator {
+      background: var(--brand);
+      transform: scaleY(1);
+    }
+    .tab-item--active .tab-item__label {
+      color: var(--black);
+    }
+    .tab-item:not(.tab-item--active) .tab-item__label {
+      color: var(--black);
+    }
+    .tab-item:not(.tab-item--active):hover .tab-item__label {
+      color: var(--color-text-tertiary);
+    }
+    .tab-item:not(.tab-item--active):hover .tab-item__indicator {
+      background: var(--color-surface-10);
+      transform: scaleY(1);
+    }
+
+    .account-nav__right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .company-logo {
+      width: 80px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .divider-v {
+      width: 1px;
+      height: 24px;
+      background: var(--grey-15);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════════════════════════════ */
+    .main-content {
+      padding: 40px var(--px-page) 0;
+      background: var(--color-background-secondary);
+    }
+
+    /* Mobile: headline-lg (28px/32px) */
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 32px;
+      color: var(--color-text-primary);
+      margin-bottom: 8px;
+    }
+
+    /* Mobile: body-lg (18px/24px) */
+    .page-preamble {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 24px;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    /* Desktop: headline-lg (36px/40px) and body-lg (20px/28px) */
+    @media (min-width: 769px) {
+      .page-title { font-size: 36px; line-height: 40px; }
+      .page-preamble { font-size: 20px; line-height: 28px; }
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .search-input {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-background-primary);
+      border: 1px solid var(--color-border-input-default);
+      padding: 0 8px;
+      height: 40px;              /* Desktop Small */
+      width: min(384px, 100%);
+      transition: border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .search-input::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 2px solid var(--color-border-focus);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-fast-2) var(--ease-standard);
+    }
+    .search-input .ms {
+      color: var(--black);
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .search-input input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 14px;            /* body-sm Desktop Small */
+      font-weight: 400;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      color: var(--color-text-primary);
+      letter-spacing: 0.28px;
+      line-height: 20px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .search-input input::placeholder { color: var(--color-text-tertiary); }
+    .search-input:hover { border-color: var(--color-border-dark); }
+    .search-input.is-active { border-color: var(--color-border-selected); }
+    .search-input:focus-within::after { opacity: 0; }
+    body.keyboard-nav :focus-within::after { opacity: 1; }
+    .search-input:focus-within .search-clear { /* controlled by JS */ }
+    .search-clear {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 0;
+    }
+    .search-clear .ms {
+      font-size: 20px;
+      color: var(--color-text-tertiary);
+      font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .search-input-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--color-border-tertiary);
+      flex-shrink: 0;
+    }
+
+    .action-btns {
+      display: flex;
+      gap: 8px;
+    }
+    .action-btn {
+      width: 40px;
+      height: 40px;
+      background: var(--black);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .action-btn .ms {
+      color: white;
+      font-size: 24px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .action-btn:hover {
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
+    }
+
+    /* Table */
+    .users-table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: var(--elevation-b-20);
+    }
+
+    .users-table thead tr {
+      background: var(--color-accent-light);
+    }
+    .users-table th {
+      padding: 0 16px;
+      height: 56px;
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-align: left;
+      padding-left: 16px;
+      color: var(--black);
+      letter-spacing: 0.28px;
+      text-transform: none;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .users-table th:first-child { padding-left: 16px; }
+
+    .sort-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .sort-icon .ms {
+      font-size: 16px;
+      color: var(--black);
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+
+    .users-table tbody tr { background: var(--color-background-primary); }
+    .users-table tbody tr:nth-child(even) { background: var(--surface-secondary); }
+    .users-table tbody tr:hover { background: var(--color-surface-10); }
+
+    .users-table td {
+      padding: 0 16px;
+      height: 56px;
+      font-size: 16px;
+      line-height: 16px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      color: var(--black);
+      vertical-align: middle;
+    }
+    .users-table td:first-child { padding-left: 16px; }
+
+    .user-name { margin-bottom: 4px; }
+    .user-name {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 16px;
+      color: var(--black);
+    }
+    .user-email {
+      font-size: 14px;
+      line-height: 14px;
+      color: var(--text-secondary);
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 400;
+    }
+    .user-email:hover {
+      text-decoration: none;
+    }
+
+    .check-icon {
+      display: table-cell;
+      text-align: left;
+      vertical-align: middle;
+    }
+    .check-icon img {
+      display: block;
+      width: 24px;
+      height: 24px;
+      font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* Pagination */
+    .pagination-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      padding-bottom: 80px;
+    }
+    .pagination-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+      width: 190px;
+    }
+    .pagination-top {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      width: 100%;
+    }
+    .pagination-count {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: var(--color-surface-60);
+      text-align: center;
+      width: 100%;
+    }
+    .pagination-bar {
+      position: relative;
+      width: 100%;
+      height: 2px;
+    }
+    .pagination-bar__track {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--color-surface-10);
+    }
+    .pagination-bar__fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0.5%;
+      background: var(--black);
+    }
+    .show-more-btn {
+      border: 1px solid var(--black);
+      background: none;
+      width: 100%;
+      padding: 12px 8px;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18px;
+      line-height: 18px;
+      color: var(--black);
+      cursor: pointer;
+      text-align: center;
+    }
+    .show-more-btn:hover { background: var(--color-surface-opacity-black-05); color: var(--black); }
+
+    /* ══════════════════════════════════════════════════════════
+       FAVOURITE STORE SECTION
+    ══════════════════════════════════════════════════════════ */
+    .fav-store-section {
+      padding: 0 var(--px-page);
+    }
+    .page-divider { padding: 48px var(--px-page); }
+    .page-divider__line { height: 1px; background: var(--color-border-primary); }
+    .fav-store { display: flex; flex-direction: column; gap: 24px; }
+    .fav-store__header { display: flex; flex-direction: column; gap: 8px; }
+    .fav-store__title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 28px;
+      color: var(--color-text-primary);
+    }
+    .fav-store__desc {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      max-width: calc(100% - 380px - 24px);
+    }
+    .fav-store__body {
+      display: flex;
+      align-items: stretch;
+    }
+    .fav-store__image {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      background: var(--color-surface-90);
+      position: relative;
+    }
+    .fav-store__image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .fav-store__card {
+      width: 380px;
+      flex-shrink: 0;
+      background: #fff;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: var(--elevation-b-20);
+    }
+    .fav-store__card-info { display: flex; flex-direction: column; gap: 16px; }
+    .fav-store__card-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 24px;
+      text-align: center;
+      color: var(--color-text-primary);
+      padding-bottom: 8px;
+    }
+    .fav-store__info-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: fit-content;
+      margin: 0 auto;
+    }
+    .fav-store__status {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .fav-store__status-dot { width: 8px; height: 8px; flex-shrink: 0; display: block; }
+    .fav-store__status-row {
+      display: flex;
+      justify-content: space-between;
+      width: 167px;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+    }
+    .fav-store__hours {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      padding-left: 16px;
+    }
+    .fav-store__hours-row { display: flex; gap: 16px; }
+    .fav-store__hours-day { width: 80px; color: var(--color-text-secondary); font-weight: 400; flex-shrink: 0; }
+    .fav-store__hours-time { color: var(--color-text-primary); font-weight: 400; white-space: nowrap; }
+    .fav-store__card-actions { display: flex; flex-direction: column; gap: 8px; }
+    .fav-store__btn-primary {
+      background: var(--color-surface-100);
+      color: var(--color-text-primary-inverted);
+      border: none;
+      height: 40px;
+      padding: 0 8px;
+      width: 100%;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.48px;
+      cursor: pointer;
+    }
+    .fav-store__btn-primary:hover {
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2)), linear-gradient(90deg, #000, #000);
+    }
+    .fav-store__btn-outline {
+      background: none;
+      border: 1px solid var(--color-border-selected);
+      color: var(--color-text-primary);
+      padding: 8px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.48px;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+    .fav-store__btn-outline:hover { background: var(--color-surface-opacity-black-05); }
+    .fav-store__btn-outline .ms { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+
+    /* ══════════════════════════════════════════════════════════
+       CONTACT SECTION
+    ══════════════════════════════════════════════════════════ */
+    .contact-section {
+      padding: 0 var(--px-page) 80px;
+      background: var(--surface-secondary);
+    }
+
+    .contact-card {
+      background: var(--white);
+      display: flex;
+      box-shadow: var(--elevation-b-20);
+    }
+
+    .contact-info {
+      flex: 1;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 16px;
+    }
+    .contact-info__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 0 8px 16px;
+      width: 100%;
+    }
+    .contact-info__title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 28px;
+      color: var(--black);
+    }
+    .contact-info__desc {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--text-secondary);
+      max-width: 360px;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding-right: 8px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 16px;
+      color: var(--black);
+      cursor: pointer;
+    }
+    .contact-link .ms { color: var(--black); font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .contact-divider-v {
+      width: 1px;
+      height: 20px;
+      background: var(--grey-15);
+    }
+
+    .avatars-group {
+      display: flex;
+      padding-top: 16px;
+    }
+    .avatars-group .avatar--lg {
+      width: 48px;
+      height: 48px;
+      border-radius: 100px;
+      border: 2px solid var(--white);
+      overflow: hidden;
+      margin-right: -8px;
+      box-shadow: var(--elevation-b-40);
+      flex-shrink: 0;
+    }
+    .avatars-group .avatar--lg:last-child { margin-right: 0; }
+    .avatars-group .avatar--lg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .contact-divider {
+      width: 1px;
+      background: var(--grey-10);
+      align-self: stretch;
+      margin: 32px 0;
+    }
+
+    .collapsibles {
+      flex: 1;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .collapsible-wrap {
+      border-bottom: 1px solid var(--color-border-primary);
+      transition: padding-bottom var(--duration-fast-4) var(--ease-standard);
+    }
+    .collapsible-wrap--open { padding-bottom: 32px; }
+    .collapsible-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      cursor: pointer;
+      height: 72px;
+      box-sizing: border-box;
+    }
+    .collapsible-item__left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .collapsible-item__left .ms { color: var(--black); }
+    .collapsible-item__label {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--black);
+    }
+    .collapsible-item__chevron .ms { color: var(--black); font-size: 24px; transition: transform var(--duration-fast-4) var(--ease-standard); }
+    .collapsible-wrap--open .collapsible-item__chevron .ms { transform: rotate(180deg); }
+    .collapsible-item__content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--duration-fast-4) var(--ease-standard);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CTA BANNER
+    ══════════════════════════════════════════════════════════ */
+    .cta-banner {
+      background: var(--white);
+      border-top: 1px solid var(--color-border-primary);
+      padding: 72px var(--px-full) 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      text-align: center;
+    }
+    .cta-banner__text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .cta-banner__title {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 40px;
+      letter-spacing: 0;
+    }
+    .cta-banner__sub {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--black);
+      line-height: 28px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-blank {
+      background: none;
+      border: none;
+      color: var(--black);
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.18px;
+      line-height: 18px;
+    }
+    .btn-blank:hover { background: var(--color-surface-opacity-black-05); }
+    .btn-primary {
+      background: var(--black);
+      border: none;
+      color: var(--white);
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.18px;
+      line-height: 18px;
+    }
+    .btn-primary:hover { background-image: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2)), linear-gradient(90deg, #000, #000); }
+
+    /* ══════════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════════ */
+    .site-footer {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .footer-top {
+      display: flex;
+      gap: 40px;
+      align-items: stretch;
+      padding: 48px var(--px-full);
+      background: var(--color-surface-90);
+      border-bottom: 1px solid var(--color-surface-80);
+    }
+    .footer-top__col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-top__divider {
+      width: 1px;
+      background: var(--color-surface-80);
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+
+    /* Newsletter */
+    .newsletter__title {
+      font-size: 36px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 36px;
+      color: var(--white);
+    }
+    .newsletter__desc {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 24px;
+      letter-spacing: 0.32px;
+    }
+    .newsletter__input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .newsletter__input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--color-surface-raised-primary, #ffffff);
+      border: 1px solid var(--color-border-input-default);
+      height: 40px;               /* Mobile Large */
+      padding: 8px;
+      box-sizing: border-box;
+      transition: border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .newsletter__input-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 2px solid var(--color-border-focus);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-fast-2) var(--ease-standard);
+    }
+    .newsletter__input-wrap:hover { border-color: var(--color-border-dark); }
+    .newsletter__input-wrap.is-active { border-color: var(--color-border-selected); }
+    .newsletter__input-wrap:focus-within::after { opacity: 0; }
+    body.keyboard-nav :focus-within::after { opacity: 1; }
+    .newsletter__input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--color-text-primary);
+      font-size: 16px;            /* body-md Mobile Large */
+      font-weight: 400;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      letter-spacing: 0.32px;
+      line-height: 22px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .newsletter__input::placeholder { color: var(--color-text-tertiary); }
+    .newsletter__input:not(:placeholder-shown) ~ * { /* sibling visibility hook */ }
+    .newsletter__clear {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 0;
+      display: none;
+      flex-shrink: 0;
+    }
+    .newsletter__clear .ms { font-size: 20px; color: var(--color-text-tertiary); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .newsletter__btn {
+      background: var(--brand);
+      color: var(--black);
+      border: none;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.48px;
+      line-height: 16px;
+    }
+    .newsletter__btn:hover { opacity: 0.9; }
+
+    /* Customer service */
+    .cs__title {
+      font-size: 36px;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 36px;
+      color: var(--white);
+    }
+    .cs__desc {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 24px;
+      letter-spacing: 0.32px;
+    }
+    .cs__bullets {
+      display: flex;
+      gap: 24px;
+    }
+    .cs__bullet-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cs__bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .cs__bullet-dot {
+      width: 6px;
+      height: 15px;
+      flex-shrink: 0;
+      margin-top: 0px;
+    }
+    .cs__bullet-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 24px;
+      letter-spacing: 0.32px;
+    }
+    .cs__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.48px;
+      line-height: 16px;
+      text-decoration: none;
+    }
+    .cs__btn:hover { background: var(--color-surface-10); }
+    .cs__btn .ms { font-size: 24px; color: var(--black); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      padding: 48px var(--px-full) 56px;
+    }
+    .footer-divider {
+      background: var(--color-surface-100);
+      padding: 0 var(--px-full);
+    }
+    .footer-divider__line {
+      height: 1px;
+      background: var(--color-surface-80);
+    }
+    .footer-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-col__heading {
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18px;
+      line-height: 18px;
+      color: var(--color-text-tertiary-inverted);
+    }
+    .footer-col__links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .footer-col__links li a {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--white);
+      text-decoration: none;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+    }
+    .footer-col__links li a:hover { text-decoration: underline; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px var(--px-full);
+    }
+    .footer-bottom__trustmarks {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .trustmark-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .trustmark-group__label {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 18px;
+      white-space: nowrap;
+    }
+    .trustmark-group__items {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      height: 32px;
+    }
+    .trustmark-badge {
+      width: 48px;
+      height: 32px;
+      border: 1px solid var(--color-surface-80);
+      border-radius: 4px;
+      background: var(--white);
+      padding: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trustmark-badge > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .trustmark-badge__inner {
+      background: var(--white);
+      padding: 8px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .trustmark-badge__inner--mc { padding: 3.5px 7px; }
+    .trustmark-badge__inner img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+    .trustmark-badge--klarna { background: #ffb3c7; }
+    .trustmark-badge--trygg { border-color: var(--color-surface-90); }
+
+    .footer-bottom__social {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .social-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text-secondary-inverted);
+      white-space: nowrap;
+    }
+    .social-icons {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--color-surface-90);
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .social-icon img { width: 24px; height: 24px; object-fit: contain; }
+    .social-icon:hover { border-color: var(--color-text-primary-inverted); }
+
+    .footer-copyright {
+      background: var(--color-surface-100);
+      padding: 32px var(--px-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-copyright__inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 16px;
+    }
+    .footer-copyright__logo {
+      width: 80px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .footer-copyright__logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .footer-copyright__text {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      white-space: nowrap;
+    }
+    /* ── Drawer ───────────────────────────────────────────── */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--color-surface-opacity-black-50);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-medium-2) var(--ease-standard);
+    }
+    .drawer-overlay.is-open { opacity: 1; pointer-events: all; }
+
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 500px;
+      height: 100vh;
+      background: #fff;
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
+    }
+    .drawer-panel.is-open { transform: translateX(0); }
+
+    .drawer-header {
+      display: flex;
+      align-items: flex-start;
+      padding: 24px 32px;
+      flex-shrink: 0;
+    }
+    .drawer-header__content { flex: 1; padding: 4px 0; }
+    .drawer-title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 26px;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .drawer-close-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      padding: 8px;
+    }
+    .drawer-close-btn:hover { background: var(--color-surface-opacity-black-05); }
+    .drawer-close-btn img { width: 24px; height: 24px; display: block; }
+
+    .drawer-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .drawer-footer {
+      padding: 24px 32px;
+      background: #fff;
+      box-shadow: var(--elevation-t-60);
+      flex-shrink: 0;
+    }
+    .drawer-save-btn {
+      width: 100%;
+      background: var(--color-surface-100);
+      color: #fff;
+      border: none;
+      padding: 16px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.48px;
+      line-height: 16px;
+      cursor: pointer;
+    }
+    .drawer-save-btn:hover {
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2)), linear-gradient(90deg, #000, #000);
+    }
+
+    /* Form fields */
+    .form-field { display: flex; flex-direction: column; gap: 4px; }
+    .form-field--pt { padding-top: 8px; }
+    .form-row { display: flex; gap: 24px; }
+    .form-row .form-field { flex: 1; min-width: 0; }
+
+    .form-label {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;            /* Desktop Large: label-md */
+      font-weight: 700;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.48px;
+      line-height: 16px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      white-space: nowrap;
+    }
+    .form-label__req { color: var(--color-text-danger-default); }
+
+    /* Input wrapper — provides focus ring via ::after */
+    .input-wrap {
+      position: relative;
+    }
+    .input-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border: 2px solid var(--color-border-focus);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-fast-2) var(--ease-standard);
+    }
+    .input-wrap:focus-within::after { opacity: 0; }
+    body.keyboard-nav :focus-within::after { opacity: 1; }
+
+    .form-input,
+    .form-select {
+      height: 48px;               /* Desktop Large */
+      border: 1px solid var(--color-border-input-default);
+      background: var(--color-surface-raised-primary, #ffffff);
+      padding: 8px 12px;          /* space-8 vert, space-12 horiz */
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;            /* body-md Desktop */
+      font-weight: 400;
+      line-height: 24px;
+      color: var(--color-text-primary);
+      letter-spacing: 0.32px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      transition: border-color var(--duration-fast-3) var(--ease-standard);
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .form-input::placeholder { color: var(--color-text-tertiary); }
+
+    /* Hover */
+    .form-input:hover, .form-select:hover { border-color: var(--color-border-dark); }
+
+    /* Active — has value (placeholder not shown) */
+    .form-input:not(:placeholder-shown) {
+      border-color: var(--color-border-selected);
+      color: var(--color-text-primary);
+    }
+
+    /* Focus (keyboard) — inner border stays border-input-default; only the blue ring (::after) appears */
+    .form-input:focus, .form-select:focus { border-color: var(--color-border-input-default); }
+
+    /* Error */
+    .form-input--error { border-color: var(--color-border-danger-default) !important; }
+
+    /* Success */
+    .form-input--success { border-color: var(--color-border-success-default) !important; }
+
+    /* Disabled */
+    .form-input:disabled {
+      background: var(--color-surface-raised-secondary, #f6f6f6);
+      border-color: var(--color-border-disabled);
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+    }
+
+    .form-select { appearance: none; cursor: pointer; padding-right: 40px; }
+    .form-select-wrap { position: relative; }
+    .form-select-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      width: 24px;
+      height: 24px;
+    }
+
+    .form-helper {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;            /* body-sm */
+      font-weight: 400;
+      color: var(--color-text-tertiary);
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .form-helper--error {
+      color: var(--color-text-danger-default);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .form-helper--success  { color: var(--color-text-success); }
+    .form-helper--disabled { color: var(--color-text-disabled); }
+
+    .form-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+    }
+    .form-checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .form-checkbox-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--color-border-selected);
+      background: var(--color-background-primary);
+      cursor: pointer;
+      flex-shrink: 0;
+      /* 4px margin on all sides: 16px box + 4+4 = 24px total incl. space for focus ring */
+      margin: 4px;
+    }
+    .form-checkbox-item input[type="checkbox"]:hover {
+      border-width: 2px;
+    }
+    .form-checkbox-item input[type="checkbox"]:focus-visible {
+      /* 2px gap (outline-offset) + 2px ring = 4px — fills the margin exactly → 24px total */
+      outline: 2px solid var(--color-border-focus);
+      outline-offset: 2px;
+    }
+    .form-checkbox-item input[type="checkbox"]:checked {
+      background-color: var(--color-surface-100);
+      border-color: var(--color-border-selected);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 14px 14px;
+    }
+    .form-checkbox-item input[type="checkbox"]:indeterminate {
+      background-color: var(--color-surface-100);
+      border-color: var(--color-border-selected);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 14px 14px;
+    }
+    .form-checkbox-item input[type="checkbox"]:disabled {
+      border-color: var(--color-border-disabled);
+      background-color: var(--color-background-primary);
+      cursor: not-allowed;
+    }
+    .form-checkbox-item input[type="checkbox"]:disabled:checked {
+      background-color: var(--color-text-disabled);
+      border-color: var(--color-text-disabled);
+    }
+    .form-checkbox-item:has(input:disabled) {
+      cursor: not-allowed;
+    }
+    .form-checkbox-item span {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-text-primary);
+      letter-spacing: 0.32px;
+      line-height: 24px;
+      white-space: nowrap;
+    }
+    .form-checkbox-item:has(input:disabled) span {
+      color: var(--color-text-disabled);
+    }
+
+    /* ── Responsive (mobile-first) ───────────────────────── */
+
+    /* xs default – mobile base styles */
+    .site-header__nav { overflow-x: auto; gap: 16px; }
+    .site-header__right { gap: 0; }
+
+    .account-nav { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .account-nav__right { width: 100%; overflow-x: auto; }
+    .account-info__name, .account-info__sub { display: none; }
+
+    .filter-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .search-input { width: 100%; }
+
+    .users-table { display: block; overflow-x: auto; }
+
+    .fav-store__body { flex-direction: column; }
+    .fav-store__image { min-height: 240px; }
+    .fav-store__card { width: 100%; padding: 24px; }
+    .fav-store__desc { max-width: 100%; }
+
+    .contact-card { flex-direction: column; }
+    .contact-info { padding-top: 24px; padding-bottom: 24px; }
+    .contact-divider { display: none; }
+    .collapsibles { padding-top: 0; padding-left: 24px; padding-right: 24px; padding-bottom: 24px; }
+
+    .footer-top { flex-direction: column; }
+    .footer-top__divider { width: 100%; height: 1px; align-self: auto; }
+    .footer-links { flex-wrap: wrap; }
+    .footer-links .footer-col { flex-basis: 100%; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+
+    .cta-buttons { flex-direction: column; }
+    .drawer-panel { width: 100%; }
+    .form-row { flex-direction: column; }
+
+    /* sm (min-width: 640px) – tablet: two-column footer links */
+    @media (min-width: 640px) {
+      .footer-links .footer-col { flex-basis: calc(50% - 12px); }
+    }
+
+    /* md (min-width: 769px) – desktop small: restore desktop layout */
+    @media (min-width: 769px) {
+      .site-header__nav { overflow-x: hidden; gap: 0; }
+      .site-header__right { gap: 8px; }
+
+      .account-nav { flex-direction: row; align-items: center; gap: 0; }
+      .account-nav__right { width: auto; overflow-x: visible; }
+      .account-info__name, .account-info__sub { display: block; }
+
+      .filter-bar { flex-direction: row; align-items: center; gap: 0; }
+      .search-input { width: min(384px, 100%); }
+
+      .users-table { display: table; overflow-x: visible; }
+
+      .fav-store__body { flex-direction: row; }
+      .fav-store__image { min-height: 0; }
+      .fav-store__card { width: 380px; padding: 32px; }
+      .fav-store__desc { max-width: calc(100% - 380px - 24px); }
+
+      .contact-card { flex-direction: row; }
+      .contact-info { padding: 32px 24px; }
+      .contact-divider { display: block; }
+      .collapsibles { padding: 32px; }
+
+      .footer-top { flex-direction: row; }
+      .footer-top__divider { width: 1px; height: auto; align-self: stretch; }
+      .footer-links { flex-wrap: nowrap; }
+      .footer-links .footer-col { flex: 1; flex-basis: auto; }
+      .footer-bottom { flex-direction: row; align-items: center; gap: 0; }
+
+      .cta-buttons { flex-direction: row; }
+      .drawer-panel { width: 500px; }
+      .form-row { flex-direction: row; }
+    }
+  </style>
 </head>
-
 <body>
-    <main class="wrap">
-        <h1>Swedol UI Prototype</h1>
-        <p>This is a demo prototype repo connected to GitHub and Vercel.</p>
-        <div class="card">
-            <h2>Workflow demo</h2>
-            <ol>
-                <li>Edit locally</li>
-                <li>Commit and push</li>
-                <li>Vercel deploys automatically</li>
-                <li>Share the live link</li>
-            </ol>
-        </div>
-    </main>
-</body>
 
+  <!-- ══ SITE HEADER ══════════════════════════════════════════ -->
+  <div class="site-header__top">
+      <button class="site-header__menu-btn" aria-label="Meny">
+        <span class="ms">menu</span>
+      </button>
+
+      <!-- Swedol logo -->
+      <div class="site-header__logo">
+        <img src="https://www.figma.com/api/mcp/asset/54de448e-8cb8-4157-a217-f813427d42f7" alt="Swedol" style="width:100%;height:100%;display:block;object-fit:contain;" />
+      </div>
+
+      <!-- Search -->
+      <div class="site-header__search">
+        <span class="ms">search</span>
+        <input type="text" placeholder="Sök produkt, varumärke, kategori" id="header-search-field" oninput="handleHeaderSearch(this.value)" />
+        <div class="site-header__search-right">
+          <div class="site-header__search-divider"></div>
+          <button class="search-scan-btn" id="header-scan-btn" aria-label="Skanna">
+            <span class="ms">qr_code_scanner</span>
+          </button>
+          <button class="search-scan-btn" id="header-clear-btn" aria-label="Rensa sökning" style="display:none" onclick="var f=document.getElementById('header-search-field');f.value='';f.focus();handleHeaderSearch('');">
+            <span class="ms" style="font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 0,'opsz' 24;color:var(--color-text-tertiary);">cancel</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right icons -->
+      <div class="site-header__right">
+        <button class="account-info">
+          <div class="avatar">
+            <img src="https://www.figma.com/api/mcp/asset/3ff9ae4b-32d7-41f1-93bc-25f7a24e7a32" alt="Stina Carlström" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+          </div>
+          <div>
+            <div class="account-info__name">Stina Carlström</div>
+            <div class="account-info__sub">Kundnummer: 326920</div>
+          </div>
+        </button>
+
+        <button class="icon-btn" aria-label="Favoriter">
+          <span class="ms">favorite</span>
+        </button>
+
+        <button class="icon-btn" aria-label="Jämför">
+          <span class="ms">compare_arrows</span>
+          <span class="badge badge--white">1</span>
+        </button>
+
+        <button class="icon-btn" aria-label="Kundvagn">
+          <span class="ms">shopping_cart</span>
+          <span class="badge">5</span>
+        </button>
+      </div>
+  </div>
+
+  <header class="site-header">
+    <!-- Main nav -->
+    <nav class="site-header__nav">
+      <div class="nav-links">
+        <a href="#">Produktsortiment</a>
+        <a href="#">Kampanj</a>
+        <a href="#">Våra Tjänster</a>
+        <a href="#">Varumärken</a>
+      </div>
+      <button class="store-btn">
+        <span class="ms">store</span>
+        <span>Borås,&nbsp;</span><span class="store-btn__text-regular">Öppet idag: Kl. 6:30 – 17:00</span>
+      </button>
+    </nav>
+  </header>
+
+
+  <!-- ══ ACCOUNT NAV ══════════════════════════════════════════ -->
+  <nav class="account-nav">
+    <!-- Profile -->
+    <div class="account-nav__profile">
+      <div class="avatar--lg">
+        <img src="https://www.figma.com/api/mcp/asset/5932e906-b772-4781-820c-9c54ff918bca" alt="Stina Carlström" />
+      </div>
+      <div>
+        <div class="account-nav__name">Stina Carlström</div>
+        <div class="account-nav__sub">Kundnummer: 326920</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tab-bar">
+      <div class="tab-item">
+        <span class="tab-item__label">Översikt</span>
+        <div class="tab-item__indicator"></div>
+      </div>
+      <div class="tab-item">
+        <span class="tab-item__label">Mina Favoriter</span>
+        <div class="tab-item__indicator"></div>
+      </div>
+      <div class="tab-item">
+        <span class="tab-item__label">Adressbok</span>
+        <div class="tab-item__indicator"></div>
+      </div>
+      <div class="tab-item tab-item--active">
+        <span class="tab-item__label">Användare</span>
+        <div class="tab-item__indicator"></div>
+      </div>
+      <div class="tab-item">
+        <span class="tab-item__label">Ordervy</span>
+        <div class="tab-item__indicator"></div>
+      </div>
+      <div class="tab-item">
+        <span class="tab-item__label">Min Profil</span>
+        <div class="tab-item__indicator"></div>
+      </div>
+      <div class="tab-item">
+        <span class="tab-item__label">Dokument</span>
+        <div class="tab-item__indicator"></div>
+      </div>
+      <div class="tab-item">
+        <span class="tab-item__label">Smart Service</span>
+        <div class="tab-item__indicator"></div>
+      </div>
+    </div>
+
+    <!-- Right: company switch + notification -->
+    <div class="account-nav__right">
+      <div class="company-logo">
+        <img src="https://www.figma.com/api/mcp/asset/92bf906e-4fca-472f-baa9-d2584ac1046a" alt="Samhall" style="width:80px;height:auto;display:block;" />
+      </div>
+      <button class="icon-btn icon-btn--sm" aria-label="Byt bolag">
+        <span class="ms" style="color:#000">sync_alt</span>
+      </button>
+      <div class="divider-v"></div>
+      <button class="icon-btn icon-btn--sm" aria-label="Notiser">
+        <span class="ms" style="color:#000">notifications</span>
+      </button>
+    </div>
+  </nav>
+
+<div class="page">
+
+  <!-- ══ MAIN CONTENT ═════════════════════════════════════════ -->
+  <main class="main-content">
+
+    <!-- Page title -->
+    <h1 class="page-title">Användare</h1>
+    <p class="page-preamble">Här återfinns de personer som är kopplade till kontot.</p>
+
+    <!-- Filter bar -->
+    <div class="filter-bar">
+      <div class="search-input">
+        <span class="ms">search</span>
+        <input type="text" placeholder="Sök användare" id="search-field" oninput="filterUsers(this.value)" />
+        <button class="search-clear" id="search-clear-btn" aria-label="Rensa sökning" style="display:none" onclick="var f=document.getElementById('search-field');f.value='';f.focus();this.style.display='none';filterUsers('');">
+          <span class="ms">cancel</span>
+        </button>
+      </div>
+
+      <div class="action-btns">
+        <button class="action-btn" aria-label="Spara">
+          <span class="ms">savings</span>
+        </button>
+        <button class="action-btn" aria-label="Exportera">
+          <span class="ms">table_chart</span>
+        </button>
+        <button class="action-btn" aria-label="Lägg till användare" onclick="openDrawer()">
+          <span class="ms">person_add</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Users Table -->
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th><span class="sort-icon">Namn <span class="ms">unfold_more</span></span></th>
+          <th><span class="sort-icon">Roll <span class="ms">unfold_more</span></span></th>
+          <th><span class="sort-icon">Anställnings nr <span class="ms">unfold_more</span></span></th>
+          <th><span class="sort-icon">Saldo <span class="ms">unfold_more</span></span></th>
+          <th><span class="sort-icon">Kostnadsställe <span class="ms">unfold_more</span></span></th>
+          <th><span class="sort-icon">Skåp <span class="ms">unfold_more</span></span></th>
+          <th><span class="sort-icon">Butik <span class="ms">unfold_more</span></span></th>
+          <th><span class="sort-icon">Webb <span class="ms">unfold_more</span></span></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="user-name">Alhan Selufi</div>
+            <div class="user-email">alhan.selufi@firmane.bolags.se</div>
+          </td>
+          <td><span>Standard</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Alexander Alpec</div>
+            <div class="user-email">alex.alpec@bolagsnamn.se</div>
+          </td>
+          <td><span>Administratör</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Alexander Alpín</div>
+            <div class="user-email">alexander.alpin@bolagsnamn.se</div>
+          </td>
+          <td><span>Firmatecknare</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Arangeera Korompilias</div>
+            <div class="user-email">aran.korompilias@bolagsnamn.se</div>
+          </td>
+          <td><span>Standard</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Anders Ajon</div>
+            <div class="user-email">anders.ajon@bolagsnamn.se</div>
+          </td>
+          <td><span>Standard</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Anders Dahl</div>
+            <div class="user-email">anders.dahl@bolagsnamn.se</div>
+          </td>
+          <td><span>Administratör</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Anders Ardhali</div>
+            <div class="user-email">anders.ardhali@bolagsnamn.se</div>
+          </td>
+          <td><span>Standard</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Anders Lau</div>
+            <div class="user-email">anders.lau@bolagsnamn.se</div>
+          </td>
+          <td><span>Standard</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Anders Liljerus</div>
+            <div class="user-email">anders.liljerus@bolagsnamn.se</div>
+          </td>
+          <td><span>Standard</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="user-name">Anders Spång</div>
+            <div class="user-email">anders.spang@bolagsnamn.se</div>
+          </td>
+          <td><span>Standard</span></td>
+          <td>Value</td>
+          <td>Value</td>
+          <td>Värde</td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td class="check-icon"><img src="https://www.figma.com/api/mcp/asset/0a44132b-162a-4da9-b4fb-4cb0ea49777b" alt="" /></td>
+          <td style="text-align:center;color:var(--grey-20);"><span class="ms">more_horiz</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination-area">
+      <div class="pagination-inner">
+        <div class="pagination-top">
+          <p class="pagination-count">Visar 10 av 2010 Användare</p>
+          <div class="pagination-bar">
+            <div class="pagination-bar__track"></div>
+            <div class="pagination-bar__fill"></div>
+          </div>
+        </div>
+        <button class="show-more-btn">Visa fler användare</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ══ FAVOURITE STORE SECTION ═════════════════════════════ -->
+  <section class="fav-store-section">
+    <div class="fav-store">
+      <!-- Header -->
+      <div class="fav-store__header">
+        <h2 class="fav-store__title">Besök din hembutik i Borås</h2>
+        <p class="fav-store__desc">Besök din hembutik. Vi bjuder på kaffet! Det skulle vara ett stort nöje att välkomna dig till vår 5 200 m² butik i Borås! Där kan du kolla in verktygen vi saluför och vår kunniga personal är såklart redo att hjälpa dig.</p>
+      </div>
+      <!-- Image + Card -->
+      <div class="fav-store__body">
+        <div class="fav-store__image">
+          <img src="https://www.figma.com/api/mcp/asset/167bb0f1-9b47-4046-918f-154e84c96af8" alt="Butik Borås" />
+        </div>
+        <div class="fav-store__card">
+          <div class="fav-store__card-info">
+            <p class="fav-store__card-title">Öppettider Borås</p>
+            <div class="fav-store__info-group">
+              <div class="fav-store__status">
+                <img class="fav-store__status-dot" src="https://www.figma.com/api/mcp/asset/70cbeb28-58dd-4ebf-9257-f2545175ea31" alt="" />
+                <div class="fav-store__status-row">
+                  <span>Öppet idag</span>
+                  <span>06:30 - 17:00</span>
+                </div>
+              </div>
+              <div class="fav-store__hours">
+                <div class="fav-store__hours-row">
+                  <span class="fav-store__hours-day">Mån - Fre</span>
+                  <span class="fav-store__hours-time">06:30 - 17:00</span>
+                </div>
+                <div class="fav-store__hours-row">
+                  <span class="fav-store__hours-day">Lör - Sön</span>
+                  <span class="fav-store__hours-time">Stängt</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="fav-store__card-actions">
+            <button class="fav-store__btn-primary">Besök butikssidan</button>
+            <button class="fav-store__btn-outline">
+              <span class="ms">directions</span>
+              Få vägbeskrivning
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-divider"><div class="page-divider__line"></div></div>
+
+  <!-- ══ CONTACT SECTION ══════════════════════════════════════ -->
+  <section class="contact-section">
+    <div class="contact-card">
+      <!-- Left: Info -->
+      <div class="contact-info">
+        <div class="contact-info__header">
+          <h2 class="contact-info__title">Hur man kontaktar oss</h2>
+          <p class="contact-info__desc">Du är varmt välkommen att kontakta vår kundtjänst om du behöver hjälp med returer, reklamationer eller har övriga frågor kring ditt kundunika avtal.</p>
+        </div>
+
+        <div class="contact-links">
+          <span class="contact-link">
+            <span class="ms">chat</span>
+            Chatta
+          </span>
+          <div class="contact-divider-v"></div>
+          <span class="contact-link">
+            <span class="ms">mail</span>
+            kontakt@alligo.se
+          </span>
+          <div class="contact-divider-v"></div>
+          <span class="contact-link">
+            <span class="ms">phone_iphone</span>
+            020-71 20 10
+          </span>
+        </div>
+
+        <div class="avatars-group">
+          <div class="avatar--lg"><img src="https://www.figma.com/api/mcp/asset/cd9f26fa-eac3-4728-8113-fa9cc09fb37f" alt="Kundtjänst" /></div>
+          <div class="avatar--lg"><img src="https://www.figma.com/api/mcp/asset/9cdb45cd-fce0-485b-9231-fabd6fa53be0" alt="Kundtjänst" /></div>
+          <div class="avatar--lg"><img src="https://www.figma.com/api/mcp/asset/d9424301-859f-4a30-8164-9344b9568610" alt="Kundtjänst" /></div>
+        </div>
+      </div>
+
+      <div class="contact-divider"></div>
+
+      <!-- Right: Collapsibles -->
+      <div class="collapsibles">
+        <div class="collapsible-wrap">
+          <div class="collapsible-item" onclick="toggleCollapsible(this)">
+            <div class="collapsible-item__left">
+              <span class="ms">schedule</span>
+              <span class="collapsible-item__label">Öppettider kundtjänst</span>
+            </div>
+            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
+          </div>
+          <div class="collapsible-item__content">
+            Måndag–fredag: 07:00–18:00<br>Lördag: 09:00–14:00<br>Söndag: Stängt
+          </div>
+        </div>
+        <div class="collapsible-wrap">
+          <div class="collapsible-item" onclick="toggleCollapsible(this)">
+            <div class="collapsible-item__left">
+              <span class="ms">perm_contact_calendar</span>
+              <span class="collapsible-item__label">Fler kontaktalternativ</span>
+            </div>
+            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
+          </div>
+          <div class="collapsible-item__content">
+            Chatt, e-post eller besök ett av våra varuhus. Vi finns här för att hjälpa dig.
+          </div>
+        </div>
+        <div class="collapsible-wrap">
+          <div class="collapsible-item" onclick="toggleCollapsible(this)">
+            <div class="collapsible-item__left">
+              <span class="ms">quiz</span>
+              <span class="collapsible-item__label">FAQ</span>
+            </div>
+            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
+          </div>
+          <div class="collapsible-item__content">
+            Hitta svar på de vanligaste frågorna om beställningar, leveranser och returer i vår FAQ.
+          </div>
+        </div>
+        <div class="collapsible-wrap">
+          <div class="collapsible-item" onclick="toggleCollapsible(this)">
+            <div class="collapsible-item__left">
+              <span class="ms">phone_callback</span>
+              <span class="collapsible-item__label">Ordna återuppringning</span>
+            </div>
+            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
+          </div>
+          <div class="collapsible-item__content">
+            Lämna ditt nummer så ringer vi upp dig inom 24 timmar under vardagar.
+          </div>
+        </div>
+        <div class="collapsible-wrap" style="border-bottom: none;">
+          <div class="collapsible-item" onclick="toggleCollapsible(this)">
+            <div class="collapsible-item__left">
+              <span class="ms">forum</span>
+              <span class="collapsible-item__label">Ge feedback</span>
+            </div>
+            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
+          </div>
+          <div class="collapsible-item__content">
+            Vi uppskattar din feedback! Berätta hur vi kan förbättra din upplevelse.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /.page -->
+
+  <!-- ══ CTA BANNER ═══════════════════════════════════════════ -->
+  <section class="cta-banner">
+    <div class="cta-banner__text">
+      <h2 class="cta-banner__title">Ta steget – skapa företagskonto nu!</h2>
+      <p class="cta-banner__sub">Förenkla beställningar och följ upp alla inköp. Integrera e-handeln med ert system och handla var ni än är.</p>
+    </div>
+    <div class="cta-buttons">
+      <button class="btn-blank">Hitta närmaste butik</button>
+      <button class="btn-primary">Skapa företagskonto</button>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <!-- Newsletter -->
+      <div class="footer-top__col">
+        <p class="newsletter__title">Nyhetsbrev</p>
+        <p class="newsletter__desc">Prenumerera på vårt nyhetsbrev för att ta del av specialerbjudanden, rabatter, nyheter och artiklar.</p>
+        <div class="newsletter__input-group">
+          <div class="newsletter__input-wrap">
+            <input class="newsletter__input" type="email" id="newsletter-field" placeholder="Din e-postadress" oninput="handleNewsletterInput(this.value)" />
+            <button class="newsletter__clear" id="newsletter-clear-btn" aria-label="Rensa" onclick="var f=document.getElementById('newsletter-field');f.value='';f.focus();handleNewsletterInput('');">
+              <span class="ms">cancel</span>
+            </button>
+          </div>
+          <button class="newsletter__btn">Prenumerera</button>
+        </div>
+      </div>
+
+      <div class="footer-top__divider"></div>
+
+      <!-- Customer Service -->
+      <div class="footer-top__col">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <p class="cs__title">Kundservice</p>
+          <p class="cs__desc">Välkommen till vår kundservice! Vi finns här för att hjälpa dig med alla dina frågor och ärenden. Registrera ditt ärende enkelt, så återkommer vi snabbt med den hjälp du behöver.</p>
+        </div>
+        <div class="cs__bullets">
+          <div class="cs__bullet-col">
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="https://www.figma.com/api/mcp/asset/8f153d24-0fe0-4320-b049-ccbcc88a1bdf" alt="" /><span class="cs__bullet-text">Returer</span></div>
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="https://www.figma.com/api/mcp/asset/8f153d24-0fe0-4320-b049-ccbcc88a1bdf" alt="" /><span class="cs__bullet-text">Fakturor</span></div>
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="https://www.figma.com/api/mcp/asset/8f153d24-0fe0-4320-b049-ccbcc88a1bdf" alt="" /><span class="cs__bullet-text">Leveransfrågor</span></div>
+          </div>
+          <div class="cs__bullet-col">
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="https://www.figma.com/api/mcp/asset/8f153d24-0fe0-4320-b049-ccbcc88a1bdf" alt="" /><span class="cs__bullet-text">Reklamationer</span></div>
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="https://www.figma.com/api/mcp/asset/8f153d24-0fe0-4320-b049-ccbcc88a1bdf" alt="" /><span class="cs__bullet-text">Ordrar</span></div>
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="https://www.figma.com/api/mcp/asset/8f153d24-0fe0-4320-b049-ccbcc88a1bdf" alt="" /><span class="cs__bullet-text">Konto</span></div>
+          </div>
+        </div>
+        <a class="cs__btn" href="#">Till kundservice <span class="ms">chevron_right</span></a>
+      </div>
+    </div>
+
+    <!-- Footer links -->
+    <div class="footer-links">
+      <div class="footer-col">
+        <p class="footer-col__heading">Kontakta oss</p>
+        <ul class="footer-col__links">
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Huvudkontor och support</a></li>
+          <li><a href="#">Fakturaadress</a></li>
+          <li><a href="#">Logistikcentrum</a></li>
+          <li><a href="#">Våra butiker</a></li>
+          <li><a href="#">Om Alligokoncernen</a></li>
+          <li><a href="#">Jobba hos oss</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col__heading">Handla hos oss</p>
+        <ul class="footer-col__links">
+          <li><a href="#">Kontoansökan</a></li>
+          <li><a href="#">Kampanj</a></li>
+          <li><a href="#">Retur och reklamation</a></li>
+          <li><a href="#">Köpevilkor</a></li>
+          <li><a href="#">Fullmakt</a></li>
+          <li><a href="#">Presentkort - saldocheck</a></li>
+          <li><a href="#">Ordersedel</a></li>
+          <li><a href="#">Swedolblad och kataloger</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col__heading">Så arbetar vi</p>
+        <ul class="footer-col__links">
+          <li><a href="#">Certifieringar och policys</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Integritetspolicy</a></li>
+          <li><a href="#">GDPR</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col__heading">Egna varumärken</p>
+        <ul class="footer-col__links">
+          <li><a href="#">1832</a></li>
+          <li><a href="#">Björnkläder</a></li>
+          <li><a href="#">Gesto Workwear</a></li>
+          <li><a href="#">Gesto Skor</a></li>
+          <li><a href="#">Balance Handskar</a></li>
+          <li><a href="#">Univern</a></li>
+          <li><a href="#">AmPro</a></li>
+          <li><a href="#">Award</a></li>
+          <li><a href="#">Nima</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col__heading">Vara vår leverantör</p>
+        <ul class="footer-col__links">
+          <li><a href="#">Suppliers Guide SWE</a></li>
+          <li><a href="#">Suppliers Guide ENG</a></li>
+          <li><a href="#">Så fungerar våra fakturarutiner</a></li>
+          <li><a href="#">Så levererar du till oss</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider">
+      <div class="footer-divider__line"></div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom__trustmarks">
+        <!-- Betalningsalternativ -->
+        <div class="trustmark-group">
+          <span class="trustmark-group__label">Betalningsalternativ</span>
+          <div class="trustmark-group__items">
+            <div class="trustmark-badge trustmark-badge--klarna">
+              <img src="https://www.figma.com/api/mcp/asset/1835a7d2-a77c-4c25-80da-bacf3f7eee93" alt="Klarna" />
+            </div>
+            <div class="trustmark-badge">
+              <div class="trustmark-badge__inner">
+                <img src="https://www.figma.com/api/mcp/asset/61bbb1e3-d84a-4493-b0c0-276b29028678" alt="Visa" />
+              </div>
+            </div>
+            <div class="trustmark-badge">
+              <div class="trustmark-badge__inner trustmark-badge__inner--mc">
+                <img src="https://www.figma.com/api/mcp/asset/4d36cc5f-6a44-4318-95d4-1816b26faa17" alt="Mastercard" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Säker betalning -->
+        <div class="trustmark-group">
+          <span class="trustmark-group__label">Säker betalning</span>
+          <div class="trustmark-group__items">
+            <div class="trustmark-badge">
+              <img src="https://www.figma.com/api/mcp/asset/67241b22-4a7e-4af4-b607-26fff3a6ff93" alt="3D Secure" />
+            </div>
+          </div>
+        </div>
+        <!-- Trygg E-handel -->
+        <div class="trustmark-group">
+          <span class="trustmark-group__label">Trygg E-handel</span>
+          <div class="trustmark-group__items">
+            <div class="trustmark-badge trustmark-badge--trygg">
+              <img src="https://www.figma.com/api/mcp/asset/d0bbc774-9783-4244-b359-6687fe0b4503" alt="Trygg E-handel" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom__social">
+        <span class="social-label">Följ oss:</span>
+        <div class="social-icons">
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <img src="https://www.figma.com/api/mcp/asset/fab10895-93c4-4377-bf9a-0f753e1d2e86" alt="Facebook" />
+          </a>
+          <a href="#" class="social-icon" aria-label="YouTube">
+            <img src="https://www.figma.com/api/mcp/asset/cc4199b8-a160-4e3d-9bf3-79becb28fdba" alt="YouTube" />
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <img src="https://www.figma.com/api/mcp/asset/810b8cb8-7674-44c7-9902-055f60bb8295" alt="Instagram" />
+          </a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <img src="https://www.figma.com/api/mcp/asset/741fb855-5ba0-4ae5-8674-e330cbc3be3b" alt="LinkedIn" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider">
+      <div class="footer-divider__line"></div>
+    </div>
+
+    <div class="footer-copyright">
+      <div class="footer-copyright__inner">
+        <div class="footer-copyright__logo">
+          <img src="https://www.figma.com/api/mcp/asset/9e63e317-46d3-4385-9817-bc4083d106f4" alt="Swedol" />
+        </div>
+        <p class="footer-copyright__text">2026 Swedol &copy; Alla rättigheter förbehållna.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Drawer overlay -->
+  <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
+
+  <!-- Drawer panel -->
+  <div id="drawer-panel" class="drawer-panel" role="dialog" aria-modal="true" aria-label="Lägg till ny användare">
+    <!-- Header -->
+    <div class="drawer-header">
+      <div class="drawer-header__content">
+        <h2 class="drawer-title">Lägg till ny användare</h2>
+      </div>
+      <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="Stäng">
+        <img src="https://www.figma.com/api/mcp/asset/9f1e8916-9248-4443-aa07-8fc59934b1af" alt="" />
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="drawer-content">
+
+      <!-- Roll -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-roll">Roll</label>
+        <div class="form-select-wrap">
+          <select class="form-select" id="drawer-roll">
+            <option>Standard</option>
+            <option>Administratör</option>
+          </select>
+          <img class="form-select-arrow" src="https://www.figma.com/api/mcp/asset/afbcb3d8-bf62-4b5f-ac68-107628828d3f" alt="" />
+        </div>
+        <span class="form-helper">Här väljer du vilken roll du vill att din användare ska ha. Standard är den vanliga användarrollen.</span>
+      </div>
+
+      <!-- Åtkomst -->
+      <div class="form-field form-field--pt">
+        <div class="form-label">Åtkomst <span class="form-label__req">*</span></div>
+        <div class="form-checkboxes">
+          <label class="form-checkbox-item">
+            <input type="checkbox" />
+            <span>Handla via webb</span>
+          </label>
+          <label class="form-checkbox-item">
+            <input type="checkbox" />
+            <span>Handla i butik</span>
+          </label>
+          <label class="form-checkbox-item">
+            <input type="checkbox" />
+            <span>Smart Service</span>
+          </label>
+        </div>
+        <span class="form-helper">Välj i vilken omfatttning du vill att användaren ska kunna handla i våra olika butiker.</span>
+      </div>
+
+      <!-- Förnamn + Efternamn -->
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="drawer-fornamn">Förnamn <span class="form-label__req">*</span></label>
+          <div class="input-wrap">
+            <input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="drawer-efternamn">Efternamn <span class="form-label__req">*</span></label>
+          <div class="input-wrap">
+            <input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Epost -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-epost">Epost <span class="form-label__req">*</span></label>
+        <div class="input-wrap">
+          <input class="form-input" type="email" id="drawer-epost" autocomplete="email" />
+        </div>
+      </div>
+
+      <!-- Mobilnummer -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-mobil">Mobilnummer <span class="form-label__req">*</span></label>
+        <div class="input-wrap">
+          <input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" />
+        </div>
+      </div>
+
+      <!-- Anställnings ID -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-anstallning">Anställnings ID <span class="form-label__req">*</span></label>
+        <div class="input-wrap">
+          <input class="form-input" type="text" id="drawer-anstallning" />
+        </div>
+      </div>
+
+      <!-- Kostnadsställe -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-kost">Kostnadsställe</label>
+        <div class="input-wrap">
+          <input class="form-input" type="text" id="drawer-kost" placeholder="-" />
+        </div>
+      </div>
+
+      <!-- Adressnummer -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-adress">Adressnummer</label>
+        <div class="input-wrap">
+          <input class="form-input" type="text" id="drawer-adress" placeholder="-" />
+        </div>
+      </div>
+
+      <!-- Aktivera Budget -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-budget">Aktivera Budget</label>
+        <div class="input-wrap form-select-wrap">
+          <select class="form-select" id="drawer-budget">
+            <option>Inaktiv</option>
+            <option>Aktiv</option>
+          </select>
+          <img class="form-select-arrow" src="https://www.figma.com/api/mcp/asset/afbcb3d8-bf62-4b5f-ac68-107628828d3f" alt="" />
+        </div>
+        <span class="form-helper">Inaktiv är standardvärdet. Välj aktiv om ni använder budget.</span>
+      </div>
+
+      <!-- Årsbudget -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-arsbudget">Årsbudget</label>
+        <div class="input-wrap">
+          <input class="form-input" type="text" id="drawer-arsbudget" placeholder="24 000.00 kr" />
+        </div>
+      </div>
+
+      <!-- Nuvarande saldo (disabled) -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-saldo">Nuvarande saldo</label>
+        <div class="input-wrap">
+          <input class="form-input" type="text" id="drawer-saldo" value="12 000.00 kr" disabled />
+        </div>
+        <span class="form-helper form-helper--disabled">Era användare har ett fastställt saldo på 12 000.00 kr</span>
+      </div>
+
+      <!-- Lägg till saldo -->
+      <div class="form-field">
+        <label class="form-label" for="drawer-lagg-saldo">Lägg till saldo</label>
+        <div class="input-wrap">
+          <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder="-" />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="drawer-footer">
+      <button class="drawer-save-btn">Spara</button>
+    </div>
+  </div>
+
+  <script>
+    /* ── Keyboard vs mouse focus tracking ────────────────────── */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') document.body.classList.add('keyboard-nav');
+    });
+    document.addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
+    document.addEventListener('touchstart', () => document.body.classList.remove('keyboard-nav'), { passive: true });
+
+    function handleNewsletterInput(value) {
+      document.getElementById('newsletter-clear-btn').style.display = value ? 'block' : 'none';
+    }
+
+    function handleHeaderSearch(query) {
+      const scanBtn = document.getElementById('header-scan-btn');
+      const clearBtn = document.getElementById('header-clear-btn');
+      const searchWrap = document.querySelector('.site-header__search');
+      if (query) {
+        scanBtn.style.display = 'none';
+        clearBtn.style.display = 'flex';
+        searchWrap.classList.add('is-active');
+      } else {
+        scanBtn.style.display = 'flex';
+        clearBtn.style.display = 'none';
+        searchWrap.classList.remove('is-active');
+      }
+    }
+
+    function filterUsers(query) {
+      document.getElementById('search-clear-btn').style.display = query ? 'block' : 'none';
+      document.querySelector('.search-input').classList.toggle('is-active', !!query);
+      const q = query.trim().toLowerCase();
+      const rows = document.querySelectorAll('.users-table tbody tr');
+      rows.forEach(row => {
+        const name = row.querySelector('.user-name')?.textContent.toLowerCase() || '';
+        const email = row.querySelector('.user-email')?.textContent.toLowerCase() || '';
+        row.style.display = (!q || name.includes(q) || email.includes(q)) ? '' : 'none';
+      });
+    }
+
+    function toggleCollapsible(header) {
+      const wrap = header.parentElement;
+      const content = header.nextElementSibling;
+      const isOpen = wrap.classList.contains('collapsible-wrap--open');
+      wrap.classList.toggle('collapsible-wrap--open', !isOpen);
+      content.style.maxHeight = isOpen ? null : content.scrollHeight + 'px';
+    }
+
+    const siteHeaderTop = document.querySelector('.site-header__top');
+    const siteHeader    = document.querySelector('.site-header');
+
+    // Placeholder keeps layout height when nav goes fixed
+    const navPlaceholder = document.createElement('div');
+    siteHeader.after(navPlaceholder);
+
+    let lastY        = window.scrollY;
+    let scrollUpAccum = 0;
+    const THRESHOLD  = 100;
+    let isFixed      = false;
+
+    function setFixed(topBarH, navH) {
+      if (isFixed) return;
+      navPlaceholder.style.height = navH + 'px';
+      siteHeader.style.top = topBarH + 'px';
+      siteHeader.classList.add('site-header--fixed');
+      isFixed = true;
+    }
+
+    function setNatural() {
+      if (!isFixed) return;
+      siteHeader.classList.remove('site-header--fixed', 'site-header--visible');
+      siteHeader.style.top = '';
+      navPlaceholder.style.height = '0';
+      isFixed = false;
+    }
+
+    function updateBorder() {
+      const navVisible = !isFixed || siteHeader.classList.contains('site-header--visible');
+      siteHeaderTop.style.borderBottomColor = navVisible ? '#232500' : '#c7d300';
+    }
+
+    window.addEventListener('scroll', () => {
+      const y       = window.scrollY;
+      const topBarH = siteHeaderTop.offsetHeight;
+      const navH    = isFixed ? 48 : siteHeader.offsetHeight;
+      const delta   = lastY - y; // positive = scrolling up
+
+      if (y <= topBarH + navH) {
+        // Back near top — restore natural flow
+        setNatural();
+        scrollUpAccum = 0;
+      } else if (delta < 0) {
+        // Scrolling down — hide nav
+        scrollUpAccum = 0;
+        siteHeader.classList.remove('site-header--visible');
+      } else {
+        // Scrolling up — accumulate distance
+        scrollUpAccum += delta;
+        setFixed(topBarH, navH);
+        if (scrollUpAccum >= THRESHOLD) {
+          siteHeader.classList.add('site-header--visible');
+        }
+      }
+
+      updateBorder();
+      lastY = y;
+    }, { passive: true });
+
+    function openDrawer() {
+      document.getElementById('drawer-overlay').classList.add('is-open');
+      document.getElementById('drawer-panel').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      document.getElementById('drawer-overlay').classList.remove('is-open');
+      document.getElementById('drawer-panel').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeDrawer();
+    });
+  </script>
+
+</body>
 </html>
