@@ -392,6 +392,180 @@ body.keyboard-nav .input-wrap:focus-within::after { opacity: 1; }
 
 ---
 
+## Select – Storlekar & Tillstånd (ECO Design System)
+
+Select används för att låta användaren välja ett alternativ ur en lista. Komponentens storlek och tillstånd följer samma system som inputfält.
+
+> Alla select-fält delar: `font-family: 'Breuer Condensed', sans-serif`, `font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1`, `border-radius: 0` (raka hörn), `appearance: none` (dold native pil), och en custom dropdown-pil (24px, Material Symbols `arrow_drop_down`).
+
+---
+
+### Storlekar per breakpoint
+
+#### Desktop (`md:`, 769px+)
+
+| Storlek | Höjd | Padding | Pil-ikon | Label | Select-text |
+|---|---|---|---|---|---|
+| **Large** | 48px | `8px` vert, `12px` horiz | 24px | `label-md`: 16px/16px, 0.48px, Bold, uppercase | `body-md`: 16px/24px, 0.32px, Regular |
+| **Small** | 40px | `8px` alla sidor | 24px | `label-sm`: 14px/14px, 0.56px, Bold, uppercase | `body-sm`: 14px/20px, 0.28px, Regular |
+| **XSmall** | 32px | `8px` alla sidor | 24px | `label-sm`: 14px/14px, 0.56px, Bold, uppercase | `body-sm`: 14px/20px, 0.28px, Regular |
+
+#### Mobile / Tablet (`xs`/`sm`, 0–768px)
+
+| Storlek | Höjd | Padding | Pil-ikon | Label | Select-text |
+|---|---|---|---|---|---|
+| **Large** | 40px | `8px` alla sidor | 24px | `label-md` (mobil): 14px/14px, 0.42px, Bold, uppercase | `body-md` (mobil): 16px/22px, 0.32px, Regular |
+| **Small** | 32px | `8px` alla sidor | 24px | `label-sm` (mobil): 12px/12px, 0.48px, Bold, uppercase | `body-sm`: 14px/20px, 0.28px, Regular |
+
+> Dropdown-pilen är placerad absolut: `right: 12px`, `top: 50%`, `transform: translateY(-50%)`. Höger padding på select måste vara minst `40px` för att ge utrymme åt pilen.
+
+---
+
+### Tillstånd (States)
+
+Alla tillstånd ska implementeras varje gång ett select-fält skapas.
+
+#### 1. Enabled (standard)
+| Egenskap | Värde |
+|---|---|
+| Border | `1px solid var(--color-border-input-default)` → `#939595` |
+| Bakgrund | `var(--color-surface-raised-primary)` → `#ffffff` |
+| Placeholder-text | `var(--color-text-tertiary)` → `#737373` |
+| Hint/meddelande | `var(--color-text-tertiary)` → `#737373` |
+
+#### 2. Hover
+| Egenskap | Värde |
+|---|---|
+| Border | `1px solid var(--color-border-dark)` → `#333333` |
+| Bakgrund | `var(--color-surface-raised-primary)` → `#ffffff` |
+
+#### 3. Active (alternativ valt)
+| Egenskap | Värde |
+|---|---|
+| Border | `1px solid var(--color-border-selected)` → `#000000` |
+| Bakgrund | `var(--color-surface-raised-primary)` → `#ffffff` |
+| Select-text | `var(--color-text-primary)` → `#000000` |
+
+> **Active state för select** kan inte detekteras med `:not(:placeholder-shown)`. Använd JS för att lägga till klassen `.is-active` på `.form-select-wrap` när ett icke-default alternativ väljs: `select.addEventListener('change', e => wrap.classList.toggle('is-active', e.target.selectedIndex !== 0))`.
+
+#### 4. Focus (tangentbordsfokus)
+| Egenskap | Värde |
+|---|---|
+| Border (selectruta) | `1px solid var(--color-border-input-default)` → `#939595` |
+| Fokusring (utanför) | `2px solid var(--color-border-focus)` → `#455efb`, `inset: -3px` |
+| Bakgrund | `var(--color-surface-raised-primary)` → `#ffffff` |
+
+> Fokusringen visas **enbart** vid tangentbordsnavigering (Tab). Implementeras via `body.keyboard-nav .input-wrap:focus-within::after { opacity: 1; }`. Klick öppnar dropdown utan ring.
+
+#### 5. Error
+| Egenskap | Värde |
+|---|---|
+| Border | `1px solid var(--color-border-danger-default)` → `#d90000` |
+| Bakgrund | `var(--color-surface-raised-primary)` → `#ffffff` |
+| Meddelande | `var(--color-text-danger-default)` → `#d90000` + felikon 20px (`error`, filled) till vänster |
+
+#### 6. Success
+| Egenskap | Värde |
+|---|---|
+| Border | `1px solid var(--color-border-success-default)` → `#248616` |
+| Bakgrund | `var(--color-surface-raised-primary)` → `#ffffff` |
+| Meddelande | `var(--color-text-success)` → `#248616` |
+
+#### 7. Disabled
+| Egenskap | Värde |
+|---|---|
+| Border | `1px solid var(--color-border-disabled)` → `#dad9d7` |
+| Bakgrund | `var(--color-surface-raised-secondary)` → `#f6f6f6` |
+| Select-text | `var(--color-text-disabled)` → `#939595` |
+| Cursor | `not-allowed` |
+
+---
+
+### Hint/meddelande-text (alla storlekar)
+- `body-sm`: 14px/20px, letter-spacing 0.28px, Regular
+- `font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1`
+- Vänster-ikon vid fel: 20px Material Symbols `error` (filled, wght 300)
+
+---
+
+### CSS-mall (Desktop Large – alla tillstånd)
+
+```css
+/* Wrapper — hanterar fokusring och pil-ikon */
+.form-select-wrap {
+  position: relative;
+}
+
+/* Fokusring (se input-sektion — samma mekanism) */
+.input-wrap.form-select-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 2px solid var(--color-border-focus);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast-2) var(--ease-standard);
+}
+body.keyboard-nav .input-wrap.form-select-wrap:focus-within::after { opacity: 1; }
+
+/* Select */
+.form-select {
+  height: 48px;                   /* Desktop Large */
+  padding: 8px 40px 8px 12px;     /* extra höger-padding för pil */
+  border: 1px solid var(--color-border-input-default);
+  background: var(--color-surface-raised-primary);
+  font-family: 'Breuer Condensed', sans-serif;
+  font-size: 16px;                /* body-md */
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.32px;
+  color: var(--color-text-primary);
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+  appearance: none;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color var(--duration-fast-3) var(--ease-standard);
+}
+
+/* Dropdown-pil */
+.form-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 24px;
+  height: 24px;
+}
+
+/* Hover */
+.form-select:hover { border-color: var(--color-border-dark); }
+
+/* Active (alternativ valt) — togglad via JS */
+.form-select-wrap.is-active .form-select { border-color: var(--color-border-selected); }
+
+/* Focus (cursor i fält) */
+.form-select:focus { border-color: var(--color-border-selected); }
+
+/* Error */
+.form-select--error { border-color: var(--color-border-danger-default) !important; }
+
+/* Success */
+.form-select--success { border-color: var(--color-border-success-default) !important; }
+
+/* Disabled */
+.form-select:disabled {
+  background: var(--color-surface-raised-secondary);
+  border-color: var(--color-border-disabled);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+```
+
+---
+
 ## Checkbox-styling (ECO Design System)
 
 Checkboxar följer ECO Design Systems specifikation: total yta **24×24px**, synlig ruta **16×16px**.
@@ -993,6 +1167,68 @@ Skuggor som enbart används för specifika komponenter. Specificeras i detalj in
 5. **Component Specific tokens** används aldrig utanför sin avsedda komponent.
 6. **Surface ≠ Background** – Surface (`background-primary: #ffffff`) är den synliga behållaren; Background är underliggande sidbakgrund. Elevation skiljer dessa åt visuellt.
 7. **Liten/skarp skugga** signalerar nära yta (låg nivå). **Stor/mjuk skugga** signalerar hög elevation – välj därefter.
+8. **Drawer-overlay** – bakgrundsöverlagringen bakom en öppen drawer ska ha `background: rgba(0,0,0,0.2)`. Använd aldrig `surface-opacity-black-50` (50%) för drawers.
+9. **Drawer-skugga** – en drawer som öppnas från höger ska alltid ha `box-shadow: var(--elevation-drawer-right)`. En drawer från vänster ska ha `box-shadow: var(--elevation-drawer-left)`. Skuggan appliceras direkt på drawer-panelen, inte på overlay.
+10. **Drawer-bredd** – en standard drawer ska alltid ha `width: min(500px, 100%)`. Detta ger fast 500px bredd på större skärmar och fyller hela bredden automatiskt när fönstret/enheten är smalare än 500px. Använd aldrig separata media queries för att sätta `width: 100%` eller `width: 500px` på drawer-panelen.
+11. **Drawer – responsiva komponentstorlekar** – vid `max-width: 768px` (xs + sm breakpoints) ska alla komponenter inuti drawern använda Mobile Base Styling. Applicera följande `@media (max-width: 768px)`-block på varje drawer:
+
+```css
+@media (max-width: 768px) {
+  /* Header */
+  .drawer-header { padding: 16px 24px; }
+  .drawer-title {
+    font-size: 22px;       /* display-sm Mobile */
+    line-height: 22px;
+  }
+
+  /* Content & footer */
+  .drawer-content { padding: 0 24px 24px; gap: 16px; }
+  .drawer-footer { padding: 16px 24px; }
+
+  /* Spara-knapp — mobile lg: padding 12px */
+  .drawer-save-btn { padding: 12px 16px; }
+
+  /* Labels — label-md Mobile: 14px/14px, 0.42px */
+  .form-label {
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.42px;
+  }
+
+  /* Inputs & selects — Large Mobile: 40px, 8px padding, body-md mobile 16px/22px */
+  .form-input,
+  .form-select {
+    height: 40px;
+    padding: 8px;
+    line-height: 22px;
+  }
+  .form-select { padding-right: 40px; }   /* behåll utrymme för dropdown-pil */
+
+  /* Checkbox-text — body-md Mobile: 16px/22px */
+  .form-checkbox-item span {
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.32px;
+  }
+
+  /* form-row staplas vertikalt på mobil */
+  .form-row { flex-direction: column; gap: 16px; }
+}
+```
+
+**Sammanfattning av Mobile Base Styling för drawer-komponenter:**
+
+| Komponent | Desktop (`769px+`) | Mobile (`≤768px`) |
+|---|---|---|
+| Drawer-titel | `display-sm` 26px/26px | 22px/22px |
+| Header-padding | `24px 32px` | `16px 24px` |
+| Content-padding | `0 32px 32px`, gap 24px | `0 24px 24px`, gap 16px |
+| Footer-padding | `24px 32px` | `16px 24px` |
+| Label (`label-md`) | 16px/16px, 0.48px | 14px/14px, 0.42px |
+| Input / Select | 48px, padding `8px 12px`, line-height 24px | 40px, padding `8px`, line-height 22px |
+| Checkbox-text | `body-md` 16px/24px, 0.32px | 16px/22px, 0.32px |
+| Spara-knapp | `padding: 16px` | `padding: 12px 16px` |
+| form-row | `flex-direction: row` | `flex-direction: column`, gap 16px |
 
 ---
 
