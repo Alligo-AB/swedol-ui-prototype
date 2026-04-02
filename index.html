@@ -283,7 +283,8 @@
       transition: opacity var(--duration-fast-2) var(--ease-standard);
     }
     .site-header__search:hover { border-color: var(--color-border-dark); }
-    .site-header__search.is-active { border-color: var(--color-border-selected); }
+    .site-header__search.is-active,
+    .site-header__search:focus-within { border-color: var(--color-border-selected); }
     .site-header__search:focus-within::after { opacity: 0; }
     body.keyboard-nav :focus-within::after { opacity: 1; }
     .site-header__search .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; flex-shrink: 0; }
@@ -673,7 +674,8 @@
     }
     .search-input input::placeholder { color: var(--color-text-tertiary); }
     .search-input:hover { border-color: var(--color-border-dark); }
-    .search-input.is-active { border-color: var(--color-border-selected); }
+    .search-input.is-active,
+    .search-input:focus-within { border-color: var(--color-border-selected); }
     .search-input:focus-within::after { opacity: 0; }
     body.keyboard-nav :focus-within::after { opacity: 1; }
     .search-input:focus-within .search-clear { /* controlled by JS */ }
@@ -1283,7 +1285,8 @@
       transition: opacity var(--duration-fast-2) var(--ease-standard);
     }
     .newsletter__input-wrap:hover { border-color: var(--color-border-dark); }
-    .newsletter__input-wrap.is-active { border-color: var(--color-border-selected); }
+    .newsletter__input-wrap.is-active,
+    .newsletter__input-wrap:focus-within { border-color: var(--color-border-selected); }
     .newsletter__input-wrap:focus-within::after { opacity: 0; }
     body.keyboard-nav :focus-within::after { opacity: 1; }
     .newsletter__input {
@@ -1559,7 +1562,7 @@
     .drawer-overlay {
       position: fixed;
       inset: 0;
-      background: var(--color-surface-opacity-black-50);
+      background: rgba(0, 0, 0, 0.2);
       z-index: 1000;
       opacity: 0;
       pointer-events: none;
@@ -1571,7 +1574,7 @@
       position: fixed;
       top: 0;
       right: 0;
-      width: 500px;
+      width: min(500px, 100%);
       height: 100vh;
       background: #fff;
       z-index: 1001;
@@ -1579,24 +1582,26 @@
       flex-direction: column;
       transform: translateX(100%);
       transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
+      box-shadow: var(--elevation-drawer-right);
     }
     .drawer-panel.is-open { transform: translateX(0); }
 
     .drawer-header {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       padding: 24px 32px;
       flex-shrink: 0;
     }
     .drawer-header__content { flex: 1; padding: 4px 0; }
     .drawer-title {
       font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 26px;
+      font-size: 26px;             /* display-sm Desktop */
       font-weight: 700;
       line-height: 26px;
       color: var(--color-text-primary);
       text-transform: uppercase;
       letter-spacing: 0;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
     }
     .drawer-close-btn {
       width: 40px;
@@ -1611,7 +1616,7 @@
       padding: 8px;
     }
     .drawer-close-btn:hover { background: var(--color-surface-opacity-black-05); }
-    .drawer-close-btn img { width: 24px; height: 24px; display: block; }
+    .drawer-close-btn .ms { font-size: 24px; color: var(--color-text-primary); }
 
     .drawer-content {
       flex: 1;
@@ -1641,14 +1646,21 @@
       letter-spacing: 0.48px;
       line-height: 16px;
       cursor: pointer;
+      transition: background-color var(--duration-fast-3) var(--ease-standard),
+                  background-image var(--duration-fast-3) var(--ease-standard);
     }
-    .drawer-save-btn:hover {
+    .drawer-save-btn:hover:not(:disabled) {
       background-image: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2)), linear-gradient(90deg, #000, #000);
+    }
+    .drawer-save-btn:disabled {
+      background: var(--color-surface-disabled, #e5e5e5);
+      color: var(--color-text-disabled, #939595);
+      cursor: not-allowed;
     }
 
     /* Form fields */
     .form-field { display: flex; flex-direction: column; gap: 4px; }
-    .form-field--pt { padding-top: 8px; }
+    .form-field--pt { padding-top: 0; }
     .form-row { display: flex; gap: 24px; }
     .form-row .form-field { flex: 1; min-width: 0; }
 
@@ -1713,8 +1725,8 @@
       color: var(--color-text-primary);
     }
 
-    /* Focus (keyboard) — inner border stays border-input-default; only the blue ring (::after) appears */
-    .form-input:focus, .form-select:focus { border-color: var(--color-border-input-default); }
+    /* Focus — selected border on click or keyboard; blue ring only on keyboard (via body.keyboard-nav) */
+    .form-input:focus { border-color: var(--color-border-selected); }
 
     /* Error */
     .form-input--error { border-color: var(--color-border-danger-default) !important; }
@@ -1730,7 +1742,32 @@
       cursor: not-allowed;
     }
 
-    .form-select { appearance: none; cursor: pointer; padding-right: 40px; }
+    .form-select {
+      appearance: none;
+      cursor: pointer;
+      padding-right: 40px;            /* utrymme för dropdown-pil */
+    }
+
+    /* Focus — selected border on click or keyboard */
+    .form-select:focus { border-color: var(--color-border-selected); }
+
+    /* Active — icke-default alternativ valt (JS-togglad klass på wrappern) */
+    .form-select-wrap.is-active .form-select { border-color: var(--color-border-selected); }
+
+    /* Error */
+    .form-select--error { border-color: var(--color-border-danger-default) !important; }
+
+    /* Success */
+    .form-select--success { border-color: var(--color-border-success-default) !important; }
+
+    /* Disabled */
+    .form-select:disabled {
+      background: var(--color-surface-raised-secondary, #f6f6f6);
+      border-color: var(--color-border-disabled);
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+    }
+
     .form-select-wrap { position: relative; }
     .form-select-arrow {
       position: absolute;
@@ -1738,8 +1775,12 @@
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;
-      width: 24px;
-      height: 24px;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--color-text-primary);
+    }
+    .form-select:disabled ~ .form-select-arrow {
+      color: var(--color-text-disabled);
     }
 
     .form-helper {
@@ -1764,6 +1805,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px 24px;
+      margin-top: 4px;
+      margin-bottom: 4px;
     }
     .form-checkbox-item {
       display: flex;
@@ -1864,8 +1907,50 @@
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
 
     .cta-buttons { flex-direction: column; }
-    .drawer-panel { width: 100%; }
     .form-row { flex-direction: column; }
+
+    /* xs/sm (max-width: 768px) – mobile: drawer component overrides */
+    @media (max-width: 768px) {
+      /* Header */
+      .drawer-header { padding: 16px 24px; }
+      .drawer-title {
+        font-size: 22px;       /* display-sm Mobile */
+        line-height: 22px;
+      }
+
+      /* Content & footer spacing */
+      .drawer-content { padding: 0 24px 24px; gap: 16px; }
+      .drawer-footer { padding: 16px 24px; }
+
+      /* Save button — mobile lg: 48px, padding 12px */
+      .drawer-save-btn { padding: 12px 16px; }
+
+      /* Labels — label-md Mobile: 14px/14px, 0.42px */
+      .form-label {
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: 0.42px;
+      }
+
+      /* Inputs & selects — Large Mobile: 40px, 8px padding, body-md mobile 16px/22px */
+      .form-input,
+      .form-select {
+        height: 40px;
+        padding: 8px;
+        line-height: 22px;
+      }
+      .form-select { padding-right: 40px; }   /* keep room for arrow */
+
+      /* Checkbox label text — body-md Mobile: 16px/22px */
+      .form-checkbox-item span {
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: 0.32px;
+      }
+
+      /* form-row stays stacked on mobile */
+      .form-row { flex-direction: column; gap: 16px; }
+    }
 
     /* sm (min-width: 640px) – tablet: two-column footer links */
     @media (min-width: 640px) {
@@ -1903,7 +1988,6 @@
       .footer-bottom { flex-direction: row; align-items: center; gap: 0; }
 
       .cta-buttons { flex-direction: row; }
-      .drawer-panel { width: 500px; }
       .form-row { flex-direction: row; }
     }
   </style>
@@ -2612,7 +2696,7 @@
         <h2 class="drawer-title">Lägg till ny användare</h2>
       </div>
       <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="Stäng">
-        <img src="https://www.figma.com/api/mcp/asset/9f1e8916-9248-4443-aa07-8fc59934b1af" alt="" />
+        <span class="ms">close</span>
       </button>
     </div>
 
@@ -2622,31 +2706,27 @@
       <!-- Roll -->
       <div class="form-field">
         <label class="form-label" for="drawer-roll">Roll</label>
-        <div class="form-select-wrap">
+        <div class="input-wrap form-select-wrap">
           <select class="form-select" id="drawer-roll">
             <option>Standard</option>
             <option>Administratör</option>
           </select>
-          <img class="form-select-arrow" src="https://www.figma.com/api/mcp/asset/afbcb3d8-bf62-4b5f-ac68-107628828d3f" alt="" />
+          <span class="ms form-select-arrow">arrow_drop_down</span>
         </div>
         <span class="form-helper">Här väljer du vilken roll du vill att din användare ska ha. Standard är den vanliga användarrollen.</span>
       </div>
 
       <!-- Åtkomst -->
       <div class="form-field form-field--pt">
-        <div class="form-label">Åtkomst <span class="form-label__req">*</span></div>
+        <div class="form-label">Åtkomst</div>
         <div class="form-checkboxes">
           <label class="form-checkbox-item">
-            <input type="checkbox" />
+            <input type="checkbox" checked disabled />
             <span>Handla via webb</span>
           </label>
           <label class="form-checkbox-item">
             <input type="checkbox" />
             <span>Handla i butik</span>
-          </label>
-          <label class="form-checkbox-item">
-            <input type="checkbox" />
-            <span>Smart Service</span>
           </label>
         </div>
         <span class="form-helper">Välj i vilken omfatttning du vill att användaren ska kunna handla i våra olika butiker.</span>
@@ -2655,40 +2735,40 @@
       <!-- Förnamn + Efternamn -->
       <div class="form-row">
         <div class="form-field">
-          <label class="form-label" for="drawer-fornamn">Förnamn <span class="form-label__req">*</span></label>
+          <label class="form-label" for="drawer-fornamn">Förnamn</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" />
+            <input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" placeholder=" " />
           </div>
         </div>
         <div class="form-field">
-          <label class="form-label" for="drawer-efternamn">Efternamn <span class="form-label__req">*</span></label>
+          <label class="form-label" for="drawer-efternamn">Efternamn</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" />
+            <input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" placeholder=" " />
           </div>
         </div>
       </div>
 
       <!-- Epost -->
       <div class="form-field">
-        <label class="form-label" for="drawer-epost">Epost <span class="form-label__req">*</span></label>
+        <label class="form-label" for="drawer-epost">Epost</label>
         <div class="input-wrap">
-          <input class="form-input" type="email" id="drawer-epost" autocomplete="email" />
+          <input class="form-input" type="email" id="drawer-epost" autocomplete="email" placeholder=" " />
         </div>
       </div>
 
       <!-- Mobilnummer -->
       <div class="form-field">
-        <label class="form-label" for="drawer-mobil">Mobilnummer <span class="form-label__req">*</span></label>
+        <label class="form-label" for="drawer-mobil">Mobilnummer</label>
         <div class="input-wrap">
-          <input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" />
+          <input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " />
         </div>
       </div>
 
       <!-- Anställnings ID -->
       <div class="form-field">
-        <label class="form-label" for="drawer-anstallning">Anställnings ID <span class="form-label__req">*</span></label>
+        <label class="form-label" for="drawer-anstallning">Anställnings ID</label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-anstallning" />
+          <input class="form-input" type="text" id="drawer-anstallning" placeholder=" " />
         </div>
       </div>
 
@@ -2716,45 +2796,68 @@
             <option>Inaktiv</option>
             <option>Aktiv</option>
           </select>
-          <img class="form-select-arrow" src="https://www.figma.com/api/mcp/asset/afbcb3d8-bf62-4b5f-ac68-107628828d3f" alt="" />
+          <span class="ms form-select-arrow">arrow_drop_down</span>
         </div>
         <span class="form-helper">Inaktiv är standardvärdet. Välj aktiv om ni använder budget.</span>
       </div>
 
-      <!-- Årsbudget -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-arsbudget">Årsbudget</label>
-        <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-arsbudget" placeholder="24 000.00 kr" />
-        </div>
-      </div>
+      <!-- Budget fields — visas enbart när "Aktiv" är valt -->
+      <div id="budget-fields" style="display:none; flex-direction:column; gap:24px;">
 
-      <!-- Nuvarande saldo (disabled) -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-saldo">Nuvarande saldo</label>
-        <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-saldo" value="12 000.00 kr" disabled />
+        <!-- Årsbudget -->
+        <div class="form-field">
+          <label class="form-label" for="drawer-arsbudget">Årsbudget</label>
+          <div class="input-wrap">
+            <input class="form-input" type="text" id="drawer-arsbudget" placeholder="24 000.00 kr" />
+          </div>
         </div>
-        <span class="form-helper form-helper--disabled">Era användare har ett fastställt saldo på 12 000.00 kr</span>
-      </div>
 
-      <!-- Lägg till saldo -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-lagg-saldo">Lägg till saldo</label>
-        <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder="-" />
+        <!-- Nuvarande saldo (disabled) -->
+        <div class="form-field">
+          <label class="form-label" for="drawer-saldo">Nuvarande saldo</label>
+          <div class="input-wrap">
+            <input class="form-input" type="text" id="drawer-saldo" value="12 000.00 kr" disabled />
+          </div>
+          <span class="form-helper form-helper--disabled">Era användare har ett fastställt saldo på 12 000.00 kr</span>
         </div>
+
+        <!-- Lägg till saldo -->
+        <div class="form-field">
+          <label class="form-label" for="drawer-lagg-saldo">Lägg till saldo</label>
+          <div class="input-wrap">
+            <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder="-" />
+          </div>
+        </div>
+
       </div>
 
     </div>
 
     <!-- Footer -->
     <div class="drawer-footer">
-      <button class="drawer-save-btn">Spara</button>
+      <button class="drawer-save-btn" id="drawer-save-btn" disabled>Spara</button>
     </div>
   </div>
 
   <script>
+    /* ── Select active state ─────────────────────────────────── */
+    document.querySelectorAll('.form-select-wrap .form-select').forEach(select => {
+      const wrap = select.closest('.form-select-wrap');
+      select.addEventListener('change', () => {
+        wrap.classList.toggle('is-active', select.selectedIndex !== 0);
+      });
+    });
+
+    /* ── Budget fields toggle ─────────────────────────────────── */
+    const budgetSelect = document.getElementById('drawer-budget');
+    const budgetFields = document.getElementById('budget-fields');
+    if (budgetSelect && budgetFields) {
+      budgetSelect.addEventListener('change', () => {
+        const isActive = budgetSelect.value === 'Aktiv';
+        budgetFields.style.display = isActive ? 'flex' : 'none';
+      });
+    }
+
     /* ── Keyboard vs mouse focus tracking ────────────────────── */
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Tab') document.body.classList.add('keyboard-nav');
@@ -2861,10 +2964,43 @@
       lastY = y;
     }, { passive: true });
 
+    /* ── Drawer save / dirty-state ───────────────────────────── */
+    const DRAWER_FIELD_IDS = [
+      'drawer-fornamn', 'drawer-efternamn', 'drawer-epost',
+      'drawer-mobil', 'drawer-anstallning', 'drawer-roll',
+      'drawer-budget', 'drawer-arsbudget', 'drawer-lagg-saldo'
+    ];
+
+    let drawerSnapshot = {};
+
+    function getDrawerValues() {
+      const vals = {};
+      DRAWER_FIELD_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) vals[id] = el.value;
+      });
+      return vals;
+    }
+
+    function isDrawerDirty() {
+      const current = getDrawerValues();
+      return DRAWER_FIELD_IDS.some(id => current[id] !== drawerSnapshot[id]);
+    }
+
+    function updateSaveBtn() {
+      document.getElementById('drawer-save-btn').disabled = !isDrawerDirty();
+    }
+
+    function snapshotDrawer() {
+      drawerSnapshot = getDrawerValues();
+      document.getElementById('drawer-save-btn').disabled = true;
+    }
+
     function openDrawer() {
       document.getElementById('drawer-overlay').classList.add('is-open');
       document.getElementById('drawer-panel').classList.add('is-open');
       document.body.style.overflow = 'hidden';
+      snapshotDrawer();
     }
 
     function closeDrawer() {
@@ -2872,6 +3008,20 @@
       document.getElementById('drawer-panel').classList.remove('is-open');
       document.body.style.overflow = '';
     }
+
+    /* Listen for changes on all drawer fields */
+    DRAWER_FIELD_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const evt = (el.tagName === 'SELECT') ? 'change' : 'input';
+      el.addEventListener(evt, updateSaveBtn);
+    });
+
+    /* Save: commit current values as new snapshot, then close */
+    document.getElementById('drawer-save-btn').addEventListener('click', function() {
+      snapshotDrawer();
+      closeDrawer();
+    });
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeDrawer();
