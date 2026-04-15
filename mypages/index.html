@@ -1088,6 +1088,223 @@
       background: var(--surface-secondary); /* #f6f6f6 */
     }
 
+    /* ── Mobile / Tablet User Cards (xs + sm, max-width: 768px) ─── */
+    .users-mobile-cards {
+      display: none; /* shown via @media max-width:768px */
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .users-mobile-cards { gap: 16px; }
+    }
+
+    .user-card {
+      background: #fff;
+      border: 1px solid #f6f6f6;
+      box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.05), 0px 1px 3px 0px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    .user-card__body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+    }
+
+    .user-card__header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .user-card__name {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 22px;
+      letter-spacing: 0px;
+      color: #000;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      white-space: nowrap;
+    }
+
+    .user-card__email {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 14px;
+      letter-spacing: 0.28px;
+      color: #4f4f4f;
+      text-decoration: underline;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
+    .user-card__access {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .user-card__checkbox-item {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      cursor: default;
+    }
+
+    .user-card__checkbox-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #dad9d7;
+      background: #fff;
+      cursor: not-allowed;
+      flex-shrink: 0;
+      margin: 4px;
+    }
+
+    .user-card__checkbox-item input[type="checkbox"]:checked {
+      background-color: #e5e5e5;
+      border-color: #e5e5e5;
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 8L6.5 12L13.5 4' stroke='%23939595' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .user-card__checkbox-label {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      color: #939595;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      white-space: nowrap;
+    }
+
+    /* Data section: shared grid + expand button */
+    .user-card__data-section {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    /* Two-column grid shared by Roll row and expanded detail rows */
+    .user-card__data-grid {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 16px;
+      row-gap: 0;
+      flex: 1;
+      min-width: 0;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: #000;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
+    .user-card__expand-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      flex-shrink: 0;
+      transition: background var(--duration-fast-3) var(--ease-standard);
+    }
+
+    .user-card__expand-btn:hover { background: rgba(0,0,0,0.05); }
+
+    .user-card__expand-icon {
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      transition: transform 200ms cubic-bezier(.35,0,.35,1);
+      display: block;
+    }
+
+    .user-card.is-open .user-card__expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .user-card__divider {
+      height: 1px;
+      background: #e5e5e5;
+      flex-shrink: 0;
+    }
+
+    /* Animated expand/collapse wrapper — spans full grid width */
+    .user-card__expanded-wrap {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: 0fr;
+      overflow: hidden;
+      margin-top: 0;
+      transition: grid-template-rows 200ms cubic-bezier(0.03, 0.61, 0.64, 0.96);
+    }
+
+    .user-card.is-open .user-card__expanded-wrap {
+      grid-template-rows: 1fr;
+      margin-top: 8px;
+      transition-duration: 150ms;
+      transition-timing-function: cubic-bezier(0.35, 0, 0.35, 1);
+    }
+
+    /* Inner expanded grid — min-height:0 required for 0fr to collapse fully */
+    .user-card__expanded {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
+      row-gap: 8px;
+      align-content: start;
+    }
+
+    .user-card__detail-label {
+      font-weight: 700;
+      white-space: nowrap;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+
+    .user-card__detail-value {
+      font-weight: 400;
+      min-width: 0;
+    }
+
+    .user-card__actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .user-card__actions-left {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .user-card__action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      color: #000;
+      transition: background var(--duration-fast-3) var(--ease-standard);
+    }
+
+    .user-card__action-btn:hover { background: rgba(0,0,0,0.05); }
+
     /* ── Logout confirm toast – knappar ─────────────────────── */
     /* Stäng × — Blank på ljus bakgrund */
     .logout-toast__close {
@@ -1172,41 +1389,47 @@
 
     /* ── Impersonation banner — Type: Banner, Emphasis: System Extra Strong, Status: Informational ── */
 
-    /* Wrapper: max-height: 0 + overflow: hidden = garanterad 0px höjd när dold */
+    /* Outer wrapper: fixed bottom, slides up when active */
     .impersonation-banner-wrap {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 350ms cubic-bezier(.16,0,.16,1); /* ease-decelerate-emphasized, medium-3 */
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      transform: translateY(100%);
+      transition: transform 350ms cubic-bezier(.16,0,.16,1);
+      pointer-events: none;
     }
     .impersonation-banner-wrap.is-visible {
-      max-height: 200px; /* generöst tak — faktisk höjd ~48px desktop / ~40px mobil */
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
-    .impersonation-banner {
-      display: flex;
-      width: 100%;
-      min-height: 48px;
-      background: var(--color-surface-information-default); /* #0066ff */
-      box-shadow: var(--elevation-b-20);
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      gap: 8px;
-      box-sizing: border-box;
-      opacity: 0;
-      transition: opacity 200ms var(--ease-standard) 150ms;
+    /* Placeholder — not needed for fixed bottom */
+    .impersonation-banner-placeholder {
+      display: none;
     }
-    .impersonation-banner-wrap.is-visible .impersonation-banner {
-      opacity: 1;
+
+    /* Inner banner */
+    .impersonation-banner {
+      width: 100%;
+      background: var(--color-surface-information-default); /* #0066ff */
+      box-shadow: 0px -2px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
     }
 
     /* Body: icon + message-group, centered on desktop */
     .impersonation-banner__body {
-      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      padding: 8px;
+      min-height: 40px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    @media (min-width: 769px) {
+      .impersonation-banner__body { min-height: 48px; }
     }
 
     .impersonation-banner__icon {
@@ -1267,13 +1490,8 @@
 
     /* Mobile/Tablet (≤768px) */
     @media (max-width: 768px) {
-      .impersonation-banner {
-        min-height: 40px;
-        padding: 8px 16px;
-        align-items: flex-start;
-        justify-content: flex-start;
-      }
       .impersonation-banner__body {
+        padding: 8px 16px;
         align-items: flex-start;
         justify-content: flex-start;
       }
@@ -2443,6 +2661,16 @@
       white-space: nowrap;
     }
     .form-label__req { color: var(--color-text-danger-default); }
+    .form-label__optional {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;       /* body-md Desktop */
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0.32px;
+      text-transform: none;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      color: var(--color-text-primary);
+    }
 
     /* Input wrapper — provides focus ring via ::after */
     .input-wrap {
@@ -2727,6 +2955,7 @@
     .footer-copyright { padding: 24px 16px; }
 
     .form-row { flex-direction: column; }
+    .form-row--name { flex-direction: row; }
 
     /* xs/sm (max-width: 768px) – mobile: drawer component overrides */
     @media (max-width: 768px) {
@@ -2750,6 +2979,12 @@
         line-height: 14px;
         letter-spacing: 0.42px;
       }
+      /* Optional suffix — body-md Mobile: 14px/14px, 0.42px */
+      .form-label__optional {
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: 0.42px;
+      }
 
       /* Inputs & selects — Large Mobile: 40px, 8px padding, body-md mobile 16px/22px */
       .form-input,
@@ -2767,8 +3002,9 @@
         letter-spacing: 0.32px;
       }
 
-      /* form-row stays stacked on mobile */
+      /* form-row stays stacked on mobile, except name row */
       .form-row { flex-direction: column; gap: 16px; }
+      .form-row--name { flex-direction: row; gap: 16px; }
     }
 
     /* sm (min-width: 640px) – tablet */
@@ -3158,6 +3394,12 @@
       .site-header { display: none; }
     }
 
+    /* ── xs + sm (max-width: 768px): show cards, hide desktop table ── */
+    @media (max-width: 768px) {
+      .users-table-wrap { display: none; }
+      .users-mobile-cards { display: flex; }
+    }
+
     /* ── xs only (max-width: 639px) – mobile overrides ── */
     @media (max-width: 639px) {
       /* Bar1: 56px (8px padding + 40px buttons) */
@@ -3447,6 +3689,20 @@
       </div>
   </div>
 
+  <!-- ══ IMPERSONATION BANNER ═════════════════════════════════ -->
+  <div id="impersonation-banner-wrap" class="impersonation-banner-wrap">
+    <div id="impersonation-banner" class="impersonation-banner" role="status">
+      <div class="impersonation-banner__body">
+        <span class="ms impersonation-banner__icon">info</span>
+        <div class="impersonation-banner__text-group">
+          <p class="impersonation-banner__text">Din roll är <span class="impersonation-banner__title">Administratör</span> och du agerar tillfälligt som <strong id="impersonation-banner-name"></strong>.</p>
+          <button class="impersonation-banner__link" id="impersonation-banner-logout">LOGGA UT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="impersonation-banner-placeholder" class="impersonation-banner-placeholder"></div>
+
   <header class="site-header">
     <!-- Main nav -->
     <nav class="site-header__nav">
@@ -3470,20 +3726,6 @@
       </button>
     </nav>
   </header>
-
-
-  <!-- ══ IMPERSONATION BANNER ═════════════════════════════════ -->
-  <div id="impersonation-banner-wrap" class="impersonation-banner-wrap">
-    <div id="impersonation-banner" class="impersonation-banner" role="status">
-      <div class="impersonation-banner__body">
-        <span class="ms impersonation-banner__icon">info</span>
-        <div class="impersonation-banner__text-group">
-          <p class="impersonation-banner__text">Din roll är <span class="impersonation-banner__title">Administratör</span> och du agerar tillfälligt som <strong id="impersonation-banner-name"></strong>.</p>
-          <button class="impersonation-banner__link" id="impersonation-banner-logout">LOGGA UT</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ══ ACCOUNT NAV ══════════════════════════════════════════ -->
   <nav class="account-nav">
@@ -3754,6 +3996,11 @@
         </tr>
       </tbody>
     </table>
+    </div>
+
+    <!-- Mobile / Tablet User Cards (xs + sm ≤768px) -->
+    <div class="users-mobile-cards" id="users-mobile-cards">
+      <!-- Cards injected by JS -->
     </div>
 
     <!-- Pagination -->
@@ -4154,7 +4401,7 @@
 
       <!-- Åtkomst -->
       <div class="form-field form-field--pt">
-        <div class="form-label">Åtkomst</div>
+        <div class="form-label"><span>Åtkomst</span><span class="form-label__optional">(Valfritt)</span></div>
         <div class="form-checkboxes">
           <label class="form-checkbox-item">
             <input type="checkbox" checked disabled />
@@ -4169,7 +4416,7 @@
       </div>
 
       <!-- Förnamn + Efternamn -->
-      <div class="form-row">
+      <div class="form-row form-row--name">
         <div class="form-field">
           <label class="form-label" for="drawer-fornamn">Förnamn</label>
           <div class="input-wrap">
@@ -4210,7 +4457,7 @@
 
       <!-- Kostnadsställe -->
       <div class="form-field">
-        <label class="form-label" for="drawer-kost">Kostnadsställe</label>
+        <label class="form-label" for="drawer-kost"><span>Kostnadsställe</span><span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
           <input class="form-input" type="text" id="drawer-kost" placeholder="-" />
         </div>
@@ -4218,7 +4465,7 @@
 
       <!-- Adressnummer -->
       <div class="form-field">
-        <label class="form-label" for="drawer-adress">Adressnummer</label>
+        <label class="form-label" for="drawer-adress"><span>Adressnummer</span><span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
           <input class="form-input" type="text" id="drawer-adress" placeholder="-" />
         </div>
@@ -4806,6 +5053,12 @@
       siteHeaderTop.style.borderBottomColor = navVisible ? '#232500' : '#c7d300';
     }
 
+    // Init --header-top-h for sticky banner
+    document.documentElement.style.setProperty('--header-top-h', siteHeaderTop.offsetHeight + 'px');
+    window.addEventListener('resize', function() {
+      document.documentElement.style.setProperty('--header-top-h', siteHeaderTop.offsetHeight + 'px');
+    });
+
     window.addEventListener('scroll', () => {
       const y       = window.scrollY;
       const topBarH = siteHeaderTop.offsetHeight;
@@ -4837,6 +5090,7 @@
     const DRAWER_FIELD_IDS = [
       'drawer-fornamn', 'drawer-efternamn', 'drawer-epost',
       'drawer-mobil', 'drawer-roll',
+      'drawer-kost', 'drawer-adress',
       'drawer-budget', 'drawer-arsbudget', 'drawer-lagg-saldo'
     ];
 
@@ -4848,12 +5102,14 @@
         const el = document.getElementById(id);
         if (el) vals[id] = el.value;
       });
+      var butik = document.getElementById('checkbox-butik');
+      if (butik) vals['checkbox-butik'] = butik.checked ? '1' : '0';
       return vals;
     }
 
     function isDrawerDirty() {
       const current = getDrawerValues();
-      return DRAWER_FIELD_IDS.some(id => current[id] !== drawerSnapshot[id]);
+      return Object.keys(current).some(id => current[id] !== drawerSnapshot[id]);
     }
 
     function updateSaveBtn() {
@@ -4923,6 +5179,10 @@
         { key: 'namn',           label: 'Namn',               fixed: true,  visible: true  },
       ];
 
+      /* Expose COLS + current ordering for mobile cards */
+      window._COLS = COLS;
+      window._currentColOrder = COLS.filter(function(c) { return !c.fixed; }).map(function(c) { return c.key; });
+
       /* Tag tbody tds with data-col and inject hidden placeholder cells */
       var table = document.querySelector('.users-table');
       if (table) {
@@ -4961,6 +5221,8 @@
         list.querySelectorAll('.col-item[data-colkey]').forEach(function(item) {
           optOrder.push(item.dataset.colkey);
         });
+        /* Keep mobile cards in sync with current column order */
+        window._currentColOrder = optOrder.slice();
         /* Reverse: top of drawer list → rightmost column in table */
         var reversed = optOrder.slice().reverse();
         table.querySelectorAll('tr').forEach(function(row) {
@@ -4974,11 +5236,11 @@
           var spacerCell  = cells.find(function(c) { return c.classList.contains('col-right-spacer'); });
           while (row.firstChild) row.removeChild(row.firstChild);
           if (namnCell)    row.appendChild(namnCell);
-          if (rollCell)    row.appendChild(rollCell);
           reversed.forEach(function(k) {
             var cell = get(k);
             if (cell) row.appendChild(cell);
           });
+          if (rollCell)    row.appendChild(rollCell);
           if (butikCell)   row.appendChild(butikCell);
           if (webbCell)    row.appendChild(webbCell);
           if (actionsCell) row.appendChild(actionsCell);
@@ -5004,6 +5266,7 @@
             this.classList.remove('is-dragging');
             list.querySelectorAll('.col-item').forEach(function(i) { i.classList.remove('drag-over'); });
             applyColOrderToTable();
+            if (window._rebuildAllMobileCards) window._rebuildAllMobileCards();
           });
 
           item.addEventListener('dragover', function(e) {
@@ -5105,6 +5368,7 @@
 
       window.closeColDrawer = function() {
         applyColOrderToTable();
+        if (window._rebuildAllMobileCards) window._rebuildAllMobileCards();
         document.getElementById('col-drawer-overlay').classList.remove('is-open');
         document.getElementById('col-drawer-panel').classList.remove('is-open');
         document.body.style.overflow = '';
@@ -5113,6 +5377,12 @@
         if (wrap) requestAnimationFrame(function() {
           wrap.scrollLeft = wrap.scrollWidth - wrap.clientWidth;
         });
+      };
+
+      /* Exposed for page-init call after USERS IIFE populates data */
+      window._initColTable = function() {
+        buildColList();
+        applyColOrderToTable();
       };
     })();
 
@@ -5136,19 +5406,177 @@
       });
     });
 
-    /* BankID-ikon i Spara-knappen när "Handla i butik" är ikryssad */
+    /* BankID-ikon i Spara-knappen — visas bara när butik aktiveras från att ha varit av */
+    window._butikInitialState = false;
     (function() {
       var butikCheckbox = document.getElementById('checkbox-butik');
       var saveBtn = document.getElementById('drawer-save-btn');
       if (!butikCheckbox || !saveBtn) return;
       butikCheckbox.addEventListener('change', function() {
-        saveBtn.classList.toggle('has-bankid', this.checked);
+        saveBtn.classList.toggle('has-bankid', this.checked && !window._butikInitialState);
+        updateSaveBtn();
       });
     })();
 
     /* Save: commit current values as new snapshot, then close */
     document.getElementById('drawer-save-btn').addEventListener('click', function() {
       snapshotDrawer();
+
+      /* If editing an existing user, write changes back to USERS + table row */
+      if (currentEditIndex >= 0) {
+        var u = USERS[currentEditIndex];
+        var rollSel = document.getElementById('drawer-roll');
+
+        u.firstName      = document.getElementById('drawer-fornamn').value.trim();
+        u.lastName       = document.getElementById('drawer-efternamn').value.trim();
+        u.email          = document.getElementById('drawer-epost').value.trim();
+        u.phone          = document.getElementById('drawer-mobil').value.trim();
+        u.anstallningsnr = document.getElementById('drawer-anstallning').value.trim();
+        u.kostnadsstalle = document.getElementById('drawer-kost').value.trim();
+        u.adress         = document.getElementById('drawer-adress').value.trim();
+        u.roll           = rollSel.options[rollSel.selectedIndex].text;
+        u.butik          = document.getElementById('checkbox-butik').checked;
+        u.budget         = document.getElementById('drawer-budget').value;
+        if (u.budget === 'Aktiv') {
+          u.arsbudget = document.getElementById('drawer-arsbudget').value.trim();
+          u.saldo     = document.getElementById('drawer-saldo').value.trim();
+        }
+
+        /* Update the corresponding table row */
+        var rows = document.querySelectorAll('.users-table tbody tr');
+        var tr = rows[currentEditIndex];
+        if (tr) {
+          /* Name */
+          var nameDiv = tr.querySelector('.user-name');
+          if (nameDiv) nameDiv.textContent = u.firstName + ' ' + u.lastName;
+
+          /* Cells by data-col */
+          var setCell = function(col, val) {
+            var td = tr.querySelector('[data-col="' + col + '"]');
+            if (td) td.textContent = val;
+          };
+          var rollTd = tr.querySelector('[data-col="roll"]');
+          if (rollTd) rollTd.innerHTML = '<span>' + u.roll + '</span>';
+          setCell('anstallningsnr', u.anstallningsnr);
+          setCell('saldo',          u.saldo);
+          setCell('kostnadsstalle', u.kostnadsstalle);
+
+          /* Butik checkbox */
+          var butikTd = tr.querySelector('[data-col="butik"]');
+          if (butikTd) {
+            var cb = butikTd.querySelector('input[type="checkbox"]');
+            if (cb) cb.checked = u.butik;
+          }
+        }
+
+        /* Refresh mobile card */
+        if (window._refreshMobileCard) window._refreshMobileCard(currentEditIndex);
+      } else {
+        /* New user — build entry, add to USERS, create table row */
+        var rollSel2 = document.getElementById('drawer-roll');
+        /* Auto-generate anställningsnummer: find current max and increment */
+        var maxNr = USERS.reduce(function(max, u) {
+          var m = u.anstallningsnr && u.anstallningsnr.match(/^ANS-(\d+)$/);
+          return m ? Math.max(max, parseInt(m[1], 10)) : max;
+        }, 10000);
+        var nextNr = 'ANS-' + String(maxNr + 1).padStart(5, '0');
+
+        var newBudget = document.getElementById('drawer-budget').value;
+        var newUser = {
+          firstName:      document.getElementById('drawer-fornamn').value.trim(),
+          lastName:       document.getElementById('drawer-efternamn').value.trim(),
+          email:          document.getElementById('drawer-epost').value.trim(),
+          phone:          document.getElementById('drawer-mobil').value.trim(),
+          anstallningsnr: nextNr,
+          kostnadsstalle: document.getElementById('drawer-kost').value.trim(),
+          adress:         document.getElementById('drawer-adress').value.trim(),
+          roll:           rollSel2.options[rollSel2.selectedIndex].text,
+          butik:          document.getElementById('checkbox-butik').checked,
+          webb:           true,
+          budget:         newBudget,
+          arsbudget:      '',
+          saldo:          newBudget === 'Aktiv' ? '' : '0 kr',
+          kategori:       '',
+          avdelning:      '',
+          butikssaldo:    '',
+          skapnummer:     '',
+          skapsection:    '',
+          personnummer:   ''
+        };
+        if (newUser.budget === 'Aktiv') {
+          newUser.arsbudget = document.getElementById('drawer-arsbudget').value.trim();
+          newUser.saldo     = document.getElementById('drawer-lagg-saldo').value.trim() || '0 kr';
+        }
+        USERS.push(newUser);
+        var newIdx = USERS.length - 1;
+
+        /* Build table row */
+        var iStyle = "font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20";
+        var newTr = document.createElement('tr');
+        newTr.innerHTML =
+          '<td>' +
+            '<div class="user-name">' + newUser.firstName + ' ' + newUser.lastName + '</div>' +
+            '<div class="user-email">' + newUser.email + '</div>' +
+          '</td>' +
+          '<td><span>' + newUser.roll + '</span></td>' +
+          '<td>' + newUser.anstallningsnr + '</td>' +
+          '<td>' + newUser.saldo + '</td>' +
+          '<td>' + newUser.kostnadsstalle + '</td>' +
+          '<td class="check-icon"><input type="checkbox"' + (newUser.butik ? ' checked' : '') + ' disabled /></td>' +
+          '<td class="check-icon"><input type="checkbox" checked disabled /></td>' +
+          '<td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay">' +
+            '<button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="' + iStyle + '">delete</span></button>' +
+            '<button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="' + iStyle + '">switch_account</span></button>' +
+            '<button class="btn-row-action" aria-label="Redigera"><span class="ms" style="' + iStyle + '">edit</span></button>' +
+          '</div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="' + iStyle + '">more_horiz</span></button></div></td>' +
+          '<td class="col-right-spacer"></td>';
+
+        var newEditBtn = newTr.querySelector('.btn-row-action[aria-label="Redigera"]');
+        if (newEditBtn) newEditBtn.onclick = (function(idx){ return function(e){ e.stopPropagation(); openEditDrawer(idx); }; })(newIdx);
+
+        /* Tag the 7 main tds with data-col before appending */
+        var tagKeys = ['namn', 'roll', 'anstallningsnr', 'saldo', 'kostnadsstalle', 'butik', 'webb'];
+        var rawTds  = newTr.querySelectorAll('td');
+        tagKeys.forEach(function(key, i) { if (rawTds[i]) rawTds[i].dataset.col = key; });
+
+        /* Add hidden-column placeholder cells (same keys as page-load IIFE) */
+        var extraKeys = ['kategori', 'avdelning', 'butikssaldo', 'skapnummer', 'skapsection', 'personnummer'];
+        var spacerTd  = newTr.querySelector('.col-right-spacer');
+        extraKeys.forEach(function(key) {
+          var xtd = document.createElement('td');
+          xtd.dataset.col = key;
+          xtd.classList.add('col-hidden');
+          xtd.textContent = '—';
+          newTr.insertBefore(xtd, spacerTd);
+        });
+
+        document.querySelector('.users-table tbody').appendChild(newTr);
+
+        /* Add mobile card for new user */
+        if (window._addMobileCard) window._addMobileCard(newUser, newIdx);
+
+        /* Reorder new row cells to exactly match the first existing row
+           (mirrors whatever column order + visibility is already applied) */
+        var refRow = document.querySelector('.users-table tbody tr:not(:last-child)');
+        if (refRow) {
+          Array.from(refRow.children).forEach(function(refCell) {
+            var key = refCell.dataset.col;
+            var match;
+            if (key) {
+              match = newTr.querySelector('[data-col="' + key + '"]');
+            } else if (refCell.classList.contains('col-action')) {
+              match = newTr.querySelector('.col-action');
+            } else if (refCell.classList.contains('col-right-spacer')) {
+              match = newTr.querySelector('.col-right-spacer');
+            }
+            if (match) {
+              newTr.appendChild(match);
+              match.classList.toggle('col-hidden', refCell.classList.contains('col-hidden'));
+            }
+          });
+        }
+      }
+
       closeDrawer();
     });
 
@@ -5206,8 +5634,151 @@
       });
     })();
 
+    /* Reorder tbody columns to match thead after data is populated */
+    window._initColTable();
+
+    /* ── Mobile / Tablet User Cards ───────────────────────────── */
+    (function buildMobileCards() {
+      var container = document.getElementById('users-mobile-cards');
+      if (!container) return;
+
+      function makeCard(u, idx) {
+        var card = document.createElement('div');
+        card.className = 'user-card';
+        card.setAttribute('data-idx', idx);
+
+        var butikChecked = u.butik ? 'checked' : '';
+        var webbChecked  = u.webb  ? 'checked' : '';
+
+        card.innerHTML =
+          '<div class="user-card__body">' +
+            '<div class="user-card__header">' +
+              '<div class="user-card__name">' + u.firstName + ' ' + u.lastName + '</div>' +
+              '<a class="user-card__email" href="mailto:' + u.email + '">' + u.email + '</a>' +
+            '</div>' +
+            '<div class="user-card__access">' +
+              '<label class="user-card__checkbox-item">' +
+                '<input type="checkbox" ' + butikChecked + ' disabled />' +
+                '<span class="user-card__checkbox-label">Handla i butik</span>' +
+              '</label>' +
+              '<label class="user-card__checkbox-item">' +
+                '<input type="checkbox" ' + webbChecked + ' disabled />' +
+                '<span class="user-card__checkbox-label">Handla via webb</span>' +
+              '</label>' +
+            '</div>' +
+            (function() {
+              var expandedRows = '';
+              var order = window._currentColOrder || ['anstallningsnr', 'saldo', 'kostnadsstalle'];
+              var cols  = window._COLS || [];
+              order.forEach(function(key) {
+                var col = cols.find(function(c) { return c.key === key; });
+                if (!col || !col.visible) return;
+                var val = (u[key] !== undefined && u[key] !== null && u[key] !== '') ? u[key] : '—';
+                expandedRows +=
+                  '<span class="user-card__detail-label">' + col.label + '</span>' +
+                  '<span class="user-card__detail-value">' + val + '</span>';
+              });
+              var hasRows = expandedRows.length > 0;
+              return (
+                '<div class="user-card__data-section">' +
+                  '<div class="user-card__data-grid">' +
+                    '<span class="user-card__detail-label">Roll</span>' +
+                    '<span class="user-card__detail-value">' + u.roll + '</span>' +
+                    (hasRows
+                      ? '<div class="user-card__expanded-wrap" aria-hidden="true">' +
+                          '<div class="user-card__expanded">' + expandedRows + '</div>' +
+                        '</div>'
+                      : '') +
+                  '</div>' +
+                  (hasRows
+                    ? '<button class="user-card__expand-btn" aria-label="Visa mer" aria-expanded="false">' +
+                        '<span class="ms user-card__expand-icon">expand_more</span>' +
+                      '</button>'
+                    : '') +
+                '</div>'
+              );
+            })() +
+            '<div class="user-card__divider"></div>' +
+            '<div class="user-card__actions">' +
+              '<div class="user-card__actions-left">' +
+                '<button class="user-card__action-btn user-card__action-btn--switch" aria-label="Byt konto">' +
+                  '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">switch_account</span>' +
+                '</button>' +
+                '<button class="user-card__action-btn user-card__action-btn--edit" aria-label="Redigera">' +
+                  '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">edit</span>' +
+                '</button>' +
+              '</div>' +
+              '<button class="user-card__action-btn user-card__action-btn--delete" aria-label="Ta bort">' +
+                '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">delete</span>' +
+              '</button>' +
+            '</div>' +
+          '</div>';
+
+        /* Expand / collapse — only present when there are visible columns */
+        var expandBtn = card.querySelector('.user-card__expand-btn');
+        if (expandBtn) {
+          expandBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var isOpen = card.classList.toggle('is-open');
+            expandBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            card.querySelector('.user-card__expanded-wrap').setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+          });
+        }
+
+        /* Edit button */
+        var editBtn = card.querySelector('.user-card__action-btn--edit');
+        editBtn.addEventListener('click', (function(i){ return function(e){ e.stopPropagation(); openEditDrawer(i); }; })(idx));
+
+        return card;
+      }
+
+      USERS.forEach(function(u, i) {
+        container.appendChild(makeCard(u, i));
+      });
+
+      /* Restore expanded-state on a newly built card */
+      function restoreOpenState(card) {
+        card.classList.add('is-open');
+        var expandBtn = card.querySelector('.user-card__expand-btn');
+        if (expandBtn) expandBtn.setAttribute('aria-expanded', 'true');
+        var expandedWrap = card.querySelector('.user-card__expanded-wrap');
+        if (expandedWrap) expandedWrap.setAttribute('aria-hidden', 'false');
+      }
+
+      /* Keep mobile cards in sync when a user is updated */
+      window._refreshMobileCard = function(idx) {
+        var existing = container.querySelector('[data-idx="' + idx + '"]');
+        if (!existing) return;
+        var wasOpen = existing.classList.contains('is-open');
+        var newCard = makeCard(USERS[idx], idx);
+        if (wasOpen) restoreOpenState(newCard);
+        container.replaceChild(newCard, existing);
+      };
+
+      /* Rebuild all cards — called after column visibility/order changes */
+      window._rebuildAllMobileCards = function() {
+        USERS.forEach(function(u, i) {
+          var existing = container.querySelector('[data-idx="' + i + '"]');
+          if (!existing) return;
+          var wasOpen = existing.classList.contains('is-open');
+          var newCard = makeCard(u, i);
+          if (wasOpen) restoreOpenState(newCard);
+          container.replaceChild(newCard, existing);
+        });
+      };
+
+      /* Append a new card when a new user is added */
+      window._addMobileCard = function(u, idx) {
+        container.appendChild(makeCard(u, idx));
+      };
+    })();
+
+    /* Tracks which USERS index is being edited; -1 = new user */
+    var currentEditIndex = -1;
+
     /* Öppna drawer i redigeringsläge */
     function openEditDrawer(i) {
+      currentEditIndex = i;
       var u = USERS[i];
       /* Byt rubrik */
       document.querySelector('#drawer-panel .drawer-title').textContent = 'Uppdatera användare';
@@ -5215,6 +5786,7 @@
       document.getElementById('drawer-fornamn').value    = u.firstName;
       document.getElementById('drawer-efternamn').value  = u.lastName;
       document.getElementById('drawer-epost').value      = u.email;
+      document.getElementById('drawer-epost').disabled   = true;
       document.getElementById('drawer-mobil').value      = u.phone;
       document.getElementById('drawer-anstallning').value = u.anstallningsnr;
       document.getElementById('drawer-kost').value       = u.kostnadsstalle;
@@ -5227,7 +5799,8 @@
       /* Butik-checkbox + BankID-ikon */
       var butikCb = document.getElementById('checkbox-butik');
       butikCb.checked = u.butik;
-      document.getElementById('drawer-save-btn').classList.toggle('has-bankid', u.butik);
+      window._butikInitialState = u.butik;
+      document.getElementById('drawer-save-btn').classList.remove('has-bankid');
       /* Budget */
       var budgetSel = document.getElementById('drawer-budget');
       budgetSel.value = u.budget;
@@ -5250,16 +5823,19 @@
     /* Återställ rubrik till "Lägg till ny användare" vid vanlig öppning */
     var _origOpenDrawer = openDrawer;
     openDrawer = function() {
+      currentEditIndex = -1;
       document.querySelector('#drawer-panel .drawer-title').textContent = 'Lägg till ny användare';
       document.getElementById('drawer-fornamn').value    = '';
       document.getElementById('drawer-efternamn').value  = '';
       document.getElementById('drawer-epost').value      = '';
+      document.getElementById('drawer-epost').disabled   = false;
       document.getElementById('drawer-mobil').value      = '';
       document.getElementById('drawer-anstallning').value = '';
       document.getElementById('drawer-kost').value       = '';
       document.getElementById('drawer-adress').value     = '';
       document.getElementById('drawer-roll').selectedIndex = 0;
       document.getElementById('checkbox-butik').checked  = false;
+      window._butikInitialState = false;
       document.getElementById('drawer-save-btn').classList.remove('has-bankid');
       document.getElementById('drawer-budget').value     = 'Inaktiv';
       document.getElementById('budget-fields').style.display = 'none';
@@ -5274,7 +5850,7 @@
 
       function openDeleteModal(row) {
         pendingRow = row;
-        var nameDiv = row.querySelector('.user-name');
+        var nameDiv = row.querySelector('.user-name') || row.querySelector('.user-card__name');
         nameEl.textContent = nameDiv ? nameDiv.textContent.trim() : 'användaren';
         overlay.classList.add('is-open');
         modal.classList.add('is-open');
@@ -5458,6 +6034,8 @@
       var impersonationBannerWrap = document.getElementById('impersonation-banner-wrap');
       var impersonationName       = document.getElementById('impersonation-banner-name');
 
+      var impersonationPlaceholder = document.getElementById('impersonation-banner-placeholder');
+
       function openImpersonation(name) {
         impersonationName.textContent = name;
         impersonationBannerWrap.classList.add('is-visible');
@@ -5479,13 +6057,33 @@
         showLogoutConfirmToast(name);
       });
 
-      /* Wire buttons */
-      document.querySelectorAll('.btn-row-action[aria-label="Ta bort"]').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
+      /* Wire buttons — desktop table */
+      document.querySelector('.users-table tbody').addEventListener('click', function(e) {
+        var btn = e.target.closest('.btn-row-action[aria-label="Ta bort"]');
+        if (btn) {
           e.stopPropagation();
           openDeleteModal(btn.closest('tr'));
-        });
+        }
       });
+
+      /* Wire buttons — mobile/tablet cards */
+      var mobileCards = document.getElementById('users-mobile-cards');
+      if (mobileCards) {
+        mobileCards.addEventListener('click', function(e) {
+          var deleteBtn = e.target.closest('.user-card__action-btn--delete');
+          if (deleteBtn) {
+            e.stopPropagation();
+            openDeleteModal(deleteBtn.closest('.user-card'));
+            return;
+          }
+          var switchBtn = e.target.closest('.user-card__action-btn--switch');
+          if (switchBtn) {
+            e.stopPropagation();
+            var name = switchBtn.closest('.user-card').querySelector('.user-card__name').textContent.trim();
+            openImpersonation(name);
+          }
+        });
+      }
 
       document.getElementById('delete-modal-close').addEventListener('click', closeDeleteModal);
       document.getElementById('delete-modal-cancel').addEventListener('click', closeDeleteModal);
