@@ -1,0 +1,63 @@
+# =========================
+# macOS system files
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external drives
+.Spotlight-V100
+.Trashes
+
+# =========================
+# Windows system files
+# =========================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# =========================
+# Editor / IDE files
+# =========================
+
+# VS Code
+.vscode/
+
+# JetBrains (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# =========================
+# Logs & temp files
+# =========================
+*.log
+*.tmp
+*.temp
+
+# =========================
+# Node (only if you ever add tooling)
+# =========================
+node_modules/
+dist/
+build/
+.cache/
+
+# =========================
+# Environment files (just in case)
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Misc
+# =========================
+*.swp
+*~
