@@ -779,6 +779,89 @@
       .page-preamble { font-size: 20px; line-height: 28px; }
     }
 
+    /* Account stats — dashboard cards */
+    .account-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: #ffffff;
+      box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .stat-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .stat-card__label {
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 12px;
+      letter-spacing: 0.48px;
+      text-transform: uppercase;
+      color: #737373;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .stat-card__icon {
+      font-size: 20px;
+      color: #939595;
+      flex-shrink: 0;
+    }
+    .stat-card__icon--warning { color: #d90000; }
+    .stat-card__value {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 40px;
+      letter-spacing: 0px;
+      color: #000000;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .stat-card__value--warning { color: #d90000; }
+    .stat-card__sub {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      color: #737373;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .stat-card__sub--warning { color: #d90000; }
+    .stat-card__sub .ms {
+      font-size: 14px;
+    }
+    .stat-card__bar {
+      height: 3px;
+      background: #e5e5e5;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card__bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: #000000;
+      border-radius: 0;
+    }
+    .stat-card__bar-fill--warning { background: #d90000; }
+    @media (max-width: 768px) {
+      .account-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+      .stat-card { padding: 12px; gap: 8px; }
+      .stat-card__value { font-size: 28px; line-height: 32px; }
+    }
+    @media (max-width: 479px) {
+      .account-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* Filter bar */
     .filter-bar {
       display: flex;
@@ -874,6 +957,88 @@
     }
     .action-btn:hover {
       background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
+    }
+
+    /* Tooltip */
+    .tooltip-wrap {
+      position: relative;
+      display: inline-flex;
+    }
+    .tooltip {
+      position: absolute;
+      z-index: 1000;
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 100ms cubic-bezier(.35,0,.35,1);
+      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .tooltip::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 6.35px solid transparent;
+      border-right: 6.35px solid transparent;
+    }
+    .tooltip-wrap:hover .tooltip { opacity: 1; }
+    /* Bottom: tooltip below element, beak at top pointing up */
+    .tooltip--bottom {
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+    }
+    .tooltip--bottom::before {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom: 6px solid rgba(0,0,0,0.9);
+    }
+    /* Top: tooltip above element, beak at bottom pointing down */
+    .tooltip--top {
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+    }
+    .tooltip--top::before {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-top: 6px solid rgba(0,0,0,0.9);
+    }
+    /* Fixed tooltip for table row buttons — rendered on body, decoupled from scroll container */
+    .row-tooltip {
+      position: fixed;
+      z-index: 9999;
+      visibility: hidden;   /* hidden but always in layout — so offsetWidth/Height are always valid */
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      white-space: nowrap;
+      pointer-events: none;
+      padding: 8px 12px;
+      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .row-tooltip__beak {
+      position: absolute;
+      width: 0;
+      height: 0;
+      /* All border properties set by JS per placement — top/left/right variants differ */
     }
 
     /* Table */
@@ -1103,7 +1268,6 @@
       background: #fff;
       border: 1px solid #f6f6f6;
       box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.05), 0px 1px 3px 0px rgba(0,0,0,0.10);
-      overflow: hidden;
     }
 
     .user-card__body {
@@ -2620,7 +2784,6 @@
     .drawer-save-btn__bankid-icon {
       width: 24px;
       height: 24px;
-      object-fit: contain;
       display: none;
       flex-shrink: 0;
     }
@@ -3555,6 +3718,267 @@
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
 
+    /* ══════════════════════════════════════════════════════════
+       ACCOUNT NAV DRAWER
+    ══════════════════════════════════════════════════════════ */
+
+    /* Header profile section (reuses .drawer-header for base layout) */
+    .account-nav-drawer__profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+    .account-nav-drawer__profile-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .account-nav-drawer__name {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      white-space: nowrap;
+    }
+    .account-nav-drawer__sub {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      white-space: nowrap;
+    }
+
+    /* Scrollable body wrapper */
+    .account-nav-drawer__body {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    /* Navigation menu */
+    .account-nav-drawer__menu {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 32px;
+      flex: 1;
+    }
+    .account-nav-drawer__menu-item {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      padding: 0 40px 0 32px;
+      cursor: pointer;
+    }
+    .account-nav-drawer__menu-item-inner {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+      flex: 1;
+    }
+    /* Active indicator dot: 8px, positioned in the 32px left gutter */
+    .account-nav-drawer__menu-dot {
+      position: absolute;
+      left: 13px;
+      top: 20px;      /* 8px padding-top + half of 24px text = center */
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-text-primary);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .account-nav-drawer__menu-item--active .account-nav-drawer__menu-dot {
+      opacity: 1;
+    }
+    /* Menu text: display-size, uppercase bold */
+    .account-nav-drawer__menu-text {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      padding: 4px 0;
+    }
+
+    /* Company section */
+    .account-nav-drawer__company {
+      border-top: 1px solid var(--color-border-secondary);
+      padding: 24px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+    .account-nav-drawer__company-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1px;
+    }
+    .account-nav-drawer__company-logo {
+      height: 17px;
+      width: auto;
+      display: block;
+    }
+    .account-nav-drawer__action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      padding: 0;
+      white-space: nowrap;
+    }
+    .account-nav-drawer__action-link .ms {
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .account-nav-drawer__contact {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .account-nav-drawer__contact-title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .account-nav-drawer__contact-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .account-nav-drawer__contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .account-nav-drawer__contact-item .ms {
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+
+    /* Credit section */
+    .account-nav-drawer__credit {
+      background: var(--color-surface-raised-secondary);
+      border-top: 1px solid var(--color-surface-10);
+      flex-shrink: 0;
+    }
+    .account-nav-drawer__credit-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 32px;
+      min-height: 40px;
+    }
+    .account-nav-drawer__credit-label {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 18px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .account-nav-drawer__credit-amount {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      white-space: nowrap;
+    }
+    .account-nav-drawer__credit-limit {
+      color: var(--color-surface-60); /* #595959 */
+    }
+
+    /* Footer */
+    .account-nav-drawer__footer {
+      padding: 24px 32px;
+      background: #fff;
+      flex-shrink: 0;
+      box-shadow: 0px -4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+    }
+    .account-nav-drawer__logout {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      padding: 0;
+    }
+    .account-nav-drawer__logout .ms {
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+
+    /* Mobile overrides (≤768px) — follows drawer mobile rules */
+    @media (max-width: 768px) {
+      /* .drawer-header already gets 16px 24px padding from global rule */
+      .account-nav-drawer__company {
+        padding: 16px 24px;
+        gap: 16px;
+      }
+      .account-nav-drawer__credit-inner {
+        padding: 4px 24px;
+      }
+      .account-nav-drawer__footer {
+        padding: 16px 24px;
+      }
+      /* Menu text scales down on mobile */
+      .account-nav-drawer__menu-text {
+        font-size: 20px;
+        line-height: 20px;
+      }
+      /* Re-center dot: 8px padding-top + 10px (half of 20px) = 18px */
+      .account-nav-drawer__menu-dot {
+        top: 18px;
+      }
+      .account-nav-drawer__menu { padding-bottom: 24px; }
+      .account-nav-drawer__name { line-height: 22px; }
+      .account-nav-drawer__sub { font-size: 14px; line-height: 20px; }
+    }
+
   </style>
 </head>
 <body>
@@ -3808,6 +4232,63 @@
     <h1 class="page-title">Användare</h1>
     <p class="page-preamble">Här återfinns de personer som är kopplade till kontot.</p>
 
+    <!-- Account stats — dashboard -->
+    <div class="account-stats">
+
+      <!-- Totalt -->
+      <div class="stat-card">
+        <div class="stat-card__header">
+          <span class="stat-card__label">Totalt</span>
+          <span class="ms stat-card__icon">group</span>
+        </div>
+        <span class="stat-card__value">820</span>
+        <span class="stat-card__sub">användare på kontot</span>
+      </div>
+
+      <!-- Webbkonton -->
+      <div class="stat-card">
+        <div class="stat-card__header">
+          <span class="stat-card__label">Webbkonton</span>
+          <span class="ms stat-card__icon">language</span>
+        </div>
+        <span class="stat-card__value">800</span>
+        <div class="stat-card__bar">
+          <div class="stat-card__bar-fill" style="width: 97.6%"></div>
+        </div>
+        <span class="stat-card__sub">av 820 användare</span>
+      </div>
+
+      <!-- Butiksanvändare -->
+      <div class="stat-card">
+        <div class="stat-card__header">
+          <span class="stat-card__label">Butiksanvändare</span>
+          <span class="ms stat-card__icon">storefront</span>
+        </div>
+        <span class="stat-card__value">500</span>
+        <div class="stat-card__bar">
+          <div class="stat-card__bar-fill" style="width: 61%"></div>
+        </div>
+        <span class="stat-card__sub">av 820 användare</span>
+      </div>
+
+      <!-- Saknar webbkoppling -->
+      <div class="stat-card">
+        <div class="stat-card__header">
+          <span class="stat-card__label">Saknar webbkoppling</span>
+          <span class="ms ms--filled stat-card__icon stat-card__icon--warning">warning</span>
+        </div>
+        <span class="stat-card__value stat-card__value--warning">20</span>
+        <div class="stat-card__bar">
+          <div class="stat-card__bar-fill stat-card__bar-fill--warning" style="width: 2.4%"></div>
+        </div>
+        <span class="stat-card__sub stat-card__sub--warning">
+          <span class="ms ms--filled" style="font-size:14px;color:#d90000">error</span>
+          kräver åtgärd
+        </span>
+      </div>
+
+    </div>
+
     <!-- Filter bar -->
     <div class="filter-bar">
       <div class="search-input">
@@ -3819,13 +4300,13 @@
       </div>
 
       <div class="action-btns">
-        <button class="action-btn" aria-label="Inställningar för saldo" onclick="openSaldoDrawer()">
+        <button class="action-btn" aria-label="Inställningar för saldo" data-tooltip="Inställningar för saldo" onclick="openSaldoDrawer()">
           <span class="ms">savings</span>
         </button>
-        <button class="action-btn" aria-label="Kolumninställningar" onclick="openColDrawer()">
+        <button class="action-btn" aria-label="Kolumninställningar" data-tooltip="Kolumninställningar" onclick="openColDrawer()">
           <span class="ms">view_column</span>
         </button>
-        <button class="action-btn" aria-label="Lägg till användare" onclick="openDrawer()">
+        <button class="action-btn" aria-label="Lägg till användare" data-tooltip="Lägg till användare" onclick="openDrawer()">
           <span class="ms">person_add</span>
         </button>
       </div>
@@ -3865,7 +4346,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -3879,7 +4360,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -3893,7 +4374,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -3907,7 +4388,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -3921,7 +4402,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -3935,7 +4416,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -3949,7 +4430,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -3963,7 +4444,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -3977,13 +4458,13 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
           <td>
             <div class="user-name">Anders Spång</div>
-            <div class="user-email">anders.spang@bolagsnamn.se</div>
+            <div class="user-email"></div>
           </td>
           <td><span>Standard</span></td>
           <td>Value</td>
@@ -3991,7 +4472,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
       </tbody>
@@ -4404,7 +4885,7 @@
         <div class="form-label"><span>Åtkomst</span><span class="form-label__optional">(Valfritt)</span></div>
         <div class="form-checkboxes">
           <label class="form-checkbox-item">
-            <input type="checkbox" checked disabled />
+            <input type="checkbox" id="checkbox-webb" />
             <span>Handla via webb</span>
           </label>
           <label class="form-checkbox-item">
@@ -4412,6 +4893,7 @@
             <span>Handla i butik</span>
           </label>
         </div>
+        <span class="form-helper form-helper--error" id="webb-email-error" style="display:none;align-items:center;gap:4px;"><span class="ms ms--filled" style="font-size:20px;color:#d90000;">error</span> Webbanvändare kräver en e-postadress.</span>
         <span class="form-helper">Lägga till nya användare som får handla i butik kräver mobilt BankID av firmatecknare.</span>
       </div>
 
@@ -4519,7 +5001,7 @@
     <!-- Footer -->
     <div class="drawer-footer">
       <button class="drawer-save-btn" id="drawer-save-btn" disabled>
-        <img class="drawer-save-btn__bankid-icon" src="https://www.figma.com/api/mcp/asset/43570c40-d9f2-44eb-99b4-85a13069104b" alt="" aria-hidden="true" />
+        <img class="drawer-save-btn__bankid-icon" src="images/BankId.svg" alt="" aria-hidden="true" />
         Spara
       </button>
     </div>
@@ -4742,6 +5224,114 @@
       window.addEventListener('resize', function() {
         measure();
         if (window.innerWidth > 768) setNatural();
+      });
+    })();
+
+    /* ── Row-action tooltip (position:fixed on body, decoupled from scroll container) ── */
+    (function() {
+      var MARGIN    = 8;    /* min clearance from viewport edge (used as fallback clamp) */
+      var BEAK_HALF = 6.35; /* half the visual width of the CSS border-triangle */
+
+      var rowTip  = document.createElement('div');
+      rowTip.className = 'row-tooltip';
+      var tipText = document.createElement('span');
+      var beak    = document.createElement('span');
+      beak.className = 'row-tooltip__beak';
+      rowTip.appendChild(tipText);
+      rowTip.appendChild(beak);
+      /* Start off-screen so it doesn't flash at (0,0) on first paint */
+      rowTip.style.left = '-9999px';
+      rowTip.style.top  = '-9999px';
+      document.body.appendChild(rowTip);
+
+      function show(btn) {
+        var label = btn.dataset.tooltip;
+        if (!label) return;
+
+        /* 1. Update text while still hidden — dimensions reflect new content */
+        tipText.textContent = label;
+
+        /* 2. Read dimensions — always valid because visibility:hidden keeps element in layout */
+        var tw = rowTip.offsetWidth;
+        var th = rowTip.offsetHeight;
+
+        /* 3. Button position in viewport */
+        var r          = btn.getBoundingClientRect();
+        var btnCenterX = r.left + r.width / 2;
+        var vw         = window.innerWidth;
+
+        /* 4. ECO Design System page margin determines the "safe zone" threshold.
+              lg (1024px+) = 40px, sm/md (640–1023px) = 32px, xs (<640px) = 16px */
+        var ecoMargin = vw >= 1024 ? 40 : vw >= 640 ? 32 : 16;
+
+        /* 5. Would a centred-top tooltip fit within the safe zone? */
+        var idealLeft = btnCenterX - tw / 2;
+        var fitsRight = idealLeft + tw <= vw - ecoMargin;
+        var fitsLeft  = idealLeft >= ecoMargin;
+
+        var left, top;
+
+        if (vw < 640) {
+          /* ── MOBILE (xs): always below button, beak points up ── */
+          beak.style.bottom       = '100%';
+          beak.style.top          = '';
+          beak.style.right        = '';
+          beak.style.borderBottom = '6px solid rgba(0,0,0,0.9)';
+          beak.style.borderTop    = '';
+          beak.style.borderLeft   = BEAK_HALF + 'px solid transparent';
+          beak.style.borderRight  = BEAK_HALF + 'px solid transparent';
+
+          top  = r.bottom + 8;
+          left = Math.max(MARGIN, Math.min(btnCenterX - tw / 2, vw - tw - MARGIN));
+
+        } else {
+          /* ── DESKTOP/TABLET: above button — Top / Right side top / Left side top ── */
+          beak.style.top          = '100%';
+          beak.style.bottom       = '';
+          beak.style.right        = '';
+          beak.style.borderTop    = '6px solid rgba(0,0,0,0.9)';
+          beak.style.borderBottom = '';
+          beak.style.borderLeft   = BEAK_HALF + 'px solid transparent';
+          beak.style.borderRight  = BEAK_HALF + 'px solid transparent';
+
+          top = r.top - th - 8;
+
+          if (fitsLeft && fitsRight) {
+            /* Top (default): centred above button */
+            left = idealLeft;
+          } else if (!fitsRight) {
+            /* Right side top: right-align tooltip with button right edge */
+            left = Math.max(MARGIN, r.right - tw);
+          } else {
+            /* Left side top: left-align tooltip with button left edge */
+            left = Math.min(r.left, vw - tw - MARGIN);
+          }
+        }
+
+        /* Beak: visual centre always tracks the button centre regardless of tooltip alignment */
+        var beakCenter        = btnCenterX - left;
+        var beakCenterClamped = Math.max(BEAK_HALF + 4, Math.min(beakCenter, tw - BEAK_HALF - 4));
+        beak.style.left = (beakCenterClamped - BEAK_HALF).toFixed(2) + 'px';
+
+        /* 6. Apply position then reveal */
+        rowTip.style.left       = Math.round(left) + 'px';
+        rowTip.style.top        = Math.round(top)  + 'px';
+        rowTip.style.visibility = 'visible';
+      }
+
+      function hide() {
+        rowTip.style.visibility = 'hidden';
+      }
+
+      document.addEventListener('mouseover', function(e) {
+        var btn = e.target.closest('[data-tooltip]');
+        if (btn) show(btn); else hide();
+      });
+
+      document.addEventListener('mouseout', function(e) {
+        var btn = e.target.closest('[data-tooltip]');
+        if (!btn) return;
+        if (!btn.contains(e.relatedTarget)) hide();
       });
     })();
 
@@ -5104,6 +5694,8 @@
       });
       var butik = document.getElementById('checkbox-butik');
       if (butik) vals['checkbox-butik'] = butik.checked ? '1' : '0';
+      var webb = document.getElementById('checkbox-webb');
+      if (webb) vals['checkbox-webb'] = webb.checked ? '1' : '0';
       return vals;
     }
 
@@ -5164,19 +5756,19 @@
     /* ── Column settings drawer ──────────────────────────── */
     (function() {
       var COLS = [
-        { key: 'webb',           label: 'Webb',               fixed: true,  visible: true  },
-        { key: 'butik',          label: 'Butik',              fixed: true,  visible: true  },
-        { key: 'roll',           label: 'Roller',             fixed: true,  visible: true  },
-        { key: 'anstallningsnr', label: 'Anställningsnummer', fixed: false, visible: true  },
-        { key: 'saldo',          label: 'Saldo',              fixed: false, visible: true  },
-        { key: 'kostnadsstalle', label: 'Kostnadsställe',     fixed: false, visible: true  },
-        { key: 'kategori',       label: 'Kategori',           fixed: false, visible: false },
-        { key: 'avdelning',      label: 'Avdelning',          fixed: false, visible: false },
-        { key: 'butikssaldo',    label: 'Använd butikssaldo', fixed: false, visible: false },
-        { key: 'skapnummer',     label: 'Skåpnummer',         fixed: false, visible: false },
-        { key: 'skapsection',    label: 'Skåpsektion',        fixed: false, visible: false },
-        { key: 'personnummer',   label: 'Personnummer',       fixed: false, visible: false },
         { key: 'namn',           label: 'Namn',               fixed: true,  visible: true  },
+        { key: 'personnummer',   label: 'Personnummer',       fixed: false, visible: false },
+        { key: 'skapsection',    label: 'Skåpsektion',        fixed: false, visible: false },
+        { key: 'skapnummer',     label: 'Skåpnummer',         fixed: false, visible: false },
+        { key: 'butikssaldo',    label: 'Använd butikssaldo', fixed: false, visible: false },
+        { key: 'avdelning',      label: 'Avdelning',          fixed: false, visible: false },
+        { key: 'kategori',       label: 'Kategori',           fixed: false, visible: false },
+        { key: 'kostnadsstalle', label: 'Kostnadsställe',     fixed: false, visible: true  },
+        { key: 'saldo',          label: 'Saldo',              fixed: false, visible: true  },
+        { key: 'anstallningsnr', label: 'Anställningsnummer', fixed: false, visible: true  },
+        { key: 'roll',           label: 'Roller',             fixed: true,  visible: true  },
+        { key: 'butik',          label: 'Butik',              fixed: true,  visible: true  },
+        { key: 'webb',           label: 'Webb',               fixed: true,  visible: true  },
       ];
 
       /* Expose COLS + current ordering for mobile cards */
@@ -5223,8 +5815,7 @@
         });
         /* Keep mobile cards in sync with current column order */
         window._currentColOrder = optOrder.slice();
-        /* Reverse: top of drawer list → rightmost column in table */
-        var reversed = optOrder.slice().reverse();
+        /* Top of drawer list → leftmost optional column in table (after Namn) */
         table.querySelectorAll('tr').forEach(function(row) {
           var cells = Array.from(row.children);
           var get = function(k) { return cells.find(function(c) { return c.dataset.col === k; }); };
@@ -5236,7 +5827,7 @@
           var spacerCell  = cells.find(function(c) { return c.classList.contains('col-right-spacer'); });
           while (row.firstChild) row.removeChild(row.firstChild);
           if (namnCell)    row.appendChild(namnCell);
-          reversed.forEach(function(k) {
+          optOrder.forEach(function(k) {
             var cell = get(k);
             if (cell) row.appendChild(cell);
           });
@@ -5406,20 +5997,55 @@
       });
     });
 
-    /* BankID-ikon i Spara-knappen — visas bara när butik aktiveras från att ha varit av */
+    /* BankID-ikon i Spara-knappen — visas vid butik-aktivering eller när tom e-post fylls i */
     window._butikInitialState = false;
+    window._webbInitialState  = false;
+    window._emailInitialValue = '';
     (function() {
       var butikCheckbox = document.getElementById('checkbox-butik');
-      var saveBtn = document.getElementById('drawer-save-btn');
+      var emailField    = document.getElementById('drawer-epost');
+      var saveBtn       = document.getElementById('drawer-save-btn');
       if (!butikCheckbox || !saveBtn) return;
+
+      function updateBankId() {
+        var butikNew = butikCheckbox.checked && !window._butikInitialState;
+        saveBtn.classList.toggle('has-bankid', butikNew);
+      }
+
       butikCheckbox.addEventListener('change', function() {
-        saveBtn.classList.toggle('has-bankid', this.checked && !window._butikInitialState);
+        updateBankId();
+        updateSaveBtn();
+      });
+
+      window._updateBankId = updateBankId;
+    })();
+
+    /* Webb-checkbox: styr e-postfältets disabled-state och validering */
+    (function() {
+      var webbCb     = document.getElementById('checkbox-webb');
+      var emailField = document.getElementById('drawer-epost');
+      var errEl      = document.getElementById('webb-email-error');
+      if (!webbCb || !emailField) return;
+
+      webbCb.addEventListener('change', function() {
+        /* Dölj felmeddelande när webb avkryssas */
+        if (!this.checked && errEl) errEl.style.display = 'none';
         updateSaveBtn();
       });
     })();
 
     /* Save: commit current values as new snapshot, then close */
     document.getElementById('drawer-save-btn').addEventListener('click', function() {
+      /* Validera: webb ikryssat men ingen e-post */
+      var webbCbSave   = document.getElementById('checkbox-webb');
+      var emailSave    = document.getElementById('drawer-epost');
+      var errElSave    = document.getElementById('webb-email-error');
+      if (webbCbSave && webbCbSave.checked && emailSave && !emailSave.value.trim()) {
+        if (errElSave) errElSave.style.display = 'flex';
+        return;
+      }
+      if (errElSave) errElSave.style.display = 'none';
+
       snapshotDrawer();
 
       /* If editing an existing user, write changes back to USERS + table row */
@@ -5436,6 +6062,7 @@
         u.adress         = document.getElementById('drawer-adress').value.trim();
         u.roll           = rollSel.options[rollSel.selectedIndex].text;
         u.butik          = document.getElementById('checkbox-butik').checked;
+        u.webb           = document.getElementById('checkbox-webb').checked;
         u.budget         = document.getElementById('drawer-budget').value;
         if (u.budget === 'Aktiv') {
           u.arsbudget = document.getElementById('drawer-arsbudget').value.trim();
@@ -5467,6 +6094,17 @@
             var cb = butikTd.querySelector('input[type="checkbox"]');
             if (cb) cb.checked = u.butik;
           }
+
+          /* Webb checkbox */
+          var webbTd = tr.querySelector('[data-col="webb"]');
+          if (webbTd) {
+            var webbCbTd = webbTd.querySelector('input[type="checkbox"]');
+            if (webbCbTd) webbCbTd.checked = u.webb;
+          }
+
+          /* Email in name cell */
+          var emailDiv = tr.querySelector('.user-email');
+          if (emailDiv) emailDiv.textContent = u.email;
         }
 
         /* Refresh mobile card */
@@ -5492,7 +6130,7 @@
           adress:         document.getElementById('drawer-adress').value.trim(),
           roll:           rollSel2.options[rollSel2.selectedIndex].text,
           butik:          document.getElementById('checkbox-butik').checked,
-          webb:           true,
+          webb:           document.getElementById('checkbox-webb').checked,
           budget:         newBudget,
           arsbudget:      '',
           saldo:          newBudget === 'Aktiv' ? '' : '0 kr',
@@ -5523,12 +6161,12 @@
           '<td>' + newUser.saldo + '</td>' +
           '<td>' + newUser.kostnadsstalle + '</td>' +
           '<td class="check-icon"><input type="checkbox"' + (newUser.butik ? ' checked' : '') + ' disabled /></td>' +
-          '<td class="check-icon"><input type="checkbox" checked disabled /></td>' +
+          '<td class="check-icon"><input type="checkbox"' + (newUser.webb ? ' checked' : '') + ' disabled /></td>' +
           '<td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay">' +
-            '<button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="' + iStyle + '">delete</span></button>' +
-            '<button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="' + iStyle + '">switch_account</span></button>' +
-            '<button class="btn-row-action" aria-label="Redigera"><span class="ms" style="' + iStyle + '">edit</span></button>' +
-          '</div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="' + iStyle + '">more_horiz</span></button></div></td>' +
+            '<button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="' + iStyle + '">delete</span></button>' +
+            '<button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="' + iStyle + '">switch_account</span></button>' +
+            '<button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="' + iStyle + '">edit</span></button>' +
+          '</div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="' + iStyle + '">more_horiz</span></button></div></td>' +
           '<td class="col-right-spacer"></td>';
 
         var newEditBtn = newTr.querySelector('.btn-row-action[aria-label="Redigera"]');
@@ -5592,10 +6230,10 @@
       { firstName:'Arangeera', lastName:'Korompilias', email:'aran.korompilias@bolagsnamn.se',       phone:'072-345 67 89', roll:'Standard',      anstallningsnr:'ANS-10573', saldo:'3 100.00 kr',  kostnadsstalle:'KST-3308', adress:'23456', butik:false, webb:true,  budget:'Aktiv',   arsbudget:'12 000.00 kr', kategori:'Säkerhet',      avdelning:'Lager',         butikssaldo:'2 800.00 kr',  skapnummer:'C-21', skapsection:'C', personnummer:'19950927-1134' },
       { firstName:'Anders',    lastName:'Ajon',        email:'anders.ajon@bolagsnamn.se',            phone:'070-987 65 43', roll:'Standard',      anstallningsnr:'ANS-10618', saldo:'9 800.00 kr',  kostnadsstalle:'KST-2504', adress:'34567', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'24 000.00 kr', kategori:'Verktyg',       avdelning:'Inköp',         butikssaldo:'8 100.00 kr',  skapnummer:'B-15', skapsection:'B', personnummer:'19840512-7742' },
       { firstName:'Anders',    lastName:'Dahl',        email:'anders.dahl@bolagsnamn.se',            phone:'073-111 22 33', roll:'Administratör', anstallningsnr:'ANS-10155', saldo:'22 000.00 kr', kostnadsstalle:'KST-1203', adress:'45678', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'48 000.00 kr', kategori:'El',            avdelning:'Administration', butikssaldo:'18 500.00 kr', skapnummer:'A-02', skapsection:'A', personnummer:'19700219-9901' },
-      { firstName:'Anders',    lastName:'Ardhali',     email:'anders.ardhali@bolagsnamn.se',         phone:'076-666 77 88', roll:'Standard',      anstallningsnr:'ANS-10729', saldo:'1 450.00 kr',  kostnadsstalle:'KST-4401', adress:'56789', butik:false, webb:true,  budget:'Inaktiv', arsbudget:'',             kategori:'Bygg',           avdelning:'Lager',         butikssaldo:'0.00 kr',      skapnummer:'D-09', skapsection:'D', personnummer:'19991104-3308' },
+      { firstName:'Anders',    lastName:'Ardhali',     email:'anders.ardhali@bolagsnamn.se',         phone:'076-666 77 88', roll:'Standard',      anstallningsnr:'ANS-10729', saldo:'1 450.00 kr',  kostnadsstalle:'KST-4401', adress:'56789', butik:false, webb:false, budget:'Inaktiv', arsbudget:'',             kategori:'Bygg',           avdelning:'Lager',         butikssaldo:'0.00 kr',      skapnummer:'D-09', skapsection:'D', personnummer:'19991104-3308' },
       { firstName:'Anders',    lastName:'Lau',         email:'anders.lau@bolagsnamn.se',             phone:'072-888 99 00', roll:'Standard',      anstallningsnr:'ANS-10844', saldo:'5 600.00 kr',  kostnadsstalle:'KST-2702', adress:'67890', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'18 000.00 kr', kategori:'Verktyg',       avdelning:'Produktion',    butikssaldo:'4 200.00 kr',  skapnummer:'C-06', skapsection:'C', personnummer:'19870731-6614' },
       { firstName:'Anders',    lastName:'Liljerus',    email:'anders.liljerus@bolagsnamn.se',        phone:'070-444 55 66', roll:'Standard',      anstallningsnr:'ANS-10936', saldo:'11 300.00 kr', kostnadsstalle:'KST-1802', adress:'78901', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'30 000.00 kr', kategori:'Säkerhet',      avdelning:'Inköp',         butikssaldo:'9 750.00 kr',  skapnummer:'B-18', skapsection:'B', personnummer:'19810423-2256' },
-      { firstName:'Anders',    lastName:'Spång',       email:'anders.spang@bolagsnamn.se',           phone:'073-222 33 44', roll:'Standard',      anstallningsnr:'ANS-11002', saldo:'7 900.00 kr',  kostnadsstalle:'KST-3105', adress:'89012', butik:false, webb:true,  budget:'Aktiv',   arsbudget:'24 000.00 kr', kategori:'El',            avdelning:'Produktion',    butikssaldo:'0.00 kr',      skapnummer:'D-14', skapsection:'D', personnummer:'19930618-8823' }
+      { firstName:'Anders',    lastName:'Spång',       email:'',                                     phone:'073-222 33 44', roll:'Standard',      anstallningsnr:'ANS-11002', saldo:'7 900.00 kr',  kostnadsstalle:'KST-3105', adress:'89012', butik:false, webb:false, budget:'Aktiv',   arsbudget:'24 000.00 kr', kategori:'El',            avdelning:'Produktion',    butikssaldo:'0.00 kr',      skapnummer:'D-14', skapsection:'D', personnummer:'19930618-8823' }
     ];
 
     /* Populera tabellrader med riktig data */
@@ -5701,16 +6339,16 @@
             '<div class="user-card__divider"></div>' +
             '<div class="user-card__actions">' +
               '<div class="user-card__actions-left">' +
-                '<button class="user-card__action-btn user-card__action-btn--switch" aria-label="Byt konto">' +
+                '<div class="tooltip-wrap"><button class="user-card__action-btn user-card__action-btn--switch" aria-label="Byt konto">' +
                   '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">switch_account</span>' +
-                '</button>' +
-                '<button class="user-card__action-btn user-card__action-btn--edit" aria-label="Redigera">' +
+                '</button><span class="tooltip tooltip--bottom">Byt konto</span></div>' +
+                '<div class="tooltip-wrap"><button class="user-card__action-btn user-card__action-btn--edit" aria-label="Redigera">' +
                   '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">edit</span>' +
-                '</button>' +
+                '</button><span class="tooltip tooltip--bottom">Redigera</span></div>' +
               '</div>' +
-              '<button class="user-card__action-btn user-card__action-btn--delete" aria-label="Ta bort">' +
+              '<div class="tooltip-wrap"><button class="user-card__action-btn user-card__action-btn--delete" aria-label="Ta bort">' +
                 '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">delete</span>' +
-              '</button>' +
+              '</button><span class="tooltip tooltip--bottom">Ta bort</span></div>' +
             '</div>' +
           '</div>';
 
@@ -5785,9 +6423,10 @@
       /* Fyll fält */
       document.getElementById('drawer-fornamn').value    = u.firstName;
       document.getElementById('drawer-efternamn').value  = u.lastName;
-      document.getElementById('drawer-epost').value      = u.email;
-      document.getElementById('drawer-epost').disabled   = true;
-      document.getElementById('drawer-mobil').value      = u.phone;
+      document.getElementById('drawer-epost').value    = u.email;
+      /* E-post disabled om användaren redan har en e-postadress (oavsett webb-status) */
+      document.getElementById('drawer-epost').disabled = !!u.email;
+      document.getElementById('drawer-mobil').value    = u.phone;
       document.getElementById('drawer-anstallning').value = u.anstallningsnr;
       document.getElementById('drawer-kost').value       = u.kostnadsstalle;
       document.getElementById('drawer-adress').value     = u.adress;
@@ -5801,6 +6440,14 @@
       butikCb.checked = u.butik;
       window._butikInitialState = u.butik;
       document.getElementById('drawer-save-btn').classList.remove('has-bankid');
+      /* Webb checkbox */
+      var webbCbEdit = document.getElementById('checkbox-webb');
+      if (webbCbEdit) webbCbEdit.checked = u.webb;
+      window._webbInitialState  = u.webb;
+      window._emailInitialValue = u.email;
+      /* Dölj ev. tidigare validerings-felmeddelande */
+      var errElEdit = document.getElementById('webb-email-error');
+      if (errElEdit) errElEdit.style.display = 'none';
       /* Budget */
       var budgetSel = document.getElementById('drawer-budget');
       budgetSel.value = u.budget;
@@ -5836,6 +6483,13 @@
       document.getElementById('drawer-roll').selectedIndex = 0;
       document.getElementById('checkbox-butik').checked  = false;
       window._butikInitialState = false;
+      var webbCbNew = document.getElementById('checkbox-webb');
+      if (webbCbNew) { webbCbNew.checked = false; webbCbNew.disabled = false; }
+      window._webbInitialState  = false;
+      window._emailInitialValue = '';
+      document.getElementById('drawer-epost').disabled = false;
+      var errElNew = document.getElementById('webb-email-error');
+      if (errElNew) errElNew.style.display = 'none';
       document.getElementById('drawer-save-btn').classList.remove('has-bankid');
       document.getElementById('drawer-budget').value     = 'Inaktiv';
       document.getElementById('budget-fields').style.display = 'none';
@@ -6094,6 +6748,7 @@
         if (e.key === 'Escape' && modal.classList.contains('is-open')) closeDeleteModal();
       });
     });
+
   </script>
 
   <!-- Delete confirmation modal -->
