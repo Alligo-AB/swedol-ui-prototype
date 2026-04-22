@@ -4636,6 +4636,7 @@
             <span>Handla i butik</span>
           </label>
         </div>
+        <span class="form-helper form-helper--error" id="access-required-error" style="display:none;align-items:center;gap:4px;"><span class="ms ms--filled" style="font-size:20px;color:#d90000;">error</span> Minst ett alternativ måste väljas.</span>
         <span class="form-helper form-helper--error" id="webb-email-error" style="display:none;align-items:center;gap:4px;"><span class="ms ms--filled" style="font-size:20px;color:#d90000;">error</span> Webbanvändare kräver en e-postadress.</span>
         <span class="form-helper">Lägga till nya användare som får handla i butik kräver mobilt BankID.</span>
       </div>
@@ -5982,11 +5983,19 @@
       butikCheckbox.addEventListener('change', function() {
         updateBankId();
         updateSaveBtn();
+        var accessErr = document.getElementById('access-required-error');
+        if (accessErr && (this.checked || (webbCheckbox && webbCheckbox.checked))) {
+          accessErr.style.display = 'none';
+        }
       });
 
       if (webbCheckbox) {
         webbCheckbox.addEventListener('change', function() {
           updateBankId();
+          var accessErr = document.getElementById('access-required-error');
+          if (accessErr && (this.checked || butikCheckbox.checked)) {
+            accessErr.style.display = 'none';
+          }
         });
       }
 
@@ -6009,8 +6018,19 @@
 
     /* Save: commit current values as new snapshot, then close */
     document.getElementById('drawer-save-btn').addEventListener('click', function() {
-      /* Validera: webb ikryssat men ingen e-post */
+      /* Validera: minst ett av webb/butik måste vara ikryssat */
       var webbCbSave   = document.getElementById('checkbox-webb');
+      var butikCbSave  = document.getElementById('checkbox-butik');
+      var accessErrEl  = document.getElementById('access-required-error');
+      var webbChecked  = webbCbSave && webbCbSave.checked;
+      var butikChecked = butikCbSave && butikCbSave.checked;
+      if (!webbChecked && !butikChecked) {
+        if (accessErrEl) accessErrEl.style.display = 'flex';
+        return;
+      }
+      if (accessErrEl) accessErrEl.style.display = 'none';
+
+      /* Validera: webb ikryssat men ingen e-post */
       var emailSave    = document.getElementById('drawer-epost');
       var errElSave    = document.getElementById('webb-email-error');
       if (webbCbSave && webbCbSave.checked && emailSave && !emailSave.value.trim()) {
