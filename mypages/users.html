@@ -1473,11 +1473,11 @@
     /* Outer wrapper: fixed bottom, slides up when active */
     .impersonation-banner-wrap {
       position: fixed;
-      bottom: 0;
+      top: 0;
       left: 0;
       right: 0;
-      z-index: 99;
-      transform: translateY(100%);
+      z-index: 101;
+      transform: translateY(-100%);
       transition: transform 350ms cubic-bezier(.16,0,.16,1);
       pointer-events: none;
     }
@@ -1486,25 +1486,41 @@
       pointer-events: auto;
     }
 
-    /* Placeholder — not needed for fixed bottom */
+    /* Placeholder — reserves space so content is pushed down */
     .impersonation-banner-placeholder {
       display: none;
+      height: 40px;   /* matches min-height of banner body (mobile) */
+      flex-shrink: 0;
+    }
+    @media (min-width: 769px) {
+      .impersonation-banner-placeholder { height: 48px; }
+    }
+
+    /* When banner is active, show placeholder and shift sticky header down */
+    body.has-impersonation-banner .impersonation-banner-placeholder {
+      display: block;
+    }
+    body.has-impersonation-banner .site-header__top {
+      top: 40px;
+    }
+    @media (min-width: 769px) {
+      body.has-impersonation-banner .site-header__top { top: 48px; }
     }
 
     /* Inner banner */
     .impersonation-banner {
       width: 100%;
       background: var(--color-surface-information-default); /* #0066ff */
-      box-shadow: 0px -2px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
     }
 
-    /* Body: icon + message-group, centered on desktop */
+    /* Body: icon + message-group, left-aligned with LOGGA UT pushed right */
     .impersonation-banner__body {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 8px;
-      padding: 8px;
+      padding: 8px 16px;
       min-height: 40px;
       box-sizing: border-box;
       width: 100%;
@@ -1520,11 +1536,13 @@
       flex-shrink: 0;
     }
 
-    /* Text + LOGGA UT side by side, gap 4px on desktop */
+    /* Text left, LOGGA UT pushed to the right */
     .impersonation-banner__text-group {
       display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: space-between;
+      flex: 1;
+      gap: 16px;
     }
 
     .impersonation-banner__text {
@@ -1560,6 +1578,7 @@
       padding: 0;
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
       transition: color var(--duration-fast-3) var(--ease-standard);
     }
@@ -3837,6 +3856,20 @@
     </div>
   </div>
 
+  <!-- ══ IMPERSONATION BANNER ═════════════════════════════════ -->
+  <div id="impersonation-banner-wrap" class="impersonation-banner-wrap">
+    <div id="impersonation-banner" class="impersonation-banner" role="status">
+      <div class="impersonation-banner__body">
+        <span class="ms impersonation-banner__icon">info</span>
+        <div class="impersonation-banner__text-group">
+          <p class="impersonation-banner__text">Din roll är <span class="impersonation-banner__title">Administratör</span> och du agerar tillfälligt som <strong id="impersonation-banner-name"></strong>.</p>
+          <button class="impersonation-banner__link" id="impersonation-banner-logout">LOGGA UT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="impersonation-banner-placeholder" class="impersonation-banner-placeholder"></div>
+
   <!-- ══ SITE HEADER (desktop: md+) ══════════════════════════ -->
   <div class="site-header__top">
       <button class="site-header__menu-btn" aria-label="Meny">
@@ -3890,20 +3923,6 @@
         </button>
       </div>
   </div>
-
-  <!-- ══ IMPERSONATION BANNER ═════════════════════════════════ -->
-  <div id="impersonation-banner-wrap" class="impersonation-banner-wrap">
-    <div id="impersonation-banner" class="impersonation-banner" role="status">
-      <div class="impersonation-banner__body">
-        <span class="ms impersonation-banner__icon">info</span>
-        <div class="impersonation-banner__text-group">
-          <p class="impersonation-banner__text">Din roll är <span class="impersonation-banner__title">Administratör</span> och du agerar tillfälligt som <strong id="impersonation-banner-name"></strong>.</p>
-          <button class="impersonation-banner__link" id="impersonation-banner-logout">LOGGA UT</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="impersonation-banner-placeholder" class="impersonation-banner-placeholder"></div>
 
   <header class="site-header">
     <!-- Main nav -->
@@ -4021,6 +4040,9 @@
       </div>
 
       <div class="action-btns">
+        <button class="action-btn" aria-label="Exportera tabell" data-tooltip="Exportera tabell" onclick="exportTable()">
+          <span class="ms">download</span>
+        </button>
         <button class="action-btn" aria-label="Inställningar för saldo" data-tooltip="Inställningar för saldo" onclick="openSaldoDrawer()">
           <span class="ms">savings</span>
         </button>
@@ -4045,12 +4067,12 @@
           <th data-col="roll"><span class="sort-icon">Roll <span class="ms">unfold_more</span></span></th>
           <th data-col="butik"><span class="sort-icon">Butik <span class="ms">unfold_more</span></span></th>
           <th data-col="webb"><span class="sort-icon">Webb <span class="ms">unfold_more</span></span></th>
-          <th data-col="kategori" class="col-hidden"><span class="sort-icon">Kategori <span class="ms">unfold_more</span></span></th>
-          <th data-col="avdelning" class="col-hidden"><span class="sort-icon">Avdelning <span class="ms">unfold_more</span></span></th>
-          <th data-col="butikssaldo" class="col-hidden"><span class="sort-icon">Anv. butikssaldo <span class="ms">unfold_more</span></span></th>
+          <th data-col="arsbudget" class="col-hidden"><span class="sort-icon">Årsbudget <span class="ms">unfold_more</span></span></th>
+          <th data-col="flyttamedSaldo" class="col-hidden"><span class="sort-icon">Flytta med saldo <span class="ms">unfold_more</span></span></th>
+          <th data-col="saldoFornyar" class="col-hidden"><span class="sort-icon">Saldo förnyas <span class="ms">unfold_more</span></span></th>
           <th data-col="skapnummer" class="col-hidden"><span class="sort-icon">Skåpnummer <span class="ms">unfold_more</span></span></th>
           <th data-col="skapsection" class="col-hidden"><span class="sort-icon">Skåpsektion <span class="ms">unfold_more</span></span></th>
-          <th data-col="personnummer" class="col-hidden"><span class="sort-icon">Personnummer <span class="ms">unfold_more</span></span></th>
+          <th data-col="personnummer" class="col-hidden"><span class="sort-icon">Personligt ID <span class="ms">unfold_more</span></span></th>
           <th class="col-action"></th>
           <th class="col-right-spacer"></th>
         </tr>
@@ -4067,7 +4089,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4081,7 +4103,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4095,7 +4117,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4109,7 +4131,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4123,7 +4145,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4137,7 +4159,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4151,7 +4173,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4165,7 +4187,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4179,7 +4201,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
         <tr>
@@ -4193,7 +4215,7 @@
           <td>Värde</td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
           <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
+          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
         <td class="col-right-spacer"></td>
         </tr>
       </tbody>
@@ -4603,7 +4625,7 @@
 
       <!-- Åtkomst -->
       <div class="form-field form-field--pt">
-        <div class="form-label"><span>Åtkomst</span><span class="form-label__optional">(Valfritt)</span></div>
+        <div class="form-label"><span>Åtkomst</span><span class="form-label__optional">(Ett alternativ måste väljas.)</span></div>
         <div class="form-checkboxes">
           <label class="form-checkbox-item">
             <input type="checkbox" id="checkbox-webb" />
@@ -4615,7 +4637,7 @@
           </label>
         </div>
         <span class="form-helper form-helper--error" id="webb-email-error" style="display:none;align-items:center;gap:4px;"><span class="ms ms--filled" style="font-size:20px;color:#d90000;">error</span> Webbanvändare kräver en e-postadress.</span>
-        <span class="form-helper">Lägga till nya användare som får handla i butik kräver mobilt BankID av firmatecknare.</span>
+        <span class="form-helper">Lägga till nya användare som får handla i butik kräver mobilt BankID.</span>
       </div>
 
       <!-- Förnamn + Efternamn -->
@@ -4644,7 +4666,7 @@
 
       <!-- Mobilnummer -->
       <div class="form-field">
-        <label class="form-label" for="drawer-mobil">Mobilnummer</label>
+        <label class="form-label" for="drawer-mobil"><span>Mobilnummer</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
           <input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " />
         </div>
@@ -4652,25 +4674,25 @@
 
       <!-- Anställnings nr -->
       <div class="form-field">
-        <label class="form-label" for="drawer-anstallning">Anställnings nr</label>
+        <label class="form-label" for="drawer-anstallning"><span>Anställnings nr</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-anstallning" placeholder=" " disabled />
+          <input class="form-input" type="text" id="drawer-anstallning" placeholder=" " />
         </div>
       </div>
 
       <!-- Kostnadsställe -->
       <div class="form-field">
-        <label class="form-label" for="drawer-kost"><span>Kostnadsställe</span><span class="form-label__optional">(Valfritt)</span></label>
+        <label class="form-label" for="drawer-kost"><span>Kostnadsställe</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-kost" placeholder="-" />
+          <input class="form-input" type="text" id="drawer-kost" placeholder=" " />
         </div>
       </div>
 
       <!-- Adressnummer -->
       <div class="form-field">
-        <label class="form-label" for="drawer-adress"><span>Adressnummer</span><span class="form-label__optional">(Valfritt)</span></label>
+        <label class="form-label" for="drawer-adress"><span>Adressnummer</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-adress" placeholder="-" />
+          <input class="form-input" type="text" id="drawer-adress" placeholder=" " />
         </div>
       </div>
 
@@ -4694,7 +4716,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-arsbudget">Årsbudget</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-arsbudget" placeholder="24 000.00 kr" />
+            <input class="form-input" type="text" id="drawer-arsbudget" placeholder=" " />
           </div>
         </div>
 
@@ -4702,16 +4724,16 @@
         <div class="form-field">
           <label class="form-label" for="drawer-saldo">Nuvarande saldo</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-saldo" value="12 000.00 kr" disabled />
+            <input class="form-input" type="text" id="drawer-saldo" value="0.00 kr" disabled />
           </div>
-          <span class="form-helper form-helper--disabled">Era användare har ett fastställt saldo på 12 000.00 kr</span>
+          <span class="form-helper form-helper--disabled" id="drawer-saldo-helper">Nuvarande saldo: 0.00 kr</span>
         </div>
 
         <!-- Lägg till saldo -->
         <div class="form-field">
           <label class="form-label" for="drawer-lagg-saldo">Lägg till saldo</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder="-" />
+            <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder=" " />
           </div>
         </div>
 
@@ -4780,10 +4802,9 @@
       <!-- Välj månad -->
       <div class="form-field">
         <label class="form-label" for="saldo-manad">Välj månad</label>
-        <div class="input-wrap form-select-wrap">
+        <div class="input-wrap form-select-wrap is-active">
           <select class="form-select" id="saldo-manad">
-            <option value="">Välj månad</option>
-            <option value="1">Januari</option>
+            <option value="1" selected>Januari</option>
             <option value="2">Februari</option>
             <option value="3">Mars</option>
             <option value="4">April</option>
@@ -4798,20 +4819,20 @@
           </select>
           <span class="ms form-select-arrow">arrow_drop_down</span>
         </div>
-        <span class="form-helper">Här väljer du vilken månad år 2025 som ska gälla som start för överflyttningen.</span>
+        <span class="form-helper">Här väljer du vilken månad som ska gälla som start för överflyttningen.</span>
       </div>
 
       <!-- Aktivera överflyttning -->
       <div class="form-field">
-        <label class="form-label" for="saldo-aktivera">Aktivera Överflyttning</label>
+        <label class="form-label" for="saldo-aktivera">Flytta med saldo</label>
         <div class="input-wrap form-select-wrap is-active">
           <select class="form-select" id="saldo-aktivera">
-            <option value="aktiv" selected>Aktiv</option>
-            <option value="avaktivera">Avaktivera</option>
+            <option value="aktiv" >Ja</option>
+            <option value="avaktivera" selected>Nej</option>
           </select>
           <span class="ms form-select-arrow">arrow_drop_down</span>
         </div>
-        <span class="form-helper">Aktivera eller avaktivera.</span>
+        <span class="form-helper">Välj om kvarvarande saldo ska följa med till nästkommande budgetår.</span>
       </div>
     </div>
 
@@ -4945,6 +4966,21 @@
       });
     });
 
+    /* ── Saldo helper functions ───────────────────────────────── */
+    function parseSaldo(str) {
+      if (!str) return 0;
+      var cleaned = String(str).replace(/\s/g, '').replace(/kr$/i, '').replace(',', '.');
+      return parseFloat(cleaned) || 0;
+    }
+    function formatSaldo(num) {
+      var sign = num < 0 ? '-' : '';
+      var abs = Math.abs(num).toFixed(2);
+      var parts = abs.split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
+      return sign + parts[0] + '.' + parts[1] + ' kr';
+    }
+    window._baseSaldo = 0;
+
     /* ── Budget fields toggle ─────────────────────────────────── */
     const budgetSelect = document.getElementById('drawer-budget');
     const budgetFields = document.getElementById('budget-fields');
@@ -4952,6 +4988,34 @@
       budgetSelect.addEventListener('change', () => {
         const isActive = budgetSelect.value === 'Aktiv';
         budgetFields.style.display = isActive ? 'flex' : 'none';
+        if (isActive) {
+          var base = 0;
+          var isNewUser = !(typeof currentEditIndex !== 'undefined' && currentEditIndex >= 0);
+          if (!isNewUser) {
+            var _eu = USERS[currentEditIndex];
+            if (_eu && _eu.budget === 'Aktiv') base = parseSaldo(_eu.saldo);
+          }
+          window._baseSaldo = base;
+          document.getElementById('drawer-saldo').value = formatSaldo(base);
+          document.getElementById('drawer-lagg-saldo').value = '';
+          if (isNewUser) {
+            document.getElementById('drawer-arsbudget').value = '0';
+          }
+          var _h = document.getElementById('drawer-saldo-helper');
+          if (_h) _h.textContent = 'Nuvarande saldo: ' + formatSaldo(base);
+        }
+      });
+    }
+
+    /* ── Lägg till saldo – live preview ──────────────────────── */
+    var _laggSaldoEl = document.getElementById('drawer-lagg-saldo');
+    if (_laggSaldoEl) {
+      _laggSaldoEl.addEventListener('input', function() {
+        var newSaldo = window._baseSaldo + parseSaldo(this.value);
+        var _sEl = document.getElementById('drawer-saldo');
+        var _hEl = document.getElementById('drawer-saldo-helper');
+        if (_sEl) _sEl.value = formatSaldo(newSaldo);
+        if (_hEl) _hEl.textContent = 'Nuvarande saldo: ' + formatSaldo(newSaldo);
       });
     }
 
@@ -5591,12 +5655,12 @@
     (function() {
       var COLS = [
         { key: 'namn',           label: 'Namn',               fixed: true,  visible: true  },
-        { key: 'personnummer',   label: 'Personnummer',       fixed: false, visible: false },
+        { key: 'arsbudget',      label: 'Årsbudget',          fixed: false, visible: false },
+        { key: 'flyttamedSaldo', label: 'Flytta med saldo',   fixed: false, visible: false },
+        { key: 'saldoFornyar',   label: 'Saldo förnyas',      fixed: false, visible: false },
+        { key: 'personnummer',   label: 'Personligt ID',      fixed: false, visible: false },
         { key: 'skapsection',    label: 'Skåpsektion',        fixed: false, visible: false },
         { key: 'skapnummer',     label: 'Skåpnummer',         fixed: false, visible: false },
-        { key: 'butikssaldo',    label: 'Använd butikssaldo', fixed: false, visible: false },
-        { key: 'avdelning',      label: 'Avdelning',          fixed: false, visible: false },
-        { key: 'kategori',       label: 'Kategori',           fixed: false, visible: false },
         { key: 'kostnadsstalle', label: 'Kostnadsställe',     fixed: false, visible: true  },
         { key: 'saldo',          label: 'Saldo',              fixed: false, visible: true  },
         { key: 'anstallningsnr', label: 'Anställningsnummer', fixed: false, visible: true  },
@@ -5613,7 +5677,7 @@
       var table = document.querySelector('.users-table');
       if (table) {
         var existingKeys = ['namn', 'roll', 'anstallningsnr', 'saldo', 'kostnadsstalle', 'butik', 'webb'];
-        var extraKeys    = ['kategori', 'avdelning', 'butikssaldo', 'skapnummer', 'skapsection', 'personnummer'];
+        var extraKeys    = ['arsbudget', 'flyttamedSaldo', 'saldoFornyar', 'skapnummer', 'skapsection', 'personnummer'];
         table.querySelectorAll('tbody tr').forEach(function(row) {
           var tds = row.querySelectorAll('td');
           existingKeys.forEach(function(key, i) {
@@ -5743,6 +5807,7 @@
             cb.addEventListener('change', function() {
               c.visible = this.checked;
               setColVisible(c.key, c.visible);
+              if (window._rebuildAllMobileCards) window._rebuildAllMobileCards();
             });
           })(col);
 
@@ -5811,6 +5876,53 @@
       };
     })();
 
+    /* ── Exportera tabell ───────────────────────────────────────── */
+    window.exportTable = function() {
+      var cols = (window._COLS || []).filter(function(c) { return c.visible; });
+      var rows = [];
+      /* Header */
+      rows.push(cols.map(function(c) { return '"' + c.label.replace(/"/g, '""') + '"'; }).join(';'));
+      /* Data */
+      (window._USERS || []).forEach(function(u) {
+        var cells = cols.map(function(c) {
+          var val = '';
+          if (c.key === 'namn')           val = (u.firstName || '') + ' ' + (u.lastName || '');
+          else if (c.key === 'butik')     val = u.butik  ? 'Ja' : 'Nej';
+          else if (c.key === 'webb')      val = u.webb   ? 'Ja' : 'Nej';
+          else if (c.key === 'roll')      val = u.roll   || '';
+          else if (c.key === 'saldo')     val = u.saldo  || '';
+          else if (c.key === 'kostnadsstalle')  val = u.kostnadsstalle  || '';
+          else if (c.key === 'anstallningsnr')  val = u.anstallningsnr || '';
+          else if (c.key === 'personnummer')    val = u.personnummer   || '';
+          else if (c.key === 'skapsection')     val = u.skapsection    || '';
+          else if (c.key === 'skapnummer')      val = u.skapnummer     || '';
+          else if (c.key === 'arsbudget') {
+            val = u.budget === 'Aktiv' ? (u.arsbudget || '—') : '—';
+          } else if (c.key === 'flyttamedSaldo') {
+            var _asCSV = document.getElementById('saldo-aktivera');
+            val = _asCSV ? (_asCSV.value === 'aktiv' ? 'Ja' : 'Nej') : 'Nej';
+          } else if (c.key === 'saldoFornyar') {
+            var _mnCSV = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
+            var _msCSV = document.getElementById('saldo-manad');
+            val = _msCSV ? (_mnCSV[parseInt(_msCSV.value, 10)] || 'Januari') : 'Januari';
+          } else {
+            val = (u[c.key] !== undefined && u[c.key] !== null) ? String(u[c.key]) : '';
+          }
+          return '"' + String(val).replace(/"/g, '""') + '"';
+        });
+        rows.push(cells.join(';'));
+      });
+      var bom = '\uFEFF';
+      var blob = new Blob([bom + rows.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'anvandare.csv';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
+    };
+
     /* ── Saldo drawer ────────────────────────────────────────────── */
     window.openSaldoDrawer = function() {
       document.getElementById('saldo-drawer-overlay').classList.add('is-open');
@@ -5831,25 +5943,52 @@
       });
     });
 
-    /* BankID-ikon i Spara-knappen — visas vid butik-aktivering eller när tom e-post fylls i */
+    /* Uppdatera "Saldo förnyas" och "Flytta med saldo"-kolumnerna när saldo-inställningar sparas */
+    function updateSaldoFornyarCells() {
+      var _mn = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
+      var _ms = document.getElementById('saldo-manad');
+      var _as = document.getElementById('saldo-aktivera');
+      var _mt = _ms ? (_mn[parseInt(_ms.value, 10)] || 'Januari') : 'Januari';
+      var _av = _as ? (_as.value === 'aktiv' ? 'Ja' : 'Nej') : 'Nej';
+      document.querySelectorAll('.users-table tbody [data-col="saldoFornyar"]').forEach(function(td) {
+        td.textContent = _mt;
+      });
+      document.querySelectorAll('.users-table tbody [data-col="flyttamedSaldo"]').forEach(function(td) {
+        td.textContent = _av;
+      });
+    }
+
+    var _saldoSaveBtn = document.querySelector('#saldo-drawer-panel .drawer-save-btn');
+    if (_saldoSaveBtn) {
+      _saldoSaveBtn.addEventListener('click', updateSaldoFornyarCells);
+    }
+
+    /* BankID-ikon i Spara-knappen — visas vid butik-aktivering eller webb-aktivering */
     window._butikInitialState = false;
     window._webbInitialState  = false;
     window._emailInitialValue = '';
     (function() {
       var butikCheckbox = document.getElementById('checkbox-butik');
-      var emailField    = document.getElementById('drawer-epost');
+      var webbCheckbox  = document.getElementById('checkbox-webb');
       var saveBtn       = document.getElementById('drawer-save-btn');
       if (!butikCheckbox || !saveBtn) return;
 
       function updateBankId() {
         var butikNew = butikCheckbox.checked && !window._butikInitialState;
-        saveBtn.classList.toggle('has-bankid', butikNew);
+        var webbNew  = webbCheckbox && webbCheckbox.checked && !window._webbInitialState;
+        saveBtn.classList.toggle('has-bankid', butikNew || webbNew);
       }
 
       butikCheckbox.addEventListener('change', function() {
         updateBankId();
         updateSaveBtn();
       });
+
+      if (webbCheckbox) {
+        webbCheckbox.addEventListener('change', function() {
+          updateBankId();
+        });
+      }
 
       window._updateBankId = updateBankId;
     })();
@@ -5900,7 +6039,11 @@
         u.budget         = document.getElementById('drawer-budget').value;
         if (u.budget === 'Aktiv') {
           u.arsbudget = document.getElementById('drawer-arsbudget').value.trim();
-          u.saldo     = document.getElementById('drawer-saldo').value.trim();
+          var _laggEdit = document.getElementById('drawer-lagg-saldo').value.trim();
+          if (_laggEdit) {
+            u.saldo = formatSaldo(window._baseSaldo + parseSaldo(_laggEdit));
+          }
+          // If "Lägg till saldo" is empty, keep existing saldo unchanged
         }
 
         /* Update the corresponding table row */
@@ -5921,6 +6064,8 @@
           setCell('anstallningsnr', u.anstallningsnr);
           setCell('saldo',          u.saldo);
           setCell('kostnadsstalle', u.kostnadsstalle);
+          setCell('arsbudget',      u.budget === 'Aktiv' ? (u.arsbudget || '—') : '—');
+          setCell('flyttamedSaldo', u.budget === 'Aktiv' ? 'Ja' : 'Nej');
 
           /* Butik checkbox */
           var butikTd = tr.querySelector('[data-col="butik"]');
@@ -5968,16 +6113,14 @@
           budget:         newBudget,
           arsbudget:      '',
           saldo:          newBudget === 'Aktiv' ? '' : '0 kr',
-          kategori:       '',
-          avdelning:      '',
-          butikssaldo:    '',
           skapnummer:     '',
           skapsection:    '',
           personnummer:   ''
         };
         if (newUser.budget === 'Aktiv') {
           newUser.arsbudget = document.getElementById('drawer-arsbudget').value.trim();
-          newUser.saldo     = document.getElementById('drawer-lagg-saldo').value.trim() || '0 kr';
+          var _laggNy = document.getElementById('drawer-lagg-saldo').value.trim();
+          newUser.saldo = formatSaldo(parseSaldo(_laggNy));
         }
         USERS.push(newUser);
         var newIdx = USERS.length - 1;
@@ -5998,7 +6141,7 @@
           '<td class="check-icon"><input type="checkbox"' + (newUser.webb ? ' checked' : '') + ' disabled /></td>' +
           '<td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay">' +
             '<button class="btn-row-action" aria-label="Ta bort" data-tooltip="Ta bort"><span class="ms" style="' + iStyle + '">delete</span></button>' +
-            '<button class="btn-row-action" aria-label="Byt konto" data-tooltip="Byt konto"><span class="ms" style="' + iStyle + '">switch_account</span></button>' +
+            '<button class="btn-row-action" aria-label="Logga in som" data-tooltip="Logga in som"><span class="ms" style="' + iStyle + '">switch_account</span></button>' +
             '<button class="btn-row-action" aria-label="Redigera" data-tooltip="Redigera"><span class="ms" style="' + iStyle + '">edit</span></button>' +
           '</div><button class="btn-row-action" aria-label="Fler alternativ" data-tooltip="Fler alternativ"><span class="ms" style="' + iStyle + '">more_horiz</span></button></div></td>' +
           '<td class="col-right-spacer"></td>';
@@ -6012,7 +6155,7 @@
         tagKeys.forEach(function(key, i) { if (rawTds[i]) rawTds[i].dataset.col = key; });
 
         /* Add hidden-column placeholder cells (same keys as page-load IIFE) */
-        var extraKeys = ['kategori', 'avdelning', 'butikssaldo', 'skapnummer', 'skapsection', 'personnummer'];
+        var extraKeys = ['arsbudget', 'flyttamedSaldo', 'saldoFornyar', 'skapnummer', 'skapsection', 'personnummer'];
         var spacerTd  = newTr.querySelector('.col-right-spacer');
         extraKeys.forEach(function(key) {
           var xtd = document.createElement('td');
@@ -6021,6 +6164,18 @@
           xtd.textContent = '—';
           newTr.insertBefore(xtd, spacerTd);
         });
+        /* Fill computed values for new user */
+        (function() {
+          var setX = function(col, val) { var td = newTr.querySelector('[data-col="' + col + '"]'); if (td) td.textContent = val; };
+          setX('arsbudget',      newUser.budget === 'Aktiv' ? (newUser.arsbudget || '—') : '—');
+          setX('flyttamedSaldo', newUser.budget === 'Aktiv' ? 'Ja' : 'Nej');
+          var _mn = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
+          var _ms = document.getElementById('saldo-manad');
+          var _as = document.getElementById('saldo-aktivera');
+          var _mt = _ms ? (_mn[parseInt(_ms.value, 10)] || '') : '';
+          var _at = _as ? (_as.value === 'aktiv' ? 'Aktiv' : 'Avaktiverad') : '';
+          setX('saldoFornyar', _mt ? _mt + ' \u2013 ' + _at : (_at || '\u2014'));
+        })();
 
         document.querySelector('.users-table tbody').appendChild(newTr);
 
@@ -6070,6 +6225,8 @@
       { firstName:'Anders',    lastName:'Spång',       email:'',                                     phone:'073-222 33 44', roll:'Standard',      anstallningsnr:'ANS-11002', saldo:'7 900.00 kr',  kostnadsstalle:'KST-3105', adress:'89012', butik:false, webb:false, budget:'Aktiv',   arsbudget:'24 000.00 kr', kategori:'El',            avdelning:'Produktion',    butikssaldo:'0.00 kr',      skapnummer:'D-14', skapsection:'D', personnummer:'19930618-8823' }
     ];
 
+    window._USERS = USERS;
+
     /* Populera tabellrader med riktig data */
     (function() {
       var rows = document.querySelectorAll('.users-table tbody tr');
@@ -6094,9 +6251,16 @@
           var td = tr.querySelector('[data-col="' + col + '"]');
           if (td) td.textContent = val;
         };
-        setCel('kategori',    u.kategori);
-        setCel('avdelning',   u.avdelning);
-        setCel('butikssaldo', u.butikssaldo);
+        setCel('arsbudget',      u.budget === 'Aktiv' ? (u.arsbudget || '—') : '—');
+        (function() {
+          var _mn = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
+          var _ms = document.getElementById('saldo-manad');
+          var _as = document.getElementById('saldo-aktivera');
+          var _mt = _ms ? (_mn[parseInt(_ms.value, 10)] || 'Januari') : 'Januari';
+          var _av = _as ? (_as.value === 'aktiv' ? 'Ja' : 'Nej') : 'Nej';
+          setCel('saldoFornyar',   _mt);
+          setCel('flyttamedSaldo', _av);
+        })();
         setCel('skapnummer',  u.skapnummer);
         setCel('skapsection', u.skapsection);
         setCel('personnummer',u.personnummer);
@@ -6142,7 +6306,7 @@
               var expandedRows = '';
               var order = window._currentColOrder || ['anstallningsnr', 'saldo', 'kostnadsstalle'];
               var cols  = window._COLS || [];
-              order.forEach(function(key) {
+              order.slice().reverse().forEach(function(key) {
                 var col = cols.find(function(c) { return c.key === key; });
                 if (!col || !col.visible) return;
                 var val = (u[key] !== undefined && u[key] !== null && u[key] !== '') ? u[key] : '—';
@@ -6173,12 +6337,15 @@
             '<div class="user-card__divider"></div>' +
             '<div class="user-card__actions">' +
               '<div class="user-card__actions-left">' +
-                '<div class="tooltip-wrap"><button class="user-card__action-btn user-card__action-btn--switch" aria-label="Byt konto">' +
+                '<div class="tooltip-wrap"><button class="user-card__action-btn user-card__action-btn--switch" aria-label="Logga in som">' +
                   '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">switch_account</span>' +
-                '</button><span class="tooltip tooltip--bottom">Byt konto</span></div>' +
+                '</button><span class="tooltip tooltip--bottom">Logga in som</span></div>' +
                 '<div class="tooltip-wrap"><button class="user-card__action-btn user-card__action-btn--edit" aria-label="Redigera">' +
                   '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">edit</span>' +
                 '</button><span class="tooltip tooltip--bottom">Redigera</span></div>' +
+                '<div class="tooltip-wrap"><button class="user-card__action-btn user-card__action-btn--export" aria-label="Exportera tabell" onclick="exportTable()">' +
+                  '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">download</span>' +
+                '</button><span class="tooltip tooltip--bottom">Exportera tabell</span></div>' +
               '</div>' +
               '<div class="tooltip-wrap"><button class="user-card__action-btn user-card__action-btn--delete" aria-label="Ta bort">' +
                 '<span class="ms" style="font-size:20px;font-variation-settings:\'FILL\' 0,\'wght\' 300,\'GRAD\' 0,\'opsz\' 20">delete</span>' +
@@ -6274,9 +6441,12 @@
       butikCb.checked = u.butik;
       window._butikInitialState = u.butik;
       document.getElementById('drawer-save-btn').classList.remove('has-bankid');
-      /* Webb checkbox */
+      /* Webb checkbox — om redan aktiverad: disabled (kan ej avaktiveras) */
       var webbCbEdit = document.getElementById('checkbox-webb');
-      if (webbCbEdit) webbCbEdit.checked = u.webb;
+      if (webbCbEdit) {
+        webbCbEdit.checked  = u.webb;
+        webbCbEdit.disabled = u.webb;
+      }
       window._webbInitialState  = u.webb;
       window._emailInitialValue = u.email;
       /* Dölj ev. tidigare validerings-felmeddelande */
@@ -6291,6 +6461,11 @@
         document.getElementById('drawer-arsbudget').value = u.arsbudget;
         document.getElementById('drawer-saldo').value     = u.saldo;
         document.getElementById('drawer-lagg-saldo').value = '';
+        window._baseSaldo = parseSaldo(u.saldo);
+        var _hEdit = document.getElementById('drawer-saldo-helper');
+        if (_hEdit) _hEdit.textContent = 'Nuvarande saldo: ' + u.saldo;
+      } else {
+        window._baseSaldo = 0;
       }
       /* Aktivera Spara direkt (redigering) */
       document.getElementById('drawer-save-btn').disabled = false;
@@ -6327,6 +6502,12 @@
       document.getElementById('drawer-save-btn').classList.remove('has-bankid');
       document.getElementById('drawer-budget').value     = 'Inaktiv';
       document.getElementById('budget-fields').style.display = 'none';
+      document.getElementById('drawer-arsbudget').value   = '';
+      document.getElementById('drawer-saldo').value       = '0.00 kr';
+      document.getElementById('drawer-lagg-saldo').value  = '';
+      window._baseSaldo = 0;
+      var _hNew = document.getElementById('drawer-saldo-helper');
+      if (_hNew) _hNew.textContent = 'Nuvarande saldo: 0.00 kr';
       _origOpenDrawer();
     };
     /* ── Delete wiring ─────────────────────────────────────── */
@@ -6424,7 +6605,14 @@
           if (!t.contains(e.target)) dismiss();
         }
 
-        t.querySelector('button').addEventListener('click', dismiss);
+        var _closeBtn = t.querySelector('button');
+        _closeBtn.addEventListener('click', dismiss);
+        _closeBtn.addEventListener('mouseenter', function() {
+          this.style.background = 'rgba(0,0,0,0.05)';
+        });
+        _closeBtn.addEventListener('mouseleave', function() {
+          this.style.background = 'transparent';
+        });
         document.body.appendChild(t);
 
         /* Starta click-outside-lyssnaren efter ett tick så att klicket som
@@ -6527,12 +6715,14 @@
       function openImpersonation(name) {
         impersonationName.textContent = name;
         impersonationBannerWrap.classList.add('is-visible');
+        document.body.classList.add('has-impersonation-banner');
       }
       function closeImpersonation() {
         impersonationBannerWrap.classList.remove('is-visible');
+        document.body.classList.remove('has-impersonation-banner');
       }
 
-      document.querySelectorAll('.btn-row-action[aria-label="Byt konto"]').forEach(function(btn) {
+      document.querySelectorAll('.btn-row-action[aria-label="Logga in som"]').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
           var name = btn.closest('tr').querySelector('.user-name').textContent.trim();
