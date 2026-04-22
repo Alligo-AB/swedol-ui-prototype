@@ -6112,13 +6112,13 @@
           webb:           document.getElementById('checkbox-webb').checked,
           budget:         newBudget,
           arsbudget:      '',
-          saldo:          newBudget === 'Aktiv' ? '' : '0 kr',
+          saldo:          newBudget === 'Aktiv' ? '' : '0.00 kr',
           skapnummer:     '',
           skapsection:    '',
           personnummer:   ''
         };
         if (newUser.budget === 'Aktiv') {
-          newUser.arsbudget = document.getElementById('drawer-arsbudget').value.trim();
+          newUser.arsbudget = formatSaldo(parseSaldo(document.getElementById('drawer-arsbudget').value.trim()));
           var _laggNy = document.getElementById('drawer-lagg-saldo').value.trim();
           newUser.saldo = formatSaldo(parseSaldo(_laggNy));
         }
@@ -6167,14 +6167,12 @@
         /* Fill computed values for new user */
         (function() {
           var setX = function(col, val) { var td = newTr.querySelector('[data-col="' + col + '"]'); if (td) td.textContent = val; };
-          setX('arsbudget',      newUser.budget === 'Aktiv' ? (newUser.arsbudget || '—') : '—');
-          setX('flyttamedSaldo', newUser.budget === 'Aktiv' ? 'Ja' : 'Nej');
-          var _mn = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
-          var _ms = document.getElementById('saldo-manad');
-          var _as = document.getElementById('saldo-aktivera');
-          var _mt = _ms ? (_mn[parseInt(_ms.value, 10)] || '') : '';
-          var _at = _as ? (_as.value === 'aktiv' ? 'Aktiv' : 'Avaktiverad') : '';
-          setX('saldoFornyar', _mt ? _mt + ' \u2013 ' + _at : (_at || '\u2014'));
+          setX('arsbudget', newUser.budget === 'Aktiv' ? (newUser.arsbudget || '—') : '—');
+          var _mnN = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
+          var _msN = document.getElementById('saldo-manad');
+          var _asN = document.getElementById('saldo-aktivera');
+          setX('saldoFornyar',   _msN ? (_mnN[parseInt(_msN.value, 10)] || 'Januari') : 'Januari');
+          setX('flyttamedSaldo', _asN ? (_asN.value === 'aktiv' ? 'Ja' : 'Nej') : 'Nej');
         })();
 
         document.querySelector('.users-table tbody').appendChild(newTr);
