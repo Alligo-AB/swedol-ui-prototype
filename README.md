@@ -6,8 +6,9 @@ UI prototype project using Claude Code, GitHub Desktop, and Vercel for collabora
 
 ### 1. Development (Claude Code)
 
-* Use Claude Code to generate/update UI code
+* Create working / feature branch off main
 * Work locally in this repo
+* Use Claude Code to generate/update UI code, or manually edit in a code editor
 
 ### 2. Version Control (GitHub Desktop)
 
