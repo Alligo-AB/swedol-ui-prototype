@@ -3170,3 +3170,404 @@ Båda varianter (Avbryt och Primär) är **alltid 32px höga** — oavsett break
 
 ---
 
+## Tooltip (ECO Design System)
+
+**Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=316-14656
+
+Tooltips visas vid hover på ikontextlösa knappar och ger en kort etikett som förklarar knappens funktion. Används för **alla** breakpoints.
+
+---
+
+### Storlekar
+
+| Storlek | Padding | Font | Line-height | Letter-spacing |
+|---|---|---|---|---|
+| **Small** | `8px 12px` | 14px, Regular | 20px | 0.28px |
+| **Large** | `16px 24px` | 18px, Regular | 26px | 0.36px |
+
+> Använd alltid **Small** för ikonknappar i verktygsrader och tabellrader.
+
+---
+
+### Utseende
+
+| Egenskap | Värde |
+|---|---|
+| Bakgrund | `rgba(0,0,0,0.9)` (`surface-100` 90% opacitet) |
+| Textfärg | `#ffffff` (`text-primary-inverted`) |
+| Font | `Breuer Condensed Regular` |
+| `font-feature-settings` | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+| `white-space` | `nowrap` |
+| Shadow | `elevation-b-40`: `0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05)` |
+| Beak | CSS-triangel, 6px hög, ~12.7px bred |
+
+---
+
+### Positioner
+
+| Typ | Beskrivning | Beak-riktning |
+|---|---|---|
+| **Top** | Tooltip ovanför elementet | Beak pekar nedåt (under tooltip-blocket) |
+| **Bottom** | Tooltip nedanför elementet | Beak pekar uppåt (ovanför tooltip-blocket) |
+| **Left** | Tooltip till vänster | Beak pekar höger (höger sida av tooltip) |
+| **Right** | Tooltip till höger | Beak pekar vänster (vänster sida av tooltip) |
+| **Left side top/bottom** | Tooltip vänsterjusterad med offset | Beak vid topp/botten |
+| **Right side top/bottom** | Tooltip högerjusterad med offset | Beak vid topp/botten |
+
+> Välj position baserat på var det finns utrymme. Standardval: **Bottom** för knappar i verktygsrader (utrymme nedanför), **Top** för knappar i tabellrader (utrymme ovanför).
+
+---
+
+### Interaktion
+
+- Tooltip visas vid **hover** (CSS `opacity: 1` via `.tooltip-wrap:hover .tooltip`).
+- Easing: `motion-ease-standard` (`cubic-bezier(.35,0,.35,1)`), `duration-fast-2` (`100ms`).
+- Aldrig synlig vid tangentbordsnavigering (`:focus`) — enbart hover.
+- `pointer-events: none` på tooltip-elementet så det inte stör musinteraktion.
+
+---
+
+### HTML-struktur
+
+```html
+<!-- Knapp med Bottom-tooltip -->
+<div class="tooltip-wrap">
+  <button class="action-btn" aria-label="Lägg till användare">
+    <span class="ms">person_add</span>
+  </button>
+  <span class="tooltip tooltip--bottom">Lägg till användare</span>
+</div>
+
+<!-- Knapp med Top-tooltip -->
+<div class="tooltip-wrap">
+  <button class="btn-row-action" aria-label="Redigera">
+    <span class="ms">edit</span>
+  </button>
+  <span class="tooltip tooltip--top">Redigera</span>
+</div>
+```
+
+> `aria-label` på knappen är obligatorisk och ska ha samma text som tooltip-innehållet.
+
+---
+
+### CSS-mall
+
+```css
+.tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 300;
+  background: rgba(0,0,0,0.9);
+  color: #fff;
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-size: 14px;        /* Small */
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.28px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 100ms cubic-bezier(.35,0,.35,1); /* duration-fast-2, ease-standard */
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05); /* elevation-b-40 */
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+
+/* Beak — delad bas för alla positioner */
+.tooltip::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 6.35px solid transparent;
+  border-right: 6.35px solid transparent;
+}
+
+.tooltip-wrap:hover .tooltip { opacity: 1; }
+
+/* Bottom — tooltip nedanför, beak pekar uppåt */
+.tooltip--bottom {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+}
+.tooltip--bottom::before {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 6px solid rgba(0,0,0,0.9);
+}
+
+/* Top — tooltip ovanför, beak pekar nedåt */
+.tooltip--top {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+}
+.tooltip--top::before {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 6px solid rgba(0,0,0,0.9);
+}
+```
+
+---
+
+## Länkar – Användningsriktlinjer (ECO Design System)
+
+**Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1221-33213
+
+ECO Design System har tre länktyper: **Inline Link**, **Action Link** och **Tile Link**.
+
+### När ska länk användas?
+
+Använd länk när användaren ska:
+- Navigera till en annan sida inom sajten/applikationen
+- Navigera till en extern sajt
+- Hoppa till ett element på samma sida
+- Agera på något, t.ex. öppna e-post eller ringa ett nummer
+
+### Vilken länktyp?
+
+| Typ | Användning | Understrykning | Ikoner |
+|---|---|---|---|
+| **Inline Link** | Inuti meningar eller textblock | Alltid understruken | Aldrig |
+| **Action Link** | Fristående, inte i löptext | Understruken vid hover | Vänster och/eller höger |
+| **Tile Link** | Grafisk/prominent, som kort eller knapp | — | Med eller utan |
+
+### Interaktion (alla länktyper)
+
+- **Mus:** klick var som helst på länktexten eller associerad ikon
+- **Tangentbord:** Enter-tangent när länken har fokus
+
+---
+
+## Action Link (ECO Design System)
+
+**Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1671-52811
+
+En klickbar länk med valfri vänster-ikon och höger-pil. Används för navigering och nedladdning.
+
+---
+
+### Anatomi
+
+```
+[Vänster-ikon (valfri)] [Länktext] [→ chevron-ikon]
+```
+
+- Länktexten är **inte** understruken i Enabled-läge — understrykning visas **enbart** vid hover.
+- Höger-ikon: `chevron_right` (Large: 24px, Medium/Small: 20px)
+- Vänster-ikon (valfri, t.ex. `file_download`): Large: 24px, Medium/Small: 20px
+
+---
+
+### Storlekar
+
+#### Desktop (`md:`, 769px+)
+
+| Storlek | Typografi-token | Font-size | Line-height | Letter-spacing | Gap | Ikon |
+|---|---|---|---|---|---|---|
+| **Large** | `body-lg` | 20px | 28px | 0px | 8px | 24px |
+| **Medium** | `body-md` | 16px | 24px | 0.32px | 4px | 20px |
+| **Small** | `body-sm` | 14px | 20px | 0.28px | 4px | 20px |
+
+#### Mobile / Tablet (`xs`/`sm`, ≤768px)
+
+| Storlek | Font-size | Line-height | Letter-spacing |
+|---|---|---|---|
+| **Large** | 18px | 24px | 0px |
+| **Medium** | 16px | 22px | 0.32px |
+| **Small** | 14px | 20px | 0.28px |
+
+> Small har samma värden på desktop och mobil.
+
+---
+
+### Varianter
+
+| Variant | Enabled-färg | Hover-färg |
+|---|---|---|
+| **Text Primary** | `#000000` (`text-action-primary`) | `#737373` (`text-action-secondary-hover`) |
+| **Text Primary Inverted** | `#ffffff` (`text-primary-inverted`) | `rgba(255,255,255,0.78)` (`text-action-primary-inverted-hover`) |
+
+**Font-weight:** Regular (400) eller Bold (700). Båda varianterna finns i alla storlekar.
+
+---
+
+### Tillstånd (States)
+
+| Tillstånd | Understrykning | Textfärg |
+|---|---|---|
+| **Enabled** | Ingen | `text-action-primary` / `text-primary-inverted` |
+| **Hover** | `text-decoration: underline` | `text-action-secondary-hover` / `text-action-primary-inverted-hover` |
+
+> Transition: `color` och `text-decoration-color` med `duration-fast-3` (150ms) och `ease-standard`.
+
+---
+
+### font-feature-settings
+
+| Storlek | Värde |
+|---|---|
+| Large (`body-lg`) | `'ss02' 1, 'ss03' 1` |
+| Medium (`body-md`) | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+| Small (`body-sm`) | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+
+---
+
+### CSS-mall
+
+```css
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;                /* Large */
+  text-decoration: none;
+  color: #000000;          /* text-action-primary */
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color 150ms cubic-bezier(.35,0,.35,1); /* duration-fast-3, ease-standard */
+}
+
+/* Storlekar */
+.action-link--large  { font-size: 20px; line-height: 28px; letter-spacing: 0px;    font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.action-link--medium { font-size: 16px; line-height: 24px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; gap: 4px; }
+.action-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; gap: 4px; }
+
+/* Hover */
+.action-link:hover { color: #737373; text-decoration: underline; }
+
+/* Inverted (på mörk bakgrund) */
+.action-link--inverted       { color: #ffffff; }
+.action-link--inverted:hover { color: rgba(255,255,255,0.78); }
+
+/* Bold-variant */
+.action-link--bold { font-weight: 700; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .action-link--large  { font-size: 18px; line-height: 24px; }
+  .action-link--medium { font-size: 16px; line-height: 22px; }
+}
+```
+
+### HTML-exempel
+
+```html
+<!-- Large, Regular, med ikon -->
+<a href="#" class="action-link action-link--large">
+  <span class="material-symbols-outlined" style="font-size:24px">file_download</span>
+  Ladda ner dokument
+  <span class="material-symbols-outlined" style="font-size:24px">chevron_right</span>
+</a>
+
+<!-- Medium, Regular -->
+<a href="#" class="action-link action-link--medium">
+  Visa alla produkter
+  <span class="material-symbols-outlined" style="font-size:20px">chevron_right</span>
+</a>
+
+<!-- Small, Bold, Inverted -->
+<a href="#" class="action-link action-link--small action-link--bold action-link--inverted">
+  Läs mer
+  <span class="material-symbols-outlined" style="font-size:20px">chevron_right</span>
+</a>
+```
+
+---
+
+## Inline Link (ECO Design System)
+
+Används **inuti meningar och textblock**. Alltid understruken — till skillnad från Action Link som bara understryks vid hover. Kombineras **aldrig** med ikoner.
+
+Storlekar, färger och breakpoints är identiska med Action Link.
+
+### Skillnad mot Action Link
+
+| Egenskap | Inline Link | Action Link |
+|---|---|---|
+| Placering | I löptext | Fristående |
+| Understrykning | Alltid | Hover only |
+| Ikoner | Aldrig | Valfria (vänster/höger) |
+| `display` | `inline` | `inline-flex` |
+
+### Tillstånd (States)
+
+| Tillstånd | Textfärg | Understrykning |
+|---|---|---|
+| **Enabled** | `#000000` (`text-action-primary`) | `text-decoration: underline` |
+| **Hover** | `#737373` (`text-action-secondary-hover`) | `text-decoration: underline` (behålls) |
+| **Enabled Inverted** | `#ffffff` (`text-primary-inverted`) | `text-decoration: underline` |
+| **Hover Inverted** | `rgba(255,255,255,0.78)` (`text-action-primary-inverted-hover`) | `text-decoration: underline` |
+
+### CSS-mall
+
+```css
+.inline-link {
+  color: #000000;          /* text-action-primary */
+  text-decoration: underline;
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color 150ms cubic-bezier(.35,0,.35,1); /* duration-fast-3, ease-standard */
+}
+
+/* Storlekar — desktop */
+.inline-link--large  { font-size: 20px; line-height: 28px; letter-spacing: 0px;    font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.inline-link--medium { font-size: 16px; line-height: 24px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.inline-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+
+/* Hover */
+.inline-link:hover { color: #737373; }
+
+/* Inverted */
+.inline-link--inverted       { color: #ffffff; }
+.inline-link--inverted:hover { color: rgba(255,255,255,0.78); }
+
+/* Bold-variant */
+.inline-link--bold { font-weight: 700; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .inline-link--large  { font-size: 18px; line-height: 24px; }
+  .inline-link--medium { font-size: 16px; line-height: 22px; }
+}
+```
+
+### HTML-exempel
+
+```html
+<!-- I löptext -->
+<p>Läs mer om våra produkter på
+  <a href="#" class="inline-link inline-link--medium">produktsidan</a>.
+</p>
+
+<!-- Inverted, i mörk kontext -->
+<p style="color:#fff">Kontakta oss via
+  <a href="mailto:info@example.com" class="inline-link inline-link--medium inline-link--inverted">info@example.com</a>.
+</p>
+```
+
+---
+
+## Tile Link (ECO Design System)
+
+Används som **kort eller knapp** när länken behöver presenteras grafiskt och prominent — t.ex. varumärkeslogotyper som länkgrupp eller ikoner med text.
+
+Ska **inte** ersätta vanliga knappar eller länktyper i löptext.
+
+### Storlekar
+
+Två storlekar: **Large** och **Small**. Val beror på kontext och placering.
+
+---
+
