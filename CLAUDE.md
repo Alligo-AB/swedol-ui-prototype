@@ -1179,7 +1179,24 @@ Skuggor som enbart används för specifika komponenter. Specificeras i detalj in
 8. **Drawer-overlay** – bakgrundsöverlagringen bakom en öppen drawer ska ha `background: rgba(0,0,0,0.2)`. Använd aldrig `surface-opacity-black-50` (50%) för drawers.
 9. **Drawer-skugga** – en drawer som öppnas från höger ska alltid ha `box-shadow: var(--elevation-drawer-right)`. En drawer från vänster ska ha `box-shadow: var(--elevation-drawer-left)`. Skuggan appliceras direkt på drawer-panelen, inte på overlay.
 10. **Drawer-bredd** – en standard drawer ska alltid ha `width: min(500px, 100%)`. Detta ger fast 500px bredd på större skärmar och fyller hela bredden automatiskt när fönstret/enheten är smalare än 500px. Använd aldrig separata media queries för att sätta `width: 100%` eller `width: 500px` på drawer-panelen.
-11. **Drawer – responsiva komponentstorlekar** – vid `max-width: 768px` (xs + sm breakpoints) ska alla komponenter inuti drawern använda Mobile Base Styling. Applicera följande `@media (max-width: 768px)`-block på varje drawer:
+11. **Drawer-header scroll-skugga** – när drawer-innehållet scrollas nedåt ska headern få en skugga för att visuellt separera den från innehållet. Använd `elevation-b-60` (`0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05)`). Klassen `.drawer-header--elevated` togglas via JS när `content.scrollTop > 0`. Transition: `var(--duration-fast-3) var(--ease-standard)`.
+
+```css
+.drawer-header {
+  transition: box-shadow var(--duration-fast-3) var(--ease-standard);
+}
+.drawer-header--elevated {
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05); /* elevation-b-60 */
+}
+```
+
+```js
+content.addEventListener('scroll', () => {
+  header.classList.toggle('drawer-header--elevated', content.scrollTop > 0);
+});
+```
+
+12. **Drawer – responsiva komponentstorlekar** – vid `max-width: 768px` (xs + sm breakpoints) ska alla komponenter inuti drawern använda Mobile Base Styling. Applicera följande `@media (max-width: 768px)`-block på varje drawer:
 
 ```css
 @media (max-width: 768px) {
@@ -3487,33 +3504,81 @@ En klickbar länk med valfri vänster-ikon och höger-pil. Används för naviger
 
 ## Inline Link (ECO Design System)
 
-Används **inuti meningar och textblock**. Alltid understruken — till skillnad från Action Link som bara understryks vid hover. Kombineras **aldrig** med ikoner.
+**Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1671-52629
 
-Storlekar, färger och breakpoints är identiska med Action Link.
+Används **inuti meningar och textblock**. Understruken i Enabled-tillståndet — understrykningen **tas bort** vid hover, ersatt av färgbyte. Kombineras **aldrig** med ikoner.
 
 ### Skillnad mot Action Link
 
 | Egenskap | Inline Link | Action Link |
 |---|---|---|
 | Placering | I löptext | Fristående |
-| Understrykning | Alltid | Hover only |
+| Understrykning | Enabled: ja. Hover: nej (tas bort) | Enabled: nej. Hover: ja (läggs till) |
 | Ikoner | Aldrig | Valfria (vänster/höger) |
 | `display` | `inline` | `inline-flex` |
 
+---
+
+### Storlekar
+
+#### Desktop (`md:`, 769px+)
+
+| Storlek | Typografi-token | Font-size | Line-height | Letter-spacing | Weight |
+|---|---|---|---|---|---|
+| **Large** | `body-lg` | 20px | 28px | 0px | 400 |
+| **Medium** | `body-md` | 16px | 24px | 0.32px | 400 |
+| **Small** | `body-sm` | 14px | 20px | 0.28px | 400 |
+| **Small Bold** | `body-sm` | 14px | 20px | 0.28px | **700** |
+
+#### Mobile / Tablet (`xs`/`sm`, ≤768px)
+
+| Storlek | Font-size | Line-height | Letter-spacing |
+|---|---|---|---|
+| **Large** | 18px | 24px | 0px |
+| **Medium** | 16px | 22px | 0.32px |
+| **Small / Small Bold** | 14px | 20px | 0.28px |
+
+---
+
+### Färgvarianter
+
+| Variant | Enabled-färg | Hover-färg |
+|---|---|---|
+| **Text Primary** | `#000000` (`text-action-primary`) | `#737373` (`text-action-primary-hover`) |
+| **Text Secondary** | `#4f4f4f` (`text-secondary`) | `#737373` (`text-action-secondary-hover`) |
+| **Text Tertiary** | `#737373` (`text-tertiary`) | `#939595` (`text-action-tertiary-hover`) |
+| **Text Primary Inverted** | `#ffffff` (`text-primary-inverted`) | `rgba(255,255,255,0.78)` (`text-action-primary-inverted-hover`) |
+
+---
+
 ### Tillstånd (States)
 
-| Tillstånd | Textfärg | Understrykning |
+| Tillstånd | Understrykning | Textfärg |
 |---|---|---|
-| **Enabled** | `#000000` (`text-action-primary`) | `text-decoration: underline` |
-| **Hover** | `#737373` (`text-action-secondary-hover`) | `text-decoration: underline` (behålls) |
-| **Enabled Inverted** | `#ffffff` (`text-primary-inverted`) | `text-decoration: underline` |
-| **Hover Inverted** | `rgba(255,255,255,0.78)` (`text-action-primary-inverted-hover`) | `text-decoration: underline` |
+| **Enabled** | `text-decoration: underline` | Per variant ovan |
+| **Hover** | `text-decoration: none` (tas bort) | Per variant ovan |
+| **Enabled Accordion Link** | `text-decoration: underline` | Som Text Primary |
+| **Hover Accordion Link** | `text-decoration: none` | Som Text Primary hover |
+
+> Transition: `color` med `duration-fast-3` (150ms) och `ease-standard`. `text-decoration` transiteras inte.
+
+---
+
+### font-feature-settings
+
+| Storlek | Värde |
+|---|---|
+| Large (`body-lg`) | `'ss02' 1, 'ss03' 1` |
+| Medium (`body-md`) | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+| Small / Small Bold (`body-sm`) | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+
+---
 
 ### CSS-mall
 
 ```css
 .inline-link {
-  color: #000000;          /* text-action-primary */
+  color: #000000;          /* text-action-primary — default */
   text-decoration: underline;
   font-family: 'Breuer Condensed', Arial, sans-serif;
   font-weight: 400;
@@ -3521,20 +3586,27 @@ Storlekar, färger och breakpoints är identiska med Action Link.
   transition: color 150ms cubic-bezier(.35,0,.35,1); /* duration-fast-3, ease-standard */
 }
 
+/* Hover — understrykning tas bort */
+.inline-link:hover { color: #737373; text-decoration: none; }
+
 /* Storlekar — desktop */
 .inline-link--large  { font-size: 20px; line-height: 28px; letter-spacing: 0px;    font-feature-settings: 'ss02' 1, 'ss03' 1; }
 .inline-link--medium { font-size: 16px; line-height: 24px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
 .inline-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
 
-/* Hover */
-.inline-link:hover { color: #737373; }
+/* Small Bold */
+.inline-link--small-bold { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-weight: 700; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.inline-link--small-bold:hover { color: #737373; text-decoration: none; }
 
-/* Inverted */
-.inline-link--inverted       { color: #ffffff; }
+/* Färgvarianter */
+.inline-link--secondary { color: #4f4f4f; }
+.inline-link--secondary:hover { color: #737373; }
+
+.inline-link--tertiary { color: #737373; }
+.inline-link--tertiary:hover { color: #939595; }
+
+.inline-link--inverted { color: #ffffff; }
 .inline-link--inverted:hover { color: rgba(255,255,255,0.78); }
-
-/* Bold-variant */
-.inline-link--bold { font-weight: 700; }
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -3546,10 +3618,16 @@ Storlekar, färger och breakpoints är identiska med Action Link.
 ### HTML-exempel
 
 ```html
-<!-- I löptext -->
+<!-- I löptext — Text Primary, Medium -->
 <p>Läs mer om våra produkter på
   <a href="#" class="inline-link inline-link--medium">produktsidan</a>.
 </p>
+
+<!-- Text Secondary -->
+<p>Se <a href="#" class="inline-link inline-link--medium inline-link--secondary">fullständiga villkor</a> för mer info.</p>
+
+<!-- Small Bold -->
+<a href="#" class="inline-link inline-link--small-bold">Läs mer</a>
 
 <!-- Inverted, i mörk kontext -->
 <p style="color:#fff">Kontakta oss via
@@ -3561,13 +3639,258 @@ Storlekar, färger och breakpoints är identiska med Action Link.
 
 ## Tile Link (ECO Design System)
 
-Används som **kort eller knapp** när länken behöver presenteras grafiskt och prominent — t.ex. varumärkeslogotyper som länkgrupp eller ikoner med text.
+**Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1671-53188
 
-Ska **inte** ersätta vanliga knappar eller länktyper i löptext.
+Används som **kort eller knapp** när länken behöver presenteras grafiskt och prominent — t.ex. varumärkeslogotyper som länkgrupp eller ikoner med text. Ska **inte** ersätta vanliga knappar eller länktyper i löptext.
+
+---
+
+### Varianter
+
+| Variant | Innehåll | Placering |
+|---|---|---|
+| **Brand** | Varumärkeslogotyp (bild) | Horizontal |
+| **Label + Icon** | Material Symbol (24px/20px) + textlabel | Vertical eller Horizontal |
+| **Label Only** | Textlabel utan ikon | Horizontal |
 
 ### Storlekar
 
-Två storlekar: **Large** och **Small**. Val beror på kontext och placering.
+| Storlek | Typ | Beskrivning |
+|---|---|---|
+| **Large** | Alla varianter | Större yta, tydligare hierarki |
+| **Small** | Label + Icon, Label Only | Kompakt yta |
+
+### Bakgrundsfärger
+
+| Färg | Bakgrund | Enabled border | Hover border |
+|---|---|---|---|
+| **White** | `#ffffff` (`surface-action-2`) | `#e5e5e5` (`border-primary`) | `#333333` (`border-hover`) |
+| **Grey** | `#f6f6f6` (`surface-raised-secondary`) | `#e5e5e5` (`border-primary`) | `#333333` (`border-hover`) |
+| **Black** | `#000000` (`surface-action-1`) | `#000000` (`border-action-1`) | `#000000` + white 20% overlay |
+
+---
+
+### Tillstånd (States)
+
+| Tillstånd | Border | Textfärg | Bakgrund |
+|---|---|---|---|
+| **Enabled** | `1px solid border-primary` (#e5e5e5) | `text-primary` (#000) | Per färgvariant |
+| **Hover** | `1px solid border-hover` (#333) | `text-action-primary-hover` (#737373) | Per färgvariant |
+| **Hover – Black** | `1px solid border-action-1` (#000) | Ikon/text förblir vit | `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), linear-gradient(#000,#000)` |
+
+> Bordern implementeras som ett absolut positionerat element (`inset: 0`) inuti tile-länken — inte som `border` på container-elementet direkt. Detta gör att bordern inte påverkar layoutens dimensioner.
+
+---
+
+### Mått per variant och breakpoint
+
+#### Brand
+
+| Version | Höjd | Padding (horisontell) | Logotyp |
+|---|---|---|---|
+| **Desktop Large** | 112px | `px-48px` | 48×99px |
+| **Mobile Large** | 80px | `px-32px` | 24×50px |
+
+#### Label + Icon — Desktop (`769px+`)
+
+| Storlek | Placering | Padding | Ikon | Gap |
+|---|---|---|---|---|
+| **Large** | Vertical | `px-16px py-10px` | 24px | `gap: 4px` |
+| **Large** | Horizontal | `px-16px py-8px` | 20px | `gap: 8px` |
+| **Small** | Vertical | `px-16px py-8px` | 24px | `gap: 4px` |
+| **Small** | Horizontal | `px-16px py-6px` | 20px | `gap: 8px` |
+
+#### Label + Icon — Mobile (`≤768px`)
+
+| Storlek | Placering | Padding | Ikon | Gap |
+|---|---|---|---|---|
+| **Large** | Vertical | `px-16px py-9px` | 24px | `gap: 4px` |
+| **Large** | Horizontal | `px-16px py-9px` | 20px | `gap: 4px` |
+| **Small** | Vertical | `px-8px py-6px` | 24px | `gap: 4px` |
+| **Small** | Horizontal | `px-8px py-6px` | 20px | `gap: 4px` |
+
+#### Label Only — Desktop (`769px+`)
+
+| Storlek | Padding |
+|---|---|
+| **Large** | `px-16px py-8px` |
+| **Small** | `px-16px py-6px` |
+
+#### Label Only — Mobile (`≤768px`)
+
+| Storlek | Padding |
+|---|---|
+| **Large** | `px-16px py-9px` |
+| **Small** | `px-8px py-6px` |
+
+---
+
+### Typografi
+
+| Storlek | Token | Desktop | Mobile | `font-feature-settings` |
+|---|---|---|---|---|
+| **Large** | `body-md` | 16px / 24px / 0.32px | 16px / 22px / 0.32px | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+| **Small** | `body-sm` | 14px / 20px / 0.28px | 14px / 20px / 0.28px | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+
+Textfärg Enabled: `text-primary` (#000). Textfärg Hover: `text-action-primary-hover` (#737373). Font: Breuer Condensed Regular.
+
+---
+
+### CSS-mall
+
+```css
+/* Tile Link — wrapper (ger rätt display-beteende) */
+.tile-link {
+  display: inline-flex;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Inner tile (borderns container) */
+.tile-link__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;           /* White — default */
+  transition: border-color 150ms cubic-bezier(.35,0,.35,1);
+}
+
+/* Vertikal placering */
+.tile-link--vertical .tile-link__inner { flex-direction: column; gap: 4px; }
+
+/* Horisontell placering */
+.tile-link--horizontal .tile-link__inner { flex-direction: row; }
+
+/* Border (absolut, påverkar inte layouten) */
+.tile-link__inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid #e5e5e5;    /* border-primary — Enabled */
+  pointer-events: none;
+  transition: border-color 150ms cubic-bezier(.35,0,.35,1);
+}
+
+/* Hover */
+.tile-link:hover .tile-link__inner::before { border-color: #333333; /* border-hover */ }
+
+/* Bakgrundsvarianter */
+.tile-link--grey .tile-link__inner  { background: #f6f6f6; }
+.tile-link--black .tile-link__inner { background: #000000; }
+.tile-link--black .tile-link__inner::before { border-color: #000000; }
+
+/* Hover Black — white 20% overlay */
+.tile-link--black:hover .tile-link__inner {
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2)),
+                    linear-gradient(90deg, #000, #000);
+}
+
+/* Label */
+.tile-link__label {
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 400;
+  color: #000000;                /* text-primary */
+  white-space: nowrap;
+  text-align: center;
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+
+  /* Large desktop */
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.32px;
+}
+.tile-link--small .tile-link__label { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; }
+
+/* Hover — label färg */
+.tile-link:hover .tile-link__label { color: #737373; /* text-action-primary-hover */ }
+
+/* Black variant — label alltid vit */
+.tile-link--black .tile-link__label { color: #ffffff; }
+.tile-link--black:hover .tile-link__label { color: #ffffff; }
+
+/* Ikon */
+.tile-link__icon {
+  font-size: 24px;               /* Large Vertical */
+  color: #000000;
+}
+.tile-link--horizontal .tile-link__icon { font-size: 20px; }
+.tile-link--small.tile-link--vertical .tile-link__icon { font-size: 24px; }
+.tile-link:hover .tile-link__icon { color: #737373; }
+.tile-link--black .tile-link__icon,
+.tile-link--black:hover .tile-link__icon { color: #ffffff; }
+
+/* Storlekar — Desktop */
+.tile-link--large.tile-link--vertical  .tile-link__inner { padding: 10px 16px; }
+.tile-link--small.tile-link--vertical  .tile-link__inner { padding: 8px 16px; }
+.tile-link--large.tile-link--horizontal .tile-link__inner { padding: 8px 16px; gap: 8px; }
+.tile-link--small.tile-link--horizontal .tile-link__inner { padding: 6px 16px; gap: 8px; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .tile-link__label { line-height: 22px; }     /* body-md mobile: 22px */
+
+  .tile-link--large.tile-link--vertical  .tile-link__inner { padding: 9px 16px; }
+  .tile-link--small.tile-link--vertical  .tile-link__inner { padding: 6px 8px; }
+  .tile-link--large.tile-link--horizontal .tile-link__inner { padding: 9px 16px; gap: 4px; }
+  .tile-link--small.tile-link--horizontal .tile-link__inner { padding: 6px 8px;  gap: 4px; }
+}
+
+/* Brand-variant */
+.tile-link--brand.tile-link--large .tile-link__inner {
+  height: 112px;
+  padding: 0 48px;
+}
+
+@media (max-width: 768px) {
+  .tile-link--brand.tile-link--large .tile-link__inner {
+    height: 80px;
+    padding: 0 32px;
+  }
+}
+```
+
+### HTML-exempel
+
+```html
+<!-- Label + Icon, Large, Vertical, White -->
+<a href="#" class="tile-link tile-link--large tile-link--vertical tile-link--white">
+  <div class="tile-link__inner">
+    <span class="material-symbols-outlined tile-link__icon">bolt</span>
+    <span class="tile-link__label">Elverk</span>
+  </div>
+</a>
+
+<!-- Label + Icon, Small, Horizontal, Grey -->
+<a href="#" class="tile-link tile-link--small tile-link--horizontal tile-link--grey">
+  <div class="tile-link__inner">
+    <span class="material-symbols-outlined tile-link__icon">search</span>
+    <span class="tile-link__label">Sök</span>
+  </div>
+</a>
+
+<!-- Label Only, Large, White -->
+<a href="#" class="tile-link tile-link--large tile-link--horizontal tile-link--white">
+  <div class="tile-link__inner">
+    <span class="tile-link__label">Elverk</span>
+  </div>
+</a>
+
+<!-- Brand, Large, White -->
+<a href="#" class="tile-link tile-link--brand tile-link--large tile-link--white">
+  <div class="tile-link__inner">
+    <img src="brand-logo.svg" alt="Björnkläder" style="height:48px;" />
+  </div>
+</a>
+
+<!-- Brand, Large, Black -->
+<a href="#" class="tile-link tile-link--brand tile-link--large tile-link--black">
+  <div class="tile-link__inner">
+    <img src="brand-logo-white.svg" alt="Björnkläder" style="height:48px;" />
+  </div>
+</a>
+```
 
 ---
 

@@ -1959,7 +1959,7 @@
       gap: 24px;
       box-shadow: var(--elevation-b-20);
     }
-    .fav-store__card-info { display: flex; flex-direction: column; gap: 16px; }
+    .fav-store__card-info { display: flex; flex-direction: column; }
     .fav-store__card-title {
       font-size: 20px;
       font-weight: 700;
@@ -1980,7 +1980,7 @@
       gap: 8px;
       align-items: center;
     }
-    .fav-store__status-dot { width: 8px; height: 8px; flex-shrink: 0; display: block; }
+    .fav-store__status-dot { width: 8px; height: 8px; flex-shrink: 0; display: block; border-radius: 50%; background: #248616; }
     .fav-store__status-row {
       display: flex;
       justify-content: space-between;
@@ -3823,11 +3823,15 @@
     }
     .upload-template-link { display: flex; align-items: center; gap: 6px; }
     .upload-template-link .ms { font-size: 20px; color: var(--color-text-tertiary); }
-    .upload-template-link a {
-      font-size: 16px; font-weight: 400; color: var(--color-text-secondary);
-      text-decoration: underline; line-height: 24px; letter-spacing: 0.32px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    .inline-link {
+      color: #000000; text-decoration: underline; cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-weight: 400;
+      transition: color 150ms cubic-bezier(.35,0,.35,1);
     }
+    .inline-link:hover { color: #737373; text-decoration: none; }
+    .inline-link--medium { font-size: 16px; line-height: 24px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+    .inline-link--secondary { color: #4f4f4f; }
+    .inline-link--secondary:hover { color: #737373; }
     .upload-file-chip {
       display: flex; align-items: center; gap: 8px; padding: 8px 12px;
       background: var(--color-surface-raised-secondary);
@@ -3994,7 +3998,7 @@
       .bankid-modal { padding: 16px; }
       .bankid-modal__title { font-size: 18px; line-height: 22px; }
       .upload-drawer-desc,
-      .upload-template-link a,
+      .inline-link--medium,
       .upload-file-chip__name,
       .upload-bankid-notice__text,
       .upload-skip-btn { line-height: 22px; }
@@ -4487,7 +4491,7 @@
             <p class="fav-store__card-title">Öppettider Borås</p>
             <div class="fav-store__info-group">
               <div class="fav-store__status">
-                <img class="fav-store__status-dot" src="images/status-dot.svg" alt="" />
+                <span class="fav-store__status-dot"></span>
                 <div class="fav-store__status-row">
                   <span>Öppet idag</span>
                   <span>06:30 - 17:00</span>
@@ -7291,7 +7295,7 @@
         </div>
         <div class="upload-template-link">
           <span class="ms">download</span>
-          <a href="#" onclick="return false">Ladda ner exempelmall</a> eller <a href="#" onclick="return false">Ladda ner befintlig tabell</a>
+          <a href="#" onclick="return false" class="inline-link inline-link--medium inline-link--secondary">Ladda ner exempelmall</a> eller <a href="#" onclick="return false" class="inline-link inline-link--medium inline-link--secondary">Ladda ner befintlig tabell</a>
           
         </div>
       </div>
