@@ -83,10 +83,10 @@
 
     /* ── VIEW 1: Kompakt ────────────────────────────────────────────────── */
     .view-compact {
-      padding: 32px;
+      padding: 40px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 0;
     }
 
     .cookie-title {
@@ -95,16 +95,17 @@
       font-weight: 700;
       line-height: 32px;
       color: var(--color-text-primary-inverted);
+      padding-bottom: 16px;
     }
 
     .cookie-text {
       font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0.32px;
+      line-height: 28px;
+      letter-spacing: 0px;
       color: var(--color-text-secondary-inverted);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
     }
 
     .cookie-action-row {
@@ -113,6 +114,7 @@
       gap: 8px;
       width: 100%;
       align-items: stretch;
+      margin-top: 32px;
     }
     .cookie-action-row .action-link { align-self: center; margin-top: 4px; }
 
@@ -442,7 +444,9 @@
     /* ── Mobile Base Styling — #modal-mobile (preview) ─────────────────── */
     #modal-mobile .cookie-title,
     #modal-mobile .settings-title { font-size: 22px; line-height: 24px; }
-    #modal-mobile .view-compact { padding: 24px; gap: 16px; }
+    #modal-mobile .view-compact { padding: 32px; gap: 0; }
+    #modal-mobile .cookie-text { font-size: 18px; line-height: 24px; padding-bottom: 0; }
+    #modal-mobile .cookie-action-row { margin-top: 24px; }
     #modal-mobile .settings-header { padding: 16px 24px; }
     #modal-mobile .cookie-categories { padding: 0 24px; }
     #modal-mobile .settings-footer { padding: 16px 24px 24px; }
@@ -628,7 +632,7 @@
     <!-- VIEW 1: Kompakt (hidden) -->
     <div class="view-compact" id="view-compact-mobile">
       <h2 class="cookie-title">Vi använder cookies</h2>
-      <p class="cookie-text" style="font-size:16px;line-height:22px;">Vi använder enhetsidentifierare för att anpassa innehållet och annonserna till användarna, tillhandahålla funktioner för sociala medier och analysera vår trafik.</p>
+      <p class="cookie-text">Vi använder enhetsidentifierare för att anpassa innehållet och annonserna till användarna, tillhandahålla funktioner för sociala medier och analysera vår trafik.</p>
       <div class="cookie-action-row">
         <button class="btn-full btn-full--primary" onclick="submitConsent('all')">Tillåt alla</button>
         <button class="btn-full btn-full--secondary" onclick="submitDecline()">Endast nödvändiga</button>
