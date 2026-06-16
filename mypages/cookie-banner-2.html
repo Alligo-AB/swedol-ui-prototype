@@ -368,9 +368,12 @@
 
     .footer-meta { padding: 4px 0 0; text-align: center; }
 
-    .inline-link {
+    .footer-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       color: var(--color-text-primary-inverted);
-      text-decoration: underline;
+      text-decoration: none;
       font-family: 'Breuer Condensed', Arial, sans-serif;
       font-size: 16px;
       font-weight: 400;
@@ -383,7 +386,9 @@
       transition: color var(--duration-fast-3) var(--ease-standard);
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
-    .inline-link:hover { color: var(--color-text-secondary-inverted); text-decoration: none; }
+    .footer-action-link:hover { color: var(--color-text-secondary-inverted); }
+    .footer-action-link:hover .footer-action-link__text { text-decoration: underline; }
+    .footer-action-link .ms { font-size: 20px; }
 
     .btn-full {
       display: flex;
@@ -491,7 +496,7 @@
         <button class="btn-full btn-full--primary" onclick="submitConsent('all')">Tillåt alla</button>
         <button class="btn-full btn-full--secondary" onclick="submitDecline()">Endast nödvändiga</button>
         <button class="action-link" onclick="openSettings('desktop')">
-          <span class="action-link__text">Avvisa eller anpassa</span>
+          <span class="action-link__text">Anpassa cookies</span>
           <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20;">chevron_right</span>
         </button>
       </div>
@@ -615,7 +620,7 @@
         <button class="btn-full btn-full--secondary" id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection" onclick="submitConsent('selection')">Spara mina val</button>
         <button class="btn-full btn-full--blank" id="CybotCookiebotDialogBodyButtonDecline" onclick="submitDecline()">Endast nödvändiga</button>
         <div class="footer-meta">
-          <button class="inline-link" onclick="goToCookieInfo()">Mer information om cookies</button>
+          <button class="footer-action-link" onclick="goToCookieInfo()"><span class="footer-action-link__text">Mer information om cookies</span><span class="ms">open_in_new</span></button>
         </div>
       </div>
 
@@ -637,7 +642,7 @@
         <button class="btn-full btn-full--primary" onclick="submitConsent('all')">Tillåt alla</button>
         <button class="btn-full btn-full--secondary" onclick="submitDecline()">Endast nödvändiga</button>
         <button class="action-link" onclick="openSettings('mobile')">
-          <span class="action-link__text">Avvisa eller anpassa</span>
+          <span class="action-link__text">Anpassa cookies</span>
           <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20;">chevron_right</span>
         </button>
       </div>
@@ -761,7 +766,7 @@
         <button class="btn-full btn-full--secondary" onclick="submitConsent('selection')">Spara mina val</button>
         <button class="btn-full btn-full--blank" onclick="submitDecline()">Endast nödvändiga</button>
         <div class="footer-meta">
-          <button class="inline-link" onclick="goToCookieInfo()">Mer information om cookies</button>
+          <button class="footer-action-link" onclick="goToCookieInfo()"><span class="footer-action-link__text">Mer information om cookies</span><span class="ms">open_in_new</span></button>
         </div>
       </div>
 
