@@ -57,6 +57,16 @@ Skriv **alltid** mobilstilen först (utan prefix), bygg sedan upp med `sm:`, `md
 2. **Inline i HTML** – all styling med Tailwind-klasser direkt i markup.
 3. **Komponenter** – knappar, typografi m.m. byter storlek vid `md:` (Desktop Small). Se komponent-sektionerna nedan.
 
+### Kvalitetskontroll — innan leverans
+
+**IMPORTANT:** Gå igenom denna lista innan en ny eller ändrad sida/komponent rapporteras som klar. Gäller alla sidor i projektet, inte bara enskilda features.
+
+1. **Brytpunkts-koll (viktigast)** — Verifiera att varje ny/ändrad komponent faktiskt växlar vid `769px` (`md`), inte vid `640px` (`sm`) eller någon annan gissad gräns. `sm` (640–768px) ska **alltid** se ut som mobil (Mobile Base Styling) — aldrig Desktop Base Styling. Anta aldrig att CSS:en är rätt bara för att den ser rimlig ut i koden: läs ut faktiska `getComputedStyle(...)`-värden (t.ex. via `javascript_tool` i Browser-panelen) vid minst tre bredder — en `xs` (~375px), en `sm` (~700px) och en `md`/`lg` (~1024px+) — innan du säger att det är klart.
+2. **Återanvänd befintliga tokens/mönster** — Sök i filen efter en komponent som redan löser samma sak (knappstorlekar, drawer-chrome, collapsible, checkbox, etc.) innan en ny CSS-klass skapas. Utöka hellre en befintlig klass än att bygga en parallell variant.
+3. **CSS-specificitet vid nästling** — När en ny komponent nästlas inuti en befintlig (t.ex. en ikon i en `.form-checkbox-item`-label), kontrollera att inga bredare regler (t.ex. `.form-checkbox-item span`) läcker igenom och stör typsnitt/färg på det nästlade elementet.
+4. **Spacing-dubblering** — Om flera element som redan har egen marginal/padding/border staplas i en flex/grid-container med `gap`, kontrollera att gapet inte adderas ovanpå elementens egen spacing.
+5. **Interaktion vid alla brytpunkter** — Testa öppna/stäng, hover, checkbox-/radioval etc. i minst mobil- och desktopbredd, inte bara ett fönsterläge, innan leverans.
+
 ---
 
 ## Knapp-styling (ECO Design System)
@@ -3383,6 +3393,7 @@ En klickbar länk med valfri vänster-ikon och höger-pil. Används för naviger
 - Länktexten är **inte** understruken i Enabled-läge — understrykning visas **enbart** vid hover.
 - Höger-ikon: `chevron_right` (Large: 24px, Medium/Small: 20px)
 - Vänster-ikon (valfri, t.ex. `file_download`): Large: 24px, Medium/Small: 20px
+- **IMPORTANT:** Ikoner får **aldrig** understrykning på hover — endast länktexten ska understrykas. Sätt `text-decoration: none` explicit på ikon-elementet (`.action-link .ms`), annars ärver ikonen `text-decoration: underline` från den hover:ade länken.
 
 ---
 
@@ -3462,6 +3473,9 @@ En klickbar länk med valfri vänster-ikon och höger-pil. Används för naviger
 
 /* Hover */
 .action-link:hover { color: #737373; text-decoration: underline; }
+
+/* Ikoner ska aldrig understrykas, bara länktexten */
+.action-link .ms { text-decoration: none; }
 
 /* Inverted (på mörk bakgrund) */
 .action-link--inverted       { color: #ffffff; }
@@ -4026,6 +4040,315 @@ Alla fills och strokes är bundna till variabler ur ECO Design System-samlingen 
 3. Bock-ikonen implementeras alltid som inline SVG `background-image` eller `<input type="checkbox">` + CSS – aldrig som `<img>` eller extern SVG-fil.
 4. Focus-ringen (`#455efb`, `outline-offset: 2px`) ska **alltid** visas vid tangentbordsnavigering (`:focus-visible`).
 5. `Disabled Selected`-state: grå ruta (`#595959`) + grå bock (`#939595`) – **inte** mörk bakgrund med vit bock (det är hover-selected-stilen).
+
+---
+
+## Breadcrumb (ECO Design System)
+
+**Figma – design:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1986-64264
+**Figma – responsivt utförande per breakpoint:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=9071-123361
+
+Breadcrumb används för att visa användarens position i sidhierarkin och möjliggöra snabb navigering uppåt i strukturen (t.ex. `Hem / Kategori / Undersida`). Placeras direkt under headern, som första element inuti sidans innehållswrapper (`.page`).
+
+### Används när
+- Sidan ligger mer än ett steg ner i navigationsträdet (PLP, PDP, landningssidor, kategorisidor).
+- Användaren behöver kunna backa till en överliggande nivå utan att använda webbläsarens tillbaka-knapp.
+
+### Används INTE när
+- Sidan är startsidan eller ligger direkt under Hem utan meningsfull mellannivå.
+- Navigeringen redan täcks av tabbar eller en tydlig tillbaka-länk i samma vy (undvik dubblering).
+
+---
+
+### Anatomi
+
+```
+[Hem]  /  [Mellansteg]  /  [Aktuell sida]
+```
+
+- Varje brödsmula renderas som en **kantad box** (`border: 1px solid` `border-action-3` = `rgba(0,0,0,0.10)`), aldrig som understruken text/länk.
+- Avskiljare mellan brödsmulor är ett `/`-tecken, centrerat i en fast bredd om `4px`.
+- Samtliga brödsmulor utom den sista är klickbara länkar (`Enabled`-stil). Den **sista** brödsmulan representerar aktuell sida (`Active`-stil) — fetstil, svart text, ej klickbar.
+- Komponenten har inbyggd vertikal spacing (padding) — se regel 1 nedan för hur det påverkar sektionen efter.
+
+---
+
+### Storlekar per breakpoint
+
+| Breakpoint | Höjd (bar) | Crumb-padding | Text | Avskiljare (höjd) | Container: horisontell padding | Container: extra bottom-padding |
+|---|---|---|---|---|---|---|
+| `xs` Mobil (0–639px) | 56px | `6px 7px` | 12px/12px, 0.24px | 24px | `var(--px-page)` (16px) | 0px |
+| `sm` Tablet (640–768px) | 56px | `6px 7px` | 12px/12px, 0.24px | 24px | `var(--px-page)` (32px) | 0px |
+| `md` Desktop Small (769–1023px) | 72px | `9px 10px` | 14px/14px, 0.28px | 32px | `var(--px-page)` (32px) | 8px |
+| `lg` / `xl` Desktop (1024px+) | 80px | `9px 10px` | 14px/14px, 0.28px | 32px | `var(--px-page)` (40px) | 16px |
+
+> `xs` och `sm` är identiska förutom horisontell sidmarginal. `md`, `lg` och `xl` delar samma crumb-/textstorlek — skillnaden är enbart hur mycket extra bottom-padding containern får utöver barens egna `16px` (top+bottom).
+> Använd **alltid** `var(--px-page)` (grid-marginalen per breakpoint) för horisontell padding — aldrig ett hårdkodat pixelvärde eller `var(--px-full)`, eftersom breadcrumben ligger inuti `.page` som redan är bredd-begränsad.
+
+---
+
+### Tillstånd (States)
+
+| Tillstånd | Border | Textfärg | Underline | Font-weight | Cursor |
+|---|---|---|---|---|---|
+| **Enabled** (ej sista) | `1px solid border-action-3` | `text-tertiary` (#737373) | Nej | Regular (400) | pointer |
+| **Hover** (ej sista) | `1px solid border-action-3` | `text-action-primary` (#000000) | **Ja** | Regular | pointer |
+| **Active** (sista/aktuell sida) | `1px solid border-action-3` | `text-primary` (#000000) | Nej | Bold (700) | default |
+
+> Hover byter **enbart** textfärg (till `text-action-primary`) och lägger till understrykning — boxens border och bakgrund (transparent) ändras inte.
+> `Active`-brödsmulan får **aldrig** hover-understrykning — den är inte klickbar och saknar `href`/klickhanterare.
+
+---
+
+### CSS-mall
+
+```css
+.breadcrumb { padding: 0 var(--px-page) 0; }
+.breadcrumb__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0;
+}
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border-action-3);
+  padding: 6px 7px;
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: 0.24px;
+  color: var(--color-text-tertiary);
+  font-feature-settings: 'ss02' 1, 'ss03' 1;
+  transition: color var(--duration-fast-3) var(--ease-standard);
+}
+.breadcrumb-item:hover {
+  color: var(--color-text-action-primary);
+  text-decoration: underline;
+}
+.breadcrumb-item--active {
+  font-weight: 700;
+  color: var(--color-text-primary);
+  cursor: default;
+}
+.breadcrumb-item--active:hover { text-decoration: none; }
+.breadcrumb-sep {
+  flex-shrink: 0;
+  width: 4px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.28px;
+}
+
+/* md: Desktop Small */
+@media (min-width: 769px) {
+  .breadcrumb { padding-bottom: 8px; }
+  .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+  .breadcrumb-sep { height: 32px; }
+}
+/* lg + xl: Desktop */
+@media (min-width: 1024px) {
+  .breadcrumb { padding-bottom: 16px; }
+}
+
+/* Komponenten har inbyggd spacing — nollställ top-paddingen på en direkt
+   efterföljande sektion/titelblock (se Section-regel 4 nedan). */
+.breadcrumb + .main-content,
+.breadcrumb + .section,
+.breadcrumb + .section--first {
+  padding-top: 0;
+}
+```
+
+### HTML-exempel
+
+```html
+<!-- 2 nivåer -->
+<nav class="breadcrumb" aria-label="Brödsmulor">
+  <div class="breadcrumb__bar">
+    <a href="#" class="breadcrumb-item">Hem</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Recensioner</span>
+  </div>
+</nav>
+
+<!-- Flera nivåer (PLP/PDP) -->
+<nav class="breadcrumb" aria-label="Brödsmulor">
+  <div class="breadcrumb__bar">
+    <a href="#" class="breadcrumb-item">Hem</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#" class="breadcrumb-item">Kläder och skydd</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#" class="breadcrumb-item">Arbetsbyxor</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Hantverksbyxor</span>
+  </div>
+</nav>
+```
+
+### Regler
+
+1. **IMPORTANT — Placering & spacing:** Breadcrumb placeras alltid direkt under headern, som första element i `.page`, **före** sidans titelblock (`.main-content`) eller första `.section`. Eftersom komponenten har inbyggd vertikal padding ska det direkt efterföljande elementet nollställa sin top-padding (`.breadcrumb + .main-content { padding-top: 0; }`) — enligt Section-komponentens regel om "Första sektionen med angränsande komponent med inbyggd spacing".
+2. **IMPORTANT — Horisontell padding:** Använd alltid `var(--px-page)`, aldrig `var(--px-full)` eller hårdkodade pixlar, eftersom breadcrumben ligger inuti den breddbegränsade `.page`-wrappern.
+3. Varje brödsmula är en **kantad box** — aldrig understruken länktext, aldrig ikon/chevron mellan stegen. Avskiljaren är alltid tecknet `/`.
+4. Endast den **sista** brödsmulan får `.breadcrumb-item--active` (fetstil, svart, `aria-current="page"`, ej klickbar/utan `href`). Alla föregående ska vara riktiga länkar (`<a>`).
+5. Storlek (crumb-padding, textstorlek, avskiljarhöjd) styrs enbart av breakpoint enligt tabellen ovan — hårdkoda aldrig en annan storlek för en enskild sida.
+6. `aria-label="Brödsmulor"` på `<nav>` samt `aria-current="page"` på den aktiva brödsmulan är obligatoriska för tillgänglighet.
+
+---
+
+## Pagination (ECO Design System)
+
+**Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=11614-537671
+
+Pagination används för att låta användaren ladda in fler resultat i en lista (recensioner, produkter, orderhistorik m.m.) utan sidladdning — ett "visa fler"-mönster, inte numrerad sidnavigering. Komponenten är smal och centrerad (`190px`, `max-width: 100%`) och placeras som sista element i en `.section`/lista, oavsett hur bred föräldern är.
+
+### Används när
+- En lista är för lång för att visa i sin helhet direkt och fler poster ska kunna laddas in stegvis.
+- Totalt antal poster är känt i förväg (behövs för räknartext + progressbar).
+
+### Används INTE när
+- Alla poster redan visas (dölj hela komponenten, se regel 3).
+- Sidan kräver traditionell numrerad sidnavigering (1, 2, 3 …) — det är ett annat mönster.
+
+---
+
+### Anatomi
+
+```
+Visar [X] av [Y] [enhet]
+[▬▬▬▬▬▬▬▬░░░░░░]              ← progressbar, 2px
+[      VISA FLER RESULTAT       ]  ← Secondary-knapp, md, full bredd av komponenten
+```
+
+### Mått
+
+| Egenskap | Värde |
+|---|---|
+| Total bredd | `190px` (`max-width: 100%`, centrerad) |
+| Gap: info-block → knapp | `24px` |
+| Gap: räknartext → progressbar | `16px` |
+| Progressbar höjd | `2px` |
+| Top-avstånd till innehållet ovanför | `24px` xs → `32px` sm → `40px` md/lg |
+| Bottom-avstånd | **Ingen egen** — se regel 1 |
+
+### Typografi & färger
+
+| Element | Token | Färg |
+|---|---|---|
+| Räknartext ("Visar X av Y …") | `body-md`: 16px/22px, 0.32px, Regular | `surface-60` (`#595959`) |
+| Progressbar — track | — | `surface-10` (`#e5e5e5`) |
+| Progressbar — fyllning | — | `surface-100` (`#000000`) |
+| Knapp | **Secondary**, storlek **md** (se Knapp-styling ovan) | border/text `border-action-1` / `text-action-primary` |
+
+---
+
+### CSS-mall
+
+```css
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 190px;
+  max-width: 100%;
+  margin: 24px auto 0; /* xs: top 24px */
+}
+.pagination[hidden] { display: none; }
+@media (min-width: 640px) { .pagination { margin-top: 32px; } } /* sm */
+@media (min-width: 769px) { .pagination { margin-top: 40px; } } /* md + lg/xl */
+
+.pagination__info { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+
+.pagination__count {
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0.32px;
+  color: var(--color-surface-60);
+  text-align: center;
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+
+.pagination__progress { width: 100%; height: 2px; background: var(--color-surface-10); position: relative; }
+.pagination__progress-bar {
+  position: absolute;
+  inset: 0;
+  width: 0%; /* sätts via JS: (synliga / totalt) * 100% */
+  background: var(--color-surface-100);
+  transition: width var(--duration-medium-2) var(--ease-standard);
+}
+
+.pagination__btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--color-border-action-1);
+  cursor: pointer;
+  padding: 8px;                    /* xs–sm: md-knapp mobil */
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  color: var(--color-text-action-primary);
+  font-feature-settings: 'ss02' 1, 'ss03' 1;
+  transition: background var(--duration-fast-3) var(--ease-standard);
+}
+.pagination__btn:hover { background: var(--color-surface-opacity-black-05); }
+@media (min-width: 769px) {
+  .pagination__btn { padding: 12px; font-size: 18px; line-height: 18px; letter-spacing: 0.18px; } /* md+: md-knapp desktop */
+}
+```
+
+### HTML-exempel
+
+```html
+<div class="pagination" id="pagination-produkter">
+  <div class="pagination__info">
+    <p class="pagination__count">Visar <span id="produkter-pagination-count">4</span> av 6 recensioner</p>
+    <div class="pagination__progress">
+      <div class="pagination__progress-bar" id="produkter-pagination-bar" style="width:66.6667%"></div>
+    </div>
+  </div>
+  <button type="button" class="pagination__btn" onclick="showMore('produkter', this)">Visa fler recensioner</button>
+</div>
+```
+
+```js
+function updatePagination(key, visible, total) {
+  document.getElementById(key + '-pagination-count').textContent = visible;
+  document.getElementById(key + '-pagination-bar').style.width = (total ? (visible / total) * 100 : 0) + '%';
+  document.getElementById('pagination-' + key).hidden = visible >= total; // inget mer att ladda
+}
+```
+
+### Regler
+
+1. **IMPORTANT — Ingen egen bottom-padding:** Komponenten placeras alltid som sista element i en `.section` (se Section-komponenten ovan). Sektionens egen bottom-padding (40/48/64/80px per breakpoint) ger redan rätt luft under — lägg **aldrig** till `padding-bottom`/`margin-bottom` på pagineringskomponenten själv, det skulle dubblera avståndet. Endast top-avståndet (24/32/40/40) hör till komponenten.
+2. Progressbarens fyllnadsbredd beräknas alltid dynamiskt som `(synliga / totalt) * 100%` via JS — hårdkoda aldrig ett fast procenttal utöver det initiala serverrenderade värdet.
+3. **Dölj hela komponenten** (`hidden`-attribut på ytterwrappern, inte bara knappen) när alla poster redan är laddade. Att bara gömma knappen lämnar en missvisande räknare/progressbar kvar.
+4. Knappen är alltid **Secondary, storlek md**, i full bredd av komponentens 190px-container — aldrig Primary eller annan storlek/variant.
+5. Komponentens bredd (`190px`, `max-width: 100%`) är fast och centrerad oavsett hur bred föräldersektionen är — sträck aldrig ut den till sektionens fulla bredd.
 
 ---
 
