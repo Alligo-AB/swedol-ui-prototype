@@ -4382,7 +4382,10 @@
     }
     .reviews-summary__cta { align-self: stretch; } /* xs: fyller bredden */
     @media (min-width: 640px) {
-      .reviews-summary__cta { align-self: flex-start; }
+      .reviews-summary__cta { align-self: flex-start; } /* sm: ännu ingen egen vänsterkolumn, hugger innehållet */
+    }
+    @media (min-width: 769px) {
+      .reviews-summary__cta { align-self: stretch; } /* md–xl: .reviews-sidebar är nu en egen vänsterkolumn — fyll dess bredd */
     }
 
     /* -- Rating bars (shared: summary + review card) ------------ */
