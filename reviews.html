@@ -4380,7 +4380,10 @@
     @media (min-width: 769px) {
       .reviews-summary__count { font-size: 18px; line-height: 22px; }
     }
-    .reviews-summary__cta { align-self: flex-start; }
+    .reviews-summary__cta { align-self: stretch; } /* xs: fyller bredden */
+    @media (min-width: 640px) {
+      .reviews-summary__cta { align-self: flex-start; }
+    }
 
     /* -- Rating bars (shared: summary + review card) ------------ */
     .rating-bars { display: flex; flex-direction: column; gap: 16px; width: 100%; }
