@@ -4329,6 +4329,11 @@
            .site-header__top (z-index:100) — utan den hamnar kortets topp
            (reviews-summary__top) dold bakom den svarta topbaren vid scroll. */
         top: calc(var(--header-top-h, 88px) + 24px);
+        /* Säkerställer att hela reviews-summary-kortet ryms/är nåbart även när
+           viewporten är kortare än kortets höjd — annars klipps botten (t.ex.
+           CTA-knappen) bort direkt när sidan börjar scrolla. */
+        max-height: calc(100vh - var(--header-top-h, 88px) - 48px);
+        overflow-y: auto;
       }
     }
     @media (min-width: 1024px) {
@@ -4386,6 +4391,20 @@
     /* -- Rating bars (shared: summary + review card) ------------ */
     .rating-bars { display: flex; flex-direction: column; gap: 16px; width: 100%; }
     .rbar-row { display: flex; align-items: center; gap: 16px; }
+    .rbar-row__label {
+      flex: 0 0 84px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 14px;
+      letter-spacing: 0.42px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    @media (min-width: 769px) {
+      .rbar-row__label { flex-basis: 96px; font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
+    }
     .rbar-row__track {
       flex: 1;
       height: 4px;
@@ -4415,24 +4434,14 @@
     @media (min-width: 769px) {
       .rbar-row__value { font-size: 16px; line-height: 16px; letter-spacing: 0.64px; }
     }
-    /* Distribution variant — star-count histogram (Figma: Rating Staplar, Larg Reality Check) */
-    .rating-bars--distribution { gap: 8px; }
-    .rating-bars--distribution .rbar-row__value { cursor: default; }
-    .rbar-row__star { display: flex; align-items: center; gap: 4px; flex: 0 0 28px; }
-    .rbar-row__star-num {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 14px;
-      letter-spacing: 0.42px;
-      text-transform: uppercase;
-      color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    .rbar-row__star .star-icon--filled { font-size: 14px; }
+    /* Compact variant used inside individual review cards */
+    .rating-bars--sm { gap: 12px; }
+    .rating-bars--sm .rbar-row__label { flex-basis: 76px; font-size: 12px; letter-spacing: 0.48px; }
+    .rating-bars--sm .rbar-row__value { font-size: 12px; letter-spacing: 0.48px; }
     @media (min-width: 769px) {
-      .rbar-row__star-num { font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
-      .rbar-row__star .star-icon--filled { font-size: 16px; }
+      /* Desktop: samma storlek (14/14) som i summary-kortet, gäller alla recensioner */
+      .rating-bars--sm .rbar-row__label { font-size: 14px; line-height: 14px; }
+      .rating-bars--sm .rbar-row__value { font-size: 14px; line-height: 14px; }
     }
 
     /* -- Toolbar: count + filter + sort --------------------------- */
@@ -4980,7 +4989,7 @@
                 <p class="reviews-summary__count">Baserat på 8&nbsp;411 betyg</p>
               </div>
 
-              <div class="rating-bars rating-bars--distribution" data-distribution="5720,1850,505,168,168"></div>
+              <div class="rating-bars" data-values="4.4,4.6,4.2,4.3,4.5"></div>
 
               <button type="button" class="rbtn rbtn--secondary reviews-summary__cta" onclick="openProductPickerDrawer()">Hitta produkt att recensera</button>
             </div>
@@ -5018,6 +5027,7 @@
                     </div>
                   </div>
                 </div>
+                <div class="rating-bars rating-bars--sm" data-values="4,5,3,5,5"></div>
                 <p class="review-card__text">Riktigt bra byxor för snickeriarbete. Många fickor och sitter skönt hela dagen.</p>
                 <div class="review-card__reply">
                   <p class="review-card__reply-title">Svar från Swedol</p>
@@ -5046,6 +5056,7 @@
                     </div>
                   </div>
                 </div>
+                <div class="rating-bars rating-bars--sm" data-values="5,5,4,4,5"></div>
                 <p class="review-card__text">Lätta och sitter bra, immar inte igen trots hög luftfuktighet i verkstaden.</p>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">2</span></button>
@@ -5069,6 +5080,7 @@
                     </div>
                   </div>
                 </div>
+                <div class="rating-bars rating-bars--sm" data-values="3,3,4,4,3"></div>
                 <p class="review-card__text">Håller värmen bra men greppet blir sämre när det är riktigt kallt. Okej för priset.</p>
                 <div class="review-card__reply">
                   <p class="review-card__reply-title">Svar från Swedol</p>
@@ -5097,6 +5109,7 @@
                     </div>
                   </div>
                 </div>
+                <div class="rating-bars rating-bars--sm" data-values="5,5,5,4,5"></div>
                 <p class="review-card__text">Stark motor och batterierna räcker hela dagen. Rekommenderas starkt till alla hantverkare.</p>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">6</span></button>
@@ -5120,6 +5133,7 @@
                     </div>
                   </div>
                 </div>
+                <div class="rating-bars rating-bars--sm" data-values="4,4,5,3,4"></div>
                 <p class="review-card__text">Håller tätt även vid ihållande regn. Något stel passform men fungerar utmärkt över arbetskläder.</p>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">0</span></button>
@@ -5143,6 +5157,7 @@
                     </div>
                   </div>
                 </div>
+                <div class="rating-bars rating-bars--sm" data-values="2,3,3,4,2"></div>
                 <p class="review-card__text">Skorna kändes sköna i affären men efter en vecka klämde tåhättan. Blev tvungen att byta storlek.</p>
                 <div class="review-card__reply">
                   <p class="review-card__reply-title">Svar från Swedol</p>
@@ -5186,7 +5201,7 @@
                 <p class="reviews-summary__count">Baserat på 1&nbsp;284 omdömen</p>
               </div>
 
-              <div class="rating-bars rating-bars--distribution" data-distribution="873,283,77,26,25"></div>
+              <div class="rating-bars" data-labels="Kundservice,Leverans,Sortiment,Enkelhet" data-values="4.5,4.3,4.6,4.4"></div>
 
               <button type="button" class="rbtn rbtn--secondary reviews-summary__cta" onclick="location.href='#'">Lämna ett omdöme om Swedol</button>
             </div>
@@ -6158,6 +6173,8 @@
        RATING LANDING PAGE (Recensioner)
     ══════════════════════════════════════════════════════════ */
     (function() {
+      var DIMENSIONS = ['Funktionalitet', 'Kvalitet', 'Prisvärd', 'Utseende', 'Sköna'];
+
       // -- Stars -------------------------------------------------
       function renderStars(el) {
         var rating  = parseFloat(el.dataset.rating || '0');
@@ -6172,25 +6189,22 @@
       }
       document.querySelectorAll('.stars[data-rating]').forEach(renderStars);
 
-      // -- Rating distribution (star-count histogram, e.g. summary sidebar) --
-      function renderRatingDistribution(el) {
-        var counts = el.dataset.distribution.split(',').map(Number); // [5-stjärnor, 4-stjärnor, ... 1-stjärna]
-        var max = Math.max.apply(null, counts) || 1;
-        var total = counts.reduce(function(sum, c) { return sum + c; }, 0) || 1;
+      // -- Rating bars (summary + review card) -------------------
+      function renderRatingBars(el) {
+        var labels = el.dataset.labels ? el.dataset.labels.split(',') : DIMENSIONS;
+        var values = el.dataset.values.split(',').map(Number);
         var html = '';
-        counts.forEach(function(count, i) {
-          var star = counts.length - i;
-          var pct = Math.max(0, Math.min(100, (count / max) * 100));
-          var share = Math.round((count / total) * 100);
+        values.forEach(function(v, i) {
+          var pct = Math.max(0, Math.min(100, (v / 5) * 100));
           html += '<div class="rbar-row">' +
-                    '<span class="rbar-row__star"><span class="rbar-row__star-num">' + star + '</span><span class="ms star-icon star-icon--filled">star</span></span>' +
+                    '<span class="rbar-row__label">' + (labels[i] || '') + '</span>' +
                     '<span class="rbar-row__track"><span class="rbar-row__fill" style="width:' + pct + '%"></span></span>' +
-                    '<span class="rbar-row__value" data-tooltip="' + share + ' % av betygen">' + count + '</span>' +
+                    '<span class="rbar-row__value">' + v + '</span>' +
                   '</div>';
         });
         el.innerHTML = html;
       }
-      document.querySelectorAll('.rating-bars[data-distribution]').forEach(renderRatingDistribution);
+      document.querySelectorAll('.rating-bars[data-values]').forEach(renderRatingBars);
 
       // -- Like / report actions ---------------------------------
       document.querySelectorAll('.js-like-action').forEach(function(btn) {
@@ -6207,118 +6221,6 @@
           btn.classList.add('review-action--active');
           countEl.textContent = parseInt(countEl.textContent, 10) + 1;
         });
-      });
-    })();
-
-    /* ── Row tooltip (position:fixed on body, decoupled from scroll container) ──
-       Adapterar placeringen (Top / Right side top / Left side top / mobil-Bottom)
-       efter tillgängligt utrymme i webbläsarfönstret och breakpoint — samma
-       mönster som mypages/users-dashboard.html. */
-    (function() {
-      var BEAK_HALF = 6.35; /* half the visual width of the CSS border-triangle */
-
-      var rowTip  = document.createElement('div');
-      rowTip.className = 'row-tooltip';
-      var tipText = document.createElement('span');
-      var beak    = document.createElement('span');
-      beak.className = 'row-tooltip__beak';
-      rowTip.appendChild(tipText);
-      rowTip.appendChild(beak);
-      /* Start off-screen so it doesn't flash at (0,0) on first paint */
-      rowTip.style.left = '-9999px';
-      rowTip.style.top  = '-9999px';
-      document.body.appendChild(rowTip);
-
-      function show(btn) {
-        var label = btn.dataset.tooltip;
-        if (!label) return;
-
-        /* 1. Update text while still hidden — dimensions reflect new content */
-        tipText.textContent = label;
-
-        /* 2. Read dimensions — always valid because visibility:hidden keeps element in layout */
-        var tw = rowTip.offsetWidth;
-        var th = rowTip.offsetHeight;
-
-        /* 3. Button position in viewport */
-        var r          = btn.getBoundingClientRect();
-        var btnCenterX = r.left + r.width / 2;
-        var vw         = window.innerWidth;
-
-        /* 4. ECO Design System page margin — både "får en centrerad tooltip plats?"-testet
-              och den slutgiltiga kant-clampningen (även på xs/sm) respekterar denna, så
-              tooltipen aldrig hamnar närmare skärmkanten än sidmarginalen.
-              lg (1024px+) = 40px, sm/md (640–1023px) = 32px, xs (<640px) = 16px */
-        var ecoMargin = vw >= 1024 ? 40 : vw >= 640 ? 32 : 16;
-
-        /* 5. Would a centred-top tooltip fit within the safe zone? */
-        var idealLeft = btnCenterX - tw / 2;
-        var fitsRight = idealLeft + tw <= vw - ecoMargin;
-        var fitsLeft  = idealLeft >= ecoMargin;
-
-        var left, top;
-
-        if (vw < 640) {
-          /* ── MOBILE (xs): always below button, beak points up ── */
-          beak.style.bottom       = '100%';
-          beak.style.top          = '';
-          beak.style.right        = '';
-          beak.style.borderBottom = '6px solid rgba(0,0,0,0.9)';
-          beak.style.borderTop    = '';
-          beak.style.borderLeft   = BEAK_HALF + 'px solid transparent';
-          beak.style.borderRight  = BEAK_HALF + 'px solid transparent';
-
-          top  = r.bottom + 8;
-          left = Math.max(ecoMargin, Math.min(btnCenterX - tw / 2, vw - tw - ecoMargin));
-
-        } else {
-          /* ── DESKTOP/TABLET: above button — Top / Right side top / Left side top ── */
-          beak.style.top          = '100%';
-          beak.style.bottom       = '';
-          beak.style.right        = '';
-          beak.style.borderTop    = '6px solid rgba(0,0,0,0.9)';
-          beak.style.borderBottom = '';
-          beak.style.borderLeft   = BEAK_HALF + 'px solid transparent';
-          beak.style.borderRight  = BEAK_HALF + 'px solid transparent';
-
-          top = r.top - th - 8;
-
-          if (fitsLeft && fitsRight) {
-            /* Top (default): centred above button */
-            left = idealLeft;
-          } else if (!fitsRight) {
-            /* Right side top: right-align tooltip with button right edge */
-            left = Math.max(ecoMargin, r.right - tw);
-          } else {
-            /* Left side top: left-align tooltip with button left edge */
-            left = Math.min(r.left, vw - tw - ecoMargin);
-          }
-        }
-
-        /* Beak: visual centre always tracks the button centre regardless of tooltip alignment */
-        var beakCenter        = btnCenterX - left;
-        var beakCenterClamped = Math.max(BEAK_HALF + 4, Math.min(beakCenter, tw - BEAK_HALF - 4));
-        beak.style.left = (beakCenterClamped - BEAK_HALF).toFixed(2) + 'px';
-
-        /* 6. Apply position then reveal */
-        rowTip.style.left       = Math.round(left) + 'px';
-        rowTip.style.top        = Math.round(top)  + 'px';
-        rowTip.style.visibility = 'visible';
-      }
-
-      function hide() {
-        rowTip.style.visibility = 'hidden';
-      }
-
-      document.addEventListener('mouseover', function(e) {
-        var btn = e.target.closest('[data-tooltip]');
-        if (btn) show(btn); else hide();
-      });
-
-      document.addEventListener('mouseout', function(e) {
-        var btn = e.target.closest('[data-tooltip]');
-        if (!btn) return;
-        if (!btn.contains(e.relatedTarget)) hide();
       });
     })();
 
