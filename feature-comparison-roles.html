@@ -715,13 +715,22 @@
        med ett sentinel-element avgör det ögonblicket — se initieringen
        längre ner, samma mönster som .drawer-header--elevated). Samma
        färg som .compare-divider--strong (dividern direkt under raden i
-       normalt flöde) så övergången känns sömlös. */
+       normalt flöde) så övergången känns sömlös.
+
+       padding-top ger whitespacet ovanför raden — enklare än en separat
+       margin-top/top-offset-gap (som då hade krävt att SAMMA extra värde
+       lades till manuellt på .compare-group__header:s top-offset också,
+       samt på de två IntersectionObserver-offsetsen för .is-stuck, se
+       nedan): padding räknas redan in automatiskt i --compare-header-row-h
+       (headerRow.offsetHeight, satt av measureCompareStickyOffsets()),
+       så resten av kedjan (grupprubrikernas stapling, is-stuck-gränsen)
+       följer med utan någon ytterligare justering. */
     .compare-header-row {
       display: flex;
       flex-direction: column;
       gap: 24px;
       width: 100%;
-      padding: 0 0 24px;
+      padding: 24px 0;
       box-sizing: border-box;
       position: sticky;
       top: var(--header-top-h, 0px);
@@ -732,7 +741,7 @@
     }
     .compare-header-row.is-stuck { border-bottom-color: var(--color-surface-40); }
     @media (min-width: 769px) {
-      .compare-header-row { flex-direction: row; align-items: flex-end; justify-content: space-between; padding: 0 16px 24px; }
+      .compare-header-row { flex-direction: row; align-items: flex-end; justify-content: space-between; padding: 24px 16px; }
     }
     .compare-header-row__label {
       display: none;
@@ -8408,29 +8417,20 @@
       }
     }
 
-    // Scrollar smidigt så att den SYNLIGA flikens rollhuvud-rad (och
-    // därmed den FÖRSTA gruppens rubrik direkt under den) hamnar i
-    // toppen av fönstret — så att om man klickat Nyckelfunktioner längst
-    // ner i tabellen, hamnar man ändå överst där översta
-    // .compare-group__header syns.
-    //
-    // Använder sentinel-elementet (.compare-sticky-sentinel, samma som
-    // .is-stuck-detekteringen längre ner) i stället för
-    // .compare-header-row:s EGEN position — headerraden är
-    // position:sticky och är, så fort man scrollat NÅGONSTANS inom
-    // tabellen, redan fastnaggad vid samma --header-top-h-position
-    // oavsett hur långt ner på sidan man faktiskt befinner sig.
-    // getBoundingClientRect().top på den fastnaggade raden ger då alltid
-    // (ungefär) samma värde, vilket gjorde målberäkningen ett no-op
-    // exakt när scroll behövdes som mest (längst ner i tabellen).
-    // Sentinel-elementet ligger däremot kvar i normalt dokumentflöde
-    // (inte sticky) och speglar därför alltid tabellens sanna,
-    // ostickyade position — oavsett aktuell scrollposition.
+    // Scrollar smidigt så att .compare-preamble:s underkant hamnar precis
+    // under sajtens sticky header — så att om man klickat Nyckelfunktioner
+    // långt ner i tabellen, hamnar man ändå överst med rollhuvud-raden
+    // (filter + roll-kolumner) och gruppernas rubriker synliga direkt
+    // under. Målar mot .compare-preamble (delad mellan flikarna, inte
+    // sticky) i stället för .compare-header-row:s sentinel — en kortare
+    // scrollsträcka som lämnar mer av rollhuvud-raden kvar i vy, istället
+    // för att skjuta hela vägen ner till att bara gruppernas rubriker
+    // syns.
     function scrollToVisibleCompareHeaderRow() {
-      var sentinel = document.querySelector('.compare-table:not([hidden]) .compare-sticky-sentinel[data-sentinel-for="header-row"]');
-      if (!sentinel) return;
+      var preamble = document.querySelector('.compare-preamble');
+      if (!preamble) return;
       var headerTopH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-top-h')) || 0;
-      var targetY = sentinel.getBoundingClientRect().top + window.scrollY - headerTopH;
+      var targetY = preamble.getBoundingClientRect().bottom + window.scrollY - headerTopH;
       window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
     }
 
