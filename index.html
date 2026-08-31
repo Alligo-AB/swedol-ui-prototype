@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Swedol – Användare</title>
+  <title>Swedol – Prototyp: Sidöversikt</title>
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
@@ -46,7 +46,7 @@
     body {
       font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
       font-feature-settings: 'ss02' 1, 'ss03' 1;
-      background: var(--color-background-secondary);
+      background: var(--color-background-primary);
       color: var(--color-text-primary);
       min-width: 320px;
     }
@@ -83,6 +83,7 @@
       --color-text-secondary-inverted:  rgba(255,255,255,0.78);
       --color-text-tertiary:            #737373;
       --color-text-tertiary-inverted:   #999999;
+      --color-text-action-primary:      #000000;
       --color-text-action-primary-inverted: #ffffff;
       --color-text-action-primary-inverted-hover: rgba(255,255,255,0.78);
       --color-text-disabled:            #939595;
@@ -143,6 +144,13 @@
       --color-border-disabled:      #dad9d7;
       --color-border-input-default: #939595;
       --color-border-focus:         #455efb;
+      --color-border-action-1:      #000000;
+      --color-border-action-2:      #ffffff;
+      --color-border-action-3:      rgba(0,0,0,0.10);
+      --color-border-information-weak: #d0e9ff;
+      --color-border-success-weak:     #daf6d0;
+      --color-border-warning-weak:     #ffe167;
+      --color-border-danger-weak:      #ffbdc0;
 
       /* ── Elevation / Shadows ────────────────────────────────── */
       --elevation-b-20:  0px 1px 3px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
@@ -211,6 +219,290 @@
     .page {
       max-width: 1280px;
       margin: 0 auto;
+    }
+    /* .page används INTE på den här sidan (ingen breadcrumb att slå in) —
+       .section-blocken nedan är fullbreddsblock precis som på övriga sidor
+       (se CLAUDE.md Section: "modulärt, återanvändbart fullbreddsblock"),
+       med bakgrundsfärgen ända ut till skärmkanten. De centrerar sitt eget
+       innehåll via --px-full (samma --max-w: 1200px som t.ex. users.html). */
+
+    /* ══════════════════════════════════════════════════════════
+       SECTION — ECO Design System
+       Modulärt, återanvändbart fullbreddsblock som representerar
+       en distinkt del av sidlayouten. Ger inbyggd vertikal padding
+       (justeras automatiskt per breakpoint) + valfri bakgrundsyta.
+       .section--first = reducerad top-padding för sidans första
+       sektion (t.ex. direkt under headern).
+       Docs: https://eco.supernova-docs.io/latest/components/components/section
+    ══════════════════════════════════════════════════════════ */
+    .section {
+      background: var(--color-surface-raised-primary);
+      padding: 32px var(--px-full) 40px; /* xs: top 32 / bottom 40 */
+    }
+    .section--secondary { background: var(--color-surface-raised-secondary); }
+    .section--first { padding-top: 16px; } /* xs: first section top 16 */
+
+    @media (min-width: 640px) { /* sm */
+      .section { padding-top: 48px; padding-bottom: 48px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 769px) { /* md */
+      .section { padding-top: 56px; padding-bottom: 64px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 1024px) { /* lg */
+      .section { padding-top: 72px; padding-bottom: 80px; }
+      .section--first { padding-top: 40px; }
+    }
+    @media (min-width: 1281px) { /* xl */
+      .section--first { padding-top: 48px; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       SITE INDEX — intern prototyp-sidöversikt (ej ECO-komponent)
+    ══════════════════════════════════════════════════════════ */
+    .site-index-intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .site-index-intro__eyebrow {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.56px;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .site-index-intro__title {
+      font-size: 28px;               /* headline-lg, mobil */
+      font-weight: 700;
+      line-height: 32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    @media (min-width: 769px) {
+      .site-index-intro__title { font-size: 36px; line-height: 40px; } /* headline-lg, desktop */
+    }
+    .site-index-intro__desc {
+      font-size: 18px;               /* body-lg, mobil */
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0px;
+      color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) {
+      .site-index-intro__desc { font-size: 20px; line-height: 28px; } /* body-lg, desktop */
+    }
+    .site-index-intro__desc code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      font-size: 0.9em;
+      background: var(--color-surface-10);
+      padding: 1px 5px;
+    }
+
+    .site-index-section__head { margin-bottom: 24px; }
+    .site-index-section__title {
+      font-size: 20px;               /* title-lg, mobil */
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--color-text-primary);
+      margin-bottom: 4px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    @media (min-width: 769px) {
+      .site-index-section__title { font-size: 24px; line-height: 28px; } /* title-lg, desktop */
+    }
+    .site-index-section__desc {
+      font-size: 16px;               /* body-md, mobil */
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-tertiary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) {
+      .site-index-section__desc { line-height: 24px; } /* body-md, desktop */
+    }
+
+    .site-index-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 640px) {
+      .site-index-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .site-index-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .site-index-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 20px;
+      border: 1px solid var(--color-border-primary);
+      background: var(--color-surface-raised-primary);
+      text-decoration: none;
+      transition: border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .site-index-card:hover { border-color: var(--color-border-dark); }
+    .site-index-card__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .site-index-card__tag-group {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .site-index-card__title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 20px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    /* Badge/Basic (ECO Design System, se CLAUDE.md ## Badge). Default = Neutral
+       Grey, Weaker, Medium, Sentence Case. Färgvarianter + Upper Case-modifier
+       nedan följer "Färgval — vanliga betydelser" i CLAUDE.md. */
+    .site-index-card__tag {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      background: var(--color-surface-05);
+      border: 1px solid var(--color-border-primary);
+      padding: 4px 5px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 14px;
+      letter-spacing: 0.56px;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    /* Letter Case: Upper Case — för fasta kategorietiketter (Inloggad/Utloggad),
+       inte statusetiketter. */
+    .site-index-card__tag--uppercase {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    /* Ny — nyskapad sida (Alert Success, Weaker) */
+    .site-index-card__tag--new {
+      background: var(--color-surface-success-weaker);
+      border-color: var(--color-border-success-weak);
+      color: var(--color-text-success);
+    }
+    /* Uppdaterad — befintlig sida med färska ändringar (Alert Info, Weaker) */
+    .site-index-card__tag--updated {
+      background: var(--color-surface-information-weaker);
+      border-color: var(--color-border-information-weak);
+      color: var(--color-text-information-default);
+    }
+    /* Pågående — ofärdigt arbete (Alert Warning, Weaker) */
+    .site-index-card__tag--wip {
+      background: var(--color-surface-warning-weaker);
+      border-color: var(--color-border-warning-weak);
+      color: var(--color-text-primary); /* ingen text-warning-default-token finns */
+    }
+    .site-index-card__desc {
+      flex: 1;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .site-index-card__desc code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      font-size: 0.9em;
+      background: var(--color-surface-10);
+      padding: 1px 4px;
+    }
+    .site-index-card__path {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       BREADCRUMB (ECO Design System)
+       Placeras alltid direkt under headern, som första element i
+       .page. Har inbyggd vertikal spacing — se sibling-regeln
+       längst ned, som nollställer top-paddingen på main-content/
+       section/section--first när de föregås av en breadcrumb.
+    ══════════════════════════════════════════════════════════ */
+    .breadcrumb { padding: 0 var(--px-page) 0; }
+    .breadcrumb__bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 0;
+    }
+    .breadcrumb-item {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--color-border-action-3);
+      padding: 6px 7px;
+      background: none;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 12px;
+      letter-spacing: 0.24px;
+      color: var(--color-text-tertiary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .breadcrumb-item:hover {
+      color: var(--color-text-action-primary);
+      text-decoration: underline;
+    }
+    .breadcrumb-item--active {
+      font-weight: 700;
+      color: var(--color-text-primary);
+      cursor: default;
+    }
+    .breadcrumb-item--active:hover { text-decoration: none; }
+    .breadcrumb-sep {
+      flex-shrink: 0;
+      width: 4px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-tertiary);
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.28px;
+    }
+    @media (min-width: 769px) {
+      .breadcrumb { padding-bottom: 8px; }
+      .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+      .breadcrumb-sep { height: 32px; }
+    }
+    @media (min-width: 1024px) {
+      .breadcrumb { padding-bottom: 16px; }
+    }
+    .breadcrumb + .main-content,
+    .breadcrumb + .section,
+    .breadcrumb + .section--first {
+      padding-top: 0;
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -585,6 +877,11 @@
       font-weight: 700;
       line-height: 24px;
       color: var(--black);
+      display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 4px;
+      padding-right: 8px;
+    }
+    .account-nav__name-role {
+      font-weight: 400; white-space: nowrap;
     }
     .account-nav__sub {
       font-size: 16px;
@@ -601,7 +898,7 @@
       flex: 1;
       min-width: 0;
       height: 48px;
-      padding: 0 40px;
+      padding: 0 32px;
       box-sizing: border-box;
     }
     .tab-bar {
@@ -780,6 +1077,122 @@
       .page-preamble { font-size: 20px; line-height: 28px; }
     }
 
+    /* Account stats */
+    .account-stats {
+      display: flex;
+      gap: 12px;
+      align-items: stretch;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: #ffffff;
+      box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+    /* TOTALT — spreads content top/bottom */
+    .stat-card--totalt {
+      flex: 1 0 0;
+      min-width: 0;
+      justify-content: space-between;
+    }
+    .stat-card--totalt .stat-card__top {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    /* Middle column: two compact cards stacked */
+    .stat-card-group {
+      flex: 1 0 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .stat-card--compact {
+      flex: 1;
+      gap: 12px;
+    }
+    /* SAKNAR WEBBKOPPLING */
+    .stat-card--info-card {
+      flex: 1 0 0;
+      min-width: 0;
+      gap: 12px;
+    }
+    .stat-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .stat-card__label {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 14px;
+      letter-spacing: 0.56px;
+      text-transform: uppercase;
+      color: #737373;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .stat-card__icon {
+      font-size: 20px;
+      color: #939595;
+      flex-shrink: 0;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .stat-card__icon--info { color: #0066ff; }
+    .stat-card__value {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 36px;
+      letter-spacing: 0px;
+      text-transform: uppercase;
+      color: #000000;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .stat-card__value--info { color: #0066ff; }
+    .stat-card__sub {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      color: #737373;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .stat-card__sub--info { color: #0066ff; }
+    .stat-card__sub .ms {
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .stat-card__bar {
+      height: 2px;
+      background: #e5e5e5;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card__bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: #000000;
+    }
+    .stat-card__bar-fill--info { background: #0066ff; }
+    @media (max-width: 768px) {
+      .account-stats { flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: flex-start; width: 100%; }
+      .stat-card--totalt { flex: 1 0 calc(50% - 4px); max-width: calc(50% - 4px); order: 1; }
+      .stat-card--info-card { flex: 1 0 calc(50% - 4px); max-width: calc(50% - 4px); order: 2; }
+      .stat-card-group { flex: 1 0 100%; flex-direction: row; order: 3; }
+      .stat-card--compact { flex: 1; }
+      .stat-card { padding: 12px; }
+      .stat-card__label { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
+      .stat-card__value { font-size: 28px; line-height: 28px; }
+    }
+
     /* Filter bar */
     .filter-bar {
       display: flex;
@@ -875,6 +1288,88 @@
     }
     .action-btn:hover {
       background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
+    }
+
+    /* Tooltip */
+    .tooltip-wrap {
+      position: relative;
+      display: inline-flex;
+    }
+    .tooltip {
+      position: absolute;
+      z-index: 1000;
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 100ms cubic-bezier(.35,0,.35,1);
+      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .tooltip::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 6.35px solid transparent;
+      border-right: 6.35px solid transparent;
+    }
+    .tooltip-wrap:hover .tooltip { opacity: 1; }
+    /* Bottom: tooltip below element, beak at top pointing up */
+    .tooltip--bottom {
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+    }
+    .tooltip--bottom::before {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom: 6px solid rgba(0,0,0,0.9);
+    }
+    /* Top: tooltip above element, beak at bottom pointing down */
+    .tooltip--top {
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+    }
+    .tooltip--top::before {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-top: 6px solid rgba(0,0,0,0.9);
+    }
+    /* Fixed tooltip for table row buttons — rendered on body, decoupled from scroll container */
+    .row-tooltip {
+      position: fixed;
+      z-index: 9999;
+      visibility: hidden;   /* hidden but always in layout — so offsetWidth/Height are always valid */
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      white-space: nowrap;
+      pointer-events: none;
+      padding: 8px 12px;
+      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .row-tooltip__beak {
+      position: absolute;
+      width: 0;
+      height: 0;
+      /* All border properties set by JS per placement — top/left/right variants differ */
     }
 
     /* Table */
@@ -1089,6 +1584,222 @@
       background: var(--surface-secondary); /* #f6f6f6 */
     }
 
+    /* ── Mobile / Tablet User Cards (xs + sm, max-width: 768px) ─── */
+    .users-mobile-cards {
+      display: none; /* shown via @media max-width:768px */
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .users-mobile-cards { gap: 16px; }
+    }
+
+    .user-card {
+      background: #fff;
+      border: 1px solid #f6f6f6;
+      box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.05), 0px 1px 3px 0px rgba(0,0,0,0.10);
+    }
+
+    .user-card__body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+    }
+
+    .user-card__header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .user-card__name {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 22px;
+      letter-spacing: 0px;
+      color: #000;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      white-space: nowrap;
+    }
+
+    .user-card__email {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 14px;
+      letter-spacing: 0.28px;
+      color: #4f4f4f;
+      text-decoration: underline;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
+    .user-card__access {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .user-card__checkbox-item {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      cursor: default;
+    }
+
+    .user-card__checkbox-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid #dad9d7;
+      background: #fff;
+      cursor: not-allowed;
+      flex-shrink: 0;
+      margin: 4px;
+    }
+
+    .user-card__checkbox-item input[type="checkbox"]:checked {
+      background-color: #e5e5e5;
+      border-color: #e5e5e5;
+      background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 8L6.5 12L13.5 4' stroke='%23939595' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .user-card__checkbox-label {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      color: #939595;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      white-space: nowrap;
+    }
+
+    /* Data section: shared grid + expand button */
+    .user-card__data-section {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    /* Two-column grid shared by Roll row and expanded detail rows */
+    .user-card__data-grid {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 16px;
+      row-gap: 0;
+      flex: 1;
+      min-width: 0;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: #000;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
+    .user-card__expand-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      flex-shrink: 0;
+      transition: background var(--duration-fast-3) var(--ease-standard);
+    }
+
+    .user-card__expand-btn:hover { background: rgba(0,0,0,0.05); }
+
+    .user-card__expand-icon {
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      transition: transform 200ms cubic-bezier(.35,0,.35,1);
+      display: block;
+    }
+
+    .user-card.is-open .user-card__expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .user-card__divider {
+      height: 1px;
+      background: #e5e5e5;
+      flex-shrink: 0;
+    }
+
+    /* Animated expand/collapse wrapper — spans full grid width */
+    .user-card__expanded-wrap {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: 0fr;
+      overflow: hidden;
+      margin-top: 0;
+      transition: grid-template-rows 200ms cubic-bezier(0.03, 0.61, 0.64, 0.96);
+    }
+
+    .user-card.is-open .user-card__expanded-wrap {
+      grid-template-rows: 1fr;
+      margin-top: 8px;
+      transition-duration: 150ms;
+      transition-timing-function: cubic-bezier(0.35, 0, 0.35, 1);
+    }
+
+    /* Inner expanded grid — min-height:0 required for 0fr to collapse fully */
+    .user-card__expanded {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
+      row-gap: 8px;
+      align-content: start;
+    }
+
+    .user-card__detail-label {
+      font-weight: 700;
+      white-space: nowrap;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+
+    .user-card__detail-value {
+      font-weight: 400;
+      min-width: 0;
+    }
+
+    .user-card__actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .user-card__actions-left {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .user-card__action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      color: #000;
+      transition: background var(--duration-fast-3) var(--ease-standard);
+    }
+
+    .user-card__action-btn:hover { background: rgba(0,0,0,0.05); }
+
     /* ── Logout confirm toast – knappar ─────────────────────── */
     /* Stäng × — Blank på ljus bakgrund */
     .logout-toast__close {
@@ -1173,41 +1884,63 @@
 
     /* ── Impersonation banner — Type: Banner, Emphasis: System Extra Strong, Status: Informational ── */
 
-    /* Wrapper: max-height: 0 + overflow: hidden = garanterad 0px höjd när dold */
+    /* Outer wrapper: fixed bottom, slides up when active */
     .impersonation-banner-wrap {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 350ms cubic-bezier(.16,0,.16,1); /* ease-decelerate-emphasized, medium-3 */
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 101;
+      transform: translateY(-100%);
+      transition: transform 350ms cubic-bezier(.16,0,.16,1);
+      pointer-events: none;
     }
     .impersonation-banner-wrap.is-visible {
-      max-height: 200px; /* generöst tak — faktisk höjd ~48px desktop / ~40px mobil */
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
+    /* Placeholder — reserves space so content is pushed down */
+    .impersonation-banner-placeholder {
+      display: none;
+      height: 40px;   /* matches min-height of banner body (mobile) */
+      flex-shrink: 0;
+    }
+    @media (min-width: 769px) {
+      .impersonation-banner-placeholder { height: 48px; }
+    }
+
+    /* When banner is active, show placeholder and shift sticky header down */
+    body.has-impersonation-banner .impersonation-banner-placeholder {
+      display: block;
+    }
+    body.has-impersonation-banner .site-header__top {
+      top: 40px;
+    }
+    @media (min-width: 769px) {
+      body.has-impersonation-banner .site-header__top { top: 48px; }
+    }
+
+    /* Inner banner */
     .impersonation-banner {
-      display: flex;
       width: 100%;
-      min-height: 48px;
       background: var(--color-surface-information-default); /* #0066ff */
-      box-shadow: var(--elevation-b-20);
-      align-items: center;
-      justify-content: center;
-      padding: 8px;
-      gap: 8px;
-      box-sizing: border-box;
-      opacity: 0;
-      transition: opacity 200ms var(--ease-standard) 150ms;
-    }
-    .impersonation-banner-wrap.is-visible .impersonation-banner {
-      opacity: 1;
+      box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
     }
 
-    /* Body: icon + message-group, centered on desktop */
+    /* Body: icon + message-group, left-aligned with LOGGA UT pushed right */
     .impersonation-banner__body {
-      flex: 1;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 8px;
+      padding: 8px 16px;
+      min-height: 40px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    @media (min-width: 769px) {
+      .impersonation-banner__body { min-height: 48px; }
     }
 
     .impersonation-banner__icon {
@@ -1217,11 +1950,13 @@
       flex-shrink: 0;
     }
 
-    /* Text + LOGGA UT side by side, gap 4px on desktop */
+    /* Text left, LOGGA UT pushed to the right */
     .impersonation-banner__text-group {
       display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: space-between;
+      flex: 1;
+      gap: 16px;
     }
 
     .impersonation-banner__text {
@@ -1257,6 +1992,7 @@
       padding: 0;
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
       transition: color var(--duration-fast-3) var(--ease-standard);
     }
@@ -1268,13 +2004,8 @@
 
     /* Mobile/Tablet (≤768px) */
     @media (max-width: 768px) {
-      .impersonation-banner {
-        min-height: 40px;
-        padding: 8px 16px;
-        align-items: flex-start;
-        justify-content: flex-start;
-      }
       .impersonation-banner__body {
+        padding: 8px 16px;
         align-items: flex-start;
         justify-content: flex-start;
       }
@@ -1642,7 +2373,7 @@
       gap: 24px;
       box-shadow: var(--elevation-b-20);
     }
-    .fav-store__card-info { display: flex; flex-direction: column; gap: 16px; }
+    .fav-store__card-info { display: flex; flex-direction: column; }
     .fav-store__card-title {
       font-size: 20px;
       font-weight: 700;
@@ -1663,7 +2394,7 @@
       gap: 8px;
       align-items: center;
     }
-    .fav-store__status-dot { width: 8px; height: 8px; flex-shrink: 0; display: block; }
+    .fav-store__status-dot { width: 8px; height: 8px; flex-shrink: 0; display: block; border-radius: 50%; background: #248616; }
     .fav-store__status-row {
       display: flex;
       justify-content: space-between;
@@ -2403,7 +3134,6 @@
     .drawer-save-btn__bankid-icon {
       width: 24px;
       height: 24px;
-      object-fit: contain;
       display: none;
       flex-shrink: 0;
     }
@@ -2421,6 +3151,241 @@
       background: var(--color-surface-disabled, #e5e5e5);
       color: var(--color-text-disabled, #939595);
       cursor: not-allowed;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       HUVUDMENY-DRAWER (ECO Design System)
+       Nivå 1 glider in från vänster; Nivå 2 glider in från höger
+       inuti samma drawer-container.
+    ══════════════════════════════════════════════════════════ */
+    .drawer-panel--left { left: 0; right: auto; transform: translateX(-100%); }
+    .drawer-panel--left.is-open { transform: translateX(0); box-shadow: var(--elevation-drawer-left); }
+
+    .menu-level {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
+      overflow: hidden;
+    }
+    .menu-level--2 { transform: translateX(100%); z-index: 2; }
+    .menu-level--2.is-active { transform: translateX(0); }
+    /* Nivå 2 trycker undan föregående nivå — den glider ut åt vänster samtidigt */
+    .menu-level--pushed { transform: translateX(-100%); }
+
+    .menu-drawer__logo { width: 100px; height: 20px; object-fit: contain; display: block; }
+
+    .menu-drawer__content {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 24px;
+    }
+    .menu-main-nav,
+    .menu-meta-nav,
+    .menu-level2-list { display: flex; flex-direction: column; }
+    .menu-main-nav { padding-top: 8px; }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 32px 8px 24px;   /* Mobil/Tablet */
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+    }
+    .menu-item:hover { background: var(--color-surface-navigation-hover); }
+    @media (min-width: 769px) {
+      .menu-item { padding-left: 32px; padding-right: 40px; } /* Desktop */
+    }
+    .menu-item__icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .menu-item__icon .ms { font-size: 28px; color: var(--color-text-tertiary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .menu-item__icon img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
+    .menu-item__label { flex: 1; min-width: 0; color: var(--color-text-primary); }
+    .menu-item__chevron { font-size: 24px; color: var(--color-text-primary); flex-shrink: 0; }
+
+    .menu-item--lg { height: 48px; padding-top: 0; padding-bottom: 0; }
+    .menu-item--lg .menu-item__label {
+      font-size: 20px;      /* Mobil/Tablet */
+      font-weight: 700;
+      line-height: 20px;
+      text-transform: uppercase;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    @media (min-width: 769px) {
+      .menu-item--lg .menu-item__label { font-size: 24px; line-height: 24px; } /* Desktop */
+    }
+
+    .menu-item--sm { padding-top: 4px; padding-bottom: 4px; }         /* Meta nav (utan ikon) */
+    .menu-item--sm:has(.menu-item__icon) { padding-top: 8px; padding-bottom: 8px; } /* Nivå 2-listor (med ikon) */
+    .menu-item--sm .menu-item__label {
+      padding: 5px 0;        /* inre "Text"-wrapper i Figma, utöver radens egen padding */
+      font-size: 16px;       /* body-md */
+      font-weight: 400;
+      line-height: 22px;     /* body-md Mobil */
+      letter-spacing: 0.32px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) {
+      .menu-item--sm .menu-item__label { line-height: 24px; } /* body-md Desktop */
+    }
+
+    .menu-store-select {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 56px;           /* Mobil/Tablet */
+      padding: 16px 32px 16px 24px;
+      flex-shrink: 0;
+      cursor: pointer;
+      background: #fff;
+      border: none;
+      border-top: 1px solid var(--color-border-secondary);
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+    .menu-store-select:hover { background: var(--color-surface-navigation-hover); }
+    .menu-store-select .ms { font-size: 24px; color: var(--color-text-primary); flex-shrink: 0; }
+    .menu-store-select__left {
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+    }
+    .menu-store-select__right {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .menu-store-select__label {
+      flex: 1;
+      min-width: 0;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) {
+      .menu-store-select { height: 72px; padding: 24px 40px 24px 32px; }
+      .menu-store-select__label { line-height: 24px; }
+    }
+
+    /* Nivå 2 — header med tillbaka-länk + titel */
+    .menu-level2__header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 32px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: box-shadow var(--duration-fast-3) var(--ease-standard);
+    }
+    .menu-level2__nav-row { display: flex; align-items: center; justify-content: space-between; }
+    .menu-level2__title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: 0.18px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+
+    /* -- Action Link (generic — används av tillbaka-länken i drawer-headers) -- */
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      color: var(--color-text-primary);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    /* text-decoration på en flex-container målas ut per flex-item (inkl. ikonen) —
+       understrykningen läggs därför på textspanet, aldrig på containern/ikonen. */
+    .action-link:hover { color: var(--color-text-tertiary); }
+    .action-link:hover .action-link__label { text-decoration: underline; }
+    .action-link .ms { font-size: 20px; }
+    @media (min-width: 769px) {
+      .action-link { line-height: 24px; }
+    }
+    /* Small — t.ex. tillbaka-länk i drawer-headers */
+    .action-link--small {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      gap: 4px;
+    }
+    .action-link--small .ms { font-size: 20px; }
+    .action-link--bold { font-weight: 700; }
+
+    /* ══════════════════════════════════════════════════════════
+       MALL-PLATSHÅLLARE — enbart för template.html, ej en riktig
+       designsystem-komponent. Visar tydligt var sidans CONTENT
+       ska in, avgränsat från header ovanför och footer/CTA nedanför.
+    ══════════════════════════════════════════════════════════ */
+    .template-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 280px;
+      width: 100%;
+      padding: 40px 24px;
+      border: 2px dashed var(--color-accent-dark);
+      background: var(--color-accent-light);
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .template-placeholder__icon {
+      font-size: 40px;
+      color: var(--color-accent-dark);
+    }
+    .template-placeholder__title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18px;
+      color: var(--color-text-primary);
+    }
+    .template-placeholder__desc {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-secondary);
+      max-width: 420px;
     }
 
     /* Form fields */
@@ -2444,6 +3409,16 @@
       white-space: nowrap;
     }
     .form-label__req { color: var(--color-text-danger-default); }
+    .form-label__optional {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;       /* body-md Desktop */
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0.32px;
+      text-transform: none;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      color: var(--color-text-primary);
+    }
 
     /* Input wrapper — provides focus ring via ::after */
     .input-wrap {
@@ -2728,6 +3703,7 @@
     .footer-copyright { padding: 24px 16px; }
 
     .form-row { flex-direction: column; }
+    .form-row--name { flex-direction: row; }
 
     /* xs/sm (max-width: 768px) – mobile: drawer component overrides */
     @media (max-width: 768px) {
@@ -2755,6 +3731,12 @@
         line-height: 14px;
         letter-spacing: 0.42px;
       }
+      /* Optional suffix — body-md Mobile: 14px/14px, 0.42px */
+      .form-label__optional {
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: 0.42px;
+      }
 
       /* Inputs & selects — Large Mobile: 40px, 8px padding, body-md mobile 16px/22px */
       .form-input,
@@ -2772,8 +3754,9 @@
         letter-spacing: 0.32px;
       }
 
-      /* form-row stays stacked on mobile */
+      /* form-row stays stacked on mobile, except name row */
       .form-row { flex-direction: column; gap: 16px; }
+      .form-row--name { flex-direction: row; gap: 16px; }
     }
 
     /* sm (min-width: 640px) – tablet */
@@ -3163,6 +4146,12 @@
       .site-header { display: none; }
     }
 
+    /* ── xs + sm (max-width: 768px): show cards, hide desktop table ── */
+    @media (max-width: 768px) {
+      .users-table-wrap { display: none; }
+      .users-mobile-cards { display: flex; }
+    }
+
     /* ── xs only (max-width: 639px) – mobile overrides ── */
     @media (max-width: 639px) {
       /* Bar1: 56px (8px padding + 40px buttons) */
@@ -3251,230 +4240,6 @@
       background: #e5e5e5;       /* border-primary */
     }
 
-    .col-sort-toggle-row { padding-top: 8px; } /* space-8 */
-
-    .col-toggle-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;                  /* space-8 */
-      cursor: pointer;
-    }
-
-    .col-toggle-switch {
-      position: relative;
-      display: inline-flex;
-      width: 32px;
-      height: 16px;
-      flex-shrink: 0;
-    }
-
-    .col-toggle-switch input[type="checkbox"] {
-      opacity: 0;
-      width: 0;
-      height: 0;
-      position: absolute;
-      appearance: none;
-      margin: 0;
-    }
-
-    .col-toggle-track {
-      position: absolute;
-      inset: 0;
-      background: #939595;       /* off: text-disabled */
-      border-radius: 19px;
-      transition: background var(--duration-fast-4) var(--ease-standard);
-    }
-
-    .col-toggle-track::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 12px;
-      height: 12px;
-      background: #ffffff;
-      border-radius: 50%;
-      transition: transform var(--duration-fast-4) var(--ease-standard);
-      box-shadow: 0px 4px 8px 0px rgba(48,49,51,0.10),
-                  0px 1px 1px 0px rgba(48,49,51,0.24),
-                  0px -1px 1px 0px rgba(0,0,0,0.03); /* elevation-input_control-switch */
-    }
-
-    .col-toggle-switch input:checked + .col-toggle-track {
-      background: #248616;       /* surface-success-default: on */
-    }
-
-    .col-toggle-switch input:checked + .col-toggle-track::after {
-      transform: translateX(16px);
-    }
-
-    .col-toggle-text {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;           /* body-sm */
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.28px;
-      color: #000000;            /* text-primary */
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       HUVUDMENY-DRAWER (ECO Design System)
-       Nivå 1 glider in från vänster; Nivå 2 glider in från höger
-       inuti samma drawer-container.
-    ══════════════════════════════════════════════════════════ */
-    .drawer-panel--left { left: 0; right: auto; transform: translateX(-100%); }
-    .drawer-panel--left.is-open { transform: translateX(0); box-shadow: var(--elevation-drawer-left); }
-
-    .menu-level {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
-      overflow: hidden;
-    }
-    .menu-level--2 { transform: translateX(100%); z-index: 2; }
-    .menu-level--2.is-active { transform: translateX(0); }
-    /* Nivå 2 trycker undan föregående nivå — den glider ut åt vänster samtidigt */
-    .menu-level--pushed { transform: translateX(-100%); }
-
-    .menu-drawer__logo { width: 100px; height: 20px; object-fit: contain; display: block; }
-
-    .menu-drawer__content {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      padding-bottom: 24px;
-    }
-    .menu-main-nav,
-    .menu-meta-nav,
-    .menu-level2-list { display: flex; flex-direction: column; }
-    .menu-main-nav { padding-top: 8px; }
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 8px 32px 8px 24px;   /* Mobil/Tablet */
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      width: 100%;
-      box-sizing: border-box;
-      text-align: left;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-    }
-    .menu-item:hover { background: var(--color-surface-navigation-hover); }
-    @media (min-width: 769px) {
-      .menu-item { padding-left: 32px; padding-right: 40px; } /* Desktop */
-    }
-    .menu-item__icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-    .menu-item__icon .ms { font-size: 28px; color: var(--color-text-tertiary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-    .menu-item__icon img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
-    .menu-item__label { flex: 1; min-width: 0; color: var(--color-text-primary); }
-    .menu-item__chevron { font-size: 24px; color: var(--color-text-primary); flex-shrink: 0; }
-
-    .menu-item--lg { height: 48px; padding-top: 0; padding-bottom: 0; }
-    .menu-item--lg .menu-item__label {
-      font-size: 20px;      /* Mobil/Tablet */
-      font-weight: 700;
-      line-height: 20px;
-      text-transform: uppercase;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    @media (min-width: 769px) {
-      .menu-item--lg .menu-item__label { font-size: 24px; line-height: 24px; } /* Desktop */
-    }
-
-    .menu-item--sm { padding-top: 4px; padding-bottom: 4px; }         /* Meta nav (utan ikon) */
-    .menu-item--sm:has(.menu-item__icon) { padding-top: 8px; padding-bottom: 8px; } /* Nivå 2-listor (med ikon) */
-    .menu-item--sm .menu-item__label {
-      padding: 5px 0;        /* inre "Text"-wrapper i Figma, utöver radens egen padding */
-      font-size: 16px;       /* body-md */
-      font-weight: 400;
-      line-height: 22px;     /* body-md Mobil */
-      letter-spacing: 0.32px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) {
-      .menu-item--sm .menu-item__label { line-height: 24px; } /* body-md Desktop */
-    }
-
-    .menu-store-select {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 56px;           /* Mobil/Tablet */
-      padding: 16px 32px 16px 24px;
-      flex-shrink: 0;
-      cursor: pointer;
-      background: #fff;
-      border: none;
-      border-top: 1px solid var(--color-border-secondary);
-      width: 100%;
-      box-sizing: border-box;
-      text-align: left;
-      position: relative;
-      z-index: 1;
-    }
-    .menu-store-select:hover { background: var(--color-surface-navigation-hover); }
-    .menu-store-select .ms { font-size: 24px; color: var(--color-text-primary); flex-shrink: 0; }
-    .menu-store-select__left {
-      display: flex;
-      align-items: flex-start;
-      gap: 4px;
-      flex: 1;
-      min-width: 0;
-    }
-    .menu-store-select__right {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      flex-shrink: 0;
-    }
-    .menu-store-select__label {
-      flex: 1;
-      min-width: 0;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 22px;
-      letter-spacing: 0.32px;
-      color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) {
-      .menu-store-select { height: 72px; padding: 24px 40px 24px 32px; }
-      .menu-store-select__label { line-height: 24px; }
-    }
-
-    /* Nivå 2 — header med tillbaka-länk + titel */
-    .menu-level2__header {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding: 24px 32px;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-      transition: box-shadow var(--duration-fast-3) var(--ease-standard);
-    }
-    .menu-level2__nav-row { display: flex; align-items: center; justify-content: space-between; }
-    .menu-level2__title {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 18px;
-      letter-spacing: 0.18px;
-      text-transform: uppercase;
-      color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
 
 
     /* ══════════════════════════════════════════════════════════
@@ -3482,15 +4247,329 @@
     ══════════════════════════════════════════════════════════ */
     /* Flyttad till partials/account-nav-drawer.html (CSS + HTML + JS, inkluderas via JS längre ner på sidan) */
 
+    /* ── Upload users drawer ─────────────────────────── */
+    .upload-drawer-desc {
+      font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: 0.32px;
+      color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .upload-dropzone {
+      border: 1.5px dashed var(--color-border-input-default);
+      background: var(--color-surface-raised-secondary);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; padding: 32px 24px; text-align: center;
+      cursor: pointer;
+      transition: border-color var(--duration-fast-3) var(--ease-standard),
+                  background var(--duration-fast-3) var(--ease-standard);
+    }
+    .upload-dropzone.is-dragging {
+      border-color: var(--color-border-focus);
+      background: var(--color-surface-information-weaker);
+    }
+    .upload-dropzone__icon {
+      font-size: 40px !important; color: var(--color-text-tertiary);
+      font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 40 !important;
+    }
+    .upload-dropzone__title {
+      font-size: 16px; font-weight: 700; color: var(--color-text-primary);
+      text-transform: uppercase; letter-spacing: 0.48px; line-height: 16px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1; margin-top: 4px;
+    }
+    .upload-dropzone__sub {
+      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
+      line-height: 20px; letter-spacing: 0.28px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .upload-dropzone__browse {
+      background: transparent; border: 1px solid #000; cursor: pointer;
+      padding: 6px 16px; font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px; font-weight: 700; line-height: 14px; letter-spacing: 0.56px;
+      text-transform: uppercase; color: #000; white-space: nowrap;
+      font-feature-settings: 'ss02' 1, 'ss03' 1; height: 32px;
+    }
+    .upload-dropzone__browse:hover { background: rgba(0,0,0,0.05); }
+    .upload-dropzone__formats {
+      font-size: 12px; color: var(--color-text-tertiary); font-weight: 400;
+      line-height: 18px; letter-spacing: 0.24px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .upload-template-link { display: flex; align-items: center; gap: 6px; }
+    .upload-template-link .ms { font-size: 20px; color: var(--color-text-tertiary); }
+    .inline-link {
+      color: #000000; text-decoration: underline; cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-weight: 400;
+      transition: color 150ms cubic-bezier(.35,0,.35,1);
+    }
+    .inline-link:hover { color: #737373; text-decoration: none; }
+    .inline-link--medium { font-size: 16px; line-height: 24px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+    .inline-link--secondary { color: #4f4f4f; }
+    .inline-link--secondary:hover { color: #737373; }
+    .upload-file-chip {
+      display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+      background: var(--color-surface-raised-secondary);
+      border: 1px solid var(--color-border-primary);
+    }
+    .upload-file-chip .ms { color: var(--color-text-tertiary); }
+    .upload-file-chip__name {
+      flex: 1; font-size: 16px; font-weight: 400; color: var(--color-text-primary);
+      line-height: 24px; letter-spacing: 0.32px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .upload-file-chip__remove {
+      background: transparent; border: none; cursor: pointer; padding: 2px;
+      display: flex; align-items: center; flex-shrink: 0;
+    }
+    .upload-file-chip__remove .ms { color: var(--color-text-tertiary); font-size: 18px; }
+    .upload-file-chip__remove:hover .ms { color: var(--color-text-primary); }
+    .upload-bankid-notice {
+      display: flex; align-items: flex-start; gap: 8px; padding: 12px;
+      background: var(--color-surface-information-weaker);
+      border: 1px solid #d0e9ff; border-left: 2px solid var(--color-surface-information-default);
+    }
+    .upload-bankid-notice .ms {
+      color: var(--color-surface-information-default); font-size: 20px; flex-shrink: 0; margin-top: 1px;
+    }
+    .upload-bankid-notice__text {
+      font-size: 16px; font-weight: 400; color: var(--color-text-primary);
+      line-height: 24px; letter-spacing: 0.32px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .upload-bankid-notice__text strong {
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.56px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1; font-size: 12px;
+    }
+    .upload-summary {
+      font-size: 14px; font-weight: 700; color: var(--color-text-secondary);
+      text-transform: uppercase; letter-spacing: 0.56px; line-height: 14px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .upload-table-scroll {
+      overflow-x: auto; border: 1px solid var(--color-border-primary);
+      max-height: 240px; overflow-y: auto;
+    }
+    .upload-preview-table {
+      width: 100%; border-collapse: collapse;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .upload-preview-table thead { position: sticky; top: 0; z-index: 1; }
+    .upload-preview-table thead th {
+      background: var(--color-accent-light); padding: 8px 12px; text-align: left;
+      font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.48px;
+      line-height: 12px; color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1; white-space: nowrap;
+      border-bottom: 1px solid var(--color-border-primary);
+    }
+    .upload-preview-table tbody tr:nth-child(even) { background: var(--color-surface-raised-secondary); }
+    .upload-preview-table tbody td {
+      padding: 8px 12px; border-bottom: 1px solid var(--color-border-secondary);
+      font-size: 14px; color: var(--color-text-primary); font-weight: 400;
+      line-height: 20px; letter-spacing: 0.28px; white-space: nowrap; vertical-align: middle;
+    }
+    .upload-preview-table tbody tr:last-child td { border-bottom: none; }
+    .upload-preview-table td.tc { text-align: center; }
+    .upload-footer-col { display: flex; flex-direction: column; gap: 12px; }
+    .upload-skip-btn {
+      background: transparent; border: none; cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: 0.32px;
+      color: var(--color-text-tertiary); text-decoration: underline;
+      text-align: center; padding: 0; width: 100%;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .upload-skip-btn:hover { color: var(--color-text-primary); }
+
+    /* ── BankID signing modal ─────────────────────────── */
+    .bankid-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 10000;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--duration-medium-2) var(--ease-standard);
+    }
+    .bankid-modal-overlay.is-open { opacity: 1; pointer-events: all; }
+    .bankid-modal {
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, calc(-50% + 12px));
+      z-index: 10001; background: #fff; width: 440px;
+      max-width: calc(100vw - 32px); padding: 24px;
+      box-shadow: var(--elevation-b-100);
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--duration-medium-2) var(--ease-decelerate-emphasized),
+                  transform var(--duration-medium-2) var(--ease-decelerate-emphasized);
+    }
+    .bankid-modal.is-open { opacity: 1; pointer-events: all; transform: translate(-50%, -50%); }
+    .bankid-modal__header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+    .bankid-modal__title {
+      flex: 1; font-size: 20px; font-weight: 700; line-height: 24px; letter-spacing: 0px;
+      color: #000; font-feature-settings: 'ss02' 1, 'ss03' 1; padding-top: 2px;
+    }
+    .bankid-modal__close {
+      background: transparent; border: none; cursor: pointer; padding: 2px; flex-shrink: 0;
+    }
+    .bankid-modal__close .ms { font-size: 20px; color: #000; }
+    .bankid-modal__body {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      text-align: center; padding-bottom: 32px;
+    }
+    .bankid-logo-large { width: 72px; height: 72px; object-fit: contain; }
+    .bankid-modal__desc {
+      font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: 0.32px;
+      color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .bankid-modal__desc strong { font-weight: 700; color: var(--color-text-primary); }
+    .bankid-modal__footer { display: flex; gap: 8px; align-items: center; }
+    .bankid-modal__cancel {
+      flex-shrink: 0; background: transparent; border: 1px solid #000; cursor: pointer;
+      padding: 6px 12px; font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px; font-weight: 700; line-height: 14px; letter-spacing: 0.56px;
+      text-transform: uppercase; color: #000; font-feature-settings: 'ss02' 1, 'ss03' 1;
+      height: 32px; white-space: nowrap;
+    }
+    .bankid-modal__cancel:hover { background: rgba(0,0,0,0.05); }
+    .bankid-modal__open-btn {
+      flex: 1; background: #000; border: none; cursor: pointer; height: 32px; padding: 6px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px; font-weight: 700; line-height: 14px; letter-spacing: 0.56px;
+      text-transform: uppercase; color: #fff;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .bankid-modal__open-btn:hover {
+      background-image: linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2)),
+                        linear-gradient(#000,#000);
+    }
+    .bankid-modal__open-btn img { width: 20px; height: 20px; object-fit: contain; }
+    .bankid-waiting {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 16px; padding: 8px 0 32px; text-align: center;
+    }
+    .bankid-spinner {
+      width: 36px; height: 36px;
+      border: 3px solid var(--color-border-primary);
+      border-top-color: var(--color-surface-information-default);
+      border-radius: 50%; animation: upload-spin 0.8s linear infinite;
+    }
+    @keyframes upload-spin { to { transform: rotate(360deg); } }
+    .bankid-waiting__label {
+      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
+      line-height: 20px; letter-spacing: 0.28px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .bankid-waiting__cancel-link {
+      background: transparent; border: none; cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
+      text-decoration: underline; letter-spacing: 0.28px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; padding: 0;
+    }
+    .bankid-waiting__cancel-link:hover { color: var(--color-text-primary); }
+    @media (max-width: 768px) {
+      .upload-dropzone { padding: 24px 16px; }
+      .bankid-modal { padding: 16px; }
+      .bankid-modal__title { font-size: 18px; line-height: 22px; }
+      .upload-drawer-desc,
+      .inline-link--medium,
+      .upload-file-chip__name,
+      .upload-bankid-notice__text,
+      .upload-skip-btn { line-height: 22px; }
+    }
+
+    /* ── Help guide drawer ───────────────────────────────── */
+    .page-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .page-title-row .page-title { margin-bottom: 0; }
+
+    .help-guide-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+    .help-guide-btn .ms { color: var(--color-text-tertiary); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .help-guide-btn:hover { background: rgba(0,0,0,0.05); }
+    .help-guide-btn:hover .ms { color: var(--color-text-primary); }
+
+    .help-section-label {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 14px;
+      letter-spacing: 0.56px;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+
+    .help-separator {
+      height: 1px;
+      background: var(--color-border-primary);
+    }
+
+    .help-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .help-item__icon-wrap {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .help-item__icon-wrap .ms { font-size: 24px; color: var(--color-text-primary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .help-item__icon-wrap--danger .ms { color: var(--color-text-danger-default); }
+
+    .help-item__text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 6px;
+    }
+
+    .help-item__title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 16px;
+      letter-spacing: 0.48px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+
+    .help-item__desc {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-tertiary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- ══ SITE HEADER (global partial) ════════════════════════════════════════════
+  <!-- ══ SITE HEADER (global partial) ═══════════════════════════
        Innehåll: mypages/partials/header.html — enda källan (single
        source of truth). Redigera ENDAST där; ändringen slår igenom
-       automatiskt i alla sidor som inkluderar partialen.
-  ════════════════════════════════════════════ -->
+       automatiskt i alla sidor som inkluderar partialen (för
+       närvarande template.html och mypages/mypages-template.html).
+  ════════════════════════════════════════════════════════════ -->
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
@@ -3500,464 +4579,193 @@
     })());
   </script>
 
+<!-- ══ CONTENT ═══════════════════════════════════════════════════
+     Detta är prototypens startsida — en intern sidöversikt/site-
+     map, inte en kundvänd startsida. Ingen breadcrumb (se CLAUDE.md
+     "Används INTE när: sidan är startsidan"). Inget .page-omslag —
+     sektionerna nedan är fullbreddsblock (se .page-kommentaren i
+     CSS:en ovan) och centrerar sitt eget innehåll via --px-full.
+════════════════════════════════════════════════════════════════ -->
+<section class="section section--first">
+  <div class="site-index-intro">
+    <p class="site-index-intro__eyebrow">Swedol UI-prototyp</p>
+    <h1 class="site-index-intro__title">Sidöversikt</h1>
+    <p class="site-index-intro__desc">Startpunkt för att navigera mellan alla sidor och komponenter i prototypen. Utgå alltid från en kopia av mallarna nedan när du bygger en ny sida — de har header/footer/huvudmeny via delade partials och alla design-tokens på plats. Fullständiga regler för komponenter, tokens och breakpoints finns i <code>CLAUDE.md</code>.</p>
+  </div>
+</section>
 
-  <!-- ══ ACCOUNT NAV ══════════════════════════════════════════ -->
-  <nav class="account-nav">
-    <!-- Profile -->
-    <div class="account-nav__profile">
-      <div class="avatar--lg">
-        <img src="images/stina-avatar-lg.png" alt="Stina Carlström" />
-      </div>
-      <div>
-        <div class="account-nav__name">Stina Carlström</div>
-        <div class="account-nav__sub">Kundnummer: 326920</div>
-      </div>
-    </div>
-
-    <!-- Tabs + overflow menu -->
-    <div class="tab-bar-wrap">
-      <div class="tab-bar">
-        <div class="tab-item">
-          <span class="tab-item__label">Översikt</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Mina Favoriter</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Adressbok</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item tab-item--active">
-          <span class="tab-item__label">Användare</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Ordervy</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Min Profil</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Fakturor</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Attestera</span>
-          <div class="tab-item__indicator"></div>
+<section class="section site-index-section">
+  <div class="site-index-section__head">
+    <h2 class="site-index-section__title">Mallar — börja alltid här</h2>
+    <p class="site-index-section__desc">Kopiera rätt mall beroende på om sidan kräver inloggning eller inte. Ta aldrig en befintlig sida som utgångspunkt.</p>
+  </div>
+  <div class="site-index-grid">
+    <a href="template.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Mall — Publik sida</span>
+        <div class="site-index-card__tag-group">
+          <span class="site-index-card__tag site-index-card__tag--updated">Uppdaterad</span>
+          <span class="site-index-card__tag site-index-card__tag--uppercase">Utloggad</span>
         </div>
       </div>
-      <div class="tab-more" id="tab-more">
-        <button class="tab-more__btn" id="tab-more-btn" aria-label="Fler alternativ" aria-expanded="false">
-          <span class="ms ms--24">more_vert</span>
-        </button>
-        <div class="tab-more__menu" id="tab-more-menu" hidden></div>
-      </div>
-    </div>
-
-    <!-- Right: company switch + notification -->
-    <div class="account-nav__right">
-      <div class="company-logo">
-        <img src="images/samhall-logo.png" alt="Samhall" style="width:80px;height:auto;display:block;" />
-      </div>
-      <button class="icon-btn icon-btn--sm" aria-label="Byt bolag">
-        <span class="ms" style="color:#000">sync_alt</span>
-      </button>
-      <div class="divider-v"></div>
-      <button class="icon-btn icon-btn--sm" aria-label="Notiser">
-        <span class="ms" style="color:#000">notifications</span>
-      </button>
-    </div>
-  </nav>
-
-<div class="page">
-
-  <!-- ══ MAIN CONTENT ═════════════════════════════════════════ -->
-  <main class="main-content">
-
-    <!-- Page title -->
-    <h1 class="page-title">Användare</h1>
-    <p class="page-preamble">Här återfinns de personer som är kopplade till kontot.</p>
-
-    <!-- Filter bar -->
-    <div class="filter-bar">
-      <div class="search-input">
-        <span class="ms">search</span>
-        <input type="text" placeholder="Sök användare" id="search-field" oninput="filterUsers(this.value)" />
-        <button class="search-clear" id="search-clear-btn" aria-label="Rensa sökning" style="display:none" onclick="var f=document.getElementById('search-field');f.value='';f.focus();this.style.display='none';filterUsers('');">
-          <span class="ms">cancel</span>
-        </button>
-      </div>
-
-      <div class="action-btns">
-        <button class="action-btn" aria-label="Inställningar för saldo" onclick="openSaldoDrawer()">
-          <span class="ms">savings</span>
-        </button>
-        <button class="action-btn" aria-label="Kolumninställningar" onclick="openColDrawer()">
-          <span class="ms">view_column</span>
-        </button>
-        <button class="action-btn" aria-label="Lägg till användare" onclick="openDrawer()">
-          <span class="ms">person_add</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Users Table -->
-    <div class="users-table-wrap">
-    <table class="users-table">
-      <thead>
-        <tr>
-          <th data-col="namn"><span class="sort-icon">Namn <span class="ms">unfold_more</span></span></th>
-          <th data-col="anstallningsnr"><span class="sort-icon">Anställnings nr <span class="ms">unfold_more</span></span></th>
-          <th data-col="saldo"><span class="sort-icon">Saldo <span class="ms">unfold_more</span></span></th>
-          <th data-col="kostnadsstalle"><span class="sort-icon">Kostnadsställe <span class="ms">unfold_more</span></span></th>
-          <th data-col="roll"><span class="sort-icon">Roll <span class="ms">unfold_more</span></span></th>
-          <th data-col="butik"><span class="sort-icon">Butik <span class="ms">unfold_more</span></span></th>
-          <th data-col="webb"><span class="sort-icon">Webb <span class="ms">unfold_more</span></span></th>
-          <th data-col="kategori" class="col-hidden"><span class="sort-icon">Kategori <span class="ms">unfold_more</span></span></th>
-          <th data-col="avdelning" class="col-hidden"><span class="sort-icon">Avdelning <span class="ms">unfold_more</span></span></th>
-          <th data-col="butikssaldo" class="col-hidden"><span class="sort-icon">Anv. butikssaldo <span class="ms">unfold_more</span></span></th>
-          <th data-col="skapnummer" class="col-hidden"><span class="sort-icon">Skåpnummer <span class="ms">unfold_more</span></span></th>
-          <th data-col="skapsection" class="col-hidden"><span class="sort-icon">Skåpsektion <span class="ms">unfold_more</span></span></th>
-          <th data-col="personnummer" class="col-hidden"><span class="sort-icon">Personnummer <span class="ms">unfold_more</span></span></th>
-          <th class="col-action"></th>
-          <th class="col-right-spacer"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div class="user-name">Alhan Selufi</div>
-            <div class="user-email">alhan.selufi@firmane.bolags.se</div>
-          </td>
-          <td><span>Standard</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Alexander Alpec</div>
-            <div class="user-email">alex.alpec@bolagsnamn.se</div>
-          </td>
-          <td><span>Administratör</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Alexander Alpín</div>
-            <div class="user-email">alexander.alpin@bolagsnamn.se</div>
-          </td>
-          <td><span>Firmatecknare</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Arangeera Korompilias</div>
-            <div class="user-email">aran.korompilias@bolagsnamn.se</div>
-          </td>
-          <td><span>Standard</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Anders Ajon</div>
-            <div class="user-email">anders.ajon@bolagsnamn.se</div>
-          </td>
-          <td><span>Standard</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Anders Dahl</div>
-            <div class="user-email">anders.dahl@bolagsnamn.se</div>
-          </td>
-          <td><span>Administratör</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Anders Ardhali</div>
-            <div class="user-email">anders.ardhali@bolagsnamn.se</div>
-          </td>
-          <td><span>Standard</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Anders Lau</div>
-            <div class="user-email">anders.lau@bolagsnamn.se</div>
-          </td>
-          <td><span>Standard</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Anders Liljerus</div>
-            <div class="user-email">anders.liljerus@bolagsnamn.se</div>
-          </td>
-          <td><span>Standard</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="user-name">Anders Spång</div>
-            <div class="user-email">anders.spang@bolagsnamn.se</div>
-          </td>
-          <td><span>Standard</span></td>
-          <td>Value</td>
-          <td>Value</td>
-          <td>Värde</td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="check-icon"><input type="checkbox" checked disabled /></td>
-          <td class="col-action"><div class="row-action-wrap"><div class="row-action-overlay"><button class="btn-row-action" aria-label="Ta bort"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">delete</span></button><button class="btn-row-action" aria-label="Byt konto"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">switch_account</span></button><button class="btn-row-action" aria-label="Redigera"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">edit</span></button></div><button class="btn-row-action" aria-label="Fler alternativ"><span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">more_horiz</span></button></div></td>
-        <td class="col-right-spacer"></td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-
-    <!-- Pagination -->
-    <div class="pagination-area">
-      <div class="pagination-inner">
-        <div class="pagination-top">
-          <p class="pagination-count">Visar 10 av 2010 Användare</p>
-          <div class="pagination-bar">
-            <div class="pagination-bar__track"></div>
-            <div class="pagination-bar__fill"></div>
-          </div>
-        </div>
-        <button class="show-more-btn">Visa fler användare</button>
-      </div>
-    </div>
-  </main>
-
-  <!-- ══ FAVOURITE STORE SECTION ═════════════════════════════ -->
-  <section class="fav-store-section">
-    <div class="fav-store">
-      <!-- Header -->
-      <div class="fav-store__header">
-        <h2 class="fav-store__title">Besök din hembutik i Borås</h2>
-        <p class="fav-store__desc">Besök din hembutik. Vi bjuder på kaffet! Det skulle vara ett stort nöje att välkomna dig till vår 5 200 m² butik i Borås! Där kan du kolla in verktygen vi saluför och vår kunniga personal är såklart redo att hjälpa dig.</p>
-      </div>
-      <!-- Image + Card -->
-      <div class="fav-store__body">
-        <div class="fav-store__image">
-          <img src="images/butik-boras.jpg" alt="Butik Borås" />
-        </div>
-        <div class="fav-store__card">
-          <div class="fav-store__card-info">
-            <p class="fav-store__card-title">Öppettider Borås</p>
-            <div class="fav-store__info-group">
-              <div class="fav-store__status">
-                <img class="fav-store__status-dot" src="images/status-dot.svg" alt="" />
-                <div class="fav-store__status-row">
-                  <span>Öppet idag</span>
-                  <span>06:30 - 17:00</span>
-                </div>
-              </div>
-              <div class="fav-store__hours">
-                <div class="fav-store__hours-row">
-                  <span class="fav-store__hours-day">Mån - Fre</span>
-                  <span class="fav-store__hours-time">06:30 - 17:00</span>
-                </div>
-                <div class="fav-store__hours-row">
-                  <span class="fav-store__hours-day">Lör - Sön</span>
-                  <span class="fav-store__hours-time">Stängt</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fav-store__card-actions">
-            <button class="fav-store__btn-primary">Besök butikssidan</button>
-            <button class="fav-store__btn-outline">
-              <span class="ms">directions</span>
-              Få vägbeskrivning
-            </button>
-          </div>
+      <p class="site-index-card__desc">Startpunkt för nya sidor som inte kräver inloggning. Vit sidbakgrund (<code>background-primary</code>).</p>
+      <span class="site-index-card__path">template.html</span>
+    </a>
+    <a href="mypages/mypages-template.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Mall — Mina sidor</span>
+        <div class="site-index-card__tag-group">
+          <span class="site-index-card__tag site-index-card__tag--updated">Uppdaterad</span>
+          <span class="site-index-card__tag site-index-card__tag--uppercase">Inloggad</span>
         </div>
       </div>
-    </div>
-  </section>
+      <p class="site-index-card__desc">Startpunkt för nya sidor under Mina sidor, med account-nav-tabbar. Grå sidbakgrund (<code>background-secondary</code>) som standard.</p>
+      <span class="site-index-card__path">mypages/mypages-template.html</span>
+    </a>
+  </div>
+</section>
 
-  <div class="page-divider"><div class="page-divider__line"></div></div>
-
-  <!-- ══ CONTACT SECTION ══════════════════════════════════════ -->
-  <section class="contact-section">
-    <div class="contact-card">
-      <!-- Left: Info -->
-      <div class="contact-info">
-        <div class="contact-info__header">
-          <h2 class="contact-info__title">Hur man kontaktar oss</h2>
-          <p class="contact-info__desc">Du är varmt välkommen att kontakta vår kundtjänst om du behöver hjälp med returer, reklamationer eller har övriga frågor kring ditt kundunika avtal.</p>
-        </div>
-
-        <div class="contact-links">
-          <span class="contact-link">
-            <span class="ms">chat</span>
-            Chatta
-          </span>
-          <div class="contact-divider-v"></div>
-          <span class="contact-link">
-            <span class="ms">mail</span>
-            kontakt@alligo.se
-          </span>
-          <div class="contact-divider-v"></div>
-          <span class="contact-link">
-            <span class="ms">phone_iphone</span>
-            020-71 20 10
-          </span>
-        </div>
-
-        <div class="avatars-group">
-          <div class="avatar--lg"><img src="images/kundtjanst-1.png" alt="Kundtjänst" /></div>
-          <div class="avatar--lg"><img src="images/kundtjanst-2.png" alt="Kundtjänst" /></div>
-          <div class="avatar--lg"><img src="images/kundtjanst-3.png" alt="Kundtjänst" /></div>
-        </div>
+<section class="section section--secondary site-index-section">
+  <div class="site-index-section__head">
+    <h2 class="site-index-section__title">Mina sidor — Användarhantering</h2>
+    <p class="site-index-section__desc">Flera parallella versioner under utveckling — <code>users.html</code> är den mest fullständiga/senaste.</p>
+  </div>
+  <div class="site-index-grid">
+    <a href="mypages/users.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Användare</span>
+        <span class="site-index-card__tag site-index-card__tag--new">Ny</span>
       </div>
-
-      <div class="contact-divider"></div>
-
-      <!-- Right: Collapsibles -->
-      <div class="collapsibles">
-        <div class="collapsible-wrap">
-          <div class="collapsible-item" onclick="toggleCollapsible(this)">
-            <div class="collapsible-item__left">
-              <span class="ms">schedule</span>
-              <span class="collapsible-item__label">Öppettider kundtjänst</span>
-            </div>
-            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
-          </div>
-          <div class="collapsible-item__content">
-            Måndag–fredag: 07:00–18:00<br>Lördag: 09:00–14:00<br>Söndag: Stängt
-          </div>
-        </div>
-        <div class="collapsible-wrap">
-          <div class="collapsible-item" onclick="toggleCollapsible(this)">
-            <div class="collapsible-item__left">
-              <span class="ms">perm_contact_calendar</span>
-              <span class="collapsible-item__label">Fler kontaktalternativ</span>
-            </div>
-            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
-          </div>
-          <div class="collapsible-item__content">
-            Chatt, e-post eller besök ett av våra varuhus. Vi finns här för att hjälpa dig.
-          </div>
-        </div>
-        <div class="collapsible-wrap">
-          <div class="collapsible-item" onclick="toggleCollapsible(this)">
-            <div class="collapsible-item__left">
-              <span class="ms">quiz</span>
-              <span class="collapsible-item__label">FAQ</span>
-            </div>
-            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
-          </div>
-          <div class="collapsible-item__content">
-            Hitta svar på de vanligaste frågorna om beställningar, leveranser och returer i vår FAQ.
-          </div>
-        </div>
-        <div class="collapsible-wrap">
-          <div class="collapsible-item" onclick="toggleCollapsible(this)">
-            <div class="collapsible-item__left">
-              <span class="ms">phone_callback</span>
-              <span class="collapsible-item__label">Ordna återuppringning</span>
-            </div>
-            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
-          </div>
-          <div class="collapsible-item__content">
-            Lämna ditt nummer så ringer vi upp dig inom 24 timmar under vardagar.
-          </div>
-        </div>
-        <div class="collapsible-wrap" style="border-bottom: none;">
-          <div class="collapsible-item" onclick="toggleCollapsible(this)">
-            <div class="collapsible-item__left">
-              <span class="ms">forum</span>
-              <span class="collapsible-item__label">Ge feedback</span>
-            </div>
-            <div class="collapsible-item__chevron"><span class="ms">expand_more</span></div>
-          </div>
-          <div class="collapsible-item__content">
-            Vi uppskattar din feedback! Berätta hur vi kan förbättra din upplevelse.
-          </div>
-        </div>
+      <p class="site-index-card__desc">Fullständig användartabell: filter, sök, kolumninställningar, saldo-hantering, lägg till/redigera/radera-drawers, mobilkort.</p>
+      <span class="site-index-card__path">mypages/users.html</span>
+    </a>
+    <a href="mypages/users-dashboard.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Användare — Dashboard-variant</span>
+        <span class="site-index-card__tag">Utkast</span>
       </div>
-    </div>
-  </section>
+      <p class="site-index-card__desc">Alternativt upplägg av användarsidan.</p>
+      <span class="site-index-card__path">mypages/users-dashboard.html</span>
+    </a>
+    <a href="mypages/users_V1.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Användare — V1</span>
+        <span class="site-index-card__tag">Arkiv</span>
+      </div>
+      <p class="site-index-card__desc">Tidigare version av användarsidan, sparad som referens.</p>
+      <span class="site-index-card__path">mypages/users_V1.html</span>
+    </a>
+    <a href="mypages/dashboard_test.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Min sida — Dashboard</span>
+        <span class="site-index-card__tag">Test</span>
+      </div>
+      <p class="site-index-card__desc">Experimentell översiktssida ("Min sida") för kontot.</p>
+      <span class="site-index-card__path">mypages/dashboard_test.html</span>
+    </a>
+    <a href="mypages/addressbook.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Adressbok</span>
+      </div>
+      <p class="site-index-card__desc">Hantering av företagets leverans- och faktureringsadresser.</p>
+      <span class="site-index-card__path">mypages/addressbook.html</span>
+    </a>
+  </div>
+</section>
 
-</div><!-- /.page -->
+<section class="section site-index-section">
+  <div class="site-index-section__head">
+    <h2 class="site-index-section__title">Jämförelse &amp; marknadsföring</h2>
+    <p class="site-index-section__desc">Publika sidor som marknadsför uppgradering/behörighetsnivåer.</p>
+  </div>
+  <div class="site-index-grid">
+    <a href="e-handelspartner.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Swedol som e-handelspartner</span>
+        <span class="site-index-card__tag site-index-card__tag--new">Ny</span>
+      </div>
+      <p class="site-index-card__desc">SaaS-liknande sida utan priser: fördelar för privatperson, företag och stora organisationer, med jämförelsetabell, EDI/Punchout-integration och FAQ.</p>
+      <span class="site-index-card__path">e-handelspartner.html</span>
+    </a>
+    <a href="feature-comparison-roles.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Jämför behörighetsnivåer</span>
+        <span class="site-index-card__tag site-index-card__tag--wip">Pågående</span>
+      </div>
+      <p class="site-index-card__desc">Ny version byggd sektion för sektion direkt från Figma-designen. Under uppbyggnad.</p>
+      <span class="site-index-card__path">feature-comparison-roles.html</span>
+    </a>
+    <a href="feature-comparison.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Jämför behörighetsnivåer — tidigare skiss</span>
+        <span class="site-index-card__tag">Arkiv</span>
+      </div>
+      <p class="site-index-card__desc">Äldre utforskande skiss av samma jämförelsesida, med hero + tabell-toggle.</p>
+      <span class="site-index-card__path">feature-comparison.html</span>
+    </a>
+    <a href="reviews.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Recensioner</span>
+        <span class="site-index-card__tag site-index-card__tag--updated">Uppdaterad</span>
+      </div>
+      <p class="site-index-card__desc">Produkt- och företagsrecensioner via Trustvoice.</p>
+      <span class="site-index-card__path">reviews.html</span>
+    </a>
+    <a href="reviews_backup.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Recensioner — backup</span>
+        <span class="site-index-card__tag">Arkiv</span>
+      </div>
+      <p class="site-index-card__desc">Sparad backup-version av recensionssidan.</p>
+      <span class="site-index-card__path">reviews_backup.html</span>
+    </a>
+  </div>
+</section>
 
-  <!-- ══ CTA BANNER ═══════════════════════════════════════════ -->
-  <section class="cta-banner">
-    <div class="cta-banner__text">
-      <h2 class="cta-banner__title">Ta steget – skapa företagskonto nu!</h2>
-      <p class="cta-banner__sub">Förenkla beställningar och följ upp alla inköp. Integrera e-handeln med ert system och handla var ni än är.</p>
-    </div>
-    <div class="cta-buttons">
-      <button class="btn-blank">Hitta närmaste butik</button>
-      <button class="btn-primary">Skapa företagskonto</button>
-    </div>
-  </section>
+<section class="section section--secondary site-index-section">
+  <div class="site-index-section__head">
+    <h2 class="site-index-section__title">Komponenter &amp; test</h2>
+  </div>
+  <div class="site-index-grid">
+    <a href="mypages/cookie-banner.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Cookie banner</span>
+      </div>
+      <p class="site-index-card__desc">Fristående test av cookie-bannerkomponenten.</p>
+      <span class="site-index-card__path">mypages/cookie-banner.html</span>
+    </a>
+    <a href="mypages/cookie-banner-2.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Cookie banner — variant 2</span>
+        <span class="site-index-card__tag">Test</span>
+      </div>
+      <p class="site-index-card__desc">Alternativt utförande av cookie-bannern.</p>
+      <span class="site-index-card__path">mypages/cookie-banner-2.html</span>
+    </a>
+  </div>
+</section>
 
-  <!-- ══ SITE FOOTER (global partial) ═════════════════════════════════
+<section class="section site-index-section">
+  <div class="site-index-section__head">
+    <h2 class="site-index-section__title">E-post</h2>
+  </div>
+  <div class="site-index-grid">
+    <a href="email/email.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Välkomstmail</span>
+      </div>
+      <p class="site-index-card__desc">HTML-mall för välkomstmejlet till nya kunder.</p>
+      <span class="site-index-card__path">email/email.html</span>
+    </a>
+  </div>
+</section>
+
+  <!-- ══ SITE FOOTER (global partial) ═══════════════════════════
        Innehåll: mypages/partials/footer.html — enda källan (single
        source of truth). Redigera ENDAST där; ändringen slår igenom
-       automatiskt i alla sidor som inkluderar partialen.
-  ════════════════════════════════════════════════════ -->
+       automatiskt i alla sidor som inkluderar partialen (för
+       närvarande template.html och mypages/mypages-template.html).
+  ════════════════════════════════════════════════════════════ -->
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
@@ -3967,265 +4775,15 @@
     })());
   </script>
 
-
-  <!-- Drawer overlay -->
-  <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
-
-  <!-- Drawer panel -->
-  <div id="drawer-panel" class="drawer-panel" role="dialog" aria-modal="true" aria-label="Lägg till ny användare">
-    <!-- Header -->
-    <div class="drawer-header">
-      <div class="drawer-header__content">
-        <h2 class="drawer-title">Lägg till ny användare</h2>
-      </div>
-      <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="Stäng">
-        <span class="ms">close</span>
-      </button>
-    </div>
-
-    <!-- Content -->
-    <div class="drawer-content">
-
-      <!-- Roll -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-roll">Roll</label>
-        <div class="input-wrap form-select-wrap">
-          <select class="form-select" id="drawer-roll">
-            <option>Standard</option>
-            <option>Administratör</option>
-          </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
-        </div>
-        <span class="form-helper">Här väljer du vilken roll du vill att din användare ska ha. Standard är den vanliga användarrollen.</span>
-      </div>
-
-      <!-- Åtkomst -->
-      <div class="form-field form-field--pt">
-        <div class="form-label">Åtkomst</div>
-        <div class="form-checkboxes">
-          <label class="form-checkbox-item">
-            <input type="checkbox" checked disabled />
-            <span>Handla via webb</span>
-          </label>
-          <label class="form-checkbox-item">
-            <input type="checkbox" id="checkbox-butik" />
-            <span>Handla i butik</span>
-          </label>
-        </div>
-        <span class="form-helper">Lägga till nya användare som får handla i butik kräver mobilt BankID av firmatecknare.</span>
-      </div>
-
-      <!-- Förnamn + Efternamn -->
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label" for="drawer-fornamn">Förnamn</label>
-          <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" placeholder=" " />
-          </div>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="drawer-efternamn">Efternamn</label>
-          <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" placeholder=" " />
-          </div>
-        </div>
-      </div>
-
-      <!-- Epost -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-epost">Epost</label>
-        <div class="input-wrap">
-          <input class="form-input" type="email" id="drawer-epost" autocomplete="email" placeholder=" " />
-        </div>
-      </div>
-
-      <!-- Mobilnummer -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-mobil">Mobilnummer</label>
-        <div class="input-wrap">
-          <input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " />
-        </div>
-      </div>
-
-      <!-- Anställnings nr -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-anstallning">Anställnings nr</label>
-        <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-anstallning" placeholder=" " disabled />
-        </div>
-      </div>
-
-      <!-- Kostnadsställe -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-kost">Kostnadsställe</label>
-        <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-kost" placeholder="-" />
-        </div>
-      </div>
-
-      <!-- Adressnummer -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-adress">Adressnummer</label>
-        <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-adress" placeholder="-" />
-        </div>
-      </div>
-
-      <!-- Aktivera Budget -->
-      <div class="form-field">
-        <label class="form-label" for="drawer-budget">Aktivera Budget</label>
-        <div class="input-wrap form-select-wrap">
-          <select class="form-select" id="drawer-budget">
-            <option>Inaktiv</option>
-            <option>Aktiv</option>
-          </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
-        </div>
-        <span class="form-helper">Inaktiv är standardvärdet. Välj aktiv om ni använder budget.</span>
-      </div>
-
-      <!-- Budget fields — visas enbart när "Aktiv" är valt -->
-      <div id="budget-fields" style="display:none; flex-direction:column; gap:24px;">
-
-        <!-- Årsbudget -->
-        <div class="form-field">
-          <label class="form-label" for="drawer-arsbudget">Årsbudget</label>
-          <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-arsbudget" placeholder="24 000.00 kr" />
-          </div>
-        </div>
-
-        <!-- Nuvarande saldo (disabled) -->
-        <div class="form-field">
-          <label class="form-label" for="drawer-saldo">Nuvarande saldo</label>
-          <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-saldo" value="12 000.00 kr" disabled />
-          </div>
-          <span class="form-helper form-helper--disabled">Era användare har ett fastställt saldo på 12 000.00 kr</span>
-        </div>
-
-        <!-- Lägg till saldo -->
-        <div class="form-field">
-          <label class="form-label" for="drawer-lagg-saldo">Lägg till saldo</label>
-          <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder="-" />
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="drawer-footer">
-      <button class="drawer-save-btn" id="drawer-save-btn" disabled>
-        <img class="drawer-save-btn__bankid-icon" src="https://www.figma.com/api/mcp/asset/43570c40-d9f2-44eb-99b4-85a13069104b" alt="" aria-hidden="true" />
-        Spara
-      </button>
-    </div>
-  </div>
-
-  <!-- Column settings drawer overlay -->
-  <div id="col-drawer-overlay" class="drawer-overlay" onclick="closeColDrawer()"></div>
-
-  <!-- Column settings drawer panel -->
-  <div id="col-drawer-panel" class="drawer-panel" role="dialog" aria-modal="true" aria-label="Inställningar för kolumner">
-    <div class="drawer-header" id="col-drawer-header">
-      <div class="drawer-header__content">
-        <h2 class="drawer-title">Inställningar för Kolumner</h2>
-      </div>
-      <button class="drawer-close-btn" onclick="closeColDrawer()" aria-label="Stäng">
-        <span class="ms">close</span>
-      </button>
-    </div>
-
-    <div class="drawer-content" id="col-drawer-content">
-      <p class="col-drawer-desc">Markera det innehåll du vill ska synas i tabellen.</p>
-      <div class="col-item-list" id="col-item-list"></div>
-      <div class="col-drawer-separator"></div>
-      <div class="col-sort-toggle-row">
-        <label class="col-toggle-label">
-          <span class="col-toggle-switch">
-            <input type="checkbox" id="col-drawer-toggle" />
-            <span class="col-toggle-track"></span>
-          </span>
-          <span class="col-toggle-text">Egen sortering av valt innehåll på sidan (Drag n Drop)</span>
-        </label>
-      </div>
-    </div>
-
-    <div class="drawer-footer">
-      <button class="drawer-save-btn" onclick="closeColDrawer()">Stäng</button>
-    </div>
-  </div>
-
-  <!-- Saldo settings drawer -->
-  <div id="saldo-drawer-overlay" class="drawer-overlay" onclick="closeSaldoDrawer()"></div>
-  <div id="saldo-drawer-panel" class="drawer-panel" role="dialog" aria-modal="true" aria-label="Inställningar för saldo">
-    <div class="drawer-header" id="saldo-drawer-header">
-      <div class="drawer-header__content">
-        <h2 class="drawer-title">Inställningar för saldo</h2>
-      </div>
-      <button class="drawer-close-btn" onclick="closeSaldoDrawer()" aria-label="Stäng">
-        <span class="ms">close</span>
-      </button>
-    </div>
-
-    <div class="drawer-content" id="saldo-drawer-content">
-      <p class="col-drawer-desc">Flytta dina användares saldo till 2025.</p>
-
-      <!-- Välj månad -->
-      <div class="form-field">
-        <label class="form-label" for="saldo-manad">Välj månad</label>
-        <div class="input-wrap form-select-wrap">
-          <select class="form-select" id="saldo-manad">
-            <option value="">Välj månad</option>
-            <option value="1">Januari</option>
-            <option value="2">Februari</option>
-            <option value="3">Mars</option>
-            <option value="4">April</option>
-            <option value="5">Maj</option>
-            <option value="6">Juni</option>
-            <option value="7">Juli</option>
-            <option value="8">Augusti</option>
-            <option value="9">September</option>
-            <option value="10">Oktober</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
-        </div>
-        <span class="form-helper">Här väljer du vilken månad år 2025 som ska gälla som start för överflyttningen.</span>
-      </div>
-
-      <!-- Aktivera överflyttning -->
-      <div class="form-field">
-        <label class="form-label" for="saldo-aktivera">Aktivera Överflyttning</label>
-        <div class="input-wrap form-select-wrap is-active">
-          <select class="form-select" id="saldo-aktivera">
-            <option value="aktiv" selected>Aktiv</option>
-            <option value="avaktivera">Avaktivera</option>
-          </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
-        </div>
-        <span class="form-helper">Aktivera eller avaktivera.</span>
-      </div>
-    </div>
-
-    <div class="drawer-footer">
-      <button class="drawer-save-btn" onclick="closeSaldoDrawer()">Spara</button>
-    </div>
-  </div>
-
-  <div class="tab-more__menu" id="tab-more-menu" hidden></div>
   <div class="nav-more__menu" id="nav-more-menu" hidden></div>
 
-  <!-- ══ MAIN MENU DRAWER (global partial) ════════════════════════════════
+  <!-- ══ MAIN MENU DRAWER (global partial) ═══════════════════════
        Innehåll: mypages/partials/main-menu.html — enda källan
        (single source of truth). Redigera ENDAST där; ändringen
        slår igenom automatiskt i alla sidor som inkluderar
-       partialen.
-  ════════════════════════════════════════════ -->
+       partialen (template.html, reviews.html och
+       mypages/mypages-template.html).
+  ════════════════════════════════════════════════════════════ -->
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
@@ -4249,7 +4807,6 @@
     })());
   </script>
 
-
   <script>
     /* ── Select active state ─────────────────────────────────── */
     document.querySelectorAll('.form-select-wrap .form-select').forEach(select => {
@@ -4259,19 +4816,6 @@
       });
     });
 
-    /* ── Budget fields toggle ─────────────────────────────────── */
-    const budgetSelect = document.getElementById('drawer-budget');
-    const budgetFields = document.getElementById('budget-fields');
-    if (budgetSelect && budgetFields) {
-      budgetSelect.addEventListener('change', () => {
-        const isActive = budgetSelect.value === 'Aktiv';
-        budgetFields.style.display = isActive ? 'flex' : 'none';
-      });
-    }
-
-    /* ── sm header: haka fast det gröna strecket på bar1 ────────
-       Observerar bar3. När bar3 scrollar förbi bar1 (dynamisk höjd)
-       läggs klassen sh-sm__bar1--accented till så border-bottom visas. */
     (function() {
       const bar1 = document.querySelector('.sh-sm__bar1');
       const bar3 = document.querySelector('.sh-sm__bar3');
@@ -4381,67 +4925,6 @@
     });
     document.addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
     document.addEventListener('touchstart', () => document.body.classList.remove('keyboard-nav'), { passive: true });
-
-    // ── Sticky tabell: högerställt innehåll + drag-scroll + skugga ──
-    (function() {
-      const wrap = document.querySelector('.users-table-wrap');
-      if (!wrap) return;
-
-      function update() {
-        const hasOverflow = wrap.scrollWidth > wrap.clientWidth;
-        const atStart = wrap.scrollLeft <= 0;
-
-        // Skugga på höger sticky kolumn: visa när Webb-innehållets högerkant är inom 16px från action-kolumnens vänsterkant
-        let webbNearAction = false;
-        const webbTd = wrap.querySelector('tbody td[data-col="webb"]');
-        const actionTd = wrap.querySelector('tbody td.col-action');
-        if (webbTd && actionTd) {
-          const webbRight = webbTd.getBoundingClientRect().right - 64; /* subtrahera padding-right */
-          const actionLeft = actionTd.getBoundingClientRect().left + 16; /* +16 för vänster padding */
-          webbNearAction = actionLeft - webbRight <= 16;
-        }
-
-        wrap.classList.toggle('has-overflow', hasOverflow);
-        wrap.classList.toggle('has-left-overflow', hasOverflow && !atStart);
-        wrap.classList.toggle('has-right-overflow', hasOverflow && webbNearAction);
-      }
-
-      function scrollToEnd() {
-        wrap.scrollLeft = wrap.scrollWidth - wrap.clientWidth;
-        update();
-      }
-
-      // Starta högerställt så att more_horiz syns
-      requestAnimationFrame(scrollToEnd);
-      window.addEventListener('resize', scrollToEnd);
-
-      // Drag-to-scroll
-      let isDragging = false;
-      let startX, scrollStart;
-
-      wrap.addEventListener('mousedown', function(e) {
-        if (e.target.closest('button, input, a, label')) return;
-        isDragging = true;
-        startX    = e.pageX;
-        scrollStart = wrap.scrollLeft;
-        wrap.classList.add('is-grabbing');
-        e.preventDefault();
-      });
-
-      document.addEventListener('mousemove', function(e) {
-        if (!isDragging) return;
-        wrap.scrollLeft = scrollStart - (e.pageX - startX);
-        update();
-      });
-
-      document.addEventListener('mouseup', function() {
-        if (!isDragging) return;
-        isDragging = false;
-        wrap.classList.remove('is-grabbing');
-      });
-
-      wrap.addEventListener('scroll', update, { passive: true });
-    })();
 
     // ── Tab overflow menu ──────────────────────────────────────
     (function() {
@@ -4609,83 +5092,6 @@
       window.addEventListener('resize', updateNavOverflow);
     })();
 
-    /* ── Huvudmeny-drawer ──────────────────────────────── */
-    function openMainMenuDrawer() {
-      document.getElementById('main-menu-overlay').classList.add('is-open');
-      document.getElementById('main-menu-panel').classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMainMenuDrawer() {
-      document.getElementById('main-menu-overlay').classList.remove('is-open');
-      document.getElementById('main-menu-panel').classList.remove('is-open');
-      document.body.style.overflow = '';
-      // Återställ till nivå 1 efter att stäng-animationen är klar
-      setTimeout(function() {
-        document.getElementById('menu-level-2').classList.remove('is-active');
-        document.getElementById('menu-level-1').classList.remove('menu-level--pushed');
-      }, 350);
-    }
-
-    function openMenuLevel2(title) {
-      if (title) document.getElementById('menu-level-2-title').textContent = title;
-      document.getElementById('menu-level-2').classList.add('is-active');
-      document.getElementById('menu-level-1').classList.add('menu-level--pushed');
-    }
-
-    function closeMenuLevel2() {
-      document.getElementById('menu-level-2').classList.remove('is-active');
-      document.getElementById('menu-level-1').classList.remove('menu-level--pushed');
-    }
-
-    // Öppnar huvudmeny-draweren direkt på nivå 2 (Produktsortiment) — utan att
-    // nivå 1 syns eller animeras emellan. Används av "Produktsortiment"-länken
-    // i globala toppmenyn.
-    function openProductPickerDrawer() {
-      var level1 = document.getElementById('menu-level-1');
-      var level2 = document.getElementById('menu-level-2');
-      var title  = document.getElementById('menu-level-2-title');
-      if (!level1 || !level2) return;
-
-      if (title) title.textContent = 'Produktsortiment';
-
-      // Stäng av transition tillfälligt så nivå-växlingen sker direkt (ingen
-      // synlig slide) — draweren ska visa Produktsortiment redan vid öppning.
-      level1.style.transition = 'none';
-      level2.style.transition = 'none';
-      level1.classList.add('menu-level--pushed');
-      level2.classList.add('is-active');
-      void level1.offsetHeight; // tvinga reflow innan transition återställs
-      level1.style.transition = '';
-      level2.style.transition = '';
-
-      openMainMenuDrawer();
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key !== 'Escape') return;
-      var mainMenuPanel = document.getElementById('main-menu-panel');
-      if (!mainMenuPanel || !mainMenuPanel.classList.contains('is-open')) return;
-      if (document.getElementById('menu-level-2').classList.contains('is-active')) {
-        closeMenuLevel2();
-      } else {
-        closeMainMenuDrawer();
-      }
-    });
-
-    // Huvudmeny-drawer har två nivåer, var och en med egen header + scrollbart innehåll
-    [
-      ['#menu-level-1 .drawer-header', '#menu-level-1 .menu-drawer__content'],
-      ['#menu-level-2-header', '#menu-level-2-content']
-    ].forEach(function(pair) {
-      var header  = document.querySelector(pair[0]);
-      var content = document.querySelector(pair[1]);
-      if (!header || !content) return;
-      content.addEventListener('scroll', function() {
-        header.classList.toggle('drawer-header--elevated', content.scrollTop > 0);
-      });
-    });
-
     function handleNewsletterInput(value) {
       document.getElementById('newsletter-clear-btn').style.display = value ? 'block' : 'none';
     }
@@ -4765,6 +5171,12 @@
       siteHeaderTop.style.borderBottomColor = navVisible ? '#232500' : '#c7d300';
     }
 
+    // Init --header-top-h for sticky banner
+    document.documentElement.style.setProperty('--header-top-h', siteHeaderTop.offsetHeight + 'px');
+    window.addEventListener('resize', function() {
+      document.documentElement.style.setProperty('--header-top-h', siteHeaderTop.offsetHeight + 'px');
+    });
+
     window.addEventListener('scroll', () => {
       const y       = window.scrollY;
       const topBarH = siteHeaderTop.offsetHeight;
@@ -4792,695 +5204,84 @@
       lastY = y;
     }, { passive: true });
 
-    /* ── Drawer save / dirty-state ───────────────────────────── */
-    const DRAWER_FIELD_IDS = [
-      'drawer-fornamn', 'drawer-efternamn', 'drawer-epost',
-      'drawer-mobil', 'drawer-roll',
-      'drawer-budget', 'drawer-arsbudget', 'drawer-lagg-saldo'
-    ];
 
-    let drawerSnapshot = {};
-
-    function getDrawerValues() {
-      const vals = {};
-      DRAWER_FIELD_IDS.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) vals[id] = el.value;
-      });
-      return vals;
-    }
-
-    function isDrawerDirty() {
-      const current = getDrawerValues();
-      return DRAWER_FIELD_IDS.some(id => current[id] !== drawerSnapshot[id]);
-    }
-
-    function updateSaveBtn() {
-      document.getElementById('drawer-save-btn').disabled = !isDrawerDirty();
-    }
-
-    function snapshotDrawer() {
-      drawerSnapshot = getDrawerValues();
-      document.getElementById('drawer-save-btn').disabled = true;
-    }
-
-    function openDrawer() {
-      document.getElementById('drawer-overlay').classList.add('is-open');
-      document.getElementById('drawer-panel').classList.add('is-open');
+    /* ── Huvudmeny-drawer ─────────────────────────────────────── */
+    function openMainMenuDrawer() {
+      document.getElementById('main-menu-overlay').classList.add('is-open');
+      document.getElementById('main-menu-panel').classList.add('is-open');
       document.body.style.overflow = 'hidden';
-      snapshotDrawer();
     }
 
-    function closeDrawer() {
-      document.getElementById('drawer-overlay').classList.remove('is-open');
-      document.getElementById('drawer-panel').classList.remove('is-open');
+    function closeMainMenuDrawer() {
+      document.getElementById('main-menu-overlay').classList.remove('is-open');
+      document.getElementById('main-menu-panel').classList.remove('is-open');
       document.body.style.overflow = '';
+      // Återställ till nivå 1 efter att stäng-animationen är klar
+      setTimeout(function() {
+        document.getElementById('menu-level-2').classList.remove('is-active');
+        document.getElementById('menu-level-1').classList.remove('menu-level--pushed');
+      }, 350);
     }
 
-    /* Drawer header elevation on content scroll — gäller alla drawers */
-    (function() {
-      document.querySelectorAll('.drawer-panel').forEach(function(panel) {
-        const header  = panel.querySelector('.drawer-header');
-        const content = panel.querySelector('.drawer-content');
-        if (!header || !content) return;
+    function openMenuLevel2(title) {
+      if (title) document.getElementById('menu-level-2-title').textContent = title;
+      document.getElementById('menu-level-2').classList.add('is-active');
+      document.getElementById('menu-level-1').classList.add('menu-level--pushed');
+    }
 
-        function updateElevation() {
-          header.classList.toggle('drawer-header--elevated', content.scrollTop > 0);
-        }
+    function closeMenuLevel2() {
+      document.getElementById('menu-level-2').classList.remove('is-active');
+      document.getElementById('menu-level-1').classList.remove('menu-level--pushed');
+    }
 
-        content.addEventListener('scroll', updateElevation, { passive: true });
+    // Öppnar huvudmeny-draweren direkt på nivå 2 (Produktsortiment) — utan att
+    // nivå 1 syns eller animeras emellan. Används av "Produktsortiment"-länken
+    // i globala toppmenyn.
+    function openProductPickerDrawer() {
+      var level1 = document.getElementById('menu-level-1');
+      var level2 = document.getElementById('menu-level-2');
+      var title  = document.getElementById('menu-level-2-title');
+      if (!level1 || !level2) return;
 
-        new MutationObserver(function() {
-          if (panel.classList.contains('is-open')) requestAnimationFrame(updateElevation);
-        }).observe(panel, { attributeFilter: ['class'] });
-      });
-    })();
+      if (title) title.textContent = 'Produktsortiment';
 
-    /* Listen for changes on all drawer fields */
-    DRAWER_FIELD_IDS.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const evt = (el.tagName === 'SELECT') ? 'change' : 'input';
-      el.addEventListener(evt, updateSaveBtn);
-    });
+      // Stäng av transition tillfälligt så nivå-växlingen sker direkt (ingen
+      // synlig slide) — draweren ska visa Produktsortiment redan vid öppning.
+      level1.style.transition = 'none';
+      level2.style.transition = 'none';
+      level1.classList.add('menu-level--pushed');
+      level2.classList.add('is-active');
+      void level1.offsetHeight; // tvinga reflow innan transition återställs
+      level1.style.transition = '';
+      level2.style.transition = '';
 
-    /* ── Column settings drawer ──────────────────────────── */
-    (function() {
-      var COLS = [
-        { key: 'webb',           label: 'Webb',               fixed: true,  visible: true  },
-        { key: 'butik',          label: 'Butik',              fixed: true,  visible: true  },
-        { key: 'roll',           label: 'Roller',             fixed: true,  visible: true  },
-        { key: 'anstallningsnr', label: 'Anställningsnummer', fixed: false, visible: true  },
-        { key: 'saldo',          label: 'Saldo',              fixed: false, visible: true  },
-        { key: 'kostnadsstalle', label: 'Kostnadsställe',     fixed: false, visible: true  },
-        { key: 'kategori',       label: 'Kategori',           fixed: false, visible: false },
-        { key: 'avdelning',      label: 'Avdelning',          fixed: false, visible: false },
-        { key: 'butikssaldo',    label: 'Använd butikssaldo', fixed: false, visible: false },
-        { key: 'skapnummer',     label: 'Skåpnummer',         fixed: false, visible: false },
-        { key: 'skapsection',    label: 'Skåpsektion',        fixed: false, visible: false },
-        { key: 'personnummer',   label: 'Personnummer',       fixed: false, visible: false },
-        { key: 'namn',           label: 'Namn',               fixed: true,  visible: true  },
-      ];
-
-      /* Tag tbody tds with data-col and inject hidden placeholder cells */
-      var table = document.querySelector('.users-table');
-      if (table) {
-        var existingKeys = ['namn', 'roll', 'anstallningsnr', 'saldo', 'kostnadsstalle', 'butik', 'webb'];
-        var extraKeys    = ['kategori', 'avdelning', 'butikssaldo', 'skapnummer', 'skapsection', 'personnummer'];
-        table.querySelectorAll('tbody tr').forEach(function(row) {
-          var tds = row.querySelectorAll('td');
-          existingKeys.forEach(function(key, i) {
-            if (tds[i]) tds[i].dataset.col = key;
-          });
-          var actionsCell = tds[tds.length - 1];
-          extraKeys.forEach(function(key) {
-            if (!row.querySelector('[data-col="' + key + '"]')) {
-              var td = document.createElement('td');
-              td.dataset.col = key;
-              td.classList.add('col-hidden');
-              td.textContent = '—';
-              row.insertBefore(td, actionsCell);
-            }
-          });
-        });
-      }
-
-      /* Set column visibility in table */
-      function setColVisible(key, visible) {
-        document.querySelectorAll('[data-col="' + key + '"]').forEach(function(el) {
-          el.classList.toggle('col-hidden', !visible);
-        });
-      }
-
-      /* Apply optional column order from drawer list to table */
-      function applyColOrderToTable() {
-        if (!table) return;
-        var list = document.getElementById('col-item-list');
-        var optOrder = [];
-        list.querySelectorAll('.col-item[data-colkey]').forEach(function(item) {
-          optOrder.push(item.dataset.colkey);
-        });
-        /* Reverse: top of drawer list → rightmost column in table */
-        var reversed = optOrder.slice().reverse();
-        table.querySelectorAll('tr').forEach(function(row) {
-          var cells = Array.from(row.children);
-          var get = function(k) { return cells.find(function(c) { return c.dataset.col === k; }); };
-          var namnCell    = get('namn');
-          var rollCell    = get('roll');
-          var butikCell   = get('butik');
-          var webbCell    = get('webb');
-          var actionsCell = cells.find(function(c) { return c.classList.contains('col-action'); });
-          var spacerCell  = cells.find(function(c) { return c.classList.contains('col-right-spacer'); });
-          while (row.firstChild) row.removeChild(row.firstChild);
-          if (namnCell)    row.appendChild(namnCell);
-          if (rollCell)    row.appendChild(rollCell);
-          reversed.forEach(function(k) {
-            var cell = get(k);
-            if (cell) row.appendChild(cell);
-          });
-          if (butikCell)   row.appendChild(butikCell);
-          if (webbCell)    row.appendChild(webbCell);
-          if (actionsCell) row.appendChild(actionsCell);
-          if (spacerCell)  row.appendChild(spacerCell);
-        });
-      }
-
-      /* Init drag-and-drop on optional list items */
-      function initColDrag() {
-        var list = document.getElementById('col-item-list');
-        var dragSrc = null;
-        list.querySelectorAll('.col-item[data-colkey]').forEach(function(item) {
-          item.setAttribute('draggable', 'false');
-
-          item.addEventListener('dragstart', function(e) {
-            dragSrc = this;
-            this.classList.add('is-dragging');
-            e.dataTransfer.effectAllowed = 'move';
-          });
-
-          item.addEventListener('dragend', function() {
-            dragSrc = null;
-            this.classList.remove('is-dragging');
-            list.querySelectorAll('.col-item').forEach(function(i) { i.classList.remove('drag-over'); });
-            applyColOrderToTable();
-          });
-
-          item.addEventListener('dragover', function(e) {
-            if (!dragSrc || this === dragSrc || this.classList.contains('col-item--fixed')) return;
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            list.querySelectorAll('.col-item').forEach(function(i) { i.classList.remove('drag-over'); });
-            this.classList.add('drag-over');
-          });
-
-          item.addEventListener('dragleave', function() {
-            this.classList.remove('drag-over');
-          });
-
-          item.addEventListener('drop', function(e) {
-            e.preventDefault();
-            if (!dragSrc || this === dragSrc || this.classList.contains('col-item--fixed')) return;
-            var allItems = Array.from(list.querySelectorAll('.col-item'));
-            var srcIdx = allItems.indexOf(dragSrc);
-            var dstIdx = allItems.indexOf(this);
-            if (srcIdx < dstIdx) {
-              list.insertBefore(dragSrc, this.nextSibling);
-            } else {
-              list.insertBefore(dragSrc, this);
-            }
-            this.classList.remove('drag-over');
-          });
-        });
-      }
-
-      /* Build column list in drawer */
-      function buildColList() {
-        var list = document.getElementById('col-item-list');
-        if (!list) return;
-        list.innerHTML = '';
-        COLS.forEach(function(col) {
-          var item = document.createElement('div');
-          item.className = 'col-item' + (col.fixed ? ' col-item--fixed' : '');
-          if (!col.fixed) item.dataset.colkey = col.key;
-
-          var label = document.createElement('label');
-          label.className = 'form-checkbox-item';
-
-          var cb = document.createElement('input');
-          cb.type = 'checkbox';
-          cb.checked = col.visible;
-          if (col.fixed) cb.disabled = true;
-          (function(c) {
-            cb.addEventListener('change', function() {
-              c.visible = this.checked;
-              setColVisible(c.key, c.visible);
-            });
-          })(col);
-
-          var span = document.createElement('span');
-          span.textContent = col.label;
-          label.appendChild(cb);
-          label.appendChild(span);
-          item.appendChild(label);
-
-          if (!col.fixed) {
-            var handle = document.createElement('span');
-            handle.className = 'col-item-handle ms';
-            handle.setAttribute('aria-hidden', 'true');
-            handle.textContent = 'drag_handle';
-            item.appendChild(handle);
-          }
-
-          list.appendChild(item);
-        });
-        initColDrag();
-      }
-
-      /* Sort toggle — state persists across open/close */
-      var colSortEnabled = false;
-
-      document.getElementById('col-drawer-toggle').addEventListener('change', function() {
-        colSortEnabled = this.checked;
-        var list = document.getElementById('col-item-list');
-        list.classList.toggle('col-sort-enabled', colSortEnabled);
-        list.querySelectorAll('.col-item[data-colkey]').forEach(function(item) {
-          item.setAttribute('draggable', colSortEnabled ? 'true' : 'false');
-        });
-      });
-
-      /* Open / close */
-      window.openColDrawer = function() {
-        buildColList();
-        document.getElementById('col-drawer-toggle').checked = colSortEnabled;
-        var list = document.getElementById('col-item-list');
-        list.classList.toggle('col-sort-enabled', colSortEnabled);
-        list.querySelectorAll('.col-item[data-colkey]').forEach(function(item) {
-          item.setAttribute('draggable', colSortEnabled ? 'true' : 'false');
-        });
-        document.getElementById('col-drawer-overlay').classList.add('is-open');
-        document.getElementById('col-drawer-panel').classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-      };
-
-      window.closeColDrawer = function() {
-        applyColOrderToTable();
-        document.getElementById('col-drawer-overlay').classList.remove('is-open');
-        document.getElementById('col-drawer-panel').classList.remove('is-open');
-        document.body.style.overflow = '';
-        /* Scroll table to rightmost position after column order applied */
-        var wrap = document.querySelector('.users-table-wrap');
-        if (wrap) requestAnimationFrame(function() {
-          wrap.scrollLeft = wrap.scrollWidth - wrap.clientWidth;
-        });
-      };
-    })();
-
-    /* ── Saldo drawer ────────────────────────────────────────────── */
-    window.openSaldoDrawer = function() {
-      document.getElementById('saldo-drawer-overlay').classList.add('is-open');
-      document.getElementById('saldo-drawer-panel').classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    };
-    window.closeSaldoDrawer = function() {
-      document.getElementById('saldo-drawer-overlay').classList.remove('is-open');
-      document.getElementById('saldo-drawer-panel').classList.remove('is-open');
-      document.body.style.overflow = '';
-    };
-
-    /* Wire up select active states for saldo drawer */
-    document.querySelectorAll('#saldo-drawer-panel .form-select-wrap .form-select').forEach(function(select) {
-      var wrap = select.closest('.form-select-wrap');
-      select.addEventListener('change', function() {
-        wrap.classList.toggle('is-active', select.selectedIndex !== 0);
-      });
-    });
-
-    /* BankID-ikon i Spara-knappen när "Handla i butik" är ikryssad */
-    (function() {
-      var butikCheckbox = document.getElementById('checkbox-butik');
-      var saveBtn = document.getElementById('drawer-save-btn');
-      if (!butikCheckbox || !saveBtn) return;
-      butikCheckbox.addEventListener('change', function() {
-        saveBtn.classList.toggle('has-bankid', this.checked);
-      });
-    })();
-
-    /* Save: commit current values as new snapshot, then close */
-    document.getElementById('drawer-save-btn').addEventListener('click', function() {
-      snapshotDrawer();
-      closeDrawer();
-    });
+      openMainMenuDrawer();
+    }
 
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeDrawer();
+      if (e.key !== 'Escape') return;
+      var mainMenuPanel = document.getElementById('main-menu-panel');
+      if (!mainMenuPanel || !mainMenuPanel.classList.contains('is-open')) return;
+      if (document.getElementById('menu-level-2').classList.contains('is-active')) {
+        closeMenuLevel2();
+      } else {
+        closeMainMenuDrawer();
+      }
     });
 
-    /* ── Användardata + Redigera-drawer ───────────────────────── */
-    var USERS = [
-      { firstName:'Alhan',     lastName:'Selufi',      email:'alhan.selufi@firmane.bolags.se',       phone:'070-123 45 67', roll:'Standard',      anstallningsnr:'ANS-10482', saldo:'6 200.00 kr',  kostnadsstalle:'KST-2201', adress:'12345', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'24 000.00 kr', kategori:'Verktyg',       avdelning:'Inköp',         butikssaldo:'4 500.00 kr',  skapnummer:'A-12', skapsection:'A', personnummer:'19881203-4421' },
-      { firstName:'Alexander', lastName:'Alpec',       email:'alex.alpec@bolagsnamn.se',             phone:'073-456 78 90', roll:'Administratör', anstallningsnr:'ANS-10391', saldo:'15 750.00 kr', kostnadsstalle:'KST-1105', adress:'67890', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'36 000.00 kr', kategori:'El',            avdelning:'Administration', butikssaldo:'12 000.00 kr', skapnummer:'B-03', skapsection:'B', personnummer:'19750614-2389' },
-      { firstName:'Alexander', lastName:'Alpín',       email:'alexander.alpin@bolagsnamn.se',        phone:'076-234 56 78', roll:'Standard',      anstallningsnr:'ANS-10024', saldo:'0.00 kr',      kostnadsstalle:'KST-1001', adress:'11111', butik:true,  webb:true,  budget:'Inaktiv', arsbudget:'',             kategori:'Bygg',           avdelning:'Produktion',    butikssaldo:'0.00 kr',      skapnummer:'A-07', skapsection:'A', personnummer:'19920308-5517' },
-      { firstName:'Arangeera', lastName:'Korompilias', email:'aran.korompilias@bolagsnamn.se',       phone:'072-345 67 89', roll:'Standard',      anstallningsnr:'ANS-10573', saldo:'3 100.00 kr',  kostnadsstalle:'KST-3308', adress:'23456', butik:false, webb:true,  budget:'Aktiv',   arsbudget:'12 000.00 kr', kategori:'Säkerhet',      avdelning:'Lager',         butikssaldo:'2 800.00 kr',  skapnummer:'C-21', skapsection:'C', personnummer:'19950927-1134' },
-      { firstName:'Anders',    lastName:'Ajon',        email:'anders.ajon@bolagsnamn.se',            phone:'070-987 65 43', roll:'Standard',      anstallningsnr:'ANS-10618', saldo:'9 800.00 kr',  kostnadsstalle:'KST-2504', adress:'34567', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'24 000.00 kr', kategori:'Verktyg',       avdelning:'Inköp',         butikssaldo:'8 100.00 kr',  skapnummer:'B-15', skapsection:'B', personnummer:'19840512-7742' },
-      { firstName:'Anders',    lastName:'Dahl',        email:'anders.dahl@bolagsnamn.se',            phone:'073-111 22 33', roll:'Administratör', anstallningsnr:'ANS-10155', saldo:'22 000.00 kr', kostnadsstalle:'KST-1203', adress:'45678', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'48 000.00 kr', kategori:'El',            avdelning:'Administration', butikssaldo:'18 500.00 kr', skapnummer:'A-02', skapsection:'A', personnummer:'19700219-9901' },
-      { firstName:'Anders',    lastName:'Ardhali',     email:'anders.ardhali@bolagsnamn.se',         phone:'076-666 77 88', roll:'Standard',      anstallningsnr:'ANS-10729', saldo:'1 450.00 kr',  kostnadsstalle:'KST-4401', adress:'56789', butik:false, webb:true,  budget:'Inaktiv', arsbudget:'',             kategori:'Bygg',           avdelning:'Lager',         butikssaldo:'0.00 kr',      skapnummer:'D-09', skapsection:'D', personnummer:'19991104-3308' },
-      { firstName:'Anders',    lastName:'Lau',         email:'anders.lau@bolagsnamn.se',             phone:'072-888 99 00', roll:'Standard',      anstallningsnr:'ANS-10844', saldo:'5 600.00 kr',  kostnadsstalle:'KST-2702', adress:'67890', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'18 000.00 kr', kategori:'Verktyg',       avdelning:'Produktion',    butikssaldo:'4 200.00 kr',  skapnummer:'C-06', skapsection:'C', personnummer:'19870731-6614' },
-      { firstName:'Anders',    lastName:'Liljerus',    email:'anders.liljerus@bolagsnamn.se',        phone:'070-444 55 66', roll:'Standard',      anstallningsnr:'ANS-10936', saldo:'11 300.00 kr', kostnadsstalle:'KST-1802', adress:'78901', butik:true,  webb:true,  budget:'Aktiv',   arsbudget:'30 000.00 kr', kategori:'Säkerhet',      avdelning:'Inköp',         butikssaldo:'9 750.00 kr',  skapnummer:'B-18', skapsection:'B', personnummer:'19810423-2256' },
-      { firstName:'Anders',    lastName:'Spång',       email:'anders.spang@bolagsnamn.se',           phone:'073-222 33 44', roll:'Standard',      anstallningsnr:'ANS-11002', saldo:'7 900.00 kr',  kostnadsstalle:'KST-3105', adress:'89012', butik:false, webb:true,  budget:'Aktiv',   arsbudget:'24 000.00 kr', kategori:'El',            avdelning:'Produktion',    butikssaldo:'0.00 kr',      skapnummer:'D-14', skapsection:'D', personnummer:'19930618-8823' }
-    ];
-
-    /* Populera tabellrader med riktig data */
-    (function() {
-      var rows = document.querySelectorAll('.users-table tbody tr');
-      rows.forEach(function(tr, i) {
-        if (!USERS[i]) return;
-        var u = USERS[i];
-        var tds = tr.querySelectorAll('td');
-        /* Roll (index 1) */
-        tds[1].innerHTML = '<span>' + u.roll + '</span>';
-        /* Anställnings nr (index 2) */
-        tds[2].textContent = u.anstallningsnr;
-        /* Saldo (index 3) */
-        tds[3].textContent = u.saldo;
-        /* Kostnadsställe (index 4) */
-        tds[4].textContent = u.kostnadsstalle;
-        /* Butik checkbox (index 5) */
-        tds[5].querySelector('input').checked = u.butik;
-        /* Webb checkbox (index 6) */
-        tds[6].querySelector('input').checked = u.webb;
-        /* Dolda kolumner — fylls i efter att IIFE:n skapat tds */
-        var setCel = function(col, val) {
-          var td = tr.querySelector('[data-col="' + col + '"]');
-          if (td) td.textContent = val;
-        };
-        setCel('kategori',    u.kategori);
-        setCel('avdelning',   u.avdelning);
-        setCel('butikssaldo', u.butikssaldo);
-        setCel('skapnummer',  u.skapnummer);
-        setCel('skapsection', u.skapsection);
-        setCel('personnummer',u.personnummer);
-        /* Koppla Redigera-knappen */
-        var editBtn = tr.querySelector('.btn-row-action[aria-label="Redigera"]');
-        if (editBtn) editBtn.onclick = (function(idx){ return function(e){ e.stopPropagation(); openEditDrawer(idx); }; })(i);
-      });
-    })();
-
-    /* Öppna drawer i redigeringsläge */
-    function openEditDrawer(i) {
-      var u = USERS[i];
-      /* Byt rubrik */
-      document.querySelector('#drawer-panel .drawer-title').textContent = 'Uppdatera användare';
-      /* Fyll fält */
-      document.getElementById('drawer-fornamn').value    = u.firstName;
-      document.getElementById('drawer-efternamn').value  = u.lastName;
-      document.getElementById('drawer-epost').value      = u.email;
-      document.getElementById('drawer-mobil').value      = u.phone;
-      document.getElementById('drawer-anstallning').value = u.anstallningsnr;
-      document.getElementById('drawer-kost').value       = u.kostnadsstalle;
-      document.getElementById('drawer-adress').value     = u.adress;
-      /* Roll select */
-      var rollSel = document.getElementById('drawer-roll');
-      for (var r = 0; r < rollSel.options.length; r++) {
-        if (rollSel.options[r].text === u.roll) { rollSel.selectedIndex = r; break; }
-      }
-      /* Butik-checkbox + BankID-ikon */
-      var butikCb = document.getElementById('checkbox-butik');
-      butikCb.checked = u.butik;
-      document.getElementById('drawer-save-btn').classList.toggle('has-bankid', u.butik);
-      /* Budget */
-      var budgetSel = document.getElementById('drawer-budget');
-      budgetSel.value = u.budget;
-      var budgetFields = document.getElementById('budget-fields');
-      budgetFields.style.display = u.budget === 'Aktiv' ? 'flex' : 'none';
-      if (u.budget === 'Aktiv') {
-        document.getElementById('drawer-arsbudget').value = u.arsbudget;
-        document.getElementById('drawer-saldo').value     = u.saldo;
-        document.getElementById('drawer-lagg-saldo').value = '';
-      }
-      /* Aktivera Spara direkt (redigering) */
-      document.getElementById('drawer-save-btn').disabled = false;
-      snapshotDrawer();
-      /* Öppna */
-      document.getElementById('drawer-overlay').classList.add('is-open');
-      document.getElementById('drawer-panel').classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    /* Återställ rubrik till "Lägg till ny användare" vid vanlig öppning */
-    var _origOpenDrawer = openDrawer;
-    openDrawer = function() {
-      document.querySelector('#drawer-panel .drawer-title').textContent = 'Lägg till ny användare';
-      document.getElementById('drawer-fornamn').value    = '';
-      document.getElementById('drawer-efternamn').value  = '';
-      document.getElementById('drawer-epost').value      = '';
-      document.getElementById('drawer-mobil').value      = '';
-      document.getElementById('drawer-anstallning').value = '';
-      document.getElementById('drawer-kost').value       = '';
-      document.getElementById('drawer-adress').value     = '';
-      document.getElementById('drawer-roll').selectedIndex = 0;
-      document.getElementById('checkbox-butik').checked  = false;
-      document.getElementById('drawer-save-btn').classList.remove('has-bankid');
-      document.getElementById('drawer-budget').value     = 'Inaktiv';
-      document.getElementById('budget-fields').style.display = 'none';
-      _origOpenDrawer();
-    };
-    /* ── Delete wiring ─────────────────────────────────────── */
-    document.addEventListener('DOMContentLoaded', function () {
-      var overlay  = document.getElementById('delete-modal-overlay');
-      var modal    = document.getElementById('delete-modal');
-      var nameEl   = document.getElementById('delete-modal-name');
-      var pendingRow = null;
-
-      function openDeleteModal(row) {
-        pendingRow = row;
-        var nameDiv = row.querySelector('.user-name');
-        nameEl.textContent = nameDiv ? nameDiv.textContent.trim() : 'användaren';
-        overlay.classList.add('is-open');
-        modal.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-        document.getElementById('delete-modal-cancel').focus();
-      }
-
-      function closeDeleteModal() {
-        overlay.classList.remove('is-open');
-        modal.classList.remove('is-open');
-        document.body.style.overflow = '';
-        pendingRow = null;
-      }
-
-      function confirmDelete() {
-        if (!pendingRow) return;
-        var name = nameEl.textContent;
-        pendingRow.remove();
-        closeDeleteModal();
-        showDeleteToast(name);
-      }
-
-      function showDeleteToast(name) {
-        var w = window.innerWidth;
-        var isXs      = w <= 639;
-        var isMobile  = w <= 768;  /* xs+sm: mobile base styling (body-md line-height 22px) */
-        var isSmMd    = !isXs && w <= 1023; /* 640–1023px: top/right 32px */
-        var t = document.createElement('div');
-        var autoTimer = null;
-        var dismissed = false;
-
-        var topVal   = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var rightVal = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var bodyLineHeight = isMobile ? '22px' : '24px';
-
-        if (isXs) {
-          t.style.cssText = [
-            'position:fixed',
-            'z-index:10000',
-            'top:0',
-            'left:0',
-            'right:0',
-            'width:100vw',
-            'box-shadow:0px 8px 16px rgba(0,0,0,.10),0px 0px 1px rgba(0,0,0,.05)',
-            'animation:toast-slide-in-top 300ms cubic-bezier(.16,0,.16,1) forwards'
-          ].join(';');
-        } else {
-          t.style.cssText = [
-            'position:fixed',
-            'z-index:10000',
-            'top:' + topVal,
-            'right:' + rightVal,
-            'width:375px',
-            'box-shadow:0px 8px 16px rgba(0,0,0,.10),0px 0px 1px rgba(0,0,0,.05)',
-            'animation:toast-slide-in 300ms cubic-bezier(.16,0,.16,1) forwards'
-          ].join(';');
-        }
-
-        t.innerHTML =
-          '<div style="background:#fff;border-left:2px solid #248616;display:flex;align-items:flex-start;padding:16px;gap:8px;">' +
-            '<span class="ms ms--24" style="color:#248616;font-variation-settings:\'FILL\' 1,\'wght\' 300,\'GRAD\' 0,\'opsz\' 24;flex-shrink:0;">check_circle</span>' +
-            '<div style="flex:1;display:flex;flex-direction:column;gap:2px;padding-top:1px;">' +
-              '<p style="font-family:\'Breuer Condensed\',Arial,sans-serif;font-size:16px;font-weight:700;line-height:18px;letter-spacing:0px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1;padding-top:2px;">Användare borttagen</p>' +
-              '<p style="font-family:\'Breuer Condensed\',Arial,sans-serif;font-size:16px;font-weight:400;line-height:' + bodyLineHeight + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;"><strong style="font-weight:700;">' + escHtml(name) + '</strong> är nu raderad som användare.</p>' +
-            '</div>' +
-            '<button aria-label="Stäng" style="flex-shrink:0;background:transparent;border:none;cursor:pointer;padding:2px;font-size:20px;color:#000;display:inline-flex;">' +
-              '<span class="ms">close</span>' +
-            '</button>' +
-          '</div>';
-
-        function dismiss() {
-          if (dismissed) return;
-          dismissed = true;
-          clearTimeout(autoTimer);
-          document.removeEventListener('click', outsideClick);
-          t.style.animation = isXs
-            ? 'toast-slide-out-top 300ms cubic-bezier(.36,.09,1,.58) forwards'
-            : 'toast-slide-out 300ms cubic-bezier(.36,.09,1,.58) forwards';
-          setTimeout(function(){ t.remove(); }, 300);
-        }
-
-        function outsideClick(e) {
-          if (!t.contains(e.target)) dismiss();
-        }
-
-        t.querySelector('button').addEventListener('click', dismiss);
-        document.body.appendChild(t);
-
-        /* Starta click-outside-lyssnaren efter ett tick så att klicket som
-           öppnade toasten (t.ex. bekräfta-knappen i modal) inte stänger den direkt */
-        setTimeout(function(){ document.addEventListener('click', outsideClick); }, 0);
-
-        autoTimer = setTimeout(dismiss, 4000);
-      }
-
-      function escHtml(s) {
-        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-      }
-
-      /* ── Logout confirmation toast ── */
-      function showLogoutConfirmToast(name) {
-        var w       = window.innerWidth;
-        var isXs    = w <= 639;
-        var isMobile = w <= 768;
-        var isSmMd  = !isXs && w <= 1023;
-        var topVal  = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var rightVal = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var bodyLh  = isMobile ? '22px' : '24px';
-        /* Desktop xs buttons: 6px padding, label-sm 14px/0.56px
-           Mobile sm buttons:  6px padding, label-md 14px/0.42px (mobile) */
-        var dismissed = false;
-
-        function dismiss() {
-          if (dismissed) return;
-          dismissed = true;
-          t.style.animation = isXs
-            ? 'toast-slide-out-top 300ms cubic-bezier(.36,.09,1,.58) forwards'
-            : 'toast-slide-out 300ms cubic-bezier(.36,.09,1,.58) forwards';
-          setTimeout(function(){ t.remove(); }, 300);
-        }
-        function confirmLogout() {
-          dismiss();
-          closeImpersonation();
-        }
-
-        var t = document.createElement('div');
-        t.setAttribute('role', 'alertdialog');
-        t.setAttribute('aria-modal', 'false');
-        t.style.cssText = [
-          'position:fixed',
-          'z-index:9999',
-          isXs ? 'top:0;left:0;right:0;width:100vw' : ('top:' + topVal + ';right:' + rightVal + ';width:375px'),
-          'box-shadow:0px 8px 16px 0px rgba(0,0,0,0.10),0px 0px 1px 0px rgba(0,0,0,0.05)',
-          'animation:' + (isXs
-            ? 'toast-slide-in-top 300ms cubic-bezier(.16,0,.16,1) forwards'
-            : 'toast-slide-in 300ms cubic-bezier(.16,0,.16,1) forwards'),
-          'font-family:\'Breuer Condensed\',Arial,sans-serif',
-          'font-feature-settings:\'ss02\' 1,\'ss03\' 1'
-        ].join(';');
-
-        t.innerHTML = [
-          '<div style="background:#fff;border-left:2px solid #fac000;display:flex;flex-direction:column;width:100%;">',
-            '<div style="display:flex;gap:8px;align-items:flex-start;padding:16px;width:100%;box-sizing:border-box;">',
-              /* Warning icon — warning_amber, filled */
-              '<span class="ms ms--24" style="color:#fac000;font-variation-settings:\'FILL\' 1,\'wght\' 300,\'GRAD\' 0,\'opsz\' 24;flex-shrink:0;margin-top:1px;">warning_amber</span>',
-              '<div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;">',
-                /* Title */
-                '<p style="font-size:16px;font-weight:700;line-height:18px;letter-spacing:0px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1;padding-top:2px;">LOGGA UT</p>',
-                /* Body line 1 */
-                '<p style="font-size:16px;font-weight:400;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;">',
-                  'Är du säker att du vill logga ut som användare <strong style="font-weight:700;">' + escHtml(name) + '</strong>?',
-                '</p>',
-                /* Body line 2 */
-                '<p style="font-size:16px;font-weight:700;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;margin-top:8px;">',
-                  'Du kommer fortfarande att vara inloggad som Administratör.',
-                '</p>',
-              '</div>',
-              /* Close × — Blank xs på ljus bakgrund */
-              '<button aria-label="Stäng" class="logout-toast__close" id="logout-toast-close">',
-                '<span class="ms">close</span>',
-              '</button>',
-            '</div>',
-            /* Action group — indented 32px from left (icon 24px + gap 8px) */
-            '<div style="padding:0 16px 16px 48px;display:flex;gap:8px;align-items:center;box-sizing:border-box;">',
-              /* OK — Secondary xs */
-              '<button id="logout-toast-ok" class="logout-toast__btn-secondary"><span style="padding:3px 4px;">OK</span></button>',
-              /* ABRYT — Primary xs */
-              '<button id="logout-toast-cancel" class="logout-toast__btn-primary"><span style="padding:3px 4px;">ABRYT</span></button>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        t.querySelector('#logout-toast-close').addEventListener('click', dismiss);
-        t.querySelector('#logout-toast-ok').addEventListener('click', confirmLogout);
-        t.querySelector('#logout-toast-cancel').addEventListener('click', dismiss);
-
-        document.body.appendChild(t);
-      }
-
-      /* ── Impersonation banner ── */
-      var impersonationBannerWrap = document.getElementById('impersonation-banner-wrap');
-      var impersonationName       = document.getElementById('impersonation-banner-name');
-
-      function openImpersonation(name) {
-        impersonationName.textContent = name;
-        impersonationBannerWrap.classList.add('is-visible');
-      }
-      function closeImpersonation() {
-        impersonationBannerWrap.classList.remove('is-visible');
-      }
-
-      document.querySelectorAll('.btn-row-action[aria-label="Byt konto"]').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var name = btn.closest('tr').querySelector('.user-name').textContent.trim();
-          openImpersonation(name);
-        });
-      });
-
-      document.getElementById('impersonation-banner-logout').addEventListener('click', function() {
-        var name = impersonationName.textContent.trim();
-        showLogoutConfirmToast(name);
-      });
-
-      /* Wire buttons */
-      document.querySelectorAll('.btn-row-action[aria-label="Ta bort"]').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          openDeleteModal(btn.closest('tr'));
-        });
-      });
-
-      document.getElementById('delete-modal-close').addEventListener('click', closeDeleteModal);
-      document.getElementById('delete-modal-cancel').addEventListener('click', closeDeleteModal);
-      document.getElementById('delete-modal-confirm').addEventListener('click', confirmDelete);
-      overlay.addEventListener('click', closeDeleteModal);
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeDeleteModal();
+    // Huvudmeny-drawer har två nivåer, var och en med egen header + scrollbart innehåll
+    [
+      ['#menu-level-1 .drawer-header', '#menu-level-1 .menu-drawer__content'],
+      ['#menu-level-2-header', '#menu-level-2-content']
+    ].forEach(function(pair) {
+      var header  = document.querySelector(pair[0]);
+      var content = document.querySelector(pair[1]);
+      if (!header || !content) return;
+      content.addEventListener('scroll', function() {
+        header.classList.toggle('drawer-header--elevated', content.scrollTop > 0);
       });
     });
-  </script>
 
-  <!-- Delete confirmation modal -->
-  <div id="delete-modal-overlay" class="delete-modal-overlay"></div>
-  <div id="delete-modal" class="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
-    <div class="delete-modal__container">
-      <div class="delete-modal__header-body">
-        <div class="delete-modal__header">
-          <div class="delete-modal__header-text">
-            <h2 class="delete-modal__title" id="delete-modal-title">Radera användare</h2>
-          </div>
-          <button class="delete-modal__close" id="delete-modal-close" aria-label="Stäng">
-            <span class="ms">close</span>
-          </button>
-        </div>
-        <p class="delete-modal__body">Är du säker på att du vill ta bort <strong id="delete-modal-name"></strong>? Användaren kommer att inaktiveras och tas bort från webb och butik.</p>
-        <p class="delete-modal__body">Åtgärden kan inte ångras.</p>
-      </div>
-      <div class="delete-modal__footer">
-        <button class="delete-modal__btn-cancel" id="delete-modal-cancel">Avbryt</button>
-        <button class="delete-modal__btn-confirm" id="delete-modal-confirm">Radera användare</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
     /* openAccountNavDrawer / closeAccountNavDrawer / syncAccountNavDrawerActive samt footer-skuggans scroll-logik ligger nu i partials/account-nav-drawer.html */
   </script>
 

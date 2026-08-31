@@ -6,6 +6,21 @@
 
 ---
 
+## Innan du bygger en ny sida
+
+**Utgå aldrig från en befintlig, färdigbyggd sida som startpunkt** för en ny prototyp-sida — kopiera alltid rätt mall:
+
+| Sidtyp | Startpunkt | Kännetecken |
+|---|---|---|
+| **Utloggad/publik sida** | Kopia av `template.html` (repo-rot) | Ingen inloggning krävs. `body`-bakgrund: `background-primary` (vit). |
+| **Inloggad sida ("Mina sidor")** | Kopia av `mypages/mypages-template.html` | Kräver inloggning, visar account-nav-tabbar. `body`-bakgrund: `background-secondary` (grå) — det är avsiktligt, se Badge-sektionens regel 7 om `body`-bakgrund. |
+
+Båda mallarna har header/footer/huvudmeny redan kopplade via delade partials (`mypages/partials/`) och samtliga design-tokens på plats — börja aldrig om från noll och kopiera aldrig en annan sidas färdiga innehåll rakt av, då följer sidspecifika CSS-/JS-hack med som inte hör hemma på den nya sidan.
+
+Se `index.html` (repo-rot) för hela sitemap:n — den är en sidöversikt som länkar till samtliga sidor i prototypen och taggar vilken som är "ny"/"uppdaterad"/"pågående"/"arkiv" av varje sidtyp.
+
+---
+
 ## Breakpoints (ECO Design System)
 
 ECO Design System har **5 breakpoints** som täcker Mobile, Tablet och Desktop.
@@ -583,6 +598,216 @@ body.keyboard-nav .input-wrap.form-select-wrap:focus-within::after { opacity: 1;
 
 ---
 
+## Segment Control (ECO Design System)
+
+**Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23144-268049
+
+Segment Control (segmenterad kontroll/"pill toggle") används för att växla mellan två relaterade vyer eller filter i samma yta — t.ex. `Användarroller / Företagsplan` eller `Alla funktioner / Nyckelfunktioner`. Ska **inte** användas som ersättning för Tabs (navigering mellan olika sidor/innehåll) eller Radio-knappar (formulärval som skickas in).
+
+> Exempelimplementation: `.compare-view-toggle`/`.compare-view-btn` (Large) och `.compare-filter-toggle`/`.compare-filter-btn` (Small) i `feature-comparison-roles.html`.
+
+### Varianter
+
+| Variant | Bakgrund (spår) | Använd på |
+|---|---|---|
+| **Primary** | `#dad9d7`→hover, `var(--color-surface-disabled)` `#e5e5e5` enabled | Ljus bakgrund (standard) |
+| **Primary Inverted** | Motsvarande mörk variant | Mörk/svart bakgrund |
+
+**Shape:** `Pill` (helt rundade hörn — `border-radius: höjd / 2`, standardval) eller `Square` (raka hörn, `border-radius: 0`, används sparsamt).
+
+### Storlekar
+
+Track-padding skalar med storlek (~1px mindre på mobil än desktop för respektive storlek). `border-radius` på spåret är alltid `höjd / 2`; det aktiva segmentets pill-radie är `spårets radie − track-padding`.
+
+**Bredd:** Kontrollen är **fluid (`width: 100%`) enbart i `breakpoint-xs`** (0–639px) — den fyller sin förälders bredd, och de två segmenten delar utrymmet jämnt (`flex: 1` på varje `.segment-control__btn`). Redan vid `sm:` (640px+) slutar den vara fluid och krymper till sitt innehåll (`width: auto`, `flex: none` på knapparna) — höjd/padding/font byter dock inte förrän vid `md:` (769px+), så sm har fortfarande mobil-storlek fast innehållsbaserad bredd. Ligger kontrollen i en flex-column-förälder med standard `align-items: stretch` (t.ex. `.compare-header-row__right`) krävs även `align-self: flex-start` från `sm:` — annars sträcker föräldern ut den trots `width: auto`. Se `.compare-view-toggle`/`.compare-filter-toggle` i `feature-comparison-roles.html` för den verifierade implementationen.
+
+| Storlek | Höjd Desktop (`md:` 769px+) | Höjd Mobil (≤768px) | Text | Använd för |
+|---|---|---|---|---|
+| **Large** | 56px, padding `5px`, radius `28px`, pill-radius `23px`, pill-padding `24px`, `label-lg` (18px/18px, 0.18px) | 48px, padding `4px`, radius `24px`, pill-radius `20px`, pill-padding `20px`, `label-lg` mobil (16px/16px, 0.32px) | `label-lg` | Primär vy-växlare (sidnivå) |
+| **Medium** | 48px, padding `4px`, radius `24px`, pill-radius `20px`, pill-padding `20px`, `label-lg` (18px/18px, 0.18px) | 40px, padding `4px`, radius `20px`, pill-radius `16px`, pill-padding `16px`, `label-lg` mobil (16px/16px, 0.32px) | `label-lg` | Mellanstor vy-växlare (t.ex. i en drawer) |
+| **Small** | 40px, padding `4px`, radius `20px`, pill-radius `16px`, pill-padding `16px`, `label-md` (16px/16px, 0.48px) | 32px, padding `3px`, radius `16px`, pill-radius `13px`, pill-padding `12px`, `label-md` mobil (14px/14px, 0.42px) | `label-md` | Sekundära filter inom en yta (t.ex. "Nyckelfunktioner") |
+| **XSmall** | 32px, padding `3px`, radius `16px`, pill-radius `13px`, pill-padding `12px`, `label-sm` (14px/14px, 0.56px) | 32px, padding `3px`, radius `16px`, pill-radius `13px`, pill-padding `10px`, `label-sm` mobil (12px/12px, 0.48px) | `label-sm` | Kompakta filter i tät yta (t.ex. tabellverktygsrad) |
+
+> XSmall har samma höjd (32px) på både desktop och mobil — endast pill-padding (12px/10px) och fontstorlek (14px/12px) skiljer breakpointen åt.
+
+### Tillstånd (States)
+
+| Tillstånd | Visuell regel |
+|---|---|
+| **Enabled** | Spår: `var(--color-surface-disabled)` `#e5e5e5`. Aktivt segment: svart pill (`var(--color-surface-100)`) med `elevation-input_control-switch`-skugga, vit text. Inaktivt segment: transparent, svart text, ingen understrykning. Pillen är ett **eget, separat `.segment-control__thumb`-element** som glider mellan segmenten — se **Interaktion (glidande pill)** nedan — inte en bakgrund som sätts direkt på den aktiva knappen. |
+| **Hover** | Spåret mörknar till `var(--color-border-tertiary)` `#dad9d7`. Det **inaktiva** segmentets text får `text-decoration: underline` (samma hover-princip som Action Link). Det aktiva segmentet ändras inte. |
+| **Focus** | **Ingen egen fokusstil på kontrollen.** De enskilda segment-knapparna är vanliga `<button>`-element och ärver projektets globala fokusring (se **Knapp-styling → Tillstånd → Focus**: `body.keyboard-nav button:focus { outline-color: #455efb }`), enbart synlig vid tangentbordsnavigering. Bygg **aldrig** en separat `::after`/border-baserad fokusring för Segment Control — det skulle avvika från den etablerade outline-metoden och dubblera fokusindikeringen. |
+| **Disabled** | Används sällan för denna komponent i produkten — om det behövs, hämta exakt spec från Figma-noden (`State=Disabled`) innan implementation. |
+
+### Interaktion (glidande pill)
+
+Det aktiva segmentets pill är **inte** en bakgrund som sätts direkt på knappen — det är ett eget `.segment-control__thumb`-element som ligger absolut positionerat bakom knapparna och **glider** till den aktiva knappens position/bredd. Det behövs eftersom knapparna kan vara olika breda (innehållsbaserad bredd på desktop, `flex: none`) — en fast 50/50-uppdelning av thumben skulle då hamna fel.
+
+1. Thumben mäts/positioneras med JS via aktiv knapps `offsetLeft`/`offsetWidth` (inte CSS `%`, se `moveSegmentThumb()` nedan).
+2. Knapparna själva är genomskinliga (`position: relative; z-index: 1`) och ligger ovanpå thumben — bara textfärgen ändras vid `--active`.
+3. Thumbens övergång: `transform`/`width` med **`var(--duration-medium-2) var(--ease-standard)`** (300ms, ease-in-out — lugn start, snabb mitt, lugn avslutning). Detta skiljer sig medvetet från hover-övergångarna (`--duration-fast-3`/`--ease-standard`, se Tillstånd-tabellen ovan) eftersom pillen rör sig en synlig sträcka och ska kännas mjuk, inte snabb/hover-artad.
+4. Mät om thumbens position vid `resize` (knapparnas bredd ändras vid `md:`-brytpunkten) och vid sidladdning.
+
+### CSS-mall (Large, Primary/Pill — mobile-first)
+
+```css
+.segment-control {
+  position: relative;
+  display: flex;
+  width: 100%;                  /* fluid — enbart breakpoint-xs (0–639px) */
+  height: 48px;                 /* mobil */
+  padding: 4px;
+  background: var(--color-surface-disabled);
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: background-color var(--duration-fast-3) var(--ease-standard);
+}
+.segment-control:hover { background: var(--color-border-tertiary); }
+
+@media (min-width: 640px) {
+  /* sm+ (Tablet och uppåt): kontrollen slutar vara fluid redan här och
+     krymper till sitt innehåll — höjd/padding är dock fortfarande
+     mobil-storlek tills md: (769px). Om föräldern är en flex-column
+     med align-items:stretch (standard) krävs även align-self: flex-start
+     här, annars sträcks kontrollen ut trots width:auto. */
+  .segment-control { width: auto; }
+}
+@media (min-width: 769px) {
+  .segment-control { height: 56px; padding: 5px; border-radius: 28px; }
+}
+
+/* Den glidande pillen — se "Interaktion (glidande pill)" ovan.
+   Bredd/position sätts av moveSegmentThumb(), inte av CSS. */
+.segment-control__thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 0;
+  background: var(--color-surface-100);
+  border-radius: 20px;
+  box-shadow: 0px 4px 8px 0px rgba(48,49,51,0.10), 0px 1px 1px 0px rgba(48,49,51,0.24), 0px -1px 1px 0px rgba(0,0,0,0.03); /* elevation-input_control-switch */
+  transition: transform var(--duration-medium-2) var(--ease-standard), width var(--duration-medium-2) var(--ease-standard);
+  pointer-events: none;
+}
+@media (min-width: 769px) {
+  .segment-control__thumb { top: 5px; bottom: 5px; border-radius: 23px; }
+}
+/* Ligger kontrollen redan på en mörk/grå yta (t.ex. ett filter inuti en
+   annan, större segment-control — se .compare-filter-toggle) ska pillen
+   vara vit istället för svart: */
+.segment-control__thumb--light { background: var(--color-surface-raised-primary); }
+
+.segment-control__btn {
+  position: relative;
+  z-index: 1;
+  flex: 1;                       /* xs: fyller segmenten jämnt */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 20px;
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-size: 16px;               /* label-lg Mobil */
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  color: var(--color-text-action-primary);
+  white-space: nowrap;
+  font-feature-settings: 'ss02' 1, 'ss03' 1;
+  transition: color var(--duration-fast-3) var(--ease-standard);
+}
+@media (min-width: 640px) {
+  .segment-control__btn { flex: none; }   /* sm+: innehållsbaserad bredd, matchar kontrollens width:auto */
+}
+@media (min-width: 769px) {
+  .segment-control__btn { padding: 0 24px; border-radius: 23px; font-size: 18px; line-height: 18px; letter-spacing: 0.18px; }
+}
+
+/* Inaktivt segment — hover ger understrykning */
+.segment-control__btn:not(.segment-control__btn--active):hover { text-decoration: underline; }
+
+/* Aktivt segment — bara textfärgen ändras, pillen ligger redan under
+   (svart pill → vit text). Med .segment-control__thumb--light (vit
+   pill) ska texten INTE bytas — låt den vara svart hela vägen. */
+.segment-control__btn--active { color: var(--color-text-action-primary-inverted); }
+
+/* Medium — mellanstor vy-växlare (t.ex. i en drawer) */
+.segment-control--md { height: 40px; padding: 4px; border-radius: 20px; }
+.segment-control--md .segment-control__thumb { top: 4px; bottom: 4px; border-radius: 16px; }
+.segment-control--md .segment-control__btn { padding: 0 16px; border-radius: 16px; font-size: 16px; line-height: 16px; letter-spacing: 0.32px; }
+@media (min-width: 769px) {
+  .segment-control--md { height: 48px; padding: 4px; border-radius: 24px; }
+  .segment-control--md .segment-control__thumb { top: 4px; bottom: 4px; border-radius: 20px; }
+  .segment-control--md .segment-control__btn { padding: 0 20px; border-radius: 20px; font-size: 18px; line-height: 18px; letter-spacing: 0.18px; }
+}
+
+/* Small — sekundära filter (t.ex. "Nyckelfunktioner") */
+.segment-control--sm { height: 32px; padding: 3px; border-radius: 16px; }
+.segment-control--sm .segment-control__thumb { top: 3px; bottom: 3px; border-radius: 13px; }
+.segment-control--sm .segment-control__btn { padding: 0 12px; border-radius: 13px; font-size: 14px; line-height: 14px; letter-spacing: 0.42px; }
+@media (min-width: 769px) {
+  .segment-control--sm { height: 40px; padding: 4px; border-radius: 20px; }
+  .segment-control--sm .segment-control__thumb { top: 4px; bottom: 4px; border-radius: 16px; }
+  .segment-control--sm .segment-control__btn { padding: 0 16px; border-radius: 16px; font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
+}
+
+/* XSmall — kompakta filter i tät yta (t.ex. tabellverktygsrad).
+   Samma höjd på mobil och desktop — endast pill-padding och font ändras. */
+.segment-control--xs { height: 32px; padding: 3px; border-radius: 16px; }
+.segment-control--xs .segment-control__thumb { top: 3px; bottom: 3px; border-radius: 13px; }
+.segment-control--xs .segment-control__btn { padding: 0 10px; border-radius: 13px; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
+@media (min-width: 769px) {
+  .segment-control--xs .segment-control__btn { padding: 0 12px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+}
+```
+
+### HTML- och JS-exempel
+
+```html
+<div class="segment-control" role="group" aria-label="Välj vy">
+  <span class="segment-control__thumb" aria-hidden="true"></span>
+  <button type="button" class="segment-control__btn segment-control__btn--active" onclick="setView('roller', this)">Användarroller</button>
+  <button type="button" class="segment-control__btn" onclick="setView('foretag', this)">Företagsplan</button>
+</div>
+```
+
+```js
+// Glider pillen till den aktiva knappens position/bredd — se
+// "Interaktion (glidande pill)" ovan för varför offsetLeft/offsetWidth
+// används istället för en fast CSS %-uppdelning.
+function moveSegmentThumb(thumb, activeBtn) {
+  if (!thumb || !activeBtn) return;
+  thumb.style.width = activeBtn.offsetWidth + 'px';
+  thumb.style.transform = 'translateX(' + activeBtn.offsetLeft + 'px)';
+}
+
+function setView(view, btn) {
+  btn.parentElement.querySelectorAll('.segment-control__btn').forEach(function (b) {
+    b.classList.toggle('segment-control__btn--active', b === btn);
+  });
+  moveSegmentThumb(btn.parentElement.querySelector('.segment-control__thumb'), btn);
+  // ... visa/dölj respektive vy ...
+}
+
+// Initiera vid sidladdning och mät om vid resize (knapparnas bredd
+// ändras vid md:-brytpunkten, 769px).
+function initSegmentThumb(control) {
+  moveSegmentThumb(control.querySelector('.segment-control__thumb'), control.querySelector('.segment-control__btn--active'));
+}
+document.querySelectorAll('.segment-control').forEach(initSegmentThumb);
+window.addEventListener('resize', function () {
+  document.querySelectorAll('.segment-control').forEach(initSegmentThumb);
+});
+```
+
+---
+
 ## Checkbox-styling (ECO Design System)
 
 Checkboxar följer ECO Design Systems specifikation: total yta **24×24px**, synlig ruta **16×16px**.
@@ -999,6 +1224,40 @@ Spacing-tokens skapar ett förutsägbart och harmoniskt avståndssystem. Tokens 
 | `space-80` | 80px | Hero-sektioner, stora vertikala avstånd |
 | `space-112` | 112px | Extra stora layoutavstånd |
 | `space-120` | 120px | Grid margin på desktop |
+
+### Layout Vertical Whitespace (per brytpunkt)
+
+Utöver den flata Spacing Scale ovan finns en semantisk, **brytpunktsanpassad** skala (T-shirt-storlekar: sm/md/lg) för vertikalt avstånd mellan element i en layout — t.ex. `gap` i en flex-column-sektion (som `.compare-intro`) eller `padding-top` framför en avslutande CTA-rad (`.section-cta`). Till skillnad från `space-24`/`space-48` osv. (fasta pixelvärden, samma på alla brytpunkter) ändras `space-sm`/`space-md`/`space-lg` HÄR i pixelvärde beroende på brytpunkt:
+
+| Token | `breakpoint-xs` | `breakpoint-sm` | `breakpoint-md` | `breakpoint-lg` | `breakpoint-xl` |
+|---|---|---|---|---|---|
+| `space-lg` | 32px | 40px | 48px | 56px | 56px |
+| `space-md` | 24px | 32px | 40px | 48px | 48px |
+
+> Använd `space-lg`/`space-md` (denna tabell) för luft MELLAN sektionens egna innehållsblock (t.ex. rubrik → kort-grid → CTA-knappar i samma sektion) — inte för `space-24`/`space-40` osv. (fasta Spacing Scale-värden ovan), som passar bättre för layout-marginaler och gutter som INTE ska variera lika finkornigt per brytpunkt.
+
+```css
+/* Exempel: gap i en flex-column-sektion, space-lg */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;                              /* xs: space-lg */
+}
+@media (min-width: 640px) {
+  .hero { gap: 40px; }                    /* sm: space-lg */
+}
+@media (min-width: 769px) {
+  .hero { gap: 48px; }                    /* md: space-lg */
+}
+@media (min-width: 1024px) {
+  .hero { gap: 56px; }                    /* lg: space-lg */
+}
+@media (min-width: 1281px) {
+  .hero { gap: 56px; }                    /* xl: space-lg */
+}
+```
+
+---
 
 ### Hur tokens används
 
@@ -3347,6 +3606,280 @@ Tooltips visas vid hover på ikontextlösa knappar och ger en kort etikett som f
 
 ---
 
+## Collapsible / Ackordion (ECO Design System)
+
+En rad-baserad expanderbar komponent — klick på headern togglar innehållet öppet/stängt med en animerad `max-height`-övergång. Används t.ex. för "Vanliga frågor"-sektioner (FAQ).
+
+### Anatomi
+
+```
+.collapsible-wrap                              ← en rad, har bottenlinje mellan raderna
+  .collapsible-item                            ← klickbar header (onclick="toggleCollapsible(this)")
+    .collapsible-item__left
+      .collapsible-item__label                 ← title-md
+    .collapsible-item__chevron                 ← "expand_more"-ikon, roterar 180° när öppen
+  .collapsible-item__content                   ← body-lg, max-height animeras via JS
+```
+
+Flera `.collapsible-wrap` staplas i en gemensam wrapper (t.ex. `.ehp-faq`) för att bilda en lista.
+
+### Typografi
+
+| Element | Token | Mobil | Desktop |
+|---|---|---|---|
+| `.collapsible-item__label` | `title-md` | 18px/22px, 0px, weight 600 | 20px/24px, 0px, weight 600 |
+| `.collapsible-item__content` | `body-lg` | 18px/24px, 0px, weight 400 | 20px/28px, 0px, weight 400 |
+
+`.collapsible-item__content` använder `color: var(--color-text-tertiary)` (`#737373`).
+
+### Tillstånd (States)
+
+| Tillstånd | Labelfärg |
+|---|---|
+| **Enabled** | `text-primary` (`--black`, `#000000`) |
+| **Hover** (hela `.collapsible-item`) | `text-action-primary-hover` (`#737373`) |
+
+> Transition: `color` med `duration-fast-3` (150ms) och `ease-standard` — samma mekanism som Inline/Action Link.
+
+### Regler
+
+1. **Bottenlinje mellan rader** — varje `.collapsible-wrap` har `border-bottom: 1px solid var(--color-border-primary)` som separator mot nästa rad i listan.
+2. **Sista raden i en lista som avslutar en sektion döljer sin bottenlinje** — om `.collapsible-wrap`-listan är sektionens sista/enda innehållsblock (dvs. inget, t.ex. en `.section-cta`-rad, kommer efter listan i samma `<section>`) ska den sista radens bottenlinje **inte** visas. Annars hänger en linje utan syfte kvar precis ovanför sektionens egen bottenpadding. Regeln är villkorad på att listans FÖRÄLDER (t.ex. `.ehp-faq`) själv är sektionens sista barn — bordern behålls som vanligt om listan följs av annat innehåll i samma sektion.
+3. **`min-height`, inte `height`, på `.collapsible-item`** — headern måste kunna växa om titeln radbryts.
+4. **`max-height`-animationen sköts av JS**, inte CSS — `toggleCollapsible()` sätter `content.style.maxHeight` till `content.scrollHeight + 'px'` (öppna) eller `null` (stänga), eftersom CSS inte kan transitionera till/från `auto`.
+
+### CSS-mall
+
+```css
+.collapsible-wrap {
+  border-bottom: 1px solid var(--color-border-primary);
+  transition: padding-bottom var(--duration-fast-4) var(--ease-standard);
+}
+/* Sista collapsible-wrap i en lista döljer sin bottom border NÄR
+   listan är sektionens sista/enda innehåll (dvs. inget — t.ex.
+   en CTA-rad — kommer efter den i samma <section>) — annars hade
+   en linje utan syfte hängt kvar precis ovanför sektionens egen
+   bottenpadding. Villkorat på att listans FÖRÄLDER (t.ex. .ehp-faq)
+   själv är sektionens sista barn, så bordern behålls som vanligt om
+   listan följs av annat innehåll i samma sektion. */
+section > *:last-child .collapsible-wrap:last-child { border-bottom: none; }
+
+.collapsible-wrap--open { padding-bottom: 32px; }
+
+.collapsible-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 0;
+  cursor: pointer;
+  min-height: 72px;
+  box-sizing: border-box;
+}
+.collapsible-item__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.collapsible-item__left .ms { color: var(--black); }
+
+/* title-md (ECO Design System): mobil 18px/22px, desktop 20px/24px, 0px spacing, weight 600 */
+.collapsible-item__label {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0;
+  color: var(--black);
+  transition: color var(--duration-fast-3) var(--ease-standard);
+}
+.collapsible-item:hover .collapsible-item__label { color: var(--color-text-action-primary-hover); }
+@media (min-width: 769px) {
+  .collapsible-item__label { font-size: 20px; line-height: 24px; }
+}
+
+.collapsible-item__chevron .ms {
+  color: var(--black);
+  font-size: 24px;
+  transition: transform var(--duration-fast-4) var(--ease-standard);
+}
+.collapsible-wrap--open .collapsible-item__chevron .ms { transform: rotate(180deg); }
+
+/* body-lg (ECO Design System): mobil 18px/24px, desktop 20px/28px, 0px spacing, weight 400 */
+.collapsible-item__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--duration-fast-4) var(--ease-standard);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: var(--color-text-tertiary);
+}
+@media (min-width: 769px) {
+  .collapsible-item__content { font-size: 20px; line-height: 28px; }
+}
+```
+
+```js
+function toggleCollapsible(header) {
+  const wrap = header.parentElement;
+  const content = header.nextElementSibling;
+  const isOpen = wrap.classList.contains('collapsible-wrap--open');
+  wrap.classList.toggle('collapsible-wrap--open', !isOpen);
+  content.style.maxHeight = isOpen ? null : content.scrollHeight + 'px';
+}
+```
+
+### HTML-exempel
+
+```html
+<div class="collapsible-wrap">
+  <div class="collapsible-item" onclick="toggleCollapsible(this)">
+    <div class="collapsible-item__left">
+      <span class="collapsible-item__label">Vad kostar det att sätta upp en kundunik webbshop?</span>
+    </div>
+    <span class="collapsible-item__chevron"><span class="ms" aria-hidden="true">expand_more</span></span>
+  </div>
+  <div class="collapsible-item__content">Det beror på omfattning och vilka funktioner ni behöver. Kontakta er lokala säljrepresentant så tar vi tillsammans fram en lösning som passar er verksamhet och er budget.</div>
+</div>
+```
+
+---
+
+## Rollkort / Tier Card (ECO Design System)
+
+Ett kortpar som presenterar två nivåer inom samma kategori (t.ex. en grundnivå och en utökad/administrativ nivå) sida vid sida, och länkar vidare ner till en detaljerad jämförelsetabell längre ner på sidan. Används på `feature-comparison-roles.html` (Standard/Administratör, Företag Standard/Företag Special) och `e-handelspartner.html` (Privatperson/Företag, Litet & medelstort företag/Stort företag & koncern) för att introducera respektive sidas roller/kontotyper innan den fullständiga `.compare-table`-jämförelsen. Innehållet (namn, badge, beskrivning, feature-strippar) anpassas per sida — CSS-klasserna och JS-funktionen (`goToCompareView()`) är identiska och kopieras rakt av.
+
+### Anatomi
+
+```
+.role-tier-pair                                  ← grid, 2 kort sida vid sida (md+)
+  .role-tier                                      ← ljust kort (grundnivå)
+    .role-tier__info                              ← vänster halva
+      .role-tier__badge-row                       ← ikon + .compare-badge
+      .role-tier__name                            ← title-lg
+      .role-tier__desc                             ← body-md
+      .role-tier__link                             ← Action Link, "arrow_downward"-ikon
+    .role-tier__features                           ← höger halva, staplade strippar
+      .role-tier__feature × 4                      ← body-sm, centrerad text
+  .role-tier.role-tier--dark                       ← utökat/administrativt kort
+    (samma understruktur)
+```
+
+Flera `.role-tier-pair` kan staplas under varandra (en per kategori/flik som ska introduceras).
+
+### Färgvarianter
+
+| Del | Ljust kort (grundnivå) | `.role-tier--dark` (utökad nivå) |
+|---|---|---|
+| Kortbakgrund | `surface-raised-primary` (`#fff`) | `surface-100` (`#000`) |
+| Kortborder | `border-primary` (`#e5e5e5`) | `surface-90` (`#222`) |
+| Titel/ikon | `text-primary` (`#000`) | `accent-default` (`#c7d300`) |
+| Beskrivning | `text-secondary` (`#4f4f4f`) | `text-secondary-inverted` (`rgba(255,255,255,.78)`) |
+| Länk | `text-action-primary` → hover `text-action-primary-hover` | `text-action-primary-inverted` → hover `text-action-primary-inverted-hover` |
+| Feature-strippar | `surface-05` (`#f6f6f6`) bakgrund, `border-primary` mellan | `surface-90` (`#222`) bakgrund, `rgba(255,255,255,.12)` mellan |
+
+> Detta är samma "light vs. dark tier"-mönster som förekommer i externa SaaS-prissidor, men i ECO Design Systems egna färgtokens, raka hörn (`border-radius: 0`) och typografi — inte pill-formade knappar eller godtyckliga färger.
+
+### Typografi
+
+| Element | Token | Mobil | Desktop |
+|---|---|---|---|
+| `.role-tiers__eyebrow` | `label-sm` | 12px/12px, 0.48px, weight 600, uppercase | 14px/14px, 0.56px |
+| `.role-tiers__title` / `.role-tier__group-title` | — (samma skala som `.fob__title`) | 26px/30px, weight 700 | 36px/40px |
+| `.role-tiers__desc` (sektionens ingress) | `body-lg` | 18px/24px, 0px | 20px/28px |
+| `.role-tier__name` | `title-lg` | 20px/24px, 0px, weight 600 | 24px/28px |
+| `.role-tier__desc` | `body-md` | 16px/22px, 0.32px | 16px/24px |
+| `.role-tier__link` | Action Link, Medium, **Bold**-variant | 16px/24px, 0.32px, weight 700, gap 6px, ikon 24px | samma |
+| `.role-tier__feature` | `body-sm` | 14px/20px, 0.28px | samma |
+
+### Regler
+
+1. **Länken byter aktiv flik i tabellen INNAN den scrollar** — `.role-tier__link` anropar en liten wrapper-funktion (t.ex. `goToCompareView(event, view)`) som hittar rätt `.compare-view-btn[data-view="…"]` och återanvänder tabellens egen `setCompareView(view, btn)` — inte en egen separat kopia av den logiken — så att segmentpillen och synligheten uppdateras identiskt med ett vanligt flik-klick, innan `scrollIntoView({behavior:'smooth'})` körs. `event.preventDefault()` krävs så att webbläsarens direkta ankarhopp inte "snap:ar" mitt i den mjuka scrollningen.
+2. **Feature-strippar ska vara grundade i den faktiska jämförelsetabellens rader** — plocka 3–4 rader som är unika för/relevanta för just den rollen (inte påhittat innehåll) så att kortet stämmer överens med vad tabellen faktiskt visar när användaren scrollar dit.
+3. **Kortparets ordning speglar flikarnas ordning** i `.compare-view-toggle` — första kortparet hör till första fliken, osv.
+4. **Länken använder Bold-varianten (700) och en 24px-ikon**, inte Regular/20px som `.compare-intro__link` — kortets CTA behöver väga upp mot den omgivande brödtexten och synas tydligt som primärt klickbar, medan `.compare-intro__link` står ensam i ett tommare område och klarar sig med Regular.
+
+### CSS-mall (kärnan)
+
+```css
+.role-tier-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 769px) {
+  .role-tier-pair { grid-template-columns: 1fr 1fr; }
+}
+
+.role-tier {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-surface-raised-primary);
+}
+@media (min-width: 640px) {
+  .role-tier { flex-direction: row; }
+}
+.role-tier--dark {
+  background: var(--color-surface-100);
+  border-color: var(--color-surface-90);
+}
+
+.role-tier__features {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-border-primary);
+}
+@media (min-width: 640px) {
+  .role-tier__features { border-top: none; border-left: 1px solid var(--color-border-primary); }
+}
+.role-tier--dark .role-tier__features { border-color: rgba(255,255,255,0.12); }
+
+.role-tier__feature {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  min-height: 56px;
+  background: var(--color-surface-05);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.28px;
+  color: var(--color-text-primary);
+}
+.role-tier__feature + .role-tier__feature { border-top: 1px solid var(--color-border-primary); }
+.role-tier--dark .role-tier__feature { background: var(--color-surface-90); color: #fff; }
+.role-tier--dark .role-tier__feature + .role-tier__feature { border-top-color: rgba(255,255,255,0.12); }
+```
+
+```js
+// Återanvänder tabellens egen setCompareView() — bygger INTE en parallell
+// egen version av flik-logiken.
+function goToCompareView(event, view) {
+  if (event) event.preventDefault();
+  var btn = document.querySelector('.compare-view-btn[data-view="' + view + '"]');
+  if (btn) setCompareView(view, btn);
+  var target = document.getElementById('jamforelse');
+  if (target) {
+    // Vanlig scrollIntoView() räknar inte in sajtens sticky header
+    // (--header-top-h, samma CSS-variabel som .compare-header-row/
+    // .compare-group__header redan använder för sin egen sticky
+    // top-offset) — sektionens topp hamnar annars gömd bakom headern.
+    var headerTopH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-top-h')) || 0;
+    var targetY = target.getBoundingClientRect().top + window.scrollY - headerTopH;
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
+  }
+}
+```
+
+> **Scrolla alltid till en `id`-ankrad sektion med `--header-top-h`-offset, aldrig med ren `scrollIntoView()`** — på sidor med sticky site-header döljer headern annars sektionens översta del. `--header-top-h` sätts redan av headerns egen JS och är samma variabel som `.compare-header-row`/`.compare-group__header` använder för sin sticky-positionering, så återanvänd den istället för att räkna ut ett eget offset.
+
+---
+
 ## Länkar – Användningsriktlinjer (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1221-33213
@@ -4043,6 +4576,182 @@ Alla fills och strokes är bundna till variabler ur ECO Design System-samlingen 
 
 ---
 
+## Badge (ECO Design System)
+
+**Figma – riktlinjer:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=4752-241948
+**Figma – alla varianter:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=6098-342317
+
+Badge är en **icke-interaktiv** status- eller etikett-indikator — läsbar men aldrig klickbar. Förväxla inte med **Tag** (interaktiv, används för filtrering/sortering/gruppering) eller med `.breadcrumb-item` (interaktiv navigering).
+
+### Används när
+- Statusindikering (t.ex. "Senaste", "Arkiv", "Under uppbyggnad", rollnamn som "Administratör").
+- Antal, featured/highlighted content, eller information som kräver omedelbar uppmärksamhet.
+- Ska **inte** förlita sig på enbart färg för att förmedla betydelse — kombinera med text och/eller ikon.
+
+### Används INTE när
+- Elementet ska vara klickbart/filtrerbart → använd **Tag** istället.
+- Det är en räknar-bubbla på en ikon (t.ex. kundvagn) → det är en annan, redan existerande komponent i det här projektet: `.badge`/`.badge--white` (cirkulär räknare, se `site-header__right`). Namnkrock — Badge/Basic nedan har fått klassnamnet `.badge-basic` för att inte kollidera.
+
+---
+
+### Varianter
+
+Badge/Basic finns i **6 States** × **3 Emphasis** × **3 Size** (Large/Medium/Small, Small endast Desktop) × valfri ikon. Utöver Basic finns även Dot (endast prick, ingen text), Number-Icon, samt e-com-specifika Product/Discount/Purchase-badges (används bara i e-handelskontext, inte i det här projektet).
+
+#### States (färg)
+
+| State | Syfte |
+|---|---|
+| **Neutral Grey** | Neutral status utan alert-betydelse (grå). |
+| **Neutral Dark** | Neutral status, hög kontrast (svart). |
+| **Alert Info** | Informativ — default alert-färg, mest flexibel. |
+| **Alert Success** | Positiv feedback/lyckad status. |
+| **Alert Warning** | Varning, kräver uppmärksamhet. |
+| **Alert Danger** | Negativ feedback/fel. |
+
+#### Emphasis (färgstyrka) — formel per state
+
+| Emphasis | Bakgrund | Border | Textfärg |
+|---|---|---|---|
+| **Strong** | `surface-{state}-default` (Neutral Grey: `surface-50` #737373 · Neutral Dark: `surface-100` svart) | ingen | `text-primary-inverted` (vit) |
+| **Weak** | `surface-{state}-weak` (Neutral Grey: `surface-20` #ccc · Neutral Dark: `surface-100` svart — identisk med Strong) | ingen | `text-{state}-default` (Neutral Grey: `text-primary` svart · Neutral Dark: `text-primary-inverted` vit) |
+| **Weaker** | `surface-{state}-weaker` (Neutral Grey: `surface-05` #f6f6f6 · Neutral Dark: `surface-100` svart — identisk med Strong/Weak) | `1px solid border-{state}-weak` (Neutral Grey: `border-primary` #e5e5e5 · Neutral Dark: `border-dark` #333) | Samma som Weak |
+
+> Neutral Dark har alltid svart bakgrund oavsett emphasis — enda skillnaden är att Weaker får en `border-dark`-kant. `{state}` i formeln ovan avser alert-namnet i gemener (`information`, `success`, `warning`, `danger`) för de fyra Alert-varianterna.
+
+**Verifierade exempel (Alert Info, Medium, Desktop):**
+
+| Emphasis | Bakgrund | Border | Text |
+|---|---|---|---|
+| Strong | `surface-information-default` `#0066ff` | – | `text-primary-inverted` vit |
+| Weak | `surface-information-weak` `#d0e9ff` | – | `text-information-default` |
+| Weaker | `surface-information-weaker` `#e2f1ff` | `1px solid border-information-weak` `#d0e9ff` | `text-information-default` |
+
+`Alert Success`/`Warning`/`Danger` följer exakt samma formel med respektive statusfärgs `-default`/`-weak`/`-weaker`-tokens (se Färger-sektionen ovan).
+
+---
+
+### Storlekar
+
+| Storlek | Padding (Desktop) | Padding (Mobil) | Font (Desktop) | Font (Mobil) | Tillgänglighet |
+|---|---|---|---|---|---|
+| **Large** | `6px 8px` | `5px 6px` | `label-lg--badge`: 14px/14px, 0.56px | 14px/14px, 0.48px | Desktop + Mobil |
+| **Medium** | `4px 5px` | `4px 5px` | `label-lg--badge`: 14px/14px, 0.56px | samma | Desktop + Mobil |
+| **Small** | `3px 5px` | – | `label-sm--badge`: 12px/12px, 0.48px | – | **Endast Desktop** |
+
+- Ikon (valfri): `14px`, `gap: 4px` mellan ikon och text.
+- Font-weight: **Medium (500)** — avviker medvetet från projektets vanliga 700, då detta är den faktiska Figma-specen för Badge/Basic.
+- `font-feature-settings`: `'ss02' 1, 'ss03' 1` (Large/Small) — Medium-storleken har även `'ss06' 1`.
+
+---
+
+### Letter Case (parameter)
+
+Badge-textens skiftläge är en egen, valbar parameter — inte hårdkodad. Två lägen:
+
+| Letter Case | Font-weight | `text-transform` | Använd när |
+|---|---|---|---|
+| **Sentence Case** (default) | 500 (Medium) | Inget (`Ny`, `Uppdaterad`) | Statusetiketter — de flesta fall. |
+| **Upper Case** | 700 (Bold) | `uppercase` (`NY`, `INLOGGAD`) | Fasta klassificerings-/kategorietiketter där versaler ger extra visuell tyngd — matchar knapparnas/label-komponenternas versal-konvention. |
+
+> Välj Sentence Case som standard. Upper Case är inte "fel" bara för att Sentence Case råkar passa innehållet — det är en medveten stilväxel, inte en bugg-fix.
+
+---
+
+### CSS-mall
+
+```css
+/* Badge/Basic — döpt .badge-basic för att inte krocka med den befintliga
+   räknar-bubblan `.badge` (kundvagn/jämför-ikoner i headern). */
+.badge-basic {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 5px;                 /* Medium, default */
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.56px;
+  white-space: nowrap;
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+.badge-basic__icon { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* Letter Case — Sentence Case är default (redan satt ovan). Upper Case: */
+.badge-basic--uppercase {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Storlekar */
+.badge-basic--large  { padding: 6px 8px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.badge-basic--small  { padding: 3px 5px; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+@media (max-width: 768px) {
+  .badge-basic--large { padding: 5px 6px; letter-spacing: 0.48px; }
+  .badge-basic--small { display: none; } /* Small är endast Desktop */
+}
+
+/* Neutral */
+.badge-basic--neutral-grey.badge-basic--strong  { background: var(--color-surface-50); color: var(--color-text-primary-inverted); }
+.badge-basic--neutral-grey.badge-basic--weak    { background: var(--color-surface-20); color: var(--color-text-primary); }
+.badge-basic--neutral-grey.badge-basic--weaker  { background: var(--color-surface-05); border: 1px solid var(--color-border-primary); color: var(--color-text-primary); }
+.badge-basic--neutral-dark.badge-basic--strong,
+.badge-basic--neutral-dark.badge-basic--weak    { background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+.badge-basic--neutral-dark.badge-basic--weaker  { background: var(--color-surface-100); border: 1px solid var(--color-border-dark); color: var(--color-text-primary-inverted); }
+
+/* Alert Info / Success (mall för Danger — byt bara statusnamnet) */
+.badge-basic--info.badge-basic--strong    { background: var(--color-surface-information-default); color: var(--color-text-primary-inverted); }
+.badge-basic--info.badge-basic--weak      { background: var(--color-surface-information-weak); color: var(--color-text-information-default); }
+.badge-basic--info.badge-basic--weaker    { background: var(--color-surface-information-weaker); border: 1px solid var(--color-border-information-weak); color: var(--color-text-information-default); }
+.badge-basic--success.badge-basic--strong { background: var(--color-surface-success-default); color: var(--color-text-primary-inverted); }
+.badge-basic--success.badge-basic--weak   { background: var(--color-surface-success-weak); color: var(--color-text-success); }
+.badge-basic--success.badge-basic--weaker { background: var(--color-surface-success-weaker); border: 1px solid var(--color-border-success-weak); color: var(--color-text-success); }
+
+/* Alert Warning — CLAUDE.md saknar en text-warning-default-token (gul text har
+   dålig kontrast); använd text-primary (svart) på samtliga emphasis-nivåer. */
+.badge-basic--warning.badge-basic--strong { background: var(--color-surface-warning-default); color: var(--color-text-primary); }
+.badge-basic--warning.badge-basic--weak   { background: var(--color-surface-warning-weak); color: var(--color-text-primary); }
+.badge-basic--warning.badge-basic--weaker { background: var(--color-surface-warning-weaker); border: 1px solid var(--color-border-warning-weak); color: var(--color-text-primary); }
+```
+
+### Färgval — vanliga betydelser
+
+Badge har inget fast facit för vilken status som får vilken färg, men håll det konsekvent inom ett projekt. Rekommenderad mappning för statusetiketter av typen "var i sitt livscykel-läge är den här sidan/komponenten":
+
+| Betydelse | State | Emphasis | Exempel |
+|---|---|---|---|
+| Nyskapad | Alert Success | Weak | `Ny` |
+| Nyligen redigerad (befintlig sida) | Alert Info | Weak | `Uppdaterad` |
+| Pågående/ofärdigt arbete | Alert Warning | Weak | `Pågående` |
+| Lägre prioritet / inaktuellt | Neutral Grey | Weaker | `Arkiv`, `Utkast`, `Test` |
+| Fast kategori (inte en status) | Neutral Grey eller Neutral Dark | Weaker/Strong | `Inloggad`, `Utloggad` — överväg `--uppercase` här för att visuellt skilja kategori från status. |
+
+### HTML-exempel
+
+```html
+<!-- Neutral Grey, Weaker, Medium — standardval för status-etiketter -->
+<span class="badge-basic badge-basic--neutral-grey badge-basic--weaker">Senaste</span>
+
+<!-- Alert Success, Strong, med ikon -->
+<span class="badge-basic badge-basic--info badge-basic--strong">
+  <img class="badge-basic__icon" src="..." alt="" />
+  Info
+</span>
+```
+
+### Regler
+
+1. **Badge ≠ Tag ≠ räknar-bubbla.** Badge är alltid icke-interaktiv (ingen `<button>`/`<a>`, inget `cursor: pointer`, ingen hover-state). Blanda inte ihop med den befintliga `.badge`-klassen (kundvagns-/jämför-räknaren i headern) — de är olika komponenter som råkar dela namn i ECO:s Figma-fil.
+2. **Färg ska aldrig vara enda bäraren av betydelse** — kombinera med text och/eller reserverad ikon (t.ex. `info`/`check_circle`/`warning`/`error` för respektive Alert-state, samma ikonlogik som Notifikationer).
+3. **Neutral Dark har alltid svart bakgrund** oavsett emphasis-val — använd den bara när hög kontrast/vikt är avsedd, annars Neutral Grey.
+4. **Small storlek är endast avsedd för Desktop** — använd Medium eller Large på mobil/tablet.
+5. Ikon (om använd) är alltid `14px` med `4px` gap till texten — hårdkoda aldrig en annan ikonstorlek i en badge.
+6. **Letter Case är en medveten parameter, inte ett misstag.** Sentence Case (default, vikt 500) och Upper Case (vikt 700 + `text-transform: uppercase`) är båda giltiga — välj utifrån om etiketten är en status (Sentence Case) eller en fast kategori (Upper Case ger extra visuell tyngd).
+7. **Färg ska spegla betydelse, inte vara slumpvis.** Håll mappningen konsekvent inom samma sida/vy (se "Färgval — vanliga betydelser" ovan) — blanda inte t.ex. grön för "Ny" på ett ställe och blå för samma betydelse på ett annat.
+
+---
+
 ## Breadcrumb (ECO Design System)
 
 **Figma – design:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1986-64264
@@ -4068,6 +4777,7 @@ Breadcrumb används för att visa användarens position i sidhierarkin och möjl
 
 - Varje brödsmula renderas som en **kantad box** (`border: 1px solid` `border-action-3` = `rgba(0,0,0,0.10)`), aldrig som understruken text/länk.
 - Avskiljare mellan brödsmulor är ett `/`-tecken, centrerat i en fast bredd om `4px`.
+- Containern har **ingen egen bakgrundsfärg** — den ligger alltid mot sidans `body`-bakgrund. Vilken färg det blir beror på sidtyp (se regel 7).
 - Samtliga brödsmulor utom den sista är klickbara länkar (`Enabled`-stil). Den **sista** brödsmulan representerar aktuell sida (`Active`-stil) — fetstil, svart text, ej klickbar.
 - Komponenten har inbyggd vertikal spacing (padding) — se regel 1 nedan för hur det påverkar sektionen efter.
 
@@ -4207,6 +4917,7 @@ Breadcrumb används för att visa användarens position i sidhierarkin och möjl
 4. Endast den **sista** brödsmulan får `.breadcrumb-item--active` (fetstil, svart, `aria-current="page"`, ej klickbar/utan `href`). Alla föregående ska vara riktiga länkar (`<a>`).
 5. Storlek (crumb-padding, textstorlek, avskiljarhöjd) styrs enbart av breakpoint enligt tabellen ovan — hårdkoda aldrig en annan storlek för en enskild sida.
 6. `aria-label="Brödsmulor"` på `<nav>` samt `aria-current="page"` på den aktiva brödsmulan är obligatoriska för tillgänglighet.
+7. **Bakgrund:** `.breadcrumb` sätter **ingen** egen bakgrundsfärg — den ligger mot `body`s bakgrund, som skiljer sig per sidtyp: publika/utloggade sidor (`template.html`) har `background-primary` (vit); sidor under Mina sidor (`mypages-template.html`, samma som övriga my-pages-sidor) har `background-secondary` (grå) som standard — det är avsiktligt, inte ett fel.
 
 ---
 

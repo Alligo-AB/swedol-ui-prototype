@@ -83,6 +83,7 @@
       --color-text-secondary-inverted:  rgba(255,255,255,0.78);
       --color-text-tertiary:            #737373;
       --color-text-tertiary-inverted:   #999999;
+      --color-text-action-primary:      #000000;
       --color-text-action-primary-inverted: #ffffff;
       --color-text-action-primary-inverted-hover: rgba(255,255,255,0.78);
       --color-text-disabled:            #939595;
@@ -143,6 +144,13 @@
       --color-border-disabled:      #dad9d7;
       --color-border-input-default: #939595;
       --color-border-focus:         #455efb;
+      --color-border-action-1:      #000000;
+      --color-border-action-2:      #ffffff;
+      --color-border-action-3:      rgba(0,0,0,0.10);
+      --color-border-information-weak: #d0e9ff;
+      --color-border-success-weak:     #daf6d0;
+      --color-border-warning-weak:     #ffe167;
+      --color-border-danger-weak:      #ffbdc0;
 
       /* ── Elevation / Shadows ────────────────────────────────── */
       --elevation-b-20:  0px 1px 3px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
@@ -750,6 +758,76 @@
       width: 1px;
       height: 24px;
       background: var(--grey-15);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       BREADCRUMB (ECO Design System)
+       Placeras alltid direkt under headern/account-nav, som första
+       element i .page. Har inbyggd vertikal spacing — se sibling-
+       regeln längst ned, som nollställer main-contents top-padding
+       när den föregås av en breadcrumb.
+    ══════════════════════════════════════════════════════════ */
+    .breadcrumb { padding: 0 var(--px-page) 0; }
+    .breadcrumb__bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 0;
+    }
+    .breadcrumb-item {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--color-border-action-3);
+      padding: 6px 7px;
+      background: none;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 12px;
+      letter-spacing: 0.24px;
+      color: var(--color-text-tertiary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .breadcrumb-item:hover {
+      color: var(--color-text-action-primary);
+      text-decoration: underline;
+    }
+    .breadcrumb-item--active {
+      font-weight: 700;
+      color: var(--color-text-primary);
+      cursor: default;
+    }
+    .breadcrumb-item--active:hover { text-decoration: none; }
+    .breadcrumb-sep {
+      flex-shrink: 0;
+      width: 4px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-tertiary);
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.28px;
+    }
+    @media (min-width: 769px) {
+      .breadcrumb { padding-bottom: 8px; }
+      .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+      .breadcrumb-sep { height: 32px; }
+    }
+    @media (min-width: 1024px) {
+      .breadcrumb { padding-bottom: 16px; }
+    }
+    .breadcrumb + .main-content,
+    .breadcrumb + .section,
+    .breadcrumb + .section--first {
+      padding-top: 0;
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -4320,6 +4398,22 @@
   </nav>
 
 <div class="page">
+
+  <!-- ══ BREADCRUMB ══════════════════════════════════════════════
+       Valfri — ta bort om sidan ligger direkt under Hem eller om
+       navigeringen redan täcks av account-nav-tabbarna (se CLAUDE.md
+       "Används INTE när"). Om den behålls: justera brödsmulorna
+       efter sidans faktiska hierarki. Om innehållet efteråt inte är
+       .main-content/.section/.section--first, lägg till en egen
+       ".breadcrumb + ..." padding-top:0-regel för det elementet.
+  ════════════════════════════════════════════════════════════════ -->
+  <nav class="breadcrumb" aria-label="Brödsmulor">
+    <div class="breadcrumb__bar">
+      <a href="#" class="breadcrumb-item">Hem</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Sidnamn</span>
+    </div>
+  </nav>
 
   <!-- CONTENT -->
 
