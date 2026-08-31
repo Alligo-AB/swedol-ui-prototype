@@ -396,6 +396,55 @@
       .compare-intro__desc { font-size: 24px; line-height: 32px; }
     }
 
+    /* ── Rollkort-snabblänkar ──────────────────────────────────────
+       Kompakt rad direkt under ingressen — EN länk per roll (samma
+       roller som .role-tier-pair längre ner), så besökaren direkt ser
+       vad sidan jämför och kan hoppa rakt till rätt kolumn i tabellen
+       utan att behöva scrolla förbi resten av heron. Byggd som ECO
+       Design Systems "System"-knappvariant (border-action-3, xs-storlek,
+       32px hög på alla brytpunkter) — medvetet den minsta, mest
+       diskreta knapptypen, eftersom detta bara är en genväg, inte en
+       primär CTA (de finns redan i .role-tier-pair). Återanvänder
+       goToCompareView() (se JS) för flikbyte + scroll, precis som
+       .role-tier__link. */
+    .role-quicklinks {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .role-quicklink {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 6px 12px;
+      box-sizing: border-box;
+      border: 1px solid var(--color-border-action-3);
+      background: transparent;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 14px;
+      letter-spacing: 0.56px;
+      text-transform: uppercase;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: background var(--duration-fast-3) var(--ease-standard), border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .role-quicklink:hover {
+      background: var(--color-surface-opacity-black-05);
+      border-color: var(--color-border-dark);
+    }
+    .role-quicklink .ms {
+      font-size: 16px;
+      color: currentColor;
+    }
+
     .compare-intro__link {
       display: inline-flex;
       align-items: center;
@@ -421,14 +470,22 @@
       .compare-intro__link { font-size: 24px; line-height: 32px; }
     }
 
+    /* CSS Grid med FAST kolumnantal (inte flex-wrap/auto-fit) — ger
+       alltid lika många kort per rad vid varje brytpunkt (1/2/4), inte
+       ett antal som beror på hur många kort som råkar få plats i
+       tillgänglig bredd. Samma brytpunkter som .fob__grid (640/1024px)
+       för konsekvens inom filen. */
     .compare-card-grid {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 8px;
       width: 100%;
     }
-    @media (min-width: 769px) {
-      .compare-card-grid { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 24px; }
+    @media (min-width: 640px) {
+      .compare-card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+    @media (min-width: 1024px) {
+      .compare-card-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
     }
 
     .compare-card {
@@ -440,9 +497,6 @@
       padding: 24px;
       background: var(--color-surface-100);
       border: 1px solid var(--color-border-secondary);
-    }
-    @media (min-width: 769px) {
-      .compare-card { flex: 1 0 0; min-width: 180px; max-width: 316px; }
     }
 
     .compare-card__header {
@@ -486,9 +540,9 @@
         font-size: 20px;
         line-height: 28px;
         display: flex;
-        align-items: center;
+        flex: 1;
+        align-items: flex-start;
         justify-content: center;
-        height: 112px;
       }
     }
 
@@ -5803,6 +5857,25 @@
       <p class="compare-intro__eyebrow">Mina sidor — Behörighetsnivåer</p>
       <h1 class="compare-intro__title">Standardanvändare vs<br aria-hidden="true">Företagsadministratör - Vad ingår i varje nivå?</h1>
       <p class="compare-intro__desc">Upptäck de kraftfulla funktionerna som finns tillgängliga för företagsadministratörer och förstå hur en uppgradering kan låsa upp avancerade möjligheter för din organisation.</p>
+
+      <div class="role-quicklinks">
+        <a href="#jamforelse" class="role-quicklink" onclick="goToCompareView(event, 'roller')">
+          <span>Standard</span>
+          <span class="ms" aria-hidden="true">arrow_downward</span>
+        </a>
+        <a href="#jamforelse" class="role-quicklink" onclick="goToCompareView(event, 'roller')">
+          <span>Administratör</span>
+          <span class="ms" aria-hidden="true">arrow_downward</span>
+        </a>
+        <a href="#jamforelse" class="role-quicklink" onclick="goToCompareView(event, 'foretag')">
+          <span>Företag Standard</span>
+          <span class="ms" aria-hidden="true">arrow_downward</span>
+        </a>
+        <a href="#jamforelse" class="role-quicklink" onclick="goToCompareView(event, 'foretag')">
+          <span>Företag Special</span>
+          <span class="ms" aria-hidden="true">arrow_downward</span>
+        </a>
+      </div>
     </div>
 
     <div class="compare-card-grid">
@@ -5833,6 +5906,34 @@
           <p class="compare-card__title">Företagsnivåer</p>
         </div>
         <p class="compare-card__desc">Hantera företaget via våra olika avancerade funktioner</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-card__header">
+          <span class="ms compare-card__icon">delivery_truck_speed</span>
+          <p class="compare-card__title">Orderhantering</p>
+        </div>
+        <p class="compare-card__desc">Sätt upp attestflöden, budgetgränser och favoritlistor för smidigare beställningar</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-card__header">
+          <span class="ms compare-card__icon">receipt_long</span>
+          <p class="compare-card__title">Fakturahantering</p>
+        </div>
+        <p class="compare-card__desc">Samla flera fakturor, koppla kostnadsställen och håll koll på betalningsvillkor</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-card__header">
+          <span class="ms compare-card__icon">sync_alt</span>
+          <p class="compare-card__title">Integrationer</p>
+        </div>
+        <p class="compare-card__desc">Koppla ihop er e-handel med affärssystemet via API, EDI eller Punchout</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-card__header">
+          <span class="ms compare-card__icon">support_agent</span>
+          <p class="compare-card__title">Support &amp; tjänster</p>
+        </div>
+        <p class="compare-card__desc">Få en personlig kundansvarig, onboarding och SLA-garanterad kundtjänst</p>
       </div>
     </div>
 

@@ -3893,6 +3893,56 @@ function goToCompareView(event, view) {
 
 > **Scrolla alltid till en `id`-ankrad sektion med `--header-top-h`-offset, aldrig med ren `scrollIntoView()`** — på sidor med sticky site-header döljer headern annars sektionens översta del. `--header-top-h` sätts redan av headerns egen JS och är samma variabel som `.compare-header-row`/`.compare-group__header` använder för sin sticky-positionering, så återanvänd den istället för att räkna ut ett eget offset.
 
+### Snabblänkar i ingressen (`.role-quicklinks`)
+
+En kompakt rad med EN länk per roll, placerad direkt under `.compare-intro__desc` (innan `.compare-card-grid`) — en snabb "innehållsförteckning" som visar exakt vilka roller/konton sidan jämför, redan innan besökaren scrollat förbi hero:n. Kompletterar (ersätter inte) de fullständiga `.role-tier-pair`-korten längre ner: samma roller, samma `goToCompareView()`-länkning, men utan beskrivning eller feature-lista — bara namn + pil.
+
+```
+.role-quicklinks                                 ← flex, wrap, centrerad, gap 8px
+  .role-quicklink × 1 per roll                    ← <a>, System-knapp (xs, 32px)
+    <span>Rollnamn</span>
+    <span class="ms">arrow_downward</span>
+```
+
+- **Storlek/variant**: byggd som ECO Design Systems **System**-knappvariant (`border: 1px solid border-action-3`, transparent bakgrund) i **xs**-storlek (32px hög, identisk mobil/desktop) — medvetet den minsta, mest diskreta knapptypen som finns, eftersom detta är en genväg och INTE en primär CTA (de finns redan i `.role-tier-pair` längre ner på sidan).
+- **Hover**: `background: var(--color-surface-opacity-black-05)` + `border-color: var(--color-border-dark)` — samma hovermönster som Secondary-knappen.
+- **Länklogik**: samma `goToCompareView(event, view)` som `.role-tier__link` — byter aktiv flik i `.compare-view-toggle` och scrollar (med `--header-top-h`-offset) till `#jamforelse`. Bygg ALDRIG en egen kopia av flik-/scroll-logiken här.
+
+```css
+.role-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px; /* space-24 — avstånd till .compare-intro__desc ovanför */
+}
+.role-quicklink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 6px 12px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-action-3);
+  background: transparent;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  transition: background var(--duration-fast-3) var(--ease-standard), border-color var(--duration-fast-3) var(--ease-standard);
+}
+.role-quicklink:hover {
+  background: var(--color-surface-opacity-black-05);
+  border-color: var(--color-border-dark);
+}
+.role-quicklink .ms { font-size: 16px; color: currentColor; }
+```
+
 ---
 
 ## Länkar – Användningsriktlinjer (ECO Design System)
