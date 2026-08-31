@@ -4642,7 +4642,7 @@
     /* -- Star rating icons ----------------------------------------- */
     .stars { display: inline-flex; align-items: center; gap: 1px; flex-shrink: 0; }
     .star-icon {
-      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       color: var(--color-border-tertiary);
       line-height: 1;
     }
@@ -4656,7 +4656,7 @@
     .review-card {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 16px;
       padding: 32px 0 24px;
       border-bottom: 1px solid var(--color-border-tertiary);
     }
@@ -4668,7 +4668,7 @@
     .review-card[hidden] { display: none; }
     .review-card:last-child { border-bottom: none; padding-bottom: 0; }
 
-    .review-card__profile { display: flex; gap: 12px; align-items: center; }
+    .review-card__profile { display: flex; gap: 12px; align-items: flex-start; }
     .review-avatar {
       width: 40px;
       height: 40px;
@@ -4691,18 +4691,18 @@
       text-transform: uppercase;
     }
     /* -- Product link (thumbnail + namn, klickbar till produktsidan) --
-       Egen rad under recensionstext/svar, ovanför gilla/rapportera-ikonerna. */
+       Placerad överst i .review-card__meta, samma plats som produkt-
+       namnet ursprungligen låg, ovanför reviewer-raden. ------------- */
     .review-card__product-link {
       display: flex;
       align-items: center;
       gap: 6px;
-      align-self: flex-start;
       text-decoration: none;
       cursor: pointer;
     }
     .review-card__thumb {
-      width: 48px;
-      height: 48px;
+      width: 16px;
+      height: 16px;
       flex-shrink: 0;
       object-fit: contain;
       background: var(--color-background-primary, #fff);
@@ -4731,17 +4731,8 @@
       color: var(--color-text-primary);
       font-feature-settings: 'ss02' 1, 'ss03' 1;
     }
-    .review-card__name {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 16px;
-      letter-spacing: 0.64px;
-      text-transform: uppercase;
-      color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    .review-card__namerow { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+    .review-card__namerow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+    .review-card__name,
     .review-card__date {
       font-family: 'Breuer Condensed', Arial, sans-serif;
       font-size: 14px;
@@ -4753,9 +4744,6 @@
     }
     .review-card__stars { display: flex; align-items: center; gap: 1px; }
 
-    /* Review text + ev. svar grupperade med gemensamt mellanrum (16px),
-       oberoende av .review-card:s egna 24px-gap mot profil/produktlänk. */
-    .review-card__body { display: flex; flex-direction: column; gap: 16px; }
     .review-card__text {
       font-family: 'Breuer Condensed', Arial, sans-serif;
       font-size: 16px;
@@ -4766,7 +4754,7 @@
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
 
-    .review-card__reply { display: flex; flex-direction: column; gap: 8px; }
+    .review-card__reply { display: flex; flex-direction: column; gap: 8px; padding-top: 8px; }
     .review-card__reply-title {
       font-family: 'Breuer Condensed', Arial, sans-serif;
       font-size: 16px;
@@ -5018,26 +5006,24 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><img src="images/stina-avatar.png" alt="Stina Carlström"></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Stina Carlström</span>
+                    <a class="review-card__product-link" href="#" aria-label="Gå till produkten Carpenter Soul hantverksbyxa stretch svart">
+                      <img class="review-card__thumb" src="images/product-hantverksbyxa.jpg" alt="">
+                      <span class="review-card__product">Carpenter Soul hantverksbyxa stretch svart</span>
+                      <span class="ms">chevron_right</span>
+                    </a>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Stina Carlström</span>
                       <span class="review-card__date">2026-08-01</span>
-                      <span class="stars review-card__stars" data-rating="4" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="4" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Riktigt bra byxor för snickeriarbete. Många fickor och sitter skönt hela dagen.</p>
-                  <div class="review-card__reply">
-                    <p class="review-card__reply-title">Svar från Swedol</p>
-                    <p class="review-card__reply-text">Hej Stina, vad kul att du uppskattar Carpenter Soul-byxorna! Kika gärna in jackan i samma serie också.</p>
-                    <p class="review-card__reply-sign">mvh Susanne / kundtjänst</p>
-                  </div>
+                <p class="review-card__text">Riktigt bra byxor för snickeriarbete. Många fickor och sitter skönt hela dagen.</p>
+                <div class="review-card__reply">
+                  <p class="review-card__reply-title">Svar från Swedol</p>
+                  <p class="review-card__reply-text">Hej Stina, vad kul att du uppskattar Carpenter Soul-byxorna! Kika gärna in jackan i samma serie också.</p>
+                  <p class="review-card__reply-sign">mvh Susanne / kundtjänst</p>
                 </div>
-                <a class="review-card__product-link" href="#" aria-label="Gå till produkten Carpenter Soul hantverksbyxa stretch svart">
-                  <img class="review-card__thumb" src="images/product-hantverksbyxa.jpg" alt="">
-                  <span class="review-card__product">Carpenter Soul hantverksbyxa stretch svart</span>
-                  <span class="ms">chevron_right</span>
-                </a>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">4</span></button>
                   <button type="button" class="review-action js-report-action"><span class="ms">flag</span><span class="js-report-count">0</span></button>
@@ -5048,21 +5034,19 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">EP</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Erik Persson</span>
+                    <a class="review-card__product-link" href="#" aria-label="Gå till produkten Skyddsglasögon klar lins">
+                      <img class="review-card__thumb" src="images/product-skyddsglasogon.jpg" alt="">
+                      <span class="review-card__product">Skyddsglasögon klar lins</span>
+                      <span class="ms">chevron_right</span>
+                    </a>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Erik Persson</span>
                       <span class="review-card__date">2026-07-28</span>
-                      <span class="stars review-card__stars" data-rating="5" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="5" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Lätta och sitter bra, immar inte igen trots hög luftfuktighet i verkstaden.</p>
-                </div>
-                <a class="review-card__product-link" href="#" aria-label="Gå till produkten Skyddsglasögon klar lins">
-                  <img class="review-card__thumb" src="images/product-skyddsglasogon.jpg" alt="">
-                  <span class="review-card__product">Skyddsglasögon klar lins</span>
-                  <span class="ms">chevron_right</span>
-                </a>
+                <p class="review-card__text">Lätta och sitter bra, immar inte igen trots hög luftfuktighet i verkstaden.</p>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">2</span></button>
                   <button type="button" class="review-action js-report-action"><span class="ms">flag</span><span class="js-report-count">0</span></button>
@@ -5073,26 +5057,24 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">ME</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Malin Ek</span>
+                    <a class="review-card__product-link" href="#" aria-label="Gå till produkten Arbetshandskar vinter">
+                      <img class="review-card__thumb" src="images/product-vinterhandske.jpg" alt="">
+                      <span class="review-card__product">Arbetshandskar vinter</span>
+                      <span class="ms">chevron_right</span>
+                    </a>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Malin Ek</span>
                       <span class="review-card__date">2026-07-20</span>
-                      <span class="stars review-card__stars" data-rating="3" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="3" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Håller värmen bra men greppet blir sämre när det är riktigt kallt. Okej för priset.</p>
-                  <div class="review-card__reply">
-                    <p class="review-card__reply-title">Svar från Swedol</p>
-                    <p class="review-card__reply-text">Hej Malin, tack för din feedback! Vi tar med oss synpunkten om greppet till vår leverantör inför kommande kollektioner.</p>
-                    <p class="review-card__reply-sign">mvh Johan / kundtjänst</p>
-                  </div>
+                <p class="review-card__text">Håller värmen bra men greppet blir sämre när det är riktigt kallt. Okej för priset.</p>
+                <div class="review-card__reply">
+                  <p class="review-card__reply-title">Svar från Swedol</p>
+                  <p class="review-card__reply-text">Hej Malin, tack för din feedback! Vi tar med oss synpunkten om greppet till vår leverantör inför kommande kollektioner.</p>
+                  <p class="review-card__reply-sign">mvh Johan / kundtjänst</p>
                 </div>
-                <a class="review-card__product-link" href="#" aria-label="Gå till produkten Arbetshandskar vinter">
-                  <img class="review-card__thumb" src="images/product-vinterhandske.jpg" alt="">
-                  <span class="review-card__product">Arbetshandskar vinter</span>
-                  <span class="ms">chevron_right</span>
-                </a>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">1</span></button>
                   <button type="button" class="review-action js-report-action"><span class="ms">flag</span><span class="js-report-count">0</span></button>
@@ -5103,21 +5085,19 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">RS</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Richard S</span>
+                    <a class="review-card__product-link" href="#" aria-label="Gå till produkten Borrmaskin 18V med 2 batterier">
+                      <img class="review-card__thumb" src="images/product-borrskruvdragare.jpg" alt="">
+                      <span class="review-card__product">Borrmaskin 18V med 2 batterier</span>
+                      <span class="ms">chevron_right</span>
+                    </a>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Richard S</span>
                       <span class="review-card__date">2026-07-15</span>
-                      <span class="stars review-card__stars" data-rating="5" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="5" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Stark motor och batterierna räcker hela dagen. Rekommenderas starkt till alla hantverkare.</p>
-                </div>
-                <a class="review-card__product-link" href="#" aria-label="Gå till produkten Borrmaskin 18V med 2 batterier">
-                  <img class="review-card__thumb" src="images/product-borrskruvdragare.jpg" alt="">
-                  <span class="review-card__product">Borrmaskin 18V med 2 batterier</span>
-                  <span class="ms">chevron_right</span>
-                </a>
+                <p class="review-card__text">Stark motor och batterierna räcker hela dagen. Rekommenderas starkt till alla hantverkare.</p>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">6</span></button>
                   <button type="button" class="review-action js-report-action"><span class="ms">flag</span><span class="js-report-count">0</span></button>
@@ -5128,21 +5108,19 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">JB</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Jonas Berg</span>
+                    <a class="review-card__product-link" href="#" aria-label="Gå till produkten Regnställ i PVC">
+                      <img class="review-card__thumb" src="images/product-regnstall.jpg" alt="">
+                      <span class="review-card__product">Regnställ i PVC</span>
+                      <span class="ms">chevron_right</span>
+                    </a>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Jonas Berg</span>
                       <span class="review-card__date">2026-07-02</span>
-                      <span class="stars review-card__stars" data-rating="4" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="4" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Håller tätt även vid ihållande regn. Något stel passform men fungerar utmärkt över arbetskläder.</p>
-                </div>
-                <a class="review-card__product-link" href="#" aria-label="Gå till produkten Regnställ i PVC">
-                  <img class="review-card__thumb" src="images/product-regnstall.jpg" alt="">
-                  <span class="review-card__product">Regnställ i PVC</span>
-                  <span class="ms">chevron_right</span>
-                </a>
+                <p class="review-card__text">Håller tätt även vid ihållande regn. Något stel passform men fungerar utmärkt över arbetskläder.</p>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">0</span></button>
                   <button type="button" class="review-action js-report-action"><span class="ms">flag</span><span class="js-report-count">0</span></button>
@@ -5153,26 +5131,24 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">LH</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Lina Holm</span>
+                    <a class="review-card__product-link" href="#" aria-label="Gå till produkten Säkerhetsskor S3">
+                      <img class="review-card__thumb" src="images/product-skyddssko.jpg" alt="">
+                      <span class="review-card__product">Säkerhetsskor S3</span>
+                      <span class="ms">chevron_right</span>
+                    </a>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Lina Holm</span>
                       <span class="review-card__date">2026-06-28</span>
-                      <span class="stars review-card__stars" data-rating="2" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="2" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Skorna kändes sköna i affären men efter en vecka klämde tåhättan. Blev tvungen att byta storlek.</p>
-                  <div class="review-card__reply">
-                    <p class="review-card__reply-title">Svar från Swedol</p>
-                    <p class="review-card__reply-text">Hej Lina, tråkigt att höra! Hör av dig till vår kundtjänst så hjälper vi dig byta till rätt storlek utan kostnad.</p>
-                    <p class="review-card__reply-sign">mvh Susanne / kundtjänst</p>
-                  </div>
+                <p class="review-card__text">Skorna kändes sköna i affären men efter en vecka klämde tåhättan. Blev tvungen att byta storlek.</p>
+                <div class="review-card__reply">
+                  <p class="review-card__reply-title">Svar från Swedol</p>
+                  <p class="review-card__reply-text">Hej Lina, tråkigt att höra! Hör av dig till vår kundtjänst så hjälper vi dig byta till rätt storlek utan kostnad.</p>
+                  <p class="review-card__reply-sign">mvh Susanne / kundtjänst</p>
                 </div>
-                <a class="review-card__product-link" href="#" aria-label="Gå till produkten Säkerhetsskor S3">
-                  <img class="review-card__thumb" src="images/product-skyddssko.jpg" alt="">
-                  <span class="review-card__product">Säkerhetsskor S3</span>
-                  <span class="ms">chevron_right</span>
-                </a>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">3</span></button>
                   <button type="button" class="review-action js-report-action"><span class="ms">flag</span><span class="js-report-count">0</span></button>
@@ -5236,20 +5212,18 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">PL</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Peter Lindqvist</span>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Peter Lindqvist</span>
                       <span class="review-card__date">2026-08-05</span>
-                      <span class="stars review-card__stars" data-rating="5" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="5" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Snabb leverans och bra kommunikation hela vägen. Beställde till vår firma i Borås och allt kom i tid.</p>
-                  <div class="review-card__reply">
-                    <p class="review-card__reply-title">Svar från Swedol</p>
-                    <p class="review-card__reply-text">Tack Peter! Vi är glada att leveransen fungerade smidigt – varmt välkommen åter.</p>
-                    <p class="review-card__reply-sign">mvh Susanne / kundtjänst</p>
-                  </div>
+                <p class="review-card__text">Snabb leverans och bra kommunikation hela vägen. Beställde till vår firma i Borås och allt kom i tid.</p>
+                <div class="review-card__reply">
+                  <p class="review-card__reply-title">Svar från Swedol</p>
+                  <p class="review-card__reply-text">Tack Peter! Vi är glada att leveransen fungerade smidigt – varmt välkommen åter.</p>
+                  <p class="review-card__reply-sign">mvh Susanne / kundtjänst</p>
                 </div>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">5</span></button>
@@ -5261,16 +5235,14 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">AK</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Amina K</span>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Amina K</span>
                       <span class="review-card__date">2026-08-02</span>
-                      <span class="stars review-card__stars" data-rating="4" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="4" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Bra sortiment av yrkeskläder, men webbsidan kunde vara lite snabbare vid sök.</p>
-                </div>
+                <p class="review-card__text">Bra sortiment av yrkeskläder, men webbsidan kunde vara lite snabbare vid sök.</p>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">1</span></button>
                   <button type="button" class="review-action js-report-action"><span class="ms">flag</span><span class="js-report-count">0</span></button>
@@ -5281,20 +5253,18 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">TS</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Torbjörn Sand</span>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Torbjörn Sand</span>
                       <span class="review-card__date">2026-07-30</span>
-                      <span class="stars review-card__stars" data-rating="5" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="5" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Fantastisk kundservice när jag behövde hjälp med en retur. Löste allt inom en dag.</p>
-                  <div class="review-card__reply">
-                    <p class="review-card__reply-title">Svar från Swedol</p>
-                    <p class="review-card__reply-text">Tack för de fina orden, Torbjörn! Vi hälsar gärna vidare till kundtjänstteamet.</p>
-                    <p class="review-card__reply-sign">mvh Johan / kundtjänst</p>
-                  </div>
+                <p class="review-card__text">Fantastisk kundservice när jag behövde hjälp med en retur. Löste allt inom en dag.</p>
+                <div class="review-card__reply">
+                  <p class="review-card__reply-title">Svar från Swedol</p>
+                  <p class="review-card__reply-text">Tack för de fina orden, Torbjörn! Vi hälsar gärna vidare till kundtjänstteamet.</p>
+                  <p class="review-card__reply-sign">mvh Johan / kundtjänst</p>
                 </div>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">3</span></button>
@@ -5306,20 +5276,18 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">CB</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Carina Berg</span>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Carina Berg</span>
                       <span class="review-card__date">2026-07-25</span>
-                      <span class="stars review-card__stars" data-rating="3" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="3" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Produkterna är bra men leveranstiden var längre än utlovat den här gången.</p>
-                  <div class="review-card__reply">
-                    <p class="review-card__reply-title">Svar från Swedol</p>
-                    <p class="review-card__reply-text">Hej Carina, vi ber om ursäkt för förseningen och ser över våra leveranstider till din ort. Tack för att du sa till.</p>
-                    <p class="review-card__reply-sign">mvh Susanne / kundtjänst</p>
-                  </div>
+                <p class="review-card__text">Produkterna är bra men leveranstiden var längre än utlovat den här gången.</p>
+                <div class="review-card__reply">
+                  <p class="review-card__reply-title">Svar från Swedol</p>
+                  <p class="review-card__reply-text">Hej Carina, vi ber om ursäkt för förseningen och ser över våra leveranstider till din ort. Tack för att du sa till.</p>
+                  <p class="review-card__reply-sign">mvh Susanne / kundtjänst</p>
                 </div>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">0</span></button>
@@ -5331,16 +5299,14 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">MO</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Mikael Ohlsson</span>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Mikael Ohlsson</span>
                       <span class="review-card__date">2026-07-18</span>
-                      <span class="stars review-card__stars" data-rating="5" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="5" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Handlat hos Swedol i över 10 år, alltid pålitliga och bra priser för företag.</p>
-                </div>
+                <p class="review-card__text">Handlat hos Swedol i över 10 år, alltid pålitliga och bra priser för företag.</p>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">8</span></button>
                   <button type="button" class="review-action js-report-action"><span class="ms">flag</span><span class="js-report-count">0</span></button>
@@ -5351,20 +5317,18 @@
                 <div class="review-card__profile">
                   <div class="review-avatar"><span class="review-avatar__initials">SM</span></div>
                   <div class="review-card__meta">
-                    <span class="review-card__name">Sofia Malm</span>
                     <div class="review-card__namerow">
+                      <span class="review-card__name">Sofia Malm</span>
                       <span class="review-card__date">2026-07-10</span>
-                      <span class="stars review-card__stars" data-rating="2" data-size="12"></span>
+                      <span class="stars review-card__stars" data-rating="2" data-size="16"></span>
                     </div>
                   </div>
                 </div>
-                <div class="review-card__body">
-                  <p class="review-card__text">Fick fel artikel i min beställning, tog för lång tid att få rättat till.</p>
-                  <div class="review-card__reply">
-                    <p class="review-card__reply-title">Svar från Swedol</p>
-                    <p class="review-card__reply-text">Hej Sofia, det var inte okej. Vi kontaktar dig direkt för att lösa det här snabbt.</p>
-                    <p class="review-card__reply-sign">mvh Johan / kundtjänst</p>
-                  </div>
+                <p class="review-card__text">Fick fel artikel i min beställning, tog för lång tid att få rättat till.</p>
+                <div class="review-card__reply">
+                  <p class="review-card__reply-title">Svar från Swedol</p>
+                  <p class="review-card__reply-text">Hej Sofia, det var inte okej. Vi kontaktar dig direkt för att lösa det här snabbt.</p>
+                  <p class="review-card__reply-sign">mvh Johan / kundtjänst</p>
                 </div>
                 <div class="review-card__actions">
                   <button type="button" class="review-action js-like-action"><span class="ms">thumb_up</span><span class="js-like-count">2</span></button>
