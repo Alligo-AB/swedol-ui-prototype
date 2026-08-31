@@ -1823,6 +1823,21 @@ Det går att använda sektioner **utan** inbyggd padding och låta innehållet i
 4. **Horisontell padding** – sektionens sidmarginaler följer breakpoint-marginalen definierad i grid-systemet (`16px` xs, `32px` sm/md, `40px` lg+). Använd `--px-full` eller `px-[16px] sm:px-[32px] lg:px-[40px]`.
 5. **Nollad padding** – stäng av inbyggd padding enbart i de 5 definierade use-casen ovan. Använd aldrig nollad padding utan tydligt syfte.
 
+### Page Divider
+
+En tunn horisontell linje som skiljer två `.section`-block åt utan att markera en tydlig färgförändring — används **mellan** två sektioner (inte inuti en, se use case 1 ovan), typiskt när båda har samma bakgrundsfärg och en full sektionsgräns skulle kännas för kraftig. Egen `<div>`, inte en `<section>`.
+
+```css
+.page-divider { padding: 48px var(--px-page); }
+.page-divider__line { height: 1px; background: var(--color-border-primary); }
+```
+
+```html
+<div class="page-divider"><div class="page-divider__line"></div></div>
+```
+
+> `48px` toppadding/bottenpadding är standard när dividern ersätter en sektionsgräns rakt av (som i `mypages/users.html`, mellan `.fav-store-section` och `.contact-section`). Om dividern istället placeras **mellan två `.section`-block som redan har egen top-/bottom-padding** (t.ex. `.section.section--first` följt av nästa `.section`), nollställ `.page-divider`s egen padding (`padding: 0 var(--px-page);`) — annars staplas två luftmängder ovanpå varandra och det blir onödigt mycket tomrum.
+
 ---
 
 ## My Pages – Page Title-sektion
