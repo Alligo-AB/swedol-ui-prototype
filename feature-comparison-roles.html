@@ -879,8 +879,14 @@
          så röd tråd/linjering med den kräver att båda hugger likadant. */
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       justify-items: center;
-      gap: 8px;
+      gap: 8px; /* xs: space-8 — sm och uppåt skalar till 24px, se nedan */
       width: 100%;
+    }
+    @media (min-width: 640px) {
+      /* gap skalar upp till 24px från sm och uppåt (delas med
+         .compare-row__checks nedan, så de två raderna alltid håller
+         samma kolumnavstånd/linjering) — bara xs behåller de tätare 8px. */
+      .compare-role-cols { gap: 24px; }
     }
     @media (min-width: 769px) {
       /* Ingen fast bredd — kolumnerna huggs till sitt eget innehåll
@@ -890,7 +896,6 @@
       .compare-role-cols {
         grid-template-columns: minmax(0, var(--compare-col-1, 1fr)) minmax(0, var(--compare-col-2, 1fr));
         width: auto;
-        gap: 8px;
       }
     }
     .compare-role-col {
@@ -930,6 +935,31 @@
       color: var(--color-text-primary);
       white-space: nowrap;
       font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    @media (max-width: 639px) {
+      /* xs: kolumnen kan vara smalare än rubrikens nowrap-bredd (t.ex.
+         "Litet & medelstort företag") vilket annars pressade texten ut
+         över kolumngränsen. align-self: stretch tar ut hela
+         .compare-role-col:s bredd (föräldern centrerar annars bara sina
+         barn efter deras innehållsbredd, se align-items:center där) så
+         att white-space: normal faktiskt har utrymme att radbryta INOM
+         kolumnen i stället för att fortsätta hugga en enda rad.
+
+         min-height sätts DYNAMISKT av JS (syncCompareRoleNameHeights(),
+         se initieringen längre ner) till den högsta av de två kolumnernas
+         faktiska renderade höjd — .compare-role-col är en fristående
+         flex-kolumn per roll (inget grid-samband mellan kolumnerna), så
+         utan detta skulle badge/knapp hamna på olika höjd så fort EN
+         rubrik radbröt fler rader än den andra. Ett statiskt gissat
+         pixelvärde här hade bara täckt "upp till N rader" — JS täcker
+         alla fall oavsett hur många rader en rubrik faktiskt radbryter
+         till. */
+      .compare-role-col__name {
+        align-self: stretch;
+        justify-content: center;
+        white-space: normal;
+        text-align: center;
+      }
     }
     @media (min-width: 769px) {
       .compare-role-col__name { font-size: 26px; line-height: 26px; text-transform: uppercase; }
@@ -1156,16 +1186,20 @@
          texten — måste hugga, precis som .compare-role-cols då gör. */
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       justify-items: center;
-      gap: 8px;
+      gap: 8px; /* xs: space-8 — sm och uppåt skalar till 24px, se nedan */
       padding: 16px 0;
       width: 100%;
       box-sizing: border-box;
+    }
+    @media (min-width: 640px) {
+      /* Samma 24px-uppskalning som .compare-role-cols — delat gap håller
+         de två raderna i linje med varandra vid alla brytpunkter över xs. */
+      .compare-row__checks { gap: 24px; }
     }
     @media (min-width: 769px) {
       .compare-row__checks {
         grid-template-columns: minmax(0, var(--compare-col-1, 1fr)) minmax(0, var(--compare-col-2, 1fr));
         width: auto;
-        gap: 8px;
         padding: 0;
         flex-shrink: 0;
       }
@@ -8592,6 +8626,35 @@
     }
     window.addEventListener('resize', measureCompareStickyOffsets);
 
+    // Ger .compare-role-col__name (rollkolumnernas rubrik, se CSS-
+    // kommentaren där) samma höjd i BÅDA kolumnerna på xs — annars radbryter
+    // en lång rubrik (t.ex. "Litet & medelstort företag") till fler rader
+    // än den andra kolumnens, vilket skjuter badge/knapp nedanför i otakt
+    // mellan kolumnerna. Bara xs (<640px) drabbas i praktiken — sm/md/lg
+    // ger kolumnerna gott om plats, och rensar därför sitt eget minHeight
+    // om fönstret breddas dit, så inline-stilen aldrig blir kvar och stör
+    // desktop-layouten.
+    function syncCompareRoleNameHeights() {
+      var visible = document.querySelector('.compare-table:not([hidden])');
+      if (!visible) return;
+      var names = visible.querySelectorAll('.compare-role-col__name');
+      if (names.length < 2 || window.innerWidth >= 640) {
+        names.forEach(function (n) { n.style.minHeight = ''; });
+        return;
+      }
+      // Nollställ innan mätning så vi läser respektive rubriks EGEN
+      // naturliga höjd, inte en tidigare synkad (och därför konstlat hög).
+      names.forEach(function (n) { n.style.minHeight = ''; });
+      var maxH = 0;
+      names.forEach(function (n) { maxH = Math.max(maxH, n.offsetHeight); });
+      names.forEach(function (n) { n.style.minHeight = maxH + 'px'; });
+    }
+    syncCompareRoleNameHeights();
+    if (window.document && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(syncCompareRoleNameHeights);
+    }
+    window.addEventListener('resize', syncCompareRoleNameHeights);
+
     function measureCompareGroupRows(wrap) {
       wrap.style.maxHeight = wrap.scrollHeight + 'px';
     }
@@ -8807,6 +8870,7 @@
       // position fram tills nu).
       initVisibleCompareFilterThumb();
       setCompareTooltipPositions();
+      syncCompareRoleNameHeights();
       observeHeaderRow();
       observeGroupHeaders();
     }
