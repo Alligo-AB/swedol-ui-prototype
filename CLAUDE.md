@@ -4790,6 +4790,7 @@ Badge har inget fast facit för vilken status som får vilken färg, men håll d
 | Nyligen redigerad (befintlig sida) | Alert Info | Weak | `Uppdaterad` |
 | Pågående/ofärdigt arbete | Alert Warning | Weak | `Pågående` |
 | Lägre prioritet / inaktuellt | Neutral Grey | Weaker | `Arkiv`, `Utkast`, `Test` |
+| Redo att lämnas över till utveckling | Neutral Dark | Weaker | `Klar för utveckling` |
 | Fast kategori (inte en status) | Neutral Grey eller Neutral Dark | Weaker/Strong | `Inloggad`, `Utloggad` — överväg `--uppercase` här för att visuellt skilja kategori från status. |
 
 ### HTML-exempel

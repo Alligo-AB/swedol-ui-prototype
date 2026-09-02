@@ -416,6 +416,12 @@
       border-color: var(--color-border-warning-weak);
       color: var(--color-text-primary); /* ingen text-warning-default-token finns */
     }
+    /* Klar för utveckling — prototyp redo att lämnas över till dev (Neutral Dark, Weaker) */
+    .site-index-card__tag--ready {
+      background: var(--color-surface-100);
+      border-color: var(--color-border-dark);
+      color: var(--color-text-primary-inverted);
+    }
     .site-index-card__desc {
       flex: 1;
       font-size: 14px;
@@ -4588,9 +4594,9 @@
 ════════════════════════════════════════════════════════════════ -->
 <section class="section section--first">
   <div class="site-index-intro">
-    <p class="site-index-intro__eyebrow">Swedol UI-prototyp</p>
-    <h1 class="site-index-intro__title">Sidöversikt</h1>
-    <p class="site-index-intro__desc">Startpunkt för att navigera mellan alla sidor och komponenter i prototypen. Utgå alltid från en kopia av mallarna nedan när du bygger en ny sida — de har header/footer/huvudmeny via delade partials och alla design-tokens på plats. Fullständiga regler för komponenter, tokens och breakpoints finns i <code>CLAUDE.md</code>.</p>
+    <p class="site-index-intro__eyebrow">Swedol UI Prototype</p>
+    <h1 class="site-index-intro__title">Site overview</h1>
+    <p class="site-index-intro__desc">Starting point for navigating between all pages and components in the prototype. Always start from a copy of the templates below when building a new page — they already have the header/footer/main menu wired up via shared partials, with all design tokens in place. Full rules for components, tokens, and breakpoints live in <code>CLAUDE.md</code>.</p>
   </div>
 </section>
 
@@ -4598,30 +4604,30 @@
 
 <section class="section site-index-section">
   <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Mallar — börja alltid här</h2>
-    <p class="site-index-section__desc">Kopiera rätt mall beroende på om sidan kräver inloggning eller inte. Ta aldrig en befintlig sida som utgångspunkt.</p>
+    <h2 class="site-index-section__title">Templates — always start here</h2>
+    <p class="site-index-section__desc">Copy the right template depending on whether the page requires login or not. Never use an existing page as your starting point.</p>
   </div>
   <div class="site-index-grid">
     <a href="template.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Mall — Publik sida</span>
+        <span class="site-index-card__title">Template — Public page</span>
         <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--updated">Uppdaterad</span>
-          <span class="site-index-card__tag site-index-card__tag--uppercase">Utloggad</span>
+          <span class="site-index-card__tag site-index-card__tag--updated">Updated</span>
+          <span class="site-index-card__tag site-index-card__tag--uppercase">Logged out</span>
         </div>
       </div>
-      <p class="site-index-card__desc">Startpunkt för nya sidor som inte kräver inloggning. Vit sidbakgrund (<code>background-primary</code>).</p>
+      <p class="site-index-card__desc">Starting point for new pages that don't require login. White page background (<code>background-primary</code>).</p>
       <span class="site-index-card__path">template.html</span>
     </a>
     <a href="mypages/mypages-template.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Mall — Mina sidor</span>
+        <span class="site-index-card__title">Template — My Pages</span>
         <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--updated">Uppdaterad</span>
-          <span class="site-index-card__tag site-index-card__tag--uppercase">Inloggad</span>
+          <span class="site-index-card__tag site-index-card__tag--updated">Updated</span>
+          <span class="site-index-card__tag site-index-card__tag--uppercase">Logged in</span>
         </div>
       </div>
-      <p class="site-index-card__desc">Startpunkt för nya sidor under Mina sidor, med account-nav-tabbar. Grå sidbakgrund (<code>background-secondary</code>) som standard.</p>
+      <p class="site-index-card__desc">Starting point for new pages under My Pages, with account nav tabs. Grey page background (<code>background-secondary</code>) by default.</p>
       <span class="site-index-card__path">mypages/mypages-template.html</span>
     </a>
   </div>
@@ -4629,47 +4635,50 @@
 
 <section class="section section--secondary site-index-section">
   <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Mina sidor — Användarhantering</h2>
-    <p class="site-index-section__desc">Flera parallella versioner under utveckling — <code>users.html</code> är den mest fullständiga/senaste.</p>
+    <h2 class="site-index-section__title">My Pages — User management</h2>
+    <p class="site-index-section__desc">Several parallel versions in progress — <code>users.html</code> is the most complete/latest.</p>
   </div>
   <div class="site-index-grid">
     <a href="mypages/users.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Användare</span>
-        <span class="site-index-card__tag site-index-card__tag--new">Ny</span>
+        <span class="site-index-card__title">Users - V2</span>
+        <span class="site-index-card__tag site-index-card__tag--new">New</span>
       </div>
-      <p class="site-index-card__desc">Fullständig användartabell: filter, sök, kolumninställningar, saldo-hantering, lägg till/redigera/radera-drawers, mobilkort.</p>
+      <p class="site-index-card__desc">Full user table: filters, search, column settings, balance management, add/edit/delete drawers, mobile cards.</p>
       <span class="site-index-card__path">mypages/users.html</span>
     </a>
     <a href="mypages/users-dashboard.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Användare — Dashboard-variant</span>
-        <span class="site-index-card__tag">Utkast</span>
+        <span class="site-index-card__title">Users — Dashboard variant</span>
+        <span class="site-index-card__tag">Draft</span>
       </div>
-      <p class="site-index-card__desc">Alternativt upplägg av användarsidan.</p>
+      <p class="site-index-card__desc">Alternative layout of the users page.</p>
       <span class="site-index-card__path">mypages/users-dashboard.html</span>
     </a>
     <a href="mypages/users_V1.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Användare — V1</span>
-        <span class="site-index-card__tag">Arkiv</span>
+        <span class="site-index-card__title">Users — V1</span>
+        <div class="site-index-card__tag-group">
+          <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
+          <span class="site-index-card__tag">Archive</span>
+        </div>
       </div>
-      <p class="site-index-card__desc">Tidigare version av användarsidan, sparad som referens.</p>
+      <p class="site-index-card__desc">Production-ready prototype. Previous version of the users page.</p>
       <span class="site-index-card__path">mypages/users_V1.html</span>
     </a>
     <a href="mypages/dashboard_test.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Min sida — Dashboard</span>
+        <span class="site-index-card__title">My Page — Dashboard</span>
         <span class="site-index-card__tag">Test</span>
       </div>
-      <p class="site-index-card__desc">Experimentell översiktssida ("Min sida") för kontot.</p>
+      <p class="site-index-card__desc">Experimental overview page ("My Page") for the account.</p>
       <span class="site-index-card__path">mypages/dashboard_test.html</span>
     </a>
     <a href="mypages/addressbook.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Adressbok</span>
+        <span class="site-index-card__title">Address book</span>
       </div>
-      <p class="site-index-card__desc">Hantering av företagets leverans- och faktureringsadresser.</p>
+      <p class="site-index-card__desc">Management of the company's delivery and billing addresses.</p>
       <span class="site-index-card__path">mypages/addressbook.html</span>
     </a>
   </div>
@@ -4677,48 +4686,50 @@
 
 <section class="section site-index-section">
   <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Jämförelse &amp; marknadsföring</h2>
-    <p class="site-index-section__desc">Publika sidor som marknadsför uppgradering/behörighetsnivåer.</p>
+    <h2 class="site-index-section__title">Comparison &amp; marketing</h2>
+    <p class="site-index-section__desc">Public pages marketing upgrades/permission tiers.</p>
   </div>
   <div class="site-index-grid">
     <a href="e-handelspartner.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Swedol som e-handelspartner</span>
-        <span class="site-index-card__tag site-index-card__tag--new">Ny</span>
+        <span class="site-index-card__title">Swedol as an e-commerce partner</span>
+        <span class="site-index-card__tag site-index-card__tag--new">New</span>
       </div>
-      <p class="site-index-card__desc">SaaS-liknande sida utan priser: fördelar för privatperson, företag och stora organisationer, med jämförelsetabell, EDI/Punchout-integration och FAQ.</p>
+      <p class="site-index-card__desc">SaaS-like page without pricing: benefits for individuals, businesses, and large organizations, with a comparison table, EDI/Punchout integration, and FAQ.</p>
       <span class="site-index-card__path">e-handelspartner.html</span>
     </a>
     <a href="feature-comparison-roles.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Jämför behörighetsnivåer</span>
-        <span class="site-index-card__tag site-index-card__tag--wip">Pågående</span>
+        <span class="site-index-card__title">Compare permission tiers</span>
+        <span class="site-index-card__tag site-index-card__tag--wip">In progress</span>
       </div>
-      <p class="site-index-card__desc">Ny version byggd sektion för sektion direkt från Figma-designen. Under uppbyggnad.</p>
+      <p class="site-index-card__desc">New version built section by section directly from the Figma design. Work in progress.</p>
       <span class="site-index-card__path">feature-comparison-roles.html</span>
     </a>
     <a href="feature-comparison.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Jämför behörighetsnivåer — tidigare skiss</span>
-        <span class="site-index-card__tag">Arkiv</span>
+        <span class="site-index-card__title">Compare permission tiers — earlier draft</span>
+        <span class="site-index-card__tag">Archive</span>
       </div>
-      <p class="site-index-card__desc">Äldre utforskande skiss av samma jämförelsesida, med hero + tabell-toggle.</p>
+      <p class="site-index-card__desc">Older exploratory draft of the same comparison page, with hero + table toggle.</p>
       <span class="site-index-card__path">feature-comparison.html</span>
     </a>
     <a href="reviews.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Recensioner</span>
-        <span class="site-index-card__tag site-index-card__tag--updated">Uppdaterad</span>
+        <span class="site-index-card__title">Reviews</span>
+        <div class="site-index-card__tag-group">
+          <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
+        </div>
       </div>
-      <p class="site-index-card__desc">Produkt- och företagsrecensioner via Trustvoice.</p>
+      <p class="site-index-card__desc">Product and company reviews via Trustvoice.</p>
       <span class="site-index-card__path">reviews.html</span>
     </a>
     <a href="reviews_backup_1.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Recensioner — backup</span>
-        <span class="site-index-card__tag">Arkiv</span>
+        <span class="site-index-card__title">Reviews — backup</span>
+        <span class="site-index-card__tag">Archive</span>
       </div>
-      <p class="site-index-card__desc">Sparad backup-version av recensionssidan.</p>
+      <p class="site-index-card__desc">Saved backup version of the reviews page.</p>
       <span class="site-index-card__path">reviews_backup_1.html</span>
     </a>
   </div>
@@ -4726,14 +4737,15 @@
 
 <section class="section section--secondary site-index-section">
   <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Komponenter &amp; test</h2>
+    <h2 class="site-index-section__title">Components &amp; testing</h2>
   </div>
   <div class="site-index-grid">
     <a href="mypages/cookie-banner.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
         <span class="site-index-card__title">Cookie banner</span>
+        <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
       </div>
-      <p class="site-index-card__desc">Produktionsfärdig prototyp av cookie-bannerkomponenten.</p>
+      <p class="site-index-card__desc">Production-ready prototype of the cookie banner component.</p>
       <span class="site-index-card__path">mypages/cookie-banner.html</span>
     </a>
     <a href="mypages/cookie-banner_v1.html" class="site-index-card" target="_blank" rel="noopener">
@@ -4741,7 +4753,7 @@
         <span class="site-index-card__title">Cookie banner — variant 2</span>
         <span class="site-index-card__tag">Test</span>
       </div>
-      <p class="site-index-card__desc">Alternativt utförande av cookie-bannern.</p>
+      <p class="site-index-card__desc">Alternative implementation of the cookie banner.</p>
       <span class="site-index-card__path">mypages/cookie-banner_v1.html</span>
     </a>
   </div>
@@ -4749,14 +4761,14 @@
 
 <section class="section site-index-section">
   <div class="site-index-section__head">
-    <h2 class="site-index-section__title">E-post</h2>
+    <h2 class="site-index-section__title">Email</h2>
   </div>
   <div class="site-index-grid">
     <a href="email/email.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">
-        <span class="site-index-card__title">Välkomstmail</span>
+        <span class="site-index-card__title">Welcome email</span>
       </div>
-      <p class="site-index-card__desc">HTML-mall för välkomstmejlet till nya kunder.</p>
+      <p class="site-index-card__desc">HTML template for the welcome email sent to new customers.</p>
       <span class="site-index-card__path">email/email.html</span>
     </a>
   </div>
