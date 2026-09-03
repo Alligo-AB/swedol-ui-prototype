@@ -1828,7 +1828,7 @@ Det går att använda sektioner **utan** inbyggd padding och låta innehållet i
 En tunn horisontell linje som skiljer två `.section`-block åt utan att markera en tydlig färgförändring — används **mellan** två sektioner (inte inuti en, se use case 1 ovan), typiskt när båda har samma bakgrundsfärg och en full sektionsgräns skulle kännas för kraftig. Egen `<div>`, inte en `<section>`.
 
 ```css
-.page-divider { padding: 48px var(--px-page); }
+.page-divider { padding: 48px var(--px-full); }
 .page-divider__line { height: 1px; background: var(--color-border-primary); }
 ```
 
@@ -1836,7 +1836,9 @@ En tunn horisontell linje som skiljer två `.section`-block åt utan att markera
 <div class="page-divider"><div class="page-divider__line"></div></div>
 ```
 
-> `48px` toppadding/bottenpadding är standard när dividern ersätter en sektionsgräns rakt av (som i `mypages/users.html`, mellan `.fav-store-section` och `.contact-section`). Om dividern istället placeras **mellan två `.section`-block som redan har egen top-/bottom-padding** (t.ex. `.section.section--first` följt av nästa `.section`), nollställ `.page-divider`s egen padding (`padding: 0 var(--px-page);`) — annars staplas två luftmängder ovanpå varandra och det blir onödigt mycket tomrum.
+> `48px` toppadding/bottenpadding är standard när dividern ersätter en sektionsgräns rakt av (som i `mypages/users.html`, mellan `.fav-store-section` och `.contact-section`). Om dividern istället placeras **mellan två `.section`-block som redan har egen top-/bottom-padding** (t.ex. `.section.section--first` följt av nästa `.section`), nollställ `.page-divider`s egen padding (`padding: 0 var(--px-full);`) — annars staplas två luftmängder ovanpå varandra och det blir onödigt mycket tomrum.
+>
+> **Använd alltid `--px-full`, aldrig `--px-page`.** `--px-page` är enbart marginalvärdet (16/32/40px) och saknar `xl`-brytpunktens centrering mot `max-w: 1200px` — en divider byggd på `--px-page` fortsätter ut mot skärmkanten på breda skärmar istället för att sluta där sektionsinnehållet ovanför/under gör det. `--px-full` (`max(var(--px-page), calc((100vw - var(--max-w)) / 2))`) är samma token som `.section` redan använder, så linjen respekterar samma marginal och samma brytpunktsgräns som resten av sidan.
 
 ---
 
