@@ -1,0 +1,165 @@
+<!-- ════════════════════════════════════════════════════════════
+     GLOBAL PARTIAL — Main Menu Drawer (Huvudmeny)
+     Denna fil är den enda källan (single source of truth) för
+     hamburgermenyns innehåll (nivå 1 + nivå 2). Den laddas in via
+     JS (synkron XHR) i varje sida som använder den — redigera
+     ENDAST här, ändringen slår igenom automatiskt i alla sidor
+     som inkluderar filen.
+
+     Inkluderas för närvarande i:
+       - /index.html
+       - /template.html
+       - /reviews.html
+       - /feature-comparison.html
+       - /mypages/mypages-template.html
+       - /mypages/users.html
+       - /mypages/users-dashboard.html
+       - /mypages/users_V1.html
+       - /mypages/dashboard_test.html
+       - /mypages/addressbook.html
+════════════════════════════════════════════════════════════ -->
+
+  <!-- ══ HUVUDMENY-DRAWER ═══════════════════════════════════════ -->
+  <div class="drawer-overlay" id="main-menu-overlay" onclick="closeMainMenuDrawer()"></div>
+  <div class="drawer-panel drawer-panel--left" id="main-menu-panel" role="dialog" aria-modal="true" aria-label="Huvudmeny">
+
+    <!-- Nivå 1 -->
+    <div class="menu-level" id="menu-level-1">
+      <div class="drawer-header">
+        <div class="drawer-header__content">
+          <img class="menu-drawer__logo" src="images/swedol-logo-black.svg" alt="Swedol">
+        </div>
+        <button type="button" class="drawer-close-btn" onclick="closeMainMenuDrawer()" aria-label="Stäng">
+          <span class="ms">close</span>
+        </button>
+      </div>
+
+      <div class="menu-drawer__content">
+        <div class="menu-main-nav">
+          <button type="button" class="menu-item menu-item--lg" onclick="openMenuLevel2('Produktsortiment')">
+            <span class="menu-item__label">Produktsortiment</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </button>
+          <a href="#" class="menu-item menu-item--lg">
+            <span class="menu-item__label">Kampanjer</span>
+          </a>
+          <a href="#" class="menu-item menu-item--lg">
+            <span class="menu-item__label">Våra Tjänster</span>
+          </a>
+        </div>
+        <div class="menu-meta-nav">
+          <a href="#" class="menu-item menu-item--sm"><span class="menu-item__label">Våra butiker</span></a>
+          <a href="#" class="menu-item menu-item--sm"><span class="menu-item__label">Vårt erbjudande</span></a>
+          <a href="#" class="menu-item menu-item--sm"><span class="menu-item__label">Kunskapsbanken</span></a>
+          <a href="#" class="menu-item menu-item--sm"><span class="menu-item__label">Mina sidor</span></a>
+          <a href="#" class="menu-item menu-item--sm"><span class="menu-item__label">Kundsupport</span></a>
+        </div>
+      </div>
+
+      <button type="button" class="menu-store-select">
+        <span class="menu-store-select__left">
+          <span class="ms">location_on</span>
+          <span class="menu-store-select__label">Välj butik</span>
+        </span>
+        <span class="menu-store-select__right">
+          <span class="ms">chevron_right</span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Nivå 2 -->
+    <div class="menu-level menu-level--2" id="menu-level-2">
+      <div class="menu-level2__header" id="menu-level-2-header">
+        <div class="menu-level2__nav-row">
+          <button type="button" class="action-link action-link--small action-link--bold" onclick="closeMenuLevel2()">
+            <span class="ms">chevron_left</span><span class="action-link__label">MENY</span>
+          </button>
+          <button type="button" class="drawer-close-btn" onclick="closeMainMenuDrawer()" aria-label="Stäng">
+            <span class="ms">close</span>
+          </button>
+        </div>
+        <h2 class="menu-level2__title" id="menu-level-2-title">Produktsortiment</h2>
+      </div>
+
+      <div class="menu-drawer__content" id="menu-level-2-content">
+        <div class="menu-level2-list">
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-verktyg-maskiner.png" alt=""></span>
+            <span class="menu-item__label">Verktyg och maskiner</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-fordon-garage.png" alt=""></span>
+            <span class="menu-item__label">Fordon och garage</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-klader-skydd.png" alt=""></span>
+            <span class="menu-item__label">Kläder och skydd</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-oljor-kem.png" alt=""></span>
+            <span class="menu-item__label">Oljor och kem</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-hydraulik-slang.png" alt=""></span>
+            <span class="menu-item__label">Hydraulik och slang</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-montering-skruv-las.png" alt=""></span>
+            <span class="menu-item__label">Montering, skruv och lås</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-el-belysning.png" alt=""></span>
+            <span class="menu-item__label">El och belysning</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-lyft-last.png" alt=""></span>
+            <span class="menu-item__label">Lyft och last</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-brandskydd-kontor-rengoring.png" alt=""></span>
+            <span class="menu-item__label">Brandskydd, kontor och rengöring</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-varme-ventilation-sanitet.png" alt=""></span>
+            <span class="menu-item__label">Värme, ventilation och sanitet</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-park-tradgard.png" alt=""></span>
+            <span class="menu-item__label">Park och trädgård</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-skogsbruk.png" alt=""></span>
+            <span class="menu-item__label">Skogsbruk</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-lantbruk.png" alt=""></span>
+            <span class="menu-item__label">Lantbruk</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-jakt-slakt.png" alt=""></span>
+            <span class="menu-item__label">Jakt och slakt</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+          <a href="#" class="menu-item menu-item--sm">
+            <span class="menu-item__icon"><img src="images/category-osorterat.png" alt=""></span>
+            <span class="menu-item__label">Osorterat</span>
+            <span class="ms menu-item__chevron">chevron_right</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
