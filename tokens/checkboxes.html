@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swedol – Tokens: Checkboxes</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+    .ms {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    button { position: relative; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color var(--duration-fast-2) var(--ease-standard); }
+    body.keyboard-nav button:focus { outline-color: var(--color-border-focus); }
+
+    body {
+      font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+      min-width: 320px;
+    }
+
+    /* Layout + motion custom properties are NOT part of the alligo-design-tokens
+       package -- they're local site conventions (see CLAUDE.md). Everything
+       else on this page (--color-*, --shadow-*, --dimension-*, --border-*)
+       comes live from the CDN link in <head>, on purpose -- unlike
+       template.html, this page does NOT redeclare a local :root fallback for
+       those, so what you see here is exactly what's published right now. */
+    :root {
+      --px-page: 16px;
+      --max-w: 1200px;
+      --px-full: max(var(--px-page), calc((100vw - var(--max-w)) / 2));
+      --duration-fast-2: 100ms;
+      --duration-fast-3: 150ms;
+      --duration-medium-2: 300ms;
+      --ease-standard: cubic-bezier(.35,0,.35,1);
+    }
+    @media (min-width: 640px) { :root { --px-page: 32px; } }
+    @media (min-width: 1024px) { :root { --px-page: 40px; } }
+
+    .page { max-width: 1280px; margin: 0 auto; }
+
+    .section {
+      background: var(--color-surface-raised-primary);
+      padding: 32px var(--px-full) 40px;
+    }
+    .section--secondary { background: var(--color-surface-raised-secondary); }
+    .section--first { padding-top: 16px; }
+    @media (min-width: 640px) {
+      .section { padding-top: 48px; padding-bottom: 48px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 769px) {
+      .section { padding-top: 56px; padding-bottom: 64px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 1024px) {
+      .section { padding-top: 72px; padding-bottom: 80px; }
+      .section--first { padding-top: 40px; }
+    }
+
+    /* Breadcrumb (ECO Design System) -- verbatim from CLAUDE.md */
+    .breadcrumb { padding: 0 var(--px-page) 0; }
+    .breadcrumb__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 16px 0; }
+    .breadcrumb-item {
+      display: inline-flex; align-items: center;
+      border: 1px solid var(--color-border-action-3);
+      padding: 6px 7px; background: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 12px;
+      letter-spacing: 0.24px; color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .breadcrumb-item:hover { color: var(--color-text-action-primary); text-decoration: underline; }
+    .breadcrumb-item--active { font-weight: 700; color: var(--color-text-primary); cursor: default; }
+    .breadcrumb-item--active:hover { text-decoration: none; }
+    .breadcrumb-sep {
+      flex-shrink: 0; width: 4px; height: 24px; display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-tertiary); font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px;
+      font-weight: 400; letter-spacing: 0.28px;
+    }
+    @media (min-width: 769px) {
+      .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+      .breadcrumb-sep { height: 32px; }
+    }
+    .breadcrumb + .section--first { padding-top: 0; }
+
+    /* Page intro */
+    .token-page-intro { max-width: 720px; margin-bottom: 40px; }
+    .token-page-intro__eyebrow {
+      font-size: 14px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase;
+      color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1; margin-bottom: 8px; display: block;
+    }
+    .token-page-intro__title {
+      font-size: 28px; font-weight: 700; line-height: 32px; color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1; margin-bottom: 12px;
+    }
+    @media (min-width: 769px) { .token-page-intro__title { font-size: 36px; line-height: 40px; } }
+    .token-page-intro__desc {
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) { .token-page-intro__desc { font-size: 18px; line-height: 26px; } }
+    .token-page-intro__desc code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em;
+      background: var(--color-surface-10); padding: 1px 5px;
+    }
+
+    /* Token nav (links between the 5 demo pages) */
+    .token-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .token-nav a {
+      display: inline-flex; align-items: center; height: 32px; padding: 6px 12px; box-sizing: border-box;
+      border: 1px solid var(--color-border-action-3); background: transparent; color: var(--color-text-primary);
+      text-decoration: none; cursor: pointer; white-space: nowrap; font-size: 14px; font-weight: 700;
+      line-height: 14px; letter-spacing: 0.56px; text-transform: uppercase;
+      transition: background var(--duration-fast-3) var(--ease-standard), border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .token-nav a:hover { background: rgba(0,0,0,0.05); border-color: var(--color-border-dark); }
+    .token-nav a[aria-current="page"] { background: var(--color-surface-100); border-color: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+
+
+    /* Checkboxes -- from eco-checkbox skill. Real SVG checkmark/dash so every
+       state actually renders, not just described. */
+    .token-cb-item { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .token-cb-item input[type="checkbox"] {
+      appearance: none; width: 16px; height: 16px;
+      border: 1.5px solid var(--color-border-selected);
+      background: var(--color-background-primary);
+      cursor: pointer; flex-shrink: 0; margin: 4px;
+      background-repeat: no-repeat; background-position: center; background-size: 12px;
+    }
+    .token-cb-item input[type="checkbox"]:hover,
+    .token-cb-item input.demo-hover { border-width: 2px; }
+    .token-cb-item input[type="checkbox"]:focus-visible,
+    .token-cb-item input.demo-focus { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .token-cb-item input[type="checkbox"]:checked,
+    .token-cb-item input.demo-checked {
+      background-color: var(--color-surface-100); border-color: var(--color-border-selected);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .token-cb-item input.demo-checked-hover {
+      background-color: var(--color-text-disabled); border-color: var(--color-text-disabled);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .token-cb-item input[type="checkbox"]:indeterminate,
+    .token-cb-item input.demo-indeterminate {
+      background-color: var(--color-surface-100); border-color: var(--color-border-selected);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8h10' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+    .token-cb-item input[type="checkbox"]:disabled { border-color: var(--color-border-disabled); cursor: not-allowed; }
+    .token-cb-item input[type="checkbox"]:disabled:checked,
+    .token-cb-item input.demo-disabled-checked {
+      background-color: var(--color-surface-disabled); border-color: var(--color-surface-disabled);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23939595' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .token-cb-item:has(input:disabled) { cursor: not-allowed; }
+    .token-cb-item:has(input:disabled) span { color: var(--color-text-disabled); }
+
+    .token-cb-item--dark input[type="checkbox"] {
+      border-color: var(--color-border-action-2); background: transparent; background-image: none;
+    }
+    .token-cb-item--dark input.demo-checked {
+      background-color: var(--color-border-action-2); border-color: var(--color-border-action-2);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23000000' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .token-cb-item--dark input.demo-checked-hover {
+      background-color: var(--color-surface-40); border-color: var(--color-surface-40);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .token-cb-item--dark input[type="checkbox"]:disabled { border-color: var(--color-surface-60); }
+    .token-cb-item--dark input.demo-disabled-checked {
+      background-color: var(--color-surface-60); border-color: var(--color-surface-60);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23939595' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .token-cb-item--dark span { color: var(--color-text-primary-inverted); }
+    .token-cb-item--dark:has(input:disabled) span { color: var(--color-text-disabled); }
+
+    .token-cb-grid { display: grid; grid-template-columns: 1fr; gap: 20px 32px; }
+    @media (min-width: 640px) { .token-cb-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .token-cb-grid { grid-template-columns: repeat(3, 1fr); } }
+    .token-cb-cell { display: flex; flex-direction: column; gap: 6px; }
+    .token-cb-cell__label { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--color-text-tertiary); }
+    .token-cb-dark-panel { background: var(--color-surface-100); padding: 32px; margin-top: 16px; }
+    .token-subsection { margin-top: 48px; }
+    .token-subsection__title { font-size: 20px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+    .token-subsection__desc { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/header.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+<div class="page">
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <div class="breadcrumb__bar">
+    <a href="../index.html" class="breadcrumb-item">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="../index.html#tokens" class="breadcrumb-item">Tokens</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Checkboxes</span>
+  </div>
+</nav>
+</div>
+
+<section class="section section--first">
+  <div class="page">
+    <div class="token-page-intro">
+      <span class="token-page-intro__eyebrow">Component skill</span>
+      <h1 class="token-page-intro__title">Checkboxes</h1>
+      <p class="token-page-intro__desc">Built directly from <code>.claude/skills/eco-checkbox/SKILL.md</code>. Real checkboxes are interactive (try clicking, tabbing to them); a few states that only exist momentarily on hover are simulated with a class so every state is visible at once for reference.</p>
+    </div>
+    <nav class="token-nav">
+      <a href="colors.html">Colors</a>
+      <a href="typography.html">Typography</a>
+      <a href="spacing-elevation.html">Spacing &amp; elevation</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="checkboxes.html" aria-current="page">Checkboxes</a>
+    </nav>
+
+    <div class="token-subsection">
+      <h2 class="token-subsection__title">Light mode</h2>
+      <div class="token-cb-grid">
+      <div class="token-cb-cell">
+        <label class="token-cb-item">
+          <input type="checkbox" />
+          <span>Default (unchecked)</span>
+        </label>
+        <span class="token-cb-cell__label">Default (unchecked)</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item">
+          <input type="checkbox" class="demo-hover" />
+          <span>Hover (unchecked)</span>
+        </label>
+        <span class="token-cb-cell__label">Hover (unchecked)</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item">
+          <input type="checkbox" class="demo-checked" />
+          <span>Checked</span>
+        </label>
+        <span class="token-cb-cell__label">Checked</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item">
+          <input type="checkbox" class="demo-checked-hover" />
+          <span>Hover (checked)</span>
+        </label>
+        <span class="token-cb-cell__label">Hover (checked)</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item">
+          <input type="checkbox" class="demo-indeterminate" />
+          <span>Indeterminate</span>
+        </label>
+        <span class="token-cb-cell__label">Indeterminate</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item">
+          <input type="checkbox" disabled />
+          <span>Disabled (unchecked)</span>
+        </label>
+        <span class="token-cb-cell__label">Disabled (unchecked)</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item">
+          <input type="checkbox" checked disabled />
+          <span>Disabled (checked)</span>
+        </label>
+        <span class="token-cb-cell__label">Disabled (checked)</span>
+      </div>
+      </div>
+    </div>
+
+    <div class="token-subsection">
+      <h2 class="token-subsection__title">Dark mode</h2>
+      <p class="token-subsection__desc">Use <code>.form-checkbox-item--dark</code> whenever a checkbox sits on a dark surface -- never the light-mode markup on a dark background.</p>
+      <div class="token-cb-dark-panel">
+        <div class="token-cb-grid">
+      <div class="token-cb-cell">
+        <label class="token-cb-item token-cb-item--dark">
+          <input type="checkbox" />
+          <span>Default (unchecked)</span>
+        </label>
+        <span class="token-cb-cell__label" style="color: var(--color-text-tertiary-inverted);">Default (unchecked)</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item token-cb-item--dark">
+          <input type="checkbox" class="demo-checked" />
+          <span>Checked / selected</span>
+        </label>
+        <span class="token-cb-cell__label" style="color: var(--color-text-tertiary-inverted);">Checked / selected</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item token-cb-item--dark">
+          <input type="checkbox" class="demo-checked-hover" />
+          <span>Selected hover</span>
+        </label>
+        <span class="token-cb-cell__label" style="color: var(--color-text-tertiary-inverted);">Selected hover</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item token-cb-item--dark">
+          <input type="checkbox" disabled />
+          <span>Disabled</span>
+        </label>
+        <span class="token-cb-cell__label" style="color: var(--color-text-tertiary-inverted);">Disabled</span>
+      </div>
+      <div class="token-cb-cell">
+        <label class="token-cb-item token-cb-item--dark">
+          <input type="checkbox" class="demo-disabled-checked" />
+          <span>Disabled selected</span>
+        </label>
+        <span class="token-cb-cell__label" style="color: var(--color-text-tertiary-inverted);">Disabled selected</span>
+      </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/footer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <div class="nav-more__menu" id="nav-more-menu" hidden></div>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/main-menu.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    document.addEventListener('keydown', (e) => { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+    document.addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
+    document.addEventListener('touchstart', () => document.body.classList.remove('keyboard-nav'), { passive: true });
+  </script>
+</body>
+</html>

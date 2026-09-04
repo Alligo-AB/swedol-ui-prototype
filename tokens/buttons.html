@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swedol – Tokens: Buttons</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+    .ms {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    button { position: relative; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color var(--duration-fast-2) var(--ease-standard); }
+    body.keyboard-nav button:focus { outline-color: var(--color-border-focus); }
+
+    body {
+      font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+      min-width: 320px;
+    }
+
+    /* Layout + motion custom properties are NOT part of the alligo-design-tokens
+       package -- they're local site conventions (see CLAUDE.md). Everything
+       else on this page (--color-*, --shadow-*, --dimension-*, --border-*)
+       comes live from the CDN link in <head>, on purpose -- unlike
+       template.html, this page does NOT redeclare a local :root fallback for
+       those, so what you see here is exactly what's published right now. */
+    :root {
+      --px-page: 16px;
+      --max-w: 1200px;
+      --px-full: max(var(--px-page), calc((100vw - var(--max-w)) / 2));
+      --duration-fast-2: 100ms;
+      --duration-fast-3: 150ms;
+      --duration-medium-2: 300ms;
+      --ease-standard: cubic-bezier(.35,0,.35,1);
+    }
+    @media (min-width: 640px) { :root { --px-page: 32px; } }
+    @media (min-width: 1024px) { :root { --px-page: 40px; } }
+
+    .page { max-width: 1280px; margin: 0 auto; }
+
+    .section {
+      background: var(--color-surface-raised-primary);
+      padding: 32px var(--px-full) 40px;
+    }
+    .section--secondary { background: var(--color-surface-raised-secondary); }
+    .section--first { padding-top: 16px; }
+    @media (min-width: 640px) {
+      .section { padding-top: 48px; padding-bottom: 48px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 769px) {
+      .section { padding-top: 56px; padding-bottom: 64px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 1024px) {
+      .section { padding-top: 72px; padding-bottom: 80px; }
+      .section--first { padding-top: 40px; }
+    }
+
+    /* Breadcrumb (ECO Design System) -- verbatim from CLAUDE.md */
+    .breadcrumb { padding: 0 var(--px-page) 0; }
+    .breadcrumb__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 16px 0; }
+    .breadcrumb-item {
+      display: inline-flex; align-items: center;
+      border: 1px solid var(--color-border-action-3);
+      padding: 6px 7px; background: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 12px;
+      letter-spacing: 0.24px; color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .breadcrumb-item:hover { color: var(--color-text-action-primary); text-decoration: underline; }
+    .breadcrumb-item--active { font-weight: 700; color: var(--color-text-primary); cursor: default; }
+    .breadcrumb-item--active:hover { text-decoration: none; }
+    .breadcrumb-sep {
+      flex-shrink: 0; width: 4px; height: 24px; display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-tertiary); font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px;
+      font-weight: 400; letter-spacing: 0.28px;
+    }
+    @media (min-width: 769px) {
+      .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+      .breadcrumb-sep { height: 32px; }
+    }
+    .breadcrumb + .section--first { padding-top: 0; }
+
+    /* Page intro */
+    .token-page-intro { max-width: 720px; margin-bottom: 40px; }
+    .token-page-intro__eyebrow {
+      font-size: 14px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase;
+      color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1; margin-bottom: 8px; display: block;
+    }
+    .token-page-intro__title {
+      font-size: 28px; font-weight: 700; line-height: 32px; color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1; margin-bottom: 12px;
+    }
+    @media (min-width: 769px) { .token-page-intro__title { font-size: 36px; line-height: 40px; } }
+    .token-page-intro__desc {
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) { .token-page-intro__desc { font-size: 18px; line-height: 26px; } }
+    .token-page-intro__desc code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em;
+      background: var(--color-surface-10); padding: 1px 5px;
+    }
+
+    /* Token nav (links between the 5 demo pages) */
+    .token-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .token-nav a {
+      display: inline-flex; align-items: center; height: 32px; padding: 6px 12px; box-sizing: border-box;
+      border: 1px solid var(--color-border-action-3); background: transparent; color: var(--color-text-primary);
+      text-decoration: none; cursor: pointer; white-space: nowrap; font-size: 14px; font-weight: 700;
+      line-height: 14px; letter-spacing: 0.56px; text-transform: uppercase;
+      transition: background var(--duration-fast-3) var(--ease-standard), border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .token-nav a:hover { background: rgba(0,0,0,0.05); border-color: var(--color-border-dark); }
+    .token-nav a[aria-current="page"] { background: var(--color-surface-100); border-color: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+
+
+    /* Buttons -- from eco-button skill, CSS lifted verbatim from that
+       SKILL.md's template. All colors are var(--color-*) tokens, no hex. */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; position: relative;
+      border: none; cursor: pointer; font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-weight: 700; text-transform: uppercase; white-space: nowrap;
+      outline: 2px solid transparent; outline-offset: 2px;
+      transition: outline-color 100ms cubic-bezier(.35,0,.35,1), background 150ms cubic-bezier(.35,0,.35,1);
+    }
+    body.keyboard-nav .btn:focus { outline-color: var(--color-border-focus); }
+
+    .btn--lg { height: 56px; padding: 16px; font-size: 18px; letter-spacing: 0.18px; }
+    .btn--md { height: 48px; padding: 12px; font-size: 18px; letter-spacing: 0.18px; }
+    .btn--sm { height: 40px; padding: 8px;  font-size: 16px; letter-spacing: 0.48px; }
+    .btn--xs { height: 32px; padding: 6px;  font-size: 14px; letter-spacing: 0.56px; }
+    @media (max-width: 768px) {
+      .btn--lg { height: 48px; padding: 12px; font-size: 16px; letter-spacing: 0.32px; }
+      .btn--md { height: 40px; padding: 8px;  font-size: 16px; letter-spacing: 0.32px; }
+      .btn--sm { height: 32px; padding: 6px;  font-size: 14px; letter-spacing: 0.48px; }
+    }
+
+    .btn--primary   { background: var(--color-surface-action-1); color: var(--color-text-primary-inverted); }
+    .btn--primary-inverted { background: var(--color-surface-action-2); color: var(--color-text-primary); }
+    .btn--secondary { background: transparent; color: var(--color-text-primary); border: 1px solid var(--color-border-action-1); }
+    .btn--secondary-inverted { background: transparent; color: var(--color-text-primary-inverted); border: 1px solid var(--color-border-action-2); }
+    .btn--destructive { background: var(--color-surface-danger-default); color: var(--color-text-primary-inverted); }
+    .btn--accent    { background: var(--color-accent-default); color: var(--color-text-primary); }
+    .btn--blank     { background: transparent; color: var(--color-text-primary); }
+    .btn--blank-inverted { background: transparent; color: var(--color-text-primary-inverted); }
+    .btn--system    { background: transparent; color: var(--color-text-primary); border: 1px solid var(--color-border-action-3); }
+    .btn--system.is-selected { background: var(--color-surface-opacity-black-12); }
+
+    .btn--primary:hover, .btn--destructive:hover, .btn--accent:hover {
+      background-image: linear-gradient(90deg, var(--color-surface-opacity-white-20), var(--color-surface-opacity-white-20)), linear-gradient(90deg, currentBg, currentBg);
+    }
+    .btn--primary:hover { background-image: linear-gradient(90deg, var(--color-surface-opacity-white-20), var(--color-surface-opacity-white-20)), linear-gradient(90deg, var(--color-surface-action-1), var(--color-surface-action-1)); }
+    .btn--destructive:hover { background-image: linear-gradient(90deg, var(--color-surface-opacity-white-20), var(--color-surface-opacity-white-20)), linear-gradient(90deg, var(--color-surface-danger-default), var(--color-surface-danger-default)); }
+    .btn--accent:hover { background-image: linear-gradient(90deg, var(--color-surface-opacity-white-20), var(--color-surface-opacity-white-20)), linear-gradient(90deg, var(--color-accent-default), var(--color-accent-default)); }
+    .btn--secondary:hover, .btn--blank:hover, .btn--secondary-inverted:hover, .btn--blank-inverted:hover { background: var(--color-surface-opacity-black-05); }
+
+    .btn:disabled, .btn--disabled { background: var(--color-surface-disabled); color: var(--color-text-disabled); cursor: not-allowed; border: none; }
+    .btn--blank:disabled, .btn--disabled-blank { background: transparent; color: var(--color-text-disabled); }
+
+    .token-btn-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 16px; }
+    .token-btn-card { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .token-btn-card__label { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--color-text-tertiary); }
+    .token-btn-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 640px) { .token-btn-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .token-btn-grid { grid-template-columns: repeat(3, 1fr); } }
+    .token-btn-dark-panel {
+      background: var(--color-surface-100); padding: 32px; margin-top: 16px;
+      display: flex; flex-wrap: wrap; gap: 24px;
+    }
+    .token-subsection { margin-top: 48px; }
+    .token-subsection__title { font-size: 20px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+    .token-subsection__desc { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/header.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+<div class="page">
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <div class="breadcrumb__bar">
+    <a href="../index.html" class="breadcrumb-item">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="../index.html#tokens" class="breadcrumb-item">Tokens</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Buttons</span>
+  </div>
+</nav>
+</div>
+
+<section class="section section--first">
+  <div class="page">
+    <div class="token-page-intro">
+      <span class="token-page-intro__eyebrow">Component skill</span>
+      <h1 class="token-page-intro__title">Buttons</h1>
+      <p class="token-page-intro__desc">Built directly from <code>.claude/skills/eco-button/SKILL.md</code> -- the CSS on this page is lifted verbatim from that skill's template, using the same <code>var(--color-...)</code> tokens shown on the Colors page. This page doubles as a working reference implementation of the skill.</p>
+    </div>
+    <nav class="token-nav">
+      <a href="colors.html">Colors</a>
+      <a href="typography.html">Typography</a>
+      <a href="spacing-elevation.html">Spacing &amp; elevation</a>
+      <a href="buttons.html" aria-current="page">Buttons</a>
+      <a href="checkboxes.html">Checkboxes</a>
+    </nav>
+
+    <div class="token-subsection">
+      <h2 class="token-subsection__title">Variants</h2>
+      <p class="token-subsection__desc">Size md. Light-background variants:</p>
+      <div class="token-btn-grid">
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--primary">Primary</button>
+        <span class="token-btn-card__label">.btn--primary</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--secondary">Secondary</button>
+        <span class="token-btn-card__label">.btn--secondary</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--destructive">Destructive</button>
+        <span class="token-btn-card__label">.btn--destructive</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--accent">Accent</button>
+        <span class="token-btn-card__label">.btn--accent</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--blank">Blank</button>
+        <span class="token-btn-card__label">.btn--blank</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--system">System</button>
+        <span class="token-btn-card__label">.btn--system</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--system is-selected">System selected</button>
+        <span class="token-btn-card__label">.btn--system.is-selected</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md" disabled>Disabled</button>
+        <span class="token-btn-card__label">:disabled</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--blank btn--disabled-blank" disabled>Disabled blank</button>
+        <span class="token-btn-card__label">.btn--blank:disabled</span>
+      </div>
+      </div>
+      <p class="token-subsection__desc" style="margin-top: 24px;">Inverted variants, on a dark surface (<code>color.surface-100</code>):</p>
+      <div class="token-btn-dark-panel">
+        <button class="btn btn--md btn--primary-inverted">Primary inverted</button>
+        <button class="btn btn--md btn--secondary-inverted">Secondary inverted</button>
+        <button class="btn btn--md btn--blank-inverted">Blank inverted</button>
+      </div>
+    </div>
+
+    <div class="token-subsection">
+      <h2 class="token-subsection__title">Sizes</h2>
+      <p class="token-subsection__desc">Primary variant across all four sizes. Resize the browser below 769px to see the mobile height/padding/font-size switch.</p>
+      <div class="token-btn-grid">
+      <div class="token-btn-card">
+        <button class="btn btn--lg btn--primary">Button lg</button>
+        <span class="token-btn-card__label">.btn--lg</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--md btn--primary">Button md</button>
+        <span class="token-btn-card__label">.btn--md</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--sm btn--primary">Button sm</button>
+        <span class="token-btn-card__label">.btn--sm</span>
+      </div>
+      <div class="token-btn-card">
+        <button class="btn btn--xs btn--primary">Button xs</button>
+        <span class="token-btn-card__label">.btn--xs</span>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/footer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <div class="nav-more__menu" id="nav-more-menu" hidden></div>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/main-menu.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    document.addEventListener('keydown', (e) => { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+    document.addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
+    document.addEventListener('touchstart', () => document.body.classList.remove('keyboard-nav'), { passive: true });
+  </script>
+</body>
+</html>
