@@ -1,0 +1,1 @@
+{"nodes": [{"id": "mypages_partials_account_nav_drawer_html", "label": "Account Nav Drawer Partial", "file_type": "code", "source_file": "mypages/partials/account-nav-drawer.html", "rationale": "Handles profile switching and account-specific navigation."}], "edges": [], "hyperedges": []}

@@ -1,0 +1,1 @@
+{"nodes": [{"id": "claude_skills_tooltip_skill", "label": "Tooltip Skill", "file_type": "document", "source_file": ".claude/skills/tooltip/SKILL.md", "rationale": "Defines tooltips for icon buttons or elements without visible text."}], "edges": [], "hyperedges": []}
