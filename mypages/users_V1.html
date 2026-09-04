@@ -961,10 +961,6 @@
     /* Table */
     .users-table-wrap {
       overflow-x: auto;
-      /* clip instead of visible: prevents overflow-x:auto from implicitly making
-         this a vertical scroll container, so position:sticky on thead th works
-         against the window rather than this wrapper. */
-      overflow-y: clip;
       box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
     }
     .users-table {
@@ -1066,15 +1062,6 @@
     .users-table-wrap.is-grabbing { user-select: none; }
 
     .users-table thead tr {
-      background: var(--color-accent-light);
-    }
-    /* Sticky header: each th gets its own opaque background so it paints over
-       scrolled body rows. top = site-header__top height (set by JS as --header-top-h).
-       z-index 3 keeps header above sticky first/last columns (z-index 1 and 2). */
-    .users-table thead th {
-      position: sticky;
-      top: var(--header-top-h, 0px);
-      z-index: 3;
       background: var(--color-accent-light);
     }
     .users-table th {
@@ -1925,7 +1912,7 @@
     .fav-store-section {
       padding: 0 var(--px-page);
     }
-    .page-divider { padding: 48px var(--px-page); }
+    .page-divider { padding: 48px var(--px-full); }
     .page-divider__line { height: 1px; background: var(--color-border-primary); }
     .fav-store { display: flex; flex-direction: column; gap: 24px; }
     .fav-store__header { display: flex; flex-direction: column; gap: 8px; }
@@ -2650,9 +2637,9 @@
       flex-direction: column;
       transform: translateX(100%);
       transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
-      box-shadow: var(--elevation-drawer-right);
+      overflow: hidden;
     }
-    .drawer-panel.is-open { transform: translateX(0); }
+    .drawer-panel.is-open { transform: translateX(0); box-shadow: var(--elevation-drawer-right); }
 
     .drawer-header {
       display: flex;
@@ -3084,6 +3071,10 @@
 
       /* Save button — mobile lg: 48px, padding 12px */
       .drawer-save-btn { padding: 12px 16px; }
+
+      /* Huvudmeny-drawer — nivå 2 header */
+      .menu-level2__header { padding: 16px 24px; }
+      .menu-level2__title { font-size: 16px; line-height: 16px; letter-spacing: 0.32px; } /* label-lg Mobil */
 
       /* Labels — label-md Mobile: 14px/14px, 0.42px */
       .form-label {
@@ -3595,197 +3586,169 @@
       border-top: 2px solid #455efb; /* border-focus */
     }
 
-    .col-drawer-separator {
-      height: 1px;
-      background: #e5e5e5;       /* border-primary */
-    }
-
-    .col-sort-toggle-row { padding-top: 8px; } /* space-8 */
-
-    .col-toggle-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;                  /* space-8 */
-      cursor: pointer;
-    }
-
-    .col-toggle-switch {
-      position: relative;
-      display: inline-flex;
-      width: 32px;
-      height: 16px;
-      flex-shrink: 0;
-    }
-
-    .col-toggle-switch input[type="checkbox"] {
-      opacity: 0;
-      width: 0;
-      height: 0;
-      position: absolute;
-      appearance: none;
-      margin: 0;
-    }
-
-    .col-toggle-track {
-      position: absolute;
-      inset: 0;
-      background: #939595;       /* off: text-disabled */
-      border-radius: 19px;
-      transition: background var(--duration-fast-4) var(--ease-standard);
-    }
-
-    .col-toggle-track::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 12px;
-      height: 12px;
-      background: #ffffff;
-      border-radius: 50%;
-      transition: transform var(--duration-fast-4) var(--ease-standard);
-      box-shadow: 0px 4px 8px 0px rgba(48,49,51,0.10),
-                  0px 1px 1px 0px rgba(48,49,51,0.24),
-                  0px -1px 1px 0px rgba(0,0,0,0.03); /* elevation-input_control-switch */
-    }
-
-    .col-toggle-switch input:checked + .col-toggle-track {
-      background: #248616;       /* surface-success-default: on */
-    }
-
-    .col-toggle-switch input:checked + .col-toggle-track::after {
-      transform: translateX(16px);
-    }
-
-    .col-toggle-text {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;           /* body-sm */
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.28px;
-      color: #000000;            /* text-primary */
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
 
     /* ══════════════════════════════════════════════════════════
        ACCOUNT NAV DRAWER
     ══════════════════════════════════════════════════════════ */
-    .account-nav-drawer__profile {
-      display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0;
+    /* Flyttad till partials/account-nav-drawer.html (CSS + HTML + JS, inkluderas via JS längre ner på sidan) */
+
+
+    /* ══════════════════════════════════════════════════════════
+       HUVUDMENY-DRAWER (ECO Design System)
+       Nivå 1 glider in från vänster; Nivå 2 glider in från höger
+       inuti samma drawer-container.
+    ══════════════════════════════════════════════════════════ */
+    .drawer-panel--left { left: 0; right: auto; transform: translateX(-100%); }
+    .drawer-panel--left.is-open { transform: translateX(0); box-shadow: var(--elevation-drawer-left); }
+
+    .menu-level {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
+      overflow: hidden;
     }
-    .account-nav-drawer__profile-info { display: flex; flex-direction: column; min-width: 0; }
-    .account-nav-drawer__name {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 700;
-      line-height: 24px; color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1; white-space: nowrap;
+    .menu-level--2 { transform: translateX(100%); z-index: 2; }
+    .menu-level--2.is-active { transform: translateX(0); }
+    /* Nivå 2 trycker undan föregående nivå — den glider ut åt vänster samtidigt */
+    .menu-level--pushed { transform: translateX(-100%); }
+
+    .menu-drawer__logo { width: 100px; height: 20px; object-fit: contain; display: block; }
+
+    .menu-drawer__content {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 24px;
     }
-    .account-nav-drawer__sub {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 400;
-      line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; white-space: nowrap;
+    .menu-main-nav,
+    .menu-meta-nav,
+    .menu-level2-list { display: flex; flex-direction: column; }
+    .menu-main-nav { padding-top: 8px; }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 32px 8px 24px;   /* Mobil/Tablet */
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
     }
-    .account-nav-drawer__body {
-      flex: 1; overflow-y: auto; display: flex; flex-direction: column; min-height: 0;
+    .menu-item:hover { background: var(--color-surface-navigation-hover); }
+    @media (min-width: 769px) {
+      .menu-item { padding-left: 32px; padding-right: 40px; } /* Desktop */
     }
-    .account-nav-drawer__menu {
-      display: flex; flex-direction: column; padding-bottom: 32px; flex: 1;
+    .menu-item__icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .menu-item__icon .ms { font-size: 28px; color: var(--color-text-tertiary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .menu-item__icon img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
+    .menu-item__label { flex: 1; min-width: 0; color: var(--color-text-primary); }
+    .menu-item__chevron { font-size: 24px; color: var(--color-text-primary); flex-shrink: 0; }
+
+    .menu-item--lg { height: 48px; padding-top: 0; padding-bottom: 0; }
+    .menu-item--lg .menu-item__label {
+      font-size: 20px;      /* Mobil/Tablet */
+      font-weight: 700;
+      line-height: 20px;
+      text-transform: uppercase;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
     }
-    .account-nav-drawer__menu-item {
-      position: relative; display: flex; align-items: stretch;
-      padding: 0 40px 0 32px; cursor: pointer;
-      transition: background-color 150ms cubic-bezier(.35,0,.35,1);
+    @media (min-width: 769px) {
+      .menu-item--lg .menu-item__label { font-size: 24px; line-height: 24px; } /* Desktop */
     }
-    .account-nav-drawer__menu-item:hover {
-      background: #fafafa; /* surface-navigation-hover */
-    }
-    .account-nav-drawer__menu-item-inner {
-      display: flex; align-items: center; padding: 8px 0; flex: 1;
-    }
-    .account-nav-drawer__menu-item--active { border-left: 4px solid #c7d300; }
-    .account-nav-drawer__menu-text {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 24px; font-weight: 700;
-      line-height: 24px; color: var(--color-text-primary); text-transform: uppercase;
-      font-feature-settings: 'ss02' 1, 'ss03' 1; padding: 4px 0;
-    }
-    .account-nav-drawer__company {
-      border-top: 1px solid var(--color-border-secondary); padding: 0 32px 24px;
-      display: flex; flex-direction: column; gap: 16px; flex-shrink: 0;
-    }
-    .account-nav-drawer__company-row {
-      display: flex; align-items: center; justify-content: space-between;
-      margin: 0 -32px; padding: 16px 40px 16px 32px;
-      cursor: pointer; transition: background-color 150ms cubic-bezier(.35,0,.35,1);
-    }
-    .account-nav-drawer__company-row:hover { background: #fafafa; }
-    .account-nav-drawer__company-logo { height: 17px; width: auto; display: block; }
-    .account-nav-drawer__action-link {
-      display: inline-flex; align-items: center; gap: 4px; background: none; border: none;
-      cursor: pointer; font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px;
-      font-weight: 400; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; padding: 0; white-space: nowrap;
-    }
-    .account-nav-drawer__action-link .ms {
-      font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .account-nav-drawer__contact { display: flex; flex-direction: column; gap: 8px; }
-    .account-nav-drawer__contact-title {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 700;
-      line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary);
+
+    .menu-item--sm { padding-top: 4px; padding-bottom: 4px; }         /* Meta nav (utan ikon) */
+    .menu-item--sm:has(.menu-item__icon) { padding-top: 8px; padding-bottom: 8px; } /* Nivå 2-listor (med ikon) */
+    .menu-item--sm .menu-item__label {
+      padding: 5px 0;        /* inre "Text"-wrapper i Figma, utöver radens egen padding */
+      font-size: 16px;       /* body-md */
+      font-weight: 400;
+      line-height: 22px;     /* body-md Mobil */
+      letter-spacing: 0.32px;
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
-    .account-nav-drawer__contact-links {
-      display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+    @media (min-width: 769px) {
+      .menu-item--sm .menu-item__label { line-height: 24px; } /* body-md Desktop */
     }
-    .account-nav-drawer__contact-item {
-      display: flex; align-items: center; gap: 8px; font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: 0.32px;
-      color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+
+    .menu-store-select {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 56px;           /* Mobil/Tablet */
+      padding: 16px 32px 16px 24px;
+      flex-shrink: 0;
+      cursor: pointer;
+      background: #fff;
+      border: none;
+      border-top: 1px solid var(--color-border-secondary);
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      position: relative;
+      z-index: 1;
     }
-    .account-nav-drawer__contact-item .ms {
-      font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    .menu-store-select:hover { background: var(--color-surface-navigation-hover); }
+    .menu-store-select .ms { font-size: 24px; color: var(--color-text-primary); flex-shrink: 0; }
+    .menu-store-select__left {
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
     }
-    .account-nav-drawer__credit {
-      background: var(--color-surface-raised-secondary); border-top: 1px solid var(--color-surface-10);
+    .menu-store-select__right {
+      display: flex;
+      align-items: center;
+      gap: 2px;
       flex-shrink: 0;
     }
-    .account-nav-drawer__credit-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 4px 32px; min-height: 40px;
+    .menu-store-select__label {
+      flex: 1;
+      min-width: 0;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
-    .account-nav-drawer__credit-label {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 700;
-      line-height: 18px; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+    @media (min-width: 769px) {
+      .menu-store-select { height: 72px; padding: 24px 40px 24px 32px; }
+      .menu-store-select__label { line-height: 24px; }
     }
-    .account-nav-drawer__credit-amount {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 400;
-      line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; white-space: nowrap;
+
+    /* Nivå 2 — header med tillbaka-länk + titel */
+    .menu-level2__header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 32px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: box-shadow var(--duration-fast-3) var(--ease-standard);
     }
-    .account-nav-drawer__credit-limit { color: var(--color-surface-60); }
-    .account-nav-drawer__footer {
-      padding: 24px 32px; background: #fff; flex-shrink: 0;
-      box-shadow: 0px -4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
-      cursor: pointer; transition: background-color 150ms cubic-bezier(.35,0,.35,1);
-    }
-    .account-nav-drawer__footer:hover { background: rgba(0,0,0,0.05); }
-    .account-nav-drawer__logout {
-      display: inline-flex; align-items: center; gap: 4px; background: none; border: none;
-      cursor: pointer; font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px;
-      font-weight: 400; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; padding: 0;
-    }
-    .account-nav-drawer__logout .ms {
-      font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    @media (max-width: 768px) {
-      .account-nav-drawer__company { padding: 0 24px 16px; gap: 16px; }
-      .account-nav-drawer__company-row { margin: 0 -24px; padding: 16px 32px 16px 24px; }
-      .account-nav-drawer__credit-inner { padding: 4px 24px; }
-      .account-nav-drawer__footer { padding: 16px 24px; }
-      .account-nav-drawer__menu-text { font-size: 20px; line-height: 20px; }
-.account-nav-drawer__menu { padding-bottom: 24px; }
-      .account-nav-drawer__name { line-height: 22px; }
-      .account-nav-drawer__sub { font-size: 14px; line-height: 20px; }
+    .menu-level2__nav-row { display: flex; align-items: center; justify-content: space-between; }
+    .menu-level2__title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: 0.18px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
     }
 
 
@@ -3793,173 +3756,20 @@
 </head>
 <body>
 
-  <!-- ══ SITE HEADER SM (xs + sm: 0–768px) ══════════════════ -->
-  <div class="site-header__sm">
+  <!-- ══ SITE HEADER (global partial) ════════════════════════════════════════════
+       Innehåll: mypages/partials/header.html — enda källan (single
+       source of truth). Redigera ENDAST där; ändringen slår igenom
+       automatiskt i alla sidor som inkluderar partialen.
+  ════════════════════════════════════════════ -->
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'partials/header.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
 
-    <!-- Row 1: left icons | logo | account + cart + menu -->
-    <div class="sh-sm__bar1">
-
-      <!-- Left: search, favorites, compare+badge -->
-      <div class="sh-sm__bar1-left">
-        <button class="sh-sm__icon-btn" aria-label="Sök">
-          <span class="ms">search</span>
-        </button>
-        <button class="sh-sm__icon-btn" aria-label="Favoriter">
-          <span class="ms">favorite</span>
-        </button>
-        <button class="sh-sm__icon-btn sh-sm__icon-btn--24" aria-label="Jämför">
-          <span class="ms ms--24">compare_arrows</span>
-          <span class="badge badge--white">1</span>
-        </button>
-      </div>
-
-      <!-- Center: logo (absolute-centered) -->
-      <div class="sh-sm__bar1-center">
-        <div class="sh-sm__logo">
-          <img src="images/swedol-logo.svg" alt="Swedol" />
-        </div>
-      </div>
-
-      <!-- Right: account info + cart + hamburger -->
-      <div class="sh-sm__bar1-right">
-        <button class="sh-sm__account-btn" aria-label="Konto">
-          <div class="avatar" style="width:24px;height:24px;flex-shrink:0;">
-            <img src="images/stina-avatar.png" alt="Stina Carlström" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
-          </div>
-          <div class="sh-sm__account-info">
-            <div class="sh-sm__account-name">Stina Carlström</div>
-            <div class="sh-sm__account-sub">Kundnummer: 326920</div>
-          </div>
-        </button>
-        <button class="sh-sm__icon-btn sh-sm__icon-btn--24" aria-label="Kundvagn">
-          <span class="ms ms--24">shopping_cart</span>
-          <span class="badge">5</span>
-        </button>
-        <button class="sh-sm__menu-btn" aria-label="Meny">
-          <span class="ms ms--24">menu</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Row 2: search bar on dark background -->
-    <div class="sh-sm__bar2">
-      <div class="sh-sm__search">
-        <span class="ms">search</span>
-        <input type="text" placeholder="Sök produkt, kategori, varumärke" />
-        <div class="sh-sm__search-right">
-          <div class="sh-sm__search-divider"></div>
-          <button class="sh-sm__search-action sh-sm__location-btn" aria-label="Välj butik">
-            <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">location_on</span>
-          </button>
-          <button class="sh-sm__search-action" aria-label="Skanna">
-            <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">qr_code_scanner</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Row 3: store nav with accent bottom border -->
-    <div class="sh-sm__bar3">
-      <button class="sh-sm__store-btn">
-        <span class="ms">store</span>
-        <span class="sh-sm__store-btn__text">
-          <span class="sh-sm__store-btn__bold">Borås,&nbsp;</span><span class="sh-sm__store-btn__regular">ÖPPET IDAG: Kl. 6:30 - 17:00</span>
-        </span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ══ IMPERSONATION BANNER ═════════════════════════════════ -->
-  <div id="impersonation-banner-wrap" class="impersonation-banner-wrap">
-    <div id="impersonation-banner" class="impersonation-banner" role="status">
-      <div class="impersonation-banner__body">
-        <span class="ms impersonation-banner__icon">info</span>
-        <div class="impersonation-banner__text-group">
-          <p class="impersonation-banner__text">Din roll är <span class="impersonation-banner__title">Administratör</span> och du agerar tillfälligt som <strong id="impersonation-banner-name"></strong>.</p>
-          <button class="impersonation-banner__link" id="impersonation-banner-logout">LOGGA UT</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="impersonation-banner-placeholder" class="impersonation-banner-placeholder"></div>
-
-  <!-- ══ SITE HEADER (desktop: md+) ══════════════════════════ -->
-  <div class="site-header__top">
-      <button class="site-header__menu-btn" aria-label="Meny">
-        <span class="ms">menu</span>
-      </button>
-
-      <!-- Swedol logo -->
-      <div class="site-header__logo">
-        <img src="images/swedol-logo.svg" alt="Swedol" style="width:100%;height:100%;display:block;object-fit:contain;" />
-      </div>
-
-      <!-- Search -->
-      <div class="site-header__search">
-        <span class="ms">search</span>
-        <input type="text" placeholder="Sök produkt, varumärke, kategori" id="header-search-field" oninput="handleHeaderSearch(this.value)" />
-        <div class="site-header__search-right">
-          <div class="site-header__search-divider"></div>
-          <button class="search-scan-btn" id="header-scan-btn" aria-label="Skanna">
-            <span class="ms">qr_code_scanner</span>
-          </button>
-          <button class="search-scan-btn" id="header-clear-btn" aria-label="Rensa sökning" style="display:none" onclick="var f=document.getElementById('header-search-field');f.value='';f.focus();handleHeaderSearch('');">
-            <span class="ms" style="font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 0,'opsz' 24;color:var(--color-text-tertiary);">cancel</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Right icons -->
-      <div class="site-header__right">
-        <button class="account-info" onclick="openAccountNavDrawer()">
-          <div class="avatar">
-            <img src="images/stina-avatar.png" alt="Stina Carlström" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
-          </div>
-          <div>
-            <div class="account-info__name">Stina Carlström</div>
-            <div class="account-info__sub">Kundnummer: 326920</div>
-          </div>
-        </button>
-
-        <button class="icon-btn" aria-label="Favoriter">
-          <span class="ms">favorite</span>
-        </button>
-
-        <button class="icon-btn" aria-label="Jämför">
-          <span class="ms">compare_arrows</span>
-          <span class="badge badge--white">1</span>
-        </button>
-
-        <button class="icon-btn" aria-label="Kundvagn">
-          <span class="ms">shopping_cart</span>
-          <span class="badge">5</span>
-        </button>
-      </div>
-  </div>
-
-  <header class="site-header">
-    <!-- Main nav -->
-    <nav class="site-header__nav">
-      <div class="nav-links-wrap">
-        <div class="nav-links">
-          <a href="#">Produktsortiment</a>
-          <a href="#">Kampanj</a>
-          <a href="#">Våra Tjänster</a>
-          <a href="#">Varumärken</a>
-          <a href="#">Outlet</a>
-        </div>
-        <div class="nav-more" id="nav-more">
-          <button class="nav-more__btn" id="nav-more-btn" aria-label="Fler alternativ" aria-expanded="false">
-            <span class="ms ms--24" style="color:var(--brand)">more_vert</span>
-          </button>
-        </div>
-      </div>
-      <button class="store-btn">
-        <span class="ms">store</span>
-        <span>Borås,&nbsp;</span><span class="store-btn__text-regular">Öppet idag: Kl. 6:30 – 17:00</span>
-      </button>
-    </nav>
-  </header>
 
   <!-- ══ ACCOUNT NAV ══════════════════════════════════════════ -->
   <nav class="account-nav">
@@ -4421,189 +4231,20 @@
     </div>
   </section>
 
-  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="footer-top">
-      <!-- Newsletter -->
-      <div class="footer-top__col">
-        <p class="newsletter__title">Nyhetsbrev</p>
-        <p class="newsletter__desc">Prenumerera på vårt nyhetsbrev för att ta del av specialerbjudanden, rabatter, nyheter och artiklar.</p>
-        <div class="newsletter__input-group">
-          <div class="newsletter__input-wrap">
-            <input class="newsletter__input" type="email" id="newsletter-field" placeholder="Din e-postadress" oninput="handleNewsletterInput(this.value)" />
-            <button class="newsletter__clear" id="newsletter-clear-btn" aria-label="Rensa" onclick="var f=document.getElementById('newsletter-field');f.value='';f.focus();handleNewsletterInput('');">
-              <span class="ms">cancel</span>
-            </button>
-          </div>
-          <button class="newsletter__btn">Prenumerera</button>
-        </div>
-      </div>
+  <!-- ══ SITE FOOTER (global partial) ═════════════════════════════════
+       Innehåll: mypages/partials/footer.html — enda källan (single
+       source of truth). Redigera ENDAST där; ändringen slår igenom
+       automatiskt i alla sidor som inkluderar partialen.
+  ════════════════════════════════════════════════════ -->
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'partials/footer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
 
-      <div class="footer-top__divider"></div>
-
-      <!-- Customer Service -->
-      <div class="footer-top__col">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <p class="cs__title">Kundservice</p>
-          <p class="cs__desc">Välkommen till vår kundservice! Vi finns här för att hjälpa dig med alla dina frågor och ärenden. Registrera ditt ärende enkelt, så återkommer vi snabbt med den hjälp du behöver.</p>
-        </div>
-        <div class="cs__bullets">
-          <div class="cs__bullet-col">
-            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Returer</span></div>
-            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Fakturor</span></div>
-            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Leveransfrågor</span></div>
-          </div>
-          <div class="cs__bullet-col">
-            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Reklamationer</span></div>
-            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Ordrar</span></div>
-            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Konto</span></div>
-          </div>
-        </div>
-        <a class="cs__btn" href="#">Till kundservice <span class="ms">chevron_right</span></a>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="footer-divider">
-      <div class="footer-divider__line"></div>
-    </div>
-
-    <!-- Footer links -->
-    <div class="footer-links">
-      <div class="footer-col">
-        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Kontakta oss <span class="ms footer-col__expand">expand_more</span></button>
-        <ul class="footer-col__links">
-          <li><a href="#">Kontakt</a></li>
-          <li><a href="#">Huvudkontor och support</a></li>
-          <li><a href="#">Fakturaadress</a></li>
-          <li><a href="#">Logistikcentrum</a></li>
-          <li><a href="#">Våra butiker</a></li>
-          <li><a href="#">Om Alligokoncernen</a></li>
-          <li><a href="#">Jobba hos oss</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Handla hos oss <span class="ms footer-col__expand">expand_more</span></button>
-        <ul class="footer-col__links">
-          <li><a href="#">Kontoansökan</a></li>
-          <li><a href="#">Kampanj</a></li>
-          <li><a href="#">Retur och reklamation</a></li>
-          <li><a href="#">Köpevilkor</a></li>
-          <li><a href="#">Fullmakt</a></li>
-          <li><a href="#">Presentkort - saldocheck</a></li>
-          <li><a href="#">Ordersedel</a></li>
-          <li><a href="#">Swedolblad och kataloger</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Så arbetar vi <span class="ms footer-col__expand">expand_more</span></button>
-        <ul class="footer-col__links">
-          <li><a href="#">Certifieringar och policys</a></li>
-          <li><a href="#">Cookies</a></li>
-          <li><a href="#">Integritetspolicy</a></li>
-          <li><a href="#">GDPR</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Egna varumärken <span class="ms footer-col__expand">expand_more</span></button>
-        <ul class="footer-col__links">
-          <li><a href="#">1832</a></li>
-          <li><a href="#">Björnkläder</a></li>
-          <li><a href="#">Gesto Workwear</a></li>
-          <li><a href="#">Gesto Skor</a></li>
-          <li><a href="#">Balance Handskar</a></li>
-          <li><a href="#">Univern</a></li>
-          <li><a href="#">AmPro</a></li>
-          <li><a href="#">Award</a></li>
-          <li><a href="#">Nima</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Vara vår leverantör <span class="ms footer-col__expand">expand_more</span></button>
-        <ul class="footer-col__links">
-          <li><a href="#">Suppliers Guide SWE</a></li>
-          <li><a href="#">Suppliers Guide ENG</a></li>
-          <li><a href="#">Så fungerar våra fakturarutiner</a></li>
-          <li><a href="#">Så levererar du till oss</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Bottom bar -->
-    <div class="footer-bottom">
-      <div class="footer-bottom__trustmarks">
-        <!-- Betalningsalternativ -->
-        <div class="trustmark-group">
-          <span class="trustmark-group__label">Betalningsalternativ</span>
-          <div class="trustmark-group__items">
-            <div class="trustmark-badge trustmark-badge--klarna">
-              <img src="images/klarna.svg" alt="Klarna" />
-            </div>
-            <div class="trustmark-badge">
-              <div class="trustmark-badge__inner">
-                <img src="images/visa.svg" alt="Visa" />
-              </div>
-            </div>
-            <div class="trustmark-badge">
-              <div class="trustmark-badge__inner trustmark-badge__inner--mc">
-                <img src="images/mastercard.svg" alt="Mastercard" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Säker betalning -->
-        <div class="trustmark-group">
-          <span class="trustmark-group__label">Säker betalning</span>
-          <div class="trustmark-group__items">
-            <div class="trustmark-badge">
-              <img src="images/3d-secure.png" alt="3D Secure" />
-            </div>
-          </div>
-        </div>
-        <!-- Trygg E-handel -->
-        <div class="trustmark-group">
-          <span class="trustmark-group__label">Trygg E-handel</span>
-          <div class="trustmark-group__items">
-            <div class="trustmark-badge trustmark-badge--trygg">
-              <img src="images/trygg-e-handel.png" alt="Trygg E-handel" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom__social">
-        <span class="social-label">Följ oss:</span>
-        <div class="social-icons">
-          <a href="#" class="social-icon" aria-label="Facebook">
-            <img src="images/facebook.svg" alt="Facebook" />
-          </a>
-          <a href="#" class="social-icon" aria-label="YouTube">
-            <img src="images/youtube.svg" alt="YouTube" />
-          </a>
-          <a href="#" class="social-icon" aria-label="Instagram">
-            <img src="images/instagram.svg" alt="Instagram" />
-          </a>
-          <a href="#" class="social-icon" aria-label="LinkedIn">
-            <img src="images/linkedin.svg" alt="LinkedIn" />
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="footer-divider">
-      <div class="footer-divider__line"></div>
-    </div>
-
-    <div class="footer-copyright">
-      <div class="footer-copyright__inner">
-        <div class="footer-copyright__logo">
-          <img src="images/swedol-logo-footer.svg" alt="Swedol" />
-        </div>
-        <p class="footer-copyright__text">2026 Swedol &copy; Alla rättigheter förbehållna.</p>
-      </div>
-    </div>
-  </footer>
 
   <!-- Drawer overlay -->
   <div id="drawer-overlay" class="drawer-overlay" onclick="closeDrawer()"></div>
@@ -4781,16 +4422,6 @@
     <div class="drawer-content" id="col-drawer-content">
       <p class="col-drawer-desc">Markera det innehåll du vill ska synas i tabellen.</p>
       <div class="col-item-list" id="col-item-list"></div>
-      <div class="col-drawer-separator"></div>
-      <div class="col-sort-toggle-row">
-        <label class="col-toggle-label">
-          <span class="col-toggle-switch">
-            <input type="checkbox" id="col-drawer-toggle" />
-            <span class="col-toggle-track"></span>
-          </span>
-          <span class="col-toggle-text">Egen sortering av valt innehåll på sidan (Drag n Drop)</span>
-        </label>
-      </div>
     </div>
 
     <div class="drawer-footer">
@@ -4858,118 +4489,35 @@
   <div class="tab-more__menu" id="tab-more-menu" hidden></div>
   <div class="nav-more__menu" id="nav-more-menu" hidden></div>
 
-  <!-- Account nav drawer overlay -->
-  <div id="account-nav-drawer-overlay" class="drawer-overlay" onclick="closeAccountNavDrawer()"></div>
+  <!-- ══ MAIN MENU DRAWER (global partial) ════════════════════════════════
+       Innehåll: mypages/partials/main-menu.html — enda källan
+       (single source of truth). Redigera ENDAST där; ändringen
+       slår igenom automatiskt i alla sidor som inkluderar
+       partialen.
+  ════════════════════════════════════════════ -->
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'partials/main-menu.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
 
-  <!-- Account nav drawer panel -->
-  <div id="account-nav-drawer-panel" class="drawer-panel" role="dialog" aria-modal="true" aria-label="Mitt konto">
-    <!-- Header -->
-    <div class="drawer-header">
-      <div class="account-nav-drawer__profile">
-        <div class="avatar--lg">
-          <img src="images/stina-avatar-lg.png" alt="Stina Carlström" />
-        </div>
-        <div class="account-nav-drawer__profile-info">
-          <div class="account-nav-drawer__name">Stina Carlström</div>
-          <div class="account-nav-drawer__sub">Kundnummer: 326920</div>
-        </div>
-      </div>
-      <button class="drawer-close-btn" onclick="closeAccountNavDrawer()" aria-label="Stäng">
-        <span class="ms">close</span>
-      </button>
-    </div>
 
-    <!-- Scrollable body -->
-    <div class="account-nav-drawer__body">
-
-      <!-- Menu -->
-      <nav class="account-nav-drawer__menu" aria-label="Mina sidor">
-        <div class="account-nav-drawer__menu-item" data-tab-index="0">
-<div class="account-nav-drawer__menu-item-inner">
-            <span class="account-nav-drawer__menu-text">Översikt</span>
-          </div>
-        </div>
-        <div class="account-nav-drawer__menu-item" data-tab-index="1">
-<div class="account-nav-drawer__menu-item-inner">
-            <span class="account-nav-drawer__menu-text">Mina Favoriter</span>
-          </div>
-        </div>
-        <div class="account-nav-drawer__menu-item" data-tab-index="2">
-<div class="account-nav-drawer__menu-item-inner">
-            <span class="account-nav-drawer__menu-text">Adressbok</span>
-          </div>
-        </div>
-        <div class="account-nav-drawer__menu-item" data-tab-index="3">
-<div class="account-nav-drawer__menu-item-inner">
-            <span class="account-nav-drawer__menu-text">Användare</span>
-          </div>
-        </div>
-        <div class="account-nav-drawer__menu-item" data-tab-index="4">
-<div class="account-nav-drawer__menu-item-inner">
-            <span class="account-nav-drawer__menu-text">Ordervy</span>
-          </div>
-        </div>
-        <div class="account-nav-drawer__menu-item" data-tab-index="5">
-<div class="account-nav-drawer__menu-item-inner">
-            <span class="account-nav-drawer__menu-text">Min Profil</span>
-          </div>
-        </div>
-        <div class="account-nav-drawer__menu-item" data-tab-index="6">
-<div class="account-nav-drawer__menu-item-inner">
-            <span class="account-nav-drawer__menu-text">Fakturor</span>
-          </div>
-        </div>
-        <div class="account-nav-drawer__menu-item" data-tab-index="7">
-<div class="account-nav-drawer__menu-item-inner">
-            <span class="account-nav-drawer__menu-text">Attestera</span>
-          </div>
-        </div>
-      </nav>
-
-      <!-- Company section -->
-      <div class="account-nav-drawer__company">
-        <div class="account-nav-drawer__company-row">
-          <img class="account-nav-drawer__company-logo" src="images/samhall-logo.png" alt="Samhall" />
-          <button class="account-nav-drawer__action-link">
-            <span class="ms">sync_alt</span>
-            <span>Byt bolag</span>
-          </button>
-        </div>
-        <div class="account-nav-drawer__contact">
-          <div class="account-nav-drawer__contact-title">Kontakta oss</div>
-          <div class="account-nav-drawer__contact-links">
-            <div class="account-nav-drawer__contact-item">
-              <span class="ms">call</span>
-              <span>010-455 80 00</span>
-            </div>
-            <div class="account-nav-drawer__contact-item">
-              <span class="ms">mail</span>
-              <span>kundservice@swedol.se</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Credit -->
-      <div class="account-nav-drawer__credit">
-        <div class="account-nav-drawer__credit-inner">
-          <span class="account-nav-drawer__credit-label">Kreditgräns</span>
-          <span class="account-nav-drawer__credit-amount">
-            125 000 kr <span class="account-nav-drawer__credit-limit">/ 200 000 kr</span>
-          </span>
-        </div>
-      </div>
-
-    </div><!-- /.account-nav-drawer__body -->
-
-    <!-- Footer -->
-    <div class="account-nav-drawer__footer">
-      <button class="account-nav-drawer__logout">
-        <span class="ms">logout</span>
-        <span>Logga ut</span>
-      </button>
-    </div>
-  </div><!-- /#account-nav-drawer-panel -->
+  <!-- ══ ACCOUNT NAV DRAWER (global partial) ═══════════════════
+       Innehåll: partials/account-nav-drawer.html — enda källan
+       (single source of truth). Redigera ENDAST där; ändringen
+       slår igenom automatiskt i alla sidor som inkluderar partialen.
+  ════════════════════════════════════════════════════════════ -->
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'partials/account-nav-drawer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
 
   <script>
     /* ── Select active state ─────────────────────────────────── */
@@ -5446,10 +4994,15 @@
           let guard2 = allItems.length;
           while (checkAndHide() && guard2-- > 0) {}
 
+          // Klona hela noden (inte bara href/textContent) så eventuella
+          // onclick-handlers (t.ex. Produktsortiment-länken) följer med.
           const hiddenItems = allItems.filter(i => hiddenSet.has(i));
-          navMenu.innerHTML = hiddenItems.map(item =>
-            `<a class="nav-more__menu-item" href="${item.getAttribute('href')}">${item.textContent}</a>`
-          ).join('');
+          navMenu.innerHTML = '';
+          hiddenItems.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.classList.add('nav-more__menu-item');
+            navMenu.appendChild(clone);
+          });
         }
       }
 
@@ -5475,6 +5028,83 @@
       document.fonts.ready.then(updateNavOverflow);
       window.addEventListener('resize', updateNavOverflow);
     })();
+
+    /* ── Huvudmeny-drawer ──────────────────────────────── */
+    function openMainMenuDrawer() {
+      document.getElementById('main-menu-overlay').classList.add('is-open');
+      document.getElementById('main-menu-panel').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMainMenuDrawer() {
+      document.getElementById('main-menu-overlay').classList.remove('is-open');
+      document.getElementById('main-menu-panel').classList.remove('is-open');
+      document.body.style.overflow = '';
+      // Återställ till nivå 1 efter att stäng-animationen är klar
+      setTimeout(function() {
+        document.getElementById('menu-level-2').classList.remove('is-active');
+        document.getElementById('menu-level-1').classList.remove('menu-level--pushed');
+      }, 350);
+    }
+
+    function openMenuLevel2(title) {
+      if (title) document.getElementById('menu-level-2-title').textContent = title;
+      document.getElementById('menu-level-2').classList.add('is-active');
+      document.getElementById('menu-level-1').classList.add('menu-level--pushed');
+    }
+
+    function closeMenuLevel2() {
+      document.getElementById('menu-level-2').classList.remove('is-active');
+      document.getElementById('menu-level-1').classList.remove('menu-level--pushed');
+    }
+
+    // Öppnar huvudmeny-draweren direkt på nivå 2 (Produktsortiment) — utan att
+    // nivå 1 syns eller animeras emellan. Används av "Produktsortiment"-länken
+    // i globala toppmenyn.
+    function openProductPickerDrawer() {
+      var level1 = document.getElementById('menu-level-1');
+      var level2 = document.getElementById('menu-level-2');
+      var title  = document.getElementById('menu-level-2-title');
+      if (!level1 || !level2) return;
+
+      if (title) title.textContent = 'Produktsortiment';
+
+      // Stäng av transition tillfälligt så nivå-växlingen sker direkt (ingen
+      // synlig slide) — draweren ska visa Produktsortiment redan vid öppning.
+      level1.style.transition = 'none';
+      level2.style.transition = 'none';
+      level1.classList.add('menu-level--pushed');
+      level2.classList.add('is-active');
+      void level1.offsetHeight; // tvinga reflow innan transition återställs
+      level1.style.transition = '';
+      level2.style.transition = '';
+
+      openMainMenuDrawer();
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key !== 'Escape') return;
+      var mainMenuPanel = document.getElementById('main-menu-panel');
+      if (!mainMenuPanel || !mainMenuPanel.classList.contains('is-open')) return;
+      if (document.getElementById('menu-level-2').classList.contains('is-active')) {
+        closeMenuLevel2();
+      } else {
+        closeMainMenuDrawer();
+      }
+    });
+
+    // Huvudmeny-drawer har två nivåer, var och en med egen header + scrollbart innehåll
+    [
+      ['#menu-level-1 .drawer-header', '#menu-level-1 .menu-drawer__content'],
+      ['#menu-level-2-header', '#menu-level-2-content']
+    ].forEach(function(pair) {
+      var header  = document.querySelector(pair[0]);
+      var content = document.querySelector(pair[1]);
+      if (!header || !content) return;
+      content.addEventListener('scroll', function() {
+        header.classList.toggle('drawer-header--elevated', content.scrollTop > 0);
+      });
+    });
 
     function handleNewsletterInput(value) {
       document.getElementById('newsletter-clear-btn').style.display = value ? 'block' : 'none';
@@ -5560,7 +5190,6 @@
     window.addEventListener('resize', function() {
       document.documentElement.style.setProperty('--header-top-h', siteHeaderTop.offsetHeight + 'px');
     });
-
 
     window.addEventListener('scroll', () => {
       const y       = window.scrollY;
@@ -5757,8 +5386,6 @@
         var list = document.getElementById('col-item-list');
         var dragSrc = null;
         list.querySelectorAll('.col-item[data-colkey]').forEach(function(item) {
-          item.setAttribute('draggable', 'false');
-
           item.addEventListener('dragstart', function(e) {
             dragSrc = this;
             this.classList.add('is-dragging');
@@ -5833,6 +5460,7 @@
           item.appendChild(label);
 
           if (!col.fixed) {
+            item.setAttribute('draggable', 'true');
             var handle = document.createElement('span');
             handle.className = 'col-item-handle ms';
             handle.setAttribute('aria-hidden', 'true');
@@ -5842,30 +5470,13 @@
 
           list.appendChild(item);
         });
+        list.classList.add('col-sort-enabled');
         initColDrag();
       }
-
-      /* Sort toggle — state persists across open/close */
-      var colSortEnabled = false;
-
-      document.getElementById('col-drawer-toggle').addEventListener('change', function() {
-        colSortEnabled = this.checked;
-        var list = document.getElementById('col-item-list');
-        list.classList.toggle('col-sort-enabled', colSortEnabled);
-        list.querySelectorAll('.col-item[data-colkey]').forEach(function(item) {
-          item.setAttribute('draggable', colSortEnabled ? 'true' : 'false');
-        });
-      });
 
       /* Open / close */
       window.openColDrawer = function() {
         buildColList();
-        document.getElementById('col-drawer-toggle').checked = colSortEnabled;
-        var list = document.getElementById('col-item-list');
-        list.classList.toggle('col-sort-enabled', colSortEnabled);
-        list.querySelectorAll('.col-item[data-colkey]').forEach(function(item) {
-          item.setAttribute('draggable', colSortEnabled ? 'true' : 'false');
-        });
         document.getElementById('col-drawer-overlay').classList.add('is-open');
         document.getElementById('col-drawer-panel').classList.add('is-open');
         document.body.style.overflow = 'hidden';
@@ -6806,37 +6417,7 @@
     });
 
     /* ── Account nav drawer ─────────────────────────────────── */
-    function openAccountNavDrawer() {
-      syncAccountNavDrawerActive();
-      document.getElementById('account-nav-drawer-overlay').classList.add('is-open');
-      document.getElementById('account-nav-drawer-panel').classList.add('is-open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeAccountNavDrawer() {
-      document.getElementById('account-nav-drawer-overlay').classList.remove('is-open');
-      document.getElementById('account-nav-drawer-panel').classList.remove('is-open');
-      document.body.style.overflow = '';
-    }
-
-    function syncAccountNavDrawerActive() {
-      var tabs = document.querySelectorAll('.account-nav .tab-bar .tab-item');
-      var activeIndex = -1;
-      tabs.forEach(function(tab, i) {
-        if (tab.classList.contains('tab-item--active')) activeIndex = i;
-      });
-      document.querySelectorAll('#account-nav-drawer-panel .account-nav-drawer__menu-item').forEach(function(item) {
-        var idx = parseInt(item.getAttribute('data-tab-index'), 10);
-        item.classList.toggle('account-nav-drawer__menu-item--active', idx === activeIndex);
-      });
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        var panel = document.getElementById('account-nav-drawer-panel');
-        if (panel && panel.classList.contains('is-open')) closeAccountNavDrawer();
-      }
-    });
+    /* openAccountNavDrawer / closeAccountNavDrawer / syncAccountNavDrawerActive samt footer-skuggans scroll-logik ligger nu i partials/account-nav-drawer.html */
 
   </script>
 

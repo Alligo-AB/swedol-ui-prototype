@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookie Banner – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+    /* ─── ECO Design System Tokens ─────────────────────────────────────── */
+    :root {
+      --color-surface-100: #000000;
+      --color-text-primary-inverted: #ffffff;
+      --color-text-secondary-inverted: rgba(255,255,255,0.78);
+      --color-text-tertiary-inverted: rgba(255,255,255,0.55);
+      --color-border-inverted: rgba(255,255,255,0.14);
+      --color-border-focus: #455efb;
+      --ease-standard: cubic-bezier(.35,0,.35,1);
+      --ease-decelerate-emphasized: cubic-bezier(.16,0,.16,1);
+      --ease-accelerate-generic: cubic-bezier(.36,.09,1,.58);
+      --duration-fast-2: 100ms;
+      --duration-fast-3: 150ms;
+      --duration-medium-2: 300ms;
+      --duration-medium-3: 350ms;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      background: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      padding: 40px 16px;
+    }
+
+    body.keyboard-nav button:focus { outline-color: var(--color-border-focus); }
+    button { outline: 2px solid transparent; outline-offset: 2px; transition: outline-color var(--duration-fast-2) var(--ease-standard); }
+
+    .demo-label {
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      color: #939595;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    /* Material Symbols */
+    .ms {
+      font-family: 'Material Symbols Outlined';
+      font-weight: 300;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      user-select: none;
+    }
+
+    /* ════════════════════════════════════════════════════════════════════
+       COOKIE MODAL
+    ════════════════════════════════════════════════════════════════════ */
+    .cookie-modal {
+      background: var(--color-surface-100);
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      box-shadow:
+        0px 16px 24px 0px rgba(0,0,0,0.10),
+        0px 0px 1px 0px rgba(0,0,0,0.05);
+    }
+
+    /* ── VIEW 1: Kompakt ────────────────────────────────────────────────── */
+    .view-compact {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cookie-title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 32px;
+      color: var(--color-text-primary-inverted);
+    }
+
+    .cookie-text {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-secondary-inverted);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
+    .cookie-action-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      align-items: stretch;
+    }
+    .cookie-action-row .action-link {
+      align-self: center;
+      margin-top: 4px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 12px 24px;
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 16px;
+      letter-spacing: 0.48px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background var(--duration-fast-3) var(--ease-standard);
+    }
+    .btn-primary:hover {
+      background-image: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.08)),
+                        linear-gradient(90deg, #ffffff, #ffffff);
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-primary-inverted);
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      padding: 0;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      white-space: nowrap;
+    }
+    .action-link:hover {
+      color: var(--color-text-secondary-inverted);
+      text-decoration: none;
+    }
+    .action-link:hover .action-link__text {
+      text-decoration: underline;
+    }
+    .action-link .ms {
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    @media (min-width: 769px) {
+      .action-link { line-height: 24px; gap: 4px; }
+    }
+
+    /* Inline link (underlined, inverted) */
+    .inline-link {
+      color: var(--color-text-primary-inverted);
+      text-decoration: underline;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .inline-link:hover { color: var(--color-text-secondary-inverted); text-decoration: none; }
+
+    .divider {
+      height: 1px;
+      background: var(--color-border-inverted);
+      margin: 0 32px;
+    }
+
+    @media (max-width: 639px) {
+      .divider { margin: 0 24px; }
+    }
+
+    /* ── VIEW 2: Cookie-inställningar ───────────────────────────────────── */
+    .view-expanded {
+      display: none;
+      flex-direction: column;
+    }
+    .view-expanded.is-open { display: flex; }
+
+    /* Header */
+    .settings-header {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .settings-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-secondary-inverted);
+      padding: 4px;
+      flex-shrink: 0;
+      transition: color var(--duration-fast-3) var(--ease-standard),
+                  background var(--duration-fast-3) var(--ease-standard);
+    }
+    .back-btn:hover { color: var(--color-text-primary-inverted); background: rgba(255,255,255,0.06); }
+    .back-btn .ms { font-size: 20px; }
+
+    .settings-title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 32px;
+      letter-spacing: 0px;
+      color: var(--color-text-primary-inverted);
+    }
+
+    /* Close button — top right */
+    .close-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-secondary-inverted);
+      padding: 4px;
+      flex-shrink: 0;
+      transition: color var(--duration-fast-3) var(--ease-standard),
+                  background var(--duration-fast-3) var(--ease-standard);
+    }
+    .close-btn:hover { color: var(--color-text-primary-inverted); background: rgba(255,255,255,0.06); }
+    .close-btn .ms { font-size: 20px; }
+
+    /* ── Categories ─────────────────────────────────────────────────────── */
+    .cookie-categories { display: flex; flex-direction: column; }
+
+    /* Each accordion item */
+    .acc-item {
+      border-bottom: 1px solid var(--color-border-inverted);
+      margin: 0 32px;
+    }
+    .acc-item:first-child { border-top: 1px solid var(--color-border-inverted); }
+
+    /* Acc item layout: checkbox-label överst, sedan klickbar rad med desc+chevron */
+    .acc-row {
+      display: flex;
+      flex-direction: column;
+      padding: 14px 0;
+      width: 100%;
+      gap: 6px;
+    }
+
+    /* Checkbox + label — överst, ej klickbar för accordion */
+    .checkbox-unit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      flex-shrink: 0;
+      width: fit-content;
+    }
+
+    /* Klickbar rad: desc + chevron */
+    .acc-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .acc-trigger .cat-desc { flex: 1; }
+    /* Hover på acc-trigger eller cat-desc triggar chevron-hover */
+    .acc-trigger:hover .acc-chevron-btn,
+    .acc-trigger:hover ~ .acc-chevron-btn {
+      color: var(--color-text-primary-inverted);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .cookie-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color var(--duration-fast-2) var(--ease-standard),
+                  background var(--duration-fast-2) var(--ease-standard);
+    }
+
+    /* Hover på checkbox-unit triggar checkbox hover */
+    .checkbox-unit:hover .cookie-checkbox:not(:disabled) {
+      border-width: 2px;
+      border-color: #ffffff;
+    }
+    .cookie-checkbox:checked {
+      background: #ffffff; border-color: #ffffff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 3.5L3.8 6.5L9 1' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center;
+    }
+    .cookie-checkbox:disabled { border-color: rgba(255,255,255,0.24); cursor: not-allowed; }
+    .cookie-checkbox:disabled:checked {
+      background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.22);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 3.5L3.8 6.5L9 1' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center;
+    }
+
+    /* Label + desc col */
+    .cat-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+
+    .cat-label {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 14px;
+      letter-spacing: 0.56px;
+      text-transform: uppercase;
+      color: var(--color-text-primary-inverted);
+    }
+    .cat-label.is-disabled { color: rgba(255,255,255,0.36); }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      text-transform: none;
+      color: rgba(255,255,255,0.36);
+    }
+
+    .cat-desc {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      color: var(--color-text-tertiary-inverted);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
+    /* Chevron toggle button */
+    .acc-chevron-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-secondary-inverted);
+      margin-top: 0;
+      padding: 2px;
+      transition: color var(--duration-fast-2) var(--ease-standard),
+                  background var(--duration-fast-2) var(--ease-standard);
+    }
+    .acc-chevron-btn:hover { color: var(--color-text-primary-inverted); background: rgba(255,255,255,0.07); }
+    .acc-chevron-btn .ms {
+      font-size: 20px;
+      transition: transform var(--duration-medium-2) var(--ease-standard);
+    }
+    .acc-item.is-open .acc-chevron-btn .ms { transform: rotate(180deg); }
+
+    /* Accordion panel */
+    .acc-panel {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height var(--duration-medium-3) var(--ease-decelerate-emphasized);
+    }
+    .acc-item.is-open .acc-panel { max-height: 400px; }
+
+    .acc-panel-inner {
+      padding: 0 0 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .acc-info-text {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.28px;
+      color: var(--color-text-secondary-inverted);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
+    /* "Information om cookies" – Secondary Inverted xs */
+    .btn-info-cookies {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      padding: 6px 12px;
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 13px;
+      letter-spacing: 0.52px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      align-self: flex-start;
+      transition: background var(--duration-fast-3) var(--ease-standard),
+                  border-color var(--duration-fast-3) var(--ease-standard);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .btn-info-cookies:hover { background: rgba(255,255,255,0.08); border-color: #ffffff; }
+
+    /* ── Footer (buttons) ───────────────────────────────────────────────── */
+    .settings-footer {
+      padding: 20px 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* "Mer information om cookies" inline link in footer */
+    .footer-meta {
+      padding: 4px 0 0;
+      text-align: center;
+    }
+
+    .btn-full {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 18px;
+      letter-spacing: 0.18px;
+      text-transform: uppercase;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .btn-full--primary  { height: 48px; padding: 12px 16px; background: #ffffff; color: #000; }
+    .btn-full--primary:hover { background-image: linear-gradient(90deg,rgba(0,0,0,0.08),rgba(0,0,0,0.08)),linear-gradient(90deg,#fff,#fff); }
+    .btn-full--secondary { height: 48px; padding: 12px 16px; background: transparent; color: #ffffff; border: 1px solid #ffffff; }
+    .btn-full--secondary:hover { background: rgba(255,255,255,0.08); }
+    .btn-full--blank { height: 40px; padding: 8px 16px; background: transparent; color: rgba(255,255,255,0.65); font-size: 14px; letter-spacing: 0.56px; }
+    .btn-full--blank:hover { color: #ffffff; background: rgba(255,255,255,0.05); }
+
+    /* ── Mobile ─────────────────────────────────────────────────────────── */
+    @media (max-width: 639px) {
+      .cookie-modal { max-width: 100%; }
+      .view-compact { padding: 24px; gap: 16px; }
+      .cookie-title { font-size: 22px; line-height: 26px; }
+      .btn-primary { height: 40px; padding: 8px 20px; font-size: 14px; }
+      .btn-full--primary, .btn-full--secondary { height: 40px; font-size: 16px; letter-spacing: 0.32px; line-height: 16px; }
+      .action-link { font-size: 14px; }
+      .settings-header { padding: 16px 24px; }
+      .acc-item { margin: 0 24px; }
+      .divider { margin: 0 24px; }
+      .settings-footer { padding: 16px 24px 24px; }
+      .btn-full--primary, .btn-full--secondary { height: 40px; font-size: 16px; letter-spacing: 0.32px; line-height: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ DESKTOP 480px ════════════════════════════════════════════════════ -->
+<div style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:480px;">
+  <span class="demo-label">Desktop — 480px</span>
+
+  <div class="cookie-modal" id="modal-desktop" role="dialog" aria-modal="true" aria-labelledby="title-desktop">
+
+    <!-- VIEW 1: Kompakt -->
+    <div class="view-compact" id="view-compact-desktop">
+      <!-- [#TITLE#] -->
+      <h2 class="cookie-title" id="title-desktop">Vi använder cookies</h2>
+      <!-- [#TEXT#] -->
+      <p class="cookie-text">
+        Vi använder enhetsidentifierare för att anpassa innehållet och annonserna till användarna, tillhandahålla funktioner för sociala medier och analysera vår trafik.
+      </p>
+      <div class="cookie-action-row">
+        <!-- [#LEVELOPTIN_ALLOWALL#] -->
+        <button class="btn-full btn-full--primary" id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll" onclick="submitConsent('all')">
+          Tillåt alla
+        </button>
+        <!-- [#DECLINE#] -->
+        <button class="btn-full btn-full--secondary" id="CybotCookiebotDialogBodyButtonDeclineCompact" onclick="submitDecline()">
+          Endast nödvändiga
+        </button>
+        <button class="action-link" onclick="openSettings('desktop')" id="settings-toggle-desktop">
+          <span class="action-link__text">Avvisa eller anpassa</span>
+          <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20;">chevron_right</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW 2: Hantera inställningar -->
+    <div class="view-expanded" id="view-expanded-desktop">
+
+      <!-- Header -->
+      <div class="settings-header">
+        <div class="settings-header-left">
+          <!-- Rubrik -->
+          <h2 class="settings-title">Hantera inställningar för samtycke</h2>
+        </div>
+        <!-- Stängknapp -->
+        <button class="close-btn" onclick="closeModal('desktop')" aria-label="Stäng">
+          <span class="ms">close</span>
+        </button>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Kategorier med accordion -->
+      <div class="cookie-categories">
+
+        <!-- Nödvändiga -->
+        <div class="acc-item" id="acc-necessary-desktop">
+          <div class="acc-row">
+            <label class="checkbox-unit" onclick="event.stopPropagation()">
+              <input type="checkbox" class="cookie-checkbox" id="nec-d" checked disabled name="CybotCookiebotDialogBodyLevelButtonNecessary" />
+              <span class="cat-label is-disabled">Nödvändiga <span class="badge">(alltid aktiva)</span></span>
+            </label>
+            <div class="acc-trigger" onclick="toggleAcc('necessary','desktop')">
+              <p class="cat-desc">Krävs för att webbplatsen ska fungera korrekt.</p>
+              <button class="acc-chevron-btn" aria-expanded="false" aria-controls="panel-necessary-desktop" onclick="event.stopPropagation();toggleAcc('necessary','desktop')" aria-label="Visa mer om Nödvändiga">
+                <span class="ms">expand_more</span>
+              </button>
+            </div>
+          </div>
+          <div class="acc-panel" id="panel-necessary-desktop" aria-hidden="true">
+            <div class="acc-panel-inner">
+              <p class="acc-info-text">Nödvändiga cookies är helt nödvändiga för att webbplatsen ska fungera på rätt sätt. Dessa cookies säkerställer grundläggande funktioner och säkerhetsfunktioner på webbplatsen, anonymt.</p>
+              <button class="btn-info-cookies" onclick="goToCookieInfo()">Information om cookies</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inställningar -->
+        <div class="acc-item" id="acc-preferences-desktop">
+          <div class="acc-row">
+            <label class="checkbox-unit" onclick="event.stopPropagation()">
+              <input type="checkbox" class="cookie-checkbox" id="pref-d" name="CybotCookiebotDialogBodyLevelButtonPreferences" />
+              <span class="cat-label">Inställningar</span>
+            </label>
+            <div class="acc-trigger" onclick="toggleAcc('preferences','desktop')">
+              <p class="cat-desc">Sparar dina val och preferenser på webbplatsen.</p>
+              <button class="acc-chevron-btn" aria-expanded="false" aria-controls="panel-preferences-desktop" onclick="event.stopPropagation();toggleAcc('preferences','desktop')" aria-label="Visa mer om Inställningar">
+                <span class="ms">expand_more</span>
+              </button>
+            </div>
+          </div>
+          <div class="acc-panel" id="panel-preferences-desktop" aria-hidden="true">
+            <div class="acc-panel-inner">
+              <p class="acc-info-text">Inställningscookies gör att webbplatsen kan komma ihåg information som ändrar hur webbplatsen beter sig eller ser ut, till exempel ditt föredragna språk eller den region du befinner dig i.</p>
+              <button class="btn-info-cookies" onclick="goToCookieInfo()">Information om cookies</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistik -->
+        <div class="acc-item" id="acc-statistics-desktop">
+          <div class="acc-row">
+            <label class="checkbox-unit" onclick="event.stopPropagation()">
+              <input type="checkbox" class="cookie-checkbox" id="stat-d" name="CybotCookiebotDialogBodyLevelButtonStatistics" />
+              <span class="cat-label">Statistik</span>
+            </label>
+            <div class="acc-trigger" onclick="toggleAcc('statistics','desktop')">
+              <p class="cat-desc">Hjälper oss förstå hur webbplatsen används.</p>
+              <button class="acc-chevron-btn" aria-expanded="false" aria-controls="panel-statistics-desktop" onclick="event.stopPropagation();toggleAcc('statistics','desktop')" aria-label="Visa mer om Statistik">
+                <span class="ms">expand_more</span>
+              </button>
+            </div>
+          </div>
+          <div class="acc-panel" id="panel-statistics-desktop" aria-hidden="true">
+            <div class="acc-panel-inner">
+              <p class="acc-info-text">Statistikcookies hjälper webbplatsägare att förstå hur besökarna interagerar med webbplatser genom att samla in och rapportera information anonymt.</p>
+              <button class="btn-info-cookies" onclick="goToCookieInfo()">Information om cookies</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marknadsföring -->
+        <div class="acc-item" id="acc-marketing-desktop">
+          <div class="acc-row">
+            <label class="checkbox-unit" onclick="event.stopPropagation()">
+              <input type="checkbox" class="cookie-checkbox" id="mkt-d" name="CybotCookiebotDialogBodyLevelButtonMarketing" />
+              <span class="cat-label">Marknadsföring</span>
+            </label>
+            <div class="acc-trigger" onclick="toggleAcc('marketing','desktop')">
+              <p class="cat-desc">Används för relevanta annonser och sociala medier.</p>
+              <button class="acc-chevron-btn" aria-expanded="false" aria-controls="panel-marketing-desktop" onclick="event.stopPropagation();toggleAcc('marketing','desktop')" aria-label="Visa mer om Marknadsföring">
+                <span class="ms">expand_more</span>
+              </button>
+            </div>
+          </div>
+          <div class="acc-panel" id="panel-marketing-desktop" aria-hidden="true">
+            <div class="acc-panel-inner">
+              <p class="acc-info-text">Marknadsföringscookies används för att spåra besökare på olika webbplatser. Avsikten är att visa annonser som är relevanta och engagerande för den enskilda användaren.</p>
+              <button class="btn-info-cookies" onclick="goToCookieInfo()">Information om cookies</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /cookie-categories -->
+
+      <!-- Footer: knappar + inline-länk -->
+      <div class="settings-footer">
+        <!-- [#LEVELOPTIN_ALLOWALL#] -->
+        <button class="btn-full btn-full--primary" onclick="submitConsent('all')">Tillåt alla</button>
+        <!-- [#LEVELOPTIN_ALLOW_SELECTION#] -->
+        <button class="btn-full btn-full--secondary" id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection" onclick="submitConsent('selection')">Spara mina val</button>
+        <!-- [#DECLINE#] -->
+        <button class="btn-full btn-full--blank" id="CybotCookiebotDialogBodyButtonDecline" onclick="submitDecline()">Endast nödvändiga</button>
+
+        <!-- Inline link -->
+        <div class="footer-meta">
+          <button class="inline-link" onclick="goToCookieInfo()">Mer information om cookies</button>
+        </div>
+      </div>
+
+    </div><!-- /view-expanded -->
+  </div><!-- /cookie-modal -->
+</div>
+
+<!-- ═══ MOBILE 375px ════════════════════════════════════════════════════ -->
+<div style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%;max-width:375px;">
+  <span class="demo-label">Mobile — 375px</span>
+
+  <div class="cookie-modal" id="modal-mobile" style="max-width:375px;" role="dialog" aria-modal="true">
+
+    <div class="view-compact" id="view-compact-mobile" style="padding:24px;gap:16px;">
+      <h2 class="cookie-title" style="font-size:22px;line-height:26px;">Vi använder cookies</h2>
+      <p class="cookie-text" style="font-size:16px;line-height:22px;">
+        Vi använder enhetsidentifierare för att anpassa innehållet och annonserna till användarna, tillhandahålla funktioner för sociala medier och analysera vår trafik.
+      </p>
+      <div class="cookie-action-row">
+        <button class="btn-full btn-full--primary" onclick="submitConsent('all')">Tillåt alla</button>
+        <button class="btn-full btn-full--secondary" onclick="submitDecline()">Endast nödvändiga</button>
+        <button class="action-link" onclick="openSettings('mobile')">
+          <span class="action-link__text">Avvisa eller anpassa</span>
+          <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20;">chevron_right</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="view-expanded" id="view-expanded-mobile">
+      <div class="settings-header">
+        <div class="settings-header-left">
+          <h2 class="settings-title" style="font-size:22px;line-height:26px;">Hantera inställningar för samtycke</h2>
+        </div>
+        <button class="close-btn" onclick="closeModal('mobile')" aria-label="Stäng"><span class="ms">close</span></button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="cookie-categories">
+        <!-- Nödvändiga -->
+        <div class="acc-item" id="acc-necessary-mobile">
+          <div class="acc-row" style="padding:12px 0;">
+            <label class="checkbox-unit" onclick="event.stopPropagation()">
+              <input type="checkbox" class="cookie-checkbox" id="nec-m" checked disabled />
+              <span class="cat-label is-disabled">Nödvändiga <span class="badge">(alltid aktiva)</span></span>
+            </label>
+            <div class="acc-trigger" onclick="toggleAcc('necessary','mobile')">
+              <p class="cat-desc">Krävs för att webbplatsen ska fungera korrekt.</p>
+              <button class="acc-chevron-btn" onclick="event.stopPropagation();toggleAcc('necessary','mobile')" aria-label="Visa mer"><span class="ms">expand_more</span></button>
+            </div>
+          </div>
+          <div class="acc-panel" id="panel-necessary-mobile">
+            <div class="acc-panel-inner" style="padding:0 0 16px 0;">
+              <p class="acc-info-text">Nödvändiga cookies säkerställer grundläggande funktioner och säkerhetsfunktioner på webbplatsen, anonymt.</p>
+              <button class="btn-info-cookies" onclick="goToCookieInfo()">Information om cookies</button>
+            </div>
+          </div>
+        </div>
+        <!-- Inställningar -->
+        <div class="acc-item" id="acc-preferences-mobile">
+          <div class="acc-row" style="padding:12px 0;">
+            <label class="checkbox-unit" onclick="event.stopPropagation()">
+              <input type="checkbox" class="cookie-checkbox" id="pref-m" />
+              <span class="cat-label">Inställningar</span>
+            </label>
+            <div class="acc-trigger" onclick="toggleAcc('preferences','mobile')">
+              <p class="cat-desc">Sparar dina val och preferenser.</p>
+              <button class="acc-chevron-btn" onclick="event.stopPropagation();toggleAcc('preferences','mobile')" aria-label="Visa mer"><span class="ms">expand_more</span></button>
+            </div>
+          </div>
+          <div class="acc-panel" id="panel-preferences-mobile">
+            <div class="acc-panel-inner" style="padding:0 0 16px 0;">
+              <p class="acc-info-text">Inställningscookies gör att webbplatsen kan komma ihåg information som ändrar hur webbplatsen beter sig eller ser ut.</p>
+              <button class="btn-info-cookies" onclick="goToCookieInfo()">Information om cookies</button>
+            </div>
+          </div>
+        </div>
+        <!-- Statistik -->
+        <div class="acc-item" id="acc-statistics-mobile">
+          <div class="acc-row" style="padding:12px 0;">
+            <label class="checkbox-unit" onclick="event.stopPropagation()">
+              <input type="checkbox" class="cookie-checkbox" id="stat-m" />
+              <span class="cat-label">Statistik</span>
+            </label>
+            <div class="acc-trigger" onclick="toggleAcc('statistics','mobile')">
+              <p class="cat-desc">Hjälper oss förstå hur webbplatsen används.</p>
+              <button class="acc-chevron-btn" onclick="event.stopPropagation();toggleAcc('statistics','mobile')" aria-label="Visa mer"><span class="ms">expand_more</span></button>
+            </div>
+          </div>
+          <div class="acc-panel" id="panel-statistics-mobile">
+            <div class="acc-panel-inner" style="padding:0 0 16px 0;">
+              <p class="acc-info-text">Statistikcookies hjälper oss förstå hur besökarna interagerar med webbplatsen genom att samla in och rapportera information anonymt.</p>
+              <button class="btn-info-cookies" onclick="goToCookieInfo()">Information om cookies</button>
+            </div>
+          </div>
+        </div>
+        <!-- Marknadsföring -->
+        <div class="acc-item" id="acc-marketing-mobile">
+          <div class="acc-row" style="padding:12px 0;">
+            <label class="checkbox-unit" onclick="event.stopPropagation()">
+              <input type="checkbox" class="cookie-checkbox" id="mkt-m" />
+              <span class="cat-label">Marknadsföring</span>
+            </label>
+            <div class="acc-trigger" onclick="toggleAcc('marketing','mobile')">
+              <p class="cat-desc">Används för relevanta annonser och sociala medier.</p>
+              <button class="acc-chevron-btn" onclick="event.stopPropagation();toggleAcc('marketing','mobile')" aria-label="Visa mer"><span class="ms">expand_more</span></button>
+            </div>
+          </div>
+          <div class="acc-panel" id="panel-marketing-mobile">
+            <div class="acc-panel-inner" style="padding:0 0 16px 0;">
+              <p class="acc-info-text">Marknadsföringscookies används för att visa annonser som är relevanta och engagerande för den enskilda användaren.</p>
+              <button class="btn-info-cookies" onclick="goToCookieInfo()">Information om cookies</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-footer" style="padding:16px 24px 24px;">
+        <button class="btn-full btn-full--primary" style="height:40px;font-size:14px;" onclick="submitConsent('all')">Tillåt alla</button>
+        <button class="btn-full btn-full--secondary" style="height:40px;font-size:14px;" onclick="submitConsent('selection')">Spara mina val</button>
+        <button class="btn-full btn-full--blank" style="font-size:13px;" onclick="submitDecline()">Endast nödvändiga</button>
+        <div class="footer-meta">
+          <button class="inline-link" onclick="goToCookieInfo()">Mer information om cookies</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* Keyboard-nav */
+  document.addEventListener('keydown', e => { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+  document.addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
+
+  /* ESC closes modal */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal('desktop'); closeModal('mobile'); }
+  });
+
+  /* Open settings view */
+  function openSettings(v) {
+    document.getElementById('view-compact-' + v).style.display = 'none';
+    document.getElementById('view-expanded-' + v).classList.add('is-open');
+  }
+
+  /* Back to compact view */
+  function closeSettings(v) {
+    document.getElementById('view-expanded-' + v).classList.remove('is-open');
+    document.getElementById('view-compact-' + v).style.display = '';
+  }
+
+  /* Close entire modal (X button) — goes back to compact */
+  function closeModal(v) {
+    closeSettings(v);
+    // In production: Cookiebot.hide() or similar
+    console.log('[Cookiebot] modal closed –', v);
+  }
+
+  /* Accordion toggle */
+  function toggleAcc(cat, variant) {
+    const item   = document.getElementById('acc-' + cat + '-' + variant);
+    const panel  = document.getElementById('panel-' + cat + '-' + variant);
+    const btn    = item.querySelector('.acc-chevron-btn');
+    const isOpen = item.classList.toggle('is-open');
+    panel.setAttribute('aria-hidden', !isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+
+  /* Consent stubs */
+  function submitConsent(type) { console.log('[Cookiebot] submitConsent –', type); }
+  function submitDecline()     { console.log('[Cookiebot] submitDecline'); }
+  function goToCookieInfo()    { console.log('[Cookiebot] → cookie info page'); /* window.location.href = '/om-cookies'; */ }
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!-- ════════════════════════════════════════════════════════════
+     GLOBAL PARTIAL — Site Footer
+     Denna fil är den enda källan (single source of truth) för
+     sajtens footer. Den laddas in via JS (synkron XHR) i varje
+     sida som använder den — redigera ENDAST här, ändringen slår
+     igenom automatiskt i alla sidor som inkluderar filen.
+
+     Inkluderas för närvarande i:
+       - /index.html
+       - /template.html
+       - /reviews.html
+       - /feature-comparison.html
+       - /mypages/mypages-template.html
+       - /mypages/users.html
+       - /mypages/users-dashboard.html
+       - /mypages/users_V1.html
+       - /mypages/dashboard_test.html
+       - /mypages/addressbook.html
+════════════════════════════════════════════════════════════ -->
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <!-- Newsletter -->
+      <div class="footer-top__col">
+        <p class="newsletter__title">Nyhetsbrev</p>
+        <p class="newsletter__desc">Prenumerera på vårt nyhetsbrev för att ta del av specialerbjudanden, rabatter, nyheter och artiklar.</p>
+        <div class="newsletter__input-group">
+          <div class="newsletter__input-wrap">
+            <input class="newsletter__input" type="email" id="newsletter-field" placeholder="Din e-postadress" oninput="handleNewsletterInput(this.value)" />
+            <button class="newsletter__clear" id="newsletter-clear-btn" aria-label="Rensa" onclick="var f=document.getElementById('newsletter-field');f.value='';f.focus();handleNewsletterInput('');">
+              <span class="ms">cancel</span>
+            </button>
+          </div>
+          <button class="newsletter__btn">Prenumerera</button>
+        </div>
+      </div>
+
+      <div class="footer-top__divider"></div>
+
+      <!-- Customer Service -->
+      <div class="footer-top__col">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <p class="cs__title">Kundservice</p>
+          <p class="cs__desc">Välkommen till vår kundservice! Vi finns här för att hjälpa dig med alla dina frågor och ärenden. Registrera ditt ärende enkelt, så återkommer vi snabbt med den hjälp du behöver.</p>
+        </div>
+        <div class="cs__bullets">
+          <div class="cs__bullet-col">
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Returer</span></div>
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Fakturor</span></div>
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Leveransfrågor</span></div>
+          </div>
+          <div class="cs__bullet-col">
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Reklamationer</span></div>
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Ordrar</span></div>
+            <div class="cs__bullet"><img class="cs__bullet-dot" src="images/bullet-dot.svg" alt="" /><span class="cs__bullet-text">Konto</span></div>
+          </div>
+        </div>
+        <a class="cs__btn" href="#">Till kundservice <span class="ms">chevron_right</span></a>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider">
+      <div class="footer-divider__line"></div>
+    </div>
+
+    <!-- Footer links -->
+    <div class="footer-links">
+      <div class="footer-col">
+        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Kontakta oss <span class="ms footer-col__expand">expand_more</span></button>
+        <ul class="footer-col__links">
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Huvudkontor och support</a></li>
+          <li><a href="#">Fakturaadress</a></li>
+          <li><a href="#">Logistikcentrum</a></li>
+          <li><a href="#">Våra butiker</a></li>
+          <li><a href="#">Om Alligokoncernen</a></li>
+          <li><a href="#">Jobba hos oss</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Handla hos oss <span class="ms footer-col__expand">expand_more</span></button>
+        <ul class="footer-col__links">
+          <li><a href="#">Kontoansökan</a></li>
+          <li><a href="#">Kampanj</a></li>
+          <li><a href="#">Retur och reklamation</a></li>
+          <li><a href="#">Köpevilkor</a></li>
+          <li><a href="#">Fullmakt</a></li>
+          <li><a href="#">Presentkort - saldocheck</a></li>
+          <li><a href="#">Ordersedel</a></li>
+          <li><a href="#">Swedolblad och kataloger</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Så arbetar vi <span class="ms footer-col__expand">expand_more</span></button>
+        <ul class="footer-col__links">
+          <li><a href="#">Certifieringar och policys</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Integritetspolicy</a></li>
+          <li><a href="#">GDPR</a></li>
+          <li><a href="reviews.html" id="footer-reviews-link">Recensioner</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Egna varumärken <span class="ms footer-col__expand">expand_more</span></button>
+        <ul class="footer-col__links">
+          <li><a href="#">1832</a></li>
+          <li><a href="#">Björnkläder</a></li>
+          <li><a href="#">Gesto Workwear</a></li>
+          <li><a href="#">Gesto Skor</a></li>
+          <li><a href="#">Balance Handskar</a></li>
+          <li><a href="#">Univern</a></li>
+          <li><a href="#">AmPro</a></li>
+          <li><a href="#">Award</a></li>
+          <li><a href="#">Nima</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <button class="footer-col__heading" onclick="toggleFooterCol(this.parentElement)">Vara vår leverantör <span class="ms footer-col__expand">expand_more</span></button>
+        <ul class="footer-col__links">
+          <li><a href="#">Suppliers Guide SWE</a></li>
+          <li><a href="#">Suppliers Guide ENG</a></li>
+          <li><a href="#">Så fungerar våra fakturarutiner</a></li>
+          <li><a href="#">Så levererar du till oss</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom__trustmarks">
+        <!-- Betalningsalternativ -->
+        <div class="trustmark-group">
+          <span class="trustmark-group__label">Betalningsalternativ</span>
+          <div class="trustmark-group__items">
+            <div class="trustmark-badge trustmark-badge--klarna">
+              <img src="images/klarna.svg" alt="Klarna" />
+            </div>
+            <div class="trustmark-badge">
+              <div class="trustmark-badge__inner">
+                <img src="images/visa.svg" alt="Visa" />
+              </div>
+            </div>
+            <div class="trustmark-badge">
+              <div class="trustmark-badge__inner trustmark-badge__inner--mc">
+                <img src="images/mastercard.svg" alt="Mastercard" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Säker betalning -->
+        <div class="trustmark-group">
+          <span class="trustmark-group__label">Säker betalning</span>
+          <div class="trustmark-group__items">
+            <div class="trustmark-badge">
+              <img src="images/3d-secure.png" alt="3D Secure" />
+            </div>
+          </div>
+        </div>
+        <!-- Trygg E-handel -->
+        <div class="trustmark-group">
+          <span class="trustmark-group__label">Trygg E-handel</span>
+          <div class="trustmark-group__items">
+            <div class="trustmark-badge trustmark-badge--trygg">
+              <img src="images/trygg-e-handel.png" alt="Trygg E-handel" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom__social">
+        <span class="social-label">Följ oss:</span>
+        <div class="social-icons">
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <img src="images/facebook.svg" alt="Facebook" />
+          </a>
+          <a href="#" class="social-icon" aria-label="YouTube">
+            <img src="images/youtube.svg" alt="YouTube" />
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <img src="images/instagram.svg" alt="Instagram" />
+          </a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <img src="images/linkedin.svg" alt="LinkedIn" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider">
+      <div class="footer-divider__line"></div>
+    </div>
+
+    <div class="footer-copyright">
+      <div class="footer-copyright__inner">
+        <div class="footer-copyright__logo">
+          <img src="images/swedol-logo-footer.svg" alt="Swedol" />
+        </div>
+        <p class="footer-copyright__text">2026 Swedol &copy; Alla rättigheter förbehållna.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // reviews.html ligger i sajtens rotmapp (samma nivå som index.html/
+    // template.html). Sidor under /mypages/ ligger en nivå djupare och
+    // måste därför gå upp en nivå för att nå den. Länken byggs relativt
+    // till aktuell sida (inte root-relativt med "/") så den fungerar
+    // oavsett om sajten serveras från domänroten eller under en subpath
+    // (t.ex. http://localhost:3000/swedol-ui-prototype/...).
+    (function () {
+      var link = document.getElementById('footer-reviews-link');
+      if (link && window.location.pathname.indexOf('/mypages/') !== -1) {
+        link.setAttribute('href', '../reviews.html');
+      }
+    })();
+  </script>

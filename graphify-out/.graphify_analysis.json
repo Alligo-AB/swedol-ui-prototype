@@ -1,0 +1,413 @@
+{
+  "communities": {
+    "0": [
+      "eco_design_system",
+      "skills_action_link_skill",
+      "skills_badge_skill",
+      "skills_banner_notification_skill",
+      "skills_breadcrumb_skill",
+      "skills_button_skill",
+      "skills_checkbox_skill",
+      "skills_collapsible_skill",
+      "skills_colors_skill",
+      "skills_elevation_skill",
+      "skills_inline_link_skill",
+      "skills_inline_notification_skill",
+      "skills_input_skill",
+      "skills_links_guide_skill",
+      "skills_modal_ecom_skill",
+      "skills_motion_skill",
+      "skills_notifications_guide_skill",
+      "skills_pagination_skill",
+      "skills_role_tier_card_skill",
+      "skills_section_skill",
+      "skills_segment_control_skill",
+      "skills_select_skill",
+      "skills_spacing_skill"
+    ],
+    "1": [
+      "alligo_design_tokens",
+      "mypages_cookie_banner_html",
+      "mypages_cookie_banner_v1_html",
+      "mypages_cookie_banner_v1_submitconsent",
+      "mypages_cookie_banner_v1_toggleacc",
+      "mypages_dashboard_test_html",
+      "mypages_dashboard_test_openaccountnavdrawer"
+    ],
+    "2": [
+      "claude_design_guidelines",
+      "reviews_clearreviewfilter",
+      "reviews_html",
+      "reviews_openfilterdrawer",
+      "reviews_openproductpickerdrawer",
+      "reviews_showmorereviews",
+      "reviews_switchreviewstab"
+    ],
+    "3": [
+      "compare_table",
+      "e_handelspartner_html",
+      "feature_comparison_html",
+      "impersonation_banner",
+      "index_html",
+      "mypages_partials_footer",
+      "mypages_partials_header"
+    ],
+    "4": [
+      "mypages_partials_main_menu",
+      "reviews_backup_1_applyreviewfilter",
+      "reviews_backup_1_html",
+      "reviews_backup_1_openfilterdrawer",
+      "reviews_backup_1_openproductpickerdrawer",
+      "reviews_backup_1_switchreviewstab",
+      "trustvoice"
+    ],
+    "5": [
+      "e_handelspartner_compare_table_section",
+      "e_handelspartner_gotocompareview",
+      "e_handelspartner_role_tiers",
+      "e_handelspartner_setcompareview",
+      "e_handelspartner_togglecomparegroup",
+      "e_handelspartner_togglecomparerow"
+    ],
+    "6": [
+      "email_email_html",
+      "email_images_hero_jpg",
+      "email_images_logo_footer_png",
+      "email_images_logo_footer_svg",
+      "email_images_logo_header_png",
+      "email_images_logo_header_svg"
+    ],
+    "7": [
+      "claude_skills_tile_link_skill",
+      "claude_skills_toast_ecom_skill",
+      "claude_skills_toast_system_skill",
+      "claude_skills_typography_skill"
+    ],
+    "8": [
+      "mypages_addressbook_openaddressdrawer",
+      "mypages_addressbook_openbillingbankidmodal",
+      "mypages_addressbook_openstorepicker",
+      "mypages_addressbook_showaddrtoast"
+    ],
+    "9": [
+      "feature_comparison_applyfilter",
+      "feature_comparison_setfilter",
+      "feature_comparison_setview"
+    ],
+    "10": [
+      "feature_comparison_roles_backup_kundansvarig",
+      "feature_comparison_roles_backup_kundunika_priser",
+      "feature_comparison_roles_backup_toggle_compare_row"
+    ],
+    "11": [
+      "mypages_addressbook_html",
+      "mypages_addressbook_renderaddresstable",
+      "mypages_partials_account_nav_drawer_html"
+    ],
+    "12": [
+      "reviews_backup_2_html",
+      "template_impersonation_banner",
+      "template_site_header"
+    ],
+    "13": [
+      "feature_comparison_roles_backup_apply_compare_filter_state",
+      "feature_comparison_roles_backup_toggle_compare_group"
+    ],
+    "14": [
+      "feature_comparison_roles_backup_measure_compare_columns",
+      "feature_comparison_roles_backup_set_compare_view"
+    ],
+    "15": [
+      "feature_comparison_roles_backup_revisionslogg",
+      "feature_comparison_roles_backup_sso_saml"
+    ],
+    "16": [
+      "index_openmainmenudrawer",
+      "index_openproductpickerdrawer"
+    ],
+    "17": [
+      "reviews_backup_2_applyreviewfilter",
+      "reviews_backup_2_openfilterdrawer"
+    ],
+    "18": [
+      "reviews_backup_2_sh_sm_bar2",
+      "reviews_backup_2_switchreviewstab"
+    ],
+    "19": [
+      "claude_skills_tooltip_skill"
+    ],
+    "20": [
+      "e_handelspartner_bankid_modal"
+    ],
+    "21": [
+      "e_handelspartner_compare_intro"
+    ],
+    "22": [
+      "e_handelspartner_ehp_integration_grid"
+    ],
+    "23": [
+      "e_handelspartner_fob_grid"
+    ],
+    "24": [
+      "e_handelspartner_form_checkboxes"
+    ],
+    "25": [
+      "e_handelspartner_site_header_sm"
+    ],
+    "26": [
+      "feature_comparison_roles_backup_avtalspriser"
+    ],
+    "27": [
+      "feature_comparison_roles_backup_footer_partial"
+    ],
+    "28": [
+      "feature_comparison_roles_backup_gdpr_verktyg"
+    ],
+    "29": [
+      "feature_comparison_roles_backup_kampanjpriser"
+    ],
+    "30": [
+      "feature_comparison_roles_backup_kundtjanst"
+    ],
+    "31": [
+      "feature_comparison_roles_backup_main_menu_partial"
+    ],
+    "32": [
+      "feature_comparison_roles_backup_onboarding"
+    ],
+    "33": [
+      "feature_comparison_roles_backup_ravarukoppling"
+    ],
+    "34": [
+      "feature_comparison_roles_backup_sla_garanti"
+    ],
+    "35": [
+      "feature_comparison_roles_compare_card_grid"
+    ],
+    "36": [
+      "feature_comparison_togglecategory"
+    ],
+    "37": [
+      "feature_comparison_toggledetail"
+    ],
+    "38": [
+      "images_3d_secure_png"
+    ],
+    "39": [
+      "images_butik_boras_jpg"
+    ],
+    "40": [
+      "images_category_el_belysning_png"
+    ],
+    "41": [
+      "images_category_klader_skydd_png"
+    ],
+    "42": [
+      "index_closemainmenudrawer"
+    ],
+    "43": [
+      "index_togglecollapsible"
+    ],
+    "44": [
+      "index_updateborder"
+    ],
+    "45": [
+      "readme_md"
+    ],
+    "46": [
+      "reviews_backup_1_showmorereviews"
+    ],
+    "47": [
+      "reviews_backup_2_bankid_modal"
+    ],
+    "48": [
+      "reviews_backup_2_sh_sm_bar3"
+    ],
+    "49": [
+      "template_delete_modal"
+    ]
+  },
+  "cohesion": {
+    "0": 0.11857707509881422,
+    "1": 0.2857142857142857,
+    "2": 0.2857142857142857,
+    "3": 0.3333333333333333,
+    "4": 0.2857142857142857,
+    "5": 0.4,
+    "6": 0.3333333333333333,
+    "7": 0.6666666666666666,
+    "8": 0.5,
+    "9": 0.6666666666666666,
+    "10": 0.6666666666666666,
+    "11": 0.6666666666666666,
+    "12": 0.6666666666666666,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0,
+    "38": 1.0,
+    "39": 1.0,
+    "40": 1.0,
+    "41": 1.0,
+    "42": 1.0,
+    "43": 1.0,
+    "44": 1.0,
+    "45": 1.0,
+    "46": 1.0,
+    "47": 1.0,
+    "48": 1.0,
+    "49": 1.0
+  },
+  "gods": [
+    {
+      "id": "reviews_html",
+      "label": "Reviews Page",
+      "degree": 7
+    },
+    {
+      "id": "reviews_backup_1_html",
+      "label": "Reviews Page (Backup 1)",
+      "degree": 5
+    },
+    {
+      "id": "e_handelspartner_html",
+      "label": "Swedol – E-handelspartner",
+      "degree": 4
+    },
+    {
+      "id": "e_handelspartner_compare_table_section",
+      "label": "Compare Table Section",
+      "degree": 4
+    },
+    {
+      "id": "skills_notifications_guide_skill",
+      "label": "Notifications Guide Skill",
+      "degree": 4
+    },
+    {
+      "id": "mypages_cookie_banner_v1_html",
+      "label": "Cookie Banner (ECO Design System)",
+      "degree": 4
+    },
+    {
+      "id": "template_site_header",
+      "label": "Site Header",
+      "degree": 3
+    },
+    {
+      "id": "skills_action_link_skill",
+      "label": "Action Link Skill",
+      "degree": 3
+    },
+    {
+      "id": "skills_links_guide_skill",
+      "label": "Links Guide Skill",
+      "degree": 3
+    },
+    {
+      "id": "skills_section_skill",
+      "label": "Section Skill",
+      "degree": 3
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Reviews Page",
+      "target": "Claude Code Design Guidelines",
+      "source_files": [
+        "reviews.html",
+        "CLAUDE.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `Claude Code Design Guidelines` unexpectedly reaches hub `Reviews Page`"
+    },
+    {
+      "source": "Reviews Page (Backup 2)",
+      "target": "Site Header",
+      "source_files": [
+        "reviews_backup_2.html",
+        "template.html"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "Cookie Banner (ECO Design System)",
+      "target": "Cookie Banner",
+      "source_files": [
+        "mypages/cookie-banner_v1.html",
+        "mypages/cookie-banner.html"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Welcome Email Template",
+      "target": "Email Hero Image",
+      "source_files": [
+        "email/email.html",
+        "email/images/hero.jpg"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc ↔ image)"
+    },
+    {
+      "source": "Welcome Email Template",
+      "target": "Swedol Footer Logo",
+      "source_files": [
+        "email/email.html",
+        "email/images/logo-footer.png"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc ↔ image)"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Reviews Page` connect `Reviews Page` to `ECO Design System`?",
+      "why": "High betweenness centrality (0.022) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Site Header` connect `Site Header` to `ECO Design System`?",
+      "why": "High betweenness centrality (0.004) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `clearReviewFilter`, `openFilterDrawer`, `openProductPickerDrawer` to the rest of the system?",
+      "why": "83 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `ECO Design System` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11857707509881422 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

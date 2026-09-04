@@ -1,0 +1,2792 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "address_management_flow",
+        "label": "Address Management Flow",
+        "nodes": [
+          "mypages_addressbook_openaddressdrawer",
+          "mypages_addressbook_renderaddresstable",
+          "mypages_addressbook_showaddrtoast"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "mypages/addressbook.html"
+      },
+      {
+        "id": "pricing_features_group",
+        "label": "Pricing and Contract Features",
+        "nodes": [
+          "feature_comparison_roles_backup_kundunika_priser",
+          "feature_comparison_roles_backup_avtalspriser",
+          "feature_comparison_roles_backup_kampanjpriser",
+          "feature_comparison_roles_backup_ravarukoppling"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "feature-comparison-roles_backup.html"
+      },
+      {
+        "id": "review_management_flow",
+        "label": "Review Management Flow",
+        "nodes": [
+          "reviews_backup_2_switchreviewstab",
+          "reviews_backup_2_openfilterdrawer",
+          "reviews_backup_2_applyreviewfilter"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "reviews_backup_2.html"
+      },
+      {
+        "id": "review_management_flow",
+        "label": "Review Management Flow",
+        "nodes": [
+          "reviews_switchreviewstab",
+          "reviews_openfilterdrawer",
+          "reviews_showmorereviews",
+          "reviews_clearreviewfilter"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "reviews.html"
+      },
+      {
+        "id": "security_compliance_group",
+        "label": "Security and Compliance Features",
+        "nodes": [
+          "feature_comparison_roles_backup_sso_saml",
+          "feature_comparison_roles_backup_revisionslogg",
+          "feature_comparison_roles_backup_gdpr_verktyg"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "feature-comparison-roles_backup.html"
+      },
+      {
+        "id": "support_services_group",
+        "label": "Support and Services Features",
+        "nodes": [
+          "feature_comparison_roles_backup_kundansvarig",
+          "feature_comparison_roles_backup_onboarding",
+          "feature_comparison_roles_backup_kundtjanst",
+          "feature_comparison_roles_backup_sla_garanti"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "feature-comparison-roles_backup.html"
+      },
+      {
+        "id": "swedol_brand_assets",
+        "label": "Swedol Brand Assets",
+        "nodes": [
+          "email_images_logo_header_png",
+          "email_images_logo_footer_png",
+          "email_images_logo_header_svg",
+          "email_images_logo_footer_svg"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "email/email.html"
+      },
+      {
+        "id": "ui_state_management",
+        "label": "UI State Management",
+        "nodes": [
+          "feature_comparison_setview",
+          "feature_comparison_setfilter",
+          "feature_comparison_applyfilter"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.9,
+        "source_file": "feature-comparison.html"
+      },
+      {
+        "id": "navigation_flow",
+        "label": "Navigation Drawer Flow",
+        "nodes": [
+          "index_openmainmenudrawer",
+          "index_closemainmenudrawer",
+          "index_openproductpickerdrawer"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.95,
+        "source_file": "index.html"
+      },
+      {
+        "id": "review_management_flow",
+        "label": "Review Management Flow",
+        "nodes": [
+          "reviews_backup_1_switchreviewstab",
+          "reviews_backup_1_openfilterdrawer",
+          "reviews_backup_1_applyreviewfilter",
+          "reviews_backup_1_showmorereviews"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.95,
+        "source_file": "reviews_backup_1.html"
+      },
+      {
+        "id": "comparison_system",
+        "label": "Feature Comparison System",
+        "nodes": [
+          "e_handelspartner_setcompareview",
+          "e_handelspartner_gotocompareview",
+          "e_handelspartner_compare_table_section",
+          "e_handelspartner_role_tiers"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "e-handelspartner.html"
+      },
+      {
+        "id": "cookie_consent_flow",
+        "label": "Cookie Consent Management",
+        "nodes": [
+          "mypages_cookie_banner_v1_html",
+          "mypages_cookie_banner_v1_submitconsent",
+          "mypages_cookie_banner_v1_toggleacc"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0
+      },
+      {
+        "id": "eco_design_system_components",
+        "label": "ECO Design System Components",
+        "nodes": [
+          "claude_skills_tile_link_skill",
+          "claude_skills_toast_ecom_skill",
+          "claude_skills_toast_system_skill",
+          "claude_skills_tooltip_skill",
+          "claude_skills_typography_skill"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".claude/skills/typography/SKILL.md"
+      },
+      {
+        "id": "link_system",
+        "label": "Link System Components",
+        "nodes": [
+          "skills_links_guide_skill",
+          "skills_inline_link_skill",
+          "skills_action_link_skill"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".claude/skills/links-guide/SKILL.md"
+      },
+      {
+        "id": "notification_system",
+        "label": "Notification System Components",
+        "nodes": [
+          "skills_notifications_guide_skill",
+          "skills_inline_notification_skill",
+          "skills_banner_notification_skill",
+          "skills_modal_ecom_skill"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": ".claude/skills/notifications-guide/SKILL.md"
+      },
+      {
+        "id": "navigation_flow",
+        "label": "Global Navigation Elements",
+        "nodes": [
+          "impersonation_banner",
+          "e_handelspartner_html"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.7,
+        "source_file": "e-handelspartner.html"
+      },
+      {
+        "id": "global_ui_patterns",
+        "label": "Global UI Patterns",
+        "nodes": [
+          "template_site_header",
+          "template_impersonation_banner",
+          "template_delete_modal"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "template.html"
+      },
+      {
+        "id": "integration_solutions",
+        "label": "B2B Integration Solutions",
+        "nodes": [
+          "e_handelspartner_ehp_integration_grid",
+          "e_handelspartner_fob_grid",
+          "e_handelspartner_compare_table_section"
+        ],
+        "relation": "form",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "e-handelspartner.html"
+      },
+      {
+        "id": "security_verification_pattern",
+        "label": "Security Verification Pattern",
+        "nodes": [
+          "mypages_addressbook_openbillingbankidmodal",
+          "mypages_addressbook_html"
+        ],
+        "relation": "implement",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "mypages/addressbook.html"
+      },
+      {
+        "id": "form_elements",
+        "label": "Form Element Components",
+        "nodes": [
+          "skills_input_skill",
+          "skills_select_skill",
+          "skills_checkbox_skill",
+          "skills_segment_control_skill"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.9,
+        "source_file": null
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "reviews_clearreviewfilter",
+      "label": "clearReviewFilter",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "Reviews Page",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "clearreviewfilter",
+      "rationale": null,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "reviews_html",
+      "label": "Reviews Page",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "Reviews Page",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "reviews page",
+      "rationale": null,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "reviews_openfilterdrawer",
+      "label": "openFilterDrawer",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "Reviews Page",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "openfilterdrawer",
+      "rationale": null,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "reviews_openproductpickerdrawer",
+      "label": "openProductPickerDrawer",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "Reviews Page",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "openproductpickerdrawer",
+      "rationale": null,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "reviews_showmorereviews",
+      "label": "showMoreReviews",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "Reviews Page",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "showmorereviews",
+      "rationale": null,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "reviews_switchreviewstab",
+      "label": "switchReviewsTab",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "Reviews Page",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "switchreviewstab",
+      "rationale": null,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_bankid_modal",
+      "label": "BankID Signing Modal",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 20,
+      "community_name": "BankID Signing Modal",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "bankid signing modal",
+      "rationale": null,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_compare_intro",
+      "label": "Compare Intro Section",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 21,
+      "community_name": "Compare Intro Section",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "compare intro section",
+      "rationale": null,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_ehp_integration_grid",
+      "label": "EHP Integration Grid",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 22,
+      "community_name": "EHP Integration Grid",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "ehp integration grid",
+      "rationale": "EDI and Punchout integration details for large organizations.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_fob_grid",
+      "label": "Features Out of Box Grid",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 23,
+      "community_name": "Features Out of Box Grid",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "features out of box grid",
+      "rationale": "Column-grid with checklist for standard features.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_form_checkboxes",
+      "label": "Form Checkboxes",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 24,
+      "community_name": "Form Checkboxes",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "form checkboxes",
+      "rationale": null,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_site_header_sm",
+      "label": "Site Header Small (Mobile)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 25,
+      "community_name": "Site Header Small (Mobile)",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "site header small (mobile)",
+      "rationale": "3-row mobile layout for xs and sm breakpoints.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "compare_table",
+      "label": "Compare Accounts Table",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Swedol \u2013 E-handelspartner",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "compare accounts table",
+      "rationale": "Complex grid-based comparison of user roles and features.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_html",
+      "label": "Swedol \u2013 E-handelspartner",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Swedol \u2013 E-handelspartner",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "swedol \u2013 e-handelspartner",
+      "rationale": null,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "impersonation_banner",
+      "label": "Impersonation Banner",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Swedol \u2013 E-handelspartner",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "impersonation banner",
+      "rationale": "Fixed top banner for informational status during user impersonation.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "mypages_partials_footer",
+      "label": "Global Footer Partial",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Swedol \u2013 E-handelspartner",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "global footer partial",
+      "rationale": "Global footer partial included via XHR.",
+      "source_file": "mypages/partials/footer.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "mypages_partials_header",
+      "label": "Global Header Partial",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 3,
+      "community_name": "Swedol \u2013 E-handelspartner",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "global header partial",
+      "rationale": "Global header partial included via XHR.",
+      "source_file": "mypages/partials/header.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "feature_comparison_roles_compare_card_grid",
+      "label": "Compare Card Grid",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 35,
+      "community_name": "Compare Card Grid",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "compare card grid",
+      "rationale": null,
+      "source_file": "feature-comparison-roles.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "readme_md",
+      "label": "swedol-ui-prototype README",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 45,
+      "community_name": "swedol-ui-prototype README",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "swedol-ui-prototype readme",
+      "rationale": null,
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_compare_table_section",
+      "label": "Compare Table Section",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 5,
+      "community_name": "Compare Table Section",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "compare table section",
+      "rationale": "Detailed feature comparison table with view toggles.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_gotocompareview",
+      "label": "goToCompareView",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 5,
+      "community_name": "Compare Table Section",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "gotocompareview",
+      "rationale": "Navigates to and activates a specific comparison view from external links.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_role_tiers",
+      "label": "Role Tiers Section",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 5,
+      "community_name": "Compare Table Section",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "role tiers section",
+      "rationale": "Account type comparison cards (Privatperson/F\u00f6retag).",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_setcompareview",
+      "label": "setCompareView",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 5,
+      "community_name": "Compare Table Section",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "setcompareview",
+      "rationale": "Switches between 'roller' and 'foretag' comparison views.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_togglecomparegroup",
+      "label": "toggleCompareGroup",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 5,
+      "community_name": "Compare Table Section",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "togglecomparegroup",
+      "rationale": "Expands/collapses feature groups in the comparison table.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "e_handelspartner_togglecomparerow",
+      "label": "toggleCompareRow",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 5,
+      "community_name": "Compare Table Section",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "togglecomparerow",
+      "rationale": "Expands/collapses individual rows in the comparison table.",
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "feature_comparison_roles_backup_toggle_compare_row",
+      "label": "toggleCompareRow",
+      "_origin": "semantic",
+      "community": 10,
+      "community_name": "Kundunika priser och prislistor",
+      "file_type": "code",
+      "norm_label": "togglecomparerow",
+      "rationale": "JavaScript function to expand/collapse feature details.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_kundansvarig",
+      "label": "Personlig kundansvarig",
+      "_origin": "semantic",
+      "community": 10,
+      "community_name": "Kundunika priser och prislistor",
+      "file_type": "concept",
+      "norm_label": "personlig kundansvarig",
+      "rationale": "Feature comparison row for dedicated account manager.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_kundunika_priser",
+      "label": "Kundunika priser och prislistor",
+      "_origin": "semantic",
+      "community": 10,
+      "community_name": "Kundunika priser och prislistor",
+      "file_type": "concept",
+      "norm_label": "kundunika priser och prislistor",
+      "rationale": "Feature comparison row for customer-unique pricing.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "reviews_backup_2_html",
+      "label": "Reviews Page (Backup 2)",
+      "_origin": "semantic",
+      "community": 12,
+      "community_name": "Site Header",
+      "file_type": "code",
+      "norm_label": "reviews page (backup 2)",
+      "rationale": "Alternative or extended version of the reviews page containing design tokens, global styles, and UI components like drawers and banners.",
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "id": "template_impersonation_banner",
+      "label": "Impersonation Banner",
+      "_origin": "semantic",
+      "community": 12,
+      "community_name": "Site Header",
+      "file_type": "code",
+      "norm_label": "impersonation banner",
+      "rationale": "System banner indicating an active impersonation session.",
+      "source_file": "template.html"
+    },
+    {
+      "id": "template_site_header",
+      "label": "Site Header",
+      "_origin": "semantic",
+      "community": 12,
+      "community_name": "Site Header",
+      "file_type": "code",
+      "norm_label": "site header",
+      "rationale": "Global header component with sticky behavior and search functionality.",
+      "source_file": "template.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_apply_compare_filter_state",
+      "label": "applyCompareFilterState",
+      "_origin": "semantic",
+      "community": 13,
+      "community_name": "applyCompareFilterState",
+      "file_type": "code",
+      "norm_label": "applycomparefilterstate",
+      "rationale": "Filters rows based on 'Alla' (All) or 'Nyckelfunktioner' (Key features).",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_toggle_compare_group",
+      "label": "toggleCompareGroup",
+      "_origin": "semantic",
+      "community": 13,
+      "community_name": "applyCompareFilterState",
+      "file_type": "code",
+      "norm_label": "togglecomparegroup",
+      "rationale": "JavaScript function to expand/collapse feature groups.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_measure_compare_columns",
+      "label": "measureCompareColumns",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "measureCompareColumns",
+      "file_type": "code",
+      "norm_label": "measurecomparecolumns",
+      "rationale": "Calculates dynamic column widths based on content to align headers and checks.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_set_compare_view",
+      "label": "setCompareView",
+      "_origin": "semantic",
+      "community": 14,
+      "community_name": "measureCompareColumns",
+      "file_type": "code",
+      "norm_label": "setcompareview",
+      "rationale": "Switches between 'roller' (roles) and 'foretag' (company) comparison views.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_revisionslogg",
+      "label": "Revisionslogg",
+      "_origin": "semantic",
+      "community": 15,
+      "community_name": "Revisionslogg",
+      "file_type": "concept",
+      "norm_label": "revisionslogg",
+      "rationale": "Feature comparison row for audit logs.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_sso_saml",
+      "label": "SSO / SAML-inloggning",
+      "_origin": "semantic",
+      "community": 15,
+      "community_name": "Revisionslogg",
+      "file_type": "concept",
+      "norm_label": "sso / saml-inloggning",
+      "rationale": "Feature comparison row for Single Sign-On.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "index_openmainmenudrawer",
+      "label": "openMainMenuDrawer",
+      "_origin": "semantic",
+      "community": 16,
+      "community_name": "openMainMenuDrawer",
+      "file_type": "code",
+      "norm_label": "openmainmenudrawer",
+      "rationale": "Opens the primary navigation drawer.",
+      "source_file": "index.html",
+      "source_location": "line 1-5",
+      "verification": "unverified"
+    },
+    {
+      "id": "index_openproductpickerdrawer",
+      "label": "openProductPickerDrawer",
+      "_origin": "semantic",
+      "community": 16,
+      "community_name": "openMainMenuDrawer",
+      "file_type": "code",
+      "norm_label": "openproductpickerdrawer",
+      "rationale": "Directly opens the product category level of the navigation drawer.",
+      "source_file": "index.html",
+      "source_location": "line 25-45",
+      "verification": "unverified"
+    },
+    {
+      "id": "reviews_backup_2_applyreviewfilter",
+      "label": "applyReviewFilter",
+      "_origin": "semantic",
+      "community": 17,
+      "community_name": "applyReviewFilter",
+      "file_type": "code",
+      "norm_label": "applyreviewfilter",
+      "rationale": "Logic for filtering review cards based on rating and reply status.",
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "id": "reviews_backup_2_openfilterdrawer",
+      "label": "openFilterDrawer",
+      "_origin": "semantic",
+      "community": 17,
+      "community_name": "applyReviewFilter",
+      "file_type": "code",
+      "norm_label": "openfilterdrawer",
+      "rationale": "JavaScript function to open the filter/sort drawer for reviews.",
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "id": "reviews_backup_2_sh_sm_bar2",
+      "label": "Search Bar Row 2",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "Search Bar Row 2",
+      "file_type": "code",
+      "norm_label": "search bar row 2",
+      "rationale": "CSS class for the mobile search bar with scroll-reveal behavior.",
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "id": "reviews_backup_2_switchreviewstab",
+      "label": "switchReviewsTab",
+      "_origin": "semantic",
+      "community": 18,
+      "community_name": "Search Bar Row 2",
+      "file_type": "code",
+      "norm_label": "switchreviewstab",
+      "rationale": "JavaScript function to toggle between Product and Company review panels.",
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_avtalspriser",
+      "label": "Avtalspriser",
+      "_origin": "semantic",
+      "community": 26,
+      "community_name": "Avtalspriser",
+      "file_type": "concept",
+      "norm_label": "avtalspriser",
+      "rationale": "Feature comparison row for contract prices.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_footer_partial",
+      "label": "mypages/partials/footer.html",
+      "_origin": "semantic",
+      "community": 27,
+      "community_name": "mypages/partials/footer.html",
+      "file_type": "code",
+      "norm_label": "mypages/partials/footer.html",
+      "rationale": "External partial loaded via XMLHttpRequest.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_gdpr_verktyg",
+      "label": "GDPR-verktyg och dataexport",
+      "_origin": "semantic",
+      "community": 28,
+      "community_name": "GDPR-verktyg och dataexport",
+      "file_type": "concept",
+      "norm_label": "gdpr-verktyg och dataexport",
+      "rationale": "Feature comparison row for GDPR compliance tools.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_kampanjpriser",
+      "label": "Kampanjpriser",
+      "_origin": "semantic",
+      "community": 29,
+      "community_name": "Kampanjpriser",
+      "file_type": "concept",
+      "norm_label": "kampanjpriser",
+      "rationale": "Feature comparison row for campaign prices.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_html",
+      "label": "feature-comparison.html",
+      "_origin": "semantic",
+      "community": 3,
+      "community_name": "Swedol \u2013 E-handelspartner",
+      "file_type": "code",
+      "norm_label": "feature-comparison.html",
+      "rationale": "Main entry point for the feature comparison page, containing styles and layout structure.",
+      "source_file": "feature-comparison.html"
+    },
+    {
+      "id": "index_html",
+      "label": "index.html",
+      "_origin": "semantic",
+      "community": 3,
+      "community_name": "Swedol \u2013 E-handelspartner",
+      "file_type": "code",
+      "norm_label": "index.html",
+      "rationale": "Global index and design system reference containing shared styles and layout components.",
+      "source_file": "index.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_kundtjanst",
+      "label": "Kundtj\u00e4nst (chatt, e-post, telefon)",
+      "_origin": "semantic",
+      "community": 30,
+      "community_name": "Kundtj\u00e4nst (chatt, e-post, telefon)",
+      "file_type": "concept",
+      "norm_label": "kundtjanst (chatt, e-post, telefon)",
+      "rationale": "Feature comparison row for standard customer support.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_main_menu_partial",
+      "label": "mypages/partials/main-menu.html",
+      "_origin": "semantic",
+      "community": 31,
+      "community_name": "mypages/partials/main-menu.html",
+      "file_type": "code",
+      "norm_label": "mypages/partials/main-menu.html",
+      "rationale": "External partial for the main navigation drawer.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_onboarding",
+      "label": "Onboarding och utbildning",
+      "_origin": "semantic",
+      "community": 32,
+      "community_name": "Onboarding och utbildning",
+      "file_type": "concept",
+      "norm_label": "onboarding och utbildning",
+      "rationale": "Feature comparison row for onboarding services.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_ravarukoppling",
+      "label": "R\u00e5varukoppling p\u00e5 priser",
+      "_origin": "semantic",
+      "community": 33,
+      "community_name": "R\u00e5varukoppling p\u00e5 priser",
+      "file_type": "concept",
+      "norm_label": "ravarukoppling pa priser",
+      "rationale": "Feature comparison row for commodity-linked pricing.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_roles_backup_sla_garanti",
+      "label": "SLA-garanti f\u00f6r svarstider",
+      "_origin": "semantic",
+      "community": 34,
+      "community_name": "SLA-garanti f\u00f6r svarstider",
+      "file_type": "concept",
+      "norm_label": "sla-garanti for svarstider",
+      "rationale": "Feature comparison row for guaranteed response times.",
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "feature_comparison_togglecategory",
+      "label": "toggleCategory",
+      "_origin": "semantic",
+      "community": 36,
+      "community_name": "toggleCategory",
+      "file_type": "code",
+      "norm_label": "togglecategory",
+      "rationale": "Manages the expansion and collapse of feature categories in the comparison table.",
+      "source_file": "feature-comparison.html",
+      "source_location": "line 35-52"
+    },
+    {
+      "id": "feature_comparison_toggledetail",
+      "label": "toggleDetail",
+      "_origin": "semantic",
+      "community": 37,
+      "community_name": "toggleDetail",
+      "file_type": "code",
+      "norm_label": "toggledetail",
+      "rationale": "Toggles the visibility of detailed feature descriptions (L\u00e4s mer).",
+      "source_file": "feature-comparison.html",
+      "source_location": "line 54-61"
+    },
+    {
+      "id": "mypages_partials_main_menu",
+      "label": "Main Menu Partial",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "Reviews Page (Backup 1)",
+      "file_type": "code",
+      "norm_label": "main menu partial",
+      "rationale": "Global main menu drawer partial.",
+      "source_file": "mypages/partials/main-menu.html"
+    },
+    {
+      "id": "reviews_backup_1_applyreviewfilter",
+      "label": "applyReviewFilter",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "Reviews Page (Backup 1)",
+      "file_type": "code",
+      "norm_label": "applyreviewfilter",
+      "rationale": "Logic for filtering review cards based on rating and reply status.",
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "id": "reviews_backup_1_html",
+      "label": "Reviews Page (Backup 1)",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "Reviews Page (Backup 1)",
+      "file_type": "code",
+      "norm_label": "reviews page (backup 1)",
+      "rationale": "Main HTML structure for the reviews landing page, including product and company review tabs.",
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "id": "reviews_backup_1_openfilterdrawer",
+      "label": "openFilterDrawer",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "Reviews Page (Backup 1)",
+      "file_type": "code",
+      "norm_label": "openfilterdrawer",
+      "rationale": "Handles opening the filter and sort drawer for reviews.",
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "id": "reviews_backup_1_openproductpickerdrawer",
+      "label": "openProductPickerDrawer",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "Reviews Page (Backup 1)",
+      "file_type": "code",
+      "norm_label": "openproductpickerdrawer",
+      "rationale": "Opens the main menu drawer directly at the product category level.",
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "id": "reviews_backup_1_switchreviewstab",
+      "label": "switchReviewsTab",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "Reviews Page (Backup 1)",
+      "file_type": "code",
+      "norm_label": "switchreviewstab",
+      "rationale": "JavaScript function to toggle between 'Produkter' (Products) and 'F\u00f6retaget' (Company) review panels.",
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "id": "trustvoice",
+      "label": "Trustvoice",
+      "_origin": "semantic",
+      "community": 4,
+      "community_name": "Reviews Page (Backup 1)",
+      "file_type": "concept",
+      "norm_label": "trustvoice",
+      "rationale": "Third-party service mentioned as the verifier of reviews.",
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "id": "index_closemainmenudrawer",
+      "label": "closeMainMenuDrawer",
+      "_origin": "semantic",
+      "community": 42,
+      "community_name": "closeMainMenuDrawer",
+      "file_type": "code",
+      "norm_label": "closemainmenudrawer",
+      "rationale": "Closes the primary navigation drawer and resets menu levels.",
+      "source_file": "index.html",
+      "source_location": "line 1-11",
+      "verification": "unverified"
+    },
+    {
+      "id": "index_togglecollapsible",
+      "label": "toggleCollapsible",
+      "_origin": "semantic",
+      "community": 43,
+      "community_name": "toggleCollapsible",
+      "file_type": "code",
+      "norm_label": "togglecollapsible",
+      "rationale": "Generic handler for accordion-style collapsible elements (e.g., FAQ).",
+      "source_file": "index.html",
+      "source_location": "line 105-111",
+      "verification": "unverified"
+    },
+    {
+      "id": "index_updateborder",
+      "label": "updateBorder",
+      "_origin": "semantic",
+      "community": 44,
+      "community_name": "updateBorder",
+      "file_type": "code",
+      "norm_label": "updateborder",
+      "rationale": "Updates header border color based on navigation visibility state.",
+      "source_file": "index.html",
+      "source_location": "line 135-138",
+      "verification": "unverified"
+    },
+    {
+      "id": "reviews_backup_1_showmorereviews",
+      "label": "showMoreReviews",
+      "_origin": "semantic",
+      "community": 46,
+      "community_name": "showMoreReviews",
+      "file_type": "code",
+      "norm_label": "showmorereviews",
+      "rationale": "Pagination logic to reveal hidden review cards.",
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "id": "reviews_backup_2_bankid_modal",
+      "label": "BankID Signing Modal",
+      "_origin": "semantic",
+      "community": 47,
+      "community_name": "BankID Signing Modal",
+      "file_type": "code",
+      "norm_label": "bankid signing modal",
+      "rationale": "UI component for BankID verification during user uploads.",
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "id": "reviews_backup_2_sh_sm_bar3",
+      "label": "Store Nav Row 3",
+      "_origin": "semantic",
+      "community": 48,
+      "community_name": "Store Nav Row 3",
+      "file_type": "code",
+      "norm_label": "store nav row 3",
+      "rationale": "CSS class for the mobile store navigation bar.",
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "id": "template_delete_modal",
+      "label": "Delete Confirmation Modal",
+      "_origin": "semantic",
+      "community": 49,
+      "community_name": "Delete Confirmation Modal",
+      "file_type": "code",
+      "norm_label": "delete confirmation modal",
+      "rationale": "Standardized modal for confirming destructive actions.",
+      "source_file": "template.html"
+    },
+    {
+      "id": "feature_comparison_applyfilter",
+      "label": "applyFilter",
+      "_origin": "semantic",
+      "community": 9,
+      "community_name": "applyFilter",
+      "file_type": "code",
+      "norm_label": "applyfilter",
+      "rationale": "Applies CSS classes to tables based on the current filter state.",
+      "source_file": "feature-comparison.html",
+      "source_location": "line 20-33"
+    },
+    {
+      "id": "feature_comparison_setfilter",
+      "label": "setFilter",
+      "_origin": "semantic",
+      "community": 9,
+      "community_name": "applyFilter",
+      "file_type": "code",
+      "norm_label": "setfilter",
+      "rationale": "Toggles between 'Nyckelfunktioner' (key) and 'Alla funktioner' (all) filters.",
+      "source_file": "feature-comparison.html",
+      "source_location": "line 12-18"
+    },
+    {
+      "id": "feature_comparison_setview",
+      "label": "setView",
+      "_origin": "semantic",
+      "community": 9,
+      "community_name": "applyFilter",
+      "file_type": "code",
+      "norm_label": "setview",
+      "rationale": "Handles switching between 'Anv\u00e4ndarroller' (users) and 'F\u00f6retagsplan' (company) views.",
+      "source_file": "feature-comparison.html",
+      "source_location": "line 1-10"
+    },
+    {
+      "id": "claude_design_guidelines",
+      "label": "Claude Code Design Guidelines",
+      "author": null,
+      "captured_at": null,
+      "community": 2,
+      "community_name": "Reviews Page",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "claude code design guidelines",
+      "rationale": null,
+      "source_file": "CLAUDE.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "eco_design_system",
+      "label": "ECO Design System",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "concept",
+      "norm_label": "eco design system",
+      "source_file": null
+    },
+    {
+      "id": "skills_action_link_skill",
+      "label": "Action Link Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "action link skill",
+      "source_file": ".claude/skills/action-link/SKILL.md"
+    },
+    {
+      "id": "skills_badge_skill",
+      "label": "Badge Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "badge skill",
+      "source_file": ".claude/skills/badge/SKILL.md"
+    },
+    {
+      "id": "skills_banner_notification_skill",
+      "label": "Banner Notification Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "banner notification skill",
+      "source_file": ".claude/skills/banner-notification/SKILL.md"
+    },
+    {
+      "id": "skills_breadcrumb_skill",
+      "label": "Breadcrumb Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "breadcrumb skill",
+      "source_file": ".claude/skills/breadcrumb/SKILL.md"
+    },
+    {
+      "id": "skills_button_skill",
+      "label": "Button Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "button skill",
+      "source_file": ".claude/skills/button/SKILL.md"
+    },
+    {
+      "id": "skills_checkbox_skill",
+      "label": "Checkbox Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "checkbox skill",
+      "source_file": ".claude/skills/checkbox/SKILL.md"
+    },
+    {
+      "id": "skills_collapsible_skill",
+      "label": "Collapsible Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "collapsible skill",
+      "source_file": ".claude/skills/collapsible/SKILL.md"
+    },
+    {
+      "id": "skills_colors_skill",
+      "label": "Colors Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "colors skill",
+      "source_file": ".claude/skills/colors/SKILL.md"
+    },
+    {
+      "id": "skills_elevation_skill",
+      "label": "Elevation Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "elevation skill",
+      "source_file": ".claude/skills/elevation/SKILL.md"
+    },
+    {
+      "id": "skills_inline_link_skill",
+      "label": "Inline Link Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "inline link skill",
+      "source_file": ".claude/skills/inline-link/SKILL.md"
+    },
+    {
+      "id": "skills_inline_notification_skill",
+      "label": "Inline Notification Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "inline notification skill",
+      "source_file": ".claude/skills/inline-notification/SKILL.md"
+    },
+    {
+      "id": "skills_input_skill",
+      "label": "Input Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "input skill",
+      "source_file": ".claude/skills/input/SKILL.md"
+    },
+    {
+      "id": "skills_links_guide_skill",
+      "label": "Links Guide Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "links guide skill",
+      "source_file": ".claude/skills/links-guide/SKILL.md"
+    },
+    {
+      "id": "skills_modal_ecom_skill",
+      "label": "Modal E-Com Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "modal e-com skill",
+      "source_file": ".claude/skills/modal-ecom/SKILL.md"
+    },
+    {
+      "id": "skills_motion_skill",
+      "label": "Motion Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "motion skill",
+      "source_file": ".claude/skills/motion/SKILL.md"
+    },
+    {
+      "id": "skills_notifications_guide_skill",
+      "label": "Notifications Guide Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "notifications guide skill",
+      "source_file": ".claude/skills/notifications-guide/SKILL.md"
+    },
+    {
+      "id": "skills_pagination_skill",
+      "label": "Pagination Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "pagination skill",
+      "source_file": ".claude/skills/pagination/SKILL.md"
+    },
+    {
+      "id": "skills_role_tier_card_skill",
+      "label": "Role Tier Card Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "role tier card skill",
+      "source_file": ".claude/skills/role-tier-card/SKILL.md"
+    },
+    {
+      "id": "skills_section_skill",
+      "label": "Section Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "section skill",
+      "source_file": ".claude/skills/section/SKILL.md"
+    },
+    {
+      "id": "skills_segment_control_skill",
+      "label": "Segment Control Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "segment control skill",
+      "source_file": ".claude/skills/segment-control/SKILL.md"
+    },
+    {
+      "id": "skills_select_skill",
+      "label": "Select Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "select skill",
+      "source_file": ".claude/skills/select/SKILL.md"
+    },
+    {
+      "id": "skills_spacing_skill",
+      "label": "Spacing Skill",
+      "community": 0,
+      "community_name": "ECO Design System",
+      "file_type": "document",
+      "norm_label": "spacing skill",
+      "source_file": ".claude/skills/spacing/SKILL.md"
+    },
+    {
+      "id": "mypages_cookie_banner_html",
+      "label": "Cookie Banner",
+      "community": 1,
+      "community_name": "Cookie Banner (ECO Design System)",
+      "file_type": "code",
+      "norm_label": "cookie banner",
+      "rationale": "Standalone component for managing user consent and cookie settings.",
+      "source_file": "mypages/cookie-banner.html"
+    },
+    {
+      "id": "mypages_cookie_banner_v1_html",
+      "label": "Cookie Banner (ECO Design System)",
+      "community": 1,
+      "community_name": "Cookie Banner (ECO Design System)",
+      "file_type": "code",
+      "norm_label": "cookie banner (eco design system)",
+      "rationale": "Updated version of the cookie banner implementing the ECO Design System tokens and styles.",
+      "source_file": "mypages/cookie-banner_v1.html"
+    },
+    {
+      "id": "mypages_cookie_banner_v1_submitconsent",
+      "label": "submitConsent",
+      "community": 1,
+      "community_name": "Cookie Banner (ECO Design System)",
+      "file_type": "code",
+      "norm_label": "submitconsent",
+      "source_file": "mypages/cookie-banner_v1.html"
+    },
+    {
+      "id": "mypages_cookie_banner_v1_toggleacc",
+      "label": "toggleAcc",
+      "community": 1,
+      "community_name": "Cookie Banner (ECO Design System)",
+      "file_type": "code",
+      "norm_label": "toggleacc",
+      "source_file": "mypages/cookie-banner_v1.html"
+    },
+    {
+      "id": "mypages_dashboard_test_html",
+      "label": "Dashboard Test Page",
+      "community": 1,
+      "community_name": "Cookie Banner (ECO Design System)",
+      "file_type": "code",
+      "norm_label": "dashboard test page",
+      "rationale": "Main dashboard view for 'My Pages', integrating various UI components like KPI cards, tables, and navigation drawers.",
+      "source_file": "mypages/dashboard_test.html"
+    },
+    {
+      "id": "mypages_dashboard_test_openaccountnavdrawer",
+      "label": "openAccountNavDrawer",
+      "community": 1,
+      "community_name": "Cookie Banner (ECO Design System)",
+      "file_type": "code",
+      "norm_label": "openaccountnavdrawer",
+      "source_file": "mypages/dashboard_test.html"
+    },
+    {
+      "id": "alligo_design_tokens",
+      "label": "Alligo Design Tokens",
+      "community": 1,
+      "community_name": "Cookie Banner (ECO Design System)",
+      "file_type": "concept",
+      "norm_label": "alligo design tokens",
+      "rationale": "External dependency for CSS variables and typography tokens.",
+      "source_file": "mypages/cookie-banner_v1.html"
+    },
+    {
+      "id": "mypages_addressbook_html",
+      "label": "Address Book Page",
+      "community": 11,
+      "community_name": "Address Book Page",
+      "file_type": "code",
+      "norm_label": "address book page",
+      "rationale": "Main entry point for the address book management interface, containing layout, styles, and logic for billing, store selection, and delivery addresses.",
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "id": "mypages_addressbook_renderaddresstable",
+      "label": "renderAddressTable()",
+      "community": 11,
+      "community_name": "Address Book Page",
+      "file_type": "code",
+      "norm_label": "renderaddresstable()",
+      "rationale": "Dynamically populates the delivery address table from the ADDRESSES data array.",
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "id": "mypages_partials_account_nav_drawer_html",
+      "label": "Account Nav Drawer Partial",
+      "community": 11,
+      "community_name": "Address Book Page",
+      "file_type": "code",
+      "norm_label": "account nav drawer partial",
+      "rationale": "Handles profile switching and account-specific navigation.",
+      "source_file": "mypages/partials/account-nav-drawer.html"
+    },
+    {
+      "id": "claude_skills_tooltip_skill",
+      "label": "Tooltip Skill",
+      "community": 19,
+      "community_name": "Tooltip Skill",
+      "file_type": "document",
+      "norm_label": "tooltip skill",
+      "rationale": "Defines tooltips for icon buttons or elements without visible text.",
+      "source_file": ".claude/skills/tooltip/SKILL.md"
+    },
+    {
+      "id": "images_3d_secure_png",
+      "label": "3D Secure Logo",
+      "community": 38,
+      "community_name": "3D Secure Logo",
+      "file_type": "image",
+      "norm_label": "3d secure logo",
+      "source_file": "images/3d-secure.png"
+    },
+    {
+      "id": "images_butik_boras_jpg",
+      "label": "Swedol Store Bor\u00e5s",
+      "community": 39,
+      "community_name": "Swedol Store Bor\u00e5s",
+      "file_type": "image",
+      "norm_label": "swedol store boras",
+      "source_file": "images/butik-boras.jpg"
+    },
+    {
+      "id": "images_category_el_belysning_png",
+      "label": "Category: El & Belysning",
+      "community": 40,
+      "community_name": "Category: El & Belysning",
+      "file_type": "image",
+      "norm_label": "category: el & belysning",
+      "source_file": "images/category-el-belysning.png"
+    },
+    {
+      "id": "images_category_klader_skydd_png",
+      "label": "Category: Kl\u00e4der & Skydd",
+      "community": 41,
+      "community_name": "Category: Kl\u00e4der & Skydd",
+      "file_type": "image",
+      "norm_label": "category: klader & skydd",
+      "source_file": "images/category-klader-skydd.png"
+    },
+    {
+      "id": "email_email_html",
+      "label": "Welcome Email Template",
+      "community": 6,
+      "community_name": "Welcome Email Template",
+      "file_type": "code",
+      "norm_label": "welcome email template",
+      "rationale": "HTML email template for Swedol welcome sequence, implementing brand styles.",
+      "source_file": "email/email.html"
+    },
+    {
+      "id": "email_images_logo_footer_svg",
+      "label": "Footer Logo SVG",
+      "community": 6,
+      "community_name": "Welcome Email Template",
+      "file_type": "code",
+      "norm_label": "footer logo svg",
+      "source_file": "email/images/logo-footer.svg"
+    },
+    {
+      "id": "email_images_logo_header_svg",
+      "label": "Header Logo SVG",
+      "community": 6,
+      "community_name": "Welcome Email Template",
+      "file_type": "code",
+      "norm_label": "header logo svg",
+      "source_file": "email/images/logo-header.svg"
+    },
+    {
+      "id": "email_images_hero_jpg",
+      "label": "Email Hero Image",
+      "community": 6,
+      "community_name": "Welcome Email Template",
+      "file_type": "image",
+      "norm_label": "email hero image",
+      "source_file": "email/images/hero.jpg"
+    },
+    {
+      "id": "email_images_logo_footer_png",
+      "label": "Swedol Footer Logo",
+      "community": 6,
+      "community_name": "Welcome Email Template",
+      "file_type": "image",
+      "norm_label": "swedol footer logo",
+      "source_file": "email/images/logo-footer.png"
+    },
+    {
+      "id": "email_images_logo_header_png",
+      "label": "Swedol Header Logo",
+      "community": 6,
+      "community_name": "Welcome Email Template",
+      "file_type": "image",
+      "norm_label": "swedol header logo",
+      "source_file": "email/images/logo-header.png"
+    },
+    {
+      "id": "claude_skills_tile_link_skill",
+      "label": "Tile Link Skill",
+      "community": 7,
+      "community_name": "Typography Skill",
+      "file_type": "document",
+      "norm_label": "tile link skill",
+      "rationale": "Defines the Tile Link component for graphical/prominent links like brand logos or icon+label tiles.",
+      "source_file": ".claude/skills/tile-link/SKILL.md"
+    },
+    {
+      "id": "claude_skills_toast_ecom_skill",
+      "label": "E-Com Toast Skill",
+      "community": 7,
+      "community_name": "Typography Skill",
+      "file_type": "document",
+      "norm_label": "e-com toast skill",
+      "rationale": "Defines e-commerce specific notifications like 'Add to cart' or 'Informational' product feedback.",
+      "source_file": ".claude/skills/toast-ecom/SKILL.md"
+    },
+    {
+      "id": "claude_skills_toast_system_skill",
+      "label": "System Toast Skill",
+      "community": 7,
+      "community_name": "Typography Skill",
+      "file_type": "document",
+      "norm_label": "system toast skill",
+      "rationale": "Defines system-generated toast notifications for user actions like save/send/delete.",
+      "source_file": ".claude/skills/toast-system/SKILL.md"
+    },
+    {
+      "id": "claude_skills_typography_skill",
+      "label": "Typography Skill",
+      "community": 7,
+      "community_name": "Typography Skill",
+      "file_type": "document",
+      "norm_label": "typography skill",
+      "rationale": "Central specification for typography tokens and styles across desktop and mobile.",
+      "source_file": ".claude/skills/typography/SKILL.md"
+    },
+    {
+      "id": "mypages_addressbook_openaddressdrawer",
+      "label": "openAddressDrawer()",
+      "community": 8,
+      "community_name": "showAddrToast",
+      "file_type": "code",
+      "norm_label": "openaddressdrawer()",
+      "rationale": "Handles both creation and editing of delivery addresses in a side drawer.",
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "id": "mypages_addressbook_openbillingbankidmodal",
+      "label": "openBillingBankIdModal()",
+      "community": 8,
+      "community_name": "showAddrToast",
+      "file_type": "code",
+      "norm_label": "openbillingbankidmodal()",
+      "rationale": "Initiates the security flow for editing sensitive billing information using BankID.",
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "id": "mypages_addressbook_openstorepicker",
+      "label": "openStorePicker()",
+      "community": 8,
+      "community_name": "showAddrToast",
+      "file_type": "code",
+      "norm_label": "openstorepicker()",
+      "rationale": "Opens the drawer to allow users to select a 'home store'.",
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "id": "mypages_addressbook_showaddrtoast",
+      "label": "showAddrToast()",
+      "community": 8,
+      "community_name": "showAddrToast",
+      "file_type": "code",
+      "norm_label": "showaddrtoast()",
+      "rationale": "Global notification system for providing feedback on user actions (success/error/info).",
+      "source_file": "mypages/addressbook.html"
+    }
+  ],
+  "links": [
+    {
+      "source": "template_site_header",
+      "target": "eco_design_system",
+      "relation": "implements",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "template.html"
+    },
+    {
+      "source": "template_impersonation_banner",
+      "target": "template_site_header",
+      "relation": "shares_data_with",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "rationale": "The banner shifts the header position via CSS variables and body classes.",
+      "source_file": "template.html"
+    },
+    {
+      "source": "reviews_backup_2_html",
+      "target": "template_site_header",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "rationale": "The reviews page dynamically loads the header partial via XMLHttpRequest.",
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "source": "e_handelspartner_compare_table_section",
+      "target": "e_handelspartner_setcompareview",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "e_handelspartner_compare_table_section",
+      "target": "e_handelspartner_togglecomparegroup",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "e_handelspartner_compare_table_section",
+      "target": "e_handelspartner_togglecomparerow",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "e_handelspartner_gotocompareview",
+      "target": "e_handelspartner_setcompareview",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "e_handelspartner_role_tiers",
+      "target": "e_handelspartner_gotocompareview",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "feature_comparison_roles_backup_apply_compare_filter_state",
+      "target": "feature_comparison_roles_backup_toggle_compare_group",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "source": "feature_comparison_roles_backup_set_compare_view",
+      "target": "feature_comparison_roles_backup_measure_compare_columns",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "source": "feature_comparison_setfilter",
+      "target": "feature_comparison_applyfilter",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "feature-comparison.html"
+    },
+    {
+      "source": "feature_comparison_setview",
+      "target": "feature_comparison_applyfilter",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "feature-comparison.html"
+    },
+    {
+      "source": "index_openproductpickerdrawer",
+      "target": "index_openmainmenudrawer",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "index.html"
+    },
+    {
+      "source": "reviews_backup_1_html",
+      "target": "reviews_backup_1_openfilterdrawer",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "source": "reviews_backup_1_html",
+      "target": "reviews_backup_1_openproductpickerdrawer",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "source": "reviews_backup_1_html",
+      "target": "reviews_backup_1_switchreviewstab",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "source": "reviews_backup_2_openfilterdrawer",
+      "target": "reviews_backup_2_applyreviewfilter",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "source": "reviews_html",
+      "target": "reviews_clearreviewfilter",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "reviews_html",
+      "target": "reviews_openfilterdrawer",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "reviews_html",
+      "target": "reviews_openproductpickerdrawer",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "reviews_html",
+      "target": "reviews_showmorereviews",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "reviews_html",
+      "target": "reviews_switchreviewstab",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "reviews_backup_2_html",
+      "target": "eco_design_system",
+      "relation": "implements",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "source": "reviews_html",
+      "target": "eco_design_system",
+      "relation": "implements",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "e_handelspartner_html",
+      "target": "mypages_partials_footer",
+      "relation": "imports",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "e_handelspartner_html",
+      "target": "mypages_partials_header",
+      "relation": "imports",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "reviews_backup_1_html",
+      "target": "mypages_partials_main_menu",
+      "relation": "imports",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "source": "e_handelspartner_html",
+      "target": "compare_table",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "e_handelspartner_html",
+      "target": "impersonation_banner",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "feature_comparison_html",
+      "target": "mypages_partials_footer",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "feature-comparison.html"
+    },
+    {
+      "source": "feature_comparison_html",
+      "target": "mypages_partials_header",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "feature-comparison.html"
+    },
+    {
+      "source": "feature_comparison_roles_backup_toggle_compare_row",
+      "target": "feature_comparison_roles_backup_kundunika_priser",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "source": "reviews_backup_1_html",
+      "target": "trustvoice",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "source": "feature_comparison_roles_backup_kundunika_priser",
+      "target": "feature_comparison_roles_backup_kundansvarig",
+      "relation": "conceptually_related_to",
+      "_origin": "semantic",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "feature-comparison-roles_backup.html",
+      "weight": 1.0
+    },
+    {
+      "source": "feature_comparison_roles_backup_sso_saml",
+      "target": "feature_comparison_roles_backup_revisionslogg",
+      "relation": "conceptually_related_to",
+      "_origin": "semantic",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "feature-comparison-roles_backup.html",
+      "weight": 1.0
+    },
+    {
+      "source": "reviews_backup_2_switchreviewstab",
+      "target": "reviews_backup_2_sh_sm_bar2",
+      "relation": "conceptually_related_to",
+      "_origin": "semantic",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "source": "feature_comparison_html",
+      "target": "index_html",
+      "relation": "conceptually_related_to",
+      "_origin": "semantic",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "rationale": "Both files share the same design system tokens, typography, and layout patterns (ECO Design System).",
+      "source_file": "feature-comparison.html"
+    },
+    {
+      "source": "reviews_backup_1_openfilterdrawer",
+      "target": "reviews_backup_1_applyreviewfilter",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "source": "e_handelspartner_role_tiers",
+      "target": "e_handelspartner_compare_table_section",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "e-handelspartner.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "reviews_html",
+      "target": "claude_design_guidelines",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "reviews.html",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "mypages_addressbook_html",
+      "target": "mypages_addressbook_renderaddresstable",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "source": "mypages_addressbook_openaddressdrawer",
+      "target": "mypages_addressbook_showaddrtoast",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "source": "mypages_addressbook_openstorepicker",
+      "target": "mypages_addressbook_showaddrtoast",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "source": "mypages_cookie_banner_v1_html",
+      "target": "mypages_cookie_banner_v1_submitconsent",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/cookie-banner_v1.html"
+    },
+    {
+      "source": "mypages_cookie_banner_v1_html",
+      "target": "mypages_cookie_banner_v1_toggleacc",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/cookie-banner_v1.html"
+    },
+    {
+      "source": "mypages_dashboard_test_html",
+      "target": "mypages_dashboard_test_openaccountnavdrawer",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/dashboard_test.html"
+    },
+    {
+      "source": "skills_action_link_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/action-link/SKILL.md"
+    },
+    {
+      "source": "skills_badge_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/badge/SKILL.md"
+    },
+    {
+      "source": "skills_banner_notification_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/banner-notification/SKILL.md"
+    },
+    {
+      "source": "skills_breadcrumb_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/breadcrumb/SKILL.md"
+    },
+    {
+      "source": "skills_button_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/button/SKILL.md"
+    },
+    {
+      "source": "skills_checkbox_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/checkbox/SKILL.md"
+    },
+    {
+      "source": "skills_collapsible_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/collapsible/SKILL.md"
+    },
+    {
+      "source": "skills_colors_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/colors/SKILL.md"
+    },
+    {
+      "source": "skills_elevation_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/elevation/SKILL.md"
+    },
+    {
+      "source": "skills_inline_link_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/inline-link/SKILL.md"
+    },
+    {
+      "source": "skills_inline_notification_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/inline-notification/SKILL.md"
+    },
+    {
+      "source": "skills_input_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/input/SKILL.md"
+    },
+    {
+      "source": "skills_links_guide_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/links-guide/SKILL.md"
+    },
+    {
+      "source": "skills_modal_ecom_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/modal-ecom/SKILL.md"
+    },
+    {
+      "source": "skills_motion_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/motion/SKILL.md"
+    },
+    {
+      "source": "skills_notifications_guide_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/notifications-guide/SKILL.md"
+    },
+    {
+      "source": "skills_pagination_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/pagination/SKILL.md"
+    },
+    {
+      "source": "skills_role_tier_card_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/role-tier-card/SKILL.md"
+    },
+    {
+      "source": "skills_section_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/section/SKILL.md"
+    },
+    {
+      "source": "skills_segment_control_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/segment-control/SKILL.md"
+    },
+    {
+      "source": "skills_select_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/select/SKILL.md"
+    },
+    {
+      "source": "skills_spacing_skill",
+      "target": "eco_design_system",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/spacing/SKILL.md"
+    },
+    {
+      "source": "mypages_addressbook_html",
+      "target": "mypages_partials_account_nav_drawer_html",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "source": "claude_skills_toast_ecom_skill",
+      "target": "claude_skills_toast_system_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/toast-ecom/SKILL.md"
+    },
+    {
+      "source": "email_email_html",
+      "target": "email_images_hero_jpg",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "email/email.html"
+    },
+    {
+      "source": "email_email_html",
+      "target": "email_images_logo_footer_png",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "email/email.html"
+    },
+    {
+      "source": "email_email_html",
+      "target": "email_images_logo_header_png",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "email/email.html"
+    },
+    {
+      "source": "mypages_cookie_banner_v1_html",
+      "target": "alligo_design_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/cookie-banner_v1.html"
+    },
+    {
+      "source": "mypages_dashboard_test_html",
+      "target": "alligo_design_tokens",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mypages/dashboard_test.html"
+    },
+    {
+      "source": "skills_breadcrumb_skill",
+      "target": "skills_section_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/breadcrumb/SKILL.md"
+    },
+    {
+      "source": "skills_links_guide_skill",
+      "target": "skills_action_link_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/links-guide/SKILL.md"
+    },
+    {
+      "source": "skills_links_guide_skill",
+      "target": "skills_inline_link_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/links-guide/SKILL.md"
+    },
+    {
+      "source": "skills_notifications_guide_skill",
+      "target": "skills_banner_notification_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/notifications-guide/SKILL.md"
+    },
+    {
+      "source": "skills_notifications_guide_skill",
+      "target": "skills_inline_notification_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/notifications-guide/SKILL.md"
+    },
+    {
+      "source": "skills_notifications_guide_skill",
+      "target": "skills_modal_ecom_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/notifications-guide/SKILL.md"
+    },
+    {
+      "source": "skills_pagination_skill",
+      "target": "skills_section_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/pagination/SKILL.md"
+    },
+    {
+      "source": "skills_role_tier_card_skill",
+      "target": "skills_action_link_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/role-tier-card/SKILL.md"
+    },
+    {
+      "source": "mypages_addressbook_openbillingbankidmodal",
+      "target": "mypages_addressbook_showaddrtoast",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "source": "email_images_logo_footer_svg",
+      "target": "email_images_logo_footer_png",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "email/images/logo-footer.svg"
+    },
+    {
+      "source": "email_images_logo_header_svg",
+      "target": "email_images_logo_header_png",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "email/images/logo-header.svg"
+    },
+    {
+      "source": "mypages_cookie_banner_v1_html",
+      "target": "mypages_cookie_banner_html",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "rationale": "v1 is an evolution of the original banner using a new design system.",
+      "source_file": "mypages/cookie-banner_v1.html"
+    },
+    {
+      "source": "claude_skills_tile_link_skill",
+      "target": "claude_skills_typography_skill",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": ".claude/skills/tile-link/SKILL.md"
+    },
+    {
+      "source": "claude_skills_toast_ecom_skill",
+      "target": "claude_skills_typography_skill",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": ".claude/skills/toast-ecom/SKILL.md"
+    },
+    {
+      "source": "claude_skills_toast_system_skill",
+      "target": "claude_skills_typography_skill",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": ".claude/skills/toast-system/SKILL.md"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "address_management_flow",
+      "label": "Address Management Flow",
+      "nodes": [
+        "mypages_addressbook_openaddressdrawer",
+        "mypages_addressbook_renderaddresstable",
+        "mypages_addressbook_showaddrtoast"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "id": "pricing_features_group",
+      "label": "Pricing and Contract Features",
+      "nodes": [
+        "feature_comparison_roles_backup_kundunika_priser",
+        "feature_comparison_roles_backup_avtalspriser",
+        "feature_comparison_roles_backup_kampanjpriser",
+        "feature_comparison_roles_backup_ravarukoppling"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "review_management_flow",
+      "label": "Review Management Flow",
+      "nodes": [
+        "reviews_backup_2_switchreviewstab",
+        "reviews_backup_2_openfilterdrawer",
+        "reviews_backup_2_applyreviewfilter"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reviews_backup_2.html"
+    },
+    {
+      "id": "review_management_flow",
+      "label": "Review Management Flow",
+      "nodes": [
+        "reviews_switchreviewstab",
+        "reviews_openfilterdrawer",
+        "reviews_showmorereviews",
+        "reviews_clearreviewfilter"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "reviews.html"
+    },
+    {
+      "id": "security_compliance_group",
+      "label": "Security and Compliance Features",
+      "nodes": [
+        "feature_comparison_roles_backup_sso_saml",
+        "feature_comparison_roles_backup_revisionslogg",
+        "feature_comparison_roles_backup_gdpr_verktyg"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "support_services_group",
+      "label": "Support and Services Features",
+      "nodes": [
+        "feature_comparison_roles_backup_kundansvarig",
+        "feature_comparison_roles_backup_onboarding",
+        "feature_comparison_roles_backup_kundtjanst",
+        "feature_comparison_roles_backup_sla_garanti"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "feature-comparison-roles_backup.html"
+    },
+    {
+      "id": "swedol_brand_assets",
+      "label": "Swedol Brand Assets",
+      "nodes": [
+        "email_images_logo_header_png",
+        "email_images_logo_footer_png",
+        "email_images_logo_header_svg",
+        "email_images_logo_footer_svg"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "email/email.html"
+    },
+    {
+      "id": "ui_state_management",
+      "label": "UI State Management",
+      "nodes": [
+        "feature_comparison_setview",
+        "feature_comparison_setfilter",
+        "feature_comparison_applyfilter"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.9,
+      "source_file": "feature-comparison.html"
+    },
+    {
+      "id": "navigation_flow",
+      "label": "Navigation Drawer Flow",
+      "nodes": [
+        "index_openmainmenudrawer",
+        "index_closemainmenudrawer",
+        "index_openproductpickerdrawer"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "index.html"
+    },
+    {
+      "id": "review_management_flow",
+      "label": "Review Management Flow",
+      "nodes": [
+        "reviews_backup_1_switchreviewstab",
+        "reviews_backup_1_openfilterdrawer",
+        "reviews_backup_1_applyreviewfilter",
+        "reviews_backup_1_showmorereviews"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "reviews_backup_1.html"
+    },
+    {
+      "id": "comparison_system",
+      "label": "Feature Comparison System",
+      "nodes": [
+        "e_handelspartner_setcompareview",
+        "e_handelspartner_gotocompareview",
+        "e_handelspartner_compare_table_section",
+        "e_handelspartner_role_tiers"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "e-handelspartner.html"
+    },
+    {
+      "id": "cookie_consent_flow",
+      "label": "Cookie Consent Management",
+      "nodes": [
+        "mypages_cookie_banner_v1_html",
+        "mypages_cookie_banner_v1_submitconsent",
+        "mypages_cookie_banner_v1_toggleacc"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0
+    },
+    {
+      "id": "eco_design_system_components",
+      "label": "ECO Design System Components",
+      "nodes": [
+        "claude_skills_tile_link_skill",
+        "claude_skills_toast_ecom_skill",
+        "claude_skills_toast_system_skill",
+        "claude_skills_tooltip_skill",
+        "claude_skills_typography_skill"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/typography/SKILL.md"
+    },
+    {
+      "id": "link_system",
+      "label": "Link System Components",
+      "nodes": [
+        "skills_links_guide_skill",
+        "skills_inline_link_skill",
+        "skills_action_link_skill"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/links-guide/SKILL.md"
+    },
+    {
+      "id": "notification_system",
+      "label": "Notification System Components",
+      "nodes": [
+        "skills_notifications_guide_skill",
+        "skills_inline_notification_skill",
+        "skills_banner_notification_skill",
+        "skills_modal_ecom_skill"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/notifications-guide/SKILL.md"
+    },
+    {
+      "id": "navigation_flow",
+      "label": "Global Navigation Elements",
+      "nodes": [
+        "impersonation_banner",
+        "e_handelspartner_html"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "e-handelspartner.html"
+    },
+    {
+      "id": "global_ui_patterns",
+      "label": "Global UI Patterns",
+      "nodes": [
+        "template_site_header",
+        "template_impersonation_banner",
+        "template_delete_modal"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "template.html"
+    },
+    {
+      "id": "integration_solutions",
+      "label": "B2B Integration Solutions",
+      "nodes": [
+        "e_handelspartner_ehp_integration_grid",
+        "e_handelspartner_fob_grid",
+        "e_handelspartner_compare_table_section"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "e-handelspartner.html"
+    },
+    {
+      "id": "security_verification_pattern",
+      "label": "Security Verification Pattern",
+      "nodes": [
+        "mypages_addressbook_openbillingbankidmodal",
+        "mypages_addressbook_html"
+      ],
+      "relation": "implement",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "mypages/addressbook.html"
+    },
+    {
+      "id": "form_elements",
+      "label": "Form Element Components",
+      "nodes": [
+        "skills_input_skill",
+        "skills_select_skill",
+        "skills_checkbox_skill",
+        "skills_segment_control_skill"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": null
+    }
+  ],
+  "built_at_commit": "2743d4abdf02aa84cd591933279675b069c57efd"
+}

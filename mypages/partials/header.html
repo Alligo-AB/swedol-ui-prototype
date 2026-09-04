@@ -1,0 +1,187 @@
+<!-- ════════════════════════════════════════════════════════════
+     GLOBAL PARTIAL — Site Header
+     Denna fil är den enda källan (single source of truth) för
+     sajtens header. Den laddas in via JS (synkron XHR) i varje
+     sida som använder den — redigera ENDAST här, ändringen slår
+     igenom automatiskt i alla sidor som inkluderar filen.
+
+     Inkluderas för närvarande i:
+       - /index.html
+       - /template.html
+       - /reviews.html
+       - /feature-comparison.html
+       - /mypages/mypages-template.html
+       - /mypages/users.html
+       - /mypages/users-dashboard.html
+       - /mypages/users_V1.html
+       - /mypages/dashboard_test.html
+       - /mypages/addressbook.html
+════════════════════════════════════════════════════════════ -->
+
+  <!-- ══ SITE HEADER SM (xs + sm: 0–768px) ══════════════════ -->
+  <div class="site-header__sm">
+
+    <!-- Row 1: left icons | logo | account + cart + menu -->
+    <div class="sh-sm__bar1">
+
+      <!-- Left: search, favorites, compare+badge -->
+      <div class="sh-sm__bar1-left">
+        <button class="sh-sm__icon-btn" aria-label="Sök">
+          <span class="ms">search</span>
+        </button>
+        <button class="sh-sm__icon-btn" aria-label="Favoriter">
+          <span class="ms">favorite</span>
+        </button>
+        <button class="sh-sm__icon-btn sh-sm__icon-btn--24" aria-label="Jämför">
+          <span class="ms ms--24">compare_arrows</span>
+          <span class="badge badge--white">1</span>
+        </button>
+      </div>
+
+      <!-- Center: logo (absolute-centered) -->
+      <div class="sh-sm__bar1-center">
+        <div class="sh-sm__logo">
+          <img src="images/swedol-logo.svg" alt="Swedol" />
+        </div>
+      </div>
+
+      <!-- Right: account info + cart + hamburger -->
+      <div class="sh-sm__bar1-right">
+        <button class="sh-sm__account-btn" aria-label="Konto">
+          <div class="avatar" style="width:24px;height:24px;flex-shrink:0;">
+            <img src="images/stina-avatar.png" alt="Stina Carlström" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+          </div>
+          <div class="sh-sm__account-info">
+            <div class="sh-sm__account-name">Stina Carlström</div>
+            <div class="sh-sm__account-sub">Kundnummer: 326920</div>
+          </div>
+        </button>
+        <button class="sh-sm__icon-btn sh-sm__icon-btn--24" aria-label="Kundvagn">
+          <span class="ms ms--24">shopping_cart</span>
+          <span class="badge">5</span>
+        </button>
+        <button class="sh-sm__menu-btn" aria-label="Meny" onclick="openMainMenuDrawer()">
+          <span class="ms ms--24">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Row 2: search bar on dark background -->
+    <div class="sh-sm__bar2">
+      <div class="sh-sm__search">
+        <span class="ms">search</span>
+        <input type="text" placeholder="Sök produkt, kategori, varumärke" />
+        <div class="sh-sm__search-right">
+          <div class="sh-sm__search-divider"></div>
+          <button class="sh-sm__search-action sh-sm__location-btn" aria-label="Välj butik">
+            <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">location_on</span>
+          </button>
+          <button class="sh-sm__search-action" aria-label="Skanna">
+            <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">qr_code_scanner</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: store nav with accent bottom border -->
+    <div class="sh-sm__bar3">
+      <button class="sh-sm__store-btn">
+        <span class="ms">store</span>
+        <span class="sh-sm__store-btn__text">
+          <span class="sh-sm__store-btn__bold">Borås,&nbsp;</span><span class="sh-sm__store-btn__regular">ÖPPET IDAG: Kl. 6:30 - 17:00</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ IMPERSONATION BANNER ═════════════════════════════════ -->
+  <div id="impersonation-banner-wrap" class="impersonation-banner-wrap">
+    <div id="impersonation-banner" class="impersonation-banner" role="status">
+      <div class="impersonation-banner__body">
+        <span class="ms impersonation-banner__icon">info</span>
+        <div class="impersonation-banner__text-group">
+          <p class="impersonation-banner__text">Din roll är <span class="impersonation-banner__title">Administratör</span> och du agerar tillfälligt som <strong id="impersonation-banner-name"></strong>.</p>
+          <button class="impersonation-banner__link" id="impersonation-banner-logout">LOGGA UT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="impersonation-banner-placeholder" class="impersonation-banner-placeholder"></div>
+
+  <!-- ══ SITE HEADER (desktop: md+) ══════════════════════════ -->
+  <div class="site-header__top">
+      <button class="site-header__menu-btn" aria-label="Meny" onclick="openMainMenuDrawer()">
+        <span class="ms">menu</span>
+      </button>
+
+      <!-- Swedol logo -->
+      <div class="site-header__logo">
+        <img src="images/swedol-logo.svg" alt="Swedol" style="width:100%;height:100%;display:block;object-fit:contain;" />
+      </div>
+
+      <!-- Search -->
+      <div class="site-header__search">
+        <span class="ms">search</span>
+        <input type="text" placeholder="Sök produkt, varumärke, kategori" id="header-search-field" oninput="handleHeaderSearch(this.value)" />
+        <div class="site-header__search-right">
+          <div class="site-header__search-divider"></div>
+          <button class="search-scan-btn" id="header-scan-btn" aria-label="Skanna">
+            <span class="ms">qr_code_scanner</span>
+          </button>
+          <button class="search-scan-btn" id="header-clear-btn" aria-label="Rensa sökning" style="display:none" onclick="var f=document.getElementById('header-search-field');f.value='';f.focus();handleHeaderSearch('');">
+            <span class="ms" style="font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 0,'opsz' 24;color:var(--color-text-tertiary);">cancel</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right icons -->
+      <div class="site-header__right">
+        <button class="account-info" onclick="openAccountNavDrawer()">
+          <div class="avatar">
+            <img src="images/stina-avatar.png" alt="Stina Carlström" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+          </div>
+          <div>
+            <div class="account-info__name">Stina Carlström</div>
+            <div class="account-info__sub">Kundnummer: 326920</div>
+          </div>
+        </button>
+
+        <button class="icon-btn" aria-label="Favoriter">
+          <span class="ms">favorite</span>
+        </button>
+
+        <button class="icon-btn" aria-label="Jämför">
+          <span class="ms">compare_arrows</span>
+          <span class="badge badge--white">1</span>
+        </button>
+
+        <button class="icon-btn" aria-label="Kundvagn">
+          <span class="ms">shopping_cart</span>
+          <span class="badge">5</span>
+        </button>
+      </div>
+  </div>
+
+  <header class="site-header">
+    <!-- Main nav -->
+    <nav class="site-header__nav">
+      <div class="nav-links-wrap">
+        <div class="nav-links">
+          <a href="#" onclick="event.preventDefault(); openProductPickerDrawer();">Produktsortiment</a>
+          <a href="#">Kampanj</a>
+          <a href="#">Våra Tjänster</a>
+          <a href="#">Varumärken</a>
+          <a href="#">Outlet</a>
+        </div>
+        <div class="nav-more" id="nav-more">
+          <button class="nav-more__btn" id="nav-more-btn" aria-label="Fler alternativ" aria-expanded="false">
+            <span class="ms ms--24" style="color:var(--brand)">more_vert</span>
+          </button>
+        </div>
+      </div>
+      <button class="store-btn">
+        <span class="ms">store</span>
+        <span>Borås,&nbsp;</span><span class="store-btn__text-regular">Öppet idag: Kl. 6:30 – 17:00</span>
+      </button>
+    </nav>
+  </header>
