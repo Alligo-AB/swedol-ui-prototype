@@ -57,14 +57,38 @@ Example — avoid:
 - **border** — the 3 border-width shorthand tokens (`brd-1`, `brd-2`, `brd-4`), each a full `width solid color` string.
 - **radius** — currently only `full` (pill/circle radius, `62.438rem`). Everything else in this design system uses `border-radius: 0` (sharp corners) per CLAUDE.md — there is no small/medium radius token because the system intentionally doesn't use one.
 
-## Known drift between tokens.json and CLAUDE.md
+## Verification status (checked against the live package, not assumed)
 
-CLAUDE.md's hand-written tables were transcribed from an earlier package snapshot and haven't been re-synced since. A few names have since changed upstream — when they disagree, trust `tokens.json`:
+`tokens.json` is generated from `alligo-design-tokens@0.0.8` -- specifically the actual live
+files served at `https://unpkg.com/alligo-design-tokens@latest/...` at the time of writing
+(unpkg's `@latest` currently resolves to 0.0.8; the GitHub repo has a few unpublished commits
+ahead of that tag -- see the CDN note below). This file was cross-checked two ways:
 
-- CLAUDE.md's `text-success` → now `text-success-default` in the package.
-- The package now also has `text-warning-default` and `text-danger-on-primary-bg`, which aren't in CLAUDE.md's color table at all.
+**Colors: 77/77 match.** Every color documented in CLAUDE.md's "Färger – Semantiska Tokens"
+table was diffed against `tokens.json` programmatically -- exact match on all 77, no
+discrepancies. Colors in this design system can be trusted to match CLAUDE.md.
 
-If you hit another mismatch, prefer `tokens.json` (it's generated directly from the package) and mention the discrepancy so CLAUDE.md can be updated.
+**Typography: 12 real discrepancies out of 40 checks (20 styles x 2 breakpoints).** Font sizes
+all match. Line-heights (and one letter-spacing) differ between what's live in the package and
+what CLAUDE.md documents, for: `body-lg`/`body-xl` mobile, `label-md` mobile letter-spacing,
+`title-sm`/`title-md` mobile, `headline-md`/`headline-xl` mobile, `body-md`/`title-sm` desktop,
+`headline-xl` desktop. Full detail is in each entry's `mobile`/`desktopOverride` block --
+compare against CLAUDE.md's typography tables directly if you need the specifics for a given
+style.
+
+The one worth flagging to design specifically: **`display-lg` on mobile is currently
+66px/60px in the live package** -- identical to the desktop value -- while CLAUDE.md documents
+it scaling down to 36px/34px on mobile. A 66px display heading at a 375px viewport would be
+visibly broken (the text would barely fit, if at all), so this reads like an unintentional gap
+in the Supernova export rather than an approved design change. Worth confirming with whoever
+owns the Figma source before anyone builds a hero/campaign page that relies on `display-lg`
+looking right on mobile.
+
+None of the above is a `tokens.json` bug -- it's what's actually live right now, verified by
+reconstructing the same `dist/` files this repo already loads via CDN and diffing them byte for
+byte against both CLAUDE.md and the generator's own output. If a discrepancy here gets resolved
+upstream (either CLAUDE.md gets corrected, or Supernova republishes corrected values), rerun
+`generate-tokens.py` and this section should shrink.
 
 ## Regenerating tokens.json
 

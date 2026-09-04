@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swedol – Tokens: Spacing & elevation</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+    .ms {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    button { position: relative; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color var(--duration-fast-2) var(--ease-standard); }
+    body.keyboard-nav button:focus { outline-color: var(--color-border-focus); }
+
+    body {
+      font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+      min-width: 320px;
+    }
+
+    /* Layout + motion custom properties are NOT part of the alligo-design-tokens
+       package -- they're local site conventions (see CLAUDE.md). Everything
+       else on this page (--color-*, --shadow-*, --dimension-*, --border-*)
+       comes live from the CDN link in <head>, on purpose -- unlike
+       template.html, this page does NOT redeclare a local :root fallback for
+       those, so what you see here is exactly what's published right now. */
+    :root {
+      --px-page: 16px;
+      --max-w: 1200px;
+      --px-full: max(var(--px-page), calc((100vw - var(--max-w)) / 2));
+      --duration-fast-2: 100ms;
+      --duration-fast-3: 150ms;
+      --duration-medium-2: 300ms;
+      --ease-standard: cubic-bezier(.35,0,.35,1);
+    }
+    @media (min-width: 640px) { :root { --px-page: 32px; } }
+    @media (min-width: 1024px) { :root { --px-page: 40px; } }
+
+    .page { max-width: 1280px; margin: 0 auto; }
+
+    .section {
+      background: var(--color-surface-raised-primary);
+      padding: 32px var(--px-full) 40px;
+    }
+    .section--secondary { background: var(--color-surface-raised-secondary); }
+    .section--first { padding-top: 16px; }
+    @media (min-width: 640px) {
+      .section { padding-top: 48px; padding-bottom: 48px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 769px) {
+      .section { padding-top: 56px; padding-bottom: 64px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 1024px) {
+      .section { padding-top: 72px; padding-bottom: 80px; }
+      .section--first { padding-top: 40px; }
+    }
+
+    /* Breadcrumb (ECO Design System) -- verbatim from CLAUDE.md */
+    .breadcrumb { padding: 0 var(--px-page) 0; }
+    .breadcrumb__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 16px 0; }
+    .breadcrumb-item {
+      display: inline-flex; align-items: center;
+      border: 1px solid var(--color-border-action-3);
+      padding: 6px 7px; background: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 12px;
+      letter-spacing: 0.24px; color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .breadcrumb-item:hover { color: var(--color-text-action-primary); text-decoration: underline; }
+    .breadcrumb-item--active { font-weight: 700; color: var(--color-text-primary); cursor: default; }
+    .breadcrumb-item--active:hover { text-decoration: none; }
+    .breadcrumb-sep {
+      flex-shrink: 0; width: 4px; height: 24px; display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-tertiary); font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px;
+      font-weight: 400; letter-spacing: 0.28px;
+    }
+    @media (min-width: 769px) {
+      .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+      .breadcrumb-sep { height: 32px; }
+    }
+    .breadcrumb + .section--first { padding-top: 0; }
+
+    /* Page intro */
+    .token-page-intro { max-width: 720px; margin-bottom: 40px; }
+    .token-page-intro__eyebrow {
+      font-size: 14px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase;
+      color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1; margin-bottom: 8px; display: block;
+    }
+    .token-page-intro__title {
+      font-size: 28px; font-weight: 700; line-height: 32px; color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1; margin-bottom: 12px;
+    }
+    @media (min-width: 769px) { .token-page-intro__title { font-size: 36px; line-height: 40px; } }
+    .token-page-intro__desc {
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) { .token-page-intro__desc { font-size: 18px; line-height: 26px; } }
+    .token-page-intro__desc code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em;
+      background: var(--color-surface-10); padding: 1px 5px;
+    }
+
+    /* Token nav (links between the 5 demo pages) */
+    .token-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .token-nav a {
+      display: inline-flex; align-items: center; height: 32px; padding: 6px 12px; box-sizing: border-box;
+      border: 1px solid var(--color-border-action-3); background: transparent; color: var(--color-text-primary);
+      text-decoration: none; cursor: pointer; white-space: nowrap; font-size: 14px; font-weight: 700;
+      line-height: 14px; letter-spacing: 0.56px; text-transform: uppercase;
+      transition: background var(--duration-fast-3) var(--ease-standard), border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .token-nav a:hover { background: rgba(0,0,0,0.05); border-color: var(--color-border-dark); }
+    .token-nav a[aria-current="page"] { background: var(--color-surface-100); border-color: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+
+
+    /* Spacing bars */
+    .token-space-row { display: grid; grid-template-columns: 90px 1fr 60px 1fr; align-items: center; gap: 12px; padding: 8px 0; }
+    .token-space-row__name { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; font-weight: 700; color: var(--color-text-primary); }
+    .token-space-row__bar { display: block; height: 16px; background: var(--color-accent-default); max-width: 100%; }
+    .token-space-row__px { font-size: 13px; color: var(--color-text-secondary); }
+    .token-space-row__var { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--color-text-tertiary); }
+    @media (max-width: 639px) {
+      .token-space-row { grid-template-columns: 70px 1fr 50px; }
+      .token-space-row__var { display: none; }
+    }
+
+    /* Shadow / border / radius cards */
+    .token-shadow-grid, .token-border-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) { .token-shadow-grid, .token-border-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .token-shadow-grid { grid-template-columns: repeat(3, 1fr); } .token-border-grid { grid-template-columns: repeat(4, 1fr); } }
+    .token-shadow-card, .token-border-card { display: flex; flex-direction: column; gap: 6px; padding: 20px; background: var(--color-surface-raised-primary); }
+    .token-shadow-card__swatch { height: 64px; background: var(--color-surface-raised-primary); margin-bottom: 8px; }
+    .token-border-card__swatch { height: 64px; background: var(--color-surface-raised-primary); margin-bottom: 8px; }
+    .token-shadow-card__name, .token-border-card__name { font-size: 14px; font-weight: 700; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }
+    .token-shadow-card__var, .token-border-card__var, .token-border-card__value { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--color-text-tertiary); }
+    .token-shadow-card__desc { font-size: 12px; line-height: 16px; color: var(--color-text-secondary); }
+
+    .token-subsection { margin-top: 48px; }
+    .token-subsection__title { font-size: 20px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 16px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+  </style>
+</head>
+<body>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/header.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+<div class="page">
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <div class="breadcrumb__bar">
+    <a href="../index.html" class="breadcrumb-item">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="../index.html#tokens" class="breadcrumb-item">Tokens</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Spacing &amp; elevation</span>
+  </div>
+</nav>
+</div>
+
+<section class="section section--first">
+  <div class="page">
+    <div class="token-page-intro">
+      <span class="token-page-intro__eyebrow">Design tokens</span>
+      <h1 class="token-page-intro__title">Spacing &amp; elevation</h1>
+      <p class="token-page-intro__desc">The spacing scale (<code>space-0</code> through <code>space-120</code>), shadow/elevation tokens, and border-width tokens from <code>alligo-design-tokens</code>. Shadows and borders are rendered with <code>var(--shadow-...)</code> / <code>var(--border-...)</code> directly, live from the CDN.</p>
+    </div>
+    <nav class="token-nav">
+      <a href="colors.html">Colors</a>
+      <a href="typography.html">Typography</a>
+      <a href="spacing-elevation.html" aria-current="page">Spacing &amp; elevation</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="checkboxes.html">Checkboxes</a>
+    </nav>
+
+    <div class="token-subsection">
+      <h2 class="token-subsection__title">Spacing scale</h2>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-0</span>
+      <span class="token-space-row__bar" style="width: 0px;"></span>
+      <span class="token-space-row__px">0px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-0</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-1</span>
+      <span class="token-space-row__bar" style="width: 1px;"></span>
+      <span class="token-space-row__px">1px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-1</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-2</span>
+      <span class="token-space-row__bar" style="width: 2px;"></span>
+      <span class="token-space-row__px">2px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-2</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-4</span>
+      <span class="token-space-row__bar" style="width: 4px;"></span>
+      <span class="token-space-row__px">4px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-4</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-8</span>
+      <span class="token-space-row__bar" style="width: 8px;"></span>
+      <span class="token-space-row__px">8px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-8</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-12</span>
+      <span class="token-space-row__bar" style="width: 12px;"></span>
+      <span class="token-space-row__px">12px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-12</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-16</span>
+      <span class="token-space-row__bar" style="width: 16px;"></span>
+      <span class="token-space-row__px">16px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-16</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-24</span>
+      <span class="token-space-row__bar" style="width: 24px;"></span>
+      <span class="token-space-row__px">24px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-24</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-32</span>
+      <span class="token-space-row__bar" style="width: 32px;"></span>
+      <span class="token-space-row__px">32px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-32</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-40</span>
+      <span class="token-space-row__bar" style="width: 40px;"></span>
+      <span class="token-space-row__px">40px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-40</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-48</span>
+      <span class="token-space-row__bar" style="width: 48px;"></span>
+      <span class="token-space-row__px">48px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-48</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-56</span>
+      <span class="token-space-row__bar" style="width: 56px;"></span>
+      <span class="token-space-row__px">56px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-56</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-64</span>
+      <span class="token-space-row__bar" style="width: 64px;"></span>
+      <span class="token-space-row__px">64px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-64</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-72</span>
+      <span class="token-space-row__bar" style="width: 72px;"></span>
+      <span class="token-space-row__px">72px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-72</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-80</span>
+      <span class="token-space-row__bar" style="width: 80px;"></span>
+      <span class="token-space-row__px">80px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-80</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-112</span>
+      <span class="token-space-row__bar" style="width: 112px;"></span>
+      <span class="token-space-row__px">112px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-112</span>
+    </div>
+    <div class="token-space-row">
+      <span class="token-space-row__name">space-120</span>
+      <span class="token-space-row__bar" style="width: 120px;"></span>
+      <span class="token-space-row__px">120px</span>
+      <span class="token-space-row__var">--dimension-spacing-space-120</span>
+    </div>
+    </div>
+
+    <div class="token-subsection">
+      <h2 class="token-subsection__title">Shadow / elevation</h2>
+      <div class="token-shadow-grid">
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-b-20);"></div>
+        <span class="token-shadow-card__name">elevation-b-20</span>
+        <span class="token-shadow-card__var">--shadow-elevation-b-20</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-b-40);"></div>
+        <span class="token-shadow-card__name">elevation-b-40</span>
+        <span class="token-shadow-card__var">--shadow-elevation-b-40</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-b-60);"></div>
+        <span class="token-shadow-card__name">elevation-b-60</span>
+        <span class="token-shadow-card__var">--shadow-elevation-b-60</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-b-80);"></div>
+        <span class="token-shadow-card__name">elevation-b-80</span>
+        <span class="token-shadow-card__var">--shadow-elevation-b-80</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-b-100);"></div>
+        <span class="token-shadow-card__name">elevation-b-100</span>
+        <span class="token-shadow-card__var">--shadow-elevation-b-100</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-t-20);"></div>
+        <span class="token-shadow-card__name">elevation-t-20</span>
+        <span class="token-shadow-card__var">--shadow-elevation-t-20</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-t-40);"></div>
+        <span class="token-shadow-card__name">elevation-t-40</span>
+        <span class="token-shadow-card__var">--shadow-elevation-t-40</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-t-60);"></div>
+        <span class="token-shadow-card__name">elevation-t-60</span>
+        <span class="token-shadow-card__var">--shadow-elevation-t-60</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-t-80);"></div>
+        <span class="token-shadow-card__name">elevation-t-80</span>
+        <span class="token-shadow-card__var">--shadow-elevation-t-80</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-t-100);"></div>
+        <span class="token-shadow-card__name">elevation-t-100</span>
+        <span class="token-shadow-card__var">--shadow-elevation-t-100</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-input-control-switch);"></div>
+        <span class="token-shadow-card__name">elevation-input-control-switch</span>
+        <span class="token-shadow-card__var">--shadow-elevation-input-control-switch</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-drawer-left);"></div>
+        <span class="token-shadow-card__name">elevation-drawer-left</span>
+        <span class="token-shadow-card__var">--shadow-elevation-drawer-left</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-drawer-right);"></div>
+        <span class="token-shadow-card__name">elevation-drawer-right</span>
+        <span class="token-shadow-card__var">--shadow-elevation-drawer-right</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-drawer-left-menu-sublevel);"></div>
+        <span class="token-shadow-card__name">elevation-drawer-left-menu-sublevel</span>
+        <span class="token-shadow-card__var">--shadow-elevation-drawer-left-menu-sublevel</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-table-overflow-left);"></div>
+        <span class="token-shadow-card__name">elevation-table-overflow-left</span>
+        <span class="token-shadow-card__var">--shadow-elevation-table-overflow-left</span>
+        
+      </div>
+      <div class="token-shadow-card">
+        <div class="token-shadow-card__swatch" style="box-shadow: var(--shadow-elevation-table-overflow-right);"></div>
+        <span class="token-shadow-card__name">elevation-table-overflow-right</span>
+        <span class="token-shadow-card__var">--shadow-elevation-table-overflow-right</span>
+        
+      </div>
+      </div>
+    </div>
+
+    <div class="token-subsection">
+      <h2 class="token-subsection__title">Border width</h2>
+      <div class="token-border-grid">
+      <div class="token-border-card">
+        <div class="token-border-card__swatch" style="border: var(--border-brd-1);"></div>
+        <span class="token-border-card__name">brd-1</span>
+        <span class="token-border-card__var">--border-brd-1</span>
+        <span class="token-border-card__value">0.063rem solid #000000</span>
+      </div>
+      <div class="token-border-card">
+        <div class="token-border-card__swatch" style="border: var(--border-brd-2);"></div>
+        <span class="token-border-card__name">brd-2</span>
+        <span class="token-border-card__var">--border-brd-2</span>
+        <span class="token-border-card__value">0.125rem solid #000000</span>
+      </div>
+      <div class="token-border-card">
+        <div class="token-border-card__swatch" style="border: var(--border-brd-4);"></div>
+        <span class="token-border-card__name">brd-4</span>
+        <span class="token-border-card__var">--border-brd-4</span>
+        <span class="token-border-card__value">0.25rem solid #000000</span>
+      </div>
+      </div>
+    </div>
+
+    <div class="token-subsection">
+      <h2 class="token-subsection__title">Radius</h2>
+      <div class="token-border-grid">
+      <div class="token-border-card">
+        <div class="token-border-card__swatch" style="border-radius: var(--dimension-radius-full); border: 1px solid var(--color-border-primary); background: var(--color-surface-05);"></div>
+        <span class="token-border-card__name">full</span>
+        <span class="token-border-card__var">--dimension-radius-full</span>
+        <span class="token-border-card__value">62.438rem</span>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/footer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <div class="nav-more__menu" id="nav-more-menu" hidden></div>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/main-menu.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    document.addEventListener('keydown', (e) => { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+    document.addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
+    document.addEventListener('touchstart', () => document.body.classList.remove('keyboard-nav'), { passive: true });
+  </script>
+</body>
+</html>

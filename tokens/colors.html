@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swedol – Tokens: Colors</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+    .ms {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    button { position: relative; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color var(--duration-fast-2) var(--ease-standard); }
+    body.keyboard-nav button:focus { outline-color: var(--color-border-focus); }
+
+    body {
+      font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+      min-width: 320px;
+    }
+
+    /* Layout + motion custom properties are NOT part of the alligo-design-tokens
+       package -- they're local site conventions (see CLAUDE.md). Everything
+       else on this page (--color-*, --shadow-*, --dimension-*, --border-*)
+       comes live from the CDN link in <head>, on purpose -- unlike
+       template.html, this page does NOT redeclare a local :root fallback for
+       those, so what you see here is exactly what's published right now. */
+    :root {
+      --px-page: 16px;
+      --max-w: 1200px;
+      --px-full: max(var(--px-page), calc((100vw - var(--max-w)) / 2));
+      --duration-fast-2: 100ms;
+      --duration-fast-3: 150ms;
+      --duration-medium-2: 300ms;
+      --ease-standard: cubic-bezier(.35,0,.35,1);
+    }
+    @media (min-width: 640px) { :root { --px-page: 32px; } }
+    @media (min-width: 1024px) { :root { --px-page: 40px; } }
+
+    .page { max-width: 1280px; margin: 0 auto; }
+
+    .section {
+      background: var(--color-surface-raised-primary);
+      padding: 32px var(--px-full) 40px;
+    }
+    .section--secondary { background: var(--color-surface-raised-secondary); }
+    .section--first { padding-top: 16px; }
+    @media (min-width: 640px) {
+      .section { padding-top: 48px; padding-bottom: 48px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 769px) {
+      .section { padding-top: 56px; padding-bottom: 64px; }
+      .section--first { padding-top: 32px; }
+    }
+    @media (min-width: 1024px) {
+      .section { padding-top: 72px; padding-bottom: 80px; }
+      .section--first { padding-top: 40px; }
+    }
+
+    /* Breadcrumb (ECO Design System) -- verbatim from CLAUDE.md */
+    .breadcrumb { padding: 0 var(--px-page) 0; }
+    .breadcrumb__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 16px 0; }
+    .breadcrumb-item {
+      display: inline-flex; align-items: center;
+      border: 1px solid var(--color-border-action-3);
+      padding: 6px 7px; background: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 12px;
+      letter-spacing: 0.24px; color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .breadcrumb-item:hover { color: var(--color-text-action-primary); text-decoration: underline; }
+    .breadcrumb-item--active { font-weight: 700; color: var(--color-text-primary); cursor: default; }
+    .breadcrumb-item--active:hover { text-decoration: none; }
+    .breadcrumb-sep {
+      flex-shrink: 0; width: 4px; height: 24px; display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-tertiary); font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px;
+      font-weight: 400; letter-spacing: 0.28px;
+    }
+    @media (min-width: 769px) {
+      .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+      .breadcrumb-sep { height: 32px; }
+    }
+    .breadcrumb + .section--first { padding-top: 0; }
+
+    /* Page intro */
+    .token-page-intro { max-width: 720px; margin-bottom: 40px; }
+    .token-page-intro__eyebrow {
+      font-size: 14px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase;
+      color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1; margin-bottom: 8px; display: block;
+    }
+    .token-page-intro__title {
+      font-size: 28px; font-weight: 700; line-height: 32px; color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1; margin-bottom: 12px;
+    }
+    @media (min-width: 769px) { .token-page-intro__title { font-size: 36px; line-height: 40px; } }
+    .token-page-intro__desc {
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) { .token-page-intro__desc { font-size: 18px; line-height: 26px; } }
+    .token-page-intro__desc code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em;
+      background: var(--color-surface-10); padding: 1px 5px;
+    }
+
+    /* Token nav (links between the 5 demo pages) */
+    .token-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .token-nav a {
+      display: inline-flex; align-items: center; height: 32px; padding: 6px 12px; box-sizing: border-box;
+      border: 1px solid var(--color-border-action-3); background: transparent; color: var(--color-text-primary);
+      text-decoration: none; cursor: pointer; white-space: nowrap; font-size: 14px; font-weight: 700;
+      line-height: 14px; letter-spacing: 0.56px; text-transform: uppercase;
+      transition: background var(--duration-fast-3) var(--ease-standard), border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .token-nav a:hover { background: rgba(0,0,0,0.05); border-color: var(--color-border-dark); }
+    .token-nav a[aria-current="page"] { background: var(--color-surface-100); border-color: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+
+    /* Color swatches */
+    .token-group { margin-bottom: 40px; }
+    .token-group__title {
+      font-size: 18px; font-weight: 700; line-height: 22px; color: var(--color-text-primary);
+      margin-bottom: 16px; font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .token-group__count { color: var(--color-text-tertiary); font-weight: 400; }
+    .token-color-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 640px) { .token-color-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .token-color-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1281px) { .token-color-grid { grid-template-columns: repeat(4, 1fr); } }
+    .token-color-card {
+      display: flex; flex-direction: column; gap: 4px; padding: 12px;
+      border: 1px solid var(--color-border-primary); background: var(--color-surface-raised-primary);
+    }
+    .token-color-card__swatch {
+      display: block; width: 100%; height: 56px; border: 1px solid var(--color-border-primary); margin-bottom: 4px;
+    }
+    .token-color-card__name {
+      font-size: 14px; font-weight: 700; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .token-color-card__var, .token-color-card__hex {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--color-text-tertiary);
+    }
+    .token-color-card__desc { font-size: 12px; line-height: 16px; color: var(--color-text-secondary); margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/header.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+<div class="page">
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <div class="breadcrumb__bar">
+    <a href="../index.html" class="breadcrumb-item">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="../index.html#tokens" class="breadcrumb-item">Tokens</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Colors</span>
+  </div>
+</nav>
+</div>
+
+<section class="section section--first">
+  <div class="page">
+    <div class="token-page-intro">
+      <span class="token-page-intro__eyebrow">Design tokens</span>
+      <h1 class="token-page-intro__title">Colors</h1>
+      <p class="token-page-intro__desc">Every semantic color token from <code>alligo-design-tokens</code>, live from the CDN this site already loads. Each swatch is rendered with <code>background: var(--color-name)</code> directly -- if Supernova publishes a new value, this page updates itself, no rebuild needed. Sourced from <code>.claude/skills/eco-tokens/tokens.json</code>.</p>
+    </div>
+    <nav class="token-nav">
+      <a href="colors.html" aria-current="page">Colors</a>
+      <a href="typography.html">Typography</a>
+      <a href="spacing-elevation.html">Spacing &amp; elevation</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="checkboxes.html">Checkboxes</a>
+    </nav>
+
+  <div class="token-group">
+    <h3 class="token-group__title">Accent <span class="token-group__count">(4)</span></h3>
+    <div class="token-color-grid">
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-accent-dark);"></span>
+        <span class="token-color-card__name">accent-dark</span>
+        <span class="token-color-card__var">--color-accent-dark</span>
+        <span class="token-color-card__hex">#8b9400</span>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-accent-default);"></span>
+        <span class="token-color-card__name">accent-default</span>
+        <span class="token-color-card__var">--color-accent-default</span>
+        <span class="token-color-card__hex">#c7d300</span>
+        <p class="token-color-card__desc">The primary color of the concept brand.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-accent-hamburger);"></span>
+        <span class="token-color-card__name">accent-hamburger</span>
+        <span class="token-color-card__var">--color-accent-hamburger</span>
+        <span class="token-color-card__hex">#c7d300</span>
+        <p class="token-color-card__desc">the color of the hamburger menu of each concept brand.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-accent-light);"></span>
+        <span class="token-color-card__name">accent-light</span>
+        <span class="token-color-card__var">--color-accent-light</span>
+        <span class="token-color-card__hex">#f4f6cc</span>
+        <p class="token-color-card__desc">Used in combination with primary or standalone as for example raised surface color in table headings or highlited parts of the UI.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="token-group">
+    <h3 class="token-group__title">Text <span class="token-group__count">(22)</span></h3>
+    <div class="token-color-grid">
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-accent);"></span>
+        <span class="token-color-card__name">text-action-accent</span>
+        <span class="token-color-card__var">--color-text-action-accent</span>
+        <span class="token-color-card__hex">#000000</span>
+        <p class="token-color-card__desc">Used as text link color for the Brand accent color button.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-primary);"></span>
+        <span class="token-color-card__name">text-action-primary</span>
+        <span class="token-color-card__var">--color-text-action-primary</span>
+        <span class="token-color-card__hex">#000000</span>
+        <p class="token-color-card__desc">Primary link color. Used as default text link color.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-primary-hover);"></span>
+        <span class="token-color-card__name">text-action-primary-hover</span>
+        <span class="token-color-card__var">--color-text-action-primary-hover</span>
+        <span class="token-color-card__hex">#737373</span>
+        <p class="token-color-card__desc">Used as hover link color for action primary when needed.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-primary-inverted);"></span>
+        <span class="token-color-card__name">text-action-primary-inverted</span>
+        <span class="token-color-card__var">--color-text-action-primary-inverted</span>
+        <span class="token-color-card__hex">#ffffff</span>
+        <p class="token-color-card__desc">Primary link color on dark backgrounds. Used together with inverted text.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-primary-inverted-hover);"></span>
+        <span class="token-color-card__name">text-action-primary-inverted-hover</span>
+        <span class="token-color-card__var">--color-text-action-primary-inverted-hover</span>
+        <span class="token-color-card__hex">#ffffffc7</span>
+        <p class="token-color-card__desc">Used as hover link color for primary inverted link.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-secondary);"></span>
+        <span class="token-color-card__name">text-action-secondary</span>
+        <span class="token-color-card__var">--color-text-action-secondary</span>
+        <span class="token-color-card__hex">#4f4f4f</span>
+        <p class="token-color-card__desc">Secondary link color. Used together with text secondary.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-secondary-hover);"></span>
+        <span class="token-color-card__name">text-action-secondary-hover</span>
+        <span class="token-color-card__var">--color-text-action-secondary-hover</span>
+        <span class="token-color-card__hex">#737373</span>
+        <p class="token-color-card__desc">Used as hover link color for action secondary.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-tertiary);"></span>
+        <span class="token-color-card__name">text-action-tertiary</span>
+        <span class="token-color-card__var">--color-text-action-tertiary</span>
+        <span class="token-color-card__hex">#737373</span>
+        <p class="token-color-card__desc">Tertiary link color. Used together with text tertiary.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-action-tertiary-hover);"></span>
+        <span class="token-color-card__name">text-action-tertiary-hover</span>
+        <span class="token-color-card__var">--color-text-action-tertiary-hover</span>
+        <span class="token-color-card__hex">#939595</span>
+        <p class="token-color-card__desc">Used as hover link color for action secondary.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-danger-default);"></span>
+        <span class="token-color-card__name">text-danger-default</span>
+        <span class="token-color-card__var">--color-text-danger-default</span>
+        <span class="token-color-card__hex">#d90000</span>
+        <p class="token-color-card__desc">Default text color for error messages.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-disabled);"></span>
+        <span class="token-color-card__name">text-disabled</span>
+        <span class="token-color-card__var">--color-text-disabled</span>
+        <span class="token-color-card__hex">#939595</span>
+        <p class="token-color-card__desc">Used when text is illustrated as disabled.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-information-default);"></span>
+        <span class="token-color-card__name">text-information-default</span>
+        <span class="token-color-card__var">--color-text-information-default</span>
+        <span class="token-color-card__hex">#0066ff</span>
+        <p class="token-color-card__desc">Default text color for reenforced messages.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-price-customer);"></span>
+        <span class="token-color-card__name">text-price-customer</span>
+        <span class="token-color-card__var">--color-text-price-customer</span>
+        <span class="token-color-card__hex">#00838f</span>
+        <p class="token-color-card__desc">Price-customer is the color of price visible for logged in users.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-price-guest);"></span>
+        <span class="token-color-card__name">text-price-guest</span>
+        <span class="token-color-card__var">--color-text-price-guest</span>
+        <span class="token-color-card__hex">#d90000</span>
+        <p class="token-color-card__desc">Price-guest is used for highligting campaign related information such as campaignprices and campaignbadges for customers that´s not logged in.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-price-on-black);"></span>
+        <span class="token-color-card__name">text-price-on-black</span>
+        <span class="token-color-card__var">--color-text-price-on-black</span>
+        <span class="token-color-card__hex">#eb0000</span>
+        <p class="token-color-card__desc">Price-guest is used for highligting campaign related information such as campaigns with red text on black.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-primary);"></span>
+        <span class="token-color-card__name">text-primary</span>
+        <span class="token-color-card__var">--color-text-primary</span>
+        <span class="token-color-card__hex">#000000</span>
+        <p class="token-color-card__desc">Highest Emphasis for dark text on light background. Primary text color. Used as the main text color throughout the UI on our sites. Provides good and legible...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-primary-inverted);"></span>
+        <span class="token-color-card__name">text-primary-inverted</span>
+        <span class="token-color-card__var">--color-text-primary-inverted</span>
+        <span class="token-color-card__hex">#ffffff</span>
+        <p class="token-color-card__desc">Used when text sits on dark backgrounds, surfaces and images.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-secondary);"></span>
+        <span class="token-color-card__name">text-secondary</span>
+        <span class="token-color-card__var">--color-text-secondary</span>
+        <span class="token-color-card__hex">#4f4f4f</span>
+        <p class="token-color-card__desc">High Emphasis for dark text on light background. The secondary text color and is used for text that has to be presented in the interface but not need to be t...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-secondary-inverted);"></span>
+        <span class="token-color-card__name">text-secondary-inverted</span>
+        <span class="token-color-card__var">--color-text-secondary-inverted</span>
+        <span class="token-color-card__hex">#ffffffc7</span>
+        <p class="token-color-card__desc">Use when contrast is needed on dark backgrounds for text that don't need to be the primary focus.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-success);"></span>
+        <span class="token-color-card__name">text-success</span>
+        <span class="token-color-card__var">--color-text-success</span>
+        <span class="token-color-card__hex">#248616</span>
+        <p class="token-color-card__desc">Default text color for success messages.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-tertiary);"></span>
+        <span class="token-color-card__name">text-tertiary</span>
+        <span class="token-color-card__var">--color-text-tertiary</span>
+        <span class="token-color-card__hex">#737373</span>
+        <p class="token-color-card__desc">Medium Emphasis and hint text for dark text on white background. Is used for text that has to be presented in the interface but not need to be the primary fo...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-text-tertiary-inverted);"></span>
+        <span class="token-color-card__name">text-tertiary-inverted</span>
+        <span class="token-color-card__var">--color-text-tertiary-inverted</span>
+        <span class="token-color-card__hex">#999999</span>
+        <p class="token-color-card__desc">Use when contrast is needed on dark backgrounds for text with lesser focus.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="token-group">
+    <h3 class="token-group__title">Background <span class="token-group__count">(2)</span></h3>
+    <div class="token-color-grid">
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-background-primary);"></span>
+        <span class="token-color-card__name">background-primary</span>
+        <span class="token-color-card__var">--color-background-primary</span>
+        <span class="token-color-card__hex">#ffffff</span>
+        <p class="token-color-card__desc">Default application background color for Alligo E-com. Should be set to either html or body element.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-background-secondary);"></span>
+        <span class="token-color-card__name">background-secondary</span>
+        <span class="token-color-card__var">--color-background-secondary</span>
+        <span class="token-color-card__hex">#f6f6f6</span>
+        <p class="token-color-card__desc">Application background color for Alligo E-com. Default background color when on My Pages. Should be set to either html or body element.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="token-group">
+    <h3 class="token-group__title">Surface <span class="token-group__count">(38)</span></h3>
+    <div class="token-color-grid">
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-02);"></span>
+        <span class="token-color-card__name">surface-02</span>
+        <span class="token-color-card__var">--color-surface-02</span>
+        <span class="token-color-card__hex">#fafafa</span>
+        <p class="token-color-card__desc">Raised surface color for Alligo E-com. Use this when you need to use a solid background on a default surface as a separator instead of for example borders. U...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-05);"></span>
+        <span class="token-color-card__name">surface-05</span>
+        <span class="token-color-card__var">--color-surface-05</span>
+        <span class="token-color-card__hex">#f6f6f6</span>
+        <p class="token-color-card__desc">Raised surface color for Alligo E-com. Used for the neutral weak Basic badge state/color and the Product badge.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-10);"></span>
+        <span class="token-color-card__name">surface-10</span>
+        <span class="token-color-card__var">--color-surface-10</span>
+        <span class="token-color-card__hex">#e5e5e5</span>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-100);"></span>
+        <span class="token-color-card__name">surface-100</span>
+        <span class="token-color-card__var">--color-surface-100</span>
+        <span class="token-color-card__hex">#000000</span>
+        <p class="token-color-card__desc">Used for Footer surface Used for Header color, Badge surface color, Link Tile Black, Tooltip.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-15);"></span>
+        <span class="token-color-card__name">surface-15</span>
+        <span class="token-color-card__var">--color-surface-15</span>
+        <span class="token-color-card__hex">#dad9d7</span>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-20);"></span>
+        <span class="token-color-card__name">surface-20</span>
+        <span class="token-color-card__var">--color-surface-20</span>
+        <span class="token-color-card__hex">#cccccc</span>
+        <p class="token-color-card__desc">Raised surface color for Alligo E-com. Use this when you need to use a lighter solid surface. Used for the neutral weak Basic badge state/color. Used for Ste...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-30);"></span>
+        <span class="token-color-card__name">surface-30</span>
+        <span class="token-color-card__var">--color-surface-30</span>
+        <span class="token-color-card__hex">#b2b2b2</span>
+        <p class="token-color-card__desc">Used for vertical scrollbar handle.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-40);"></span>
+        <span class="token-color-card__name">surface-40</span>
+        <span class="token-color-card__var">--color-surface-40</span>
+        <span class="token-color-card__hex">#939595</span>
+        <p class="token-color-card__desc">Raised surface color for Alligo E-com. Used for Stepper steps.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-50);"></span>
+        <span class="token-color-card__name">surface-50</span>
+        <span class="token-color-card__var">--color-surface-50</span>
+        <span class="token-color-card__hex">#737373</span>
+        <p class="token-color-card__desc">Default neutral color. Raised surface color for Alligo E-com. Use this when you need to use a lighter solid surface with strong emphasis. Used for the neutra...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-60);"></span>
+        <span class="token-color-card__name">surface-60</span>
+        <span class="token-color-card__var">--color-surface-60</span>
+        <span class="token-color-card__hex">#595959</span>
+        <p class="token-color-card__desc">Raised surface color for Alligo E-com. Used for Stepper steps.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-70);"></span>
+        <span class="token-color-card__name">surface-70</span>
+        <span class="token-color-card__var">--color-surface-70</span>
+        <span class="token-color-card__hex">#4f4f4f</span>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-80);"></span>
+        <span class="token-color-card__name">surface-80</span>
+        <span class="token-color-card__var">--color-surface-80</span>
+        <span class="token-color-card__hex">#333333</span>
+        <p class="token-color-card__desc">Used for Footer trustmarks.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-90);"></span>
+        <span class="token-color-card__name">surface-90</span>
+        <span class="token-color-card__var">--color-surface-90</span>
+        <span class="token-color-card__hex">#222222</span>
+        <p class="token-color-card__desc">Used for Footer trustmarks.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-action-1);"></span>
+        <span class="token-color-card__name">surface-action-1</span>
+        <span class="token-color-card__var">--color-surface-action-1</span>
+        <span class="token-color-card__hex">#000000</span>
+        <p class="token-color-card__desc">Default action color. Used for the Primary button.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-action-2);"></span>
+        <span class="token-color-card__name">surface-action-2</span>
+        <span class="token-color-card__var">--color-surface-action-2</span>
+        <span class="token-color-card__hex">#ffffff</span>
+        <p class="token-color-card__desc">Secondary action color. Used for the Primary Inverted button. Used for the Tag component.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-danger-default);"></span>
+        <span class="token-color-card__name">surface-danger-default</span>
+        <span class="token-color-card__var">--color-surface-danger-default</span>
+        <span class="token-color-card__hex">#d90000</span>
+        <p class="token-color-card__desc">Default Danger status coloer: Red is mainly used for messages and in error states. Also to draw attention to important information that needs to be attended ...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-danger-weak);"></span>
+        <span class="token-color-card__name">surface-danger-weak</span>
+        <span class="token-color-card__var">--color-surface-danger-weak</span>
+        <span class="token-color-card__hex">#ffbdc0</span>
+        <p class="token-color-card__desc">Weak danger status color: Used to communicate problems that have to be resolved so that user can continue forward. Used mainly as background for short concis...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-danger-weaker);"></span>
+        <span class="token-color-card__name">surface-danger-weaker</span>
+        <span class="token-color-card__var">--color-surface-danger-weaker</span>
+        <span class="token-color-card__hex">#ffebeb</span>
+        <p class="token-color-card__desc">Danger - Light: Used to communicate problems that have to be resolved so that user can continue forward. Is mainly used for messages and in error states. Thi...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-disabled);"></span>
+        <span class="token-color-card__name">surface-disabled</span>
+        <span class="token-color-card__var">--color-surface-disabled</span>
+        <span class="token-color-card__hex">#e5e5e5</span>
+        <p class="token-color-card__desc">Default disabled surface color for Allego E-com. Used for horizontal scroll trackbar.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-information-default);"></span>
+        <span class="token-color-card__name">surface-information-default</span>
+        <span class="token-color-card__var">--color-surface-information-default</span>
+        <span class="token-color-card__hex">#0066ff</span>
+        <p class="token-color-card__desc">Default Info status color. Blue is used to reenforce a message when it needs to be sharp and clear and at the same time, making it bold and optimistic. Can b...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-information-weak);"></span>
+        <span class="token-color-card__name">surface-information-weak</span>
+        <span class="token-color-card__var">--color-surface-information-weak</span>
+        <span class="token-color-card__hex">#d0e9ff</span>
+        <p class="token-color-card__desc">Weak info status color: Used mainly as background for short concise messages to emphasise medium level. For example to communicate medium emphasis in context...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-information-weaker);"></span>
+        <span class="token-color-card__name">surface-information-weaker</span>
+        <span class="token-color-card__var">--color-surface-information-weaker</span>
+        <span class="token-color-card__hex">#e2f1ff</span>
+        <p class="token-color-card__desc">Weaker info status color: used mostly as background for text and messages. Can be used to implicate authentication connectivity and/or progress or to convey ...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-navigation-hover);"></span>
+        <span class="token-color-card__name">surface-navigation-hover</span>
+        <span class="token-color-card__var">--color-surface-navigation-hover</span>
+        <span class="token-color-card__hex">#fafafa</span>
+        <p class="token-color-card__desc">Default hover color for drawer navigation or component action (drawer-link).</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-opacity-black-05);"></span>
+        <span class="token-color-card__name">surface-opacity-black-05</span>
+        <span class="token-color-card__var">--color-surface-opacity-black-05</span>
+        <span class="token-color-card__hex">#0000000d</span>
+        <p class="token-color-card__desc">Hover surface for Blank & Secondary button</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-opacity-black-10);"></span>
+        <span class="token-color-card__name">surface-opacity-black-10</span>
+        <span class="token-color-card__var">--color-surface-opacity-black-10</span>
+        <span class="token-color-card__hex">#0000001a</span>
+        <p class="token-color-card__desc">Used for the Tag component.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-opacity-black-12);"></span>
+        <span class="token-color-card__name">surface-opacity-black-12</span>
+        <span class="token-color-card__var">--color-surface-opacity-black-12</span>
+        <span class="token-color-card__hex">#0000001f</span>
+        <p class="token-color-card__desc">Hover surface for Primary Inverted, System Enabled & System.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-opacity-black-20);"></span>
+        <span class="token-color-card__name">surface-opacity-black-20</span>
+        <span class="token-color-card__var">--color-surface-opacity-black-20</span>
+        <span class="token-color-card__hex">#00000033</span>
+        <p class="token-color-card__desc">Used for Overlay on Cards.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-opacity-black-50);"></span>
+        <span class="token-color-card__name">surface-opacity-black-50</span>
+        <span class="token-color-card__var">--color-surface-opacity-black-50</span>
+        <span class="token-color-card__hex">#00000080</span>
+        <p class="token-color-card__desc">Used for Overlay on Cards.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-opacity-white-0);"></span>
+        <span class="token-color-card__name">surface-opacity-white-0</span>
+        <span class="token-color-card__var">--color-surface-opacity-white-0</span>
+        <span class="token-color-card__hex">#ffffff00</span>
+        <p class="token-color-card__desc">Surface 0 opacity color. Used for the buttons: Secondary, Secondary Inverted, Blank, Blank Inverted & System.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-opacity-white-20);"></span>
+        <span class="token-color-card__name">surface-opacity-white-20</span>
+        <span class="token-color-card__var">--color-surface-opacity-white-20</span>
+        <span class="token-color-card__hex">#ffffff33</span>
+        <p class="token-color-card__desc">Hover surface for Primary button, System Enabled & System.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-raised-primary);"></span>
+        <span class="token-color-card__name">surface-raised-primary</span>
+        <span class="token-color-card__var">--color-surface-raised-primary</span>
+        <span class="token-color-card__hex">#ffffff</span>
+        <p class="token-color-card__desc">Default application surface color for Alligo E-com. Use this for e.g. card backgrounds.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-raised-secondary);"></span>
+        <span class="token-color-card__name">surface-raised-secondary</span>
+        <span class="token-color-card__var">--color-surface-raised-secondary</span>
+        <span class="token-color-card__hex">#f6f6f6</span>
+        <p class="token-color-card__desc">Default raised surface color for Alligo E-com. Use this when you need to separate a specific layer from the surface color.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-success-default);"></span>
+        <span class="token-color-card__name">surface-success-default</span>
+        <span class="token-color-card__var">--color-surface-success-default</span>
+        <span class="token-color-card__hex">#248616</span>
+        <p class="token-color-card__desc">Default Success status color: Green indicates success. May be used together with form validation and positive feedback. For example, you might show a success...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-success-weak);"></span>
+        <span class="token-color-card__name">surface-success-weak</span>
+        <span class="token-color-card__var">--color-surface-success-weak</span>
+        <span class="token-color-card__hex">#daf6d0</span>
+        <p class="token-color-card__desc">Weak success status color: Indicates success, used mainly as background for short concise messages to emphasise medium level. For example to communicate medi...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-success-weaker);"></span>
+        <span class="token-color-card__name">surface-success-weaker</span>
+        <span class="token-color-card__var">--color-surface-success-weaker</span>
+        <span class="token-color-card__hex">#edffe7</span>
+        <p class="token-color-card__desc">Weaker success status color: Indicates success, used mostly as background for text and messages. For example together with form validation and positive feedb...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-warning-default);"></span>
+        <span class="token-color-card__name">surface-warning-default</span>
+        <span class="token-color-card__var">--color-surface-warning-default</span>
+        <span class="token-color-card__hex">#fac000</span>
+        <p class="token-color-card__desc">Default Warning status color: Used in order to display information that needs user's attention and may require further steps.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-warning-weak);"></span>
+        <span class="token-color-card__name">surface-warning-weak</span>
+        <span class="token-color-card__var">--color-surface-warning-weak</span>
+        <span class="token-color-card__hex">#ffe167</span>
+        <p class="token-color-card__desc">Weak warning status color: Indicates warning, used mainly as background for short concise messages to emphasise medium level. For example to communicate medi...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-surface-warning-weaker);"></span>
+        <span class="token-color-card__name">surface-warning-weaker</span>
+        <span class="token-color-card__var">--color-surface-warning-weaker</span>
+        <span class="token-color-card__hex">#fff5c2</span>
+        <p class="token-color-card__desc">Weaker warning status color: Indicates a warning of some sort, used mostly as background for text and messages. For example to display information that needs...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="token-group">
+    <h3 class="token-group__title">Border <span class="token-group__count">(23)</span></h3>
+    <div class="token-color-grid">
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-action-1);"></span>
+        <span class="token-color-card__name">border-action-1</span>
+        <span class="token-color-card__var">--color-border-action-1</span>
+        <span class="token-color-card__hex">#000000</span>
+        <p class="token-color-card__desc">Primary border action color.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-action-2);"></span>
+        <span class="token-color-card__name">border-action-2</span>
+        <span class="token-color-card__var">--color-border-action-2</span>
+        <span class="token-color-card__hex">#ffffff</span>
+        <p class="token-color-card__desc">Secondary border action color.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-action-3);"></span>
+        <span class="token-color-card__name">border-action-3</span>
+        <span class="token-color-card__var">--color-border-action-3</span>
+        <span class="token-color-card__hex">#0000001a</span>
+        <p class="token-color-card__desc">Border action color for system buttons.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-danger-default);"></span>
+        <span class="token-color-card__name">border-danger-default</span>
+        <span class="token-color-card__var">--color-border-danger-default</span>
+        <span class="token-color-card__hex">#d90000</span>
+        <p class="token-color-card__desc">Danger border color. Used for the strong danger notification 2px border style.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-danger-weak);"></span>
+        <span class="token-color-card__name">border-danger-weak</span>
+        <span class="token-color-card__var">--color-border-danger-weak</span>
+        <span class="token-color-card__hex">#ffbdc0</span>
+        <p class="token-color-card__desc">Danger border color. Used for the weak danger notification border style. Used for the danger badge border style.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-dark);"></span>
+        <span class="token-color-card__name">border-dark</span>
+        <span class="token-color-card__var">--color-border-dark</span>
+        <span class="token-color-card__hex">#333333</span>
+        <p class="token-color-card__desc">Border color when borders are dark or placed on surface black but with no need for prominent presence. Used as borders and dividers in the collapsible compon...</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-disabled);"></span>
+        <span class="token-color-card__name">border-disabled</span>
+        <span class="token-color-card__var">--color-border-disabled</span>
+        <span class="token-color-card__hex">#dad9d7</span>
+        <p class="token-color-card__desc">Default border disabled color for the UI. Used where applicable. Used on form elements.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-focus);"></span>
+        <span class="token-color-card__name">border-focus</span>
+        <span class="token-color-card__var">--color-border-focus</span>
+        <span class="token-color-card__hex">#455efb</span>
+        <p class="token-color-card__desc">Dedicated for the focus state only.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-hover);"></span>
+        <span class="token-color-card__name">border-hover</span>
+        <span class="token-color-card__var">--color-border-hover</span>
+        <span class="token-color-card__hex">#333333</span>
+        <p class="token-color-card__desc">Default border hover color for ADS. (Form items, Drawer size picker, Quantity picker, Boxed drawer link, Tile Link Brand White, System buttons.)</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-information-default);"></span>
+        <span class="token-color-card__name">border-information-default</span>
+        <span class="token-color-card__var">--color-border-information-default</span>
+        <span class="token-color-card__hex">#0066ff</span>
+        <p class="token-color-card__desc">Info border color. Used for the strong info notification 2px border style.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-information-weak);"></span>
+        <span class="token-color-card__name">border-information-weak</span>
+        <span class="token-color-card__var">--color-border-information-weak</span>
+        <span class="token-color-card__hex">#d0e9ff</span>
+        <p class="token-color-card__desc">Info border color. Used for the strong info notification border style. Used for the info badge border style.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-input-control-default);"></span>
+        <span class="token-color-card__name">border-input-control-default</span>
+        <span class="token-color-card__var">--color-border-input-control-default</span>
+        <span class="token-color-card__hex">#737373</span>
+        <p class="token-color-card__desc">Default border color for for input controls. Checkbox & radiobutton, toggles, input steppers, sliders, etc.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-input-default);"></span>
+        <span class="token-color-card__name">border-input-default</span>
+        <span class="token-color-card__var">--color-border-input-default</span>
+        <span class="token-color-card__hex">#939595</span>
+        <p class="token-color-card__desc">Default border color for for input components (text fields, select, date picker, search, auto-suggest, text area etc)</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-primary);"></span>
+        <span class="token-color-card__name">border-primary</span>
+        <span class="token-color-card__var">--color-border-primary</span>
+        <span class="token-color-card__hex">#e5e5e5</span>
+        <p class="token-color-card__desc">Default border color for Allego E-com.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-secondary);"></span>
+        <span class="token-color-card__name">border-secondary</span>
+        <span class="token-color-card__var">--color-border-secondary</span>
+        <span class="token-color-card__hex">#f6f6f6</span>
+        <p class="token-color-card__desc">Border color when the border must be less prominent but still needs a presence in the UI.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-selected);"></span>
+        <span class="token-color-card__name">border-selected</span>
+        <span class="token-color-card__var">--color-border-selected</span>
+        <span class="token-color-card__hex">#000000</span>
+        <p class="token-color-card__desc">Border color for Items in the UI that uses a selected state. Used for selected Form items, Drawer size picker, Quantity picker, Boxed drawer link.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-selected-hover);"></span>
+        <span class="token-color-card__name">border-selected-hover</span>
+        <span class="token-color-card__var">--color-border-selected-hover</span>
+        <span class="token-color-card__hex">#737373</span>
+        <p class="token-color-card__desc">Border color for selected items in the UI that uses a selected state. Used for selected form control items.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-selected-weaker);"></span>
+        <span class="token-color-card__name">border-selected-weaker</span>
+        <span class="token-color-card__var">--color-border-selected-weaker</span>
+        <span class="token-color-card__hex">#cccccc</span>
+        <p class="token-color-card__desc">Border color for the selected product card state and corresponding variant table on the PLP. Used on Stepper steps.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-success-default);"></span>
+        <span class="token-color-card__name">border-success-default</span>
+        <span class="token-color-card__var">--color-border-success-default</span>
+        <span class="token-color-card__hex">#248616</span>
+        <p class="token-color-card__desc">Success border color. Used for the strong success notification 2px border style.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-success-weak);"></span>
+        <span class="token-color-card__name">border-success-weak</span>
+        <span class="token-color-card__var">--color-border-success-weak</span>
+        <span class="token-color-card__hex">#daf6d0</span>
+        <p class="token-color-card__desc">Success border color. Used for the weak success notification border style. Used for the success badge border style.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-tertiary);"></span>
+        <span class="token-color-card__name">border-tertiary</span>
+        <span class="token-color-card__var">--color-border-tertiary</span>
+        <span class="token-color-card__hex">#dad9d7</span>
+        <p class="token-color-card__desc">Border color when elements needs to be separated by shorter/smaller borders. For example sizes and values placed horizontally.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-warning-default);"></span>
+        <span class="token-color-card__name">border-warning-default</span>
+        <span class="token-color-card__var">--color-border-warning-default</span>
+        <span class="token-color-card__hex">#fac000</span>
+        <p class="token-color-card__desc">Warning border color. Used for the strong warning notification 2px border style.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-border-warning-weak);"></span>
+        <span class="token-color-card__name">border-warning-weak</span>
+        <span class="token-color-card__var">--color-border-warning-weak</span>
+        <span class="token-color-card__hex">#ffe167</span>
+        <p class="token-color-card__desc">Warning border color. Used for the weak warning notification border style. Used for the warning badge border style.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="token-group">
+    <h3 class="token-group__title">Icon <span class="token-group__count">(2)</span></h3>
+    <div class="token-color-grid">
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-icon-inverted);"></span>
+        <span class="token-color-card__name">icon-inverted</span>
+        <span class="token-color-card__var">--color-icon-inverted</span>
+        <span class="token-color-card__hex">#ffffff</span>
+        <p class="token-color-card__desc">Used as primary Icon color on dark surfaces.</p>
+      </div>
+      <div class="token-color-card">
+        <span class="token-color-card__swatch" style="background: var(--color-icon-primary);"></span>
+        <span class="token-color-card__name">icon-primary</span>
+        <span class="token-color-card__var">--color-icon-primary</span>
+        <span class="token-color-card__hex">#000000</span>
+        <p class="token-color-card__desc">Used as primary Icon color.</p>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/footer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <div class="nav-more__menu" id="nav-more-menu" hidden></div>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/main-menu.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    document.addEventListener('keydown', (e) => { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+    document.addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
+    document.addEventListener('touchstart', () => document.body.classList.remove('keyboard-nav'), { passive: true });
+  </script>
+</body>
+</html>
