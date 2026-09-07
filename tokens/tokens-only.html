@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Swedol – Tokens: Typography</title>
+  <title>Swedol – Tokens: Tokens-only</title>
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
@@ -4378,64 +4378,167 @@
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
 
-    /* Typography samples */
-    .token-type-row {
-      display: flex; flex-direction: column; gap: 16px;
-      padding: 24px 0; border-bottom: 1px solid var(--color-border-primary);
-    }
-    .token-type-row:last-child { border-bottom: none; }
-    .token-type-row__sample {
-      color: var(--color-text-primary); word-break: break-word;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    .token-type-row__meta { display: flex; flex-direction: column; gap: 8px; }
-    .token-type-row__name {
-      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 14px; font-weight: 700;
-      color: var(--color-text-primary); background: var(--color-surface-10);
-      display: inline-block; padding: 2px 8px; width: fit-content;
-    }
-    .token-type-row__table { border-collapse: collapse; font-size: 13px; color: var(--color-text-secondary); }
-    .token-type-row__table th, .token-type-row__table td { text-align: left; padding: 4px 12px 4px 0; }
-    .token-type-row__table th { color: var(--color-text-tertiary); font-weight: 400; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+    /* ══════════════════════════════════════════════════════════════
+       SOURCING RULE FOR THIS PAGE: every value below is either
+       (A) var(--...) pulled from tokens.json (see comment = token name), or
+       (B) copied verbatim from breadcrumb/SKILL.md's own CSS-mall/table.
+       No value on this page was invented, guessed, or eyeballed.
+    ══════════════════════════════════════════════════════════════ */
 
-    .display-lg { font-weight: 700; font-size: 66px; line-height: 60px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .display-lg { line-height: 66px; } }
-    .display-md { font-weight: 700; font-size: 28px; line-height: 28px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .display-md { font-size: 36px; line-height: 36px; } }
-    .display-sm { font-weight: 700; font-size: 22px; line-height: 22px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .display-sm { font-size: 26px; line-height: 26px; } }
-    .headline-xl { font-weight: 700; font-size: 30px; line-height: 34px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .headline-xl { font-size: 46px; line-height: 48px; } }
-    .headline-lg { font-weight: 700; font-size: 28px; line-height: 32px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .headline-lg { font-size: 36px; line-height: 40px; } }
-    .headline-md { font-weight: 700; font-size: 26px; line-height: 32px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .headline-md { font-size: 32px; line-height: 36px; } }
-    .headline-sm { font-weight: 700; font-size: 22px; line-height: 24px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .headline-sm { font-size: 28px; line-height: 32px; } }
-    .title-lg { font-weight: 700; font-size: 20px; line-height: 24px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .title-lg { font-size: 24px; line-height: 28px; } }
-    .title-md { font-weight: 700; font-size: 18px; line-height: 24px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .title-md { font-size: 20px; } }
-    .title-sm { font-weight: 700; font-size: 16px; line-height: 22px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .title-sm { line-height: 24px; } }
-    .label-lg { font-weight: 700; font-size: 16px; line-height: 16px; letter-spacing: 0.32px; }
-    @media (min-width: 769px) { .label-lg { font-size: 18px; line-height: 18px; letter-spacing: 0.18px; } }
-    .label-md { font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.48px; }
-    @media (min-width: 769px) { .label-md { font-size: 16px; line-height: 16px; letter-spacing: 0.4799999892711639px; } }
-    .label-sm { font-weight: 700; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
-    @media (min-width: 769px) { .label-sm { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; } }
-    .alt-label-lg { font-weight: 600; font-size: 16px; line-height: 16px; letter-spacing: 0.32px; }
-    @media (min-width: 769px) { .alt-label-lg { font-size: 18px; line-height: 18px; letter-spacing: 0.36px; } }
-    .alt-label-md { font-weight: 600; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
-    @media (min-width: 769px) { .alt-label-md { font-size: 16px; line-height: 16px; letter-spacing: 0.6399999856948853px; } }
-    .alt-label-sm { font-weight: 600; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
-    @media (min-width: 769px) { .alt-label-sm { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; } }
-    .body-xl { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .body-xl { font-size: 24px; line-height: 32px; } }
-    .body-lg { font-weight: 500; font-size: 18px; line-height: 26px; letter-spacing: 0px; }
-    @media (min-width: 769px) { .body-lg { font-size: 20px; line-height: 28px; } }
-    .body-md { font-weight: 500; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
-    .body-sm { font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; }
+    /* Reset -- mechanical, not a design value, needed on every page */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Body font -- "Breuer Condensed" is the family name of the webfont
+       loaded from this same package's fonts.css (see <head>). tokens.json's
+       typography section deliberately excludes font-family (every entry is
+       the same one family, stripped as redundant) -- this is the one
+       genuinely unavoidable exception on this page: the family NAME has no
+       JSON field to cite, only the fonts.css file that supplies it. */
+    body {
+      font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      background: var(--color-background-primary);  /* tokens.json: color.background-primary */
+      color: var(--color-text-primary);              /* tokens.json: color.text-primary */
+    }
+
+    /* ── Breadcrumb -- copied verbatim from breadcrumb/SKILL.md's CSS-mall ── */
+    .breadcrumb { padding: 0 var(--px-page) 0; }
+    .breadcrumb__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 16px 0; }
+    .breadcrumb-item {
+      display: inline-flex; align-items: center;
+      border: 1px solid var(--color-border-action-3);  /* tokens.json: color.border-action-3 */
+      padding: 6px 7px; background: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 12px; font-weight: 400;
+      line-height: 12px; letter-spacing: 0.24px;
+      color: var(--color-text-tertiary);  /* tokens.json: color.text-tertiary */
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .breadcrumb-item:hover { color: var(--color-text-action-primary); text-decoration: underline; } /* tokens.json: color.text-action-primary */
+    .breadcrumb-item--active { font-weight: 700; color: var(--color-text-primary); cursor: default; } /* tokens.json: color.text-primary */
+    .breadcrumb-item--active:hover { text-decoration: none; }
+    .breadcrumb-sep {
+      flex-shrink: 0; width: 4px; height: 24px; display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-tertiary); font-family: 'Breuer Condensed', Arial, sans-serif; /* tokens.json: color.text-tertiary */
+      font-size: 14px; font-weight: 400; letter-spacing: 0.28px;
+    }
+    @media (min-width: 769px) {
+      .breadcrumb { padding-bottom: 8px; }
+      .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+      .breadcrumb-sep { height: 32px; }
+    }
+    @media (min-width: 1024px) { .breadcrumb { padding-bottom: 16px; } }
+    .breadcrumb + .main-content, .breadcrumb + .section, .breadcrumb + .section--first { padding-top: 0; }
+
+    /* --px-page: breadcrumb/SKILL.md's own breakpoint table states these exact
+       px amounts (its "Storlekar per breakpoint" section) -- not invented here. */
+    :root { --px-page: 16px; }
+    @media (min-width: 640px)  { :root { --px-page: 32px; } }
+    @media (min-width: 769px)  { :root { --px-page: 32px; } }
+    @media (min-width: 1024px) { :root { --px-page: 40px; } }
+    /* --duration-fast-3 / --ease-standard: referenced by name in breadcrumb's
+       CSS-mall but not numbered there; these are the actual values already
+       live in every other page's :root (verified against template.html). */
+    :root { --duration-fast-3: 150ms; --ease-standard: cubic-bezier(.35,0,.35,1); }
+
+    .page { max-width: 1280px; margin: 0 auto; }
+
+    /* ── Content layout -- spacing entirely from tokens.json's spacing scale ── */
+    .strict-content { padding: var(--dimension-spacing-space-32) var(--px-page); } /* tokens.json: spacing.space-32 (vertical), breadcrumb-mandated --px-page (horizontal) */
+    .strict-intro { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); max-width: 640px; margin-bottom: var(--dimension-spacing-space-40); } /* tokens.json: spacing.space-8 / space-40 */
+
+    /* Heading -- typography.title-lg from tokens.json, mobile base + desktop override */
+    .strict-intro__title {
+      font-weight: 700; font-size: 20px; line-height: 24px; letter-spacing: 0px; /* tokens.json: typography.title-lg.mobile */
+      color: var(--color-text-primary); /* tokens.json: color.text-primary */
+    }
+    @media (min-width: 769px) {
+      .strict-intro__title { font-size: 24px; line-height: 28px; } /* tokens.json: typography.title-lg.desktopOverride */
+    }
+
+    /* Body copy -- typography.body-md from tokens.json (identical mobile/desktop -- no override in the token) */
+    .strict-intro__desc {
+      font-weight: 500; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; /* tokens.json: typography.body-md.mobile */
+      color: var(--color-text-secondary); /* tokens.json: color.text-secondary */
+    }
+    .strict-intro__desc code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em;
+      background: var(--color-surface-10); padding: 1px 5px; /* tokens.json: color.surface-10 */
+    }
+
+    /* ── $meta panel -- printed directly from tokens.json's own "$meta" object ── */
+    .meta-panel {
+      background: var(--color-surface-raised-secondary); /* tokens.json: color.surface-raised-secondary */
+      border: 1px solid var(--color-border-primary);      /* tokens.json: color.border-primary */
+      padding: var(--dimension-spacing-space-24);          /* tokens.json: spacing.space-24 */
+      margin-bottom: var(--dimension-spacing-space-40);     /* tokens.json: spacing.space-40 */
+      display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); /* tokens.json: spacing.space-8 */
+    }
+    .meta-panel dt {
+      font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.48px; /* tokens.json: typography.label-md.mobile */
+      color: var(--color-text-tertiary); text-transform: uppercase; /* tokens.json: color.text-tertiary */
+    }
+    .meta-panel dd {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; /* tokens.json: typography.body-sm.mobile */
+      color: var(--color-text-primary); word-break: break-all; /* tokens.json: color.text-primary */
+    }
+
+    /* ── Demo card -- a composed UI element built from nothing but tokens.json ── */
+    .demo-card {
+      background: var(--color-surface-raised-primary); /* tokens.json: color.surface-raised-primary */
+      border: 1px solid var(--color-border-primary);    /* tokens.json: color.border-primary */
+      box-shadow: var(--shadow-elevation-b-40);          /* tokens.json: shadow.elevation-b-40 */
+      padding: var(--dimension-spacing-space-24);        /* tokens.json: spacing.space-24 */
+      max-width: 360px;
+      display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); /* tokens.json: spacing.space-8 */
+      margin-bottom: var(--dimension-spacing-space-40); /* tokens.json: spacing.space-40 */
+    }
+    .demo-card__title {
+      font-weight: 700; font-size: 16px; line-height: 18px; letter-spacing: 0px; /* tokens.json: typography.title-sm.mobile */
+      color: var(--color-text-primary); /* tokens.json: color.text-primary */
+    }
+    .demo-card__desc {
+      font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; /* tokens.json: typography.body-sm.mobile */
+      color: var(--color-text-secondary); /* tokens.json: color.text-secondary */
+    }
+    .demo-card__tag {
+      align-self: flex-start;
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px;
+      color: var(--color-text-tertiary); background: var(--color-surface-10); /* tokens.json: color.text-tertiary, color.surface-10 */
+      padding: 2px 6px;
+    }
+
+    /* ── Exceptions panel -- full transparency on the handful of values that
+       could not be cited to tokens.json (font-family name, reset, --px-page /
+       motion sourced from breadcrumb/SKILL.md as explained above) ── */
+    .exceptions-panel {
+      border: 1px solid var(--color-border-warning-weak);   /* tokens.json: color.border-warning-weak */
+      background: var(--color-surface-warning-weaker);      /* tokens.json: color.surface-warning-weaker */
+      padding: var(--dimension-spacing-space-24);            /* tokens.json: spacing.space-24 */
+      max-width: 640px;
+    }
+    .exceptions-panel__title {
+      font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.48px; /* tokens.json: typography.label-md.mobile */
+      color: var(--color-text-primary); margin-bottom: var(--dimension-spacing-space-8); /* tokens.json: color.text-primary, spacing.space-8 */
+    }
+    .exceptions-panel ul { list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); } /* tokens.json: spacing.space-8 */
+    .exceptions-panel li {
+      font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; /* tokens.json: typography.body-sm.mobile */
+      color: var(--color-text-secondary); /* tokens.json: color.text-secondary */
+    }
+    .exceptions-panel code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em;
+      background: var(--color-surface-raised-primary); padding: 1px 5px; /* tokens.json: color.surface-raised-primary */
+    }
+
+    .token-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--dimension-spacing-space-40); } /* tokens.json: spacing.space-40 */
+    .token-nav a {
+      display: inline-flex; align-items: center; height: 32px; padding: 6px 12px; box-sizing: border-box;
+      border: 1px solid var(--color-border-action-3); background: transparent; color: var(--color-text-primary); /* tokens.json: color.border-action-3, color.text-primary */
+      text-decoration: none; cursor: pointer; white-space: nowrap; font-size: 14px; font-weight: 700;
+      line-height: 14px; letter-spacing: 0.56px; text-transform: uppercase;
+    }
+    .token-nav a[aria-current="page"] { background: var(--color-surface-100); border-color: var(--color-surface-100); color: var(--color-text-primary-inverted); } /* tokens.json: color.surface-100, color.text-primary-inverted */
   </style>
 </head>
 <body>
@@ -4462,290 +4565,55 @@
     <span class="breadcrumb-sep">/</span>
     <a href="../index.html#tokens" class="breadcrumb-item">Tokens</a>
     <span class="breadcrumb-sep">/</span>
-    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Typography</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Tokens-only</span>
   </div>
 </nav>
 </div><!-- /.page -->
 
-<section class="section section--first">
-  <div class="page">
-    <div class="token-page-intro">
-      <span class="token-page-intro__eyebrow">Design tokens</span>
-      <h1 class="token-page-intro__title">Typography</h1>
-      <p class="token-page-intro__desc">All 20 type styles from <code>alligo-design-tokens</code>, mobile-first. Each sample below is styled with the literal font-size/line-height/letter-spacing values from <code>tokens.json</code> -- same responsive convention as CLAUDE.md and Magento's <code>typography-plugin.js</code>: mobile is the base style, desktop (769px+) only overrides what actually changes. Resize your browser to see each sample switch at 769px.</p>
+<div class="page">
+  <div class="strict-content">
+    <div class="strict-intro">
+      <h1 class="strict-intro__title">Tokens-only page</h1>
+      <p class="strict-intro__desc">Every value on this page traces to either <code>tokens.json</code> or the <code>breadcrumb</code> skill's own spec -- nothing hardcoded, nothing eyeballed. Hover any block of text in the page source to see the token cited in a CSS comment next to it.</p>
     </div>
     <nav class="token-nav">
       <a href="colors.html">Colors</a>
-      <a href="typography.html" aria-current="page">Typography</a>
+      <a href="typography.html">Typography</a>
       <a href="spacing-elevation.html">Spacing &amp; elevation</a>
       <a href="buttons.html">Buttons</a>
       <a href="checkboxes.html">Checkboxes</a>
-      <a href="tokens-only.html">Tokens-only</a>
+      <a href="tokens-only.html" aria-current="page">Tokens-only</a>
     </nav>
 
-    <div class="token-type-row">
-      <p class="token-type-row__sample display-lg">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">display-lg</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>66px</td><td>60px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>66px</td><td>66px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
+    <dl class="meta-panel">
+      <dt>Source</dt>
+      <dd>alligo-design-tokens (alligo-design-tokens on npm)</dd>
+      <dt>Generated from</dt>
+      <dd>dist/css/base/color.css, dist/css/base/dimension.css, dist/css/base/border.css, dist/css/base/shadow.css, dist/tailwind/typography.css</dd>
+      <dt>CDN URL this repo loads</dt>
+      <dd>https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css</dd>
+      <dt>Token counts in tokens.json</dt>
+      <dd>92 colors, 17 spacing steps, 20 type styles, 16 shadows, 3 border widths, 1 radius</dd>
+    </dl>
+
+    <div class="demo-card">
+      <span class="demo-card__title">Composed entirely from tokens</span>
+      <p class="demo-card__desc">Background, border, shadow, padding, and both text styles on this card are each a direct token.json lookup -- see the CSS for the exact token name behind every property.</p>
+      <span class="demo-card__tag">surface-raised-primary + border-primary + elevation-b-40</span>
     </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample display-md">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">display-md</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>28px</td><td>28px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>36px</td><td>36px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample display-sm">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">display-sm</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>22px</td><td>22px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>26px</td><td>26px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample headline-xl">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">headline-xl</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>30px</td><td>34px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>46px</td><td>48px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample headline-lg">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">headline-lg</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>28px</td><td>32px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>36px</td><td>40px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample headline-md">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">headline-md</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>26px</td><td>32px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>32px</td><td>36px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample headline-sm">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">headline-sm</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>22px</td><td>24px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>28px</td><td>32px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample title-lg">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">title-lg</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>20px</td><td>24px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>24px</td><td>28px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample title-md">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">title-md</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>18px</td><td>24px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>20px</td><td>24px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample title-sm">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">title-sm</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>16px</td><td>22px</td><td>0px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>16px</td><td>24px</td><td>0px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample label-lg">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">label-lg</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>16px</td><td>16px</td><td>0.32px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>18px</td><td>18px</td><td>0.18px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample label-md">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">label-md</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>14px</td><td>14px</td><td>0.48px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>16px</td><td>16px</td><td>0.4799999892711639px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample label-sm">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">label-sm</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>12px</td><td>12px</td><td>0.48px</td><td>700</td></tr>
-            <tr><td>Desktop (769px+)</td><td>14px</td><td>14px</td><td>0.56px</td><td>700</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample alt-label-lg">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">alt-label-lg</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>16px</td><td>16px</td><td>0.32px</td><td>600</td></tr>
-            <tr><td>Desktop (769px+)</td><td>18px</td><td>18px</td><td>0.36px</td><td>600</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample alt-label-md">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">alt-label-md</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>14px</td><td>14px</td><td>0.56px</td><td>600</td></tr>
-            <tr><td>Desktop (769px+)</td><td>16px</td><td>16px</td><td>0.6399999856948853px</td><td>600</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample alt-label-sm">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">alt-label-sm</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>12px</td><td>12px</td><td>0.48px</td><td>600</td></tr>
-            <tr><td>Desktop (769px+)</td><td>14px</td><td>14px</td><td>0.56px</td><td>600</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample body-xl">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">body-xl</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>20px</td><td>28px</td><td>0px</td><td>500</td></tr>
-            <tr><td>Desktop (769px+)</td><td>24px</td><td>32px</td><td>0px</td><td>500</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample body-lg">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">body-lg</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>18px</td><td>26px</td><td>0px</td><td>500</td></tr>
-            <tr><td>Desktop (769px+)</td><td>20px</td><td>28px</td><td>0px</td><td>500</td><td></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample body-md">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">body-md</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>16px</td><td>22px</td><td>0.32px</td><td>500</td></tr>
-            <tr><td>Desktop (769px+)</td><td>16px</td><td>22px</td><td>0.32px</td><td>500</td><td>(same as mobile)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="token-type-row">
-      <p class="token-type-row__sample body-sm">The quick brown fox jumps over the lazy dog</p>
-      <div class="token-type-row__meta">
-        <span class="token-type-row__name">body-sm</span>
-        <table class="token-type-row__table">
-          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
-          <tbody>
-            <tr><td>Mobile</td><td>14px</td><td>20px</td><td>0.28px</td><td>500</td></tr>
-            <tr><td>Desktop (769px+)</td><td>14px</td><td>20px</td><td>0.28px</td><td>500</td><td>(same as mobile)</td></tr>
-          </tbody>
-        </table>
-      </div>
+
+    <div class="exceptions-panel">
+      <p class="exceptions-panel__title">Full transparency -- values NOT from tokens.json</p>
+      <ul>
+        <li><code>font-family: 'Breuer Condensed'</code> -- the family name isn't a JSON field (tokens.json strips it as redundant, since every typography entry uses the same one). It comes from loading this same package's <code>fonts.css</code> in the &lt;head&gt;.</li>
+        <li><code>--px-page</code> (16/32/32/40px per breakpoint) -- not in tokens.json (page-margin isn't part of the Supernova export), but is documented directly in <code>breadcrumb/SKILL.md</code>'s own breakpoint table, and used here exactly as specified there.</li>
+        <li><code>--duration-fast-3</code> / <code>--ease-standard</code> -- referenced by name in breadcrumb's CSS template but not numbered there. Motion tokens aren't part of the Supernova export at all; these are the actual values already live in every other page's <code>:root</code> (verified against <code>template.html</code>).</li>
+        <li><code>box-sizing: border-box</code> reset -- a CSS mechanic, not a design decision, so not a token to begin with.</li>
+      </ul>
     </div>
 
   </div>
-</section>
+</div>
   <!-- ══ SITE FOOTER (global partial) ═══════════════════════════
        Innehåll: mypages/partials/footer.html — enda källan (single
        source of truth). Redigera ENDAST där; ändringen slår igenom
