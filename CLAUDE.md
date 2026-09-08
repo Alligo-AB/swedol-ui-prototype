@@ -91,6 +91,12 @@ Skriv **alltid** mobilstilen först (utan prefix), bygg sedan upp med `sm:`, `md
 
 Varje komponent i ECO Design System är en egen skill under `.claude/skills/<namn>/SKILL.md`. De laddas automatiskt när de behövs — t.ex. laddas bara knapp-specen (`.claude/skills/button/`) när du faktiskt bygger en knapp — så håll den här filen tunn och lägg aldrig tillbaka komponentspecifika CSS-mallar här.
 
+**Innan du bygger något nytt**
+
+| Skill | Används när |
+|---|---|
+| `prototype-guide` | Startpunkten för ALLT skapande arbete — ny prototyp, sida, produkt-/tjänstesida, UI/UX-flöde eller funktionalitet för Swedol, oavsett om uppdraget utgår från en Figma-prototyp, en brainstorm eller en spec. Knyter ihop generell webbdesign-kvalitet (hierarki, layout, mikroanimation, strukturerad kritik) och inspirationsreferenser (t.ex. Mobbin — struktur, aldrig stil) med ECO Design System-reglerna och styr in i rätt komponent-skills nedan. Läs denna FÖRST. |
+
 **Grundtokens**
 
 | Skill | Används när |
