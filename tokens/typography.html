@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Swedol – Prototyp: Sidöversikt</title>
+  <title>Swedol – Tokens: Typography</title>
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
@@ -220,11 +220,6 @@
       max-width: 1280px;
       margin: 0 auto;
     }
-    /* .page används INTE på den här sidan (ingen breadcrumb att slå in) —
-       .section-blocken nedan är fullbreddsblock precis som på övriga sidor
-       (se CLAUDE.md Section: "modulärt, återanvändbart fullbreddsblock"),
-       med bakgrundsfärgen ända ut till skärmkanten. De centrerar sitt eget
-       innehåll via --px-full (samma --max-w: 1200px som t.ex. users.html). */
 
     /* ══════════════════════════════════════════════════════════
        SECTION — ECO Design System
@@ -256,189 +251,6 @@
     }
     @media (min-width: 1281px) { /* xl */
       .section--first { padding-top: 48px; }
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       SITE INDEX — intern prototyp-sidöversikt (ej ECO-komponent)
-    ══════════════════════════════════════════════════════════ */
-    .site-index-intro {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .site-index-intro__eyebrow {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.56px;
-      text-transform: uppercase;
-      color: var(--color-text-tertiary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    .site-index-intro__title {
-      font-size: 28px;               /* headline-lg, mobil */
-      font-weight: 700;
-      line-height: 32px;
-      color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    @media (min-width: 769px) {
-      .site-index-intro__title { font-size: 36px; line-height: 40px; } /* headline-lg, desktop */
-    }
-    .site-index-intro__desc {
-      font-size: 18px;               /* body-lg, mobil */
-      font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0px;
-      color: var(--color-text-secondary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) {
-      .site-index-intro__desc { font-size: 20px; line-height: 28px; } /* body-lg, desktop */
-    }
-    .site-index-intro__desc code {
-      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-      font-size: 0.9em;
-      background: var(--color-surface-10);
-      padding: 1px 5px;
-    }
-
-    .site-index-section__head { margin-bottom: 24px; }
-    .site-index-section__title {
-      font-size: 20px;               /* title-lg, mobil */
-      font-weight: 700;
-      line-height: 24px;
-      color: var(--color-text-primary);
-      margin-bottom: 4px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    @media (min-width: 769px) {
-      .site-index-section__title { font-size: 24px; line-height: 28px; } /* title-lg, desktop */
-    }
-    .site-index-section__desc {
-      font-size: 16px;               /* body-md, mobil */
-      font-weight: 400;
-      line-height: 22px;
-      letter-spacing: 0.32px;
-      color: var(--color-text-tertiary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) {
-      .site-index-section__desc { line-height: 24px; } /* body-md, desktop */
-    }
-
-    .site-index-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    @media (min-width: 640px) {
-      .site-index-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1024px) {
-      .site-index-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    .site-index-card {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 20px;
-      border: 1px solid var(--color-border-primary);
-      background: var(--color-surface-raised-primary);
-      text-decoration: none;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .site-index-card:hover { border-color: var(--color-border-dark); }
-    .site-index-card__top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-    }
-    .site-index-card__tag-group {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .site-index-card__title {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 20px;
-      color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    /* Badge/Basic (ECO Design System, se CLAUDE.md ## Badge). Default = Neutral
-       Grey, Weaker, Medium, Sentence Case. Färgvarianter + Upper Case-modifier
-       nedan följer "Färgval — vanliga betydelser" i CLAUDE.md. */
-    .site-index-card__tag {
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      background: var(--color-surface-05);
-      border: 1px solid var(--color-border-primary);
-      padding: 4px 5px;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 14px;
-      letter-spacing: 0.56px;
-      color: var(--color-text-primary);
-      white-space: nowrap;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    /* Letter Case: Upper Case — för fasta kategorietiketter (Inloggad/Utloggad),
-       inte statusetiketter. */
-    .site-index-card__tag--uppercase {
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    /* Ny — nyskapad sida (Alert Success, Weaker) */
-    .site-index-card__tag--new {
-      background: var(--color-surface-success-weaker);
-      border-color: var(--color-border-success-weak);
-      color: var(--color-text-success);
-    }
-    /* Uppdaterad — befintlig sida med färska ändringar (Alert Info, Weaker) */
-    .site-index-card__tag--updated {
-      background: var(--color-surface-information-weaker);
-      border-color: var(--color-border-information-weak);
-      color: var(--color-text-information-default);
-    }
-    /* Pågående — ofärdigt arbete (Alert Warning, Weaker) */
-    .site-index-card__tag--wip {
-      background: var(--color-surface-warning-weaker);
-      border-color: var(--color-border-warning-weak);
-      color: var(--color-text-primary); /* ingen text-warning-default-token finns */
-    }
-    /* Klar för utveckling — prototyp redo att lämnas över till dev (Neutral Dark, Weaker) */
-    .site-index-card__tag--ready {
-      background: var(--color-surface-100);
-      border-color: var(--color-border-dark);
-      color: var(--color-text-primary-inverted);
-    }
-    .site-index-card__desc {
-      flex: 1;
-      font-size: 14px;
-      line-height: 20px;
-      color: var(--color-text-secondary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .site-index-card__desc code {
-      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-      font-size: 0.9em;
-      background: var(--color-surface-10);
-      padding: 1px 4px;
-    }
-    .site-index-card__path {
-      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-      font-size: 12px;
-      color: var(--color-text-tertiary);
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -2332,7 +2144,7 @@
     .fav-store-section {
       padding: 0 var(--px-page);
     }
-    .page-divider { padding: 0 var(--px-full); }
+    .page-divider { padding: 48px var(--px-full); }
     .page-divider__line { height: 1px; background: var(--color-border-primary); }
     .fav-store { display: flex; flex-direction: column; gap: 24px; }
     .fav-store__header { display: flex; flex-direction: column; gap: 8px; }
@@ -4566,6 +4378,64 @@
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
 
+    /* Typography samples */
+    .token-type-row {
+      display: flex; flex-direction: column; gap: 16px;
+      padding: 24px 0; border-bottom: 1px solid var(--color-border-primary);
+    }
+    .token-type-row:last-child { border-bottom: none; }
+    .token-type-row__sample {
+      color: var(--color-text-primary); word-break: break-word;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .token-type-row__meta { display: flex; flex-direction: column; gap: 8px; }
+    .token-type-row__name {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 14px; font-weight: 700;
+      color: var(--color-text-primary); background: var(--color-surface-10);
+      display: inline-block; padding: 2px 8px; width: fit-content;
+    }
+    .token-type-row__table { border-collapse: collapse; font-size: 13px; color: var(--color-text-secondary); }
+    .token-type-row__table th, .token-type-row__table td { text-align: left; padding: 4px 12px 4px 0; }
+    .token-type-row__table th { color: var(--color-text-tertiary); font-weight: 400; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+
+    .display-lg { font-weight: 700; font-size: 66px; line-height: 60px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .display-lg { line-height: 66px; } }
+    .display-md { font-weight: 700; font-size: 28px; line-height: 28px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .display-md { font-size: 36px; line-height: 36px; } }
+    .display-sm { font-weight: 700; font-size: 22px; line-height: 22px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .display-sm { font-size: 26px; line-height: 26px; } }
+    .headline-xl { font-weight: 700; font-size: 30px; line-height: 34px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .headline-xl { font-size: 46px; line-height: 48px; } }
+    .headline-lg { font-weight: 700; font-size: 28px; line-height: 32px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .headline-lg { font-size: 36px; line-height: 40px; } }
+    .headline-md { font-weight: 700; font-size: 26px; line-height: 32px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .headline-md { font-size: 32px; line-height: 36px; } }
+    .headline-sm { font-weight: 700; font-size: 22px; line-height: 24px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .headline-sm { font-size: 28px; line-height: 32px; } }
+    .title-lg { font-weight: 700; font-size: 20px; line-height: 24px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .title-lg { font-size: 24px; line-height: 28px; } }
+    .title-md { font-weight: 700; font-size: 18px; line-height: 24px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .title-md { font-size: 20px; } }
+    .title-sm { font-weight: 700; font-size: 16px; line-height: 22px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .title-sm { line-height: 24px; } }
+    .label-lg { font-weight: 700; font-size: 16px; line-height: 16px; letter-spacing: 0.32px; }
+    @media (min-width: 769px) { .label-lg { font-size: 18px; line-height: 18px; letter-spacing: 0.18px; } }
+    .label-md { font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.48px; }
+    @media (min-width: 769px) { .label-md { font-size: 16px; line-height: 16px; letter-spacing: 0.4799999892711639px; } }
+    .label-sm { font-weight: 700; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
+    @media (min-width: 769px) { .label-sm { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; } }
+    .alt-label-lg { font-weight: 600; font-size: 16px; line-height: 16px; letter-spacing: 0.32px; }
+    @media (min-width: 769px) { .alt-label-lg { font-size: 18px; line-height: 18px; letter-spacing: 0.36px; } }
+    .alt-label-md { font-weight: 600; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+    @media (min-width: 769px) { .alt-label-md { font-size: 16px; line-height: 16px; letter-spacing: 0.6399999856948853px; } }
+    .alt-label-sm { font-weight: 600; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
+    @media (min-width: 769px) { .alt-label-sm { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; } }
+    .body-xl { font-weight: 500; font-size: 20px; line-height: 28px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .body-xl { font-size: 24px; line-height: 32px; } }
+    .body-lg { font-weight: 500; font-size: 18px; line-height: 26px; letter-spacing: 0px; }
+    @media (min-width: 769px) { .body-lg { font-size: 20px; line-height: 28px; } }
+    .body-md { font-weight: 500; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+    .body-sm { font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; }
   </style>
 </head>
 <body>
@@ -4579,258 +4449,303 @@
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'mypages/partials/header.html?v=' + Date.now(), false);
+      xhr.open('GET', '../mypages/partials/header.html?v=' + Date.now(), false);
       xhr.send(null);
       return xhr.responseText;
     })());
   </script>
 
-<!-- ══ CONTENT ═══════════════════════════════════════════════════
-     Detta är prototypens startsida — en intern sidöversikt/site-
-     map, inte en kundvänd startsida. Ingen breadcrumb (se CLAUDE.md
-     "Används INTE när: sidan är startsidan"). Inget .page-omslag —
-     sektionerna nedan är fullbreddsblock (se .page-kommentaren i
-     CSS:en ovan) och centrerar sitt eget innehåll via --px-full.
-════════════════════════════════════════════════════════════════ -->
+<div class="page">
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <div class="breadcrumb__bar">
+    <a href="../index.html" class="breadcrumb-item">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="../index.html#tokens" class="breadcrumb-item">Tokens</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Typography</span>
+  </div>
+</nav>
+</div><!-- /.page -->
+
 <section class="section section--first">
-  <div class="site-index-intro">
-    <p class="site-index-intro__eyebrow">Swedol UI Prototype</p>
-    <h1 class="site-index-intro__title">Site overview</h1>
-    <p class="site-index-intro__desc">Starting point for navigating between all pages and components in the prototype. Always start from a copy of the templates below when building a new page — they already have the header/footer/main menu wired up via shared partials, with all design tokens in place. Full rules for components, tokens, and breakpoints live in <code>CLAUDE.md</code>.</p>
+  <div class="page">
+    <div class="token-page-intro">
+      <span class="token-page-intro__eyebrow">Design tokens</span>
+      <h1 class="token-page-intro__title">Typography</h1>
+      <p class="token-page-intro__desc">All 20 type styles from <code>alligo-design-tokens</code>, mobile-first. Each sample below is styled with the literal font-size/line-height/letter-spacing values from <code>tokens.json</code> -- same responsive convention as CLAUDE.md and Magento's <code>typography-plugin.js</code>: mobile is the base style, desktop (769px+) only overrides what actually changes. Resize your browser to see each sample switch at 769px.</p>
+    </div>
+    <nav class="token-nav">
+      <a href="colors.html">Colors</a>
+      <a href="typography.html" aria-current="page">Typography</a>
+      <a href="spacing-elevation.html">Spacing &amp; elevation</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="checkboxes.html">Checkboxes</a>
+      <a href="tokens-only.html">Tokens-only</a>
+    </nav>
+
+    <div class="token-type-row">
+      <p class="token-type-row__sample display-lg">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">display-lg</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>66px</td><td>60px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>66px</td><td>66px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample display-md">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">display-md</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>28px</td><td>28px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>36px</td><td>36px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample display-sm">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">display-sm</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>22px</td><td>22px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>26px</td><td>26px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample headline-xl">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">headline-xl</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>30px</td><td>34px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>46px</td><td>48px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample headline-lg">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">headline-lg</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>28px</td><td>32px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>36px</td><td>40px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample headline-md">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">headline-md</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>26px</td><td>32px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>32px</td><td>36px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample headline-sm">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">headline-sm</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>22px</td><td>24px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>28px</td><td>32px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample title-lg">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">title-lg</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>20px</td><td>24px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>24px</td><td>28px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample title-md">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">title-md</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>18px</td><td>24px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>20px</td><td>24px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample title-sm">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">title-sm</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>16px</td><td>22px</td><td>0px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>16px</td><td>24px</td><td>0px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample label-lg">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">label-lg</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>16px</td><td>16px</td><td>0.32px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>18px</td><td>18px</td><td>0.18px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample label-md">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">label-md</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>14px</td><td>14px</td><td>0.48px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>16px</td><td>16px</td><td>0.4799999892711639px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample label-sm">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">label-sm</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>12px</td><td>12px</td><td>0.48px</td><td>700</td></tr>
+            <tr><td>Desktop (769px+)</td><td>14px</td><td>14px</td><td>0.56px</td><td>700</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample alt-label-lg">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">alt-label-lg</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>16px</td><td>16px</td><td>0.32px</td><td>600</td></tr>
+            <tr><td>Desktop (769px+)</td><td>18px</td><td>18px</td><td>0.36px</td><td>600</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample alt-label-md">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">alt-label-md</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>14px</td><td>14px</td><td>0.56px</td><td>600</td></tr>
+            <tr><td>Desktop (769px+)</td><td>16px</td><td>16px</td><td>0.6399999856948853px</td><td>600</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample alt-label-sm">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">alt-label-sm</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>12px</td><td>12px</td><td>0.48px</td><td>600</td></tr>
+            <tr><td>Desktop (769px+)</td><td>14px</td><td>14px</td><td>0.56px</td><td>600</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample body-xl">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">body-xl</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>20px</td><td>28px</td><td>0px</td><td>500</td></tr>
+            <tr><td>Desktop (769px+)</td><td>24px</td><td>32px</td><td>0px</td><td>500</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample body-lg">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">body-lg</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>18px</td><td>26px</td><td>0px</td><td>500</td></tr>
+            <tr><td>Desktop (769px+)</td><td>20px</td><td>28px</td><td>0px</td><td>500</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample body-md">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">body-md</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>16px</td><td>22px</td><td>0.32px</td><td>500</td></tr>
+            <tr><td>Desktop (769px+)</td><td>16px</td><td>22px</td><td>0.32px</td><td>500</td><td>(same as mobile)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="token-type-row">
+      <p class="token-type-row__sample body-sm">The quick brown fox jumps over the lazy dog</p>
+      <div class="token-type-row__meta">
+        <span class="token-type-row__name">body-sm</span>
+        <table class="token-type-row__table">
+          <thead><tr><th></th><th>Font size</th><th>Line height</th><th>Letter spacing</th><th>Weight</th></tr></thead>
+          <tbody>
+            <tr><td>Mobile</td><td>14px</td><td>20px</td><td>0.28px</td><td>500</td></tr>
+            <tr><td>Desktop (769px+)</td><td>14px</td><td>20px</td><td>0.28px</td><td>500</td><td>(same as mobile)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </section>
-
-<div class="page-divider"><div class="page-divider__line"></div></div>
-
-<section class="section site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Templates — always start here</h2>
-    <p class="site-index-section__desc">Copy the right template depending on whether the page requires login or not. Never use an existing page as your starting point.</p>
-  </div>
-  <div class="site-index-grid">
-    <a href="template.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Template — Public page</span>
-        <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--updated">Updated</span>
-          <span class="site-index-card__tag site-index-card__tag--uppercase">Logged out</span>
-        </div>
-      </div>
-      <p class="site-index-card__desc">Starting point for new pages that don't require login. White page background (<code>background-primary</code>).</p>
-      <span class="site-index-card__path">template.html</span>
-    </a>
-    <a href="mypages/mypages-template.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Template — My Pages</span>
-        <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--updated">Updated</span>
-          <span class="site-index-card__tag site-index-card__tag--uppercase">Logged in</span>
-        </div>
-      </div>
-      <p class="site-index-card__desc">Starting point for new pages under My Pages, with account nav tabs. Grey page background (<code>background-secondary</code>) by default.</p>
-      <span class="site-index-card__path">mypages/mypages-template.html</span>
-    </a>
-  </div>
-</section>
-
-<section class="section site-index-section" id="tokens">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Tokens</h2>
-    <p class="site-index-section__desc">Design tokens from <code>alligo-design-tokens</code> (generated by Supernova), shown live via <code>var(--color-...)</code> etc., plus the <code>eco-button</code>/<code>eco-checkbox</code> component skills built on top of them. Source of truth for these pages: <code>.claude/skills/eco-tokens/tokens.json</code>.</p>
-  </div>
-  <div class="site-index-grid">
-    <a href="tokens/colors.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Colors</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">All 91 semantic color tokens, grouped by Accent/Text/Background/Surface/Border/Icon, with swatch, token name, CSS variable, and hex.</p>
-      <span class="site-index-card__path">tokens/colors.html</span>
-    </a>
-    <a href="tokens/typography.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Typography</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">All 20 type styles (display/headline/title/label/alt-label/body), live-rendered mobile-first with desktop overrides — resize to see the 769px switch.</p>
-      <span class="site-index-card__path">tokens/typography.html</span>
-    </a>
-    <a href="tokens/spacing-elevation.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Spacing &amp; elevation</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">The space-0–space-120 scale, all shadow/elevation tokens, border-width tokens, and the radius token.</p>
-      <span class="site-index-card__path">tokens/spacing-elevation.html</span>
-    </a>
-    <a href="tokens/buttons.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Buttons</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">Every button variant and size from the <code>eco-button</code> skill, built with the exact CSS in that skill's template.</p>
-      <span class="site-index-card__path">tokens/buttons.html</span>
-    </a>
-    <a href="tokens/checkboxes.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Checkboxes</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">Light and dark mode checkbox states from the <code>eco-checkbox</code> skill.</p>
-      <span class="site-index-card__path">tokens/checkboxes.html</span>
-    </a>
-    <a href="tokens/tokens-only.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Tokens-only</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">Strict compliance page — every value traces to <code>tokens.json</code> or the <code>breadcrumb</code> skill's own spec, nothing hardcoded. Lists its few unavoidable exceptions in the open.</p>
-      <span class="site-index-card__path">tokens/tokens-only.html</span>
-    </a>
-  </div>
-</section>
-
-<section class="section section--secondary site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">My Pages — User management</h2>
-    <p class="site-index-section__desc">Several parallel versions in progress — <code>users.html</code> is the most complete/latest.</p>
-  </div>
-  <div class="site-index-grid">
-    <a href="mypages/users.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Users - V2</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">Full user table: filters, search, column settings, balance management, add/edit/delete drawers, mobile cards.</p>
-      <span class="site-index-card__path">mypages/users.html</span>
-    </a>
-    <a href="mypages/users-dashboard.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Users — Dashboard variant</span>
-        <span class="site-index-card__tag">Draft</span>
-      </div>
-      <p class="site-index-card__desc">Alternative layout of the users page.</p>
-      <span class="site-index-card__path">mypages/users-dashboard.html</span>
-    </a>
-    <a href="mypages/users_V1.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Users — V1</span>
-        <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
-          <span class="site-index-card__tag">Archive</span>
-        </div>
-      </div>
-      <p class="site-index-card__desc">Production-ready prototype. Previous version of the users page.</p>
-      <span class="site-index-card__path">mypages/users_V1.html</span>
-    </a>
-    <a href="mypages/dashboard_test.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">My Page — Dashboard</span>
-        <span class="site-index-card__tag">Test</span>
-      </div>
-      <p class="site-index-card__desc">Experimental overview page ("My Page") for the account.</p>
-      <span class="site-index-card__path">mypages/dashboard_test.html</span>
-    </a>
-    <a href="mypages/addressbook.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Address book</span>
-      </div>
-      <p class="site-index-card__desc">Management of the company's delivery and billing addresses.</p>
-      <span class="site-index-card__path">mypages/addressbook.html</span>
-    </a>
-  </div>
-</section>
-
-<section class="section site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Comparison &amp; marketing</h2>
-    <p class="site-index-section__desc">Public pages marketing upgrades/permission tiers.</p>
-  </div>
-  <div class="site-index-grid">
-    <a href="e-handelspartner.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Swedol as an e-commerce partner</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">SaaS-like page without pricing: benefits for individuals, businesses, and large organizations, with a comparison table, EDI/Punchout integration, and FAQ.</p>
-      <span class="site-index-card__path">e-handelspartner.html</span>
-    </a>
-    <a href="feature-comparison-roles.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Compare permission tiers</span>
-        <span class="site-index-card__tag site-index-card__tag--wip">In progress</span>
-      </div>
-      <p class="site-index-card__desc">New version built section by section directly from the Figma design. Work in progress.</p>
-      <span class="site-index-card__path">feature-comparison-roles.html</span>
-    </a>
-    <a href="feature-comparison.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Compare permission tiers — earlier draft</span>
-        <span class="site-index-card__tag">Archive</span>
-      </div>
-      <p class="site-index-card__desc">Older exploratory draft of the same comparison page, with hero + table toggle.</p>
-      <span class="site-index-card__path">feature-comparison.html</span>
-    </a>
-    <a href="reviews.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Reviews</span>
-        <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
-        </div>
-      </div>
-      <p class="site-index-card__desc">Product and company reviews via Trustvoice.</p>
-      <span class="site-index-card__path">reviews.html</span>
-    </a>
-    <a href="reviews_backup_1.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Reviews — backup</span>
-        <span class="site-index-card__tag">Archive</span>
-      </div>
-      <p class="site-index-card__desc">Saved backup version of the reviews page.</p>
-      <span class="site-index-card__path">reviews_backup_1.html</span>
-    </a>
-  </div>
-</section>
-
-<section class="section section--secondary site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Components &amp; testing</h2>
-  </div>
-  <div class="site-index-grid">
-    <a href="mypages/cookie-banner.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Cookie banner</span>
-        <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
-      </div>
-      <p class="site-index-card__desc">Production-ready prototype of the cookie banner component.</p>
-      <span class="site-index-card__path">mypages/cookie-banner.html</span>
-    </a>
-    <a href="mypages/cookie-banner_v1.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Cookie banner — variant 2</span>
-        <span class="site-index-card__tag">Test</span>
-      </div>
-      <p class="site-index-card__desc">Alternative implementation of the cookie banner.</p>
-      <span class="site-index-card__path">mypages/cookie-banner_v1.html</span>
-    </a>
-  </div>
-</section>
-
-<section class="section site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Email</h2>
-  </div>
-  <div class="site-index-grid">
-    <a href="email/email.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Welcome email</span>
-      </div>
-      <p class="site-index-card__desc">HTML template for the welcome email sent to new customers.</p>
-      <span class="site-index-card__path">email/email.html</span>
-    </a>
-  </div>
-</section>
-
   <!-- ══ SITE FOOTER (global partial) ═══════════════════════════
        Innehåll: mypages/partials/footer.html — enda källan (single
        source of truth). Redigera ENDAST där; ändringen slår igenom
@@ -4840,7 +4755,7 @@
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'mypages/partials/footer.html?v=' + Date.now(), false);
+      xhr.open('GET', '../mypages/partials/footer.html?v=' + Date.now(), false);
       xhr.send(null);
       return xhr.responseText;
     })());
@@ -4858,7 +4773,7 @@
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'mypages/partials/main-menu.html?v=' + Date.now(), false);
+      xhr.open('GET', '../mypages/partials/main-menu.html?v=' + Date.now(), false);
       xhr.send(null);
       return xhr.responseText;
     })());
@@ -4872,7 +4787,7 @@
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
+      xhr.open('GET', '../mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
       xhr.send(null);
       return xhr.responseText;
     })());

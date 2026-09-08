@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="check_box_outline" clip-path="url(#clip0_0_51)">
+<g id="Vector">
+</g>
+<path id="Rectangle 854" d="M4 4H20V20H4V4Z" fill="var(--fill-0, #E5E5E5)"/>
+<path id="check" d="M10.229 16.229L6.54199 12.521L7.74999 11.312L10.229 13.771L16.25 7.771L17.458 9L10.229 16.229Z" fill="var(--fill-0, #939595)"/>
+</g>
+<defs>
+<clipPath id="clip0_0_51">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>
