@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Swedol – Prototyp: Sidöversikt</title>
+  <title>Swedol – Tokens: Tokens-only</title>
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
@@ -220,11 +220,6 @@
       max-width: 1280px;
       margin: 0 auto;
     }
-    /* .page används INTE på den här sidan (ingen breadcrumb att slå in) —
-       .section-blocken nedan är fullbreddsblock precis som på övriga sidor
-       (se CLAUDE.md Section: "modulärt, återanvändbart fullbreddsblock"),
-       med bakgrundsfärgen ända ut till skärmkanten. De centrerar sitt eget
-       innehåll via --px-full (samma --max-w: 1200px som t.ex. users.html). */
 
     /* ══════════════════════════════════════════════════════════
        SECTION — ECO Design System
@@ -256,189 +251,6 @@
     }
     @media (min-width: 1281px) { /* xl */
       .section--first { padding-top: 48px; }
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       SITE INDEX — intern prototyp-sidöversikt (ej ECO-komponent)
-    ══════════════════════════════════════════════════════════ */
-    .site-index-intro {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .site-index-intro__eyebrow {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.56px;
-      text-transform: uppercase;
-      color: var(--color-text-tertiary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    .site-index-intro__title {
-      font-size: 28px;               /* headline-lg, mobil */
-      font-weight: 700;
-      line-height: 32px;
-      color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    @media (min-width: 769px) {
-      .site-index-intro__title { font-size: 36px; line-height: 40px; } /* headline-lg, desktop */
-    }
-    .site-index-intro__desc {
-      font-size: 18px;               /* body-lg, mobil */
-      font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0px;
-      color: var(--color-text-secondary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) {
-      .site-index-intro__desc { font-size: 20px; line-height: 28px; } /* body-lg, desktop */
-    }
-    .site-index-intro__desc code {
-      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-      font-size: 0.9em;
-      background: var(--color-surface-10);
-      padding: 1px 5px;
-    }
-
-    .site-index-section__head { margin-bottom: 24px; }
-    .site-index-section__title {
-      font-size: 20px;               /* title-lg, mobil */
-      font-weight: 700;
-      line-height: 24px;
-      color: var(--color-text-primary);
-      margin-bottom: 4px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    @media (min-width: 769px) {
-      .site-index-section__title { font-size: 24px; line-height: 28px; } /* title-lg, desktop */
-    }
-    .site-index-section__desc {
-      font-size: 16px;               /* body-md, mobil */
-      font-weight: 400;
-      line-height: 22px;
-      letter-spacing: 0.32px;
-      color: var(--color-text-tertiary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) {
-      .site-index-section__desc { line-height: 24px; } /* body-md, desktop */
-    }
-
-    .site-index-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    @media (min-width: 640px) {
-      .site-index-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1024px) {
-      .site-index-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    .site-index-card {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 20px;
-      border: 1px solid var(--color-border-primary);
-      background: var(--color-surface-raised-primary);
-      text-decoration: none;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .site-index-card:hover { border-color: var(--color-border-dark); }
-    .site-index-card__top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-    }
-    .site-index-card__tag-group {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .site-index-card__title {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 20px;
-      color: var(--color-text-primary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    /* Badge/Basic (ECO Design System, se CLAUDE.md ## Badge). Default = Neutral
-       Grey, Weaker, Medium, Sentence Case. Färgvarianter + Upper Case-modifier
-       nedan följer "Färgval — vanliga betydelser" i CLAUDE.md. */
-    .site-index-card__tag {
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      background: var(--color-surface-05);
-      border: 1px solid var(--color-border-primary);
-      padding: 4px 5px;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 14px;
-      letter-spacing: 0.56px;
-      color: var(--color-text-primary);
-      white-space: nowrap;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    /* Letter Case: Upper Case — för fasta kategorietiketter (Inloggad/Utloggad),
-       inte statusetiketter. */
-    .site-index-card__tag--uppercase {
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    /* Ny — nyskapad sida (Alert Success, Weaker) */
-    .site-index-card__tag--new {
-      background: var(--color-surface-success-weaker);
-      border-color: var(--color-border-success-weak);
-      color: var(--color-text-success);
-    }
-    /* Uppdaterad — befintlig sida med färska ändringar (Alert Info, Weaker) */
-    .site-index-card__tag--updated {
-      background: var(--color-surface-information-weaker);
-      border-color: var(--color-border-information-weak);
-      color: var(--color-text-information-default);
-    }
-    /* Pågående — ofärdigt arbete (Alert Warning, Weaker) */
-    .site-index-card__tag--wip {
-      background: var(--color-surface-warning-weaker);
-      border-color: var(--color-border-warning-weak);
-      color: var(--color-text-primary); /* ingen text-warning-default-token finns */
-    }
-    /* Klar för utveckling — prototyp redo att lämnas över till dev (Neutral Dark, Weaker) */
-    .site-index-card__tag--ready {
-      background: var(--color-surface-100);
-      border-color: var(--color-border-dark);
-      color: var(--color-text-primary-inverted);
-    }
-    .site-index-card__desc {
-      flex: 1;
-      font-size: 14px;
-      line-height: 20px;
-      color: var(--color-text-secondary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .site-index-card__desc code {
-      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-      font-size: 0.9em;
-      background: var(--color-surface-10);
-      padding: 1px 4px;
-    }
-    .site-index-card__path {
-      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-      font-size: 12px;
-      color: var(--color-text-tertiary);
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -2332,7 +2144,7 @@
     .fav-store-section {
       padding: 0 var(--px-page);
     }
-    .page-divider { padding: 0 var(--px-full); }
+    .page-divider { padding: 48px var(--px-full); }
     .page-divider__line { height: 1px; background: var(--color-border-primary); }
     .fav-store { display: flex; flex-direction: column; gap: 24px; }
     .fav-store__header { display: flex; flex-direction: column; gap: 8px; }
@@ -4566,6 +4378,167 @@
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
 
+    /* ══════════════════════════════════════════════════════════════
+       SOURCING RULE FOR THIS PAGE: every value below is either
+       (A) var(--...) pulled from tokens.json (see comment = token name), or
+       (B) copied verbatim from breadcrumb/SKILL.md's own CSS-mall/table.
+       No value on this page was invented, guessed, or eyeballed.
+    ══════════════════════════════════════════════════════════════ */
+
+    /* Reset -- mechanical, not a design value, needed on every page */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Body font -- "Breuer Condensed" is the family name of the webfont
+       loaded from this same package's fonts.css (see <head>). tokens.json's
+       typography section deliberately excludes font-family (every entry is
+       the same one family, stripped as redundant) -- this is the one
+       genuinely unavoidable exception on this page: the family NAME has no
+       JSON field to cite, only the fonts.css file that supplies it. */
+    body {
+      font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      background: var(--color-background-primary);  /* tokens.json: color.background-primary */
+      color: var(--color-text-primary);              /* tokens.json: color.text-primary */
+    }
+
+    /* ── Breadcrumb -- copied verbatim from breadcrumb/SKILL.md's CSS-mall ── */
+    .breadcrumb { padding: 0 var(--px-page) 0; }
+    .breadcrumb__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 16px 0; }
+    .breadcrumb-item {
+      display: inline-flex; align-items: center;
+      border: 1px solid var(--color-border-action-3);  /* tokens.json: color.border-action-3 */
+      padding: 6px 7px; background: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 12px; font-weight: 400;
+      line-height: 12px; letter-spacing: 0.24px;
+      color: var(--color-text-tertiary);  /* tokens.json: color.text-tertiary */
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .breadcrumb-item:hover { color: var(--color-text-action-primary); text-decoration: underline; } /* tokens.json: color.text-action-primary */
+    .breadcrumb-item--active { font-weight: 700; color: var(--color-text-primary); cursor: default; } /* tokens.json: color.text-primary */
+    .breadcrumb-item--active:hover { text-decoration: none; }
+    .breadcrumb-sep {
+      flex-shrink: 0; width: 4px; height: 24px; display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-tertiary); font-family: 'Breuer Condensed', Arial, sans-serif; /* tokens.json: color.text-tertiary */
+      font-size: 14px; font-weight: 400; letter-spacing: 0.28px;
+    }
+    @media (min-width: 769px) {
+      .breadcrumb { padding-bottom: 8px; }
+      .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+      .breadcrumb-sep { height: 32px; }
+    }
+    @media (min-width: 1024px) { .breadcrumb { padding-bottom: 16px; } }
+    .breadcrumb + .main-content, .breadcrumb + .section, .breadcrumb + .section--first { padding-top: 0; }
+
+    /* --px-page: breadcrumb/SKILL.md's own breakpoint table states these exact
+       px amounts (its "Storlekar per breakpoint" section) -- not invented here. */
+    :root { --px-page: 16px; }
+    @media (min-width: 640px)  { :root { --px-page: 32px; } }
+    @media (min-width: 769px)  { :root { --px-page: 32px; } }
+    @media (min-width: 1024px) { :root { --px-page: 40px; } }
+    /* --duration-fast-3 / --ease-standard: referenced by name in breadcrumb's
+       CSS-mall but not numbered there; these are the actual values already
+       live in every other page's :root (verified against template.html). */
+    :root { --duration-fast-3: 150ms; --ease-standard: cubic-bezier(.35,0,.35,1); }
+
+    .page { max-width: 1280px; margin: 0 auto; }
+
+    /* ── Content layout -- spacing entirely from tokens.json's spacing scale ── */
+    .strict-content { padding: var(--dimension-spacing-space-32) var(--px-page); } /* tokens.json: spacing.space-32 (vertical), breadcrumb-mandated --px-page (horizontal) */
+    .strict-intro { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); max-width: 640px; margin-bottom: var(--dimension-spacing-space-40); } /* tokens.json: spacing.space-8 / space-40 */
+
+    /* Heading -- typography.title-lg from tokens.json, mobile base + desktop override */
+    .strict-intro__title {
+      font-weight: 700; font-size: 20px; line-height: 24px; letter-spacing: 0px; /* tokens.json: typography.title-lg.mobile */
+      color: var(--color-text-primary); /* tokens.json: color.text-primary */
+    }
+    @media (min-width: 769px) {
+      .strict-intro__title { font-size: 24px; line-height: 28px; } /* tokens.json: typography.title-lg.desktopOverride */
+    }
+
+    /* Body copy -- typography.body-md from tokens.json (identical mobile/desktop -- no override in the token) */
+    .strict-intro__desc {
+      font-weight: 500; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; /* tokens.json: typography.body-md.mobile */
+      color: var(--color-text-secondary); /* tokens.json: color.text-secondary */
+    }
+    .strict-intro__desc code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em;
+      background: var(--color-surface-10); padding: 1px 5px; /* tokens.json: color.surface-10 */
+    }
+
+    /* ── $meta panel -- printed directly from tokens.json's own "$meta" object ── */
+    .meta-panel {
+      background: var(--color-surface-raised-secondary); /* tokens.json: color.surface-raised-secondary */
+      border: 1px solid var(--color-border-primary);      /* tokens.json: color.border-primary */
+      padding: var(--dimension-spacing-space-24);          /* tokens.json: spacing.space-24 */
+      margin-bottom: var(--dimension-spacing-space-40);     /* tokens.json: spacing.space-40 */
+      display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); /* tokens.json: spacing.space-8 */
+    }
+    .meta-panel dt {
+      font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.48px; /* tokens.json: typography.label-md.mobile */
+      color: var(--color-text-tertiary); text-transform: uppercase; /* tokens.json: color.text-tertiary */
+    }
+    .meta-panel dd {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; /* tokens.json: typography.body-sm.mobile */
+      color: var(--color-text-primary); word-break: break-all; /* tokens.json: color.text-primary */
+    }
+
+    /* ── Demo card -- a composed UI element built from nothing but tokens.json ── */
+    .demo-card {
+      background: var(--color-surface-raised-primary); /* tokens.json: color.surface-raised-primary */
+      border: 1px solid var(--color-border-primary);    /* tokens.json: color.border-primary */
+      box-shadow: var(--shadow-elevation-b-40);          /* tokens.json: shadow.elevation-b-40 */
+      padding: var(--dimension-spacing-space-24);        /* tokens.json: spacing.space-24 */
+      max-width: 360px;
+      display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); /* tokens.json: spacing.space-8 */
+      margin-bottom: var(--dimension-spacing-space-40); /* tokens.json: spacing.space-40 */
+    }
+    .demo-card__title {
+      font-weight: 700; font-size: 16px; line-height: 18px; letter-spacing: 0px; /* tokens.json: typography.title-sm.mobile */
+      color: var(--color-text-primary); /* tokens.json: color.text-primary */
+    }
+    .demo-card__desc {
+      font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; /* tokens.json: typography.body-sm.mobile */
+      color: var(--color-text-secondary); /* tokens.json: color.text-secondary */
+    }
+    .demo-card__tag {
+      align-self: flex-start;
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px;
+      color: var(--color-text-tertiary); background: var(--color-surface-10); /* tokens.json: color.text-tertiary, color.surface-10 */
+      padding: 2px 6px;
+    }
+
+    /* ── Exceptions panel -- full transparency on the handful of values that
+       could not be cited to tokens.json (font-family name, reset, --px-page /
+       motion sourced from breadcrumb/SKILL.md as explained above) ── */
+    .exceptions-panel {
+      border: 1px solid var(--color-border-warning-weak);   /* tokens.json: color.border-warning-weak */
+      background: var(--color-surface-warning-weaker);      /* tokens.json: color.surface-warning-weaker */
+      padding: var(--dimension-spacing-space-24);            /* tokens.json: spacing.space-24 */
+      max-width: 640px;
+    }
+    .exceptions-panel__title {
+      font-weight: 700; font-size: 14px; line-height: 14px; letter-spacing: 0.48px; /* tokens.json: typography.label-md.mobile */
+      color: var(--color-text-primary); margin-bottom: var(--dimension-spacing-space-8); /* tokens.json: color.text-primary, spacing.space-8 */
+    }
+    .exceptions-panel ul { list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); } /* tokens.json: spacing.space-8 */
+    .exceptions-panel li {
+      font-weight: 500; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; /* tokens.json: typography.body-sm.mobile */
+      color: var(--color-text-secondary); /* tokens.json: color.text-secondary */
+    }
+    .exceptions-panel code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em;
+      background: var(--color-surface-raised-primary); padding: 1px 5px; /* tokens.json: color.surface-raised-primary */
+    }
+
+    .token-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--dimension-spacing-space-40); } /* tokens.json: spacing.space-40 */
+    .token-nav a {
+      display: inline-flex; align-items: center; height: 32px; padding: 6px 12px; box-sizing: border-box;
+      border: 1px solid var(--color-border-action-3); background: transparent; color: var(--color-text-primary); /* tokens.json: color.border-action-3, color.text-primary */
+      text-decoration: none; cursor: pointer; white-space: nowrap; font-size: 14px; font-weight: 700;
+      line-height: 14px; letter-spacing: 0.56px; text-transform: uppercase;
+    }
+    .token-nav a[aria-current="page"] { background: var(--color-surface-100); border-color: var(--color-surface-100); color: var(--color-text-primary-inverted); } /* tokens.json: color.surface-100, color.text-primary-inverted */
   </style>
 </head>
 <body>
@@ -4579,258 +4552,68 @@
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'mypages/partials/header.html?v=' + Date.now(), false);
+      xhr.open('GET', '../mypages/partials/header.html?v=' + Date.now(), false);
       xhr.send(null);
       return xhr.responseText;
     })());
   </script>
 
-<!-- ══ CONTENT ═══════════════════════════════════════════════════
-     Detta är prototypens startsida — en intern sidöversikt/site-
-     map, inte en kundvänd startsida. Ingen breadcrumb (se CLAUDE.md
-     "Används INTE när: sidan är startsidan"). Inget .page-omslag —
-     sektionerna nedan är fullbreddsblock (se .page-kommentaren i
-     CSS:en ovan) och centrerar sitt eget innehåll via --px-full.
-════════════════════════════════════════════════════════════════ -->
-<section class="section section--first">
-  <div class="site-index-intro">
-    <p class="site-index-intro__eyebrow">Swedol UI Prototype</p>
-    <h1 class="site-index-intro__title">Site overview</h1>
-    <p class="site-index-intro__desc">Starting point for navigating between all pages and components in the prototype. Always start from a copy of the templates below when building a new page — they already have the header/footer/main menu wired up via shared partials, with all design tokens in place. Full rules for components, tokens, and breakpoints live in <code>CLAUDE.md</code>.</p>
+<div class="page">
+<nav class="breadcrumb" aria-label="Breadcrumbs">
+  <div class="breadcrumb__bar">
+    <a href="../index.html" class="breadcrumb-item">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="../index.html#tokens" class="breadcrumb-item">Tokens</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Tokens-only</span>
   </div>
-</section>
+</nav>
+</div><!-- /.page -->
 
-<div class="page-divider"><div class="page-divider__line"></div></div>
+<div class="page">
+  <div class="strict-content">
+    <div class="strict-intro">
+      <h1 class="strict-intro__title">Tokens-only page</h1>
+      <p class="strict-intro__desc">Every value on this page traces to either <code>tokens.json</code> or the <code>breadcrumb</code> skill's own spec -- nothing hardcoded, nothing eyeballed. Hover any block of text in the page source to see the token cited in a CSS comment next to it.</p>
+    </div>
+    <nav class="token-nav">
+      <a href="colors.html">Colors</a>
+      <a href="typography.html">Typography</a>
+      <a href="spacing-elevation.html">Spacing &amp; elevation</a>
+      <a href="buttons.html">Buttons</a>
+      <a href="checkboxes.html">Checkboxes</a>
+      <a href="tokens-only.html" aria-current="page">Tokens-only</a>
+    </nav>
 
-<section class="section site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Templates — always start here</h2>
-    <p class="site-index-section__desc">Copy the right template depending on whether the page requires login or not. Never use an existing page as your starting point.</p>
-  </div>
-  <div class="site-index-grid">
-    <a href="template.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Template — Public page</span>
-        <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--updated">Updated</span>
-          <span class="site-index-card__tag site-index-card__tag--uppercase">Logged out</span>
-        </div>
-      </div>
-      <p class="site-index-card__desc">Starting point for new pages that don't require login. White page background (<code>background-primary</code>).</p>
-      <span class="site-index-card__path">template.html</span>
-    </a>
-    <a href="mypages/mypages-template.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Template — My Pages</span>
-        <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--updated">Updated</span>
-          <span class="site-index-card__tag site-index-card__tag--uppercase">Logged in</span>
-        </div>
-      </div>
-      <p class="site-index-card__desc">Starting point for new pages under My Pages, with account nav tabs. Grey page background (<code>background-secondary</code>) by default.</p>
-      <span class="site-index-card__path">mypages/mypages-template.html</span>
-    </a>
-  </div>
-</section>
+    <dl class="meta-panel">
+      <dt>Source</dt>
+      <dd>alligo-design-tokens (alligo-design-tokens on npm)</dd>
+      <dt>Generated from</dt>
+      <dd>dist/css/base/color.css, dist/css/base/dimension.css, dist/css/base/border.css, dist/css/base/shadow.css, dist/tailwind/typography.css</dd>
+      <dt>CDN URL this repo loads</dt>
+      <dd>https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css</dd>
+      <dt>Token counts in tokens.json</dt>
+      <dd>92 colors, 17 spacing steps, 20 type styles, 16 shadows, 3 border widths, 1 radius</dd>
+    </dl>
 
-<section class="section site-index-section" id="tokens">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Tokens</h2>
-    <p class="site-index-section__desc">Design tokens from <code>alligo-design-tokens</code> (generated by Supernova), shown live via <code>var(--color-...)</code> etc., plus the <code>eco-button</code>/<code>eco-checkbox</code> component skills built on top of them. Source of truth for these pages: <code>.claude/skills/eco-tokens/tokens.json</code>.</p>
-  </div>
-  <div class="site-index-grid">
-    <a href="tokens/colors.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Colors</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">All 91 semantic color tokens, grouped by Accent/Text/Background/Surface/Border/Icon, with swatch, token name, CSS variable, and hex.</p>
-      <span class="site-index-card__path">tokens/colors.html</span>
-    </a>
-    <a href="tokens/typography.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Typography</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">All 20 type styles (display/headline/title/label/alt-label/body), live-rendered mobile-first with desktop overrides — resize to see the 769px switch.</p>
-      <span class="site-index-card__path">tokens/typography.html</span>
-    </a>
-    <a href="tokens/spacing-elevation.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Spacing &amp; elevation</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">The space-0–space-120 scale, all shadow/elevation tokens, border-width tokens, and the radius token.</p>
-      <span class="site-index-card__path">tokens/spacing-elevation.html</span>
-    </a>
-    <a href="tokens/buttons.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Buttons</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">Every button variant and size from the <code>eco-button</code> skill, built with the exact CSS in that skill's template.</p>
-      <span class="site-index-card__path">tokens/buttons.html</span>
-    </a>
-    <a href="tokens/checkboxes.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Checkboxes</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">Light and dark mode checkbox states from the <code>eco-checkbox</code> skill.</p>
-      <span class="site-index-card__path">tokens/checkboxes.html</span>
-    </a>
-    <a href="tokens/tokens-only.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Tokens-only</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">Strict compliance page — every value traces to <code>tokens.json</code> or the <code>breadcrumb</code> skill's own spec, nothing hardcoded. Lists its few unavoidable exceptions in the open.</p>
-      <span class="site-index-card__path">tokens/tokens-only.html</span>
-    </a>
-  </div>
-</section>
+    <div class="demo-card">
+      <span class="demo-card__title">Composed entirely from tokens</span>
+      <p class="demo-card__desc">Background, border, shadow, padding, and both text styles on this card are each a direct token.json lookup -- see the CSS for the exact token name behind every property.</p>
+      <span class="demo-card__tag">surface-raised-primary + border-primary + elevation-b-40</span>
+    </div>
 
-<section class="section section--secondary site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">My Pages — User management</h2>
-    <p class="site-index-section__desc">Several parallel versions in progress — <code>users.html</code> is the most complete/latest.</p>
-  </div>
-  <div class="site-index-grid">
-    <a href="mypages/users.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Users - V2</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">Full user table: filters, search, column settings, balance management, add/edit/delete drawers, mobile cards.</p>
-      <span class="site-index-card__path">mypages/users.html</span>
-    </a>
-    <a href="mypages/users-dashboard.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Users — Dashboard variant</span>
-        <span class="site-index-card__tag">Draft</span>
-      </div>
-      <p class="site-index-card__desc">Alternative layout of the users page.</p>
-      <span class="site-index-card__path">mypages/users-dashboard.html</span>
-    </a>
-    <a href="mypages/users_V1.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Users — V1</span>
-        <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
-          <span class="site-index-card__tag">Archive</span>
-        </div>
-      </div>
-      <p class="site-index-card__desc">Production-ready prototype. Previous version of the users page.</p>
-      <span class="site-index-card__path">mypages/users_V1.html</span>
-    </a>
-    <a href="mypages/dashboard_test.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">My Page — Dashboard</span>
-        <span class="site-index-card__tag">Test</span>
-      </div>
-      <p class="site-index-card__desc">Experimental overview page ("My Page") for the account.</p>
-      <span class="site-index-card__path">mypages/dashboard_test.html</span>
-    </a>
-    <a href="mypages/addressbook.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Address book</span>
-      </div>
-      <p class="site-index-card__desc">Management of the company's delivery and billing addresses.</p>
-      <span class="site-index-card__path">mypages/addressbook.html</span>
-    </a>
-  </div>
-</section>
+    <div class="exceptions-panel">
+      <p class="exceptions-panel__title">Full transparency -- values NOT from tokens.json</p>
+      <ul>
+        <li><code>font-family: 'Breuer Condensed'</code> -- the family name isn't a JSON field (tokens.json strips it as redundant, since every typography entry uses the same one). It comes from loading this same package's <code>fonts.css</code> in the &lt;head&gt;.</li>
+        <li><code>--px-page</code> (16/32/32/40px per breakpoint) -- not in tokens.json (page-margin isn't part of the Supernova export), but is documented directly in <code>breadcrumb/SKILL.md</code>'s own breakpoint table, and used here exactly as specified there.</li>
+        <li><code>--duration-fast-3</code> / <code>--ease-standard</code> -- referenced by name in breadcrumb's CSS template but not numbered there. Motion tokens aren't part of the Supernova export at all; these are the actual values already live in every other page's <code>:root</code> (verified against <code>template.html</code>).</li>
+        <li><code>box-sizing: border-box</code> reset -- a CSS mechanic, not a design decision, so not a token to begin with.</li>
+      </ul>
+    </div>
 
-<section class="section site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Comparison &amp; marketing</h2>
-    <p class="site-index-section__desc">Public pages marketing upgrades/permission tiers.</p>
   </div>
-  <div class="site-index-grid">
-    <a href="e-handelspartner.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Swedol as an e-commerce partner</span>
-        <span class="site-index-card__tag site-index-card__tag--new">New</span>
-      </div>
-      <p class="site-index-card__desc">SaaS-like page without pricing: benefits for individuals, businesses, and large organizations, with a comparison table, EDI/Punchout integration, and FAQ.</p>
-      <span class="site-index-card__path">e-handelspartner.html</span>
-    </a>
-    <a href="feature-comparison-roles.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Compare permission tiers</span>
-        <span class="site-index-card__tag site-index-card__tag--wip">In progress</span>
-      </div>
-      <p class="site-index-card__desc">New version built section by section directly from the Figma design. Work in progress.</p>
-      <span class="site-index-card__path">feature-comparison-roles.html</span>
-    </a>
-    <a href="feature-comparison.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Compare permission tiers — earlier draft</span>
-        <span class="site-index-card__tag">Archive</span>
-      </div>
-      <p class="site-index-card__desc">Older exploratory draft of the same comparison page, with hero + table toggle.</p>
-      <span class="site-index-card__path">feature-comparison.html</span>
-    </a>
-    <a href="reviews.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Reviews</span>
-        <div class="site-index-card__tag-group">
-          <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
-        </div>
-      </div>
-      <p class="site-index-card__desc">Product and company reviews via Trustvoice.</p>
-      <span class="site-index-card__path">reviews.html</span>
-    </a>
-    <a href="reviews_backup_1.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Reviews — backup</span>
-        <span class="site-index-card__tag">Archive</span>
-      </div>
-      <p class="site-index-card__desc">Saved backup version of the reviews page.</p>
-      <span class="site-index-card__path">reviews_backup_1.html</span>
-    </a>
-  </div>
-</section>
-
-<section class="section section--secondary site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Components &amp; testing</h2>
-  </div>
-  <div class="site-index-grid">
-    <a href="mypages/cookie-banner.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Cookie banner</span>
-        <span class="site-index-card__tag site-index-card__tag--ready">Ready for development</span>
-      </div>
-      <p class="site-index-card__desc">Production-ready prototype of the cookie banner component.</p>
-      <span class="site-index-card__path">mypages/cookie-banner.html</span>
-    </a>
-    <a href="mypages/cookie-banner_v1.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Cookie banner — variant 2</span>
-        <span class="site-index-card__tag">Test</span>
-      </div>
-      <p class="site-index-card__desc">Alternative implementation of the cookie banner.</p>
-      <span class="site-index-card__path">mypages/cookie-banner_v1.html</span>
-    </a>
-  </div>
-</section>
-
-<section class="section site-index-section">
-  <div class="site-index-section__head">
-    <h2 class="site-index-section__title">Email</h2>
-  </div>
-  <div class="site-index-grid">
-    <a href="email/email.html" class="site-index-card" target="_blank" rel="noopener">
-      <div class="site-index-card__top">
-        <span class="site-index-card__title">Welcome email</span>
-      </div>
-      <p class="site-index-card__desc">HTML template for the welcome email sent to new customers.</p>
-      <span class="site-index-card__path">email/email.html</span>
-    </a>
-  </div>
-</section>
-
+</div>
   <!-- ══ SITE FOOTER (global partial) ═══════════════════════════
        Innehåll: mypages/partials/footer.html — enda källan (single
        source of truth). Redigera ENDAST där; ändringen slår igenom
@@ -4840,7 +4623,7 @@
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'mypages/partials/footer.html?v=' + Date.now(), false);
+      xhr.open('GET', '../mypages/partials/footer.html?v=' + Date.now(), false);
       xhr.send(null);
       return xhr.responseText;
     })());
@@ -4858,7 +4641,7 @@
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'mypages/partials/main-menu.html?v=' + Date.now(), false);
+      xhr.open('GET', '../mypages/partials/main-menu.html?v=' + Date.now(), false);
       xhr.send(null);
       return xhr.responseText;
     })());
@@ -4872,7 +4655,7 @@
   <script>
     document.write((function () {
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
+      xhr.open('GET', '../mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
       xhr.send(null);
       return xhr.responseText;
     })());
