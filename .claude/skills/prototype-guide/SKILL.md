@@ -11,7 +11,7 @@ description: Use BEFORE and DURING work on any new prototype, page, product/serv
 
 ## Purpose
 
-This skill is the **entry point** for all creative work in this repo — prototypes, pages, product/service pages, UI, UX flows, and functionality for Swedol, regardless of whether the assignment arrives as a finished Figma prototype, a loose brainstorm, or a written spec. It doesn't replace the component skills (`button`, `input`, `section`, etc.) — it **routes into them**: it provides the same kind of general design quality that dedicated skills for web-design review, distinctive visual direction, structured design critique, and micro-interaction polish usually provide — but **entirely expressed through ECO Design System's own tokens, components, and rules**, never invented freely.
+This skill is the **entry point** for all creative work in this repo — prototypes, pages, product/service pages, UI, UX flows, and functionality for Swedol, regardless of whether the assignment arrives as a finished Figma prototype, a loose brainstorm, or a written spec. It doesn't replace the component skills (`eco-button`, `eco-input`, `eco-section`, etc.) — it **routes into them**: it provides the same kind of general design quality that dedicated skills for web-design review, distinctive visual direction, structured design critique, and micro-interaction polish usually provide — but **entirely expressed through ECO Design System's own tokens, components, and rules**, never invented freely.
 
 **Core principle:** general design judgment is allowed to drive *composition* (what goes where, how much air, what draws the eye, what flow a user goes through, whether/when something should move) — but **never the values** (color, spacing, shadow, radius, typeface, easing, duration). Values always come from a skill or token that already exists in this repo. When general design advice conflicts with a stated ECO decision, ECO always wins (see Guardrails).
 
@@ -64,7 +64,9 @@ See `CLAUDE.md` → "Innan du bygger en ny sida" for the full rule and why.
 
 ### 3. Map out which components/patterns are needed
 
-Go through the intended interface piece by piece and match every part against the skills index in `CLAUDE.md` (buttons → `button`, form fields → `input`/`select`/`checkbox`, notices → `notifications-guide`, links → `links-guide`, spacing → `spacing`, color → `colors`, shadow → `elevation`, animation → `motion`, etc.). Load and read every relevant skill before coding that part.
+Go through the intended interface piece by piece and match every part against the skills index in `CLAUDE.md` (buttons → `eco-button`, form fields → `eco-input`/`eco-select`/`eco-checkbox`, notices → `notifications-guide`, links → `links-guide`, spacing → `eco-spacing`, color → `eco-colors`, shadow → `eco-elevation`, animation → `eco-motion`, etc.). Load and read every relevant skill before coding that part.
+
+**Before writing any actual CSS value** (color, spacing, shadow, border), load `eco-tokens` and emit `var(--...)` against `tokens.json` — never a hardcoded hex/px, even for a brand-new prototype that doesn't touch an existing file yet. Component skills like `eco-button` already write every value this way; match that pattern rather than reading their px/hex numbers back out as literals.
 
 **A pattern is missing entirely** (it exists in Figma or the brief but has no skill)? Flag it to the user and ask before you either (a) build a one-off solution inline using existing tokens, or (b) create a new skill under `.claude/skills/` — per the rule in `CLAUDE.md`. Never guess a new component style into existence. This is the same permanent-vs-snowflake question from step 0's "Figma is the design system" note — ask it there the moment you spot the gap, don't wait until you're mid-build. This also includes micro-interaction patterns raised in step 6 below (e.g. a press-feedback scale on buttons) that aren't yet defined by a component skill — flag them the same way rather than inventing a transform value inline.
 
@@ -75,13 +77,13 @@ When the task is a comparison, marketing, or campaign-style page (this repo's "C
 | Block | What it does | Built with |
 |---|---|---|
 | Header/logo | Placement and identity, always visible | Shared partial, already wired in the templates |
-| Hero/value proposition | What the page is about, in under 2 seconds | `typography` scale (Display/Headline) |
-| Primary CTA | One clear next step | `button` Primary — max one per surface |
-| Supporting information/specs | Details a professional buyer actually needs | `typography` Body/Label, `section` |
-| Trust signals | Reviews, customer logos, certifications — where relevant for B2B | `badge`, `role-tier-card`, or a plain section built from existing tokens |
-| Related content/products | A natural continuation of the flow | `tile-link` or `action-link` |
-| FAQ | Only if the content actually has recurring questions | `collapsible` |
-| Secondary/closing CTA | A second chance further down a long page | `button`, never more dramatic than the primary one |
+| Hero/value proposition | What the page is about, in under 2 seconds | `eco-typography` scale (Display/Headline) |
+| Primary CTA | One clear next step | `eco-button` Primary — max one per surface |
+| Supporting information/specs | Details a professional buyer actually needs | `eco-typography` Body/Label, `eco-section` |
+| Trust signals | Reviews, customer logos, certifications — where relevant for B2B | `eco-badge`, `eco-role-tier-card`, or a plain section built from existing tokens |
+| Related content/products | A natural continuation of the flow | `eco-tile-link` or `eco-action-link` |
+| FAQ | Only if the content actually has recurring questions | `eco-collapsible` |
+| Secondary/closing CTA | A second chance further down a long page | `eco-button`, never more dramatic than the primary one |
 | Footer/contact | Shared partial | Already wired in the templates |
 
 What this checklist deliberately does **not** carry over from its source material: oversized 4–6rem display type, gradient-mesh/glassmorphism backgrounds, urgency/scarcity CTAs (countdown timers, "limited spots"), animated counter effects, or a mandate that all of the above must appear on every page. Those are conversion-marketing defaults that conflict with ECO's typography scale, restrained motion tokens, and Swedol's professional B2B tone — see Guardrail 4.
@@ -92,20 +94,30 @@ Use the checklist below (from classic web-design practice) as a lens, but solve 
 
 | Design principle | Solved with |
 |---|---|
-| Clear visual hierarchy (heading → support → CTA) | `typography` scale, not arbitrary font sizes |
-| Consistent rhythm/air between blocks | `spacing` scale (space-0…space-120, space-sm/md/lg) and the `section` padding table |
-| Contrast & readability | `colors` tokens (text/background/border pairs that are already contrast-safe) |
-| Depth/layering where needed (cards, modals, drawers) | `elevation` skill — never a custom `box-shadow` value |
-| Motion feels natural, not bouncy or too fast | `motion` skill's easing/duration tokens — see step 6 for *whether* something should animate at all |
-| One clear primary call-to-action per view | `button` variants (Primary/Secondary/etc.), never more than one Primary per surface |
-| Forms feel forgiving (states, error messages) | `input`/`select`/`checkbox` states + `inline-notification` for errors |
+| Clear visual hierarchy (heading → support → CTA) | `eco-typography` scale, not arbitrary font sizes |
+| Consistent rhythm/air between blocks | `eco-spacing` scale (space-0…space-120, space-sm/md/lg) and the `eco-section` padding table |
+| Contrast & readability | `eco-colors` tokens (text/background/border pairs that are already contrast-safe) |
+| Depth/layering where needed (cards, modals, drawers) | `eco-elevation` skill — never a custom `box-shadow` value |
+| Motion feels natural, not bouncy or too fast | `eco-motion` skill's easing/duration tokens — see step 6 for *whether* something should animate at all |
+| One clear primary call-to-action per view | `eco-button` variants (Primary/Secondary/etc.), never more than one Primary per surface |
+| Forms feel forgiving (states, error messages) | `eco-input`/`eco-select`/`eco-checkbox` states + `eco-inline-notification` for errors |
 | Links signal the right weight | `links-guide` → Inline/Action/Tile |
-| Statuses/labels are legible in one second | `badge` skill |
-| The page feels whole, not a stack of loose blocks | `section`'s background rule (deliberately alternating white/grey) + Page Divider |
+| Statuses/labels are legible in one second | `eco-badge` skill |
+| The page feels whole, not a stack of loose blocks | `eco-section`'s background rule (deliberately alternating white/grey) + Page Divider |
 | The mobile experience isn't "squeezed desktop" | Mobile-first per the breakpoint table in `CLAUDE.md`, actually test at `xs`/`sm`/`md` |
 | A distinct, deliberate composition — not a generic default | See the distinctiveness check below |
 
 **Distinctiveness check (before coding the layout):** would you have landed on the exact same layout and emphasis for a completely different Swedol page with a different purpose? If yes — go back and let the actual content and purpose (steps 0–1) drive what's emphasized, in what order, and with how much air, within ECO's tokens. Distinctiveness comes from composition (what's emphasized, ordering, rhythm), never from inventing new colors/typefaces/shadows — those stay locked to ECO.
+
+### 4b. Explore 2–4 composition directions before committing to one
+
+When the task's layout/composition is genuinely open (mostly mode B from step 0 — a loose brainstorm with no dictated structure, or any new page/flow where more than one reasonable hierarchy exists), don't jump straight to one polished build. First produce **2–4 distinct composition directions**, placed side by side (e.g. as separate sections/anchors in one scratch HTML file, or separate files) so they can be compared directly, then ask the user to pick one — or a combination — before continuing to step 5 onward.
+
+- Each direction varies **composition only** — what's emphasized, ordering, layout structure, information density, rhythm — never values. All directions still use only ECO tokens/components; a direction is not "a different color scheme," it's "hero-led vs. list-led vs. comparison-table-led," for example.
+- Keep them at low/medium fidelity — enough to judge hierarchy and flow, not full copy/micro-interaction polish (steps 5–9 happen after a direction is picked, on the chosen one only).
+- Label each direction with a one-line rationale (what it optimizes for), so the choice is informed, not just visual preference.
+- Skip this step when the structure is already dictated (mode A with a finished Figma prototype, mode C with a spec that specifies layout, or a small addition to an existing page) — there's no real direction to choose between.
+- If genuinely unsure whether the task calls for this step, ask rather than guessing (see Guardrail 5).
 
 ### 5. Copy is design content, not decoration
 
@@ -119,25 +131,25 @@ Words earn their place in a design for one reason: making it easier to understan
 
 ### 6. Micro-interaction & motion — decide *whether* and *why* before *how*
 
-The `motion` skill gives you the allowed easing curves and duration tokens (`motion-ease-*`, `motion-duration-fast/medium/slow-*`). Before reaching for them, decide whether the animation should exist at all:
+The `eco-motion` skill gives you the allowed easing curves and duration tokens (`motion-ease-*`, `motion-duration-fast/medium/slow-*`). Before reaching for them, decide whether the animation should exist at all:
 
 | How often does the user see this interaction? | Decision |
 |---|---|
 | Very often (keyboard shortcuts, a toggle used dozens of times/day) | No animation |
 | Often (hover, list navigation) | Remove it or keep it extremely short (`motion-duration-fast-1`/`fast-2`) |
-| Occasional, once or twice per session (modals, drawers, toasts) | Standard animation from `motion` |
-| Rare/first-time (onboarding, confirmations) | Can allow slightly more noticeable motion — still within `motion`'s tokens, still the slow tier at most |
+| Occasional, once or twice per session (modals, drawers, toasts) | Standard animation from `eco-motion` |
+| Rare/first-time (onboarding, confirmations) | Can allow slightly more noticeable motion — still within `eco-motion`'s tokens, still the slow tier at most |
 
 Every animation needs an answer to "why does this animate?" — spatial consistency (a drawer enters and exits from the same direction), state indication, preventing an abrupt jump, or feedback on a press. "It looks cool" isn't a reason if the user sees it often.
 
-**Which token tier, concretely:** this repo's `motion` skill already ties duration to on-screen distance (short/medium/long → fast/medium/slow) and easing to interaction type (`motion-ease-standard` for hover, `motion-ease-decelerate-emphasized` for things entering from off-screen, `motion-ease-accelerate-generic` for things leaving). Use that mapping — do not reach for a duration or curve outside those tables just because a source pattern suggests a specific millisecond value (e.g. "180ms feels faster than 400ms"); pick the nearest existing `motion` token in the right tier instead of inventing a new number.
+**Which token tier, concretely:** this repo's `eco-motion` skill already ties duration to on-screen distance (short/medium/long → fast/medium/slow) and easing to interaction type (`motion-ease-standard` for hover, `motion-ease-decelerate-emphasized` for things entering from off-screen, `motion-ease-accelerate-generic` for things leaving). Use that mapping — do not reach for a duration or curve outside those tables just because a source pattern suggests a specific millisecond value (e.g. "180ms feels faster than 400ms"); pick the nearest existing `eco-motion` token in the right tier instead of inventing a new number.
 
 Practical rules that apply regardless of which duration/easing token is chosen:
 - **Prefer CSS transitions over keyframes** for UI that can be triggered quickly/repeatedly (a toast that can appear multiple times, a toggle) — transitions can be interrupted and retargeted smoothly; keyframes restart from zero.
 - **Never animate a keyboard-triggered action.**
 - **Respect `prefers-reduced-motion`** — color/opacity transitions that aid comprehension may stay; movement/position animation should be removed.
 - **Popovers anchored to a trigger should scale from that trigger, not from center** (`transform-origin` matching the trigger's position) — the exception is modals, which stay centered because they aren't anchored to a specific trigger. This is a placement decision, not a new value, and doesn't conflict with any existing token.
-- **Don't invent a press-feedback scale value** (e.g. a button `:active` scale-down) even though it's a well-known polish pattern — no component skill currently defines one. If you notice buttons/cards feel unresponsive on press, flag it per step 3 as a possible gap in the `button`/`elevation` skills instead of adding an inline transform.
+- **Don't invent a press-feedback scale value** (e.g. a button `:active` scale-down) even though it's a well-known polish pattern — no component skill currently defines one. If you notice buttons/cards feel unresponsive on press, flag it per step 3 as a possible gap in the `eco-button`/`eco-elevation` skills instead of adding an inline transform.
 
 ### 7. Functionality (JS)
 
@@ -225,7 +237,7 @@ The five points under "Kvalitetskontroll — innan leverans" in `CLAUDE.md` (bre
 1. **Never free values.** No hex color, px number for spacing/shadow, or custom easing curve that doesn't already exist as a token/skill — even if it "looks better," and even if it came from a Figma file or an inspiration reference. If no token fits: flag and ask, don't build silently.
 2. **Never copy a finished page as a template.** See step 2.
 3. **Never more than one new skill at a time without checking in.** This skill existing doesn't change the `CLAUDE.md` rule about asking before `.claude/skills/` grows.
-4. **General "best practice" never beats a stated ECO design decision.** If a general web-design rule (e.g. "CTAs should be orange for attention," or a maximalist landing-page trend — oversized display type, gradient meshes, urgency/scarcity CTAs) collides with how the `button` skill defines variants, the `button` skill wins.
+4. **General "best practice" never beats a stated ECO design decision.** If a general web-design rule (e.g. "CTAs should be orange for attention," or a maximalist landing-page trend — oversized display type, gradient meshes, urgency/scarcity CTAs) collides with how the `eco-button` skill defines variants, the `eco-button` skill wins.
 5. **Ask when scope is unclear.** "Make a nice landing page" with no further detail → ask which page type (public/logged-in), what purpose/audience, and which sections should be included, before building. This also applies when an inspiration reference (Figma or Mobbin-like) is ambiguous about what's structure and what's style.
 6. **Inspiration references give structure, never style.** Color, typeface, spacing, radius, shadow, and easing in a Figma file or external reference are always replaced by ECO tokens — only flow/information architecture/content prioritization may inspire composition.
 7. **A well-known polish pattern is not a license to invent a value.** Press-feedback scales, stagger timings, or any other micro-interaction detail from outside sources gets flagged as a possible gap per step 3, not added inline just because it's good practice elsewhere.

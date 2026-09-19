@@ -64,9 +64,9 @@ files served at `https://unpkg.com/alligo-design-tokens@latest/...` at the time 
 (unpkg's `@latest` currently resolves to 0.0.8; the GitHub repo has a few unpublished commits
 ahead of that tag -- see the CDN note below). This file was cross-checked two ways:
 
-**Colors: 77/77 match.** Every color documented in CLAUDE.md's "Färger – Semantiska Tokens"
-table was diffed against `tokens.json` programmatically -- exact match on all 77, no
-discrepancies. Colors in this design system can be trusted to match CLAUDE.md.
+**Colors: 77/77 match.** Every color documented in the `eco-colors` skill's "Colors – Semantic
+Tokens" table was diffed against `tokens.json` programmatically -- exact match on all 77, no
+discrepancies. Colors in this design system can be trusted to match `eco-colors`.
 
 **Typography: 12 real discrepancies out of 40 checks (20 styles x 2 breakpoints).** Font sizes
 all match. Line-heights (and one letter-spacing) differ between what's live in the package and

@@ -1,35 +1,35 @@
 ---
 name: links-guide
-description: Använd INNAN du bygger en länk, för att avgöra om det ska vara en Inline Link (i löptext), Action Link (fristående) eller Tile Link (grafisk/prominent). Läs sedan skillen för den specifika länktypen.
+description: Use BEFORE building a link, to decide whether it should be an Inline Link (in body text), Action Link (standalone), or Tile Link (graphical/prominent). Then read the skill for the specific link type.
 ---
 
-> Del av designsystemet i swedol-ui-prototype. Se `CLAUDE.md` för teknikstack, mallregler, breakpoints och kvalitetschecklistan som alltid gäller utöver denna spec.
+> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
-## Länkar – Användningsriktlinjer (ECO Design System)
+## Links – Usage Guidelines (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1221-33213
 
-ECO Design System har tre länktyper: **Inline Link**, **Action Link** och **Tile Link**.
+The ECO Design System has three link types: **Inline Link**, **Action Link**, and **Tile Link**.
 
-### När ska länk användas?
+### When should a link be used?
 
-Använd länk när användaren ska:
-- Navigera till en annan sida inom sajten/applikationen
-- Navigera till en extern sajt
-- Hoppa till ett element på samma sida
-- Agera på något, t.ex. öppna e-post eller ringa ett nummer
+Use a link when the user should:
+- Navigate to another page within the site/application
+- Navigate to an external site
+- Jump to an element on the same page
+- Act on something, e.g. open email or call a number
 
-### Vilken länktyp?
+### Which link type?
 
-| Typ | Användning | Understrykning | Ikoner |
+| Type | Usage | Underline | Icons |
 |---|---|---|---|
-| **Inline Link** | Inuti meningar eller textblock | Alltid understruken | Aldrig |
-| **Action Link** | Fristående, inte i löptext | Understruken vid hover | Vänster och/eller höger |
-| **Tile Link** | Grafisk/prominent, som kort eller knapp | — | Med eller utan |
+| **Inline Link** | Inside sentences or text blocks | Always underlined | Never |
+| **Action Link** | Standalone, not in body text | Underlined on hover | Left and/or right |
+| **Tile Link** | Graphical/prominent, like a card or button | — | With or without |
 
-### Interaktion (alla länktyper)
+### Interaction (all link types)
 
-- **Mus:** klick var som helst på länktexten eller associerad ikon
-- **Tangentbord:** Enter-tangent när länken har fokus
+- **Mouse:** click anywhere on the link text or associated icon
+- **Keyboard:** Enter key while the link has focus
 
 ---

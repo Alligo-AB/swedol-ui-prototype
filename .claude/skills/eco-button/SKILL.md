@@ -1,77 +1,72 @@
 ---
 name: eco-button
-description: ECO Design System button component spec — variants, sizes per breakpoint, states, focus handling, and CSS template. Use whenever creating or editing a <button> in this repo. Read the eco-tokens skill first for the token names referenced below.
+description: Use when building, changing, or reviewing buttons (`<button>`, CTAs) in swedol-ui-prototype — all variants (Primary/Secondary/Blank/Destructive/Accent/System), sizes, and states (hover/focus/disabled) per the ECO Design System.
 ---
 
-# eco-button
+> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
-Component spec for buttons, condensed from CLAUDE.md's "Knapp-styling (ECO Design System)" section and rewritten to reference `eco-tokens` instead of hardcoded hex. Figma: `node-id=2007-68126` in the ECO Design System file.
+## Button Styling (ECO Design System)
 
-**Read `eco-tokens/SKILL.md` and `eco-tokens/tokens.json` first** — every color below is a token, not a literal value. If CLAUDE.md's button section and this file ever disagree on a color hex, trust the token in `tokens.json` (see "Known drift" in eco-tokens).
+**Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=2007-68126
 
-## Variants
+### Variants
 
 | Variant | Background | Text | Border |
 |---|---|---|---|
-| **Primary** | `color.surface-action-1` (`#000`) | `color.text-primary-inverted` (`#fff`) | — |
-| **Primary Inverted** | `color.surface-action-2` (`#fff`) | `color.text-primary` (`#000`) | — |
-| **Secondary** | transparent | `color.text-primary` | `1px solid` `color.border-action-1` |
-| **Secondary Inverted** | transparent | `color.text-primary-inverted` | `1px solid` `color.border-action-2` |
-| **Blank** | transparent | `color.text-primary` | — |
-| **Blank Inverted** | transparent | `color.text-primary-inverted` | — |
-| **Destructive** | `color.surface-danger-default` (`#d90000`) | `color.text-primary-inverted` | — |
-| **Accent** | `color.accent-default` (`#c7d300`) | `color.text-primary` | — |
-| **System** | transparent | `color.text-primary` | `1px solid` `color.border-action-3` (`rgba(0,0,0,.10)`) |
-| **System Selected** | `color.surface-opacity-black-12` | `color.text-primary` | `1px solid` `color.border-action-3` |
-| **Disabled** (any variant) | `color.surface-disabled` | `color.text-disabled` | — |
-| **Disabled Blank** | transparent | `color.text-disabled` | — |
+| **Primary** | `var(--color-surface-action-1)` | `var(--color-text-primary-inverted)` | — |
+| **Primary Inverted** | `var(--color-surface-action-2)` | `var(--color-text-primary)` | — |
+| **Secondary** | transparent | `var(--color-text-primary)` | `1px solid var(--color-border-action-1)` |
+| **Secondary Inverted** | transparent | `var(--color-text-primary-inverted)` | `1px solid var(--color-border-action-2)` |
+| **Blank** | transparent | `var(--color-text-primary)` | — |
+| **Blank Inverted** | transparent | `var(--color-text-primary-inverted)` | — |
+| **Destructive** | `var(--color-surface-danger-default)` | `var(--color-text-primary-inverted)` | — |
+| **Accent** | `var(--color-accent-default)` | `var(--color-text-action-accent)` | — |
+| **System** | transparent | `var(--color-text-primary)` | `1px solid var(--color-border-action-3)` = `border-action-3` |
+| **System Selected** | `var(--color-surface-opacity-black-12)` | `var(--color-text-primary)` | `1px solid var(--color-border-action-3)` = `border-action-3` |
+| **Disabled** (all variants) | `var(--color-surface-disabled)` | `var(--color-text-disabled)` | — |
+| **Disabled Blank** | transparent | `var(--color-text-disabled)` | — |
 
-`System` is for buttons that act at a system level (filters, sort, tool selection) — distinct from `Secondary` by its subtle semi-transparent border (`border-action-3`) instead of a solid black one. `System Selected` is the active/selected state of `System` — same border, `surface-opacity-black-12` background marks the selected state.
+> **System** is used for buttons that act at the system level (e.g. filter, sort, tool selection). Differs from Secondary via the subtle, semi-transparent border (`border-action-3`) instead of solid black.
+> **System Selected** is the active/selected state of System — same border, but with a `rgba(0,0,0,0.12)` background marking the selected state.
 
-## Sizes
+### Sizes — Desktop (`min-width: 769px` / breakpoint `lg-md`)
 
-Desktop (`min-width: 769px`, breakpoint `lg-md`):
-
-| Size | Height | Button padding | Text padding | Font |
+| Size | Height | Padding (button) | Inner padding (text) | Font |
 |---|---|---|---|---|
-| **lg** | 56px | 16px | `px-8px py-3px` | label-lg: 18px Bold, 0.18px spacing |
-| **md** | 48px | 12px | `px-8px py-3px` | label-lg: 18px Bold, 0.18px spacing |
-| **sm** | 40px | 8px | `px-8px py-4px` | label-md: 16px Bold, 0.48px spacing |
-| **xs** | 32px | 6px | `px-4px py-3px` | label-sm: 14px Bold, 0.56px spacing |
+| **lg** | 56px | `16px` | `px-8px py-3px` | label-lg: 18px Bold, 0.18px spacing |
+| **md** | 48px | `12px` | `px-8px py-3px` | label-lg: 18px Bold, 0.18px spacing |
+| **sm** | 40px | `8px` | `px-8px py-4px` | label-md: 16px Bold, 0.48px spacing |
+| **xs** | 32px | `6px` | `px-4px py-3px` | label-sm: 14px Bold, 0.56px spacing |
 
-Mobile (default, breakpoint `sm-xs`):
+### Sizes — Mobile (default / breakpoint `sm-xs`)
 
-| Size | Height | Padding | Font |
+| Size | Height | Padding (button) | Font |
 |---|---|---|---|
-| **lg** | 48px | 12px | label-lg: 16px Bold, 0.32px spacing |
-| **md** | 40px | 8px | label-lg: 16px Bold, 0.32px spacing |
-| **sm** | 32px | 6px | label-md: 14px Bold, 0.48px spacing |
-| **xs** | 32px | 6px | label-sm: 14px Bold, 0.56px spacing |
+| **lg** | 48px | `12px` | label-lg: 16px Bold, 0.32px spacing |
+| **md** | 40px | `8px` | label-lg: 16px Bold, 0.32px spacing |
+| **sm** | 32px | `6px` | label-md: 14px Bold, 0.48px spacing |
+| **xs** | 32px | `6px` | label-sm: 14px Bold, 0.56px spacing |
 
-Font sizes/line-heights/letter-spacing for `label-lg/md/sm` are in `eco-tokens/tokens.json` → `typography` (already split mobile/desktop) — use those values rather than retyping them, they're identical to what's above.
+### States
 
-## States
-
-| State | Rule |
+| State | Visual rule |
 |---|---|
 | **Enabled** | Base style per variant above |
-| **Hover — Primary / Destructive / Accent** | `background-image: linear-gradient(90deg, color.surface-opacity-white-20, color.surface-opacity-white-20), linear-gradient(90deg, [base color], [base color])` — white 20% overlay on top of the solid background |
-| **Hover — Secondary** | `background: color.surface-opacity-black-05` |
-| **Hover — Blank / icon buttons on light background** | `background: color.surface-opacity-black-05` — same rule as Secondary hover |
-| **Focus** | Ring shown **only on keyboard navigation** (Tab), never on click. `outline: 2px solid transparent; outline-offset: 2px;` on the button, then `body.keyboard-nav button:focus { outline-color: color.border-focus /* #455efb */ }`. Use the `outline` method, not a `::after` with `inset` — a button with a border (e.g. Secondary's 1px) loses its gap with the inset method (`inset:-3px − 1px border − 2px ring = 0px gap`); `outline` always measures from the outer border edge, so the 2px gap stays consistent regardless of variant. |
-| **Disabled** | Per Disabled row in the Variants table above. `cursor: not-allowed`. |
+| **Hover – Primary / Destructive / Accent** | `background-image: linear-gradient(90deg, var(--color-surface-opacity-white-20), var(--color-surface-opacity-white-20)), linear-gradient(90deg, [base color], [base color])` — white 20% overlay over the solid background color. |
+| **Hover – Secondary** | `background: var(--color-surface-opacity-black-05)` — subtle dark overlay on a transparent background. |
+| **Hover – Blank / icon buttons on a light background** | `background: var(--color-surface-opacity-black-05)` — same as Secondary hover. Used on `Blank` buttons and icon buttons on a white/light background. |
+| **Focus** | The focus ring only shows **on keyboard navigation** (Tab). Same mechanism as form elements: `body.keyboard-nav button:focus::after { opacity: 1 }`. Ring: `border: 2px solid var(--color-border-focus)`, `inset: -3px`, `border-radius: 0`, `opacity: 0` by default with a transition. |
+| **Disabled** | Bg `var(--color-surface-disabled)`, text `var(--color-text-disabled)`, `cursor: not-allowed` |
 
-`body.keyboard-nav` is set globally via JS on `Tab` keydown and removed on `mousedown`/`touchstart` — reuse the existing global listener rather than adding a second one; check `template.html`/`mypages-template.html` for it before writing a new one.
+> The focus ring is implemented as a global `button::after` rule with `opacity: 0` by default. `body.keyboard-nav` is set via JS when the user presses Tab, and removed on `mousedown`/`touchstart`. **Never** use `:focus-visible` for buttons — always use the `body.keyboard-nav` pattern for consistent behavior with the form elements.
 
-## Typography (all buttons)
-
+### Typography (all buttons)
 - Font: `Breuer Condensed Bold`, sans-serif
 - `text-transform: uppercase`
 - `white-space: nowrap`
 - `font-feature-settings: 'ss02' 1, 'ss03' 1` (for label-lg/md)
 
-## CSS template (Primary, adapt per variant/size using the tables above)
-
+### CSS template (Primary)
 ```css
 .btn {
   display: inline-flex;
@@ -84,42 +79,38 @@ Font sizes/line-heights/letter-spacing for `label-lg/md/sm` are in `eco-tokens/t
   font-weight: 700;
   text-transform: uppercase;
   white-space: nowrap;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  transition: outline-color 100ms cubic-bezier(.35,0,.35,1); /* duration-fast-2, ease-standard */
 }
-body.keyboard-nav .btn:focus { outline-color: var(--color-border-focus); }
 
-/* Sizes -- Desktop (md: 769px+) */
+/* Sizes – Desktop */
 .btn--lg { height: 56px; padding: 16px; font-size: 18px; letter-spacing: 0.18px; }
 .btn--md { height: 48px; padding: 12px; font-size: 18px; letter-spacing: 0.18px; }
 .btn--sm { height: 40px; padding: 8px;  font-size: 16px; letter-spacing: 0.48px; }
 .btn--xs { height: 32px; padding: 6px;  font-size: 14px; letter-spacing: 0.56px; }
-/* Mobile overrides (default, wrap desktop sizes above in @media (min-width: 769px) instead) */
+
+/* Sizes – Mobile (default, override with desktop: if needed) */
+/* lg-mobile = 48px, md-mobile = 40px, sm/xs-mobile = 32px */
 
 /* Variants */
-.btn--primary   { background: var(--color-surface-action-1); color: var(--color-text-primary-inverted); }
-.btn--secondary { background: transparent; color: var(--color-text-primary); border: 1px solid var(--color-border-action-1); }
-.btn--destructive { background: var(--color-surface-danger-default); color: var(--color-text-primary-inverted); }
-.btn--accent    { background: var(--color-accent-default); color: var(--color-text-primary); }
-.btn--blank     { background: transparent; color: var(--color-text-primary); }
-.btn--system    { background: transparent; color: var(--color-text-primary); border: 1px solid var(--color-border-action-3); }
-.btn--system.is-selected { background: var(--color-surface-opacity-black-12); }
+.btn--primary           { background: var(--color-surface-action-1); color: var(--color-text-primary-inverted); }
+.btn--secondary         { background: transparent; color: var(--color-text-primary); border: 1px solid var(--color-border-action-1); }
+.btn--destructive       { background: var(--color-surface-danger-default); color: var(--color-text-primary-inverted); }
+.btn--accent            { background: var(--color-accent-default); color: var(--color-text-action-accent); }
+.btn--blank             { background: transparent; color: var(--color-text-primary); }
 
 /* Hover */
-.btn--primary:hover, .btn--destructive:hover, .btn--accent:hover {
-  background-image: linear-gradient(90deg, var(--color-surface-opacity-white-20), var(--color-surface-opacity-white-20)),
-                     linear-gradient(90deg, currentColor, currentColor); /* replace currentColor with the variant's own bg var */
-}
-.btn--secondary:hover, .btn--blank:hover { background: var(--color-surface-opacity-black-05); }
+.btn--primary:hover     { background-image: linear-gradient(90deg,var(--color-surface-opacity-white-20),var(--color-surface-opacity-white-20)), linear-gradient(90deg,var(--color-surface-action-1),var(--color-surface-action-1)); }
+.btn--destructive:hover { background-image: linear-gradient(90deg,var(--color-surface-opacity-white-20),var(--color-surface-opacity-white-20)), linear-gradient(90deg,var(--color-surface-danger-default),var(--color-surface-danger-default)); }
+
+/* Focus — the outline method, NOT ::after with inset.
+   Reason: ::after with inset is positioned from the padding edge, not the border edge.
+   Buttons with a border (e.g. Secondary 1px solid) lose the gap (inset -3px - 1px border - 2px ring = 0px gap).
+   outline always measures from the outer border edge → a consistent 2px gap regardless of button variant. */
+button { position: relative; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color 100ms cubic-bezier(.35,0,.35,1); /* duration-fast-2, ease-standard */ }
+body.keyboard-nav button:focus { outline-color: var(--color-border-focus); }
 
 /* Disabled */
 .btn:disabled, .btn--disabled { background: var(--color-surface-disabled); color: var(--color-text-disabled); cursor: not-allowed; border: none; }
-.btn--blank:disabled { background: transparent; }
+.btn--blank:disabled           { background: transparent; }
 ```
 
-Note: the hover gradient's second `linear-gradient(90deg, X, X)` must use the variant's *own* solid background color (e.g. `var(--color-surface-action-1)` for Primary, `var(--color-surface-danger-default)` for Destructive, `var(--color-accent-default)` for Accent) — write it out per variant rather than `currentColor`, which was only a placeholder above.
-
-## Before shipping a new/changed button
-
-Per CLAUDE.md's quality-control checklist (applies repo-wide, not just buttons): verify the breakpoint switch actually happens at 769px (not 640px) by checking computed styles at ~375px, ~700px, and ~1024px+ — don't assume the CSS is right just because it reads correctly. Search the file for an existing `.btn`/button pattern before adding a new CSS class; extend, don't duplicate.
+---
