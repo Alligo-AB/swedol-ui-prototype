@@ -1,0 +1,32 @@
+<!-- test-review.html -->
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+    <style>
+        /* INTENTIONAL DEVIATIONS for testing */
+        .search-input {
+            border: 1px solid #e5e5e5;
+            /* Wrong: should be var(--color-border-input-default) */
+            padding: 12px;
+            /* Wrong: should match ECO Input spec */
+            color: #4f4f4f;
+            /* Wrong: should be var(--color-text-tertiary) */
+        }
+
+        button {
+            background: #0000ff;
+            /* Wrong: should be a proper ECO token */
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <input type="text" class="search-input" placeholder="Test search">
+        <button>Test Button</button>
+    </div>
+</body>
+
+</html>
