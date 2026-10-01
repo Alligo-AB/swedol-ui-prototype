@@ -1,7 +1,7 @@
 # =========================
 # macOS system files
 # =========================
-# .DS_Store
+.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -61,3 +61,7 @@ build/
 # =========================
 *.swp
 *~
+
+# Python cache
+__pycache__/
+*.py[cod]

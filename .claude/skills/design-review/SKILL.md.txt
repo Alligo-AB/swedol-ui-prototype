@@ -54,7 +54,7 @@ If Figma MCP is unavailable, stop the automated review and report that Figma MCP
 
 When you run the design-review skill:
 
-1. **Get the Jira key from the user command** (e.g., "Run design-review on AE-3036"). Ask for it only if no Jira key was provided.
+1. **Ask for Jira key** (e.g., "AE-3036")
 2. **Read the ticket** → Extract and classify Figma frame links, UAT/staging implementation URL, prototype/reference URLs, and acceptance criteria. Never substitute a prototype/reference URL for UAT.
 3. **Test implementation** → Compare the live UAT implementation against the linked Figma scope, Jira acceptance criteria, and ECO rules at the required responsive widths
 4. **Generate findings** → Severity-categorized report (Critical, Should-fix, Nice-to-have, To-confirm, Figma issues)
@@ -239,11 +239,11 @@ Every claim of a *visible* difference must be checked by rendering or measuring 
 
 **Page:** [URL]  
 **Figma frames:** [links per breakpoint]  
-**Sources:** Linked Figma scope + Jira acceptance criteria + ECO Design System  
+**Source of truth:** ECO Design System  
 **Method:** getComputedStyle + visual comparison
 
 ## 🔴 Critical        C1, C2 …
-## 🟠 Should fix      S1, S2 …
+## 🟠 Should fix      S-1, S-2 …
 ## 🟢 Nice-to-have    N1, N2 …
 ## ❓ To confirm      Q1, Q2 …
 ## 📐 Issues in Figma  F1, F2 …
@@ -262,7 +262,7 @@ The workflow generates annotated comparison images automatically:
 - **Implementation side:** Captured from the live UAT implementation using Claude in Chrome.
 - **Composed:** Figma + UAT side-by-side.
 - **Annotated:** Confirmed deviations are marked directly on the image.
-- **Tagged:** Use the same finding IDs as the written review where applicable (C1, S2, etc.).
+- **Tagged:** Use the same finding IDs as the written review where applicable (C1, S-2, etc.).
 - **Uploaded:** Automatically to Jira via the Jira REST attachment API.
 
 ### UAT comparison crop
@@ -413,7 +413,7 @@ The successful POST response already contains the Jira attachment ID and filenam
 
 Do not make a second POST request to retrieve the attachment ID. A second POST uploads the same image again and creates a duplicate Jira attachment.
 
-3. **Attach comparison images to the Jira ticket and embed them in the Jira review comment when the Jira comment format supports attachment embedding.** Reference every uploaded image by filename and caption. If inline embedding is not supported by the available Jira comment tool, keep the attachment on the ticket and reference its filename in the comment; do not fall back to manual browser upload.
+3. **Attach comparison images to the Jira ticket.** Inline embedding in the comment is optional. Reference each uploaded image by filename and caption in the review comment.
 
 ### Result
 
@@ -429,9 +429,9 @@ Developers see in the Jira ticket comment:
 ## 9. Error handling
 
 **If Atlassian MCP is not connected:**
-- Save the completed report and generated images under `/tmp`; do not create temporary review artifacts in the project repository.
-- Report: "Automatic posting is not configured. Please enable Atlassian MCP in connector settings."
-- Do not turn the automated workflow into a manual copy/paste or browser-upload workflow.
+- Fall back to generating a `.md` file the user can manually paste
+- Save the report and generated images under `/tmp`; do not create temporary review artifacts in the project repository.
+- Warn: "Automatic posting is not configured. Please enable Atlassian MCP in connector settings."
 
 **If Jira credentials are missing:**
 - Look for `.env` file
@@ -452,10 +452,9 @@ Developers see in the Jira ticket comment:
 ## 10. Corrections
 
 If a finding turns out wrong:
-1. Re-check the Figma, Jira and live UAT evidence before changing the finding.
-2. Update the existing Jira review comment using Atlassian MCP rather than creating a duplicate review comment.
-3. Regenerate and re-upload a comparison image only if the corrected finding changes that image. Do not re-upload unchanged images.
-4. Tell the user what changed.
+1. Edit the report file
+2. Re-run the Jira upload (update the existing comment or post a new one)
+3. Tell the user what changed
 
 ---
 
@@ -484,7 +483,7 @@ Run design-review skill on AE-3036
 
 **Page:** https://uat.swedol.se/company/users2
 **Figma:** Desktop (1440px), Tablet (768px), Mobile (375px)
-**Sources:** Linked Figma scope + Jira acceptance criteria + ECO Design System
+**Source:** ECO Design System + alligo-design-tokens
 **Method:** getComputedStyle + visual comparison
 
 ## 🔴 Critical (6)
@@ -493,13 +492,13 @@ Run design-review skill on AE-3036
 [Deviation details...]
 
 [IMAGE 1 EMBEDDED HERE - AE-3036_comparison_C1_S1_S3.png]
-*Image 1 – Desktop 1440px. Marks: C1, S1, S3.*
+*Image 1 – Desktop 1440px. Marks: C1, S-1, S-3.*
 
 ### C2. Row actions hidden on keyboard focus (WCAG)
 [Details...]
 
 [IMAGE 2 EMBEDDED HERE - AE-3036_comparison_C2_S6.png]
-*Image 2 – Row actions. Marks: C2, S6.*
+*Image 2 – Row actions. Marks: C2, S-6.*
 
 [... continues automatically ...]
 
@@ -517,7 +516,7 @@ Designer says: "Run design-review on AE-3036"
 ↓
 Claude reads ticket → finds Figma frames + UAT URL
 ↓
-Tests live UAT against the linked Figma scope + Jira acceptance criteria + ECO
+Tests UAT at 9 widths against ECO + Figma
 ↓
 Generates comparison image(s) as needed (annotated)
 ↓
