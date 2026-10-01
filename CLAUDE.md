@@ -52,6 +52,8 @@ Both templates already have the header/footer/main menu wired up via shared part
 
 See `index.html` (repo root) for the full sitemap — it's a page overview that links to every page in the prototype and tags each one as "new"/"updated"/"in progress"/"archive" per page type.
 
+**Images:** all images live in one folder, `images/` in the repo root. Reference them as `/images/<file>` (root-absolute) in `mypages/` pages and all partials, since partials are injected into both root and `mypages/` pages. Never create a per-folder `images/` copy (no `mypages/images/`, `tokens/images/`). Exception: `email/images/`, separate on purpose for email HTML. Requires the server to run from the repo root (`npx serve .`).
+
 ---
 
 ## Breakpoints (ECO Design System)
@@ -132,6 +134,19 @@ Every component in the ECO Design System is its own skill under `.claude/skills/
 |---|---|
 | `prototype-guide` | The starting point for ALL creative work — a new prototype, page, product/service page, UI/UX flow, or feature for Swedol, whether the assignment starts from a Figma prototype, a brainstorm, or a spec. Ties together general web-design quality (hierarchy, layout, micro-animation, structured critique) and inspiration references (e.g. Mobbin — structure, never style) with the ECO Design System rules, and routes into the right component skills below. Read this FIRST. |
 
+**Adding to the design system**
+
+| Skill | Used when |
+|---|---|
+| `eco-add-component` | Use when adding a NEW component (a new `eco-*` skill from a Figma component) or substantially changing an existing one — Figma extraction → token mapping → skill template → CLAUDE.md index → verification checklist. Read this FIRST so every component skill keeps the same standard. |
+| `eco-doc-page` | Use when building or changing a documentation/showcase page for the ECO Design System (foundations like colors, components like button/radio) in `eco-design-system/` — page structure, section order, shared `docs.css` classes, live-from-tokens rules, overview hub, registration in index.html. |
+
+**Reviewing what developers built**
+
+| Skill | Used when |
+|---|---|
+| `design-review` | Comparing a developer-built page/component (UAT/staging URL or code) against the Figma design (one frame per breakpoint) and the ECO rules, and producing a severity-grouped report for the developers — as a file and/or Jira comment, optionally with annotated Figma-vs-implementation images and a placement guide for where each image goes in the comment. |
+
 **Foundational tokens**
 
 | Skill | Used when |
@@ -152,6 +167,7 @@ Every component in the ECO Design System is its own skill under `.claude/skills/
 | `eco-select` | Use when building or reviewing select fields/dropdowns — sizes, states, and the dropdown arrow per the ECO Design System. |
 | `eco-segment-control` | Use when building or reviewing a segmented control (pill toggle) for switching between two related views/filters in the same surface — sizes, the sliding-pill interaction, and states. Never replaces Tabs or Radio buttons. |
 | `eco-checkbox` | Use when building or reviewing checkboxes — light mode (standard and the detailed table icon variant) and dark mode, including all states (enabled/hover/focus/selected/indeterminate/disabled). |
+| `eco-radio` | Use when building or reviewing radio buttons — a list of two or more mutually exclusive options where exactly one can be chosen. Sizes (Large/Small), all states (enabled/hover/focus/selected/selected hover/selected focus/disabled/disabled selected), label + optional hint message. |
 
 **Layout**
 

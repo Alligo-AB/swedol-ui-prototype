@@ -38,7 +38,7 @@ Both sizes take the full width of their container (`width: 100%`). No fixed widt
 | Property | Desktop (`md:` 769px+) | Mobile/Tablet (`xs`/`sm` ≤768px) |
 |---|---|---|
 | Height | `48px` (`min-height`) | `40px` (`min-height`) |
-| Padding | `12px` all sides | `8px` all sides |
+| Padding | `12px` top/bottom, `16px` left/right | `8px` top/bottom, `16px` left/right |
 | Icon | 24px | 24px |
 | Left border width | `2px` | `2px` |
 | Title text | `label-sm` Desktop: 14px, 0.56px, Bold, uppercase | `label-sm` Mobile: 12px, 0.48px, Bold, uppercase |
@@ -54,13 +54,13 @@ Both sizes take the full width of their container (`width: 100%`). No fixed widt
 | Gap icon → text | `12px` | `12px` | `8px` |
 | Gap title → body | `12px` | `8px` | `8px` |
 | Title (`title-md`) | 20px/24px, 0px, Bold | 18px/22px, 0px, Bold (mobile scale) | 18px/22px, 0px, Bold (mobile scale) |
-| Body (`body-md`) | 16px/24px, 0.32px, Regular | 16px/22px, 0.32px, Regular (mobile scale) | 16px/22px, 0.32px, Regular (mobile scale) |
+| Body (`body-md`) | 17px/24px, 0.32px, Regular | 16px/22px, 0.32px, Regular (mobile scale) | 16px/22px, 0.32px, Regular (mobile scale) |
 | Footer indent (`padding-left`, aligns under text) | `60px` (= icon 48 + gap 12) | `52px` (= icon 40 + gap 12) | `32px` (= icon 24 + gap 8) |
 | Button group | `pt-24px`, `gap-8px`, buttons are **xs** size | same | same |
 | Button text | `label-sm` desktop: 14px/14px, 0.56px | `label-sm` mobile: 12px/12px, 0.48px | `label-sm` mobile: 12px/12px, 0.48px |
-| Text link (optional, below buttons) | `body-md` 16px/24px, 0.32px, underline | `body-md` mobile scale | `body-md` mobile scale |
+| Text link (optional, below buttons) | `body-md` 17px/24px, 0.32px, underline | `body-md` mobile scale | `body-md` mobile scale |
 
-> **Large** always shows a status icon (48/40/24px), a `title-md` heading, `body-md` body copy, and a `Notification / Section / Footer - Call to Action` action group (Primary + Secondary/Blank buttons, optional text link below) — see Anatomy below. This is a heavier content contract than `Small`; don't use `Large` for a simple one-line status message.
+> **Large** always shows a status icon (48/40/24px), a `title-md` heading, `body-md` body copy, and a `Notification / Section / Footer - Call to Action` action group (Secondary + Blank buttons, optional text link below — no Primary button in Figma) — see Anatomy below. This is a heavier content contract than `Small`; don't use `Large` for a simple one-line status message.
 
 ---
 
@@ -72,11 +72,13 @@ Three tiers, same ladder for both `Small` and `Large` (only the left-border widt
 
 | Emphasis | Background | Left border | Other borders | Text color |
 |---|---|---|---|---|
-| **Strong** | `var(--color-surface-{status}-default)` (solid status color) | `var(--color-surface-{status}-weaker)` | none | `var(--color-text-primary-inverted)` (white) |
-| **Weak** | `var(--color-surface-{status}-weaker)` | `var(--color-surface-{status}-default)` | `Small`: `1px solid var(--color-surface-{status}-weaker)` (same tone as bg). `Large`: `1px solid var(--color-border-{status}-weak)` | `var(--color-text-primary)` (black) |
+| **Strong** | `var(--color-surface-{status}-default)` (solid status color) | `var(--color-surface-{status}-weaker)` | none (`Large`: `1px solid var(--color-border-{status}-default)`, same tone as bg) | `var(--color-text-primary-inverted)` (white) |
+| **Weak** | `var(--color-surface-{status}-weaker)` | `var(--color-surface-{status}-default)` | `1px solid var(--color-border-{status}-weaker)` (same tone as bg). Figma's tablet Large uses `border-{status}-weak` — likely a Figma inconsistency, `-weaker` used at every breakpoint. | `var(--color-text-primary)` (black) |
 | **Weaker** | `var(--color-surface-raised-primary)` (white) | `var(--color-surface-{status}-default)` | none | `var(--color-text-primary)` (black) |
 
 `{status}` = `information` / `success` / `warning` / `danger` (Error uses the `danger` token family).
+
+> **Shadow:** `Small` — only `Weaker` has `elevation-b-20`; `Strong` and `Weak` have none. `Large` — all three tiers have `elevation-b-20`.
 
 > **Strong is the old `System Extra Strong`.** The solid-color, white-text, high-priority treatment (e.g. admin impersonation — "Din roll är ADMINISTRATÖR och du agerar tillfälligt som [namn]") now lives at `Strong` emphasis, left-aligned like every other tier — it's no longer a separate centered variant. If you're migrating old markup that used a centered `.banner-notification--extra-strong` layout, switch it to the standard left-aligned `Strong` layout (see CSS template below); centering is no longer part of the spec.
 
@@ -87,7 +89,7 @@ Three tiers, same ladder for both `Small` and `Large` (only the left-border widt
 | **Informational** | `var(--color-surface-information-default)` | `var(--color-surface-information-weaker)` | `var(--color-surface-information-default)` / `var(--color-surface-information-weaker)` | `var(--color-text-information-default)` | `info` |
 | **Error** | `var(--color-surface-danger-default)` | `var(--color-surface-danger-weaker)` | `var(--color-surface-danger-default)` / `var(--color-surface-danger-weaker)` | `var(--color-text-danger-default)` | `error` |
 | **Success** | `var(--color-surface-success-default)` | `var(--color-surface-success-weaker)` | `var(--color-surface-success-default)` / `var(--color-surface-success-weaker)` | `var(--color-text-success)` | `check_circle` |
-| **Warning** | `var(--color-surface-warning-default)` | `var(--color-surface-warning-weaker)` | `var(--color-surface-warning-default)` / `var(--color-surface-warning-weaker)` | `var(--color-border-warning-default)` (no dedicated `text-warning` token) | `warning_amber` |
+| **Warning** | `var(--color-surface-warning-default)` | `var(--color-surface-warning-weaker)` | `var(--color-surface-warning-default)` / `var(--color-surface-warning-weaker)` | `var(--color-border-warning-default)` (no dedicated `text-warning` token) | `warning` |
 
 #### Usage guidance per status
 
@@ -130,7 +132,7 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
 ```
 [8px border] [Icon 48px] [Title — title-md]                        [✕ close 20px]
                           [Body text — body-md]
-                          [Primary button] [Secondary/Blank button]
+                          [Secondary button] [Blank button]
                           [Text link]
 ```
 
@@ -142,7 +144,7 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
 
 - **Gap** icon–text: `12px` (Large desktop) / `8px` (Small). Gap title–link (Promotion): `4px`
 - **Close button**: Blank xs, `close`-icon 20px, `padding: 2px`
-- **Shadow**: `elevation-b-20` = `var(--shadow-elevation-b-20)`
+- **Shadow**: `elevation-b-20` = `var(--shadow-elevation-b-20)` — `Small`: Weaker only; `Large`: all tiers (see Emphasis)
 
 ---
 
@@ -154,7 +156,6 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
   display: flex;
   align-items: stretch;
   width: 100%;
-  box-shadow: var(--shadow-elevation-b-20);
 }
 
 .banner-notification__base {
@@ -182,13 +183,13 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
   display: flex;
   gap: 8px;
   align-items: flex-start;
-  padding: 12px;
+  padding: 12px 16px;
   width: 100%;
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
-  .banner-notification__inner { padding: 8px; }
+  .banner-notification__inner { padding: 8px 16px; }
 }
 
 .banner-notification__content {
@@ -267,17 +268,17 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
 .banner-notification--weak.banner-notification--success .banner-notification__left-border { background: var(--color-surface-success-default); }
 .banner-notification--weak.banner-notification--warning .banner-notification__left-border { background: var(--color-surface-warning-default); }
 
-.banner-notification--weak.banner-notification--info    .banner-notification__container { border-color: var(--color-surface-information-weaker); }
-.banner-notification--weak.banner-notification--error   .banner-notification__container { border-color: var(--color-surface-danger-weaker); }
-.banner-notification--weak.banner-notification--success .banner-notification__container { border-color: var(--color-surface-success-weaker); }
-.banner-notification--weak.banner-notification--warning .banner-notification__container { border-color: var(--color-surface-warning-weaker); }
+.banner-notification--weak.banner-notification--info    .banner-notification__container { border-color: var(--color-border-information-weaker); }
+.banner-notification--weak.banner-notification--error   .banner-notification__container { border-color: var(--color-border-danger-weaker); }
+.banner-notification--weak.banner-notification--success .banner-notification__container { border-color: var(--color-border-success-weaker); }
+.banner-notification--weak.banner-notification--warning .banner-notification__container { border-color: var(--color-border-warning-weaker); }
 .banner-notification--weak.banner-notification--info    .banner-notification__icon { color: var(--color-text-information-default); }
 .banner-notification--weak.banner-notification--error   .banner-notification__icon { color: var(--color-text-danger-default); }
 .banner-notification--weak.banner-notification--success .banner-notification__icon { color: var(--color-text-success); }
 .banner-notification--weak.banner-notification--warning .banner-notification__icon { color: var(--color-border-warning-default); }
 
 /* Emphasis — Weaker: white background, colored left border only, no edge */
-.banner-notification--weaker { background: var(--color-surface-raised-primary); }
+.banner-notification--weaker { background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); }
 .banner-notification--weaker .banner-notification__container { border: none; }
 .banner-notification--weaker .banner-notification__text,
 .banner-notification--weaker .banner-notification__title,
@@ -343,7 +344,7 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
 
 .banner-notification--large .banner-notification__body {
   font-family: 'Breuer Condensed', sans-serif;
-  font-size: 16px;
+  font-size: 17px;          /* body-md desktop; 16px/22px below 769px */
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.32px;
@@ -351,7 +352,7 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
   margin-top: 12px;
 }
 @media (max-width: 768px) {
-  .banner-notification--large .banner-notification__body { line-height: 22px; margin-top: 8px; }
+  .banner-notification--large .banner-notification__body { font-size: 16px; line-height: 22px; margin-top: 8px; }
 }
 
 .banner-notification--large .banner-notification__footer {
@@ -488,7 +489,7 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
     </div>
     <div class="banner-notification__footer">
       <div class="banner-notification__btn-group">
-        <button class="btn btn--primary btn--xs">Go to cart</button>
+        <button class="btn btn--secondary btn--xs">Go to cart</button>
         <button class="btn btn--blank btn--xs">Choose accessories</button>
       </div>
       <a href="#" class="banner-notification__link">Text link</a>

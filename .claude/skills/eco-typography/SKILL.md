@@ -10,6 +10,7 @@ description: Use when choosing or reviewing typography/text styles (Body, Alt-La
 > **Known discrepancies, not changed here — require confirmation before changing in code:**
 > - **`display-lg` on mobile** is `66px/60px` in the live package (same as desktop) — the table below keeps `36px/34px` as the documented value since `66px` is likely an unintentional Supernova export bug (a 66px heading at 375px width would be broken). Confirm with design before either value is used.
 > - **Font-weight** for Body (documented as 400) and Alt-Label (documented as 500) differs from `tokens.json` (500 and 600 respectively) — not changed here, flag for confirmation before changing the weight in code, since it affects already-built pages.
+> - **Stylistic sets (`ss02`/`ss03`/`ss06`) are not in the web fonts.** The `font-feature-settings` rules below match Figma, but the Breuer Condensed web font files in `alligo-design-tokens` (`dist/fonts/breuercondensed-*-webfont.woff`) only contain the OpenType features `frac`, `liga` and `sups` (checked 2026-09-28; the swedol.se UAT fonts are the same). In the browser the setting therefore has no visible effect, and glyphs cannot match Figma's alternates until the web fonts are rebuilt with the sets kept. Keep writing the declaration (it is harmless and correct once the fonts are fixed), but never report a missing or present `font-feature-settings` as a visible difference without comparing the rendered glyphs first.
 
 ## Typography – Desktop Base Styling (ECO Design System)
 

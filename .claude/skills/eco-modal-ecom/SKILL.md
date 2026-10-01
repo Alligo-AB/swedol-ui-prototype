@@ -30,13 +30,13 @@ Desktop and Tablet: the modal is centered in the viewport. The background overla
 
 | Size | Desktop (`md:` 769px+) | Tablet (`sm:` 640–768px) | Mobile (`xs:` 0–639px) |
 |---|---|---|---|
-| **Small** | `440px` | `440px` | Fills the whole viewport |
-| **Medium** | `600px` | `576px` | Fills the whole viewport |
-| **Large** | `705px` | `576px` | Fills the whole viewport |
+| **Small** | `440px` | `440px` | `375px` wide card, height by content (not full screen) |
+| **Medium** | `600px` | `576px` | — (no xs variant in Figma; use Large) |
+| **Large** | `705px` | `576px` | Fills the whole viewport (`375px` × `813px` in Figma) |
 
 > Choose the size based on the amount of content. Small for simple confirmations, Medium/Large for more complex information.
 
-> **xs (Mobile):** The modal is **not** centered. It fills the whole viewport: `position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; padding: 16px`. The header+body section has `flex: 1` so the buttons are pinned to the bottom. A close button (`×`) is shown at the top.
+> **xs (Mobile), Large:** The modal is **not** centered. It fills the whole viewport (Small stays a compact `375px` card with `padding: 16px` and `24px` above the buttons): `position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; padding: 16px`. The header+body section has `flex: 1` so the buttons are pinned to the bottom. A close button (`×`) is shown at the top.
 
 ---
 
@@ -68,7 +68,7 @@ Body text
 |---|---|---|
 | **Label** (optional) | `alt-label-sm`: 14px/14px, 0.56px, Medium(500), uppercase, `text-secondary` var(--color-text-secondary) | 12px/12px, 0.48px |
 | **Title** | `title-md`: 20px/24px, 0px, Bold | `title-md`: 18px/22px, 0px, Bold |
-| **Body text** | `body-md`: 16px/24px, 0.32px, Regular, `text-secondary` var(--color-text-secondary) | 16px/22px, 0.32px |
+| **Body text** | `body-md`: 17px/24px, 0.32px, Regular, `text-secondary` var(--color-text-secondary) | 16px/22px, 0.32px |
 | **Button text** | `label-sm`: 14px/14px, 0.56px, Bold, uppercase | `label-md`: 14px/14px, 0.48px, Bold, uppercase |
 
 ---
@@ -204,7 +204,7 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 /* Body */
 .modal__body {
   font-family: 'Breuer Condensed', sans-serif;
-  font-size: 16px;          /* body-md */
+  font-size: 17px;          /* body-md desktop; 16px/22px below 769px */
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.32px;
@@ -214,7 +214,7 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 }
 
 @media (max-width: 768px) {
-  .modal__body { line-height: 22px; }
+  .modal__body { font-size: 16px; line-height: 22px; }
 }
 
 /* Button group */

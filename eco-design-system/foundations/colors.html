@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colors – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+</head>
+<body>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#foundations" class="breadcrumb-item">Foundations</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Colors</span>
+    </div>
+  </nav>
+</div>
+
+<!-- ── Intro ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Foundations</span>
+    <h1 class="ds-title">Colors</h1>
+    <p class="ds-lead">Color in ECO is <strong>semantic</strong>. A token says what a color is <em>for</em>, not what it looks like, so text, surfaces, borders and status each have their own family and a component never needs a raw hex value.</p>
+    <p class="ds-lead">Swatches on this page use <code>var(--color-…)</code> directly. When the token package is updated, this page updates with it.</p>
+    <p class="ds-lead">Every semantic color token from <code>alligo-design-tokens</code>, live from the CDN this site already loads. Sourced from <code>.claude/skills/eco-tokens/tokens.json</code>.</p>
+  </div>
+</section>
+
+<!-- ── On-page navigation: sticks to the top of the browser when reached ── -->
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#neutrals">Neutrals</a></li>
+    <li><a href="#brand">Brand accent</a></li>
+    <li><a href="#text">Text &amp; icon</a></li>
+    <li><a href="#border">Border</a></li>
+    <li><a href="#status">Status</a></li>
+    <li><a href="#state">Action &amp; state</a></li>
+    <li><a href="#overlay">Overlays</a></li>
+    <li><a href="#usage">Usage</a></li>
+  </ul>
+</nav>
+
+
+
+<!-- ── Neutrals ──────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="neutrals">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Neutrals</h2>
+    <p class="ds-desc">Black, white and a ladder of greys carry most of the interface. Swedol is monochrome by design, which keeps the brand accent scarce and meaningful. Numbers follow the share of black: <code>surface-100</code> is black, <code>surface-02</code> is almost white.</p>
+    <div class="ds-ramp" id="ramp" role="img" aria-label="Neutral surface scale from surface-100 (black) to surface-02 (near white)"></div>
+    <div class="ds-grid" id="g-neutral"></div>
+    <h3 class="ds-h3">Page and raised surfaces</h3>
+    <p class="ds-desc">Every page sits on <code>background-primary</code>. Full-width sections alternate between <code>surface-raised-primary</code> and <code>surface-raised-secondary</code>, if nothing else is stated, and a card takes the opposite surface of the section it sits in, so it always reads as raised. Never pick a grey by hand.</p>
+    <figure class="ds-layers" aria-label="Layering: page background, two alternating sections, and cards on the opposite surface">
+      <div class="ds-layer ds-layer--page">
+        <span class="ds-layer__tag">Page · background-primary</span>
+        <div class="ds-layer ds-layer--primary">
+          <span class="ds-layer__tag">Section · surface-raised-primary</span>
+          <div class="ds-layer__row">
+            <div class="ds-layer ds-layer--secondary ds-layer--card"><span class="ds-layer__tag">Card · surface-raised-secondary</span><i></i><i></i></div>
+            <div class="ds-layer ds-layer--secondary ds-layer--card"><span class="ds-layer__tag">Card · surface-raised-secondary</span><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="ds-layer ds-layer--secondary">
+          <span class="ds-layer__tag">Section · surface-raised-secondary</span>
+          <div class="ds-layer__row">
+            <div class="ds-layer ds-layer--primary ds-layer--card"><span class="ds-layer__tag">Card · surface-raised-primary</span><i></i><i></i></div>
+            <div class="ds-layer ds-layer--primary ds-layer--card"><span class="ds-layer__tag">Card · surface-raised-primary</span><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </figure>
+    <div class="ds-grid" id="g-page"></div>
+  </div>
+</section>
+
+<!-- ── Brand accent ──────────────────────────────────────────── -->
+<section class="ds-section" id="brand">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Brand accent</h2>
+    <p class="ds-desc">The Swedol lime. Use it for emphasis and brand moments, not for decoration and not for text on white: its contrast is too low. Light accent works as a highlight surface, for example in table headings.</p>
+    <div class="ds-grid ds-grid--feature" id="g-accent"></div>
+  </div>
+</section>
+
+<!-- ── Text & icon ───────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="text">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Text &amp; icon</h2>
+    <p class="ds-desc">Choose the text token by role: <code>primary</code> for content, <code>secondary</code> and <code>tertiary</code> for support, <code>action</code> for links and buttons. The badge on each swatch is the WCAG contrast on the intended surface: white, or black for inverted and on-black tokens.</p>
+    <h3 class="ds-h3">Text</h3>
+    <div class="ds-grid" id="g-text"></div>
+    <h3 class="ds-h3">Icon</h3>
+    <div class="ds-grid" id="g-icon"></div>
+  </div>
+</section>
+
+<!-- ── Border ────────────────────────────────────────────────── -->
+<section class="ds-section" id="border">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Border</h2>
+    <p class="ds-desc">Borders separate and outline. Default structure uses <code>primary</code> to <code>tertiary</code>; interactive states (hover, focus, selected) have their own tokens so the change is always the same across components.</p>
+    <div class="ds-grid" id="g-border"></div>
+  </div>
+</section>
+
+<!-- ── Status ────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="status">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Status</h2>
+    <p class="ds-desc">Information, success, warning and danger each come as a matched set. <code>default</code> is the strong version, <code>weak</code> and <code>weaker</code> tone it down for backgrounds. Use them for status only, never for branding.</p>
+    <div class="ds-status" id="g-status"></div>
+  </div>
+</section>
+
+<!-- ── Action & state ────────────────────────────────────────── -->
+<section class="ds-section" id="state">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Action &amp; state</h2>
+    <p class="ds-desc">Fills for buttons, navigation and disabled controls.</p>
+    <div class="ds-grid" id="g-state"></div>
+  </div>
+</section>
+
+<!-- ── Overlays ──────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="overlay">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Overlays</h2>
+    <p class="ds-desc">Transparent black and white for hover fills, scrims and layers. The checkerboard shows the transparency.</p>
+    <div class="ds-grid" id="g-overlay"></div>
+  </div>
+</section>
+
+<!-- ── Usage ─────────────────────────────────────────────────── -->
+<section class="ds-section" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <p class="ds-desc" id="coverage"></p>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do">
+        <h3 class="ds-rule__title">Do</h3>
+        <ul>
+          <li>Write <code>var(--color-…)</code>. Look the name up in <code>tokens.json</code>.</li>
+          <li>Pick the token by role (text, surface, border, status), not by how it looks.</li>
+          <li>Use inverted text and icon tokens on dark surfaces.</li>
+          <li>Keep status colors for status: information, success, warning, danger.</li>
+        </ul>
+      </div>
+      <div class="ds-rule ds-rule--dont">
+        <h3 class="ds-rule__title">Don’t</h3>
+        <ul>
+          <li>Hardcode hex or rgb, even when it matches a token today.</li>
+          <li>Use the brand accent as text color on white.</li>
+          <li>Put light-mode tokens on a dark surface.</li>
+          <li>Invent a new grey. If nothing fits, ask before adding a value.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script>
+(function () {
+  var TOKENS_URL = '../../.claude/skills/eco-tokens/tokens.json';
+
+  /* ── helpers ─────────────────────────────────────────────── */
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function parseHex(h) {           // #rgb | #rrggbb | #rrggbbaa -> [r,g,b,a]
+    h = h.replace('#', '');
+    if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join('');
+    var n = parseInt(h.slice(0, 6), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255, h.length === 8 ? parseInt(h.slice(6), 16) / 255 : 1];
+  }
+  function lum(rgb) {
+    var c = rgb.slice(0, 3).map(function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function contrast(a, b) {
+    var l1 = lum(a), l2 = lum(b);
+    return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+  }
+  function rgbText(rgb) {
+    return rgb[3] < 1
+      ? 'rgba(' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ', ' + Math.round(rgb[3] * 100) / 100 + ')'
+      : 'rgb(' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ')';
+  }
+  function isDarkText(k) { return /inverted|on-black/.test(k); }
+
+  /* ── swatch card ─────────────────────────────────────────── */
+  function copyBtn(t) {
+    var b = el('button', 'ds-swatch__copy', 'var(' + t.var + ')');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Copy var(' + t.var + ')');
+    b.addEventListener('click', function () {
+      var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'var(' + t.var + ')'; }, 1200); };
+      if (navigator.clipboard) navigator.clipboard.writeText('var(' + t.var + ')').then(done, done); else done();
+    });
+    return b;
+  }
+  var drift = 0;
+  var rootCS = getComputedStyle(document.documentElement);
+  var probe = document.body.appendChild(el('span'));
+  probe.style.display = 'none';
+  function liveStatus(t, rgb) {     // compare tokens.json with what the CDN package really defines
+    if (!rootCS.getPropertyValue(t.var).trim()) return 'Not in the current token package (tokens.json is out of date).';
+    probe.style.color = 'var(' + t.var + ')';
+    var m = getComputedStyle(probe).color.match(/[\d.]+/g).map(Number);
+    var a = m.length > 3 ? m[3] : 1;
+    if (Math.abs(m[0] - rgb[0]) > 1 || Math.abs(m[1] - rgb[1]) > 1 || Math.abs(m[2] - rgb[2]) > 1 || Math.abs(a - rgb[3]) > 0.02)
+      return 'Live value differs: ' + (a < 1 ? 'rgba(' + m.join(', ') + ')' : 'rgb(' + m.slice(0, 3).join(', ') + ')') + '. tokens.json is out of date.';
+    return '';
+  }
+  function getLive(t) {
+    if (!rootCS.getPropertyValue(t.var).trim()) return null;
+    probe.style.color = 'var(' + t.var + ')';
+    var m = getComputedStyle(probe).color.match(/[\d.]+/g).map(Number);
+    return [m[0], m[1], m[2], m.length > 3 ? m[3] : 1];
+  }
+  function card(key, t, kind) {
+    var rgb = parseHex(t.value);
+    var eff = getLive(t) || rgb;   // contrast uses what the package really renders
+    var c = el('div', 'ds-swatch');
+    var chip = el('div', 'ds-swatch__chip' + (rgb[3] < 1 ? ' ds-swatch__chip--checker' : ''));
+    chip.setAttribute('aria-hidden', 'true');
+    var fill = el('span');
+    if (kind === 'text' || kind === 'icon') {
+      var dark = isDarkText(key);
+      chip.style.background = dark ? 'var(--color-surface-100)' : 'var(--color-surface-raised-primary)';
+      fill.textContent = 'Aa';
+      fill.style.cssText = 'color: var(' + t.var + '); font-size: 40px; line-height: 1; font-weight: 700;';
+      if (kind === 'text') {
+        var r = contrast(eff, dark ? [0, 0, 0] : [255, 255, 255]);
+        var badge = el('span', 'ds-swatch__aa', r.toFixed(1) + ':1 · ' + (r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : r >= 3 ? 'AA large' : 'Fail'));
+        chip.style.flexDirection = 'column'; chip.style.justifyContent = 'space-between'; chip.style.alignItems = 'flex-start';
+        fill.style.height = 'auto'; fill.style.width = 'auto';
+        chip.appendChild(fill); chip.appendChild(badge);
+      } else chip.appendChild(fill);
+    } else if (kind === 'border') {
+      fill.style.cssText = 'border: 6px solid var(' + t.var + '); background: var(--color-surface-raised-primary);';
+      chip.appendChild(fill);
+    } else {
+      fill.style.background = 'var(' + t.var + ')';
+      chip.appendChild(fill);
+    }
+    if (kind !== 'text') chip.style.padding = '8px';
+    c.appendChild(chip);
+    var body = el('div', 'ds-swatch__body');
+    body.appendChild(el('span', 'ds-swatch__name', key));
+    body.appendChild(el('span', 'ds-swatch__meta', t.value + ' · ' + rgbText(rgb)));
+    if (t.description && t.description !== 'TBA') body.appendChild(el('span', 'ds-swatch__desc', t.description));
+    var warn = liveStatus(t, rgb);
+    if (warn) { drift++; body.appendChild(el('span', 'ds-swatch__warn', warn)); }
+    body.appendChild(copyBtn(t));
+    c.appendChild(body);
+    return c;
+  }
+
+  /* ── groups ──────────────────────────────────────────────── */
+  var STATUS = ['information', 'success', 'warning', 'danger'];
+  var RAMP = ['100', '90', '80', '70', '60', '50', '40', '30', '20', '15', '10', '05', '02'];
+  var shown = {};
+
+  function place(id, keys, colors, kind) {
+    var host = document.getElementById(id);
+    keys.forEach(function (k) {
+      if (!colors[k] || shown[k]) return;
+      shown[k] = 1;
+      host.appendChild(card(k, colors[k], kind));
+    });
+  }
+
+  var GROUPS = ['g-neutral', 'g-page', 'g-accent', 'g-text', 'g-icon', 'g-border', 'g-state', 'g-overlay', 'g-status', 'ramp'];
+  function build(colors) {
+    GROUPS.forEach(function (id) { document.getElementById(id).textContent = ''; });
+    var old = document.getElementById('other'); if (old) old.remove();
+    shown = {}; drift = 0;
+    var keys = Object.keys(colors);
+    var isStatus = function (k) { return new RegExp('^(surface|border)-(' + STATUS.join('|') + ')-').test(k); };
+
+    // Ramp + neutral cards
+    var ramp = document.getElementById('ramp');
+    var rk = RAMP.map(function (n) { return 'surface-' + n; });
+    rk.forEach(function (k) {
+      var t = colors[k]; if (!t) return;
+      var s = el('div', 'ds-ramp__step', k.replace('surface-', ''));
+      s.style.background = 'var(' + t.var + ')';
+      s.style.color = contrast(parseHex(t.value), [0, 0, 0]) > 4.5 ? 'var(--color-text-primary)' : 'var(--color-text-primary-inverted)';
+      ramp.appendChild(s);
+    });
+    place('g-neutral', rk.concat(['greyscale-black']), colors, 'fill');
+    place('g-page', ['background-primary', 'background-secondary', 'surface-raised-primary', 'surface-raised-secondary'], colors, 'fill');
+
+    place('g-accent', keys.filter(function (k) { return k.indexOf('accent-') === 0; }), colors, 'fill');
+    place('g-text', keys.filter(function (k) { return k.indexOf('text-') === 0; }), colors, 'text');
+    place('g-icon', keys.filter(function (k) { return k.indexOf('icon-') === 0; }), colors, 'icon');
+    place('g-border', keys.filter(function (k) { return k.indexOf('border-') === 0 && !isStatus(k); }), colors, 'border');
+    place('g-state', ['surface-action-1', 'surface-action-2', 'surface-navigation-hover', 'surface-disabled'], colors, 'fill');
+    place('g-overlay', keys.filter(function (k) { return /^surface-opacity-/.test(k); }), colors, 'fill');
+
+    // Status matrix
+    var host = document.getElementById('g-status');
+    STATUS.forEach(function (s) {
+      var col = el('div', 'ds-status__col');
+      col.appendChild(el('div', 'ds-status__title', s.charAt(0).toUpperCase() + s.slice(1)));
+      var rows = [
+        ['surface-' + s + '-default', 'Surface · default', 'fill'],
+        ['surface-' + s + '-weak', 'Surface · weak', 'fill'],
+        ['surface-' + s + '-weaker', 'Surface · weaker', 'fill'],
+        ['border-' + s + '-default', 'Border · default', 'border'],
+        ['border-' + s + '-weak', 'Border · weak', 'border'],
+        ['border-' + s + '-weaker', 'Border · weaker', 'border'],
+        [s === 'information' ? 'text-information-default' : s === 'success' ? 'text-success' : s === 'danger' ? 'text-danger-default' : null, 'Text', 'text']
+      ];
+      rows.forEach(function (r) {
+        var k = r[0]; if (!k || !colors[k]) return;
+        shown[k] = 1;
+        var row = el('div', 'ds-status__row');
+        var dot = el('span', 'ds-status__dot');
+        dot.setAttribute('aria-hidden', 'true');
+        if (r[2] === 'fill') dot.style.background = 'var(' + colors[k].var + ')';
+        else if (r[2] === 'border') dot.style.cssText = 'border: 4px solid var(' + colors[k].var + ');';
+        else { dot.textContent = 'Aa'; dot.style.color = 'var(' + colors[k].var + ')'; }
+        var lab = el('span', 'ds-status__label');
+        lab.appendChild(el('b', null, r[1]));
+        lab.appendChild(el('span', null, k + ' · ' + colors[k].value));
+        row.appendChild(dot); row.appendChild(lab);
+        col.appendChild(row);
+      });
+      host.appendChild(col);
+    });
+
+    // Anything the page above did not place (new tokens in a later package version)
+    var rest = keys.filter(function (k) { return !shown[k]; });
+    if (rest.length) {
+      var sec = document.getElementById('usage').parentNode.insertBefore(document.createElement('section'), document.getElementById('usage'));
+      sec.className = 'ds-section'; sec.id = 'other';
+      sec.innerHTML = '<div class="ds-page ds-inner"><h2 class="ds-h2">Other</h2><p class="ds-desc">Tokens not yet placed in a group on this page.</p><div class="ds-grid" id="g-other"></div></div>';
+      place('g-other', rest, colors, 'fill');
+    }
+    document.getElementById('coverage').textContent =
+      keys.length + ' semantic color tokens, all shown on this page' + (rest.length ? ' (' + rest.length + ' in “Other”)' : '') +
+      '. Source: .claude/skills/eco-tokens/tokens.json (this page reloads its content when that file changes).' +
+      (drift ? ' ' + drift + ' token(s) differ from the live package and are flagged on their swatches: regenerate tokens.json with generate-tokens.py.' : ' All values match the live package.');
+  }
+
+  ECO.watch(TOKENS_URL, function (j) {
+    var err = document.getElementById('load-error'); if (err) err.remove();
+    build(j.color);
+  }, function () {
+    if (document.getElementById('load-error')) return;
+    var m = el('p', 'ds-desc', 'Could not load tokens.json. Open this page through the local server (npx serve), not as a file.');
+    m.id = 'load-error';
+    document.getElementById('neutrals').querySelector('.ds-inner').appendChild(m);
+  });
+})();
+</script>
+<script src="../subnav.js"></script>
+</body>
+</html>

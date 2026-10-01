@@ -73,7 +73,7 @@ Icons are reserved for their corresponding alert color or specific intended e-co
 | **Informational** | `info` |
 | **Error** | `error` |
 | **Success** | `check_circle` |
-| **Warning** | `warning_amber` |
+| **Warning** | `warning` |
 
 Any icon in the icon gallery is available for **E-Com Informational** and **Promotion** — those are not reserved to a single icon.
 

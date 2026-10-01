@@ -9,7 +9,7 @@ description: Use when building or reviewing a segmented control (pill toggle) fo
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23144-268049
 
-Segment Control (segmented control / "pill toggle") is used to switch between two related views or filters in the same surface — e.g. `User roles / Company plan` or `All features / Key features`. Should **not** be used as a replacement for Tabs (navigation between different pages/content) or Radio buttons (submitted form choices).
+Segment Control (segmented control / "pill toggle") is used to switch between two related views or filters in the same surface — e.g. `User roles / Company plan` or `All features / Key features`. Should **not** be used as a replacement for Tabs (navigation between different pages/content) or Radio buttons (`eco-radio`, submitted form choices).
 
 > Example implementation: `.compare-view-toggle`/`.compare-view-btn` (Large) and `.compare-filter-toggle`/`.compare-filter-btn` (Small) in `feature-comparison-roles.html`.
 

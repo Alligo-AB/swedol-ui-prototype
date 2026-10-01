@@ -28,6 +28,8 @@ description: Use when building an inline notification that should stay in page c
 | **Large** | 48px | `12px` all sides | 24px |
 | **Small** | 32px | `4px` all sides | 20px |
 
+> **Small** has no Actionable variant in Figma, and Weak Small exists only for Informational and Warning.
+
 > Renamed from `Medium` to `Large` in the 2026-09 Figma update — same dimensions, name only. Update any code/class names still using `Medium`/`inline-notification--medium` to `Large`.
 
 ---
@@ -50,17 +52,17 @@ All four statuses support **Strong / Weak** emphasis (no `Weaker` tier for Inlin
 #### Emphasis
 | Emphasis | Background | Left border | Other borders |
 |---|---|---|---|
-| **System Strong** | The status color's weak background (see table) | `2px solid [status color]` | `1px solid [status-color-weak]` |
-| **System Weak** | `var(--color-surface-raised-primary)` (`surface-raised-primary`) | `2px solid [status color]` | `1px solid [status-color-weak]` |
+| **System Strong** | The status color's weak background (see table) | `2px solid [status color]` | `1px solid [status-color-weaker]` |
+| **System Weak** | `var(--color-surface-raised-primary)` (`surface-raised-primary`) | `2px solid [status color]` | **none** (2026-09 Figma) |
 
 #### Status + colors
 
 | Status | Left border / Icon | Strong background | Right/top/bottom border | Material Symbol |
 |---|---|---|---|---|
-| **Informational** | `var(--color-border-information-default)` | `var(--color-surface-information-weaker)` (`surface-information-weaker`) | `var(--color-border-information-weak)` | `info` |
-| **Error** | `var(--color-border-danger-default)` | `var(--color-surface-danger-weaker)` (`surface-danger-weaker`) | `var(--color-border-danger-weak)` | `error` |
-| **Success** | `var(--color-text-success)` | `var(--color-surface-success-weaker)` (`surface-success-weaker`) | `var(--color-border-success-weak)` | `check_circle` |
-| **Warning** | `var(--color-border-warning-default)` | `var(--color-surface-warning-weaker)` (`surface-warning-weaker`) | `var(--color-border-warning-weak)` | `warning` |
+| **Informational** | `var(--color-border-information-default)` | `var(--color-surface-information-weaker)` (`surface-information-weaker`) | `var(--color-border-information-weaker)` | `info` |
+| **Error** | `var(--color-border-danger-default)` | `var(--color-surface-danger-weaker)` (`surface-danger-weaker`) | `var(--color-border-danger-weaker)` | `error` |
+| **Success** | `var(--color-text-success)` | `var(--color-surface-success-weaker)` (`surface-success-weaker`) | `var(--color-border-success-weaker)` | `check_circle` |
+| **Warning** | `var(--color-border-warning-default)` | `var(--color-surface-warning-weaker)` (`surface-warning-weaker`) | `var(--color-border-warning-weaker)` | `warning` |
 | **Informational E-Com** | `var(--color-border-information-default)` | — (always Weak, `var(--color-surface-raised-primary)`) | **none** | Optional (e.g. `local_shipping`) |
 
 > **Informational E-Com** always has a white background (`surface-raised-primary`, `var(--color-surface-raised-primary)`) and **no** right/top/bottom border — just the 2px left blue one. The icon isn't reserved and is picked contextually from the gallery.
@@ -82,7 +84,8 @@ All four statuses support **Strong / Weak** emphasis (no `Weaker` tier for Inlin
 ```
 
 - **Left border**: `2px solid [status color]`, full height
-- **Right/top/bottom border**: `1px solid [status-color-weak]`
+- **Right/top/bottom border**: Strong only — `1px solid [status-color-weaker]` (`border-{status}-weaker`, same color as the Strong background). Weak has none.
+  > `border-*-weaker` was added to `tokens.json` (2026-09) with provisional values equal to `surface-*-weaker`; also add them to the `:root` block of each page when tokens are refreshed.
 - **Padding**: `12px` (Large) / `4px` (Small)
 - **Icon**: Material Symbols Outlined, 24px (Large) / 20px (Small), color = status color
 - **Gap** between icon and text: `8px`
@@ -220,29 +223,30 @@ All four statuses support **Strong / Weak** emphasis (no `Weaker` tier for Inlin
 /* Status — Informational */
 .inline-notification--info.inline-notification--strong { background: var(--color-surface-information-weaker); }
 .inline-notification--info .inline-notification__left-border { background: var(--color-surface-information-default); }
-.inline-notification--info .inline-notification__container { border-color: var(--color-border-information-weak); }
+.inline-notification--info .inline-notification__container { border-color: var(--color-border-information-weaker); }
 .inline-notification--info .inline-notification__icon { color: var(--color-surface-information-default); }
 
 /* Status — Error */
 .inline-notification--error.inline-notification--strong { background: var(--color-surface-danger-weaker); }
 .inline-notification--error .inline-notification__left-border { background: var(--color-surface-danger-default); }
-.inline-notification--error .inline-notification__container { border-color: var(--color-border-danger-weak); }
+.inline-notification--error .inline-notification__container { border-color: var(--color-border-danger-weaker); }
 .inline-notification--error .inline-notification__icon { color: var(--color-surface-danger-default); }
 
 /* Status — Success */
 .inline-notification--success.inline-notification--strong { background: var(--color-surface-success-weaker); }
 .inline-notification--success .inline-notification__left-border { background: var(--color-surface-success-default); }
-.inline-notification--success .inline-notification__container { border-color: var(--color-border-success-weak); }
+.inline-notification--success .inline-notification__container { border-color: var(--color-border-success-weaker); }
 .inline-notification--success .inline-notification__icon { color: var(--color-surface-success-default); }
 
 /* Status — Warning */
 .inline-notification--warning.inline-notification--strong { background: var(--color-surface-warning-weaker); }
 .inline-notification--warning .inline-notification__left-border { background: var(--color-surface-warning-default); }
-.inline-notification--warning .inline-notification__container { border-color: var(--color-border-warning-weak); }
+.inline-notification--warning .inline-notification__container { border-color: var(--color-border-warning-weaker); }
 .inline-notification--warning .inline-notification__icon { color: var(--color-surface-warning-default); }
 
-/* Weak — white background */
+/* Weak — white background, no right/top/bottom border */
 .inline-notification--weak { background: var(--color-surface-raised-primary); }
+.inline-notification--weak .inline-notification__container { border-color: transparent; }
 
 /* Informational E-Com — white background, no right/top/bottom border */
 .inline-notification--ecom .inline-notification__container {

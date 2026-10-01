@@ -49,13 +49,13 @@ All four statuses support **Strong / Weak** emphasis.
 | **Informational** | `var(--color-border-information-default)` | `var(--color-surface-information-weaker)` (`surface-information-weaker`) | `info` |
 | **Error** | `var(--color-border-danger-default)` | `var(--color-surface-danger-weaker)` (`surface-danger-weaker`) | `error` |
 | **Success** | `var(--color-text-success)` | `var(--color-surface-success-weaker)` (`surface-success-weaker`) | `check_circle` |
-| **Warning** | `var(--color-border-warning-default)` | `var(--color-surface-warning-weaker)` (`surface-warning-weaker`) | `warning_amber` |
+| **Warning** | `var(--color-border-warning-default)` | `var(--color-surface-warning-weaker)` (`surface-warning-weaker`) | `warning` |
 
 #### Layout variants
 | Variant | Content |
 |---|---|
 | **Default** | Status icon + [Title (optional) + body text] + Close button |
-| **Actionable** | Same as Default + one or more Blank buttons below the text |
+| **Actionable** | Same as Default + buttons and/or a text link below the text (indent `32px`, `16px` above the buttons) |
 
 ---
 
@@ -64,12 +64,14 @@ All four statuses support **Strong / Weak** emphasis.
 ```
 [Status icon 24px] [Title (optional) — title-sm]   [✕ close 20px]
                   [Body text — body-md           ]
-                  [Blank button (Actionable only)]
+                  [Secondary button] [Primary button]   ← Actionable only
+                  [Text link]                            ← Actionable only
 ```
 
 - **Left border**: `2px solid [status color]`, full height
 - **Padding**: `16px` inside, `8px` gap between icon and text block
 - **Close button**: Blank xs, `close` icon 20px, `padding: 2px`
+- **Actionable footer** (2026-09 Figma): Secondary + Primary button (`gap: 8px`, Primary `flex: 1`) and an Inline Link `body-md` underlined below. Buttons: desktop = xs (`padding: 6px`, `label-sm`), tablet/mobile = sm (`padding: 4px`, `label-md`), both 32px tall.
 - **Shadow**: `elevation-b-80` = `var(--shadow-elevation-b-80)`
 
 ---
@@ -79,7 +81,7 @@ All four statuses support **Strong / Weak** emphasis.
 | Element | Token | Value |
 |---|---|---|
 | Title (optional) | `title-sm` | 16px/18px, Bold, 0px tracking, `text-primary` (var(--color-text-primary)) |
-| Body text | `body-md` | 16px/24px, Regular, 0.32px tracking, `text-primary` (var(--color-text-primary)) |
+| Body text | `body-md` | Desktop 17px/24px, Mobile/Tablet 16px/22px, Regular, 0.32px tracking, `text-primary` (var(--color-text-primary)) |
 
 ---
 
@@ -134,12 +136,16 @@ All four statuses support **Strong / Weak** emphasis.
 
 .toast__text {
   font-family: 'Breuer Condensed', sans-serif;
-  font-size: 16px;
+  font-size: 17px;          /* body-md desktop; 16px/22px below 769px */
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.32px;
   color: var(--color-text-primary);
   font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+
+@media (max-width: 768px) {
+  .toast__text { font-size: 16px; line-height: 22px; }
 }
 
 .toast__close {

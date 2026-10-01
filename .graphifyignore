@@ -2,3 +2,9 @@ icon-*.png
 icon-*.svg
 icon-*.jpg
 *.ico
+
+# images (not useful for the design-system graph)
+images/
+mypages/images/
+tokens/images/
+email/images/

@@ -1,0 +1,15 @@
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/design-review/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/eco-add-component/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/eco-banner-notification/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/eco-inline-notification/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/eco-modal-ecom/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/eco-radio/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/eco-segment-control/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/eco-toast-system/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/eco-typography/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/.claude/skills/notifications-guide/SKILL.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/CLAUDE.md
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/mypages/addressbook.html
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/mypages/users-dashboard.html
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/mypages/users.html
+/Users/eriksundler/AlligoSites/swedol-ui-prototype/mypages/users_V1.html

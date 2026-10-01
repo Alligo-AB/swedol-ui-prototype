@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="eco-design-system/eyebrow.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
@@ -271,9 +272,11 @@
       text-align: center;
     }
     .site-index-intro__eyebrow {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.56px;
+      /* size/weight/spacing come from eco-design-system/eyebrow.css (shared with the doc pages) */
+      font-size: var(--eyebrow-size);
+      line-height: var(--eyebrow-line-height);
+      font-weight: var(--eyebrow-weight);
+      letter-spacing: var(--eyebrow-letter-spacing);
       text-transform: uppercase;
       color: var(--color-text-tertiary);
       font-feature-settings: 'ss02' 1, 'ss03' 1;
@@ -4629,6 +4632,23 @@
       </div>
       <p class="site-index-card__desc">Starting point for new pages under My Pages, with account nav tabs. Grey page background (<code>background-secondary</code>) by default.</p>
       <span class="site-index-card__path">mypages/mypages-template.html</span>
+    </a>
+  </div>
+</section>
+
+<section class="section section--secondary site-index-section" id="eco-design-system">
+  <div class="site-index-section__head">
+    <h2 class="site-index-section__title">ECO Design System</h2>
+    <p class="site-index-section__desc">Documentation of the design system: foundations and components, rendered live from the token package. Replaces the older <code>tokens/</code> showcase pages one page at a time.</p>
+  </div>
+  <div class="site-index-grid">
+    <a href="eco-design-system/overview.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Overview</span>
+        <span class="site-index-card__tag site-index-card__tag--new">New</span>
+      </div>
+      <p class="site-index-card__desc">Start page with entry points to every foundation and component page, each with a short summary and illustration.</p>
+      <span class="site-index-card__path">eco-design-system/overview.html</span>
     </a>
   </div>
 </section>

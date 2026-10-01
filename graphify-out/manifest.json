@@ -6,8 +6,8 @@
     "semantic_hash": "444e043f3bcd292b0d21c5f87e448ca3"
   },
   ".claude/settings.json": {
-    "mtime": 1788859988.3603003,
-    "seen": 1789817367.7622159,
+    "mtime": 1789826993.5243323,
+    "seen": 1790786919.142473,
     "ast_hash": "d85ff12585ff2f93a4599a35eaa2dfec",
     "semantic_hash": "d85ff12585ff2f93a4599a35eaa2dfec"
   },
@@ -30,10 +30,10 @@
     "semantic_hash": "c38787104a28a4f5b30cbe79be726fc2"
   },
   "CLAUDE.md": {
-    "mtime": 1789736703.8716724,
-    "seen": 1789817367.7623239,
-    "ast_hash": "f86f054f485a78ae9cbf1946f8db14fe",
-    "semantic_hash": "f86f054f485a78ae9cbf1946f8db14fe"
+    "mtime": 1790786170.7736197,
+    "seen": 1790787183.8674262,
+    "ast_hash": "2494d01f7abccd35766edbec3c7736d3",
+    "semantic_hash": "2494d01f7abccd35766edbec3c7736d3"
   },
   "README.md": {
     "mtime": 1777022883.2654543,
@@ -72,22 +72,22 @@
     "semantic_hash": "92d4e0f052924b0cb36f3d54199352af"
   },
   "mypages/partials/footer.html": {
-    "mtime": 1786721781.377528,
-    "seen": 1788441300.649617,
+    "mtime": 1788859989.4897451,
+    "seen": 1790787183.867429,
     "ast_hash": "8500c189c63c5ac8fd81ef271dbdb27e",
-    "semantic_hash": ""
+    "semantic_hash": "8500c189c63c5ac8fd81ef271dbdb27e"
   },
   "mypages/partials/header.html": {
-    "mtime": 1786723096.2074623,
-    "seen": 1788441300.649668,
+    "mtime": 1788859989.4998245,
+    "seen": 1790787183.86743,
     "ast_hash": "57944f8fbaaecdd4a90689319bd31bda",
-    "semantic_hash": ""
+    "semantic_hash": "57944f8fbaaecdd4a90689319bd31bda"
   },
   "mypages/partials/main-menu.html": {
-    "mtime": 1786723103.2570238,
-    "seen": 1788502506.15626,
+    "mtime": 1788859989.5060306,
+    "seen": 1790787183.867431,
     "ast_hash": "52ceb8c1e3689dbe1ec3df3dbf13c9bf",
-    "semantic_hash": ""
+    "semantic_hash": "52ceb8c1e3689dbe1ec3df3dbf13c9bf"
   },
   "reviews.html": {
     "mtime": 1788859989.5491517,
@@ -120,10 +120,10 @@
     "semantic_hash": "b1336d397f97cd95d8e9d54352524249"
   },
   ".claude/skills/notifications-guide/SKILL.md": {
-    "mtime": 1789736070.7007878,
-    "seen": 1789817367.762322,
-    "ast_hash": "deac5132cdd4d58ad3b92e4f82bff336",
-    "semantic_hash": "deac5132cdd4d58ad3b92e4f82bff336"
+    "mtime": 1790772956.5238202,
+    "seen": 1790787183.867425,
+    "ast_hash": "3505cf0fd48df06b661094b33a81d3c4",
+    "semantic_hash": "3505cf0fd48df06b661094b33a81d3c4"
   },
   "email/email.html": {
     "mtime": 1776865435.0705981,
@@ -132,10 +132,10 @@
     "semantic_hash": "776472218dd59abcd0f587f39e8a9817"
   },
   "mypages/addressbook.html": {
-    "mtime": 1788859989.4317205,
-    "seen": 1789817367.762387,
-    "ast_hash": "82896003b35fb32a5b8099a76e0bfd84",
-    "semantic_hash": "82896003b35fb32a5b8099a76e0bfd84"
+    "mtime": 1790772956.5354903,
+    "seen": 1790787183.867427,
+    "ast_hash": "622562050f87c5a9d163cadb63bc5fc2",
+    "semantic_hash": "622562050f87c5a9d163cadb63bc5fc2"
   },
   "mypages/cookie-banner.html": {
     "mtime": 1788859989.4397535,
@@ -156,64 +156,10 @@
     "semantic_hash": "2afdde57ff061bf9fb65ab79bd7d220f"
   },
   "mypages/partials/account-nav-drawer.html": {
-    "mtime": 1787906460.4957218,
-    "seen": 1788509676.9414148,
+    "mtime": 1788859989.483357,
+    "seen": 1790787183.867428,
     "ast_hash": "eb679838671fbcf0a7c76773dd275056",
-    "semantic_hash": ""
-  },
-  "email/images/hero.jpg": {
-    "mtime": 1777471121.2824724,
-    "seen": 1788509676.9414191,
-    "ast_hash": "8889667a20982735de4226388be404ff",
-    "semantic_hash": ""
-  },
-  "email/images/logo-footer.png": {
-    "mtime": 1776082556.1623182,
-    "seen": 1788509676.94142,
-    "ast_hash": "da89607f01464674b1bb4143990eb24f",
-    "semantic_hash": ""
-  },
-  "email/images/logo-footer.svg": {
-    "mtime": 1776082556.176143,
-    "seen": 1788509676.94142,
-    "ast_hash": "ce50fc6284361de0b90df65ebef52d20",
-    "semantic_hash": ""
-  },
-  "email/images/logo-header.png": {
-    "mtime": 1776082556.1801429,
-    "seen": 1788509676.941421,
-    "ast_hash": "013182611a04d3d7ad4200d9eacaa63e",
-    "semantic_hash": ""
-  },
-  "email/images/logo-header.svg": {
-    "mtime": 1776082556.1847298,
-    "seen": 1788509676.941422,
-    "ast_hash": "6169f910f8ba357e23e3db30f138dc7a",
-    "semantic_hash": ""
-  },
-  "images/3d-secure.png": {
-    "mtime": 1776082556.1903973,
-    "seen": 1788509676.9414232,
-    "ast_hash": "6c30f2ab429e467a8aa343dda676396c",
-    "semantic_hash": ""
-  },
-  "images/butik-boras.jpg": {
-    "mtime": 1776082556.2032695,
-    "seen": 1788509676.9414232,
-    "ast_hash": "9b0aac107452b5b0d53c2e03629c7e93",
-    "semantic_hash": ""
-  },
-  "images/category-el-belysning.png": {
-    "mtime": 1786698836.8256912,
-    "seen": 1788509676.9414241,
-    "ast_hash": "8c306fc3b70eafdc1d1566f03137a5ad",
-    "semantic_hash": ""
-  },
-  "images/category-klader-skydd.png": {
-    "mtime": 1786698835.2709265,
-    "seen": 1788509676.9414248,
-    "ast_hash": "b4e85b077889adcf0de8151df8f65472",
-    "semantic_hash": ""
+    "semantic_hash": "eb679838671fbcf0a7c76773dd275056"
   },
   ".claude/skills/eco-tokens/generate-tokens.py": {
     "mtime": 1788860238.09667,
@@ -234,10 +180,10 @@
     "semantic_hash": "0a4cd81cf862ef3dd8be517accc33f27"
   },
   ".claude/skills/eco-banner-notification/SKILL.md": {
-    "mtime": 1789736193.2233922,
-    "seen": 1789817367.762298,
-    "ast_hash": "5808a6f228810aa668db17ed9ad42a99",
-    "semantic_hash": "5808a6f228810aa668db17ed9ad42a99"
+    "mtime": 1790775252.3328671,
+    "seen": 1790787183.867414,
+    "ast_hash": "cdf42ffeb71935c49c7361a98763b321",
+    "semantic_hash": "cdf42ffeb71935c49c7361a98763b321"
   },
   ".claude/skills/eco-breadcrumb/SKILL.md": {
     "mtime": 1789734948.5458562,
@@ -282,10 +228,10 @@
     "semantic_hash": "a6e7b64a3c922d336feff28a87275b11"
   },
   ".claude/skills/eco-inline-notification/SKILL.md": {
-    "mtime": 1789736091.2698467,
-    "seen": 1789817367.762309,
-    "ast_hash": "114634be6cc537ff37aa383f269c9b98",
-    "semantic_hash": "114634be6cc537ff37aa383f269c9b98"
+    "mtime": 1790773689.5335789,
+    "seen": 1790787183.867415,
+    "ast_hash": "51ce231dbeae7561c008c04d8f215c8b",
+    "semantic_hash": "51ce231dbeae7561c008c04d8f215c8b"
   },
   ".claude/skills/eco-input/SKILL.md": {
     "mtime": 1789734447.9933226,
@@ -294,10 +240,10 @@
     "semantic_hash": "af4582c5abdbad16d47673df4bb1b848"
   },
   ".claude/skills/eco-modal-ecom/SKILL.md": {
-    "mtime": 1789736217.9322958,
-    "seen": 1789817367.7623098,
-    "ast_hash": "d3f4d062b1d65f9420414c0bb1c6e7c9",
-    "semantic_hash": "d3f4d062b1d65f9420414c0bb1c6e7c9"
+    "mtime": 1790773698.4288566,
+    "seen": 1790787183.8674161,
+    "ast_hash": "0b02b99c0745673bb59b258b7c1c3a40",
+    "semantic_hash": "0b02b99c0745673bb59b258b7c1c3a40"
   },
   ".claude/skills/eco-motion/SKILL.md": {
     "mtime": 1789734390.4519274,
@@ -324,10 +270,10 @@
     "semantic_hash": "67f19aeeaeb6f9c0a76ff7577ace5e9c"
   },
   ".claude/skills/eco-segment-control/SKILL.md": {
-    "mtime": 1789734509.1305497,
-    "seen": 1789817367.762314,
-    "ast_hash": "f63c7bf0c77cf6f6d9a7dddaedeb8f92",
-    "semantic_hash": "f63c7bf0c77cf6f6d9a7dddaedeb8f92"
+    "mtime": 1790786170.7789314,
+    "seen": 1790787183.867418,
+    "ast_hash": "5aaf0f96fb20f2851633df2b1c844a20",
+    "semantic_hash": "5aaf0f96fb20f2851633df2b1c844a20"
   },
   ".claude/skills/eco-select/SKILL.md": {
     "mtime": 1789734468.7698994,
@@ -354,10 +300,10 @@
     "semantic_hash": "f8a5df917df238c8ee1034db8de2bba8"
   },
   ".claude/skills/eco-toast-system/SKILL.md": {
-    "mtime": 1789736214.1318045,
-    "seen": 1789817367.7623181,
-    "ast_hash": "d08eedd4c6ce883ecc3372c7d1ba89a3",
-    "semantic_hash": "d08eedd4c6ce883ecc3372c7d1ba89a3"
+    "mtime": 1790773698.4295037,
+    "seen": 1790787183.8674188,
+    "ast_hash": "d2473e21b8b26e6f528942add6d962af",
+    "semantic_hash": "d2473e21b8b26e6f528942add6d962af"
   },
   ".claude/skills/eco-tokens/SKILL.md": {
     "mtime": 1789734996.568572,
@@ -372,10 +318,10 @@
     "semantic_hash": "07d3b61056075f9366489c5e515f41b4"
   },
   ".claude/skills/eco-typography/SKILL.md": {
-    "mtime": 1789734289.2892075,
-    "seen": 1789817367.7623198,
-    "ast_hash": "01a9bab8cae731a3c8c6b1f44f1654df",
-    "semantic_hash": "01a9bab8cae731a3c8c6b1f44f1654df"
+    "mtime": 1790580854.6094098,
+    "seen": 1790787183.86742,
+    "ast_hash": "b3c5bafaf626786829da514a8b771b55",
+    "semantic_hash": "b3c5bafaf626786829da514a8b771b55"
   },
   ".claude/skills/prototype-guide/SKILL.md": {
     "mtime": 1789737033.546631,
@@ -402,22 +348,22 @@
     "semantic_hash": "3758e3a84ed3bb822db1f0116651bfa6"
   },
   "mypages/users-dashboard.html": {
-    "mtime": 1788859989.516181,
-    "seen": 1789817367.762392,
-    "ast_hash": "1323f6156f98e461be3a6f872f5fb3e9",
-    "semantic_hash": "1323f6156f98e461be3a6f872f5fb3e9"
+    "mtime": 1790772956.5479946,
+    "seen": 1790787183.8674319,
+    "ast_hash": "2e7cd425b313b2feec9d6973fd437f9c",
+    "semantic_hash": "2e7cd425b313b2feec9d6973fd437f9c"
   },
   "mypages/users.html": {
-    "mtime": 1788859989.5327525,
-    "seen": 1789817367.762393,
-    "ast_hash": "a25c887ba49c5de08347281fa1ddce4e",
-    "semantic_hash": "a25c887ba49c5de08347281fa1ddce4e"
+    "mtime": 1790772956.5419965,
+    "seen": 1790787183.867433,
+    "ast_hash": "9f259a22718caa4c9f10245864d44ca7",
+    "semantic_hash": "9f259a22718caa4c9f10245864d44ca7"
   },
   "mypages/users_V1.html": {
-    "mtime": 1788859989.5421948,
-    "seen": 1789817367.7623942,
-    "ast_hash": "3faabc82a146d7f8ed3c568145c7e863",
-    "semantic_hash": "3faabc82a146d7f8ed3c568145c7e863"
+    "mtime": 1790772956.5297987,
+    "seen": 1790787183.867434,
+    "ast_hash": "e0134f31b64075d91b019c7666a40575",
+    "semantic_hash": "e0134f31b64075d91b019c7666a40575"
   },
   "tokens/_test.html": {
     "mtime": 1788860238.1212132,
@@ -454,5 +400,29 @@
     "seen": 1789817367.762402,
     "ast_hash": "e2dfdd5f0152876a7368e9a32ffaed03",
     "semantic_hash": "e2dfdd5f0152876a7368e9a32ffaed03"
+  },
+  ".claude/skills/design-review/compose-helpers.py": {
+    "mtime": 1790684862.4879582,
+    "seen": 1790787183.8674078,
+    "ast_hash": "a7fb62223d94aeaac757aad2aad57d61",
+    "semantic_hash": "a7fb62223d94aeaac757aad2aad57d61"
+  },
+  ".claude/skills/design-review/SKILL.md": {
+    "mtime": 1790686424.2609313,
+    "seen": 1790787183.8674119,
+    "ast_hash": "eedb775b724affa9990b22fb6365b6a7",
+    "semantic_hash": "eedb775b724affa9990b22fb6365b6a7"
+  },
+  ".claude/skills/eco-add-component/SKILL.md": {
+    "mtime": 1790786170.3696866,
+    "seen": 1790787183.867413,
+    "ast_hash": "031d8ee91db818181c9c9fb685d7f04c",
+    "semantic_hash": "031d8ee91db818181c9c9fb685d7f04c"
+  },
+  ".claude/skills/eco-radio/SKILL.md": {
+    "mtime": 1790786140.1332886,
+    "seen": 1790787183.867417,
+    "ast_hash": "171b68648f8a8cad3af50c94c957c80e",
+    "semantic_hash": "171b68648f8a8cad3af50c94c957c80e"
   }
 }

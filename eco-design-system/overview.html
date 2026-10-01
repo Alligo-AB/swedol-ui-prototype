@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECO Design System – Documentation</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">ECO Design System</span>
+    </div>
+  </nav>
+</div>
+
+<!-- ── Intro ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Swedol · ECO Design System</span>
+    <h1 class="ds-title">Design system</h1>
+    <p class="ds-lead"><strong>ECO</strong> is the shared language for every Swedol interface: the foundations (color, type, space) and the components built on top of them.</p>
+    <p class="ds-lead">Every example on these pages is rendered live from the <code>alligo-design-tokens</code> package, so what you see is what the prototypes use.</p>
+  </div>
+</section>
+
+<!-- ── On-page navigation: sticks to the top of the browser when reached ── -->
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#foundations">Foundations</a></li>
+    <li><a href="#components">Components</a></li>
+  </ul>
+</nav>
+
+
+
+<!-- ── Foundations ───────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="foundations">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Foundations</h2>
+    <p class="ds-desc">The building blocks every component is made from. Start here: a value that is not a foundation is not allowed in a component.</p>
+    <div class="ds-cards">
+
+      <a class="ds-card" href="foundations/colors.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-swatches">
+            <span style="background: var(--color-surface-100)"></span>
+            <span style="background: var(--color-surface-50)"></span>
+            <span style="background: var(--color-surface-raised-secondary)"></span>
+            <span style="background: var(--color-accent-default)"></span>
+            <span style="background: var(--color-surface-information-default)"></span>
+          </div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Colors</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Neutrals, brand accent, text, border and status colors, with token names, hex values and contrast.</p>
+          <span class="ds-card__meta" id="colors-meta">Semantic color tokens</span>
+        </div>
+      </a>
+
+      <div class="ds-card ds-card--soon" aria-disabled="true">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-type"><b>Aa</b><span>Breuer Condensed</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Typography</span><span class="ds-tag">Coming</span></div>
+          <p class="ds-card__desc">Display, headline, title, body and label styles for mobile and desktop.</p>
+        </div>
+      </div>
+
+      <div class="ds-card ds-card--soon" aria-disabled="true">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-space">
+            <span style="height: 8px"></span><span style="height: 16px"></span><span style="height: 24px"></span><span style="height: 40px"></span><span style="height: 64px"></span>
+          </div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Spacing</span><span class="ds-tag">Coming</span></div>
+          <p class="ds-card__desc">The fixed spacing scale and the breakpoint-adaptive space tokens.</p>
+        </div>
+      </div>
+
+      <div class="ds-card ds-card--soon" aria-disabled="true">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-elev">
+            <span style="box-shadow: var(--shadow-elevation-b-20)"></span>
+            <span style="box-shadow: var(--shadow-elevation-b-40)"></span>
+            <span style="box-shadow: var(--shadow-elevation-b-80)"></span>
+          </div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Elevation</span><span class="ds-tag">Coming</span></div>
+          <p class="ds-card__desc">Shadow levels for cards, drawers, modals and tooltips.</p>
+        </div>
+      </div>
+
+      <div class="ds-card ds-card--soon" aria-disabled="true">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-motion"><span></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Motion</span><span class="ds-tag">Coming</span></div>
+          <p class="ds-card__desc">Easing curves and durations for transitions and animation.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Components ────────────────────────────────────────────── -->
+<section class="ds-section" id="components">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Components</h2>
+    <p class="ds-desc">Reusable parts with sizes, states and usage rules. Each component has a specification skill; the pages below are being moved here one at a time.</p>
+    <div class="ds-cards">
+
+      <div class="ds-card ds-card--soon" aria-disabled="true">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-btn"><span>Primary</span><span>Secondary</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Button</span><span class="ds-tag">Coming</span></div>
+          <p class="ds-card__desc">Primary, secondary, blank, destructive, accent and system buttons in all sizes and states.</p>
+        </div>
+      </div>
+
+      <div class="ds-card ds-card--soon" aria-disabled="true">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-check"><span><i class="on"></i>Selected</span><span><i></i>Not selected</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Checkbox</span><span class="ds-tag">Coming</span></div>
+          <p class="ds-card__desc">Choose any number of options. Light and dark mode, all states.</p>
+        </div>
+      </div>
+
+      <div class="ds-card ds-card--soon" aria-disabled="true">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-radio"><span><i class="on"></i>Standard</span><span><i></i>Express</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Radio button</span><span class="ds-tag">Coming</span></div>
+          <p class="ds-card__desc">Choose exactly one of two or more options. Large and small, all states.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<script src="tokens-loader.js"></script>
+<script>
+  ECO.watch('../.claude/skills/eco-tokens/tokens.json', function (j) {
+    document.getElementById('colors-meta').textContent = Object.keys(j.color).length + ' semantic color tokens';
+  });
+</script>
+<script src="subnav.js"></script>
+</body>
+</html>
