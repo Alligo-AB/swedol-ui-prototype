@@ -127,36 +127,50 @@ Use them where text alone may be misread: layout differences, spacing, hover men
 - **Implementation side:** automated export from the authenticated page is blocked (injecting libraries and passing upload tokens are refused). Ask the user for DevTools screenshots instead — give a table with file name, width and exactly what must be visible. DevTools: Cmd+Shift+M for the device toolbar (Swedish: "Växla enhetsverktygsfält"), Cmd+Shift+P → "Capture screenshot" ("Ta skärmbild").
 - **Compose** with Pillow: Figma and implementation side by side or stacked, blue marks = design, red marks = deviation, short tags on the image (`C1`, `MA2`) and a legend with one line per tag under the image. Check each image visually for overlapping labels before delivering. Reusable drawing helpers (`box`, `vbrace`, `panel`, `sheet`, `save`) are in `compose-helpers.py` in this folder; import or copy them and write the per-image sections for the current ticket.
 
-### Where images go in the Jira comment
+### Where images go in Jira
 
-1. Put each image **once**, directly under the **first** item in the comment that it shows.
-2. Number images in the order they appear in the comment (Image 1, 2, …), not by file name.
-3. Under each image, a caption: `Image N – <view, width>, Figma (top/left) vs UAT (bottom/right). Marks: <tags>.`
-4. In every other item the image covers, add a last line: `See Image N.` (or `See Image 1 (desktop) and Image 4 (tablet).`).
-5. **Write the report as if the images were already in place.** When the user inserts the images by hand, put a placeholder line where each image goes, then the caption, and the `See Image N.` references in the other items:
+1. Put each image **once**, directly under the **first** finding in the report that it shows.
 
+2. Number images in the order they appear in the report (Image 1, 2, …), not by file name.
+
+3. Under each image, use a caption:
+   `Image N – <view, width>, Figma (top/left) vs UAT (bottom/right). Marks: <tags>.`
+
+4. In every other finding the image covers, add a final line:
+   `See Image N.`
+   or, when relevant:
+   `See Image 1 (desktop) and Image 4 (tablet).`
+
+5. Save generated comparison images using clear ticket-specific filenames, for example:
+   `<TICKET>_01_<short-name>.png`
+
+6. Before posting the final Jira review, upload all generated comparison images to the Jira issue using the helper in this skill folder:
+
+   ```bash
+   .claude/skills/design-review/upload-jira-images.sh \
+     <JIRA_KEY> \
+     <IMAGE_PATH_1> \
+     <IMAGE_PATH_2>
    ```
-   > 📷 **INSERT IMAGE 1 HERE:** `<TICKET>_01_<short-name>.png` *(delete this line after inserting the image)*
 
-   *Image 1 – Desktop 1440px, Figma (top) vs UAT (bottom). Marks: C1, MA1, MA3, MA4, MA5, Q1.*
-   ```
+   One or more image paths may be supplied in the same command.
 
-   The user drops the image onto the placeholder line and deletes that line; the caption stays. Add a short "Images:" note near the top of the report saying which image is under which item.
-6. Also give the user a placement table:
+7. The upload helper reads the user's Jira credentials from the repository root `.env`. Never print, expose, copy or include those credentials in the report or Jira comment.
 
-| Image | Goes under | Also shows |
-|---|---|---|
-| `<TICKET>_01_<short-name>.png` | C1 | MA1, MA3, MA4, MA5, Q1 |
+8. A successful upload returns Jira attachment JSON for each image. Verify that every generated comparison image was successfully attached before considering image delivery complete.
 
-Example captions (adapt the view, width and tags):
-- `Image 1 – Desktop 1440px, Figma (top) vs UAT (bottom). Marks: C1, MA1, MA3.`
-- `Image 2 – Hover state (UAT). Marks: MA6. Also relevant for C2: this state never appears on keyboard focus.`
-- `Image 3 – Tablet (sm): Figma 768px (left) vs UAT 700px (right). Marks: MA2.`
+9. If an image upload fails:
+   - do not claim that the image was uploaded;
+   - keep the generated image file;
+   - tell the user which image failed to upload;
+   - do not ask the user to provide credentials in chat.
+
+10. The Jira attachment and the report's `Image N` caption/reference must use the same generated image filename so the visual evidence is easy to identify.
 
 ## 9. Delivering
 
 - **File:** always.
 - **Jira comment:** show the final text and wait for a clear "yes" before posting — it is published in the user's name. Markdown is accepted by `addOrEditJiraIssueComment`.
-- **Images in Jira:** uploading needs the Atlassian media token in a shell command, which auto mode blocks. Either the user drags the images into the comment by hand (use the placement table above), or the user adds a permission rule first.
+- **Images in Jira:** upload generated comparison images automatically using `.claude/skills/design-review/upload-jira-images.sh <JIRA_KEY> <IMAGE_PATH...>` before posting the final review. The helper reads the user's Jira credentials from the repository root `.env` and uploads the files through the Jira REST attachment API. Verify that Jira returns a successful attachment response for every image. If an upload fails, keep the generated file and tell the user which image failed; never request or expose Jira credentials in chat.
 - **Figma annotations:** writing to a shared design file needs explicit approval and may be blocked in auto mode. Ask before placing anything in Figma.
 - **Corrections:** if a finding turns out wrong, say so plainly, correct the report file and give the user the replacement text for Jira.
