@@ -17,9 +17,8 @@ those have a known duplicate-segment naming bug upstream, see SKILL.md):
     - css/base/dimension.css  -> spacing scale (--dimension-spacing-space-*) + radius
     - css/base/border.css     -> border-width shorthand tokens
     - css/base/shadow.css     -> elevation/shadow tokens
-    - tailwind/typography.css -> responsive type scale, fused mobile+desktop per class,
-                                  using the same size-word mapping as Magento's typography-plugin.js
-                                  (x-large->xl, large->lg, medium->md, small->sm, x-small->xs)
+    - css/base/typography.css + css/base/dimension.css + css/mobiletypography/dimension.css
+                              -> responsive type scale, fused mobile+desktop per token
 
 Declaration extraction is two-pass and deliberately avoids a single "optional leading
 comment" regex: matching `(?:/\*...\*/\s*)?--token-name: value;` in one pass is unsafe --
@@ -124,55 +123,87 @@ def parse_shadows(dist):
     return shadows
 
 
-# (.+?) is deliberately non-greedy: a greedy (.+) prefers the LONGEST possible
-# category match, which mis-splits e.g. "body-x-large" as category="body-x",
-# size="large" (since "large" alone also matches the alternation) instead of the
-# correct category="body", size="x-large". Confirmed this dropped body-xl and
-# headline-xl entirely (silently renamed to body-x-lg / headline-x-lg) during
-# initial development. Non-greedy tries the shortest category first and stops at
-# the first dash-boundary whose tail satisfies the full SIZES alternation, which
-# is always the linguistically correct split for every category name actually
-# used in this token set (display, headline, title, label, alt-label, body).
-SIZE_MAP = {"x-large": "xl", "large": "lg", "medium": "md", "small": "sm", "x-small": "xs"}
-SIZES = "|".join(SIZE_MAP.keys())
-RESPONSIVE_RE = re.compile(rf'^typography-(mobile|desktop)-(.+?)-({SIZES})$')
+# Typography is now exported by Supernova as semantic type-scale tokens plus two
+# dimension themes:
+#   css/base/typography.css              -> canonical type-scale names + descriptions
+#   css/base/dimension.css               -> desktop/base type dimensions
+#   css/mobiletypography/dimension.css   -> mobile type dimensions
+#
+# Older package versions encoded mobile/desktop directly in Tailwind class names.
+# Do not parse tailwind/typography.css for responsiveness: current exports use class
+# names such as typography-type-scale-design-tokens-body-body-lg and no longer carry
+# a mobile/desktop scope there.
+TYPE_SCALE_PREFIX = "type-scale-design-tokens-"
+TYPE_PROPS = ("font-weight", "font-size", "line-height", "letter-spacing")
 
 
-def parse_props(block):
-    props = {}
-    for line in block.strip().split(";"):
-        line = line.strip()
-        if not line or ":" not in line:
-            continue
-        prop, _, val = line.partition(":")
-        prop, val = prop.strip(), val.strip()
-        if prop in ("font-family", "font-style", "text-indent"):
-            continue
-        props[prop] = val
-    return props
+def fallback_value(value):
+    """Return a CSS var() fallback when present, otherwise the literal value."""
+    m = re.search(r'var\(\s*--[^,]+,\s*([^\)]+)\)', value)
+    return m.group(1).strip() if m else value.strip()
+
+
+def normalize_typography_value(prop, value):
+    value = fallback_value(value)
+    # Supernova currently serializes semantic font-weight dimensions as e.g. 500px.
+    # CSS font-weight itself is unitless, and the previous tokens.json contract was too.
+    if prop == "font-weight":
+        m = re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)px', value)
+        if m:
+            return m.group(1)
+    return value
+
+
+def typography_dimensions(dist, theme_path):
+    css = read(dist, theme_path)
+    declarations = {name: value for name, value, _ in extract_declarations(css, "dimension")}
+    result = {}
+    for name in declarations:
+        for prop in TYPE_PROPS:
+            prefix = f"{prop}-"
+            if name.startswith(prefix):
+                token_name = name[len(prefix):]
+                result.setdefault(token_name, {})[prop] = normalize_typography_value(
+                    prop, declarations[name]
+                )
+                break
+    return result
 
 
 def parse_typography(dist):
-    css = read(dist, "tailwind/typography.css")
-    mobile, desktop = {}, {}
-    for m in re.finditer(r'\.(typography-[a-z0-9-]+)\s*\{([^}]+)\}', css):
-        full_class, block = m.group(1), m.group(2)
-        rm = RESPONSIVE_RE.match(full_class)
-        if not rm:
+    type_css = read(dist, "css/base/typography.css")
+    mobile_dims = typography_dimensions(dist, "css/mobiletypography/dimension.css")
+    desktop_dims = typography_dimensions(dist, "css/base/dimension.css")
+
+    # The type-scale file is the source of truth for which semantic typography styles
+    # actually exist. This deliberately excludes the separate `modifiers-*` tokens.
+    styles = {}
+    for name, _, comment in extract_declarations(type_css, "typography"):
+        if not name.startswith(TYPE_SCALE_PREFIX):
             continue
-        scope, category, size = rm.group(1), rm.group(2), rm.group(3)
-        short_name = f"{category}-{SIZE_MAP[size]}"
-        props = parse_props(block)
-        (mobile if scope == "mobile" else desktop)[short_name] = props
+        short_name = name[len(TYPE_SCALE_PREFIX):]
+        if short_name.startswith("modifiers-"):
+            continue
+        # Current Supernova export contains a redundant category segment only for
+        # alt-label (`alt-label-alt-label-lg`). Normalize it to the public token name.
+        short_name = re.sub(r'^alt-label-alt-label-', 'alt-label-', short_name)
+        styles[short_name] = comment or None
 
-    all_names = sorted(set(mobile) | set(desktop))
     typography = {}
-    for name in all_names:
-        mp, dp = mobile.get(name, {}), desktop.get(name, {})
-        diff = {k: v for k, v in dp.items() if mp.get(k) != v}
-        typography[name] = {"mobile": mp, "desktopOverride": diff, "breakpoint": "769px"}
-    return typography
-
+    for name in styles:
+        mp = mobile_dims.get(name, {})
+        dp = desktop_dims.get(name, {})
+        if not mp and not dp:
+            continue
+        # Keep the established ECO contract: mobile is complete; desktopOverride only
+        # contains values that differ at the existing 769px breakpoint.
+        base = mp or dp
+        diff = {k: v for k, v in dp.items() if base.get(k) != v}
+        entry = {"mobile": base, "desktopOverride": diff, "breakpoint": "769px"}
+        if styles[name]:
+            entry["description"] = styles[name]
+        typography[name] = entry
+    return dict(sorted(typography.items()))
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -189,7 +220,8 @@ def main():
                 "dist/css/base/dimension.css",
                 "dist/css/base/border.css",
                 "dist/css/base/shadow.css",
-                "dist/tailwind/typography.css",
+                "dist/css/base/typography.css",
+                "dist/css/mobiletypography/dimension.css",
             ],
             "note": ("Semantic tokens only (primitives excluded). Typography entries follow the same "
                       "mobile-base + desktop-diff convention as the Magento typography-plugin.js, fused "
