@@ -6,7 +6,8 @@
 .section--flush { padding-top: 0; padding-bottom: 0; }                                                          /* zeroed padding (the 5 use cases) */
 @media (min-width: 640px)  { .section { padding-top: 48px; padding-bottom: 48px; } .section--first { padding-top: 32px; } }   /* sm */
 @media (min-width: 769px)  { .section { padding-top: 56px; padding-bottom: 64px; } .section--first { padding-top: 32px; } }   /* md */
-@media (min-width: 1024px) { .section { padding-top: 72px; padding-bottom: 80px; } .section--first { padding-top: 48px; } }   /* lg */
+@media (min-width: 1024px) { .section { padding-top: 72px; padding-bottom: 80px; } .section--first { padding-top: 40px; } }   /* lg */
+@media (min-width: 1281px) { .section--first { padding-top: 48px; } }   /* xl */
 .section--flush, .section--flush.section--first { padding-top: 0; padding-bottom: 0; }
 
 .page-divider { padding: 48px var(--px-full); }

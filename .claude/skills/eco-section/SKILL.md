@@ -75,7 +75,7 @@ These values apply to every section except the first.
 
 @media (min-width: 1024px) { /* lg */
   .section { padding-top: 72px; padding-bottom: 80px; }
-  .section--first { padding-top: 48px; padding-bottom: 80px; }
+  .section--first { padding-top: 40px; padding-bottom: 80px; }
 }
 
 @media (min-width: 1281px) { /* xl */

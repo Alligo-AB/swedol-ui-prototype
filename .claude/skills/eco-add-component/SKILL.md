@@ -48,6 +48,7 @@ Keep it thin: spec + template, no page-specific hacks.
 - If a guide skill exists for the family (`links-guide`, `notifications-guide`) add the new type there.
 - Update cross-references (e.g. `eco-pill-segment-control` says "never replaces Radio buttons" → link to `eco-radio`).
 - If the user mentions page renames/new pages, follow the index.html memory rules.
+- Add a row to the **component map** in `.claude/skills/prototype-guide/SKILL.md` (section 3a, "I need X → use skill Y"), and link the component's CSS/JS in `template.html` and `mypages/mypages-template.html`. These are manual: nothing updates them.
 - Run `graphify update .` afterwards (CLAUDE.md graphify rule).
 
 ## 6. Verify before reporting done

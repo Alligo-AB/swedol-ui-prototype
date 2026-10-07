@@ -66,6 +66,31 @@ See `CLAUDE.md` → "Innan du bygger en ny sida" for the full rule and why.
 
 Go through the intended interface piece by piece and match every part against the skills index in `CLAUDE.md` (buttons → `eco-button`, form fields → `eco-input`/`eco-select`/`eco-checkbox`, notices → `notifications-guide`, links → `links-guide`, spacing → `eco-spacing`, color → `eco-colors`, shadow → `eco-elevation`, animation → `eco-motion`, etc.). Load and read every relevant skill before coding that part.
 
+#### 3a. Component map: "I need X → use skill Y"
+
+Read this before you decide a piece is "new". Every row is a finished component with a docs page in `eco-design-system/components/` and shared CSS/JS in `components/`. The templates already link the CSS. **Keep this map in sync by hand:** the step "add to `prototype-guide` map" in `eco-add-component` does it when a component is added. The full list with descriptions is in `CLAUDE.md` → skills index.
+
+| I need… | Use |
+|---|---|
+| A button, icon button, or a row of 2–4 toggle options | `eco-button` (button group: section "Button group") |
+| A text field, multi-line text, a dropdown | `eco-input`, `eco-textarea`, `eco-select`; an icon-name field: `eco-icon-picker` |
+| Yes/no, one-of-many, on/off, a value on a scale | `eco-checkbox`, `eco-radio`, `eco-switch`, `eco-range` |
+| Switch between 2–4 views of the same content | `eco-pill-segment-control` |
+| A link (decide the type first) | `links-guide` → `eco-inline-link`, `eco-action-link`, `eco-tile-link` |
+| Where am I / go back up | `eco-breadcrumb` |
+| Load more items into a list | `eco-pagination` |
+| A status label or role name (read-only) | `eco-badge` |
+| A name for an icon-only button | `eco-tooltip` |
+| FAQ or optional long content | `eco-collapsible` |
+| Rows and columns of data | `eco-table` |
+| A full-width page block, a divider between blocks | `eco-section`; small divider inside content: `eco-divider` |
+| Two tiers side by side that link to a comparison | `eco-role-tier-card` |
+| Tell the user something changed | `notifications-guide` → toast, inline, banner, modal |
+| A menu, a list row | `eco-menu`, `eco-list-item` |
+| Color, text style, spacing, shadow, motion | `eco-colors`, `eco-typography`, `eco-spacing`, `eco-elevation`, `eco-motion` (values: `eco-tokens`) |
+
+None fits? Flag it and ask (see the rule below). Do not build a one-off.
+
 **Before writing any actual CSS value** (color, spacing, shadow, border), load `eco-tokens` and emit `var(--...)` against `tokens.json` — never a hardcoded hex/px, even for a brand-new prototype that doesn't touch an existing file yet. Component skills like `eco-button` already write every value this way; match that pattern rather than reading their px/hex numbers back out as literals.
 
 **A pattern is missing entirely** (it exists in Figma or the brief but has no skill)? Flag it to the user and ask before you either (a) build a one-off solution inline using existing tokens, or (b) create a new skill under `.claude/skills/` — per the rule in `CLAUDE.md`. Never guess a new component style into existence. This is the same permanent-vs-snowflake question from step 0's "Figma is the design system" note — ask it there the moment you spot the gap, don't wait until you're mid-build. This also includes micro-interaction patterns raised in step 6 below (e.g. a press-feedback scale on buttons) that aren't yet defined by a component skill — flag them the same way rather than inventing a transform value inline.
