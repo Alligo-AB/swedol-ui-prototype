@@ -339,23 +339,23 @@ body.has-modal { overflow: hidden; }
 @media (min-width: 640px) and (max-width: 768px) { .banner-notification--large .banner-notification__left-border { width: 4px; } }
 .banner-notification--large .banner-notification__main .icon-btn { margin-left: auto; }
 
-/* Promotion: brand campaigns, Small only. Mobile (sm-xs, Figma 32px): title on the left, link on the right, no ×.
-   Desktop (769px+, 48px): centered "Title - Link" with the ×. */
+/* Promotion: brand campaigns, Small only. Mobile (sm-xs, 32px): title on the left, link and × on the right.
+   Desktop (769px+, 48px): centered "Title - Link" with the × at the far right. */
 .banner-notification--promotion {
-  position: relative; align-items: center; min-height: 32px; padding: var(--dimension-spacing-space-8);
+  position: relative; align-items: center; min-height: 32px; padding: var(--dimension-spacing-space-4) var(--dimension-spacing-space-8);  /* 4px: the 24px × plus 4px + 4px keeps the banner at 32px */
   box-shadow: var(--shadow-elevation-b-20);
 }
 .banner-notification__promo { display: flex; align-items: center; gap: var(--dimension-spacing-space-12); width: 100%; margin: 0; }
 .banner-notification--promotion .banner-notification__title { flex: 1; text-align: left; font-size: 14px; line-height: 16px; letter-spacing: 0.42px; }  /* label-md, mobile */
 .banner-notification--promotion .inline-link { flex-shrink: 0; white-space: nowrap; font-size: 14px; line-height: 16px; letter-spacing: 0.36px; }  /* body-sm, mobile */
-.banner-notification--promotion .icon-btn { display: none; }
+.banner-notification--promotion { gap: var(--dimension-spacing-space-8); }  /* mobile: title, link and × in one row */
 /* The whole Promotion banner is the click target: the link's ::after covers the banner (the × sits above it), and hovering anywhere gives the link its hover */
 .banner-notification--promotion { cursor: pointer; }
 .banner-notification--promotion .inline-link::after { content: ''; position: absolute; inset: 0; }
-.banner-notification--promotion .icon-btn { z-index: 1; }
-.banner-notification--promotion:hover .inline-link { text-decoration: none; color: var(--color-text-action-primary-hover); }
-.banner-notification--dark:hover .inline-link { color: var(--color-text-action-primary-inverted-hover); }
-.banner-notification--promotion.banner-notification--accent-strong:hover .inline-link, .banner-notification--promotion.banner-notification--accent-weak:hover .inline-link { color: inherit; }  /* no hover token on the accent surface: only the underline goes */
+.banner-notification--promotion .icon-btn { position: relative; z-index: 1; }  /* relative: z-index only works on a positioned element, so the × stays above the link's ::after on mobile */
+.banner-notification--promotion:hover:not(:has(.icon-btn:hover)) .inline-link { text-decoration: none; color: var(--color-text-action-primary-hover); }  /* not while the × is hovered */
+.banner-notification--dark:hover:not(:has(.icon-btn:hover)) .inline-link { color: var(--color-text-action-primary-inverted-hover); }
+.banner-notification--promotion.banner-notification--accent-strong:hover:not(:has(.icon-btn:hover)) .inline-link, .banner-notification--promotion.banner-notification--accent-weak:hover:not(:has(.icon-btn:hover)) .inline-link { color: inherit; }  /* no hover token on the accent surface: only the underline goes */
 body.keyboard-nav .banner-notification--promotion:has(.inline-link:focus) { outline: 2px solid var(--color-border-focus); outline-offset: -4px; }  /* the ring follows the clickable banner */
 @media (min-width: 769px) {
   .banner-notification--promotion { min-height: 48px; padding: var(--dimension-spacing-space-12) 48px; }
@@ -363,7 +363,8 @@ body.keyboard-nav .banner-notification--promotion:has(.inline-link:focus) { outl
   .banner-notification--promotion .banner-notification__title { display: inline; font-size: 18px; line-height: 18px; letter-spacing: 0.18px; }  /* label-md, desktop */
   .banner-notification--promotion .banner-notification__title::after { content: ' -'; }
   .banner-notification--promotion .inline-link { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }  /* body-md */
-  .banner-notification--promotion .icon-btn { display: inline-flex; position: absolute; right: var(--dimension-spacing-space-16); top: 50%; transform: translateY(-50%); }
+  .banner-notification--promotion { gap: 0; }
+  .banner-notification--promotion .icon-btn { position: absolute; right: var(--dimension-spacing-space-16); top: 50%; transform: translateY(-50%); }
 }
 .banner-notification--dark   { background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
 .banner-notification--light  { background: var(--color-surface-raised-primary); color: var(--color-text-primary); }

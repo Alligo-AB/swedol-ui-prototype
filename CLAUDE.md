@@ -109,6 +109,12 @@ module.exports = {
 2. **Inline in HTML** – all styling with Tailwind classes directly in markup.
 3. **Components** – buttons, typography, etc. change size at `md:` (Desktop Small). See the component sections below.
 
+### Working routine (every task)
+
+1. **Ask first** when a request can mean two things (for example Pill Segment Control vs button group).
+2. **Verify before saying done:** mobile (~375px) and desktop (1200px), real mouse hover/click and keyboard (Tab), not only scripts. Check neighbours that share the file (other variants, other pages). State what was not tested.
+3. **Sweep afterwards:** grep `.claude/skills/` and this file for old names or behaviour, update every affected skill and index row in the same turn, and name which ones changed.
+
 ### Quality control — before delivery
 
 **IMPORTANT:** Go through this list before reporting a new or changed page/component as done. Applies to every page in the project, not just individual features.

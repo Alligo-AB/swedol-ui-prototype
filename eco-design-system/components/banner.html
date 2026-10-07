@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
   <link rel="stylesheet" href="../docs.css">
   <link rel="stylesheet" href="/components/css/range.css">
-  <link rel="stylesheet" href="../notifications.css?v=17">
+  <link rel="stylesheet" href="../notifications.css?v=21">
   <style>
     /* page-local: layout, the Breakpoint preview, and the page wireframes of the placement demo (tokens only) */
-    body[data-bp="mobile"] .banner-notification:not(.banner-notification--large) { min-height: 40px; }
+    body[data-bp="mobile"] .banner-notification:not(.banner-notification--large):not(.banner-notification--promotion) { min-height: 40px; }
     body[data-bp="mobile"] .banner-notification:not(.banner-notification--large) .banner-notification__inner { padding: 8px 16px; }
     body[data-bp="mobile"] .banner-notification:not(.banner-notification--large) .banner-notification__text { font-size: 12px; line-height: 18px; letter-spacing: 0.24px; padding-top: 3px; }
     body[data-bp="desktop"] .banner-notification:not(.banner-notification--large):not(.banner-notification--promotion) { min-height: 48px; }
@@ -30,18 +30,20 @@
     body[data-bp="desktop"] .banner-notification--large .banner-notification__footer { padding-left: 60px; }  /* icon 48 + gap 12 */
     body[data-bp="desktop"] .banner-notification--large .banner-notification__body { margin-top: 12px; font-size: 17px; line-height: 24px; }
     /* Promotion preview: mobile = title left, link right, no ×, 32px; desktop = centered, 48px */
-    body[data-bp="mobile"] .banner-notification--promotion { min-height: 32px; padding: 8px; }
+    body[data-bp="mobile"] .banner-notification--promotion { min-height: 32px; padding: 4px 8px; }
     body[data-bp="mobile"] .banner-notification__promo { display: flex; text-align: left; }
     body[data-bp="mobile"] .banner-notification--promotion .banner-notification__title { display: block; font-size: 14px; line-height: 16px; letter-spacing: 0.42px; }
     body[data-bp="mobile"] .banner-notification--promotion .banner-notification__title::after { content: none; }
     body[data-bp="mobile"] .banner-notification--promotion .inline-link { font-size: 14px; line-height: 16px; letter-spacing: 0.36px; }
-    body[data-bp="mobile"] .banner-notification--promotion .icon-btn { display: none; }
+    body[data-bp="mobile"] .banner-notification--promotion { gap: 8px; }
+    body[data-bp="mobile"] .banner-notification--promotion .icon-btn { position: relative; transform: none; }
     body[data-bp="desktop"] .banner-notification--promotion { min-height: 48px; padding: 12px 48px; }
     body[data-bp="desktop"] .banner-notification__promo { display: block; text-align: center; }
     body[data-bp="desktop"] .banner-notification--promotion .banner-notification__title { display: inline; font-size: 18px; line-height: 18px; letter-spacing: 0.18px; }
     body[data-bp="desktop"] .banner-notification--promotion .banner-notification__title::after { content: ' -'; }
     body[data-bp="desktop"] .banner-notification--promotion .inline-link { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }
-    body[data-bp="desktop"] .banner-notification--promotion .icon-btn { display: inline-flex; }
+    body[data-bp="desktop"] .banner-notification--promotion { gap: 0; }
+    body[data-bp="desktop"] .banner-notification--promotion .icon-btn { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
     .pg-stack { display: flex; flex-direction: column; gap: 16px; }
     .pg-figs { display: flex; flex-direction: column; gap: 32px; }
     .pg-fig { margin: 0; display: flex; flex-direction: column; gap: 12px; }

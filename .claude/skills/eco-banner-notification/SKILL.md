@@ -125,7 +125,7 @@ Used **only** for brand-driven campaign banners — not for system status. `Smal
 
 > **Brand Specific (Tools, Swedol, or Campaign Accent):** `Strong`/`Weak` always resolve through the concept brand's own `accent-default`/`accent-light` tokens — on Swedol that renders lime, on Tools it renders red. There is no separate "Tools" or "Swedol" emphasis option anymore; the same two tokens (`Strong`/`Weak`) automatically pick up the right brand color because `accent-default`/`accent-light` are themselves brand-scoped in `tokens.json`. Don't hardcode a brand-specific hex (e.g. `#cd1125`) for this — reference the accent tokens so the banner is correct on every concept brand's site.
 > **Desktop (769px+):** content centered: `Title -` (uppercase, `label-md` 18/18, 0.18px) + underlined `Till kampanjen`-style Inline Link (`body-md` 17/24, 0.32px), all in one line, `white-space: nowrap`; padding `12px` top/bottom and `8px` sides (plus room for the ×), height `48px`, × shown.
-> **Mobile / tablet (below 769px, Figma Small-XSmall, 32px):** a different layout: padding `8px`, height `32px`, **title on the left** (`label-md` 14/16, 0.42px, uppercase, no trailing dash) and the **link on the right** (Inline Link `body-sm` 14/16, 0.36px, `white-space: nowrap`), 12px gap, **no ×** in Figma. The link is an Inline Link (`eco-inline-link`): underlined, underline removed on hover; on `Dark` it is Text Primary Inverted, on the brand-accent emphasis it keeps the surface text color (no hover token, confirm with design). Never uppercase. **The whole Promotion banner is clickable:** the link's `::after` is stretched over the banner (`position: absolute; inset: 0`, banner `position: relative`, × `z-index: 1` above it), and `.banner-notification--promotion:hover .inline-link` gives the link its hover (underline removed, hover color), so hovering anywhere shows the effect. Keyboard focus on the link draws the focus ring around the banner (`outline-offset: -4px`; confirm the offset with design).
+> **Mobile / tablet (below 769px, Figma Small-XSmall, 32px):** a different layout: padding `4px` vertical / `8px` horizontal (the 24px × fills the rest of the 32px), height `32px`, **title on the left** (`label-md` 14/16, 0.42px, uppercase, no trailing dash) and the **link on the right** (Inline Link `body-sm` 14/16, 0.36px, `white-space: nowrap`), 12px gap, then the **×** (Close icon button, 8px after the link; added 2026-10, Figma shows none on mobile, so confirm with design). With `closable: false` there is no ×. The link is an Inline Link (`eco-inline-link`): underlined, underline removed on hover; on `Dark` it is Text Primary Inverted, on the brand-accent emphasis it keeps the surface text color (no hover token, confirm with design). Never uppercase. **The whole Promotion banner is clickable:** the link's `::after` is stretched over the banner (`position: absolute; inset: 0`, banner `position: relative`, × `z-index: 1` above it), and `.banner-notification--promotion:hover:not(:has(.icon-btn:hover)) .inline-link` gives the link its hover (underline removed, hover color), so hovering anywhere on the banner shows the effect, **except over the ×**: hovering the × only hovers the button. Keyboard focus on the link draws the focus ring around the banner (`outline-offset: -4px`; confirm the offset with design).
 
 ---
 
@@ -148,7 +148,7 @@ All three emphasis tiers share this same left-aligned anatomy — only backgroun
 **Promotion (Small only):**
 ```
 Desktop:  [      TITLE - Inline link (centered)      ]  [✕ close 20px]
-Mobile:   [TITLE (left)                  Inline link]     ← no ×, 32px high
+Mobile:   [TITLE (left)              Inline link  ✕]     ← 32px high, × last
           ← whole background is the emphasis color →
 ```
 
@@ -387,13 +387,13 @@ Mobile:   [TITLE (left)                  Inline link]     ← no ×, 32px high
 }
 
 /* ---------- Promotion (Small only) ---------- */
-/* Mobile (below 769px, Figma Small-XSmall): 32px, title left, link right, no × */
+/* Mobile (below 769px): 32px, title left, link and × right (× added 2026-10) */
 .banner-notification--promotion {
   position: relative;
   align-items: center;
   width: 100%;
   min-height: 32px;
-  padding: 8px;
+  padding: 4px 8px;            /* the 24px × plus 4px + 4px keeps 32px */
   box-sizing: border-box;
   box-shadow: var(--shadow-elevation-b-20);
 }
@@ -415,7 +415,7 @@ Mobile:   [TITLE (left)                  Inline link]     ← no ×, 32px high
   line-height: 16px;
   letter-spacing: 0.36px;
 }
-.banner-notification--promotion .icon-btn { display: none; }
+.banner-notification--promotion { gap: 8px; }   /* mobile: title, link and × in one row */
 
 /* Desktop: 48px, centered "Title - Link", × shown */
 @media (min-width: 769px) {
@@ -424,7 +424,8 @@ Mobile:   [TITLE (left)                  Inline link]     ← no ×, 32px high
   .banner-notification--promotion .banner-notification__title { display: inline; font-size: 18px; line-height: 18px; letter-spacing: 0.18px; }  /* label-md */
   .banner-notification--promotion .banner-notification__title::after { content: ' -'; }
   .banner-notification--promotion .inline-link { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }  /* body-md */
-  .banner-notification--promotion .icon-btn { display: inline-flex; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
+  .banner-notification--promotion { gap: 0; }
+  .banner-notification--promotion .icon-btn { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
 }
 
 /* Promotion emphasis colors */
