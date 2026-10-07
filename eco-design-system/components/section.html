@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/section.css">
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-dark { background: var(--color-surface-100); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-cap { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 600; }
+    .ds-stage--dark .pg-cap { color: var(--color-text-secondary-inverted); }
+
+  </style>
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Section</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Layout</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="The skill has no Figma link. The values are the project’s own section rules.">Not verified in Figma</span></div>
+    <h1 class="ds-title">Section</h1>
+    <p class="ds-lead">A section is a <strong>full-width block of a page</strong>. Its padding adjusts at each breakpoint and its surface is white or grey.</p><p class="ds-lead">Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-section/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#playground">Playground</a></li><li><a href="#padding">Padding</a></li><li><a href="#zeroed">Zeroed padding</a></li><li><a href="#divider">Page divider</a></li><li><a href="#mypages">My Pages title</a></li><li><a href="#code">Code</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="playground"><div class="ds-page ds-inner"><h2 class="ds-h2">Playground</h2><p class="ds-desc">One section in a stage. The padding is measured live from the real component, so it changes as you resize the window. The side margin is set to 24px inside the stage only.</p><div class="ds-playground"><div class="ds-stage" id="pg-stage" data-mode-stage><div id="pg-host" style="width:100%"></div></div><div class="ds-controls"><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-pos">Position</span><div class="btn-group" role="group" aria-labelledby="pg-l-pos" data-pg="pos"><button type="button" data-v="other" aria-pressed="true">Other</button><button type="button" data-v="first" aria-pressed="false">First</button></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bg">Background</span><div class="btn-group" role="group" aria-labelledby="pg-l-bg" data-pg="bg"><button type="button" data-v="primary" aria-pressed="true">White</button><button type="button" data-v="secondary" aria-pressed="false">Grey</button></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-pad">Padding</span><div class="btn-group" role="group" aria-labelledby="pg-l-pad" data-pg="pad"><button type="button" data-v="on" aria-pressed="true">Built-in</button><button type="button" data-v="off" aria-pressed="false">Zeroed</button></div></div><p class="pg-note" id="pg-read" role="status" style="margin:0"></p></div></div><h3 class="ds-h3">Markup for this selection</h3><div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div></div></section>
+<section class="ds-section" id="padding"><div class="ds-page ds-inner"><h2 class="ds-h2">Padding</h2><p class="ds-desc">Padding steps at the five ECO breakpoints. The first section on a page has less top padding. The row for the current window width is marked.</p><h3 class="ds-h3">First section</h3><div class="ds-table-wrap"><table class="ds-table" id="t-first"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Top</th><th scope="col">Bottom</th></tr></thead><tbody><tr data-bp="xs"><th scope="row">xs · 0–639px</th><td>16px</td><td>40px</td></tr><tr data-bp="sm"><th scope="row">sm · 640–768px</th><td>32px</td><td>48px</td></tr><tr data-bp="md"><th scope="row">md · 769–1023px</th><td>32px</td><td>64px</td></tr><tr data-bp="lg"><th scope="row">lg · 1024–1280px</th><td>48px</td><td>80px</td></tr><tr data-bp="xl"><th scope="row">xl · 1281px+</th><td>48px</td><td>80px</td></tr></tbody></table></div><h3 class="ds-h3">Other sections</h3><div class="ds-table-wrap"><table class="ds-table" id="t-other"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Top</th><th scope="col">Bottom</th></tr></thead><tbody><tr data-bp="xs"><th scope="row">xs · 0–639px</th><td>32px</td><td>40px</td></tr><tr data-bp="sm"><th scope="row">sm · 640–768px</th><td>48px</td><td>48px</td></tr><tr data-bp="md"><th scope="row">md · 769–1023px</th><td>56px</td><td>64px</td></tr><tr data-bp="lg"><th scope="row">lg · 1024–1280px</th><td>72px</td><td>80px</td></tr><tr data-bp="xl"><th scope="row">xl · 1281px+</th><td>72px</td><td>80px</td></tr></tbody></table></div><h3 class="ds-h3">Surface and sides</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Surface</th><td><code>surface-raised-primary</code> (white, default) or <code>surface-raised-secondary</code> (grey). A page starts with white or uses white only; grey marks a clear change. No other backgrounds without design approval.</td></tr><tr><th scope="row">Sides</th><td><code>var(--px-full)</code>: the grid margin (16 / 32 / 40px) that also centers content against the 1200px maximum width.</td></tr><tr><th scope="row">Padding</th><td>Normally always on. It is the white space that divides content.</td></tr></tbody></table></div></div></section>
+<section class="ds-section ds-section--secondary" id="zeroed"><div class="ds-page ds-inner"><h2 class="ds-h2">Zeroed padding</h2><p class="ds-desc">Turn the built-in padding off only in these five cases (<code>.section--flush</code>), and with a clear purpose.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">#</th><th scope="col">Case</th><th scope="col">Use when</th></tr></thead><tbody><tr><th scope="row">1</th><td>Divider inside a section</td><td>Two parts with the same background, no clear break wanted, but the content should keep the section padding.</td></tr><tr><th scope="row">2</th><td>Adjacent topic with an in-between section</td><td>Two sections cover one topic and a semi-topic section (cross-sell, product placement) sits between them.</td></tr><tr><th scope="row">3</th><td>Fluid hero banner</td><td>The section is the container of a full-width banner for new products or a campaign.</td></tr><tr><th scope="row">4</th><td>First section next to a component with built-in spacing</td><td>Zero the top padding when the content follows a breadcrumb.</td></tr><tr><th scope="row">5</th><td>First section with a fluid banner first</td><td>Zero top and bottom when the page starts with a full-width banner or image.</td></tr></tbody></table></div></div></section>
+<section class="ds-section" id="divider"><div class="ds-page ds-inner"><h2 class="ds-h2">Page divider</h2><p class="ds-desc">A thin line between two sections of the same color, when a full section break would feel heavy. It is a <code>div</code>, not a section, and uses <code>--px-full</code> so the line stops where the content stops.</p><h3 class="ds-h3">Replacing a section boundary</h3><p class="ds-desc">With its own 48px top and bottom padding.</p><div class="ds-stage" style="display:block"><div class="page-divider"><div class="page-divider__line"></div></div></div><h3 class="ds-h3">Between two sections that already have padding</h3><p class="ds-desc">Zero the divider’s own vertical padding, or the air stacks.</p><div class="ds-stage" style="display:block"><div class="page-divider" style="padding-top:0;padding-bottom:0"><div class="page-divider__line"></div></div></div></div></section>
+<section class="ds-section ds-section--secondary" id="mypages"><div class="ds-page ds-inner"><h2 class="ds-h2">My Pages title</h2><p class="ds-desc">On My Pages the page title block has fixed spacing that must always be used.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col"><code>.main-content</code> padding-top</th><th scope="col"><code>.page-preamble</code> margin-bottom</th></tr></thead><tbody><tr><th scope="row">xs</th><td>24px</td><td>24px</td></tr><tr><th scope="row">sm</th><td>24px</td><td>32px</td></tr><tr><th scope="row">md and up</th><td>40px</td><td>40px</td></tr></tbody></table></div></div></section>
+<section class="ds-section" id="code"><div class="ds-page ds-inner"><h2 class="ds-h2">Code</h2><div id="recipes"></div><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/section.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+<section class="ds-section ds-section--secondary" id="usage"><div class="ds-page ds-inner"><h2 class="ds-h2">Usage</h2><div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The block…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">is a full-width part of a page layout</th><td>Section</td></tr><tr><th scope="row">separates two sections of one color lightly</th><td>Page divider</td></tr><tr><th scope="row">separates items inside content</th><td><code>eco-divider</code></td></tr><tr><th scope="row">is the page frame (header, footer)</th><td>The page template</td></tr></tbody></table></div><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Write the xs padding first, then add sm, md, lg and xl.</li><li>Mark the first section with <code>.section--first</code>.</li><li>Use <code>--px-full</code> for the sides.</li><li>Zero the padding only for the five cases.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Use another background without design approval.</li><li>Use <code>--px-page</code> for the divider’s sides.</li><li>Stack a divider’s 48px on a section’s own padding.</li><li>Use zeroed padding without a clear purpose.</li></ul></div></div></div></section>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var st = { pos: 'other', bg: 'primary', pad: 'on' };
+  function bpName() { var w = innerWidth; return w >= 1281 ? 'xl' : w >= 1024 ? 'lg' : w >= 769 ? 'md' : w >= 640 ? 'sm' : 'xs'; }
+  function mark() { var b = bpName(); $$('[data-bp]').forEach(function (r) { var on = r.dataset.bp === b; r.style.background = on ? 'var(--color-surface-02)' : ''; if (on) r.setAttribute('aria-current', 'true'); else r.removeAttribute('aria-current'); }); }
+  function cls() { return 'section' + (st.pos === 'first' ? ' section--first' : '') + (st.bg === 'secondary' ? ' section--secondary' : '') + (st.pad === 'off' ? ' section--flush' : ''); }
+  function renderPg() {
+    var host = clear($('#pg-host'));
+    host.innerHTML = '<section class="' + cls() + '" style="padding-left:24px;padding-right:24px"><div class="pg-block" style="background:var(--color-surface-10);padding:16px;font-size:14px;line-height:20px">Content</div></section>';
+    var s = host.firstChild, cs = getComputedStyle(s);
+    $('#pg-read').textContent = 'At ' + bpName() + ' (' + innerWidth + 'px): top ' + cs.paddingTop + ', bottom ' + cs.paddingBottom + '.';
+    $('#pg-code').textContent = '<section class="' + cls() + '">\n  <!-- content -->\n</section>';
+    mark();
+  }
+  DK.wire(st, renderPg); window.addEventListener('resize', renderPg);
+  DK.recipes($('#recipes'), [
+    ['First section, then another (link section.css)', '<section class="section section--first">…</section>\n<section class="section section--secondary">…</section>'],
+    ['Zeroed padding (a fluid hero banner)', '<section class="section section--flush">\n  <img src="hero.jpg" alt="" style="display:block;width:100%" />\n</section>'],
+    ['Page divider between two sections of one color', '<div class="page-divider"><div class="page-divider__line"></div></div>'],
+    ['My Pages title block', '<div class="main-content">\n  <div class="page-preamble">…</div>\n</div>']]);
+  DK.printCss($('#css-code'), 'section');
+  renderPg();
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

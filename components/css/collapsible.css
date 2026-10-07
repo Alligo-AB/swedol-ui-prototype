@@ -2,7 +2,7 @@
    Tokens only. Mobile-first (desktop from 769px). */
 .collapsible-wrap {
   border-bottom: 1px solid var(--color-border-primary);
-  transition: padding-bottom var(--duration-fast-4) var(--ease-standard);
+  transition: padding-bottom var(--co-duration, var(--duration-fast-4)) var(--co-ease, var(--ease-standard));  /* --co-* set by the docs Motion section; recommended value is the fallback */
 }
 /* The last collapsible-wrap in a list hides its bottom border WHEN
    the list is the section's last/only content (i.e. nothing — e.g.
@@ -41,7 +41,7 @@ section > *:last-child .collapsible-wrap:last-child { border-bottom: none; }
   color: var(--color-text-primary);
   transition: color var(--duration-fast-3) var(--ease-standard);
 }
-.collapsible-item:hover .collapsible-item__label { color: var(--color-text-action-primary-hover); }
+.collapsible-item:is(:hover, [data-state="hover"]) .collapsible-item__label { color: var(--color-text-action-primary-hover); }
 @media (min-width: 769px) {
   .collapsible-item__label { font-size: 20px; line-height: 24px; }
 }
@@ -49,7 +49,7 @@ section > *:last-child .collapsible-wrap:last-child { border-bottom: none; }
 .collapsible-item__chevron .ms {
   color: var(--color-icon-primary);
   font-size: 24px;
-  transition: transform var(--duration-fast-4) var(--ease-standard);
+  transition: transform var(--co-duration, var(--duration-fast-4)) var(--co-ease, var(--ease-standard));
 }
 .collapsible-wrap--open .collapsible-item__chevron .ms { transform: rotate(180deg); }
 
@@ -57,7 +57,7 @@ section > *:last-child .collapsible-wrap:last-child { border-bottom: none; }
 .collapsible-item__content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--duration-fast-4) var(--ease-standard);
+  transition: max-height var(--co-duration, var(--duration-fast-4)) var(--co-ease, var(--ease-standard));
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;

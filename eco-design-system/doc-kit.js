@@ -39,6 +39,29 @@
     if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
   });
 
+
+  /* Playground wiring: every [data-pg="key"] toggle/select writes state[key] and calls fn() */
+  function wire(state, fn) { $$('[data-pg]').forEach(function (g) { seg(g, function (v) { state[g.dataset.pg] = v; fn(); }); }); }
+  /* Mode toggle (light/dark) synced across every [data-mode-toggle] group; fn(mode) after each change. Stages with [data-mode-stage] flip to .ds-stage--dark. */
+  function mode(fn) {
+    $$('[data-mode-toggle]').forEach(function (g) {
+      g.addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return; var v = b.dataset.v;
+        $$('[data-mode-toggle]').forEach(function (x) { $$('button', x).forEach(function (y) { y.setAttribute('aria-pressed', String(y.dataset.v === v)); }); });
+        $$('[data-mode-stage]').forEach(function (s) { s.classList.toggle('ds-stage--dark', v === 'dark'); });
+        if (fn) fn(v);
+      });
+    });
+  }
+  /* Print a shared components/css/<name>.css into a <pre>; strip = [[regex, replacement], …] (e.g. the page-only [data-state] pairs) */
+  function printCss(pre, name, strip) {
+    return fetch('../../components/css/' + name + '.css', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (t) {
+      (strip || DEFAULT_STRIP).forEach(function (re) { t = t.replace(re[0], re[1]); });
+      pre.textContent = t.replace(/^\n+/, '');
+    });
+  }
+  var DEFAULT_STRIP = [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/:is\(:focus-visible, \[data-state="focus"\]\)/g, ':focus-visible']];
+
   function codeBox(title) {
     var box = document.createElement('div'), id = 'dk' + (uid++);
     box.className = 'ds-code';
@@ -89,7 +112,7 @@
   /* Motion section for a component page: its own section after `opts.anchor` (a section id) with a preview stage, sliders for
      Easing and Duration (every eco-motion token), a switch for Height collapse and a table of the chosen tokens and values.
      Applied live to the stage through --<prefix>-ease / --<prefix>-duration and data-<prefix>="fade".
-     opts: { anchor, prefix, rec: {ease, dur, collapse}, collapse, why, role: 'exit', preview(): element }. Several motions on one page (e.g. Toast enter + exit): parts: [{ title, prefix, rec: {ease, dur}, exit }] replaces prefix/rec; show(): fires the real component (fixed in the window) instead of preview(), and the vars are set on <html>. role 'exit' adds the warnings table and a live warning. rec = the recommended default for this
+     opts: { anchor, prefix, rec: {ease, dur, collapse}, collapse, why, role: 'exit', always (no close button needed: controls stay active), preview(): element }. Several motions on one page (e.g. Toast enter + exit): parts: [{ title, prefix, rec: {ease, dur}, exit }] replaces prefix/rec; show(): fires the real component (fixed in the window) instead of preview(), and the vars are set on <html>. role 'exit' adds the warnings table and a live warning. rec = the recommended default for this
      component, marked * and shown in the table. The sections after the new one swap their background so they keep alternating. */
   var EASE = [['decelerate-generic', 'Decelerate'], ['decelerate-emphasized', 'Decelerate emphasized'], ['standard', 'Standard'], ['accelerate-generic', 'Accelerate']];
   var DUR = [['fast-1', 'Fast 1', 50], ['fast-2', 'Fast 2', 100], ['fast-3', 'Fast 3', 150], ['fast-4', 'Fast 4', 200], ['medium-1', 'Medium 1', 250], ['medium-2', 'Medium 2', 300], ['medium-3', 'Medium 3', 350], ['medium-4', 'Medium 4', 400], ['slow-1', 'Slow 1', 450], ['slow-2', 'Slow 2', 500], ['slow-3', 'Slow 3', 550], ['slow-4', 'Slow 4', 600]];
@@ -170,7 +193,7 @@
     off.textContent = 'This selection has no close button, so it has no closing motion. Change the selection in Playground.';
     host.parentNode.appendChild(off);
     function check() {
-      if (opts.show) return;
+      if (opts.show || opts.always) return;
       var x = host.querySelector('.icon-btn--close'), can = !!(x && x.offsetParent);
       controls.inert = !can; controls.style.opacity = can ? '' : '0.5'; off.hidden = can;
     }
@@ -185,5 +208,5 @@
     return { render: render };
   }
 
-  w.DK = { motion: motion, $: $, $$: $$, clear: clear, esc: esc, seg: seg, bp: bp, recipes: recipes, printFile: printFile, tokenTable: tokenTable, rows: rows };
+  w.DK = { wire: wire, mode: mode, printCss: printCss, codeBox: codeBox, motion: motion, $: $, $$: $$, clear: clear, esc: esc, seg: seg, bp: bp, recipes: recipes, printFile: printFile, tokenTable: tokenTable, rows: rows };
 })(window);

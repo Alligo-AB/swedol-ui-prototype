@@ -1,28 +1,28 @@
 # Graph Report - swedol-ui-prototype  (2026-10-07)
 
 ## Corpus Check
-- 65 files · ~620,676 words
+- 64 files · ~621,658 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 441 nodes · 643 edges · 36 communities (26 shown, 6 thin omitted)
-- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 53 edges (avg confidence: 0.85)
+- 439 nodes · 635 edges · 35 communities (25 shown, 6 thin omitted)
+- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 52 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7d753375`
+- Built from commit: `eed6257a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- Checkbox
+- ECO semantic color tokens
 - Section
 - Component library skills index
 - Shared header partial
 - System Inline Notification
 - tokens/_test.html (unused placeholder)
 - eco-doc-page/SKILL.md
-- Segment Control
+- Pill Segment Control (ECO Design System)
 - Design review: implementation vs. Figma + ECO
 - generate-tokens.py
 - Menu – Dropdown & Exposed Dropdown (ECO Design System)
@@ -45,7 +45,6 @@
 - Icon picker (ECO Design System)
 - run
 - select-menu.js
-- segment-control.js
 - README.md
 
 ## God Nodes (most connected - your core abstractions)
@@ -80,20 +79,19 @@
 - **Notification component skills routed by notifications-guide** — claude_skills_notifications_guide_skill, claude_skills_eco_toast_system_skill, claude_skills_eco_toast_ecom_skill, claude_skills_eco_banner_notification_skill, claude_skills_eco_inline_notification_skill, claude_skills_eco_modal_ecom_skill [EXTRACTED 0.95]
 - **Shared page shell partials (header, main menu, footer, account-nav drawer)** — mypages_partials_header, mypages_partials_main_menu, mypages_partials_footer, mypages_partials_account_nav_drawer [EXTRACTED 1.00]
 - **Users page drawer set (add, columns, balance, upload)** — mypages_users_add_user_drawer, mypages_users_column_settings_drawer, mypages_users_balance_settings_drawer, mypages_users_upload_users_drawer [EXTRACTED 1.00]
-- **Keyboard-only focus ring pattern (body.keyboard-nav)** — _claude_skills_eco_button_skill_focus_outline_method, _claude_skills_eco_input_skill_focus_ring_absolute, _claude_skills_eco_segment_control_skill_focus_inherits_button [INFERRED 0.85]
 - **Action, Inline and Tile link family** — _claude_skills_eco_action_link_skill_action_link, _claude_skills_eco_inline_link_skill_inline_link, _claude_skills_eco_tile_link_skill_tile_link [INFERRED 0.85]
 - **Banner, Inline and Modal notification family** — _claude_skills_eco_banner_notification_skill_banner_notification, _claude_skills_eco_inline_notification_skill_inline_notification, _claude_skills_eco_modal_ecom_skill_modal_ecom [INFERRED 0.85]
 - **Pages using role tier cards** — feature_comparison_roles, feature_comparison_roles_backup, e_handelspartner, claude_skills_eco_role_tier_card_skill [INFERRED 0.85]
 
-## Communities (36 total, 6 thin omitted)
+## Communities (35 total, 6 thin omitted)
 
-### Community 0 - "Checkbox"
-Cohesion: 0.17
-Nodes (13): Button hover white 20% overlay, Checkbox, Checkbox dark mode (.form-checkbox-item--dark), Checkbox Disabled Selected gray box with gray checkmark, Checkbox light-mode focus ring deviates from border-focus, Checkbox 24x24 size model, Checkbox table check-icon variant (.check-icon), Border color tokens (+5 more)
+### Community 0 - "ECO semantic color tokens"
+Cohesion: 0.08
+Nodes (29): Promotion uses brand-scoped accent tokens, Bordered box crumb with slash separator, Button, Button hover white 20% overlay, System button variant, Button variants Primary/Secondary/Blank/Destructive/Accent/System, Checkbox, Checkbox dark mode (.form-checkbox-item--dark) (+21 more)
 
 ### Community 1 - "Section"
-Cohesion: 0.07
-Nodes (34): Action Link, Action Link icons never underlined on hover, Action Link Text Primary Inverted variant, Action Link sizes Large/Medium/Small, Breadcrumb Active (last, current page) state, Bordered box crumb with slash separator, Breadcrumb, Breadcrumb built-in spacing zeroes following section top padding (+26 more)
+Cohesion: 0.06
+Nodes (36): Action Link, Action Link icons never underlined on hover, Action Link Text Primary Inverted variant, Action Link sizes Large/Medium/Small, Breadcrumb Active (last, current page) state, Breadcrumb, Breadcrumb built-in spacing zeroes following section top padding, Breadcrumb uses --px-page not --px-full (+28 more)
 
 ### Community 2 - "Component library skills index"
 Cohesion: 0.09
@@ -105,15 +103,15 @@ Nodes (49): Page templates: template.html and mypages-template.html, eco-role-ti
 
 ### Community 4 - "System Inline Notification"
 Cohesion: 0.06
-Nodes (38): Badge/Basic (.badge-basic), Badge color-meaning mapping for lifecycle status, Badge emphasis Strong/Weak/Weaker, Badge letter case parameter, Badge vs Tag vs counter bubble distinction, Badge states Neutral Grey/Dark and Alert Info/Success/Warning/Danger, Banner Notification, Banner emphasis Strong/Weak/Weaker (+30 more)
+Nodes (41): Badge/Basic (.badge-basic), Badge color-meaning mapping for lifecycle status, Badge emphasis Strong/Weak/Weaker, Badge letter case parameter, Badge vs Tag vs counter bubble distinction, Badge states Neutral Grey/Dark and Alert Info/Success/Warning/Danger, Banner Notification, Banner emphasis Strong/Weak/Weaker (+33 more)
 
 ### Community 6 - "eco-doc-page/SKILL.md"
 Cohesion: 0.14
 Nodes (13): Building blocks in `docs.css`, Component pages, Controls in a playground are the real components, Foundation pages, Hub (`overview.html`), Motion section, Page anatomy (in this order), Principles (+5 more)
 
-### Community 7 - "Segment Control"
-Cohesion: 0.08
-Nodes (27): Button, Button keyboard-nav focus outline method, Button variants Primary/Secondary/Blank/Destructive/Accent/System, Component-specific elevation tokens, Input focus ring is absolute inset -3px, keyboard-only, Input Field, Label above input, hint/message below pattern, Input sizes per breakpoint (+19 more)
+### Community 7 - "Pill Segment Control (ECO Design System)"
+Cohesion: 0.25
+Nodes (7): CSS template (Large, Primary/Pill — mobile-first), HTML and JS example, Interaction (sliding pill), Pill Segment Control (ECO Design System), Sizes, States, Variants
 
 ### Community 8 - "Design review: implementation vs. Figma + ECO"
 Cohesion: 0.14
@@ -187,17 +185,13 @@ Nodes (5): Behavior (same everywhere), Flags, Icon picker (ECO Design System), R
 Cohesion: 0.70
 Nodes (4): choose(), close(), holder(), openMenu()
 
-### Community 34 - "segment-control.js"
-Cohesion: 1.00
-Nodes (3): init(), place(), setup()
-
 ## Ambiguous Edges - Review These
 - `Border color tokens` → `Tile Link background colors White/Grey/Black`  [AMBIGUOUS]
   .claude/skills/eco-tile-link/SKILL.md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **143 isolated node(s):** `1. Before you start — ask, don't guess`, `Prototype as a source (functionality)`, `Sweep systematically (do not sample)`, `4. WCAG check (separate section in the report)`, `5. Verify before you report` (+138 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 198 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **148 isolated node(s):** `1. Before you start — ask, don't guess`, `Prototype as a source (functionality)`, `Sweep systematically (do not sample)`, `4. WCAG check (separate section in the report)`, `5. Verify before you report` (+143 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 203 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -205,15 +199,15 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `Border color tokens` and `Tile Link background colors White/Grey/Black`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `ECO semantic color tokens` connect `System Inline Notification` to `Checkbox`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Why does `ECO semantic color tokens` connect `ECO semantic color tokens` to `System Inline Notification`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Why does `Component library skills index` connect `Component library skills index` to `Shared header partial`, `links-guide skill`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **Why does `Border color tokens` connect `Checkbox` to `Section`, `System Inline Notification`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Shared header partial` (e.g. with `Shared account-nav drawer partial` and `Shared main menu partial`) actually correct?**
   _`Shared header partial` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `Users page (Användare)` (e.g. with `mypages-template.html (logged-in page template)` and `Users dashboard page (Användare with stat cards)`) actually correct?**
   _`Users page (Användare)` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 4 inferred relationships involving `mypages-template.html (logged-in page template)` (e.g. with `Address book page (Adressbok)` and `My Pages dashboard test page`) actually correct?**
   _`mypages-template.html (logged-in page template)` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 3 inferred relationships involving `Reviews page (Recensioner)` (e.g. with `template.html (public page template)` and `Reviews page backup 1`) actually correct?**
+  _`Reviews page (Recensioner)` has 3 INFERRED edges - model-reasoned connections that need verification._

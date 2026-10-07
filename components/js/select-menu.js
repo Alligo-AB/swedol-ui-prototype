@@ -11,10 +11,11 @@
     open = null;
   }
   function holder(sel) { return sel.closest('.input-wrap'); }
-  function openMenu(sel) {
+  function openMenu(sel, byPointer) {
     close();
     var small = /form-select--(sm|xs)/.test(sel.className);
     var menu = document.createElement('div'); menu.className = 'menu' + (small ? ' menu--sm' : '');
+    if (byPointer) menu.dataset.input = 'pointer';   /* no focus ring on the first row until the keyboard is used */
     var ul = document.createElement('ul'); ul.className = 'menu__items'; ul.setAttribute('role', 'listbox');
     var l = sel.id && document.querySelector('label[for="' + sel.id + '"]'), by = sel.getAttribute('aria-labelledby') && document.getElementById(sel.getAttribute('aria-labelledby'));
     if (l || by) ul.setAttribute('aria-label', (l || by).textContent);
@@ -43,7 +44,7 @@
     if (sel) {
       if (sel.disabled) return;
       e.preventDefault(); sel.focus();
-      if (open && open.sel === sel) close(); else openMenu(sel);
+      if (open && open.sel === sel) close(); else openMenu(sel, true);
     } else if (open && !e.target.closest('.menu')) close();
   });
   document.addEventListener('click', function (e) {
@@ -53,6 +54,7 @@
   document.addEventListener('keydown', function (e) {
     var t = e.target;
     if (open && open.menu.contains(t)) {
+      delete open.menu.dataset.input;   /* keyboard in use: rings show again */
       var items = Array.prototype.slice.call(open.menu.querySelectorAll('.menu__item:not([aria-disabled="true"])')), i = items.indexOf(t);
       if (e.key === 'ArrowDown') { e.preventDefault(); (items[i + 1] || t).focus(); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); (items[i - 1] || t).focus(); }

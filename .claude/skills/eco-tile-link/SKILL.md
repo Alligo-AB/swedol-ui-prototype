@@ -106,6 +106,9 @@ Text color Enabled: `text-primary` (var(--color-text-action-primary)). Text colo
 
 ### CSS template
 
+> **Shared file:** `<link rel="stylesheet" href="/components/css/tile-link.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/tile-link.html`. Mobile-first; label sizes follow the typography table (17/24 desktop).
+
+
 ```css
 /* Tile Link — wrapper (gives the correct display behavior) */
 .tile-link {

@@ -10,7 +10,7 @@
 }
 
 /* Hover — underline removed */
-.inline-link:hover { color: var(--color-text-action-primary-hover); text-decoration: none; }
+.inline-link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); text-decoration: none; }
 
 /* Sizes — mobile first (xs/sm), desktop from 769px */
 .inline-link--large  { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
@@ -23,14 +23,14 @@
 
 /* Small Bold */
 .inline-link--small-bold { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
-.inline-link--small-bold:hover { color: var(--color-text-action-primary-hover); text-decoration: none; }
+.inline-link--small-bold:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); text-decoration: none; }
 
 /* Color variants */
 .inline-link--secondary { color: var(--color-text-secondary); }
-.inline-link--secondary:hover { color: var(--color-text-action-secondary-hover); }
+.inline-link--secondary:is(:hover, [data-state="hover"]) { color: var(--color-text-action-secondary-hover); }
 
 .inline-link--tertiary { color: var(--color-text-tertiary); }
-.inline-link--tertiary:hover { color: var(--color-text-action-tertiary-hover); }
+.inline-link--tertiary:is(:hover, [data-state="hover"]) { color: var(--color-text-action-tertiary-hover); }
 
 .inline-link--inverted { color: var(--color-text-primary-inverted); }
-.inline-link--inverted:hover { color: var(--color-text-action-primary-inverted-hover); }
+.inline-link--inverted:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-inverted-hover); }

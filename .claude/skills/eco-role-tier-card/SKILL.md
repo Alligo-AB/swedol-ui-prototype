@@ -61,6 +61,9 @@ Several `.role-tier-pair` can be stacked one below another (one per category/tab
 
 ### CSS template (the core)
 
+> **Shared file:** `<link rel="stylesheet" href="/components/css/role-tier.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/role-tier-card.html`. Includes `.role-quicklinks`. Link `badge.css` too.
+
+
 ```css
 .role-tier-pair {
   display: grid;

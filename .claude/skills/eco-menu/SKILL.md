@@ -55,7 +55,7 @@ Two sizes. Both change at `md` (769px), `sm` (640–768px) looks like mobile.
 |---|---|---|
 | **Enabled** | Fill `surface-raised-primary`, text `text-primary`, no icon | Same, plus an outline `circle` icon, `text-action-tertiary` |
 | **Hover** | Fill `surface-navigation-hover`, no icon | Fill `surface-navigation-hover`, outline `check_circle` in `text-action-tertiary` (preview of the choice) |
-| **Focus** (derived) | Keyboard focus (`:focus-visible`): 2px `border-focus` ring inside the row (`outline-offset: -2px`), the row's divider is hidden so it does not cross the ring | Same |
+| **Focus** (derived) | Keyboard focus (`:focus-visible`): 2px `border-focus` ring inside the row (`outline-offset: -2px`), the row's divider is hidden so it does not cross the ring. **When a select opens with the mouse, the focused row shows no ring** (`.menu[data-input="pointer"]`, set by `select-menu.js`) until a key is pressed; opened with Enter/Space/Arrows, the ring shows at once | Same |
 | **Selected** | Fill `surface-raised-primary`, outline `check_circle` in `text-action-primary` | Same as Select |
 | **Disabled Selected** (Figma, all 4 sizes) | Text `text-disabled`, check `text-disabled`, no hover fill, `cursor: not-allowed` | Derived: same, check in `text-disabled` |
 | **Disabled** (derived, not selected) | Text `text-disabled`, no icon | Derived: text and circle in `text-disabled` |

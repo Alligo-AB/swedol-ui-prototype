@@ -15,10 +15,10 @@
   transition: outline-color var(--duration-fast-2) var(--ease-standard), box-shadow var(--duration-fast-2) var(--ease-standard);
 }
 .btn-group button::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--color-surface-opacity-black-12); opacity: 0; transition: opacity var(--duration-fast-2) var(--ease-standard); }
-.btn-group button:hover:not(:disabled) { box-shadow: inset 0 0 0 1px var(--color-border-hover); }
-.btn-group button:hover:not([aria-pressed="true"]):not(:disabled)::before { opacity: 1; }
+.btn-group button:is(:hover, [data-state="hover"]):not(:disabled) { box-shadow: inset 0 0 0 1px var(--color-border-hover); }
+.btn-group button:is(:hover, [data-state="hover"]):not([aria-pressed="true"]):not(:disabled)::before { opacity: 1; }
 .btn-group button[aria-pressed="true"] { background: var(--color-surface-opacity-black-12); }
 .btn-group button:disabled { color: var(--color-text-disabled); box-shadow: inset 0 0 0 1px var(--color-border-disabled); cursor: not-allowed; }
-.btn-group button:hover:not(:disabled) { z-index: 1; }  /* hover frame on top of the neighbours' */
-body.keyboard-nav .btn-group button:focus { outline-color: var(--color-border-focus); z-index: 2; }
+.btn-group button:is(:hover, [data-state="hover"]):not(:disabled) { z-index: 1; }  /* hover frame on top of the neighbours' */
+.btn-group button[data-state="focus"], body.keyboard-nav .btn-group button:focus { outline-color: var(--color-border-focus); z-index: 2; }
 @media (min-width: 769px) { .btn-group button { height: 40px; padding: 0 var(--dimension-spacing-space-16); font-size: 16px; line-height: 16px; letter-spacing: 0.48px; } }

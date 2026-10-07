@@ -729,3 +729,61 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .mo-end .mo-bulb .mo-ic { color: var(--color-surface-warning-default); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 48; }
 @media (min-width: 769px) { .mo-cols { grid-template-columns: repeat(3, 1fr); } .mo-race { padding: 32px 40px; } .mo-race__row { grid-template-columns: 280px 1fr; align-items: center; } }
 
+
+/* ── Intro meta row: eyebrow + "Not verified in Figma" badge (components/css/badge.css) ── */
+.ds-eyebrow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 16px; }
+.ds-eyebrow-row .ds-eyebrow { margin-bottom: 0; }
+
+/* ── Material Symbols base class for components that use .ms (collapsible …); same as template.html ── */
+.ms { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: 20px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-smoothing: antialiased; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; user-select: none; flex-shrink: 0; }
+
+/* ── Mini illustrations for the hub cards (links, status, layout, extra form parts) ── */
+.mini-bgroup { display: inline-flex; }
+.mini-bgroup span { padding: 0 14px; height: 36px; line-height: 36px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.42px; box-shadow: inset 0 0 0 1px var(--color-border-action-3); margin-left: -1px; }
+.mini-bgroup span:first-child { margin-left: 0; }
+.mini-bgroup .on { background: var(--color-surface-opacity-black-12); }
+.mini-seg { display: inline-flex; padding: 4px; height: 44px; border-radius: 22px; background: var(--color-surface-disabled); }
+.mini-seg span { padding: 0 18px; line-height: 36px; border-radius: 18px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.42px; }
+.mini-seg .on { background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+.mini-range { position: relative; width: 200px; height: 24px; }
+.mini-range i { position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--color-border-primary); }
+.mini-range b { position: absolute; left: 90px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--color-surface-100); }
+.mini-iconpick { display: flex; align-items: center; gap: 8px; width: 200px; height: 40px; padding: 0 8px; border: 1px solid var(--color-border-input-default); background: var(--color-surface-raised-primary); }
+.mini-iconpick em { font-style: normal; font-size: 16px; color: var(--color-text-tertiary); }
+.mini-link p { margin: 0 0 8px; font-size: 16px; line-height: 22px; }
+.mini-link .mo-ic { vertical-align: middle; font-size: 20px; }
+.mini-link u { color: var(--color-text-action-primary); }
+.mini-tile { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 24px; border: 1px solid var(--color-border-primary); background: var(--color-surface-raised-primary); font-size: 16px; }
+.mini-tile em { font-style: normal; }
+.mini-badge { display: flex; gap: 8px; }
+.mini-badge span { padding: 4px 8px; font-size: 14px; line-height: 14px; font-weight: 500; letter-spacing: 0.56px; background: var(--color-surface-05); border: 1px solid var(--color-border-primary); }
+.mini-badge .ok { background: var(--color-surface-success-weak); border-color: transparent; color: var(--color-text-success-default); }
+.mini-badge .info { background: var(--color-surface-information-weak); border-color: transparent; color: var(--color-text-information-default); }
+.mini-bc { display: flex; align-items: center; gap: 6px; font-size: 12px; line-height: 12px; }
+.mini-bc span, .mini-bc b { padding: 6px 7px; border: 1px solid var(--color-border-action-3); color: var(--color-text-tertiary); }
+.mini-bc b { color: var(--color-text-primary); font-weight: 600; }
+.mini-bc i { font-style: normal; color: var(--color-text-tertiary); }
+.mini-pag { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 160px; font-size: 14px; }
+.mini-pag em { font-style: normal; color: var(--color-surface-60); }
+.mini-pag i { display: block; width: 100%; height: 2px; background: var(--color-surface-10); }
+.mini-pag b { display: block; width: 66%; height: 2px; background: var(--color-surface-100); }
+.mini-pag span { width: 100%; text-align: center; padding: 8px 0; box-shadow: inset 0 0 0 1px var(--color-border-action-1); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.48px; }
+.mini-tip { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.mini-tip .mo-ic { font-size: 24px; padding: 8px; }
+.mini-tip em { font-style: normal; padding: 6px 10px; font-size: 14px; background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+.mini-sec { display: flex; flex-direction: column; width: 160px; border: 1px solid var(--color-border-primary); }
+.mini-sec span { height: 36px; background: var(--color-surface-raised-primary); }
+.mini-sec .g { background: var(--color-surface-raised-secondary); }
+.mini-tier { display: flex; gap: 8px; }
+.mini-tier span { width: 72px; height: 72px; border: 1px solid var(--color-border-primary); background: var(--color-surface-raised-primary); }
+.mini-tier .d { background: var(--color-surface-100); border-color: var(--color-surface-90); }
+.mini-coll { display: flex; flex-direction: column; width: 200px; }
+.mini-coll span { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 16px; font-weight: 600; border-bottom: 1px solid var(--color-border-primary); }
+.mini-coll .mo-ic { font-size: 20px; }
+.mini-table { display: flex; flex-direction: column; width: 200px; box-shadow: var(--shadow-elevation-b-20); background: var(--color-surface-raised-primary); }
+.mini-table span { height: 28px; border-bottom: 1px solid var(--color-border-secondary); }
+.mini-table span:first-child { background: var(--color-surface-02); }
+
+.ds-card__tags { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px; }
+.ds-card__top { flex-wrap: wrap; gap: 8px; }
+.ds-card__tags { margin-left: auto; }

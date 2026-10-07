@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Links guide – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <link rel="stylesheet" href="../../components/css/action-link.css">
+  <link rel="stylesheet" href="../../components/css/tile-link.css">
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-dark { background: var(--color-surface-100); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-cap { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 600; }
+    .ds-stage--dark .pg-cap { color: var(--color-text-secondary-inverted); }
+
+  </style>
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Links guide</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design (linked in the intro).">Not verified in Figma</span></div>
+    <h1 class="ds-title">Links guide</h1>
+    <p class="ds-lead">ECO has three link types: <strong>inline link</strong>, <strong>action link</strong> and <strong>tile link</strong>. Read this guide before you build a link.</p><p class="ds-lead">Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/links-guide/SKILL.md</code>. Figma: <a class="ds-link" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1221-33213" target="_blank" rel="noopener">Links usage guidelines</a>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#choose">Which link type</a></li><li><a href="#examples">In context</a></li><li><a href="#behavior">Behavior</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="choose"><div class="ds-page ds-inner"><h2 class="ds-h2">Which link type</h2><p class="ds-desc">Use a link when the user should go to another page, to another site, to a spot on the same page, or act on something (open email, call a number). Choose the type by where the link sits and how prominent it must be.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Where</th><th scope="col">Underline</th><th scope="col">Icons</th><th scope="col">Page</th></tr></thead><tbody><tr><th scope="row">Inline link</th><td>Inside a sentence or text block</td><td>On when enabled, off on hover</td><td>Never</td><td><a class="ds-link" href="inline-link.html">Inline link</a></td></tr><tr><th scope="row">Action link</th><td>Standalone, not in body text</td><td>Off when enabled, on on hover</td><td>Left and/or right</td><td><a class="ds-link" href="action-link.html">Action link</a></td></tr><tr><th scope="row">Tile link</th><td>Graphical and prominent, like a card or button</td><td>None</td><td>With or without</td><td><a class="ds-link" href="tile-link.html">Tile link</a></td></tr></tbody></table></div><h3 class="ds-h3">Quick decision</h3><ol class="ds-steps" style="padding-left:24px;display:flex;flex-direction:column;gap:8px;font-size:17px;line-height:24px"><li>Does it run an action in the page (save, send, open a modal)? Use a button, not a link: <code>eco-button</code>.</li><li>Is it inside a sentence? Use an <strong>inline link</strong>.</li><li>Is it a logo, a category or a shortcut shown as a card? Use a <strong>tile link</strong>.</li><li>Otherwise it stands alone: use an <strong>action link</strong>.</li></ol></div></section>
+<section class="ds-section" id="examples"><div class="ds-page ds-inner"><h2 class="ds-h2">In context</h2><p class="ds-desc">The three types together, as they would be used on a page.</p><div class="ds-stage"><div class="pg-col" style="gap:24px"><p style="margin:0;font-size:17px;line-height:24px">Read more about our work wear on the <a href="#" class="inline-link inline-link--medium" data-prevent>product page</a>.</p><a href="#" class="action-link action-link--medium" data-prevent>View all products<span class="action-link__icon" aria-hidden="true">chevron_right</span></a><div class="pg-row"><a href="#" class="tile-link tile-link--large tile-link--vertical tile-link--white" data-prevent><div class="tile-link__inner"><span class="tile-link__icon" aria-hidden="true">checkroom</span><span class="tile-link__label">Work wear</span></div></a><a href="#" class="tile-link tile-link--large tile-link--vertical tile-link--white" data-prevent><div class="tile-link__inner"><span class="tile-link__icon" aria-hidden="true">construction</span><span class="tile-link__label">Tools</span></div></a></div></div></div></div></section>
+<section class="ds-section ds-section--secondary" id="behavior"><div class="ds-page ds-inner"><h2 class="ds-h2">Behavior</h2><p class="ds-desc">All three link types behave the same way for input.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Mouse</th><td>Click anywhere on the link text or its icon.</td></tr><tr><th scope="row">Keyboard</th><td>Enter while the link has focus. Tab shows the focus ring.</td></tr><tr><th scope="row">Markup</th><td>A real <code>&lt;a href&gt;</code> in every case. Links navigate; buttons act.</td></tr><tr><th scope="row">Motion</th><td>Color changes over <code>duration-fast-3</code> with <code>ease-standard</code>.</td></tr></tbody></table></div></div></section>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner"><h2 class="ds-h2">Usage</h2><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Choose the type by placement first, prominence second.</li><li>Name the destination in the link text.</li><li>Use one type per group of links.</li><li>Use <code>eco-button</code> for actions that do not navigate.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Use an inline link outside a sentence.</li><li>Add an icon to an inline link.</li><li>Use a tile link for ordinary text navigation.</li><li>Write “click here” as the link text.</li></ul></div></div></div></section>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  $$('[data-prevent]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

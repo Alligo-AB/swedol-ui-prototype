@@ -33,7 +33,7 @@
   border-right: 6.35px solid transparent;
 }
 
-.tooltip-wrap:hover .tooltip { opacity: 1; }
+.tooltip-wrap:is(:hover, [data-state="hover"]) .tooltip { opacity: 1; }
 
 /* Bottom — tooltip below, beak points up */
 .tooltip--bottom {

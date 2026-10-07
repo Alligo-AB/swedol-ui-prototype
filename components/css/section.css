@@ -1,0 +1,19 @@
+/* ECO component CSS: section + page divider. Skill: eco-section. Link it, do not copy it: <link rel="stylesheet" href="/components/css/section.css">
+   Needs --px-full (page margin, defined by the page). Padding steps at the 5 ECO breakpoints. Tokens only. Mobile-first. */
+.section { padding: 32px var(--px-full) 40px; background: var(--color-surface-raised-primary); }                /* xs */
+.section--secondary { background: var(--color-surface-raised-secondary); }
+.section--first { padding-top: 16px; }
+.section--flush { padding-top: 0; padding-bottom: 0; }                                                          /* zeroed padding (the 5 use cases) */
+@media (min-width: 640px)  { .section { padding-top: 48px; padding-bottom: 48px; } .section--first { padding-top: 32px; } }   /* sm */
+@media (min-width: 769px)  { .section { padding-top: 56px; padding-bottom: 64px; } .section--first { padding-top: 32px; } }   /* md */
+@media (min-width: 1024px) { .section { padding-top: 72px; padding-bottom: 80px; } .section--first { padding-top: 48px; } }   /* lg */
+.section--flush, .section--flush.section--first { padding-top: 0; padding-bottom: 0; }
+
+.page-divider { padding: 48px var(--px-full); }
+.page-divider__line { height: 1px; background: var(--color-border-primary); }
+
+/* My Pages page title (eco-section, "My Pages – Page Title section") */
+.main-content { padding-top: 24px; }                                   /* xs + sm */
+.page-preamble { margin-bottom: 24px; }                                /* xs */
+@media (min-width: 640px) { .page-preamble { margin-bottom: 32px; } }  /* sm */
+@media (min-width: 769px) { .main-content { padding-top: 40px; } .page-preamble { margin-bottom: 40px; } }   /* md and up */

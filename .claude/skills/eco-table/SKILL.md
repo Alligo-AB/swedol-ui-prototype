@@ -62,6 +62,9 @@ Header cells: bold. Body cells: `body-sm` (14px/20px, 0.36px) from `eco-typograp
 Use real `th` with `scope`. Check icons use `eco-checkbox` (`.check-icon`, disabled): give the cell a block checkbox with a 4px margin so the row stays 48px (`input { display: block; margin: 4px auto; }`).
 
 ### CSS template
+
+> **Shared file:** `<link rel="stylesheet" href="/components/css/table.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/table.html`.
+
 ```css
 .table-wrap {
   overflow-x: auto;

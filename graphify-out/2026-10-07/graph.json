@@ -62,19 +62,6 @@
         "source_file": "mypages/users.html"
       },
       {
-        "id": "keyboard_nav_focus_pattern",
-        "label": "Keyboard-only focus ring pattern (body.keyboard-nav)",
-        "nodes": [
-          "_claude_skills_eco_button_skill_focus_outline_method",
-          "_claude_skills_eco_input_skill_focus_ring_absolute",
-          "_claude_skills_eco_segment_control_skill_focus_inherits_button"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": ".claude/skills/eco-button/SKILL.md"
-      },
-      {
         "id": "link_component_family",
         "label": "Action, Inline and Tile link family",
         "nodes": [
@@ -679,7 +666,7 @@
       "file_type": "code",
       "norm_label": "apply()",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L132"
+      "source_location": "L133"
     },
     {
       "id": "eco_design_system_doc_kit_motion_check",
@@ -691,7 +678,7 @@
       "file_type": "code",
       "norm_label": "check()",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L165"
+      "source_location": "L172"
     },
     {
       "id": "eco_design_system_doc_kit_motion_nameof",
@@ -703,7 +690,7 @@
       "file_type": "code",
       "norm_label": "nameof()",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L120"
+      "source_location": "L121"
     },
     {
       "id": "eco_design_system_doc_kit_motion_render",
@@ -715,7 +702,7 @@
       "file_type": "code",
       "norm_label": "render()",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L169"
+      "source_location": "L177"
     },
     {
       "id": "eco_design_system_doc_kit_motion_row",
@@ -727,7 +714,7 @@
       "file_type": "code",
       "norm_label": "row()",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L131"
+      "source_location": "L132"
     },
     {
       "id": "eco_design_system_doc_kit_motion_slider",
@@ -739,7 +726,7 @@
       "file_type": "code",
       "norm_label": "slider()",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L121"
+      "source_location": "L122"
     },
     {
       "id": "eco_design_system_doc_kit_printfile",
@@ -1028,42 +1015,6 @@
       "norm_label": "updatepagination()",
       "source_file": "components/js/pagination.js",
       "source_location": "L2"
-    },
-    {
-      "id": "components_js_segment_control_init",
-      "label": "init()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "segment-control.js",
-      "file_type": "code",
-      "norm_label": "init()",
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L19"
-    },
-    {
-      "id": "components_js_segment_control_place",
-      "label": "place()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "segment-control.js",
-      "file_type": "code",
-      "norm_label": "place()",
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L6"
-    },
-    {
-      "id": "components_js_segment_control_setup",
-      "label": "setup()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "segment-control.js",
-      "file_type": "code",
-      "norm_label": "setup()",
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L12"
     },
     {
       "id": "claude_skills_eco_tokens_generate_tokens_extract_declarations",
@@ -2051,7 +2002,7 @@
       "file_type": "document",
       "frontmatter": {
         "name": "eco-range",
-        "description": "Use when the user picks one value from an ordered series of steps (easing, duration, size, density, a number between a minimum and a maximum) by dragging a thumb along a track, with the current value shown and optional tick labels. Not for choosing between two or three named options (use eco-segment-control or eco-radio), not for an on/off setting (use eco-switch) and not for typing a number (use eco-input)."
+        "description": "Use when the user picks one value from an ordered series of steps (easing, duration, size, density, a number between a minimum and a maximum) by dragging a thumb along a track, with the current value shown and optional tick labels. Not for choosing between two or three named options (use eco-pill-segment-control or eco-radio), not for an on/off setting (use eco-switch) and not for typing a number (use eco-input)."
       },
       "node_kind": "page",
       "norm_label": "eco-range/skill.md",
@@ -2068,7 +2019,7 @@
       "node_kind": "heading",
       "norm_label": "flags",
       "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L63"
+      "source_location": "L64"
     },
     {
       "id": "claude_skills_eco_range_skill_range_eco_design_system",
@@ -2092,7 +2043,7 @@
       "node_kind": "heading",
       "norm_label": "rules",
       "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L54"
+      "source_location": "L55"
     },
     {
       "id": "claude_skills_eco_range_skill_states",
@@ -2104,7 +2055,7 @@
       "node_kind": "heading",
       "norm_label": "states",
       "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L43"
+      "source_location": "L44"
     },
     {
       "id": "claude_skills_eco_range_skill_use_it",
@@ -2578,17 +2529,6 @@
       "source_location": "L1"
     },
     {
-      "id": "components_js_segment_control",
-      "label": "segment-control.js",
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "segment-control.js",
-      "file_type": "code",
-      "norm_label": "segment-control.js",
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L1"
-    },
-    {
       "id": "claude_skills_eco_doc_page_skill",
       "label": "eco-doc-page/SKILL.md",
       "_origin": "ast",
@@ -2638,7 +2578,7 @@
       "node_kind": "heading",
       "norm_label": "controls in a playground are the real components",
       "source_file": ".claude/skills/eco-doc-page/SKILL.md",
-      "source_location": "L161"
+      "source_location": "L163"
     },
     {
       "id": "claude_skills_eco_doc_page_skill_foundation_pages",
@@ -2734,7 +2674,7 @@
       "node_kind": "heading",
       "norm_label": "text fields in a playground",
       "source_file": ".claude/skills/eco-doc-page/SKILL.md",
-      "source_location": "L157"
+      "source_location": "L159"
     },
     {
       "id": "claude_skills_eco_doc_page_skill_verify_before_done",
@@ -2759,6 +2699,106 @@
       "norm_label": "what this is",
       "source_file": ".claude/skills/eco-doc-page/SKILL.md",
       "source_location": "L8"
+    },
+    {
+      "id": "claude_skills_eco_pill_segment_control_skill",
+      "label": "eco-pill-segment-control/SKILL.md",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Pill Segment Control (ECO Design System)",
+      "file_type": "document",
+      "frontmatter": {
+        "name": "eco-pill-segment-control",
+        "description": "Use when building or reviewing a segmented control (pill toggle) for switching between two related views/filters in the same surface \u2014 sizes, the sliding-pill interaction, and states. Never replaces Tabs or Radio buttons. Not the framed button group (see `eco-button`, section Button group)."
+      },
+      "node_kind": "page",
+      "norm_label": "eco-pill-segment-control/skill.md",
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "claude_skills_eco_pill_segment_control_skill_css_template_large_primary_pill_mobile_first",
+      "label": "CSS template (Large, Primary/Pill \u2014 mobile-first)",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Pill Segment Control (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "css template (large, primary/pill \u2014 mobile-first)",
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L60"
+    },
+    {
+      "id": "claude_skills_eco_pill_segment_control_skill_html_and_js_example",
+      "label": "HTML and JS example",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Pill Segment Control (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "html and js example",
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L180"
+    },
+    {
+      "id": "claude_skills_eco_pill_segment_control_skill_interaction_sliding_pill",
+      "label": "Interaction (sliding pill)",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Pill Segment Control (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "interaction (sliding pill)",
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L51"
+    },
+    {
+      "id": "claude_skills_eco_pill_segment_control_skill_pill_segment_control_eco_design_system",
+      "label": "Pill Segment Control (ECO Design System)",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Pill Segment Control (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "pill segment control (eco design system)",
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L8"
+    },
+    {
+      "id": "claude_skills_eco_pill_segment_control_skill_sizes",
+      "label": "Sizes",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Pill Segment Control (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "sizes",
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L25"
+    },
+    {
+      "id": "claude_skills_eco_pill_segment_control_skill_states",
+      "label": "States",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Pill Segment Control (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "states",
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L42"
+    },
+    {
+      "id": "claude_skills_eco_pill_segment_control_skill_variants",
+      "label": "Variants",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "Pill Segment Control (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "variants",
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L16"
     },
     {
       "id": "claude_skills_design_review_skill",
@@ -2966,17 +3006,80 @@
       "source_location": "L49"
     },
     {
+      "id": "_claude_skills_eco_breadcrumb_skill_bordered_box_crumb",
+      "label": "Bordered box crumb with slash separator",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "bordered box crumb with slash separator",
+      "rationale": "Each crumb is a bordered box (border-action-3), never underlined text or chevrons; separator is a centered / character.",
+      "source_file": ".claude/skills/eco-breadcrumb/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_button_skill_button",
+      "label": "Button",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "button",
+      "rationale": "ECO Design System button in variants, sizes and states; Breuer Condensed Bold uppercase.",
+      "source_file": ".claude/skills/eco-button/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "_claude_skills_eco_button_skill_hover_white_overlay",
       "label": "Button hover white 20% overlay",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "button hover white 20% overlay",
       "rationale": "Primary/Destructive/Accent hover layers surface-opacity-white-20 gradient over the solid background.",
+      "source_file": ".claude/skills/eco-button/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_button_skill_system_variant",
+      "label": "System button variant",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "system button variant",
+      "rationale": "Transparent with subtle border-action-3 (10% black) for system-level actions like filter/sort; System Selected adds opacity-black-12 fill.",
+      "source_file": ".claude/skills/eco-button/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_button_skill_variants",
+      "label": "Button variants Primary/Secondary/Blank/Destructive/Accent/System",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "button variants primary/secondary/blank/destructive/accent/system",
       "source_file": ".claude/skills/eco-button/SKILL.md",
       "source_location": null,
       "source_url": null
@@ -2988,7 +3091,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "checkbox",
@@ -3004,7 +3107,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "checkbox dark mode (.form-checkbox-item--dark)",
@@ -3020,7 +3123,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "checkbox 24x24 size model",
@@ -3036,12 +3139,28 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "checkbox table check-icon variant (.check-icon)",
       "rationale": "Table cells reuse the checkbox input, checked+disabled for permission granted.",
       "source_file": ".claude/skills/eco-checkbox/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_colors_skill_accent_tokens",
+      "label": "Accent color tokens accent-default/light/dark",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "accent color tokens accent-default/light/dark",
+      "rationale": "Brand-scoped: lime on Swedol.",
+      "source_file": ".claude/skills/eco-colors/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -3052,11 +3171,121 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "border color tokens",
       "source_file": ".claude/skills/eco-colors/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_colors_skill_colors",
+      "label": "ECO semantic color tokens",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "eco semantic color tokens",
+      "rationale": "All tokens sourced as var(--color-*), values live in tokens.json.",
+      "source_file": ".claude/skills/eco-colors/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_colors_skill_opacity_tokens",
+      "label": "Surface opacity tokens",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "surface opacity tokens",
+      "source_file": ".claude/skills/eco-colors/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_colors_skill_text_tokens",
+      "label": "Text color tokens",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "text color tokens",
+      "source_file": ".claude/skills/eco-colors/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_role_tier_card_skill_goto_compare_view",
+      "label": "goToCompareView() switch-tab-then-scroll function",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "gotocompareview() switch-tab-then-scroll function",
+      "rationale": "Reuses the table's setCompareView and scrolls with --header-top-h offset.",
+      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_role_tier_card_skill_light_dark_variants",
+      "label": "Role tier light vs dark card variants",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "role tier light vs dark card variants",
+      "rationale": "Base tier is light; extended tier .role-tier--dark uses surface-100 with accent-default title.",
+      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_role_tier_card_skill_quicklinks",
+      "label": "Role quicklinks (.role-quicklinks)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "role quicklinks (.role-quicklinks)",
+      "rationale": "One System xs button per role in the intro as a quick table of contents.",
+      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_role_tier_card_skill_role_tier_card",
+      "label": "Role Card / Tier Card pair",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "role card / tier card pair",
+      "rationale": "Two tiers side by side linking onward to a full comparison table.",
+      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -3067,7 +3296,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "tile link background colors white/grey/black",
@@ -3083,7 +3312,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "tile link black hover white 20% overlay",
@@ -3098,7 +3327,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "tile link",
@@ -3114,11 +3343,27 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "tile link variants brand/label+icon/label only",
       "source_file": ".claude/skills/eco-tile-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_banner_notification_skill_promotion_brand_tokens",
+      "label": "Promotion uses brand-scoped accent tokens",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "promotion uses brand-scoped accent tokens",
+      "rationale": "Strong/Weak resolve via accent-default/accent-light so each concept brand (lime on Swedol, red on Tools) is correct without hardcoded hex.",
+      "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -3129,7 +3374,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "rationale",
       "norm_label": "checkbox disabled selected gray box with gray checkmark",
@@ -3145,12 +3390,60 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "rationale",
       "norm_label": "checkbox light-mode focus ring deviates from border-focus",
       "rationale": "Spec hardcodes blue #0052CC unlike every other form component (var(--color-border-focus)); flagged to confirm with design.",
       "source_file": ".claude/skills/eco-checkbox/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_colors_skill_no_hardcoded_hex",
+      "label": "Never hardcode hex, use var(--color-*)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "never hardcode hex, use var(--color-*)",
+      "rationale": "Single source of truth in tokens.json keeps brands consistent.",
+      "source_file": ".claude/skills/eco-colors/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_role_tier_card_skill_features_grounded_rule",
+      "label": "Feature strips must be grounded in comparison table rows",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "feature strips must be grounded in comparison table rows",
+      "rationale": "Card content must match what the table actually shows.",
+      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_role_tier_card_skill_header_offset_scroll_rule",
+      "label": "Scroll to anchored sections with --header-top-h offset",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ECO semantic color tokens",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "scroll to anchored sections with --header-top-h offset",
+      "rationale": "Plain scrollIntoView hides section top behind sticky header.",
+      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -3161,7 +3454,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "Checkbox",
+      "community_name": "ECO semantic color tokens",
       "contributor": null,
       "file_type": "rationale",
       "norm_label": "tile link border is absolute ::before inset 0",
@@ -3234,22 +3527,6 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_breadcrumb_skill_bordered_box_crumb",
-      "label": "Bordered box crumb with slash separator",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "bordered box crumb with slash separator",
-      "rationale": "Each crumb is a bordered box (border-action-3), never underlined text or chevrons; separator is a centered / character.",
-      "source_file": ".claude/skills/eco-breadcrumb/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "_claude_skills_eco_breadcrumb_skill_breadcrumb",
       "label": "Breadcrumb",
       "_origin": "semantic",
@@ -3262,22 +3539,6 @@
       "norm_label": "breadcrumb",
       "rationale": "Shows position in page hierarchy; placed directly under header as first element in .page.",
       "source_file": ".claude/skills/eco-breadcrumb/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_button_skill_system_variant",
-      "label": "System button variant",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "system button variant",
-      "rationale": "Transparent with subtle border-action-3 (10% black) for system-level actions like filter/sort; System Selected adds opacity-black-12 fill.",
-      "source_file": ".claude/skills/eco-button/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -3345,6 +3606,37 @@
       "source_url": null
     },
     {
+      "id": "_claude_skills_eco_motion_skill_combination_rule",
+      "label": "Distance + fade + easing combination table",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "distance + fade + easing combination table",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_motion_skill_duration_tokens",
+      "label": "Duration tokens fast/medium/slow",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "duration tokens fast/medium/slow",
+      "rationale": "Fast 50-200ms, Medium 250-400ms, Slow 450-600ms with four steps each.",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "_claude_skills_eco_motion_skill_easing_tokens",
       "label": "Easing tokens decelerate/accelerate/standard",
       "_origin": "semantic",
@@ -3356,6 +3648,37 @@
       "file_type": "concept",
       "norm_label": "easing tokens decelerate/accelerate/standard",
       "rationale": "decelerate-emphasized for entrances, accelerate-generic for exits, standard for hover.",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_motion_skill_fades",
+      "label": "Fades fast/medium/slow",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "fades fast/medium/slow",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_motion_skill_motion",
+      "label": "Motion easing and duration",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "motion easing and duration",
+      "rationale": "Animation conveys intent; timing, spacing and ease as three basic concepts.",
       "source_file": ".claude/skills/eco-motion/SKILL.md",
       "source_location": null,
       "source_url": null
@@ -3377,8 +3700,8 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_role_tier_card_skill_light_dark_variants",
-      "label": "Role tier light vs dark card variants",
+      "id": "_claude_skills_eco_pagination_skill_progress_bar",
+      "label": "Pagination progress bar",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
@@ -3386,41 +3709,9 @@
       "community_name": "Section",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "role tier light vs dark card variants",
-      "rationale": "Base tier is light; extended tier .role-tier--dark uses surface-100 with accent-default title.",
-      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_role_tier_card_skill_quicklinks",
-      "label": "Role quicklinks (.role-quicklinks)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "role quicklinks (.role-quicklinks)",
-      "rationale": "One System xs button per role in the intro as a quick table of contents.",
-      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_role_tier_card_skill_role_tier_card",
-      "label": "Role Card / Tier Card pair",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "role card / tier card pair",
-      "rationale": "Two tiers side by side linking onward to a full comparison table.",
-      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
+      "norm_label": "pagination progress bar",
+      "rationale": "2px bar with width computed via JS as visible/total.",
+      "source_file": ".claude/skills/eco-pagination/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -3615,6 +3906,22 @@
       "source_url": null
     },
     {
+      "id": "_claude_skills_eco_button_skill_focus_outline_method",
+      "label": "Button keyboard-nav focus outline method",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "button keyboard-nav focus outline method",
+      "rationale": "Uses outline with offset, not ::after inset, because inset measures from padding edge and bordered buttons lose the gap; shown only under body.keyboard-nav, never :focus-visible.",
+      "source_file": ".claude/skills/eco-button/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "_claude_skills_eco_collapsible_skill_last_row_border_rule",
       "label": "Hide last row bottom line when list closes a section",
       "_origin": "semantic",
@@ -3663,6 +3970,38 @@
       "source_url": null
     },
     {
+      "id": "_claude_skills_eco_input_skill_focus_ring_absolute",
+      "label": "Input focus ring is absolute inset -3px, keyboard-only",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "input focus ring is absolute inset -3px, keyboard-only",
+      "rationale": "Ring is an ::after element on the wrapper, shown only under body.keyboard-nav, animated with opacity.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_motion_skill_distance_drives_duration",
+      "label": "Distance drives duration group",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "distance drives duration group",
+      "rationale": "Short <=25% of view uses fast; medium 26-50% medium; long 51-100% slow.",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "_claude_skills_eco_pagination_skill_hide_whole_component_rule",
       "label": "Hide the whole pagination once all items loaded",
       "_origin": "semantic",
@@ -3691,22 +4030,6 @@
       "norm_label": "pagination has no bottom padding of its own",
       "rationale": "Section's own bottom padding already gives air; adding more would double spacing.",
       "source_file": ".claude/skills/eco-pagination/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_role_tier_card_skill_features_grounded_rule",
-      "label": "Feature strips must be grounded in comparison table rows",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "feature strips must be grounded in comparison table rows",
-      "rationale": "Card content must match what the table actually shows.",
-      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -5268,53 +5591,6 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_colors_skill_accent_tokens",
-      "label": "Accent color tokens accent-default/light/dark",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 4,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "accent color tokens accent-default/light/dark",
-      "rationale": "Brand-scoped: lime on Swedol.",
-      "source_file": ".claude/skills/eco-colors/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_colors_skill_colors",
-      "label": "ECO semantic color tokens",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 4,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "eco semantic color tokens",
-      "rationale": "All tokens sourced as var(--color-*), values live in tokens.json.",
-      "source_file": ".claude/skills/eco-colors/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_colors_skill_opacity_tokens",
-      "label": "Surface opacity tokens",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 4,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "surface opacity tokens",
-      "source_file": ".claude/skills/eco-colors/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "_claude_skills_eco_colors_skill_surface_status_tokens",
       "label": "Surface semantic status colors default/weak/weaker",
       "_origin": "semantic",
@@ -5330,8 +5606,8 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_colors_skill_text_tokens",
-      "label": "Text color tokens",
+      "id": "_claude_skills_eco_elevation_skill_component_specific",
+      "label": "Component-specific elevation tokens",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
@@ -5339,8 +5615,9 @@
       "community_name": "System Inline Notification",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "text color tokens",
-      "source_file": ".claude/skills/eco-colors/SKILL.md",
+      "norm_label": "component-specific elevation tokens",
+      "rationale": "Switch and table-overflow shadows are never used outside their component.",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -5521,6 +5798,70 @@
       "source_url": null
     },
     {
+      "id": "_claude_skills_eco_input_skill_input",
+      "label": "Input Field",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "System Inline Notification",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "input field",
+      "rationale": "Text input with sizes Large/Small/XSmall, seven states, label/hint anatomy; border-radius 0.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_input_skill_label_hint_pattern",
+      "label": "Label above input, hint/message below pattern",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "System Inline Notification",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "label above input, hint/message below pattern",
+      "rationale": "Label uppercase Bold; message is body-sm with 4px gap.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_input_skill_sizes",
+      "label": "Input sizes per breakpoint",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "System Inline Notification",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "input sizes per breakpoint",
+      "rationale": "Desktop Large 48px, Small 40px, XSmall 32px; Mobile Large 40px, Small 32px.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_input_skill_states",
+      "label": "Input states enabled/hover/active/focus/error/success/disabled",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "System Inline Notification",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "input states enabled/hover/active/focus/error/success/disabled",
+      "rationale": "Every state must be implemented each time.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "_claude_skills_eco_modal_ecom_skill_button_sizes",
       "label": "Modal buttons always 32px tall",
       "_origin": "semantic",
@@ -5585,6 +5926,53 @@
       "source_url": null
     },
     {
+      "id": "_claude_skills_eco_select_skill_select",
+      "label": "Select",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "System Inline Notification",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "select",
+      "rationale": "Dropdown using appearance:none with custom 24px arrow; sizes and states follow Input.",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_select_skill_sizes",
+      "label": "Select sizes per breakpoint",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "System Inline Notification",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "select sizes per breakpoint",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_select_skill_states",
+      "label": "Select states",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "System Inline Notification",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "select states",
+      "rationale": "Seven states identical to Input.",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "_claude_skills_eco_badge_skill_color_meaning_mapping",
       "label": "Badge color-meaning mapping for lifecycle status",
       "_origin": "semantic",
@@ -5633,22 +6021,6 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_banner_notification_skill_promotion_brand_tokens",
-      "label": "Promotion uses brand-scoped accent tokens",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 4,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "promotion uses brand-scoped accent tokens",
-      "rationale": "Strong/Weak resolve via accent-default/accent-light so each concept brand (lime on Swedol, red on Tools) is correct without hardcoded hex.",
-      "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "_claude_skills_eco_banner_notification_skill_strong_replaces_extra_strong",
       "label": "Strong emphasis replaces System Extra Strong",
       "_origin": "semantic",
@@ -5661,22 +6033,6 @@
       "norm_label": "strong emphasis replaces system extra strong",
       "rationale": "2026-09 Figma restructure merged the centered admin-impersonation variant into left-aligned Strong.",
       "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_colors_skill_no_hardcoded_hex",
-      "label": "Never hardcode hex, use var(--color-*)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 4,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "never hardcode hex, use var(--color-*)",
-      "rationale": "Single source of truth in tokens.json keeps brands consistent.",
-      "source_file": ".claude/skills/eco-colors/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -5729,6 +6085,22 @@
       "source_url": null
     },
     {
+      "id": "_claude_skills_eco_select_skill_active_state_js_rule",
+      "label": "Select active state requires JS .is-active",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 4,
+      "community_name": "System Inline Notification",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "select active state requires js .is-active",
+      "rationale": "Cannot use :not(:placeholder-shown) on select, so JS toggles the class when a non-default option is chosen.",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "tokens_test",
       "label": "tokens/_test.html (unused placeholder)",
       "_origin": "semantic",
@@ -5741,433 +6113,6 @@
       "norm_label": "tokens/_test.html (unused placeholder)",
       "rationale": "Contains only the comment 'unused, safe to delete'.",
       "source_file": "tokens/_test.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_button_skill_button",
-      "label": "Button",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "button",
-      "rationale": "ECO Design System button in variants, sizes and states; Breuer Condensed Bold uppercase.",
-      "source_file": ".claude/skills/eco-button/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_button_skill_variants",
-      "label": "Button variants Primary/Secondary/Blank/Destructive/Accent/System",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "button variants primary/secondary/blank/destructive/accent/system",
-      "source_file": ".claude/skills/eco-button/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_component_specific",
-      "label": "Component-specific elevation tokens",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "component-specific elevation tokens",
-      "rationale": "Switch and table-overflow shadows are never used outside their component.",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_input",
-      "label": "Input Field",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "input field",
-      "rationale": "Text input with sizes Large/Small/XSmall, seven states, label/hint anatomy; border-radius 0.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_label_hint_pattern",
-      "label": "Label above input, hint/message below pattern",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "label above input, hint/message below pattern",
-      "rationale": "Label uppercase Bold; message is body-sm with 4px gap.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_sizes",
-      "label": "Input sizes per breakpoint",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "input sizes per breakpoint",
-      "rationale": "Desktop Large 48px, Small 40px, XSmall 32px; Mobile Large 40px, Small 32px.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_states",
-      "label": "Input states enabled/hover/active/focus/error/success/disabled",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "input states enabled/hover/active/focus/error/success/disabled",
-      "rationale": "Every state must be implemented each time.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_motion_skill_combination_rule",
-      "label": "Distance + fade + easing combination table",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "distance + fade + easing combination table",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_motion_skill_duration_tokens",
-      "label": "Duration tokens fast/medium/slow",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "duration tokens fast/medium/slow",
-      "rationale": "Fast 50-200ms, Medium 250-400ms, Slow 450-600ms with four steps each.",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_motion_skill_fades",
-      "label": "Fades fast/medium/slow",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "fades fast/medium/slow",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_motion_skill_motion",
-      "label": "Motion easing and duration",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "motion easing and duration",
-      "rationale": "Animation conveys intent; timing, spacing and ease as three basic concepts.",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_pagination_skill_progress_bar",
-      "label": "Pagination progress bar",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "pagination progress bar",
-      "rationale": "2px bar with width computed via JS as visible/total.",
-      "source_file": ".claude/skills/eco-pagination/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_role_tier_card_skill_goto_compare_view",
-      "label": "goToCompareView() switch-tab-then-scroll function",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "gotocompareview() switch-tab-then-scroll function",
-      "rationale": "Reuses the table's setCompareView and scrolls with --header-top-h offset.",
-      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_segment_control_skill_fluid_only_at_xs",
-      "label": "Segment Control fluid width only at xs",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "segment control fluid width only at xs",
-      "rationale": "width 100% below 640px; content-based width from sm while keeping mobile height.",
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_segment_control_skill_segment_control",
-      "label": "Segment Control",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "segment control",
-      "rationale": "Pill toggle for switching between two related views/filters.",
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_segment_control_skill_sizes",
-      "label": "Segment Control sizes Large/Medium/Small/XSmall",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "segment control sizes large/medium/small/xsmall",
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_segment_control_skill_sliding_pill",
-      "label": "Segment Control sliding pill thumb",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "segment control sliding pill thumb",
-      "rationale": "Separate thumb element positioned by JS via offsetLeft/offsetWidth, transition medium-2 standard.",
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_select_skill_select",
-      "label": "Select",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "select",
-      "rationale": "Dropdown using appearance:none with custom 24px arrow; sizes and states follow Input.",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_select_skill_sizes",
-      "label": "Select sizes per breakpoint",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "select sizes per breakpoint",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_select_skill_states",
-      "label": "Select states",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "select states",
-      "rationale": "Seven states identical to Input.",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_button_skill_focus_outline_method",
-      "label": "Button keyboard-nav focus outline method",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "button keyboard-nav focus outline method",
-      "rationale": "Uses outline with offset, not ::after inset, because inset measures from padding edge and bordered buttons lose the gap; shown only under body.keyboard-nav, never :focus-visible.",
-      "source_file": ".claude/skills/eco-button/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_focus_ring_absolute",
-      "label": "Input focus ring is absolute inset -3px, keyboard-only",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "input focus ring is absolute inset -3px, keyboard-only",
-      "rationale": "Ring is an ::after element on the wrapper, shown only under body.keyboard-nav, animated with opacity.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_motion_skill_distance_drives_duration",
-      "label": "Distance drives duration group",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "distance drives duration group",
-      "rationale": "Short <=25% of view uses fast; medium 26-50% medium; long 51-100% slow.",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_role_tier_card_skill_header_offset_scroll_rule",
-      "label": "Scroll to anchored sections with --header-top-h offset",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "scroll to anchored sections with --header-top-h offset",
-      "rationale": "Plain scrollIntoView hides section top behind sticky header.",
-      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_segment_control_skill_focus_inherits_button",
-      "label": "Segment Control has no own focus style",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "segment control has no own focus style",
-      "rationale": "Buttons inherit the global keyboard-nav outline; a separate ring would duplicate focus indication.",
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_segment_control_skill_not_tabs_or_radio",
-      "label": "Segment Control never replaces Tabs or Radio buttons",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "segment control never replaces tabs or radio buttons",
-      "rationale": "Tabs navigate content; radios are submitted form choices.",
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_select_skill_active_state_js_rule",
-      "label": "Select active state requires JS .is-active",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "Segment Control",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "select active state requires js .is-active",
-      "rationale": "Cannot use :not(:placeholder-shown) on select, so JS toggles the class when a non-default option is chosen.",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
       "source_location": null,
       "source_url": null
     }
@@ -6642,42 +6587,6 @@
       "weight": 1.0
     },
     {
-      "source": "components_js_segment_control_init",
-      "target": "components_js_segment_control_place",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L21",
-      "weight": 1.0
-    },
-    {
-      "source": "components_js_segment_control_init",
-      "target": "components_js_segment_control_setup",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L22",
-      "weight": 1.0
-    },
-    {
-      "source": "components_js_segment_control_setup",
-      "target": "components_js_segment_control_place",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L16",
-      "weight": 1.0
-    },
-    {
       "source": "components_js_select_menu_choose",
       "target": "components_js_select_menu_close",
       "relation": "calls",
@@ -6722,7 +6631,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L101",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -6734,7 +6643,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L118",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -6746,7 +6655,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L157",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
@@ -6758,7 +6667,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L137",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -6794,7 +6703,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L169",
+      "source_location": "L179",
       "weight": 1.0
     },
     {
@@ -6806,7 +6715,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L169",
+      "source_location": "L179",
       "weight": 1.0
     },
     {
@@ -6818,7 +6727,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L125",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -6830,7 +6739,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L128",
+      "source_location": "L129",
       "weight": 1.0
     },
     {
@@ -7454,7 +7363,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L121",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -7466,7 +7375,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L132",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -7987,7 +7896,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-doc-page/SKILL.md",
-      "source_location": "L157",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -7998,7 +7907,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-doc-page/SKILL.md",
-      "source_location": "L161",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -8376,6 +8285,83 @@
       "weight": 1.0
     },
     {
+      "source": "claude_skills_eco_pill_segment_control_skill",
+      "target": "claude_skills_eco_pill_segment_control_skill_pill_segment_control_eco_design_system",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_pill_segment_control_skill_pill_segment_control_eco_design_system",
+      "target": "claude_skills_eco_pill_segment_control_skill_variants",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_pill_segment_control_skill_pill_segment_control_eco_design_system",
+      "target": "claude_skills_eco_pill_segment_control_skill_html_and_js_example",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L180",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_pill_segment_control_skill_pill_segment_control_eco_design_system",
+      "target": "claude_skills_eco_pill_segment_control_skill_sizes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_pill_segment_control_skill_pill_segment_control_eco_design_system",
+      "target": "claude_skills_eco_pill_segment_control_skill_states",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_pill_segment_control_skill_pill_segment_control_eco_design_system",
+      "target": "claude_skills_eco_pill_segment_control_skill_interaction_sliding_pill",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_pill_segment_control_skill_pill_segment_control_eco_design_system",
+      "target": "claude_skills_eco_pill_segment_control_skill_css_template_large_primary_pill_mobile_first",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-pill-segment-control/SKILL.md",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
       "source": "claude_skills_eco_radio_skill",
       "target": "claude_skills_eco_radio_skill_radio_button_eco_design_system",
       "relation": "contains",
@@ -8493,7 +8479,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -8504,7 +8490,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L54",
+      "source_location": "L55",
       "weight": 1.0
     },
     {
@@ -8515,7 +8501,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L63",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -9080,39 +9066,6 @@
       "weight": 1.0
     },
     {
-      "source": "components_js_segment_control",
-      "target": "components_js_segment_control_setup",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L12",
-      "weight": 1.0
-    },
-    {
-      "source": "components_js_segment_control",
-      "target": "components_js_segment_control_init",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L19",
-      "weight": 1.0
-    },
-    {
-      "source": "components_js_segment_control",
-      "target": "components_js_segment_control_place",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/js/segment-control.js",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
       "source": "components_js_select_menu",
       "target": "components_js_select_menu_holder",
       "relation": "contains",
@@ -9296,7 +9249,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L120",
+      "source_location": "L121",
       "weight": 1.0
     },
     {
@@ -9307,7 +9260,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L131",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -9695,7 +9648,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L170",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -9707,7 +9660,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L171",
+      "source_location": "L183",
       "weight": 1.0
     },
     {
@@ -10285,39 +10238,6 @@
       "weight": 1.0
     },
     {
-      "source": "_claude_skills_eco_segment_control_skill_fluid_only_at_xs",
-      "target": "_claude_skills_eco_segment_control_skill_segment_control",
-      "relation": "conceptually_related_to",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "_claude_skills_eco_segment_control_skill_sizes",
-      "target": "_claude_skills_eco_segment_control_skill_segment_control",
-      "relation": "conceptually_related_to",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "_claude_skills_eco_segment_control_skill_sliding_pill",
-      "target": "_claude_skills_eco_segment_control_skill_segment_control",
-      "relation": "conceptually_related_to",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
       "source": "_claude_skills_eco_select_skill_sizes",
       "target": "_claude_skills_eco_select_skill_select",
       "relation": "conceptually_related_to",
@@ -10747,28 +10667,6 @@
       "weight": 1.0
     },
     {
-      "source": "_claude_skills_eco_segment_control_skill_focus_inherits_button",
-      "target": "_claude_skills_eco_segment_control_skill_segment_control",
-      "relation": "rationale_for",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "_claude_skills_eco_segment_control_skill_not_tabs_or_radio",
-      "target": "_claude_skills_eco_segment_control_skill_segment_control",
-      "relation": "rationale_for",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
       "source": "_claude_skills_eco_select_skill_active_state_js_rule",
       "target": "_claude_skills_eco_select_skill_states",
       "relation": "rationale_for",
@@ -11117,39 +11015,6 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "_claude_skills_eco_segment_control_skill_focus_inherits_button",
-      "target": "_claude_skills_eco_button_skill_focus_outline_method",
-      "relation": "references",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "_claude_skills_eco_segment_control_skill_sliding_pill",
-      "target": "_claude_skills_eco_elevation_skill_component_specific",
-      "relation": "references",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "_claude_skills_eco_segment_control_skill_sliding_pill",
-      "target": "_claude_skills_eco_motion_skill_duration_tokens",
-      "relation": "references",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-segment-control/SKILL.md",
       "source_location": null,
       "weight": 1.0
     },
@@ -13112,17 +12977,6 @@
       "weight": 1.0
     },
     {
-      "source": "_claude_skills_eco_role_tier_card_skill_goto_compare_view",
-      "target": "_claude_skills_eco_segment_control_skill_segment_control",
-      "relation": "references",
-      "_origin": "semantic",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
       "source": "claude_skills_eco_tooltip_skill",
       "target": "claude_skills_eco_elevation_skill",
       "relation": "references",
@@ -13425,19 +13279,6 @@
       "source_file": "mypages/users.html"
     },
     {
-      "id": "keyboard_nav_focus_pattern",
-      "label": "Keyboard-only focus ring pattern (body.keyboard-nav)",
-      "nodes": [
-        "_claude_skills_eco_button_skill_focus_outline_method",
-        "_claude_skills_eco_input_skill_focus_ring_absolute",
-        "_claude_skills_eco_segment_control_skill_focus_inherits_button"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": ".claude/skills/eco-button/SKILL.md"
-    },
-    {
       "id": "link_component_family",
       "label": "Action, Inline and Tile link family",
       "nodes": [
@@ -13478,5 +13319,5 @@
       "source_file": "feature-comparison-roles.html"
     }
   ],
-  "built_at_commit": "7d7533754975ca50d8c09e7b0302e242b2853d14"
+  "built_at_commit": "eed6257aad3990bf013aed23f0ba3e63c5cf07af"
 }

@@ -65,6 +65,9 @@ Breadcrumb is used to show the user's position in the page hierarchy and enable 
 
 ### CSS template
 
+> **Shared file:** `<link rel="stylesheet" href="/components/css/breadcrumb.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/breadcrumb.html`.
+
+
 ```css
 .breadcrumb { padding: 0 var(--px-page) 0; }
 .breadcrumb__bar {

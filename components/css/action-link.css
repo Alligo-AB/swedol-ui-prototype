@@ -1,0 +1,42 @@
+/* ECO component CSS: action link. Skill: eco-action-link. Link it, do not copy it: <link rel="stylesheet" href="/components/css/action-link.css">
+   Needs the Material Symbols Outlined font. Tokens only. Mobile-first (desktop from 769px). */
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;                                          /* Large */
+  text-decoration: none;
+  color: var(--color-text-action-primary);
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color var(--duration-fast-3) var(--ease-standard);
+}
+.action-link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); text-decoration: underline; }
+
+/* Icons never get the underline, only the link text */
+.action-link__icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none;
+  white-space: nowrap; flex-shrink: 0; text-decoration: none; user-select: none;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  font-size: 20px;
+}
+
+/* Sizes: mobile first, desktop from 769px */
+.action-link--large  { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.action-link--medium { gap: 4px; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.action-link--small  { gap: 4px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.action-link--large .action-link__icon { font-size: 24px; }
+@media (min-width: 769px) {
+  .action-link--large  { font-size: 20px; line-height: 28px; }
+  .action-link--medium { font-size: 17px; line-height: 24px; }
+}
+
+/* Bold */
+.action-link--bold { font-weight: 600; }
+
+/* Inverted (on a dark surface) */
+.action-link--inverted { color: var(--color-text-action-primary-inverted); }
+.action-link--inverted:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-inverted-hover); }
+
+body.keyboard-nav .action-link:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }

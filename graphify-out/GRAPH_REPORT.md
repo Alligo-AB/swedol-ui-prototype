@@ -1,16 +1,16 @@
 # Graph Report - swedol-ui-prototype  (2026-10-07)
 
 ## Corpus Check
-- 64 files · ~620,313 words
+- 65 files · ~642,012 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 439 nodes · 635 edges · 35 communities (25 shown, 6 thin omitted)
+- 445 nodes · 642 edges · 36 communities (25 shown, 7 thin omitted)
 - Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 52 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7d753375`
+- Built from commit: `eed6257a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,6 +45,7 @@
 - Icon picker (ECO Design System)
 - run
 - select-menu.js
+- pill-segment-control.js
 - README.md
 
 ## God Nodes (most connected - your core abstractions)
@@ -83,7 +84,7 @@
 - **Banner, Inline and Modal notification family** — _claude_skills_eco_banner_notification_skill_banner_notification, _claude_skills_eco_inline_notification_skill_inline_notification, _claude_skills_eco_modal_ecom_skill_modal_ecom [INFERRED 0.85]
 - **Pages using role tier cards** — feature_comparison_roles, feature_comparison_roles_backup, e_handelspartner, claude_skills_eco_role_tier_card_skill [INFERRED 0.85]
 
-## Communities (35 total, 6 thin omitted)
+## Communities (36 total, 7 thin omitted)
 
 ### Community 0 - "ECO semantic color tokens"
 Cohesion: 0.08
@@ -170,8 +171,8 @@ Cohesion: 0.22
 Nodes (24): B(), banner(), button(), closeBtn(), e(), ecom(), el(), ic() (+16 more)
 
 ### Community 26 - "doc-kit.js"
-Cohesion: 0.19
-Nodes (15): block(), clear(), codeBox(), esc(), load(), motion(), apply(), check() (+7 more)
+Cohesion: 0.16
+Nodes (16): block(), clear(), codeBox(), esc(), load(), motion(), apply(), check() (+8 more)
 
 ### Community 27 - "attach"
 Cohesion: 0.35
@@ -191,8 +192,8 @@ Nodes (4): choose(), close(), holder(), openMenu()
 
 ## Knowledge Gaps
 - **148 isolated node(s):** `1. Before you start — ask, don't guess`, `Prototype as a source (functionality)`, `Sweep systematically (do not sample)`, `4. WCAG check (separate section in the report)`, `5. Verify before you report` (+143 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 203 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 205 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -200,7 +201,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **What is the exact relationship between `Border color tokens` and `Tile Link background colors White/Grey/Black`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
 - **Why does `ECO semantic color tokens` connect `ECO semantic color tokens` to `System Inline Notification`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **Why does `Component library skills index` connect `Component library skills index` to `Shared header partial`, `links-guide skill`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Shared header partial` (e.g. with `Shared account-nav drawer partial` and `Shared main menu partial`) actually correct?**

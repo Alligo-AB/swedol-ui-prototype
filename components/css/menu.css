@@ -32,6 +32,9 @@
     .menu__item:is(:hover, [data-state="hover"]):not([aria-disabled="true"]) { background: var(--color-surface-navigation-hover); }
     .menu__item:is(:focus-visible, [data-state="focus"]) { outline: 2px solid var(--color-border-focus); outline-offset: -2px; }
     .menu__item:is(:focus-visible, [data-state="focus"])::after { display: none; } /* the row's divider would paint over the bottom edge of the ring */
+    /* Opened with the mouse: the row that gets focus programmatically shows no ring until a key is pressed (select-menu.js sets and clears data-input) */
+    .menu[data-input="pointer"] .menu__item:focus-visible { outline: none; }
+    .menu[data-input="pointer"]:not(.menu--none) .menu__item:focus-visible::after { display: block; }
 
     /* Icon: Select shows it only when selected, Multi Select always */
     .menu__item-icon { flex: none; width: var(--menu-icon); height: var(--menu-icon); user-select: none; }

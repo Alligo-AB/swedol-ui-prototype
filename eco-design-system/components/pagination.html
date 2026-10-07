@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagination – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/pagination.css">
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-dark { background: var(--color-surface-100); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-cap { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 600; }
+    .ds-stage--dark .pg-cap { color: var(--color-text-secondary-inverted); }
+
+  </style>
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Pagination</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Navigation</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design (linked in the intro).">Not verified in Figma</span></div>
+    <h1 class="ds-title">Pagination</h1>
+    <p class="ds-lead">Pagination here is a <strong>“load more” pattern</strong>: a counter, a thin progress bar and a button that adds more items to a list without a page load.</p><p class="ds-lead">Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-pagination/SKILL.md</code>. Figma: <a class="ds-link" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=11614-537671" target="_blank" rel="noopener">Pagination</a>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#playground">Playground</a></li><li><a href="#variants">Snapshots</a></li><li><a href="#specs">Specs</a></li><li><a href="#code">Code</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="playground"><div class="ds-page ds-inner"><h2 class="ds-h2">Playground</h2><p class="ds-desc">A list of reviews with the real component under it. Press the button to load more; the counter and the bar follow, and the whole component hides when everything is shown.</p><div class="ds-playground"><div class="ds-stage" id="pg-stage" style="display:block"><div id="pg-list" style="display:flex;flex-direction:column;gap:8px;width:100%"></div><div id="pg-host"></div></div><div class="ds-controls"><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-tot">Total items</span><div class="btn-group" role="group" aria-labelledby="pg-l-tot" data-pg="total"><button type="button" data-v="6" aria-pressed="true">6</button><button type="button" data-v="12" aria-pressed="false">12</button><button type="button" data-v="24" aria-pressed="false">24</button></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-step">Load per click</span><div class="btn-group" role="group" aria-labelledby="pg-l-step" data-pg="step"><button type="button" data-v="2" aria-pressed="true">2</button><button type="button" data-v="4" aria-pressed="false">4</button></div></div><button type="button" class="btn btn--secondary btn--sm" id="pg-reset" style="align-self:flex-start"><span class="btn__label">Reset</span></button></div></div><h3 class="ds-h3">Markup for this selection</h3><div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div></div></section>
+<section class="ds-section" id="variants"><div class="ds-page ds-inner"><h2 class="ds-h2">Snapshots</h2><p class="ds-desc">Three snapshots of the same component. The counter text and the bar width come from the numbers; the button is always Secondary, Medium.</p><div class="ds-stage"><div class="pg-row" style="align-items:flex-start;gap:48px" id="v-snap"></div></div></div></section>
+<section class="ds-section ds-section--secondary" id="specs"><div class="ds-page ds-inner"><h2 class="ds-h2">Specs</h2><h3 class="ds-h3">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Width</th><td>190px, <code>max-width: 100%</code>, centered, never stretched</td></tr><tr><th scope="row">Gap: info block to button</th><td>24px</td></tr><tr><th scope="row">Gap: counter to bar</th><td>16px</td></tr><tr><th scope="row">Progress bar</th><td>2px high; fill animates over <code>duration-medium-2</code></td></tr><tr><th scope="row">Top spacing</th><td>24px xs, 32px sm, 40px md and up. Page spacing, so it steps at 640px</td></tr><tr><th scope="row">Bottom spacing</th><td>None of its own: the section’s padding provides it</td></tr></tbody></table></div><h3 class="ds-h3">Type and color</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Style</th><th scope="col">Token</th></tr></thead><tbody><tr><th scope="row">Counter text</th><td><code>body-md</code>: 17/24 (mobile 16/22), 0.32px, regular</td><td><code>surface-60</code></td></tr><tr><th scope="row">Bar track</th><td>—</td><td><code>surface-10</code></td></tr><tr><th scope="row">Bar fill</th><td>—</td><td><code>surface-100</code></td></tr><tr><th scope="row">Button</th><td><code>eco-button</code> Secondary, Medium (<code>btn btn--secondary btn--md</code>), full width</td><td><a class="ds-link" href="button.html">Button</a></td></tr></tbody></table></div><h3 class="ds-h3">Tokens</h3><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><h3 class="ds-h3">Behavior</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Fill width</th><td>Always <code>(visible / total) × 100%</code>, set by <code>updatePagination(key, visible, total)</code>.</td></tr><tr><th scope="row">All shown</th><td>The <code>hidden</code> attribute goes on the whole component, never just the button.</td></tr><tr><th scope="row">Ids</th><td>The script reads <code>{key}-pagination-count</code>, <code>{key}-pagination-bar</code> and <code>pagination-{key}</code>.</td></tr></tbody></table></div></div></section>
+<section class="ds-section" id="code"><div class="ds-page ds-inner"><h2 class="ds-h2">Code</h2><div id="recipes"></div><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/pagination.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div><div class="ds-code" style="margin-top:24px"><div class="ds-code__bar"><span>JS (components/js/pagination.js)</span><button type="button" class="mo-copy" data-copy="js-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="js-code"></pre></div></div></section>
+<section class="ds-section ds-section--secondary" id="usage"><div class="ds-page ds-inner"><h2 class="ds-h2">Usage</h2><div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The list…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">is long and more items are loaded progressively, total known</th><td>Pagination (load more)</td></tr><tr><th scope="row">is already fully shown</th><td>Nothing: hide the component</td></tr><tr><th scope="row">needs numbered pages (1, 2, 3 …)</th><td>A different pattern (not built)</td></tr></tbody></table></div><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Place it last in the section or list.</li><li>Hide the whole component when all items are shown.</li><li>Compute the bar width from the numbers.</li><li>Use the Secondary Medium button.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Add padding below the component.</li><li>Hide only the button.</li><li>Stretch it to the section width.</li><li>Use a Primary button.</li></ul></div></div></div></section>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/pagination.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var st = { total: '6', step: '2' }, shown = 2, N = 0;
+  function pag(key, visible, total, host) {
+    var d = document.createElement('div'); d.className = 'pagination'; d.id = 'pagination-' + key; if (visible >= total) d.hidden = true;
+    d.innerHTML = '<div class="pagination__info"><p class="pagination__count">Showing <span id="' + key + '-pagination-count">' + visible + '</span> of ' + total + ' reviews</p><div class="pagination__progress"><div class="pagination__progress-bar" id="' + key + '-pagination-bar" style="width:' + (visible / total * 100) + '%"></div></div></div><button type="button" class="btn btn--secondary btn--md"><span class="btn__label">Show more reviews</span></button>';
+    host.appendChild(d); return d;
+  }
+  function list() {
+    var l = clear($('#pg-list'));
+    for (var i = 1; i <= shown; i++) { var r = document.createElement('div'); r.className = 'pg-note'; r.style.cssText = 'padding:12px 16px;background:var(--color-surface-raised-secondary);color:var(--color-text-primary);font-size:16px;line-height:22px'; r.textContent = 'Review ' + i + ': “Good fit, strong seams.”'; l.appendChild(r); }
+  }
+  function renderPg() {
+    var total = +st.total, step = +st.step; shown = Math.min(shown, total);
+    list(); var d = pag('pg', shown, total, clear($('#pg-host')));
+    $('button', d).addEventListener('click', function () { shown = Math.min(total, shown + step); list(); updatePagination('pg', shown, total); });
+    $('#pg-code').textContent = '<div class="pagination" id="pagination-pg">\n  <div class="pagination__info">\n    <p class="pagination__count">Showing <span id="pg-pagination-count">' + shown + '</span> of ' + total + ' reviews</p>\n    <div class="pagination__progress">\n      <div class="pagination__progress-bar" id="pg-pagination-bar" style="width:' + (shown / total * 100).toFixed(4) + '%"></div>\n    </div>\n  </div>\n  <button type="button" class="btn btn--secondary btn--md"><span class="btn__label">Show more reviews</span></button>\n</div>\n\n<script>updatePagination(\'pg\', visible, ' + total + ');<\/script>';
+  }
+  $$('[data-pg]').forEach(function (g) { DK.seg(g, function (v) { st[g.dataset.pg] = v; shown = 2; renderPg(); }); });
+  $('#pg-reset').addEventListener('click', function () { shown = 2; renderPg(); });
+  var sn = clear($('#v-snap')); [['s1', 2, 6], ['s2', 4, 6], ['s3', 5, 6]].forEach(function (s) { var c = document.createElement('div'); c.style.cssText = 'width:240px;display:flex;justify-content:center'; var w = document.createElement('div'); w.style.width = '100%'; c.appendChild(w); sn.appendChild(c); pag(s[0], s[1], s[2], w); });
+  DK.tokenTable($('#tok-table tbody'), [['All', 'Counter text', 'surface-60'], ['All', 'Bar track', 'surface-10'], ['All', 'Bar fill', 'surface-100']]);
+  DK.recipes($('#recipes'), [['Component (link button.css, pagination.css and pagination.js)', '<div class="pagination" id="pagination-products">\n  <div class="pagination__info">\n    <p class="pagination__count">Showing <span id="products-pagination-count">4</span> of 6 reviews</p>\n    <div class="pagination__progress">\n      <div class="pagination__progress-bar" id="products-pagination-bar" style="width:66.6667%"></div>\n    </div>\n  </div>\n  <button type="button" class="btn btn--secondary btn--md" onclick="showMore(\'products\', this)">\n    <span class="btn__label">Show more reviews</span>\n  </button>\n</div>']]);
+  DK.printCss($('#css-code'), 'pagination');
+  fetch('../../components/js/pagination.js').then(function (r) { return r.text(); }).then(function (t) { $('#js-code').textContent = t; });
+  renderPg();
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

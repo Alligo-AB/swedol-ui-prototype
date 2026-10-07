@@ -403,6 +403,24 @@
   $('#pg-label').addEventListener('input', renderPg);
   $('#pg-count').addEventListener('input', renderPg);
 
+  /* Playground button groups that do not fit the controls column swap to a select (eco-button, Button group: "more options: a select") */
+  $$('.ds-controls .btn-group').forEach(function (g) {
+    var field = g.parentElement, lab = $('.form-label', field), n = 'pg-grp-' + (g.dataset.pg || 'bp');
+    var w = document.createElement('div'); w.className = 'input-wrap'; w.style.display = 'none';
+    var s = document.createElement('select'); s.className = 'form-select form-select--sm'; s.id = n; s.setAttribute('aria-labelledby', lab.id);
+    $$('button', g).forEach(function (b) { var o = document.createElement('option'); o.value = b.dataset.v; o.textContent = b.textContent; s.appendChild(o); });
+    var a = document.createElement('span'); a.className = 'form-select-arrow'; a.setAttribute('aria-hidden', 'true'); a.textContent = 'arrow_drop_down';
+    w.appendChild(s); w.appendChild(a); field.appendChild(w);
+    function sync() { var p = $('[aria-pressed="true"]', g); if (p) s.value = p.dataset.v; }
+    s.addEventListener('change', function () { $('[data-v="' + s.value + '"]', g).click(); });
+    g.addEventListener('click', sync);
+    function fit() {
+      g.style.display = ''; w.style.display = 'none';
+      if (g.scrollWidth > field.clientWidth) { sync(); g.style.display = 'none'; w.style.display = ''; }
+    }
+    fit(); addEventListener('resize', fit);
+  });
+
   /* ── Variants ── */
   function buildVariants() {
     var light = clear($('#v-light')), dark = clear($('#v-dark'));

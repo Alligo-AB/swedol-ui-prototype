@@ -68,7 +68,7 @@ Every state must be implemented each time a select field is created.
 | Focus ring (outer) | `2px solid var(--color-border-focus)` → `#455efb`, `inset: -3px` |
 | Background | `var(--color-surface-raised-primary)` → `#ffffff` |
 
-> The focus ring is shown **only** on keyboard navigation (Tab). Implemented via `body.keyboard-nav .input-wrap:focus-within::after { opacity: 1; }`. Clicking opens the dropdown without a ring.
+> The focus ring is shown **only** on keyboard navigation (Tab). Implemented via `body.keyboard-nav .input-wrap:focus-within::after { opacity: 1; }`. Clicking opens the dropdown without a ring, and the menu's first (selected) row also shows no ring when opened by mouse: `select-menu.js` sets `data-input="pointer"` on the `.menu` and removes it on the first key press, after which `:focus-visible` rings show as usual.
 
 #### 5. Error
 | Property | Value |

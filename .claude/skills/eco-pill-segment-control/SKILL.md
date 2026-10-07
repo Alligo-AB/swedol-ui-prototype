@@ -59,6 +59,9 @@ The active segment's pill is **not** a background set directly on the button —
 
 ### CSS template (Large, Primary/Pill — mobile-first)
 
+> **Shared file:** `<link rel="stylesheet" href="/components/css/pill-segment-control.css">` and `<script src="/components/js/pill-segment-control.js"></script>`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/segment-control.html`. The script slides the thumb, syncs `aria-pressed` and fires `segment-change`.
+
+
 ```css
 .pill-segment-control {
   position: relative;
@@ -217,3 +220,7 @@ window.addEventListener('resize', function () {
 ```
 
 ---
+
+### Motion
+
+The thumb slide uses `--sg-ease` / `--sg-duration` (fallback: `ease-standard`, `duration-medium-2`, the recommended values). The docs page has a Motion section (`DK.motion`, prefix `sg`) to compare other tokens live.

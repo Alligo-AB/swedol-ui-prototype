@@ -73,3 +73,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 ```
 
 ---
+
+### Motion
+
+Open/close uses `--co-ease` / `--co-duration` (fallback: `ease-standard`, `duration-fast-4`, the recommended values) on `.collapsible-wrap`, its chevron and its content. The docs page has a Motion section (`DK.motion`, prefix `co`) to compare other tokens live. Set the vars on a wrapper to override.

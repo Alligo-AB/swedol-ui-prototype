@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Role tier card – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/role-tier.css">
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-dark { background: var(--color-surface-100); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-cap { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 600; }
+    .ds-stage--dark .pg-cap { color: var(--color-text-secondary-inverted); }
+
+  </style>
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Role tier card</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Cards</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component exists. The card was built on the comparison pages and documented from there.">Not verified in Figma</span></div>
+    <h1 class="ds-title">Role tier card</h1>
+    <p class="ds-lead">A role tier card pair introduces <strong>two tiers of one category</strong> side by side, for example Standard and Administrator, and links on to the full comparison table.</p><p class="ds-lead">Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-role-tier-card/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#playground">Playground</a></li><li><a href="#variants">Variants</a></li><li><a href="#states">States</a></li><li><a href="#specs">Specs</a></li><li><a href="#code">Code</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="playground"><div class="ds-page ds-inner"><h2 class="ds-h2">Playground</h2><p class="ds-desc">A pair of cards that introduces two tiers side by side. Below 640px each card stacks its features under the text; from 769px the two cards sit next to each other.</p><div class="ds-playground"><div class="ds-stage" id="pg-stage" data-mode-stage><div id="pg-host" style="width:100%"></div></div><div class="ds-controls"><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-st">Link</span><div class="btn-group" role="group" aria-labelledby="pg-l-st" data-pg="state"><button type="button" data-v="enabled" aria-pressed="true">Enabled</button><button type="button" data-v="hover" aria-pressed="false">Hover</button></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-f">Features per card</span><div class="btn-group" role="group" aria-labelledby="pg-l-f" data-pg="n"><button type="button" data-v="3" aria-pressed="false">3</button><button type="button" data-v="4" aria-pressed="true">4</button></div></div><div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-n1">Base card name</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-n1" value="Standard" placeholder="Base card name" /></div></div></div><div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-n2">Dark card name</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-n2" value="Administrator" placeholder="Dark card name" /></div></div></div></div></div><h3 class="ds-h3">Markup for this selection</h3><div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div></div></section>
+<section class="ds-section" id="variants"><div class="ds-page ds-inner"><h2 class="ds-h2">Variants</h2><p class="ds-desc">Pairs stack one under another, one per category. The order of the pairs follows the order of the tabs in the comparison table below them.</p><h3 class="ds-h3">Two pairs</h3><div class="ds-stage" style="display:block"><div id="v-pairs"></div></div><h3 class="ds-h3">Quick links</h3><p class="ds-desc">A compact row with one small System-style link per role, above the cards. It uses the same <code>goToCompareView()</code> as the card links.</p><div class="ds-stage"><div class="role-quicklinks" style="margin:0" id="v-quick"></div></div></div></section>
+<section class="ds-section ds-section--secondary" id="states"><div class="ds-page ds-inner"><h2 class="ds-h2">States</h2><p class="ds-desc">The only interactive part is the link. It has no underline when enabled; the label is underlined on hover and the color changes. Hover is forced on this page.</p><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Base card</th><th scope="col">Dark card</th></tr></thead><tbody></tbody></table></div></div></section>
+<section class="ds-section" id="specs"><div class="ds-page ds-inner"><h2 class="ds-h2">Specs</h2><h3 class="ds-h3">Colors</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Base card</th><th scope="col">Dark card (<code>.role-tier--dark</code>)</th></tr></thead><tbody><tr><th scope="row">Background</th><td><code>surface-raised-primary</code></td><td><code>surface-100</code></td></tr><tr><th scope="row">Border</th><td><code>border-primary</code></td><td><code>surface-90</code></td></tr><tr><th scope="row">Title and icon</th><td><code>text-primary</code></td><td><code>accent-default</code></td></tr><tr><th scope="row">Description</th><td><code>text-secondary</code></td><td><code>text-secondary-inverted</code></td></tr><tr><th scope="row">Link</th><td><code>text-action-primary</code>, hover <code>-hover</code></td><td><code>text-action-primary-inverted</code>, hover <code>-hover</code></td></tr><tr><th scope="row">Feature strips</th><td><code>surface-05</code>, lines <code>border-primary</code></td><td><code>surface-90</code>, lines white at 12%</td></tr></tbody></table></div><h3 class="ds-h3">Type</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Token</th><th scope="col">Mobile</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Name</th><td><code>title-lg</code>, weight 600</td><td>20/24, 0</td><td>24/28, 0</td></tr><tr><th scope="row">Description</th><td><code>body-md</code></td><td>16/22, 0.32px</td><td>17/24, 0.32px</td></tr><tr><th scope="row">Link</th><td>Action link, Medium, Bold (600), 24px icon, gap 6px</td><td>16/24, 0.32px</td><td>17/24, 0.32px</td></tr><tr><th scope="row">Feature</th><td><code>body-sm</code></td><td>14/20, 0.36px</td><td>14/20, 0.36px</td></tr></tbody></table></div><h3 class="ds-h3">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Pair</th><td>1 column below 769px, 2 columns from 769px, gap 24px; stacked pairs 24px (xs) / 32px (md+) apart</td></tr><tr><th scope="row">Card</th><td>Column below 640px, row from 640px; 1px border, sharp corners</td></tr><tr><th scope="row">Info block</th><td>24px padding (32px from 769px), gap 8px, 55% of the width</td></tr><tr><th scope="row">Feature strip</th><td>min height 56px, 16px padding, text centered; 45% of the width</td></tr></tbody></table></div><h3 class="ds-h3">Tokens</h3><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Card</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Open points:</strong> no Figma component. The line between feature strips on the dark card is <code>rgba(255, 255, 255, 0.12)</code>: there is no token for white at 12%, so it is written out with a comment in the CSS. The card is built for the comparison pages (<code>feature-comparison-roles.html</code>, <code>e-handelspartner.html</code>); the link needs their table script.</p><h3 class="ds-h3">Behavior and rules</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Link</th><td>Switches the active tab in the table <strong>before</strong> scrolling, by calling the table’s own <code>setCompareView()</code>. Call <code>event.preventDefault()</code> so the anchor does not snap mid-scroll.</td></tr><tr><th scope="row">Scroll offset</th><td>Scroll to the section with the <code>--header-top-h</code> offset, never a plain <code>scrollIntoView()</code>.</td></tr><tr><th scope="row">Feature strips</th><td>Three or four rows taken from rows that really exist in the comparison table and are specific to that role.</td></tr><tr><th scope="row">Order</th><td>The pairs follow the order of the tabs.</td></tr></tbody></table></div></div></section>
+<section class="ds-section ds-section--secondary" id="code"><div class="ds-page ds-inner"><h2 class="ds-h2">Code</h2><div id="recipes"></div><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/role-tier.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner"><h2 class="ds-h2">Usage</h2><div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">You need…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">to introduce two tiers of one category and link to the full table</th><td>Role tier card pair</td></tr><tr><th scope="row">to compare many roles in detail</th><td><a class="ds-link" href="table.html">Table</a></td></tr><tr><th scope="row">one prominent link</th><td><a class="ds-link" href="tile-link.html">Tile link</a></td></tr></tbody></table></div><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Use the dark card for the extended or administrative tier.</li><li>Ground the feature strips in the table below.</li><li>Switch the tab before scrolling.</li><li>Keep sharp corners and ECO colors.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Invent features that are not in the table.</li><li>Use pill-shaped buttons.</li><li>Scroll without the header offset.</li><li>Use it for more than two tiers.</li></ul></div></div></div></section>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  function card(o) {
+    var f = o.features.slice(0, o.n).map(function (x) { return '<div class="role-tier__feature">' + esc(x) + '</div>'; }).join('');
+    return '<div class="role-tier' + (o.dark ? ' role-tier--dark' : '') + '"><div class="role-tier__info"><div class="role-tier__badge-row"><span class="role-tier__icon" aria-hidden="true" style="font-family:\'Material Symbols Outlined\'">' + o.icon + '</span><span class="badge-basic badge-basic--' + (o.dark ? 'neutral-grey badge-basic--strong' : 'neutral-grey badge-basic--weaker') + '">' + esc(o.badge) + '</span></div>' +
+      '<p class="role-tier__name">' + esc(o.name) + '</p><p class="role-tier__desc">' + esc(o.desc) + '</p>' +
+      '<a href="#" class="role-tier__link"' + (o.hover ? ' data-state="hover"' : '') + '><span class="role-tier__link-label">' + esc(o.link) + '</span><span class="role-tier__link-icon" aria-hidden="true">arrow_downward</span></a></div>' +
+      (o.n ? '<div class="role-tier__features">' + f + '</div>' : '') + '</div>';
+  }
+  var BASE = { icon: 'person', badge: 'Standard access', desc: 'Standard users can shop, follow their own orders and keep track of their invoices.', link: 'Compare Standard in the table', features: ['Place orders', 'Quick order', 'Own favourite lists', 'View own invoices'] };
+  var DARK = { dark: true, icon: 'admin_panel_settings', badge: 'Full access', desc: 'Administrators manage users, approve orders and see the whole company’s purchases.', link: 'Compare Administrator in the table', features: ['Manage users', 'Approve orders', 'Company-wide invoices', 'Set purchase limits'] };
+  function pair(a, b, o) { return '<div class="role-tier-pair">' + card(Object.assign({ n: 4 }, a, o)) + card(Object.assign({ n: 4 }, b, o)) + '</div>'; }
+  var st = { state: 'enabled', n: '4' };
+  function renderPg() {
+    var o = { n: +st.n, hover: st.state === 'hover' };
+    var a = Object.assign({}, BASE, { name: $('#pg-n1').value }), b = Object.assign({}, DARK, { name: $('#pg-n2').value });
+    $('#pg-host').innerHTML = pair(a, b, o);
+    $$('#pg-host a').forEach(function (x) { x.addEventListener('click', function (e) { e.preventDefault(); }); });
+    $('#pg-code').textContent = (o.hover ? '<!-- hover is forced here for preview; in production it comes from :hover -->\n' : '') + '<div class="role-tier-pair">\n  <div class="role-tier">\n    <div class="role-tier__info">\n      <div class="role-tier__badge-row">\n        <span class="role-tier__icon" aria-hidden="true">person</span>\n        <span class="badge-basic badge-basic--neutral-grey badge-basic--weaker">Standard access</span>\n      </div>\n      <p class="role-tier__name">' + esc(a.name) + '</p>\n      <p class="role-tier__desc">…</p>\n      <a href="#compare" class="role-tier__link" onclick="goToCompareView(event, \'roles\')">\n        <span class="role-tier__link-label">Compare ' + esc(a.name) + ' in the table</span>\n        <span class="role-tier__link-icon" aria-hidden="true">arrow_downward</span>\n      </a>\n    </div>\n    <div class="role-tier__features">\n      <div class="role-tier__feature">Place orders</div>\n      …\n    </div>\n  </div>\n  <div class="role-tier role-tier--dark">…same structure…</div>\n</div>';
+  }
+  DK.wire(st, renderPg); $('#pg-n1').addEventListener('input', renderPg); $('#pg-n2').addEventListener('input', renderPg);
+  $('#v-pairs').innerHTML = pair(BASE, DARK, { name: 'x' }).replace('>x<', '>Standard<').replace('>x<', '>Administrator<') +
+    pair({ icon: 'apartment', badge: 'Company', name: 'Company standard', desc: 'For companies that buy through one shared account.', link: 'Compare in the table', features: ['Shared order history', 'Company prices', 'Invoice payment', 'Delivery addresses'] },
+         { dark: true, icon: 'domain_add', badge: 'Special terms', name: 'Company special', desc: 'For companies with an agreement and their own price list.', link: 'Compare in the table', features: ['Agreement prices', 'Own price list', 'Credit limit', 'Dedicated contact'] }, {});
+  $$('#v-pairs a').forEach(function (x) { x.addEventListener('click', function (e) { e.preventDefault(); }); });
+  $('#v-quick').innerHTML = ['Standard', 'Administrator', 'Company standard'].map(function (n) { return '<a href="#" class="role-quicklink"><span>' + n + '</span><span class="role-quicklink__icon" aria-hidden="true">arrow_downward</span></a>'; }).join('');
+  $$('#v-quick a').forEach(function (x) { x.addEventListener('click', function (e) { e.preventDefault(); }); });
+  var tb = $('#matrix tbody');
+  [['Enabled', false], ['Hover', true]].forEach(function (r) {
+    var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+    [BASE, DARK].forEach(function (c) { var td = document.createElement('td'); td.style.textAlign = 'left'; td.innerHTML = card(Object.assign({}, c, { name: c.dark ? 'Administrator' : 'Standard', n: 0, hover: r[1] })); tr.appendChild(td); });
+    tb.appendChild(tr);
+  });
+  $$('#matrix a').forEach(function (x) { x.addEventListener('click', function (e) { e.preventDefault(); }); });
+  DK.tokenTable($('#tok-table tbody'), [['Base', 'Background', 'surface-raised-primary'], ['Base', 'Border', 'border-primary'], ['Base', 'Name and icon', 'text-primary'], ['Base', 'Description', 'text-secondary'], ['Base', 'Feature background', 'surface-05'],
+    ['Dark', 'Background', 'surface-100'], ['Dark', 'Border', 'surface-90'], ['Dark', 'Name and icon', 'accent-default'], ['Dark', 'Description', 'text-secondary-inverted'], ['Dark', 'Feature background', 'surface-90'], ['Dark', 'Feature text', 'text-primary-inverted'],
+    ['Both · hover', 'Link', 'text-action-primary-hover'], ['Dark · hover', 'Link', 'text-action-primary-inverted-hover']]);
+  DK.recipes($('#recipes'), [
+    ['Card pair (link role-tier.css, badge.css and the Material Symbols font)', '<div class="role-tier-pair">\n  <div class="role-tier">\n    <div class="role-tier__info">\n      <div class="role-tier__badge-row">\n        <span class="role-tier__icon" aria-hidden="true">person</span>\n        <span class="badge-basic badge-basic--neutral-grey badge-basic--weaker">Standard access</span>\n      </div>\n      <p class="role-tier__name">Standard</p>\n      <p class="role-tier__desc">Standard users can shop and follow their own orders.</p>\n      <a href="#compare" class="role-tier__link" onclick="goToCompareView(event, \'roles\')">\n        <span class="role-tier__link-label">Compare Standard in the table</span>\n        <span class="role-tier__link-icon" aria-hidden="true">arrow_downward</span>\n      </a>\n    </div>\n    <div class="role-tier__features">\n      <div class="role-tier__feature">Place orders</div>\n      <div class="role-tier__feature">Quick order</div>\n      <div class="role-tier__feature">Own favourite lists</div>\n    </div>\n  </div>\n  <div class="role-tier role-tier--dark">… same structure …</div>\n</div>'],
+    ['Link logic (uses the table’s own setCompareView)', "function goToCompareView(event, view) {\n  if (event) event.preventDefault();\n  var btn = document.querySelector('.compare-view-btn[data-view=\"' + view + '\"]');\n  if (btn) setCompareView(view, btn);\n  var target = document.getElementById('compare');\n  var headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-top-h')) || 0;\n  window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - headerH, behavior: 'smooth' });\n}"],
+    ['Quick links', '<div class="role-quicklinks">\n  <a href="#compare" class="role-quicklink" onclick="goToCompareView(event, \'roles\')">\n    <span>Standard</span><span class="role-quicklink__icon" aria-hidden="true">arrow_downward</span>\n  </a>\n</div>']]);
+  DK.printCss($('#css-code'), 'role-tier');
+  renderPg();
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

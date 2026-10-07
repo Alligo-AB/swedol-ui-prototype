@@ -187,7 +187,7 @@ Focus: same ring as the button. Add `aria-label` always, and an `eco-tooltip` wh
 
 ## Button group (toggle group)
 
-Joined System buttons for choosing between 2–4 short, related options on one row (playground option groups, toolbars). Not the pill: that is `eco-pill-segment-control`. Shared file: **`components/css/button-group.css`** (`<link rel="stylesheet" href="/components/css/button-group.css">`).
+Joined System buttons for choosing between 2–4 short, related options on one row (playground option groups, toolbars). Not the pill: that is `eco-pill-segment-control`. Documentation page: `eco-design-system/components/button-group.html`. Shared file: **`components/css/button-group.css`** (`<link rel="stylesheet" href="/components/css/button-group.css">`).
 
 ```html
 <div class="btn-group" role="group" aria-label="Size">
@@ -197,3 +197,5 @@ Joined System buttons for choosing between 2–4 short, related options on one r
 ```
 
 Selected = `aria-pressed="true"` (black-12 fill). 1px frame shared between neighbours, hover frame `border-hover`, keyboard focus ring (`body.keyboard-nav`). 32px high on mobile, 40px from 769px. More than 4 options: use `eco-select`.
+
+**Does not fit: use a select.** Never shrink the padding, wrap or scroll a group to make it fit (the button design stays as is). When the group is wider than its container (e.g. a narrow playground controls column), show an `eco-select` with the same options instead, and keep the two in sync. Reference: the playground in `eco-design-system/components/button.html` ("Playground button groups that do not fit…"): builds a `form-select--sm` per `.ds-controls .btn-group`, toggles on `g.scrollWidth > field.clientWidth` at load and on `resize`, and forwards the select's `change` as a click on the matching button. Hide with `style.display`, not the `hidden` attribute (`.btn-group` sets `display`, which overrides `[hidden]`).

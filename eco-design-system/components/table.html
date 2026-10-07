@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Table – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/table.css">
+  <link rel="stylesheet" href="../../components/css/checkbox.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-dark { background: var(--color-surface-100); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-cap { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 600; }
+    .ds-stage--dark .pg-cap { color: var(--color-text-secondary-inverted); }
+
+  </style>
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Table</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Data</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="First version: the values come from the docs pages, not from a Figma table component.">Not verified in Figma</span></div>
+    <h1 class="ds-title">Table</h1>
+    <p class="ds-lead">A table shows <strong>rows of comparable data</strong>. It sits in a wrap with the elevation of a dashboard card and scrolls sideways when the window is narrow.</p><p class="ds-lead">Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-table/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#playground">Playground</a></li><li><a href="#variants">Variants</a></li><li><a href="#specs">Specs</a></li><li><a href="#code">Code</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="playground"><div class="ds-page ds-inner"><h2 class="ds-h2">Playground</h2><p class="ds-desc">A table in its wrap. The wrap carries the card shadow and scrolls sideways when the window is too narrow. Pick one header tone per page.</p><div class="ds-playground"><div class="ds-stage" id="pg-stage" data-mode-stage><div id="pg-host" style="width:100%"></div></div><div class="ds-controls"><div class="ds-field form-field"><label class="form-label form-label--sm" for="sel-pg-l-tone" id="pg-l-tone">Header background</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="tone" id="sel-pg-l-tone"><option value="default" selected>Default (surface-02)</option><option value="accent">Accent light</option><option value="information">Information</option><option value="success">Success</option><option value="warning">Warning</option><option value="danger">Danger</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-c">Cells</span><div class="btn-group" role="group" aria-labelledby="pg-l-c" data-pg="cells"><button type="button" data-v="text" aria-pressed="true">Text</button><button type="button" data-v="check" aria-pressed="false">Check icons</button></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-r">Rows</span><div class="btn-group" role="group" aria-labelledby="pg-l-r" data-pg="rows"><button type="button" data-v="3" aria-pressed="true">3</button><button type="button" data-v="5" aria-pressed="false">5</button></div></div></div></div><h3 class="ds-h3">Markup for this selection</h3><div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div></div></section>
+<section class="ds-section" id="variants"><div class="ds-page ds-inner"><h2 class="ds-h2">Variants</h2><p class="ds-desc">Text columns are left-aligned. Check-icon columns are centered on the docs pages (page-local).</p><h3 class="ds-h3">Text</h3><div class="ds-stage" style="display:block"><div id="v-text"></div></div><h3 class="ds-h3">Check icons</h3><p class="ds-desc">Read-only <code>eco-checkbox</code> in a <code>.check-icon</code> cell.</p><div class="ds-stage" style="display:block"><div id="v-check"></div></div><h3 class="ds-h3">Wide content scrolls</h3><p class="ds-desc">The table keeps its width; the wrap scrolls and the page does not.</p><div class="ds-stage" style="display:block;max-width:420px"><div id="v-wide"></div></div></div></section>
+<section class="ds-section ds-section--secondary" id="specs"><div class="ds-page ds-inner"><h2 class="ds-h2">Specs</h2><h3 class="ds-h3">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Header row</th><td>56px (a minimum: taller if the text wraps)</td></tr><tr><th scope="row">Body row</th><td>48px (a minimum)</td></tr><tr><th scope="row">Cell padding</th><td>11px top and bottom, 24px left and right. The 1px line makes it 12px; keeps a one-line row at 48px</td></tr><tr><th scope="row">Wrap</th><td>No border, <code>overflow-x: auto</code></td></tr></tbody></table></div><h3 class="ds-h3">Type</h3><p class="ds-desc">Header cells and the first column (row header) are bold (600). Body cells are <code>body-sm</code>: 14/20, 0.36px. The same on every breakpoint.</p><h3 class="ds-h3">Tokens</h3><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><h3 class="ds-h3">Header background</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Tone</th><th scope="col">Token</th><th scope="col">When</th></tr></thead><tbody><tr><th scope="row">Default</th><td><code>surface-02</code></td><td>Standard</td></tr><tr><th scope="row">Accent</th><td><code>accent-light</code></td><td>More emphasis, Swedol accent. For Tools: <code>--color-primitive-color-brand-tools-accent-light</code> (a primitive)</td></tr><tr><th scope="row">Status</th><td><code>surface-{information, success, warning, danger}-weaker</code></td><td>Only when the table itself carries that status</td></tr></tbody></table></div><p class="ds-desc ds-note">Pick one per page; never mix tones in one table. Header text stays <code>text-primary</code>.</p><p class="ds-desc ds-note"><strong>Open points:</strong> the values come from the docs pages, not from a Figma component. Not built yet: sorting, selection, sticky header, empty and loading states, dark mode, very long cell text, and rows with a control other than a checkbox. The 11px padding is a consequence of the 1px row line.</p><h3 class="ds-h3">Accessibility</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Markup</th><td>Real <code>th</code> with <code>scope</code>; name the table with a <code>caption</code> or a nearby heading.</td></tr><tr><th scope="row">Last row</th><td>No bottom line. Scope the rule to <code>tbody</code>, never a bare <code>tr:last-child</code> (it removes a one-row header’s line).</td></tr><tr><th scope="row">Narrow window</th><td>The wrap scrolls; the page does not (<code>scrollWidth == innerWidth</code>).</td></tr></tbody></table></div></div></section>
+<section class="ds-section" id="code"><div class="ds-page ds-inner"><h2 class="ds-h2">Code</h2><div id="recipes"></div><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/table.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+<section class="ds-section ds-section--secondary" id="usage"><div class="ds-page ds-inner"><h2 class="ds-h2">Usage</h2><div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The data…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">has rows and columns to compare</th><td>Table</td></tr><tr><th scope="row">is one list of label and value pairs</th><td>A description list</td></tr><tr><th scope="row">is a layout</th><td>CSS grid, never a table</td></tr></tbody></table></div><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Use <code>th</code> with <code>scope</code>.</li><li>Keep one header tone per page.</li><li>Bold the first column as the row header.</li><li>Check that the wrap scrolls at 375px.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Use a table for layout.</li><li>Add a bottom line on the last row.</li><li>Mix header tones in one table.</li><li>Hardcode colors, shadow or spacing.</li></ul></div></div></div></section>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var TONE = { 'default': '', accent: 'var(--color-accent-light)', information: 'var(--color-surface-information-weaker)', success: 'var(--color-surface-success-weaker)', warning: 'var(--color-surface-warning-weaker)', danger: 'var(--color-surface-danger-weaker)' };
+  var ROWS = [['View orders', 1, 1], ['Create orders', 1, 1], ['Approve orders', 0, 1], ['Manage users', 0, 1], ['View invoices', 1, 1]];
+  function tbl(o) {
+    var w = document.createElement('div'); w.className = 'table-wrap';
+    var h = '<table class="table"><thead><tr><th scope="col">Permission</th><th scope="col"' + (o.check ? ' style="text-align:center"' : '') + '>Standard</th><th scope="col"' + (o.check ? ' style="text-align:center"' : '') + '>Administrator</th></tr></thead><tbody>';
+    ROWS.slice(0, o.rows).forEach(function (r) {
+      h += '<tr><th scope="row">' + r[0] + '</th>' + [r[1], r[2]].map(function (v) { return o.check ? '<td class="check-icon" style="text-align:center"><input type="checkbox"' + (v ? ' checked' : '') + ' disabled aria-label="' + (v ? 'Yes' : 'No') + '" style="display:block;margin:4px auto"></td>' : '<td>' + (v ? 'Yes' : 'No') + '</td>'; }).join('') + '</tr>';
+    });
+    w.innerHTML = h + '</tbody></table>';
+    if (o.tone && TONE[o.tone]) $$('thead th', w).forEach(function (t) { t.style.background = TONE[o.tone]; });
+    return w;
+  }
+  var st = { tone: 'default', cells: 'text', rows: '3' };
+  function renderPg() {
+    var o = { tone: st.tone, check: st.cells === 'check', rows: +st.rows };
+    clear($('#pg-host')).appendChild(tbl(o));
+    var h = '<div class="table-wrap">\n  <table class="table">\n    <thead>\n      <tr><th scope="col">Permission</th><th scope="col">Standard</th><th scope="col">Administrator</th></tr>\n    </thead>\n    <tbody>\n';
+    ROWS.slice(0, o.rows).forEach(function (r) { h += '      <tr><th scope="row">' + r[0] + '</th>' + (o.check ? '<td class="check-icon"><input type="checkbox"' + (r[1] ? ' checked' : '') + ' disabled /></td><td class="check-icon"><input type="checkbox"' + (r[2] ? ' checked' : '') + ' disabled /></td>' : '<td>' + (r[1] ? 'Yes' : 'No') + '</td><td>' + (r[2] ? 'Yes' : 'No') + '</td>') + '</tr>\n'; });
+    h += '    </tbody>\n  </table>\n</div>';
+    if (TONE[o.tone]) h = '<style>\n  .table thead th { background: ' + TONE[o.tone] + '; }\n</style>\n' + h;
+    $('#pg-code').textContent = h;
+  }
+  DK.wire(st, renderPg);
+  clear($('#v-text')).appendChild(tbl({ rows: 5 }));
+  clear($('#v-check')).appendChild(tbl({ rows: 5, check: true }));
+  var wd = clear($('#v-wide')); var ww = tbl({ rows: 3 }); ww.querySelector('thead tr').insertAdjacentHTML('beforeend', '<th scope="col">Comment</th><th scope="col">Last changed</th>'); $$('tbody tr', ww).forEach(function (r) { r.insertAdjacentHTML('beforeend', '<td>Applies to all company accounts</td><td>2026-10-07</td>'); }); wd.appendChild(ww);
+  DK.tokenTable($('#tok-table tbody'), [['All', 'Wrap background', 'surface-raised-primary'], ['All', 'Header background (default)', 'surface-02'], ['All', 'Line under header', 'border-primary'], ['All', 'Lines between rows', 'border-secondary'], ['All', 'Text', 'text-primary'], ['All', 'Wrap shadow', 'shadow-elevation-b-20']]);
+  DK.recipes($('#recipes'), [['Table (link table.css)', '<div class="table-wrap">\n  <table class="table">\n    <caption>Permissions per role</caption>\n    <thead>\n      <tr><th scope="col">Permission</th><th scope="col">Standard</th><th scope="col">Administrator</th></tr>\n    </thead>\n    <tbody>\n      <tr><th scope="row">View orders</th><td>Yes</td><td>Yes</td></tr>\n      <tr><th scope="row">Manage users</th><td>No</td><td>Yes</td></tr>\n    </tbody>\n  </table>\n</div>'],
+    ['Check icon cell (also link checkbox.css)', '<td class="check-icon"><input type="checkbox" checked disabled aria-label="Yes" /></td>']]);
+  DK.printCss($('#css-code'), 'table');
+  renderPg();
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

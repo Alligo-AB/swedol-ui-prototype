@@ -46,6 +46,9 @@ These values apply to every section except the first.
 
 ### CSS template
 
+> **Shared file:** `<link rel="stylesheet" href="/components/css/section.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/section.html`. Also holds `.page-divider` and the My Pages title spacing.
+
+
 ```css
 /* Other sections */
 .section {

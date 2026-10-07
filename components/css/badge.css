@@ -52,3 +52,14 @@
 .badge-basic--warning.badge-basic--strong { background: var(--color-surface-warning-default); color: var(--color-text-primary); }
 .badge-basic--warning.badge-basic--weak   { background: var(--color-surface-warning-weak); color: var(--color-text-primary); }
 .badge-basic--warning.badge-basic--weaker { background: var(--color-surface-warning-weaker); border: 1px solid var(--color-border-warning-weak); color: var(--color-text-primary); }
+
+/* Alert Danger (same formula as Info and Success) */
+.badge-basic--danger.badge-basic--strong  { background: var(--color-surface-danger-default); color: var(--color-text-primary-inverted); }
+.badge-basic--danger.badge-basic--weak    { background: var(--color-surface-danger-weak); color: var(--color-text-danger-default); }
+.badge-basic--danger.badge-basic--weaker  { background: var(--color-surface-danger-weaker); border: 1px solid var(--color-border-danger-weak); color: var(--color-text-danger-default); }
+
+/* Icon as a Material Symbols glyph: <span class="badge-basic__icon" aria-hidden="true">info</span> (an <img> icon works too) */
+span.badge-basic__icon {
+  font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: 14px; line-height: 14px; letter-spacing: normal;
+  text-transform: none; white-space: nowrap; overflow: hidden; user-select: none; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+}

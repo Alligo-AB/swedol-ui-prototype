@@ -82,6 +82,9 @@ A clickable link with an optional left icon and a right arrow. Used for navigati
 
 ### CSS template
 
+> **Shared file:** `<link rel="stylesheet" href="/components/css/action-link.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/action-link.html`. Icons are `<span class="action-link__icon">`, sizes mobile-first.
+
+
 ```css
 .action-link {
   display: inline-flex;

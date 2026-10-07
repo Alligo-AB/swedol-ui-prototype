@@ -95,7 +95,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/badge.css">
 ```
 
-`components/css/badge.css` is the single source for this component. Mobile-first, desktop from 769px, `var(--…)` only. To change the component, edit that file.
+`components/css/badge.css` is the single source for this component. It now includes `.badge-basic--danger` and a glyph icon (`<span class="badge-basic__icon" aria-hidden="true">info</span>`). Documentation page: `eco-design-system/components/badge.html`. Mobile-first, desktop from 769px, `var(--…)` only. To change the component, edit that file.
 
 ### Color choice — common meanings
 
