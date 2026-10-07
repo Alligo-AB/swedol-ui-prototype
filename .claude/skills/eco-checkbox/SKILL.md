@@ -1,6 +1,6 @@
 ---
 name: eco-checkbox
-description: Use when building or reviewing checkboxes — light mode (standard and the detailed table icon variant) and dark mode, including all states (enabled/hover/focus/selected/indeterminate/disabled).
+description: Use when building or reviewing checkboxes — light mode (standard and the detailed table icon variant) and dark mode, including all states (enabled/hover/focus/selected/indeterminate/disabled), plus the tile variants used on PDP and in filtering (Color swatch, Image, Number).
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -18,14 +18,74 @@ Checkboxes follow the ECO Design System spec: total area **24×24px**, visible b
 
 | State | Visual rule |
 |---|---|
-| Enabled | 1.5px solid `var(--color-surface-100)` border, white background |
-| Hover | border-width: 2px |
-| Focus | Blue focus ring `#0052CC` **(deviates from `border-focus` = `var(--color-border-focus)` used in every other form component — not changed here, confirm with design before either value is used)**, 2px, offset 2px |
-| Selected | Black fill `var(--color-border-selected)`, white checkmark (SVG) |
-| Indeterminate | Black fill `var(--color-surface-100)`, white dash (SVG) |
-| Disabled | Border `var(--color-surface-15)`, white background, `cursor: not-allowed` |
-| Disabled Selected | Fill `var(--color-border-input-default)`, border `var(--color-border-input-default)` |
+| Enabled | `1px solid var(--color-border-input-control-default)`, fill `var(--color-surface-raised-primary)` |
+| Hover | fill `var(--color-surface-raised-secondary)`, border `var(--color-border-hover)` (still 1px) |
+| Focus | Enabled look + ring `var(--color-border-focus)`, 2px, offset 2px (matches Figma) |
+| Selected | Fill and border `var(--color-surface-100)`, white checkmark (SVG) |
+| Selected Hover | Fill and border `var(--color-surface-50)`, white checkmark |
+| Selected Focus | Selected look + focus ring |
+| Indeterminate | Same as Selected, white dash (SVG). Hover = Selected Hover. Focus = Selected Focus. |
+| Disabled | Border `var(--color-border-disabled)`, fill `var(--color-surface-disabled)`, `cursor: not-allowed` |
+| Disabled Selected | Fill and border `var(--color-surface-disabled)`, grey checkmark `#939595` (= `text-disabled`) |
+| Disabled Indeterminate | Fill and border `var(--color-surface-disabled)`, grey dash `#939595` |
 | Disabled label | Text `var(--color-text-disabled)` via `:has(input:disabled) span` |
+
+> Updated from Figma (2026-10-03): the enabled border is now the grey `border-input-control-default` at **1px** and hover no longer thickens the border (it changes fill and border color). Dark mode is unchanged (1px white border, **2px on hover**). Disabled Indeterminate and Inline Menu Disabled / Disabled Selected / Disabled Indeterminate were added later (all sizes and modes). Dark disabled mixed: fill and border `surface-60`, dash `surface-40`.
+
+### Sizes and Inline Menu (Figma `Checkbox`, node `1548:53635`, file `42MgqJjV9vfplwQnrUB62r`)
+
+Figma properties: `Mode` (Light/Dark), `Size` (Large/Small), `Breakpoint` (XLarge-Large-Medium / Small-XSmall), `State`. The Breakpoint axis (XLarge-Large-Medium = Desktop, 769px+; Small-XSmall = Mobile/Tablet, below 769px) leaves the box, area, gap and Small label unchanged; only the Large label differs: Mobile 16/22, Desktop 17/24 (`body-md`).
+
+| Size | Area | Box | Margin | Gap | Label |
+|---|---|---|---|---|---|
+| Large (default) | 24×24px | 16×16px | 4px | 8px | `body-md`: 16/22, from `md:` 17/24, 0.32px |
+| Small (`.form-checkbox-item--sm`) | 20×20px | 14×14px | 3px | 4px | `body-sm`: 14/20, 0.36px |
+
+- Small focus ring: `outline-offset: 1px` (1px + 2px = 3px margin). Checkmark `background-size: 12px`.
+- Selected Hover exists for both sizes and looks the same (updated in Figma).
+- **Inline Menu** (all sizes, light and dark): box + 24×24px dropdown arrow (`.cb-arrow`, fill `icon-primary`, dark `icon-inverted`), no label (add `aria-label`), gap 8px Large / 4px Small. States: Enabled, Hover, Focus, Selected, Selected Hover, Selected Focus, Mixed, Mixed Hover, Mixed Focus, Disabled, Disabled Selected, Disabled Mixed. The arrow is `text-disabled` (`#939595`) when disabled, light and dark (`:has(input:disabled) .cb-arrow`).
+- Every state is defined in Figma for both sizes, both modes and the inline menu.
+- Live reference with all of this: `eco-design-system/components/checkbox.html` (it links `components/css/checkbox.css`, the single CSS source).
+
+```html
+<label class="form-checkbox-item form-checkbox-item--sm"><input type="checkbox" /><span>Label</span></label>
+<label class="form-checkbox-item"><input type="checkbox" aria-label="Select all" />
+  <svg class="cb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg></label>
+```
+
+### Tiles: Color swatch, Image, Number (PDP and filtering)
+
+Figma: Checkbox Color Swatch `4650:209393`, Checkbox Image / Number `14460:597851`. Used first and foremost on product pages (PDP) and in filtering, where the choice is a color or a picture instead of a text label. Native `<input type="checkbox">` visually hidden over a `.form-checkbox-tile__box`; **no visible label, so `aria-label` is required**; several can be chosen. Live reference: the **Tiles** section of `eco-design-system/components/checkbox.html` (its `#cb-css` block is the canonical CSS).
+
+| Tile | Desktop | Mobile | Inside | Enabled border |
+|---|---|---|---|---|
+| Color swatch (`.form-checkbox-tile`) | 24×24px | 24×24px | 16px swatch (`--swatch` = product color), 2px padding | 1px `border-secondary` |
+| Image (`--image`) | 48×48px | 40×40px | image, `object-fit: contain`, 6px from the edge | 1px `border-primary` |
+| Number (`--number`, a `<button>`, "+10") | 48×48px | 40×40px | `label-md` 16/16, 0.48px, Bold, uppercase, `text-primary` | 1px `border-secondary` |
+
+States (all tiles, fill `surface-raised-primary`): **Hover** 1px `border-hover`; **Selected** 2px `border-selected`; **Selected Hover** 2px `border-selected-hover` (the 2px frame is a 1px border plus `box-shadow: inset 0 0 0 1px`, so the size never changes); **Focus** ring `border-focus` 2px, offset 2px. Number only has Enabled and Hover. Disabled is not defined in Figma for tiles.
+
+> **Filter list row:** on filter pages a color tile sits in a row with its name (`body-md`, `text-primary`) and the number of products (`body-md`, `text-tertiary`, right-aligned); the whole row is the click target (`.form-checkbox-tile--row` on the same label, 48px min height, 8px between tile and name). A group has a header (title + chevron), the list, a "Show more" action and a 1px `border-primary` divider before the next group (for example "Size").
+
+> **Product color library:** Figma node `13395:185062` (Product color filter swatches) has 26 colors: Yellow, White, Beige, Black, Blue, Bronze, Brown, Gold, Green, Grey, Oak, Orange, Pink, Purple, Red, Silver, Teak, Pattern, Dark, Multi color, Black mirror, Clear, Matte, Mirror lens, Semi shiny, Transparent. Most are a glossy angular gradient (`conic-gradient`) per color, a few are linear gradients, Pattern is a checker. The live values are the `COLORS` list in the page script (product data, not design tokens). A color row is the name (`alt-label-lg` style, Medium, uppercase, `text-tertiary`) + a 16px swatch + the hex value from product data, with a 1px `border-primary` divider below.
+
+> **One at a time on a PDP:** on a product page only one tile can be chosen (for example the image variants of one product). Then use `<input type="radio" name="…">` inside the same `.form-checkbox-tile` markup (the CSS works for both). Use `type="checkbox"` when several can be chosen, as in filtering. Show the chosen option's name next to the group so it is not conveyed by the picture alone.
+
+> Flag: in Figma the mobile Color Swatch has a 20×18px swatch box in the selected states (16px in Enabled); the page uses 16px for every state and breakpoint. The tile colors in examples are product data, not design tokens.
+
+```html
+<label class="form-checkbox-tile">
+  <input type="checkbox" aria-label="Blue" />
+  <span class="form-checkbox-tile__box"><span class="form-checkbox-tile__swatch" style="--swatch: #0066ff"></span></span>
+</label>
+<label class="form-checkbox-tile form-checkbox-tile--image">
+  <input type="checkbox" aria-label="Yellow / black" />
+  <span class="form-checkbox-tile__box"><img src="/images/product-skaljacka-gul-svart.webp" alt="" /></span>
+</label>
+<button type="button" class="form-checkbox-tile form-checkbox-tile--number" aria-label="Show 10 more colors">
+  <span class="form-checkbox-tile__box">+10</span>
+</button>
+```
 
 ### HTML structure
 ```html
@@ -35,23 +95,15 @@ Checkboxes follow the ECO Design System spec: total area **24×24px**, visible b
 </label>
 ```
 
-### CSS template
-```css
-.form-checkbox-item { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-.form-checkbox-item input[type="checkbox"] {
-  appearance: none; width: 16px; height: 16px;
-  border: 1.5px solid var(--color-surface-100); background: var(--color-surface-raised-primary);
-  cursor: pointer; flex-shrink: 0; margin: 4px;
-}
-.form-checkbox-item input[type="checkbox"]:hover { border-width: 2px; }
-.form-checkbox-item input[type="checkbox"]:focus-visible { outline: 2px solid #0052CC; outline-offset: 2px; } /* deviates from var(--color-border-focus) — see flag above */
-.form-checkbox-item input[type="checkbox"]:checked { background-color: var(--color-surface-100); border-color: var(--color-surface-100); /* + SVG checkmark */ }
-.form-checkbox-item input[type="checkbox"]:indeterminate { background-color: var(--color-surface-100); border-color: var(--color-surface-100); /* + SVG dash */ }
-.form-checkbox-item input[type="checkbox"]:disabled { border-color: var(--color-border-disabled); cursor: not-allowed; }
-.form-checkbox-item input[type="checkbox"]:disabled:checked { background-color: var(--color-surface-40); border-color: var(--color-surface-40); }
-.form-checkbox-item:has(input:disabled) { cursor: not-allowed; }
-.form-checkbox-item:has(input:disabled) span { color: var(--color-text-disabled); }
+### CSS
+
+Link the shared stylesheet. Never copy its rules into a page, and never write a parallel version:
+
+```html
+<link rel="stylesheet" href="/components/css/checkbox.css">
 ```
+
+`components/css/checkbox.css` is the single source for this component. The docs page `eco-design-system/components/checkbox.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 ---
 
@@ -65,13 +117,14 @@ Always implement checkboxes with `<input type="checkbox">` + CSS — never with 
 
 | State | Background | Border | Checkmark |
 |---|---|---|---|
-| **Default (unchecked)** | `--color-background-primary` | `1.5px solid --color-border-selected` | — |
-| **Checked** | `--color-surface-100` (black) | `--color-border-selected` | White (`stroke="white"`) |
-| **Hover (unchecked)** | — | `2px solid --color-border-selected` | — |
-| **Hover (checked)** | `--color-text-disabled` (var(--color-text-disabled)) | `--color-text-disabled` (var(--color-text-disabled)) | White |
-| **Disabled unchecked** | `--color-background-primary` | `--color-border-disabled` (var(--color-surface-15)) | — |
-| **Disabled checked** | `--color-surface-disabled` (var(--color-surface-disabled)) | none (matches background) | Gray (`stroke="var(--color-surface-40)"`) |
-| **Indeterminate** | `--color-surface-100` (black) | `--color-border-selected` | White horizontal line |
+| **Default (unchecked)** | `--color-surface-raised-primary` | `1px solid --color-border-input-control-default` | — |
+| **Checked** | `--color-surface-100` (black) | `--color-surface-100` | White (`stroke="white"`) |
+| **Hover (unchecked)** | `--color-surface-raised-secondary` | `1px solid --color-border-hover` | — |
+| **Hover (checked)** | `--color-surface-50` | `--color-surface-50` | White |
+| **Disabled unchecked** | `--color-surface-disabled` | `--color-border-disabled` | — |
+| **Disabled checked** | `--color-surface-disabled` | none (matches background) | Gray (`#939595` = `--color-text-disabled`) |
+| **Indeterminate** | `--color-surface-100` (black) | `--color-surface-100` | White horizontal line |
+| **Disabled indeterminate** | `--color-surface-disabled` | `--color-surface-disabled` | Gray line (`#939595`) |
 
 > **NOTE:** `disabled:checked` = light gray background (var(--color-surface-disabled)) + gray checkmark (var(--color-surface-40)).
 > **Not** a dark gray background + white checkmark — that's the hover-selected style.
@@ -105,7 +158,7 @@ Tables use the same `<input type="checkbox">` + CSS with the `.check-icon` class
 | `State` | `Enabled`, `Hover`, `Focus`, `Selected`, `Selected Hover`, `Selected Focus`, `indeterminate`, `Disabled`, `Disabled Selected`, `Inline Menu`, `Inline Menu Hover`, `Inline Menu Selected`, `Inline Menu Selected Hover`, `Inline Menu indeterminate`, `Inline Menu indeterminate Hover` |
 | `Size` | `Large`, `Small` |
 
-> `Selected Hover` only exists for `Version=Desktop Large` and `Version=Mobile Large`.
+> `Selected Hover` exists for Large and Small (Figma updated).
 
 ### Semantic tokens (dark mode)
 
@@ -128,70 +181,6 @@ Every fill and stroke is bound to variables from the ECO Design System collectio
 | Message text | Enabled → indeterminate / Inline Menu | `color/text-tertiary-inverted` | `var(--color-text-tertiary-inverted)` |
 | Message text | Disabled / Disabled Selected | `color/text-disabled` | `var(--color-text-disabled)` |
 
-### CSS template
-
-```css
-/* Wrapper */
-.form-checkbox-item--dark { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-
-/* Checkbox box */
-.form-checkbox-item--dark input[type="checkbox"] {
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 1.5px solid var(--color-border-action-2);      /* border-action-2 */
-  background: transparent;          /* surface-opacity-white-0 */
-  cursor: pointer;
-  flex-shrink: 0;
-  margin: 4px;
-}
-
-/* Hover — thicker border */
-.form-checkbox-item--dark input[type="checkbox"]:hover { border-width: 2px; }
-
-/* Selected */
-.form-checkbox-item--dark input[type="checkbox"]:checked {
-  background-color: var(--color-surface-action-2);        /* border-action-2 */
-  border-color: var(--color-text-primary-inverted);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23000000' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-/* Selected Hover */
-.form-checkbox-item--dark input[type="checkbox"]:checked:hover {
-  background-color: var(--color-surface-40);        /* surface-40 */
-  border-color: var(--color-text-disabled);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-/* Focus */
-.form-checkbox-item--dark input[type="checkbox"]:focus-visible {
-  outline: 2px solid var(--color-border-focus);       /* border-focus */
-  outline-offset: 2px;
-}
-
-/* Disabled */
-.form-checkbox-item--dark input[type="checkbox"]:disabled {
-  border-color: var(--color-surface-60);            /* surface-60 */
-  cursor: not-allowed;
-}
-
-/* Disabled Selected */
-.form-checkbox-item--dark input[type="checkbox"]:disabled:checked {
-  background-color: var(--color-surface-60);        /* surface-60 */
-  border-color: var(--color-surface-60);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23939595' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-/* Label text */
-.form-checkbox-item--dark span {
-  color: var(--color-text-primary-inverted);                   /* text-primary-inverted */
-  font-family: 'Breuer Condensed', sans-serif;
-}
-
-/* Disabled label */
-.form-checkbox-item--dark:has(input:disabled) { cursor: not-allowed; }
-.form-checkbox-item--dark:has(input:disabled) span { color: var(--color-text-disabled); /* text-disabled */ }
-```
 
 ### HTML example
 

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modal – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../notifications.css?v=15">
+  <style>
+    /* page-local: layout, the static preview (the real modal is fixed) and the Breakpoint preview */
+    .modal-preview { padding: 24px; display: flex; justify-content: center; width: 100%; overflow: hidden; }
+    .modal-preview .modal { position: static; transform: none; max-width: 100%; max-height: none; animation: none; }
+    .modal-preview .modal--medium, .modal-preview .modal--large { width: 100%; max-width: 705px; }
+    body[data-bp="desktop"] .modal-preview .modal { padding: 24px; }
+    body[data-bp="desktop"] .modal-preview .modal--small { width: 440px; }
+    body[data-bp="desktop"] .modal-preview .modal--medium { width: 600px; }
+    body[data-bp="desktop"] .modal-preview .modal--large { width: 705px; }
+    body[data-bp="desktop"] .modal-preview .modal__label { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+    body[data-bp="desktop"] .modal-preview .modal__title { font-size: 20px; line-height: 24px; }
+    body[data-bp="desktop"] .modal-preview .modal__body { font-size: 17px; line-height: 24px; }
+    body[data-bp="desktop"] .modal-preview .modal__footer { padding-top: 32px; }
+    body[data-bp="mobile"] .modal-preview .modal { padding: 16px; width: 375px; }
+    body[data-bp="mobile"] .modal-preview .modal__label { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
+    body[data-bp="mobile"] .modal-preview .modal__title { font-size: 18px; line-height: 22px; }
+    body[data-bp="mobile"] .modal-preview .modal__body { font-size: 16px; line-height: 22px; }
+    body[data-bp="mobile"] .modal-preview .modal__footer { padding-top: 24px; }
+    .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); flex-wrap: wrap; }
+    .pg-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-row:last-child { padding-bottom: 0; }
+    .pg-row__txt { flex: 1; min-width: 240px; }
+    .pg-row__txt b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-row__txt span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); margin-top: 12px; }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .ds-field[hidden] { display: none; }
+  </style>
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Modal</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Components · Notifications</span>
+    <h1 class="ds-title">Modal</h1>
+    <p class="ds-lead">A modal is the <strong>most disruptive</strong> notification. It blocks the page until the user makes a decision, so use it only when the user must confirm or choose before going on.</p>
+    <p class="ds-lead">Every “Open modal” button opens the real dialog: try ESC, a click on the dark overlay, Tab and the × to close it. Specification: <code>.claude/skills/eco-modal-ecom/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#playground">Playground</a></li><li><a href="#action">In action</a></li><li><a href="#variants">Variants</a></li><li><a href="#specs">Anatomy &amp; specs</a></li><li><a href="#code">Code</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="playground">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Playground</h2>
+    <p class="ds-desc">Choose size, label and content and the preview and its code update. Press <strong>Open modal</strong> to open the real one over this page.</p>
+    <div class="ds-playground">
+      <div class="ds-stage ds-stage--center" style="padding:0"><div class="modal-preview" id="pg-host"></div></div>
+      <div class="ds-controls">
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bp">Breakpoint</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-bp" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-sz">Size</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-sz" data-pg="size"><button type="button" data-v="small" aria-pressed="true">Small</button><button type="button" data-v="medium" aria-pressed="false">Medium</button><button type="button" data-v="large" aria-pressed="false">Large</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-lb">Label</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-lb" data-pg="label"><button type="button" data-v="off" aria-pressed="true">None</button><button type="button" data-v="on" aria-pressed="false">Label</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-title">Title</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-title" value="Delete this address?" placeholder="Title" /></div></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-body">Body</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-body" value="The address is removed from your address book. You cannot undo this." placeholder="Body" /></div></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-cancel">Cancel button</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-cancel" value="Cancel" placeholder="Cancel button" /></div></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-ok">Primary button</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-ok" value="Delete" placeholder="Primary button" /></div></div></div>
+        <button type="button" class="btn btn--primary" id="pg-open" style="align-self:flex-start"><span class="btn__label">Open modal</span></button>
+      </div>
+    </div>
+    <p class="pg-note" id="pg-log" aria-live="polite"></p>
+    <h3 class="ds-h3">Markup for this selection</h3>
+    <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="action">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">In action</h2>
+    <p class="ds-desc">Three situations that really need a decision. The line under the list tells you how the last modal was closed, because a modal must close in all of these ways: the ×, the ESC key and a click on the overlay.</p>
+    <div class="ds-stage" id="scenarios"></div>
+    <p class="pg-note" id="log" aria-live="polite">No modal opened yet.</p>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="variants">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Variants</h2>
+    <p class="ds-desc">Modal has no status or emphasis. It varies in <strong>size</strong> and in whether it carries a <strong>label</strong>. Choose the size by the amount of content: Small for a simple confirmation, Medium or Large for more.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="vb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="vb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+    <div id="v-sizes"></div>
+    <p class="ds-desc ds-note">On mobile (below 640px) Small stays a compact 375px card. Medium and Large fill the whole screen with the buttons pinned to the bottom. Open a real one below 640px to see it.</p>
+  </div>
+</section>
+
+<section class="ds-section" id="specs">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Anatomy &amp; specs</h2>
+    <div class="ds-anatomy" style="margin-bottom:32px">
+      <div class="modal-preview" id="anat" style="width:auto;max-width:100%"></div>
+      <ul class="ds-anatomy__legend">
+        <li><b>1 Label</b> (optional) · <code>alt-label-sm</code>, uppercase, <code>text-secondary</code></li>
+        <li><b>2 Title</b> · <code>title-md</code>, bold</li>
+        <li><b>3 Close</b> · 20px icon; always present</li>
+        <li><b>4 Body</b> · <code>body-md</code>, <code>text-secondary</code></li>
+        <li><b>5 Cancel</b> · Blank, 32px high</li>
+        <li><b>6 Primary action</b> · Primary, fills the rest of the row</li>
+        <li><b>7 Overlay</b> · <code>surface-opacity-black-20</code>, covers the page</li>
+      </ul>
+    </div>
+    <h3 class="ds-h3">Sizes</h3>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Desktop (769px+)</th><th scope="col">Tablet (640–768px)</th><th scope="col">Mobile (below 640px)</th></tr></thead><tbody id="sizes"></tbody></table></div>
+    <h3 class="ds-h3">Typography and spacing</h3>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Desktop (769px+)</th><th scope="col">Tablet and mobile</th></tr></thead><tbody id="type"></tbody></table></div>
+    <h3 class="ds-h3">Tokens</h3>
+    <p class="ds-desc">Resolved from the live token package.</p>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Role</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody id="tok"></tbody></table></div>
+    <h3 class="ds-h3">Behavior and accessibility</h3>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody id="beh"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Copy the markup or open it from script, then add the CSS once per page. Both come from <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.</p>
+    <div id="recipes"></div>
+    <div id="files"></div>
+  </div>
+</section>
+
+<section class="ds-section" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <p class="ds-desc">A modal stops the user. Only do that when the decision cannot wait.</p>
+    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The message…</th><th scope="col">Use</th></tr></thead><tbody id="which"></tbody></table></div>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Ask one clear question and give one primary action.</li><li>Name the action on the button: “Delete”, not “OK”.</li><li>Close on ×, ESC and a click on the overlay, every time.</li><li>Move focus into the dialog and back to the opener on close.</li></ul></div>
+      <div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Use a modal for feedback. Use a Toast.</li><li>Use it for status in page context. Use Inline.</li><li>Open one on page load.</li><li>Open a modal from a modal.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script src="../doc-kit.js?v=2"></script>
+<script src="../notifications.js?v=9"></script>
+<script>
+(function () {
+  var $ = DK.$, N = ECO_N, H = N.html;
+  function sample(o) { var d = document.createElement('div'); d.innerHTML = H.modal(o).replace(/<div class="modal-overlay"[^>]*><\/div>\n/, ''); return d.firstChild; }
+  var SIZES = [['small', 'Small', 'Delete this address?', 'The address is removed from your address book.'],
+               ['medium', 'Medium', 'Your cart has changed', 'Two items in your cart changed price or availability since you added them. Review the changes before you continue to checkout.'],
+               ['large', 'Large', 'We have updated our terms', 'We have updated our terms of purchase and our privacy policy. The changes cover how we handle returns for business customers, how long we keep order history, and how we contact you about deliveries. Read the summary and accept to continue using My Pages.']];
+
+  /* Playground */
+  var pg = { size: 'small', label: 'off' };
+  function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value }; }
+  function renderPg() { var o = pgOpts(); DK.clear($('#pg-host')).appendChild(sample(o)); $('#pg-code').textContent = H.modal(o); }
+  DK.$$('[data-pg]').forEach(function (g) { DK.seg(g, function (v) { pg[g.dataset.pg] = v; renderPg(); }); });
+  ['#pg-title', '#pg-body', '#pg-cancel', '#pg-ok'].forEach(function (s) { $(s).addEventListener('input', renderPg); });
+  $('#pg-open').addEventListener('click', function () {
+    var o = pgOpts(); o.onClose = function (r) { $('#pg-log').textContent = 'Closed with: ' + r + '.'; };
+    N.openModal(o);
+  });
+
+  /* In action */
+  var log = $('#log');
+  function closed(r) { log.textContent = 'Closed with: ' + ({ close: 'the × button', esc: 'the ESC key', overlay: 'a click on the overlay', cancel: 'Cancel', confirm: 'the primary button' }[r] || r) + '.'; }
+  var SC = [
+    { t: 'Confirm a deletion', d: 'Small. A destructive action: the user must confirm. Confirming shows a toast.', run: function (b) {
+        N.openModal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders, addresses and saved lists are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account', onClose: closed,
+          onConfirm: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Your account was deleted.', autoHide: 4000 }); }, 200); } }); } },
+    { t: 'Cart has changed', d: 'Medium. Important information the user must not miss before checkout.', run: function () {
+        N.openModal({ size: 'medium', label: 'Cart', title: SIZES[1][2], body: SIZES[1][3], cancel: 'Back to cart', confirm: 'Continue to checkout', onClose: closed }); } },
+    { t: 'Updated terms', d: 'Large. A compliance notice with more text. Below 640px it fills the screen.', run: function () {
+        N.openModal({ size: 'large', title: SIZES[2][2], body: SIZES[2][3], cancel: 'Read later', confirm: 'Accept', onClose: closed }); } }];
+  SC.forEach(function (s) {
+    var row = document.createElement('div'); row.className = 'pg-row';
+    row.innerHTML = '<div class="pg-row__txt"><b></b><span></span></div>';
+    row.querySelector('b').textContent = s.t; row.querySelector('span').textContent = s.d;
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn--primary'; b.innerHTML = '<span class="btn__label">Open modal</span>'; b.addEventListener('click', s.run);
+    row.appendChild(b); $('#scenarios').appendChild(row);
+  });
+
+  /* Variants */
+  SIZES.forEach(function (s, i) {
+    var h = document.createElement('h3'); h.className = 'ds-h3'; h.textContent = s[1]; $('#v-sizes').appendChild(h);
+    var st = document.createElement('div'); st.className = 'ds-stage'; st.style.padding = '0';
+    var w = document.createElement('div'); w.className = 'modal-preview'; w.appendChild(sample({ size: s[0], label: i === 1 ? 'Cart' : '', title: s[2], body: s[3], cancel: 'Cancel', confirm: 'Confirm' })); st.appendChild(w); $('#v-sizes').appendChild(st);
+  });
+
+  $('#anat').appendChild(sample({ size: 'small', label: 'Label (optional)', title: 'Title', body: 'Body text explains what the user decides.', cancel: 'Cancel', confirm: 'Confirm' }));
+  DK.rows($('#sizes'), [['Small', '440px', '440px', '375px card, height by content'], ['Medium', '600px', '576px', 'Fills the screen (no own mobile variant)'], ['Large', '705px', '576px', 'Fills the screen: 100% × 100dvh, buttons pinned to the bottom'], ['Padding', '24px', '24px', '16px']]);
+  DK.rows($('#type'), [
+    ['Label', '<code>alt-label-sm</code> 14/14, 0.56px, 500, uppercase', '12/12, 0.48px'],
+    ['Title', '<code>title-md</code> 20/24, bold', '18/22, bold'],
+    ['Body', '<code>body-md</code> 17/24, 0.32px', '16/22, 0.32px'],
+    ['Buttons', '32px high, <code>label-sm</code> 14px, 0.56px', '32px high, 14px, 0.42px'],
+    ['Space above buttons', '32px', '24px'], ['Gap label to title, header to body', '8px', '8px']]);
+  DK.tokenTable($('#tok'), [['Panel', 'Background', 'surface-raised-primary'], ['Panel', 'Shadow', 'shadow-elevation-b-100'], ['Overlay', 'Background', 'surface-opacity-black-20'], ['Title', 'Text', 'text-primary'], ['Label and body', 'Text', 'text-secondary'], ['Cancel (Blank)', 'Text', 'text-action-primary'], ['Primary', 'Background', 'surface-action-1']]);
+  DK.rows($('#beh'), [
+    ['Click ×', 'Closes the modal.'], ['ESC', 'Closes the modal.'], ['Click the overlay', 'Closes the modal. A click inside the panel does not.'],
+    ['Open', 'Focus moves into the dialog. Page scroll is locked.'], ['Tab / Shift+Tab', 'Stays inside the dialog.'],
+    ['Close', 'Focus returns to the button that opened it.'], ['Markup', '<code>role="dialog"</code>, <code>aria-modal="true"</code>, <code>aria-labelledby</code> pointing at the title.']]);
+
+  DK.recipes($('#recipes'), [
+    ['Markup', H.modal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders and addresses are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account' })],
+    ['Open it from script', "var dialog = ECO_N.openModal({\n  size: 'small',                 // small | medium | large\n  label: 'Account',              // optional\n  title: 'Delete your account?',\n  body: 'This cannot be undone.',\n  cancel: 'Cancel',\n  confirm: 'Delete account',\n  onConfirm: deleteAccount,\n  onClose: function (reason) {}  // close | esc | overlay | cancel | confirm\n});"]]);
+  DK.printFile($('#files'), '../notifications.css', [['CSS: Modal', ['modal']], ['CSS: shared close button and buttons', ['base']]])
+    .then(function () { return DK.printFile($('#files'), '../notifications.js', [['JavaScript: openModal', ['runtime']]]); });
+  DK.rows($('#which'), [
+    ['needs a confirmation or a choice before the user can continue', 'Modal (this page)'],
+    ['confirms what happened, briefly', '<a href="toast.html" class="ds-link">Toast</a>'],
+    ['is status information in page context', '<a href="inline.html" class="ds-link">Inline</a>'],
+    ['concerns the whole page or system', '<a href="banner.html" class="ds-link">Banner</a>']]);
+
+  DK.bp(); renderPg();
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

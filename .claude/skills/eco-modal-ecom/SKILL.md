@@ -5,6 +5,8 @@ description: Use when building a modal (E-Com Modal) that requires confirmation 
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
+> **Buttons and ×:** buttons and the close button follow `eco-button` (see `notifications-guide`, "Buttons and the close button"): `btn btn--primary|secondary|blank` with `<span class="btn__label">`, always 32px (XSmall from 769px, Small below), and the × is `icon-btn icon-btn--close` (`icon-btn--close-inverted` on dark/solid surfaces). Live CSS: `eco-design-system/notifications.css`.
+
 ## Notification – E-Com Modal (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-48335
@@ -58,7 +60,7 @@ Body text
 - **Gap**, header section: `8px` vertical
 - **Header**: `gap: 12px` between Label+Title and the close button
 - **Close button**: Blank xs, `close` icon 20px, `padding: 2px`
-- **Buttons in footer**: `gap: 8px`, Cancel (Secondary xs, fixed width) + Primary (Primary xs, `flex: 1`)
+- **Buttons in footer**: `gap: 8px`, Cancel (Blank xs, fixed width) + Primary (Primary xs, `flex: 1`)
 
 ---
 
@@ -179,7 +181,7 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 .modal__title {
   font-family: 'Breuer Condensed', sans-serif;
   font-size: 20px;          /* title-md Desktop */
-  font-weight: 700;
+  font-weight: 600;
   line-height: 24px;
   letter-spacing: 0px;
   color: var(--color-text-primary);
@@ -190,16 +192,6 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
   .modal__title { font-size: 18px; line-height: 22px; }
 }
 
-/* Close button */
-.modal__close {
-  flex-shrink: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 2px;
-  font-size: 20px;
-  color: var(--color-text-primary);
-}
 
 /* Body */
 .modal__body {
@@ -230,54 +222,11 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
   .modal__footer { padding-top: 24px; }
 }
 
-/* Cancel — Secondary xs */
-.modal__btn-cancel {
-  flex-shrink: 0;
-  background: transparent;
-  border: 1px solid var(--color-border-selected);
-  cursor: pointer;
-  padding: 6px;
-  font-family: 'Breuer Condensed', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 14px;
-  letter-spacing: 0.56px;
-  text-transform: uppercase;
-  color: var(--color-text-primary);
-  white-space: nowrap;
-  font-feature-settings: 'ss02' 1, 'ss03' 1;
-}
 
-@media (max-width: 768px) {
-  .modal__btn-cancel { padding: 8px; font-size: 16px; line-height: 16px; letter-spacing: 0.32px; }
-}
 
-@media (max-width: 639px) {
-  .modal__btn-cancel { padding: 4px; font-size: 14px; line-height: 14px; letter-spacing: 0.42px; }
-}
 
-/* Primary action — Primary xs, flex: 1 */
-.modal__btn-primary {
-  flex: 1;
-  background: var(--color-surface-100);
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  font-family: 'Breuer Condensed', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 14px;
-  letter-spacing: 0.56px;
-  text-transform: uppercase;
-  color: var(--color-text-primary-inverted);
-  text-align: center;
-  white-space: nowrap;
-  font-feature-settings: 'ss02' 1, 'ss03' 1;
-}
-
-@media (max-width: 768px) {
-  .modal__btn-primary { padding: 4px; font-size: 14px; line-height: 14px; letter-spacing: 0.42px; }
-}
+/* Buttons and ×: eco-button classes (.btn, .icon-btn.icon-btn--close); live CSS in eco-design-system/notifications.css */
+.modal__footer .btn--primary { flex: 1; }
 ```
 
 ### HTML example (Small, Desktop)
@@ -293,14 +242,12 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
       <p class="modal__label">Label (optional)</p>
       <h2 class="modal__title" id="modal-title">Title</h2>
     </div>
-    <button class="modal__close" aria-label="Close" onclick="closeModal()">
-      <span class="material-symbols-outlined">close</span>
-    </button>
+    <button type="button" class="icon-btn icon-btn--close" aria-label="Close"><span class="btn__icon" aria-hidden="true">close</span></button>
   </div>
   <p class="modal__body">Body text.</p>
   <div class="modal__footer">
-    <button class="modal__btn-cancel" onclick="closeModal()">Cancel</button>
-    <button class="modal__btn-primary">Confirm</button>
+    <button type="button" class="btn btn--blank" onclick="closeModal()"><span class="btn__label">Cancel</span></button>
+    <button type="button" class="btn btn--primary"><span class="btn__label">Confirm</span></button>
   </div>
 </div>
 ```

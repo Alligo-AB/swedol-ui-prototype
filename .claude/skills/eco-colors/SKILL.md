@@ -16,6 +16,7 @@ All tokens have the `color/` prefix in Figma. Values are always sourced from `va
 | `accent-default` | `var(--color-accent-default)` | Primary accent color (lime yellow). Used in Accent buttons. |
 | `accent-light` | `var(--color-accent-light)` | Light accent color. Background for accent highlights. |
 | `accent-dark` | `var(--color-accent-dark)` | Dark accent color. Hover state for accent. |
+| `accent-hamburger` | `var(--color-accent-hamburger)` | the color of the hamburger menu of each concept brand. |
 
 ```html
 <!-- Example: Accent button -->
@@ -45,9 +46,11 @@ All tokens have the `color/` prefix in Figma. Values are always sourced from `va
 | `text-action-tertiary` | `var(--color-text-action-tertiary)` | Tertiary link color. Used together with text-tertiary. |
 | `text-action-tertiary-hover` | `var(--color-text-action-tertiary-hover)` | Hover for tertiary link. |
 | `text-action-accent` | `var(--color-text-action-accent)` | Text on an accent-colored surface. |
-| `text-success` | `var(--color-text-success)` | Status text – success. |
+| `text-success-default` | `var(--color-text-success-default)` | Status text – success. |
+| `text-warning-default` | `var(--color-text-warning-default)` | Status text – warning. |
 | `text-danger-default` | `var(--color-text-danger-default)` | Status text – error/danger. |
 | `text-information-default` | `var(--color-text-information-default)` | Status text – information. |
+| `text-danger-on-primary-bg` | `var(--color-text-danger-on-primary-bg)` | Default text color for longer error messages in smaller text sizes. |
 
 ```html
 <!-- Example: Text colors -->
@@ -92,6 +95,11 @@ Used to build up contrast in the grayscale. The number indicates approximate opa
 | `surface-raised-secondary` | `var(--color-surface-raised-secondary)` | Raised surface, secondary. |
 | `surface-disabled` | `var(--color-surface-disabled)` | Background for disabled elements. |
 | `surface-navigation-hover` | `var(--color-surface-navigation-hover)` | Navigation hover background. |
+| `greyscale-black` | `var(--color-greyscale-black)` | Neutral level. |
+| `surface-30` | `var(--color-surface-30)` | Used for vertical scrollbar handle. |
+| `surface-70` | `var(--color-surface-70)` | Neutral level. |
+| `surface-action-1` | `var(--color-surface-action-1)` | Default action color. Used for the Primary button. |
+| `surface-action-2` | `var(--color-surface-action-2)` | Secondary action color. Used for the Primary Inverted button. Used for the Tag component. |
 
 ### Surface – Semantic status colors
 
@@ -112,7 +120,7 @@ Used to build up contrast in the grayscale. The number indicates approximate opa
 
 ```html
 <!-- Example: Status messages -->
-<div style="background:var(--color-surface-success-weaker); color:var(--color-text-success);">Order confirmed</div>
+<div style="background:var(--color-surface-success-weaker); color:var(--color-text-success-default);">Order confirmed</div>
 <div style="background:var(--color-surface-danger-weaker); color:var(--color-text-danger-default);">Something went wrong</div>
 <div style="background:var(--color-surface-information-weaker); color:var(--color-text-information-default);">Fetching information...</div>
 <div style="background:var(--color-surface-warning-weaker); color:var(--color-text-primary);">Low stock</div>
@@ -128,6 +136,7 @@ Used to build up contrast in the grayscale. The number indicates approximate opa
 | `surface-opacity-black-50` | `var(--color-surface-opacity-black-50)` | Black at 50% opacity. Modal background. |
 | `surface-opacity-white-0` | `var(--color-surface-opacity-white-0)` | White, fully transparent. |
 | `surface-opacity-white-20` | `var(--color-surface-opacity-white-20)` | White at 20% opacity. Subtle lightening on a dark background. |
+| `surface-opacity-black-12` | `var(--color-surface-opacity-black-12)` | Hover surface for Primary Inverted, System Enabled & System. |
 
 ### Border
 
@@ -156,6 +165,10 @@ Used to build up contrast in the grayscale. The number indicates approximate opa
 | `border-warning-weak` | `var(--color-border-warning-weak)` | Warning border, weak. |
 | `border-danger-default` | `var(--color-border-danger-default)` | Danger border, strong. |
 | `border-danger-weak` | `var(--color-border-danger-weak)` | Danger border, weak. |
+| `border-danger-weaker` | `var(--color-border-danger-weaker)` | Danger border color. Used for the weak danger notification border style. Used for the danger badge border style. |
+| `border-information-weaker` | `var(--color-border-information-weaker)` | Info border color. Used for the strong info notification border style. Used for the info badge border style. |
+| `border-success-weaker` | `var(--color-border-success-weaker)` | Success border color. Used for the weak success notification border style. Used for the success badge border style. |
+| `border-warning-weaker` | `var(--color-border-warning-weaker)` | Warning border color. Used for the weak warning notification border style. Used for the warning badge border style. |
 
 ```html
 <!-- Example: Border usage -->

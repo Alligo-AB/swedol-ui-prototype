@@ -1,0 +1,74 @@
+/* ECO component CSS: list-item. Shared by the docs page (eco-design-system/components/list-item.html) and every prototype/product page.
+   Skill: eco-list-item. Link it, do not copy it: <link rel="stylesheet" href="/components/css/list-item.css">
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only. */
+    /* ── List Item: leading + label + trailing. Mobile-first, desktop from 769px. ── */
+    .list-item {
+      --li-fs: 16px; --li-lh: 22px; --li-trail: 20px; --li-box: 16px; --li-box-m: 4px; --li-travel: 24px; /* Large, mobile */
+      display: flex; align-items: center; gap: var(--dimension-spacing-space-8);
+      width: 100%; min-width: 0; box-sizing: border-box; color: var(--color-text-primary);
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: var(--li-fs); font-weight: 400; line-height: var(--li-lh); letter-spacing: 0.32px;
+    }
+    .list-item--sm { --li-fs: 14px; --li-lh: 20px; --li-trail: 20px; --li-box: 14px; --li-box-m: 3px; --li-travel: 16px; letter-spacing: 0.36px; }
+    .list-item__lead { display: flex; align-items: center; flex: none; gap: var(--dimension-spacing-space-8); } /* leading element + label stay together */
+    .list-item__label { min-width: 0; }
+    .list-item__label--bold { font-weight: 600; }
+    .list-item__text { display: flex; flex-direction: column; min-width: 0; } /* overline + label + supporting text */
+    .list-item__overline { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 500; text-transform: uppercase; color: var(--color-text-tertiary); } /* alt-label-sm */
+    .list-item__support { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); /* body-sm, max 2 lines */
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+    .list-item__fill { flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
+
+    /* Leading: icon (20px, Figma "Icon"), check box and radio (presentational, the item or row carries aria-checked / aria-selected) */
+    .list-item__icon, .list-item__trail-icon {
+      flex: none; user-select: none; font-family: 'Material Symbols Outlined'; font-style: normal; font-weight: normal;
+      line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; color: var(--color-icon-primary);
+    }
+    .list-item__icon { font-size: 20px; width: 20px; height: 20px; }
+    .list-item__trail-icon { font-size: var(--li-trail); width: var(--li-trail); height: var(--li-trail); }
+    .list-item__check, .list-item__radio {
+      flex: none; box-sizing: border-box; width: var(--li-box); height: var(--li-box); margin: var(--li-box-m); /* total area 24px (Large) / 20px (Small) */
+      border: 1px solid var(--color-border-input-control-default); background: var(--color-surface-raised-primary);
+      background-repeat: no-repeat; background-position: center;
+    }
+    .list-item__radio { border-radius: 50%; }
+    .list-item__switch { flex: none; position: relative; width: 48px; height: 24px; border-radius: 999px; background: var(--color-surface-20); } /* trailing control, same track and thumb as eco-switch */
+    .list-item__switch::before { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-input-control-switch); }
+    .list-item--sm .list-item__switch { width: 32px; height: 16px; }
+    .list-item--sm .list-item__switch::before { width: 12px; height: 12px; }
+    :is([aria-selected="true"], [aria-checked="true"]) .list-item__switch { background: var(--color-surface-success-default); }
+    :is([aria-selected="true"], [aria-checked="true"]) .list-item__switch::before { transform: translateX(var(--li-travel)); }
+    :is([aria-selected="true"], [aria-checked="true"]) .list-item__check { background-color: var(--color-surface-100); border-color: var(--color-surface-100); background-size: 100% 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); }
+    :is([aria-selected="true"], [aria-checked="true"]) .list-item__radio { border-color: var(--color-border-selected); background-image: radial-gradient(circle, var(--color-surface-100) 0 3px, transparent 3.5px); }
+
+    /* Leading: color swatch (16px) and swatch tile (24px frame, Figma "Color Swatch + Label"), image (48px) */
+    .list-item__swatch { flex: none; width: 16px; height: 16px; background: var(--swatch); }
+    .list-item__swatch--tile { box-sizing: border-box; width: 24px; height: 24px; padding: 3px; background: none; border: 1px solid var(--color-border-secondary); }
+    .list-item__swatch--tile::before { content: ''; display: block; width: 100%; height: 100%; background: var(--swatch); }
+    :is([aria-selected="true"], [aria-checked="true"]) .list-item__swatch--tile { border-color: var(--color-border-selected); box-shadow: inset 0 0 0 1px var(--color-border-selected); } /* 2px frame without changing the size */
+    .list-item__image { flex: none; width: 48px; height: 48px; object-fit: cover; }
+
+    /* Trailing: text (secondary or tertiary) or icon */
+    .list-item__trail-text { flex: none; }
+    .list-item__trail-text--secondary { color: var(--color-text-secondary); }
+    .list-item__trail-text--tertiary { color: var(--color-text-tertiary); }
+
+    /* Standalone interactive item (role="checkbox" | "radio" | "switch"): pointer and focus ring only. Hover, divider and row padding stay with the container. */
+    .list-item[role]:not([aria-disabled="true"]) { cursor: pointer; }
+    .list-item[role]:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .list-item[role][aria-disabled="true"] { cursor: not-allowed; }
+
+    /* Disabled (not in Figma, derived from eco-menu) */
+    [aria-disabled="true"] .list-item, .list-item[aria-disabled="true"] { color: var(--color-text-disabled); }
+    [aria-disabled="true"] :is(.list-item__icon, .list-item__trail-icon, .list-item__trail-text) { color: var(--color-text-disabled); }
+    [aria-disabled="true"] .list-item__switch { background: var(--color-surface-disabled); }
+    [aria-disabled="true"] .list-item__switch::before { box-shadow: none; }
+    [aria-disabled="true"] :is(.list-item__check, .list-item__radio) { background-color: var(--color-surface-disabled); border-color: var(--color-border-disabled); background-image: none; }
+
+    /* Desktop (769px and up): Large label 17/24 and 24px trailing icon. Small is the same on both breakpoints. */
+    @media (min-width: 769px) {
+      .list-item:not(.list-item--sm) { --li-fs: 17px; --li-lh: 24px; --li-trail: 24px; }
+      .list-item__overline { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+    }

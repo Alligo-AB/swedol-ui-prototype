@@ -46,11 +46,11 @@ Several `.role-tier-pair` can be stacked one below another (one per category/tab
 |---|---|---|---|
 | `.role-tiers__eyebrow` | `label-sm` | 12px/12px, 0.48px, weight 600, uppercase | 14px/14px, 0.56px |
 | `.role-tiers__title` / `.role-tier__group-title` | — (same scale as `.fob__title`) | 26px/30px, weight 700 | 36px/40px |
-| `.role-tiers__desc` (the section's intro) | `body-lg` | 18px/24px, 0px | 20px/28px |
+| `.role-tiers__desc` (the section's intro) | `body-lg` | 18px/24px, 0.18px | 20px/28px |
 | `.role-tier__name` | `title-lg` | 20px/24px, 0px, weight 600 | 24px/28px |
-| `.role-tier__desc` | `body-md` | 16px/22px, 0.32px | 16px/24px |
-| `.role-tier__link` | Action Link, Medium, **Bold** variant | 16px/24px, 0.32px, weight 700, gap 6px, icon 24px | same |
-| `.role-tier__feature` | `body-sm` | 14px/20px, 0.28px | same |
+| `.role-tier__desc` | `body-md` | 16px/22px, 0.32px | 17px/24px |
+| `.role-tier__link` | Action Link, Medium, **Bold** variant | 17px/24px, 0.32px, weight 700, gap 6px, icon 24px | same |
+| `.role-tier__feature` | `body-sm` | 14px/20px, 0.36px | same |
 
 ### Rules
 
@@ -107,7 +107,7 @@ Several `.role-tier-pair` can be stacked one below another (one per category/tab
   background: var(--color-surface-05);
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: 0.28px;
+  letter-spacing: 0.36px;
   color: var(--color-text-primary);
 }
 .role-tier__feature + .role-tier__feature { border-top: 1px solid var(--color-border-primary); }
@@ -174,7 +174,7 @@ A compact row with ONE link per role, placed directly below `.compare-intro__des
   cursor: pointer;
   white-space: nowrap;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 14px;
   letter-spacing: 0.56px;
   text-transform: uppercase;

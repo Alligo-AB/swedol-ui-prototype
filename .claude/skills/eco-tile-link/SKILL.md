@@ -97,8 +97,8 @@ Used as a **card or button** when the link needs to be presented graphically and
 
 | Size | Token | Desktop | Mobile | `font-feature-settings` |
 |---|---|---|---|---|
-| **Large** | `body-md` | 16px / 24px / 0.32px | 16px / 22px / 0.32px | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
-| **Small** | `body-sm` | 14px / 20px / 0.28px | 14px / 20px / 0.28px | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+| **Large** | `body-md` | 17px / 24px / 0.32px | 16px / 22px / 0.32px | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
+| **Small** | `body-sm` | 14px / 20px / 0.36px | 14px / 20px / 0.36px | `'ss02' 1, 'ss03' 1, 'ss06' 1` |
 
 Text color Enabled: `text-primary` (var(--color-text-action-primary)). Text color Hover: `text-action-primary-hover` (var(--color-text-action-primary-hover)). Font: Breuer Condensed Regular.
 
@@ -122,7 +122,7 @@ Text color Enabled: `text-primary` (var(--color-text-action-primary)). Text colo
   align-items: center;
   justify-content: center;
   background: var(--color-surface-raised-primary);           /* White — default */
-  transition: border-color 150ms cubic-bezier(.35,0,.35,1);
+  transition: border-color var(--duration-fast-3) var(--ease-standard);
 }
 
 /* Vertical placement */
@@ -138,7 +138,7 @@ Text color Enabled: `text-primary` (var(--color-text-action-primary)). Text colo
   inset: 0;
   border: 1px solid var(--color-border-primary);    /* border-primary — Enabled */
   pointer-events: none;
-  transition: border-color 150ms cubic-bezier(.35,0,.35,1);
+  transition: border-color var(--duration-fast-3) var(--ease-standard);
 }
 
 /* Hover */
@@ -169,7 +169,7 @@ Text color Enabled: `text-primary` (var(--color-text-action-primary)). Text colo
   line-height: 24px;
   letter-spacing: 0.32px;
 }
-.tile-link--small .tile-link__label { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; }
+.tile-link--small .tile-link__label { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
 
 /* Hover — label color */
 .tile-link:hover .tile-link__label { color: var(--color-text-action-primary-hover); /* text-action-primary-hover */ }

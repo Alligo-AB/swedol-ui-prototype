@@ -37,7 +37,7 @@
     }
     .account-nav-drawer__profile-info { display: flex; flex-direction: column; min-width: 0; }
     .account-nav-drawer__name {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 600;
       line-height: 24px; color: var(--color-text-primary);
       font-feature-settings: 'ss02' 1, 'ss03' 1;
       display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 4px;
@@ -59,7 +59,7 @@
     .account-nav-drawer__menu-item {
       position: relative; display: flex; align-items: stretch;
       padding: 0 40px 0 32px; cursor: pointer;
-      transition: background-color 150ms cubic-bezier(.35,0,.35,1);
+      transition: background-color var(--duration-fast-3) var(--ease-standard);
     }
     .account-nav-drawer__menu-item:hover {
       background: #fafafa; /* surface-navigation-hover */
@@ -69,7 +69,7 @@
     }
     .account-nav-drawer__menu-item--active { border-left: 4px solid #c7d300; }
     .account-nav-drawer__menu-text {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 24px; font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 24px; font-weight: 600;
       line-height: 24px; color: var(--color-text-primary); text-transform: uppercase;
       font-feature-settings: 'ss02' 1, 'ss03' 1; padding: 4px 0;
     }
@@ -80,22 +80,23 @@
     .account-nav-drawer__company-row {
       display: flex; align-items: center; justify-content: space-between;
       margin: 0 -32px; padding: 16px 40px 16px 32px;
-      cursor: pointer; transition: background-color 150ms cubic-bezier(.35,0,.35,1);
+      cursor: pointer; transition: background-color var(--duration-fast-3) var(--ease-standard);
     }
     .account-nav-drawer__company-row:hover { background: #fafafa; }
     .account-nav-drawer__company-logo { height: 17px; width: auto; display: block; }
     .account-nav-drawer__action-link {
       display: inline-flex; align-items: center; gap: 4px; background: none; border: none;
       cursor: pointer; font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px;
-      font-weight: 400; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary);
+      font-weight: 400; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary);
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; padding: 0; white-space: nowrap;
     }
+    @media (min-width: 769px) { .account-nav-drawer__action-link { font-size: 17px; line-height: 24px; } }
     .account-nav-drawer__action-link .ms {
       font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
     }
     .account-nav-drawer__contact { display: flex; flex-direction: column; gap: 8px; }
     .account-nav-drawer__contact-title {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 600;
       line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary);
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
@@ -104,9 +105,10 @@
     }
     .account-nav-drawer__contact-item {
       display: flex; align-items: center; gap: 8px; font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: 0.32px;
+      font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px;
       color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
     }
+    @media (min-width: 769px) { .account-nav-drawer__contact-item { font-size: 17px; line-height: 24px; } }
     .account-nav-drawer__contact-item .ms {
       font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
     }
@@ -119,7 +121,7 @@
       padding: 4px 32px; min-height: 40px;
     }
     .account-nav-drawer__credit-label {
-      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 700;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px; font-weight: 600;
       line-height: 18px; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1;
     }
     .account-nav-drawer__credit-amount {
@@ -132,7 +134,7 @@
       padding: 24px 32px; background: #fff; flex-shrink: 0;
       position: relative; z-index: 1;
       cursor: pointer;
-      transition: background-color 150ms cubic-bezier(.35,0,.35,1), box-shadow var(--duration-fast-3) var(--ease-standard);
+      transition: background-color var(--duration-fast-3) var(--ease-standard), box-shadow var(--duration-fast-3) var(--ease-standard);
     }
     .account-nav-drawer__footer:hover { background: rgba(0,0,0,0.05); }
     .account-nav-drawer__footer--elevated {
@@ -141,9 +143,10 @@
     .account-nav-drawer__logout {
       display: inline-flex; align-items: center; gap: 4px; background: none; border: none;
       cursor: pointer; font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 16px;
-      font-weight: 400; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary);
+      font-weight: 400; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary);
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; padding: 0;
     }
+    @media (min-width: 769px) { .account-nav-drawer__logout { font-size: 17px; line-height: 24px; } }
     .account-nav-drawer__logout .ms {
       font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
     }

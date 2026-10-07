@@ -1,0 +1,75 @@
+/* ECO component CSS: select. Shared by the docs page (eco-design-system/components/select.html) and every prototype/product page.
+   Skill: eco-select. Link it, do not copy it: <link rel="stylesheet" href="/components/css/select.css">
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only. */
+    /* ── Field: label, select box, message ── */
+    .form-field { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .form-label {
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1;
+      font-size: 12px; font-weight: 600; line-height: 12px; letter-spacing: 0.48px; /* label-sm (mobile) */
+      text-transform: uppercase; color: var(--color-text-primary);
+    }
+
+    /* Wrapper: carries the focus ring (2px, 3px outside the box) and the arrow */
+    .input-wrap { position: relative; }
+    .input-wrap::after {
+      content: ''; position: absolute; inset: -3px; pointer-events: none; opacity: 0;
+      border: 2px solid var(--color-border-focus);
+      transition: opacity var(--duration-fast-3) var(--ease-standard);
+    }
+    body.keyboard-nav .input-wrap:focus-within::after,
+    .input-wrap[data-state="focus"]::after { opacity: 1; }
+
+    /* Select: native element, native list. appearance none hides the native arrow. */
+    .form-select {
+      display: block; width: 100%; box-sizing: border-box; height: 40px; margin: 0; padding: 0 40px 0 var(--dimension-spacing-space-8); /* Large, mobile; 40px right = room for the arrow */
+      border: 1px solid var(--color-border-input-default); border-radius: 0; outline: 0;
+      background: var(--color-surface-raised-primary); appearance: none; cursor: pointer;
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px; /* body-md (mobile) */
+      color: var(--color-text-primary);
+      transition: border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .form-select--sm, .form-select--xs { height: 32px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; } /* body-sm */
+    .form-select:has(option[value=""]:checked) { color: var(--color-text-tertiary); }                          /* placeholder look */
+
+    /* Dropdown arrow: Material Symbols arrow_drop_down, 24px */
+    .form-select-arrow {
+      position: absolute; right: var(--dimension-spacing-space-12); top: 50%; transform: translateY(-50%); pointer-events: none;
+      width: 24px; height: 24px; font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 1;
+      font-weight: normal; font-style: normal; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; color: var(--color-icon-primary); user-select: none;
+    }
+
+    /* States */
+    .form-select:is(:hover, [data-state="hover"]) { border-color: var(--color-border-hover); }
+    .form-select:is(:focus, [aria-expanded="true"], [data-state="active"]) { border-color: var(--color-border-selected); }  /* Active: the field is being used (focus or menu open). A chosen option alone does not select it. */
+    .form-select--error { border-color: var(--color-border-danger-default); }
+    .form-select--success { border-color: var(--color-border-success-default); }
+    .form-select--error:focus { border-color: var(--color-border-danger-default); }
+    .form-select--success:focus { border-color: var(--color-border-success-default); }
+    .form-select:disabled { background: var(--color-surface-raised-secondary); border-color: var(--color-border-disabled); color: var(--color-text-disabled); cursor: not-allowed; }
+    .form-select:disabled + .form-select-arrow { color: var(--color-text-disabled); }
+
+    /* Message */
+    .form-helper {
+      display: flex; align-items: center; gap: var(--dimension-spacing-space-4);
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); /* body-sm */
+    }
+    .form-helper-icon { width: 20px; height: 20px; font-family: 'Material Symbols Outlined'; font-size: 20px; line-height: 1; font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; user-select: none; }
+    .form-helper--error { color: var(--color-text-danger-default); }
+    .form-helper--success { color: var(--color-text-success-default); }
+    .form-helper--disabled { color: var(--color-text-disabled); }
+
+    /* Desktop (769px and up): Large 48px, Small 40px, XSmall 32px */
+    @media (min-width: 769px) {
+      .form-label { font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }      /* label-md */
+      .form-label--sm { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }  /* label-sm */
+      .form-select { height: 48px; padding-left: var(--dimension-spacing-space-12); font-size: 17px; line-height: 24px; } /* body-md */
+      .form-select--sm { height: 40px; padding-left: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; }
+      .form-select--xs { height: 32px; padding-left: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; }
+    }
+
+    /* Exposed dropdown: the menu opens under the field, as wide as the field */
+    .input-wrap > .menu { position: absolute; top: calc(100% + var(--dimension-spacing-space-4)); left: 0; z-index: 10; } /* z-index 10: local, no z-index token */
+    .input-wrap > .menu--up { top: auto; bottom: calc(100% + var(--dimension-spacing-space-4)); } /* not enough room below: open upwards */

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motion – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="foundation">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#foundations" class="breadcrumb-item">Foundations</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Motion</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Foundations</span>
+    <h1 class="ds-title">Easing and Duration</h1>
+    <p class="ds-lead">Interaction is a combination of functionality, intention and connection and are conveyed through the use of motion.</p>
+    <p class="ds-lead">Utilize these fundamental principles, illustrations, and tokens to develop coherent and realistic animations to bring a nice user experience and to help inform our users. The principles and guidelines of motion stated here are highly dependent on its purpose and application. These principles will be more obvious in some cases and may vary in other scenarios, but should be used as best as possible in order to ensure consistency.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#guidelines">General Guidelines</a></li>
+    <li><a href="#easing">Easing sets</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li><a href="#distances">Distances</a></li>
+    <li><a href="#fades">Fades</a></li>
+    <li><a href="#duration">Duration</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#usage">Usage</a></li>
+  </ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="guidelines">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">General Guidelines</h2>
+    <div class="mo-cols">
+      <div><h3>Timing</h3><p>The duration required for an action to occur is known as timing. It is crucial to consider timing carefully in all animation scenarios.</p></div>
+      <div><h3>Spacing</h3><p>Spacing refers to the gap between two frames of a moving object. Utilizing varied spacing is essential to achieve smooth transitions.</p></div>
+      <div><h3>Ease</h3><p>Ease is affected by both timing and spacing, playing a significant role in how actions flow. Objects should smoothly accelerate and decelerate during movements.</p></div>
+    </div>
+    <p class="ds-desc" style="margin-top:32px">The selection of a easing type depends on how a transition moves in relation to the screen. A rule of thumb regarding the combination of distance and duration in order to mimic real-world physics is:</p>
+    <ul class="mo-list"><li>Fast fade, short distance</li><li>Medium fade, medium distance</li><li>Slow fade, long distance</li></ul>
+  </div>
+</section>
+
+<section class="ds-section" id="easing">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Easing sets</h2>
+    <p class="ds-desc">The speed at which objects move during an animation is determined by the easing. We have 4 predefinde easings that we use first. Each example runs live; pick the duration it runs with.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="dl-ease">Example duration **</span>
+      <div class="btn-group" role="group" aria-labelledby="dl-ease" data-dur="ease"></div>
+      <button type="button" class="btn btn--system btn--sm mo-pause" aria-pressed="false"><span class="btn__label">Pause animation</span></button>
+    </div>
+    <div class="ds-table-wrap"><table class="ds-table mo-table mo-table--ease"><colgroup><col style="width:296px"><col style="width:553px"><col></colgroup><thead><tr><th>Example</th><th>Description</th><th></th></tr></thead><tbody id="t-ease"></tbody></table></div>
+    <p class="ds-desc ds-note">** Use these tokens in accordance with the principles shown earlier. With reduced motion turned on in your system, the demos stay still.</p>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="compare">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Compare</h2>
+    <p class="ds-desc">All four easings, same distance, same duration. Watch where each one is fast and where it brakes.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="dl-race">Example duration **</span>
+      <div class="btn-group" role="group" aria-labelledby="dl-race" data-dur="race"></div>
+      <button type="button" class="btn btn--system btn--sm mo-pause" aria-pressed="false"><span class="btn__label">Pause animation</span></button>
+    </div>
+    <div class="mo-race" id="race"></div>
+  </div>
+</section>
+
+<section class="ds-section" id="distances">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Distances</h2>
+    <p class="ds-desc">Distances are broken down into three distance levels. Each distance level uses a set of interval timings on our duration scale.</p>
+    <div class="ds-table-wrap"><table class="ds-table mo-table"><thead><tr><th>Distance</th><th>Description</th><th class="mo-right ds-tokcell">Token</th></tr></thead><tbody id="t-dist"></tbody></table></div>
+    <p class="ds-desc ds-note">Hover the grey track (or focus it with Tab) to roll the ball. The track is as long as the distance it stands for: 25%, 50% and 100% of the description width. Move the mouse out and the ball rolls back.</p>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="fades">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Fades</h2>
+    <p class="ds-desc">Fades serve as a sophisticated method for transitioning between colors and/or levels of opacity.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="dl-fade">Example duration (slow fade) **</span>
+      <div class="btn-group" role="group" aria-labelledby="dl-fade" data-dur="fade"></div>
+      <button type="button" class="btn btn--system btn--sm mo-pause" aria-pressed="false"><span class="btn__label">Pause animation</span></button>
+    </div>
+    <div class="ds-table-wrap"><table class="ds-table mo-table"><thead><tr><th>Fades</th><th>Description</th><th>Example</th><th class="mo-right ds-tokcell">Token</th></tr></thead><tbody id="t-fade"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section" id="duration">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Duration</h2>
+    <p class="ds-desc">** Use these tokens in accordance with the principles shown earlier. When applying duration for vertical distances any of the durations that seem fit may apply.</p>
+    <div class="ds-toolbar"><button type="button" class="btn btn--system btn--sm mo-pause" aria-pressed="false"><span class="btn__label">Pause animation</span></button></div>
+    <div class="ds-table-wrap"><table class="ds-table mo-table"><thead><tr><th>Value</th><th>Name</th><th>Example</th><th class="mo-right ds-tokcell">Token</th></tr></thead><tbody id="t-dur"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Copy the custom properties, then combine one easing with one duration.</p>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Custom properties</span><button type="button" class="mo-copy" data-copy="code-all" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-all"></pre>
+    </div>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Use in CSS</span><button type="button" class="mo-copy" data-copy="code-use" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-use">/* Drawer slides in */
+.drawer { transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized); }
+/* Button hover */
+.btn    { transition: background-color var(--duration-fast-4) var(--ease-standard); }
+/* Element leaves the screen */
+.toast--exit { transition: opacity var(--duration-fast-3) var(--ease-accelerate-generic); }</pre>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do">
+        <h3 class="ds-rule__title">Do</h3>
+        <ul>
+          <li>Use <code>decelerate-emphasized</code> to bring things on screen (drawers, menus, notifications).</li>
+          <li>Use <code>standard</code> for hover states.</li>
+          <li>Use <code>accelerate-generic</code> when an element leaves.</li>
+          <li>Match the duration group to the distance.</li>
+        </ul>
+      </div>
+      <div class="ds-rule ds-rule--dont">
+        <h3 class="ds-rule__title">Don’t</h3>
+        <ul>
+          <li>Go over 600ms.</li>
+          <li>Use a linear or custom curve when a token fits.</li>
+          <li>Use <code>accelerate-generic</code> for an element that enters.</li>
+          <li>Ignore <code>prefers-reduced-motion</code>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  /* Source: Figma "Motion" (ECO Design System) and .claude/skills/eco-motion. Not in tokens.json yet. */
+  var EASE = [
+    { k: 'decelerate-generic', v: [.16, .38, .58, 1], t: 'Ease Out  - Decelerate Generic',
+      p: ['Ease-Out animations begin quickly and gradually decelerate. Imagine a football being kicked and then slowly falling to the ground. Because of the sudden start and gradual end, ease-out is a good use when bringing an object onto the screen from outside or on screen fading in. We mostly use Ease Out Decelerate Emphasised<i>*</i> for this but the Generic is of course less emphasised.', 'Mostly used used for onClick as to enter selected states.', '<b>Used on Components:</b> Form Elements, Tabs, Toggled buttons, Tooltip.'] },
+    { k: 'decelerate-emphasized', v: [.16, 0, .16, 1], t: 'Ease Out  - Decelerate Emphasized <i>*</i>',
+      p: ['Ease-Out animations begin quickly and gradually decelerate. Imagine a football being kicked and then slowly falling to the ground. Because of the sudden start and gradual end, ease-out is a good use when bringing an object onto the screen from outside or on screen fading in. We mostly use Ease Out Emphasised for this but the Generic is of course is less emphasised.', '<b>Mostly used:</b> for moving Items from off screen to on screen and vice versa. Used for anchor linking from top to bottom and vice versa.', '<b>Used together with components:</b> Main Drawer Menu, My Account Drawer Menu, Product Menu, Drawers in General, Notifications.'] },
+    { k: 'accelerate-generic', v: [.36, .09, 1, .58], t: 'Ease In  - Accelerate Generic',
+      p: ['Slow animations that speed up are called ease-in animations. Imagine a stone falling from a building, starting off slowly and then suddenly hitting the ground. This timing is great for removing objects from the screen.'] },
+    { k: 'standard', v: [.35, 0, .35, 1], t: 'Ease InOut  - Standard',
+      p: ['Ease InOut animations begin slowly, then pick up speed before slowing down at the end. It\u2019s like a car going fast and then quickly decelerating. This timing is great for moving objects already on the screen from one place to another.', 'Used for mostly all hover states.', '<b>Used on Components:</b> Button, Product Card, Text Link, Action Link, Breadcrumb, Link Tile, Collapsible state, Collapsible base, Overflow menu, Form elements, Menu List states, Avatar photo, Stepper, Tab bar, Quantity picker, Drawer Link.'] }
+  ];
+  var DUR = [
+    ['fast-1', 50, 'Duration fast 1'], ['fast-2', 100, 'Duration fast 2'], ['fast-3', 150, 'Duration fast 3'], ['fast-4', 200, 'Duration fast 4'],
+    ['medium-1', 250, 'Duration medium 1'], ['medium-2', 300, 'Duration medium 2'], ['medium-3', 350, 'Duration medium 3'], ['medium-4', 400, 'Duration medium 4'],
+    ['slow-1', 450, 'Duration slow 1'], ['slow-2', 500, 'Duration slow 2'], ['slow-3', 550, 'Duration slow 3'], ['slow-4', 600, 'Duration slow 4']
+  ];
+  var PICK = ['fast-3', 'fast-4', 'medium-2', 'slow-1', 'slow-4'];
+  var OPTS = { ease: PICK, race: PICK, fade: ['slow-1', 'slow-2', 'slow-3', 'slow-4'] };
+  var DURS = { ease: 300, race: 300, fade: 450 }, paused = false, root = document.documentElement;
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function bez(v) { return 'cubic-bezier(' + v.join(',') + ')'; }
+  function ms(n) { return n + 'ms'; }
+  var BALL = 'sports_soccer';
+  function track(e, d, k, hover) {
+    var t = el('div', 'mo-track' + (hover ? ' mo-track--hover' : '')); t.setAttribute('aria-hidden', hover ? 'false' : 'true'); if (hover) { t.tabIndex = 0; t.setAttribute('aria-hidden', 'false'); t.setAttribute('role', 'img'); t.setAttribute('aria-label', 'Ball rolls on hover or focus'); }
+    var b = el('span', 'mo-ic mo-ball', BALL); b.setAttribute('aria-hidden', 'true'); b.style.setProperty('--mo-e', bez(e)); if (d) b.style.setProperty('--mo-d', ms(d));
+    if (k) { t.style.width = k * 100 + '%'; t.style.minWidth = '112px'; b.style.setProperty('--mo-rot', Math.round(1080 * k) + 'deg'); }
+    t.appendChild(b); return t;
+  }
+  function wireCopy(btn, getText, lab) {
+    btn.addEventListener('click', function () {
+      var ic = btn.querySelector('.mo-ic'); var done = function () { if (ic) { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); } else { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = lab; }, 1200); } };
+      if (navigator.clipboard) navigator.clipboard.writeText(getText()).then(done, done); else done();
+    });
+  }
+  function td(c) { var x = el('td'); if (c) x.appendChild(c); return x; }
+  function row(host, cells) { var tr = el('tr'); cells.forEach(function (c) { tr.appendChild(c); }); host.appendChild(tr); }
+  function demoBar(e, d, s) { var b = el('div', 'mo-bar'); b.setAttribute('aria-hidden', 'true'); b.style.setProperty('--mo-e', bez(e)); b.style.setProperty('--mo-d', ms(d)); if (s) b.style.setProperty('--mo-s', s); return b; }
+  var STD = EASE[3].v;
+
+  var COPY_ICON = '<span class="mo-ic" aria-hidden="true">content_copy</span>';
+  function copyName(text) {
+    var w = el('span', 'ds-copyname'), b = el('button', 'mo-copy'); w.appendChild(el('span', 'ds-copyname__text', text));
+    b.type = 'button'; b.innerHTML = COPY_ICON; b.setAttribute('aria-label', 'Copy ' + text); wireCopy(b, function () { return text; }, ''); w.appendChild(b); return w;
+  }
+  function chip(text) { return copyName(text); }
+  function link(text) { return copyName(text); }
+  function graph(e) {
+    var g = el('div', 'mo-graph'); g.setAttribute('aria-hidden', 'true');
+    g.appendChild(el('span', 'mo-axis mo-axis--y', 'Value'));
+    var plot = el('div', 'mo-plot'), S = 'http://www.w3.org/2000/svg', v = e.v, R = 224;
+    var svg = document.createElementNS(S, 'svg'); svg.setAttribute('viewBox', '0 0 ' + R + ' ' + R);
+    var p = document.createElementNS(S, 'path'); p.setAttribute('d', 'M0 ' + R + ' C' + v[0] * R + ' ' + (R - v[1] * R) + ' ' + v[2] * R + ' ' + (R - v[3] * R) + ' ' + R + ' 0'); svg.appendChild(p); plot.appendChild(svg);
+    g.appendChild(plot); g.appendChild(el('span', 'mo-axis mo-axis--x', 'Duration **'));
+    return g;
+  }
+  function renderEase() {
+    var h = document.getElementById('t-ease'); h.textContent = '';
+    EASE.forEach(function (e) {
+      var c1 = td(); c1.className = 'mo-c1';
+      var n = el('span', 'mo-name'); n.innerHTML = e.t; c1.appendChild(n);
+      c1.appendChild(graph(e));
+      var c2 = td(); e.p.forEach(function (t) { var p = el('p', 'mo-p'); p.innerHTML = t; c2.appendChild(p); });
+      row(h, [c1, c2, td()]); h.lastChild.className = 'mo-row-main';
+      var tk = el('div', 'mo-toks'); tk.appendChild(el('h3', 'mo-toks__title', 'Tokens'));
+      var cols = el('div', 'mo-toks__cols');
+      [['CSS', copyName('motion-ease-' + e.k)], ['Timing Function', link(bez(e.v))]].forEach(function (c) { var col = el('div'); col.appendChild(el('div', 'mo-val', c[0])); col.appendChild(c[1]); cols.appendChild(col); });
+      tk.appendChild(cols);
+      var d = td(track(e.v, DURS.ease)); d.colSpan = 2; row(h, [d, td()]); h.lastChild.className = 'mo-row-demo';
+      var tc = td(tk); tc.colSpan = 2; row(h, [tc, td()]); h.lastChild.className = 'mo-row-toks';
+    });
+  }
+  function exCell(n, wide) { var c = td(n); c.className = 'mo-ex' + (wide ? ' mo-ex--wide' : ''); return c; }
+  function renderRace() {
+    var h = document.getElementById('race'); h.textContent = '';
+    EASE.forEach(function (e) {
+      var r = el('div', 'mo-race__row'); r.appendChild(el('b', null, 'motion-ease-' + e.k)); var t = track(e.v, DURS.race); r.appendChild(t); h.appendChild(r);
+    });
+  }
+  function tokCell(k) { var c = td(chip('motion-duration-' + k)); c.className = 'mo-right ds-tokcell'; return c; }
+  function renderDist() {
+    var h = document.getElementById('t-dist'); h.textContent = '';
+    [['Short', '25% or less of the total view width. Use the short duration tokens for shorter distances, as it covers a smaller portion of the view width in less time.', 25, 'fast-4', 200],
+     ['Medium', '26% - 50% of view width. Use the medium duration tokens.', 50, 'medium-2', 300],
+     ['Long', '51% - 100% of viewport. Utilize the long duration tokens for longer distances to ensure smooth transitions.', 100, 'slow-1', 450]].forEach(function (d) {
+      var t = track(EASE[1].v, d[4], d[2] / 100, true);
+      var c = td(el('p', 'mo-p', d[1])); t.style.marginTop = '16px'; c.appendChild(t);
+      row(h, [td(el('span', null, d[0])), c, tokCell(d[3])]);
+    });
+  }
+  function renderFades() {
+    var h = document.getElementById('t-fade'); h.textContent = '';
+    function fast() { var b = el('button', 'btn btn--primary btn--lg'); b.type = 'button'; var ic = el('span', 'btn__icon', 'shopping_cart'); ic.setAttribute('aria-hidden', 'true'); b.appendChild(ic); b.appendChild(el('span', 'btn__label', 'Add to cart')); return b; }
+    function medium(d) {
+      var w = el('div', 'mo-dash'); w.style.setProperty('--mo-d', ms(d));
+      [['receipt_long', 'Orders', '128'], ['payments', 'Revenue', '48 200'], ['description', 'Invoices', '12']].forEach(function (s) {
+        var c = el('div', 'mo-stat'); c.tabIndex = 0; var i = el('span', 'mo-ic', s[0]); i.setAttribute('aria-hidden', 'true');
+        c.appendChild(i); c.appendChild(el('span', null, s[1])); c.appendChild(el('b', null, s[2])); w.appendChild(c);
+      });
+      return w;
+    }
+    function slow(d) { var w = el('div', 'mo-bulb'); w.style.setProperty('--mo-d', ms(d)); w.setAttribute('role', 'img'); w.setAttribute('aria-label', 'A light bulb that fades on and off'); w.appendChild(el('span', 'mo-bulb__glow')); var i = el('span', 'mo-ic', 'lightbulb'); i.setAttribute('aria-hidden', 'true'); w.appendChild(i); return w; }
+    [['Fast fade', 'Fast fades are used in your standard, small interactions, such as with buttons and list items. Make use of the fast duration token.', 100, 'fast-2', fast, 'The real button (eco-button): the hover layer dissolves in over 100ms with ease-standard. Hover it, or focus it with Tab.'],
+     ['Medium fade', 'Medium fades are used for medium sized interactions. Think objects that will elevate from the surface, such as cards.', 300, 'medium-2', medium, 'Hover or focus a card.'],
+     ['Slow fade', 'Use slow fades for key elements like empty states and loading phases, utilizing the slow duration token.', DURS.fade, DUR.filter(function (x) { return x[1] === DURS.fade; })[0][0], slow, 'Loops on its own.']].forEach(function (f) {
+      var box = el('div'); box.appendChild(f[4](f[2])); box.appendChild(el('p', 'mo-spec', f[5]));
+      row(h, [td(el('span', null, f[0])), td(el('p', 'mo-p', f[1])), exCell(box, true), tokCell(f[3])]);
+    });
+  }
+  function renderDur() {
+    var h = document.getElementById('t-dur'); h.textContent = '';
+    DUR.forEach(function (d) { row(h, [td(el('span', null, ms(d[1]))), td(el('span', null, d[2])), exCell(demoBar(STD, d[1])), tokCell(d[0])]); });
+  }
+  function renderCode() {
+    var s = ':root {\n  /* Easing */\n';
+    EASE.forEach(function (e) { s += '  --ease-' + e.k + ': ' + bez(e.v).replace(/,/g, ', ') + ';\n'; });
+    s += '\n  /* Duration */\n';
+    DUR.forEach(function (d) { s += '  --duration-' + d[0] + ': ' + ms(d[1]) + ';\n'; });
+    document.getElementById('code-all').textContent = s + '}';
+  }
+  /* Duration picker + pause */
+  function renderSeg(kind) {
+    var seg = document.querySelector('[data-dur="' + kind + '"]'); seg.textContent = '';
+    OPTS[kind].forEach(function (k) {
+      var d = DUR.filter(function (x) { return x[0] === k; })[0];
+      var b = el('button', null, d[1] + 'ms'); b.type = 'button'; b.setAttribute('aria-pressed', String(d[1] === DURS[kind])); b.title = 'motion-duration-' + k;
+      b.addEventListener('click', function () { DURS[kind] = d[1]; renderSeg(kind); if (kind === 'ease') renderEase(); else if (kind === 'race') renderRace(); else renderFades(); });
+      seg.appendChild(b);
+    });
+  }
+  document.querySelectorAll('.mo-pause').forEach(function (b) {
+    b.addEventListener('click', function () { paused = !paused; document.querySelectorAll('.mo-pause').forEach(function (x) { x.setAttribute('aria-pressed', String(paused)); }); });
+  });
+
+  setInterval(function () { if (!paused) root.classList.toggle('mo-end'); }, 1600);
+  document.querySelectorAll('[data-copy]').forEach(function (b) { wireCopy(b, function () { return document.getElementById(b.getAttribute('data-copy')).textContent; }, 'Copy'); });
+  renderSeg('ease'); renderSeg('race'); renderSeg('fade'); renderEase(); renderRace(); renderDist(); renderFades(); renderDur(); renderCode();
+})();
+</script>
+<script src="../subnav.js"></script>
+</body>
+</html>

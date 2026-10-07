@@ -1,0 +1,31 @@
+/* ECO component CSS: range (slider). Shared by every prototype/product page and the docs playgrounds.
+   Skill: eco-range. Link it, do not copy it: <link rel="stylesheet" href="/components/css/range.css">
+   Behaviour (value text, tick labels, recommended mark): components/js/range.js. The CSS alone gives a styled native range. Tokens only. */
+.form-range { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; color: var(--color-text-primary); }
+.form-range[hidden] { display: none; }  /* display:flex above would override the hidden attribute */
+.form-range__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--dimension-spacing-space-8); }
+.form-range__label { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-weight: 600; color: var(--color-text-secondary); }  /* label-sm */
+.form-range__value { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-primary); }  /* body-sm */
+
+.form-range__input { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; margin: 0; background: transparent; cursor: pointer; }
+.form-range__input::-webkit-slider-runnable-track { height: 2px; background: var(--color-border-primary); }
+.form-range__input::-moz-range-track { height: 2px; background: var(--color-border-primary); }
+.form-range__input::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -7px; border-radius: 50%; border: 0; background: var(--color-surface-100); transition: box-shadow var(--duration-fast-2) var(--ease-standard); }
+.form-range__input::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; border: 0; background: var(--color-surface-100); transition: box-shadow var(--duration-fast-2) var(--ease-standard); }
+/* hover: halo around the thumb */
+.form-range__input:hover:not(:disabled)::-webkit-slider-thumb { box-shadow: 0 0 0 4px var(--color-surface-opacity-black-12); }
+.form-range__input:hover:not(:disabled)::-moz-range-thumb { box-shadow: 0 0 0 4px var(--color-surface-opacity-black-12); }
+/* focus: ring on keyboard focus only */
+.form-range__input:focus { outline: 0; }
+.form-range__input:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+/* disabled */
+.form-range__input:disabled { cursor: not-allowed; }
+.form-range__input:disabled::-webkit-slider-runnable-track { background: var(--color-border-disabled); }
+.form-range__input:disabled::-moz-range-track { background: var(--color-border-disabled); }
+.form-range__input:disabled::-webkit-slider-thumb { background: var(--color-text-disabled); }
+.form-range__input:disabled::-moz-range-thumb { background: var(--color-text-disabled); }
+
+/* tick labels under the track, placed by position (first left-aligned, last right-aligned) */
+.form-range__ticks { position: relative; height: 16px; font-size: 12px; line-height: 16px; letter-spacing: 0.3px; color: var(--color-text-tertiary); }
+.form-range__ticks span { position: absolute; top: 0; white-space: nowrap; }
+.form-range:has(:disabled) .form-range__label, .form-range:has(:disabled) .form-range__value, .form-range:has(:disabled) .form-range__ticks { color: var(--color-text-disabled); }

@@ -17,7 +17,7 @@ Tooltips show on hover over icon-only buttons and give a short label explaining 
 
 | Size | Padding | Font | Line-height | Letter-spacing |
 |---|---|---|---|---|
-| **Small** | `8px 12px` | 14px, Regular | 20px | 0.28px |
+| **Small** | `8px 12px` | 14px, Regular | 20px | 0.36px |
 | **Large** | `16px 24px` | 18px, Regular | 26px | 0.36px |
 
 > Always use **Small** for icon buttons in toolbars and table rows.
@@ -86,71 +86,14 @@ Tooltips show on hover over icon-only buttons and give a short label explaining 
 
 ---
 
-### CSS template
+### CSS
 
-```css
-.tooltip-wrap {
-  position: relative;
-  display: inline-flex;
-}
+Link the shared stylesheet. Never copy its rules into a page, and never write a parallel version:
 
-.tooltip {
-  position: absolute;
-  z-index: 300;
-  background: rgba(0,0,0,0.9);
-  color: var(--color-text-primary-inverted);
-  font-family: 'Breuer Condensed', Arial, sans-serif;
-  font-size: 14px;        /* Small */
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0.28px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 100ms cubic-bezier(.35,0,.35,1); /* duration-fast-2, ease-standard */
-  box-shadow: var(--shadow-elevation-b-40);
-  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-}
-
-/* Beak — shared base for all positions */
-.tooltip::before {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 6.35px solid transparent;
-  border-right: 6.35px solid transparent;
-}
-
-.tooltip-wrap:hover .tooltip { opacity: 1; }
-
-/* Bottom — tooltip below, beak points up */
-.tooltip--bottom {
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 8px 12px;
-}
-.tooltip--bottom::before {
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-bottom: 6px solid rgba(0,0,0,0.9);
-}
-
-/* Top — tooltip above, beak points down */
-.tooltip--top {
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 8px 12px;
-}
-.tooltip--top::before {
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-top: 6px solid rgba(0,0,0,0.9);
-}
+```html
+<link rel="stylesheet" href="/components/css/tooltip.css">
 ```
+
+`components/css/tooltip.css` is the single source for this component. Mobile-first, desktop from 769px, `var(--…)` only. To change the component, edit that file.
 
 ---

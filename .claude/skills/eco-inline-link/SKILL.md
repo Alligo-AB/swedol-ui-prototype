@@ -28,18 +28,18 @@ Used **inside sentences and text blocks**. Underlined in the Enabled state — t
 
 | Size | Typography token | Font-size | Line-height | Letter-spacing | Weight |
 |---|---|---|---|---|---|
-| **Large** | `body-lg` | 20px | 28px | 0px | 400 |
-| **Medium** | `body-md` | 16px | 24px | 0.32px | 400 |
-| **Small** | `body-sm` | 14px | 20px | 0.28px | 400 |
-| **Small Bold** | `body-sm` | 14px | 20px | 0.28px | **700** |
+| **Large** | `body-lg` | 20px | 28px | 0.18px | 400 |
+| **Medium** | `body-md` | 17px | 24px | 0.32px | 400 |
+| **Small** | `body-sm` | 14px | 20px | 0.36px | 400 |
+| **Small Bold** | `body-sm` | 14px | 20px | 0.36px | **700** |
 
 #### Mobile / Tablet (`xs`/`sm`, ≤768px)
 
 | Size | Font-size | Line-height | Letter-spacing |
 |---|---|---|---|
-| **Large** | 18px | 24px | 0px |
+| **Large** | 18px | 24px | 0.18px |
 | **Medium** | 16px | 22px | 0.32px |
-| **Small / Small Bold** | 14px | 20px | 0.28px |
+| **Small / Small Bold** | 14px | 20px | 0.36px |
 
 ---
 
@@ -77,46 +77,15 @@ Used **inside sentences and text blocks**. Underlined in the Enabled state — t
 
 ---
 
-### CSS template
+### CSS
 
-```css
-.inline-link {
-  color: var(--color-text-action-primary);          /* text-action-primary — default */
-  text-decoration: underline;
-  font-family: 'Breuer Condensed', Arial, sans-serif;
-  font-weight: 400;
-  cursor: pointer;
-  transition: color 150ms cubic-bezier(.35,0,.35,1); /* duration-fast-3, ease-standard */
-}
+Link the shared stylesheet. Never copy its rules into a page, and never write a parallel version:
 
-/* Hover — underline removed */
-.inline-link:hover { color: var(--color-text-action-primary-hover); text-decoration: none; }
-
-/* Sizes — desktop */
-.inline-link--large  { font-size: 20px; line-height: 28px; letter-spacing: 0px;    font-feature-settings: 'ss02' 1, 'ss03' 1; }
-.inline-link--medium { font-size: 16px; line-height: 24px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
-.inline-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
-
-/* Small Bold */
-.inline-link--small-bold { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-weight: 700; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
-.inline-link--small-bold:hover { color: var(--color-text-action-primary-hover); text-decoration: none; }
-
-/* Color variants */
-.inline-link--secondary { color: var(--color-text-secondary); }
-.inline-link--secondary:hover { color: var(--color-text-action-secondary-hover); }
-
-.inline-link--tertiary { color: var(--color-text-tertiary); }
-.inline-link--tertiary:hover { color: var(--color-text-action-tertiary-hover); }
-
-.inline-link--inverted { color: var(--color-text-primary-inverted); }
-.inline-link--inverted:hover { color: var(--color-text-action-primary-inverted-hover); }
-
-/* Mobile */
-@media (max-width: 768px) {
-  .inline-link--large  { font-size: 18px; line-height: 24px; }
-  .inline-link--medium { font-size: 16px; line-height: 22px; }
-}
+```html
+<link rel="stylesheet" href="/components/css/inline-link.css">
 ```
+
+`components/css/inline-link.css` is the single source for this component. Mobile-first, desktop from 769px, `var(--…)` only. To change the component, edit that file.
 
 ### HTML example
 

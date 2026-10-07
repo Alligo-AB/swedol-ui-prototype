@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inline notification – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="/components/css/range.css">
+  <link rel="stylesheet" href="../notifications.css?v=17">
+  <style>
+    /* page-local: layout, and the demo form (inputs follow eco-input; this page only needs plain fields) */
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; align-items: stretch; }
+    .pg-grid { display: grid; gap: 16px 24px; grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, 1fr); } }
+    .ds-field[hidden] { display: none; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); margin-top: 12px; }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; min-width: 300px; }
+    .pg-form__region { min-height: 0; }
+    .pg-form-stage { display: flex; flex-direction: column; gap: 16px; align-items: stretch; }
+    .pg-form-stage .pg-form__region:empty { display: none; }
+    .pg-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  </style>
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Inline notification</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Components · Notifications</span>
+    <h1 class="ds-title">Inline notification</h1>
+    <p class="ds-lead">An inline notification gives <strong>feedback right where the user is working</strong>: next to a form, a quantity field or a delivery estimate. It stays in the page until the user acts or the state changes. It never disappears by itself.</p>
+    <p class="ds-lead">The buttons in <a href="#action" class="ds-link">In action</a> show the statuses appearing in context. Specification: <code>.claude/skills/eco-inline-notification/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#playground">Playground</a></li><li><a href="#action">In action</a></li><li><a href="#variants">Variants</a></li><li><a href="#states">States</a></li><li><a href="#specs">Anatomy &amp; specs</a></li><li><a href="#code">Code</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="playground">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Playground</h2>
+    <p class="ds-desc">Choose size, status, emphasis and layout and the notification and its code update. The × works; <strong>Show again</strong> brings it back.</p>
+    <div class="ds-playground">
+      <div class="ds-stage ds-stage--center" style="align-items:stretch"><div id="pg-host" style="width:100%;align-self:center"></div></div>
+      <div class="ds-controls">
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-sz">Size</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-sz" data-pg="size"><button type="button" data-v="large" aria-pressed="true">Large</button><button type="button" data-v="small" aria-pressed="false">Small</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="sel-pg-l-st" id="pg-l-st">Status</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="status" id="sel-pg-l-st"><option value="info">Informational</option><option value="success">Success</option><option value="warning">Warning</option><option value="error">Error</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>
+        <div class="ds-field" id="f-em"><span class="form-label form-label--sm" id="pg-l-em">Emphasis</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-em" data-pg="emphasis"><button type="button" data-v="strong" aria-pressed="true">Strong</button><button type="button" data-v="weak" aria-pressed="false">Weak</button></div></div>
+        <div class="ds-field" id="f-ly"><span class="form-label form-label--sm" id="pg-l-ly">Layout</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-ly" data-pg="layout"><button type="button" data-v="default" aria-pressed="true">Default</button><button type="button" data-v="actionable" aria-pressed="false">Actionable</button></div></div>
+        <div class="ds-field" id="pg-acts-f" hidden><span class="form-label form-label--sm" id="pg-l-ac">Actions</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-ac" data-pg="acts"><button type="button" data-v="buttons" aria-pressed="true">Buttons</button><button type="button" data-v="links" aria-pressed="false">Inline links</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-ti">Title</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-ti" data-pg="title"><button type="button" data-v="off" aria-pressed="true">None</button><button type="button" data-v="on" aria-pressed="false">Title</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-cl">Close button</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-cl" data-pg="closable"><button type="button" data-v="on" aria-pressed="true">Shown</button><button type="button" data-v="off" aria-pressed="false">Hidden</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-text">Text</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-text" value="Only 4 left in stock. Delivery in 2–3 days." placeholder="Text" /></div></div></div>
+        <div class="ds-field form-field" id="f-ic" hidden><label class="form-label form-label--sm" for="pg-ic">Icon (Informational only)</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-ic" data-icon-picker value="" placeholder="Material Symbol name, e.g. local_shipping" aria-describedby="pg-ic-h" /></div></div><span class="pg-note" id="pg-ic-h" style="margin:0">Google Material Symbols name. Shown as Outlined: Fill 0, Weight 300, Grade 0. Empty = the default filled icon.</span></div>
+        <div class="ds-field form-field" id="pg-b2-f" hidden><label class="form-label form-label--sm" for="pg-b2">Secondary button</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-b2" value="Change address" placeholder="Secondary button" /></div></div></div>
+        <div class="ds-field form-field" id="pg-b1-f" hidden><label class="form-label form-label--sm" for="pg-b1">Primary button</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-b1" value="Continue" placeholder="Primary button" /></div></div></div>
+        <div class="ds-field form-field" id="pg-l1-f" hidden><label class="form-label form-label--sm" for="pg-l1">Link 1</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-l1" value="Delivery terms" placeholder="Link 1" /></div></div></div>
+        <div class="ds-field form-field" id="pg-l2-f" hidden><label class="form-label form-label--sm" for="pg-l2">Link 2</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-l2" value="Change address" placeholder="Link 2" /></div></div></div>
+        <p class="pg-note" style="margin:0">The animation when the × is clicked is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+        <button type="button" class="btn btn--secondary" id="pg-reset" style="align-self:flex-start"><span class="btn__label">Show again</span></button>
+      </div>
+    </div>
+    <p class="pg-note" id="pg-rule"></p>
+    <h3 class="ds-h3">Markup for this selection</h3>
+    <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
+    <p class="ds-desc ds-note">The markup has no motion. Closing animation is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+  </div>
+</section>
+
+<section class="ds-section" id="action">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">In action</h2>
+    <p class="ds-desc">Two real situations. The notification appears <em>where the work is</em>, replaces the previous one, and stays until the user fixes the problem or closes it.</p>
+    <h3 class="ds-h3">Change password (form feedback)</h3>
+    <p class="ds-desc">Each button submits the form with a different result. The notification replaces the previous one and stays until it is closed.</p>
+    <div class="ds-stage pg-form-stage"><div class="pg-form__region" id="pw-region" aria-live="polite"></div>
+      <div class="pg-btns" id="pw-btns"></div></div>
+    <h3 class="ds-h3">Quantity (product information)</h3>
+    <p class="ds-desc">Informational Weak with its own icon. The message follows the quantity.</p>
+    <div class="ds-stage pg-form-stage"><div class="pg-form__region" id="qty-region" aria-live="polite"></div>
+      <div class="pg-btns" id="qty-btns"></div></div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="variants">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Variants</h2>
+    <p class="ds-desc">Two sizes, two emphasis levels and two layouts. Pick the size by how much room the message has, and the emphasis by how loud it should be.</p>
+    <h3 class="ds-h3">Large</h3>
+    <p class="ds-desc">48px high with a 24px icon. The default for messages next to forms and content blocks.</p>
+    <div class="ds-stage"><div class="pg-grid" id="v-large"></div></div>
+    <h3 class="ds-h3">Small</h3>
+    <p class="ds-desc">32px high with a 20px icon, for tight spaces such as next to a field. No Actionable layout. Weak exists only for Informational and Warning.</p>
+    <div class="ds-stage"><div class="pg-grid" id="v-small"></div></div>
+    <h3 class="ds-h3">Actionable</h3>
+    <p class="ds-desc">Large only. Buttons under the text, indented 32px so they line up with it. Use it when the user can fix the problem from here.</p>
+    <div class="ds-stage"><div class="pg-grid" id="v-act"></div></div>
+    <h3 class="ds-h3">Actionable with inline links</h3>
+    <p class="ds-desc">The action area holds <strong>either buttons or inline links</strong>, not both. Links suit lighter next steps.</p>
+    <div class="ds-stage"><div class="pg-grid" id="v-links"></div></div>
+    <h3 class="ds-h3">Informational with your own icon</h3>
+    <p class="ds-desc">Informational Weak is white with a blue edge. Like any Informational notification it may carry an icon the author chooses instead of the default <code>info</code>: a Google Material Symbols name, shown as Outlined (Fill 0, Weight 300, Grade 0). Success, Warning and Error always keep their own filled icon.</p>
+    <div class="ds-stage"><div class="pg-grid" id="v-icon"></div></div>
+  </div>
+</section>
+
+<section class="ds-section" id="states">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">States</h2>
+    <p class="ds-desc">Every status in both emphases. Combinations Figma does not define are marked. An inline notification has no hover or focus state of its own; its × and links do.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="ms-l">Size</span>
+      <div class="btn-group" role="group" aria-labelledby="ms-l" data-mx="size"><button type="button" data-v="large" aria-pressed="true">Large</button><button type="button" data-v="small" aria-pressed="false">Small</button></div>
+      <span class="ds-toolbar__label" id="ml-l">Layout</span>
+      <div class="btn-group" role="group" aria-labelledby="ml-l" data-mx="layout"><button type="button" data-v="default" aria-pressed="true">Default</button><button type="button" data-v="actionable" aria-pressed="false">Buttons</button><button type="button" data-v="links" aria-pressed="false">Inline links</button></div></div>
+    <div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">Status</th><th scope="col">Strong</th><th scope="col">Weak</th></tr></thead><tbody></tbody></table></div>
+    <p class="ds-desc ds-note" id="mx-note"></p>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="specs">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Anatomy &amp; specs</h2>
+    <div class="ds-anatomy" style="margin-bottom:32px">
+      <div id="anat" style="width:min(560px,100%)"></div>
+      <ul class="ds-anatomy__legend">
+        <li><b>1 Left edge</b> · 2px, status color</li>
+        <li><b>2 Status icon</b> · 24px (Small 20px)</li>
+        <li><b>3 Title</b> (optional) · <code>label-sm</code>, uppercase</li>
+        <li><b>4 Text</b> · <code>body-sm</code> 14/20</li>
+        <li><b>5 Close</b> · 20px icon</li>
+        <li><b>6 Actions</b> (Actionable) · buttons <b>or</b> inline links</li>
+      </ul>
+    </div>
+    <h3 class="ds-h3">Dimensions</h3>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Large</th><th scope="col">Small</th></tr></thead><tbody id="dim"></tbody></table></div>
+    <h3 class="ds-h3">Tokens</h3>
+    <p class="ds-desc">Resolved from the live token package.</p>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Status · emphasis</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody id="tok"></tbody></table></div>
+    <h3 class="ds-h3">Behavior and accessibility</h3>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody id="beh"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Copy the markup, then add the CSS once per page. The × needs the small script. Both come from <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.</p>
+    <div id="recipes"></div>
+    <div id="files"></div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <p class="ds-desc">Inline is for status that belongs to a place on the page and has to stay.</p>
+    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The message…</th><th scope="col">Use</th></tr></thead><tbody id="which"></tbody></table></div>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Place it next to the thing it is about.</li><li>Give an Error a way to fix it, in the text or as an action.</li><li>Use Informational for helper messages such as stock or delivery.</li><li>Announce it with <code>aria-live</code> when it appears after an action.</li></ul></div>
+      <div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Use it for a single field. Use the field’s own error message.</li><li>Use it for a brief confirmation. Use a Toast.</li><li>Add the Actionable layout to Small.</li><li>Use the Weaker emphasis. That is Banner only.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script src="../../components/js/range.js"></script>
+<script src="../doc-kit.js?v=16"></script>
+<script src="../notifications.js?v=11"></script>
+<script>
+(function () {
+  var $ = DK.$, H = ECO_N.html;
+  var STATUS = [['info', 'Informational'], ['success', 'Success'], ['warning', 'Warning'], ['error', 'Error']];
+  var TXT = { info: 'Only 4 left in stock. Delivery in 2–3 days.', success: 'Your password was changed.', warning: 'That password is easy to guess.', error: 'The payment was declined. Check your card details.' };
+  function mk(o) { var d = document.createElement('div'); d.innerHTML = H.inline(o); return d.firstChild; }
+
+  /* Playground */
+  var mo;  /* Motion section: re-rendered with the playground selection */
+  var pg = { size: 'large', status: 'info', emphasis: 'strong', layout: 'default', acts: 'buttons', title: 'off', closable: 'on' };
+  function pgOpts() {
+    var o = { size: pg.size, status: pg.status, emphasis: pg.emphasis, text: $('#pg-text').value, closable: pg.closable === 'on' };
+    if (pg.status === 'info' && $('#pg-ic').value.trim()) o.icon = $('#pg-ic').value.trim();
+    if (pg.title === 'on') o.title = STATUS.filter(function (s) { return s[0] === pg.status; })[0][1];
+    if (pg.layout === 'actionable' && pg.size === 'large') {
+      if (pg.acts === 'links') o.links = [$('#pg-l1').value, $('#pg-l2').value].filter(Boolean);
+      else { o.secondary = $('#pg-b2').value; o.primary = $('#pg-b1').value; }
+    }
+    return o;
+  }
+  function renderPg() {
+    if (mo) mo.render();
+    var small = pg.size === 'small';
+    $('#f-ly').hidden = small;
+    $('#f-ic').hidden = pg.status !== 'info';
+    var act = !small && pg.layout === 'actionable'; $('#pg-acts-f').hidden = !act;
+    ['b2', 'b1'].forEach(function (k) { $('#pg-' + k + '-f').hidden = !act || pg.acts !== 'buttons'; });
+    ['l1', 'l2'].forEach(function (k) { $('#pg-' + k + '-f').hidden = !act || pg.acts !== 'links'; });
+    var rule = '';
+    if (small && pg.emphasis === 'weak' && (pg.status === 'success' || pg.status === 'error')) rule = 'Small · Weak is only defined for Informational and Warning. Shown here anyway to match Large.';
+    if (small) rule = rule || 'Small has no Actionable layout.';
+    $('#pg-rule').textContent = rule;
+    var o = pgOpts(); DK.clear($('#pg-host')).appendChild(mk(o)); $('#pg-code').textContent = H.inline(o);
+  }
+  DK.$$('[data-pg]').forEach(function (g) { DK.seg(g, function (v) { pg[g.dataset.pg] = v; renderPg(); }); });
+  ['#pg-text', '#pg-ic', '#pg-b2', '#pg-b1', '#pg-l1', '#pg-l2'].forEach(function (q) { $(q).addEventListener('input', renderPg); }); $('#pg-reset').addEventListener('click', renderPg);
+
+  /* In action: buttons only */
+  function region(host, o) { DK.clear(host); if (o) host.appendChild(mk(o)); }
+  function btns(host, list) { list.forEach(function (c) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn--secondary'; b.innerHTML = '<span class="btn__label"></span>'; b.firstChild.textContent = c[0]; b.addEventListener('click', c[1]); host.appendChild(b); }); }
+  var pw = $('#pw-region');
+  btns($('#pw-btns'), [
+    ['Submit empty', function () { region(pw, { size: 'large', status: 'error', emphasis: 'strong', title: 'Password missing', text: 'Enter a new password to continue.' }); }],
+    ['Too short', function () { region(pw, { size: 'large', status: 'error', emphasis: 'strong', title: 'Too short', text: 'Use at least 8 characters.', links: ['Show requirements', 'Password tips'] }); }],
+    ['Weak password', function () { region(pw, { size: 'large', status: 'warning', emphasis: 'strong', title: 'Weak password', text: TXT.warning + ' Choose something less common.' }); }],
+    ['Good password', function () { region(pw, { size: 'large', status: 'success', emphasis: 'strong', text: TXT.success }); }]]);
+  var qr = $('#qty-region');
+  btns($('#qty-btns'), [
+    ['Quantity 1', function () { region(qr, { size: 'large', status: 'info', emphasis: 'weak', icon: 'local_shipping', text: 'In stock. Delivery in 2–3 days.' }); }],
+    ['Quantity 4', function () { region(qr, { size: 'large', status: 'info', emphasis: 'weak', icon: 'inventory_2', text: 'That is all we have in stock.' }); }],
+    ['Quantity 5', function () { region(qr, { size: 'large', status: 'info', emphasis: 'weak', icon: 'inventory_2', text: 'Only 4 in stock. The rest ships when the next delivery arrives, in about 2 weeks.' }); }]]);
+
+  /* Variants */
+  STATUS.forEach(function (s) {
+    ['strong', 'weak'].forEach(function (e) { $('#v-large').appendChild(mk({ size: 'large', status: s[0], emphasis: e, title: s[1], text: TXT[s[0]] })); });
+    $('#v-small').appendChild(mk({ size: 'small', status: s[0], emphasis: 'strong', text: TXT[s[0]] }));
+    if (s[0] === 'info' || s[0] === 'warning') $('#v-small').appendChild(mk({ size: 'small', status: s[0], emphasis: 'weak', text: TXT[s[0]] }));
+    $('#v-act').appendChild(mk({ size: 'large', status: s[0], emphasis: s[0] === 'error' ? 'strong' : 'weak', title: s[1], text: TXT[s[0]], secondary: 'Secondary', primary: 'Primary' }));
+    $('#v-links').appendChild(mk({ size: 'large', status: s[0], emphasis: 'strong', title: s[1], text: TXT[s[0]], links: ['Text link', 'Text link'] }));
+  });
+  $('#v-icon').appendChild(mk({ size: 'large', status: 'info', emphasis: 'weak', icon: 'local_shipping', text: 'Free delivery on orders over 1 000 kr.' }));
+  $('#v-icon').appendChild(mk({ size: 'small', status: 'info', emphasis: 'weak', icon: 'local_shipping', text: 'Delivery in 2–3 days.' }));
+
+  /* Matrix */
+  var mx = { size: 'large', layout: 'default' };
+  function matrix() {
+    var tb = DK.clear($('#matrix tbody')), small = mx.size === 'small';
+    STATUS.forEach(function (s) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = s[1]; tr.appendChild(th);
+      ['strong', 'weak'].forEach(function (e) {
+        var td = document.createElement('td');
+        if (small && (mx.layout !== 'default' || (e === 'weak' && (s[0] === 'success' || s[0] === 'error')))) { td.innerHTML = '<span class="ds-na">Not defined</span>'; }
+        else td.appendChild(mk({ size: mx.size, status: s[0], emphasis: e, title: small ? '' : s[1], text: small ? 'Short message.' : 'Message text.', secondary: mx.layout === 'actionable' ? 'Secondary' : '', primary: mx.layout === 'actionable' ? 'Primary' : '', links: mx.layout === 'links' ? ['Link', 'Link'] : [] }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+    $('#mx-note').textContent = small ? 'Small has no Actionable layout, and Weak exists only for Informational and Warning.' : 'Large has every combination.';
+  }
+  DK.$$('[data-mx]').forEach(function (g) { DK.seg(g, function (v) { mx[g.dataset.mx] = v; matrix(); }); });
+
+  $('#anat').appendChild(mk({ size: 'large', status: 'error', emphasis: 'strong', title: 'Title', text: 'Body text explains what to do.', secondary: 'Secondary', primary: 'Primary' }));
+  DK.rows($('#dim'), [['Height', '48px', '32px'], ['Padding', '12px', '4px'], ['Icon', '24px', '20px'], ['Left edge', '2px', '2px'], ['Outline (Strong)', '1px, <code>border-{status}-weaker</code>, inside the height', 'Same'], ['Gap icon to text', '8px', '8px'],
+    ['Title', '<code>label-sm</code> 14px, 0.56px, bold, uppercase', 'Same'], ['Text', '<code>body-sm</code> 14/20, 0.36px', 'Same'], ['Actionable', 'Indent 32px; buttons 16px below the text, 32px high; link 8px below the buttons', 'Not defined'], ['Shadow', '<code>var(--shadow-elevation-b-20)</code>', 'Same']]);
+  DK.tokenTable($('#tok'), [
+    ['Informational · Strong', 'Background', 'surface-information-weaker'], ['Informational · Strong', 'Outline', 'border-information-weaker'], ['Informational · both', 'Left edge and icon', 'surface-information-default'],
+    ['Weak', 'Background', 'surface-raised-primary'], ['All', 'Text', 'text-primary'], ['All', 'Shadow', 'shadow-elevation-b-20'],
+    ['Error · Strong', 'Background', 'surface-danger-weaker'], ['Success · Strong', 'Background', 'surface-success-weaker'], ['Warning · Strong', 'Background', 'surface-warning-weaker']]);
+  DK.rows($('#beh'), [
+    ['Click ×', 'Hides the notification.'], ['Persistence', 'It stays until the user acts, the state changes or it is closed. It never auto-hides.'],
+    ['Tab', 'The ×, buttons and link take focus with a visible ring.'],
+    ['Inline link', 'Underlined when enabled; on hover the underline goes and the color changes (<code>eco-inline-link</code>, Small).'],
+    ['Screen readers', 'Put the notification in a region with <code>aria-live="polite"</code> (<code>role="alert"</code> for errors that block progress) so it is announced when it appears.']]);
+
+  DK.recipes($('#recipes'), [
+    ['Large · Informational · Strong', H.inline({ size: 'large', status: 'info', emphasis: 'strong', title: 'Title', text: 'Body text.' })],
+    ['Large · Error · Actionable', H.inline({ size: 'large', status: 'error', emphasis: 'strong', title: 'Payment declined', text: 'Check your card details.', secondary: 'Change card', primary: 'Try again' })],
+    ['Large · Informational · Actionable with inline links', H.inline({ size: 'large', status: 'info', emphasis: 'strong', title: 'Delivery', text: 'Your order ships tomorrow.', links: ['Track order', 'Change address'] })],
+    ['Large · Informational · Weak with your own icon', H.inline({ size: 'large', status: 'info', emphasis: 'weak', icon: 'local_shipping', text: 'Delivery in 2–3 days.' })],
+    ['Small · Warning · Weak', H.inline({ size: 'small', status: 'warning', emphasis: 'weak', text: 'That password is easy to guess.' })]]);
+  DK.printFile($('#files'), '../notifications.css', [['CSS: Inline notification', ['inline']], ['CSS: shared icon, close button, link and buttons', ['base']]]);
+  DK.rows($('#which'), [
+    ['belongs to one section, form or content block and must stay', 'Inline (this page)'], ['is a short confirmation of an action', '<a href="toast.html" class="ds-link">Toast</a>'],
+    ['concerns the whole page or system', '<a href="banner.html" class="ds-link">Banner</a>'], ['needs a decision before the user can go on', '<a href="modal.html" class="ds-link">Modal</a>']]);
+
+  mo = DK.motion({ anchor: 'playground', prefix: 'n-close', rec: { ease: 'accelerate-generic', dur: 'fast-3', collapse: true }, role: 'exit', why: 'Closing removes the element: accelerate easing, fast fade, and the height collapses so no gap is left (eco-motion: element disappears).', preview: function () { return mk(pgOpts()); } });
+  DK.bp(); renderPg(); matrix();
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+</body>
+</html>

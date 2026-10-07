@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spacing – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="foundation">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#foundations" class="breadcrumb-item">Foundations</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Spacing</span>
+    </div>
+  </nav>
+</div>
+
+<!-- ── Intro ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Foundations</span>
+    <h1 class="ds-title">Spacing</h1>
+    <p class="ds-lead">The spacing scale gives every margin, padding and gap a <strong>predictable</strong> size. It has <span id="n-tokens">17</span> tokens built on an <strong>8px</strong> base; 1px, 2px, 4px and 12px are for detail.</p>
+    <p class="ds-lead">Every bar and diagram on this page is drawn with the <code>var(--…)</code> from the package, so it follows the package when it changes. See <code>.claude/skills/eco-spacing</code> for the rules.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#scale">Scale</a></li>
+    <li><a href="#layout">Layout spacing</a></li>
+    <li><a href="#how-to">How to use</a></li>
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#reference">Reference</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#usage">Usage</a></li>
+  </ul>
+</nav>
+
+<!-- ── Overview ──────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="overview">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Overview</h2>
+    <p class="ds-desc">Apply the scale to all margins, padding and position coordinates, on both the vertical and horizontal edges. Use it when you build a component or a page template. It must be used in all Alligo components and designs.</p>
+    <p class="ds-desc ds-note">Most values are multiples of 8px. The 1px, 2px and 4px units are for detail level, and 12px is a complement when needed.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Group</th><th>Tokens</th><th>Range</th><th>Typical use</th></tr></thead>
+        <tbody id="groups-table"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── Scale ─────────────────────────────────────────────────── -->
+<section class="ds-section" id="scale">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Scale</h2>
+    <p class="ds-desc">A systematic set for margins, padding, position coordinates and layout gaps. Each square is the real token size. Click a token to copy its variable.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table sp-table">
+        <thead><tr><th>Example</th><th>Description</th><th class="ds-tokcell">Token</th></tr></thead>
+        <tbody id="scale-table"></tbody>
+      </table>
+    </div>
+    <p class="ds-desc ds-note" id="coverage"></p>
+  </div>
+</section>
+
+<!-- ── Layout spacing ────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="layout">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Layout spacing</h2>
+    <p class="ds-desc">Two tokens change value with the breakpoint. Use them for the air <em>between</em> a section’s own content blocks, for example heading, card grid and buttons. Use the fixed scale above for margins and gutters.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Token</th><th>xs <span class="ds-na">0–639</span></th><th>sm <span class="ds-na">640–768</span></th><th>md <span class="ds-na">769–1023</span></th><th>lg <span class="ds-na">1024–1280</span></th><th>xl <span class="ds-na">1281+</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>space-lg</code></th><td>32px</td><td>40px</td><td>48px</td><td>56px</td><td>56px</td></tr>
+          <tr><th scope="row"><code>space-md</code></th><td>24px</td><td>32px</td><td>40px</td><td>48px</td><td>48px</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ds-desc ds-note">These two are not in <code>tokens.json</code>; the values come from the <code>eco-spacing</code> skill. Write them mobile first and raise the value at <code>sm</code>, <code>md</code> and <code>lg</code>.</p>
+  </div>
+</section>
+
+<!-- ── How to use ────────────────────────────────────────────── -->
+<section class="ds-section" id="how-to">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">How to use</h2>
+    <p class="ds-desc">Spacing is applied by combining a token with a consumer class.</p>
+
+    <h3 class="ds-h3">01 · Choose a spacing token</h3>
+    <p class="ds-desc">A token defines the size only. It maps directly to a pixel value in the spacing scale.</p>
+    <div class="sp-chips" id="chips"></div>
+
+    <h3 class="ds-h3">02 · Choose a consumer (where the space applies)</h3>
+    <p class="ds-desc">The consumer says which edge or axis gets the space.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Group</th><th>Class</th><th>Applies to</th></tr></thead>
+        <tbody id="consumers"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── Examples ──────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="examples">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Examples</h2>
+    <p class="ds-desc">One token and one consumer class per pattern.</p>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Margin</span><button type="button" class="mo-copy" data-copy="ex-margin" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="ex-margin">&lt;div class="space-24 mb-space"&gt;
+  Element
+&lt;/div&gt;</pre>
+    </div>
+    <p class="ds-desc ds-note">Adds 24px space below the element.</p>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Padding</span><button type="button" class="mo-copy" data-copy="ex-padding" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="ex-padding">&lt;div class="space-12 px-space"&gt;
+  Content
+&lt;/div&gt;</pre>
+    </div>
+    <p class="ds-desc ds-note">Adds 12px padding left and right.</p>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Gap</span><button type="button" class="mo-copy" data-copy="ex-gap" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="ex-gap">&lt;div class="space-24 gap-space"&gt;
+  &lt;div&gt;A&lt;/div&gt;
+  &lt;div&gt;B&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </div>
+    <p class="ds-desc ds-note">Adds 24px spacing between child elements in both directions.</p>
+  </div>
+</section>
+
+<!-- ── Reference ─────────────────────────────────────────────── -->
+<section class="ds-section" id="reference">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Reference</h2>
+    <p class="ds-desc">A strict directional reference. Each diagram maps one consumer class to one exact edge or axis. Blue marks the applied space; grey is the affected element or its children. Pick a token to redraw every diagram.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="ref-l">Token</span>
+      <div class="btn-group" role="group" aria-labelledby="ref-l" id="ref-token"></div>
+    </div>
+    <div class="sp-cols" id="ref"></div>
+    <p class="ds-desc ds-note">Use one token for external margin, internal padding and the distance between children. X combines left + right and Y combines top + bottom.</p>
+  </div>
+</section>
+
+<!-- ── Code ──────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Always write the token with its pixel fallback. The list is generated from <code>tokens.json</code>.</p>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>All spacing tokens</span><button type="button" class="mo-copy" data-copy="code-all" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-all"></pre>
+    </div>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Use in CSS</span><button type="button" class="mo-copy" data-copy="code-use" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-use">.card { padding: var(--dimension-spacing-space-16, 16px); }
+.item { margin: var(--dimension-spacing-space-24, 24px) var(--dimension-spacing-space-8, 8px); }
+.grid { display: grid; gap: var(--dimension-spacing-space-24, 24px); }</pre>
+    </div>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Page margin and gap per breakpoint (mobile first)</span><button type="button" class="mo-copy" data-copy="code-bp" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-bp">section { padding: 0 var(--dimension-spacing-space-16, 16px); }                 /* xs */
+@media (min-width: 640px)  { section { padding: 0 var(--dimension-spacing-space-32, 32px); } }  /* sm, md */
+@media (min-width: 1024px) { section { padding: 0 var(--dimension-spacing-space-40, 40px); } }  /* lg */</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ── Usage ─────────────────────────────────────────────────── -->
+<section class="ds-section" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do">
+        <h3 class="ds-rule__title">Do</h3>
+        <ul>
+          <li>Use a token for every margin, padding and gap.</li>
+          <li>Prefer 8px multiples; use 1, 2, 4 and 12px only for detail.</li>
+          <li>Use <code>space-md</code> / <code>space-lg</code> between a section’s own content blocks.</li>
+          <li>Write the token with its pixel fallback.</li>
+        </ul>
+      </div>
+      <div class="ds-rule ds-rule--dont">
+        <h3 class="ds-rule__title">Don’t</h3>
+        <ul>
+          <li>Type a pixel value that has a token.</li>
+          <li>Stack two spacing values where one token would do.</li>
+          <li>Add a gap on top of an element’s own margin or padding.</li>
+          <li>Use a fixed token where the space should change per breakpoint.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script>
+(function () {
+  var TOKENS_URL = '../../.claude/skills/eco-tokens/tokens.json';
+  var USE = {
+    'space-0': 'Zero out spacing.', 'space-1': 'Fine detail, very small adjustments.', 'space-2': 'Fine detail: borders, small adjustments.', 'space-4': 'Fine detail: inner padding in tight components.',
+    'space-8': 'Base unit. Inner padding, gap in tight layouts.', 'space-12': 'Complement. Paragraph spacing, tight lists.', 'space-16': 'Standard padding. Mobile page margin.',
+    'space-24': 'Medium spacing. Gutter on desktop.', 'space-32': 'Tablet and desktop margin. Section spacing.', 'space-40': 'Desktop page margin (lg). Section spacing.',
+    'space-48': 'Large section spacing.', 'space-56': 'Component height, large button on desktop.', 'space-64': 'Large layout spacing.', 'space-72': 'Large layout spacing.',
+    'space-80': 'Hero sections, large vertical spacing.', 'space-112': 'Extra-large layout spacing.', 'space-120': 'Grid margin on desktop.'
+  };
+  var GROUPS = { none: 'None', small: 'Small', medium: 'Medium', large: 'Large', xlarge: 'XLarge' };
+  var CONSUMERS = [
+    ['Margin', 'mt-space', 'margin-top'], ['Margin', 'mr-space', 'margin-right'], ['Margin', 'mb-space', 'margin-bottom'], ['Margin', 'ml-space', 'margin-left'], ['Margin', 'mx-space', 'left + right'], ['Margin', 'my-space', 'top + bottom'],
+    ['Padding', 'pt-space', 'padding-top'], ['Padding', 'pr-space', 'padding-right'], ['Padding', 'pb-space', 'padding-bottom'], ['Padding', 'pl-space', 'padding-left'], ['Padding', 'px-space', 'left + right'], ['Padding', 'py-space', 'top + bottom'],
+    ['Gap (layout spacing)', 'gap-space', 'row + column gap'], ['Gap (layout spacing)', 'gap-x-space', 'horizontal gap'], ['Gap (layout spacing)', 'gap-y-space', 'vertical gap']
+  ];
+  var REF_TOKENS = ['space-4', 'space-8', 'space-12', 'space-16', 'space-24'];
+  var EDGES = [['Top', 't'], ['Right', 'r'], ['Bottom', 'b'], ['Left', 'l'], ['X (L+R)', 'l r'], ['Y (T+B)', 't b']];
+  var DESC = { t: 'top edge', r: 'right edge', b: 'bottom edge', l: 'left edge', 'l r': 'both horizontal edges', 't b': 'both vertical edges' };
+  var CLS = { t: 't', r: 'r', b: 'b', l: 'l', 'l r': 'x', 't b': 'y' };
+
+  var S = null, refToken = 'space-4';
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function px(k) { return S[k].px; }
+  function num(k) { return parseInt(S[k].px, 10); }
+  function live(k) { return getComputedStyle(document.documentElement).getPropertyValue(S[k].var).trim(); }
+  function group(k) { var m = /dimension-spacing-([a-z]+)-\d+/.exec(S[k].value); return m ? GROUPS[m[1]] || m[1] : ''; }
+  function label(k) { return num(k) === 0 ? 'None' : 'Space ' + num(k) + ' ' + group(k); }
+  function varOf(k) { return 'var(' + S[k].var + ', ' + px(k) + ')'; }
+  function wireCopy(btn, getText, lab) {
+    btn.addEventListener('click', function () {
+      var ic = btn.querySelector('.mo-ic'); var done = function () { if (ic) { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); } else { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = lab; }, 1200); } };
+      if (navigator.clipboard) navigator.clipboard.writeText(getText()).then(done, done); else done();
+    });
+  }
+  function copyBtn(text, lab) {
+    var w = el('span', 'ds-copyname'), b = el('button', 'mo-copy');
+    w.appendChild(el('span', 'ds-copyname__text', lab || text));
+    b.type = 'button'; b.setAttribute('aria-label', 'Copy ' + text);
+    var ic = el('span', 'mo-ic', 'content_copy'); ic.setAttribute('aria-hidden', 'true'); b.appendChild(ic);
+    wireCopy(b, function () { return text; }, ''); w.appendChild(b); return w;
+  }
+
+  function renderGroups() {
+    var host = document.getElementById('groups-table'); host.textContent = '';
+    var order = Object.keys(GROUPS), by = {};
+    Object.keys(S).forEach(function (k) { var g = group(k); (by[g] = by[g] || []).push(k); });
+    order.forEach(function (id) {
+      var ks = by[GROUPS[id]]; if (!ks) return;
+      var tr = el('tr'); var th = el('th', null, GROUPS[id]); th.scope = 'row'; tr.appendChild(th);
+      tr.appendChild(el('td', null, ks.join(', ')));
+      tr.appendChild(el('td', null, ks.length > 1 ? px(ks[0]) + ' – ' + px(ks[ks.length - 1]) : px(ks[0])));
+      tr.appendChild(el('td', null, USE[ks[0]] ? (ks.length > 1 ? { Small: 'Detail work inside components.', Medium: 'Padding, gutters and margins.', Large: 'Section and layout spacing.', XLarge: 'Extra-large layout spacing.' }[GROUPS[id]] : USE[ks[0]]) : ''));
+      host.appendChild(tr);
+    });
+  }
+
+  function renderScale() {
+    var host = document.getElementById('scale-table'); host.textContent = '';
+    var drift = [];
+    Object.keys(S).forEach(function (k) {
+      var tr = el('tr');
+      var td = el('td'); var bar = el('span', 'sp-bar'); bar.setAttribute('aria-hidden', 'true');
+      bar.style.width = bar.style.height = 'var(' + S[k].var + ', 0px)';
+      td.appendChild(bar); td.appendChild(el('span', 'sp-px', px(k))); tr.appendChild(td);
+      var d = el('td'); d.appendChild(el('strong', null, label(k)));
+      if (USE[k]) d.appendChild(el('span', 'sp-use', USE[k]));
+      var lv = live(k);
+      if (lv !== px(k)) {
+        drift.push(k);
+        d.appendChild(el('span', 'sp-warn', lv ? 'Package says ' + lv + ', tokens.json says ' + px(k) : 'Not in the live package'));
+      }
+      tr.appendChild(d);
+      var t = el('td', 'ds-tokcell'); t.appendChild(copyBtn(S[k].var, k)); tr.appendChild(t);
+      host.appendChild(tr);
+    });
+    var n = Object.keys(S).length;
+    document.getElementById('coverage').textContent = n + ' spacing tokens, all shown on this page' + (drift.length ? '; ' + drift.length + ' differ from the live package (' + drift.join(', ') + ')' : ', all matching the live package') + '. Source: .claude/skills/eco-tokens/tokens.json (this page reloads its content when that file changes).';
+    document.getElementById('n-tokens').textContent = n;
+  }
+
+  function renderChips() {
+    var host = document.getElementById('chips'); host.textContent = '';
+    ['space-4', 'space-12', 'space-24', 'space-40'].forEach(function (k) { if (S[k]) host.appendChild(el('code', 'sp-chip', k)); });
+  }
+
+  function renderConsumers() {
+    var host = document.getElementById('consumers'); host.textContent = '';
+    CONSUMERS.forEach(function (c, i) {
+      var tr = el('tr');
+      var th = el('th', null, i === 0 || CONSUMERS[i - 1][0] !== c[0] ? c[0] : ''); th.scope = 'row'; tr.appendChild(th);
+      var t = el('td'); t.appendChild(el('code', null, c[1])); tr.appendChild(t);
+      tr.appendChild(el('td', null, c[2]));
+      host.appendChild(tr);
+    });
+  }
+
+  /* One diagram per edge. --sp is the chosen token; the marked edge is a border of that size. */
+  function edgeFig(kind, edges) {
+    var f = el('div', 'sp-fig' + (kind === 'p' ? ' sp-fig--p' : '')), box = el('div', 'sp-box sp-box--' + kind);
+    edges.split(' ').forEach(function (e) { box.classList.add('sp-e-' + e); });
+    box.appendChild(el('div', 'sp-target', kind === 'm' ? 'Target' : 'Inner content'));
+    f.appendChild(box); return f;
+  }
+  function childrenFig(layout, names, note) {
+    var f = el('div', 'sp-fig sp-fig--gap'), c = el('div', 'sp-kids sp-kids--' + layout);
+    names.forEach(function (n) { c.appendChild(el('span', 'sp-kid', n)); });
+    f.appendChild(c); f.appendChild(el('span', 'sp-note', '↔ ' + note + ' between children')); return f;
+  }
+  function example(title, cls, fig, desc) {
+    var w = el('div', 'sp-ex'), h = el('div', 'sp-ex__head');
+    h.appendChild(el('b', null, title)); h.appendChild(el('span', null, refToken + ' ' + cls));
+    w.appendChild(h); w.appendChild(fig); w.appendChild(el('p', 'sp-ex__desc', desc + ' The applied distance comes from ' + refToken + '.'));
+    return w;
+  }
+  function col(title, sub, items) {
+    var c = el('div', 'sp-col'); c.appendChild(el('h3', 'sp-col__title', title)); c.appendChild(el('p', 'sp-col__sub', sub));
+    var l = el('div', 'sp-col__list'); items.forEach(function (i) { l.appendChild(i); }); c.appendChild(l); return c;
+  }
+  function renderRef() {
+    var host = document.getElementById('ref'); host.textContent = '';
+    host.style.setProperty('--sp', varOf(refToken));
+    var p = px(refToken);
+    var mar = EDGES.map(function (e) { return example(e[0], 'm' + CLS[e[1]] + '-space', edgeFig('m', e[1]), 'External ' + DESC[e[1]] + '.'); });
+    var pad = EDGES.map(function (e) { return example(e[0], 'p' + CLS[e[1]] + '-space', edgeFig('p', e[1]), 'Internal ' + DESC[e[1]] + '.'); });
+    var gap = [
+      example('gap', 'gap-space', childrenFig('grid', ['A', 'B', 'C', 'D'], p), 'Both axes in a grid.'),
+      example('column', 'gap-x-space', childrenFig('col', ['A', 'B', 'C'], p), 'Horizontal between columns.'),
+      example('row', 'gap-y-space', childrenFig('row', ['A', 'B', 'C'], p), 'Vertical between rows.')
+    ];
+    host.appendChild(col('Margin (external)', 'Space outside the target boundary.', mar));
+    host.appendChild(col('Padding (internal)', 'Space between a boundary and its content.', pad));
+    host.appendChild(col('Gap (between children)', 'Space inserted between sibling items.', gap));
+  }
+  function renderRefToken() {
+    var host = document.getElementById('ref-token'); host.textContent = '';
+    REF_TOKENS.forEach(function (k) {
+      if (!S[k]) return;
+      var b = el('button', null, k); b.type = 'button'; b.setAttribute('aria-pressed', String(k === refToken));
+      b.addEventListener('click', function () { refToken = k; renderRefToken(); renderRef(); });
+      host.appendChild(b);
+    });
+  }
+
+  function renderCode() {
+    var s = ':root {\n';
+    Object.keys(S).forEach(function (k) { s += '  ' + S[k].var + ': ' + px(k) + ';  /* ' + k + ' */\n'; });
+    document.getElementById('code-all').textContent = s + '}';
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    wireCopy(b, function () { return document.getElementById(b.getAttribute('data-copy')).textContent; }, 'Copy');
+  });
+
+  ECO.watch(TOKENS_URL, function (j) {
+    var err = document.getElementById('load-error'); if (err) err.remove();
+    S = j.spacing;
+    renderGroups(); renderScale(); renderChips(); renderConsumers(); renderRefToken(); renderRef(); renderCode();
+  }, function () {
+    if (document.getElementById('load-error')) return;
+    var m = el('p', 'ds-desc', 'Could not load tokens.json. Open this page through the local server (npx serve), not as a file.');
+    m.id = 'load-error';
+    document.getElementById('overview').querySelector('.ds-inner').appendChild(m);
+  });
+})();
+</script>
+<script src="../subnav.js"></script>
+</body>
+</html>

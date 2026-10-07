@@ -1,0 +1,411 @@
+/* ══════════════════════════════════════════════════════════════
+   ECO notifications: Toast, E-Com Toast, Modal, Banner, Inline.
+   The component CSS for all five, shared by every notification doc page
+   (the Code sections print the blocks below, so it cannot drift).
+   Specs: .claude/skills/eco-toast-system, eco-toast-ecom, eco-modal-ecom,
+   eco-banner-notification, eco-inline-notification.
+   Mobile-first: mobile values below 769px (sm looks like mobile), desktop from 769px.
+   Needs alligo-design-tokens (fonts.css + index.css) loaded first.
+   ══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+/* eco-motion tokens (easings and durations). They are not in the CDN token package, so they are declared here with the eco-motion values. */
+:root {
+  --ease-decelerate-generic: cubic-bezier(.16, .38, .58, 1);
+  --ease-decelerate-emphasized: cubic-bezier(.16, 0, .16, 1);
+  --ease-accelerate-generic: cubic-bezier(.36, .09, 1, .58);
+  --ease-standard: cubic-bezier(.35, 0, .35, 1);
+  --duration-fast-1: 50ms;
+  --duration-fast-2: 100ms;
+  --duration-fast-3: 150ms;
+  --duration-fast-4: 200ms;
+  --duration-medium-1: 250ms;
+  --duration-medium-2: 300ms;
+  --duration-medium-3: 350ms;
+  --duration-medium-4: 400ms;
+  --duration-slow-1: 450ms;
+  --duration-slow-2: 500ms;
+  --duration-slow-3: 550ms;
+  --duration-slow-4: 600ms;
+}
+
+/* @section base */
+/* Status icon: Material Symbols Outlined, wght 300, Filled (notifications-guide) */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined'; font-weight: 400; font-style: normal; line-height: 1;
+  letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal;
+  -webkit-font-smoothing: antialiased; font-feature-settings: 'liga';
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+}
+
+/* User-chosen icon on an Informational notification: the OUTLINE variant (the default status icon stays filled) */
+.material-symbols-outlined.icon-outline { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+/* Buttons and the close button follow eco-button (the same classes and tokens as components/button.html).
+   Notification buttons are always 32px high: XSmall from 769px (label-sm), Small below (label-md), as the notification skills specify. */
+.btn {
+  --btn-h: 32px; --btn-pad: var(--dimension-spacing-space-4); --btn-tx: 6px; --btn-icon: 24px;  /* Small, mobile; 6px: no spacing token */
+  --btn-fs: 14px; --btn-lh: 14px; --btn-ls: 0.42px; --btn-ff: normal;                           /* label-md */
+  --btn-bg: transparent; --btn-fg: var(--color-text-action-primary); --btn-line: transparent; --btn-hover: var(--color-surface-opacity-black-05);
+  box-sizing: border-box; position: relative; display: inline-flex; align-items: center; justify-content: center;
+  height: var(--btn-h); margin: 0; padding: 0 var(--btn-pad); border: 0; border-radius: 0; cursor: pointer;
+  background-color: var(--btn-bg); color: var(--btn-fg); box-shadow: inset 0 0 0 1px var(--btn-line);
+  font-family: 'Breuer Condensed', Arial, sans-serif; font-weight: 600; font-size: var(--btn-fs); line-height: var(--btn-lh); letter-spacing: var(--btn-ls);
+  font-feature-settings: var(--btn-ff); text-transform: uppercase; white-space: nowrap; text-decoration: none;
+  outline: 2px solid transparent; outline-offset: 2px; isolation: isolate; transition: outline-color var(--duration-fast-2) var(--ease-standard), box-shadow var(--duration-fast-2) var(--ease-standard); /* duration-fast-2, ease-standard */
+}
+.btn__label { padding: 0 var(--btn-tx); }
+@media (min-width: 769px) {
+  .btn { --btn-pad: 6px; --btn-tx: var(--dimension-spacing-space-4); --btn-fs: 14px; --btn-lh: 14px; --btn-ls: 0.56px; --btn-ff: 'ss02' 1, 'ss03' 1; } /* XSmall, label-sm; 6px: no spacing token */
+}
+.btn--primary          { --btn-bg: var(--color-surface-action-1); --btn-fg: var(--color-text-action-primary-inverted); --btn-hover: var(--color-surface-opacity-white-20); }
+.btn--secondary        { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary); --btn-line: var(--color-border-action-1); --btn-hover: var(--color-surface-opacity-black-05); }
+.btn--blank            { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary); --btn-hover: var(--color-surface-opacity-black-05); }
+.btn--secondary-inverted { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary-inverted); --btn-line: var(--color-border-action-2); --btn-hover: var(--color-surface-opacity-white-20); }
+.btn--blank-inverted   { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary-inverted); --btn-hover: var(--color-surface-opacity-white-20); }
+.btn::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--btn-hover); opacity: 0; transition: opacity var(--duration-fast-2) var(--ease-standard); } /* hover dissolve, as in Figma: bezier .35, 0, .35, 1, 100ms */
+.btn:hover:not(:disabled)::before { opacity: 1; }
+.btn:disabled { --btn-bg: var(--color-surface-disabled); --btn-fg: var(--color-text-disabled); --btn-line: transparent; cursor: not-allowed; }
+.btn--secondary:disabled, .btn--secondary-inverted:disabled { --btn-bg: var(--color-surface-opacity-white-0); --btn-line: var(--color-border-disabled); }
+.btn--blank:disabled, .btn--blank-inverted:disabled { --btn-bg: var(--color-surface-opacity-white-0); }
+
+/* Close: Blank icon button, 24px box with a 20px icon. Inverted on dark and solid surfaces. */
+.icon-btn {
+  appearance: none; box-sizing: border-box; position: relative; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; margin: 0; padding: var(--dimension-spacing-space-2); border: 0; border-radius: 0;
+  background: transparent; color: var(--color-icon-primary); cursor: pointer; outline: 2px solid transparent; outline-offset: 2px;
+  transition: outline-color var(--duration-fast-2) var(--ease-standard);
+}
+.icon-btn .btn__icon {
+  width: 20px; height: 20px; font-family: 'Material Symbols Outlined'; font-size: 20px; line-height: 1; font-weight: 400; letter-spacing: normal; text-transform: none; user-select: none;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+}
+.icon-btn--close:hover { background: var(--color-surface-opacity-black-05); }
+.icon-btn--close-inverted { color: var(--color-icon-inverted); }
+.icon-btn--close-inverted:hover { background: var(--color-surface-opacity-white-20); }  /* no white-05 token: open point */
+body.keyboard-nav .btn:focus, body.keyboard-nav .icon-btn:focus, body.keyboard-nav .inline-link:focus { outline-color: var(--color-border-focus); }
+
+/* Inline link (eco-inline-link): underlined when enabled, underline removed on hover with a color change; never with an icon.
+   Notifications use Medium (body-md) and, in Inline, Small (body-sm). A <button class="inline-link"> is reset to look like a link. */
+.inline-link {
+  display: inline; margin: 0; padding: 0; border: 0; background: none; cursor: pointer; text-align: inherit;
+  color: var(--color-text-action-primary); text-decoration: underline; text-transform: none;  /* never inherits uppercase from a title or button around it */
+  font-family: 'Breuer Condensed', Arial, sans-serif; font-weight: 400;
+  transition: color var(--duration-fast-3) var(--ease-standard);  /* text-decoration is not transitioned */
+}
+.inline-link:hover { color: var(--color-text-action-primary-hover); text-decoration: none; }
+.inline-link--medium { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }  /* body-md */
+@media (min-width: 769px) { .inline-link--medium { font-size: 17px; line-height: 24px; } }
+.inline-link--small { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }  /* body-sm */
+/* Text Primary Inverted, on dark and solid surfaces */
+.ecom-toast--info .inline-link, .banner-notification--strong .inline-link, .banner-notification--dark .inline-link { color: var(--color-text-action-primary-inverted); }
+.ecom-toast--info .inline-link:hover, .banner-notification--strong .inline-link:hover, .banner-notification--dark .inline-link:hover { color: var(--color-text-action-primary-inverted-hover); }
+/* hidden = dismissed with × */
+.banner-notification[hidden], .inline-notification[hidden] { display: none; }
+/* × closes with a fade and a height collapse, so no empty gap is left. Recommended (eco-motion, "element disappears"): accelerate-generic, fast-3, collapse.
+   Override per page with --n-close-ease / --n-close-duration; JS skips the collapse inside [data-n-close="fade"]. */
+.banner-notification, .inline-notification { transition: opacity var(--n-close-duration, var(--duration-fast-3)) var(--n-close-ease, var(--ease-accelerate-generic)), height var(--n-close-duration, var(--duration-fast-3)) var(--n-close-ease, var(--ease-accelerate-generic)), min-height var(--n-close-duration, var(--duration-fast-3)) var(--n-close-ease, var(--ease-accelerate-generic)), margin var(--n-close-duration, var(--duration-fast-3)) var(--n-close-ease, var(--ease-accelerate-generic)), padding var(--n-close-duration, var(--duration-fast-3)) var(--n-close-ease, var(--ease-accelerate-generic)); }
+.banner-notification.is-closing, .inline-notification.is-closing { opacity: 0; pointer-events: none; }
+.banner-notification.is-collapsing, .inline-notification.is-collapsing { overflow: hidden; min-height: 0; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; }
+/* @end base */
+
+/* @section toast */
+/* ── Toast (system): short-lived feedback on a user action ── */
+.toast { display: flex; flex-direction: column; width: 100%; box-shadow: var(--shadow-elevation-b-80); }  /* xs (below 640px): fills the whole viewport width */
+@media (min-width: 640px) { .toast { width: 375px; max-width: 100%; } }
+.toast__inner {
+  display: flex; flex-direction: column; padding: var(--dimension-spacing-space-16);
+  border-left: var(--dimension-spacing-space-2) solid var(--status-color); background: var(--toast-bg);
+}
+.toast__row { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
+.toast__icon { font-size: 24px; color: var(--status-color); flex-shrink: 0; }
+.toast__body { flex: 1; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); min-width: 0; }
+.toast__title {
+  font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 600; line-height: 18px; letter-spacing: 0;
+  color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+}
+.toast__text {
+  font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px;
+  color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+@media (min-width: 769px) { .toast__text { font-size: 17px; line-height: 24px; } }
+
+/* Actionable: indent 32px, 16px above the buttons, text link below */
+.toast__actions { padding: var(--dimension-spacing-space-16) 0 0 var(--dimension-spacing-space-32); }
+.toast__btns { display: flex; gap: var(--dimension-spacing-space-8); }
+.toast__btns .btn--primary { flex: 1; }
+.toast__links { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-16); }  /* Actionable: buttons OR inline links */
+.toast__btns + .toast__links { margin-top: var(--dimension-spacing-space-8); }
+
+/* Status */
+.toast--info    { --status-color: var(--color-surface-information-default); --weaker: var(--color-surface-information-weaker); }
+.toast--success { --status-color: var(--color-surface-success-default);     --weaker: var(--color-surface-success-weaker); }
+.toast--warning { --status-color: var(--color-surface-warning-default);     --weaker: var(--color-surface-warning-weaker); }
+.toast--error   { --status-color: var(--color-surface-danger-default);      --weaker: var(--color-surface-danger-weaker); }
+/* Emphasis: Strong = tinted background, Weak = white */
+.toast--strong { --toast-bg: var(--weaker); }
+.toast--weak   { --toast-bg: var(--color-surface-raised-primary); }
+
+/* Where toasts appear: fixed, from the right (xs: from the top, full width) */
+.toast-host { position: fixed; z-index: 9999; top: 0; right: 0; left: 0; display: flex; flex-direction: column; pointer-events: none; }
+.toast-host > * { pointer-events: auto; width: 100%; }
+.toast-host .toast, .toast-host .ecom-toast { width: 100%; }
+@media (min-width: 640px)  { .toast-host { top: var(--dimension-spacing-space-32); right: var(--dimension-spacing-space-32); left: auto; width: 375px; } }
+@media (min-width: 1024px) { .toast-host { top: var(--dimension-spacing-space-40); right: var(--dimension-spacing-space-40); } }
+@media (min-width: 769px)  { .toast-host--wide { width: 440px; } }
+
+/* Motion (eco-motion): no fade, only a slide. Enter: duration-medium-2 + ease-decelerate-emphasized. Exit: duration-medium-2 + ease-accelerate-generic.
+   Override per page with --toast-in-ease / --toast-in-duration / --toast-out-ease / --toast-out-duration (set on <html> or .toast-host). */
+@keyframes toast-in-top  { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes toast-out-top { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+@keyframes toast-in-side  { from { transform: translateX(calc(100% + var(--dimension-spacing-space-40))); } to { transform: translateX(0); } }
+@keyframes toast-out-side { from { transform: translateX(0); } to { transform: translateX(calc(100% + var(--dimension-spacing-space-40))); } }
+.toast-host > .is-entering { animation: toast-in-top var(--toast-in-duration, var(--duration-medium-2)) var(--toast-in-ease, var(--ease-decelerate-emphasized)) both; }
+.toast-host > .is-leaving  { animation: toast-out-top var(--toast-out-duration, var(--duration-medium-2)) var(--toast-out-ease, var(--ease-accelerate-generic)) forwards; }
+@media (min-width: 640px) {
+  .toast-host > .is-entering { animation-name: toast-in-side; }
+  .toast-host > .is-leaving  { animation-name: toast-out-side; }
+}
+@media (prefers-reduced-motion: reduce) { .toast-host > .is-entering, .toast-host > .is-leaving { animation: none; } }
+/* @end toast */
+
+/* @section ecom */
+/* ── E-Com Toast: add to cart / informational ── */
+.ecom-toast { position: relative; box-shadow: var(--shadow-elevation-b-80); width: 100%; display: flex; }  /* xs (below 640px): fills the whole viewport width */
+@media (min-width: 640px) { .ecom-toast { width: 375px; max-width: 100%; } }
+.ecom-toast--cart { background: var(--color-surface-raised-primary); padding: var(--dimension-spacing-space-16); flex-direction: column; align-items: flex-start; }
+.ecom-toast--info {
+  background: var(--color-surface-100); border: 1px solid var(--color-border-secondary);
+  padding: calc(var(--dimension-spacing-space-16) - 1px); align-items: flex-start; gap: var(--dimension-spacing-space-12); color: var(--color-text-primary-inverted); /* the 1px edge sits inside the 16px / 24px padding (Figma heights 56 / 72) */
+}
+/* Tablet (Figma Small, from 640px) already has the wide card and 24px padding; only the buttons stay mobile-sized (see .btn) */
+@media (min-width: 640px) {
+  .ecom-toast--cart { width: 440px; padding: var(--dimension-spacing-space-24); }
+  .ecom-toast--info { padding: calc(var(--dimension-spacing-space-24) - 1px); }
+}
+.ecom-toast__header { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-12); width: 100%; }
+.ecom-toast__image-text { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-16); flex: 1; min-width: 0; }
+.ecom-toast__img { width: 40px; height: 40px; object-fit: contain; flex-shrink: 0; background: var(--color-surface-raised-secondary); }
+.ecom-toast__text, .ecom-toast__info-text {
+  flex: 1; font-family: 'Breuer Condensed', sans-serif; font-size: 17px; line-height: 24px; letter-spacing: 0.32px; /* 17/24 at every breakpoint */
+  color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+.ecom-toast__name { font-size: 16px; line-height: 18px; font-weight: 600; letter-spacing: 0; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.ecom-toast__footer { display: flex; gap: var(--dimension-spacing-space-8); align-items: center; padding-top: var(--dimension-spacing-space-16); width: 100%; }
+.ecom-toast__footer .btn { flex-shrink: 0; }
+.ecom-toast__footer .btn--primary { flex: 1; }  /* Primary fills the rest of the row, as in the Modal */
+/* Informational: black surface, inverted text */
+.ecom-toast__info-text { color: var(--color-text-primary-inverted); }
+.ecom-toast__info-content { flex: 1; display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-12); min-width: 0; }
+.ecom-toast__info-text { flex: 1 1 0; min-width: 1px; }
+.ecom-toast--info .inline-link { white-space: nowrap; }
+/* @end ecom */
+
+/* @section modal */
+/* ── Modal (E-Com Modal): needs a decision. Always closes with ×, ESC and a click on the overlay. ── */
+.modal-overlay { position: fixed; inset: 0; background: var(--color-surface-opacity-black-20); z-index: 9998; }
+.modal {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;
+  background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-100);
+  display: flex; flex-direction: column; box-sizing: border-box;
+  width: 375px; max-width: calc(100vw - var(--dimension-spacing-space-32)); max-height: calc(100dvh - var(--dimension-spacing-space-32));
+  padding: var(--dimension-spacing-space-16); overflow: auto;
+}
+.modal__content { flex: 1; }
+.modal__header { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-12); width: 100%; }
+.modal__header-text { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); flex: 1; padding-top: var(--dimension-spacing-space-2); }
+.modal__label {
+  font-family: 'Breuer Condensed', sans-serif; font-size: 12px; font-weight: 500; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase;
+  color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+}
+.modal__title {
+  font-family: 'Breuer Condensed', sans-serif; font-size: 18px; font-weight: 600; line-height: 22px; letter-spacing: 0;
+  color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1;
+}
+.modal__body {
+  margin-top: var(--dimension-spacing-space-8); font-family: 'Breuer Condensed', sans-serif; font-size: 16px; line-height: 22px; letter-spacing: 0.32px;
+  color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+.modal__footer { display: flex; gap: var(--dimension-spacing-space-8); align-items: center; padding-top: var(--dimension-spacing-space-24); width: 100%; }
+.modal__footer .btn--primary { flex: 1; }
+/* Tablet: medium and large are 576px */
+@media (min-width: 640px) {
+  .modal { padding: var(--dimension-spacing-space-24); width: 440px; }
+  .modal--medium, .modal--large { width: 576px; }
+}
+/* Desktop */
+@media (min-width: 769px) {
+  .modal--small { width: 440px; }
+  .modal--medium { width: 600px; }
+  .modal--large { width: 705px; }
+  .modal__label { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+  .modal__title { font-size: 20px; line-height: 24px; }
+  .modal__body { font-size: 17px; line-height: 24px; }
+  .modal__footer { padding-top: var(--dimension-spacing-space-32); }
+}
+/* Mobile large (and medium, which has no xs variant): fills the viewport, buttons pinned to the bottom */
+@media (max-width: 639px) {
+  .modal--medium, .modal--large {
+    top: 0; left: 0; transform: none; width: 100%; max-width: none; height: 100dvh; max-height: none;
+  }
+}
+@keyframes modal-in { from { opacity: 0; } to { opacity: 1; } }
+.modal, .modal-overlay { animation: modal-in var(--duration-fast-4) var(--ease-decelerate-emphasized) both; }
+@media (prefers-reduced-motion: reduce) { .modal, .modal-overlay { animation: none; } }
+body.has-modal { overflow: hidden; }
+/* @end modal */
+
+/* @section banner */
+/* ── Banner: page-wide, stays until closed or the state changes ── */
+.banner-notification { display: flex; align-items: stretch; width: 100%; min-height: 40px; box-shadow: var(--shadow-elevation-b-20); }  /* every banner has elevation-b-20 (Figma 2026-10) */
+.banner-notification__base { display: flex; align-items: center; width: 100%; overflow: hidden; }
+.banner-notification__left-border { width: var(--dimension-spacing-space-2); align-self: stretch; flex-shrink: 0; }
+/* The 1px edge (Weak) is an inset shadow, so it takes no room: padding is a true 8px / 12px vertical, 16px horizontal, and the height stays 40px / 48px */
+.banner-notification__container { flex: 1; --b-edge: transparent; box-shadow: inset 0 1px 0 var(--b-edge), inset -1px 0 0 var(--b-edge), inset 0 -1px 0 var(--b-edge); }
+.banner-notification__inner { display: flex; gap: var(--dimension-spacing-space-8); align-items: flex-start; padding: var(--dimension-spacing-space-8) var(--dimension-spacing-space-16); width: 100%; box-sizing: border-box; }
+.banner-notification__content { display: flex; gap: var(--dimension-spacing-space-8); align-items: flex-start; flex: 1; }
+.banner-notification__icon { font-size: 24px; flex-shrink: 0; }
+.banner-notification__text {
+  flex: 1; font-family: 'Breuer Condensed', sans-serif; font-size: 12px; line-height: 18px; letter-spacing: 0.24px; padding-top: 3px;
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+/* System banner inline link: Small Bold, between the text and the × (Figma), 14/20 at every breakpoint */
+.banner-notification__content > .banner-notification__links { display: flex; gap: var(--dimension-spacing-space-8); flex-shrink: 0; padding-top: var(--dimension-spacing-space-2); }
+.inline-link--bold { font-weight: 600; }
+.banner-notification__title { font-weight: 600; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+@media (min-width: 769px) {
+  .banner-notification { min-height: 48px; }
+  .banner-notification__inner { padding: var(--dimension-spacing-space-12) var(--dimension-spacing-space-16); }
+  .banner-notification__text { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; padding-top: var(--dimension-spacing-space-2); }
+  .banner-notification__title { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+}
+
+/* Emphasis: Strong = solid status color */
+.banner-notification--info    { --b-default: var(--color-surface-information-default); --b-weaker: var(--color-surface-information-weaker); --b-border: var(--color-border-information-weaker); --b-icon: var(--color-text-information-default); }
+.banner-notification--success { --b-default: var(--color-surface-success-default);     --b-weaker: var(--color-surface-success-weaker);     --b-border: var(--color-border-success-weaker);     --b-icon: var(--color-text-success-default); }
+.banner-notification--warning { --b-default: var(--color-surface-warning-default);     --b-weaker: var(--color-surface-warning-weaker);     --b-border: var(--color-border-warning-weaker);     --b-icon: var(--color-border-warning-default); }
+.banner-notification--error   { --b-default: var(--color-surface-danger-default);      --b-weaker: var(--color-surface-danger-weaker);      --b-border: var(--color-border-danger-weaker);      --b-icon: var(--color-text-danger-default); }
+
+.banner-notification--strong { background: var(--b-default); }
+.banner-notification--strong .banner-notification__left-border { background: var(--b-weaker); }
+.banner-notification--strong :is(.banner-notification__text, .banner-notification__title, .banner-notification__icon, .banner-notification__heading, .banner-notification__body) { color: var(--color-text-primary-inverted); }
+
+/* Weak: tinted background, status-colored left border */
+.banner-notification--weak { background: var(--b-weaker); }
+.banner-notification--weak .banner-notification__left-border { background: var(--b-default); }
+.banner-notification--weak .banner-notification__container { --b-edge: var(--b-border); }
+.banner-notification--weak .banner-notification__icon { color: var(--b-icon); }
+
+/* Weaker: white, shadow, status-colored left border */
+.banner-notification--weaker { background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); }
+.banner-notification--weaker .banner-notification__left-border { background: var(--b-default); }
+.banner-notification--weaker .banner-notification__icon { color: var(--b-icon); }
+.banner-notification--weak, .banner-notification--weaker { color: var(--color-text-primary); }
+
+/* Large: My Pages only. Icon, heading, body, actions. */
+.banner-notification--large { box-shadow: var(--shadow-elevation-b-20); }
+.banner-notification--large .banner-notification__left-border { width: 4px; }
+.banner-notification--large .banner-notification__inner { flex-direction: column; gap: 0;  /* the footer's own 24px is the only space under the body */ padding: var(--dimension-spacing-space-12) var(--dimension-spacing-space-12) var(--dimension-spacing-space-16); }
+.banner-notification--large .banner-notification__main { display: flex; gap: var(--dimension-spacing-space-8); align-items: flex-start; width: 100%; }
+.banner-notification--large .banner-notification__icon { font-size: 24px; }
+.banner-notification--large .banner-notification__heading {
+  font-family: 'Breuer Condensed', sans-serif; font-size: 18px; font-weight: 600; line-height: 22px; letter-spacing: 0; font-feature-settings: 'ss02' 1, 'ss03' 1;
+}
+.banner-notification--large .banner-notification__body {
+  margin-top: var(--dimension-spacing-space-8); font-family: 'Breuer Condensed', sans-serif; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+.banner-notification--large .banner-notification__textblock { flex: 1; }
+.banner-notification--large .banner-notification__footer { padding: var(--dimension-spacing-space-24) 0 0 var(--dimension-spacing-space-32); width: 100%; }
+.banner-notification--large .banner-notification__btns { display: flex; gap: var(--dimension-spacing-space-8); align-items: center; flex-wrap: wrap; }
+.banner-notification--large .banner-notification__links { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-16); }  /* buttons OR inline links */
+.banner-notification--large .banner-notification__btns + .banner-notification__links { margin-top: var(--dimension-spacing-space-8); }
+.banner-notification--large .banner-notification__close-wrap { padding: 0; }
+@media (min-width: 640px) {
+  .banner-notification--large .banner-notification__inner { padding: var(--dimension-spacing-space-16); }
+  .banner-notification--large .banner-notification__main { gap: var(--dimension-spacing-space-12); }
+  .banner-notification--large .banner-notification__icon { font-size: 40px; }
+  .banner-notification--large .banner-notification__footer { padding-left: 52px; padding-top: var(--dimension-spacing-space-24); }
+}
+@media (min-width: 769px) {
+  .banner-notification--large .banner-notification__left-border { width: 8px; }
+  .banner-notification--large .banner-notification__inner { padding: var(--dimension-spacing-space-24); }
+  .banner-notification--large .banner-notification__icon { font-size: 48px; }
+  .banner-notification--large .banner-notification__heading { font-size: 20px; line-height: 24px; }
+  .banner-notification--large .banner-notification__body { margin-top: var(--dimension-spacing-space-12); font-size: 17px; line-height: 24px; }
+  .banner-notification--large .banner-notification__footer { padding-left: 60px; }
+}
+@media (min-width: 640px) and (max-width: 768px) { .banner-notification--large .banner-notification__left-border { width: 4px; } }
+.banner-notification--large .banner-notification__main .icon-btn { margin-left: auto; }
+
+/* Promotion: brand campaigns, Small only. Mobile (sm-xs, Figma 32px): title on the left, link on the right, no ×.
+   Desktop (769px+, 48px): centered "Title - Link" with the ×. */
+.banner-notification--promotion {
+  position: relative; align-items: center; min-height: 32px; padding: var(--dimension-spacing-space-8);
+  box-shadow: var(--shadow-elevation-b-20);
+}
+.banner-notification__promo { display: flex; align-items: center; gap: var(--dimension-spacing-space-12); width: 100%; margin: 0; }
+.banner-notification--promotion .banner-notification__title { flex: 1; text-align: left; font-size: 14px; line-height: 16px; letter-spacing: 0.42px; }  /* label-md, mobile */
+.banner-notification--promotion .inline-link { flex-shrink: 0; white-space: nowrap; font-size: 14px; line-height: 16px; letter-spacing: 0.36px; }  /* body-sm, mobile */
+.banner-notification--promotion .icon-btn { display: none; }
+/* The whole Promotion banner is the click target: the link's ::after covers the banner (the × sits above it), and hovering anywhere gives the link its hover */
+.banner-notification--promotion { cursor: pointer; }
+.banner-notification--promotion .inline-link::after { content: ''; position: absolute; inset: 0; }
+.banner-notification--promotion .icon-btn { z-index: 1; }
+.banner-notification--promotion:hover .inline-link { text-decoration: none; color: var(--color-text-action-primary-hover); }
+.banner-notification--dark:hover .inline-link { color: var(--color-text-action-primary-inverted-hover); }
+.banner-notification--promotion.banner-notification--accent-strong:hover .inline-link, .banner-notification--promotion.banner-notification--accent-weak:hover .inline-link { color: inherit; }  /* no hover token on the accent surface: only the underline goes */
+body.keyboard-nav .banner-notification--promotion:has(.inline-link:focus) { outline: 2px solid var(--color-border-focus); outline-offset: -4px; }  /* the ring follows the clickable banner */
+@media (min-width: 769px) {
+  .banner-notification--promotion { min-height: 48px; padding: var(--dimension-spacing-space-12) 48px; }
+  .banner-notification__promo { display: block; text-align: center; }
+  .banner-notification--promotion .banner-notification__title { display: inline; font-size: 18px; line-height: 18px; letter-spacing: 0.18px; }  /* label-md, desktop */
+  .banner-notification--promotion .banner-notification__title::after { content: ' -'; }
+  .banner-notification--promotion .inline-link { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }  /* body-md */
+  .banner-notification--promotion .icon-btn { display: inline-flex; position: absolute; right: var(--dimension-spacing-space-16); top: 50%; transform: translateY(-50%); }
+}
+.banner-notification--dark   { background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+.banner-notification--light  { background: var(--color-surface-raised-primary); color: var(--color-text-primary); }
+.banner-notification--accent-strong { background: var(--color-accent-default); color: var(--color-text-action-accent); }
+.banner-notification--accent-weak   { background: var(--color-accent-light); color: var(--color-text-action-primary); }
+.banner-notification--promotion .inline-link { color: inherit; }  /* brand-accent promotions: no hover token, so only the underline goes (open point) */
+.banner-notification--dark .inline-link { color: var(--color-text-action-primary-inverted); }
+/* @end banner */
+
+/* @section inline */
+/* ── Inline: contextual, stays until the user acts or the state changes ── */
+.inline-notification { display: flex; align-items: stretch; box-shadow: var(--shadow-elevation-b-20); }
+.inline-notification__base { display: flex; align-items: center; overflow: hidden; width: 100%; }
+.inline-notification__left-border { width: var(--dimension-spacing-space-2); align-self: stretch; flex-shrink: 0; }
+/* The 1px outline (Strong) is an inset shadow, so it takes no room: the padding is a true 12px (Small 4px) and the height stays 48px (32px) */
+.inline-notification__container { flex: 1; --i-edge: transparent; box-shadow: inset 0 1px 0 var(--i-edge), inset -1px 0 0 var(--i-edge), inset 0 -1px 0 var(--i-edge); }
+.inline-notification__inner { display: flex; flex-direction: column; align-items: flex-start; padding: var(--dimension-spacing-space-12); width: 100%; box-sizing: border-box; }
+.inline-notification--small .inline-notification__inner { padding: var(--dimension-spacing-space-4); }
+/* Small (Figma 24000:263507): container padding 4px, header 2px extra on the left, icon and text 2px down. Icon sits 6px from the left edge, 4px from the right,
+   6px from top and bottom on one line (32px high); with 2+ lines the icon, text and × stay top-aligned. */
+.inline-notification--small .inline-notification__header { padding-left: var(--dimension-spacing-space-2); }
+.inline-notification--small .inline-notification__icon, .inline-notification--small .inline-notification__text { margin-top: var(--dimension-spacing-space-2); padding-top: 0; }
+.inline-notification__header { display: flex; gap: var(--dimension-spacing-space-8); align-items: flex-start; width: 100%; }
+.inline-notification__icon { font-size: 24px; flex-shrink: 0; color: var(--i-default); }
+.inline-notification--small .inline-notification__icon { font-size: 20px; }
+.inline-notification__text {
+  flex: 1; min-width: 0; padding-top: var(--dimension-spacing-space-2); font-family: 'Breuer Condensed', sans-serif; font-size: 14px; line-height: 20px; letter-spacing: 0.36px;
+  color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+.inline-notification__title { font-weight: 600; text-transform: uppercase; letter-spacing: 0.56px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+/* Actionable */
+.inline-notification__actions { padding-left: var(--dimension-spacing-space-32); width: 100%; box-sizing: border-box; }
+.inline-notification__btns { display: flex; gap: var(--dimension-spacing-space-8); align-items: center; padding-top: var(--dimension-spacing-space-16); }
+.inline-notification__links { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-16); padding-top: var(--dimension-spacing-space-16); }  /* buttons OR inline links */
+.inline-notification__btns + .inline-notification__links { padding-top: var(--dimension-spacing-space-8); }
+
+.inline-notification--info    { --i-default: var(--color-surface-information-default); --i-weaker: var(--color-surface-information-weaker); --i-border: var(--color-border-information-weaker); }
+.inline-notification--success { --i-default: var(--color-surface-success-default);     --i-weaker: var(--color-surface-success-weaker);     --i-border: var(--color-border-success-weaker); }
+.inline-notification--warning { --i-default: var(--color-surface-warning-default);     --i-weaker: var(--color-surface-warning-weaker);     --i-border: var(--color-border-warning-weaker); }
+.inline-notification--error   { --i-default: var(--color-surface-danger-default);      --i-weaker: var(--color-surface-danger-weaker);      --i-border: var(--color-border-danger-weaker); }
+.inline-notification__left-border { background: var(--i-default); }
+.inline-notification--strong { background: var(--i-weaker); }
+.inline-notification--strong .inline-notification__container { --i-edge: var(--i-border); }
+.inline-notification--weak { background: var(--color-surface-raised-primary); }
+/* @end inline */

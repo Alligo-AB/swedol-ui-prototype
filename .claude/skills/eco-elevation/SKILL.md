@@ -44,11 +44,11 @@ Each level consists of two layers: a soft main shadow + a sharp contour shadow (
 
 | Token | CSS `box-shadow` | Level | Used for |
 |---|---|---|---|
-| `elevation-b-20` | `var(--shadow-elevation-b-20)` | 20% | Variant Tables (PDP/PLP), Data tables |
-| `elevation-b-40` | `var(--shadow-elevation-b-40)` | 40% | Tooltip |
-| `elevation-b-60` | `var(--shadow-elevation-b-60)` | 60% | Overflow menu, Notification |
-| `elevation-b-80` | `var(--shadow-elevation-b-80)` | 80% | Site header, Menu, Dropdowns, Exposed Dropdowns |
-| `elevation-b-100` | `var(--shadow-elevation-b-100)` | 100% | Modals |
+| `elevation-b-20` | `var(--shadow-elevation-b-20)` | 20% | Subtle separation, surfaces only slightly above their surroundings. Data and variant tables, address and contact cards, inline system notifications, compact badges. Avoid for menus, drawers, modals. |
+| `elevation-b-40` | `var(--shadow-elevation-b-40)` | 40% | Compact floating guidance. Tooltips; limited use on sticky table headers and compact map/header controls. Use a higher level for menus, toasts, dialogs. |
+| `elevation-b-60` | `var(--shadow-elevation-b-60)` | 60% | Clear mid-level separation. Headers, main navigation, search surfaces, notifications, overflow surfaces. Use b-80/b-100 when the surface must dominate the layer stack. |
+| `elevation-b-80` | `var(--shadow-elevation-b-80)` | 80% | High-priority transient surfaces. Menus, dropdowns, exposed dropdowns, toast notifications, mobile navigation layers. Avoid for modals and horizontally entering drawers. |
+| `elevation-b-100` | `var(--shadow-elevation-b-100)` | 100% | Strongest general bottom elevation. Modal notifications, cookie settings, other blocking dialogs. Use the designated drawer styles for side drawers. |
 
 ```css
 /* Example: Card with elevation-b-20 */
@@ -68,13 +68,13 @@ Each level consists of two layers: a soft main shadow + a sharp contour shadow (
 
 Simulates a light source from below. The shadow falls upward. **Used sparingly.**
 
-| Token | CSS `box-shadow` | Level |
-|---|---|---|
-| `elevation-t-20` | `var(--shadow-elevation-t-20)` | 20% |
-| `elevation-t-40` | `var(--shadow-elevation-t-40)` | 40% |
-| `elevation-t-60` | `var(--shadow-elevation-t-60)` | 60% |
-| `elevation-t-80` | `var(--shadow-elevation-t-80)` | 80% |
-| `elevation-t-100` | `var(--shadow-elevation-t-100)` | 100% |
+| Token | CSS `box-shadow` | Level | Used for |
+|---|---|---|---|
+| `elevation-t-20` | `var(--shadow-elevation-t-20)` | 20% | No approved usage recorded. Use only after confirming a subtle top-edge separation is required. |
+| `elevation-t-40` | `var(--shadow-elevation-t-40)` | 40% | No approved usage recorded. Reserve for bottom-anchored surfaces that need a light but visible top edge. |
+| `elevation-t-60` | `var(--shadow-elevation-t-60)` | 60% | Separates a fixed bottom action area from scrollable content. Drawer footers, search drawer footers, other sticky footer actions (desktop, tablet, mobile). Standard footer treatment. |
+| `elevation-t-80` | `var(--shadow-elevation-t-80)` | 80% | Drawer and filter-drawer footers that need more emphasis than t-60. Prefer t-60 for the standard footer. |
+| `elevation-t-100` | `var(--shadow-elevation-t-100)` | 100% | No approved usage recorded. Use only when t-80 is demonstrably insufficient and the layer hierarchy has been reviewed. |
 
 ---
 
@@ -84,9 +84,9 @@ Intended for essential global components (navigation menu, drawers) that must si
 
 | Token | CSS `box-shadow` | Description |
 |---|---|---|
-| `elevation-drawer-left` | `var(--shadow-elevation-drawer-left)` | Drawer from the left – shadow on the right side |
-| `elevation-drawer-right` | `var(--shadow-elevation-drawer-right)` | Drawer from the right – shadow on the left side |
-| `elevation-drawer-left-menu-sublevel` | `var(--shadow-elevation-drawer-left-menu-sublevel)` | Inline drawer, sub-menu levels (level 2+) |
+| `elevation-drawer-left` | `var(--shadow-elevation-drawer-left)` | Drawer from the left – shadow on the right side. Left-side store-selection and navigation drawers. Not for drawers entering from the right. |
+| `elevation-drawer-right` | `var(--shadow-elevation-drawer-right)` | Drawer from the right – shadow on the left side. Product-information, filter, account, notification, cart, review and delivery-information drawers. Not for drawers entering from the left. |
+| `elevation-drawer-left-menu-sublevel` | `var(--shadow-elevation-drawer-left-menu-sublevel)` | Inline drawer, sub-menu levels (level 2+): lifts the active submenu above the preceding menu surface. No verified usage outside documentation; confirm the pattern before adoption. |
 
 ```css
 /* Drawer from the left */
@@ -108,16 +108,16 @@ Shadows used only for specific components. Detailed in each component's own desc
 
 | Token | CSS `box-shadow` | Used for |
 |---|---|---|
-| `elevation-input_control-switch` | `var(--shadow-elevation-input-control-switch)` | Toggle switch – indicates a raised level |
-| `elevation-table-overflow-right` | `var(--shadow-elevation-table-overflow-right)` | Table overflow, right – shadow inside a table where content exceeds the width |
-| `elevation-table-overflow-left` | `var(--shadow-elevation-table-overflow-left)` | Table overflow, left – shadow inside a table where content exceeds the width |
+| `elevation-input-control-switch` | `var(--shadow-elevation-input-control-switch)` | Toggle switch – indicates a raised level. Switch thumbs and the selected option in segmented controls. Not general component elevation. |
+| `elevation-table-overflow-right` | `var(--shadow-elevation-table-overflow-right)` | Table overflow, right – separates fixed content at the right edge from scrollable middle content. No verified usage outside documentation; use only in an approved overflow-table pattern, paired with the opposite edge. |
+| `elevation-table-overflow-left` | `var(--shadow-elevation-table-overflow-left)` | Table overflow, left – separates fixed content at the left edge from scrollable middle content. Desktop user tables with an overflow column; only when content can continue behind the fixed edge. |
 
 ---
 
 ### Elevation rules
 
 1. **Always choose the lowest possible level** – use `elevation-b-20` as the default for card-like surfaces.
-2. **Increase elevation for prioritized actions** – modals and critical overlays should always sit at `elevation-b-100`.
+2. **Increase elevation for prioritized actions** – modals and critical overlays should always sit at `elevation-b-100`. Site header and main navigation use `elevation-b-60`; menus, dropdowns and toasts use `elevation-b-80`.
 3. **Don't mix Bottom and Top** on the same component (exception: `elevation-input-control-switch`).
 4. **Drawers and navigation** should always use `elevation-drawer-*`, never `elevation-b-*`.
 5. **Component Specific tokens** are never used outside their intended component.
@@ -199,7 +199,7 @@ content.addEventListener('scroll', () => {
 | Footer padding | `24px 32px` | `16px 24px` |
 | Label (`label-md`) | 16px/16px, 0.48px | 14px/14px, 0.42px |
 | Input / Select | 48px, padding `8px 12px`, line-height 24px | 40px, padding `8px`, line-height 22px |
-| Checkbox text | `body-md` 16px/24px, 0.32px | 16px/22px, 0.32px |
+| Checkbox text | `body-md` 17px/24px, 0.32px | 16px/22px, 0.32px |
 | Save button | `padding: 16px` | `padding: 12px 16px` |
 | form-row | `flex-direction: row` | `flex-direction: column`, gap 16px |
 

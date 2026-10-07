@@ -1,0 +1,11 @@
+/* ECO component CSS: divider. Shared by the docs page (eco-design-system/components/divider.html) and every prototype/product page.
+   Skill: eco-divider. Link it, do not copy it: <link rel="stylesheet" href="/components/css/divider.css">
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only. */
+    /* ── Divider ── */
+    .divider {
+      display: block; width: 100%; height: 1px; margin: 0; padding: 0; border: 0; flex-shrink: 0;
+      background: var(--color-border-primary); /* Border Primary (default) */
+    }
+    .divider--secondary { background: var(--color-border-secondary); }
+    .divider--tertiary  { background: var(--color-border-tertiary); }
+    .divider--vertical  { width: 1px; height: auto; align-self: stretch; } /* inside a flex row */

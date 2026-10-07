@@ -48,9 +48,11 @@ A newly installed design skill should be added to the list of examples in the pa
 | **Logged-out/public page** | Copy of `template.html` (repo root) | No login required. `body` background: `background-primary` (white). |
 | **Logged-in page ("My Pages")** | Copy of `mypages/mypages-template.html` | Requires login, shows the account-nav tabs. `body` background: `background-secondary` (grey) — this is intentional, see rule 7 in the Badge section about `body` background. |
 
-Both templates already have the header/footer/main menu wired up via shared partials (`mypages/partials/`) and every design token in place — never start from scratch, and never copy another page's finished content wholesale, since page-specific CSS/JS hacks that don't belong on the new page will come along with it.
+Both templates carry only the page frame (header, footer, menu, drawers, breadcrumb) plus links to the shared component CSS; page-specific content CSS (user cards, stat cards, upload, tooltips, pagination, collapsibles …) was removed in 2026-10 and lives in each page or in the component's skill. Both templates already have the header/footer/main menu wired up via shared partials (`mypages/partials/`) and every design token in place — never start from scratch, and never copy another page's finished content wholesale, since page-specific CSS/JS hacks that don't belong on the new page will come along with it.
 
 See `index.html` (repo root) for the full sitemap — it's a page overview that links to every page in the prototype and tags each one as "new"/"updated"/"in progress"/"archive" per page type.
+
+**Component CSS and JS (shared, one source):** every component's CSS lives in `components/css/<name>.css` (button, input, select, textarea, checkbox, radio, switch, list-item, divider, menu, collapsible, tooltip, pagination, inline-link, badge, range, button-group) and its behaviour JS in `components/js/` (`select-menu.js`, `collapsible.js`, `pagination.js`, `range.js`; the icon picker in `components/icon-picker/`). Notifications use `eco-design-system/notifications.css` + `notifications.js`. The templates already link them. In a new page: `<link rel="stylesheet" href="/components/css/<name>.css">` for each component used, root-absolute, never a copy of the rules in the page. The ECO docs pages in `eco-design-system/` link the same files, so docs and product cannot drift. Changing a component means editing that file.
 
 **Images:** all images live in one folder, `images/` in the repo root. Reference them as `/images/<file>` (root-absolute) in `mypages/` pages and all partials, since partials are injected into both root and `mypages/` pages. Never create a per-folder `images/` copy (no `mypages/images/`, `tokens/images/`). Exception: `email/images/`, separate on purpose for email HTML. Requires the server to run from the repo root (`npx serve .`).
 
@@ -112,12 +114,13 @@ module.exports = {
 **IMPORTANT:** Go through this list before reporting a new or changed page/component as done. Applies to every page in the project, not just individual features.
 
 1. **Breakpoint check (most important)** — Verify that every new/changed component actually switches at `769px` (`md`), not at `640px` (`sm`) or some other guessed threshold. `sm` (640–768px) must **always** look like mobile (Mobile Base Styling) — never Desktop Base Styling. Never assume the CSS is correct just because it looks reasonable in the code: read the actual `getComputedStyle(...)` values (e.g. via `javascript_tool` in the Browser panel) at at least three widths — an `xs` (~375px), an `sm` (~700px), and an `md`/`lg` (~1024px+) — before calling it done.
-2. **Reuse existing tokens/patterns** — Search the file for a component that already solves the same thing (button sizes, drawer chrome, collapsible, checkbox, etc.) before creating a new CSS class. Extend an existing class rather than building a parallel variant.
+2. **Reuse existing tokens/patterns** — Check `components/css/` and `components/js/` first (link the shared file, do not rewrite it), then search the file for a component that already solves the same thing (button sizes, drawer chrome, collapsible, checkbox, etc.) before creating a new CSS class. Extend an existing class rather than building a parallel variant.
 3. **CSS specificity when nesting** — When a new component is nested inside an existing one (e.g. an icon in a `.form-checkbox-item` label), check that no broader rule (e.g. `.form-checkbox-item span`) leaks through and disturbs the font/color of the nested element.
 4. **Spacing duplication** — If several elements that already have their own margin/padding/border are stacked in a flex/grid container with `gap`, check that the gap isn't added on top of the elements' own spacing.
 5. **Interaction at every breakpoint** — Test open/close, hover, checkbox/radio selection, etc. at both mobile and desktop width at minimum, not just one window size, before delivery.
 6. **Never hardcode design tokens** — Color, spacing (fixed scale values), shadow, and border shorthand must always be written as `var(--...)` against `tokens.json` (see the `eco-tokens` skill), never as a literal hex/px. Every component skill under `.claude/skills/eco-*/SKILL.md` already follows this — keep the pattern when editing a skill. Exceptions require a visible comment explaining why (see e.g. `eco-checkbox`'s flagged non-standard focus color).
 7. **Ask before inventing a value** — If a color, size, spacing, or pattern isn't covered by an existing token or skill under `.claude/skills/eco-*/SKILL.md`, ask before choosing a value yourself rather than guessing.
+8. **Button label in a span** — every `.btn` label sits in `<span class="btn__label">` (also for buttons built in JS: `innerHTML`, change the text on the span, never `button.textContent`). Without it the 8px label inset is missing and the text sits too tight against the edge. See `eco-button`.
 
 ---
 
@@ -139,7 +142,7 @@ Every component in the ECO Design System is its own skill under `.claude/skills/
 | Skill | Used when |
 |---|---|
 | `eco-add-component` | Use when adding a NEW component (a new `eco-*` skill from a Figma component) or substantially changing an existing one — Figma extraction → token mapping → skill template → CLAUDE.md index → verification checklist. Read this FIRST so every component skill keeps the same standard. |
-| `eco-doc-page` | Use when building or changing a documentation/showcase page for the ECO Design System (foundations like colors, components like button/radio) in `eco-design-system/` — page structure, section order, shared `docs.css` classes, live-from-tokens rules, overview hub, registration in index.html. |
+| `eco-doc-page` | Use when building or changing a documentation/showcase page for the ECO Design System (foundations like colors, components like button/radio) in `eco-design-system/` — page structure, section order, shared `docs.css` classes, spacing and card rules, the component-page template (playground, variants, states matrix, specs, code, usage; reference: `components/checkbox.html`), live-from-tokens rules, overview hub, registration in index.html. |
 
 **Reviewing what developers built**
 
@@ -158,16 +161,25 @@ Every component in the ECO Design System is its own skill under `.claude/skills/
 | `eco-elevation` | Use when choosing shadow/elevation for cards, modals, drawers, tooltips, or other raised surfaces — Shadow Bottom/Top, Designated Level (drawers), and component-specific shadows. |
 | `eco-motion` | Use when animating or transitioning something — easing curves (decelerate/accelerate/standard) and duration tokens (fast/medium/slow) per the ECO Design System. |
 
+**Actions**
+
+| Skill | Used when |
+|---|---|
+| `eco-button` | Use when building, changing, or reviewing buttons (`<button>`, CTAs) and icon buttons in swedol-ui-prototype — all variants (Primary/Secondary/Blank/Destructive/Accent/System and the three Inverted ones), sizes (Large/Medium/Small/XSmall), content (label, icons, icon only, badge) and states (hover/focus/disabled) per the ECO Design System. Not for links (use links-guide) or a switch between two views (use eco-pill-segment-control). |
+
 **Form components**
 
 | Skill | Used when |
 |---|---|
-| `eco-button` | Use when building, changing, or reviewing buttons (`<button>`, CTAs) in swedol-ui-prototype — all variants (Primary/Secondary/Blank/Destructive/Accent/System), sizes, and states (hover/focus/disabled) per the ECO Design System. |
 | `eco-input` | Use when building or reviewing text input fields — sizes (Large/Small/XSmall), all states (enabled/hover/active/focus/error/success/disabled), and label/hint patterns per the ECO Design System. |
+| `eco-icon-picker` | Use when a field must hold a Material Symbols icon name (icon for a banner, notification, menu item, tile or category) — click/Tab into it and a panel opens on top with instant search over all icons, Recent and Popular. One script, `components/icon-picker/icon-picker.js`, for prototypes, back-office forms and docs playgrounds alike. |
+| `eco-textarea` | Use when building or reviewing a multi-line text area (comments, feedback, long free text) — label with optional word count, all states (enabled/hover/active/focus/error/success/disabled), resizer and message per the ECO Design System. Not for single-line text (use eco-input) or choosing from a list (use eco-select). |
 | `eco-select` | Use when building or reviewing select fields/dropdowns — sizes, states, and the dropdown arrow per the ECO Design System. |
-| `eco-segment-control` | Use when building or reviewing a segmented control (pill toggle) for switching between two related views/filters in the same surface — sizes, the sliding-pill interaction, and states. Never replaces Tabs or Radio buttons. |
-| `eco-checkbox` | Use when building or reviewing checkboxes — light mode (standard and the detailed table icon variant) and dark mode, including all states (enabled/hover/focus/selected/indeterminate/disabled). |
+| `eco-pill-segment-control` | Use when building or reviewing a segmented control (pill toggle) for switching between two related views/filters in the same surface — sizes, the sliding-pill interaction, and states. Never replaces Tabs or Radio buttons. Not the framed button group (see `eco-button`). |
+| `eco-checkbox` | Use when building or reviewing checkboxes — light mode (standard and the detailed table icon variant) and dark mode, including all states (enabled/hover/focus/selected/indeterminate/disabled) Also the tile variants for PDP and filtering (Color swatch, Image, Number). |
+| `eco-switch` | Use when building or reviewing a switch (toggle switch) — an immediate on/off control for a single binary setting. Sizes (Large/Small/X-Small), light and dark mode, all states (enabled/hover/focus/disabled × off/on), label. Not for choosing between options (use eco-radio) or multi-select/form submission (use eco-checkbox). |
 | `eco-radio` | Use when building or reviewing radio buttons — a list of two or more mutually exclusive options where exactly one can be chosen. Sizes (Large/Small), all states (enabled/hover/focus/selected/selected hover/selected focus/disabled/disabled selected), label + optional hint message. |
+| `eco-range` | Use when the user picks one value from an ordered series of steps (easing, duration, size, a number between a minimum and a maximum) by dragging a thumb along a track, with the current value and optional tick labels. Native `<input type="range">` + `components/css/range.css` + `components/js/range.js`, for prototypes, back-office forms and docs playgrounds alike. Not for two or three named options (use eco-pill-segment-control / eco-radio), on/off (eco-switch) or typed numbers (eco-input). |
 
 **Layout**
 
@@ -199,10 +211,14 @@ Every component in the ECO Design System is its own skill under `.claude/skills/
 
 | Skill | Used when |
 |---|---|
+| `eco-menu` | Use when building or reviewing a menu surface — the dropdown list that opens from a button/action (Dropdown menu) or from a Select field (Exposed dropdown menu). Base Item (Select / Multi Select, Enabled/Hover/Selected), Menu Item Divider (Middle-inset/Full-width/No), sizes, scrollbar and elevation. Not for the closed select field itself (use eco-select) and not for page navigation. |
+| `eco-list-item` | Use when building or reviewing the content of one row in a list surface (List Item) — optional leading element (icon, check box, radio, color swatch, swatch frame, image), label (regular/bold) and optional trailing element (icon, secondary or tertiary text, check box, radio, switch), plus optional overline and supporting text. Used inside Menu, Overflow menu, List Picker, Drawer link and Filter sections. Not for the row container (height, divider, hover, focus: use eco-menu) and not for a standalone checkbox/radio (use eco-checkbox / eco-radio). |
+| `eco-divider` | Use when separating content groups with a thin line (Divider) — horizontal between sections/list items, vertical between side-by-side items. Three colors (Border Primary/Secondary/Tertiary). Not for section boundaries that already have their own padding (see eco-section `.page-divider`) and not a replacement for whitespace, headings or labels. |
 | `eco-tooltip` | Use when adding a tooltip to an icon button or other element with no visible text — shown on hover, never on keyboard focus. |
 | `eco-collapsible` | Use when building a row-based expandable component/accordion, e.g. an "FAQ" section — header + animated content. |
 | `eco-role-tier-card` | Use when building a role card/tier card pair that introduces two tiers within the same category (e.g. Standard/Administrator) side by side and links onward to a full comparison table. |
 | `eco-badge` | Use when building a non-interactive status or label indicator (Badge) — e.g. "New", "Updated", "Archive", a role name. Not to be confused with Tag (interactive filtering) or the cart counter's `.badge` class. |
+| `eco-table` | Use when building a data table (rows and columns of text, check icons or small controls) — row and header heights, cell padding, lines, header background and the card shadow. A first version: more variants and states (sorting, selection, sticky header, empty state) are added later. |
 | `eco-breadcrumb` | Use when building breadcrumbs for page-hierarchy navigation — placed directly under the header as the first element in `.page`. |
 | `eco-pagination` | Use when building a "load more" pattern for progressively loading more results into a list (reviews, products, order history) — not numbered page navigation. |
 

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toast – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../notifications.css?v=16">
+  <style>
+    /* page-local: layout, and the Breakpoint preview (forces the mobile or desktop text size at any window width) */
+    body[data-bp="mobile"] .toast__text { font-size: 16px; line-height: 22px; }
+    body[data-bp="desktop"] .toast__text { font-size: 17px; line-height: 24px; }
+    /* Breakpoint preview of the system toast: Mobile (xs) fills the width; Desktop is the 375px card */
+    body[data-bp="mobile"] .toast { width: 375px; max-width: 100%; }
+    body[data-bp="desktop"] .toast { width: 375px; max-width: 100%; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); justify-items: start; }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, max-content); gap: 24px 32px; } }
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+    .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); flex-wrap: wrap; }
+    .pg-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-row:last-child { padding-bottom: 0; }
+    .pg-row__txt { flex: 1; min-width: 240px; }
+    .pg-row__txt b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-row__txt span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .ds-field[hidden] { display: none; }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); margin-top: 12px; }
+    .pg-fix { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  </style>
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+  <link rel="stylesheet" href="/components/css/range.css">
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Toast</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Components · Notifications</span>
+    <h1 class="ds-title">Toast</h1>
+    <p class="ds-lead">A toast is <strong>short-lived feedback</strong> on something the user just did: saved, copied, failed. It slides in, says its piece and leaves without blocking the page.</p>
+    <p class="ds-lead">Every example is the real component, and every “Show toast” button fires a real toast in the corner of your window. Not sure it is the right component? Start at the <a href="notifications.html" class="ds-link">notification guide</a>. Specification: <code>.claude/skills/eco-toast-system/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#playground">Playground</a></li><li><a href="#action">In action</a></li><li><a href="#variants">Variants</a></li><li><a href="#states">States</a></li><li><a href="#specs">Anatomy &amp; specs</a></li><li><a href="#code">Code</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="playground">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Playground</h2>
+    <p class="ds-desc">Choose status, emphasis and content and the toast and its code update. Press <strong>Show toast</strong> to see how it enters, stays and leaves in your window.</p>
+    <div class="ds-playground">
+      <div class="ds-stage ds-stage--center" id="pg-stage"><div id="pg-host" style="max-width:100%"></div></div>
+      <div class="ds-controls">
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bp">Breakpoint</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-bp" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="sel-pg-l-st" id="pg-l-st">Status</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="status" id="sel-pg-l-st"><option value="info">Informational</option><option value="success">Success</option><option value="warning">Warning</option><option value="error">Error</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-em">Emphasis</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-em" data-pg="emphasis"><button type="button" data-v="strong" aria-pressed="true">Strong</button><button type="button" data-v="weak" aria-pressed="false">Weak</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-ly">Layout</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-ly" data-pg="layout"><button type="button" data-v="default" aria-pressed="true">Default</button><button type="button" data-v="actionable" aria-pressed="false">Actionable</button></div></div>
+        <div class="ds-field" id="pg-acts-f" hidden><span class="form-label form-label--sm" id="pg-l-ac">Actions</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-ac" data-pg="acts"><button type="button" data-v="buttons" aria-pressed="true">Buttons</button><button type="button" data-v="links" aria-pressed="false">Inline links</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-ti">Title</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-ti" data-pg="title"><button type="button" data-v="off" aria-pressed="true">None</button><button type="button" data-v="on" aria-pressed="false">Title</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-ah">Auto-hide</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-ah" data-pg="auto"><button type="button" data-v="on" aria-pressed="true">On</button><button type="button" data-v="off" aria-pressed="false">Off</button></div></div>
+        <div class="form-range" id="pg-time-f" data-range data-unit=" s" data-ticks="2|3|4|5|6|7|8|9|10">
+          <div class="form-range__head"><label class="form-range__label" for="pg-time">Auto-hide time</label><output class="form-range__value" for="pg-time"></output></div>
+          <input class="form-range__input" id="pg-time" type="range" min="2" max="10" step="1" value="4">
+          <div class="form-range__ticks"></div>
+        </div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-text">Text</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-text" value="Your changes were saved." placeholder="Text" /></div></div></div>
+        <div class="ds-field form-field" id="f-ic" hidden><label class="form-label form-label--sm" for="pg-ic">Icon (Informational only)</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-ic" data-icon-picker value="" placeholder="Material Symbol name, e.g. local_shipping" aria-describedby="pg-ic-h" /></div></div><span class="pg-note" id="pg-ic-h" style="margin:0">Google Material Symbols name. Shown as Outlined: Fill 0, Weight 300, Grade 0. Empty = the default filled icon.</span></div>
+        <div class="ds-field form-field" id="pg-b2-f" hidden><label class="form-label form-label--sm" for="pg-b2">Secondary button</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-b2" value="Details" placeholder="Secondary button" /></div></div></div>
+        <div class="ds-field form-field" id="pg-b1-f" hidden><label class="form-label form-label--sm" for="pg-b1">Primary button</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-b1" value="Undo" placeholder="Primary button" /></div></div></div>
+        <div class="ds-field form-field" id="pg-l1-f" hidden><label class="form-label form-label--sm" for="pg-l1">Link 1</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-l1" value="Learn more" placeholder="Link 1" /></div></div></div>
+        <div class="ds-field form-field" id="pg-l2-f" hidden><label class="form-label form-label--sm" for="pg-l2">Link 2</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-l2" value="Undo" placeholder="Link 2" /></div></div></div>
+        <p class="pg-note" style="margin:0">The slide-in and slide-out animation is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+        <button type="button" class="btn btn--primary" id="pg-show" style="align-self:flex-start"><span class="btn__label">Show toast</span></button>
+      </div>
+    </div>
+    <h3 class="ds-h3">Markup for this selection</h3>
+    <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
+    <p class="ds-desc ds-note">The markup has no motion. Slide-in and slide-out animation is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+  </div>
+</section>
+
+<section class="ds-section" id="action">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">In action</h2>
+    <p class="ds-desc">Six real situations. Each button fires the toast the way production code would. Dismiss a toast with the ×, by clicking anywhere outside it, or wait for auto-hide. Where a toast offers an action, the action fires a second toast.</p>
+    <div class="ds-stage" id="scenarios"></div>
+    <p class="ds-desc ds-note">Resize the window below 640px and trigger a toast again: it now slides in from the top and fills the width.</p>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="variants">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Variants</h2>
+    <p class="ds-desc">Four statuses in two emphasis levels, each with a Default and an Actionable layout. The status decides the color and the icon; the emphasis decides how loud the toast is.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="vb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="vb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+    <h3 class="ds-h3">Strong and Weak</h3>
+    <p class="ds-desc"><strong>Strong</strong> has a tinted background and is the default. <strong>Weak</strong> is white with the status color in the 2px left edge only.</p>
+    <div class="ds-stage"><div class="pg-grid" id="v-emph"></div></div>
+    <h3 class="ds-h3">Actionable</h3>
+    <p class="ds-desc">Add buttons and an optional text link below the text, indented 32px to line up under it. Use it when the user needs a way forward, such as <em>Retry</em> after an error.</p>
+    <div class="ds-stage"><div class="pg-grid" id="v-act"></div></div>
+    <h3 class="ds-h3">Actionable with inline links</h3>
+    <p class="ds-desc">The action area holds <strong>either buttons or inline links</strong>, not both. Use links for lighter choices such as <em>Undo</em> or <em>Learn more</em>.</p>
+    <div class="ds-stage"><div class="pg-grid" id="v-links"></div></div>
+  </div>
+</section>
+
+<section class="ds-section" id="states">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">States</h2>
+    <p class="ds-desc">Every status in both emphasis levels. A toast has no hover or disabled state of its own; its lifecycle (enter, visible, exit) is described under <a href="#specs" class="ds-link">Anatomy &amp; specs</a>.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="sl-l">Layout</span>
+      <div class="btn-group" role="group" aria-labelledby="sl-l" data-mx="layout"><button type="button" data-v="default" aria-pressed="true">Default</button><button type="button" data-v="actionable" aria-pressed="false">Buttons</button><button type="button" data-v="links" aria-pressed="false">Inline links</button></div>
+      <span class="ds-toolbar__label" id="sb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+    <div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix">
+      <thead><tr><th scope="col">Status</th><th scope="col">Strong</th><th scope="col">Weak</th></tr></thead><tbody></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="specs">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Anatomy &amp; specs</h2>
+    <div class="ds-anatomy" style="margin-bottom:32px">
+      <div id="anat" style="max-width:100%"></div>
+      <ul class="ds-anatomy__legend">
+        <li><b>1 Status icon</b> · 24px, in the status color</li>
+        <li><b>2 Title</b> (optional) · <code>title-sm</code> 16/18 bold</li>
+        <li><b>3 Text</b> · <code>body-md</code> 16/22, from 769px 17/24</li>
+        <li><b>4 Close</b> · Blank xs, 20px icon, 2px padding</li>
+        <li><b>5 Actions</b> (Actionable) · Secondary + Primary buttons, <b>or</b> inline links</li>
+        <li><b>6 Left edge</b> · 2px, status color, full height</li>
+      </ul>
+    </div>
+    <h3 class="ds-h3">Dimensions</h3>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody id="dim"></tbody></table></div>
+    <h3 class="ds-h3">Position and motion</h3>
+    <p class="ds-desc">The toast is <code>position: fixed</code> and always enters from the right, except on mobile where it enters from the top.</p>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Top</th><th scope="col">Right</th><th scope="col">Width</th><th scope="col">Enters from</th></tr></thead><tbody id="pos"></tbody></table></div>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Motion</th><th scope="col">Value</th></tr></thead><tbody id="motion-rows"></tbody></table></div>
+    <h3 class="ds-h3">Tokens</h3>
+    <p class="ds-desc">Resolved from the live token package.</p>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Status · emphasis</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody id="tok"></tbody></table></div>
+    <h3 class="ds-h3">Behavior and accessibility</h3>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody id="beh"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Copy the markup, then add the CSS and the script once per page. Both are read from <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>, so they are always what you see above.</p>
+    <div id="recipes"></div>
+    <div id="files"></div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <p class="ds-desc">Notifications look alike but differ in how much they interrupt. Choose by what the user needs to do.</p>
+    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The message…</th><th scope="col">Use</th></tr></thead><tbody id="which"></tbody></table></div>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Confirm what happened in a few words: “Folder created”.</li><li>Match the status icon to the status color.</li><li>Put a Retry button inside an error toast.</li><li>Run the exit animation on every dismissal.</li></ul></div>
+      <div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Use a toast for a single form field. Use the field’s error message.</li><li>Put a permanent message in a toast. Use Inline or Banner.</li><li>Ask for confirmation in a toast. Use a Modal.</li><li>Stack several toasts. One at a time.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script src="../../components/js/range.js"></script>
+<script src="../doc-kit.js?v=3"></script>
+<script src="../notifications.js?v=9"></script>
+<script>
+(function () {
+  var $ = DK.$, N = ECO_N, H = N.html;
+  var STATUS = [['info', 'Informational'], ['success', 'Success'], ['warning', 'Warning'], ['error', 'Error']];
+  var DEMO = {
+    info: 'Syncing files in the background…', success: 'Your changes were saved.', warning: 'Poor network connection. Retrying…', error: 'Failed to upload attachment.'
+  };
+  function sample(o) { var d = document.createElement('div'); d.innerHTML = H.toast(o); return d.firstChild; }
+  function mk(status, emphasis, actionable, extra) {
+    var o = { status: status, emphasis: emphasis, text: DEMO[status] };
+    if (extra && extra.title) o.title = STATUS.filter(function (s) { return s[0] === status; })[0][1];
+    if (actionable === 'links') o.links = ['Learn more', 'Undo'];
+    else if (actionable) { o.secondary = 'Details'; o.primary = status === 'error' ? 'Retry' : 'Undo'; }
+    return sample(o);
+  }
+
+  /* Playground */
+  var pg = { status: 'info', emphasis: 'strong', layout: 'default', acts: 'buttons', title: 'off', auto: 'on' };
+  function pgOpts() {
+    var o = { status: pg.status, emphasis: pg.emphasis, text: $('#pg-text').value };
+    if (pg.status === 'info' && $('#pg-ic').value.trim()) o.icon = $('#pg-ic').value.trim();
+    if (pg.title === 'on') o.title = STATUS.filter(function (s) { return s[0] === pg.status; })[0][1];
+    if (pg.layout === 'actionable') {
+      if (pg.acts === 'links') o.links = [$('#pg-l1').value, $('#pg-l2').value].filter(Boolean);
+      else { o.secondary = $('#pg-b2').value; o.primary = $('#pg-b1').value; }
+    }
+    return o;
+  }
+  function renderPg() {
+    $('#f-ic').hidden = pg.status !== 'info'; $('#pg-time-f').hidden = pg.auto === 'off';
+    var act = pg.layout === 'actionable'; $('#pg-acts-f').hidden = !act;
+    ['b2', 'b1'].forEach(function (k) { $('#pg-' + k + '-f').hidden = !act || pg.acts !== 'buttons'; });
+    ['l1', 'l2'].forEach(function (k) { $('#pg-' + k + '-f').hidden = !act || pg.acts !== 'links'; });
+    var o = pgOpts(); DK.clear($('#pg-host')).appendChild(sample(o)); $('#pg-code').textContent = H.toast(o);
+  }
+  DK.$$('[data-pg]').forEach(function (g) { DK.seg(g, function (v) { pg[g.dataset.pg] = v; renderPg(); }); });
+  ['#pg-text', '#pg-ic', '#pg-b2', '#pg-b1', '#pg-l1', '#pg-l2'].forEach(function (q) { $(q).addEventListener('input', renderPg); });
+  $('#pg-show').addEventListener('click', function () {
+    var o = pgOpts(), a = null;
+    if (o.primary || o.secondary) {
+      a = {}; if (o.primary) a.primary = { label: o.primary }; if (o.secondary) a.secondary = { label: o.secondary };
+    } else if (o.links && o.links.length) a = { links: o.links.map(function (t) { return { label: t }; }) };
+    N.showToast({ status: o.status, emphasis: o.emphasis, title: o.title, text: o.text, actions: a, autoHide: pg.auto === 'on' ? $('#pg-time').value * 1000 : 0 });
+  });
+
+  /* In action */
+  var SC = [
+    { t: 'Save settings', d: 'Success, Weak. Confirms the action and leaves by itself after 4 seconds.', run: function () { N.showToast({ status: 'success', emphasis: 'weak', text: 'Settings saved.', autoHide: 4000 }); } },
+    { t: 'Copy to clipboard', d: 'Success, Strong. The shortest useful message.', run: function () { N.showToast({ status: 'success', text: 'Copied to clipboard.', autoHide: 4000 }); } },
+    { t: 'Background sync', d: 'Informational. Passive status; no action needed.', run: function () { N.showToast({ status: 'info', text: 'Syncing files in the background…', autoHide: 4000 }); } },
+    { t: 'Poor connection', d: 'Warning. A soft error. Stays until the user dismisses it or carries on.', run: function () { N.showToast({ status: 'warning', text: 'Poor network connection. Retrying…', actions: { link: { label: 'Check connection' } } }); } },
+    { t: 'Upload failed', d: 'Error, Actionable. Stays on screen with a Retry button. Press Retry to see the success toast that follows.', run: function () {
+        N.showToast({ status: 'error', title: 'Upload failed', text: 'Failed to upload attachment.', actions: { primary: { label: 'Retry', onClick: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Attachment uploaded.', autoHide: 4000 }); }, 350); } }, secondary: { label: 'Dismiss' } } }); } },
+    { t: 'Undo a delete', d: 'Informational, Actionable. A quick undo inside the toast.', run: function () {
+        N.showToast({ status: 'info', text: 'Address deleted.', autoHide: 6000, actions: { link: { label: 'Undo', onClick: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Address restored.', autoHide: 4000 }); }, 350); } } } }); } }
+  ];
+  var sc = $('#scenarios');
+  SC.forEach(function (s) {
+    var row = document.createElement('div'); row.className = 'pg-row';
+    row.innerHTML = '<div class="pg-row__txt"><b></b><span></span></div>';
+    row.querySelector('b').textContent = s.t; row.querySelector('span').textContent = s.d;
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn--primary'; b.innerHTML = '<span class="btn__label">Show toast</span>'; b.addEventListener('click', s.run);
+    row.appendChild(b); sc.appendChild(row);
+  });
+
+  /* Variants */
+  STATUS.forEach(function (s) {
+    $('#v-emph').appendChild(mk(s[0], 'strong')); $('#v-emph').appendChild(mk(s[0], 'weak'));
+    $('#v-act').appendChild(mk(s[0], s[0] === 'error' || s[0] === 'warning' ? 'strong' : 'weak', true, { title: true }));
+    $('#v-links').appendChild(mk(s[0], 'strong', 'links'));
+  });
+
+  /* States matrix */
+  var mx = { layout: 'default' };
+  function matrix() {
+    var tb = DK.clear($('#matrix tbody'));
+    STATUS.forEach(function (s) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = s[1]; tr.appendChild(th);
+      ['strong', 'weak'].forEach(function (e) { var td = document.createElement('td'); td.appendChild(mk(s[0], e, mx.layout === 'actionable' ? true : mx.layout === 'links' ? 'links' : false)); tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  }
+  DK.seg($('[data-mx="layout"]'), function (v) { mx.layout = v; matrix(); });
+
+  /* Specs */
+  $('#anat').appendChild(sample({ status: 'error', emphasis: 'strong', title: 'Upload failed', text: 'Failed to upload attachment.', secondary: 'Details', primary: 'Retry' }));
+  DK.rows($('#dim'), [
+    ['Width', '<code>375px</code> from 640px. On mobile (below 640px) the full viewport width.'],
+    ['Padding', '16px, with 8px between icon and text'],
+    ['Left edge', '2px solid, status color'],
+    ['Shadow', '<code>var(--shadow-elevation-b-80)</code>'],
+    ['Actionable footer', 'Indent 32px, 16px above the buttons, buttons 32px high, Primary fills the rest of the row. Or inline links, 16px gap between them. Buttons and links are alternatives.'],
+    ['Z-index', '9999']]);
+  DK.rows($('#pos'), [
+    ['lg (1024px+)', '40px', '40px', '375px', 'The right'],
+    ['md (769–1023px)', '32px', '32px', '375px', 'The right'],
+    ['sm (640–768px)', '32px', '32px', '375px', 'The right'],
+    ['xs (0–639px)', '0', '0 (left 0)', 'Full viewport width', 'The top']]);
+  DK.rows($('#motion-rows'), [
+    ['Duration', '<code>var(--duration-medium-2)</code> (300ms) enter and exit; no fade, the toast only slides'],
+    ['Enter easing', '<code>var(--ease-decelerate-emphasized)</code> (<code>cubic-bezier(0.16, 0, 0.16, 1)</code>)'],
+    ['Exit easing', '<code>var(--ease-accelerate-generic)</code> (<code>cubic-bezier(0.36, 0.09, 1, 0.58)</code>)'],
+    ['Auto-hide', '4000ms for System Toast'],
+    ['Reduced motion', 'The toast appears and leaves without sliding']]);
+  var T = [];
+  STATUS.forEach(function (s) {
+    var k = s[0] === 'error' ? 'danger' : s[0] === 'info' ? 'information' : s[0];
+    T.push([s[1] + ' · Strong', 'Background', 'surface-' + k + '-weaker'], [s[1] + ' · both', 'Left edge and icon', 'surface-' + k + '-default']);
+  });
+  T.push(['Weak', 'Background', 'surface-raised-primary'], ['All', 'Text', 'text-primary'], ['All', 'Shadow', 'shadow-elevation-b-80']);
+  DK.tokenTable($('#tok'), T);
+  DK.rows($('#beh'), [
+    ['Click ×', 'Runs the exit animation, then removes the toast.'],
+    ['Click outside', 'Same. The listener starts on the next tick so the click that opened the toast does not close it.'],
+    ['Wait', 'Auto-hide after 4 seconds (Success and Informational). Warning and Error stay until dismissed.'],
+    ['Tab', 'The × and any button or link take focus with a visible ring.'],
+    ['Inline link', 'Underlined when enabled; on hover the underline goes and the color changes (<code>eco-inline-link</code>, Medium).'],
+    ['Screen readers', 'The toast area is <code>role="status"</code> with <code>aria-live="polite"</code>, so new toasts are announced without moving focus.'],
+    ['Second toast', 'Replaces the first one at once. Only one toast is on screen.']]);
+
+  /* Code */
+  DK.recipes($('#recipes'), [
+    ['Default', H.toast({ status: 'success', emphasis: 'strong', text: 'Your changes were saved.' })],
+    ['Actionable error', H.toast({ status: 'error', emphasis: 'strong', title: 'Upload failed', text: 'Failed to upload attachment.', secondary: 'Details', primary: 'Retry' })],
+    ['Actionable with inline links', H.toast({ status: 'info', emphasis: 'strong', text: 'Address deleted.', links: ['Undo', 'Learn more'] })],
+    ['Show it from script', "ECO_N.showToast({\n  status: 'success',      // info | success | warning | error\n  emphasis: 'strong',     // strong | weak\n  text: 'Your changes were saved.',\n  autoHide: 4000          // 0 = stays until dismissed\n});\n\n// Actionable\nECO_N.showToast({\n  status: 'error', title: 'Upload failed', text: 'Failed to upload attachment.',\n  actions: { primary: { label: 'Retry', onClick: retry }, secondary: { label: 'Dismiss' } }   // or { links: [{ label: 'Undo', onClick: undo }] }\n});"]]);
+  DK.printFile($('#files'), '../notifications.css', [['CSS: toast', ['toast']], ['CSS: shared close button, link and buttons', ['base']]])
+    .then(function () { return DK.printFile($('#files'), '../notifications.js', [['JavaScript: showToast', ['runtime']]]); });
+
+  DK.rows($('#which'), [
+    ['confirms what the user just did, briefly', 'Toast (this page)'],
+    ['confirms an add to cart or wishlist', '<a href="toast-ecom.html" class="ds-link">E-Com Toast</a>'],
+    ['belongs to one section and must stay', '<a href="inline.html" class="ds-link">Inline</a>'],
+    ['concerns the whole page or system', '<a href="banner.html" class="ds-link">Banner</a>'],
+    ['needs a decision before the user can go on', '<a href="modal.html" class="ds-link">Modal</a>']]);
+
+  DK.motion({ anchor: 'playground', parts: [{ title: 'Enter', prefix: 'toast-in', rec: { ease: 'decelerate-emphasized', dur: 'medium-2' } }, { title: 'Exit', prefix: 'toast-out', rec: { ease: 'accelerate-generic', dur: 'medium-2' }, exit: true }], collapse: false, role: 'exit', why: 'The toast only slides, with no fade. It enters with decelerate emphasized and leaves with accelerate, both Medium 2 (eco-motion: element enters / element disappears).', show: function () { N.showToast({ status: 'success', text: 'Your changes were saved.', autoHide: 4000 }); } });
+  DK.bp(); renderPg(); matrix();
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+</body>
+</html>

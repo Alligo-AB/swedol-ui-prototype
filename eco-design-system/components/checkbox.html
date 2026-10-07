@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkbox – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <link rel="stylesheet" href="../docs.css">
+  <!-- The component itself. Section "Code" prints this block live; the :is(:hover, [data-state]) pairs
+       exist only so this page can force a state, and are stripped from the printed code. -->
+  <link rel="stylesheet" href="../../components/css/checkbox.css">
+  <style>
+    /* page-local layout only (no component or token values) */
+    /* Breakpoint preview (this page only): force the Large label to the Figma Breakpoint values regardless of window width */
+    body[data-bp="mobile"] .form-checkbox-item:not(.form-checkbox-item--sm) span { font-size: 16px; line-height: 22px; }
+    body[data-bp="desktop"] .form-checkbox-item:not(.form-checkbox-item--sm) span { font-size: 17px; line-height: 24px; }
+    body[data-bp="mobile"] .form-checkbox-tile--image .form-checkbox-tile__box, body[data-bp="mobile"] .form-checkbox-tile--number .form-checkbox-tile__box { width: 40px; height: 40px; }
+    body[data-bp="desktop"] .form-checkbox-tile--image .form-checkbox-tile__box, body[data-bp="desktop"] .form-checkbox-tile--number .form-checkbox-tile__box { width: 48px; height: 48px; }
+    .cb-pdp { display: flex; flex-direction: column; gap: 8px; padding: 24px; background: var(--color-surface-raised-secondary); }
+    .cb-pdp__label { font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 600; line-height: 16px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-primary); }
+    .cb-pdp__name { font-family: 'Breuer Condensed', sans-serif; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); margin-bottom: 4px; }
+    .cb-filter { max-width: 420px; background: var(--color-surface-raised-primary); }
+    .cb-filter__head { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 16px; }
+    .cb-filter__title { font-family: 'Breuer Condensed', sans-serif; font-size: 20px; font-weight: 600; line-height: 24px; color: var(--color-text-primary); } /* title-md */
+    .cb-filter__chev { font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 1; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .cb-filter__more { display: inline-block; margin: 8px 0 24px; padding: 0; border: 0; background: none; cursor: pointer; font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 600; line-height: 22px; color: var(--color-text-primary); }
+    .cb-filter__more:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .cb-filter__rule { border: 0; border-top: 1px solid var(--color-border-primary); margin: 0; }
+    .cb-colorlist { display: grid; gap: 0 32px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .cb-colorlist > div { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--color-border-primary); }
+    .cb-colorlist__label { flex: 0 0 92.58px;  /* 92.58px: fixed label column, as in Figma */ font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1; font-size: 16px; font-weight: 500; line-height: 16px; letter-spacing: 0.32px; text-transform: uppercase; color: var(--color-text-tertiary); } /* alt-label-lg: 16/16 mobile, 18/18 desktop */
+    .cb-colorlist__swatch { width: 16px; height: 16px; background: var(--swatch); flex-shrink: 0; }
+    @media (min-width: 769px) { .cb-colorlist__label { font-size: 18px; line-height: 18px; letter-spacing: 0.36px; } }
+    .cb-tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cb-row {  display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+    .cb-col { display: flex; flex-direction: column; gap: 4px; }
+    .cb-group { border: 0; display: flex; flex-direction: column; gap: 0; }
+    .cb-group legend { font-size: 16px; line-height: 24px; font-weight: 600; margin-bottom: 4px; padding: 0; }
+    .cb-group--wrap { flex-direction: row; flex-wrap: wrap; gap: 4px 24px; }
+    .cb-group--wrap legend { width: 100%; }
+    .cb-indent { margin-left: 24px; display: flex; flex-direction: column; }
+    .cb-state { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; margin-top: 12px; color: var(--color-text-tertiary); }
+    .ds-stage--dark .cb-state { color: var(--color-text-tertiary-inverted); }
+    .cb-table td, .cb-table th { text-align: center; }
+    .cb-table .check-icon input { display: block; margin: 4px auto; } /* 24px area, so the row stays 48px */
+    .cb-table td:first-child, .cb-table th:first-child { text-align: left; }
+  </style>
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Checkbox</span>
+    </div>
+  </nav>
+</div>
+
+<!-- ── Intro ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Components · Form</span>
+    <h1 class="ds-title">Checkbox</h1>
+    <p class="ds-lead">A checkbox lets the user turn <strong>one or more options</strong> on or off, independently of each other. The choice is saved when the form is submitted.</p>
+    <p class="ds-lead">Every example on this page is the real component. Click, tab and press Space to try it. Specification: <code>.claude/skills/eco-checkbox/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#playground">Playground</a></li>
+    <li><a href="#variants">Variants</a></li>
+    <li><a href="#states">States</a></li>
+    <li><a href="#tiles">Tiles</a></li>
+    <li><a href="#specs">Anatomy &amp; specs</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#usage">Usage</a></li>
+  </ul>
+</nav>
+
+<!-- ── Playground ────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="playground">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Playground</h2>
+    <p class="ds-desc">Choose a mode, value and state and the checkbox and its code update. Light mode is the default. Use dark mode only on a dark surface (<code>surface-100</code> or <code>surface-80</code>). The checkbox in the stage is live: click it to change its value.</p>
+    <div class="ds-playground">
+      <div class="ds-stage ds-stage--center" id="pg-stage" data-mode-stage>
+        <div id="pg-host"></div>
+      </div>
+      <div class="ds-controls">
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-mode">Mode</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-mode" data-pg="mode"><button type="button" data-v="light" aria-pressed="true">Light</button><button type="button" data-v="dark" aria-pressed="false">Dark</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bp">Breakpoint</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-bp" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-size">Size</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-size" data-pg="size"><button type="button" data-v="large" aria-pressed="true">Large</button><button type="button" data-v="small" aria-pressed="false">Small</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-type">Type</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-type" data-pg="type"><button type="button" data-v="standard" aria-pressed="true">Standard</button><button type="button" data-v="menu" aria-pressed="false">Inline menu</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-val">Value</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-val" data-pg="value"><button type="button" data-v="unchecked" aria-pressed="true">Unchecked</button><button type="button" data-v="checked" aria-pressed="false">Checked</button><button type="button" data-v="indeterminate" aria-pressed="false">Mixed</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-st">State</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-st" data-pg="state"><button type="button" data-v="enabled" aria-pressed="true">Enabled</button><button type="button" data-v="hover" aria-pressed="false">Hover</button><button type="button" data-v="focus" aria-pressed="false">Focus</button><button type="button" data-v="disabled" aria-pressed="false">Disabled</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-label">Label (standard only)</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-label" value="Label" placeholder="Label" /></div></div></div>
+        <p class="ds-swatch__meta" id="pg-status" aria-live="polite"></p>
+      </div>
+    </div>
+    <h3 class="ds-h3" style="margin-top:32px">Markup for this selection</h3>
+    <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
+  </div>
+</section>
+
+<!-- ── Variants ──────────────────────────────────────────────── -->
+<section class="ds-section" id="variants">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Variants</h2>
+    <p class="ds-desc">Two sizes (Large, Small), two modes (light, dark) and two types (standard, inline menu). Figma also has a Breakpoint property (XLarge–Medium and Small–XSmall), which only changes the Large label size (use the Breakpoint toggle to preview it): see Anatomy &amp; specs. Choose the mode to see every variant below on a light or a dark surface.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="vm-l">Mode</span>
+      <div class="btn-group" role="group" aria-labelledby="vm-l" data-mode-toggle><button type="button" data-v="light" aria-pressed="true">Light</button><button type="button" data-v="dark" aria-pressed="false">Dark</button></div>
+      <span class="ds-toolbar__label" id="vb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="vb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+
+    <h3 class="ds-h3">Sizes</h3>
+    <p class="ds-desc"><strong>Large</strong> is the default. <strong>Small</strong> (class <code>.form-checkbox-item--sm</code>) is for dense layouts such as tables and filters.</p>
+    <div class="ds-stage" data-mode-stage>
+      <div class="cb-row" id="v-sizes" style="align-items:flex-start;gap:12px 48px"></div>
+    </div>
+
+    <h3 class="ds-h3">With label, without label</h3>
+    <p class="ds-desc">A visible label is the default. A checkbox without a label needs an <code>aria-label</code>, and is only for dense cases such as table rows.</p>
+    <div class="ds-stage" data-mode-stage>
+      <div class="cb-row" id="v-single"></div>
+    </div>
+
+    <h3 class="ds-h3">Group</h3>
+    <p class="ds-desc">Related options go in a <code>fieldset</code> with a <code>legend</code>. Stack them in a column, or wrap them in a row when the labels are short.</p>
+    <div class="ds-stage" data-mode-stage>
+      <div class="cb-row" style="align-items:flex-start;gap:32px 48px">
+        <fieldset class="cb-group" id="v-group-col"></fieldset>
+        <fieldset class="cb-group cb-group--wrap" id="v-group-row" style="max-width:420px"></fieldset>
+      </div>
+    </div>
+
+    <h3 class="ds-h3">Select all (mixed)</h3>
+    <p class="ds-desc">A parent checkbox shows the mixed state when only some children are selected. Click the parent to select or clear all. This is the only case where the mixed state is used.</p>
+    <div class="ds-stage" data-mode-stage>
+      <div class="cb-col" id="v-parent"></div>
+      <p class="cb-state" id="v-parent-out" aria-live="polite"></p>
+    </div>
+
+    <h3 class="ds-h3">Inline menu</h3>
+    <p class="ds-desc">A checkbox with a dropdown arrow, for example a table header where the checkbox selects all rows and the arrow opens a menu (class <code>.form-checkbox-item--menu</code> markup below). It has no label, so it needs an <code>aria-label</code>. States: enabled, hover, focus and disabled, each unchecked, checked or mixed. The menu itself is not part of this component.</p>
+    <div class="ds-stage" data-mode-stage>
+      <div class="cb-row" id="v-menu"></div>
+    </div>
+
+    <h3 class="ds-h3">Check icon in a table</h3>
+    <p class="ds-desc">Read-only, to show whether a role has a permission. Always disabled, light mode only (class <code>.check-icon</code> on the cell).</p>
+    <div class="ds-table-wrap"><table class="ds-table cb-table">
+      <thead><tr><th scope="col">Permission</th><th scope="col">Standard</th><th scope="col">Administrator</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">View orders</th><td class="check-icon"><input type="checkbox" checked disabled aria-label="Standard: yes" /></td><td class="check-icon"><input type="checkbox" checked disabled aria-label="Administrator: yes" /></td></tr>
+        <tr><th scope="row">Manage users</th><td class="check-icon"><input type="checkbox" disabled aria-label="Standard: no" /></td><td class="check-icon"><input type="checkbox" checked disabled aria-label="Administrator: yes" /></td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<!-- ── States ────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="states">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">States</h2>
+    <p class="ds-desc">Every state for each value. Hover and focus are forced on this page with <code>data-state</code> so they can be seen at the same time; in your code they come from <code>:hover</code> and <code>:focus-visible</code>. The cells are live, so click to change the value (disabled cells do not respond).</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="sm-l">Mode</span>
+      <div class="btn-group" role="group" aria-labelledby="sm-l" data-mode-toggle><button type="button" data-v="light" aria-pressed="true">Light</button><button type="button" data-v="dark" aria-pressed="false">Dark</button></div>
+<span class="ds-toolbar__label" id="sb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div>
+      <span class="ds-toolbar__label" id="sm-s">Size</span>
+      <div class="btn-group" role="group" aria-labelledby="sm-s" data-mx="size"><button type="button" data-v="large" aria-pressed="true">Large</button><button type="button" data-v="small" aria-pressed="false">Small</button></div>
+      <span class="ds-toolbar__label" id="sm-t">Type</span>
+      <div class="btn-group" role="group" aria-labelledby="sm-t" data-mx="type"><button type="button" data-v="standard" aria-pressed="true">Standard</button><button type="button" data-v="menu" aria-pressed="false">Inline menu</button></div></div>
+    <div class="ds-table-wrap" data-mode-stage-bg><table class="ds-table ds-matrix" id="matrix">
+      <thead><tr><th scope="col">State</th><th scope="col">Unchecked</th><th scope="col">Checked</th><th scope="col">Mixed</th></tr></thead>
+      <tbody></tbody></table></div>
+    <p class="ds-desc ds-note">A checked checkbox in hover is “Selected hover”, in focus “Selected focus”. Every state in Figma is shown: nothing is left out for any size, mode or type.</p>
+  </div>
+</section>
+
+<!-- ── Tiles ─────────────────────────────────────────────────── -->
+<section class="ds-section" id="tiles">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Tiles</h2>
+    <p class="ds-desc">Checkbox tiles are used first and foremost on product pages (PDP) and in filtering, where the choice is a picture or a color instead of a text label. They are native checkboxes, so several can be chosen. Three kinds: <strong>Color swatch</strong>, <strong>Image</strong> and <strong>Number</strong> (the “+10” tile that shows how many more there are). They have no label, so each needs an <code>aria-label</code>.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="tb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="tb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+
+    <h3 class="ds-h3">Color swatch in a filter list</h3>
+    <p class="ds-desc">A 24×24px tile with a 16px square of the product color. The same size on desktop and mobile. The color is the product’s own, set with the <code>--swatch</code> variable. In filtering several colors can be chosen, so these are checkboxes.</p>
+    <div class="ds-stage"><div class="cb-filter" id="t-filter"></div></div>
+    <p class="ds-desc" style="margin-top:24px">The same tiles as a compact grid, all 26 product colors:</p>
+    <div class="ds-stage"><fieldset class="cb-group" id="t-color"></fieldset></div>
+    <p class="ds-desc" style="margin-top:24px">The swatch shows the product color, including the glossy gradients and finishes (gold, mirror lens, semi shiny, transparent, pattern). The library below has all 26 product colors from Figma, each with its name in <code>alt-label-lg</code> style (Medium, uppercase, <code>text-tertiary</code>) and a 16px swatch. In the real filter the hex value comes from the product data.</p>
+    <div class="ds-stage"><div class="cb-colorlist" id="t-colorlist" role="list"></div></div>
+
+    <h3 class="ds-h3">Image on a product page</h3>
+    <p class="ds-desc">The product picture inside a 48px tile (40px on mobile), with 6px around the image. On a product page (PDP) only <strong>one</strong> can be chosen at a time, so the tiles are <code>radio</code> inputs with the same tile styling (use checkboxes only when several can be chosen, as in filtering). The Number tile (“+10”) has the same size and sits last in the row.</p>
+    <div class="ds-stage"><div class="cb-pdp" id="t-image"></div></div>
+
+    <h3 class="ds-h3">States</h3>
+    <p class="ds-desc">Enabled, hover, selected and selected hover for each tile. Hover is forced on this page. The Number tile only has enabled and hover in Figma.</p>
+    <div class="ds-table-wrap"><table class="ds-table ds-matrix" id="tile-matrix">
+      <thead><tr><th scope="col">State</th><th scope="col">Color swatch</th><th scope="col">Image</th><th scope="col">Number</th></tr></thead>
+      <tbody></tbody></table></div>
+    <p class="ds-desc ds-note">Selected is a 2px frame, drawn as a 1px border plus a 1px inset line so the tile never changes size. Disabled is not defined in Figma for tiles.</p>
+  </div>
+</section>
+
+<!-- ── Anatomy & specs ───────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="specs">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Anatomy &amp; specs</h2>
+    <p class="ds-desc">The 4px margin around the box leaves exactly room for the focus ring (2px gap plus 2px line), so focusing never shifts the layout. The diagram is drawn at 8× scale.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy__fig" role="img" aria-label="24 pixel area containing a 16 pixel box with a focus ring"><div class="ds-anatomy__box"></div></div>
+      <ul class="ds-anatomy__legend">
+        <li><b>24×24px</b> total area (the box plus 4px margin)</li>
+        <li><b>16×16px</b> visible box (Small: 14×14px in 20×20px), 1px border (dark mode: 2px on hover)</li>
+        <li><b>2px + 2px</b> focus ring: offset, then line</li>
+        <li><b>8px</b> gap to the label</li>
+        <li><b>Label</b> Breuer Condensed, <code>body-md</code> 16/22 (17/24 from 769px)</li>
+      </ul>
+    </div>
+
+    <h3 class="ds-h3">Sizes</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th scope="col">Size</th><th scope="col">Area</th><th scope="col">Box</th><th scope="col">Margin</th><th scope="col">Gap to label</th><th scope="col">Label</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Large · Desktop</th><td>24×24px</td><td>16×16px</td><td>4px</td><td>8px</td><td><code>body-md</code>: 17/24, 0.32px (769px and up)</td></tr>
+        <tr><th scope="row">Large · Mobile</th><td>24×24px</td><td>16×16px</td><td>4px</td><td>8px</td><td><code>body-md</code>: 16/22, 0.32px (below 769px)</td></tr>
+        <tr><th scope="row">Small · both</th><td>20×20px</td><td>14×14px</td><td>3px</td><td>4px</td><td><code>body-sm</code>: 14/20</td></tr>
+        <tr><th scope="row">Inline menu</th><td colspan="5">Box as above, then a 24×24px dropdown arrow (<code>icon-primary</code>, dark: <code>icon-inverted</code>). Gap 8px Large, 4px Small. No label.</td></tr>
+      </tbody></table></div>
+    <p class="ds-desc ds-note"><strong>Breakpoint.</strong> Figma has two versions of every checkbox: “XLarge–Large–Medium” (Desktop) and “Small–XSmall” (Mobile). In Figma the box, area, gap and Small label are the same in both; only the Large label differs, following <code>body-md</code> (17/24 on Desktop, 16/22 on Mobile). The component switches at 769px by itself. The Breakpoint toggle above forces one of them for preview only.</p>
+
+    <h3 class="ds-h3">Tile sizes</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th scope="col">Tile</th><th scope="col">Desktop</th><th scope="col">Mobile</th><th scope="col">Inside</th><th scope="col">Border (enabled)</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Color swatch</th><td>24×24px</td><td>24×24px</td><td>16px swatch, 2px padding</td><td>1px <code>border-secondary</code></td></tr>
+        <tr><th scope="row">Image</th><td>48×48px</td><td>40×40px</td><td>image 6px from the edge, <code>object-fit: contain</code></td><td>1px <code>border-primary</code></td></tr>
+        <tr><th scope="row">Number</th><td>48×48px</td><td>40×40px</td><td><code>label-md</code> 16/16, 0.48px, Bold, uppercase</td><td>1px <code>border-secondary</code></td></tr>
+      </tbody></table></div>
+    <p class="ds-desc ds-note">Hover is 1px <code>border-hover</code>, selected is a 2px <code>border-selected</code> frame, selected hover is a 2px <code>border-selected-hover</code> frame. The fill is <code>surface-raised-primary</code>. In Figma the mobile Color Swatch has a 20×18px swatch box in the selected states; this page uses the 16px swatch for every state and breakpoint.</p>
+
+    <h3 class="ds-h3">Tokens</h3>
+    <p class="ds-desc">Resolved from the live token package.</p>
+    <div class="ds-table-wrap"><table class="ds-table" id="tok-table">
+      <thead><tr><th scope="col">Mode</th><th scope="col">Part · state</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead>
+      <tbody></tbody></table></div>
+    <p class="ds-desc ds-note">The checkmark and dash are SVG data URIs, which cannot use <code>var()</code>. Their colors (white, black, <code>#939595</code> for the disabled check) are set in the SVG and match <code>icon-inverted</code>, <code>surface-100</code> and <code>surface-40</code>.</p>
+
+    <h3 class="ds-h3">Behavior and accessibility</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Click box or label</th><td>Toggles checked. Clearing the mixed state also makes it checked.</td></tr>
+        <tr><th scope="row">Tab / Shift+Tab</th><td>Moves between checkboxes. The focus ring shows with <code>:focus-visible</code> only.</td></tr>
+        <tr><th scope="row">Space</th><td>Toggles the focused checkbox.</td></tr>
+        <tr><th scope="row">Mixed</th><td>Set <code>input.indeterminate = true</code> in JavaScript. It cannot be set in HTML.</td></tr>
+        <tr><th scope="row">Disabled</th><td>Not focusable, no hover. The label turns <code>text-disabled</code> through <code>:has(input:disabled)</code>.</td></tr>
+        <tr><th scope="row">Without label</th><td>Add <code>aria-label</code>. Never use an image or SVG file for the box.</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<!-- ── Code ──────────────────────────────────────────────────── -->
+<section class="ds-section" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Copy the markup you need, then add the CSS once per page. The CSS below is read from this page’s stylesheet, so it is always what you see above.</p>
+    <div id="recipes"></div>
+    <div class="ds-code"><div class="ds-code__bar"><span>CSS (light, dark and tiles)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div>
+  </div>
+</section>
+
+<!-- ── Usage ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <p class="ds-desc">Checkbox, radio and switch look alike but do different jobs. Choose by what the user is deciding.</p>
+    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table">
+      <thead><tr><th scope="col">The user…</th><th scope="col">Use</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">picks any number of options, saved on submit</th><td>Checkbox</td></tr>
+        <tr><th scope="row">picks exactly one of two or more options</th><td><code>eco-radio</code></td></tr>
+        <tr><th scope="row">turns a setting on or off, with immediate effect</th><td><code>eco-switch</code></td></tr>
+      </tbody></table></div>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do">
+        <h3 class="ds-rule__title">Do</h3>
+        <ul>
+          <li>Write labels that make sense when checked, in sentence case.</li>
+          <li>Group related checkboxes in a <code>fieldset</code> with a <code>legend</code>.</li>
+          <li>Use <code>.form-checkbox-item--dark</code> on dark surfaces.</li>
+          <li>Use the mixed state only for a “select all” parent.</li>
+        </ul>
+      </div>
+      <div class="ds-rule ds-rule--dont">
+        <h3 class="ds-rule__title">Don’t</h3>
+        <ul>
+          <li>Use a checkbox for a choice between options. Use radio.</li>
+          <li>Use a checkbox for an on/off setting that applies at once. Use switch.</li>
+          <li>Put the light markup on a dark surface, or the dark markup on a light one.</li>
+          <li>Build the box from an image or SVG file, or hardcode its colors.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var uid = 0;
+
+  /* Build a real component. o: {dark, checked, mixed, disabled, state, label, aria} */
+  function cb(o) {
+    var l = document.createElement('label');
+    l.className = 'form-checkbox-item' + (o.dark ? ' form-checkbox-item--dark' : '') + (o.small ? ' form-checkbox-item--sm' : '') + (o.menu ? ' form-checkbox-item--menu' : '');
+    var i = document.createElement('input');
+    i.type = 'checkbox';
+    i.checked = !!o.checked;
+    i.indeterminate = !!o.mixed;
+    i.disabled = !!o.disabled;
+    if (o.state === 'hover' || o.state === 'focus') i.dataset.state = o.state;
+    if (o.aria) i.setAttribute('aria-label', o.aria);
+    l.appendChild(i);
+    if (o.menu) {
+      var a = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      a.setAttribute('class', 'cb-arrow'); a.setAttribute('viewBox', '0 0 24 24'); a.setAttribute('aria-hidden', 'true');
+      a.innerHTML = '<path d="M7 10l5 5 5-5z"/>'; l.appendChild(a);
+    } else if (o.label != null) { var s = document.createElement('span'); s.textContent = o.label; l.appendChild(s); }
+    return l;
+  }
+  function clear(n) { n.textContent = ''; return n; }
+
+  /* ── Mode: one setting, synced across every toggle and stage ── */
+  var mode = 'light';
+  function applyMode() {
+    $$('[data-mode-toggle]').forEach(function (g) {
+      $$('button', g).forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === mode)); });
+    });
+    $$('[data-mode-stage]').forEach(function (s) { if (s.id !== 'pg-stage') s.classList.toggle('ds-stage--dark', mode === 'dark'); });
+    buildVariants(); buildMatrix();
+  }
+  $$('[data-mode-toggle]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      mode = b.dataset.v; applyMode();
+    });
+  });
+
+  /* ── Breakpoint preview: one setting synced across every toggle ── */
+  $$('[data-bp-toggle]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      if (b.dataset.v === 'auto') document.body.removeAttribute('data-bp'); else document.body.setAttribute('data-bp', b.dataset.v);
+      $$('[data-bp-toggle]').forEach(function (x) { $$('button', x).forEach(function (y) { y.setAttribute('aria-pressed', String(y.dataset.v === b.dataset.v)); }); });
+    });
+  });
+
+  /* ── Playground ── */
+  var pg = { mode: 'light', size: 'large', type: 'standard', value: 'unchecked', state: 'enabled' };
+  function renderPg() {
+    var dark = pg.mode === 'dark', label = $('#pg-label').value;
+    $('#pg-stage').classList.toggle('ds-stage--dark', dark);
+    var menu = pg.type === 'menu', small = pg.size === 'small';
+    var aria = menu ? 'Select all' : (label ? null : 'Checkbox');
+    $('#pg-label').disabled = menu;
+    var node = cb({ dark: dark, small: small, menu: menu, checked: pg.value === 'checked', mixed: pg.value === 'indeterminate', disabled: pg.state === 'disabled', state: pg.state, label: label, aria: aria });
+    clear($('#pg-host')).appendChild(node);
+    var input = $('input', node);
+    input.addEventListener('change', function () { status(input); });
+    status(input);
+    var html = '<label class="form-checkbox-item' + (dark ? ' form-checkbox-item--dark' : '') + (small ? ' form-checkbox-item--sm' : '') + (menu ? ' form-checkbox-item--menu' : '') + '">\n  <input type="checkbox"' +
+      (pg.value === 'checked' ? ' checked' : '') + (pg.state === 'disabled' ? ' disabled' : '') + (aria ? ' aria-label="' + aria + '"' : '') + ' />\n' +
+      (menu ? '  <svg class="cb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>\n' : label ? '  <span>' + label.replace(/</g, '&lt;') + '</span>\n' : '') + '</label>';
+    if (pg.value === 'indeterminate') html += '\n\n<script>\n  document.querySelector(\'input\').indeterminate = true; // cannot be set in HTML\n<\/script>';
+    if (pg.state === 'hover' || pg.state === 'focus') html = '<!-- ' + pg.state + ' is forced here for preview; in production it comes from :' + (pg.state === 'hover' ? 'hover' : 'focus-visible') + ' -->\n' + html;
+    $('#pg-code').textContent = html;
+  }
+  function status(i) { $('#pg-status').textContent = 'Now: ' + (i.indeterminate ? 'mixed' : i.checked ? 'checked' : 'unchecked') + (i.disabled ? ', disabled' : ''); }
+  $$('[data-pg]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      pg[g.dataset.pg] = b.dataset.v;
+      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      renderPg();
+    });
+  });
+  $('#pg-label').addEventListener('input', renderPg);
+
+  /* ── Variants ── */
+  function buildVariants() {
+    var d = mode === 'dark';
+    var sz = clear($('#v-sizes'));
+    [['Large', false], ['Small', true]].forEach(function (z) {
+      var c = document.createElement('div'); c.className = 'cb-col';
+      var cap = document.createElement('div'); cap.className = 'ds-stage__cap'; cap.textContent = z[0]; c.appendChild(cap);
+      c.appendChild(cb({ dark: d, small: z[1], label: 'Unchecked' }));
+      c.appendChild(cb({ dark: d, small: z[1], checked: true, label: 'Checked' }));
+      c.appendChild(cb({ dark: d, small: z[1], mixed: true, label: 'Mixed' }));
+      c.appendChild(cb({ dark: d, small: z[1], disabled: true, label: 'Disabled' }));
+      sz.appendChild(c);
+    });
+    var mn = clear($('#v-menu'));
+    [false, true].forEach(function (sm) {
+      mn.appendChild(cb({ dark: d, small: sm, menu: true, aria: 'Select all' }));
+      mn.appendChild(cb({ dark: d, small: sm, menu: true, checked: true, aria: 'Select all, checked' }));
+      mn.appendChild(cb({ dark: d, small: sm, menu: true, mixed: true, aria: 'Select all, some selected' }));
+    });
+    var s = clear($('#v-single'));
+    s.appendChild(cb({ dark: d, label: 'With label' }));
+    s.appendChild(cb({ dark: d, checked: true, label: 'Checked' }));
+    s.appendChild(cb({ dark: d, aria: 'No visible label' }));
+    s.appendChild(cb({ dark: d, checked: true, aria: 'No visible label, checked' }));
+
+    function group(host, legend, items) {
+      clear(host);
+      var lg = document.createElement('legend'); lg.textContent = legend; host.appendChild(lg);
+      items.forEach(function (it) { host.appendChild(cb({ dark: d, label: it[0], checked: it[1], disabled: it[2] })); });
+    }
+    group($('#v-group-col'), 'Delivery options', [['Leave at door', true], ['Text me on arrival'], ['Call me on arrival'], ['Signature required', false, true]]);
+    group($('#v-group-row'), 'Show columns', [['Name', true], ['Email', true], ['Role'], ['Last login']]);
+
+    var host = clear($('#v-parent'));
+    var parent = cb({ dark: d, label: 'Select all' }), pi = $('input', parent);
+    var kids = ['Orders', 'Invoices', 'Reports'].map(function (t, n) { return cb({ dark: d, label: t, checked: n === 0 }); });
+    host.appendChild(parent);
+    var wrap = document.createElement('div'); wrap.className = 'cb-indent';
+    kids.forEach(function (k) { wrap.appendChild(k); });
+    host.appendChild(wrap);
+    function sync() {
+      var on = kids.filter(function (k) { return $('input', k).checked; }).length;
+      pi.checked = on === kids.length; pi.indeterminate = on > 0 && on < kids.length;
+      $('#v-parent-out').textContent = on + ' of ' + kids.length + ' selected → parent is ' + (pi.indeterminate ? 'mixed' : pi.checked ? 'checked' : 'unchecked');
+    }
+    pi.addEventListener('change', function () { kids.forEach(function (k) { $('input', k).checked = pi.checked; }); sync(); });
+    kids.forEach(function (k) { $('input', k).addEventListener('change', sync); });
+    sync();
+  }
+
+  /* ── State matrix ── */
+  var ROWS = [['Enabled', 'enabled'], ['Hover', 'hover'], ['Focus', 'focus'], ['Disabled', 'disabled']];
+  var mx = { size: 'large', type: 'standard' };
+  $$('[data-mx]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      mx[g.dataset.mx] = b.dataset.v;
+      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      buildMatrix();
+    });
+  });
+  var COLS = ['unchecked', 'checked', 'mixed'];
+  function buildMatrix() {
+    var d = mode === 'dark', tb = clear($('#matrix tbody'));
+    $('[data-mode-stage-bg]').classList.toggle('ds-stage--dark', d);
+    var menu = mx.type === 'menu', small = mx.size === 'small';
+    ROWS.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th');
+      th.scope = 'row'; th.textContent = r[0] + (r[1] === 'hover' ? ' / Selected hover' : r[1] === 'focus' ? ' / Selected focus' : '');
+      tr.appendChild(th);
+      COLS.forEach(function (c) {
+        var td = document.createElement('td');
+        td.appendChild(cb({ dark: d, small: small, menu: menu, checked: c === 'checked', mixed: c === 'mixed', disabled: r[1] === 'disabled', state: r[1], aria: r[0] + ', ' + c, label: menu ? null : undefined }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  /* the matrix wrapper takes the dark surface itself, so table text/borders must follow */
+  var mw = document.createElement('style');
+  mw.textContent = '.ds-stage--dark .ds-table, .ds-stage--dark .ds-table th, .ds-stage--dark .ds-table td { color: var(--color-text-primary-inverted); border-color: var(--color-surface-60); } .ds-stage--dark .ds-table thead th { background: transparent; } .ds-table-wrap.ds-stage--dark { padding: 0; background: var(--color-surface-100); border-color: var(--color-surface-100); }';
+  document.head.appendChild(mw);
+
+
+  /* ── Tiles ── */
+  var COLORS = [["Yellow", "conic-gradient(from 0deg, rgb(217,217,0) 0%, rgb(246,246,8) 51%, rgb(246,246,8) 100%)"], ["White", "conic-gradient(from 0deg, rgb(231,231,231) 0%, rgb(255,255,255) 50.5%, rgb(255,255,255) 100%)"], ["Beige", "conic-gradient(from 0deg, rgb(210,210,190) 0%, rgb(245,245,220) 51%, rgb(245,245,220) 100%)"], ["Black", "conic-gradient(from 0deg, rgb(0,0,0) 0%, rgb(0,0,0) 52%, rgb(8,8,8) 58%, rgb(17,17,17) 64%, rgb(33,33,33) 76%, rgb(50,50,50) 88%, rgb(67,67,67) 100%)"], ["Blue", "conic-gradient(from 0deg, rgb(22,81,170) 0%, rgb(11,91,212) 25%, rgb(0,102,255) 50%, rgb(18,113,255) 62.5%, rgb(35,123,255) 75%, rgb(70,144,255) 100%)"], ["Bronze", "conic-gradient(from 0deg, rgb(168,103,39) 0%, rgb(205,127,50) 48%, rgb(229,156,84) 100%)"], ["Brown", "conic-gradient(from 0deg, rgb(150,75,0) 0%, rgb(150,75,0) 50.5%, rgb(158,85,12) 62.875%, rgb(167,95,23) 75.25%, rgb(184,115,47) 100%)"], ["Gold", "conic-gradient(from 0deg, rgb(204,174,12) 0%, rgb(255,215,0) 50%, rgb(255,217,11) 62.5%, rgb(255,219,23) 75%, rgb(255,222,46) 100%)"], ["Green", "conic-gradient(from 0deg, rgb(8,131,8) 0%, rgb(4,166,4) 25.5%, rgb(0,200,0) 51%, rgb(0,233,0) 100%)"], ["Grey", "conic-gradient(from 0deg, rgb(116,113,113) 0%, rgb(128,128,128) 50%, rgb(156,154,154) 75%, rgb(184,181,181) 100%)"], ["Oak", "conic-gradient(from 0deg, rgb(178,147,109) 0%, rgb(216,181,137) 50%, rgb(235,205,166) 100%)"], ["Orange", "conic-gradient(from 0deg, rgb(190,128,13) 0%, rgb(255,165,0) 50%, rgb(255,170,14) 62.5%, rgb(255,175,28) 75%, rgb(255,185,56) 100%)"], ["Pink", "conic-gradient(from 0deg, rgb(253,155,172) 0%, rgb(255,192,203) 50.5%, rgb(255,192,203) 100%)"], ["Purple", "conic-gradient(from 0deg, rgb(104,0,169) 0%, rgb(136,15,212) 25%, rgb(169,31,255) 50%, rgb(180,60,255) 75%, rgb(192,90,255) 100%)"], ["Red", "conic-gradient(from 0deg, rgb(198,29,29) 0%, rgb(226,15,15) 25.75%, rgb(241,7,7) 38.625%, rgb(255,0,0) 51.5%, rgb(255,12,12) 63.625%, rgb(255,25,25) 75.75%, rgb(255,50,50) 100%)"], ["Silver", "conic-gradient(from 0deg, rgb(168,168,168) 0%, rgb(192,192,192) 49.5%, rgb(217,217,217) 100%)"], ["Teak", "conic-gradient(from 0deg, rgb(136,108,64) 0%, rgb(171,137,83) 50%, rgb(171,137,83) 100%)"], ["Pattern", "conic-gradient(var(--color-surface-100) 25%, var(--color-surface-raised-primary) 0 50%, var(--color-surface-100) 0 75%, var(--color-surface-raised-primary) 0) 0 0 / 8px 8px"], ["Dark", "conic-gradient(from 0deg, rgb(0,0,0) 0%, rgb(0,0,0) 52%, rgb(8,8,8) 58%, rgb(17,17,17) 64%, rgb(33,33,33) 76%, rgb(50,50,50) 88%, rgb(67,67,67) 100%)"], ["Multi color", "conic-gradient(from 180deg, rgb(255,0,0) 0%, rgb(254,15,1) 0.97%, rgb(254,31,1) 1.94%, rgb(253,62,2) 3.88%, rgb(252,92,3) 5.81%, rgb(251,123,4) 7.75%, rgb(248,185,6) 11.63%, rgb(246,246,8) 15.5%, rgb(170,246,8) 34%, rgb(130,247,8) 37.38%, rgb(90,248,9) 40.75%, rgb(50,249,9) 44.13%, rgb(30,249,10) 45.81%, rgb(10,250,10) 47.5%, rgb(19,236,24) 48.63%, rgb(29,223,39) 49.75%, rgb(47,195,67) 52%, rgb(66,168,96) 54.25%, rgb(85,141,125) 56.5%, rgb(104,114,154) 58.75%, rgb(122,86,182) 61%, rgb(141,59,211) 63.25%, rgb(160,32,240) 65.5%, rgb(168,72,228) 68.63%, rgb(176,112,216) 71.75%, rgb(184,152,204) 74.88%, rgb(192,192,192) 78%, rgb(192,192,192) 86.5%, rgb(208,144,144) 89.88%, rgb(224,96,96) 93.25%, rgb(231,72,72) 94.94%, rgb(239,48,48) 96.63%, rgb(247,24,24) 98.31%, rgb(251,12,12) 99.16%, rgb(255,0,0) 100%)"], ["Black mirror", "linear-gradient(90deg, rgb(233,233,233) 0%, rgb(158,158,158) 42.5%, rgb(0,0,0) 100%)"], ["Clear", "linear-gradient(90deg, rgb(255,255,255) 0%, rgb(243,243,243) 28%, rgb(237,237,237) 56%, rgb(212,212,212) 88.5%, rgb(203,203,203) 100%)"], ["Matte", "linear-gradient(90deg, rgb(196,192,192) 0%, rgb(131,131,131) 100%)"], ["Mirror lens", "linear-gradient(90deg, rgb(219,255,255) 0%, rgb(121,255,255) 100%)"], ["Semi shiny", "linear-gradient(90deg, rgb(233,233,233) 0%, rgb(131,131,131) 100%)"], ["Transparent", "conic-gradient(from 0deg, rgb(233 233 233 / 0.5), rgb(245 245 245 / 0.5))"]]; /* product colors from the Figma color library: product data, not design tokens */
+  var IMAGES = [['Orange', '/images/product-skaljacka-orange.webp'], ['Red', '/images/product-skaljacka-rod.webp'], ['Yellow / black', '/images/product-skaljacka-gul-svart.webp'], ['Yellow / navy', '/images/product-skaljacka-gul-marin.webp']];
+  /* o: {kind color|image|number, name, color, src, checked, state hover|focus, text} */
+  function tile(o) {
+    var box = document.createElement('span'); box.className = 'form-checkbox-tile__box';
+    var el;
+    if (o.kind === 'number') {
+      el = document.createElement('button'); el.type = 'button'; el.className = 'form-checkbox-tile form-checkbox-tile--number'; el.setAttribute('aria-label', o.name || 'Show 10 more');
+      box.textContent = o.text || '+10'; el.appendChild(box);
+    } else {
+      el = document.createElement('label'); el.className = 'form-checkbox-tile' + (o.kind === 'image' ? ' form-checkbox-tile--image' : '');
+      var i = document.createElement('input'); i.type = o.radio ? 'radio' : 'checkbox'; if (o.radio) i.name = o.radio; i.checked = !!o.checked; i.setAttribute('aria-label', o.name); el.appendChild(i);
+      if (o.kind === 'image') { var im = document.createElement('img'); im.src = o.src; im.alt = ''; box.appendChild(im); }
+      else { var sw = document.createElement('span'); sw.className = 'form-checkbox-tile__swatch'; sw.style.setProperty('--swatch', o.color); box.appendChild(sw); }
+      el.appendChild(box);
+    }
+    if (o.state) el.dataset.state = o.state;
+    return el;
+  }
+  /* A row: tile + name + count (the whole row toggles) */
+  function tileRow(o) {
+    var el = tile({ kind: 'color', name: o.name, color: o.color, checked: o.checked });
+    el.classList.add('form-checkbox-tile--row');
+    var t = document.createElement('span'); t.className = 'form-checkbox-tile__text'; t.textContent = o.name;
+    var c = document.createElement('span'); c.className = 'form-checkbox-tile__count'; c.textContent = o.count;
+    el.appendChild(t); el.appendChild(c); el.querySelector('input').removeAttribute('aria-label');
+    return el;
+  }
+  function buildTiles() {
+    var f = clear($('#t-filter'));
+    var hd = document.createElement('div'); hd.className = 'cb-filter__head'; hd.innerHTML = '<span class="cb-filter__title">Color</span><span class="cb-filter__chev" aria-hidden="true">expand_less</span>'; f.appendChild(hd);
+    var fs0 = document.createElement('fieldset'); fs0.className = 'cb-group'; var lg0 = document.createElement('legend'); lg0.textContent = 'Color'; lg0.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)'; fs0.appendChild(lg0); f.appendChild(fs0);
+    [['Beige', 16, true], ['Blue', 419], ['Brown', 10], ['Grey', 149], ['Green', 77]].forEach(function (r) {
+      var cd = COLORS.filter(function (x) { return x[0] === r[0]; })[0]; fs0.appendChild(tileRow({ name: r[0], color: cd[1], count: r[1], checked: !!r[2] }));
+    });
+    var mo = document.createElement('button'); mo.type = 'button'; mo.className = 'cb-filter__more'; mo.textContent = 'Show more'; f.appendChild(mo);
+    f.appendChild(document.createElement('hr')).className = 'cb-filter__rule';
+    var c = clear($('#t-color')); var lg = document.createElement('legend'); lg.textContent = 'Color'; c.appendChild(lg);
+    var cr = document.createElement('div'); cr.className = 'cb-tiles'; c.appendChild(cr);
+    COLORS.forEach(function (x, n) { cr.appendChild(tile({ kind: 'color', name: x[0], color: x[1], checked: n === 0 || n === 4 })); });
+    var cl = clear($('#t-colorlist'));
+    COLORS.forEach(function (x) { var r = document.createElement('div'), l = document.createElement('span'), w = document.createElement('span'); l.className = 'cb-colorlist__label'; l.textContent = x[0]; w.className = 'cb-colorlist__swatch'; w.style.setProperty('--swatch', x[1]); w.setAttribute('aria-hidden', 'true'); r.appendChild(l); r.appendChild(w); cl.appendChild(r); });
+    var m = clear($('#t-image'));
+    var lab = document.createElement('div'); lab.className = 'cb-pdp__label'; lab.textContent = 'More options'; m.appendChild(lab);
+    var nm = document.createElement('div'); nm.className = 'cb-pdp__name'; nm.id = 'pdp-name'; nm.setAttribute('aria-live', 'polite'); nm.textContent = IMAGES[2][0]; m.appendChild(nm);
+    var fs = document.createElement('fieldset'); fs.className = 'cb-group'; var lg2 = document.createElement('legend'); lg2.textContent = 'Color'; lg2.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)'; fs.appendChild(lg2);
+    var mr = document.createElement('div'); mr.className = 'cb-tiles'; fs.appendChild(mr); m.appendChild(fs);
+    IMAGES.forEach(function (x, n) { var t = tile({ kind: 'image', radio: 'pdp-color', name: x[0], src: x[1], checked: n === 2 }); t.querySelector('input').addEventListener('change', function () { nm.textContent = x[0]; }); mr.appendChild(t); });
+    mr.appendChild(tile({ kind: 'number', name: 'Show 10 more colors' }));
+    var tb = clear($('#tile-matrix tbody'));
+    [['Enabled', null, false], ['Hover', 'hover', false], ['Selected', null, true], ['Selected hover', 'hover', true]].forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      [['color', COLORS[4]], ['image', IMAGES[0]], ['number', null]].forEach(function (k) {
+        var td = document.createElement('td');
+        if (k[0] === 'number' && r[2]) { td.className = 'ds-na'; td.textContent = 'Not defined'; }
+        else td.appendChild(tile({ kind: k[0], name: k[1] ? k[1][0] : 'Show 10 more', color: k[0] === 'color' ? k[1][1] : null, src: k[0] === 'image' ? k[1][1] : null, checked: r[2], state: r[1] }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  /* ── Token table (resolved live) ── */
+  var TOK = [
+    ['Light', 'Box border · enabled', 'border-input-control-default'], ['Light', 'Box fill · enabled', 'surface-raised-primary'],
+    ['Light', 'Box border · hover', 'border-hover'], ['Light', 'Box fill · hover', 'surface-raised-secondary'],
+    ['Light', 'Box fill · checked / mixed', 'surface-100'], ['Light', 'Box fill · checked / mixed hover', 'surface-50'],
+    ['Light', 'Box border · disabled', 'border-disabled'], ['Light', 'Box fill · disabled', 'surface-disabled'],
+    ['Light', 'Focus ring', 'border-focus'], ['Light', 'Label', 'text-primary'], ['Light', 'Label · disabled', 'text-disabled'],
+    ['Dark', 'Box border · enabled / checked', 'border-action-2'], ['Dark', 'Box fill · enabled', 'surface-opacity-white-0'],
+    ['Dark', 'Box fill · checked / mixed', 'surface-action-2'], ['Dark', 'Box fill · checked hover', 'surface-40'],
+    ['Dark', 'Box border / fill · disabled', 'surface-60'], ['Dark', 'Label', 'text-primary-inverted'], ['Dark', 'Label · disabled', 'text-disabled'],
+    ['Tile', 'Border · enabled (swatch, number)', 'border-secondary'], ['Tile', 'Border · enabled (image)', 'border-primary'], ['Tile', 'Border · hover', 'border-hover'],
+    ['Tile', 'Frame · selected (2px)', 'border-selected'], ['Tile', 'Frame · selected hover (2px)', 'border-selected-hover'], ['Tile', 'Fill', 'surface-raised-primary'], ['Tile', 'Number text', 'text-primary']
+  ];
+  var cs = getComputedStyle(document.documentElement), tt = $('#tok-table tbody');
+  TOK.forEach(function (t) {
+    var v = cs.getPropertyValue('--color-' + t[2]).trim(), tr = document.createElement('tr');
+    [t[0], t[1]].forEach(function (x, n) { var c = document.createElement(n ? 'td' : 'th'); if (!n) c.scope = 'row'; c.textContent = x; tr.appendChild(c); });
+    var tc = document.createElement('td'), code = document.createElement('code'); code.textContent = 'var(--color-' + t[2] + ')'; tc.appendChild(code); tr.appendChild(tc);
+    var vc = document.createElement('td'), dot = document.createElement('span');
+    dot.className = 'ds-dot'; dot.style.background = 'var(--color-' + t[2] + ')'; dot.setAttribute('aria-hidden', 'true');
+    vc.appendChild(dot); vc.appendChild(document.createTextNode(v || 'missing')); tr.appendChild(vc);
+    tt.appendChild(tr);
+  });
+
+  /* ── Code: recipes + live CSS ── */
+  var RECIPES = [
+    ['Standard', '<label class="form-checkbox-item">\n  <input type="checkbox" />\n  <span>Label</span>\n</label>'],
+    ['Checked / disabled', '<label class="form-checkbox-item">\n  <input type="checkbox" checked disabled />\n  <span>Label</span>\n</label>'],
+    ['Small', '<label class="form-checkbox-item form-checkbox-item--sm">\n  <input type="checkbox" />\n  <span>Label</span>\n</label>'],
+    ['Inline menu', '<label class="form-checkbox-item">\n  <input type="checkbox" aria-label="Select all" />\n  <svg class="cb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>\n</label>'],
+    ['Dark surface', '<label class="form-checkbox-item form-checkbox-item--dark">\n  <input type="checkbox" />\n  <span>Label</span>\n</label>'],
+    ['Group', '<fieldset>\n  <legend>Delivery options</legend>\n  <label class="form-checkbox-item"><input type="checkbox" /><span>Leave at door</span></label>\n  <label class="form-checkbox-item"><input type="checkbox" /><span>Signature required</span></label>\n</fieldset>'],
+    ['Mixed (set in JavaScript)', 'document.querySelector(\'#select-all\').indeterminate = true;'],
+    ['Tile: color swatch', '<fieldset>\n  <legend>Color</legend>\n  <label class="form-checkbox-tile">\n    <input type="checkbox" aria-label="Blue" />\n    <span class="form-checkbox-tile__box"><span class="form-checkbox-tile__swatch" style="--swatch: #0066ff"></span></span>\n  </label>\n</fieldset>'],
+    ['Tile: image', '<label class="form-checkbox-tile form-checkbox-tile--image">\n  <input type="checkbox" aria-label="Yellow / black" />\n  <span class="form-checkbox-tile__box"><img src="/images/product-skaljacka-gul-svart.webp" alt="" /></span>\n</label>'],
+    ['Tile: color row in a filter list', '<label class="form-checkbox-tile form-checkbox-tile--row">\n  <input type="checkbox" />\n  <span class="form-checkbox-tile__box"><span class="form-checkbox-tile__swatch" style="--swatch: #0066ff"></span></span>\n  <span class="form-checkbox-tile__text">Blue</span>\n  <span class="form-checkbox-tile__count">419</span>\n</label>'],
+    ['Tile: image on a PDP (one at a time)', '<fieldset>\n  <legend>Color</legend>\n  <label class="form-checkbox-tile form-checkbox-tile--image">\n    <input type="radio" name="color" aria-label="Yellow / black" checked />\n    <span class="form-checkbox-tile__box"><img src="/images/product-skaljacka-gul-svart.webp" alt="" /></span>\n  </label>\n  <label class="form-checkbox-tile form-checkbox-tile--image">\n    <input type="radio" name="color" aria-label="Winter gloves" />\n    <span class="form-checkbox-tile__box"><img src="/images/product-skaljacka-gul-marin.webp" alt="" /></span>\n  </label>\n</fieldset>'],
+    ['Tile: number', '<button type="button" class="form-checkbox-tile form-checkbox-tile--number" aria-label="Show 10 more colors">\n  <span class="form-checkbox-tile__box">+10</span>\n</button>'],
+    ['Table check icon', '<td class="check-icon"><input type="checkbox" checked disabled aria-label="Administrator: yes" /></td>']
+  ];
+  var rh = $('#recipes');
+  RECIPES.forEach(function (r) {
+    var box = document.createElement('div'); box.className = 'ds-code';
+    var id = 'rc' + (uid++);
+    box.innerHTML = '<div class="ds-code__bar"><span></span><button type="button" class="mo-copy" data-copy="' + id + '" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="' + id + '"></pre>';
+    $('span', box).textContent = r[0]; $('pre', box).textContent = r[1];
+    rh.appendChild(box);
+  });
+  /* The component CSS lives in components/css/ (shared with prototypes); the Code section prints that same file */
+  function cssText(name) {
+    var get = function (n) { return fetch('../../components/css/' + n + '.css').then(function (r) { return r.text(); }); };
+    if (name !== 'select-menu') return get(name);
+    return Promise.all([get('menu'), get('select')]).then(function (a) { return a[0].replace(/\s+$/, '') + '\n\n' + a[1].slice(a[1].indexOf('    /* Exposed dropdown')); });
+  }
+  cssText('checkbox').then(function (t) {
+    $('#css-code').textContent = t
+    .replace(/:is\(:hover, \[data-state="hover"\]\)/g, ':hover')
+    .replace(/:is\(:focus-visible, \[data-state="focus"\]\)/g, ':focus-visible')
+    .replace(/,\n    \.form-checkbox-tile\[data-state="focus"\] \.form-checkbox-tile__box/g, '')
+    .replace(/^\n+/, '').replace(/^ {4}/gm, '');
+  });
+
+  /* ── Copy buttons ── */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var txt = document.getElementById(b.dataset.copy).textContent;
+    var ic = b.querySelector('.mo-ic'); var done = function () { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); };
+    if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
+  });
+
+  renderPg(); applyMode(); buildTiles();
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

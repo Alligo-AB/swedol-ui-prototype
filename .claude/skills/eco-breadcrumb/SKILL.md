@@ -97,7 +97,7 @@ Breadcrumb is used to show the user's position in the page hierarchy and enable 
   text-decoration: underline;
 }
 .breadcrumb-item--active {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-text-primary);
   cursor: default;
 }

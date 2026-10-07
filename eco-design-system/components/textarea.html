@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text area – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <link rel="stylesheet" href="../docs.css">
+  <!-- The component itself. The Code section prints this block live; the [data-state] selectors exist only so this
+       page can force a state, and are stripped from the printed code. Mobile-first, desktop from 769px. -->
+  <link rel="stylesheet" href="../../components/css/textarea.css">
+  <style>
+    /* page-local: layout, and the Breakpoint preview (forces the mobile or desktop values at any window width) */
+    body[data-bp="mobile"] .form-label { font-size: 12px; line-height: 12px; }
+    body[data-bp="mobile"] .form-textarea { font-size: 16px; line-height: 22px; }
+    body[data-bp="desktop"] .form-label { font-size: 16px; line-height: 16px; }
+    body[data-bp="desktop"] .form-textarea { font-size: 17px; line-height: 24px; }
+    .ta-col { display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 360px; }
+    .ta-grid { display: grid; gap: 32px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 769px) { .ta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .ta-matrix td { min-width: 280px; vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .ta-matrix .form-field { min-width: 240px; }
+    .ta-legend { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+    .ta-legend b { font-weight: 600; }
+  </style>
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Text area</span>
+    </div>
+  </nav>
+</div>
+
+<!-- ── Intro ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Components · Form</span>
+    <h1 class="ds-title">Text area</h1>
+    <p class="ds-lead">A text area lets the user enter <strong>text over multiple lines</strong>: comments, feedback or longer passages that need more room than a single-line input. It has a label, an optional word count, a resizer and a message that explains or validates the value.</p>
+    <p class="ds-lead">Every example on this page is the real component. Type, click and tab to try it. Specification: <code>.claude/skills/eco-textarea/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#playground">Playground</a></li>
+    <li><a href="#variants">Variants</a></li>
+    <li><a href="#states">States</a></li>
+    <li><a href="#specs">Anatomy &amp; specs</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#usage">Usage</a></li>
+  </ul>
+</nav>
+
+<!-- ── Playground ────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="playground">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Playground</h2>
+    <p class="ds-desc">Choose a breakpoint and state and the field and its code update. Hover and focus are forced here so they can be seen; type in the field to get the Active state and see the word count change.</p>
+    <div class="ds-playground">
+      <div class="ds-stage ds-stage--center" id="pg-stage"><div class="ta-col" id="pg-host"></div></div>
+      <div class="ds-controls">
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bp">Breakpoint</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-bp" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="sel-pg-l-st" id="pg-l-st">State</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="state" id="sel-pg-l-st"><option value="enabled">Enabled</option><option value="hover">Hover</option><option value="active">Active</option><option value="focus">Focus</option><option value="error">Error</option><option value="success">Success</option><option value="disabled">Disabled</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-cnt">Word count</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-cnt" data-pg="count"><button type="button" data-v="on" aria-pressed="true">Shown</button><button type="button" data-v="off" aria-pressed="false">Hidden</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-label">Label</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-label" value="Comment" placeholder="Label" /></div></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-hint">Message</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-hint" value="Tell us what you think." placeholder="Message" /></div></div></div>
+      </div>
+    </div>
+    <h3 class="ds-h3">Markup for this selection</h3>
+    <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
+  </div>
+</section>
+
+<!-- ── Variants ──────────────────────────────────────────────── -->
+<section class="ds-section" id="variants">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Variants</h2>
+    <p class="ds-desc">There is one size. Figma defines only the Desktop version; below 769px the label and text use the smaller mobile type styles (same as the input). The component switches by itself; the Breakpoint toggle forces one for preview.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="vb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="vb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+
+    <h3 class="ds-h3">Word count</h3>
+    <p class="ds-desc">The word count sits on the label row, on the right. Use it when the text has a limit (<code>maxlength</code>); leave it out when there is none.</p>
+    <div class="ds-stage"><div class="ta-grid" id="v-count"></div></div>
+
+    <h3 class="ds-h3">Messages</h3>
+    <p class="ds-desc">The message sits below the field, in <code>body-sm</code>. Hint text is neutral; error and success change the color of the border and the message. An error message has a leading icon so color is never the only signal.</p>
+    <div class="ds-stage"><div class="ta-grid" id="v-messages"></div></div>
+
+    <h3 class="ds-h3">Resizing</h3>
+    <p class="ds-desc">The user can drag the corner handle to make the field taller (vertical only). A disabled field cannot be resized.</p>
+    <div class="ds-stage"><div class="ta-grid" id="v-resize"></div></div>
+  </div>
+</section>
+
+<!-- ── States ────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="states">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">States</h2>
+    <p class="ds-desc">All seven states from Figma, with and without the word count. Hover and focus are forced on this page; in your code they come from <code>:hover</code> and keyboard focus. Active means the field has a value.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+    <div class="ds-table-wrap"><table class="ds-table ta-matrix" id="matrix">
+      <thead><tr><th scope="col">State</th><th scope="col">With word count</th><th scope="col">Without word count</th></tr></thead>
+      <tbody></tbody></table></div>
+  </div>
+</section>
+
+<!-- ── Anatomy & specs ───────────────────────────────────────── -->
+<section class="ds-section" id="specs">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Anatomy &amp; specs</h2>
+    <p class="ds-desc">The focus ring is a separate element around the box, 3px outside it, so focusing never changes the layout or the box size.</p>
+    <div class="ds-stage"><div class="ds-anatomy">
+      <div class="ta-col" id="a-host"></div>
+      <ol class="ta-legend">
+        <li><b>1 Label</b>: <code>label-md</code> (mobile <code>label-sm</code>), uppercase, 4px above the box</li>
+        <li><b>2 Word count</b>: <code>body-sm</code>, <code>text-secondary</code>, right-aligned on the label row</li>
+        <li><b>3 Text</b>: <code>body-md</code>, 12px padding, 66px minimum height</li>
+        <li><b>4 Resizer</b>: handle in the bottom-right corner, vertical resize</li>
+        <li><b>5 Message</b>: <code>body-sm</code>, 4px below the box</li>
+        <li><b>Focus ring</b>: 2px, <code>border-focus</code>, 3px outside the box</li>
+      </ol></div></div>
+
+    <h3 class="ds-h3">Dimensions and type</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th scope="col">Breakpoint</th><th scope="col">Min height</th><th scope="col">Padding</th><th scope="col">Label</th><th scope="col">Text</th><th scope="col">Word count, message</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Desktop (769px+)</th><td>66px</td><td>12px</td><td><code>label-md</code> 16/16, 0.48px</td><td><code>body-md</code> 17/24, 0.32px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr>
+        <tr><th scope="row">Mobile (below 769px)</th><td>66px</td><td>12px</td><td><code>label-sm</code> 12/12, 0.48px</td><td><code>body-md</code> 16/22, 0.32px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr>
+      </tbody></table></div>
+
+    <h3 class="ds-h3">Tokens</h3>
+    <p class="ds-desc">Resolved from the live token package.</p>
+    <div class="ds-table-wrap"><table class="ds-table" id="tok-table">
+      <thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead>
+      <tbody></tbody></table></div>
+
+    <h3 class="ds-h3">Behavior and accessibility</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Type a value</th><td>The field becomes Active (black border). The word count updates; <code>maxlength</code> stops typing at the limit.</td></tr>
+        <tr><th scope="row">Drag the corner</th><td>The field grows or shrinks in height only. It never goes below the 66px minimum.</td></tr>
+        <tr><th scope="row">Tab</th><td>The blue ring shows on keyboard focus only (<code>body.keyboard-nav</code>, set by a small script).</td></tr>
+        <tr><th scope="row">Label</th><td>Always a <code>label</code> with <code>for</code> and <code>id</code>. A placeholder is never the label.</td></tr>
+        <tr><th scope="row">Error</th><td>Set <code>aria-invalid="true"</code> and point <code>aria-describedby</code> at the message.</td></tr>
+        <tr><th scope="row">Disabled</th><td>Not focusable. Grey fill, light border, <code>text-disabled</code> for text and message, no resize.</td></tr>
+      </tbody></table></div>
+    <p class="ds-desc ds-note"><strong>Open points:</strong> Figma has only a Desktop version, so the mobile type values are taken from the input. Disabled uses <code>border-primary</code> and focus uses a <code>text-secondary</code> placeholder, both as in Figma and both different from the input. The resizer is the browser’s own handle, not the 8px Figma icon. Details are in the skill’s Flags.</p>
+  </div>
+</section>
+
+<!-- ── Code ──────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Copy the markup you need, then add the CSS once per page. The CSS is read from this page’s stylesheet, so it is always what you see above. Add the scripts once per page as well.</p>
+    <div id="recipes"></div>
+    <div class="ds-code"><div class="ds-code__bar"><span>CSS</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div>
+    <div class="ds-code"><div class="ds-code__bar"><span>JavaScript (focus ring on keyboard only, word count)</span><button type="button" class="mo-copy" data-copy="js-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="js-code">document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+document.addEventListener('mousedown', function () { document.body.classList.remove('keyboard-nav'); });
+
+// word count: one textarea + its .form-count
+function bindCount(ta, count) {
+  var update = function () { count.textContent = ta.value.length + '/' + ta.maxLength; };
+  ta.addEventListener('input', update); update();
+}</pre></div>
+  </div>
+</section>
+
+<!-- ── Usage ─────────────────────────────────────────────────── -->
+<section class="ds-section" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <p class="ds-desc">Choose the control by what the user is entering.</p>
+    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table">
+      <thead><tr><th scope="col">The user…</th><th scope="col">Use</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">writes a comment, feedback or a longer passage</th><td>Text area</td></tr>
+        <tr><th scope="row">types a short value: a name, a number, a search term</th><td><code>eco-input</code></td></tr>
+        <tr><th scope="row">picks one value from a fixed list</th><td><code>eco-select</code></td></tr>
+        <tr><th scope="row">picks one of two or three options</th><td><code>eco-radio</code></td></tr>
+      </tbody></table></div>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do">
+        <h3 class="ds-rule__title">Do</h3>
+        <ul>
+          <li>Give every field a visible label, uppercase, and sentence case for any pre-filled text.</li>
+          <li>Show the word count when there is a character limit, and set <code>maxlength</code> to match.</li>
+          <li>Explain what is wrong in the message, with the error icon.</li>
+          <li>Let the user resize the field vertically.</li>
+        </ul>
+      </div>
+      <div class="ds-rule ds-rule--dont">
+        <h3 class="ds-rule__title">Don’t</h3>
+        <ul>
+          <li>Use a text area for a short single-line value.</li>
+          <li>Use a placeholder as the label.</li>
+          <li>Show the focus ring on mouse click, or remove it on keyboard focus.</li>
+          <li>Use color alone for error or success.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var uid = 0, MAX = 100;
+
+  /* Keyboard focus ring: only after Tab */
+  document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+  document.addEventListener('mousedown', function () { document.body.classList.remove('keyboard-nav'); });
+
+  function icon(name) { var s = document.createElement('span'); s.className = 'input-icon'; s.textContent = name; s.setAttribute('aria-hidden', 'true'); return s; }
+
+  /* Build a real field. o: {state, label, count (bool), value, hint} */
+  function field(o) {
+    var id = 'ta' + (uid++), hid = id + '-m', st = o.state || 'enabled';
+    var f = document.createElement('div'); f.className = 'form-field';
+    var cnt = null;
+    if (o.label || o.count) {
+      var head = document.createElement('div'); head.className = 'form-field__head';
+      if (o.label) { var l = document.createElement('label'); l.className = 'form-label'; l.htmlFor = id; l.textContent = o.label; head.appendChild(l); }
+      if (o.count) { cnt = document.createElement('span'); cnt.className = 'form-count'; head.appendChild(cnt); }
+      f.appendChild(head);
+    }
+    var wrap = document.createElement('div'); wrap.className = 'input-wrap'; if (st === 'focus') wrap.dataset.state = 'focus';
+    var ta = document.createElement('textarea'); ta.id = id;
+    ta.className = 'form-textarea' + (st === 'error' ? ' form-textarea--error' : '') + (st === 'success' ? ' form-textarea--success' : '');
+    ta.placeholder = 'Placeholder text'; ta.maxLength = MAX;
+    if (!o.label) ta.setAttribute('aria-label', 'Text area');
+    if (st === 'hover' || st === 'active' || st === 'focus') ta.dataset.state = st === 'focus' ? 'active' : st;  /* forced demo states: focus shows the selected border too */
+    if (st === 'active' || st === 'error' || st === 'success') ta.value = o.value || 'Text';
+    if (st === 'disabled') ta.disabled = true;
+    if (st === 'error') ta.setAttribute('aria-invalid', 'true');
+    if (o.hint) ta.setAttribute('aria-describedby', hid);
+    wrap.appendChild(ta); f.appendChild(wrap);
+    if (cnt) { var upd = function () { cnt.textContent = ta.value.length + '/' + MAX; }; ta.addEventListener('input', upd); upd(); }
+    if (o.hint) {
+      var h = document.createElement('div'); h.id = hid; h.className = 'form-helper' + (st === 'error' ? ' form-helper--error' : st === 'success' ? ' form-helper--success' : st === 'disabled' ? ' form-helper--disabled' : '');
+      if (st === 'error') h.appendChild(icon('error'));
+      h.appendChild(document.createTextNode(o.hint)); f.appendChild(h);
+    }
+    return f;
+  }
+  function clear(n) { n.textContent = ''; return n; }
+  var HINT = { enabled: 'Message or hint text', hover: 'Message or hint text', active: 'Message or hint text', focus: 'Message or hint text', error: 'Enter at least 10 characters.', success: 'Thank you for your comment.', disabled: 'This field cannot be edited.' };
+
+  /* ── Breakpoint preview: one setting synced across every toggle ── */
+  $$('[data-bp-toggle]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      var bp = b.dataset.v;
+      if (bp === 'auto') document.body.removeAttribute('data-bp'); else document.body.setAttribute('data-bp', bp);
+      $$('[data-bp-toggle]').forEach(function (x) { $$('button', x).forEach(function (y) { y.setAttribute('aria-pressed', String(y.dataset.v === bp)); }); });
+    });
+  });
+  function wireSeg(g, fn) {
+    if (g.tagName === 'SELECT') { g.addEventListener('change', function () { fn(g.value); }); return; }
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || b.disabled) return;
+      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      fn(b.dataset.v);
+    });
+  }
+
+  /* ── Playground ── */
+  var pg = { state: 'enabled', count: 'on' };
+  function renderPg() {
+    var label = $('#pg-label').value, hint = $('#pg-hint').value, st = pg.state, cnt = pg.count === 'on';
+    clear($('#pg-host')).appendChild(field({ state: st, label: label, count: cnt, hint: hint }));
+    var html = '<div class="form-field">\n';
+    if (label || cnt) {
+      html += '  <div class="form-field__head">\n';
+      if (label) html += '    <label class="form-label form-label--sm" for="comment">' + label.replace(/</g, '&lt;') + '</label>\n';
+      if (cnt) html += '    <span class="form-count">' + (st === 'active' || st === 'error' || st === 'success' ? 'Text'.length : 0) + '/' + MAX + '</span>\n';
+      html += '  </div>\n';
+    }
+    html += '  <div class="input-wrap">\n    <textarea class="form-textarea' + (st === 'error' ? ' form-textarea--error' : '') + (st === 'success' ? ' form-textarea--success' : '') + '" id="comment" maxlength="' + MAX + '" placeholder="Placeholder text"' + (label ? '' : ' aria-label="Text area"') + (st === 'disabled' ? ' disabled' : '') + (st === 'error' ? ' aria-invalid="true"' : '') + (hint ? ' aria-describedby="comment-msg"' : '') + '>' + (st === 'active' || st === 'error' || st === 'success' ? 'Text' : '') + '</textarea>\n  </div>\n';
+    if (hint) html += '  <div class="form-helper' + (st === 'error' ? ' form-helper--error' : st === 'success' ? ' form-helper--success' : st === 'disabled' ? ' form-helper--disabled' : '') + '" id="comment-msg">' + (st === 'error' ? '<span class="input-icon" aria-hidden="true">error</span>' : '') + hint.replace(/</g, '&lt;') + '</div>\n';
+    html += '</div>';
+    if (st === 'hover' || st === 'focus') html = '<!-- ' + st + ' is forced here for preview; in production it comes from ' + (st === 'hover' ? ':hover' : 'keyboard focus') + ' -->\n' + html;
+    $('#pg-code').textContent = html;
+  }
+  $$('[data-pg]').forEach(function (g) { wireSeg(g, function (v) { pg[g.dataset.pg] = v; renderPg(); }); });
+  $('#pg-label').addEventListener('input', renderPg); $('#pg-hint').addEventListener('input', renderPg);
+
+  /* ── Variants ── */
+  function buildVariants() {
+    var c = clear($('#v-count'));
+    c.appendChild(field({ label: 'With word count', count: true, hint: 'Message or hint text' }));
+    c.appendChild(field({ label: 'Without word count', hint: 'Message or hint text' }));
+    var ms = clear($('#v-messages'));
+    [['enabled', 'Hint'], ['error', 'Error'], ['success', 'Success'], ['disabled', 'Disabled']].forEach(function (m) {
+      ms.appendChild(field({ label: m[1], count: true, state: m[0], hint: HINT[m[0]] }));
+    });
+    var rz = clear($('#v-resize'));
+    rz.appendChild(field({ label: 'Resizable', count: true }));
+    rz.appendChild(field({ label: 'Disabled, no resize', count: true, state: 'disabled' }));
+  }
+
+  /* ── States matrix ── */
+  var ROWS = [['Enabled', 'enabled'], ['Hover', 'hover'], ['Active', 'active'], ['Focus', 'focus'], ['Error', 'error'], ['Success', 'success'], ['Disabled', 'disabled']];
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    ROWS.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      [true, false].forEach(function (cnt) {
+        var td = document.createElement('td');
+        td.appendChild(field({ state: r[1], label: 'Label', count: cnt, hint: HINT[r[1]] }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  /* ── Anatomy example ── */
+  clear($('#a-host')).appendChild(field({ state: 'active', label: 'Label', count: true, hint: 'Message or hint text', value: 'Text' }));
+
+  /* ── Token table (resolved live) ── */
+  var TOK = [
+    ['Enabled', 'Border', 'border-input-default'], ['Enabled', 'Fill', 'surface-raised-primary'], ['Enabled', 'Placeholder, message', 'text-tertiary'],
+    ['All', 'Label', 'text-primary'], ['All', 'Word count', 'text-secondary'],
+    ['Hover', 'Border', 'border-hover'], ['Active', 'Border', 'border-selected'], ['Active', 'Text', 'text-primary'],
+    ['Focus', 'Ring (2px, 3px outside)', 'border-focus'], ['Focus', 'Placeholder', 'text-secondary'],
+    ['Error', 'Border', 'border-danger-default'], ['Error', 'Message', 'text-danger-default'],
+    ['Success', 'Border', 'border-success-default'], ['Success', 'Message', 'text-success-default'],
+    ['Disabled', 'Border', 'border-primary'], ['Disabled', 'Fill', 'surface-raised-secondary'], ['Disabled', 'Text, message', 'text-disabled'], ['Disabled', 'Label, word count', 'surface-60']
+  ];
+  var cs = getComputedStyle(document.documentElement), tt = $('#tok-table tbody');
+  TOK.forEach(function (t) {
+    var v = cs.getPropertyValue('--color-' + t[2]).trim(), tr = document.createElement('tr');
+    [t[0], t[1]].forEach(function (x, n) { var c = document.createElement(n ? 'td' : 'th'); if (!n) c.scope = 'row'; c.textContent = x; tr.appendChild(c); });
+    var tc = document.createElement('td'), code = document.createElement('code'); code.textContent = 'var(--color-' + t[2] + ')'; tc.appendChild(code); tr.appendChild(tc);
+    var vc = document.createElement('td'), dot = document.createElement('span');
+    dot.className = 'ds-dot'; dot.style.background = 'var(--color-' + t[2] + ')'; dot.setAttribute('aria-hidden', 'true');
+    vc.appendChild(dot); vc.appendChild(document.createTextNode(v || 'missing')); tr.appendChild(vc);
+    tt.appendChild(tr);
+  });
+
+  /* ── Code: recipes + live CSS ── */
+  var RECIPES = [
+    ['Standard', '<div class="form-field">\n  <label class="form-label form-label--sm" for="comment">Comment</label>\n  <div class="input-wrap">\n    <textarea class="form-textarea" id="comment" placeholder="Placeholder text"></textarea>\n  </div>\n  <div class="form-helper">Message or hint text</div>\n</div>'],
+    ['With word count', '<div class="form-field">\n  <div class="form-field__head">\n    <label class="form-label form-label--sm" for="comment">Comment</label>\n    <span class="form-count" id="comment-count">0/100</span>\n  </div>\n  <div class="input-wrap">\n    <textarea class="form-textarea" id="comment" maxlength="100" placeholder="Placeholder text"></textarea>\n  </div>\n</div>\n<script>bindCount(document.getElementById("comment"), document.getElementById("comment-count"));<\/script>'],
+    ['Error', '<div class="form-field">\n  <label class="form-label form-label--sm" for="feedback">Feedback</label>\n  <div class="input-wrap">\n    <textarea class="form-textarea form-textarea--error" id="feedback" aria-invalid="true" aria-describedby="feedback-msg">Too short</textarea>\n  </div>\n  <div class="form-helper form-helper--error" id="feedback-msg"><span class="input-icon" aria-hidden="true">error</span>Enter at least 10 characters.</div>\n</div>'],
+    ['Disabled', '<div class="form-field">\n  <label class="form-label form-label--sm" for="note">Note</label>\n  <div class="input-wrap">\n    <textarea class="form-textarea" id="note" placeholder="Placeholder text" disabled></textarea>\n  </div>\n  <div class="form-helper form-helper--disabled">This field cannot be edited.</div>\n</div>']
+  ];
+  var rh = $('#recipes');
+  RECIPES.forEach(function (r) {
+    var box = document.createElement('div'); box.className = 'ds-code'; var id = 'rc' + (uid++);
+    box.innerHTML = '<div class="ds-code__bar"><span></span><button type="button" class="mo-copy" data-copy="' + id + '" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="' + id + '"></pre>';
+    $('span', box).textContent = r[0]; $('pre', box).textContent = r[1]; rh.appendChild(box);
+  });
+  /* The component CSS lives in components/css/ (shared with prototypes); the Code section prints that same file */
+  function cssText(name) {
+    var get = function (n) { return fetch('../../components/css/' + n + '.css').then(function (r) { return r.text(); }); };
+    if (name !== 'select-menu') return get(name);
+    return Promise.all([get('menu'), get('select')]).then(function (a) { return a[0].replace(/\s+$/, '') + '\n\n' + a[1].slice(a[1].indexOf('    /* Exposed dropdown')); });
+  }
+  cssText('textarea').then(function (t) {
+    $('#css-code').textContent = t
+    .replace(/:is\(:hover, \[data-state="hover"\]\)/g, ':hover')
+    .replace(/,\n    \.input-wrap\[data-state="focus"\]::after/g, '')
+    .replace(/^\n+/, '').replace(/^ {4}/gm, '');
+  });
+
+  /* ── Copy buttons ── */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var txt = document.getElementById(b.dataset.copy).textContent;
+    var ic = b.querySelector('.mo-ic'); var done = function () { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); };
+    if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
+  });
+
+  renderPg(); buildVariants(); buildMatrix();
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+</body>
+</html>

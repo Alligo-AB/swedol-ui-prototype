@@ -5,6 +5,10 @@ description: Use when building a system-generated Toast notification — short-l
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
+> **Buttons and ×:** buttons and the close button follow `eco-button` (see `notifications-guide`, "Buttons and the close button"): `btn btn--primary|secondary|blank` with `<span class="btn__label">`, always 32px (XSmall from 769px, Small below), and the × is `icon-btn icon-btn--close` (`icon-btn--close-inverted` on dark/solid surfaces). Live CSS: `eco-design-system/notifications.css`.
+
+> **Custom icon (Informational only):** the author may replace the default `info` icon with another from the gallery. The author enters the Google Material Symbols name; it renders as **Outlined, Fill 0, Weight 300, Grade 0** (`font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0`, class `icon-outline`); the default status icons stay filled. See `notifications-guide`.
+
 ## Notification – System Toast (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-29321
@@ -48,14 +52,14 @@ All four statuses support **Strong / Weak** emphasis.
 |---|---|---|---|
 | **Informational** | `var(--color-border-information-default)` | `var(--color-surface-information-weaker)` (`surface-information-weaker`) | `info` |
 | **Error** | `var(--color-border-danger-default)` | `var(--color-surface-danger-weaker)` (`surface-danger-weaker`) | `error` |
-| **Success** | `var(--color-text-success)` | `var(--color-surface-success-weaker)` (`surface-success-weaker`) | `check_circle` |
+| **Success** | `var(--color-text-success-default)` | `var(--color-surface-success-weaker)` (`surface-success-weaker`) | `check_circle` |
 | **Warning** | `var(--color-border-warning-default)` | `var(--color-surface-warning-weaker)` (`surface-warning-weaker`) | `warning` |
 
 #### Layout variants
 | Variant | Content |
 |---|---|
 | **Default** | Status icon + [Title (optional) + body text] + Close button |
-| **Actionable** | Same as Default + buttons and/or a text link below the text (indent `32px`, `16px` above the buttons) |
+| **Actionable** | Same as Default + an action area below the text (indent `32px`, `16px` above it) that holds **either buttons or inline links**, not both. Links: `.toast__links`, `8px` row / `16px` column gap |
 
 ---
 
@@ -65,7 +69,7 @@ All four statuses support **Strong / Weak** emphasis.
 [Status icon 24px] [Title (optional) — title-sm]   [✕ close 20px]
                   [Body text — body-md           ]
                   [Secondary button] [Primary button]   ← Actionable only
-                  [Text link]                            ← Actionable only
+                  [Inline link] [Inline link]            ← Actionable only, instead of the buttons
 ```
 
 - **Left border**: `2px solid [status color]`, full height
@@ -91,9 +95,10 @@ All four statuses support **Strong / Weak** emphasis.
 .toast {
   display: flex;
   flex-direction: column;
-  width: 375px;
+  width: 100%;                /* xs (below 640px): the toast fills the whole viewport width, in the page as well as in a preview */
   box-shadow: var(--shadow-elevation-b-80);
 }
+@media (min-width: 640px) { .toast { width: 375px; max-width: 100%; } }
 
 .toast__inner {
   display: flex;
@@ -120,6 +125,7 @@ All four statuses support **Strong / Weak** emphasis.
   font-size: 24px;
   color: var(--status-color);
   flex-shrink: 0;
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;  /* Filled, wght 300: without this a plain Material Symbols span renders outline */
 }
 
 .toast__body { flex: 1; display: flex; flex-direction: column; gap: 2px; }
@@ -127,7 +133,7 @@ All four statuses support **Strong / Weak** emphasis.
 .toast__title {
   font-family: 'Breuer Condensed', sans-serif;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 18px;
   letter-spacing: 0px;
   color: var(--color-text-primary);
@@ -148,15 +154,9 @@ All four statuses support **Strong / Weak** emphasis.
   .toast__text { font-size: 16px; line-height: 22px; }
 }
 
-.toast__close {
-  flex-shrink: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 2px;
-  font-size: 20px;
-  color: var(--color-text-primary);
-}
+
+
+/* Buttons and ×: eco-button classes (.btn, .icon-btn.icon-btn--close); live CSS in eco-design-system/notifications.css */
 ```
 
 ---
@@ -172,7 +172,7 @@ The toast is `position: fixed`. Always slides in from the right — except on `x
 | `sm` (640–768px) | `32px` | `32px` | auto | `375px` |
 | `xs` (0–639px) | `0px` | `0px` | `0px` | `100vw` (fills the full viewport width) |
 
-> On `xs`, the toast animates in from the top instead of from the right. The width is always `375px` on sm and up, and fills the full viewport width on xs.
+> **xs (below 640px):** the toast **fills the whole viewport width**, flush with the top, left and right edges, and **enters from the top and leaves upward** (`toast-slide-in-top` / `toast-slide-out-top`); there is no gap to the screen edge. The width is `375px` from 640px and up. The same applies to the E-Com Toast (Add to cart and Informational) and to a toast shown as a static preview: below 640px a `.toast` is `width: 100%`, not a fixed 375px card. Checked at 375, 500 and 639px (the 15px difference seen in a desktop browser is the scrollbar).
 
 ```css
 .toast-container {
@@ -204,11 +204,12 @@ The toast is `position: fixed`. Always slides in from the right — except on `x
 | Property | Value |
 |---|---|
 | Enter direction | From the right (`xs`: from the top) |
-| Enter easing | `cubic-bezier(0.16, 0, 0.16, 1)` (`ease-decelerate-emphasized`) |
+| Enter easing | `var(--ease-decelerate-emphasized)` (`cubic-bezier(.16, 0, .16, 1)`, `eco-motion`) |
 | Exit direction | To the right (`xs`: upward) |
-| Exit easing | `cubic-bezier(0.36, 0.09, 1, 0.58)` (`ease-accelerate-generic`) |
-| Duration | `300ms` |
-| Auto-hide | `4000ms` |
+| Exit easing | `var(--ease-accelerate-generic)` (`cubic-bezier(.36, .09, 1, .58)`, `eco-motion`) |
+| Duration | `var(--duration-medium-2)` (`300ms`), enter and exit |
+| Override | `--toast-in-ease` / `--toast-in-duration` / `--toast-out-ease` / `--toast-out-duration` (on `<html>` or `.toast-host`); the defaults above are the fallbacks. Live controls: Motion section on `eco-design-system/components/toast.html`. The playground and the code block there link to it (`#motion`). Auto-hide (4s) is not part of it. |
+| Auto-hide | `4000ms` (default; `autoHide: <ms>` per call, `0` = stays). The playground on `eco-design-system/components/toast.html` has an Auto-hide On/Off group plus an `eco-range` "Auto-hide time" (2–10 s, step 1, default 4) shown only while On |
 
 **Dismiss triggers:** close button, click outside the toast, auto-hide. All three should run the exit animation — never call `remove()` directly without animating out.
 
@@ -254,9 +255,11 @@ function showToast(/* ... */) {
     clearTimeout(autoTimer);
     document.removeEventListener('click', outsideClick);
     toast.style.animation = isXs
-      ? 'toast-slide-out-top 300ms cubic-bezier(.36,.09,1,.58) forwards'
-      : 'toast-slide-out 300ms cubic-bezier(.36,.09,1,.58) forwards';
-    setTimeout(function(){ toast.remove(); }, 300);
+      ? 'toast-slide-out-top var(--duration-medium-2) var(--ease-accelerate-generic) forwards'
+      : 'toast-slide-out var(--duration-medium-2) var(--ease-accelerate-generic) forwards';
+    // wait for the exit animation: its length is the duration token set in the CSS, so read it instead of hardcoding 300
+    var ms = parseFloat(getComputedStyle(toast).animationDuration) * 1000 || 0;
+    setTimeout(function(){ toast.remove(); }, ms + 20);
   }
 
   function outsideClick(e) {

@@ -132,3 +132,25 @@ Spacing is applied by combining a **token** (size) with a **consumer class** (wh
 ```
 
 ---
+
+### Directional matrix
+
+Strict reference from the ECO Figma file (Spacing, "Directional matrix"). One token, three consumers: use the same token for external margin, internal padding and the distance between children. Each consumer class maps to exactly one edge or axis; X combines left + right, Y combines top + bottom. Shown for `space-4`; the mapping is the same for every token.
+
+| Edge / axis | Margin (external) | Padding (internal) |
+|---|---|---|
+| Top | `mt-space` | `pt-space` |
+| Right | `mr-space` | `pr-space` |
+| Bottom | `mb-space` | `pb-space` |
+| Left | `ml-space` | `pl-space` |
+| X (L+R) | `mx-space` | `px-space` |
+| Y (T+B) | `my-space` | `py-space` |
+
+| Gap (between children) | Class | Applies to |
+|---|---|---|
+| Both axes in a grid | `gap-space` | row + column |
+| Horizontal, between columns | `gap-x-space` | column-gap |
+| Vertical, between rows | `gap-y-space` | row-gap |
+
+- **Margin** is space outside the target boundary. **Padding** is space between a boundary and its content. **Gap** is space inserted between sibling items.
+- Live version with a token picker: `eco-design-system/foundations/spacing.html`, section Reference.

@@ -1,0 +1,36 @@
+/* ECO component CSS: inline-link. Skill: eco-inline-link. Link it, do not copy it: <link rel="stylesheet" href="/components/css/inline-link.css">
+   Tokens only. Mobile-first (desktop from 769px). */
+.inline-link {
+  color: var(--color-text-action-primary);          /* text-action-primary — default */
+  text-decoration: underline;
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color var(--duration-fast-3) var(--ease-standard); /* duration-fast-3, ease-standard */
+}
+
+/* Hover — underline removed */
+.inline-link:hover { color: var(--color-text-action-primary-hover); text-decoration: none; }
+
+/* Sizes — mobile first (xs/sm), desktop from 769px */
+.inline-link--large  { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.inline-link--medium { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.inline-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+@media (min-width: 769px) {
+  .inline-link--large  { font-size: 20px; line-height: 28px; }
+  .inline-link--medium { font-size: 17px; line-height: 24px; }
+}
+
+/* Small Bold */
+.inline-link--small-bold { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.inline-link--small-bold:hover { color: var(--color-text-action-primary-hover); text-decoration: none; }
+
+/* Color variants */
+.inline-link--secondary { color: var(--color-text-secondary); }
+.inline-link--secondary:hover { color: var(--color-text-action-secondary-hover); }
+
+.inline-link--tertiary { color: var(--color-text-tertiary); }
+.inline-link--tertiary:hover { color: var(--color-text-action-tertiary-hover); }
+
+.inline-link--inverted { color: var(--color-text-primary-inverted); }
+.inline-link--inverted:hover { color: var(--color-text-action-primary-inverted-hover); }

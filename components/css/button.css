@@ -1,0 +1,132 @@
+/* ECO component CSS: button. Shared by the docs page (eco-design-system/components/button.html) and every prototype/product page.
+   Skill: eco-button. Link it, do not copy it: <link rel="stylesheet" href="/components/css/button.css">
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only. */
+    /* ── Base ── */
+    .btn {
+      --btn-h: 48px;                                   /* Large, mobile */
+      --btn-pad: var(--dimension-spacing-space-12);    /* space between the button edge and its content */
+      --btn-tx: var(--dimension-spacing-space-8);      /* inset of the label inside the button */
+      --btn-icon: 24px;
+      --btn-fs: 16px; --btn-lh: 16px; --btn-ls: 0.32px; /* label-lg, mobile */
+      --btn-ff: 'ss02' 1, 'ss03' 1;
+      --btn-bg: transparent;
+      --btn-fg: var(--color-text-action-primary);
+      --btn-line: transparent;                          /* 1px line drawn inside the box, so it never changes the size */
+      --btn-hover: var(--color-surface-opacity-black-05);
+      box-sizing: border-box; position: relative;
+      display: inline-flex; align-items: center; justify-content: center;
+      height: var(--btn-h); margin: 0; padding: 0 var(--btn-pad);
+      border: 0; border-radius: 0; cursor: pointer;
+      background-color: var(--btn-bg); color: var(--btn-fg);
+      box-shadow: inset 0 0 0 1px var(--btn-line);
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-weight: 600;
+      font-size: var(--btn-fs); line-height: var(--btn-lh); letter-spacing: var(--btn-ls);
+      font-feature-settings: var(--btn-ff);
+      text-transform: uppercase; white-space: nowrap; text-decoration: none;
+      outline: 2px solid transparent; outline-offset: 2px; /* focus ring: 2px gap + 2px line, measured from the outer edge */
+      isolation: isolate;                              /* the hover layer (::before, z-index -1) sits above the background and below the content */
+      transition: outline-color var(--duration-fast-2) var(--ease-standard), box-shadow var(--duration-fast-2) var(--ease-standard); /* duration-fast-2, ease-standard: Figma "Dissolve", custom bezier .35, 0, .35, 1, 100ms */
+    }
+    .btn::before {                                     /* hover layer: dissolves in over the base color */
+      content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background: var(--btn-hover); opacity: 0;
+      transition: opacity var(--duration-fast-2) var(--ease-standard);
+    }
+    .btn__label { padding: 0 var(--btn-tx); }
+    .btn__icon {
+      flex-shrink: 0; width: var(--btn-icon); height: var(--btn-icon);
+      font-family: 'Material Symbols Outlined'; font-size: var(--btn-icon); line-height: 1; font-weight: 400; letter-spacing: normal; text-transform: none;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+    }
+    .btn--icon { width: var(--btn-h); padding: 0; }      /* icon only: a square, needs aria-label */
+
+    /* ── Variants ── */
+    .btn--primary            { --btn-bg: var(--color-surface-action-1); --btn-fg: var(--color-text-action-primary-inverted); --btn-hover: var(--color-surface-opacity-white-20); }
+    .btn--primary-inverted   { --btn-bg: var(--color-surface-action-2); --btn-fg: var(--color-text-action-primary);          --btn-hover: var(--color-surface-opacity-black-12); }
+    .btn--secondary          { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary);          --btn-line: var(--color-border-action-1); --btn-hover: var(--color-surface-opacity-black-05); }
+    .btn--secondary-inverted { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary-inverted); --btn-line: var(--color-border-action-2); --btn-hover: var(--color-surface-opacity-white-20); }
+    .btn--blank              { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary);          --btn-hover: var(--color-surface-opacity-black-05); }
+    .btn--blank-inverted     { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary-inverted); --btn-hover: var(--color-surface-opacity-white-20); }
+    .btn--destructive        { --btn-bg: var(--color-surface-danger-default); --btn-fg: var(--color-text-action-primary-inverted); --btn-hover: var(--color-surface-opacity-white-20); }
+    .btn--accent             { --btn-bg: var(--color-accent-default);         --btn-fg: var(--color-text-action-accent);           --btn-hover: var(--color-surface-opacity-white-20); }
+    .btn--system             { --btn-bg: var(--color-surface-opacity-white-0); --btn-fg: var(--color-text-action-primary);          --btn-line: var(--color-border-action-3); }
+    .btn--system[aria-pressed="true"] { --btn-bg: var(--color-surface-opacity-black-12); }  /* System selected */
+
+    /* ── Hover: a layer on the base color that dissolves in (100ms, ease-standard, as in Figma) ── */
+    .btn:is(:hover, [data-state="hover"]):not(:disabled)::before { opacity: 1; }
+    .btn--system { --btn-hover: var(--color-surface-opacity-black-12); }
+    .btn--system[aria-pressed="true"] { --btn-hover: var(--color-surface-opacity-white-0); }   /* already black-12: nothing on top */
+    .btn--system:is(:hover, [data-state="hover"]):not(:disabled) { --btn-line: var(--color-border-hover); }
+
+    /* ── Focus: keyboard only (body.keyboard-nav is set on Tab, removed on mousedown/touchstart) ── */
+    body.keyboard-nav .btn:focus,
+    .btn[data-state="focus"] { outline-color: var(--color-border-focus); }
+
+    /* ── Disabled ── */
+    .btn:disabled {
+      --btn-bg: var(--color-surface-disabled); --btn-fg: var(--color-text-disabled); --btn-line: transparent;
+      cursor: not-allowed;
+    }
+    .btn--secondary:disabled, .btn--secondary-inverted:disabled, .btn--system:disabled { --btn-bg: var(--color-surface-opacity-white-0); --btn-line: var(--color-border-disabled); }
+    .btn--blank:disabled, .btn--blank-inverted:disabled { --btn-bg: var(--color-surface-opacity-white-0); }
+
+    /* ── Sizes, mobile first (every size sets every property, so the 769px block can replace them one by one) ── */
+    /* --btn-bd-*: number badge (offset from the top and right edge, height = min width, side padding, type); --btn-dot-off: dot offset */
+    .btn--lg { --btn-h: 48px; --btn-pad: var(--dimension-spacing-space-12); --btn-tx: var(--dimension-spacing-space-8); --btn-icon: 24px; --btn-fs: 16px; --btn-lh: 16px; --btn-ls: 0.32px; --btn-ff: 'ss02' 1, 'ss03' 1;  /* label-lg */
+               --btn-bd-off: 4px; --btn-bd-h: 18px; --btn-bd-px: 4px; --btn-bd-fs: 12px; --btn-bd-ls: 0.48px; --btn-dot-off: 8px; }
+    .btn--md { --btn-h: 40px; --btn-pad: var(--dimension-spacing-space-8);  --btn-tx: var(--dimension-spacing-space-8); --btn-icon: 24px; --btn-fs: 16px; --btn-lh: 16px; --btn-ls: 0.32px; --btn-ff: 'ss02' 1, 'ss03' 1;  /* label-lg */
+               --btn-bd-off: 3px; --btn-bd-h: 18px; --btn-bd-px: 4px; --btn-bd-fs: 12px; --btn-bd-ls: 0.48px; --btn-dot-off: 7px; }
+    .btn--sm { --btn-h: 32px; --btn-pad: var(--dimension-spacing-space-4);  --btn-tx: 6px;                          --btn-icon: 24px; --btn-fs: 14px; --btn-lh: 14px; --btn-ls: 0.42px; --btn-ff: normal;                /* label-md; 6px: no spacing token */
+               --btn-bd-off: 3px; --btn-bd-h: 14px; --btn-bd-px: 2px; --btn-bd-fs: 10px; --btn-bd-ls: 0;      --btn-dot-off: 4px; }
+    .btn--xs { --btn-h: 32px; --btn-pad: 6px;                               --btn-tx: var(--dimension-spacing-space-4); --btn-icon: 20px; --btn-fs: 12px; --btn-lh: 12px; --btn-ls: 0.48px; --btn-ff: 'ss02' 1, 'ss03' 1;  /* label-sm; 6px: no spacing token */
+               --btn-bd-off: 3px; --btn-bd-h: 14px; --btn-bd-px: 2px; --btn-bd-fs: 10px; --btn-bd-ls: 0;      --btn-dot-off: 4px; }
+    @media (min-width: 769px) {
+      .btn--lg { --btn-h: 56px; --btn-pad: var(--dimension-spacing-space-16); --btn-tx: var(--dimension-spacing-space-8); --btn-icon: 24px; --btn-fs: 18px; --btn-lh: 18px; --btn-ls: 0.18px; --btn-ff: 'ss02' 1, 'ss03' 1;
+                 --btn-bd-off: 4px; --btn-bd-h: 20px; --btn-bd-px: 5px; --btn-bd-fs: 14px; --btn-bd-ls: 0.56px; --btn-dot-off: 12px; }
+      .btn--md { --btn-h: 48px; --btn-pad: var(--dimension-spacing-space-12); --btn-tx: var(--dimension-spacing-space-8); --btn-icon: 24px; --btn-fs: 18px; --btn-lh: 18px; --btn-ls: 0.18px; --btn-ff: 'ss02' 1, 'ss03' 1;
+                 --btn-bd-off: 4px; --btn-bd-h: 20px; --btn-bd-px: 5px; --btn-bd-fs: 14px; --btn-bd-ls: 0.56px; --btn-dot-off: 8px; }
+      .btn--sm { --btn-h: 40px; --btn-pad: var(--dimension-spacing-space-8);  --btn-tx: var(--dimension-spacing-space-8); --btn-icon: 24px; --btn-fs: 16px; --btn-lh: 16px; --btn-ls: 0.48px; --btn-ff: normal;
+                 --btn-bd-off: 4px; --btn-bd-h: 16px; --btn-bd-px: 3px; --btn-bd-fs: 10px; --btn-bd-ls: 0;      --btn-dot-off: 6px; }
+      .btn--xs { --btn-h: 32px; --btn-pad: 6px;                               --btn-tx: var(--dimension-spacing-space-4); --btn-icon: 20px; --btn-fs: 14px; --btn-lh: 14px; --btn-ls: 0.56px; --btn-ff: 'ss02' 1, 'ss03' 1;
+                 --btn-bd-off: 3px; --btn-bd-h: 16px; --btn-bd-px: 3px; --btn-bd-fs: 10px; --btn-bd-ls: 0;      --btn-dot-off: 4px; }
+    }
+
+    /* ── Badge: a number (up to "99+") or a dot, in the top right corner of the button ── */
+    .btn__badge {
+      position: absolute; top: var(--btn-bd-off); right: var(--btn-bd-off); z-index: 1;
+      box-sizing: border-box; display: flex; align-items: center; justify-content: center;
+      min-width: var(--btn-bd-h); height: var(--btn-bd-h); padding: 0 var(--btn-bd-px); border-radius: 100px; /* pill: radius 100px as in Figma */
+      background: var(--color-surface-danger-default); color: var(--color-text-action-primary-inverted);
+      font-size: var(--btn-bd-fs); line-height: 1; letter-spacing: var(--btn-bd-ls); font-feature-settings: normal;
+      pointer-events: none;
+    }
+    .btn__dot { position: absolute; top: var(--btn-dot-off); right: var(--btn-dot-off); z-index: 1; width: 6px; height: 6px; border-radius: 50%; background: var(--color-surface-danger-default); pointer-events: none; }
+    .btn--icon.btn--xs { --btn-bd-off: 2px; }  /* icon-only XSmall: the badge sits 1px closer to the corner */
+
+    /* ── Icon button: a single icon that is also a control (toggle icons, close) ── */
+    .icon-btn {
+      appearance: none; box-sizing: border-box; position: relative;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px; margin: 0; padding: 0; border: 0; border-radius: 0;
+      background: transparent; color: var(--color-icon-primary); cursor: pointer;
+      outline: 2px solid transparent; outline-offset: 2px;
+      transition: outline-color var(--duration-fast-2) var(--ease-standard);
+    }
+    .icon-btn .btn__icon { --btn-icon: 24px; }
+    .icon-btn--sm { width: 20px; height: 20px; }
+    .icon-btn--sm .btn__icon { --btn-icon: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .icon-btn:is(:hover, [data-state="hover"]):not(:disabled) { color: var(--color-text-action-primary-hover); }
+    .icon-btn[aria-pressed="true"] .btn__icon,
+    .icon-btn--filled .btn__icon { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .icon-btn--sm[aria-pressed="true"] .btn__icon,
+    .icon-btn--sm.icon-btn--filled .btn__icon { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    body.keyboard-nav .icon-btn:focus,
+    .icon-btn[data-state="focus"] { outline-color: var(--color-border-focus); }
+    .icon-btn:disabled { color: var(--color-text-disabled); cursor: not-allowed; }
+    /* Close: a 24px box with a 20px icon, gets a surface on hover */
+    .icon-btn--close { padding: 2px; }
+    .icon-btn--close .btn__icon { --btn-icon: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .icon-btn--close:is(:hover, [data-state="hover"]):not(:disabled) { color: var(--color-icon-primary); background: var(--color-surface-opacity-black-05); }
+    .icon-btn--close-inverted { color: var(--color-icon-inverted); }
+    .icon-btn--close-inverted:is(:hover, [data-state="hover"]):not(:disabled) { color: var(--color-icon-inverted); background: var(--color-surface-opacity-white-20); }

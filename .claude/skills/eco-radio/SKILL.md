@@ -16,7 +16,7 @@ Always implement radios with a native `<input type="radio">` + CSS — never `<i
 - **Preselect a default option** in every group. It removes confusion and gives users a clear suggestion.
 - Prefer **vertical** layouts — easier to scan. Horizontal layouts obscure the link between radio and label.
 - The **whole label is clickable** (wrap input + text in `<label>`), not just the circle.
-- Not for toggling between two views/filters in the same surface (→ `eco-segment-control`), not for multi-select (→ `eco-checkbox`).
+- Not for toggling between two views/filters in the same surface (→ `eco-pill-segment-control`), not for multi-select (→ `eco-checkbox`).
 
 ### Size model
 Only **Large** and **Small** exist. Sizes do **not** change per breakpoint; only the label type style does (see below).
@@ -31,13 +31,13 @@ Focus ring (2px) + offset (2px) = 4px → fills the Large margin exactly, same m
 ### Label & message typography (`eco-typography`)
 | Size | Label | Breakpoint behaviour |
 |---|---|---|
-| **Large** | `body-md` — 16px/22px, 0.32px | Mobile-first value; follow `eco-typography` if it changes at `md:` (769px) |
-| **Small** | `body-sm` — 14px/20px, 0.28px | Same on all breakpoints |
+| **Large** | `body-md` — 16px/22px, 0.32px | 17px/24px from `md:` (769px) |
+| **Small** | `body-sm` — 14px/20px, 0.36px | Same on all breakpoints |
 | Hint message (both) | `body-sm` — 14px/20px, `var(--color-text-tertiary)` | — |
 
 Font: `Breuer Condensed`, `font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1`.
 
-> **Flag for design (do not silently change):** the Figma radio frames show Large desktop label as 17px/24px and body-sm letter-spacing 0.36px, while `tokens.json`/`eco-typography` have `body-md` 16px/22px and `body-sm` 0.28px (no desktop override). This skill follows `tokens.json`. Confirm with design whether the desktop radio label really differs.
+> Matches Figma and `tokens.json` (2026-10-02): `body-md` is 17/24 from `md:`, `body-sm` letter-spacing 0.36px.
 
 ### States
 
@@ -81,51 +81,15 @@ Focus color is `var(--color-border-focus)` (`#455efb`) — this matches the Figm
 ```
 Every radio in a group shares the same `name`; the group gets a `<fieldset>` + `<legend>` (style the legend with the surrounding form's label style, e.g. `eco-input` `label-md`).
 
-### CSS template
-```css
-.form-radio-group { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; } /* vertical by default */
+### CSS
 
-.form-radio-item {
-  display: flex; align-items: center; gap: var(--dimension-spacing-space-8, 8px); cursor: pointer;
-  font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-  font-size: 16px; line-height: 22px; letter-spacing: 0.32px; /* body-md */
-  color: var(--color-text-primary);
-}
-.form-radio-item--sm { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; } /* body-sm */
+Link the shared stylesheet. Never copy its rules into a page, and never write a parallel version:
 
-.form-radio-item input[type="radio"] {
-  appearance: none; flex-shrink: 0; cursor: pointer;
-  width: 16px; height: 16px; margin: var(--dimension-spacing-space-4, 4px);   /* total area 24×24 */
-  border: var(--border-brd-1-width, 1px) solid var(--color-border-input-control-default);
-  border-radius: 50%;
-  background-color: var(--color-surface-raised-primary);
-  background-repeat: no-repeat; background-position: center;
-}
-.form-radio-item--sm input[type="radio"] { width: 14px; height: 14px; margin: 3px; }  /* total area 20×20 */
-
-.form-radio-item input[type="radio"]:hover { background-color: var(--color-surface-opacity-black-05); border-color: var(--color-border-hover); }
-.form-radio-item input[type="radio"]:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
-
-/* Selected — dot is a 6px radial-gradient, no SVG/img */
-.form-radio-item input[type="radio"]:checked {
-  border-color: var(--color-border-selected);
-  background-image: radial-gradient(circle, var(--color-surface-100) 0 3px, transparent 3.5px);
-}
-.form-radio-item input[type="radio"]:checked:hover { border-color: var(--color-border-selected-hover); }
-
-/* Disabled */
-.form-radio-item input[type="radio"]:disabled { background-color: var(--color-surface-disabled); border-color: var(--color-border-disabled); cursor: not-allowed; }
-.form-radio-item input[type="radio"]:disabled:checked {
-  border-color: var(--color-surface-disabled);
-  background-image: radial-gradient(circle, var(--color-surface-50) 0 3px, transparent 3.5px);
-}
-.form-radio-item:has(input:disabled) { cursor: not-allowed; color: var(--color-text-disabled); }
-
-/* Hint message (aligned to the left edge of the radio) */
-.form-radio-field { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4, 4px); }
-.form-radio-message { margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; color: var(--color-text-tertiary); }
-.form-radio-field:has(input:disabled) .form-radio-message { color: var(--color-text-disabled); }
+```html
+<link rel="stylesheet" href="/components/css/radio.css">
 ```
+
+`components/css/radio.css` is the single source for this component. The docs page `eco-design-system/components/radio.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 > `--border-brd-1-width` does not exist as a token (`--border-brd-1` is the full `width style color` shorthand, black). The `1px` fallback is intentional; only the colour changes per state. If a width-only token is added to `alligo-design-tokens`, switch to it.
 
 ### Rules

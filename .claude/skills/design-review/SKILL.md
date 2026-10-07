@@ -25,8 +25,9 @@ Goal: clear, verified feedback that developers can act on. Every item says what 
    If one frame covers several breakpoints, ask which width it is drawn at. Ask for state frames too (hover, error, empty, open menus). Breakpoints without a frame are checked against ECO rules only, and the report says so.
 3. **Implementation.** URL of the running page and/or repo path. Ask whether it needs a login — the user logs in themselves; never type credentials.
 4. **Jira.** The ticket link looks like `https://<site>.atlassian.net/browse/KEY-123`. Posting needs the Atlassian connector; without it, deliver a file the user pastes. Read the ticket's acceptance criteria — they are part of the review (e.g. WCAG, rows per load, sorting).
-5. **Prototype.** Ask whether the page or component has a Claude Code prototype in this repo (a page under `mypages/` or the repo root; `index.html` lists them). If yes, get the path. If several versions exist (for example `users.html` and `users_V1.html`), ask which one matches the ticket. Do not assume the newest. See "Prototype as a source" in section 2.
+5. **Prototype.** Ask whether the page or component has a Claude Code prototype in this repo (a page under `mypages/` or the repo root; `index.html` lists them). If yes, get the path. If several versions exist (for example `<page>.html` and `<page>_V1.html`), ask which one matches the ticket. Do not assume the newest. See "Prototype as a source" in section 2.
 6. **Report language and format.** Ask (default: English, Markdown for the new Jira editor).
+7. **Image placement in the Jira comment.** Default and standard: comparison images are **attached to the ticket** and the comment refers to them by filename. Do not ask. Embedding images in the comment text is optional and only done if the user asks for it. Do not post a "Version A/B" pair and do not label the comment with a version.
 
 ## 2. Read the design
 
@@ -54,6 +55,23 @@ Rules:
 - **States and accessibility.** (Findings go in the WCAG section, see section 4.) Hover, keyboard focus (do hover-only menus appear on focus? is there a focus ring?), sortable headers (`<button>`, `aria-sort`, visible active sort), a visible `<h1>`, tooltips, empty/disabled states.
 - **Acceptance criteria.** Test the behaviour the ticket asks for (search as you type, sorting, rows per load).
 - **Clean up** any injected iframes or test elements afterwards.
+
+### Sweep systematically (do not sample)
+
+A review that checks a few obvious things misses whole classes of deviation (on AE-3512 a first pass missed letter-spacing on six text styles, and a wrong mobile button size). Work from a matrix, not from what catches the eye:
+
+1. **List every element type on the page** at each breakpoint you review: page title, preamble, search field (value, placeholder, border), buttons, table header, table cell, name, email, labels, values, badges, icons, dividers, cards, pagination text and button, footer-adjacent elements. Include elements that only exist at one breakpoint (e.g. mobile cards, expanded states).
+2. **For each element, read the full set of properties** from Figma and from `getComputedStyle`, and compare every one: font-family, font-size, font-weight, line-height, **letter-spacing**, text-transform, text-decoration, colour, background, border (width, style, colour), border-radius, box-shadow, padding, margin, gap, width, height, opacity. Do not stop at the property that already differs.
+3. **Measure each element at each breakpoint** (xs, sm, md/lg, xl), because values change per breakpoint (e.g. button size 32 px at xs, 40 px at sm and up; title 28 px vs 36 px).
+4. **Check the Figma value per breakpoint frame**, not one frame assumed to apply everywhere. Resolve Figma variable fallbacks against the ECO tokens (`eco-tokens`, `eco-typography`) and flag where they disagree.
+5. **Look for a shared cause.** When several elements show the same wrong value (e.g. 0.2 px letter-spacing on many styles), report it as one finding with a table of the elements, and name the likely global source.
+6. **States and variants:** hover, focus, active, disabled, selected, sorted, expanded/collapsed, empty, error, loading, first/last row, odd/even striping.
+7. **Content:** labels, placeholders, headings, counts, number and currency formats, empty values, truncation.
+8. **Record what you measured** (element, property, breakpoint, value) while you go, so "Matches design and ECO" and "Not tested" are both honest.
+
+**Never list something under "Matches design and ECO" unless every property in step 2 was compared for it.** If only some properties were checked, say which (e.g. "email size and colour") and leave the rest to the findings or to "Not tested".
+
+**Self-audit before reporting:** re-read the matrix and ask for each element type, "did I compare all properties at all breakpoints?". Re-measure anything claimed from memory or from a single width. If a claim came from a different breakpoint than the Figma frame it is compared against, fix that first. Correct earlier wrong claims openly in the report and to the user.
 
 ## 4. WCAG check (separate section in the report)
 
@@ -115,7 +133,25 @@ Page reviewed / Figma frames (one link per breakpoint) / Prototype (path, if any
 ## ✅ Matches design and ECO
 ```
 
-Each item: **Deviation**, **Should be** (Figma node or ECO token/skill), **Currently** (measured value), **Suggestion** (selector/file). Keep UI strings from the page in their original language.
+Each item has a fixed shape. Every part is **on its own line**, in this order, with these exact bold labels:
+
+```
+### C1 – <short summarising title> (WCAG x.y.z, only if relevant)
+**Deviation:** <what differs, one sentence>
+**Should be:** <Figma node or ECO token/skill>
+**Currently:** <measured value>
+**Suggestion:** <selector/file/fix>
+*🔍 See Image NN – <filename>*
+```
+
+Rules:
+- The title line is a summarising heading for the item (id plus a short title, like a headline). Always write one. The description goes on the **Deviation:** line, never in the title. Make it a heading level 3 (`<h3>` in Jira HTML, `###` in Markdown); the severity groups are `<h2>`. Put the WCAG criteria in the heading in plain text, e.g. `C1 – Sortable headers not keyboard operable (WCAG 2.1.1, 4.1.2)`.
+- The shape exists so developers know what to expect, not to force bad layouts. When a finding covers several elements with the same kind of deviation (e.g. letter-spacing on six text styles), keep the heading, **Deviation:** and **Suggestion:** lines and put the per-element values in a table (columns: Element, Should be, Currently) in place of the single **Should be:**/**Currently:** lines. Use a table only when it is clearer than lines.
+- All four labels are always present (in a table item, the table stands in for **Should be:** and **Currently:**). If there is no fix to suggest, write `**Suggestion:** –` rather than dropping the line.
+- The image reference, if the item has one, is the **last line of the item**, on its own line, in italics, prefixed with 🔍 (see "Where images go in Jira", rule 4b).
+- In Jira HTML comments, one `<p>` per item with `<br>` between lines (or one paragraph per line) so each part renders on its own line. In Markdown files, end each line with two spaces or use a list/line break so lines do not merge.
+- The "Matches design and ECO" section is a bullet list, one finding per bullet (`<ul><li>` in Jira HTML, `- ` in Markdown), not a running paragraph.
+- Keep UI strings from the page in their original language.
 
 Save the report where the user can find it (e.g. a folder on the Desktop), not only in a temp/scratchpad folder.
 
@@ -129,20 +165,25 @@ Use them where text alone may be misread: layout differences, spacing, hover men
 
 ### Where images go in Jira
 
+0. **Placement mode** (section 1, step 7). Default: attachments only. The image is not shown in the comment; every reference names the attachment file (`*🔍 See Image 01 – <filename>*`), and the caption rule (3) is dropped. Embedding is only done on request: then rules 1–4 apply and the image is shown under the first finding it covers.
+
 1. Put each image **once**, directly under the **first** finding in the report that it shows.
 
-2. Number images in the order they appear in the report (Image 1, 2, …), not by file name.
+2. Number images in the order they appear in the report (Image 01, 02, …), not by file name.
 
 3. Under each image, use a caption:
-   `Image N – <view, width>, Figma (top/left) vs UAT (bottom/right). Marks: <tags>.`
+   `Image NN – <view, width>, Figma (top/left) vs UAT (bottom/right). Marks: <tags>.`
 
 4. In every other finding the image covers, add a final line:
-   `See Image N.`
+   `See Image NN.`
    or, when relevant:
-   `See Image 1 (desktop) and Image 4 (tablet).`
+   `See Image 01 (desktop) and Image 04 (tablet).`
 
-5. Save generated comparison images using clear ticket-specific filenames, for example:
-   `<TICKET>_01_<short-name>.png`
+4b. **Highlight every image reference** (captions and `See Image NN` lines) so it is easy to find when skimming. Put the reference as the **last line of the finding**, in *italics*, prefixed with 🔍: `*🔍 See Image 01 – <filename>*`, in the Jira comment and in the report file. Use 🔍 only for image references.
+   - **Do not use colour or highlight spans in Jira.** Tested on AE-3512: Jira's palette has no pink, and a `background-color: #fdd0ec` highlight is stored with the same colour as text colour, so the reference turns into an unreadable pink bar. If colour is wanted anyway, show the user the posted comment first and be ready to edit it back to the marker version.
+
+5. Save generated comparison images using clear ticket-specific filenames that contain the exact reference name used in the text, so a reference maps to one file:
+   `<TICKET>_Image-NN_<short-name>.png` (text says `Image NN`, file is `AE-3512_Image-01_desktop-toolbar.png`).
 
 6. Before posting the final Jira review, upload all generated comparison images to the Jira issue using the helper in this skill folder:
 
@@ -165,12 +206,14 @@ Use them where text alone may be misread: layout differences, spacing, hover men
    - tell the user which image failed to upload;
    - do not ask the user to provide credentials in chat.
 
-10. The Jira attachment and the report's `Image N` caption/reference must use the same generated image filename so the visual evidence is easy to identify.
+10. The Jira attachment and the report's `Image NN` caption/reference must use the same generated image filename (see rule 5) so the visual evidence is easy to identify.
 
 ## 9. Delivering
 
 - **File:** always.
 - **Jira comment:** show the final text and wait for a clear "yes" before posting — it is published in the user's name. Markdown is accepted by `addOrEditJiraIssueComment`.
 - **Images in Jira:** upload generated comparison images automatically using `.claude/skills/design-review/upload-jira-images.sh <JIRA_KEY> <IMAGE_PATH...>` before posting the final review. The helper reads the user's Jira credentials from the repository root `.env` and uploads the files through the Jira REST attachment API. Verify that Jira returns a successful attachment response for every image. If an upload fails, keep the generated file and tell the user which image failed; never request or expose Jira credentials in chat.
+- **Permissions (auto mode):** posting the comment (`addOrEditJiraIssueComment`) is blocked in auto mode until the user adds an allow rule to `.claude/settings.local.json`. Tell the user this up front and give the exact line (`mcp__<atlassian-server-id>__addOrEditJiraIssueComment`). Embedded images (only on request) also need the Atlassian Media `curl` upload (`Bash(curl --location https://api.media.atlassian.com/*)`), which can still be denied for some calls because of the long token in the command; fall back to attachments if so.
+- **Uploader identity:** `upload-jira-images.sh` uses the credentials in the repo `.env`, so Jira shows that account (not necessarily the reviewer) as the uploader. Tell the user which account it is.
 - **Figma annotations:** writing to a shared design file needs explicit approval and may be blocked in auto mode. Ask before placing anything in Figma.
 - **Corrections:** if a finding turns out wrong, say so plainly, correct the report file and give the user the replacement text for Jira.

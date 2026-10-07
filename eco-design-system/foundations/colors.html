@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
   <link rel="stylesheet" href="../docs.css">
 </head>
-<body>
+<body data-ds="foundation">
 <div class="ds-page">
   <nav class="breadcrumb" aria-label="Breadcrumbs">
     <div class="breadcrumb__bar">
@@ -87,7 +87,11 @@
   <div class="ds-page ds-inner">
     <h2 class="ds-h2">Brand accent</h2>
     <p class="ds-desc">The Swedol lime. Use it for emphasis and brand moments, not for decoration and not for text on white: its contrast is too low. Light accent works as a highlight surface, for example in table headings.</p>
+    <h3 class="ds-h3">Swedol</h3>
     <div class="ds-grid ds-grid--feature" id="g-accent"></div>
+    <h3 class="ds-h3">Tools</h3>
+    <p class="ds-desc">Tools has its own accent. These are primitive tokens from the package (<code>--color-primitive-color-brand-tools-accent-*</code>), so they are not in <code>tokens.json</code>; the Swedol <code>accent-*</code> tokens above are what the components use.</p>
+    <div class="ds-grid ds-grid--feature" id="g-tools"></div>
   </div>
 </section>
 
@@ -202,14 +206,16 @@
 
   /* ── swatch card ─────────────────────────────────────────── */
   function copyBtn(t) {
-    var b = el('button', 'ds-swatch__copy', 'var(' + t.var + ')');
-    b.type = 'button';
-    b.setAttribute('aria-label', 'Copy var(' + t.var + ')');
+    var txt = 'var(' + t.var + ')', w = el('span', 'ds-copyname'), b = el('button', 'mo-copy');
+    w.appendChild(el('span', 'ds-copyname__text', txt));
+    b.type = 'button'; b.setAttribute('aria-label', 'Copy ' + txt);
+    var ic = el('span', 'mo-ic', 'content_copy'); ic.setAttribute('aria-hidden', 'true'); b.appendChild(ic);
     b.addEventListener('click', function () {
-      var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'var(' + t.var + ')'; }, 1200); };
-      if (navigator.clipboard) navigator.clipboard.writeText('var(' + t.var + ')').then(done, done); else done();
+      var done = function () { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); };
+      if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
     });
-    return b;
+    w.appendChild(b);
+    return w;
   }
   var drift = 0;
   var rootCS = getComputedStyle(document.documentElement);
@@ -241,7 +247,7 @@
       var dark = isDarkText(key);
       chip.style.background = dark ? 'var(--color-surface-100)' : 'var(--color-surface-raised-primary)';
       fill.textContent = 'Aa';
-      fill.style.cssText = 'color: var(' + t.var + '); font-size: 40px; line-height: 1; font-weight: 700;';
+      fill.style.cssText = 'color: var(' + t.var + '); font-size: 40px; line-height: 1; font-weight: 600;';
       if (kind === 'text') {
         var r = contrast(eff, dark ? [0, 0, 0] : [255, 255, 255]);
         var badge = el('span', 'ds-swatch__aa', r.toFixed(1) + ':1 · ' + (r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : r >= 3 ? 'AA large' : 'Fail'));
@@ -283,7 +289,7 @@
     });
   }
 
-  var GROUPS = ['g-neutral', 'g-page', 'g-accent', 'g-text', 'g-icon', 'g-border', 'g-state', 'g-overlay', 'g-status', 'ramp'];
+  var GROUPS = ['g-neutral', 'g-page', 'g-accent', 'g-tools', 'g-text', 'g-icon', 'g-border', 'g-state', 'g-overlay', 'g-status', 'ramp'];
   function build(colors) {
     GROUPS.forEach(function (id) { document.getElementById(id).textContent = ''; });
     var old = document.getElementById('other'); if (old) old.remove();
@@ -305,6 +311,12 @@
     place('g-page', ['background-primary', 'background-secondary', 'surface-raised-primary', 'surface-raised-secondary'], colors, 'fill');
 
     place('g-accent', keys.filter(function (k) { return k.indexOf('accent-') === 0; }), colors, 'fill');
+    // Tools accent: primitives read live from the package CSS (they are not in tokens.json)
+    var tools = document.getElementById('g-tools');
+    [['brand', 'Primary accent of the Tools concept brand.'], ['light', 'Light accent: highlight surface, same role as accent-light.'], ['dark', 'Dark accent: hover state, same role as accent-dark.']].forEach(function (a) {
+      var v = '--color-primitive-color-brand-tools-accent-' + a[0], val = rootCS.getPropertyValue(v).trim();
+      if (val) tools.appendChild(card('tools-accent-' + a[0], { var: v, value: val, description: a[1] }, 'fill'));
+    });
     place('g-text', keys.filter(function (k) { return k.indexOf('text-') === 0; }), colors, 'text');
     place('g-icon', keys.filter(function (k) { return k.indexOf('icon-') === 0; }), colors, 'icon');
     place('g-border', keys.filter(function (k) { return k.indexOf('border-') === 0 && !isStatus(k); }), colors, 'border');
@@ -323,7 +335,7 @@
         ['border-' + s + '-default', 'Border · default', 'border'],
         ['border-' + s + '-weak', 'Border · weak', 'border'],
         ['border-' + s + '-weaker', 'Border · weaker', 'border'],
-        [s === 'information' ? 'text-information-default' : s === 'success' ? 'text-success' : s === 'danger' ? 'text-danger-default' : null, 'Text', 'text']
+        ['text-' + s + '-default', 'Text', 'text']
       ];
       rows.forEach(function (r) {
         var k = r[0]; if (!k || !colors[k]) return;

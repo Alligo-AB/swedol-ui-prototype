@@ -1,0 +1,166 @@
+/* ECO component CSS: checkbox. Shared by the docs page (eco-design-system/components/checkbox.html) and every prototype/product page.
+   Skill: eco-checkbox. Link it, do not copy it: <link rel="stylesheet" href="/components/css/checkbox.css">
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only. */
+    /* ── Light ── */
+    .form-checkbox-item { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .form-checkbox-item input[type="checkbox"],
+    .check-icon input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none;
+      width: 16px; height: 16px;
+      border: 1px solid var(--color-border-input-control-default);
+      background: var(--color-surface-raised-primary);
+      cursor: pointer; flex-shrink: 0;
+      margin: 4px; /* 16px box + 4px each side = 24px area, room for the focus ring */
+    }
+    .form-checkbox-item input[type="checkbox"]:is(:hover, [data-state="hover"]):not(:disabled) {
+      background-color: var(--color-surface-raised-secondary);
+      border-color: var(--color-border-hover);
+    }
+    .form-checkbox-item input[type="checkbox"]:is(:focus-visible, [data-state="focus"]) {
+      outline: 2px solid var(--color-border-focus); outline-offset: 2px;
+    }
+    .form-checkbox-item input[type="checkbox"]:checked,
+    .check-icon input[type="checkbox"]:checked {
+      background-color: var(--color-surface-100);
+      border-color: var(--color-surface-100);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: 14px 14px;
+    }
+    .form-checkbox-item input[type="checkbox"]:is(:checked, :indeterminate):is(:hover, [data-state="hover"]):not(:disabled) {
+      background-color: var(--color-surface-50); border-color: var(--color-surface-50);
+    }
+    .form-checkbox-item input[type="checkbox"]:indeterminate {
+      background-color: var(--color-surface-100);
+      border-color: var(--color-surface-100);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: 14px 14px;
+    }
+    .form-checkbox-item input[type="checkbox"]:disabled,
+    .check-icon input[type="checkbox"]:disabled {
+      border-color: var(--color-border-disabled);
+      background-color: var(--color-surface-disabled);
+      cursor: not-allowed;
+    }
+    .check-icon input[type="checkbox"]:disabled:not(:checked) { background-color: var(--color-background-primary); } /* table variant keeps a white box */
+    .form-checkbox-item input[type="checkbox"]:disabled:checked,
+    .check-icon input[type="checkbox"]:disabled:checked {
+      background-color: var(--color-surface-disabled);
+      border-color: var(--color-surface-disabled);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='%23939595' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: 14px 14px;
+    }
+    .form-checkbox-item input[type="checkbox"]:disabled:indeterminate {
+      background-color: var(--color-surface-disabled); border-color: var(--color-surface-disabled);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='%23939595' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+    .form-checkbox-item:has(input:disabled) { cursor: not-allowed; }
+    .form-checkbox-item:has(input:disabled) .cb-arrow { fill: var(--color-text-disabled); }
+    .form-checkbox-item span {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px; /* body-md */
+      color: var(--color-text-primary);
+    }
+    @media (min-width: 769px) { .form-checkbox-item span { font-size: 17px; line-height: 24px; } }
+    .form-checkbox-item:has(input:disabled) span { color: var(--color-text-disabled); }
+
+    /* ── Dark: on surface-100 / surface-80 backgrounds, never mix with the light markup ── */
+    .form-checkbox-item--dark input[type="checkbox"] {
+      border: 1px solid var(--color-border-action-2);
+      background-color: var(--color-surface-opacity-white-0);
+    }
+    .form-checkbox-item--dark input[type="checkbox"]:not(:checked):not(:indeterminate):is(:hover, [data-state="hover"]):not(:disabled) {
+      background-color: var(--color-surface-opacity-white-0);
+      border-color: var(--color-border-action-2); border-width: 2px;
+    }
+    .form-checkbox-item--dark input[type="checkbox"]:checked {
+      background-color: var(--color-surface-action-2);
+      border-color: var(--color-border-action-2);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='%23000000' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .form-checkbox-item--dark input[type="checkbox"]:checked:is(:hover, [data-state="hover"]):not(:disabled) {
+      background-color: var(--color-surface-40);
+      border-color: var(--color-text-disabled);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .form-checkbox-item--dark input[type="checkbox"]:indeterminate {
+      background-color: var(--color-surface-action-2);
+      border-color: var(--color-border-action-2);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='%23000000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+    .form-checkbox-item--dark input[type="checkbox"]:indeterminate:is(:hover, [data-state="hover"]):not(:disabled) {
+      background-color: var(--color-surface-40);
+      border-color: var(--color-text-disabled);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+    .form-checkbox-item--dark input[type="checkbox"]:disabled {
+      border-color: var(--color-surface-60);
+      background-color: var(--color-surface-opacity-white-0);
+    }
+    .form-checkbox-item--dark input[type="checkbox"]:disabled:checked {
+      background-color: var(--color-surface-60);
+      border-color: var(--color-surface-60);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='%23939595' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .form-checkbox-item--dark input[type="checkbox"]:disabled:indeterminate {
+      background-color: var(--color-surface-60); border-color: var(--color-surface-60);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='%23939595' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+    .form-checkbox-item--dark span { color: var(--color-text-primary-inverted); }
+
+    /* ── Size Small: 14px box in a 20px area, 4px gap, Body Small label ── */
+    .form-checkbox-item--sm { gap: 4px; }
+    .form-checkbox-item--sm input[type="checkbox"] { width: 14px; height: 14px; margin: 3px; }
+    .form-checkbox-item--sm input[type="checkbox"]:is(:focus-visible, [data-state="focus"]) { outline-offset: 1px; } /* 1px gap + 2px ring = 3px margin */
+    .form-checkbox-item--sm input[type="checkbox"]:checked,
+    .form-checkbox-item--sm input[type="checkbox"]:indeterminate { background-size: 12px 12px; }
+    .form-checkbox-item--sm span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; } /* body-sm, all breakpoints */
+
+    /* ── Inline Menu: checkbox + dropdown arrow, no label (add aria-label) ── */
+    .form-checkbox-item .cb-arrow { width: 24px; height: 24px; flex-shrink: 0; fill: var(--color-icon-primary); }
+    .form-checkbox-item--dark .cb-arrow { fill: var(--color-icon-inverted); }
+    .form-checkbox-item--dark:has(input:disabled) span { color: var(--color-text-disabled); }
+
+    /* ── Tiles: Color swatch, Image and Number (PDP and filtering) ── */
+    .form-checkbox-tile { position: relative; display: inline-flex; flex-shrink: 0; padding: 0; border: 0; background: none; cursor: pointer; }
+    .form-checkbox-tile input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; appearance: none; cursor: pointer; }
+    .form-checkbox-tile__box {
+      box-sizing: border-box; display: flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px; padding: 2px;                                   /* Color swatch: 24px area, 16px swatch */
+      border: 1px solid var(--color-border-secondary);
+      background: var(--color-surface-raised-primary);
+    }
+    .form-checkbox-tile__swatch { width: 16px; height: 16px; background: var(--swatch); }   /* --swatch: the product color */
+    .form-checkbox-tile--image .form-checkbox-tile__box,
+    .form-checkbox-tile--number .form-checkbox-tile__box { width: 40px; height: 40px; padding: 6px; } /* mobile 40px, desktop 48px */
+    .form-checkbox-tile--image .form-checkbox-tile__box { border-color: var(--color-border-primary); }
+    .form-checkbox-tile--image img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .form-checkbox-tile--number .form-checkbox-tile__box {
+      font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 600; line-height: 16px; letter-spacing: 0.48px; text-transform: uppercase; /* label-md */
+      color: var(--color-text-primary);
+    }
+
+    /* Row: the tile with a name and a count, as in a filter list (the whole row is the click target) */
+    .form-checkbox-tile--row { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); width: 100%; min-height: 48px; text-align: left; }
+    .form-checkbox-tile__text, .form-checkbox-tile__count {
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px; /* body-md */
+    }
+    .form-checkbox-tile__text { flex: 1; color: var(--color-text-primary); }
+    .form-checkbox-tile__count { color: var(--color-text-tertiary); }
+
+    /* Hover */
+    .form-checkbox-tile:is(:hover, [data-state="hover"]) .form-checkbox-tile__box { border-color: var(--color-border-hover); }
+    /* Selected: a 2px frame (1px border + 1px inset), so the size never changes */
+    .form-checkbox-tile input:checked + .form-checkbox-tile__box { border-color: var(--color-border-selected); box-shadow: inset 0 0 0 1px var(--color-border-selected); }
+    .form-checkbox-tile:is(:hover, [data-state="hover"]) input:checked + .form-checkbox-tile__box { border-color: var(--color-border-selected-hover); box-shadow: inset 0 0 0 1px var(--color-border-selected-hover); }
+    /* Focus */
+    .form-checkbox-tile input:focus-visible + .form-checkbox-tile__box,
+    .form-checkbox-tile[data-state="focus"] .form-checkbox-tile__box { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .form-checkbox-tile--number:focus-visible .form-checkbox-tile__box { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .form-checkbox-tile--number .form-checkbox-tile__box { border-color: var(--color-border-secondary); }
+
+    @media (min-width: 769px) {
+      .form-checkbox-tile__text, .form-checkbox-tile__count { font-size: 17px; line-height: 24px; }
+      .form-checkbox-tile--image .form-checkbox-tile__box,
+      .form-checkbox-tile--number .form-checkbox-tile__box { width: 48px; height: 48px; }
+    }

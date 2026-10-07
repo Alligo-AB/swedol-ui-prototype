@@ -1,6 +1,6 @@
 ---
 name: eco-doc-page
-description: Use when building or changing a documentation/showcase page for the ECO Design System (foundations such as colors or typography, and components such as button or radio) in `eco-design-system/` — page structure, section order, shared `docs.css` classes, live-from-tokens rules, the overview hub and registration in index.html.
+description: Use when building or changing a documentation/showcase page for the ECO Design System (foundations such as colors or typography, and components such as button or radio) in `eco-design-system/` — page structure, section order, shared `docs.css` classes, live-from-tokens rules, the overview hub and registration in index.html — and the component-page template (playground, variants, states matrix, specs, code, usage), spacing and card rules.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, breakpoints and the quality checklist. This skill is about **showing** the system. The rules for each component live in its `eco-*` skill; add a new component with `eco-add-component`.
@@ -16,10 +16,18 @@ eco-design-system/
   subnav.js                stuck-state hairline + active-section marker for the sticky nav
   tokens-loader.js         ECO.watch(): load tokens.json and re-render when it changes
   overview.html            hub: entry points, summary + live illustration per page
-  foundations/colors.html  reference implementation — copy its structure
+  foundations/colors.html  reference implementation for foundation pages — copy its structure
   foundations/<name>.html  typography, spacing, elevation, motion …
-  components/<name>.html   button, checkbox, radio …
+  components/checkbox.html reference implementation for component pages — copy its structure
+  components/<name>.html   button, radio, switch …
+  components/notifications.html + toast / toast-ecom / modal / banner / inline .html   the notification family
+  (the component CSS/JS of the form and action components is in the repo-root components/css/ and components/js/, linked by these pages and by prototypes)
+  notifications.css, notifications.js   the real component CSS + runtime shared by the notification pages (Code sections print their `@section` blocks live); doc-kit.js = shared page helpers (DK)
 ```
+
+**Page type attribute.** Every page sets `data-ds` on `<body>`: `foundation` (`<body data-ds="foundation">`) or `component` (`<body data-ds="component">`). `docs.css` uses it to scope the spacing and card rules below, so a rule for one page type never leaks into the other.
+
+**Page top padding** (`--pt-page` on `body`): 16px xs, 32px sm, 32px md, 40px lg, 48px xl. The breadcrumb has no top padding of its own (only 16px below).
 
 > Never name the hub `index.html`: `npx serve` (the local server) redirects `/folder/index.html` to `/folder`, which breaks every relative path on the page.
 
@@ -54,8 +62,32 @@ Section backgrounds alternate white / grey (`eco-section`). The first section fo
 | Not-yet-built hub entry | `div.ds-card.ds-card--soon` + `<span class="ds-tag">Coming</span>`, `aria-disabled="true"` |
 | Mini illustration | `.mini-*` classes (built from tokens). Add a new `.mini-x` in `docs.css` when a new page needs one. |
 | Sub-heading / helper text | `.ds-h3`, `.ds-desc` |
+| Option group (Mode, Size, Breakpoint …) | `.btn-group` (shared `components/css/button-group.css`, see `eco-button`): a joined group of System buttons, buttons with `aria-pressed`, inside `.ds-toolbar` (page-wide) or `.ds-field` (in `.ds-controls`). **Max 4 options with short labels (the whole group must fit the controls panel on one row), never wrapped.** More options: a `select.form-select.form-select--sm` (`eco-select`) with the same `data-pg` (`DK.seg` and `wireSeg` handle both) |
+| Example surface | `.ds-stage` (`--dark` for a dark surface, `--center` to center one example), `.ds-stage__cap` for a small caption |
+| Playground (stage + controls) | `.ds-playground` > `.ds-stage` + `.ds-controls` |
+| Icon name field (Material Symbols) | `data-icon-picker` on the input, script `../../components/icon-picker/icon-picker.js`. Spec and rules: `eco-icon-picker`. Never a plain text input. |
+| Table (matrix, specs, tokens) | `.ds-table-wrap` > `.ds-table`, see `eco-table`; `.ds-matrix` for a states matrix; `.ds-dot` for a color dot; `.ds-na` for a "not defined" cell |
+| Copyable code block | `.ds-code` > `.ds-code__bar` (title + copy button) + `pre` |
+| Divider between the intro/sub-nav and a white first content section | `<hr class="ds-divider">` directly after `.ds-subnav` (1px `--color-border-primary`, full page width, no margin or padding of its own). Not needed when the first section is grey. |
+| Copy control (every place that copies a token, class, value or code) | Always a Blank icon button: `<button type="button" class="mo-copy" aria-label="Copy …"><span class="mo-ic" aria-hidden="true">content_copy</span></button>`; on click the glyph becomes `check` for 1.2 s. Never a text "Copy" link. A token or value shown beside it is `.ds-copyname` > `.ds-copyname__text` + the button. Material Symbols is imported by `docs.css`. |
+| Anatomy diagram (8× scale) | `.ds-anatomy` > `.ds-anatomy__fig` + `.ds-anatomy__legend` |
 
 Need a block that does not exist? Add it to `docs.css` with the same conventions (tokens only, mobile-first, `md` = 769px) rather than writing page-local CSS.
+
+## Spacing and card treatment
+
+All values are mobile-first; the larger value applies from 769px (`md`).
+
+| Between | Mobile | Desktop |
+|---|---|---|
+| `.ds-desc` and the block it introduces (`.ds-stage`, `.ds-table-wrap`, `.ds-playground`, `.ds-layers`, `.ds-ramp`, `.ds-grid`, `.ds-status`) | 12px | 16px |
+| Block (or note under it) and the next `.ds-h3` | 32px | 48px |
+| `.ds-h3` and the `.ds-desc` after it | 8px | 8px |
+| Foundation pages (`data-ds="foundation"`): block and next `.ds-h3` | 56px | 56px |
+| `.ds-h3` straight after a `.ds-desc` (section intro) | 0 | 0 |
+| Block and the explanatory note under it: `<p class="ds-desc ds-note">` (body-md: 16/22 mobile, 17/24 desktop) | 8px | 8px |
+
+**Cards on component pages** (`data-ds="component"`): `.ds-stage`, `.ds-controls`, `.ds-code`, `.ds-rule` have no 1px frame and use `var(--shadow-elevation-b-20)`, the same elevation as the dashboard stat cards. `.ds-controls` has 24px side padding; `.ds-code__bar` is 56px high with 24px side padding; the Do / Don't cards keep their 4px color bar on top. Tables (`.ds-table-wrap`) get the same treatment on every page type: see `eco-table`.
 
 ## Foundation pages
 
@@ -63,17 +95,30 @@ Need a block that does not exist? Add it to `docs.css` with the same conventions
 - Show the token name, the `var(--…)` (click to copy), hex/rgb, and the description from `tokens.json`.
 - Show objective info that teaches: contrast badge for text colors, a ramp for ordered scales, matched sets for status.
 - Colors page is the reference implementation: `foundations/colors.html`.
+- Status matrix: build the text-token name as `text-<status>-default` for all four statuses (information, success, warning, danger). Concept-brand accents that are only primitives in the package (Tools: `--color-primitive-color-brand-tools-accent-*`) are read live from the package CSS and labelled as primitives, since `tokens.json` has semantic tokens only.
 
-## Component pages (when they are added)
+## Component pages
 
-Use the same anatomy and these content sections, matching the component's `eco-*` skill (link to it in the intro or a note):
+Reference implementation: `components/checkbox.html`. Copy its structure for every component (Form components first), and keep the specification in the component's `eco-*` skill (link to it in the intro).
 
-1. **Overview**: a live default example, what it is, when to use / when not (from the Figma info frame).
-2. **Variants and sizes**: a grid of every variant × size, real components, not screenshots.
-3. **States**: every state in a matrix (enabled, hover, focus, selected, disabled …). Use the real component CSS; force hover/focus with a `data-state` class only on this page, never in the component CSS.
-4. **Anatomy and specs**: dimensions, spacing, typography and token table.
-5. **Code**: the HTML structure and CSS template from the skill (one copyable block each).
-6. **Usage**: Do / Don't.
+**Form components follow the checkbox page first and unchanged:** input, select, segment control, switch and radio (the `eco-*` Form components table in `CLAUDE.md`), and button (group Actions on the overview) use the same six sections, the same toggles, the same card treatment and the same spacing, so every Form page looks and behaves the same. Only the toggles and variants that the component really has change (for example no Mode toggle without a dark mode, no Inline menu type outside checkbox). Other component families (notifications, links, layout) start from the same template and may add or drop sections, but ask before deviating from the order. **Notifications** add an **In action** section after Playground (real triggers: toasts fire, modals open, forms show inline feedback) and, for Banner, **Placement and priority**; the component CSS/JS live in the shared `notifications.css` / `notifications.js` instead of a per-page `<style id>` because five pages and the guide use them.
+
+**Sections (in this order)**, each with a sticky-nav chip:
+1. **Playground**: `.ds-playground`, a live stage plus controls: Mode (light/dark, only if the component has a dark mode), Size, Type/variant, Value, State, label text and a Breakpoint toggle when the Figma axis changes anything. Below it a copyable **markup for this selection** that updates with the controls. The component in the stage is real: click and tab to try it.
+2. **Variants**: every variant and size as real components in `.ds-stage` blocks (sizes, with/without label, group, special patterns such as select-all, inline/menu type, table use). One Mode toggle (and Breakpoint toggle) at the top syncs every stage.
+3. **States**: a `.ds-matrix` table, rows = states, columns = values (for example unchecked / checked / mixed), with Mode, Size and Type toggles. Every state in Figma appears; a state Figma does not define shows `.ds-na` "Not defined" (and is explained in a note), never an empty cell.
+4. **Anatomy & specs**: an `.ds-anatomy` diagram at 8× scale with a legend, a sizes table, a **token table resolved live** (`getComputedStyle(documentElement).getPropertyValue('--color-…')`, with a `.ds-dot`), and a behavior / accessibility table (click, Tab, Space, disabled, label).
+5. **Code**: one copyable `.ds-code` block per recipe (standard, checked/disabled, dark, group, special cases) and one for the **CSS, fetched live from the shared `components/css/<name>.css` that the page links** so it can never drift from the examples.
+> **Tailwind block (all component pages):** `eco-design-system/tailwind-note.js` appends a "Using with Tailwind" block at the end of the Code section (or the last section on pages without one): the component CSS goes in `@layer components`, tokens are used as `[var(--…)]`, `md` is 769px. Include `<script src="../tailwind-note.js"></script>` before `subnav.js` on every new component page.
+
+6. **Usage**: a "which component" table (this one vs its siblings, for example checkbox / radio / switch) and the Do / Don't cards.
+
+**How to build it**
+- **One builder function** creates every example (`cb({dark, small, menu, checked, mixed, disabled, state, label, aria})`-style) so playground, variants and matrix always use the same markup.
+- **Component CSS lives in `components/css/<name>.css`** (repo root, shared with prototypes and products), linked from the page with `<link rel="stylesheet" href="../../components/css/<name>.css">`. Not in `docs.css`, not in a `<style id>` block in the page: it is the component, and the Code section fetches and prints the same file (copy `cssText()` from `components/input.html`). Behaviour JS the same way in `components/js/`. Force hover/focus for the matrix with `:is(:hover, [data-state="hover"])` pairs; the Code section strips the `[data-state]` half before printing (`replace`).
+- **Mode, Breakpoint and other global toggles** are `[data-…-toggle]` groups that all stay in sync (`aria-pressed`); the choice applies via a class on the stages or a `data-bp` attribute on `<body>`. A Breakpoint toggle (Window / Desktop / Mobile) only previews what the component does by itself at 769px: it forces the values with page-local CSS and is never part of the component CSS.
+- **Mobile**: mobile styling below 769px (`sm` looks like mobile), the Breakpoint axis in Figma = Desktop (769px+) / Mobile (below 769px).
+- Page-local CSS is only layout (rows, columns, group spacing) and the state-forcing for the demo; no component or token values.
 
 ## Hub (`overview.html`)
 
@@ -92,4 +137,29 @@ Sections **Foundations** and **Components**. One card per page: title, tag (`Liv
 - Console clean; coverage line says all tokens shown; every flagged drift is reported to the user.
 - Breakpoints: `getComputedStyle` at ~375px, ~700px (must look like mobile), ~1280px. Check `--px-page` (16/32/40), title/lead sizes, grid columns, and no horizontal scroll (`scrollWidth == innerWidth`).
 - Keyboard: Tab reaches breadcrumb, toc chips, copy buttons, hub links, each with a visible focus ring. Copy buttons announce "Copied".
-- No hardcoded hex/px colors in page or `docs.css`.
+- No hardcoded hex/px colors in page or `docs.css` (SVG data-URI icons are the one exception, noted on the page).
+- Component pages: toggle every Mode / Size / Type / Breakpoint and check the matrix has no empty cell, every state in Figma is shown, the CSS block matches the examples, and a table row is 48px / header row 56px (`getBoundingClientRect`).
+- Spacing: measure the gaps in "Spacing and card treatment" at ~375px, ~700px and ~1280px.
+
+
+## Motion section
+
+When a component animates (close, open, enter, exit), give the page its own **Motion** section right after the playground, so the reader can compare easing and duration live. Use `DK.motion({ anchor, prefix, rec, why, collapse, preview })` from `eco-design-system/doc-kit.js` (Banner and Inline notification are the reference). It builds the section (preview stage + controls, same layout as the playground), adds a "Motion" chip to the subnav and flips the background of the later sections so they keep alternating.
+
+- Controls (sliders are the shared `eco-range` component: the page must link `/components/css/range.css` and `/components/js/range.js`): slider **Easing** (all four eco-motion easings), slider **Duration** (all 12 duration tokens, fast-1 … slow-4, tick labels in ms), **toggle button group** "Height" (Fade only / Collapse, `.ds-seg`; only with `collapse`) and Show again.
+- `role: 'exit'` (component closes or is removed) adds a live warning under the controls and a table "Recommendations and warnings": Decelerate easing (made for enter, use Accelerate), Slow duration 450 ms or more (a closing element should leave quickly), Height Fade only (content jumps up). Other roles (enter, hover) need their own rules in `WARN` in `doc-kit.js` before use.
+- Table "Motion for this selection": Property / Token / Value / Recommended, read live from the tokens.
+- The component CSS reads `--<prefix>-ease` / `--<prefix>-duration` with the **recommended value as fallback**, and the JS skips the collapse inside `[data-<prefix>="fade"]`.
+- `rec` = the recommended default for that component from `eco-motion` (combination rule: distance + fade + easing); `why` = one sentence. Recommended is marked `*`.
+- Two motions on one page (Toast: enter + exit): pass `parts: [{ title, prefix, rec, exit }]` instead of `prefix`/`rec` (one Easing + Duration slider pair per part, `exit: true` gets the exit warnings) and `show()` instead of `preview()` for a component that is fixed in the window: the vars are set on `<html>` and the stage shows a hint plus a Show toast button. Reference: `components/toast.html`, `toast-ecom.html`.
+- **Link to it from the playground and the code block.** `DK.motion` gives the section `id="motion"`. Add `<p class="pg-note" style="margin:0">The animation … is set in <a href="#motion" class="ds-link">Motion</a>.</p>` in the playground controls (before the Show/Show again button) and `<p class="ds-desc ds-note">The markup has no motion. … is set in <a href="#motion" class="ds-link">Motion</a>.</p>` under the code block. Reference: `banner.html`, `toast.html`, `toast-ecom.html`. No other element on the page may use `id="motion"` (name a spec table body `motion-rows`).
+- When asked to build a component page for something that animates, **suggest** adding the Motion section (and the recommended default) before building it.
+
+
+## Text fields in a playground
+
+Playground text fields are the shared **`eco-input`**, never a docs-only style: `<div class="ds-field form-field"><label class="form-label" for="id">Label</label><div class="input-wrap"><div class="input-box"><input class="form-input" type="text" id="id" value="…" placeholder="Label" /></div></div></div>`, and the page links `/components/css/input.css`. The placeholder is required (the Active border uses `:placeholder-shown`). `subnav.js` sets `body.keyboard-nav` for the focus ring. Hover, active, focus and disabled then follow `eco-input` everywhere. `docs.css` has no text-input rules.
+
+## Controls in a playground are the real components
+
+Every control in a playground or toolbar is the shared component, never a docs-only style: option groups = the **button group** (`.btn-group`, joined System buttons, 2–4 options; link `/components/css/button-group.css`; see `eco-button`). The pill `eco-pill-segment-control` is not used in docs playgrounds, dropdowns = **`eco-select`** (`.form-select.form-select--sm` inside `.input-wrap`, plus `select.css`, `menu.css`, `select-menu.js`), text fields = **`eco-input`** (`.input-box--sm`), sliders = **`eco-range`**, single toggle buttons = **`eco-button`** (`btn btn--system btn--sm`). Field labels use `form-label form-label--sm`. Use the Small size. `docs.css` has no rules for these controls; fix the shared file instead.

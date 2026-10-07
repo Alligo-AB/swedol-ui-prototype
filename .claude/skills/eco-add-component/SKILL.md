@@ -35,7 +35,7 @@ Frontmatter: `name: eco-<name>`, `description: Use when …` (one line: when to 
 5. **Typography** — table linking to `eco-typography` styles; mobile-first, switching at `md` (769px), never `sm`.
 6. **States** — one table, every variant state × (fill, border, text, icon, extras). Every Figma state must appear.
 7. **HTML structure** — semantic, native elements first (`<input>`, `<button>`, `<fieldset>`), a11y attributes, real example incl. disabled/selected.
-8. **CSS template** — hand-written CSS with `var(--…)` only, mobile-first `@media (min-width: 769px)`. **No Tailwind classes** (repo has no Tailwind build — see `eco-tokens`). Reuse existing classes/patterns from sibling skills before adding new ones.
+8. **CSS** — the component's CSS goes in **`components/css/<name>.css`** (and behaviour JS in `components/js/<name>.js`), never inline in the docs page and never as a long template in the skill. The docs page and every prototype `<link>` that one file; the skill only shows the `<link>` line, the HTML structure and the rules (copy the pointer section from `eco-input`). Hand-written CSS, `var(--…)` only, mobile-first `@media (min-width: 769px)`, `[data-state]` hooks only if the docs page needs forced states. **No Tailwind classes** (repo has no Tailwind build — see `eco-tokens`). Reuse existing classes/patterns from sibling skills before adding new ones, and check the new class names against `template.html` and the partials for clashes (the main-menu drawer already owns `.menu-item…`).
 9. **Dark mode / variants** — only if Figma has them.
 10. **Rules** — numbered, numbered "Never"/"Always" items incl. the token rule, a11y rule (focus-visible, label association), and the breakpoint test line.
 11. **Flags** — deviations/ambiguities found (Figma vs tokens, missing tokens).
@@ -43,10 +43,10 @@ Frontmatter: `name: eco-<name>`, `description: Use when …` (one line: when to 
 Keep it thin: spec + template, no page-specific hacks.
 
 ## 5. Register it
-- Add the component's documentation page in `eco-design-system/components/<name>.html` following `eco-doc-page` (replace its `Coming` card in `overview.html`, add a card in the root `index.html`).
+- Add the component's documentation page in `eco-design-system/components/<name>.html` following `eco-doc-page` (copy `components/checkbox.html`, the reference implementation) (replace its `Coming` card in `overview.html`, add a card in the root `index.html`).
 - Add a row to the matching table in **`CLAUDE.md` → "Component library — skills index"** (Form components / Layout / Notifications / Links / Other), copying the skill's `description` as the "Used when" cell. New category → ask first.
 - If a guide skill exists for the family (`links-guide`, `notifications-guide`) add the new type there.
-- Update cross-references (e.g. `eco-segment-control` says "never replaces Radio buttons" → link to `eco-radio`).
+- Update cross-references (e.g. `eco-pill-segment-control` says "never replaces Radio buttons" → link to `eco-radio`).
 - If the user mentions page renames/new pages, follow the index.html memory rules.
 - Run `graphify update .` afterwards (CLAUDE.md graphify rule).
 

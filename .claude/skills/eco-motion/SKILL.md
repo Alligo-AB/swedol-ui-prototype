@@ -41,17 +41,17 @@ Choose easing based on how a transition moves relative to the screen:
 ```css
 /* Example: Element sliding in from off-screen (drawer) */
 .drawer {
-  transition: transform 350ms cubic-bezier(.16,0,.16,1);
+  transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
 }
 
 /* Example: Hover state on a button */
 .btn {
-  transition: background-color 200ms cubic-bezier(.35,0,.35,1);
+  transition: background-color var(--duration-fast-4) var(--ease-standard);
 }
 
 /* Example: Element leaving the screen */
 .toast-exit {
-  transition: opacity 150ms cubic-bezier(.36,.09,1,.58);
+  transition: opacity var(--duration-fast-3) var(--ease-accelerate-generic);
 }
 ```
 
@@ -125,6 +125,7 @@ Fades are a refined way to transition between colors and/or opacity levels.
 | Drawer slides in | Medium–Long | Medium fade | `motion-ease-decelerate-emphasized` |
 | Modal appears | Medium | Medium fade | `motion-ease-decelerate-emphasized` |
 | Element disappears | Any | Fast fade | `motion-ease-accelerate-generic` |
+| Banner / Inline notification closes (×) | Short | Fast fade (`fast-3`) + height collapse | `motion-ease-accelerate-generic` |
 | Loading/empty state | — | Slow fade | `motion-ease-standard` |
 
 ```css
@@ -153,3 +154,8 @@ Fades are a refined way to transition between colors and/or opacity levels.
 ```
 
 ---
+
+
+### Choosing motion in docs
+
+Component docs pages that animate get a live **Motion** section (easing, duration, collapse, recommended default marked `*`, warnings for choices that clash with these rules). See `eco-doc-page`, "Motion section".

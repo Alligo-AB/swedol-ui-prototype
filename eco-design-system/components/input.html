@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <link rel="stylesheet" href="../docs.css">
+  <!-- The component itself. The Code section prints this block live; the [data-state] selectors exist only so this
+       page can force a state, and are stripped from the printed code. Mobile-first, desktop from 769px. -->
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <style>
+    /* page-local: layout, and the Breakpoint preview (forces the mobile or desktop values at any window width) */
+    body[data-bp="mobile"] .form-label, body[data-bp="mobile"] .form-label--sm { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
+    body[data-bp="mobile"] .input-box { height: 40px; padding: 0 var(--dimension-spacing-space-4) 0 var(--dimension-spacing-space-8); }
+    body[data-bp="mobile"] .input-box--sm, body[data-bp="mobile"] .input-box--xs { height: 32px; padding: 0 6px 0 var(--dimension-spacing-space-8); }
+    body[data-bp="mobile"] .input-box .form-input { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+    body[data-bp="mobile"] .input-box--sm .form-input, body[data-bp="mobile"] .input-box--xs .form-input { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
+    body[data-bp="desktop"] .form-label { font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
+    body[data-bp="desktop"] .form-label--sm { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+    body[data-bp="desktop"] .input-box { height: 48px; padding: 0 var(--dimension-spacing-space-8) 0 var(--dimension-spacing-space-12); }
+    body[data-bp="desktop"] .input-box--sm { height: 40px; padding: 0 var(--dimension-spacing-space-4) 0 var(--dimension-spacing-space-8); }
+    body[data-bp="desktop"] .input-box--xs { height: 32px; padding: 0 6px 0 var(--dimension-spacing-space-8); }
+    body[data-bp="desktop"] .input-box .form-input { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }
+    body[data-bp="desktop"] .input-box--sm .form-input, body[data-bp="desktop"] .input-box--xs .form-input { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
+
+    body[data-bp="mobile"] .input-box .input-actions { margin-left: 10px; }
+    body[data-bp="mobile"] .input-box--sm .input-actions, body[data-bp="mobile"] .input-box--xs .input-actions { margin-left: var(--dimension-spacing-space-16); }
+    body[data-bp="mobile"] .input-box--sm .input-actions__btn { padding: 0; background: transparent; }
+    body[data-bp="mobile"] .input-box--sm .input-actions__btn:hover { background: transparent; color: var(--color-text-action-primary-hover); }
+    body[data-bp="desktop"] .input-box .input-actions, body[data-bp="desktop"] .input-box--sm .input-actions { margin-left: var(--dimension-spacing-space-4); }
+    body[data-bp="desktop"] .input-box--xs .input-actions { margin-left: var(--dimension-spacing-space-16); }
+    body[data-bp="desktop"] .input-box--sm .input-actions__btn { padding: 6px; }
+    body[data-bp="desktop"] .input-box--sm .input-actions__btn:hover { background: var(--color-surface-opacity-black-05); color: var(--color-text-action-primary); }
+    .in-col { display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 360px; }
+    .in-grid { display: grid; gap: 32px 24px; grid-template-columns: 1fr; }
+    @media (min-width: 769px) { .in-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .in-matrix td { min-width: 280px; vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .in-matrix .form-field { min-width: 240px; }
+    .in-legend { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+    .in-legend b { font-weight: 600; }
+    .in-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); margin-top: 12px; }
+  </style>
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Input</span>
+    </div>
+  </nav>
+</div>
+
+<!-- ── Intro ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Components · Form</span>
+    <h1 class="ds-title">Input</h1>
+    <p class="ds-lead">An input field lets the user enter <strong>free text, numbers or search terms</strong>. It can have a label, a left icon, right-hand action icons and a message that explains or validates the value.</p>
+    <p class="ds-lead">Every example on this page is the real component. Type, click, tab and clear the value to try it. Specification: <code>.claude/skills/eco-input/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#playground">Playground</a></li>
+    <li><a href="#variants">Variants</a></li>
+    <li><a href="#states">States</a></li>
+    <li><a href="#specs">Anatomy &amp; specs</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#usage">Usage</a></li>
+  </ul>
+</nav>
+
+<!-- ── Playground ────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="playground">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Playground</h2>
+    <p class="ds-desc">Choose a breakpoint, size and state and the field and its code update. Hover and focus are forced here so they can be seen; type in the field to get the Active state, and use the clear button to empty it.</p>
+    <div class="ds-playground">
+      <div class="ds-stage ds-stage--center" id="pg-stage"><div class="in-col" id="pg-host"></div></div>
+      <div class="ds-controls">
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bp">Breakpoint</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-bp" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-size">Size</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-size" data-pg="size" data-size-toggle><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button><button type="button" data-v="xs" aria-pressed="false">XSmall</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="sel-pg-l-st" id="pg-l-st">State</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="state" id="sel-pg-l-st"><option value="enabled">Enabled</option><option value="hover">Hover</option><option value="active">Active</option><option value="focus">Focus</option><option value="error">Error</option><option value="success">Success</option><option value="disabled">Disabled</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-left">Left icon</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-left" data-pg="left"><button type="button" data-v="off" aria-pressed="true">None</button><button type="button" data-v="on" aria-pressed="false">Search</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-right">Right icons</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-right" data-pg="right"><button type="button" data-v="none" aria-pressed="true">None</button><button type="button" data-v="clear" aria-pressed="false">Clear</button><button type="button" data-v="both" aria-pressed="false">Clear + actions</button></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-msg">Message icon</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-msg" data-pg="msgIcon"><button type="button" data-v="off" aria-pressed="true">None</button><button type="button" data-v="on" aria-pressed="false">Icon</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-label">Label</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-label" value="Order number" placeholder="Label" /></div></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-hint">Message</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-hint" value="Found on your order confirmation." placeholder="Message" /></div></div></div>
+      </div>
+    </div>
+    <h3 class="ds-h3">Markup for this selection</h3>
+    <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
+  </div>
+</section>
+
+<!-- ── Variants ──────────────────────────────────────────────── -->
+<section class="ds-section" id="variants">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Variants</h2>
+    <p class="ds-desc">Three sizes on desktop (Large 48px, Small 40px, XSmall 32px) and two on mobile (Large 40px, Small 32px). Figma has a Breakpoint property: Desktop is 769px and up, Mobile is below 769px. The component switches by itself; the Breakpoint toggle forces one for preview.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="vb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="vb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+
+    <h3 class="ds-h3">Sizes</h3>
+    <p class="ds-desc"><strong>Large</strong> is for standard forms, <strong>Small</strong> for compact surfaces, <strong>XSmall</strong> for dense tables and filters (desktop only: on mobile it is not available, use Small).</p>
+    <div class="ds-stage"><div class="in-grid" id="v-sizes"></div></div>
+
+    <h3 class="ds-h3">Icons</h3>
+    <p class="ds-desc">A left icon shows the type of input (the default is search). Right-hand icons are optional: <strong>clear</strong> appears only when the field has a value, a <strong>divider</strong> separates clear from the <strong>action icons</strong>. Enable only the ones the field needs.</p>
+    <div class="ds-stage"><div class="in-grid" id="v-icons"></div></div>
+
+    <h3 class="ds-h3">Messages</h3>
+    <p class="ds-desc">The message sits below the field, in <code>body-sm</code>. Hint text is neutral, error and success change the color of the border and the message. The message icon is optional and up to you; an icon next to an error message helps so color is not the only signal.</p>
+    <div class="ds-stage"><div class="in-grid" id="v-messages"></div></div>
+  </div>
+</section>
+
+<!-- ── States ────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="states">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">States</h2>
+    <p class="ds-desc">All seven states from Figma, with and without icons. Hover and focus are forced on this page; in your code they come from <code>:hover</code> and keyboard focus. Active means the field has a value.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div>
+      <span class="ds-toolbar__label" id="ss-l">Size</span>
+      <div class="btn-group" role="group" aria-labelledby="ss-l" data-mx="size" data-size-toggle><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button><button type="button" data-v="xs" aria-pressed="false">XSmall</button></div></div>
+    <div class="ds-table-wrap"><table class="ds-table in-matrix" id="matrix">
+      <thead><tr><th scope="col">State</th><th scope="col">Plain</th><th scope="col">Left icon</th><th scope="col">Left + right icons</th></tr></thead>
+      <tbody></tbody></table></div>
+  </div>
+</section>
+
+<!-- ── Anatomy & specs ───────────────────────────────────────── -->
+<section class="ds-section" id="specs">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Anatomy &amp; specs</h2>
+    <p class="ds-desc">The focus ring is a separate element around the box, 3px outside it, so focusing never changes the layout or the box size.</p>
+    <div class="ds-stage"><div class="ds-anatomy">
+      <div class="in-col" id="a-host"></div>
+      <ol class="in-legend">
+        <li><b>1 Label</b>: <code>label-md</code> / <code>label-sm</code>, uppercase, 4px above the box</li>
+        <li><b>2 Left icon</b>: 24px (Large) or 20px (Small, XSmall), 8px to the text</li>
+        <li><b>3 Input text</b>: <code>body-md</code> (Large) or <code>body-sm</code></li>
+        <li><b>4 Clear</b>: only with a value. <b>5 Divider</b>: 1px × 16px. <b>6 Action icons</b></li>
+        <li><b>7 Message</b>: <code>body-sm</code>, 4px below the box</li>
+        <li><b>Focus ring</b>: 2px, <code>border-focus</code>, 3px outside the box</li>
+      </ol></div></div>
+
+    <h3 class="ds-h3">Sizes</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th scope="col">Breakpoint · size</th><th scope="col">Height</th><th scope="col">Padding (left, right)</th><th scope="col">Left icon</th><th scope="col">Right icons</th><th scope="col">Label</th><th scope="col">Input text</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Desktop · Large</th><td>48px</td><td>12px, 8px</td><td>24px</td><td>Button (32px)</td><td><code>label-md</code> 16/16, 0.48px</td><td><code>body-md</code> 17/24, 0.32px</td></tr>
+        <tr><th scope="row">Desktop · Small</th><td>40px</td><td>8px, 4px</td><td>20px</td><td>Button (32px)</td><td><code>label-sm</code> 14/14, 0.56px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr>
+        <tr><th scope="row">Desktop · XSmall</th><td>32px</td><td>8px, 6px</td><td>20px</td><td>Icon Button (20px)</td><td><code>label-sm</code> 14/14, 0.56px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr>
+        <tr><th scope="row">Mobile · Large</th><td>40px</td><td>8px, 4px</td><td>24px</td><td>Button (32px)</td><td><code>label-sm</code> 12/12, 0.48px</td><td><code>body-md</code> 16/22, 0.32px</td></tr>
+        <tr><th scope="row">Mobile · Small</th><td>32px</td><td>8px, 6px</td><td>20px</td><td>Icon Button (20px)</td><td><code>label-sm</code> 12/12, 0.48px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr>
+      </tbody></table></div>
+    <p class="ds-desc ds-note">Right-hand icons are 20px in every size, but the component that holds them differs. A <strong>Button</strong> (<code>eco-button</code>, Blank, icon only, 6px padding = 32px, grey fill on hover) holds them on Desktop Large, Desktop Small and Mobile Large. An <strong>Icon Button</strong> (just the 20px icon, it turns grey on hover) holds them on Desktop XSmall and Mobile Small. Icon color is <code>text-action-primary</code>. Padding top and bottom comes from the fixed height. The 6px values and the 10px gap before the icons on Mobile Large are literals: there is no spacing token for them.</p>
+
+    <h3 class="ds-h3">Tokens</h3>
+    <p class="ds-desc">Resolved from the live token package.</p>
+    <div class="ds-table-wrap"><table class="ds-table" id="tok-table">
+      <thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead>
+      <tbody></tbody></table></div>
+
+    <h3 class="ds-h3">Behavior and accessibility</h3>
+    <div class="ds-table-wrap"><table class="ds-table">
+      <thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Type a value</th><td>The field becomes Active: black border and the clear button appears.</td></tr>
+        <tr><th scope="row">Clear button</th><td>Empties the field and returns focus to it. It is a real <code>button</code> with an <code>aria-label</code>.</td></tr>
+        <tr><th scope="row">Tab</th><td>The blue ring shows on keyboard focus only (<code>body.keyboard-nav</code>, set by a small script).</td></tr>
+        <tr><th scope="row">Hover on a right icon</th><td>Button: grey fill (<code>surface-opacity-black-05</code>). Icon Button: the icon turns <code>text-action-primary-hover</code>.</td></tr>
+        <tr><th scope="row">Label</th><td>Always a <code>label</code> with <code>for</code> and <code>id</code>. Search fields without a visible label need an <code>aria-label</code>.</td></tr>
+        <tr><th scope="row">Error</th><td>Set <code>aria-invalid="true"</code> and point <code>aria-describedby</code> at the message.</td></tr>
+        <tr><th scope="row">Disabled</th><td>Not focusable. Grey fill, light border, <code>text-disabled</code> for text, icons and message.</td></tr>
+      </tbody></table></div>
+    <p class="ds-desc ds-note"><strong>Open points:</strong> Figma binds <code>icon/disabled</code>, which is not in <code>tokens.json</code>, so the disabled icon uses <code>text-disabled</code> (same value). Multi-line text fields are a separate component: see Text area.</p>
+  </div>
+</section>
+
+<!-- ── Code ──────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Copy the markup you need, then add the CSS once per page. The CSS is read from this page’s stylesheet, so it is always what you see above. Add the keyboard script once per page as well.</p>
+    <div id="recipes"></div>
+    <div class="ds-code"><div class="ds-code__bar"><span>CSS</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div>
+    <div class="ds-code"><div class="ds-code__bar"><span>JavaScript (focus ring on keyboard only)</span><button type="button" class="mo-copy" data-copy="js-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="js-code">document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+document.addEventListener('mousedown', function () { document.body.classList.remove('keyboard-nav'); });</pre></div>
+  </div>
+</section>
+
+<!-- ── Usage ─────────────────────────────────────────────────── -->
+<section class="ds-section" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <p class="ds-desc">Choose the control by what the user is entering.</p>
+    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table">
+      <thead><tr><th scope="col">The user…</th><th scope="col">Use</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">types free text, a number or a search term</th><td>Input</td></tr>
+        <tr><th scope="row">picks one value from a fixed list</th><td><code>eco-select</code></td></tr>
+        <tr><th scope="row">picks one of two or three options</th><td><code>eco-radio</code></td></tr>
+        <tr><th scope="row">picks any number of options</th><td><code>eco-checkbox</code></td></tr>
+      </tbody></table></div>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do">
+        <h3 class="ds-rule__title">Do</h3>
+        <ul>
+          <li>Give every field a visible label, in sentence case for values and uppercase for the label itself.</li>
+          <li>Pick the size by breakpoint: Large for standard forms, Small for compact surfaces, XSmall for dense tables.</li>
+          <li>Explain what is wrong in the message, with the error icon.</li>
+          <li>Use pre-filled or detected values where you can, in sentence case.</li>
+        </ul>
+      </div>
+      <div class="ds-rule ds-rule--dont">
+        <h3 class="ds-rule__title">Don’t</h3>
+        <ul>
+          <li>Use a placeholder as the label.</li>
+          <li>Show the focus ring on mouse click, or remove it on keyboard focus.</li>
+          <li>Use color alone for error or success.</li>
+          <li>Hardcode the colors or the heights: use the tokens and the size classes.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script>
+(function () {
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var uid = 0, ACTIONS = [['location_on', 'Use my location'], ['qr_code_scanner', 'Scan a code'], ['photo_camera', 'Take a photo']];
+
+  /* Keyboard focus ring: only after Tab */
+  document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+  document.addEventListener('mousedown', function () { document.body.classList.remove('keyboard-nav'); });
+
+  function icon(name, cls) { var s = document.createElement('span'); s.className = 'input-icon ' + (cls || ''); s.textContent = name; s.setAttribute('aria-hidden', 'true'); return s; }
+
+  /* Build a real field. o: {size lg|sm|xs, state, label, aria, placeholder, value, left (icon name), right 'none'|'clear'|'both'|'actions', hint} */
+  function field(o) {
+    var id = 'in' + (uid++), hid = id + '-m', st = o.state || 'enabled', sz = o.size || 'lg';
+    var f = document.createElement('div'); f.className = 'form-field';
+    if (o.label) { var l = document.createElement('label'); l.className = 'form-label' + (sz !== 'lg' ? ' form-label--sm' : ''); l.htmlFor = id; l.textContent = o.label; f.appendChild(l); }
+    var wrap = document.createElement('div'); wrap.className = 'input-wrap'; if (st === 'focus') wrap.dataset.state = 'focus';
+    var box = document.createElement('div');
+    box.className = 'input-box' + (sz !== 'lg' ? ' input-box--' + sz : '') + (st === 'error' ? ' input-box--error' : '') + (st === 'success' ? ' input-box--success' : '');
+    if (st === 'hover' || st === 'active' || st === 'focus') box.dataset.state = st === 'focus' ? 'active' : st;  /* forced demo states: focus shows the selected border too */
+    if (o.left) box.appendChild(icon(o.left, sz === 'lg' ? 'input-icon--lg' : ''));
+    var inp = document.createElement('input'); inp.type = 'text'; inp.id = id; inp.className = 'form-input';
+    inp.placeholder = o.placeholder || 'Placeholder';
+    if (!o.label) inp.setAttribute('aria-label', o.aria || o.placeholder || 'Input');
+    if (st === 'active') inp.value = o.value || 'Value';
+    if (st === 'disabled') inp.disabled = true;
+    if (st === 'error') inp.setAttribute('aria-invalid', 'true');
+    if (o.hint) inp.setAttribute('aria-describedby', hid);
+    box.appendChild(inp);
+    var r = o.right || 'none';
+    if (r !== 'none') {
+      var acts = document.createElement('div'); acts.className = 'input-actions';
+      var btn = function (name, label, extra) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'input-actions__btn' + (extra ? ' ' + extra : '');
+        b.setAttribute('aria-label', label); if (st === 'disabled') b.disabled = true;
+        b.appendChild(icon(name, extra && extra.indexOf('clear') > -1 ? 'input-icon--fill' : '')); return b;
+      };
+      if (r === 'clear' || r === 'both') {
+        var c = btn('cancel', 'Clear', 'input-actions__clear');
+        c.addEventListener('click', function () { inp.value = ''; inp.focus(); });
+        acts.appendChild(c);
+      }
+      if (r === 'both') { var dv = document.createElement('span'); dv.className = 'input-actions__divider'; acts.appendChild(dv); }
+      if (r === 'both' || r === 'actions') ACTIONS.forEach(function (a) { acts.appendChild(btn(a[0], a[1])); });
+      box.appendChild(acts);
+    }
+    wrap.appendChild(box); f.appendChild(wrap);
+    if (o.hint) {
+      var h = document.createElement('div'); h.id = hid; h.className = 'form-helper' + (st === 'error' ? ' form-helper--error' : st === 'success' ? ' form-helper--success' : st === 'disabled' ? ' form-helper--disabled' : '');
+      if (o.msgIcon === undefined ? st === 'error' : o.msgIcon) h.appendChild(icon(MSG_ICON[st]));
+      h.appendChild(document.createTextNode(o.hint)); f.appendChild(h);
+    }
+    return f;
+  }
+  var MSG_ICON = { enabled: 'info', hover: 'info', active: 'info', focus: 'info', error: 'error', success: 'check_circle', disabled: 'info' };
+  function clear(n) { n.textContent = ''; return n; }
+  var HINT = { enabled: 'Helper text', hover: 'Helper text', active: 'Helper text', focus: 'Helper text', error: 'Enter a valid order number.', success: 'Order number found.', disabled: 'This field cannot be edited.' };
+
+  /* ── Breakpoint preview: one setting synced across every toggle ── */
+  var bp = 'auto';
+  function syncSizes() {   /* XSmall does not exist on mobile */
+    $$('[data-size-toggle]').forEach(function (g) {
+      var x = $('[data-v="xs"]', g); x.disabled = bp === 'mobile';
+      if (bp === 'mobile' && x.getAttribute('aria-pressed') === 'true') { var s = $('[data-v="sm"]', g); s.click(); }
+    });
+  }
+  $$('[data-bp-toggle]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      bp = b.dataset.v;
+      if (bp === 'auto') document.body.removeAttribute('data-bp'); else document.body.setAttribute('data-bp', bp);
+      $$('[data-bp-toggle]').forEach(function (x) { $$('button', x).forEach(function (y) { y.setAttribute('aria-pressed', String(y.dataset.v === bp)); }); });
+      syncSizes();
+    });
+  });
+  function wireSeg(g, fn) {
+    if (g.tagName === 'SELECT') { g.addEventListener('change', function () { fn(g.value); }); return; }
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b || b.disabled) return;
+      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      fn(b.dataset.v);
+    });
+  }
+
+  /* ── Playground ── */
+  var pg = { size: 'lg', state: 'enabled', left: 'off', right: 'none', msgIcon: 'off' };
+  function renderPg() {
+    var label = $('#pg-label').value, hint = $('#pg-hint').value;
+    var o = { size: pg.size, state: pg.state, label: label, aria: label || 'Input', placeholder: 'Placeholder', left: pg.left === 'on' ? 'search' : null, right: pg.right, hint: hint, msgIcon: pg.msgIcon === 'on' };
+    var node = field(o); clear($('#pg-host')).appendChild(node);
+    var html = '<div class="form-field">\n';
+    if (label) html += '  <label class="form-label' + (pg.size !== 'lg' ? ' form-label--sm' : '') + '" for="order">' + label.replace(/</g, '&lt;') + '</label>\n';
+    html += '  <div class="input-wrap">\n    <div class="input-box' + (pg.size !== 'lg' ? ' input-box--' + pg.size : '') + (pg.state === 'error' ? ' input-box--error' : '') + (pg.state === 'success' ? ' input-box--success' : '') + '">\n';
+    if (pg.left === 'on') html += '      <span class="input-icon' + (pg.size === 'lg' ? ' input-icon--lg' : '') + '" aria-hidden="true">search</span>\n';
+    html += '      <input class="form-input" id="order" type="text" placeholder="Placeholder"' + (label ? '' : ' aria-label="Input"') + (pg.state === 'active' ? ' value="Value"' : '') + (pg.state === 'disabled' ? ' disabled' : '') + (pg.state === 'error' ? ' aria-invalid="true"' : '') + (hint ? ' aria-describedby="order-msg"' : '') + ' />\n';
+    if (pg.right !== 'none') {
+      html += '      <div class="input-actions">\n';
+      if (pg.right !== 'actions') html += '        <button type="button" class="input-actions__btn input-actions__clear" aria-label="Clear"><span class="input-icon input-icon--fill" aria-hidden="true">cancel</span></button>\n';
+      if (pg.right === 'both') {
+        html += '        <span class="input-actions__divider"></span>\n';
+        ACTIONS.forEach(function (a) { html += '        <button type="button" class="input-actions__btn" aria-label="' + a[1] + '"><span class="input-icon" aria-hidden="true">' + a[0] + '</span></button>\n'; });
+      }
+      html += '      </div>\n';
+    }
+    html += '    </div>\n  </div>\n';
+    if (hint) html += '  <div class="form-helper' + (pg.state === 'error' ? ' form-helper--error' : pg.state === 'success' ? ' form-helper--success' : pg.state === 'disabled' ? ' form-helper--disabled' : '') + '" id="order-msg">' + (pg.msgIcon === 'on' ? '<span class="input-icon" aria-hidden="true">' + (MSG_ICON[pg.state]) + '</span>' : '') + hint.replace(/</g, '&lt;') + '</div>\n';
+    html += '</div>';
+    if (pg.state === 'hover' || pg.state === 'focus') html = '<!-- ' + pg.state + ' is forced here for preview; in production it comes from ' + (pg.state === 'hover' ? ':hover' : 'keyboard focus') + ' -->\n' + html;
+    $('#pg-code').textContent = html;
+  }
+  $$('[data-pg]').forEach(function (g) { wireSeg(g, function (v) { pg[g.dataset.pg] = v; renderPg(); }); });
+  $('#pg-label').addEventListener('input', renderPg); $('#pg-hint').addEventListener('input', renderPg);
+
+  /* ── Variants ── */
+  function buildVariants() {
+    var sz = clear($('#v-sizes'));
+    [['lg', 'Large'], ['sm', 'Small'], ['xs', 'XSmall']].forEach(function (s) {
+      sz.appendChild(field({ size: s[0], label: s[1], placeholder: 'Placeholder', left: 'search', hint: 'Helper text' }));
+    });
+    var ic = clear($('#v-icons'));
+    ic.appendChild(field({ label: 'Left icon', placeholder: 'Search', left: 'search' }));
+    ic.appendChild(field({ label: 'Clear', placeholder: 'Placeholder', state: 'active', value: 'Value', right: 'clear' }));
+    ic.appendChild(field({ label: 'Clear + actions', placeholder: 'Placeholder', state: 'active', value: 'Value', left: 'search', right: 'both' }));
+    ic.appendChild(field({ label: 'Actions only', placeholder: 'Placeholder', right: 'actions' }));
+    var ms = clear($('#v-messages'));
+    [['enabled', 'Hint'], ['error', 'Error'], ['success', 'Success'], ['disabled', 'Disabled']].forEach(function (m) {
+      ms.appendChild(field({ label: m[1], placeholder: 'Placeholder', state: m[0], hint: HINT[m[0]] }));
+    });
+  }
+
+  /* ── States matrix ── */
+  var mx = { size: 'lg' };
+  var ROWS = [['Enabled', 'enabled'], ['Hover', 'hover'], ['Active', 'active'], ['Focus', 'focus'], ['Error', 'error'], ['Success', 'success'], ['Disabled', 'disabled']];
+  var COLS = [{ left: null, right: 'none' }, { left: 'search', right: 'none' }, { left: 'search', right: 'both' }];
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    ROWS.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      COLS.forEach(function (c) {
+        var td = document.createElement('td');
+        td.appendChild(field({ size: mx.size, state: r[1], label: 'Label', placeholder: 'Placeholder', left: c.left, right: c.right, hint: HINT[r[1]] }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  wireSeg($('[data-mx="size"]'), function (v) { mx.size = v; buildMatrix(); });
+
+  /* ── Anatomy example ── */
+  clear($('#a-host')).appendChild(field({ size: 'lg', label: 'Label', placeholder: 'Placeholder', state: 'active', value: 'Value', left: 'search', right: 'both', hint: 'Message' }));
+
+  /* ── Token table (resolved live) ── */
+  var TOK = [
+    ['Enabled', 'Border', 'border-input-default'], ['Enabled', 'Fill', 'surface-raised-primary'], ['Enabled', 'Placeholder, message', 'text-tertiary'],
+    ['Hover', 'Border', 'border-hover'], ['Active', 'Border', 'border-selected'], ['Active', 'Input text', 'text-primary'], ['Active', 'Divider', 'border-tertiary'],
+    ['Focus', 'Ring (2px, 3px outside)', 'border-focus'], ['Error', 'Border', 'border-danger-default'], ['Error', 'Message', 'text-danger-default'],
+    ['Success', 'Border', 'border-success-default'], ['Success', 'Message', 'text-success-default'],
+    ['Disabled', 'Border', 'border-disabled'], ['Disabled', 'Fill', 'surface-raised-secondary'], ['Disabled', 'Text, icons, message', 'text-disabled'],
+    ['All', 'Left icon', 'icon-primary'], ['All', 'Right icons', 'text-action-primary'], ['All', 'Right icon hover (Icon Button)', 'text-action-primary-hover'], ['All', 'Right icon hover (Button fill)', 'surface-opacity-black-05'], ['All', 'Label', 'text-primary']
+  ];
+  var cs = getComputedStyle(document.documentElement), tt = $('#tok-table tbody');
+  TOK.forEach(function (t) {
+    var v = cs.getPropertyValue('--color-' + t[2]).trim(), tr = document.createElement('tr');
+    [t[0], t[1]].forEach(function (x, n) { var c = document.createElement(n ? 'td' : 'th'); if (!n) c.scope = 'row'; c.textContent = x; tr.appendChild(c); });
+    var tc = document.createElement('td'), code = document.createElement('code'); code.textContent = 'var(--color-' + t[2] + ')'; tc.appendChild(code); tr.appendChild(tc);
+    var vc = document.createElement('td'), dot = document.createElement('span');
+    dot.className = 'ds-dot'; dot.style.background = 'var(--color-' + t[2] + ')'; dot.setAttribute('aria-hidden', 'true');
+    vc.appendChild(dot); vc.appendChild(document.createTextNode(v || 'missing')); tr.appendChild(vc);
+    tt.appendChild(tr);
+  });
+
+  /* ── Code: recipes + live CSS ── */
+  var RECIPES = [
+    ['Standard', '<div class="form-field">\n  <label class="form-label form-label--sm" for="name">Name</label>\n  <div class="input-wrap">\n    <div class="input-box">\n      <input class="form-input" id="name" type="text" placeholder="Placeholder" />\n    </div>\n  </div>\n  <div class="form-helper">Helper text</div>\n</div>'],
+    ['Error', '<div class="form-field">\n  <label class="form-label form-label--sm" for="email">Email</label>\n  <div class="input-wrap">\n    <div class="input-box input-box--error">\n      <input class="form-input" id="email" type="email" placeholder="name@example.com" aria-invalid="true" aria-describedby="email-msg" />\n    </div>\n  </div>\n  <div class="form-helper form-helper--error" id="email-msg"><span class="input-icon" aria-hidden="true">error</span>Enter a valid email address.</div>\n</div>'],
+    ['Search with left icon', '<div class="form-field">\n  <div class="input-wrap">\n    <div class="input-box">\n      <span class="input-icon input-icon--lg" aria-hidden="true">search</span>\n      <input class="form-input" type="text" placeholder="Search" aria-label="Search" />\n    </div>\n  </div>\n</div>'],
+    ['Clear and action icons', '<div class="input-box">\n  <input class="form-input" id="q" type="text" placeholder="Placeholder" />\n  <div class="input-actions">\n    <button type="button" class="input-actions__btn input-actions__clear" aria-label="Clear"><span class="input-icon input-icon--fill" aria-hidden="true">cancel</span></button>\n    <span class="input-actions__divider"></span>\n    <button type="button" class="input-actions__btn" aria-label="Scan a code"><span class="input-icon" aria-hidden="true">qr_code_scanner</span></button>\n  </div>\n</div>\n<!-- clear shows only while the field has a value; wire it: clear.onclick = () => { input.value = ""; input.focus(); } -->'],
+    ['Small and XSmall', '<!-- Small -->\n<div class="input-box input-box--sm">...</div>\n<label class="form-label form-label--sm">...</label>\n<!-- XSmall (desktop only) -->\n<div class="input-box input-box--xs">...</div>']
+  ];
+  var rh = $('#recipes');
+  RECIPES.forEach(function (r) {
+    var box = document.createElement('div'); box.className = 'ds-code'; var id = 'rc' + (uid++);
+    box.innerHTML = '<div class="ds-code__bar"><span></span><button type="button" class="mo-copy" data-copy="' + id + '" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="' + id + '"></pre>';
+    $('span', box).textContent = r[0]; $('pre', box).textContent = r[1]; rh.appendChild(box);
+  });
+  /* The component CSS lives in components/css/ (shared with prototypes); the Code section prints that same file */
+  function cssText(name) {
+    var get = function (n) { return fetch('../../components/css/' + n + '.css').then(function (r) { return r.text(); }); };
+    if (name !== 'select-menu') return get(name);
+    return Promise.all([get('menu'), get('select')]).then(function (a) { return a[0].replace(/\s+$/, '') + '\n\n' + a[1].slice(a[1].indexOf('    /* Exposed dropdown')); });
+  }
+  cssText('input').then(function (t) {
+    $('#css-code').textContent = t
+    .replace(/:is\(:hover, \[data-state="hover"\]\)/g, ':hover')
+    .replace(/,\n    \.input-wrap\[data-state="focus"\]::after/g, '')
+    .replace(/^\n+/, '').replace(/^ {4}/gm, '');
+  });
+
+  /* ── Copy buttons ── */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var txt = document.getElementById(b.dataset.copy).textContent;
+    var ic = b.querySelector('.mo-ic'); var done = function () { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); };
+    if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
+  });
+
+  renderPg(); buildVariants(); buildMatrix(); syncSizes();
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+</body>
+</html>

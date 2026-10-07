@@ -87,62 +87,15 @@ The badge text's case is its own, selectable parameter — not hardcoded. Two mo
 
 ---
 
-### CSS template
+### CSS
 
-```css
-/* Badge/Basic — named .badge-basic to avoid colliding with the
-   existing counter bubble `.badge` (cart/compare icons in the header). */
-.badge-basic {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 5px;                 /* Medium, default */
-  font-family: 'Breuer Condensed', Arial, sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 14px;
-  letter-spacing: 0.56px;
-  white-space: nowrap;
-  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-}
-.badge-basic__icon { width: 14px; height: 14px; flex-shrink: 0; }
+Link the shared stylesheet. Never copy its rules into a page, and never write a parallel version:
 
-/* Letter Case — Sentence Case is the default (already set above). Upper Case: */
-.badge-basic--uppercase {
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-/* Sizes */
-.badge-basic--large  { padding: 6px 8px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
-.badge-basic--small  { padding: 3px 5px; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
-@media (max-width: 768px) {
-  .badge-basic--large { padding: 5px 6px; letter-spacing: 0.48px; }
-  .badge-basic--small { display: none; } /* Small is Desktop-only */
-}
-
-/* Neutral */
-.badge-basic--neutral-grey.badge-basic--strong  { background: var(--color-surface-50); color: var(--color-text-primary-inverted); }
-.badge-basic--neutral-grey.badge-basic--weak    { background: var(--color-surface-20); color: var(--color-text-primary); }
-.badge-basic--neutral-grey.badge-basic--weaker  { background: var(--color-surface-05); border: 1px solid var(--color-border-primary); color: var(--color-text-primary); }
-.badge-basic--neutral-dark.badge-basic--strong,
-.badge-basic--neutral-dark.badge-basic--weak    { background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
-.badge-basic--neutral-dark.badge-basic--weaker  { background: var(--color-surface-100); border: 1px solid var(--color-border-dark); color: var(--color-text-primary-inverted); }
-
-/* Alert Info / Success (template for Danger — just swap the status name) */
-.badge-basic--info.badge-basic--strong    { background: var(--color-surface-information-default); color: var(--color-text-primary-inverted); }
-.badge-basic--info.badge-basic--weak      { background: var(--color-surface-information-weak); color: var(--color-text-information-default); }
-.badge-basic--info.badge-basic--weaker    { background: var(--color-surface-information-weaker); border: 1px solid var(--color-border-information-weak); color: var(--color-text-information-default); }
-.badge-basic--success.badge-basic--strong { background: var(--color-surface-success-default); color: var(--color-text-primary-inverted); }
-.badge-basic--success.badge-basic--weak   { background: var(--color-surface-success-weak); color: var(--color-text-success); }
-.badge-basic--success.badge-basic--weaker { background: var(--color-surface-success-weaker); border: 1px solid var(--color-border-success-weak); color: var(--color-text-success); }
-
-/* Alert Warning — CLAUDE.md lacks a text-warning-default token (yellow text has
-   poor contrast); use text-primary (black) at every emphasis level. */
-.badge-basic--warning.badge-basic--strong { background: var(--color-surface-warning-default); color: var(--color-text-primary); }
-.badge-basic--warning.badge-basic--weak   { background: var(--color-surface-warning-weak); color: var(--color-text-primary); }
-.badge-basic--warning.badge-basic--weaker { background: var(--color-surface-warning-weaker); border: 1px solid var(--color-border-warning-weak); color: var(--color-text-primary); }
+```html
+<link rel="stylesheet" href="/components/css/badge.css">
 ```
+
+`components/css/badge.css` is the single source for this component. Mobile-first, desktop from 769px, `var(--…)` only. To change the component, edit that file.
 
 ### Color choice — common meanings
 

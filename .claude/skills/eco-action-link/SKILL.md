@@ -32,17 +32,17 @@ A clickable link with an optional left icon and a right arrow. Used for navigati
 
 | Size | Typography token | Font-size | Line-height | Letter-spacing | Gap | Icon |
 |---|---|---|---|---|---|---|
-| **Large** | `body-lg` | 20px | 28px | 0px | 8px | 24px |
-| **Medium** | `body-md` | 16px | 24px | 0.32px | 4px | 20px |
-| **Small** | `body-sm` | 14px | 20px | 0.28px | 4px | 20px |
+| **Large** | `body-lg` | 20px | 28px | 0.18px | 8px | 24px |
+| **Medium** | `body-md` | 17px | 24px | 0.32px | 4px | 20px |
+| **Small** | `body-sm` | 14px | 20px | 0.36px | 4px | 20px |
 
 #### Mobile / Tablet (`xs`/`sm`, ≤768px)
 
 | Size | Font-size | Line-height | Letter-spacing |
 |---|---|---|---|
-| **Large** | 18px | 24px | 0px |
+| **Large** | 18px | 24px | 0.18px |
 | **Medium** | 16px | 22px | 0.32px |
-| **Small** | 14px | 20px | 0.28px |
+| **Small** | 14px | 20px | 0.36px |
 
 > Small has the same values on desktop and mobile.
 
@@ -92,13 +92,13 @@ A clickable link with an optional left icon and a right arrow. Used for navigati
   font-family: 'Breuer Condensed', Arial, sans-serif;
   font-weight: 400;
   cursor: pointer;
-  transition: color 150ms cubic-bezier(.35,0,.35,1); /* duration-fast-3, ease-standard */
+  transition: color var(--duration-fast-3) var(--ease-standard); /* duration-fast-3, ease-standard */
 }
 
 /* Sizes */
-.action-link--large  { font-size: 20px; line-height: 28px; letter-spacing: 0px;    font-feature-settings: 'ss02' 1, 'ss03' 1; }
-.action-link--medium { font-size: 16px; line-height: 24px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; gap: 4px; }
-.action-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; gap: 4px; }
+.action-link--large  { font-size: 20px; line-height: 28px; letter-spacing: 0.18px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.action-link--medium { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; gap: 4px; }
+.action-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; gap: 4px; }
 
 /* Hover */
 .action-link:hover { color: var(--color-text-action-primary-hover); text-decoration: underline; }
@@ -111,7 +111,7 @@ A clickable link with an optional left icon and a right arrow. Used for navigati
 .action-link--inverted:hover { color: var(--color-text-action-primary-inverted-hover); }
 
 /* Bold variant */
-.action-link--bold { font-weight: 700; }
+.action-link--bold { font-weight: 600; }
 
 /* Mobile */
 @media (max-width: 768px) {

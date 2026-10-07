@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typography – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <!-- Type styles (.t-<token>) are generated from tokens.json by the script below -->
+  <style id="ty-live"></style>
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="foundation">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#foundations" class="breadcrumb-item">Foundations</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Typography</span>
+    </div>
+  </nav>
+</div>
+
+<!-- ── Intro ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Foundations</span>
+    <h1 class="ds-title">Typography</h1>
+    <p class="ds-lead">ECO type is <strong>modular</strong>: <span id="n-styles">20</span> base styles, each built from a <em>role</em>, a <em>size</em> and, when needed, a <em>modifier</em>. One typeface, Breuer Condensed, carries every Alligo brand.</p>
+    <p class="ds-lead">Mobile and desktop have their own base styling and switch at 769px. Every specimen on this page is rendered from <code>tokens.json</code>, so it follows the package when it changes.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#styles">Styles</a></li>
+    <li><a href="#modifiers">Modifiers</a></li>
+    <li><a href="#typesetting">Typesetting</a></li>
+    <li><a href="#playground">Playground</a></li>
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#tokens">Tokens</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#usage">Usage</a></li>
+  </ul>
+</nav>
+
+<!-- ── Overview ──────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="overview">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Overview</h2>
+    <p class="ds-desc">Breuer Condensed has three weights. Figma lists them as 500, 600 and 700; in CSS they are 100 lower. This page prints both.</p>
+    <div class="ds-stage ty-weights" id="weights"></div>
+
+    <h3 class="ds-h3">Anatomy of a style</h3>
+    <p class="ds-desc">A style name reads <code>role-size</code> and an optional <code>--modifier</code>, for example <code>label-lg--underline</code>.</p>
+    <div class="ty-anat">
+      <div><b>Role</b><span>The purpose and emphasis of the text. Six roles: Display, Headline, Title, Label, Alt-Label and Body.</span><span><code>headline</code>-lg</span></div>
+      <div><b>Size</b><span>Keeps the scale rhythmic. Small, Medium, Large and XLarge, with availability per role.</span><span>headline-<code>lg</code></span></div>
+      <div><b>Modifier</b><span>Describes one specific intended use, such as underline or badge. Body styles also have italic, bold and strikethrough.</span><span>label-lg<code>--underline</code></span></div>
+    </div>
+
+    <h3 class="ds-h3">The six roles</h3>
+    <p class="ds-desc">Pick the role first, then the size. Roles are ordered here from most to least emphasis in the interface.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Role</th><th>Case</th><th>Sizes</th><th>Purpose</th></tr></thead>
+        <tbody id="roles-table"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── Styles ────────────────────────────────────────────────── -->
+<section class="ds-section" id="styles">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Styles</h2>
+    <p class="ds-desc">Every style, set in its real size, line height and letter spacing. Use the toggle to see the mobile or desktop base styling; <em>Window</em> follows your browser width.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div>
+    </div>
+    <div id="scale"></div>
+  </div>
+</section>
+
+<!-- ── Modifiers ─────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="modifiers">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Modifiers</h2>
+    <p class="ds-desc">A modifier changes one thing about a base style and keeps the rest. They are not in <code>tokens.json</code>; the CSS is given here and in the Code section.</p>
+
+    <h3 class="ds-h3">Body modifiers</h3>
+    <p class="ds-desc">Available on all four body sizes. Use them inside running text; <code>preamble</code> is only for <code>body-xl</code>.</p>
+    <div class="ds-stage">
+      <div class="ty-mods">
+        <div><p class="t-body-lg" style="margin:0">Work wear that works as hard as you do.</p><small>body-lg</small></div>
+        <div><p class="t-body-lg" style="margin:0;font-style:italic">Work wear that works as hard as you do.</p><small>body-lg italic</small></div>
+        <div><p class="t-body-lg" style="margin:0;font-weight:600">Work wear that works as hard as you do.</p><small>body-lg bold (weight 600)</small></div>
+        <div><p class="t-body-lg" style="margin:0;font-weight:600;font-style:italic">Work wear that works as hard as you do.</p><small>body-lg bold-italic</small></div>
+        <div><p class="t-body-lg" style="margin:0;text-decoration:underline">Work wear that works as hard as you do.</p><small>body-lg underline</small></div>
+        <div><p class="t-body-lg" style="margin:0;text-decoration:line-through">Work wear that works as hard as you do.</p><small>body-lg strikethrough</small></div>
+        <div><p class="t-body-xl" style="margin:0">A longer preamble sets the scene before the article begins.</p><small>body-xl preamble</small></div>
+        <div><p class="t-body-xl" style="margin:0;text-decoration:underline">A longer preamble sets the scene before the article begins.</p><small>body-xl preamble-underline</small></div>
+      </div>
+    </div>
+    <p class="ds-desc ds-note">Bold-underline and bold-strikethrough combine the two in the same way.</p>
+
+    <h3 class="ds-h3">Label modifiers</h3>
+    <p class="ds-desc">Label has a few component-specific variants. Underline marks a text link set as a label; the badge styles use normal case.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Modifier</th><th>Base</th><th>Change</th><th>Sample</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>label-lg--underline</code></th><td><code>label-lg</code></td><td>+ underline</td><td><span class="t-label-lg" style="text-decoration:underline">Read more</span></td></tr>
+          <tr><th scope="row"><code>label-lg--badge</code></th><td><code>label-sm</code></td><td>14px, 0.56px, normal case</td><td><span class="t-label-sm" style="text-transform:none;font-size:14px;line-height:14px;letter-spacing:0.56px">New</span></td></tr>
+          <tr><th scope="row"><code>label-sm--badge</code></th><td><code>label-sm</code></td><td>12px, 0.48px, normal case</td><td><span class="t-label-sm" style="text-transform:none;font-size:12px;line-height:12px;letter-spacing:0.48px">New</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── Typesetting ───────────────────────────────────────────── -->
+<section class="ds-section" id="typesetting">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Typesetting</h2>
+    <p class="ds-desc">How styles combine on a page: which style an HTML element gets, how long a line of text should be and how much space follows a paragraph.</p>
+
+    <h3 class="ds-h3">Hierarchy</h3>
+    <p class="ds-desc">The default style for each element, from the ECO Figma file (Editor Default Styles). Choose the element for the document outline, then take the style from this table. On My Pages the page title is an H1 even though the table lists it as H2.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Element</th><th>Default style</th><th>Modifier</th><th>Token</th></tr></thead>
+        <tbody id="hier-table"></tbody>
+      </table>
+    </div>
+    <p class="ds-desc ds-note">Display Large and Headline XLarge are both H1 styles. Use one of them on a page, never both. For a paragraph, body-lg or body-md depends on the context.</p>
+
+    <h3 class="ds-h3">Line length</h3>
+    <p class="ds-desc">Count characters per line, spaces included. Under 40 is too narrow: the eye jumps too often. 40–60 is a good length and 60–90 is ideal. Around 100 is the margin, and past it the text is too wide. Never go beyond 130. The ruler below is set in <code>body-sm</code>; the same limits hold for the other body styles.</p>
+    <div class="ty-ruler t-body-sm" role="img" aria-label="Four paragraphs of increasing line length with a character ruler marked at 0, 40, 60, 90, 100 and 130 characters">
+      <div class="ty-ruler__track"><i class="ty-mark ty-mark--0" style="left:0.0em"><b>0</b></i><i class="ty-mark ty-mark--warn" style="left:13.44em"><b>40</b></i><i class="ty-mark ty-mark--ok" style="left:20.16em"><b>60</b></i><i class="ty-mark ty-mark--ok" style="left:30.24em"><b>90</b></i><i class="ty-mark ty-mark--bad" style="left:33.6em"><b>100</b></i><i class="ty-mark ty-mark--bad" style="left:43.68em"><b>130</b></i></div>
+      <div class="ty-line"><span class="t-title-sm">Too narrow</span><p class="t-body-sm" style="width:16em">Alligo is a leading Nordic player in workwear, personal protection, tools and supplies. Sales mainly take place through the concept brands Swedol.</p></div><div class="ty-line"><span class="t-title-sm">Good length</span><p class="t-body-sm" style="width:22.5em">Alligo is a leading Nordic player in workwear, personal protection, tools and supplies. Sales mainly take place through the concept brands Swedol in Sweden and Tools in Norway.</p></div><div class="ty-line"><span class="t-title-sm">Ideal length</span><p class="t-body-sm" style="width:31.4em">Alligo is a leading Nordic player in workwear, personal protection, tools and supplies. Sales mainly take place through the concept brands Swedol in Sweden and Tools in Norway and Finland, via stores, direct sales, e-commerce and smart solutions at the customer&#8217;s location.</p></div><div class="ty-line"><span class="t-title-sm">On the margin / Too wide</span><p class="t-body-sm" style="width:45.3em">Alligo is a leading Nordic player in workwear, personal protection, tools and supplies. Sales mainly take place through the concept brands Swedol in Sweden and Tools in Norway and Finland, via stores, direct sales, e-commerce and smart solutions at the customer&#8217;s location.</p></div>
+    </div>
+    <p class="ds-desc ds-note">On small screens the limits are met by the layout itself: at 375px a body line holds about 40–65 characters. On desktop, cap the width of the text container instead of letting it fill the columns.</p>
+
+    <h3 class="ds-h3">Paragraph spacing</h3>
+    <p class="ds-desc">Add the gap after a paragraph with one spacing token, never by stacking two. Use <code>body-lg</code> or <code>body-md</code> throughout an article, not both: <code>body-lg</code> for dedicated articles, <code>body-md</code> when space is tight.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Style</th><th>Desktop</th><th>Mobile</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>body-sm</code></th><td>12px</td><td>12px</td></tr>
+          <tr><th scope="row"><code>body-md</code></th><td>16px</td><td>16px</td></tr>
+          <tr><th scope="row"><code>body-lg</code></th><td>20px</td><td>16px</td></tr>
+          <tr><th scope="row"><code>body-xl</code></th><td>24px</td><td class="ds-na">Not defined</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="ds-h3">Spacing after a style</h3>
+    <p class="ds-desc">The space that follows a text style, from the ECO Figma file (Style spacing). The values listed for a style are the options a designer or developer can pick from; choose one spacing token and never combine several. The blue bar shows the largest option under the sample. For body styles the value is the space before the next block, for example a heading.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Style</th><th>Sample</th><th>Desktop</th><th>Mobile</th></tr></thead>
+        <tbody id="sp-table"></tbody>
+      </table>
+    </div>
+    <p class="ds-desc ds-note">Spacing after <code>body-xl--preamble</code> is 16px at every width. The Figma frame also has one unlabeled 12px example for the preamble, marked with a red frame; it is not used here.</p>
+  </div>
+</section>
+
+<!-- ── Playground ────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="playground">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Playground</h2>
+    <p class="ds-desc">Pick a role and size, type your own text and copy the CSS for the selection.</p>
+    <div class="ds-playground">
+      <div class="ds-stage" id="pg-stage" style="overflow:hidden"><span class="ds-stage__cap" id="pg-cap"></span><p class="ty-sample" id="pg-sample" contenteditable="false"></p></div>
+      <div class="ds-controls">
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bp">Breakpoint</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-bp" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-role" id="pg-l-role">Role</label><div class="input-wrap"><select class="form-select form-select--sm" id="pg-role"></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>
+        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-size">Size</span>
+          <div class="btn-group" role="group" aria-labelledby="pg-l-size" id="pg-size"></div></div>
+        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-text">Text</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-text" value="Work wear that works as hard as you do." placeholder="Text" /></div></div></div>
+      </div>
+    </div>
+    <div class="ds-code" style="margin-top:16px">
+      <div class="ds-code__bar"><span>CSS for this selection</span><button type="button" class="mo-copy" id="pg-copy" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="pg-code"></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ── Examples ──────────────────────────────────────────────── -->
+<section class="ds-section" id="examples">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Examples</h2>
+    <p class="ds-desc">Styles in context. Each example uses only the styles named in its caption; resize the window to watch mobile and desktop base styling switch at 769px.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="eb-l">Breakpoint</span>
+      <div class="btn-group" role="group" aria-labelledby="eb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div>
+    </div>
+
+    <h3 class="ds-h3">Article</h3>
+    <p class="ds-desc">A full article from the ECO Figma file (Article Anatomy): kicker <code>alt-label-lg</code>, H1 <code>display-lg</code>, preamble <code>body-xl</code> (medium weight), headings <code>headline-lg</code> to <code>title-md</code>, lists, a blockquote and paragraphs. Use <em>Body size</em> to switch the running text between <code>body-lg</code> and <code>body-md</code>; use one of them throughout an article.</p>
+    <div class="ds-toolbar"><span class="ds-toolbar__label" id="as-l">Body size</span>
+      <div class="btn-group" role="group" aria-labelledby="as-l" id="article-size"><button type="button" data-v="lg" aria-pressed="true">Body Large</button><button type="button" data-v="md" aria-pressed="false">Body Medium</button></div>
+    </div>
+    <div class="ty-card ty-card--article">
+      <article class="ty-article" id="article" data-size="lg">
+        <span class="t-alt-label-lg ty-kicker">Lorem ipsum</span>
+        <h1 class="t-display-lg ty-h1">Lorem ipsum dolor Loret Amet Tema Apa</h1>
+        <p class="t-body-xl ty-preamble">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacus, ultrices pretium est turpis aenean rutrum dolor sit amet nullam dolor.</p>
+        <p class="ty-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacus, ultrices pretium est turpis aenean rutrum. Morbi sed semper convallis turpis arcu porta morbi sed.</p><p class="ty-body">Scelerisque sit varius ut sociis feugiat. Sit eget euismod diam tortor fermentum nulla facilisi facilisis.</p>
+        <section class="ty-sec"><h2 class="t-headline-lg ty-h">Lorem ipsum dolor</h2><p class="ty-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus interdum facilisi eget sem. Adipiscing convallis est volutpat elit ipsum tristique tellus. Consequat nulla quis at quis. Pharetra, purus odio consequat faucibus rhoncus velit quam faucibus nullam. Cursus vestibulum malesuada velit fames tellus mauris.</p></section><section class="ty-sec"><h3 class="t-headline-md ty-h">Lorem ipsum dolor</h3><p class="ty-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus interdum facilisi eget sem. Adipiscing convallis est volutpat elit ipsum tristique tellus. Consequat nulla quis at quis. Pharetra, purus odio consequat faucibus rhoncus velit quam faucibus nullam. Cursus vestibulum malesuada velit fames tellus mauris.</p></section><section class="ty-sec"><h4 class="t-headline-sm ty-h">Lorem ipsum dolor</h4><p class="ty-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus interdum facilisi eget sem. Adipiscing convallis est volutpat elit ipsum tristique tellus. Consequat nulla quis at quis. Pharetra, purus odio consequat faucibus rhoncus velit quam faucibus nullam. Cursus vestibulum malesuada velit fames tellus mauris.</p><p class="ty-body">Consequat nulla quis at quis. Pharetra, purus odio consequat faucibus rhoncus velit quam faucibus nullam. Cursus vestibulum malesuada velit fames tellus mauris.</p><ul class="ty-list ty-body"><li>List item level 1<ul><li>List item level 2<ul><li>List item level 3</li></ul></li></ul></li></ul><p class="ty-body">Consequat nulla quis at quis. Pharetra, purus odio consequat faucibus rhoncus velit quam faucibus nullam. Cursus vestibulum malesuada velit fames tellus mauris.</p></section><section class="ty-sec"><h5 class="t-title-lg ty-h">Lorem ipsum dolor</h5><ol class="ty-list ty-list--ol ty-body"><li>List item level 1<ol><li>List item level 2<ol><li>List item level 3</li></ol></li></ol></li></ol></section><section class="ty-sec"><h5 class="t-title-lg ty-h">Lorem ipsum dolor</h5><p class="ty-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus interdum facilisi eget sem. Adipiscing convallis est volutpat elit ipsum tristique tellus. Consequat nulla quis at quis. Pharetra, purus odio consequat faucibus rhoncus velit quam faucibus nullam. Cursus vestibulum malesuada velit fames tellus mauris.</p></section><section class="ty-sec"><h6 class="t-title-md ty-h">Lorem ipsum dolor</h6><p class="ty-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus interdum facilisi eget sem. Adipiscing convallis est volutpat elit ipsum tristique tellus. Consequat nulla quis at quis. Pharetra, purus odio consequat faucibus rhoncus velit quam faucibus nullam. Cursus vestibulum malesuada velit fames tellus mauris.</p><p class="ty-body">Scelerisque sit varius ut sociis feugiat. Sit eget euismod diam tortor fermentum nulla facilisi facilisis.</p></section>
+        <blockquote class="ty-quote">
+          <p class="t-headline-md ty-quote__text">It has to start somewhere, it has to start sometime. What better place than here, what better time than now?</p>
+          <footer class="ty-quote__src"><span class="t-label-sm">Name Surname</span><span class="t-body-sm">Title</span></footer>
+        </blockquote>
+        <p class="ty-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus interdum facilisi eget sem. Adipiscing convallis est volutpat elit ipsum tristique tellus. Consequat nulla quis at quis. Pharetra, purus odio consequat faucibus rhoncus velit quam faucibus nullam. Cursus vestibulum malesuada velit fames tellus mauris.</p>
+      </article>
+    </div>
+    <p class="ds-desc ds-note">Spacing follows the four ECO Figma frames (desktop and mobile, Body Large and Medium). Above a heading: 32px (Large) or 24px (Medium) on desktop, 24px on mobile. Heading to text: 12px on desktop, 8px on mobile. Paragraph gap: 20px (Large) or 16px (Medium) on desktop, 16px on mobile. Bullets are 8px (Large) or 6px (Medium). Under the kicker and H1 it is 12px and 16px at every width.</p>
+
+    <h3 class="ds-h3">Product card</h3>
+    <p class="ds-desc">From the ECO Figma file (Product Card): <code>label-sm</code> in the discount badges, <code>alt-label-sm</code> for the brand, <code>title-md</code> for the name and the price, <code>body-sm</code> for article number, rating count, old price and stock status, and <code>label-md</code> for the button text. The image area is a placeholder.</p>
+    <div class="ty-pair">
+      <article class="ty-pc">
+        <div class="ty-pc__image">
+          <div class="ty-pc__badges"><span class="ty-pc__badge ty-pc__badge--sale t-label-sm">30% Rabatt</span><span class="ty-pc__badge ty-pc__badge--dark t-label-sm">Utförsäljning</span></div>
+          <div class="ty-pc__actions" aria-hidden="true"><span><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 7h10M10 4l3 3-3 3M17 13H7m3-3l-3 3 3 3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><span><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M10 16.5S3 12.2 3 7.8A3.8 3.8 0 0 1 10 6a3.8 3.8 0 0 1 7 1.8c0 4.400-7 8.700-7 8.700z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span></div>
+          <div class="ty-pc__img" role="img" aria-label="Product image placeholder"></div>
+          <span class="ty-pc__badge ty-pc__badge--agreement" aria-hidden="true"><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M3 2h8v10H3zM5 7l1.5 1.5L9 5.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span>
+        </div>
+        <div class="ty-pc__info">
+          <span class="t-alt-label-sm ty-pc__brand">Björnkläder</span>
+          <h4 class="t-title-md ty-pc__name">Carpenter soul hantverksbyxa</h4>
+          <div class="ty-pc__meta">
+            <span class="t-body-sm ty-pc__sec">Art.nr: VE-32917</span>
+            <span class="ty-pc__rating"><span class="ty-pc__stars" role="img" aria-label="4 of 5 stars"><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M6 .8l1.5 3.3 3.5.4-2.6 2.4.7 3.5L6 8.6 2.9 10.4l.7-3.5L1 4.5l3.5-.4z" fill="currentColor"/></svg><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M6 .8l1.5 3.3 3.5.4-2.6 2.4.7 3.5L6 8.6 2.9 10.4l.7-3.5L1 4.5l3.5-.4z" fill="currentColor"/></svg><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M6 .8l1.5 3.3 3.5.4-2.6 2.4.7 3.5L6 8.6 2.9 10.4l.7-3.5L1 4.5l3.5-.4z" fill="currentColor"/></svg><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M6 .8l1.5 3.3 3.5.4-2.6 2.4.7 3.5L6 8.6 2.9 10.4l.7-3.5L1 4.5l3.5-.4z" fill="currentColor"/></svg><svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M6 .8l1.5 3.3 3.5.4-2.6 2.4.7 3.5L6 8.6 2.9 10.4l.7-3.5L1 4.5l3.5-.4z" fill="var(--color-surface-20)"/></svg></span><a href="#" class="t-body-sm ty-pc__reviews" onclick="return false">200</a><span class="ty-pc__ico"><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M7 6.2v3.6M7 4.2v.1" stroke="currentColor" stroke-width="1.4"/></svg></span></span>
+          </div>
+        </div>
+        <div class="ty-pc__buy">
+          <div class="ty-pc__price"><span class="t-title-md ty-pc__now">53,00 kr</span> <span class="t-body-sm ty-pc__ter">exkl.moms</span></div>
+          <div class="ty-pc__old"><span class="t-body-sm ty-pc__ter" style="text-decoration:line-through">53,00 kr</span><span class="ty-pc__ico ty-pc__ico--lg"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M7 6.2v3.6M7 4.2v.1" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+          <ul class="ty-pc__status t-body-sm"><li>Finns i flera varianter</li><li>Välj butik för butikssaldo</li></ul>
+          <span class="ty-pc__btn t-label-md">Visa 9 varianter <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="ds-h3">Form field</h3>
+    <p class="ds-desc"><code>alt-label-sm</code> for the label, <code>body-md</code> for the entered value, <code>body-sm</code> for the hint.</p>
+    <div class="ty-pair">
+      <div class="ty-card">
+        <div class="ty-field">
+          <span class="t-alt-label-sm">Company name</span>
+          <span class="ty-field__input t-body-md">Alligo AB</span>
+          <span class="t-body-sm" style="color:var(--color-text-secondary)">As it appears on your invoice.</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ds-h3">Campaign banner</h3>
+    <p class="ds-desc">From the ECO Figma file (Hero Banner): kicker as <code>label-lg</code>, headline as <code>display-lg</code>, intro as <code>body-xl</code> (medium weight) and the button text as <code>label-lg</code>, all in white over a dark gradient on the image. Spacing is taken from the Figma banner: 12px under the kicker, 4px under the headline and 24px under the intro (this differs from the <em>Spacing after a style</em> table, which gives 8px and 32px). Display is for short, loud text; keep it to a few words. The image is a placeholder.</p>
+    <section class="ty-hero" aria-label="Campaign banner example">
+      <div class="ty-hero__content">
+        <span class="t-label-lg">Klara tuffa vinterförhållanden</span>
+        <h4 class="t-display-lg ty-hero__title">Varma och säkra arbetsskor för vintern</h4>
+        <p class="t-body-xl ty-hero__text">Upptäck Swedols breda sortiment av varma och hållbara arbetskängor, fodrade arbetsstövlar och arbetsskor för vintern – designade för att klara de tuffaste vinterförhållandena.</p>
+        <span class="ty-hero__btn t-label-lg">Köp vinterkängor här</span>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ── Tokens ────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="tokens">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Tokens</h2>
+    <p class="ds-desc">Typography tokens are not CSS variables in the package. Use the values below, or the generated CSS in the Code section. Desktop values apply from 769px; below that, mobile.</p>
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>Token</th><th>Mobile</th><th>Desktop</th><th>Weight (CSS / Figma)</th><th>Case</th></tr></thead>
+        <tbody id="tok-table"></tbody>
+      </table>
+    </div>
+    <p class="ds-desc ds-note" id="coverage"></p>
+  </div>
+</section>
+
+<!-- ── Code ──────────────────────────────────────────────────── -->
+<section class="ds-section" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Generated from <code>tokens.json</code> with the same function that styles the examples above, so it cannot drift.</p>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Base rule (every style)</span><button type="button" class="mo-copy" data-copy="code-base" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-base"></pre>
+    </div>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>All styles, mobile first</span><button type="button" class="mo-copy" data-copy="code-all" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-all"></pre>
+    </div>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Use in markup</span><button type="button" class="mo-copy" data-copy="code-use" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-use">&lt;h1 class="t-display-lg"&gt;Dressed for the job&lt;/h1&gt;
+&lt;p class="t-body-xl"&gt;What to look for in work wear.&lt;/p&gt;
+&lt;p class="t-body-lg"&gt;A heavier weave resists wear.&lt;/p&gt;
+&lt;span class="t-alt-label-sm"&gt;Company name&lt;/span&gt;</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ── Usage ─────────────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do">
+        <h3 class="ds-rule__title">Do</h3>
+        <ul>
+          <li>Pick the role by purpose first, then the size.</li>
+          <li>Use one H1 style per page: <code>display-lg</code> or <code>headline-xl</code>.</li>
+          <li>Use <code>body-lg</code> or <code>body-md</code> through a whole article, not both.</li>
+          <li>Keep body lines at 60–90 characters, never past 130.</li>
+        </ul>
+      </div>
+      <div class="ds-rule ds-rule--dont">
+        <h3 class="ds-rule__title">Don’t</h3>
+        <ul>
+          <li>Set a custom font size, weight or line height next to a token.</li>
+          <li>Use Display for long text or more than a few words.</li>
+          <li>Pick a style for how big it looks and ignore the HTML element it sits in.</li>
+          <li>Add paragraph spacing by combining several spacing tokens.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script>
+(function () {
+  var TOKENS_URL = '../../.claude/skills/eco-tokens/tokens.json';
+  var FONT = "'Breuer Condensed', Arial, sans-serif";
+  var BASE = "font-family: " + FONT + ";\nfont-style: normal;\nfont-feature-settings: 'ss02' 1, 'ss03' 1;";
+  var ROLES = [
+    { id: 'display', name: 'Display', upper: true, purpose: 'Short, important text or numerals: banners, campaigns, attention-grabbing content.', use: 'Hero and campaign text. Use sparingly.' },
+    { id: 'headline', name: 'Headline', purpose: 'High-emphasis, shorter text that divides content into sections and gives a clear hierarchy.', use: 'Primary headings and content regions.' },
+    { id: 'title', name: 'Title', purpose: 'Medium-emphasis text that stays short, smaller than a headline.', use: 'Component text and secondary content division.' },
+    { id: 'label', name: 'Label', upper: true, purpose: 'Utilitarian, smaller styles for the text inside components.', use: 'Button text, form fields, component labels.' },
+    { id: 'alt-label', name: 'Alt-Label', upper: true, purpose: 'Alternative utilitarian style that complements Label with lower emphasis.', use: 'Labeling form fields, component text and user info.' },
+    { id: 'body', name: 'Body', purpose: 'Longer passages of text, readable at smaller sizes. Body XLarge is for short intro passages.', use: 'Paragraphs and extended content.' }
+  ];
+  var SIZES = ['xl', 'lg', 'md', 'sm'], SIZE_NAME = { xl: 'XLarge', lg: 'Large', md: 'Medium', sm: 'Small' };
+  var USE = {
+    'display-lg': 'H1 on a page or article. Primary focal point.', 'display-md': 'Medium hero and promotional content.', 'display-sm': 'Compact promotional headings.',
+    'headline-xl': 'H1 content with strong emphasis (not with display-lg).', 'headline-lg': 'Major sections, typically H2.', 'headline-md': 'Prominent sections, typically H3. Also blockquote.', 'headline-sm': 'Compact section intros, typically H4.',
+    'title-lg': 'Important subsections, H5.', 'title-md': 'Standard components, H6.', 'title-sm': 'Compact component content.',
+    'label-lg': 'Buttons, navigation, high visibility.', 'label-md': 'Standard interface controls.', 'label-sm': 'Badges, small buttons, dense controls.',
+    'alt-label-lg': 'Content categorization.', 'alt-label-md': 'Secondary context.', 'alt-label-sm': 'Low-emphasis metadata and field labels.',
+    'body-xl': 'Short intro passages (preamble).', 'body-lg': 'Spacious reading, articles.', 'body-md': 'Compact reading, dense content.', 'body-sm': 'Secondary information and helper text.'
+  };
+  var HIER = [
+    ['Pre-heading / Kicker', 'Alt-label Large', '–', 'alt-label-lg'],
+    ['H1', 'Display Large, Headline XLarge', '–', 'display-lg, headline-xl'],
+    ['H2 (H1 on my pages)', 'Headline Large', '–', 'headline-lg'],
+    ['H3', 'Headline Medium', '–', 'headline-md'],
+    ['H4', 'Headline Small', '–', 'headline-sm'],
+    ['H5', 'Title Large', '–', 'title-lg'],
+    ['H6', 'Title Medium', '–', 'title-md'],
+    ['Preamble', 'Body XLarge', 'Preamble', 'body-xl-preamble'],
+    ['Paragraph', 'Body Large, Body Medium (use of style depends on the context)', '–', 'body-lg, body-md'],
+    ['Button', 'Label Large, Medium, Small', '–', 'label-lg, label-md, label-sm'],
+    ['List', 'Body Large, Body Medium', '–', 'body-lg, body-md'],
+    ['Table', 'Body Medium', '–', 'body-md'],
+    ['Blockquote', 'Headline Medium', 'Blockquote', 'headline-md-blockquote']
+  ];
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function roleOf(k) { return k.replace(/-(xl|lg|md|sm)$/, ''); }
+  function roleMeta(id) { return ROLES.filter(function (r) { return r.id === id; })[0]; }
+  function isUpper(k) { return !!roleMeta(roleOf(k)).upper; }
+  function cssW(w) { return Math.max(400, (+w) - 100); }                 // Figma weight -> CSS weight
+  function resolve(t, bp) { return Object.assign({}, t.mobile, bp === 'desktop' ? t.desktopOverride : {}); }
+  function bpOf(v) { return v === 'auto' ? (window.innerWidth >= 769 ? 'desktop' : 'mobile') : v; }
+  function decl(v, k, withWeight) {
+    return 'font-size: ' + v['font-size'] + '; line-height: ' + v['line-height'] + '; letter-spacing: ' + (v['letter-spacing'] || '0px') + ';' +
+      (withWeight ? ' font-weight: ' + cssW(v['font-weight']) + ';' + (isUpper(k) ? ' text-transform: uppercase;' : '') : '');
+  }
+  function fullBlock(k, t, bp) {
+    var v = resolve(t, bp);
+    return 'font-size: ' + v['font-size'] + ';\nline-height: ' + v['line-height'] + ';\nletter-spacing: ' + (v['letter-spacing'] || '0px') + ';\nfont-weight: ' + cssW(v['font-weight']) + ';' + (isUpper(k) ? '\ntext-transform: uppercase;' : '');
+  }
+
+  /* ── generated CSS ───────────────────────────────────────── */
+  function cleanCss(T) {
+    var mobile = '', desk = '';
+    Object.keys(T).forEach(function (k) {
+      var t = T[k], m = resolve(t, 'mobile');
+      mobile += '.t-' + k + ' { ' + decl(m, k, true) + ' }\n';
+      var o = t.desktopOverride || {}, parts = [];
+      ['font-size', 'line-height', 'letter-spacing'].forEach(function (p) { if (o[p]) parts.push(p + ': ' + o[p] + ';'); });
+      if (parts.length) desk += '  .t-' + k + ' { ' + parts.join(' ') + ' }\n';
+    });
+    return mobile + '\n@media (min-width: 769px) {\n' + desk + '}';
+  }
+  function liveCss(T) {
+    var s = '.t-' + Object.keys(T).join(',.t-') + '{' + BASE.replace(/\n/g, ' ') + '}\n' + cleanCss(T) + '\n';
+    Object.keys(T).forEach(function (k) {
+      s += '[data-bp="desktop"] .t-' + k + '{' + decl(resolve(T[k], 'desktop'), k, true) + '}\n';
+      s += '[data-bp="mobile"] .t-' + k + '{' + decl(resolve(T[k], 'mobile'), k, true) + '}\n';
+    });
+    return s;
+  }
+
+  /* ── copy helper ─────────────────────────────────────────── */
+  function wireCopy(btn, getText, label) {
+    btn.addEventListener('click', function () {
+      var ic = btn.querySelector('.mo-ic'); var done = function () { if (ic) { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); } else { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = label; }, 1200); } };
+      if (navigator.clipboard) navigator.clipboard.writeText(getText()).then(done, done); else done();
+    });
+  }
+
+  /* ── state shared by the toggles ─────────────────────────── */
+  var T = null, pgRole = 'headline', pgSize = 'lg';
+  var SAMPLE = 'Work wear that works as hard as you do.';
+  var bpMode = 'auto';
+
+  function setBp(v) {
+    bpMode = v;
+    if (v === 'auto') document.body.removeAttribute('data-bp'); else document.body.setAttribute('data-bp', v);
+    document.querySelectorAll('[data-bp-toggle] button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === v)); });
+    if (T) { renderMeta(); renderSpacing(); renderPlayground(); }
+  }
+  document.querySelectorAll('[data-bp-toggle] button').forEach(function (b) {
+    b.addEventListener('click', function () { setBp(b.getAttribute('data-v')); });
+  });
+  window.addEventListener('resize', function () { if (T && bpMode === 'auto') { renderMeta(); renderSpacing(); renderPlayground(); } });
+
+  var artSize = 'lg';
+  function setArticle(v) {
+    artSize = v;
+    var art = document.getElementById('article'); art.setAttribute('data-size', v);
+    art.querySelectorAll('.ty-body').forEach(function (n) { n.classList.remove('t-body-lg', 't-body-md'); n.classList.add('t-body-' + v); });
+    document.querySelectorAll('#article-size button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === v)); });
+  }
+  document.querySelectorAll('#article-size button').forEach(function (b) { b.addEventListener('click', function () { setArticle(b.getAttribute('data-v')); }); });
+  setArticle('lg');
+
+  /* ── sections ────────────────────────────────────────────── */
+  function renderWeights() {
+    var host = document.getElementById('weights'); host.textContent = '';
+    [['Regular', 400, 500, 'Body'], ['Medium', 500, 600, 'Alt-Label'], ['Bold', 600, 700, 'Label, Title, Headline, Display']].forEach(function (w) {
+      var row = el('div', 'ty-row');
+      var meta = el('div', 'ty-meta');
+      meta.appendChild(el('span', 'ty-meta__name', w[0]));
+      meta.appendChild(el('span', 'ty-meta__val', 'CSS ' + w[1] + ' · Figma ' + w[2]));
+      meta.appendChild(el('span', 'ty-meta__use', w[3]));
+      var s = el('p', 'ty-sample', 'Breuer Condensed – The quick brown fox jumps over the lazy dog 0123456789');
+      s.style.cssText = 'font-family:' + FONT + ';font-weight:' + w[1] + ';font-size:28px;line-height:32px;';
+      row.appendChild(meta); row.appendChild(s); host.appendChild(row);
+    });
+  }
+
+  function renderRoles() {
+    var host = document.getElementById('roles-table'); host.textContent = '';
+    ROLES.forEach(function (r) {
+      var sizes = SIZES.filter(function (s) { return T[r.id + '-' + s]; }).map(function (s) { return SIZE_NAME[s]; }).join(', ');
+      var tr = el('tr');
+      var th = el('th'); th.scope = 'row'; th.textContent = r.name;
+      tr.appendChild(th); tr.appendChild(el('td', null, r.upper ? 'Uppercase' : 'Normal case')); tr.appendChild(el('td', null, sizes)); tr.appendChild(el('td', null, r.purpose));
+      host.appendChild(tr);
+    });
+  }
+
+  function renderMeta() {                       // numbers in the scale and tokens table depend on the breakpoint
+    renderScale();
+  }
+
+  function renderScale() {
+    var host = document.getElementById('scale'); host.textContent = '';
+    var bp = bpOf(bpMode);
+    ROLES.forEach(function (r, i) {
+      var keys = SIZES.map(function (s) { return r.id + '-' + s; }).filter(function (k) { return T[k]; });
+      var h = el('h3', 'ds-h3', r.name); if (i === 0) h.style.marginTop = '0';
+      host.appendChild(h);
+      host.appendChild(el('p', 'ds-desc', r.purpose));
+      var card = el('div', 'ty-card');
+      keys.forEach(function (k) {
+        var v = resolve(T[k], bp);
+        var row = el('div', 'ty-row');
+        var meta = el('div', 'ty-meta');
+        meta.appendChild(el('span', 'ty-meta__name', k));
+        meta.appendChild(el('span', 'ty-meta__val', v['font-size'] + ' / ' + v['line-height'] + ' · ' + (v['letter-spacing'] || '0px') + ' · ' + cssW(v['font-weight'])));
+        meta.appendChild(el('span', 'ty-meta__use', USE[k] || ''));
+        var cw = el('span', 'ds-copyname'), b = el('button', 'mo-copy'); b.type = 'button'; b.setAttribute('aria-label', 'Copy class t-' + k);
+        var cic = el('span', 'mo-ic', 'content_copy'); cic.setAttribute('aria-hidden', 'true'); b.appendChild(cic);
+        cw.appendChild(el('span', 'ds-copyname__text', '.t-' + k));
+        wireCopy(b, function () { return 't-' + k; }, ''); cw.appendChild(b);
+        meta.appendChild(cw);
+        var s = el('p', 't-' + k + ' ty-sample', r.id === 'body' ? 'Work wear that works as hard as you do. Jackets, trousers and boots built for a full day of work.' : (r.upper ? 'Dressed for the job' : 'Dressed for the job'));
+        row.appendChild(meta); row.appendChild(s); card.appendChild(row);
+      });
+      host.appendChild(card);
+    });
+  }
+
+  function renderTypesetting() {
+    var host = document.getElementById('hier-table'); host.textContent = '';
+    HIER.forEach(function (h) {
+      var tr = el('tr'); var th = el('th'); th.scope = 'row'; th.textContent = h[0]; tr.appendChild(th);
+      for (var i = 1; i < 4; i++) tr.appendChild(el('td', null, h[i]));
+      host.appendChild(tr);
+    });
+  }
+
+  var SP = [
+    ['display-lg', [16, 8, 4], [16, 8, 4]], ['display-md', [12, 8], [12, 8]], ['display-sm', [12, 8], [12, 8]],
+    ['headline-xl', [16, 8], [12, 8]], ['headline-lg', [12, 8], [12, 8]], ['headline-md', [12, 8], [12, 8]], ['headline-sm', [12, 8], [12, 8]],
+    ['title-lg', [12, 8], [12, 8]], ['title-md', [12], [8]], ['title-sm', [8, 4], [8, 4]],
+    ['label-lg', [8, 4], [8, 4]], ['label-md', [8, 4], [8, 4]], ['label-sm', [8, 4], [8, 4]],
+    ['alt-label-lg', [12], [12]], ['alt-label-md', [8, 4], [8, 4]], ['alt-label-sm', [8, 4], [8, 4]],
+    ['body-xl', [32], [24]], ['body-lg', [32], [24]], ['body-md', [24], [24]], ['body-sm', [16], [16]]
+  ];
+  function renderSpacing() {
+    var host = document.getElementById('sp-table'); host.textContent = '';
+    var bp = bpOf(bpMode);
+    SP.forEach(function (r) {
+      if (!T[r[0]]) return;
+      var tr = el('tr'); var th = el('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      var td = el('td');
+      td.appendChild(el('div', 't-' + r[0], 'Clearance Sale!'));
+      var bar = el('div', 'ty-sp-bar'); bar.style.height = (bp === 'desktop' ? r[1] : r[2])[0] + 'px'; bar.setAttribute('aria-hidden', 'true');
+      td.appendChild(bar); tr.appendChild(td);
+      [r[1], r[2]].forEach(function (vals) {
+        tr.appendChild(el('td', null, vals.map(function (v) { return v + 'px (space-' + v + ')'; }).join(', ')));
+      });
+      host.appendChild(tr);
+    });
+  }
+
+  function renderPlayground() {
+    var bp = bpOf(bpMode), k = pgRole + '-' + pgSize;
+    if (!T[k]) { pgSize = SIZES.filter(function (s) { return T[pgRole + '-' + s]; })[0]; k = pgRole + '-' + pgSize; }
+    var roleHost = document.getElementById('pg-role'); roleHost.textContent = '';
+    ROLES.forEach(function (r) {
+      var o = el('option', null, r.name); o.value = r.id; o.selected = r.id === pgRole; roleHost.appendChild(o);
+    });
+    roleHost.onchange = function () { pgRole = roleHost.value; renderPlayground(); };
+    var sizeHost = document.getElementById('pg-size'); sizeHost.textContent = '';
+    SIZES.forEach(function (s) {
+      var b = el('button', null, SIZE_NAME[s]); b.type = 'button';
+      b.disabled = !T[pgRole + '-' + s]; b.setAttribute('aria-pressed', String(s === pgSize));
+      b.addEventListener('click', function () { pgSize = s; renderPlayground(); });
+      sizeHost.appendChild(b);
+    });
+    var v = resolve(T[k], bp);
+    var smp = document.getElementById('pg-sample');
+    smp.className = 'ty-sample t-' + k;
+    smp.textContent = document.getElementById('pg-text').value || SAMPLE;
+    document.getElementById('pg-cap').textContent = k + ' · ' + v['font-size'] + ' / ' + v['line-height'] + ' · ' + bp;
+    document.getElementById('pg-code').textContent = '.t-' + k + ' {\n  ' + BASE.replace(/\n/g, '\n  ') + '\n  ' + fullBlock(k, T[k], bp).replace(/\n/g, '\n  ') + '\n}';
+  }
+  document.getElementById('pg-text').addEventListener('input', function () { if (T) renderPlayground(); });
+  wireCopy(document.getElementById('pg-copy'), function () { return document.getElementById('pg-code').textContent; }, 'Copy');
+
+  function renderTokens() {
+    var host = document.getElementById('tok-table'); host.textContent = '';
+    var keys = [];
+    ROLES.forEach(function (r) { SIZES.forEach(function (s) { if (T[r.id + '-' + s]) keys.push(r.id + '-' + s); }); });
+    var rest = Object.keys(T).filter(function (k) { return keys.indexOf(k) < 0; });
+    keys = keys.concat(rest);
+    keys.forEach(function (k) {
+      var m = resolve(T[k], 'mobile'), d = resolve(T[k], 'desktop');
+      var f = function (v) { return v['font-size'] + ' / ' + v['line-height'] + ' · ' + (v['letter-spacing'] || '0px'); };
+      var tr = el('tr'); var th = el('th'); th.scope = 'row'; th.textContent = k; tr.appendChild(th);
+      tr.appendChild(el('td', null, f(m))); tr.appendChild(el('td', null, f(d)));
+      tr.appendChild(el('td', null, cssW(m['font-weight']) + ' / ' + m['font-weight']));
+      tr.appendChild(el('td', null, isUpper(k) ? 'Uppercase' : 'Normal'));
+      host.appendChild(tr);
+    });
+    document.getElementById('coverage').textContent = keys.length + ' typography tokens' + (rest.length ? ' (' + rest.length + ' not placed in a role: ' + rest.join(', ') + ')' : ', all shown on this page') + '. Source: .claude/skills/eco-tokens/tokens.json (this page reloads its content when that file changes).';
+    document.getElementById('n-styles').textContent = keys.length;
+  }
+
+  function renderCode() {
+    document.getElementById('code-base').textContent = '[class^="t-"] {\n  ' + BASE.replace(/\n/g, '\n  ') + '\n}';
+    document.getElementById('code-all').textContent = cleanCss(T);
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    wireCopy(b, function () { return document.getElementById(b.getAttribute('data-copy')).textContent; }, 'Copy');
+  });
+
+  ECO.watch(TOKENS_URL, function (j) {
+    var err = document.getElementById('load-error'); if (err) err.remove();
+    T = j.typography;
+    document.getElementById('ty-live').textContent = liveCss(T);
+    renderWeights(); renderRoles(); renderScale(); renderTypesetting(); renderSpacing(); renderPlayground(); renderTokens(); renderCode();
+  }, function () {
+    if (document.getElementById('load-error')) return;
+    var m = el('p', 'ds-desc', 'Could not load tokens.json. Open this page through the local server (npx serve), not as a file.');
+    m.id = 'load-error';
+    document.getElementById('overview').querySelector('.ds-inner').appendChild(m);
+  });
+})();
+</script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+</body>
+</html>

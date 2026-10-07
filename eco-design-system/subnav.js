@@ -90,3 +90,10 @@
     })(t0);
   });
 })();
+
+/* Keyboard focus ring for the doc text fields: html[data-kbd] is set after a Tab key and cleared on a pointer press (docs.css) */
+(function () {
+  var r = document.documentElement;
+  document.addEventListener('keydown', function (e) { if (e.key === 'Tab') { r.setAttribute('data-kbd', ''); document.body.classList.add('keyboard-nav'); } }, true);
+  document.addEventListener('pointerdown', function () { r.removeAttribute('data-kbd'); document.body.classList.remove('keyboard-nav'); }, true);  /* body.keyboard-nav: the focus ring of the shared components (eco-input …) */
+})();

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shadows &amp; Elevation – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <link rel="stylesheet" href="../docs.css">
+</head>
+<body data-ds="foundation">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#foundations" class="breadcrumb-item">Foundations</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Shadows &amp; Elevation</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Foundations</span>
+    <h1 class="ds-title">Shadows &amp; Elevation</h1>
+    <p class="ds-lead">Shadows express the degree of elevation between surfaces, indicating higher priority or position. The page covers <span id="n-tokens">16</span> tokens in four categories: Shadow Bottom, Shadow Top, Designated Level and Component Specific.</p>
+    <p class="ds-lead">Every example is drawn with the <code>var(--shadow-…)</code> from the package, so it follows the package when it changes. See <code>.claude/skills/eco-elevation</code> for the rules.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#choosing">Choosing elevation</a></li>
+    <li><a href="#bottom">Shadow Bottom</a></li>
+    <li><a href="#top">Shadow Top</a></li>
+    <li><a href="#designated">Designated Level</a></li>
+    <li><a href="#component">Component Specific</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#usage">Usage</a></li>
+  </ul>
+</nav>
+<hr class="ds-divider">
+
+<section class="ds-section" id="overview">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Overview</h2>
+    <p class="ds-desc">Shadows express the degree of elevation between surfaces. So elevation is the distance between any two elements along the z-axis.</p>
+    <div class="el-diagrams">
+      <div><h3 class="el-diagram__title">Shadow Bottom</h3><p class="el-diagram__sub">Light from above. The shadow falls on the layer below.</p><div class="el-stack el-stack--b" role="img" aria-label="Shadow Bottom layers, highest elevation on top" id="stack-bottom"></div></div>
+      <div><h3 class="el-diagram__title">Shadow Top</h3><p class="el-diagram__sub">Light from below. The shadow falls on the layer above.</p><div class="el-stack el-stack--t" role="img" aria-label="Shadow Top layers, highest elevation at the bottom" id="stack-top"></div></div>
+    </div>
+    <p class="ds-desc ds-note">Higher levels are narrower so each shadow stays visible. Every Bottom and Top level adds a 1px contour shadow (<code>0 0 1px</code>, 5% black) to the main shadow.</p>
+    <h3 class="ds-h3">Terms</h3>
+    <div class="el-terms">
+      <div class="el-term" id="term-component"><h3>Component specific shadows</h3><p>This is shadows and elevation used exclusively for specific components in the ECO Design System. These are specified in detail within each component.</p></div>
+      <div class="el-term" id="term-designated"><h3>Designated level</h3><p>This is intended for essential global components, such as main and left navigation menus, which must operate on a separate layer and should infrequently, if ever, be hindered by other elements.</p></div>
+      <div class="el-term" id="term-bottom"><h3>Bottom shadow elevation</h3><p>The Bottom shadow elevation variant simulates a light source from the top direction to cast a shadow on surfaces beneath the component or surface it is connected with. This is the most commonly used set of elevations throughout the UI.</p></div>
+      <div class="el-term"><h3>Surface</h3><p>The lowest level visible container on which components, text etc. are placed upon.</p></div>
+      <div class="el-term"><h3>Background</h3><p>The background color of our applications.</p></div>
+      <div class="el-term" id="term-top"><h3>Top shadow elevation</h3><p>The Top shadow elevation variant simulates a light source from the bottom direction to cast a shadow on surfaces beneath the component or surface it is connected with. This is used sparingly.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="choosing">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Choosing elevation</h2>
+    <p class="ds-desc">When selecting an appropriate elevation level, it is essential to adhere to certain best practices.</p>
+    <div class="el-prose">
+      <p>Boost user focus by increasing elevation. Users pay more attention to items that appear closer, so raise the elevation of actions you want the users to prioritize.</p>
+      <p>Select an elevation that mimics authentic lighting conditions (as much as possible). Both a shadow’s size and amount of softness or diffusion express the degree of distance between two surfaces.</p>
+      <ul>
+        <li>A surface with a shadow that is small and sharp indicates a surface’s close proximity to the surface behind it.</li>
+        <li>Larger, softer shadows express more distance and appear to be elevating on a higher level.</li>
+      </ul>
+      <p>Don’t overuse elevation. Excessive use of elevation can detract from the user experience by causing distractions. It is advisable to apply elevation sparingly.</p>
+      <p>The ECO Design System offers two base variants of shadow &amp; elevation: <a href="#term-bottom">Bottom</a> and <a href="#term-top">Top</a>.</p>
+      <p>We also use <a href="#term-designated">Designated Level</a> elevations and <a href="#term-component">Component specific</a> sets of shadow and elevation.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section" id="bottom">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Shadow Bottom</h2>
+    <p class="ds-desc">The Bottom shadow elevation variant simulates a light source from the top to cast a shadow on top of the surface or surfaces beneath the component it is placed on. This is the most commonly used set of elevations throughout the UI.</p>
+    <div class="ds-table-wrap"><table class="ds-table el-table"><thead><tr><th>Example</th><th>Description</th><th class="ds-tokcell">Token</th></tr></thead><tbody id="t-bottom"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="top">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Shadow Top</h2>
+    <p class="ds-desc">The Top shadow elevation variant simulates a light source from the bottom to cast a shadow on top of the surface or surfaces beneath the component it is placed on. This is used sparingly.</p>
+    <div class="ds-table-wrap"><table class="ds-table el-table"><thead><tr><th>Example</th><th>Description</th><th class="ds-tokcell">Token</th></tr></thead><tbody id="t-top"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section" id="designated">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Designated Level</h2>
+    <p class="ds-desc">This is intended for essential global components, such as main and left navigation menus, which must operate on a separate layer and should rarely, if ever, be hindered by other elements.</p>
+    <div class="ds-table-wrap"><table class="ds-table el-table"><thead><tr><th>Example</th><th>Description</th><th class="ds-tokcell">Token</th></tr></thead><tbody id="t-designated"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="component">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Component Specific</h2>
+    <p class="ds-desc">Shadows used together with a specific component.</p>
+    <div class="ds-table-wrap"><table class="ds-table el-table"><thead><tr><th>Example</th><th>Description</th><th class="ds-tokcell">Token</th></tr></thead><tbody id="t-component"></tbody></table></div>
+    <p class="ds-desc ds-note" id="coverage"></p>
+  </div>
+</section>
+
+<section class="ds-section" id="code">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Code</h2>
+    <p class="ds-desc">Use the token as the whole <code>box-shadow</code> value. The list is generated from <code>tokens.json</code>.</p>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>Use in CSS</span><button type="button" class="mo-copy" data-copy="code-use" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-use">.card   { box-shadow: var(--shadow-elevation-b-20); }
+.modal  { box-shadow: var(--shadow-elevation-b-100); }
+.drawer { box-shadow: var(--shadow-elevation-drawer-right); }</pre>
+    </div>
+    <div class="ds-code">
+      <div class="ds-code__bar"><span>All shadow tokens</span><button type="button" class="mo-copy" data-copy="code-all" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div>
+      <pre id="code-all"></pre>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do">
+        <h3 class="ds-rule__title">Do</h3>
+        <ul>
+          <li>Pick the lowest level that separates the surface. <code>elevation-b-20</code> is the default for cards.</li>
+          <li>Raise elevation for what you want the user to prioritize, for example modals at <code>elevation-b-100</code>.</li>
+          <li>Use <code>elevation-drawer-*</code> for drawers and navigation.</li>
+          <li>Write the token as <code>var(--shadow-…)</code>.</li>
+        </ul>
+      </div>
+      <div class="ds-rule ds-rule--dont">
+        <h3 class="ds-rule__title">Don’t</h3>
+        <ul>
+          <li>Overuse elevation. Too many raised surfaces distract.</li>
+          <li>Mix Bottom and Top on one component (exception: the toggle switch).</li>
+          <li>Use <code>elevation-b-*</code> on a drawer.</li>
+          <li>Use a Component Specific shadow outside its own component.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script>
+(function () {
+  var TOKENS_URL = '../../.claude/skills/eco-tokens/tokens.json';
+  /* Group, then per token: title, purpose, usage (from the Figma frame). Tokens not listed land in "Other". */
+  var GROUPS = {
+    bottom: { host: 't-bottom', list: [
+      ['elevation-b-20', 'Elevation level 20%', 'Creates subtle separation for surfaces that sit only slightly above their surroundings without making them feel like overlays.', 'Suitable for data and variant tables, address and contact cards, inline system notifications, and established compact badges. Avoid for menus, drawers, and modal layers.'],
+      ['elevation-b-40', 'Elevation level 40%', 'Gives compact floating guidance enough separation to remain legible above nearby content.', 'Suitable primarily for tooltips, with limited established use on sticky table headers and compact map or header controls. Use a higher level for menus, toasts, and dialogs.'],
+      ['elevation-b-60', 'Elevation level 60%', 'Creates clear mid-level separation for floating surfaces that must remain distinct from surrounding content.', 'Suitable for headers, main navigation, search surfaces, notifications, and established overflow surfaces. Use b-80 or b-100 when the surface must dominate the layer stack.'],
+      ['elevation-b-80', 'Elevation level 80%', 'Gives high-priority transient surfaces strong separation above page content.', 'Suitable for menus, dropdowns, exposed dropdowns, toast notifications, and mobile navigation layers. Avoid for modal dialogs and horizontally entering drawers.'],
+      ['elevation-b-100', 'Elevation level 100%', 'Creates the strongest general bottom elevation for top-level surfaces that must dominate the interface.', 'Suitable for modal notifications, cookie settings, and other blocking dialogs. Use the designated drawer styles for side drawers.']
+    ] },
+    top: { host: 't-top', mod: 'top', list: [
+      ['elevation-t-20', 'Elevation level 20%', 'Provides the lightest upward-cast elevation for a surface anchored below content.', 'No approved usage is currently recorded. Use only after confirming that a subtle top-edge separation is required.'],
+      ['elevation-t-40', 'Elevation level 40%', 'Provides a low upward-cast elevation with more separation than t-20.', 'No approved usage is currently recorded. Reserve for bottom-anchored surfaces that need a light but visible top edge.'],
+      ['elevation-t-60', 'Elevation level 60%', 'Separates a fixed bottom action area from scrollable content with a clear upward shadow.', 'Suitable for drawer footers, search drawer footers, and other established sticky footer actions across desktop, tablet, and mobile.'],
+      ['elevation-t-80', 'Elevation level 80%', 'Gives a fixed bottom action area stronger separation when content passes beneath it.', 'Suitable for established drawer and filter-drawer footers that require more emphasis than t-60. Prefer t-60 for the standard footer treatment.'],
+      ['elevation-t-100', 'Elevation level 100%', 'Provides the strongest upward-cast elevation for a bottom-anchored surface.', 'No approved usage is currently recorded. Use only when t-80 is demonstrably insufficient and the layer hierarchy has been reviewed.']
+    ] },
+    designated: { host: 't-designated', mod: 'side', list: [
+      ['elevation-drawer-left', 'Drawer vertical left', 'Separates a drawer entering from the left by casting its shadow onto the content at the right edge.', 'Suitable for left-side store-selection and navigation drawers. Do not use for drawers entering from the right.'],
+      ['elevation-drawer-right', 'Drawer vertical right', 'Separates a drawer entering from the right by casting its shadow onto the content at the left edge.', 'Suitable for product-information, filter, account, notification, cart, review, and delivery-information drawers. Do not use for drawers entering from the left.'],
+      ['elevation-drawer-left-menu-sublevel', 'Inline drawer vertical left – Sub menu', 'Separates nested left-navigation levels by lifting the active submenu above the preceding menu surface.', 'Intended from menu level 2 onward. No verified usage outside documentation is currently recorded, so confirm the pattern before adoption.']
+    ] },
+    component: { host: 't-component', list: [
+      ['elevation-input-control-switch', 'Input control – Toggle switch', 'Creates a compact raised control surface that makes the movable or selected element feel distinct from its track or container.', 'Suitable for toggle-switch thumbs and the selected option in established segmented controls. Do not use as general component elevation.'],
+      ['elevation-table-overflow-right', 'Desktop table overflow right', 'Signals horizontal table overflow and separates fixed content at the right edge from scrollable middle content.', 'No verified usage outside documentation is currently recorded. Use only in an approved overflow-table pattern and pair it consistently with the opposite edge.'],
+      ['elevation-table-overflow-left', 'Desktop table overflow left', 'Signals horizontal table overflow and separates fixed content at the left edge from scrollable middle content.', 'Suitable for established desktop user tables with an overflow column. Use only when content can continue behind the fixed edge.']
+    ] }
+  };
+  var LEVELS = ['20', '40', '60', '80', '100'];
+  var S = null;
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function live(k) { return getComputedStyle(document.documentElement).getPropertyValue(S[k].var).trim(); }
+  function rgba(hex) {   /* #rrggbb[aa] -> rgba(r, g, b, a) */
+    var h = hex.replace('#', ''), a = h.length === 8 ? parseInt(h.slice(6), 16) / 255 : 1;
+    return 'rgba(' + [0, 2, 4].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }).join(', ') + ', ' + +a.toFixed(2) + ')';
+  }
+  function layers(k) { return S[k].value.split(/,\s*(?=-?\d)/).map(function (l) { var p = l.trim().split(/\s+/); return 'box-shadow: ' + p.slice(0, 4).join(' ') + ' ' + rgba(p[4]) + ';'; }); }
+  /* One copy control everywhere: Blank icon button with the Material Symbols content_copy glyph; the glyph turns into a check for 1.2 s. */
+  function wireCopy(btn, getText) {
+    btn.addEventListener('click', function () {
+      var ic = btn.querySelector('.mo-ic');
+      var done = function () { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); };
+      if (navigator.clipboard) navigator.clipboard.writeText(getText()).then(done, done); else done();
+    });
+  }
+  function copyBtn(text) {
+    var b = el('button', 'mo-copy'); b.type = 'button'; b.setAttribute('aria-label', 'Copy ' + text);
+    var ic = el('span', 'mo-ic', 'content_copy'); ic.setAttribute('aria-hidden', 'true'); b.appendChild(ic);
+    wireCopy(b, function () { return text; }); return b;
+  }
+
+  /* Layer stacks (Figma Supernova ECO DS Assets 317:147 / 327:1099): nested boxes, sizes in px of the 630x666 frame; the 65px strip of each box holds its label. */
+  var FRAME = [630, 666], STRIP = 65;
+  var BOXES = [['Background', 630, 666], ['Surface', 544, 580], ['20', 458, 494], ['40', 408, 429], ['60', 358, 364], ['80', 308, 299], ['100', 258, 234], ['Designated level', 208, 169]];
+  function renderStack(id, dir) {
+    var host = document.getElementById(id); host.textContent = '';
+    BOXES.forEach(function (d, i) {
+      var level = /^\d+$/.test(d[0]), box = el('div', 'el-box' + (i === 0 ? ' el-box--bg' : '') + (i === BOXES.length - 1 ? ' el-box--designated' : ''));
+      box.style.width = d[1] / FRAME[0] * 100 + '%'; box.style.height = d[2] / FRAME[1] * 100 + '%'; box.style.setProperty('--z', i);
+      if (level && S['elevation-' + dir + '-' + d[0]]) box.style.boxShadow = 'var(' + S['elevation-' + dir + '-' + d[0]].var + ')';
+      var lab = el('div', 'el-box__label'); lab.style.height = STRIP / d[2] * 100 + '%';
+      lab.appendChild(el('span', null, level ? 'Elevation level ' + d[0] + '%' : d[0]));
+      var chip = i === 0 ? ['background - secondary', '--color-background-secondary'] : i === 1 ? ['surface - raised - primary', '--color-surface-raised-primary'] : null;
+      if (chip) { var c = el('span', 'el-chip'), sw = el('i'); sw.style.setProperty('--c', 'var(' + chip[1] + ')'); c.appendChild(sw); c.appendChild(document.createTextNode(chip[0])); lab.appendChild(c); }
+      box.appendChild(lab); host.appendChild(box);
+    });
+  }
+  function renderLayers() { renderStack('stack-bottom', 'b'); renderStack('stack-top', 't'); }
+
+  function row(k, info, mod) {
+    var tr = el('tr'), ex = el('td'), de = el('td'), tk = el('td');
+    var stage = el('div', 'el-stage'), demo = el('div', 'el-demo' + (mod ? ' el-demo--' + mod : ''), 'Surface');
+    demo.style.boxShadow = 'var(' + S[k].var + ')'; stage.appendChild(demo); ex.appendChild(stage);
+    layers(k).forEach(function (s) { ex.appendChild(el('span', 'el-spec', s)); });
+    var lv = live(k);
+    if (!lv) ex.appendChild(el('span', 'el-warn', 'Not in the live package'));
+    de.appendChild(el('strong', 'el-title', info[1]));
+    de.appendChild(el('p', 'el-p', 'Purpose: ' + info[2])); de.appendChild(el('p', 'el-p el-p--use', info[3]));
+    tk.className = 'ds-tokcell'; var w = el('span', 'ds-copyname'); w.appendChild(el('span', 'ds-copyname__text', k)); w.appendChild(copyBtn(k)); tk.appendChild(w);
+    [ex, de, tk].forEach(function (c) { tr.appendChild(c); });
+    return { tr: tr, missing: !lv };
+  }
+
+  function renderTables() {
+    var shown = {}, missing = [];
+    Object.keys(GROUPS).forEach(function (g) {
+      var host = document.getElementById(GROUPS[g].host); host.textContent = '';
+      GROUPS[g].list.forEach(function (info) {
+        var k = info[0]; if (!S[k]) { missing.push(k); return; }
+        var r = row(k, info, GROUPS[g].mod); shown[k] = 1; if (r.missing) missing.push(k); host.appendChild(r.tr);
+      });
+    });
+    var other = Object.keys(S).filter(function (k) { return !shown[k]; });
+    if (other.length) {   /* "Other": tokens that no group places */
+      var host = document.getElementById('t-component');
+      other.forEach(function (k) { host.appendChild(row(k, [k, k, S[k].description || 'No description in tokens.json.', ''], '').tr); });
+    }
+    var n = Object.keys(S).length;
+    document.getElementById('n-tokens').textContent = n;
+    document.getElementById('coverage').textContent = n + ' shadow tokens, all shown on this page' + (other.length ? ' (' + other.length + ' not yet described, listed last in Component Specific)' : '') + (missing.length ? '; missing from the live package: ' + missing.join(', ') : ', all present in the live package') + '. Source: .claude/skills/eco-tokens/tokens.json (this page reloads its content when that file changes).';
+  }
+
+  function renderCode() {
+    var s = ':root {\n';
+    Object.keys(S).forEach(function (k) { s += '  ' + S[k].var + ': ' + S[k].value + ';\n'; });
+    document.getElementById('code-all').textContent = s + '}';
+  }
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    wireCopy(b, function () { return document.getElementById(b.getAttribute('data-copy')).textContent; });
+  });
+
+  ECO.watch(TOKENS_URL, function (j) {
+    var err = document.getElementById('load-error'); if (err) err.remove();
+    S = j.shadow;
+    renderLayers(); renderTables(); renderCode();
+  }, function () {
+    if (document.getElementById('load-error')) return;
+    var m = el('p', 'ds-desc', 'Could not load tokens.json. Open this page through the local server (npx serve), not as a file.');
+    m.id = 'load-error';
+    document.getElementById('overview').querySelector('.ds-inner').appendChild(m);
+  });
+})();
+</script>
+<script src="../subnav.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+/* ECO component CSS: radio. Shared by the docs page (eco-design-system/components/radio.html) and every prototype/product page.
+   Skill: eco-radio. Link it, do not copy it: <link rel="stylesheet" href="/components/css/radio.css">
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only. */
+    /* ── Radio group and item ── */
+    .form-radio-group { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); } /* vertical by default */
+    .form-radio-group legend {
+      padding: 0; margin-bottom: var(--dimension-spacing-space-8);
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1;
+      font-size: 12px; font-weight: 600; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-primary); /* label-sm (mobile) */
+    }
+    .form-radio-item {
+      display: flex; align-items: center; gap: var(--dimension-spacing-space-8); cursor: pointer;
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px; /* body-md */
+      color: var(--color-text-primary);
+    }
+    .form-radio-item--sm { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; } /* body-sm */
+
+    .form-radio-item input[type="radio"] {
+      appearance: none; flex-shrink: 0; cursor: pointer;
+      width: 16px; height: 16px; margin: var(--dimension-spacing-space-4);   /* total area 24x24 */
+      border: 1px solid var(--color-border-input-control-default);           /* 1px: no width-only token */
+      border-radius: 50%;
+      background-color: var(--color-surface-raised-primary);
+      background-repeat: no-repeat; background-position: center;
+    }
+    .form-radio-item--sm input[type="radio"] { width: 14px; height: 14px; margin: 3px; } /* total area 20x20 */
+
+    .form-radio-item input[type="radio"]:is(:hover, [data-state="hover"]):not(:disabled) {
+      background-color: var(--color-surface-opacity-black-05); border-color: var(--color-border-hover);
+    }
+    .form-radio-item input[type="radio"]:is(:focus-visible, [data-state="focus"]) { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+
+    /* Selected: the dot is a 6px radial-gradient, no SVG or image */
+    .form-radio-item input[type="radio"]:checked {
+      border-color: var(--color-border-selected);
+      background-image: radial-gradient(circle, var(--color-surface-100) 0 3px, transparent 3.5px);
+    }
+    .form-radio-item input[type="radio"]:checked:is(:hover, [data-state="hover"]):not(:disabled) { border-color: var(--color-border-selected-hover); }
+
+    /* Disabled */
+    .form-radio-item input[type="radio"]:disabled { background-color: var(--color-surface-disabled); border-color: var(--color-border-disabled); cursor: not-allowed; }
+    .form-radio-item input[type="radio"]:disabled:checked {
+      border-color: var(--color-surface-disabled);
+      background-image: radial-gradient(circle, var(--color-surface-50) 0 3px, transparent 3.5px);
+    }
+    .form-radio-item:has(input:disabled) { cursor: not-allowed; color: var(--color-text-disabled); }
+
+    /* Hint message, aligned under the label */
+    .form-radio-field { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .form-radio-message {
+      margin: 0 0 0 calc(24px + var(--dimension-spacing-space-8));          /* under the label, not under the circle */
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary);
+    }
+    .form-radio-field:has(.form-radio-item--sm) .form-radio-message { margin-left: calc(20px + var(--dimension-spacing-space-8)); }
+    .form-radio-field:has(input:disabled) .form-radio-message { color: var(--color-text-disabled); }
+
+    @media (min-width: 769px) {
+      .form-radio-group legend { font-size: 16px; line-height: 16px; }                  /* label-md */
+      .form-radio-item { font-size: 17px; line-height: 24px; }                          /* body-md */
+      .form-radio-item--sm { font-size: 14px; line-height: 20px; }                      /* body-sm, same on all breakpoints */
+    }

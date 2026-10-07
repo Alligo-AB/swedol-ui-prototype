@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../notifications.css?v=15">
+  <style>
+    /* page-local: layout only */
+    .pg-wiz { display: grid; gap: 24px; grid-template-columns: 1fr; }
+    @media (min-width: 769px) { .pg-wiz { grid-template-columns: 360px 1fr; } }
+    .pg-q { display: flex; flex-direction: column; gap: 20px; }
+    .pg-res { display: flex; flex-direction: column; gap: 16px; }
+    .pg-res h3 { font-size: 28px; line-height: 32px; font-weight: 600; }
+    .pg-res p { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); }
+    .pg-res .pg-prev { background: var(--color-surface-05); padding: 16px; border: 1px dashed var(--color-border-secondary); overflow: hidden; }
+    .pg-res .pg-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pg-ok { font-weight: 600; }
+    .pg-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pg-demo-stage { display: flex; flex-direction: column; gap: 16px; }
+    .pg-flow-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); }
+    .pg-flow-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-flow-row > div { flex: 1; min-width: 240px; }
+    .pg-flow-row b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-flow-row span { font-size: 14px; line-height: 20px; color: var(--color-text-secondary); }
+    .pg-demo-stage .pg-form__region:empty { display: none; }
+  </style>
+  <link rel="stylesheet" href="/components/css/button-group.css">
+</head>
+<body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Notifications</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow">Components · Notifications</span>
+    <h1 class="ds-title">Notifications</h1>
+    <p class="ds-lead">Notifications tell users that something changed. Five components cover it, from a toast that vanishes in four seconds to a modal that stops the page. <strong>The skill is choosing the right one</strong>, and as <em>quiet</em> a one as the situation allows.</p>
+    <p class="ds-lead">Use the chooser below, then open the page for the component: <a href="toast.html" class="ds-link">Toast</a>, <a href="toast-ecom.html" class="ds-link">E-Com Toast</a>, <a href="modal.html" class="ds-link">Modal</a>, <a href="banner.html" class="ds-link">Banner</a> and <a href="inline.html" class="ds-link">Inline</a>. Specification: <code>.claude/skills/notifications-guide/SKILL.md</code>.</p>
+  </div>
+</section>
+
+<nav class="ds-subnav" aria-label="On this page">
+  <ul class="ds-toc"><li><a href="#choose">Which component</a></li><li><a href="#matrix">Decision matrix</a></li><li><a href="#status">Status and icon</a></li><li><a href="#dismiss">Dismissing</a></li><li><a href="#action">In action</a></li><li><a href="#usage">Usage</a></li></ul>
+</nav>
+
+<section class="ds-section ds-section--secondary" id="choose">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Which component</h2>
+    <p class="ds-desc">Answer up to three questions. The answer shows the component, why, and a live example you can fire.</p>
+    <div class="pg-wiz">
+      <div class="ds-controls pg-q">
+        <div class="ds-field"><span class="form-label form-label--sm" id="q1-l">Must the user decide before going on?</span>
+          <div class="btn-group" role="group" aria-labelledby="q1-l" data-q="block"><button type="button" data-v="no" aria-pressed="true">No</button><button type="button" data-v="yes" aria-pressed="false">Yes</button></div></div>
+        <div class="ds-field" id="q2"><span class="form-label form-label--sm" id="q2-l">What triggered it?</span>
+          <div class="btn-group" role="group" aria-labelledby="q2-l" data-q="origin"><button type="button" data-v="task" aria-pressed="true">A user action</button><button type="button" data-v="system" aria-pressed="false">The system or an admin</button></div></div>
+        <div class="ds-field" id="q3"><span class="form-label form-label--sm" id="q3-l">Is it about a shopping action?</span>
+          <div class="btn-group" role="group" aria-labelledby="q3-l" data-q="shop"><button type="button" data-v="no" aria-pressed="true">No</button><button type="button" data-v="yes" aria-pressed="false">Cart or wishlist</button></div></div>
+        <div class="ds-field" id="q4"><span class="form-label form-label--sm" id="q4-l">How long should it stay?</span>
+          <div class="btn-group" role="group" aria-labelledby="q4-l" data-q="life"><button type="button" data-v="brief" aria-pressed="true">Briefly</button><button type="button" data-v="stay" aria-pressed="false">Until the user acts</button></div></div>
+      </div>
+      <div class="ds-stage pg-res" id="res" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="ds-section" id="matrix">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Decision matrix</h2>
+    <p class="ds-desc">Two origins. <strong>Task-generated</strong> notifications answer something the user just did and belong next to where they are working. <strong>System-generated</strong> ones come from the application or an administrator, independent of what the user is doing.</p>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Component</th><th scope="col">Disruption</th><th scope="col">Origin</th><th scope="col">Use when</th><th scope="col">Statuses</th></tr></thead><tbody id="mtx"></tbody></table></div>
+    <h3 class="ds-h3">When not to notify</h3>
+    <p class="ds-desc">Every notification interrupts. Frequent interruptions lower productivity and cause alert fatigue, so keep each one inside the part of the interface and the task where it matters. If the message is not needed, do not send it.</p>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="status">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Status and icon</h2>
+    <p class="ds-desc">Status colors carry a fixed meaning, and each has one reserved icon. Never pair a status color with another status’s icon. Icons are Material Symbols Outlined, weight 300, filled.</p>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Status</th><th scope="col">Icon</th><th scope="col">Color token</th><th scope="col">Used for</th></tr></thead><tbody id="stat"></tbody></table></div>
+    <h3 class="ds-h3">Without a status</h3>
+    <p class="ds-desc"><strong>E-Com</strong> (E-Com Toast, E-Com Modal, Informational E-Com inline) uses the brand’s black and white and no status color; any icon from the gallery may be used. <strong>Promotion</strong> banners use the brand’s accent color or neutral black and white, also with a free icon.</p>
+    <h3 class="ds-h3">Emphasis per component</h3>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Component</th><th scope="col">Emphasis</th><th scope="col">Sizes</th><th scope="col">Layouts</th></tr></thead><tbody id="emph"></tbody></table></div>
+  </div>
+</section>
+
+<section class="ds-section" id="dismiss">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Dismissing</h2>
+    <p class="ds-desc">A notification that does not go away on its own must always be dismissable. A Modal must support all three ways: ×, ESC and a click outside.</p>
+    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Method</th><th scope="col">Toast</th><th scope="col">E-Com Toast</th><th scope="col">Inline</th><th scope="col">Banner</th><th scope="col">Modal</th></tr></thead><tbody id="dis"></tbody></table></div>
+    <p class="ds-desc ds-note">On a Banner, whether the × exists is decided by the administrator or content owner, not by the component.</p>
+  </div>
+</section>
+
+<section class="ds-section ds-section--secondary" id="action">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">In action</h2>
+    <p class="ds-desc">Fire each component, then three flows where components work together.</p>
+    <h3 class="ds-h3">The five components</h3>
+    <p class="ds-desc">Each button fires that component. Banner and Inline appear under the buttons.</p>
+    <div class="ds-stage"><div class="pg-btns" id="cards"></div></div>
+    <div id="banner-slot" style="margin-top:16px"></div>
+    <h3 class="ds-h3">Flows</h3>
+    <p class="ds-desc">Real situations that combine components. Notice that each message uses the quietest component that does the job.</p>
+    <div class="ds-stage pg-demo-stage" id="flows"></div>
+  </div>
+</section>
+
+<section class="ds-section" id="usage">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Usage</h2>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Keep task feedback close to where the user is working.</li><li>Choose the least disruptive component that does the job.</li><li>Match status icon and status color.</li><li>Give errors a way forward: a retry, a fix, a link.</li></ul></div>
+      <div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Use a banner or modal for feedback on a click.</li><li>Notify when nothing the user cares about changed.</li><li>Use a notification for a single form field: use the field’s own message.</li><li>Show several notifications at once for the same event.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<script src="../tokens-loader.js"></script>
+<script src="../doc-kit.js?v=2"></script>
+<script src="../notifications.js?v=9"></script>
+<script>
+(function () {
+  var $ = DK.$, N = ECO_N, H = N.html, IMG = '/images/product-hantverksbyxa.jpg';
+  function mk(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
+
+  /* Triggers, shared by the chooser and the cards */
+  var T = {
+    toast: function () { N.showToast({ status: 'success', emphasis: 'weak', text: 'Settings saved.', autoHide: 4000 }); },
+    ecom: function () { N.showEcomToast({ variant: 'cart', name: 'Carpenter Soul work pants stretch black', text: 'has been added to the cart.', img: IMG, secondary: { label: 'Choose accessories' }, primary: { label: 'Go to cart' } }); },
+    modal: function () { N.openModal({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'Cancel', confirm: 'Delete' }); },
+    banner: function () { var s = DK.clear($('#banner-slot')); s.appendChild(mk(H.banner({ size: 'small', status: 'warning', emphasis: 'weak', title: 'Planned maintenance', text: 'The site is unavailable on Sunday 02:00–04:00.' }))); s.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); },
+    inline: function () { var s = DK.clear($('#banner-slot')); s.appendChild(mk(H.inline({ size: 'large', status: 'error', emphasis: 'strong', title: 'Payment declined', text: 'Check your card details.', secondary: 'Change card', primary: 'Try again' }))); s.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+  };
+  var COMP = {
+    toast: { n: 'Toast', u: 'toast.html', why: 'A brief confirmation of what the user just did, away from the content so nothing is blocked. It leaves by itself.', prev: function () { return H.toast({ status: 'success', emphasis: 'weak', text: 'Settings saved.' }); }, trig: 'Show toast' },
+    ecom: { n: 'E-Com Toast', u: 'toast-ecom.html', why: 'A brief confirmation of a shopping action, with the natural next steps for the shopper.', prev: function () { return H.ecom({ variant: 'info', name: 'Belt stretch black', text: 'added to your wishlist.', link: 'View' }); }, trig: 'Show toast' },
+    inline: { n: 'Inline', u: 'inline.html', why: 'Feedback that belongs to one section or form and must stay visible until the user acts or the state changes.', prev: function () { return H.inline({ size: 'large', status: 'warning', emphasis: 'strong', text: 'That password is easy to guess.' }); }, trig: 'Show inline' },
+    banner: { n: 'Banner', u: 'banner.html', why: 'A message from the system or an administrator about the whole page, site or a customer group, set at the top.', prev: function () { return H.banner({ size: 'small', status: 'warning', emphasis: 'weak', title: 'Planned maintenance', text: 'The site is unavailable on Sunday.' }); }, trig: 'Show banner' },
+    modal: { n: 'Modal', u: 'modal.html', why: 'The user must decide before going on. It blocks the page, so it is the last resort.', prev: function () { return null; }, trig: 'Open modal' }
+  };
+  var q = { block: 'no', origin: 'task', shop: 'no', life: 'brief' };
+  function pick() {
+    if (q.block === 'yes') return 'modal';
+    if (q.origin === 'system') return 'banner';
+    if (q.life === 'stay') return 'inline';
+    return q.shop === 'yes' ? 'ecom' : 'toast';
+  }
+  function res() {
+    $('#q2').hidden = q.block === 'yes'; $('#q3').hidden = q.block === 'yes' || q.origin === 'system'; $('#q4').hidden = q.block === 'yes' || q.origin === 'system';
+    var k = pick(), c = COMP[k], h = DK.clear($('#res'));
+    h.innerHTML = '<span class="ds-toolbar__label">Use</span><h3></h3><p></p><div class="pg-prev"></div><div class="pg-actions"></div>';
+    $('h3', h).textContent = c.n; $('p', h).textContent = c.why;
+    var pv = c.prev(), box = $('.pg-prev', h);
+    if (pv) box.appendChild(mk(pv)); else { box.textContent = 'A dialog over a dimmed page. Press the button to open the real one.'; box.style.fontSize = '14px'; }
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn--primary'; b.textContent = c.trig;
+    b.addEventListener('click', function () { T[k](); }); $('.pg-actions', h).appendChild(b);
+    var a = document.createElement('a'); a.href = c.u; a.className = 'btn btn--secondary'; a.textContent = 'Open ' + c.n + ' page'; a.style.textDecoration = 'none'; $('.pg-actions', h).appendChild(a);
+  }
+  DK.$$('[data-q]').forEach(function (g) { DK.seg(g, function (v) { q[g.dataset.q] = v; res(); }); });
+
+  DK.rows($('#mtx'), [
+    ['<a href="banner.html" class="ds-link">Banner</a>', 'Medium, at the top', 'System', 'Global or product-level messages: maintenance, outage, campaigns, notices to a customer group.', 'All four, plus Promotion'],
+    ['<a href="inline.html" class="ds-link">Inline</a>', 'Low, embedded', 'Task', 'Contextual feedback or status in the region of active work.', 'All four'],
+    ['<a href="toast.html" class="ds-link">Toast</a>', 'Low, slides in', 'Task', 'Brief, transient confirmation that needs minimal interaction.', 'All four'],
+    ['<a href="toast-ecom.html" class="ds-link">E-Com Toast</a>', 'Low, slides in', 'Task', 'Add to cart, wishlist or brief shopping information.', 'None (brand black and white)'],
+    ['<a href="modal.html" class="ds-link">Modal</a>', 'High, blocks the page', 'Either', 'Crucial information or a decision needed before the user can go on.', 'None']]);
+  [['info', 'Informational', 'info', 'information', 'Neutral guidance, status, helpful context.'], ['success', 'Success', 'check_circle', 'success', 'A completed or confirmed outcome.'], ['warning', 'Warning', 'warning', 'warning', 'Something to be careful about; not a failure.'], ['error', 'Error', 'error', 'danger', 'A failure or a blocking problem.']].forEach(function (s) {
+    DK.rows($('#stat'), [[s[1], '<span class="material-symbols-outlined" aria-hidden="true" style="font-size:24px;color:var(--color-surface-' + s[3] + '-default)">' + s[2] + '</span> <code>' + s[2] + '</code>', '<span class="ds-dot" aria-hidden="true" style="background:var(--color-surface-' + s[3] + '-default)"></span><code>surface-' + s[3] + '-default</code>', s[4]]]);
+  });
+  DK.rows($('#emph'), [['Banner', 'Strong, Weak, Weaker; Promotion: Dark, Light, Strong, Weak', 'Small, Large (Large: My Pages only)', 'Default'], ['Inline', 'Strong, Weak', 'Large, Small', 'Default, Actionable (Large)'],
+    ['Toast', 'Strong, Weak', 'One', 'Default, Actionable'], ['E-Com Toast', 'None', 'One', 'Add to cart, Informational'], ['Modal', 'None', 'Small, Medium, Large', 'Label optional']]);
+  DK.rows($('#dis'), [['× close icon', '<b class="pg-ok">Yes</b>', '<b class="pg-ok">Yes</b>', '<b class="pg-ok">Yes</b>', '<b class="pg-ok">Yes</b> (if the owner allows)', '<b class="pg-ok">Always</b>'],
+    ['Click outside', '<b class="pg-ok">Yes</b>', '<b class="pg-ok">Yes</b>', '<span class="ds-na">No</span>', '<span class="ds-na">No</span>', '<b class="pg-ok">Always</b>'],
+    ['ESC key', '<span class="ds-na">No</span>', '<span class="ds-na">No</span>', '<span class="ds-na">No</span>', '<span class="ds-na">No</span>', '<b class="pg-ok">Always</b>'],
+    ['Auto-dismiss', '<b class="pg-ok">Yes</b> (4 s)', '<b class="pg-ok">Yes</b> (3 s)', '<span class="ds-na">No</span>', '<span class="ds-na">No</span>', '<span class="ds-na">No</span>']]);
+
+  [['toast', 'Toast'], ['ecom', 'E-Com Toast'], ['modal', 'Modal'], ['banner', 'Banner'], ['inline', 'Inline']].forEach(function (c) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn--primary'; b.textContent = c[1]; b.addEventListener('click', T[c[0]]); $('#cards').appendChild(b);
+  });
+
+  /* Flows */
+  var fl = $('#flows');
+  function flow(title, desc, label, cls, run) {
+    var w = document.createElement('div'); w.className = 'pg-flow-row'; w.innerHTML = '<div><b></b><span></span></div>';
+    $('b', w).textContent = title; $('span', w).textContent = desc;
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'btn ' + cls; b.textContent = label; b.addEventListener('click', run); w.appendChild(b); fl.appendChild(w);
+  }
+  flow('Add to cart → E-Com Toast', 'A shopping action, short-lived, with next steps.', 'Add to cart', 'btn--primary', T.ecom);
+  flow('Delete account → Modal → Toast', 'A destructive action needs a decision (Modal). The result is brief feedback (Toast).', 'Delete account', 'btn--secondary', function () {
+    N.openModal({ size: 'small', title: 'Delete your account?', body: 'Your orders and addresses are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account',
+      onConfirm: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Your account was deleted.', autoHide: 4000 }); }, 200); } }); });
+  flow('Subscribe → Inline', 'Feedback tied to a form stays next to the form (Inline), not in a corner. Press twice to see both results.', 'Subscribe', 'btn--secondary', (function () {
+    var ok = false; return function () {
+      var slot = $('#flow-inline'); if (!slot) { slot = document.createElement('div'); slot.id = 'flow-inline'; slot.setAttribute('aria-live', 'polite'); fl.insertBefore(slot, fl.lastChild.nextSibling); }
+      ok = !ok; DK.clear(slot).appendChild(mk(ok ? H.inline({ size: 'large', status: 'error', emphasis: 'strong', title: 'Invalid email', text: 'Enter an address like name@company.com.' }) : H.inline({ size: 'large', status: 'success', emphasis: 'strong', text: 'You are subscribed. Check your inbox to confirm.' })));
+    }; })());
+
+  res();
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

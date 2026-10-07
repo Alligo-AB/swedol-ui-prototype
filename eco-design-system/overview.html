@@ -34,6 +34,10 @@
   <ul class="ds-toc">
     <li><a href="#foundations">Foundations</a></li>
     <li><a href="#components">Components</a></li>
+    <li><a href="#actions">Actions</a></li>
+    <li><a href="#form">Form</a></li>
+    <li><a href="#notifications">Notifications</a></li>
+    <li><a href="#other">Menus &amp; lists</a></li>
   </ul>
 </nav>
 
@@ -63,29 +67,31 @@
         </div>
       </a>
 
-      <div class="ds-card ds-card--soon" aria-disabled="true">
+      <a class="ds-card" href="foundations/typography.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-type"><b>Aa</b><span>Breuer Condensed</span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Typography</span><span class="ds-tag">Coming</span></div>
-          <p class="ds-card__desc">Display, headline, title, body and label styles for mobile and desktop.</p>
+          <div class="ds-card__top"><span class="ds-card__title">Typography</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Display, headline, title, body and label styles for mobile and desktop, with modifiers, typesetting rules and examples.</p>
+          <span class="ds-card__meta" id="type-meta">Typography tokens</span>
         </div>
-      </div>
+      </a>
 
-      <div class="ds-card ds-card--soon" aria-disabled="true">
+      <a class="ds-card" href="foundations/spacing.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-space">
             <span style="height: 8px"></span><span style="height: 16px"></span><span style="height: 24px"></span><span style="height: 40px"></span><span style="height: 64px"></span>
           </div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Spacing</span><span class="ds-tag">Coming</span></div>
-          <p class="ds-card__desc">The fixed spacing scale and the breakpoint-adaptive space tokens.</p>
+          <div class="ds-card__top"><span class="ds-card__title">Spacing</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">The fixed spacing scale and the breakpoint-adaptive space tokens, with consumer classes and directional examples.</p>
+          <span class="ds-card__meta" id="space-meta">Spacing tokens</span>
         </div>
-      </div>
+      </a>
 
-      <div class="ds-card ds-card--soon" aria-disabled="true">
+      <a class="ds-card" href="foundations/elevation.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-elev">
             <span style="box-shadow: var(--shadow-elevation-b-20)"></span>
@@ -94,20 +100,22 @@
           </div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Elevation</span><span class="ds-tag">Coming</span></div>
-          <p class="ds-card__desc">Shadow levels for cards, drawers, modals and tooltips.</p>
+          <div class="ds-card__top"><span class="ds-card__title">Shadows &amp; Elevation</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Shadow levels for cards, drawers, modals and tooltips: Bottom, Top, Designated Level and Component Specific.</p>
+          <span class="ds-card__meta" id="elev-meta">Shadow tokens</span>
         </div>
-      </div>
+      </a>
 
-      <div class="ds-card ds-card--soon" aria-disabled="true">
+      <a class="ds-card" href="foundations/motion.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-motion"><span></span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Motion</span><span class="ds-tag">Coming</span></div>
-          <p class="ds-card__desc">Easing curves and durations for transitions and animation.</p>
+          <div class="ds-card__top"><span class="ds-card__title">Motion</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Easing curves and durations for transitions and animation, with a live demo of each.</p>
+          <span class="ds-card__meta">4 easings · 12 durations</span>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -117,38 +125,201 @@
 <section class="ds-section" id="components">
   <div class="ds-page ds-inner">
     <h2 class="ds-h2">Components</h2>
-    <p class="ds-desc">Reusable parts with sizes, states and usage rules. Each component has a specification skill; the pages below are being moved here one at a time.</p>
+    <p class="ds-desc">Reusable parts with sizes, states and usage rules. Each component has a specification skill; the pages below are being moved here one at a time, grouped by family.</p>
+    <h3 class="ds-h3 ds-group" id="actions">Actions</h3>
+    <p class="ds-desc">What the user presses to do something. Used everywhere: in forms, notifications, modals and banners.</p>
     <div class="ds-cards">
 
-      <div class="ds-card ds-card--soon" aria-disabled="true">
+      <a class="ds-card" href="components/button.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-btn"><span>Primary</span><span>Secondary</span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Button</span><span class="ds-tag">Coming</span></div>
-          <p class="ds-card__desc">Primary, secondary, blank, destructive, accent and system buttons in all sizes and states.</p>
+          <div class="ds-card__top"><span class="ds-card__title">Button</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Primary, secondary, blank, destructive, accent and system buttons, with icon buttons. Four sizes and four states, with an interactive playground.</p>
+          <span class="ds-card__meta">9 variants · 4 sizes · 4 states · 2 breakpoints</span>
         </div>
-      </div>
+      </a>
 
-      <div class="ds-card ds-card--soon" aria-disabled="true">
+    </div>
+    <h3 class="ds-h3 ds-group" id="form">Form</h3>
+    <p class="ds-desc">Controls the user fills in or sets. They share states, sizes and the same page layout.</p>
+    <div class="ds-cards">
+
+      <a class="ds-card" href="components/checkbox.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-check"><span><i class="on"></i>Selected</span><span><i></i>Not selected</span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Checkbox</span><span class="ds-tag">Coming</span></div>
-          <p class="ds-card__desc">Choose any number of options. Light and dark mode, all states.</p>
+          <div class="ds-card__top"><span class="ds-card__title">Checkbox</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Choose any number of options. Light and dark mode, all states, with an interactive playground.</p>
+          <span class="ds-card__meta">3 values · 4 states · 2 modes</span>
         </div>
-      </div>
+      </a>
 
-      <div class="ds-card ds-card--soon" aria-disabled="true">
+      <a class="ds-card" href="components/input.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-input"><b>Label</b><span>Placeholder</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Input</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Enter free text, numbers or search terms. Sizes, seven states, icons and messages, with an interactive playground.</p>
+          <span class="ds-card__meta">3 sizes · 7 states · 2 breakpoints</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/textarea.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-textarea"><b>Label</b><span>Placeholder text</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Text area</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Enter text over several lines, with an optional word count. Seven states and a resizer, with an interactive playground.</p>
+          <span class="ds-card__meta">1 size · 7 states · 2 breakpoints</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/radio.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-radio"><span><i class="on"></i>Standard</span><span><i></i>Express</span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Radio button</span><span class="ds-tag">Coming</span></div>
-          <p class="ds-card__desc">Choose exactly one of two or more options. Large and small, all states.</p>
+          <div class="ds-card__top"><span class="ds-card__title">Radio button</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Choose exactly one of two or more options. Large and small, all eight states, with an interactive playground.</p>
+          <span class="ds-card__meta">2 sizes · 8 states · 2 breakpoints</span>
         </div>
-      </div>
+      </a>
+
+      <a class="ds-card" href="components/select.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-select"><b>Label</b><span>Choose an option<i></i></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Select</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Choose one option from a list. Sizes, seven states and messages, with an interactive playground.</p>
+          <span class="ds-card__meta">3 sizes · 7 states · 2 breakpoints</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/switch.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-switch"><span><i class="on"></i>Email</span><span><i></i>SMS</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Switch</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Turn one setting on or off with immediate effect. Three sizes, light and dark mode, all states.</p>
+          <span class="ds-card__meta">3 sizes · 4 states · 2 modes</span>
+        </div>
+      </a>
+
+    </div>
+<h3 class="ds-h3 ds-group" id="notifications">Notifications</h3>
+    <p class="ds-desc">Tell the user that something changed. Five components from a short-lived toast to a blocking modal; start with the guide to choose.</p>
+    <div class="ds-cards">
+
+      <a class="ds-card" href="components/notifications.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-notif"><span class="mn mn--toast"></span><span class="mn mn--banner"></span><span class="mn mn--modal"></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Notifications guide</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Which of the five notification components to use, with a chooser, status colors and icons, and live demos of each.</p>
+          <span class="ds-card__meta">5 components · 4 statuses</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/toast.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-toast"><i></i><span>Settings saved.</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Toast</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Short-lived feedback on a user action. Trigger real toasts, in four statuses and two emphasis levels.</p>
+          <span class="ds-card__meta">4 statuses · 2 emphasis · 2 layouts</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/toast-ecom.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-toast mini-toast--dark"><span>Belt stretch black added to your wishlist.</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">E-Com Toast</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Confirm add to cart or wishlist without leaving the page. Try it on a product card.</p>
+          <span class="ds-card__meta">2 variants · 2 breakpoints</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/modal.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-modal"><b>Delete address?</b><span>This cannot be undone.</span><i></i></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Modal</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Block the page until the user decides. Three sizes; try ESC, overlay click and focus return.</p>
+          <span class="ds-card__meta">3 sizes · 3 ways to close</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/banner.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-banner"><i></i><span>Planned maintenance on Sunday.</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Banner</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Page-wide and system messages. Small, Large and Promotion, with placement and priority rules.</p>
+          <span class="ds-card__meta">3 sizes · 3 emphasis · 4 statuses</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/inline.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-banner mini-banner--inline"><i></i><span>Only 4 left in stock.</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Inline notification</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Feedback next to the work, until the user acts. See it react in a form.</p>
+          <span class="ds-card__meta">2 sizes · 2 emphasis · 5 statuses</span>
+        </div>
+      </a>
+
+    </div>
+<h3 class="ds-h3 ds-group" id="other">Menus, lists and dividers</h3>
+    <p class="ds-desc">Surfaces and separators that organise content.</p>
+    <div class="ds-cards">
+
+      <a class="ds-card" href="components/menu.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-menu"><span>Label text</span><span class="on">Label text<i></i></span><span>Label text</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Menu</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">The list surface of a dropdown and an exposed dropdown (Select). Two sizes, three dividers, single and multi select.</p>
+          <span class="ds-card__meta">2 sizes · 3 dividers · 2 selection types</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/list-item.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-list"><span><i class="on"></i>Label text<em>24</em></span><span><i></i>Label text<em>8</em></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">List Item</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">The content of one row in a menu or picker: leading, label, trailing, with optional overline and supporting text.</p>
+          <span class="ds-card__meta">2 sizes · 7 leading · 7 trailing</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="components/divider.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-divider"><i></i><i></i><i></i></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Divider</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Separate content groups with a 1px line. Horizontal and vertical, three colors, with an interactive playground.</p>
+          <span class="ds-card__meta">2 directions · 3 colors</span>
+        </div>
+      </a>
 
     </div>
   </div>
@@ -156,6 +327,9 @@
 <script src="tokens-loader.js"></script>
 <script>
   ECO.watch('../.claude/skills/eco-tokens/tokens.json', function (j) {
+    if (j.typography) document.getElementById('type-meta').textContent = Object.keys(j.typography).length + ' typography tokens · 6 roles';
+    if (j.spacing) document.getElementById('space-meta').textContent = Object.keys(j.spacing).length + ' spacing tokens · 8px base';
+    if (j.shadow) document.getElementById('elev-meta').textContent = Object.keys(j.shadow).length + ' shadow tokens · 4 categories';
     document.getElementById('colors-meta').textContent = Object.keys(j.color).length + ' semantic color tokens';
   });
 </script>
