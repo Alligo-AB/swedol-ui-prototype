@@ -56,7 +56,7 @@ Tooltips show on hover over icon-only buttons and give a short label explaining 
 ### Interaction
 
 - The tooltip shows on **hover** (CSS `opacity: 1` via `.tooltip-wrap:hover .tooltip`).
-- Easing: `motion-ease-standard` (`cubic-bezier(.35,0,.35,1)`), `duration-fast-2` (`100ms`).
+- Easing: `ease-standard` (`cubic-bezier(.35,0,.35,1)`), `duration-fast-2` (`100ms`).
 - Never visible on keyboard navigation (`:focus`) — hover only.
 - `pointer-events: none` on the tooltip element so it doesn't interfere with mouse interaction.
 
@@ -83,6 +83,23 @@ Tooltips show on hover over icon-only buttons and give a short label explaining 
 ```
 
 > `aria-label` on the button is mandatory and must have the same text as the tooltip content.
+
+---
+
+### Tooltip on a button that has a label
+
+Use this when the button already shows text and the tooltip only adds detail (for example `duration-fast-4 · 200ms` on a duration button). The button itself is the wrapper, so it fits inside a joined `btn-group`, where an extra wrapper element would break the shared frame:
+
+```html
+<button type="button" class="tooltip-wrap" aria-label="duration-fast-4 · 200ms">
+  Fast 4
+  <span class="tooltip tooltip--top" aria-hidden="true">duration-fast-4 · 200ms</span>
+</button>
+```
+
+- `aria-label` has the same text as the tooltip (as everywhere). The tooltip is `aria-hidden`, so the text is not read twice.
+- A tooltip is never all caps. It sets `text-transform: none` itself, so it stays in normal case even inside an uppercase button (buttons are uppercase).
+- Hover only, as always. Do not use the browser's `title` attribute for this.
 
 ---
 

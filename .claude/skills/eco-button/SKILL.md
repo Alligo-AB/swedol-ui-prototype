@@ -91,7 +91,7 @@ All text tokens are the **action** tokens (`text-action-*`), not `text-primary`.
 | State | Rule |
 |---|---|
 | **Enabled** | The table above. |
-| **Hover transition (all)** | The hover layer **dissolves in**: Figma interaction "Dissolve", custom bezier `0.35, 0, 0.35, 1` (= `motion-ease-standard`), **100ms** (`motion-duration-fast-2`). Built as a `::before` layer (`opacity` 0 → 1) on `isolation: isolate`, so it fades over the fill and under the label. A gradient `background-image` cannot be animated, so do not use one. |
+| **Hover transition (all)** | The hover layer **dissolves in**: Figma interaction "Dissolve", custom bezier `0.35, 0, 0.35, 1` (= `ease-standard`), **100ms** (`duration-fast-2`). Built as a `::before` layer (`opacity` 0 → 1) on `isolation: isolate`, so it fades over the fill and under the label. A gradient `background-image` cannot be animated, so do not use one. |
 | **Hover – Primary, Destructive, Accent** | `--color-surface-opacity-white-20` layer over the fill (`--btn-hover`). |
 | **Hover – Primary Inverted** | `--color-surface-opacity-black-12` layer over the white fill. |
 | **Hover – Secondary, Blank** | `--color-surface-opacity-black-05` surface. The Secondary frame is unchanged. |

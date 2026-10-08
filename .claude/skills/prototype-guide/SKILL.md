@@ -156,18 +156,18 @@ Words earn their place in a design for one reason: making it easier to understan
 
 ### 6. Micro-interaction & motion — decide *whether* and *why* before *how*
 
-The `eco-motion` skill gives you the allowed easing curves and duration tokens (`motion-ease-*`, `motion-duration-fast/medium/slow-*`). Before reaching for them, decide whether the animation should exist at all:
+The `eco-motion` skill gives you the allowed easing curves and duration tokens (`ease-*`, `duration-fast/medium/slow-*`). Before reaching for them, decide whether the animation should exist at all:
 
 | How often does the user see this interaction? | Decision |
 |---|---|
 | Very often (keyboard shortcuts, a toggle used dozens of times/day) | No animation |
-| Often (hover, list navigation) | Remove it or keep it extremely short (`motion-duration-fast-1`/`fast-2`) |
+| Often (hover, list navigation) | Remove it or keep it extremely short (`duration-fast-1`/`fast-2`) |
 | Occasional, once or twice per session (modals, drawers, toasts) | Standard animation from `eco-motion` |
 | Rare/first-time (onboarding, confirmations) | Can allow slightly more noticeable motion — still within `eco-motion`'s tokens, still the slow tier at most |
 
 Every animation needs an answer to "why does this animate?" — spatial consistency (a drawer enters and exits from the same direction), state indication, preventing an abrupt jump, or feedback on a press. "It looks cool" isn't a reason if the user sees it often.
 
-**Which token tier, concretely:** this repo's `eco-motion` skill already ties duration to on-screen distance (short/medium/long → fast/medium/slow) and easing to interaction type (`motion-ease-standard` for hover, `motion-ease-decelerate-emphasized` for things entering from off-screen, `motion-ease-accelerate-generic` for things leaving). Use that mapping — do not reach for a duration or curve outside those tables just because a source pattern suggests a specific millisecond value (e.g. "180ms feels faster than 400ms"); pick the nearest existing `eco-motion` token in the right tier instead of inventing a new number.
+**Which token tier, concretely:** this repo's `eco-motion` skill already ties duration to on-screen distance (short/medium/long → fast/medium/slow) and easing to interaction type (`ease-standard` for hover, `ease-decelerate-emphasized` for things entering from off-screen, `ease-accelerate-generic` for things leaving). Use that mapping — do not reach for a duration or curve outside those tables just because a source pattern suggests a specific millisecond value (e.g. "180ms feels faster than 400ms"); pick the nearest existing `eco-motion` token in the right tier instead of inventing a new number.
 
 Practical rules that apply regardless of which duration/easing token is chosen:
 - **Prefer CSS transitions over keyframes** for UI that can be triggered quickly/repeatedly (a toast that can appear multiple times, a toggle) — transitions can be interrupted and retargeted smoothly; keyframes restart from zero.

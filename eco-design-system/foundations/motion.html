@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../docs.css">
   <link rel="stylesheet" href="../../components/css/button.css">
   <link rel="stylesheet" href="/components/css/button-group.css">
+  <link rel="stylesheet" href="/components/css/tooltip.css">
 </head>
 <body data-ds="foundation">
 <div class="ds-page">
@@ -99,9 +100,7 @@
   <div class="ds-page ds-inner">
     <h2 class="ds-h2">Fades</h2>
     <p class="ds-desc">Fades serve as a sophisticated method for transitioning between colors and/or levels of opacity.</p>
-    <div class="ds-toolbar"><span class="ds-toolbar__label" id="dl-fade">Example duration (slow fade) **</span>
-      <div class="btn-group" role="group" aria-labelledby="dl-fade" data-dur="fade"></div>
-      <button type="button" class="btn btn--system btn--sm mo-pause" aria-pressed="false"><span class="btn__label">Pause animation</span></button>
+    <div class="ds-toolbar"><button type="button" class="btn btn--system btn--sm mo-pause" aria-pressed="false"><span class="btn__label">Pause animation</span></button>
     </div>
     <div class="ds-table-wrap"><table class="ds-table mo-table"><thead><tr><th>Fades</th><th>Description</th><th>Example</th><th class="mo-right ds-tokcell">Token</th></tr></thead><tbody id="t-fade"></tbody></table></div>
   </div>
@@ -231,7 +230,7 @@
       row(h, [c1, c2, td()]); h.lastChild.className = 'mo-row-main';
       var tk = el('div', 'mo-toks'); tk.appendChild(el('h3', 'mo-toks__title', 'Tokens'));
       var cols = el('div', 'mo-toks__cols');
-      [['CSS', copyName('motion-ease-' + e.k)], ['Timing Function', link(bez(e.v))]].forEach(function (c) { var col = el('div'); col.appendChild(el('div', 'mo-val', c[0])); col.appendChild(c[1]); cols.appendChild(col); });
+      [['CSS', copyName('ease-' + e.k)], ['Timing Function', link(bez(e.v))]].forEach(function (c) { var col = el('div'); col.appendChild(el('div', 'mo-val', c[0])); col.appendChild(c[1]); cols.appendChild(col); });
       tk.appendChild(cols);
       var d = td(track(e.v, DURS.ease)); d.colSpan = 2; row(h, [d, td()]); h.lastChild.className = 'mo-row-demo';
       var tc = td(tk); tc.colSpan = 2; row(h, [tc, td()]); h.lastChild.className = 'mo-row-toks';
@@ -241,10 +240,10 @@
   function renderRace() {
     var h = document.getElementById('race'); h.textContent = '';
     EASE.forEach(function (e) {
-      var r = el('div', 'mo-race__row'); r.appendChild(el('b', null, 'motion-ease-' + e.k)); var t = track(e.v, DURS.race); r.appendChild(t); h.appendChild(r);
+      var r = el('div', 'mo-race__row'); r.appendChild(el('b', null, 'ease-' + e.k)); var t = track(e.v, DURS.race); r.appendChild(t); h.appendChild(r);
     });
   }
-  function tokCell(k) { var c = td(chip('motion-duration-' + k)); c.className = 'mo-right ds-tokcell'; return c; }
+  function tokCell(k) { var c = td(chip('duration-' + k)); c.className = 'mo-right ds-tokcell'; return c; }
   function renderDist() {
     var h = document.getElementById('t-dist'); h.textContent = '';
     [['Short', '25% or less of the total view width. Use the short duration tokens for shorter distances, as it covers a smaller portion of the view width in less time.', 25, 'fast-4', 200],
@@ -266,13 +265,19 @@
       });
       return w;
     }
-    function slow(d) { var w = el('div', 'mo-bulb'); w.style.setProperty('--mo-d', ms(d)); w.setAttribute('role', 'img'); w.setAttribute('aria-label', 'A light bulb that fades on and off'); w.appendChild(el('span', 'mo-bulb__glow')); var i = el('span', 'mo-ic', 'lightbulb'); i.setAttribute('aria-hidden', 'true'); w.appendChild(i); return w; }
+    function slow(d) {
+      var w = el('div', 'mo-bulb'); w.style.setProperty('--mo-d', ms(d)); w.setAttribute('role', 'img'); w.setAttribute('aria-label', 'A light bulb that fades on and off'); w.appendChild(el('span', 'mo-bulb__glow')); var i = el('span', 'mo-ic', 'lightbulb'); i.setAttribute('aria-hidden', 'true'); w.appendChild(i);
+      var box = el('div'); box.appendChild(w);
+      var ctl = el('div', 'ds-toolbar mo-inline-tb'), lab = el('span', 'ds-toolbar__label', 'Example duration **'); lab.id = 'dl-fade'; ctl.appendChild(lab);
+      var sg = el('div', 'btn-group'); sg.setAttribute('role', 'group'); sg.setAttribute('aria-labelledby', 'dl-fade'); sg.setAttribute('data-dur', 'fade'); ctl.appendChild(sg); box.appendChild(ctl); return box;
+    }
     [['Fast fade', 'Fast fades are used in your standard, small interactions, such as with buttons and list items. Make use of the fast duration token.', 100, 'fast-2', fast, 'The real button (eco-button): the hover layer dissolves in over 100ms with ease-standard. Hover it, or focus it with Tab.'],
      ['Medium fade', 'Medium fades are used for medium sized interactions. Think objects that will elevate from the surface, such as cards.', 300, 'medium-2', medium, 'Hover or focus a card.'],
      ['Slow fade', 'Use slow fades for key elements like empty states and loading phases, utilizing the slow duration token.', DURS.fade, DUR.filter(function (x) { return x[1] === DURS.fade; })[0][0], slow, 'Loops on its own.']].forEach(function (f) {
       var box = el('div'); box.appendChild(f[4](f[2])); box.appendChild(el('p', 'mo-spec', f[5]));
       row(h, [td(el('span', null, f[0])), td(el('p', 'mo-p', f[1])), exCell(box, true), tokCell(f[3])]);
     });
+    renderSeg('fade');
   }
   function renderDur() {
     var h = document.getElementById('t-dur'); h.textContent = '';
@@ -290,8 +295,9 @@
     var seg = document.querySelector('[data-dur="' + kind + '"]'); seg.textContent = '';
     OPTS[kind].forEach(function (k) {
       var d = DUR.filter(function (x) { return x[0] === k; })[0];
-      var b = el('button', null, d[1] + 'ms'); b.type = 'button'; b.setAttribute('aria-pressed', String(d[1] === DURS[kind])); b.title = 'motion-duration-' + k;
-      b.addEventListener('click', function () { DURS[kind] = d[1]; renderSeg(kind); if (kind === 'ease') renderEase(); else if (kind === 'race') renderRace(); else renderFades(); });
+      var b = el('button', null, d[2].replace('Duration f', 'F').replace('Duration m', 'M').replace('Duration s', 'S')); b.type = 'button'; b.className = 'tooltip-wrap'; b.setAttribute('aria-pressed', String(d[1] === DURS[kind]));
+      var tip = 'duration-' + k + ' \u00b7 ' + d[1] + 'ms'; b.setAttribute('aria-label', tip); var tt = el('span', 'tooltip tooltip--top', tip); tt.setAttribute('aria-hidden', 'true'); b.appendChild(tt);   /* eco-tooltip: hover only */
+      b.addEventListener('click', function () { DURS[kind] = d[1]; if (kind === 'ease') { renderSeg(kind); renderEase(); } else if (kind === 'race') { renderSeg(kind); renderRace(); } else renderFades(); });
       seg.appendChild(b);
     });
   }
@@ -301,7 +307,7 @@
 
   setInterval(function () { if (!paused) root.classList.toggle('mo-end'); }, 1600);
   document.querySelectorAll('[data-copy]').forEach(function (b) { wireCopy(b, function () { return document.getElementById(b.getAttribute('data-copy')).textContent; }, 'Copy'); });
-  renderSeg('ease'); renderSeg('race'); renderSeg('fade'); renderEase(); renderRace(); renderDist(); renderFades(); renderDur(); renderCode();
+  renderSeg('ease'); renderSeg('race'); renderEase(); renderRace(); renderDist(); renderFades(); renderDur(); renderCode();
 })();
 </script>
 <script src="../subnav.js"></script>

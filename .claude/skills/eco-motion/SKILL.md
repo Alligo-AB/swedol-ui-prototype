@@ -31,12 +31,12 @@ Choose easing based on how a transition moves relative to the screen:
 
 | Token | Curve | Type | Description | Used for |
 |---|---|---|---|---|
-| `motion-ease-decelerate-generic` | `cubic-bezier(.16,.38,.58,1)` | Ease Out – Generic | Starts fast, brakes gradually. Less emphasized variant. | onClick, enter selected states. Form elements, Tabs, Toggled buttons, Tooltip. |
-| `motion-ease-decelerate-emphasized` | `cubic-bezier(.16,0,.16,1)` | Ease Out – Emphasized ★ | More pronounced braking. Default choice for bringing elements in from off-screen. | Drawers (all variants), Main/Account menu, Product menu, Notifications. |
-| `motion-ease-accelerate-generic` | `cubic-bezier(.36,.09,1,.58)` | Ease In – Generic | Starts slow, speeds up. Like an object falling. | Removing elements from the screen (exit animations). |
-| `motion-ease-standard` | `cubic-bezier(.35,0,.35,1)` | Ease InOut – Standard | Starts slow, speeds up, brakes. All-round easing. | Hover states (the majority). Button, Product Card, Text Link, Breadcrumb, Collapsible, Overflow menu, Form elements, Tab bar, Drawer Link. |
+| `ease-decelerate-generic` | `cubic-bezier(.16,.38,.58,1)` | Ease Out – Generic | Starts fast, brakes gradually. Less emphasized variant. | onClick, enter selected states. Form elements, Tabs, Toggled buttons, Tooltip. |
+| `ease-decelerate-emphasized` | `cubic-bezier(.16,0,.16,1)` | Ease Out – Emphasized ★ | More pronounced braking. Default choice for bringing elements in from off-screen. | Drawers (all variants), Main/Account menu, Product menu, Notifications. |
+| `ease-accelerate-generic` | `cubic-bezier(.36,.09,1,.58)` | Ease In – Generic | Starts slow, speeds up. Like an object falling. | Removing elements from the screen (exit animations). |
+| `ease-standard` | `cubic-bezier(.35,0,.35,1)` | Ease InOut – Standard | Starts slow, speeds up, brakes. All-round easing. | Hover states (the majority). Button, Product Card, Text Link, Breadcrumb, Collapsible, Overflow menu, Form elements, Tab bar, Drawer Link. |
 
-> ★ `motion-ease-decelerate-emphasized` is the first choice for enter animations. `motion-ease-decelerate-generic` is used when a lighter emphasis is wanted.
+> ★ `ease-decelerate-emphasized` is the first choice for enter animations. `ease-decelerate-generic` is used when a lighter emphasis is wanted.
 
 ```css
 /* Example: Element sliding in from off-screen (drawer) */
@@ -67,28 +67,28 @@ Duration is split into three groups — **Fast**, **Medium**, and **Slow** — w
 
 | Token | Value | Used for |
 |---|---|---|
-| `motion-duration-fast-1` | 50ms | Micro-interactions, immediate feedback |
-| `motion-duration-fast-2` | 100ms | Fast hover transitions, focus indicators |
-| `motion-duration-fast-3` | 150ms | Standard hover, fast exit animations |
-| `motion-duration-fast-4` | 200ms | Light enter animations, short state changes |
+| `duration-fast-1` | 50ms | Micro-interactions, immediate feedback |
+| `duration-fast-2` | 100ms | Fast hover transitions, focus indicators |
+| `duration-fast-3` | 150ms | Standard hover, fast exit animations |
+| `duration-fast-4` | 200ms | Light enter animations, short state changes |
 
 #### Medium (250–400ms) – Medium-sized interactions
 
 | Token | Value | Used for |
 |---|---|---|
-| `motion-duration-medium1` | 250ms | Dropdowns, tooltips, shorter slide-ins |
-| `motion-duration-medium2` | 300ms | Standard for most UI transitions |
-| `motion-duration-medium3` | 350ms | Drawers, panels, medium-sized surfaces |
-| `motion-duration-medium4` | 400ms | Complex component transitions |
+| `duration-medium-1` | 250ms | Dropdowns, tooltips, shorter slide-ins |
+| `duration-medium-2` | 300ms | Standard for most UI transitions |
+| `duration-medium-3` | 350ms | Drawers, panels, medium-sized surfaces |
+| `duration-medium-4` | 400ms | Complex component transitions |
 
 #### Slow (450–600ms) – Large, heavier motion
 
 | Token | Value | Used for |
 |---|---|---|
-| `motion-duration-slow-1` | 450ms | Large enter animations, page transitions |
-| `motion-duration-slow-2` | 500ms | Hero elements, full-width animations |
-| `motion-duration-slow-3` | 550ms | Empty states, loading phases |
-| `motion-duration-slow-4` | 600ms | The longest allowed duration – use sparingly |
+| `duration-slow-1` | 450ms | Large enter animations, page transitions |
+| `duration-slow-2` | 500ms | Hero elements, full-width animations |
+| `duration-slow-3` | 550ms | Empty states, loading phases |
+| `duration-slow-4` | 600ms | The longest allowed duration – use sparingly |
 
 ---
 
@@ -120,13 +120,13 @@ Fades are a refined way to transition between colors and/or opacity levels.
 
 | Scenario | Distance | Fade | Easing |
 |---|---|---|---|
-| Button hover | Short | Fast fade | `motion-ease-standard` |
-| Dropdown opens | Short–Medium | Fast–Medium fade | `motion-ease-decelerate-generic` |
-| Drawer slides in | Medium–Long | Medium fade | `motion-ease-decelerate-emphasized` |
-| Modal appears | Medium | Medium fade | `motion-ease-decelerate-emphasized` |
-| Element disappears | Any | Fast fade | `motion-ease-accelerate-generic` |
-| Banner / Inline notification closes (×) | Short | Fast fade (`fast-3`) + height collapse | `motion-ease-accelerate-generic` |
-| Loading/empty state | — | Slow fade | `motion-ease-standard` |
+| Button hover | Short | Fast fade | `ease-standard` |
+| Dropdown opens | Short–Medium | Fast–Medium fade | `ease-decelerate-generic` |
+| Drawer slides in | Medium–Long | Medium fade | `ease-decelerate-emphasized` |
+| Modal appears | Medium | Medium fade | `ease-decelerate-emphasized` |
+| Element disappears | Any | Fast fade | `ease-accelerate-generic` |
+| Banner / Inline notification closes (×) | Short | Fast fade (`fast-3`) + height collapse | `ease-accelerate-generic` |
+| Loading/empty state | — | Slow fade | `ease-standard` |
 
 ```css
 /* CSS custom properties for the whole project */

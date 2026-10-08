@@ -787,3 +787,5 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .ds-card__tags { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px; }
 .ds-card__top { flex-wrap: wrap; gap: 8px; }
 .ds-card__tags { margin-left: auto; }
+
+.mo-inline-tb { margin-top: 12px; }
