@@ -134,3 +134,7 @@ Badge has no fixed rulebook for which status gets which color, but keep it consi
 7. **Color should reflect meaning, not be random.** Keep the mapping consistent within the same page/view (see "Color choice — common meanings" above) — don't mix, e.g., green for "New" in one place and blue for the same meaning elsewhere.
 
 ---
+
+### Badge/Number-Icon (`.badge-number`)
+
+A 24px black circle with a number (or a check icon) in it: `surface-100`, `text-primary-inverted`, `label-sm` 14/14, letter-spacing 0.56px, weight 600, one size at every breakpoint (Figma "Badge/Number-Icon", size Large; file Supernova-ECO-DS-Assets, node 5516:31452). Markup: `<span class="badge-number">1</span>`, or `<span class="badge-number"><span class="badge-number__icon" aria-hidden="true">done</span></span>`. Currently used for the numbered markers of anatomy diagrams in the docs (`DK.callouts`). Not a status badge and not the cart counter `.badge`.

@@ -12,14 +12,20 @@
    ══════════════════════════════════════════════════════════════ */
 
 @import url('eyebrow.css');
+@import url('../components/css/spacing.css');   /* space-md / space-lg for every doc page (var(--dimension-spacing-space-md)) */
 
 /* ── Page frame (same variables as template.html) ─────────────── */
 :root {
+  --ds-accent-light: #FFECE5;   /* ECO DS documentation accent colour, light (active states in the doc navigation; not in the token package) */
+  --ds-accent: #E94E19;   /* ECO DS documentation accent colour (not in the token package; Swedol's own accent is --color-accent-default) */
   --px-page: 16px;
+  --toc-w: 192px;   /* Contents list width (widest item "Screen reader support" ≈ 160px) */
+  --toc-gap: 40px;  /* space between the content and the Contents list */
   --max-w: 1200px;
   --px-full: max(var(--px-page), calc((100vw - var(--max-w)) / 2));
   /* Motion (eco-motion): same values template.html defines locally; not in the CDN package */
   --ease-standard: cubic-bezier(.35, 0, .35, 1);
+  --ease-decelerate-generic: cubic-bezier(.16, .38, .58, 1);
   --ease-decelerate-emphasized: cubic-bezier(.16, 0, .16, 1);
   --duration-fast-2: 100ms;
   --duration-fast-3: 150ms;
@@ -110,6 +116,9 @@ body {
 }
 .ds-toc a:hover { color: var(--color-text-action-primary); text-decoration: underline; }
 
+/* Overlays inside the examples stay below the sticky on-page nav (z-index 10): tooltips (components/css/tooltip.css reads --tooltip-z) */
+:root { --tooltip-z: 9; }
+
 /* On-page nav: a separate element between the intro and the first section so it can stick for the
    rest of the page (a sticky element only sticks inside its parent). Before it sticks it looks exactly
    like a chip row inside the intro: same background, 40px under the lead, and the section bottom
@@ -128,14 +137,16 @@ body {
 .ds-subnav .ds-toc li { flex-shrink: 0; }
 /* Narrow window: the row swipes sideways (touch / trackpad natively, mouse by dragging, see subnav.js).
    Edge fades (set by subnav.js) show that more chips are off-screen. */
-.ds-subnav .ds-toc { overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
-.ds-subnav .ds-toc.is-scrollable {
+.ds-subnav :is(.ds-toc, .tab-bar) { overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+.ds-subnav :is(.ds-toc, .tab-bar).is-scrollable {
   cursor: grab;
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-l, 0px), #000 calc(100% - var(--fade-r, 0px)), transparent 100%);
           mask-image: linear-gradient(to right, transparent 0, #000 var(--fade-l, 0px), #000 calc(100% - var(--fade-r, 0px)), transparent 100%);
 }
-.ds-subnav .ds-toc.is-dragging { cursor: grabbing; user-select: none; }
-.ds-subnav .ds-toc a { -webkit-user-drag: none; }
+.ds-subnav :is(.ds-toc, .tab-bar).is-dragging { cursor: grabbing; user-select: none; }
+.ds-subnav .ds-toc a, .ds-subnav .tab { -webkit-user-drag: none; }
+.ds-subnav--tabs { padding-top: 0; padding-bottom: 0; }   /* the tab bar has its own height and divider */
+.ds-subnav--tabs.is-stuck { box-shadow: none; }
 .ds-subnav.is-stuck { box-shadow: 0 1px 0 var(--color-border-primary); }   /* line only while stuck, no layout shift */
 .ds-toc a[aria-current="true"] { color: var(--color-text-primary); border-color: var(--color-border-dark); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }  /* in-page links (subnav, Motion links) glide instead of jump */
@@ -145,11 +156,52 @@ body {
 @media (min-width: 769px)  { .ds-subnav { margin-bottom: 52px; } }   /* 64 − 12 */
 @media (min-width: 1024px) { .ds-subnav { margin-bottom: 68px; } }   /* 80 − 12 */
 
+/* ── Page tabs and side contents (pages split into Examples & Guidelines / Specifications / Code) ─────────
+   .ds-tabs: the eco-tabs link bar under the intro. .ds-doc wraps the sections; toc.js builds the chip row (below 1024px) and the
+   sticky "Contents" list (from 1024px, right margin) from the headings. See the eco-doc-page skill. */
+.ds-tabs { padding: 40px var(--px-full) 0; background: var(--color-surface-raised-primary); }
+.ds-tabs .tab-bar { max-width: 1280px; margin-left: auto; margin-right: auto; }
+.ds-section--first:has(+ .ds-tabs) { padding-bottom: 0; }
+.ds-tabs + .ds-subnav, .ds-tabs + .ds-doc { margin-top: 0; }
+.ds-tabs + .ds-subnav { padding-top: 24px; }   /* air between the tab bar and the chips */
+.ds-doc { position: relative; }
+.ds-sidetoc { display: none; }
+@media (min-width: 769px) {   /* split pages: text measure = the width of a playground stage (100% minus 320px controls + 24px gap), never narrower than the 760px default */
+  :root:has(.ds-doc) :is(.ds-lead, .ds-desc, .ds-bullets) { max-width: max(760px, calc(100% - 344px)); }
+}
+@media (min-width: 1024px) {
+  .ds-subnav--auto { display: none; }
+  .ds-doc > .ds-section > .ds-inner { padding-right: calc(var(--toc-w) + var(--toc-gap)); }
+  .ds-sidetoc { display: block; position: absolute; top: 0; bottom: 0; right: var(--px-full); width: var(--toc-w); z-index: 1; }
+  .ds-sidetoc__in { position: sticky; top: 24px; margin-top: 72px; max-height: calc(100vh - 48px); overflow-y: auto; scrollbar-width: thin; }
+  .ds-sidetoc__title { font-size: 16px; line-height: 18px; font-weight: 600; margin: 0 0 16px; color: var(--color-text-primary); }   /* title-sm */
+  .ds-sidetoc__list { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--color-border-primary); }
+  .ds-sidetoc__list a {
+    display: block; margin-left: -1px; padding: 6px 16px; border-left: 2px solid transparent; text-decoration: none;
+    font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary);   /* body-sm */
+    transition: color var(--duration-fast-3) var(--ease-standard);
+  }
+  .ds-sidetoc__item--2 a { padding-left: 32px; }
+  .ds-sidetoc__list a:hover { color: var(--color-text-primary); }
+  .ds-sidetoc__list a[aria-current="true"] { color: var(--color-text-action-primary); border-left-color: var(--color-text-action-primary); }
+  .ds-sidetoc__list a:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: -2px; }
+  /* Layout: the whole block (text column 1200px + gap + Contents list) is centred in the space beside the navigation, so both side margins are equal.
+     --px-full is that margin; the Contents list hangs in the right part of the block, outside the text measure. */
+  :root:has(.ds-doc) { --px-full: max(var(--px-page), calc((100vw - var(--dn-offset, 0px) - var(--max-w) - var(--toc-w) - var(--toc-gap)) / 2)); }
+  :root:has(.ds-doc) .ds-doc > .ds-section, :root:has(.ds-doc) .ds-section--first { padding-right: var(--px-full); }
+  :root:has(.ds-doc) .ds-doc > .ds-section > .ds-inner, :root:has(.ds-doc) .ds-section--first > .ds-inner {
+    max-width: calc(var(--max-w) + var(--toc-w) + var(--toc-gap)); padding-right: calc(var(--toc-w) + var(--toc-gap)); margin-left: 0; margin-right: 0;
+  }
+  :root:has(.ds-doc) .ds-page:has(> .breadcrumb) { max-width: none; margin: 0; }   /* the breadcrumb starts where the text column starts */
+  :root:has(.ds-doc) .breadcrumb { padding-left: var(--px-full); padding-right: var(--px-full); }
+  :root:has(.ds-doc) .ds-tabs .tab-bar { max-width: var(--max-w); margin-left: 0; margin-right: 0; }
+}
+
 /* ── Section heading ──────────────────────────────────────────── */
 .ds-h2 { font-size: 28px; line-height: 32px; font-weight: 600; margin-bottom: 16px; scroll-margin-top: 24px; }
 .ds-h3 { font-size: 18px; line-height: 22px; font-weight: 600; margin: 32px 0 8px; }  /* mobile base; 48px from 769px */
 .ds-desc + .ds-h3 { margin-top: 0; }  /* heading straight after the section intro */
-.ds-desc { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; max-width: 760px; color: var(--color-text-secondary); margin-bottom: 32px; }
+.ds-desc { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; max-width: 760px; color: var(--color-text-secondary); margin-bottom: 32px; }
 .ds-desc code, .ds-lead code, .ds-rule code { white-space: nowrap; font-family: ui-monospace, Menlo, monospace; font-size: 0.875em; background: var(--color-surface-05); padding: 1px 4px; }
 /* Foundation pages keep their original rhythm: 56px above a heading at every width (a heading straight after a .ds-desc stays at 0) */
 body[data-ds="foundation"] :not(.ds-desc) + .ds-h3 { margin-top: 56px; }
@@ -204,24 +256,24 @@ body[data-ds="foundation"] .ds-note + .ds-h3 { margin-top: 56px; }  /* note unde
 
 /* ── Layering diagram (page / section / card surfaces) ────────── */
 .ds-layers { margin: 0 0 32px; }
-.ds-layer { position: relative; border: 1px solid var(--color-border-secondary); padding: 40px 12px 12px; min-width: 0; }
-.ds-layer--page { background: var(--color-background-primary); padding: 40px 16px 16px; display: flex; flex-direction: column; gap: 16px; }
+.ds-layer { position: relative; border: 1px solid var(--color-border-secondary); padding: 12px; min-width: 0; }
+.ds-layer--page { background: var(--color-background-primary); padding: 16px; display: flex; flex-direction: column; gap: 16px; }
 .ds-layer--primary { background: var(--color-surface-raised-primary); }
 .ds-layer--secondary { background: var(--color-surface-raised-secondary); }
 .ds-layer__tag {
-  position: absolute; top: 10px; left: 12px; right: 12px;
-  font-size: 12px; line-height: 16px; letter-spacing: 0.24px; font-weight: 600; color: var(--color-text-secondary);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  display: block; margin-bottom: 12px;
+  font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; color: var(--color-text-secondary);   /* body-sm */
+  overflow-wrap: anywhere;   /* wraps instead of clipping the token name */
 }
+.ds-layer--page > .ds-layer__tag, .ds-layer--card > .ds-layer__tag { margin-bottom: 0; }   /* the flex gap spaces them */
 .ds-layer__row { display: grid; gap: 12px; grid-template-columns: 1fr; }
-.ds-layer--card { padding-top: 36px; display: flex; flex-direction: column; gap: 8px; }
+.ds-layer--card { display: flex; flex-direction: column; gap: 8px; }
 .ds-layer--card i { display: block; height: 8px; background: var(--color-surface-15); }
 .ds-layer--card i + i { width: 60%; }
 @media (min-width: 640px) {
   .ds-layer__row { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .ds-layer__tag { font-size: 14px; letter-spacing: 0.28px; }
 }
-@media (min-width: 1024px) { .ds-layer--page { padding: 48px 24px 24px; gap: 24px; } .ds-layer { padding-top: 44px; } }
+@media (min-width: 1024px) { .ds-layer--page { padding: 24px; gap: 24px; } }
 
 /* ── Status matrix (Information / Success / Warning / Danger) ─── */
 .ds-status { display: grid; gap: 8px; grid-template-columns: 1fr; }
@@ -234,7 +286,7 @@ body[data-ds="foundation"] .ds-note + .ds-h3 { margin-top: 56px; }  /* note unde
 .ds-status__dot { flex-shrink: 0; width: 40px; height: 40px; border: 1px solid var(--color-border-primary); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 600; }
 .ds-status__label { display: flex; flex-direction: column; min-width: 0; }
 .ds-status__label b { font-size: 14px; line-height: 20px; font-weight: 600; }
-.ds-status__label span { font-size: 12px; line-height: 16px; letter-spacing: 0.24px; color: var(--color-text-tertiary); overflow-wrap: anywhere; }
+.ds-status__label span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); overflow-wrap: anywhere; }
 
 /* ── Guidance: Do / Don't ─────────────────────────────────────── */
 .ds-rules { display: grid; gap: 16px; grid-template-columns: 1fr; }
@@ -242,10 +294,56 @@ body[data-ds="foundation"] .ds-note + .ds-h3 { margin-top: 56px; }  /* note unde
 .ds-rule { border: 1px solid var(--color-border-primary); background: var(--color-surface-raised-primary); padding: 20px; }
 .ds-rule--do   { border-top: 4px solid var(--color-border-success-default); }
 .ds-rule--dont { border-top: 4px solid var(--color-border-danger-default); }
+
+/* Numbered anatomy diagram (DK.callouts in doc-kit.js, markers as in Figma "Marker"): a 24px .badge-number, a 1px line and a 3px dot on the part.
+   Put .ds-callout on a .ds-fig__stage, the component in .ds-callout__art. The marker fill is surface-100 (confirmed; Figma annotation/marker-fill is being changed to it). */
+.ds-fig__stage.ds-callout { position: relative; padding: 72px 24px 88px 72px; }
+.ds-callout__line { position: absolute; background: var(--color-surface-100); pointer-events: none; }
+.ds-callout__dot { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--color-surface-100); box-shadow: 0 0 0 1px var(--color-surface-raised-primary); pointer-events: none; }   /* white ring: stays visible on a dark part */
+.ds-callout__pin { position: absolute; pointer-events: none; }
+/* numbered legend: the same black circle as the marker badge, in place of the bullet */
+.ds-bullets--num { counter-reset: ds-num; }
+.ds-bullets.ds-bullets--num li { counter-increment: ds-num; padding-left: 40px; }
+.ds-bullets.ds-bullets--num li::before { content: counter(ds-num); display: grid; place-items: center; width: 24px; height: 24px; top: 0; background: var(--color-surface-100); color: var(--color-text-primary-inverted); font-size: 14px; line-height: 14px; letter-spacing: 0.56px; font-weight: 600; }
+@media (min-width: 769px) { .ds-bullets.ds-bullets--num li::before { top: 2px; } }   /* centered on the first line: (24 − 24) / 2 mobile, (28 − 24) / 2 desktop */
+
+/* Do / Don't figure: a live mini example (never a screenshot) with a caption, color bar on top as .ds-rule. Pair them in .ds-figs. */
+.ds-figs { display: grid; gap: 16px; grid-template-columns: 1fr; margin: 16px 0 32px; }
+@media (min-width: 769px) { .ds-figs { grid-template-columns: 1fr 1fr; gap: 24px; } }
+.ds-figs--one { grid-template-columns: 1fr; }   /* a single figure, full width */
+.ds-fig { margin: 0; min-width: 0; }
+.ds-fig--do   { border-top: 4px solid var(--color-border-success-default); }
+.ds-fig--dont { border-top: 4px solid var(--color-border-danger-default); }
+.ds-fig__stage { display: flex; align-items: center; justify-content: center; min-height: 240px; padding: 24px; background: var(--color-surface-raised-secondary); }
+.ds-fig__cap { display: flex; align-items: flex-start; gap: 8px; padding: 12px 0 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); }
+@media (min-width: 769px) { .ds-fig__cap { font-size: 17px; line-height: 24px; } }
+.ds-fig__ic { font-family: 'Material Symbols Outlined'; font-style: normal; line-height: 1; font-size: 24px; font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; flex: none; }
+.ds-fig--do .ds-fig__ic   { color: var(--color-text-success-default); }
+.ds-fig--dont .ds-fig__ic { color: var(--color-text-danger-default); }
+body[data-ds="component"] .ds-fig__stage { box-shadow: var(--shadow-elevation-b-20); }
 .ds-rule__title { font-size: 20px; line-height: 24px; font-weight: 600; margin-bottom: 12px; }
-.ds-rule ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.ds-rule ul, .ds-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .ds-rule li { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; padding-left: 16px; position: relative; }
-.ds-rule li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--color-surface-100); }
+.ds-rule li::before, .ds-bullets li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--color-surface-100); }
+/* Bullet list in body text: same type as .ds-desc (body-lg: 18/24 mobile, 20/28 from 769px), round 8px bullets and 8px between items as the Typography article (.ty-list), so a list is never smaller than the text around it */
+.ds-bullets { max-width: 760px; margin-bottom: 32px; }
+.ds-bullets li { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; color: var(--color-text-secondary); padding-left: 16px; position: relative; }
+.ds-bullets li::before { top: calc(0.5lh - 4px); width: 8px; height: 8px; border-radius: 50%; }
+@media (min-width: 769px) { .ds-bullets li { font-size: 20px; line-height: 28px; letter-spacing: 0.18px; } }
+/* Running text on a component page (Overview, When to use …): the spacing of the Typography article (text is Body Large like every .ds-desc).
+   Paragraph gap 16 / 20px, above a heading 24 / 32px, heading to text 8 / 12px. Put .ds-prose on the .ds-inner that holds the text. */
+.ds-prose { --ds-ps: 16px; --ds-sec: 24px; --ds-hgap: 8px; }
+@media (min-width: 769px) { .ds-prose { --ds-ps: 20px; --ds-sec: 32px; --ds-hgap: 12px; } }
+.ds-prose > .ds-desc, .ds-prose > .ds-bullets { margin: 0 0 var(--ds-ps); }
+.ds-prose > .ds-h2 { margin-bottom: var(--ds-hgap); }
+.ds-prose > .ds-h3, .ds-prose > .ds-desc + .ds-h3, .ds-prose > .ds-desc + .ds-h3.ds-group, .ds-prose > .ds-bullets + .ds-h3 { margin: var(--ds-sec) 0 var(--ds-hgap); }
+.ds-prose > .ds-group + .ds-h3 { margin-top: 0; }  /* sub-heading straight under its group heading */
+.ds-prose > * + .ds-h2 { margin-top: var(--ds-sec); }  /* a further h2 in the same text block (e.g. Formatting after Overview) */
+.ds-prose > .ds-h2 + .ds-h3.ds-group { margin: 0 0 var(--ds-hgap); }  /* group heading straight under its h2 */
+.ds-prose > .ds-figs { margin: var(--ds-ps) 0 0; }
+.ds-prose > .ds-figs + :is(.ds-h2, .ds-h3, .ds-desc, .ds-bullets) { margin-top: var(--dimension-spacing-space-32); }  /* a new block after a figure and its caption: 32px mobile, 48px from 769px */
+@media (min-width: 769px) { .ds-prose > .ds-figs + :is(.ds-h2, .ds-h3, .ds-desc, .ds-bullets) { margin-top: var(--dimension-spacing-space-48); } }
+.ds-prose > :last-child { margin-bottom: 0; }
 
 /* ── Hub cards (index) ────────────────────────────────────────── */
 .ds-cards { display: grid; gap: 16px; grid-template-columns: 1fr; }
@@ -343,7 +441,9 @@ a.ds-card:hover { border-color: var(--color-border-dark); }
   .ds-desc:has(+ .ds-stage, + .ds-table-wrap, + .ds-playground, + .ds-layers, + .ds-ramp, + .ds-grid, + .ds-status) { margin-bottom: 16px; }
   .ds-table-wrap + .ds-desc + .ds-h3, .ds-stage + .ds-desc + .ds-h3 { margin-top: 48px; }
 }
-.ds-stage__cap { font-size: 12px; line-height: 16px; letter-spacing: 0.24px; font-weight: 600; color: var(--color-text-tertiary); margin-bottom: 12px; text-transform: uppercase; }
+.ds-stage__cap { font-size: 14px; line-height: 14px; letter-spacing: 0.42px; font-weight: 600; color: var(--color-text-tertiary); margin-bottom: 12px; text-transform: uppercase; }   /* label-md mobile (tokens.json), 600 = Figma 700 − 100; 16/16 from 769px */
+@media (min-width: 769px) { .ds-stage__cap { font-size: 16px; line-height: 16px; letter-spacing: 0.48px; } }   /* label-md desktop */
+.ds-stage__cap.ds-stage__cap--name { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 400; text-transform: none; }   /* caption that shows a style name and values: normal case, body-sm */
 .ds-stage--dark .ds-stage__cap { color: var(--color-text-tertiary-inverted); }
 .ds-stage--center { display: flex; align-items: center; justify-content: center; min-height: 160px; }
 
@@ -418,7 +518,7 @@ body[data-ds="component"] .ds-code pre { padding: 12px 24px; }
 .ty-mods { display: grid; gap: 12px 32px; grid-template-columns: 1fr; }
 @media (min-width: 769px) { .ty-mods { grid-template-columns: 1fr 1fr; } }
 .ty-mods > div { display: flex; flex-direction: column; gap: 2px; }
-.ty-mods small { font-size: 12px; line-height: 16px; letter-spacing: 0.24px; color: var(--color-text-tertiary); }
+.ty-mods small { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
 
 /* Inline link in doc text (eco-inline-link: always underlined) */
 .ds-link { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
@@ -564,7 +664,7 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .sp-warn { display: block; font-weight: 600; color: var(--color-text-danger-default); margin-top: 4px; }
 .sp-table td:last-child { text-align: right; }
 .sp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.sp-chip { padding: 6px 8px; background: var(--color-surface-raised-secondary); font-family: inherit; font-size: 13px; line-height: 16px; font-weight: 600; }
+.sp-chip { padding: 6px 8px; background: var(--color-surface-raised-secondary); font-family: inherit; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; }   /* body-sm */
 
 .sp-cols { display: grid; gap: 16px; grid-template-columns: 1fr; align-items: start; }
 .sp-col { background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); padding: 24px; min-width: 0; }
@@ -624,7 +724,7 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .el-stack--b .el-box__label { bottom: 0; }
 .el-stack--t .el-box__label { top: 0; }
 @media (min-width: 1024px) { .el-box__label { font-size: 16px; line-height: 22px; } }
-.el-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid var(--color-border-secondary); background: var(--color-surface-raised-primary); color: var(--color-text-primary); font-size: 13px; line-height: 16px; font-weight: 400; white-space: nowrap; }
+.el-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid var(--color-border-secondary); background: var(--color-surface-raised-primary); color: var(--color-text-primary); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 400; white-space: nowrap; }   /* body-sm */
 .el-chip i { width: 12px; height: 12px; background: var(--c); border: 1px solid var(--color-border-secondary); }
 .el-terms { display: grid; gap: 16px; grid-template-columns: 1fr; }
 .el-term { padding: 24px; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); }
@@ -674,13 +774,13 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .mo-name { display: block; font-size: 17px; line-height: 24px; font-weight: 600; margin-bottom: 16px; }
 .mo-name i { font-style: normal; color: var(--color-text-danger-default); }
 .mo-graph { display: grid; grid-template-columns: 16px 224px; grid-template-rows: 224px auto; column-gap: 8px; row-gap: 8px; }
-.mo-axis { font-size: 12px; line-height: 14px; letter-spacing: 0.56px; font-weight: 600; text-transform: uppercase; color: var(--color-text-tertiary); }
+.mo-axis { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 600; text-transform: uppercase; color: var(--color-text-tertiary); }
 .mo-axis--y { grid-row: 1; align-self: end; writing-mode: vertical-rl; transform: rotate(180deg); }
 .mo-plot { grid-row: 1; grid-column: 2; position: relative; background: var(--color-surface-information-weaker); }
 .mo-plot svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .mo-plot path { fill: none; stroke: var(--color-border-information-default); stroke-width: 2; }
 .mo-axis--x { grid-row: 2; grid-column: 2; }
-.mo-val { margin: 16px 0 0 24px; font-size: 12px; line-height: 14px; letter-spacing: 0.56px; font-weight: 600; text-transform: uppercase; }
+.mo-val { margin: 16px 0 0 24px; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 600; text-transform: uppercase; }
 .mo-toks { margin: 0 0 0 24px; }   /* aligned with the left edge of the graph */
 .mo-toks__title { font-size: 17px; line-height: 24px; font-weight: 600; margin-bottom: 8px; }
 .mo-toks__cols { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 8px 32px; }
@@ -688,8 +788,9 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .mo-toks .ds-copyname { margin-top: 4px; }
 
 .mo-copy:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
-.mo-p { font-size: 17px; line-height: 28px; }
-.mo-row-main > td:nth-child(2) > .mo-p:first-child { margin-top: 32px; }   /* title 24px + 16px gap above the graph, minus the text's own top spacing: the first line's cap height meets the top of the graph */
+.mo-p { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md mobile (tokens.json) */
+@media (min-width: 769px) { .mo-p { font-size: 17px; line-height: 24px; } }   /* body-md desktop */
+.mo-row-main > td:nth-child(2) > .mo-p:first-child { margin-top: 34px; }   /* title 24px + 16px gap above the graph, minus the text's own top spacing (body-md half-leading 3px): the first line's cap height meets the top of the graph */
 .mo-p + .mo-p { margin-top: 16px; }
 .mo-p b { font-weight: 600; }
 .mo-copy { flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: none; border: 0; cursor: pointer; color: var(--color-icon-primary); }
@@ -720,7 +821,9 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .mo-stat:is(:hover, :focus-visible) { box-shadow: var(--shadow-elevation-b-80); transform: translateY(-4px); }
 .mo-stat:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
 .mo-stat .mo-ic { font-size: 24px; color: var(--color-icon-primary); }
-.mo-stat span:nth-child(2) { font-size: 12px; line-height: 14px; letter-spacing: 0.56px; font-weight: 600; text-transform: uppercase; color: var(--color-text-tertiary); }
+.mo-stat span:nth-child(2) { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 600; text-transform: uppercase; color: var(--color-text-tertiary); }
+/* label-sm: 12/12 mobile, 14/14 from 769px (tokens.json); the three rules above set the mobile values */
+@media (min-width: 769px) { .mo-axis, .mo-val, .mo-stat span:nth-child(2) { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; } }
 .mo-stat b { font-size: 24px; line-height: 28px; font-weight: 600; }
 .mo-bulb { position: relative; display: grid; place-items: center; height: 120px; background: var(--color-surface-100); }
 .mo-bulb__glow { position: absolute; width: 96px; height: 96px; border-radius: 50%; background: var(--color-surface-warning-weak); opacity: 0; transform: scale(.6); transition: opacity var(--mo-d) var(--ease-standard), transform var(--mo-d) var(--ease-standard); }
@@ -730,7 +833,7 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 @media (min-width: 769px) { .mo-cols { grid-template-columns: repeat(3, 1fr); } .mo-race { padding: 32px 40px; } .mo-race__row { grid-template-columns: 280px 1fr; align-items: center; } }
 
 
-/* ── Intro meta row: eyebrow + "Not verified in Figma" badge (components/css/badge.css) ── */
+/* ── Intro meta row: eyebrow + "Not verified with Figma" badge (components/css/badge.css) ── */
 .ds-eyebrow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 16px; }
 .ds-eyebrow-row .ds-eyebrow { margin-bottom: 0; }
 
@@ -742,6 +845,9 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .mini-bgroup span { padding: 0 14px; height: 36px; line-height: 36px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.42px; box-shadow: inset 0 0 0 1px var(--color-border-action-3); margin-left: -1px; }
 .mini-bgroup span:first-child { margin-left: 0; }
 .mini-bgroup .on { background: var(--color-surface-opacity-black-12); }
+.mini-tabs { display: inline-flex; gap: 16px; border-bottom: 1px solid var(--color-border-primary); }
+.mini-tabs span { padding-bottom: 8px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.42px; line-height: 14px; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.mini-tabs .on { border-bottom-color: var(--color-surface-100); }
 .mini-seg { display: inline-flex; padding: 4px; height: 44px; border-radius: 22px; background: var(--color-surface-disabled); }
 .mini-seg span { padding: 0 18px; line-height: 36px; border-radius: 18px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.42px; }
 .mini-seg .on { background: var(--color-surface-100); color: var(--color-text-primary-inverted); }

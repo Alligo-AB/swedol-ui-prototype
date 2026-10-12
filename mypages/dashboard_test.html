@@ -7,6 +7,8 @@
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="/components/css/tabs.css">
+  <script src="/components/js/tabs.js"></script>
   <link rel="stylesheet" href="/components/css/button.css">
   <link rel="stylesheet" href="/components/css/checkbox.css">
   <link rel="stylesheet" href="/components/css/inline-link.css">
@@ -618,59 +620,12 @@
       padding: 0 32px;
       box-sizing: border-box;
     }
-    .tab-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      height: 48px;
-      overflow: hidden;
-      flex: 1;
-      min-width: 0;
-    }
-    .tab-item {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      position: relative;
-      height: 48px;
-    }
-    .tab-item__label {
-      font-size: 18px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.18px;
-      color: var(--black);
-      white-space: nowrap;
-      line-height: 18px;
-    }
-    .tab-item__indicator {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: transparent;
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform var(--duration-medium-2) var(--ease-decelerate-generic), background var(--duration-medium-2) var(--ease-standard);
-    }
-    .tab-item--active .tab-item__indicator {
-      background: var(--brand);
-      transform: scaleY(1);
-    }
-    .tab-item--active .tab-item__label {
-      color: var(--black);
-    }
-    .tab-item:not(.tab-item--active) .tab-item__label {
-      color: var(--black);
-    }
-    .tab-item:not(.tab-item--active):hover .tab-item__label {
-      color: var(--color-text-tertiary);
-    }
-    .tab-item:not(.tab-item--active):hover .tab-item__indicator {
-      background: var(--color-surface-10);
-      transform: scaleY(1);
+    /* Account-nav tabs: the shared tabs component (/components/css/tabs.css, skill eco-tabs, Primary / Large). Page-local layout only. */
+    .account-nav .tab-bar {
+      flex: 1; min-width: 0; justify-content: center;
+      border-bottom: 0;                          /* the account nav has its own divider */
+      --tab-line-active: var(--brand);           /* My Pages: brand coloured active line (Swedol / Tools set --brand) */
+      align-self: flex-start; margin-top: 11px;  /* the label (not label + line) is centred in the 48px row, level with the more button */
     }
 
     .account-nav__right {
@@ -734,6 +689,7 @@
       cursor: pointer;
       white-space: nowrap;
       text-transform: uppercase;
+      text-decoration: none;
       border-bottom: 1px solid var(--color-border-secondary);
     }
     .tab-more__menu-item:last-child { border-bottom: none; }
@@ -4322,40 +4278,16 @@
 
     <!-- Tabs + overflow menu -->
     <div class="tab-bar-wrap">
-      <div class="tab-bar">
-        <div class="tab-item">
-          <span class="tab-item__label">Översikt</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Mina Favoriter</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Adressbok</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Användare</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Ordervy</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Min Profil</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Fakturor</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Attestera</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-      </div>
+      <nav class="tab-bar tab-bar--primary" aria-label="Kontomeny">
+        <a class="tab" href="#"><span class="tab__label">Översikt</span></a>
+        <a class="tab" href="#"><span class="tab__label">Mina Favoriter</span></a>
+        <a class="tab" href="/mypages/addressbook.html"><span class="tab__label">Adressbok</span></a>
+        <a class="tab" href="/mypages/users.html"><span class="tab__label">Användare</span></a>
+        <a class="tab" href="#"><span class="tab__label">Ordervy</span></a>
+        <a class="tab" href="#"><span class="tab__label">Min Profil</span></a>
+        <a class="tab" href="#"><span class="tab__label">Fakturor</span></a>
+        <a class="tab" href="#"><span class="tab__label">Attestera</span></a>
+      </nav>
       <div class="tab-more" id="tab-more">
         <button class="tab-more__btn" id="tab-more-btn" aria-label="Fler alternativ" aria-expanded="false">
           <span class="ms ms--24">more_vert</span>
@@ -4821,7 +4753,7 @@
       const moreMenu = document.getElementById('tab-more-menu');
       if (!tabBar || !tabMore || !moreMenu) return;
 
-      const allItems = Array.from(tabBar.querySelectorAll('.tab-item'));
+      const allItems = Array.from(tabBar.querySelectorAll('.tab'));
 
       function closeMenu() {
         moreMenu.hidden = true;
@@ -4841,7 +4773,7 @@
           const visible = allItems.filter(i => !hiddenSet.has(i));
           for (let i = visible.length - 1; i >= 0; i--) {
             const r = visible[i].getBoundingClientRect();
-            if (r.right > br.right) {
+            if (r.right > br.right - 4) {   /* 4px: the tab bar's padding for the focus ring */
               hiddenSet.add(visible[i]);
               visible[i].style.display = 'none';
               return true;
@@ -4861,10 +4793,11 @@
 
           const hiddenItems = allItems.filter(i => hiddenSet.has(i));
           moreMenu.innerHTML = hiddenItems.map(item => {
-            const label    = item.querySelector('.tab-item__label').textContent;
-            const isActive = item.classList.contains('tab-item--active');
+            const label    = item.querySelector('.tab__label').textContent;
+            const isActive = item.hasAttribute('aria-current');
             const check    = isActive ? `<span class="tab-more__menu-item__check">check_circle</span>` : '';
-            return `<div class="tab-more__menu-item">${label}${check}</div>`;
+            const href = item.getAttribute('href');
+            return `<a class="tab-more__menu-item" href="${href}"${href === '#' ? ' onclick="return false"' : ''}>${label}${check}</a>`;
           }).join('');
         }
       }
@@ -4926,7 +4859,7 @@
           const visible = allItems.filter(i => !hiddenSet.has(i));
           for (let i = visible.length - 1; i >= 0; i--) {
             const r = visible[i].getBoundingClientRect();
-            if (r.right > br.right) {
+            if (r.right > br.right - 4) {   /* 4px: the tab bar's padding for the focus ring */
               hiddenSet.add(visible[i]);
               visible[i].style.display = 'none';
               return true;

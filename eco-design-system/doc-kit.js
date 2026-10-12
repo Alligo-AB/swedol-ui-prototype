@@ -208,5 +208,33 @@
     return { render: render };
   }
 
-  w.DK = { wire: wire, mode: mode, printCss: printCss, codeBox: codeBox, motion: motion, $: $, $$: $$, clear: clear, esc: esc, seg: seg, bp: bp, recipes: recipes, printFile: printFile, tokenTable: tokenTable, rows: rows };
+  /* Numbered markers on an anatomy diagram (Figma "Marker": a 24px number badge, a 1px line and a 3px dot on the part).
+     fig: the positioned container. items: [{ n, el | box(), side, at, len }]
+       el / box(): the part (an element, or a function returning a viewport rect).
+       side: where the badge sits relative to the part: 'left' | 'right' | 'top' | 'bottom'.
+       at: 'edge' (default, the middle of the edge that faces the badge) or 'center' (the middle of the part).
+       len: distance from the dot to the center of the badge, default 48px.
+     Needs components/css/badge.css (.badge-number) and .ds-callout__* in docs.css. Redrawn on resize and when fonts load. */
+  function callouts(fig, items) {
+    var P = 24;
+    function node(cls, st, extra) { var n = document.createElement('div'); n.className = (extra ? extra + ' ' : '') + 'ds-callout__' + cls; Object.keys(st).forEach(function (k) { n.style[k] = st[k] + 'px'; }); fig.appendChild(n); return n; }
+    function draw() {
+      $$('.ds-callout__line, .ds-callout__dot, .ds-callout__pin', fig).forEach(function (n) { n.remove(); });
+      var fr = fig.getBoundingClientRect();
+      items.forEach(function (it) {
+        var r = it.el ? it.el.getBoundingClientRect() : it.box(), L = it.len || 48, ctr = it.at === 'center';
+        var x = r.left - fr.left, y = r.top - fr.top, cx = x + r.width / 2, cy = y + r.height / 2, tx, ty, px, py;
+        if (it.side === 'left')       { tx = ctr ? cx : x;               ty = cy; px = tx - L; py = ty; node('line', { left: px + P / 2, top: ty - 0.5, width: L - P / 2, height: 1 }); }
+        else if (it.side === 'right') { tx = ctr ? cx : x + r.width;     ty = cy; px = tx + L; py = ty; node('line', { left: tx, top: ty - 0.5, width: L - P / 2, height: 1 }); }
+        else if (it.side === 'top')   { tx = cx; ty = ctr ? cy : y;               px = tx; py = ty - L; node('line', { left: tx - 0.5, top: py + P / 2, width: 1, height: L - P / 2 }); }
+        else                          { tx = cx; ty = ctr ? cy : y + r.height;    px = tx; py = ty + L; node('line', { left: tx - 0.5, top: ty, width: 1, height: L - P / 2 }); }
+        node('dot', { left: tx - 1.5, top: ty - 1.5 });
+        var pin = node('pin', { left: px - P / 2, top: py - P / 2 }, 'badge-number'); pin.textContent = it.n;
+      });
+    }
+    draw(); window.addEventListener('resize', draw); if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+    return { redraw: draw };
+  }
+
+  w.DK = { callouts: callouts, wire: wire, mode: mode, printCss: printCss, codeBox: codeBox, motion: motion, $: $, $$: $$, clear: clear, esc: esc, seg: seg, bp: bp, recipes: recipes, printFile: printFile, tokenTable: tokenTable, rows: rows };
 })(window);

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tooltip: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/tooltip.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-fig { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 320px; }
+    .pg-fig .tooltip-wrap { display: flex; }
+    .pg-tip-long { white-space: normal; width: 280px; }   /* demo only: a deliberately long tooltip, to show what not to do */
+    .pg-align { display: grid; grid-template-columns: 1fr; width: 100%; }
+    .pg-align > div { display: flex; justify-content: center; padding: 16px 0 72px; border-top: 1px solid var(--color-border-primary); }
+    .pg-align > div:first-child { border-top: 0; }
+    @media (min-width: 769px) { .pg-align { grid-template-columns: repeat(3, minmax(0, 1fr)); } .pg-align > div { border-top: 0; border-left: 1px solid var(--color-border-primary); } .pg-align > div:first-child { border-left: 0; } }
+    .pg-place { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+    .pg-place > div { display: flex; align-items: center; justify-content: center; min-height: 160px; }
+    .pg-place > div:nth-child(1) { padding-right: 72px; }   /* room beside the trigger for the tooltip, so the pair sits centered in its cell */
+    .pg-place > div:nth-child(2) { padding-left: 72px; }
+    .pg-place > div:nth-child(even) { border-left: 1px solid var(--color-border-primary); }
+    .pg-place > div:nth-child(n+3) { border-top: 1px solid var(--color-border-primary); }
+    .ds-callout__art { padding-right: 84px; }   /* room for the open tooltip to the right of the trigger: label (74px) + 10px distance */
+    .pg-top { align-items: flex-start; padding-top: 40px; }   /* both password examples start at the same height */
+    .pg-btn { padding-bottom: 72px; }   /* room for the open tooltip below the button */
+    .pg-tip-fill { width: 100%; box-sizing: border-box; }
+    .pg-tip-link { display: block; margin-top: 8px; color: var(--color-text-action-primary-inverted); text-decoration: underline; }
+
+    /* Variants: every type, forced open. Room around the trigger for the tooltip on its side. */
+    .pg-vars { display: grid; grid-template-columns: 1fr; gap: 32px 16px; width: 100%; }
+    @media (min-width: 640px) { .pg-vars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1280px) { .pg-vars { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .pg-var { display: flex; flex-direction: column; gap: 4px; }
+    .pg-var .ds-stage__cap { margin-bottom: 0; }
+    .pg-var code { align-self: flex-start; }
+    .pg-var__stage { display: flex; align-items: center; justify-content: center; padding: 8px; }
+    .pg-var__stage--a { padding-top: 52px; }   /* tooltip above the trigger */
+    .pg-var__stage--b { padding-bottom: 52px; }   /* tooltip below */
+    .pg-var__stage--r { padding: 16px 84px 16px 8px; }   /* tooltip to the right of the trigger */
+    .pg-var__stage--l { padding: 16px 8px 16px 84px; }   /* tooltip to the left */
+    .pg-wide { padding-bottom: 128px; }   /* room for a tooltip that wraps over three lines */
+    .pg-vars code, .pg-var code { font-family: ui-monospace, Menlo, monospace; font-size: 0.875em; background: var(--color-surface-05); padding: 1px 4px; width: fit-content; }
+  </style>
+</head><body data-ds="component">
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="tooltip.html" class="breadcrumb-item">Tooltip</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Feedback</span></div>
+    <h1 class="ds-title">Tooltip</h1>
+    <p class="ds-lead">A tooltip gives an <strong>icon-only button a short name</strong> when the user hovers it. It is never shown on keyboard focus.</p><p class="ds-lead">How to add a tooltip to a page. The files are <code>components/css/tooltip.css</code> and <code>components/js/tooltip.js</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Tooltip"><a class="tab" href="tooltip.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="tooltip-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="tooltip-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2>
+<p class="ds-desc">Link the shared files once per page. Never copy the rules, and never write a tooltip script of your own: a page that does (for example a <code>row-tooltip</code>) fights the shared one over the position.</p>
+<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody>
+<tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/tooltip.css"&gt;</code> and <code>&lt;script src="/components/js/tooltip.js"&gt;&lt;/script&gt;</code>. Both templates (<code>template.html</code>, <code>mypages/mypages-template.html</code>) already have them.</td></tr>
+<tr><th scope="row">2. Choose</th><td><strong>Global</strong> (recommended for icon buttons, table rows and anything built in JS): add <code>data-tooltip="Label"</code> to the element. <strong>Markup</strong> (<code>.tooltip-wrap</code> + <code>.tooltip</code>): when you need a specific type or size (start, end, left, right, Large, Body), or a tooltip that is part of the page markup.</td></tr>
+<tr><th scope="row">3. Name the control</th><td>Give the button an <code>aria-label</code> with the same text as the tooltip. The tooltip itself is not announced.</td></tr>
+</tbody></table></div>
+</div></section>
+<section class="ds-section ds-section--secondary" id="tooltip"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Tooltip</h2><h3 class="ds-h3 ds-group">Global: <code>data-tooltip</code></h3><p class="ds-desc">One shared tooltip is shown for any element with <code>data-tooltip</code>, including elements you add later. It is a popover in the top layer, so no <code>overflow</code>, <code>z-index</code> or stacking context can clip it or hide it. It is centered on the element, aligns to the start or end of it (as shown under Layout &amp; Appearance in Examples &amp; Guidelines) when it would leave the viewport sideways, and flips above or below when there is no room.</p>
+<div class="ds-stage ds-stage--center" style="gap:24px;margin-bottom:24px"><button type="button" class="btn btn--secondary btn--sm btn--icon" aria-label="Add user" data-tooltip="Add user"><span class="btn__icon" aria-hidden="true">person_add</span></button><button type="button" class="btn btn--secondary btn--sm btn--icon" aria-label="Download" data-tooltip="Download" data-tooltip-position="bottom"><span class="btn__icon" aria-hidden="true">download</span></button><span class="ds-note" style="margin:0">Hover the buttons: the first uses <code>data-tooltip</code>, the second adds <code>data-tooltip-position="bottom"</code>.</span></div>
+<h3 class="ds-h3 ds-group">Markup: <code>.tooltip-wrap</code></h3>
+<p class="ds-desc">Classes name where the tooltip sits next to the element: <code>tooltip--top</code> and <code>tooltip--bottom</code> (automatic), <code>--top-start</code>, <code>--top-end</code>, <code>--bottom-start</code>, <code>--bottom-end</code>, <code>--left</code>, <code>--right</code>, <code>--left-start</code>, <code>--right-start</code> and <code>--body</code> (always manual). <code>tooltip--lg</code> is Large. <code>tooltip--manual</code> keeps a Top or Bottom tooltip fixed and centered, and <code>tooltip--flip</code>, <code>tooltip--align-start</code> and <code>tooltip--align-end</code> are added by <code>tooltip.js</code>: never write them yourself.</p>
+<div id="recipes"></div></div></section>
+<section class="ds-section" id="definition-tooltip"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Definition Tooltip</h2><p class="ds-desc ds-note">To be added. The Definition Tooltip has its own code, which is not documented yet.</p></div></section>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Global tooltip</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Setting</th><th scope="col">Effect</th></tr></thead><tbody>
+<tr><th scope="row"><code>data-tooltip="Label"</code></th><td>The text. Plain text only, one to three words.</td></tr>
+<tr><th scope="row"><code>data-tooltip-position="bottom"</code></th><td>Below the element. Default is above (<code>top</code>). Use Bottom in toolbars (room below), Top in table rows (room above). The flip still applies.</td></tr>
+<tr><th scope="row"><code>--tooltip-safe-top</code> on <code>:root</code></th><td>Height in px of a sticky header. Room above then counts from below the header, so a tooltip is flipped below instead of landing on it. Set it from the breakpoint where the header sticks.</td></tr>
+<tr><th scope="row"><code>--tooltip-z</code> on <code>:root</code></th><td>z-index of tooltips in markup (<code>.tooltip-wrap</code>), default 300. Set it below a sticky header's z-index. The global tooltip is in the top layer and does not use it.</td></tr>
+</tbody></table></div><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>tooltip-wrap</code></th><td>The wrapper around the trigger and the tooltip. It is the anchor of an automatic tooltip.</td></tr><tr><th scope="row"><code>tooltip</code></th><td>The tooltip. Always combined with one type class.</td></tr><tr><th scope="row"><code>tooltip--top</code>, <code>tooltip--bottom</code></th><td>Above or below the trigger, centered. Automatic.</td></tr><tr><th scope="row"><code>tooltip--top-start</code>, <code>--top-end</code>, <code>--bottom-start</code>, <code>--bottom-end</code>, <code>--left</code>, <code>--right</code>, <code>--left-start</code>, <code>--right-start</code></th><td>The other placement types. Always manual.</td></tr><tr><th scope="row"><code>tooltip--body</code></th><td>No beak, no placement.</td></tr><tr><th scope="row"><code>tooltip--lg</code></th><td>Large size.</td></tr><tr><th scope="row"><code>tooltip--manual</code></th><td>Keeps a Top or Bottom tooltip fixed and centered.</td></tr><tr><th scope="row"><code>tooltip--flip</code>, <code>tooltip--align-start</code>, <code>tooltip--align-end</code></th><td>Added by <code>tooltip.js</code> to an open tooltip. Never write them yourself.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3>
+<ul class="ds-bullets">
+<li>Hover only, never on keyboard focus. On touch it shows on tap and hides on the next tap elsewhere.</li>
+<li>Automatic alignment and the global tooltip use CSS anchor positioning. In a browser without it the tooltip is centered on the element by script and kept inside the viewport.</li>
+<li>Without <code>tooltip.js</code> a markup tooltip stays on its declared side, and a <code>data-tooltip</code> shows nothing.</li>
+<li>A <code>transform</code>, <code>filter</code> or <code>contain</code> on an ancestor makes a markup tooltip's <code>fixed</code> position relative to that ancestor. The global tooltip is not affected. Use <code>tooltip--manual</code> if you must keep a markup tooltip there.</li>
+<li>Replacing an old script: delete the page's own tooltip script and CSS (<code>.row-tooltip</code>, a local <code>.tooltip</code> block), keep the <code>data-tooltip</code> attributes, and add <code>data-tooltip-position="bottom"</code> where the old one opened below.</li>
+</ul>
+<div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Positioning context</th><td>Automatic tooltips are <code>position: fixed</code>, so a container with <code>overflow</code> does not clip them. A <code>transform</code>, <code>filter</code> or <code>contain</code> on an ancestor makes <code>fixed</code> relative to that ancestor: use <code>tooltip--manual</code> there.</td></tr><tr><th scope="row">Own positioning script</th><td>A page must not position a tooltip with a script of its own (for example inline <code>left</code>): the script and the automatic alignment would fight over the position. Use <code>data-tooltip</code>, or <code>tooltip--manual</code> if a fixed tooltip is really needed.</td></tr><tr><th scope="row">Browser support</th><td>Automatic alignment uses CSS anchor positioning. Without support the tooltip stays centered, as in manual mode.</td></tr></tbody></table></div></div></section>
+<section class="ds-section ds-section--secondary" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file and one script, shared by every page. Link them, never copy them.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/tooltip.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div>
+<div class="ds-code" style="margin-top:16px"><div class="ds-code__bar"><span>JS (components/js/tooltip.js)</span><button type="button" class="mo-copy" data-copy="js-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="js-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  DK.recipes($('#recipes'), [['Global (data-tooltip)', '<button type="button" class="btn btn--blank btn--sm btn--icon" aria-label="Add user" data-tooltip="Add user" data-tooltip-position="bottom">\n  <span class="btn__icon" aria-hidden="true">person_add</span>\n</button>'], ['Bottom (toolbar)', '<div class="tooltip-wrap">\n  <button type="button" class="btn btn--blank btn--sm btn--icon" aria-label="Add user">\n    <span class="btn__icon" aria-hidden="true">person_add</span>\n  </button>\n  <span class="tooltip tooltip--bottom">Add user</span>\n</div>'], ['Top (table row)', '<div class="tooltip-wrap">\n  <button type="button" class="btn btn--blank btn--sm btn--icon" aria-label="Edit">\n    <span class="btn__icon" aria-hidden="true">edit</span>\n  </button>\n  <span class="tooltip tooltip--top">Edit</span>\n</div>']]);
+  DK.printCss($('#css-code'), 'tooltip');
+  fetch('../../components/js/tooltip.js', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (t) { $('#js-code').textContent = t; });
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/tooltip.js"></script>
+</body>
+</html>

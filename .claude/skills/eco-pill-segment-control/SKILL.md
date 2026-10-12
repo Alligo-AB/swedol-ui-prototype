@@ -1,6 +1,6 @@
 ---
 name: eco-pill-segment-control
-description: Use when building or reviewing a segmented control (pill toggle) for switching between two related views/filters in the same surface — sizes, the sliding-pill interaction, and states. Never replaces Tabs or Radio buttons. Not the framed button group (see `eco-button`, section Button group).
+description: Use when building or reviewing a segmented control (pill toggle) for switching between two related views/filters in the same surface — sizes, the sliding-pill interaction, and states. Never replaces Tabs (`eco-tabs`) or Radio buttons (`eco-radio`). Not the framed button group (see `eco-button`, section Button group).
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.

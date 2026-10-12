@@ -1518,6 +1518,8 @@
     }
 
     /* Top row: logo + search + user icons */
+    /* Tooltips (components/css/tooltip.css, components/js/tooltip.js): room above counts from below the sticky header (from 769px) */
+    @media (min-width: 769px) { :root { --tooltip-safe-top: 81px; } }
     .site-header__top {
       position: sticky;
       top: 0;
@@ -2285,78 +2287,6 @@
       background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
     }
 
-    /* Tooltip */
-    .tooltip {
-      position: absolute;
-      z-index: 1000;
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      white-space: nowrap;
-      text-transform: none; /* en tooltip ska aldrig ärva sitt ankares text-transform
-                                (t.ex. .compare-role-col__name:s versaler vid 769px+) */
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    /* Wrap-variant — för längre tooltip-texter (hela meningar) som inte
-       ska tvingas till en enda rad. Kombineras med --top/--bottom för
-       positionen; samma centrerade beak-mönster gäller oförändrat. */
-    .tooltip--wrap {
-      white-space: normal;
-      min-width: 220px;
-      max-width: 280px;
-      text-align: left;
-    }
-    /* Bottom: tooltip below element, beak at top pointing up */
-    /* Top: tooltip above element, beak at bottom pointing down */
-    /* Positionering vid mindre brytpunkter (≤768px) — samma algoritm som
-       .row-tooltip (se dess IIFE längre ner, samma mönster som i
-       mypages/users.html): boxen FÖRSÖKER centreras på sin trigger
-       (info-ikonen) men klipps (clamp) bara så mycket som krävs för att
-       rymmas inom ECO-designsystemets sidmarginal — inte ett ovillkorat
-       vänster-/högerjusterat fast läge. left/transform på .tooltip sätts
-       inline av JS (setCompareTooltipPositions(), se längre ner) och
-       vinner därför alltid över CSS oavsett brytpunkt; på desktop
-       rensar samma JS den inline-stylingen så basregelns centrerade
-       left:50%/transform ovan gäller igen. Beaken följer alltid ikonens
-       sanna mittpunkt (--beak-offset, satt av samma JS) i stället för
-       att vara fast centrerad — måste stå EFTER --bottom-basregeln
-       (samma specificitet — senare i källan vinner) för att override:a
-       dess left:50%/transform. */
-    @media (max-width: 768px) {
-      .tooltip--bottom::before { left: var(--beak-offset, 50%); transform: none; }
-    }
-    /* Fixed tooltip for table row buttons — rendered on body, decoupled from scroll container */
-    .row-tooltip {
-      position: fixed;
-      z-index: 9999;
-      visibility: hidden;   /* hidden but always in layout — so offsetWidth/Height are always valid */
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      white-space: nowrap;
-      pointer-events: none;
-      padding: 8px 12px;
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .row-tooltip__beak {
-      position: absolute;
-      width: 0;
-      height: 0;
-      /* All border properties set by JS per placement — top/left/right variants differ */
-    }
 
     /* Table */
     .users-table-wrap {
@@ -6080,19 +6010,17 @@
             </div>
             <div class="compare-role-cols">
               <div class="compare-role-col">
-                <div class="compare-role-col__name tooltip-wrap">
+                <div class="compare-role-col__name" data-tooltip="Standardanvändare kan handla och följa sina egna ordrar." data-tooltip-position="bottom">
                   Standard
                   <span class="ms compare-role-col__info" aria-hidden="true">info</span>
-                  <span class="tooltip tooltip--bottom tooltip--wrap" role="tooltip">Standardanvändare kan handla och följa sina egna ordrar.</span>
                 </div>
                 <span class="compare-badge compare-badge--std">Standardåtkomst</span>
                 <button type="button" class="compare-btn compare-btn--secondary compare-btn--sm">Öppna konto</button>
               </div>
               <div class="compare-role-col">
-                <div class="compare-role-col__name tooltip-wrap">
+                <div class="compare-role-col__name" data-tooltip="Administratör har fullständig åtkomst och kan hantera alla användare, ordrar och behörigheter inom företagskontot." data-tooltip-position="bottom">
                   Administratör
                   <span class="ms compare-role-col__info" aria-hidden="true">info</span>
-                  <span class="tooltip tooltip--bottom tooltip--wrap" role="tooltip">Administratör har fullständig åtkomst och kan hantera alla användare, ordrar och behörigheter inom företagskontot.</span>
                 </div>
                 <span class="compare-badge compare-badge--full">Fullständig åtkomst</span>
                 <button type="button" class="compare-btn compare-btn--primary compare-btn--sm">Bli administratör</button>
@@ -6919,19 +6847,17 @@
             </div>
             <div class="compare-role-cols">
               <div class="compare-role-col">
-                <div class="compare-role-col__name tooltip-wrap">
+                <div class="compare-role-col__name" data-tooltip="Företag Standard passar de flesta – enkel onlinehandel med avtalspriser." data-tooltip-position="bottom">
                   Företag Standard
                   <span class="ms compare-role-col__info" aria-hidden="true">info</span>
-                  <span class="tooltip tooltip--bottom tooltip--wrap" role="tooltip">Företag Standard passar de flesta – enkel onlinehandel med avtalspriser.</span>
                 </div>
                 <span class="compare-badge compare-badge--std">Standardåtkomst</span>
                 <button type="button" class="compare-btn compare-btn--secondary compare-btn--sm">Mer om Standard</button>
               </div>
               <div class="compare-role-col">
-                <div class="compare-role-col__name tooltip-wrap">
+                <div class="compare-role-col__name" data-tooltip="Företag Special ger utökade integrationer, kundunika priser och dedikerad support." data-tooltip-position="bottom">
                   Företag Special
                   <span class="ms compare-role-col__info" aria-hidden="true">info</span>
-                  <span class="tooltip tooltip--bottom tooltip--wrap" role="tooltip">Företag Special ger utökade integrationer, kundunika priser och dedikerad support.</span>
                 </div>
                 <span class="compare-badge compare-badge--full">Fullständig åtkomst</span>
                 <button type="button" class="compare-btn compare-btn--primary compare-btn--sm">Uppgradera till Special</button>
@@ -8394,68 +8320,6 @@
     }
     window.addEventListener('resize', measureVisibleCompareColumns);
 
-    // Positionerar info-ikonens tooltips i .compare-role-col__name vid
-    // mindre brytpunkter (≤768px) — SAMMA algoritm som .row-tooltip
-    // (position:fixed-tooltipen för radåtgärdsknappar, se dess IIFE
-    // längre ner i filen / samma mönster i mypages/users.html): FÖRSÖK
-    // centrera tooltipen på sin trigger (ikonen), men klipp (clamp)
-    // boxens position bara så mycket som krävs för att den ska rymmas
-    // inom ECO-designsystemets sidmarginal (16px under 640px, 32px vid
-    // 640–768px) — inte ett ovillkorat vänster-/högerjusterat fast läge.
-    // Beaken följer alltid ikonens sanna mittpunkt (--beak-offset, se
-    // CSS vid .tooltip--bottom::before), oavsett hur mycket boxen själv
-    // fått flyttas för att rymmas — klipps i sin tur in mot boxens egna
-    // kanter (BEAK_HALF+4) så den aldrig hamnar utanför tooltipen.
-    // På desktop (>768px) rensas all inline-styling — CSS:s vanliga
-    // centrerade left:50%/transform tar över igen. Bara den SYNLIGA
-    // flikens tooltips hanteras (display:none ger 0 i alla mått).
-    function setCompareTooltipPositions() {
-      var scope = document.querySelector('.compare-table:not([hidden])');
-      if (!scope) return;
-      var names = scope.querySelectorAll('.compare-role-col__name');
-      var vw = document.documentElement.clientWidth; // pålitligare än window.innerWidth (som kan räkna in scrollbar-bredd inkonsekvent)
-
-      if (vw > 768) {
-        names.forEach(function (nameEl) {
-          var tip = nameEl.querySelector('.tooltip');
-          if (!tip) return;
-          tip.style.left = '';
-          tip.style.transform = '';
-          tip.style.removeProperty('--beak-offset');
-        });
-        return;
-      }
-
-      var ecoMargin = vw >= 640 ? 32 : 16;
-      var beakHalf = 6.35; // halva bredden på beak-triangelns border (se .tooltip::before)
-
-      names.forEach(function (nameEl) {
-        var icon = nameEl.querySelector('.compare-role-col__info');
-        var tip = nameEl.querySelector('.tooltip');
-        if (!icon || !tip) return;
-
-        var iconRect = icon.getBoundingClientRect();
-        var wrapRect = nameEl.getBoundingClientRect();
-        var iconCenter = iconRect.left + iconRect.width / 2;
-        var tipWidth = tip.offsetWidth;
-
-        var idealLeft = iconCenter - tipWidth / 2;
-        var clampedLeft = Math.max(ecoMargin, Math.min(idealLeft, vw - ecoMargin - tipWidth));
-
-        tip.style.left = (clampedLeft - wrapRect.left) + 'px';
-        tip.style.transform = 'none';
-
-        var beakOffset = iconCenter - clampedLeft;
-        beakOffset = Math.max(beakHalf + 4, Math.min(beakOffset, tipWidth - beakHalf - 4));
-        tip.style.setProperty('--beak-offset', beakOffset + 'px');
-      });
-    }
-    setCompareTooltipPositions();
-    if (window.document && document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(setCompareTooltipPositions);
-    }
-    window.addEventListener('resize', setCompareTooltipPositions);
-
     // .compare-group__header ska "fastna" precis under .compare-header-row
     // när båda är sticky (se CSS) — sätter rollhuvud-radens faktiska
     // renderade höjd som --compare-header-row-h, som grupphuvudets
@@ -8719,7 +8583,6 @@
       // mätas om här (den dolda flikens knappar rapporterade 0 i bredd/
       // position fram tills nu).
       initVisibleCompareFilterThumb();
-      setCompareTooltipPositions();
       syncCompareRoleNameHeights();
       observeHeaderRow();
       observeGroupHeaders();
@@ -8805,5 +8668,6 @@
     /* openAccountNavDrawer / closeAccountNavDrawer / syncAccountNavDrawerActive samt footer-skuggans scroll-logik ligger nu i partials/account-nav-drawer.html */
   </script>
 
+<script src="/components/js/tooltip.js"></script>
 </body>
 </html>

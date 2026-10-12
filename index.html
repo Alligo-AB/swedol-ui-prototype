@@ -1300,88 +1300,6 @@
       background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
     }
 
-    /* Tooltip */
-    .tooltip-wrap {
-      position: relative;
-      display: inline-flex;
-    }
-    .tooltip {
-      position: absolute;
-      z-index: 1000;
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .tooltip::before {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
-      border-left: 6.35px solid transparent;
-      border-right: 6.35px solid transparent;
-    }
-    .tooltip-wrap:hover .tooltip { opacity: 1; }
-    /* Bottom: tooltip below element, beak at top pointing up */
-    .tooltip--bottom {
-      top: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 8px 12px;
-    }
-    .tooltip--bottom::before {
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-bottom: 6px solid rgba(0,0,0,0.9);
-    }
-    /* Top: tooltip above element, beak at bottom pointing down */
-    .tooltip--top {
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 8px 12px;
-    }
-    .tooltip--top::before {
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-top: 6px solid rgba(0,0,0,0.9);
-    }
-    /* Fixed tooltip for table row buttons — rendered on body, decoupled from scroll container */
-    .row-tooltip {
-      position: fixed;
-      z-index: 9999;
-      visibility: hidden;   /* hidden but always in layout — so offsetWidth/Height are always valid */
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      white-space: nowrap;
-      pointer-events: none;
-      padding: 8px 12px;
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .row-tooltip__beak {
-      position: absolute;
-      width: 0;
-      height: 0;
-      /* All border properties set by JS per placement — top/left/right variants differ */
-    }
-
     /* Table */
     .users-table-wrap {
       overflow-x: auto;
@@ -4631,6 +4549,14 @@
       </div>
       <p class="site-index-card__desc">SaaS-like page without pricing: benefits for individuals, businesses, and large organizations, with a comparison table, EDI/Punchout integration, and FAQ.</p>
       <span class="site-index-card__path">e-handelspartner.html</span>
+    </a>
+    <a href="hero-erbjudandedagar.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Campaign hero — offer days</span>
+        <span class="site-index-card__tag site-index-card__tag--new">New</span>
+      </div>
+      <p class="site-index-card__desc">Dark hero with store selection, live countdown and email reminder sign-up.</p>
+      <span class="site-index-card__path">hero-erbjudandedagar.html</span>
     </a>
     <a href="feature-comparison-roles.html" class="site-index-card" target="_blank" rel="noopener">
       <div class="site-index-card__top">

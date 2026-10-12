@@ -280,6 +280,9 @@
     }
 
     /* Top row: logo + search + user icons */
+    /* Tooltips (components/css/tooltip.css, components/js/tooltip.js): below the sticky header, and room above counts from below it (from 769px) */
+    :root { --tooltip-z: 98; }
+    @media (min-width: 769px) { :root { --tooltip-safe-top: 81px; } }
     .site-header__top {
       position: sticky;
       top: 0;
@@ -1048,50 +1051,6 @@
       background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
     }
 
-    /* Tooltip */
-    .tooltip {
-      position: absolute;
-      z-index: 1000;
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    /* Bottom: tooltip below element, beak at top pointing up */
-    /* Top: tooltip above element, beak at bottom pointing down */
-    /* Fixed tooltip for table row buttons — rendered on body, decoupled from scroll container */
-    .row-tooltip {
-      position: fixed;
-      z-index: 9999;
-      visibility: hidden;   /* hidden but always in layout — so offsetWidth/Height are always valid */
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      white-space: nowrap;
-      pointer-events: none;
-      padding: 8px 12px;
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .row-tooltip__beak {
-      position: absolute;
-      width: 0;
-      height: 0;
-      /* All border properties set by JS per placement — top/left/right variants differ */
-    }
 
     /* Table */
     .users-table-wrap {
@@ -6076,118 +6035,6 @@
       });
     })();
 
-    /* ── Row tooltip (position:fixed on body, decoupled from scroll container) ──
-       Adapterar placeringen (Top / Right side top / Left side top / mobil-Bottom)
-       efter tillgängligt utrymme i webbläsarfönstret och breakpoint — samma
-       mönster som mypages/users-dashboard.html. */
-    (function() {
-      var BEAK_HALF = 6.35; /* half the visual width of the CSS border-triangle */
-
-      var rowTip  = document.createElement('div');
-      rowTip.className = 'row-tooltip';
-      var tipText = document.createElement('span');
-      var beak    = document.createElement('span');
-      beak.className = 'row-tooltip__beak';
-      rowTip.appendChild(tipText);
-      rowTip.appendChild(beak);
-      /* Start off-screen so it doesn't flash at (0,0) on first paint */
-      rowTip.style.left = '-9999px';
-      rowTip.style.top  = '-9999px';
-      document.body.appendChild(rowTip);
-
-      function show(btn) {
-        var label = btn.dataset.tooltip;
-        if (!label) return;
-
-        /* 1. Update text while still hidden — dimensions reflect new content */
-        tipText.textContent = label;
-
-        /* 2. Read dimensions — always valid because visibility:hidden keeps element in layout */
-        var tw = rowTip.offsetWidth;
-        var th = rowTip.offsetHeight;
-
-        /* 3. Button position in viewport */
-        var r          = btn.getBoundingClientRect();
-        var btnCenterX = r.left + r.width / 2;
-        var vw         = window.innerWidth;
-
-        /* 4. ECO Design System page margin — både "får en centrerad tooltip plats?"-testet
-              och den slutgiltiga kant-clampningen (även på xs/sm) respekterar denna, så
-              tooltipen aldrig hamnar närmare skärmkanten än sidmarginalen.
-              lg (1024px+) = 40px, sm/md (640–1023px) = 32px, xs (<640px) = 16px */
-        var ecoMargin = vw >= 1024 ? 40 : vw >= 640 ? 32 : 16;
-
-        /* 5. Would a centred-top tooltip fit within the safe zone? */
-        var idealLeft = btnCenterX - tw / 2;
-        var fitsRight = idealLeft + tw <= vw - ecoMargin;
-        var fitsLeft  = idealLeft >= ecoMargin;
-
-        var left, top;
-
-        if (vw < 640) {
-          /* ── MOBILE (xs): always below button, beak points up ── */
-          beak.style.bottom       = '100%';
-          beak.style.top          = '';
-          beak.style.right        = '';
-          beak.style.borderBottom = '6px solid rgba(0,0,0,0.9)';
-          beak.style.borderTop    = '';
-          beak.style.borderLeft   = BEAK_HALF + 'px solid transparent';
-          beak.style.borderRight  = BEAK_HALF + 'px solid transparent';
-
-          top  = r.bottom + 8;
-          left = Math.max(ecoMargin, Math.min(btnCenterX - tw / 2, vw - tw - ecoMargin));
-
-        } else {
-          /* ── DESKTOP/TABLET: above button — Top / Right side top / Left side top ── */
-          beak.style.top          = '100%';
-          beak.style.bottom       = '';
-          beak.style.right        = '';
-          beak.style.borderTop    = '6px solid rgba(0,0,0,0.9)';
-          beak.style.borderBottom = '';
-          beak.style.borderLeft   = BEAK_HALF + 'px solid transparent';
-          beak.style.borderRight  = BEAK_HALF + 'px solid transparent';
-
-          top = r.top - th - 8;
-
-          if (fitsLeft && fitsRight) {
-            /* Top (default): centred above button */
-            left = idealLeft;
-          } else if (!fitsRight) {
-            /* Right side top: right-align tooltip with button right edge */
-            left = Math.max(ecoMargin, r.right - tw);
-          } else {
-            /* Left side top: left-align tooltip with button left edge */
-            left = Math.min(r.left, vw - tw - ecoMargin);
-          }
-        }
-
-        /* Beak: visual centre always tracks the button centre regardless of tooltip alignment */
-        var beakCenter        = btnCenterX - left;
-        var beakCenterClamped = Math.max(BEAK_HALF + 4, Math.min(beakCenter, tw - BEAK_HALF - 4));
-        beak.style.left = (beakCenterClamped - BEAK_HALF).toFixed(2) + 'px';
-
-        /* 6. Apply position then reveal */
-        rowTip.style.left       = Math.round(left) + 'px';
-        rowTip.style.top        = Math.round(top)  + 'px';
-        rowTip.style.visibility = 'visible';
-      }
-
-      function hide() {
-        rowTip.style.visibility = 'hidden';
-      }
-
-      document.addEventListener('mouseover', function(e) {
-        var btn = e.target.closest('[data-tooltip]');
-        if (btn) show(btn); else hide();
-      });
-
-      document.addEventListener('mouseout', function(e) {
-        var btn = e.target.closest('[data-tooltip]');
-        if (!btn) return;
-        if (!btn.contains(e.relatedTarget)) hide();
-      });
-    })();
-
     function switchReviewsTab(tab) {
       ['produkter', 'foretaget'].forEach(function(key) {
         var isActive = key === tab;
@@ -6352,5 +6199,6 @@
     ['produkter', 'foretaget'].forEach(function(tabKey) { updatePagination(tabKey, 4); });
   </script>
 
+<script src="/components/js/tooltip.js"></script>
 </body>
 </html>

@@ -63,3 +63,34 @@ span.badge-basic__icon {
   font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: 14px; line-height: 14px; letter-spacing: normal;
   text-transform: none; white-space: nowrap; overflow: hidden; user-select: none; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
 }
+
+/* Badge/Number-Icon (Figma, size Large): a 24px black circle with a number or a check icon. First used in the numbered
+   markers of anatomy diagrams (eco-design-system, DK.callouts). One size for every breakpoint: label-sm 14/14. */
+.badge-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  padding: 0 5px;
+  border-radius: 100px;
+  background: var(--color-surface-100);
+  color: var(--color-text-primary-inverted);
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  font-feature-settings: 'ss02' 1, 'ss03' 1;
+}
+.badge-number__icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+}

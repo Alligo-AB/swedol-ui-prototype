@@ -7,6 +7,8 @@
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="/components/css/tabs.css">
+  <script src="/components/js/tabs.js"></script>
   <link rel="stylesheet" href="/components/css/inline-link.css">
   <link rel="stylesheet" href="/components/css/tooltip.css">
   <link rel="stylesheet" href="../styles.css">
@@ -234,6 +236,9 @@
     }
 
     /* Top row: logo + search + user icons */
+    /* Tooltips (components/css/tooltip.css) stay below the sticky header (z-index 99/100) */
+    :root { --tooltip-z: 98; }
+    @media (min-width: 769px) { :root { --tooltip-safe-top: 81px; } }   /* the sticky header's height: tooltip.js counts room above from below it */
     .site-header__top {
       position: sticky;
       top: 0;
@@ -612,59 +617,12 @@
       padding: 0 32px;
       box-sizing: border-box;
     }
-    .tab-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      height: 48px;
-      overflow: hidden;
-      flex: 1;
-      min-width: 0;
-    }
-    .tab-item {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      position: relative;
-      height: 48px;
-    }
-    .tab-item__label {
-      font-size: 18px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.18px;
-      color: var(--black);
-      white-space: nowrap;
-      line-height: 18px;
-    }
-    .tab-item__indicator {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: transparent;
-      transform: scaleY(0);
-      transform-origin: bottom;
-      transition: transform var(--duration-medium-2) var(--ease-decelerate-generic), background var(--duration-medium-2) var(--ease-standard);
-    }
-    .tab-item--active .tab-item__indicator {
-      background: var(--brand);
-      transform: scaleY(1);
-    }
-    .tab-item--active .tab-item__label {
-      color: var(--black);
-    }
-    .tab-item:not(.tab-item--active) .tab-item__label {
-      color: var(--black);
-    }
-    .tab-item:not(.tab-item--active):hover .tab-item__label {
-      color: var(--color-text-tertiary);
-    }
-    .tab-item:not(.tab-item--active):hover .tab-item__indicator {
-      background: var(--color-surface-10);
-      transform: scaleY(1);
+    /* Account-nav tabs: the shared tabs component (/components/css/tabs.css, skill eco-tabs, Primary / Large). Page-local layout only. */
+    .account-nav .tab-bar {
+      flex: 1; min-width: 0; justify-content: center;
+      border-bottom: 0;                          /* the account nav has its own divider */
+      --tab-line-active: var(--brand);           /* My Pages: brand coloured active line (Swedol / Tools set --brand) */
+      align-self: flex-start; margin-top: 11px;  /* the label (not label + line) is centred in the 48px row, level with the more button */
     }
 
     .account-nav__right {
@@ -728,6 +686,7 @@
       cursor: pointer;
       white-space: nowrap;
       text-transform: uppercase;
+      text-decoration: none;
       border-bottom: 1px solid var(--color-border-secondary);
     }
     .tab-more__menu-item:last-child { border-bottom: none; }
@@ -1001,50 +960,6 @@
       background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
     }
 
-    /* Tooltip */
-    .tooltip {
-      position: absolute;
-      z-index: 1000;
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    /* Bottom: tooltip below element, beak at top pointing up */
-    /* Top: tooltip above element, beak at bottom pointing down */
-    /* Fixed tooltip for table row buttons — rendered on body, decoupled from scroll container */
-    .row-tooltip {
-      position: fixed;
-      z-index: 9999;
-      visibility: hidden;   /* hidden but always in layout — so offsetWidth/Height are always valid */
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      white-space: nowrap;
-      pointer-events: none;
-      padding: 8px 12px;
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .row-tooltip__beak {
-      position: absolute;
-      width: 0;
-      height: 0;
-      /* All border properties set by JS per placement — top/left/right variants differ */
-    }
 
     /* Table */
     .users-table-wrap {
@@ -4136,40 +4051,16 @@
 
     <!-- Tabs + overflow menu -->
     <div class="tab-bar-wrap">
-      <div class="tab-bar">
-        <div class="tab-item">
-          <span class="tab-item__label">Översikt</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Mina Favoriter</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Adressbok</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item tab-item--active">
-          <span class="tab-item__label">Användare</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Ordervy</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Min Profil</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Fakturor</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-        <div class="tab-item">
-          <span class="tab-item__label">Attestera</span>
-          <div class="tab-item__indicator"></div>
-        </div>
-      </div>
+      <nav class="tab-bar tab-bar--primary" aria-label="Kontomeny">
+        <a class="tab" href="#"><span class="tab__label">Översikt</span></a>
+        <a class="tab" href="#"><span class="tab__label">Mina Favoriter</span></a>
+        <a class="tab" href="/mypages/addressbook.html"><span class="tab__label">Adressbok</span></a>
+        <a class="tab" href="/mypages/users.html" aria-current="page"><span class="tab__label">Användare</span></a>
+        <a class="tab" href="#"><span class="tab__label">Ordervy</span></a>
+        <a class="tab" href="#"><span class="tab__label">Min Profil</span></a>
+        <a class="tab" href="#"><span class="tab__label">Fakturor</span></a>
+        <a class="tab" href="#"><span class="tab__label">Attestera</span></a>
+      </nav>
       <div class="tab-more" id="tab-more">
         <button class="tab-more__btn" id="tab-more-btn" aria-label="Fler alternativ" aria-expanded="false">
           <span class="ms ms--24">more_vert</span>
@@ -4279,19 +4170,19 @@
       </div>
 
       <div class="action-btns">
-        <button class="action-btn" aria-label="Exportera tabell" data-tooltip="Exportera tabell" onclick="exportTable()">
+        <button class="action-btn" aria-label="Exportera tabell" data-tooltip="Exportera tabell" data-tooltip-position="bottom" onclick="exportTable()">
           <span class="ms">download</span>
         </button>
-        <button class="action-btn" aria-label="Inställningar för saldo" data-tooltip="Inställningar för saldo" onclick="openSaldoDrawer()">
+        <button class="action-btn" aria-label="Inställningar för saldo" data-tooltip="Inställningar för saldo" data-tooltip-position="bottom" onclick="openSaldoDrawer()">
           <span class="ms">savings</span>
         </button>
-        <button class="action-btn" aria-label="Kolumninställningar" data-tooltip="Kolumninställningar" onclick="openColDrawer()">
+        <button class="action-btn" aria-label="Kolumninställningar" data-tooltip="Kolumninställningar" data-tooltip-position="bottom" onclick="openColDrawer()">
           <span class="ms">view_column</span>
         </button>
-        <button class="action-btn" aria-label="Ladda upp användare" data-tooltip="Ladda upp användare" onclick="openUploadDrawer()">
+        <button class="action-btn" aria-label="Ladda upp användare" data-tooltip="Ladda upp användare" data-tooltip-position="bottom" onclick="openUploadDrawer()">
           <span class="ms">upload_file</span>
         </button>
-        <button class="action-btn" aria-label="Lägg till användare" data-tooltip="Lägg till användare" onclick="openDrawer()">
+        <button class="action-btn" aria-label="Lägg till användare" data-tooltip="Lägg till användare" data-tooltip-position="bottom" onclick="openDrawer()">
           <span class="ms">person_add</span>
         </button>
       </div>
@@ -5105,114 +4996,6 @@
       });
     })();
 
-    /* ── Row-action tooltip (position:fixed on body, decoupled from scroll container) ── */
-    (function() {
-      var MARGIN    = 8;    /* min clearance from viewport edge (used as fallback clamp) */
-      var BEAK_HALF = 6.35; /* half the visual width of the CSS border-triangle */
-
-      var rowTip  = document.createElement('div');
-      rowTip.className = 'row-tooltip';
-      var tipText = document.createElement('span');
-      var beak    = document.createElement('span');
-      beak.className = 'row-tooltip__beak';
-      rowTip.appendChild(tipText);
-      rowTip.appendChild(beak);
-      /* Start off-screen so it doesn't flash at (0,0) on first paint */
-      rowTip.style.left = '-9999px';
-      rowTip.style.top  = '-9999px';
-      document.body.appendChild(rowTip);
-
-      function show(btn) {
-        var label = btn.dataset.tooltip;
-        if (!label) return;
-
-        /* 1. Update text while still hidden — dimensions reflect new content */
-        tipText.textContent = label;
-
-        /* 2. Read dimensions — always valid because visibility:hidden keeps element in layout */
-        var tw = rowTip.offsetWidth;
-        var th = rowTip.offsetHeight;
-
-        /* 3. Button position in viewport */
-        var r          = btn.getBoundingClientRect();
-        var btnCenterX = r.left + r.width / 2;
-        var vw         = window.innerWidth;
-
-        /* 4. ECO Design System page margin determines the "safe zone" threshold.
-              lg (1024px+) = 40px, sm/md (640–1023px) = 32px, xs (<640px) = 16px */
-        var ecoMargin = vw >= 1024 ? 40 : vw >= 640 ? 32 : 16;
-
-        /* 5. Would a centred-top tooltip fit within the safe zone? */
-        var idealLeft = btnCenterX - tw / 2;
-        var fitsRight = idealLeft + tw <= vw - ecoMargin;
-        var fitsLeft  = idealLeft >= ecoMargin;
-
-        var left, top;
-
-        if (vw < 640) {
-          /* ── MOBILE (xs): always below button, beak points up ── */
-          beak.style.bottom       = '100%';
-          beak.style.top          = '';
-          beak.style.right        = '';
-          beak.style.borderBottom = '6px solid rgba(0,0,0,0.9)';
-          beak.style.borderTop    = '';
-          beak.style.borderLeft   = BEAK_HALF + 'px solid transparent';
-          beak.style.borderRight  = BEAK_HALF + 'px solid transparent';
-
-          top  = r.bottom + 8;
-          left = Math.max(MARGIN, Math.min(btnCenterX - tw / 2, vw - tw - MARGIN));
-
-        } else {
-          /* ── DESKTOP/TABLET: above button — Top / Right side top / Left side top ── */
-          beak.style.top          = '100%';
-          beak.style.bottom       = '';
-          beak.style.right        = '';
-          beak.style.borderTop    = '6px solid rgba(0,0,0,0.9)';
-          beak.style.borderBottom = '';
-          beak.style.borderLeft   = BEAK_HALF + 'px solid transparent';
-          beak.style.borderRight  = BEAK_HALF + 'px solid transparent';
-
-          top = r.top - th - 8;
-
-          if (fitsLeft && fitsRight) {
-            /* Top (default): centred above button */
-            left = idealLeft;
-          } else if (!fitsRight) {
-            /* Right side top: right-align tooltip with button right edge */
-            left = Math.max(MARGIN, r.right - tw);
-          } else {
-            /* Left side top: left-align tooltip with button left edge */
-            left = Math.min(r.left, vw - tw - MARGIN);
-          }
-        }
-
-        /* Beak: visual centre always tracks the button centre regardless of tooltip alignment */
-        var beakCenter        = btnCenterX - left;
-        var beakCenterClamped = Math.max(BEAK_HALF + 4, Math.min(beakCenter, tw - BEAK_HALF - 4));
-        beak.style.left = (beakCenterClamped - BEAK_HALF).toFixed(2) + 'px';
-
-        /* 6. Apply position then reveal */
-        rowTip.style.left       = Math.round(left) + 'px';
-        rowTip.style.top        = Math.round(top)  + 'px';
-        rowTip.style.visibility = 'visible';
-      }
-
-      function hide() {
-        rowTip.style.visibility = 'hidden';
-      }
-
-      document.addEventListener('mouseover', function(e) {
-        var btn = e.target.closest('[data-tooltip]');
-        if (btn) show(btn); else hide();
-      });
-
-      document.addEventListener('mouseout', function(e) {
-        var btn = e.target.closest('[data-tooltip]');
-        if (!btn) return;
-        if (!btn.contains(e.relatedTarget)) hide();
-      });
-    })();
-
     /* ── Keyboard vs mouse focus tracking ────────────────────── */
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Tab') document.body.classList.add('keyboard-nav');
@@ -5289,7 +5072,7 @@
       const moreMenu = document.getElementById('tab-more-menu');
       if (!tabBar || !tabMore || !moreMenu) return;
 
-      const allItems = Array.from(tabBar.querySelectorAll('.tab-item'));
+      const allItems = Array.from(tabBar.querySelectorAll('.tab'));
 
       function closeMenu() {
         moreMenu.hidden = true;
@@ -5309,7 +5092,7 @@
           const visible = allItems.filter(i => !hiddenSet.has(i));
           for (let i = visible.length - 1; i >= 0; i--) {
             const r = visible[i].getBoundingClientRect();
-            if (r.right > br.right) {
+            if (r.right > br.right - 4) {   /* 4px: the tab bar's padding for the focus ring */
               hiddenSet.add(visible[i]);
               visible[i].style.display = 'none';
               return true;
@@ -5329,10 +5112,11 @@
 
           const hiddenItems = allItems.filter(i => hiddenSet.has(i));
           moreMenu.innerHTML = hiddenItems.map(item => {
-            const label    = item.querySelector('.tab-item__label').textContent;
-            const isActive = item.classList.contains('tab-item--active');
+            const label    = item.querySelector('.tab__label').textContent;
+            const isActive = item.hasAttribute('aria-current');
             const check    = isActive ? `<span class="tab-more__menu-item__check">check_circle</span>` : '';
-            return `<div class="tab-more__menu-item">${label}${check}</div>`;
+            const href = item.getAttribute('href');
+            return `<a class="tab-more__menu-item" href="${href}"${href === '#' ? ' onclick="return false"' : ''}>${label}${check}</a>`;
           }).join('');
         }
       }
@@ -5394,7 +5178,7 @@
           const visible = allItems.filter(i => !hiddenSet.has(i));
           for (let i = visible.length - 1; i >= 0; i--) {
             const r = visible[i].getBoundingClientRect();
-            if (r.right > br.right) {
+            if (r.right > br.right - 4) {   /* 4px: the tab bar's padding for the focus ring */
               hiddenSet.add(visible[i]);
               visible[i].style.display = 'none';
               return true;
@@ -7346,5 +7130,6 @@
     </div>
   </div>
 
+<script src="/components/js/tooltip.js"></script>
 </body>
 </html>

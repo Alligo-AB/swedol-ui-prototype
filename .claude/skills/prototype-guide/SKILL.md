@@ -76,6 +76,7 @@ Read this before you decide a piece is "new". Every row is a finished component 
 | A text field, multi-line text, a dropdown | `eco-input`, `eco-textarea`, `eco-select`; an icon-name field: `eco-icon-picker` |
 | Yes/no, one-of-many, on/off, a value on a scale | `eco-checkbox`, `eco-radio`, `eco-switch`, `eco-range` |
 | Switch between 2–4 views of the same content | `eco-pill-segment-control` |
+| Tabs: sub-navigation or content sections (primary/secondary), e.g. My Pages account nav | `eco-tabs` |
 | A link (decide the type first) | `links-guide` → `eco-inline-link`, `eco-action-link`, `eco-tile-link` |
 | Where am I / go back up | `eco-breadcrumb` |
 | Load more items into a list | `eco-pagination` |

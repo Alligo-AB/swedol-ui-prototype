@@ -1,6 +1,6 @@
 ---
 name: eco-spacing
-description: Use when setting margin, padding, or gap — the fixed Spacing Scale (space-0…space-120) and the breakpoint-adaptive space-sm/space-md/space-lg tokens.
+description: Use when setting margin, padding, or gap — the fixed Spacing Scale (space-0…space-120) and the breakpoint-adaptive space-md/space-lg tokens.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -35,7 +35,7 @@ Spacing tokens create a predictable, harmonious spacing system. Tokens are appli
 
 ### Layout Vertical Whitespace (per breakpoint)
 
-Beyond the flat Spacing Scale above, there's a semantic, **breakpoint-adaptive** scale (T-shirt sizes: sm/md/lg) for vertical spacing between elements in a layout — e.g. `gap` in a flex-column section (like `.compare-intro`) or `padding-top` in front of a closing CTA row (`.section-cta`). Unlike `space-24`/`space-48` etc. (fixed pixel values, the same at every breakpoint), `space-sm`/`space-md`/`space-lg` HERE change pixel value depending on breakpoint:
+Beyond the flat Spacing Scale above, there's a semantic, **breakpoint-adaptive** scale (T-shirt sizes: md and lg; sm, xs and xl do not exist yet) for vertical spacing between elements in a layout — e.g. `gap` in a flex-column section (like `.compare-intro`) or `padding-top` in front of a closing CTA row (`.section-cta`). Unlike `space-24`/`space-48` etc. (fixed pixel values, the same at every breakpoint), `space-md`/`space-lg` HERE change pixel value depending on breakpoint:
 
 | Token | `breakpoint-xs` | `breakpoint-sm` | `breakpoint-md` | `breakpoint-lg` | `breakpoint-xl` |
 |---|---|---|---|---|---|
@@ -43,6 +43,10 @@ Beyond the flat Spacing Scale above, there's a semantic, **breakpoint-adaptive**
 | `space-md` | 24px | 32px | 40px | 48px | 48px |
 
 > Use `space-lg`/`space-md` (this table) for the air BETWEEN a section's own content blocks (e.g. heading → card grid → CTA buttons within the same section) — not `space-24`/`space-40` etc. (fixed Spacing Scale values above), which fit better for layout margins and gutters that should NOT vary as finely per breakpoint.
+
+**Shared file:** `<link rel="stylesheet" href="/components/css/spacing.css">` (already in `template.html` and `mypages/mypages-template.html`) defines `--dimension-spacing-space-md` and `--dimension-spacing-space-lg`; the value switches per breakpoint by itself. Use them everywhere, not only on Storyblok-built parts: `gap: var(--dimension-spacing-space-lg);`. Never write the per-breakpoint pixel values by hand. There is no `space-sm`, `space-xs` or `space-xl` token yet; the table above is complete.
+
+The example below shows what the variable does behind the scenes.
 
 ```css
 /* Example: gap in a flex-column section, space-lg */

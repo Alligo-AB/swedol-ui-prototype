@@ -91,7 +91,7 @@
         </tbody>
       </table>
     </div>
-    <p class="ds-desc ds-note">These two are not in <code>tokens.json</code>; the values come from the <code>eco-spacing</code> skill. Write them mobile first and raise the value at <code>sm</code>, <code>md</code> and <code>lg</code>.</p>
+    <p class="ds-desc ds-note">These two are not in <code>tokens.json</code>. Link <code>/components/css/spacing.css</code> and use <code>var(--dimension-spacing-space-md)</code> or <code>var(--dimension-spacing-space-lg)</code>: the value changes at each breakpoint by itself, so never write the pixel values by hand. They apply to every page, not only to parts built in Storyblok. No <code>space-xs</code>, <code>space-sm</code> or <code>space-xl</code> exists yet.</p>
   </div>
 </section>
 

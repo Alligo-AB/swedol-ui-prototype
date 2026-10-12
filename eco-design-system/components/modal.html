@@ -11,7 +11,7 @@
   <style>
     /* page-local: layout, the static preview (the real modal is fixed) and the Breakpoint preview */
     .modal-preview { padding: 24px; display: flex; justify-content: center; width: 100%; overflow: hidden; }
-    .modal-preview .modal { position: static; transform: none; max-width: 100%; max-height: none; animation: none; }
+    .modal-preview .modal { position: static; transform: none; max-width: 100%; max-height: none; animation: none; z-index: auto; }   /* a flex item honors z-index even when static: it put the preview over the sticky nav */
     .modal-preview .modal--medium, .modal-preview .modal--large { width: 100%; max-width: 705px; }
     body[data-bp="desktop"] .modal-preview .modal { padding: 24px; }
     body[data-bp="desktop"] .modal-preview .modal--small { width: 440px; }

@@ -1,5 +1,17 @@
 /* ECO component CSS: tooltip. Skill: eco-tooltip. Link it, do not copy it: <link rel="stylesheet" href="/components/css/tooltip.css">
-   Tokens only. Mobile-first (desktop from 769px). */
+   Tokens only. Mobile-first (desktop from 769px).
+   Class names say where the tooltip sits next to the element (Figma names the beak side instead, so Figma "Bottom" = tooltip--top). */
+.tooltip-wrap,
+.tooltip--global {
+  --tooltip-bg: rgba(0,0,0,0.9);                                        /* surface-100 at 90%: opacity on the fill only, not on the text */
+  --tooltip-beak-w: 12.696px;                                           /* beak base (Figma) */
+  --tooltip-beak-h: 6px;                                                /* beak height */
+  --tooltip-gap: var(--dimension-spacing-space-4);                      /* tip of the beak to the element */
+  --tooltip-inset: var(--dimension-spacing-space-16);                   /* beak offset from the edge on the start/end types */
+  --tooltip-beak-center: calc(var(--tooltip-inset) + var(--tooltip-beak-w) / 2);
+  --tooltip-offset: calc(var(--tooltip-beak-h) + var(--tooltip-gap));   /* tooltip block to the element */
+}
+
 .tooltip-wrap {
   position: relative;
   display: inline-flex;
@@ -7,8 +19,9 @@
 
 .tooltip {
   position: absolute;
-  z-index: 300;
-  background: rgba(0,0,0,0.9);
+  z-index: var(--tooltip-z, 300);   /* a page with a sticky header sets --tooltip-z below the header's z-index, so a tooltip never paints over the menu */
+  padding: var(--dimension-spacing-space-8) var(--dimension-spacing-space-16);   /* Small: 8px 16px (Figma 2026-10-10: was 8px 12px) */
+  background: var(--tooltip-bg);
   color: var(--color-text-primary-inverted);
   font-family: 'Breuer Condensed', Arial, sans-serif;
   font-size: 14px;        /* Small */
@@ -16,7 +29,13 @@
   text-transform: none;   /* never uppercase, also when the tooltip sits inside an uppercase button */
   line-height: 20px;
   letter-spacing: 0.36px;
-  white-space: nowrap;
+  /* width: one line when it fits, else wraps at the maximum. width: max-content also stops an absolutely positioned tooltip from
+     shrinking to the width of its trigger. 280px is the maximum already used by the pages' wrapping tooltips; never wider than
+     the viewport minus the 8px edge margin. */
+  width: max-content;
+  max-width: min(280px, calc(100vw - 2 * var(--dimension-spacing-space-8)));
+  white-space: normal;
+  text-align: left;
   pointer-events: none;
   opacity: 0;
   transition: opacity var(--duration-fast-2) var(--ease-standard); /* duration-fast-2, ease-standard */
@@ -24,42 +43,183 @@
   font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
 }
 
-/* Beak — shared base for all positions */
+/* Large */
+.tooltip--lg {
+  padding: var(--dimension-spacing-space-12) var(--dimension-spacing-space-16);   /* 12px 16px */
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.tooltip-wrap:is(:hover, [data-state="hover"]) .tooltip { opacity: 1; }
+
+/* Global tooltip: components/js/tooltip.js shows ONE shared tooltip (a popover, so it sits in the top layer: no clipping, no
+   stacking context can hide it) for any element with data-tooltip="Label". Optional data-tooltip-position="top|bottom"
+   (default top). It sits where .tooltip--top / .tooltip--bottom put it, with the same automatic alignment and flip. */
+.tooltip--global { opacity: 1; margin: 0; border: 0; overflow: visible; }
+
+
+/* Beak — shared base: a CSS triangle, 6px high. Each type sets the side and the border colour. */
 .tooltip::before {
   content: '';
   position: absolute;
   width: 0;
   height: 0;
-  border-left: 6.35px solid transparent;
-  border-right: 6.35px solid transparent;
+  border: 0 solid transparent;
 }
 
-.tooltip-wrap:is(:hover, [data-state="hover"]) .tooltip { opacity: 1; }
+/* Body — no beak, no placement (Figma "Body") */
+.tooltip--body { position: relative; }
+.tooltip--body::before { display: none; }
 
-/* Bottom — tooltip below, beak points up */
-.tooltip--bottom {
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 8px 12px;
-}
-.tooltip--bottom::before {
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-bottom: 6px solid rgba(0,0,0,0.9);
-}
+/* Top / Bottom: beak on the bottom / top edge of the tooltip */
+.tooltip--top,
+.tooltip--top-start,
+.tooltip--top-end    { bottom: calc(100% + var(--tooltip-offset)); }
+.tooltip--bottom,
+.tooltip--bottom-start,
+.tooltip--bottom-end { top: calc(100% + var(--tooltip-offset)); }
 
-/* Top — tooltip above, beak points down */
-.tooltip--top {
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 8px 12px;
-}
-.tooltip--top::before {
+.tooltip--top::before,
+.tooltip--top-start::before,
+.tooltip--top-end::before {
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-top: 6px solid rgba(0,0,0,0.9);
+  border-width: var(--tooltip-beak-h) calc(var(--tooltip-beak-w) / 2) 0;
+  border-top-color: var(--tooltip-bg);
+}
+.tooltip--bottom::before,
+.tooltip--bottom-start::before,
+.tooltip--bottom-end::before {
+  bottom: 100%;
+  border-width: 0 calc(var(--tooltip-beak-w) / 2) var(--tooltip-beak-h);
+  border-bottom-color: var(--tooltip-bg);
+}
+
+/* centred beak */
+.tooltip--top,
+.tooltip--bottom { left: 50%; transform: translateX(-50%); }
+.tooltip--top::before,
+.tooltip--bottom::before { left: 50%; transform: translateX(-50%); }
+
+/* beak 16px from the left edge (Figma "… Left") */
+.tooltip--top-start,
+.tooltip--bottom-start { left: 50%; transform: translateX(calc(-1 * var(--tooltip-beak-center))); }
+.tooltip--top-start::before,
+.tooltip--bottom-start::before { left: var(--tooltip-inset); }
+
+/* beak 16px from the right edge (Figma "… Right") */
+.tooltip--top-end,
+.tooltip--bottom-end { right: 50%; transform: translateX(var(--tooltip-beak-center)); }
+.tooltip--top-end::before,
+.tooltip--bottom-end::before { right: var(--tooltip-inset); }
+
+/* Left / Right: tooltip beside the element, beak on the right / left edge of the tooltip */
+.tooltip--left,
+.tooltip--left-start  { right: calc(100% + var(--tooltip-offset)); }
+.tooltip--right,
+.tooltip--right-start { left: calc(100% + var(--tooltip-offset)); }
+
+.tooltip--left::before,
+.tooltip--left-start::before {
+  left: 100%;
+  border-width: calc(var(--tooltip-beak-w) / 2) 0 calc(var(--tooltip-beak-w) / 2) var(--tooltip-beak-h);
+  border-left-color: var(--tooltip-bg);
+}
+.tooltip--right::before,
+.tooltip--right-start::before {
+  right: 100%;
+  border-width: calc(var(--tooltip-beak-w) / 2) var(--tooltip-beak-h) calc(var(--tooltip-beak-w) / 2) 0;
+  border-right-color: var(--tooltip-bg);
+}
+
+/* centred beak */
+.tooltip--left,
+.tooltip--right { top: 50%; transform: translateY(-50%); }
+.tooltip--left::before,
+.tooltip--right::before { top: 50%; transform: translateY(-50%); }
+
+/* beak 16px from the top edge (Figma "Left Top" / "Right Top") */
+.tooltip--left-start,
+.tooltip--right-start { top: 50%; transform: translateY(calc(-1 * var(--tooltip-beak-center))); }
+.tooltip--left-start::before,
+.tooltip--right-start::before { top: var(--tooltip-inset); }
+
+/* ── Automatic alignment (the default for .tooltip--top and .tooltip--bottom) ─────────────────────
+   A Top or Bottom tooltip is centered on its trigger and stays inside the viewport sideways: when it would bleed off a
+   side it slides along the edge (8px from it). Add .tooltip--manual to keep it fixed and centered. The beak always points
+   at the trigger's center: it is a fixed child of the tooltip, anchored to the trigger.
+   Above or below: components/js/tooltip.js adds .tooltip--flip when the tooltip opens with too little room on its side
+   (CSS alone cannot: a browser picks a flip from the layout-time scroll position, which is wrong on a page that scrolls).
+   Without the script the tooltip stays on its declared side. Uses CSS anchor positioning; where it is not supported the
+   tooltip keeps the manual position (centered) and nothing breaks. Start, end, left and right are always manual. */
+@supports (position-area: bottom) and (anchor-scope: --tooltip) {
+  .tooltip-wrap { anchor-name: --tooltip; anchor-scope: --tooltip; }
+  /* the global tooltip is anchored to whichever element tooltip.js marks with anchor-name: --tooltip-global */
+  .tooltip.tooltip--global:not(.tooltip--manual),
+  .tooltip.tooltip--global:not(.tooltip--manual)::before { position-anchor: --tooltip-global; }
+
+  .tooltip--top:not(.tooltip--manual),
+  .tooltip--bottom:not(.tooltip--manual) {
+    position: fixed;
+    position-anchor: --tooltip;
+    inset: auto;
+    transform: none;
+    margin-inline: var(--dimension-spacing-space-8);
+  }
+  .tooltip--bottom:not(.tooltip--manual) { position-area: bottom; margin-top: var(--tooltip-offset); }
+  .tooltip--top:not(.tooltip--manual)    { position-area: top;    margin-bottom: var(--tooltip-offset); }
+
+  /* the beak: a fixed child anchored to the trigger, 4px from it, centered on it */
+  .tooltip--top:not(.tooltip--manual)::before,
+  .tooltip--bottom:not(.tooltip--manual)::before {
+    position: fixed;
+    position-anchor: --tooltip;
+    inset: auto;
+    transform: none;
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+  }
+  .tooltip--bottom:not(.tooltip--manual)::before {
+    position-area: bottom;
+    margin-top: var(--tooltip-gap);
+    border-width: 0 calc(var(--tooltip-beak-w) / 2) var(--tooltip-beak-h);
+    border-bottom-color: var(--tooltip-bg);
+  }
+  .tooltip--top:not(.tooltip--manual)::before {
+    position-area: top;
+    margin-bottom: var(--tooltip-gap);
+    border-width: var(--tooltip-beak-h) calc(var(--tooltip-beak-w) / 2) 0;
+    border-top-color: var(--tooltip-bg);
+  }
+  /* aligned to the trigger's outer edge (set by tooltip.js when a centered tooltip would not fit the viewport): the same geometry
+     as the start / end types shown under Positioning on the docs page: the beak sits 16px from the tooltip's edge and on the
+     trigger's center, so the tooltip's edge lines up with the trigger's outer edge. position-area off, explicit insets */
+  .tooltip--align-start:not(.tooltip--manual),
+  .tooltip--align-end:not(.tooltip--manual) { position-area: none; }
+  .tooltip--align-start:not(.tooltip--manual) { left: anchor(center); right: auto; margin-inline: calc(-1 * var(--tooltip-beak-center)) var(--dimension-spacing-space-8); }
+  .tooltip--align-end:not(.tooltip--manual)   { right: anchor(center); left: auto; margin-inline: var(--dimension-spacing-space-8) calc(-1 * var(--tooltip-beak-center)); }
+  .tooltip--bottom:not(.tooltip--flip):is(.tooltip--align-start, .tooltip--align-end):not(.tooltip--manual),
+  .tooltip--top.tooltip--flip:is(.tooltip--align-start, .tooltip--align-end):not(.tooltip--manual)  { top: anchor(bottom); bottom: auto; margin-top: var(--tooltip-offset); margin-bottom: 0; }
+  .tooltip--top:not(.tooltip--flip):is(.tooltip--align-start, .tooltip--align-end):not(.tooltip--manual),
+  .tooltip--bottom.tooltip--flip:is(.tooltip--align-start, .tooltip--align-end):not(.tooltip--manual) { bottom: anchor(top); top: auto; margin-bottom: var(--tooltip-offset); margin-top: 0; }
+
+  /* flipped by tooltip.js: the other side, the beak flips with it */
+  .tooltip--bottom.tooltip--flip:not(.tooltip--manual) { position-area: top; margin-top: 0; margin-bottom: var(--tooltip-offset); }
+  .tooltip--top.tooltip--flip:not(.tooltip--manual)    { position-area: bottom; margin-bottom: 0; margin-top: var(--tooltip-offset); }
+  .tooltip--bottom.tooltip--flip:not(.tooltip--manual)::before {
+    position-area: top;
+    margin-top: 0;
+    margin-bottom: var(--tooltip-gap);
+    border-width: var(--tooltip-beak-h) calc(var(--tooltip-beak-w) / 2) 0;
+    border-bottom-color: transparent;
+    border-top-color: var(--tooltip-bg);
+  }
+  .tooltip--top.tooltip--flip:not(.tooltip--manual)::before {
+    position-area: bottom;
+    margin-bottom: 0;
+    margin-top: var(--tooltip-gap);
+    border-width: 0 calc(var(--tooltip-beak-w) / 2) var(--tooltip-beak-h);
+    border-top-color: transparent;
+    border-bottom-color: var(--tooltip-bg);
+  }
 }

@@ -23,7 +23,7 @@
        - En trigger som anropar openAccountNavDrawer() — finns i
          partials/header.html (.account-info) samt i sidans egen
          .account-nav__profile.
-       - Element med klassen ".account-nav .tab-bar .tab-item" för
+       - Element med klassen ".account-nav .tab-bar .tab" för
          att syncAccountNavDrawerActive() ska kunna markera rätt
          menyval som aktivt.
 ════════════════════════════════════════════════════════════ -->
@@ -291,10 +291,10 @@
     }
 
     function syncAccountNavDrawerActive() {
-      var tabs = document.querySelectorAll('.account-nav .tab-bar .tab-item');
+      var tabs = document.querySelectorAll('.account-nav .tab-bar .tab');
       var activeIndex = -1;
       tabs.forEach(function(tab, i) {
-        if (tab.classList.contains('tab-item--active')) activeIndex = i;
+        if (tab.hasAttribute('aria-current')) activeIndex = i;
       });
       document.querySelectorAll('#account-nav-drawer-panel .account-nav-drawer__menu-item').forEach(function(item) {
         var idx = parseInt(item.getAttribute('data-tab-index'), 10);
