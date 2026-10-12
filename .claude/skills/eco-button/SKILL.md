@@ -171,7 +171,8 @@ Focus: same ring as the button. Add `aria-label` always, and an `eco-tooltip` wh
 5. **Icon-only buttons** need `aria-label`; icons are `aria-hidden="true"`. A badge is `aria-hidden` too: put the count in the label.
 6. **Disabled:** use the `disabled` attribute, not a class alone.
 7. **Navigation** goes in `<a class="btn …">`, actions in `<button>`. System selected is `aria-pressed`, so a System group is not page navigation.
-8. Old prototype pages have their own `.btn-primary` / `.btn-blank` classes (e.g. in `template.html`). New work uses the classes above; do not copy the old ones.
+8. **Button beside a field matches its height.** A button in the same row as an input or select (e.g. newsletter, email sign-up) has the same height: Input Large = Button **Medium** (40px mobile / 48px desktop), Input Small = Button **Small** (32 / 40), Input XSmall = Button **XSmall** (32). Never `btn--lg` next to a Large input (it is 8px taller). Check with `offsetHeight` at ~375 and ~1024px+.
+9. Old prototype pages have their own `.btn-primary` / `.btn-blank` classes (e.g. in `template.html`). New work uses the classes above; do not copy the old ones.
 
 ### Flags
 

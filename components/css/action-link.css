@@ -11,9 +11,11 @@
   cursor: pointer;
   transition: color var(--duration-fast-3) var(--ease-standard);
 }
-.action-link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); text-decoration: underline; }
+.action-link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); }
+/* Underline sits on the text span only: text-decoration on the link itself would propagate to the (blockified) icon flex items and cannot be undone there */
+.action-link:is(:hover, [data-state="hover"]) .action-link__label { text-decoration: underline; }
 
-/* Icons never get the underline, only the link text */
+/* Icons never get the underline, only the link text (.action-link__label) */
 .action-link__icon {
   font-family: 'Material Symbols Outlined';
   font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none;

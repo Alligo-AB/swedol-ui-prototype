@@ -71,13 +71,13 @@
     a.className = 'action-link action-link--' + o.size + (o.bold ? ' action-link--bold' : '') + (o.inv ? ' action-link--inverted' : '');
     if (o.state === 'hover') a.dataset.state = 'hover';
     if (o.left) a.appendChild(icon('file_download'));
-    a.appendChild(document.createTextNode(o.label)); a.appendChild(icon('chevron_right'));
+    var lb = document.createElement('span'); lb.className = 'action-link__label'; lb.textContent = o.label; a.appendChild(lb); a.appendChild(icon('chevron_right'));
     a.addEventListener('click', function (e) { e.preventDefault(); });
     return a;
   }
   function markup(o) {
     return '<a href="#" class="action-link action-link--' + o.size + (o.bold ? ' action-link--bold' : '') + (o.inv ? ' action-link--inverted' : '') + '">\n' +
-      (o.left ? '  <span class="action-link__icon" aria-hidden="true">file_download</span>\n' : '') + '  ' + esc(o.label) + '\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>';
+      (o.left ? '  <span class="action-link__icon" aria-hidden="true">file_download</span>\n' : '') + '  <span class="action-link__label">' + esc(o.label) + '</span>\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>';
   }
   function renderPg() {
     var o = { size: st.size, bold: st.weight === 'bold', inv: st.variant === 'inverted', state: st.state, left: st.left === 'on', label: $('#pg-label').value };
@@ -116,9 +116,9 @@
     ['Inverted · enabled', 'Text and icons', 'text-action-primary-inverted'], ['Inverted · hover', 'Text and icons', 'text-action-primary-inverted-hover'],
     ['Keyboard focus', 'Ring', 'border-focus']]);
   DK.recipes($('#recipes'), [
-    ['Large, with a left icon', '<a href="/downloads" class="action-link action-link--large">\n  <span class="action-link__icon" aria-hidden="true">file_download</span>\n  Download document\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>'],
-    ['Medium', '<a href="/products" class="action-link action-link--medium">\n  View all products\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>'],
-    ['Small, bold, inverted (on a dark surface)', '<a href="/news" class="action-link action-link--small action-link--bold action-link--inverted">\n  Read more\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>']]);
+    ['Large, with a left icon', '<a href="/downloads" class="action-link action-link--large">\n  <span class="action-link__icon" aria-hidden="true">file_download</span>\n  <span class="action-link__label">Download document</span>\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>'],
+    ['Medium', '<a href="/products" class="action-link action-link--medium">\n  <span class="action-link__label">View all products</span>\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>'],
+    ['Small, bold, inverted (on a dark surface)', '<a href="/news" class="action-link action-link--small action-link--bold action-link--inverted">\n  <span class="action-link__label">Read more</span>\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>']]);
   DK.printCss($('#css-code'), 'action-link');
   renderPg();
 

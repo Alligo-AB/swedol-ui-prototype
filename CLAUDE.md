@@ -127,6 +127,7 @@ module.exports = {
 6. **Never hardcode design tokens** — Color, spacing (fixed scale values), shadow, and border shorthand must always be written as `var(--...)` against `tokens.json` (see the `eco-tokens` skill), never as a literal hex/px. Every component skill under `.claude/skills/eco-*/SKILL.md` already follows this — keep the pattern when editing a skill. Exceptions require a visible comment explaining why (see e.g. `eco-checkbox`'s flagged non-standard focus color).
 7. **Ask before inventing a value** — If a color, size, spacing, or pattern isn't covered by an existing token or skill under `.claude/skills/eco-*/SKILL.md`, ask before choosing a value yourself rather than guessing.
 8. **Button label in a span** — every `.btn` label sits in `<span class="btn__label">` (also for buttons built in JS: `innerHTML`, change the text on the span, never `button.textContent`). Without it the 8px label inset is missing and the text sits too tight against the edge. See `eco-button`.
+9. **Button beside a field = same height** — a button in the same row as an input/select uses the matching size: Input Large → `btn--md`, Small → `btn--sm`, XSmall → `btn--xs` (never `btn--lg` next to a Large input). Verify with `offsetHeight`. See `eco-button` rule 8 and `eco-input` rule 5.
 
 ---
 

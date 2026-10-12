@@ -180,6 +180,7 @@ Clear icon shows only while the input has a value (e.g. `.input-wrap:has(.form-i
 2. Always associate the `<label>` with the input (`for`/`id`); icon buttons need `aria-label`.
 3. Always implement every state; focus ring only on keyboard navigation (`body.keyboard-nav`).
 4. Breakpoint test: verify at ~375px, ~700px (`sm` = mobile sizing), ~1024px+ with `getComputedStyle` before delivery.
+5. **A button in the same row as the field matches its height:** Input Large = `btn--md`, Small = `btn--sm`, XSmall = `btn--xs` (see `eco-button` rule 8). Never `btn--lg` next to a Large input.
 
 ### Flags
 

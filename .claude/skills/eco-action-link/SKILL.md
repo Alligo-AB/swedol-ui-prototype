@@ -22,7 +22,7 @@ A clickable link with an optional left icon and a right arrow. Used for navigati
 - The link text is **not** underlined in the Enabled state — the underline shows **only** on hover.
 - Right icon: `chevron_right` (Large: 24px, Medium/Small: 20px)
 - Left icon (optional, e.g. `file_download`): Large: 24px, Medium/Small: 20px
-- **IMPORTANT:** Icons must **never** get an underline on hover — only the link text should be underlined. Set `text-decoration: none` explicitly on the icon element (`.action-link .ms`), otherwise the icon inherits `text-decoration: underline` from the hovered link.
+- **IMPORTANT:** Icons must **never** get an underline on hover — only the link text. **Always wrap the text in `<span class="action-link__label">`** and put the underline on that span (`.action-link:hover .action-link__label`), never on `.action-link` itself. The link is a flex container, so its icons are flex items; `text-decoration` set on the link propagates to them and `text-decoration: none` on the icon cannot undo it. Bare text without the span means the icon gets underlined.
 
 ---
 
@@ -104,10 +104,9 @@ A clickable link with an optional left icon and a right arrow. Used for navigati
 .action-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; gap: 4px; }
 
 /* Hover */
-.action-link:hover { color: var(--color-text-action-primary-hover); text-decoration: underline; }
+.action-link:hover { color: var(--color-text-action-primary-hover); }
+.action-link:hover .action-link__label { text-decoration: underline; }   /* label only, never on .action-link */
 
-/* Icons must never get an underline, only the link text */
-.action-link .ms { text-decoration: none; }
 
 /* Inverted (on a dark background) */
 .action-link--inverted       { color: var(--color-text-action-primary-inverted); }
@@ -129,19 +128,19 @@ A clickable link with an optional left icon and a right arrow. Used for navigati
 <!-- Large, Regular, with icon -->
 <a href="#" class="action-link action-link--large">
   <span class="material-symbols-outlined" style="font-size:24px">file_download</span>
-  Download document
+  <span class="action-link__label">Download document</span>
   <span class="material-symbols-outlined" style="font-size:24px">chevron_right</span>
 </a>
 
 <!-- Medium, Regular -->
 <a href="#" class="action-link action-link--medium">
-  View all products
+  <span class="action-link__label">View all products</span>
   <span class="material-symbols-outlined" style="font-size:20px">chevron_right</span>
 </a>
 
 <!-- Small, Bold, Inverted -->
 <a href="#" class="action-link action-link--small action-link--bold action-link--inverted">
-  Read more
+  <span class="action-link__label">Read more</span>
   <span class="material-symbols-outlined" style="font-size:20px">chevron_right</span>
 </a>
 ```
