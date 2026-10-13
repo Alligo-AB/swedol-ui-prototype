@@ -3,7 +3,7 @@ name: eco-button
 description: Use when building, changing, or reviewing buttons (`<button>`, CTAs) and icon buttons in swedol-ui-prototype — all variants (Primary/Secondary/Blank/Destructive/Accent/System and the three Inverted ones), sizes (Large/Medium/Small/XSmall), content (label, icons, icon only, badge) and states (hover/focus/disabled) per the ECO Design System. Not for links (use links-guide) or a switch between two views (use eco-pill-segment-control).
 ---
 
-> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec. Documentation page with live examples: `eco-design-system/components/button.html`.
+> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec. Documentation, three pages with live examples: `eco-design-system/components/button.html` (Examples & Guidelines), `button-specifications.html` and `button-code.html`.
 
 ## Button (ECO Design System)
 
@@ -17,17 +17,34 @@ A button triggers an action or goes to another page, with a single tap. A page c
 
 | Variant | Use it for |
 |---|---|
-| **Primary** | The main call to action in a page, banner or card ("Add to cart", "Next page" in onboarding). Use sparingly: **one primary action per major page section**. |
-| **Primary Inverted** | Dark surfaces. Also usable together with Primary on a light background as a button of medium importance. |
+| **Primary** | The main call to action in a page, banner or card ("Add to cart", "Next page" in onboarding). Use sparingly: **at most one primary action per screen, section or container**. |
+| **Primary Inverted** | Same role and priority as Primary. Choose it when its appearance gives clear visibility and enough contrast in the context (not limited to dark or colored surfaces). |
 | **Secondary** | A second action on the page. In a pair it is the "negative" action ("Cancel", "Back"). Also where a task needs more weight than a Blank button, e.g. "+ Add address" beside a Blank "icon + Update". |
-| **Secondary Inverted** | Dark surfaces. |
+| **Secondary Inverted** | Same role and priority as Secondary; chosen by context and contrast. |
 | **Blank** | Less prominent, sometimes independent actions ("Read more" beside a strong "Buy now"). Also sub-tasks where a primary button holds the final action ("icon + Update"). |
-| **Blank Inverted** | Dark surfaces. |
-| **Destructive** | Removes something or cannot be undone. Never the default choice in a dialog. |
-| **Accent** | A brand-colored call to action; use with care so it stays distinctive. |
-| **System / System selected** | Filtering and navigation, mainly in filter sections or wherever many buttons are grouped, to lower the cognitive load. A toggle: use `aria-pressed`. |
+| **Blank Inverted** | Same role and priority as Blank; chosen by context and contrast. |
+| **Destructive** | Deletes, removes or otherwise harms user data or content. Specific label ("Delete project", not "Confirm"); for irreversible or high-impact actions add a safeguard such as confirmation, and allow undo where feasible. Never the default choice in a dialog, never only to draw attention. |
+| **Accent** | Selective brand treatment for non-business-critical actions; not an extra level in the hierarchy, must not compete with Primary, never for "Add to cart". Tokens `accent-default` (fill) and `text-action-accent` (label). |
+| **System / System selected** | System: repeated utility actions in action-dense interfaces (card lists, toolbars, filter sections); not a substitute for Primary when an action is central. System selected: a persistent active state (applied filter, toggled option), not hover, focus or pressed, not for one-time actions. A toggle: use `aria-pressed`. |
 
-The inverted variants are for dark surfaces (`surface-100`) only; never put a normal variant on a dark surface or an inverted one on a light surface (except Primary Inverted as above).
+**Standard or Inverted** is chosen by the surrounding context, visibility and contrast, not by the background color alone. Inverted variants do not change the action's role or priority and are not limited to dark or colored surfaces. Always keep the contrast accessible and the keyboard focus visible, and use clear, action-specific labels. (Source: the descriptions on the Figma Button component set `2007:68126`, updated 2026-10-13; the docs page shows the inverted variants on `surface-100` only as a preview.)
+
+### When not to use each variant (Supernova + Figma guidance, 2026-10-13)
+
+| Variant | Avoid when |
+|---|---|
+| **Primary** | Several high-priority actions appear together: use Secondary or Blank for the hierarchy. |
+| **Secondary** | Among other visually heavy actions, where a lighter option (Blank or System) fits. Examples: "More info", "Edit", "Export" next to a Primary. |
+| **Blank** | The flow is critical (checkout, form steps), for the main call to action, or where users may fail to see it is clickable. Good for headers, filter panels, table tools, "Cancel" in a dialog; may repeat in one view. |
+| **System** | High-priority (Primary), business-critical but secondary (Secondary), destructive (Destructive), or where it must stand out in a busy context (modal, steps, checkout). Use for lists with many actions, filters, tables, low business-priority actions ("Show details", expand, open tools/settings). |
+| **System Selected** | On/off settings (use `eco-switch`), actions needing confirmation (Primary/Destructive), actions without immediate effect (checkbox + Apply). Use for filter chips and sorting mode: an active mode with an immediate effect. |
+| **Accent** | Business-critical actions ("Add to cart"), or where it competes with Primary. |
+
+**Combining variants:** (the docs show two Do figures: a Secondary pair above a System pair with icons, and the E-Com Toast card with Blank + Primary as shipped, see `eco-toast-ecom`; where Supernova and the design system differ, the design system wins) buttons next to each other are 8px apart (`space-8`). Pair a high-emphasis button with a lower-emphasis one, usually Primary + Secondary (Secondary is the go-to partner). Many actions (page headers, data lists, dashboards): group low-emphasis buttons of the **same** variant, typically System. Dialogs and panels: Primary for the confirmation, Secondary for supporting actions, Blank for lesser ones such as Cancel or Back. Placement (Primary to the right or above), stacking and truncation are layout rules that go to the Foundations Layout page (not written yet; Supernova says Primary right or above).
+
+**Content:** every variant can have a leading icon, a trailing icon, both, or icon only. Leading and trailing icons together are uncommon. Icon only is for constrained space, always with an `aria-label` and a tooltip after a 300ms hover delay (design guidance; `tooltip.js` has no delay yet). Sizes behave the same at every breakpoint for all variants.
+
+**Writing labels:** start with a verb (Save, Send, Add user); 1–3 words ("View details", not "Click here to view more information"); be specific ("Request booking", not "Submit" or "Confirm"); destructive: Delete, Remove, Discard, not Clear, Reset, Clean ("Delete user", not "Remove"), with supporting signals (color, icon, confirmation); one verb per recurring action (Edit or Modify, not both). Sentence case in the HTML.
 
 Not for: a standalone link (`eco-action-link`), a link in a sentence (`eco-inline-link`), a graphical tile (`eco-tile-link`), a switch between two views (`eco-pill-segment-control`), an immediate on/off setting (`eco-switch`).
 
@@ -146,7 +163,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/button.css">
 ```
 
-`components/css/button.css` is the single source for this component. The docs page `eco-design-system/components/button.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/button.css` is the single source for this component. The docs pages `eco-design-system/components/button*.html` link the same file, and `button-code.html` prints it in its CSS section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 Every size class sets **every** `--btn-*` property in both the mobile block and the 769px block, so the media block can replace them one by one. Per-variant rules (hover layer, System hover frame, disabled variants) are in the page file.
 
@@ -167,12 +184,13 @@ Focus: same ring as the button. Add `aria-label` always, and an `eco-tooltip` wh
 1. **Never hardcode** a color, spacing or shadow: use `var(--…)` from `tokens.json` (rule 6 in `CLAUDE.md`). The only literal pixel values are the ones with no spacing token (6px padding/inset) and are commented.
 2. **Breakpoint:** the size switches at `769px` (`md`), never `sm`. `sm` (640–768px) looks like mobile. Check with `getComputedStyle` at ~375, ~700 and ~1024px+.
 3. **Focus ring:** the `body.keyboard-nav` pattern with `outline`, never `:focus-visible` and never `::after` with `inset` (the gap would differ with a frame).
-4. **One Primary per major section.** Inverted variants on dark surfaces only. Destructive is never the default.
+4. **At most one Primary per screen, section or container.** Choose standard or inverted by context and contrast, not background color alone. Destructive is never the default, needs a specific label ("Delete project", not "Confirm") and, when irreversible or high-impact, a safeguard such as confirmation and undo where feasible. Accent is a brand treatment, never for business-critical actions such as "Add to cart".
 5. **Icon-only buttons** need `aria-label`; icons are `aria-hidden="true"`. A badge is `aria-hidden` too: put the count in the label.
-6. **Disabled:** use the `disabled` attribute, not a class alone.
+6. **Disabled:** use the `disabled` attribute, not a class alone. A disabled button is not focusable (Tab skips it) and has no hover, focus or click; screen readers may still announce it as unavailable; never attach a tooltip to it (Figma state descriptions).
 7. **Navigation** goes in `<a class="btn …">`, actions in `<button>`. System selected is `aria-pressed`, so a System group is not page navigation.
 8. **Button beside a field matches its height.** A button in the same row as an input or select (e.g. newsletter, email sign-up) has the same height: Input Large = Button **Medium** (40px mobile / 48px desktop), Input Small = Button **Small** (32 / 40), Input XSmall = Button **XSmall** (32). Never `btn--lg` next to a Large input (it is 8px taller). Check with `offsetHeight` at ~375 and ~1024px+.
-9. Old prototype pages have their own `.btn-primary` / `.btn-blank` classes (e.g. in `template.html`). New work uses the classes above; do not copy the old ones.
+9. **Reduced motion:** `button.css` and `button-group.css` turn the 100ms dissolve off under `prefers-reduced-motion: reduce`. Keep that block when editing.
+10. Old prototype pages have their own `.btn-primary` / `.btn-blank` classes (e.g. in `template.html`). New work uses the classes above; do not copy the old ones.
 
 ### Flags
 
@@ -188,7 +206,7 @@ Focus: same ring as the button. Add `aria-label` always, and an `eco-tooltip` wh
 
 ## Button group (toggle group)
 
-Joined System buttons for choosing between 2–4 short, related options on one row (playground option groups, toolbars). Not the pill: that is `eco-pill-segment-control`. Documentation page: `eco-design-system/components/button-group.html`. Shared file: **`components/css/button-group.css`** (`<link rel="stylesheet" href="/components/css/button-group.css">`).
+Joined System buttons for choosing between 2–4 short, related options on one row (playground option groups, toolbars). Not the pill: that is `eco-pill-segment-control`. Documentation, three pages: `eco-design-system/components/button-group.html`, `button-group-specifications.html` and `button-group-code.html`. Shared file: **`components/css/button-group.css`** (`<link rel="stylesheet" href="/components/css/button-group.css">`).
 
 ```html
 <div class="btn-group" role="group" aria-label="Size">

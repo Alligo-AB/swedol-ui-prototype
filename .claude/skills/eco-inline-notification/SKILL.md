@@ -14,6 +14,7 @@ description: Use when building an inline notification that should stay in page c
 ## Notification – System Inline (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-35659
+**Documentation (three pages, converted 2026-10-13):** `eco-design-system/components/inline.html` (Examples & Guidelines), `inline-specifications.html`, `inline-code.html`; hub: `notifications.html`. Generator: `eco-design-system/gen/gen_inline.py` (starting point only: the pages are the real files).
 
 ### Used when
 - Feedback or status information belongs directly to a specific section, form, or content block on the page
@@ -49,7 +50,7 @@ description: Use when building an inline notification that should stay in page c
 | **Warning** | Alerts the user about sub-optimal inputs (e.g. weak password, non-standard shipping details). | Dismissible by the user if a quiet "Close" action is provided. |
 | **Error** | Failed form validations, payment authorization issues, or critical missing fields. | Requires action directly related to rectifying the error to proceed. |
 
-All four statuses support **Strong / Weak** emphasis (no `Weaker` tier for Inline — that's a Banner-only concept).
+All four statuses support **Strong / Weak** emphasis (no `Weaker` tier for Inline — that's a Banner-only concept). **Which one: Weak is the default**; Strong when the problem blocks a central flow in that area (recommendation, not covered by the design guidance). See `notifications-guide` → "Choosing the emphasis".
 
 ---
 

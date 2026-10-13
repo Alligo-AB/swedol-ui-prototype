@@ -59,7 +59,7 @@
 
   /* System toast. actions: buttons { primary:{label,onClick}, secondary:{…} } OR inline links { links:[{label,onClick}, …] } makes it Actionable. */
   function showToast(o) {
-    var status = o.status || 'info', t = el('div', 'toast toast--' + status + ' toast--' + (o.emphasis || 'strong'));
+    var status = o.status || 'info', t = el('div', 'toast toast--' + status + ' toast--' + (o.emphasis || 'weak'));
     var inner = el('div', 'toast__inner'), row = el('div', 'toast__row'), body = el('div', 'toast__body');
     row.appendChild(o.icon && status === 'info' ? icon(o.icon, 'toast__icon icon-outline') : icon(ICON[status], 'toast__icon'));
     if (o.title) body.appendChild(el('p', 'toast__title', o.title));
@@ -134,7 +134,11 @@
     function close(reason) {
       if (closed) return; closed = true;
       document.removeEventListener('keydown', key);
-      ov.remove(); m.remove(); document.body.classList.remove('has-modal');
+      document.body.classList.remove('has-modal');
+      /* fade out first, then remove: the exit length is the duration token in the CSS (never remove() without animating out) */
+      ov.classList.add('is-leaving'); m.classList.add('is-leaving');
+      var ms = reduce() ? 0 : parseFloat(getComputedStyle(m).animationDuration) * 1000 || 0;
+      if (ms) setTimeout(function () { ov.remove(); m.remove(); }, ms + 20); else { ov.remove(); m.remove(); }
       if (opener && opener.focus) opener.focus();
       if (o.onClose) o.onClose(reason);
     }
@@ -197,7 +201,7 @@
   /* o: { status, emphasis, title, text, primary, secondary, link } (button/link labels as strings) */
   function toast(o) {
     var s = o.status || 'info', act = o.primary || o.secondary || links(o).length, h = '';
-    h += '<div class="toast toast--' + s + ' toast--' + (o.emphasis || 'strong') + '">\n  <div class="toast__inner">\n    <div class="toast__row">\n      ' + sic(o, s, 'toast__icon') + '\n      <div class="toast__body">\n';
+    h += '<div class="toast toast--' + s + ' toast--' + (o.emphasis || 'weak') + '">\n  <div class="toast__inner">\n    <div class="toast__row">\n      ' + sic(o, s, 'toast__icon') + '\n      <div class="toast__body">\n';
     if (o.title) h += '        <p class="toast__title">' + e(o.title) + '</p>\n';
     h += '        <p class="toast__text">' + e(o.text) + '</p>\n      </div>\n      ' + X() + '\n    </div>\n';
     if (act) {

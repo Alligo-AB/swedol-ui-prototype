@@ -6,14 +6,21 @@
   <title>Button – ECO Design System</title>
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
   <link rel="stylesheet" href="../docs.css">
-  <!-- The component itself. Section "Code" prints this block live; the :is(:hover, [data-state]) pairs
-       exist only so this page can force a state, and are stripped from the printed code.
-       Size, padding and type come from custom properties (--btn-*), set per size class and switched at 769px. -->
+  <link rel="stylesheet" href="../docnav.css">
+
+  <link rel="stylesheet" href="../notifications.css?v=16">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
   <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <script src="../../components/js/tabs.js"></script>
   <style>
-    /* page-local layout only (no component or token values) */
+    /* page-local: layout and state forcing for the demo only; no component or token values */
     .bt-row { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
     .bt-vrow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 12px 0; }
     .bt-vrow + .bt-vrow { border-top: 1px solid var(--color-border-primary); }
@@ -25,283 +32,67 @@
     .ds-matrix td.bt-dark, .ds-matrix th.bt-dark { color: var(--color-text-primary-inverted); border-color: var(--color-surface-60); }
     .ds-matrix td { text-align: center; }
     .ds-matrix td > .btn, .ds-matrix td > .icon-btn { vertical-align: middle; }
-    .bt-anat { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
-    .bt-anat__fig { background: var(--color-surface-05); border: 1px dashed var(--color-border-secondary); padding: 40px; max-width: 100%; overflow-x: auto; }
-    .bt-anat__fig .btn { zoom: 2; }
-    .bt-anat__fig .btn__label, .bt-anat__fig .btn__icon { outline: 1px dashed var(--color-border-focus); outline-offset: 0; }
-    .bt-anat__fig .btn__label { background: var(--color-surface-opacity-black-05); }
-    .bt-pair { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-    .bt-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; margin-top: 12px; color: var(--color-text-tertiary); }
+    .bt-pair { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8); align-items: center; }
+    .bt-fig { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
     .bt-icons td, .bt-icons th { text-align: center; }
     .bt-icons td:first-child, .bt-icons th:first-child { text-align: left; }
     .bt-icons td { min-width: 72px; }
+    .bt-col { display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16); width: 100%; }
+    .bt-col .divider { width: 100%; margin: 0; }
+    .bt-toast { width: 100%; }
+    .bt-toast .ecom-toast--cart { position: static; width: 100%; }   /* demo: the real e-com toast card, in the flow and as wide as the figure */
+    .ds-callout__art { padding-right: 56px; }
   </style>
-  <link rel="stylesheet" href="/components/css/input.css">
-  <link rel="stylesheet" href="/components/css/select.css">
-  <link rel="stylesheet" href="/components/css/menu.css">
-  <link rel="stylesheet" href="/components/css/button-group.css">
 </head>
 <body data-ds="component">
+<script src="../docnav.js"></script>
 <div class="ds-page">
   <nav class="breadcrumb" aria-label="Breadcrumbs">
-    <div class="breadcrumb__bar">
-      <a href="../../index.html" class="breadcrumb-item">Home</a>
-      <span class="breadcrumb-sep">/</span>
-      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
-      <span class="breadcrumb-sep">/</span>
-      <a href="../overview.html#components" class="breadcrumb-item">Components</a>
-      <span class="breadcrumb-sep">/</span>
-      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Button</span>
-    </div>
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Button</span></div>
   </nav>
 </div>
 
-<!-- ── Intro ─────────────────────────────────────────────────── -->
 <section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
-    <span class="ds-eyebrow">Components · Actions</span>
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Actions</span></div>
     <h1 class="ds-title">Button</h1>
-    <p class="ds-lead">A button <strong>triggers an action</strong> or <strong>takes the user to another page</strong>. It lets the user make a choice with a single tap. Use a mix of styles on one page to point at the main action and still offer the alternatives.</p>
-    <p class="ds-lead">Every example on this page is the real component. Click, hover and press Tab to try it. Specification: <code>.claude/skills/eco-button/SKILL.md</code>.</p>
-  </div>
+    <p class="ds-lead">A button <strong>triggers an action</strong> or <strong>takes the user to another page</strong>. It lets the user make a choice with a single tap. Use a mix of styles on one page to point at the main action and still offer the alternatives.</p><p class="ds-lead">Every example on this page is the real component, not a picture. Click, hover and press Tab to try it. Specification: <code>.claude/skills/eco-button/SKILL.md</code>. Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=6098-342318" target="_blank" rel="noopener">Button</a>, <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23990-132193" target="_blank" rel="noopener">Icon buttons</a>, <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23998-178299" target="_blank" rel="noopener">Button dot &amp; badges</a>.</p></div>
 </section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Button"><a class="tab" aria-current="page" href="button.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="button-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="button-code.html"><span class="tab__label">Code</span></a></nav></div>
 
-<nav class="ds-subnav" aria-label="On this page">
-  <ul class="ds-toc">
-    <li><a href="#playground">Playground</a></li>
-    <li><a href="#variants">Variants</a></li>
-    <li><a href="#states">States</a></li>
-    <li><a href="#icon-buttons">Icon buttons</a></li>
-    <li><a href="#specs">Anatomy &amp; specs</a></li>
-    <li><a href="#code">Code</a></li>
-    <li><a href="#usage">Usage</a></li>
-  </ul>
-</nav>
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="playground"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Playground</h2><p class="ds-desc">Choose a variant, size, content and state and the button and its code update. The inverted variants are shown on a dark surface here so they are easy to see; choose them by context, visibility and contrast, not by background color alone. The button in the stage is live: click it, or press Tab to see the focus ring.</p><div class="ds-playground"><div class="ds-stage ds-stage--center" id="pg-stage"><div id="pg-host"></div></div><div class="ds-controls"><div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-variants" id="pg-l-var">Variant</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="variant" id="pg-variants"></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bp">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="pg-l-bp" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-size">Size</span><div class="btn-group" role="group" aria-labelledby="pg-l-size" data-pg="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="md" aria-pressed="false">Medium</button><button type="button" data-v="sm" aria-pressed="false">Small</button><button type="button" data-v="xs" aria-pressed="false">XSmall</button></div></div><div class="ds-field form-field"><label class="form-label form-label--sm" for="sel-pg-l-con" id="pg-l-con">Content</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="content" id="sel-pg-l-con"><option value="label">Label</option><option value="lead">Icon + label</option><option value="trail">Label + icon</option><option value="both">Icon + label + icon</option><option value="icon">Icon only</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bd">Badge</span><div class="btn-group" role="group" aria-labelledby="pg-l-bd" data-pg="badge"><button type="button" data-v="none" aria-pressed="true">None</button><button type="button" data-v="number" aria-pressed="false">Number</button><button type="button" data-v="dot" aria-pressed="false">Dot</button></div></div><div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-count">Badge number (over 99 shows 99+)</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-count" value="1" placeholder="Badge number" inputmode="numeric" maxlength="5" /></div></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-st">State</span><div class="btn-group" role="group" aria-labelledby="pg-l-st" data-pg="state"><button type="button" data-v="enabled" aria-pressed="true">Enabled</button><button type="button" data-v="hover" aria-pressed="false">Hover</button><button type="button" data-v="focus" aria-pressed="false">Focus</button><button type="button" data-v="disabled" aria-pressed="false">Disabled</button></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-sel">Selected (System only)</span><div class="btn-group" role="group" aria-labelledby="pg-l-sel" data-pg="pressed"><button type="button" data-v="off" aria-pressed="true">Off</button><button type="button" data-v="on" aria-pressed="false">On</button></div></div><div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-label">Label (not for icon only)</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-label" value="Button label" placeholder="Label" /></div></div></div><p class="ds-swatch__meta" id="pg-status" aria-live="polite"></p></div></div><h3 class="ds-h3">Markup for this selection</h3><div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Overview</h2><p class="ds-desc">A button <strong>triggers an action</strong> or <strong>takes the user to another page</strong>. It lets the user make a choice with a single tap. Use a mix of styles on one page to point at the main action and still offer the alternatives.</p><p class="ds-desc">Button has nine variants (Primary, Secondary, Blank, Destructive, Accent, System and the three Inverted ones), four sizes (Large, Medium, Small, XSmall), a label, one or two icons or an icon only, an optional badge, and four states. The icon button (toggle icons and Close) is a single icon that is also a control.</p><p class="ds-desc">Choose a style by the role and importance of the action. The guidance for each style applies to all its sizes and states. Use clear, action-specific labels, keep the contrast accessible and the keyboard focus visible.</p><p class="ds-desc">This documentation has three pages. <strong>Examples &amp; Guidelines</strong> (this page) shows when and how to use a button. <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html">Specifications</a> holds the values: tokens, sizes, measurements, states and requirements. <a class="inline-link inline-link--large inline-link--secondary" href="button-code.html">Code</a> shows how to add one to a page.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3><p class="ds-desc">Use a button when the user starts something with a single tap. Use it to:</p><ul class="ds-bullets"><li>Start an action, such as “Add to cart”, “Save” or “Delete”</li><li>Move on to the next step, or to another page, such as “Next” or “Go to checkout” (a link that looks like a button: <code>&lt;a class="btn …"&gt;</code>)</li><li>Filter or switch in a group of many buttons (System, with <code>aria-pressed</code>)</li></ul><h3 class="ds-h3 ds-group">When not to use</h3><h3 class="ds-h3">More than one Primary button</h3><p class="ds-desc">A page can show several buttons, but one action must stand out. Use <strong>at most one Primary button per screen, section or container</strong> and Secondary or Blank for the others. Too many Primary buttons cause confusion.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="bt-fig" id="fig-p-do"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do use one Primary button and a quieter Secondary.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div class="bt-fig" id="fig-p-dont"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not show several Primary buttons next to each other.</figcaption></figure></div><h3 class="ds-h3">The wrong variant for the context</h3><p class="ds-desc">Choose standard or Inverted by the surrounding context, visibility and contrast, not by the background color alone. An inverted variant keeps the role and priority of its standard variant, and it is not limited to dark or colored surfaces.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage ds-stage--dark"><div class="bt-fig" id="fig-d-do"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do choose the variant that has clear contrast on the surface.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage ds-stage--dark"><div class="bt-fig" id="fig-d-dont"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not use a variant that lacks contrast on the surface.</figcaption></figure></div><h3 class="ds-h3">A destructive action</h3><p class="ds-desc">Use Destructive for an action that deletes, removes or otherwise causes a potentially harmful change to user data or content. Name the consequence in the label. For an irreversible or high-impact action, add a safeguard such as a confirmation, and allow undo where feasible. Never use Destructive only to draw attention.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="bt-fig" id="fig-x-do"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do name the consequence in the label.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div class="bt-fig" id="fig-x-dont"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not use a generic label such as “Confirm”.</figcaption></figure></div><h3 class="ds-h3">A business-critical action</h3><p class="ds-desc">Accent is a brand treatment, not a level in the action hierarchy. Use it selectively for brand personality or a non-business-critical action, and never let it compete with the Primary call to action.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="bt-fig" id="fig-a-do"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do use Primary for “Add to cart”.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div class="bt-fig" id="fig-a-dont"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not use Accent for “Add to cart”.</figcaption></figure></div><h3 class="ds-h3 ds-group">Writing button labels</h3><p class="ds-desc">A label says what the button does. Write it in sentence case in the HTML: the CSS makes it uppercase.</p><ul class="ds-bullets"><li><strong>Start with a verb.</strong> Use a clear, specific action verb that describes exactly what the button does: Save, Send, Add user.</li><li><strong>Keep it short.</strong> Aim for one to three words, quick to scan: “View details”, not “Click here to view more information”.</li><li><strong>Be specific.</strong> Avoid vague labels such as “Submit” or “Confirm” and make the outcome explicit: “Request booking”.</li><li><strong>Name destructive actions clearly.</strong> Use a strong, unambiguous verb: Delete, Remove or Discard. Avoid Clear, Reset and Clean. “Delete user” is clear; “Remove” alone is too vague. Add supporting signals such as color, an icon or a confirmation where needed.</li><li><strong>Use the same verb everywhere.</strong> Choose one verb for a recurring action and keep it, for example Edit or Modify, not both.</li></ul><h3 class="ds-h3">A long label</h3><p class="ds-desc">A long label is slow to scan and makes the button wide. Start with a verb and keep it short.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="bt-fig" id="fig-l-do"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do start with a verb and keep it short.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div class="bt-fig" id="fig-l-dont"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not fill the button with a sentence.</figcaption></figure></div><h3 class="ds-h3">A vague label</h3><p class="ds-desc">A label such as “Submit” does not say what happens next. Name the outcome.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="bt-fig" id="fig-v-do"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do name the outcome.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div class="bt-fig" id="fig-v-dont"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not use a vague label such as “Submit”.</figcaption></figure></div><h3 class="ds-h3 ds-group">Quick reference</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">The user…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">starts an action or moves to the next step</th><td>Button</td></tr><tr><th scope="row">follows a standalone link, such as “View all products”</th><td><a class="inline-link inline-link--small" href="action-link.html">Action link</a></td></tr><tr><th scope="row">follows a link inside a sentence</th><td><a class="inline-link inline-link--small" href="inline-link.html">Inline link</a></td></tr><tr><th scope="row">chooses a brand or category from a graphic tile</th><td><a class="inline-link inline-link--small" href="tile-link.html">Tile link</a></td></tr><tr><th scope="row">picks one of 2–4 short options in a toolbar</th><td><a class="inline-link inline-link--small" href="button-group.html">Button group</a></td></tr><tr><th scope="row">switches between two related views</th><td><a class="inline-link inline-link--small" href="segment-control.html">Pill segment control</a></td></tr><tr><th scope="row">turns a setting on or off at once</th><td><a class="inline-link inline-link--small" href="switch.html">Switch</a></td></tr></tbody></table></div><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Use at most one Primary button per screen, section or container.</li><li>Use Secondary for “Cancel” and “Back”, and Blank for the quietest actions.</li><li>Write short labels that start with a verb.</li><li>Choose standard or inverted variants by context, visibility and contrast.</li><li>Name the consequence on a Destructive button.</li><li>Give every icon-only button an <code>aria-label</code>.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Show several Primary buttons next to each other.</li><li>Use a button for navigation to another site section when a link fits. Use a link.</li><li>Use Destructive as the default choice in a dialog.</li><li>Use a variant that lacks clear contrast on its surface.</li><li>Use Accent for a business-critical action such as “Add to cart”.</li><li>Hardcode colors or sizes. Use the tokens and the size classes.</li></ul></div></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="anatomy"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Anatomy</h2><h3 class="ds-h3 ds-group">Button</h3><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout" id="bt-anat" role="img" aria-label="Anatomy of a button: 1 container, 2 icon, 3 label, 4 badge"><div class="ds-callout__art"><div id="a-host"></div></div></div></figure></div><ol class="ds-bullets ds-bullets--num"><li><strong>Container.</strong> A box of a fixed height with the content centred. Large is 56px high on desktop and 48px on mobile. The 1px frame of Secondary and System is drawn inside the box.</li><li><strong>Icon.</strong> Optional, before the label, after it, or on both sides. Material Symbols, 24px (20px in XSmall), with no gap to the label.</li><li><strong>Label.</strong> Breuer Condensed, uppercase, 600. It has its own 8px inset (4px in XSmall), so the width is the label plus both insets.</li><li><strong>Badge.</strong> Optional number in the top right corner, a count that shows “99+” over 99. It shows that something needs attention and is hidden from screen readers.</li></ol><p class="ds-desc">An icon-only button is a square the same height as the text button.</p><h3 class="ds-h3 ds-group">Icon-only button with a dot</h3><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout" id="bt-anat2" role="img" aria-label="Anatomy of an icon-only button with a dot: 1 container, 2 icon, 3 dot"><div class="ds-callout__art"><div id="a-host2"></div></div></div></figure></div><ol class="ds-bullets ds-bullets--num"><li><strong>Container.</strong> A square, as wide as it is high: 56px on desktop and 48px on mobile for Large. There is no label and no padding, so it needs an <code>aria-label</code>.</li><li><strong>Icon.</strong> The only content, centred. Material Symbols, 24px (20px in XSmall), <code>aria-hidden="true"</code>.</li><li><strong>Dot.</strong> A 6px circle in <code>surface-danger-default</code> in the top right corner. It shows that something is new, with no count, and is hidden from screen readers: put “new” in the <code>aria-label</code>. Its offset from the corner follows the size and breakpoint (12px for Large on desktop).</li></ol></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="variants"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Variants</h2><p class="ds-desc">Nine variants in four sizes. The Breakpoint toggle previews what Figma calls Desktop (769px and up) and Mobile (below 769px). The component switches by itself at 769px, so you never set it yourself.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="vb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="vb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><h3 class="ds-h3 ds-group">Hierarchy</h3><p class="ds-desc">A page can show more than one button. Combine styles so one action stands out and the others are quieter. Large, Medium, Small and XSmall are shown on each row.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div id="v-light"></div></div></figure></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-stage--dark"><div id="v-dark"></div></div></figure></div><p class="ds-desc ds-note">The inverted variants (Primary, Secondary and Blank) keep the role and priority of the standard ones. They are shown on a dark surface here. Choose between standard and inverted by context, visibility and contrast, not by background color alone.</p><h3 class="ds-h3 ds-group">When to use each variant</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Variant</th><th scope="col">Use when</th><th scope="col">Avoid when</th></tr></thead><tbody><tr><th scope="row">Primary</th><td>The most important, highest-priority action, typically the user’s main goal: completing a task or moving forward in a process, such as “Add to cart”, “Proceed to checkout”, “Continue” or “Submit”. Use <strong>at most one Primary button per screen, section or container</strong> (for example a banner or a card), so buttons do not compete and the way forward is clear.</td><td>Several high-priority actions appear together. Use Secondary or Blank to set the hierarchy.</td></tr><tr><th scope="row">Secondary</th><td>Supporting actions that matter but are not the main task, such as “More info”, “Edit” or “Export”. It works next to a Primary button as a complement without competing with it, or alone when no Primary action is needed. Also when a task needs more weight than a Blank button, for example “+ Add address” beside a Blank “Update”.</td><td>It sits among other visually heavy actions, where a lighter option (Blank or System) fits better.</td></tr><tr><th scope="row">Blank (tertiary)</th><td>Low-emphasis actions that stay available without dominating the interface: in headers, filter panels and table tools, or beside a Primary button as “Cancel” in a dialog, or “Read more” next to “Buy now”. Choose Blank by the action’s importance, not by the number of buttons in a group. It can appear several times in one view.</td><td>The flow is critical (checkout, form steps) and clarity and emphasis matter, for the main call to action, or for actions that must be easy to discover. Users may fail to recognize it as clickable.</td></tr><tr><th scope="row">Destructive</th><td>Actions that delete, remove or otherwise cause a potentially harmful change to user data or content. Use it with caution, with a specific label such as “Delete project”. For irreversible or high-impact actions add a safeguard such as a confirmation, and allow undo where feasible.</td><td>As a default action, or only to draw attention to a non-destructive action.</td></tr><tr><th scope="row">Accent</th><td>Selective use to express brand personality or highlight a non-business-critical action. A brand treatment, not an extra level in the hierarchy. It uses the brand colors in the semantic tokens: <code>accent-default</code> for the background and <code>text-action-accent</code> for the label.</td><td>Business-critical actions such as “Add to cart”, or where it would compete with the Primary call to action.</td></tr><tr><th scope="row">System</th><td>A low- to medium-emphasis action that must be clickable without competing with more important ones. For dense interfaces where many buttons appear at once: lists with many actions (rows and cards), filters, tables and data-dense views, and low business-priority actions such as “Show details”, expand, open tools or open settings. It keeps the hierarchy between Primary and Secondary clear and the interface calm.</td><td>High-priority actions (use Primary). Business-critical but secondary actions (use Secondary). Destructive actions (use Destructive). A button that must stand out in a busy context such as a modal, a step or checkout.</td></tr><tr><th scope="row">System selected</th><td>A System button that is an active mode, turned on or off with an immediate effect: a mode switch for views, filters, tools and functions, such as activating a filter chip or choosing a sorting mode. The selected look stays until the selection changes. Use <code>aria-pressed</code>.</td><td>An on/off setting (use a Switch). An action that needs confirmation, such as deleting or a critical change (use Primary or Destructive). An action without immediate effect (use a checkbox and an Apply button). A one-time action.</td></tr><tr><th scope="row">Inverted</th><td>Primary, Secondary and Blank Inverted have the same role and priority as the standard ones. Choose them when their appearance gives clear visibility and enough contrast in the surrounding context. Not limited to dark or colored surfaces.</td><td>The standard variant already has clear contrast on the surface.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">With icons</h3><p class="ds-desc">Each variant can be used with a leading icon, a trailing icon, both, or an icon only for compact or utility-focused interactions. A leading icon is the usual choice; a trailing icon, or both, is not common but an option when needed. The icon is 24px (20px in XSmall), with no gap to the label. Icons here are Material Symbols.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div id="v-icons"></div></div></figure></div><h3 class="ds-h3 ds-group">Icon only</h3><p class="ds-desc">Use an icon-only button where space is constrained. It is a square the same height as the text button, it needs an <code>aria-label</code>, and it is always accompanied by a <a class="inline-link inline-link--large inline-link--secondary" href="tooltip.html">tooltip</a> that describes the action. The tooltip is shown after a 300ms hover delay (see <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#behavior">Behavior</a> in Specifications).</p><h3 class="ds-h3 ds-group">Badge</h3><p class="ds-desc">A badge sits in the top right corner and shows that something needs attention, such as items in a cart. It is a <strong>number</strong> (a count that shows “99+” for anything over 99, so type 150 in the playground and you get 99+) or a <strong>dot</strong> (something new, no count). It works on a button with a label and on an icon-only button, in every size. Size and position follow the button size and breakpoint (see <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#sizes">Sizes</a> in Specifications).</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div id="v-badge"></div></div></figure></div><p class="ds-desc ds-note">In Small and XSmall the number badge overlaps the end of the label, as in Figma. Prefer an icon-only button when the label is long. The badge is decoration for the eye: put the count in the <code>aria-label</code> and mark the badge <code>aria-hidden="true"</code>.</p><h3 class="ds-h3 ds-group">System buttons and selected</h3><p class="ds-desc">System buttons toggle: click one to select or clear it. Selected has a <code>surface-opacity-black-12</code> surface and the same quiet frame.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div class="bt-row" id="v-system" role="group" aria-label="Filter example"></div></div></figure></div><h3 class="ds-h3 ds-group">Combining variants</h3><p class="ds-desc">A general rule is to pair a high-emphasis button with a lower-emphasis one. In most cases that is a Primary with a Secondary: Secondary is the go-to partner of a Primary.</p><ul class="ds-bullets"><li><strong>Multiple actions.</strong> In layouts with many actions, such as page headers, data lists or dashboards, group the low-emphasis buttons together to keep the visual balance. Use the same low-emphasis variant for all of them, typically System buttons.</li><li><strong>Dialogs and panels.</strong> Use a Primary button for the confirmation, a Secondary for supporting actions, and Blank for lesser supporting actions such as Cancel or Back.</li></ul><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="bt-col" id="fig-c1"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do use the same low-emphasis variant when multiple actions are required.</figcaption></figure><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="bt-toast"><div class="ecom-toast ecom-toast--cart"><div class="ecom-toast__header"><div class="ecom-toast__image-text"><img class="ecom-toast__img" src="/images/product-hantverksbyxa.jpg" alt="" /><p class="ecom-toast__text"><span class="ecom-toast__name">Carpenter Soul work pants stretch black</span> has been added to the cart.</p></div><button type="button" class="icon-btn icon-btn--close" aria-label="Close"><span class="btn__icon" aria-hidden="true">close</span></button></div><div class="ecom-toast__footer"><button type="button" class="btn btn--blank btn--xs"><span class="btn__label">Accessories</span></button><button type="button" class="btn btn--primary btn--xs"><span class="btn__label">Go to cart</span></button></div></div></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do pair a Primary button with a lower-emphasis button, here Blank in the E-Com Toast.</figcaption></figure></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div class="bt-pair" id="v-pairs" style="gap:32px 48px"></div></div><figcaption class="ds-fig__cap">More combinations: Primary with Blank, Primary with Secondary, Secondary with Blank, and a dialog set (Primary, Secondary, Blank).</figcaption></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="icon-buttons"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Icon buttons</h2><p class="ds-desc">An icon button is a single icon that is also a control, with no label and no frame. It is used where the action is well known from the icon: favourite, edit, show on a map, scan, close. Do not use it where the icon alone would be unclear. Use a tooltip (<a class="inline-link inline-link--large inline-link--secondary" href="tooltip.html">Tooltip</a>) and an <code>aria-label</code>.</p><h3 class="ds-h3 ds-group">Toggle icons</h3><p class="ds-desc">Eight icons in Figma. Each has Enabled, Hover, Selected and Selected hover, in Large (24px) and Small (20px). Selected shows the filled icon. The icons on this page are Material Symbols stand-ins for the exact Figma drawings. Every state is under <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#states">States</a> in Specifications.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div class="bt-row" id="v-ib" role="group" aria-label="Toggle icons"></div></div><figcaption class="ds-fig__cap">Click an icon to select it.</figcaption></figure></div><h3 class="ds-h3 ds-group">Close</h3><p class="ds-desc">A 24px box with a 20px icon, for closing a modal, drawer, banner or toast. It has a Blank and a Blank inverted version (for contexts where the standard one lacks contrast). Hover adds a surface. The size is the same on desktop and mobile.</p><div class="ds-figs"><figure class="ds-fig"><div class="ds-fig__stage"><div class="bt-row" id="v-close"></div></div><figcaption class="ds-fig__cap">Blank, on a light surface.</figcaption></figure><figure class="ds-fig"><div class="ds-fig__stage ds-stage--dark"><div class="bt-row" id="v-close-inv"></div></div><figcaption class="ds-fig__cap">Blank inverted, on a dark surface.</figcaption></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><p class="ds-desc">Four sizes. Large, Medium and Small change at 769px; XSmall is 32px high on both. Figma has two versions of every button: “XLarge–Large–Medium” (Desktop, 769px and up) and “Small–XSmall” (Mobile, below 769px). The tablet range (640 to 768px) uses the Mobile version. The breakpoint behavior of each size is the same for every variant and grid density. Measurements are under <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#sizes">Sizes</a> in Specifications.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div id="v-sizes"></div></div></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="layout"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-group">Alignment</h3><p class="ds-desc ds-note">To be added to the Foundations (Layout) page: where the Primary button goes, how buttons stack when they do not fit side by side, and what to do with a label that does not fit. Pairs of buttons are under <a class="inline-link inline-link--medium inline-link--secondary" href="#variants">Variants</a>, Combining variants.</p><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">A button is as wide as its content: padding, icon or label, and the label inset, on both sides. An icon-only button is a square. There is no minimum width and no modifier for a full-width button: a button that must fill its container gets its width from the page layout.</p><h3 class="ds-h3 ds-group">Appearance</h3><p class="ds-desc">Square corners, a fixed height per size, and an uppercase label in Breuer Condensed, 600. Primary, Destructive and Accent are filled; Secondary and System have a 1px frame; Blank has neither. Token names and values are under <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#design-tokens">Design Tokens</a> in Specifications.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><h3 class="ds-h3 ds-group">Hover</h3><p class="ds-desc">A layer dissolves in over the base color: <code>surface-opacity-white-20</code> on Primary, Destructive and Accent, <code>surface-opacity-black-12</code> on Primary inverted, <code>surface-opacity-black-05</code> on Secondary and Blank, and <code>surface-opacity-white-20</code> on the inverted Secondary and Blank. System hover and System selected hover are the same: a <code>surface-opacity-black-12</code> surface and a <code>border-hover</code> frame.</p><h3 class="ds-h3 ds-group">Focus</h3><p class="ds-desc">The ring is a 2px <code>border-focus</code> line with a 2px gap, drawn outside the button, so it never moves anything. It shows on keyboard use only: <code>body.keyboard-nav</code> is set on Tab and removed on mousedown and touchstart, the same as the form controls.</p><h3 class="ds-h3 ds-group">Disabled</h3><p class="ds-desc">Use the <code>disabled</code> attribute. A disabled button is not focusable and has no hover. Secondary, Secondary inverted and System keep a frame in <code>border-disabled</code> with no fill; Blank has neither; the others get <code>surface-disabled</code>. Say why in nearby text when the reason is not obvious.</p><h3 class="ds-h3 ds-group">Selected (System)</h3><p class="ds-desc">A System button is a toggle. A click sets or clears <code>aria-pressed</code>; your script does it, the CSS does not. It must not be used for page navigation. Selected is a persistent state, not hover, focus or a temporary pressed state, and it stays until the selection changes. Do not use it for a one-time action.</p><h3 class="ds-h3 ds-group">Destructive actions</h3><p class="ds-desc">For an irreversible or high-impact action, add a safeguard such as a confirmation, and allow the user to undo it where feasible. Never make Destructive the default choice in a dialog.</p><h3 class="ds-h3 ds-group">Icon only</h3><p class="ds-desc">An icon-only button has no visible text, so it is always accompanied by a tooltip that describes the action. The tooltip appears after a 300ms delay when the user hovers the button. A disabled button never has a tooltip.</p><h3 class="ds-h3 ds-group">Motion</h3><p class="ds-desc">The hover layer dissolves in over 100ms with <code>ease-standard</code>. Details are under <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#motion">Motion</a> in Specifications.</p><p class="ds-desc ds-note">All states are listed under <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#states">States</a> in Specifications.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility</h2><p class="ds-desc">All requirements are listed under <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#accessibility-requirements">Accessibility Requirements</a> in Specifications.</p><h3 class="ds-h3 ds-group">Keyboard support</h3><p class="ds-desc">Tab moves between buttons. Enter or Space runs the action (a link that looks like a button runs on Enter). The focus ring shows on keyboard use only.</p><h3 class="ds-h3 ds-group">Screen reader support</h3><p class="ds-desc">Use a label that names the action, such as “Delete project”, not “Confirm”. Use <code>&lt;button&gt;</code> for actions and <code>&lt;a class="btn …"&gt;</code> for navigation. An icon-only button needs an <code>aria-label</code>, and its icon is <code>aria-hidden="true"</code>. A badge is hidden too: put the count in the <code>aria-label</code>. A System button announces its state through <code>aria-pressed</code>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="related"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="button-group.html">Button group</a></strong>. Joined System buttons for choosing between two to four short options.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="action-link.html">Action link</a></strong>. A standalone link with an optional icon.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="inline-link.html">Inline link</a></strong>. A link inside a sentence.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="tile-link.html">Tile link</a></strong>. A graphical link, such as a brand logo.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="segment-control.html">Pill segment control</a></strong>. A switch between two related views.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="switch.html">Switch</a></strong>. An immediate on or off setting.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="tooltip.html">Tooltip</a></strong>. The short name of an icon-only button.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="references"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">References</h2><ul class="ds-bullets"><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/ARIA/apg/patterns/button/" target="_blank" rel="noopener">WAI-ARIA Authoring Practices: Button</a>. Keyboard and role requirements.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html" target="_blank" rel="noopener">WCAG 2.2: Non-text Contrast</a>. Success criterion 1.4.11.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html" target="_blank" rel="noopener">WCAG 2.2: Target Size (Minimum)</a>. Success criterion 2.5.8.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://fluent2.microsoft.design/components/web/react/core/button/usage" target="_blank" rel="noopener">Fluent 2: Button</a>. Microsoft.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://m3.material.io/components/buttons/overview" target="_blank" rel="noopener">Material Design 3: Buttons</a>. Google.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://carbondesignsystem.com/components/button/usage/" target="_blank" rel="noopener">Carbon Design System: Button</a>. IBM.</li></ul></div></section>
+</div>
 
-<!-- ── Playground ────────────────────────────────────────────── -->
-<section class="ds-section ds-section--secondary" id="playground">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">Playground</h2>
-    <p class="ds-desc">Choose a variant, size, content and state and the button and its code update. The three inverted variants sit on a dark surface (<code>surface-100</code>) and are only used there. The button in the stage is live: click it, or press Tab to see the focus ring.</p>
-    <div class="ds-playground">
-      <div class="ds-stage ds-stage--center" id="pg-stage">
-        <div id="pg-host"></div>
-      </div>
-      <div class="ds-controls">
-        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-variants" id="pg-l-var">Variant</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="variant" id="pg-variants"></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>
-        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bp">Breakpoint</span>
-          <div class="btn-group" role="group" aria-labelledby="pg-l-bp" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
-        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-size">Size</span>
-          <div class="btn-group" role="group" aria-labelledby="pg-l-size" data-pg="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="md" aria-pressed="false">Medium</button><button type="button" data-v="sm" aria-pressed="false">Small</button><button type="button" data-v="xs" aria-pressed="false">XSmall</button></div></div>
-        <div class="ds-field form-field"><label class="form-label form-label--sm" for="sel-pg-l-con" id="pg-l-con">Content</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="content" id="sel-pg-l-con"><option value="label">Label</option><option value="lead">Icon + label</option><option value="trail">Label + icon</option><option value="both">Icon + label + icon</option><option value="icon">Icon only</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>
-        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-bd">Badge</span>
-          <div class="btn-group" role="group" aria-labelledby="pg-l-bd" data-pg="badge"><button type="button" data-v="none" aria-pressed="true">None</button><button type="button" data-v="number" aria-pressed="false">Number</button><button type="button" data-v="dot" aria-pressed="false">Dot</button></div></div>
-        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-count">Badge number (over 99 shows 99+)</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-count" value="1" inputmode="numeric" maxlength="5" placeholder="Badge number" /></div></div></div>
-        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-st">State</span>
-          <div class="btn-group" role="group" aria-labelledby="pg-l-st" data-pg="state"><button type="button" data-v="enabled" aria-pressed="true">Enabled</button><button type="button" data-v="hover" aria-pressed="false">Hover</button><button type="button" data-v="focus" aria-pressed="false">Focus</button><button type="button" data-v="disabled" aria-pressed="false">Disabled</button></div></div>
-        <div class="ds-field"><span class="form-label form-label--sm" id="pg-l-sel">Selected (System only)</span>
-          <div class="btn-group" role="group" aria-labelledby="pg-l-sel" data-pg="pressed"><button type="button" data-v="off" aria-pressed="true">Off</button><button type="button" data-v="on" aria-pressed="false">On</button></div></div>
-        <div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-label">Label (not for icon only)</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-label" value="Button label" placeholder="Label" /></div></div></div>
-        <p class="ds-swatch__meta" id="pg-status" aria-live="polite"></p>
-      </div>
-    </div>
-    <h3 class="ds-h3" style="margin-top:32px">Markup for this selection</h3>
-    <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
-  </div>
-</section>
-
-<!-- ── Variants ──────────────────────────────────────────────── -->
-<section class="ds-section" id="variants">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">Variants</h2>
-    <p class="ds-desc">Nine variants in four sizes. The Breakpoint toggle previews what Figma calls Desktop (769px and up) and Mobile (below 769px). The component switches by itself at 769px, so you never set it yourself.</p>
-    <div class="ds-toolbar"><span class="ds-toolbar__label" id="vb-l">Breakpoint</span>
-      <div class="btn-group" role="group" aria-labelledby="vb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div>
-
-    <h3 class="ds-h3">Hierarchy</h3>
-    <p class="ds-desc">A page can show more than one button. Combine styles so one action stands out and the others are quieter. Large, Medium, Small and XSmall are shown on each row.</p>
-    <div class="ds-stage"><div id="v-light"></div></div>
-    <div class="ds-stage ds-stage--dark"><div id="v-dark"></div></div>
-    <p class="ds-desc ds-note">The inverted variants (Primary, Secondary and Blank) are for dark surfaces. Primary inverted can also sit with Primary on a light background as a button of medium importance.</p>
-
-    <h3 class="ds-h3">Which variant</h3>
-    <div class="ds-table-wrap"><table class="ds-table">
-      <thead><tr><th scope="col">Variant</th><th scope="col">Use it for</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Primary</th><td>The main call to action in a page, banner or card, such as “Add to cart” or “Next”. Use it sparingly: <strong>one primary action per major section</strong>. Too many cause confusion.</td></tr>
-        <tr><th scope="row">Secondary</th><td>A second action next to the primary one, such as “Cancel” or “Back”. Also when a task needs more weight than a Blank button, for example “+ Add address” beside a Blank “Update”.</td></tr>
-        <tr><th scope="row">Blank</th><td>Less prominent actions, alone or paired with a primary button: “Read more” next to “Buy now”. Also sub-tasks where a primary button holds the final action, such as “icon + Update”.</td></tr>
-        <tr><th scope="row">Destructive</th><td>An action that removes something or cannot be undone, such as “Delete”. Never as a default action.</td></tr>
-        <tr><th scope="row">Accent</th><td>A brand-colored call to action. Use with care so it stays distinctive.</td></tr>
-        <tr><th scope="row">System</th><td>Filtering and navigation, mainly inside filter sections or wherever many buttons are grouped. The light frame and quiet selected state lower the cognitive load. Use <code>aria-pressed</code> for the selected state.</td></tr>
-        <tr><th scope="row">Inverted</th><td>Primary, Secondary and Blank for a dark surface. They improve accessibility and usability where the normal ones would not have enough contrast.</td></tr>
-      </tbody></table></div>
-
-    <h3 class="ds-h3">With icons</h3>
-    <p class="ds-desc">An icon can go before the label, after it, or on both sides. An icon-only button is a square the same height as the text button and needs an <code>aria-label</code>. The icon is 24px (20px in XSmall). Icons here are Material Symbols.</p>
-    <div class="ds-stage"><div id="v-icons"></div></div>
-
-    <h3 class="ds-h3">Badge</h3>
-    <p class="ds-desc">A badge sits in the top right corner and shows that something needs attention, such as items in a cart. It is a <strong>number</strong> (a count that shows “99+” for anything over 99, so type 150 in the playground and you get 99+) or a <strong>dot</strong> (something new, no count). It works on a button with a label and on an icon-only button, in every size. Size and position follow the button size and breakpoint (see the table in Anatomy &amp; specs).</p>
-    <div class="ds-stage"><div id="v-badge"></div></div>
-    <p class="ds-desc ds-note">In Small and XSmall the number badge overlaps the end of the label, as in Figma. Prefer an icon-only button when the label is long. The badge is decoration for the eye: put the count in the <code>aria-label</code> and mark the badge <code>aria-hidden="true"</code>.</p>
-
-    <h3 class="ds-h3">System buttons and selected</h3>
-    <p class="ds-desc">System buttons toggle: click one to select or clear it. Selected has a <code>surface-opacity-black-12</code> surface and the same quiet frame.</p>
-    <div class="ds-stage"><div class="bt-row" id="v-system" role="group" aria-label="Filter example"></div></div>
-
-    <h3 class="ds-h3">Combinations</h3>
-    <p class="ds-desc">Put the more important button first on the left on desktop. The primary button is always the strongest one in the group.</p>
-    <div class="ds-stage"><div class="bt-pair" id="v-pairs"></div></div>
-  </div>
-</section>
-
-<!-- ── States ────────────────────────────────────────────────── -->
-<section class="ds-section ds-section--secondary" id="states">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">States</h2>
-    <p class="ds-desc">Every state for every variant. Hover and focus are forced on this page with <code>data-state</code> so they show at the same time; in your code they come from <code>:hover</code> and the keyboard focus rule. The buttons are live (the disabled ones do not respond).</p>
-    <div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span>
-      <div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div>
-      <span class="ds-toolbar__label" id="sm-s">Size</span>
-      <div class="btn-group" role="group" aria-labelledby="sm-s" data-mx="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="md" aria-pressed="false">Medium</button><button type="button" data-v="sm" aria-pressed="false">Small</button><button type="button" data-v="xs" aria-pressed="false">XSmall</button></div></div>
-    <div class="ds-table-wrap"><table class="ds-table ds-matrix" id="matrix">
-      <thead><tr><th scope="col">Variant</th><th scope="col">Enabled</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead>
-      <tbody></tbody></table></div>
-    <p class="ds-desc ds-note">Hover: Primary, Destructive and Accent get a <code>surface-opacity-white-20</code> layer on top of their color, Primary inverted a <code>surface-opacity-black-12</code> layer. Secondary and Blank get <code>surface-opacity-black-05</code>, the inverted ones <code>surface-opacity-white-20</code>. System hover and System selected hover are the same: a <code>surface-opacity-black-12</code> surface and a <code>border-hover</code> frame. The focus ring is a 2px <code>border-focus</code> line with a 2px gap, drawn outside the button, so it never moves anything. Disabled: Secondary, Secondary inverted and System keep a frame in <code>border-disabled</code> with no fill; Blank has neither; the others get <code>surface-disabled</code>.</p>
-  </div>
-</section>
-
-<!-- ── Icon buttons ──────────────────────────────────────────── -->
-<section class="ds-section" id="icon-buttons">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">Icon buttons</h2>
-    <p class="ds-desc">An icon button is a single icon that is also a control, with no label and no frame. It is used where the action is well known from the icon: favourite, edit, show on a map, scan, close. Do not use it where the icon alone would be unclear. Use a tooltip (<code>eco-tooltip</code>) and an <code>aria-label</code>.</p>
-
-    <h3 class="ds-h3">Toggle icons</h3>
-    <p class="ds-desc">Eight icons in Figma. Each has Enabled, Hover, Selected and Selected hover, in Large (24px) and Small (20px). Selected shows the filled icon. The icons on this page are Material Symbols stand-ins for the exact Figma drawings.</p>
-    <div class="ds-toolbar"><span class="ds-toolbar__label" id="ib-s">Size</span>
-      <div class="btn-group" role="group" aria-labelledby="ib-s" data-ib="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button></div></div>
-    <div class="ds-table-wrap"><table class="ds-table ds-matrix bt-icons" id="ib-matrix">
-      <thead><tr id="ib-head"></tr></thead>
-      <tbody></tbody></table></div>
-    <p class="ds-desc ds-note">Hover changes the icon color to <code>text-action-primary-hover</code>; there is no surface. Selected hover is the filled icon in that color. Figma has no focus or disabled state for these icons: focus follows the button rule, disabled uses <code>text-disabled</code> (see the flags in the skill). The “cancel” icon is always filled.</p>
-
-    <h3 class="ds-h3">Close</h3>
-    <p class="ds-desc">A 24px box with a 20px icon, for closing a modal, drawer, banner or toast. It has a Blank and a Blank inverted version (dark surfaces). Hover adds a surface. The size is the same on desktop and mobile.</p>
-    <div class="ds-table-wrap"><table class="ds-table ds-matrix" id="close-matrix">
-      <thead><tr><th scope="col">Version</th><th scope="col">Enabled</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead>
-      <tbody></tbody></table></div>
-    <p class="ds-desc ds-note">Figma only defines Enabled and Hover for Close. Focus follows the shared rule; disabled is not defined and is not used for a close control.</p>
-  </div>
-</section>
-
-<!-- ── Anatomy & specs ───────────────────────────────────────── -->
-<section class="ds-section ds-section--secondary" id="specs">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">Anatomy &amp; specs</h2>
-    <p class="ds-desc">A button is a box of a fixed height with the content centred. Inside it the label has its own inset, so the width is the label plus both insets. The diagram shows a Large desktop button at 2× with the label and icons outlined.</p>
-    <div class="bt-anat">
-      <div class="bt-anat__fig" id="anat" role="img" aria-label="A large button with a leading icon, a label and a trailing icon, each outlined"></div>
-      <ul class="ds-anatomy__legend" id="anat-legend"></ul>
-    </div>
-
-    <h3 class="ds-h3">Sizes</h3>
-    <p class="ds-desc">Heights and type per size and breakpoint. The table is generated from the same numbers the Breakpoint toggle uses.</p>
-    <div class="ds-table-wrap"><table class="ds-table" id="size-table">
-      <thead><tr><th scope="col">Size</th><th scope="col">Height</th><th scope="col">Padding</th><th scope="col">Label inset</th><th scope="col">Icon</th><th scope="col">Label style</th></tr></thead>
-      <tbody></tbody></table></div>
-    <p class="ds-desc ds-note"><strong>Breakpoint.</strong> Figma has two versions of every button: “XLarge–Large–Medium” (Desktop, 769px and up) and “Small–XSmall” (Mobile, below 769px). The tablet range (640 to 768px) uses the Mobile version. The 1px frame of Secondary, System and their inverted versions is drawn inside the box, so it never changes the size: Primary and Secondary of the same size are equally wide.</p>
-
-    <h3 class="ds-h3">Badge sizes</h3>
-    <p class="ds-desc">Number badge: a pill, as high as it is wide for one digit and wider for two or “99+”. Offsets are from the top and right edge of the button. Same numbers for a button with a label and an icon-only button, except XSmall icon only (2px).</p>
-    <div class="ds-table-wrap"><table class="ds-table" id="badge-table">
-      <thead><tr><th scope="col">Size · breakpoint</th><th scope="col">Number: offset</th><th scope="col">Height</th><th scope="col">Side padding</th><th scope="col">Digits</th><th scope="col">Dot: offset</th></tr></thead>
-      <tbody></tbody></table></div>
-    <p class="ds-desc ds-note">The badge is <code>surface-danger-default</code> with a white number (<code>text-action-primary-inverted</code>), uppercase, 600. The dot is a 6px circle in the same color.</p>
-
-    <h3 class="ds-h3">Tokens</h3>
-    <p class="ds-desc">Resolved from the live token package.</p>
-    <div class="ds-table-wrap"><table class="ds-table" id="tok-table">
-      <thead><tr><th scope="col">Variant · part</th><th scope="col">Where</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead>
-      <tbody></tbody></table></div>
-
-    <h3 class="ds-h3">Behavior and accessibility</h3>
-    <div class="ds-table-wrap"><table class="ds-table">
-      <thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Click, Enter, Space</th><td>Runs the action. Use <code>&lt;button&gt;</code> for actions and <code>&lt;a class="btn …"&gt;</code> for navigation.</td></tr>
-        <tr><th scope="row">Tab / Shift+Tab</th><td>Moves between buttons. The focus ring shows only when <code>body.keyboard-nav</code> is set (on Tab, removed on mousedown and touchstart), the same as the form controls.</td></tr>
-        <tr><th scope="row">Disabled</th><td>Use the <code>disabled</code> attribute. It is not focusable and has no hover. Say why in nearby text when the reason is not obvious.</td></tr>
-        <tr><th scope="row">System selected</th><td>Set <code>aria-pressed="true"</code>. It is a toggle, so it must not be used for page navigation.</td></tr>
-        <tr><th scope="row">Icon only</th><td>Add <code>aria-label</code>, and hide the icon with <code>aria-hidden="true"</code>.</td></tr>
-        <tr><th scope="row">Label</th><td>Uppercase through CSS, so write it in sentence case in the HTML. Keep it short and start with a verb.</td></tr>
-      </tbody></table></div>
-  </div>
-</section>
-
-<!-- ── Code ──────────────────────────────────────────────────── -->
-<section class="ds-section" id="code">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">Code</h2>
-    <p class="ds-desc">Copy the markup you need, then add the CSS once per page. The CSS below is read from this page’s stylesheet, so it is always what you see above. Add the small script for the focus ring once per page as well.</p>
-    <div id="recipes"></div>
-    <div class="ds-code"><div class="ds-code__bar"><span>CSS (button and icon button)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div>
-  </div>
-</section>
-
-<!-- ── Usage ─────────────────────────────────────────────────── -->
-<section class="ds-section ds-section--secondary" id="usage">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">Usage</h2>
-    <p class="ds-desc">Several components look like a button. Choose by what the user is doing.</p>
-    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table">
-      <thead><tr><th scope="col">The user…</th><th scope="col">Use</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">starts an action or moves to the next step</th><td>Button</td></tr>
-        <tr><th scope="row">follows a standalone link, such as “View all products”</th><td><code>eco-action-link</code></td></tr>
-        <tr><th scope="row">follows a link inside a sentence</th><td><code>eco-inline-link</code></td></tr>
-        <tr><th scope="row">chooses a brand or category from a graphic tile</th><td><code>eco-tile-link</code></td></tr>
-        <tr><th scope="row">switches between two related views</th><td><code>eco-pill-segment-control</code></td></tr>
-        <tr><th scope="row">turns a setting on or off at once</th><td><code>eco-switch</code></td></tr>
-      </tbody></table></div>
-    <div class="ds-rules">
-      <div class="ds-rule ds-rule--do">
-        <h3 class="ds-rule__title">Do</h3>
-        <ul>
-          <li>Use one Primary button per major section.</li>
-          <li>Use Secondary for “Cancel” and “Back”, and Blank for the quietest actions.</li>
-          <li>Write short labels that start with a verb.</li>
-          <li>Use the inverted variants on dark surfaces only.</li>
-          <li>Give every icon-only button an <code>aria-label</code>.</li>
-        </ul>
-      </div>
-      <div class="ds-rule ds-rule--dont">
-        <h3 class="ds-rule__title">Don’t</h3>
-        <ul>
-          <li>Show several Primary buttons next to each other.</li>
-          <li>Use a button for navigation to another site section when a link fits. Use a link.</li>
-          <li>Use Destructive as the default choice in a dialog.</li>
-          <li>Put an inverted variant on a light surface, or a normal one on a dark surface.</li>
-          <li>Hardcode colors or sizes. Use the tokens and the size classes.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script src="../tokens-loader.js"></script>
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
 <script>
 (function () {
-  var $ = function (s, r) { return (r || document).querySelector(s); };
-  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
   var uid = 0;
-  function clear(n) { n.textContent = ''; return n; }
-
-  /* Focus ring: shown for keyboard use only (same mechanism as the form controls) */
-  document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
-  ['mousedown', 'touchstart'].forEach(function (t) { document.addEventListener(t, function () { document.body.classList.remove('keyboard-nav'); }, { passive: true }); });
-
   var VARIANTS = [
     ['primary', 'Primary', false], ['secondary', 'Secondary', false], ['blank', 'Blank', false], ['destructive', 'Destructive', false], ['accent', 'Accent', false], ['system', 'System', false],
     ['primary-inverted', 'Primary inverted', true], ['secondary-inverted', 'Secondary inverted', true], ['blank-inverted', 'Blank inverted', true]
@@ -320,18 +111,6 @@
     sm: { m: { h: 32, pad: 4, tx: 6, icon: 24, fs: 14, lh: 14, ls: 0.42, ff: false, style: 'label-md', bd: { off: 3, h: 14, px: 2, fs: 10, ls: 0 }, dot: 4 }, d: { h: 40, pad: 8, tx: 8, icon: 24, fs: 16, lh: 16, ls: 0.48, ff: false, style: 'label-md', bd: { off: 4, h: 16, px: 3, fs: 10, ls: 0 }, dot: 6 } },
     xs: { m: { h: 32, pad: 6, tx: 4, icon: 20, fs: 12, lh: 12, ls: 0.48, ff: true, style: 'label-sm', bd: { off: 3, offIcon: 2, h: 14, px: 2, fs: 10, ls: 0 }, dot: 4 }, d: { h: 32, pad: 6, tx: 4, icon: 20, fs: 14, lh: 14, ls: 0.56, ff: true, style: 'label-sm', bd: { off: 3, offIcon: 2, h: 16, px: 3, fs: 10, ls: 0 }, dot: 4 } }
   };
-  /* Breakpoint preview (this page only): force the Figma values for one breakpoint regardless of window width */
-  var fs = document.createElement('style');
-  fs.textContent = [['mobile', 'm'], ['desktop', 'd']].map(function (bp) {
-    return Object.keys(SIZES).map(function (s) {
-      var v = SIZES[s][bp[1]], b = v.bd;
-      return 'body[data-bp="' + bp[0] + '"] .btn--' + s + ' { --btn-h:' + v.h + 'px; --btn-pad:' + v.pad + 'px; --btn-tx:' + v.tx + 'px; --btn-icon:' + v.icon + 'px; --btn-fs:' + v.fs + 'px; --btn-lh:' + v.lh + 'px; --btn-ls:' + v.ls + 'px; --btn-ff:' + (v.ff ? "'ss02' 1, 'ss03' 1" : 'normal') +
-        '; --btn-bd-off:' + b.off + 'px; --btn-bd-h:' + b.h + 'px; --btn-bd-px:' + b.px + 'px; --btn-bd-fs:' + b.fs + 'px; --btn-bd-ls:' + b.ls + 'px; --btn-dot-off:' + v.dot + 'px; }' +
-        (b.offIcon ? '\nbody[data-bp="' + bp[0] + '"] .btn--icon.btn--' + s + ' { --btn-bd-off:' + b.offIcon + 'px; }' : '');
-    }).join('\n');
-  }).join('\n');
-  document.head.appendChild(fs);
-
   /* Build a real button. o: {variant, size, content label|lead|trail|both|icon, label, state hover|focus, disabled, pressed, badge number|dot} */
   function btn(o) {
     var b = document.createElement('button'); b.type = 'button';
@@ -355,16 +134,16 @@
   }
   function row(label) { var r = document.createElement('div'); r.className = 'bt-vrow'; var l = document.createElement('div'); l.className = 'bt-vlabel'; l.textContent = label; r.appendChild(l); return r; }
 
-  /* ── Breakpoint preview: one setting synced across every toggle ── */
-  $$('[data-bp-toggle]').forEach(function (g) {
-    g.addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      if (b.dataset.v === 'auto') document.body.removeAttribute('data-bp'); else document.body.setAttribute('data-bp', b.dataset.v);
-      $$('[data-bp-toggle]').forEach(function (x) { $$('button', x).forEach(function (y) { y.setAttribute('aria-pressed', String(y.dataset.v === b.dataset.v)); }); });
-    });
-  });
-
-  /* ── Playground ── */
+  var IB = [['compare', 'compare_arrows'], ['add_card_favourite', 'favorite'], ['add_favourite_to_list', 'playlist_add'], ['edit', 'edit'], ['location_on', 'location_on'], ['cancel_filled', 'cancel', true], ['qr_code_scanner', 'qr_code_scanner'], ['list_selected', 'check_circle']];
+  function ibtn(o) {
+    var b = document.createElement('button'); b.type = 'button';
+    b.className = 'icon-btn' + (o.small ? ' icon-btn--sm' : '') + (o.filled ? ' icon-btn--filled' : '') + (o.cls ? ' ' + o.cls : '');
+    b.setAttribute('aria-label', o.aria); b.disabled = !!o.disabled;
+    if (o.pressed != null) { b.setAttribute('aria-pressed', String(!!o.pressed)); b.addEventListener('click', function () { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); }); }
+    if (o.state) b.dataset.state = o.state;
+    var i = document.createElement('span'); i.className = 'btn__icon'; i.setAttribute('aria-hidden', 'true'); i.textContent = o.glyph; b.appendChild(i);
+    return b;
+  }
   var pg = { variant: 'primary', size: 'lg', content: 'label', state: 'enabled', pressed: 'off', badge: 'none' };
   VARIANTS.forEach(function (v) {
     var o = document.createElement('option'); o.value = v[0]; o.textContent = v[1]; o.selected = v[0] === pg.variant; $('#pg-variants').appendChild(o);
@@ -391,17 +170,11 @@
     if (pg.state === 'hover' || pg.state === 'focus') html = '<!-- ' + pg.state + ' is forced here for preview; in production it comes from ' + (pg.state === 'hover' ? ':hover' : 'the keyboard focus rule') + ' -->\n' + html;
     $('#pg-code').textContent = html;
   }
-  $$('[data-pg]').forEach(function (g) {
-    if (g.tagName === 'SELECT') { g.addEventListener('change', function () { pg[g.dataset.pg] = g.value; renderPg(); }); return; }
-    g.addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b || b.disabled) return;
-      pg[g.dataset.pg] = b.dataset.v;
-      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-      renderPg();
-    });
-  });
+
+  DK.wire(pg, renderPg);
   $('#pg-label').addEventListener('input', renderPg);
   $('#pg-count').addEventListener('input', renderPg);
+  DK.bp();
 
   /* Playground button groups that do not fit the controls column swap to a select (eco-button, Button group: "more options: a select") */
   $$('.ds-controls .btn-group').forEach(function (g) {
@@ -458,196 +231,71 @@
     pr.style.gap = '32px 48px';
   }
 
-  /* ── State matrix ── */
-  var mx = { size: 'lg' };
-  $$('[data-mx]').forEach(function (g) {
-    g.addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      mx[g.dataset.mx] = b.dataset.v;
-      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-      buildMatrix();
-    });
-  });
-  var STATES = ['enabled', 'hover', 'focus', 'disabled'];
-  function buildMatrix() {
-    var tb = clear($('#matrix tbody'));
-    var rows = VARIANTS.map(function (v) { return [v[0], v[1], v[2], false]; });
-    rows.splice(6, 0, ['system', 'System · selected', false, true]);
-    rows.forEach(function (r) {
-      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[1]; if (r[2]) th.className = 'bt-dark'; tr.appendChild(th);
-      STATES.forEach(function (s) {
-        var td = document.createElement('td'); if (r[2]) td.className = 'bt-dark';
-        td.appendChild(btn({ variant: r[0], size: mx.size, state: s, disabled: s === 'disabled', pressed: r[3], label: 'Button label' }));
-        tr.appendChild(td);
-      });
-      tb.appendChild(tr);
-    });
-  }
 
-  /* ── Icon buttons ── */
-  var IB = [['compare', 'compare_arrows'], ['add_card_favourite', 'favorite'], ['add_favourite_to_list', 'playlist_add'], ['edit', 'edit'], ['location_on', 'location_on'], ['cancel_filled', 'cancel', true], ['qr_code_scanner', 'qr_code_scanner'], ['list_selected', 'check_circle']];
-  function ibtn(o) {
-    var b = document.createElement('button'); b.type = 'button';
-    b.className = 'icon-btn' + (o.small ? ' icon-btn--sm' : '') + (o.filled ? ' icon-btn--filled' : '') + (o.cls ? ' ' + o.cls : '');
-    b.setAttribute('aria-label', o.aria); b.disabled = !!o.disabled;
-    if (o.pressed != null) { b.setAttribute('aria-pressed', String(!!o.pressed)); b.addEventListener('click', function () { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); }); }
-    if (o.state) b.dataset.state = o.state;
-    var i = document.createElement('span'); i.className = 'btn__icon'; i.setAttribute('aria-hidden', 'true'); i.textContent = o.glyph; b.appendChild(i);
-    return b;
-  }
-  var ib = { size: 'lg' };
-  $$('[data-ib]').forEach(function (g) {
-    g.addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      ib[g.dataset.ib] = b.dataset.v;
-      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-      buildIcons();
-    });
+  /* Sizes */
+  var vsz = clear($('#v-sizes'));
+  ['lg', 'md', 'sm', 'xs'].forEach(function (s) {
+    var r = row(SIZE_NAME[s]);
+    r.appendChild(btn({ variant: 'primary', size: s, label: 'Button label' }));
+    r.appendChild(btn({ variant: 'secondary', size: s, content: 'lead', label: 'Button label' }));
+    r.appendChild(btn({ variant: 'primary', size: s, content: 'icon', aria: 'Add to cart' }));
+    vsz.appendChild(r);
   });
-  function buildIcons() {
-    var small = ib.size === 'sm', head = clear($('#ib-head'));
-    var h0 = document.createElement('th'); h0.scope = 'col'; h0.textContent = 'State'; head.appendChild(h0);
-    IB.forEach(function (x) { var h = document.createElement('th'); h.scope = 'col'; h.textContent = x[0]; head.appendChild(h); });
-    var tb = clear($('#ib-matrix tbody'));
-    [['Enabled', null, false], ['Hover', 'hover', false], ['Selected', null, true], ['Selected hover', 'hover', true]].forEach(function (r) {
-      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
-      IB.forEach(function (x) {
-        var td = document.createElement('td');
-        td.appendChild(ibtn({ small: small, glyph: x[1], filled: x[2], aria: x[0] + ', ' + r[0].toLowerCase(), state: r[1], pressed: r[2] }));
-        tr.appendChild(td);
-      });
-      tb.appendChild(tr);
-    });
-    var ct = clear($('#close-matrix tbody'));
-    [['Blank', ''], ['Blank inverted', ' icon-btn--close-inverted']].forEach(function (v) {
-      var inv = !!v[1], tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = v[0]; if (inv) th.className = 'bt-dark'; tr.appendChild(th);
-      [['enabled', null, false], ['hover', 'hover', false], ['focus', 'focus', false], ['disabled', null, true]].forEach(function (s) {
-        var td = document.createElement('td'); if (inv) td.className = 'bt-dark';
-        if (s[0] === 'disabled') { td.className += ' ds-na'; td.textContent = 'Not defined'; }
-        else td.appendChild(ibtn({ glyph: 'close', aria: 'Close, ' + s[0], cls: 'icon-btn--close' + v[1], state: s[1] }));
-        tr.appendChild(td);
-      });
-      ct.appendChild(tr);
-    });
-  }
 
-  /* ── Anatomy + size table ── */
+  /* Icon buttons */
+  var vib = clear($('#v-ib'));
+  IB.forEach(function (x) { vib.appendChild(ibtn({ glyph: x[1], filled: x[2], aria: x[0], pressed: false })); });
+  clear($('#v-close')).appendChild(ibtn({ glyph: 'close', aria: 'Close', cls: 'icon-btn--close' }));
+  clear($('#v-close-inv')).appendChild(ibtn({ glyph: 'close', aria: 'Close', cls: 'icon-btn--close icon-btn--close-inverted' }));
+
+  /* Usage figures */
+  var fp = clear($('#fig-p-do')); fp.appendChild(btn({ variant: 'primary', size: 'md', label: 'Save' })); fp.appendChild(btn({ variant: 'secondary', size: 'md', label: 'Cancel' }));
+  var fq = clear($('#fig-p-dont')); fq.appendChild(btn({ variant: 'primary', size: 'md', label: 'Save' })); fq.appendChild(btn({ variant: 'primary', size: 'md', label: 'Cancel' }));
+  clear($('#fig-l-do')).appendChild(btn({ variant: 'primary', size: 'md', label: 'Add to cart' }));
+  clear($('#fig-l-dont')).appendChild(btn({ variant: 'primary', size: 'md', label: 'Click here to add to cart' }));
+  clear($('#fig-v-do')).appendChild(btn({ variant: 'primary', size: 'md', label: 'Request booking' }));
+  clear($('#fig-v-dont')).appendChild(btn({ variant: 'primary', size: 'md', label: 'Submit' }));
+  clear($('#fig-x-do')).appendChild(btn({ variant: 'destructive', size: 'md', label: 'Delete project' }));
+  clear($('#fig-x-dont')).appendChild(btn({ variant: 'destructive', size: 'md', label: 'Confirm' }));
+  clear($('#fig-a-do')).appendChild(btn({ variant: 'primary', size: 'md', label: 'Add to cart' }));
+  clear($('#fig-a-dont')).appendChild(btn({ variant: 'accent', size: 'md', label: 'Add to cart' }));
+  clear($('#fig-d-do')).appendChild(btn({ variant: 'primary-inverted', size: 'md', label: 'Shop now' }));
+  clear($('#fig-d-dont')).appendChild(btn({ variant: 'primary', size: 'md', label: 'Shop now' }));
+
+  /* Anatomy */
+  var ah = clear($('#a-host')), ab = btn({ variant: 'primary', size: 'lg', content: 'lead', label: 'Button label', badge: 'number', count: '3' });
+  ab.tabIndex = -1; ah.appendChild(ab);
+  DK.callouts($('#bt-anat'), [
+    { n: 1, el: ab, side: 'left', len: 56, at: 'edge' },
+    { n: 2, el: $('.btn__icon', ab), side: 'top', len: 48, at: 'center' },
+    { n: 3, side: 'bottom', len: 48, at: 'center', box: function () { var r = document.createRange(); r.selectNodeContents($('.btn__label', ab)); return r.getBoundingClientRect(); } },
+    { n: 4, el: $('.btn__badge', ab), side: 'right', len: 48, at: 'edge' }
+  ]);
+  var ah2 = clear($('#a-host2')), ab2 = btn({ variant: 'primary', size: 'lg', content: 'icon', badge: 'dot', aria: 'Cart, new items' });
+  ab2.tabIndex = -1; ah2.appendChild(ab2);
+  DK.callouts($('#bt-anat2'), [
+    { n: 1, el: ab2, side: 'left', len: 56, at: 'edge' },
+    { n: 2, el: $('.btn__icon', ab2), side: 'bottom', len: 48, at: 'center' },
+    { n: 3, el: $('.btn__dot', ab2), side: 'right', len: 48, at: 'edge' }
+  ]);
+  renderPg(); buildVariants();
   (function () {
-    var f = $('#anat'); f.appendChild(btn({ variant: 'primary', size: 'lg', content: 'both', label: 'Button label' }));
-    var lg = [
-      ['56px', 'height, Large on desktop (48px on mobile)'],
-      ['16px', 'padding between the edge and the icon or label (12px on mobile)'],
-      ['8px', 'inset around the label (4px for XSmall)'],
-      ['24px', 'icons (20px for XSmall), no gap: the inset is the space'],
-      ['Label', 'Breuer Condensed, uppercase, 600, <code>label-lg</code> 18/18 desktop, 16/16 mobile']
-    ];
-    lg.forEach(function (x) { var li = document.createElement('li'); li.innerHTML = '<b>' + x[0] + '</b> ' + x[1]; $('#anat-legend').appendChild(li); });
-    var tb = $('#size-table tbody');
-    Object.keys(SIZES).forEach(function (s) {
-      [['d', 'Desktop (769px and up)'], ['m', 'Mobile (below 769px)']].forEach(function (b) {
-        var v = SIZES[s][b[0]], tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = SIZE_NAME[s] + ' · ' + b[1]; tr.appendChild(th);
-        [v.h + 'px', v.pad + 'px', v.tx + 'px', v.icon + 'px', '<code>' + v.style + '</code> ' + v.fs + '/' + v.lh + ', ' + v.ls + 'px'].forEach(function (t) { var td = document.createElement('td'); td.innerHTML = t; tr.appendChild(td); });
-        tb.appendChild(tr);
-      });
-    });
+    var c = clear($('#fig-c1')), r = document.createElement('div'); r.className = 'bt-pair';
+    r.appendChild(btn({ variant: 'secondary', size: 'md', label: 'Shop women' })); r.appendChild(btn({ variant: 'secondary', size: 'md', label: 'Shop men' })); c.appendChild(r);
+    var hr = document.createElement('hr'); hr.className = 'divider'; c.appendChild(hr);
+    var r2 = document.createElement('div'); r2.className = 'bt-pair';
+    [['Select all', 'select_all'], ['Deselect all', 'deselect']].forEach(function (x) { var b = btn({ variant: 'system', size: 'sm', content: 'trail', label: x[0] }); $('.btn__icon', b).textContent = x[1]; r2.appendChild(b); });
+    c.appendChild(r2);
+  })();
+  (function () {
+    var host = $('#v-pairs');
+    function pair(list) { var d = document.createElement('div'); d.className = 'bt-pair'; list.forEach(function (b) { d.appendChild(btn({ variant: b[0], size: 'md', label: b[1] })); }); host.appendChild(d); }
+    pair([['primary', 'Save changes'], ['secondary', 'Edit'], ['blank', 'Cancel']]);
   })();
 
-  /* ── Badge table ── */
-  (function () {
-    var tb = $('#badge-table tbody');
-    Object.keys(SIZES).forEach(function (s) {
-      [['d', 'Desktop'], ['m', 'Mobile']].forEach(function (b) {
-        var v = SIZES[s][b[0]], x = v.bd, tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = SIZE_NAME[s] + ' · ' + b[1]; tr.appendChild(th);
-        [x.off + 'px' + (x.offIcon ? ' (icon only ' + x.offIcon + 'px)' : ''), x.h + 'px', x.px + 'px', x.fs + 'px' + (x.ls ? ', ' + x.ls + 'px' : ''), v.dot + 'px'].forEach(function (t) { var td = document.createElement('td'); td.textContent = t; tr.appendChild(td); });
-        tb.appendChild(tr);
-      });
-    });
-  })();
-
-  /* ── Token table (resolved live) ── */
-  var TOK = [
-    ['Primary · fill', 'Enabled', 'surface-action-1'], ['Primary · label', 'Enabled', 'text-action-primary-inverted'],
-    ['Primary inverted · fill', 'Enabled', 'surface-action-2'], ['Primary inverted · label', 'Enabled', 'text-action-primary'],
-    ['Secondary · frame', 'Enabled', 'border-action-1'], ['Secondary inverted · frame', 'Enabled', 'border-action-2'],
-    ['Blank, Secondary · label', 'Enabled', 'text-action-primary'], ['Inverted · label', 'Enabled', 'text-action-primary-inverted'],
-    ['Destructive · fill', 'Enabled', 'surface-danger-default'], ['Accent · fill', 'Enabled', 'accent-default'], ['Accent · label', 'Enabled', 'text-action-accent'],
-    ['Transparent variants · fill', 'Enabled', 'surface-opacity-white-0'],
-    ['System · frame', 'Enabled', 'border-action-3'], ['System · selected fill', 'Selected', 'surface-opacity-black-12'], ['System · frame', 'Hover, selected hover', 'border-hover'],
-    ['Primary, Destructive, Accent · layer', 'Hover', 'surface-opacity-white-20'],
-    ['Badge number text', 'Badge', 'text-action-primary-inverted'], ['Primary inverted · layer, System fill', 'Hover', 'surface-opacity-black-12'],
-    ['Secondary, Blank · layer', 'Hover', 'surface-opacity-black-05'], ['Secondary, Blank inverted · layer', 'Hover', 'surface-opacity-white-20'],
-    ['Focus ring', 'Focus', 'border-focus'],
-    ['Fill', 'Disabled', 'surface-disabled'], ['Label', 'Disabled', 'text-disabled'], ['Frame (Secondary, System)', 'Disabled', 'border-disabled'],
-    ['Badge fill', 'Badge', 'surface-danger-default'],
-    ['Icon button · icon', 'Enabled', 'icon-primary'], ['Icon button · icon', 'Hover', 'text-action-primary-hover'], ['Close inverted · icon', 'Enabled', 'icon-inverted']
-  ];
-  var cs = getComputedStyle(document.documentElement), tt = $('#tok-table tbody');
-  TOK.forEach(function (t) {
-    var v = cs.getPropertyValue('--color-' + t[2]).trim(), tr = document.createElement('tr');
-    [t[0], t[1]].forEach(function (x, n) { var c = document.createElement(n ? 'td' : 'th'); if (!n) c.scope = 'row'; c.textContent = x; tr.appendChild(c); });
-    var tc = document.createElement('td'), code = document.createElement('code'); code.textContent = 'var(--color-' + t[2] + ')'; tc.appendChild(code); tr.appendChild(tc);
-    var vc = document.createElement('td'), dot = document.createElement('span');
-    dot.className = 'ds-dot'; dot.style.background = 'var(--color-' + t[2] + ')'; dot.setAttribute('aria-hidden', 'true');
-    vc.appendChild(dot); vc.appendChild(document.createTextNode(v || 'missing')); tr.appendChild(vc);
-    tt.appendChild(tr);
-  });
-
-  /* ── Code: recipes + live CSS ── */
-  var RECIPES = [
-    ['Primary', '<button type="button" class="btn btn--primary btn--lg">\n  <span class="btn__label">Add to cart</span>\n</button>'],
-    ['Secondary and Blank', '<button type="button" class="btn btn--secondary btn--md"><span class="btn__label">Cancel</span></button>\n<button type="button" class="btn btn--blank btn--md"><span class="btn__label">Read more</span></button>'],
-    ['Sizes', 'class="btn btn--primary btn--lg"   <!-- 56px desktop, 48px mobile -->\nclass="btn btn--primary btn--md"   <!-- 48px desktop, 40px mobile -->\nclass="btn btn--primary btn--sm"   <!-- 40px desktop, 32px mobile -->\nclass="btn btn--primary btn--xs"   <!-- 32px -->'],
-    ['Icon + label', '<button type="button" class="btn btn--primary btn--lg">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n  <span class="btn__label">Add to cart</span>\n</button>'],
-    ['Label + icon', '<button type="button" class="btn btn--secondary btn--md">\n  <span class="btn__label">Next</span>\n  <span class="btn__icon" aria-hidden="true">arrow_forward</span>\n</button>'],
-    ['Icon + label + icon', '<button type="button" class="btn btn--primary btn--lg">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n  <span class="btn__label">Add to cart</span>\n  <span class="btn__icon" aria-hidden="true">arrow_forward</span>\n</button>'],
-    ['Icon only', '<button type="button" class="btn btn--primary btn--lg btn--icon" aria-label="Cart">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n</button>'],
-    ['Badge: number on an icon-only button', '<button type="button" class="btn btn--primary btn--lg btn--icon" aria-label="Cart, 99+ items">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n  <span class="btn__badge" aria-hidden="true">99+</span>\n</button>'],
-    ['Badge: number on a button with a label', '<button type="button" class="btn btn--primary btn--lg" aria-label="Messages, 1 new">\n  <span class="btn__label">Messages</span>\n  <span class="btn__badge" aria-hidden="true">1</span>\n</button>'],
-    ['Badge: dot', '<button type="button" class="btn btn--primary btn--lg btn--icon" aria-label="Cart, new items">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n  <span class="btn__dot" aria-hidden="true"></span>\n</button>'],
-    ['Destructive and Accent', '<button type="button" class="btn btn--destructive btn--md"><span class="btn__label">Delete</span></button>\n<button type="button" class="btn btn--accent btn--md"><span class="btn__label">Campaign</span></button>'],
-    ['System (toggle)', '<button type="button" class="btn btn--system btn--md" aria-pressed="false"><span class="btn__label">Brand</span></button>\n<button type="button" class="btn btn--system btn--md" aria-pressed="true"><span class="btn__label">Size</span></button>'],
-    ['Inverted (on a dark surface)', '<div style="background: var(--color-surface-100)">\n  <button type="button" class="btn btn--primary-inverted btn--md"><span class="btn__label">Shop now</span></button>\n  <button type="button" class="btn btn--secondary-inverted btn--md"><span class="btn__label">Learn more</span></button>\n  <button type="button" class="btn btn--blank-inverted btn--md"><span class="btn__label">Skip</span></button>\n</div>'],
-    ['Disabled', '<button type="button" class="btn btn--primary btn--md" disabled><span class="btn__label">Unavailable</span></button>'],
-    ['Link that looks like a button', '<a href="/checkout" class="btn btn--primary btn--md"><span class="btn__label">Go to checkout</span></a>'],
-    ['Icon button (toggle)', '<button type="button" class="icon-btn" aria-label="Add to favourites" aria-pressed="false">\n  <span class="btn__icon" aria-hidden="true">favorite</span>\n</button>'],
-    ['Close', '<button type="button" class="icon-btn icon-btn--close" aria-label="Close">\n  <span class="btn__icon" aria-hidden="true">close</span>\n</button>'],
-    ['Focus ring script (once per page)', "document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });\n['mousedown', 'touchstart'].forEach(function (t) {\n  document.addEventListener(t, function () { document.body.classList.remove('keyboard-nav'); }, { passive: true });\n});"]
-  ];
-  var rh = $('#recipes');
-  RECIPES.forEach(function (r) {
-    var box = document.createElement('div'); box.className = 'ds-code';
-    var id = 'rc' + (uid++);
-    box.innerHTML = '<div class="ds-code__bar"><span></span><button type="button" class="mo-copy" data-copy="' + id + '" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="' + id + '"></pre>';
-    $('span', box).textContent = r[0]; $('pre', box).textContent = r[1];
-    rh.appendChild(box);
-  });
-  /* The component CSS lives in components/css/ (shared with prototypes); the Code section prints that same file */
-  function cssText(name) {
-    var get = function (n) { return fetch('../../components/css/' + n + '.css').then(function (r) { return r.text(); }); };
-    if (name !== 'select-menu') return get(name);
-    return Promise.all([get('menu'), get('select')]).then(function (a) { return a[0].replace(/\s+$/, '') + '\n\n' + a[1].slice(a[1].indexOf('    /* Exposed dropdown')); });
-  }
-  cssText('button').then(function (t) {
-    $('#css-code').textContent = t
-    .replace(/:is\(:hover, \[data-state="hover"\]\)/g, ':hover')
-    .replace(/,\n    \.btn\[data-state="focus"\]/g, '')
-    .replace(/,\n    \.icon-btn\[data-state="focus"\]/g, '')
-    .replace(/^\n+/, '').replace(/^ {4}/gm, '');
-  });
-
-  /* ── Copy buttons ── */
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-copy]'); if (!b) return;
-    var txt = document.getElementById(b.dataset.copy).textContent;
-    var ic = b.querySelector('.mo-ic'); var done = function () { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); };
-    if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done); else done();
-  });
-
-  renderPg(); buildVariants(); buildMatrix(); buildIcons();
 })();
 </script>
-<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
 <script src="../subnav.js"></script>
-<script src="../../components/js/select-menu.js"></script>
 </body>
 </html>

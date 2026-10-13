@@ -18,7 +18,7 @@
       groups: [
         { title: 'Actions', items: [c('button', 'Button'), c('button-group', 'Button group')] },
         { title: 'Form', items: [c('checkbox', 'Checkbox'), c('input', 'Input'), c('textarea', 'Text area'), c('radio', 'Radio button'), c('select', 'Select'), c('switch', 'Switch'), c('tabs', 'Tabs'), c('segment-control', 'Pill segment control'), c('range', 'Range'), c('icon-picker', 'Icon picker')] },
-        { title: 'Notifications', items: [c('notifications', 'Notifications guide'), c('toast', 'Toast'), c('toast-ecom', 'E-Com Toast'), c('modal', 'Modal'), c('banner', 'Banner'), c('inline', 'Inline notification')] },
+        { title: 'Notifications', items: [c('notifications', 'Notifications guide', { children: [c('toast', 'Toast'), c('toast-ecom', 'E-Com Toast'), c('modal', 'Modal'), c('banner', 'Banner'), c('inline', 'Inline notification')] })] },
         { title: 'Menus, lists and dividers', items: [c('menu', 'Menu'), c('list-item', 'List Item'), c('divider', 'Divider')] },
         { title: 'Links', items: [c('links-guide', 'Links guide', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
         { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb'), c('pagination', 'Pagination'), c('tooltip', 'Tooltip')] },

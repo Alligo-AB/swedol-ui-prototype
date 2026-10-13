@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Button group: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .bg-fig { width: 100%; overflow: hidden; padding: 4px; margin: -4px; box-sizing: content-box; }   /* demo: a fixed box, so a group that is too wide is cut off, not wrapped */
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="button-group.html" class="breadcrumb-item">Button group</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Actions</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for the button group (section “Button group” in eco-button). This page documents the repo implementation.">Not verified with Figma</span></div>
+    <h1 class="ds-title">Button group</h1>
+    <p class="ds-lead">A button group is a row of <strong>joined System buttons</strong> for choosing between two to four short options. The selected button has a black 12% fill.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from the specification skill: no Figma component is linked.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Button group"><a class="tab" href="button-group.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="button-group-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="button-group-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Height</th><th scope="col">Padding</th><th scope="col">Label</th></tr></thead><tbody><tr><th scope="row">Mobile and tablet</th><td>32px</td><td>0 10px</td><td>14/14, 0.42px, uppercase, weight 600</td></tr><tr><th scope="row">Desktop (769px+)</th><td>40px</td><td>0 16px</td><td>16/16, 0.48px, uppercase, weight 600</td></tr></tbody></table></div><p class="ds-desc ds-note">The tablet range (640 to 768px) uses the mobile values. The 1px frame is drawn inside each button (<code>inset box-shadow</code>) and shared between neighbours with <code>margin-left: -1px</code>. The group is <code>inline-flex</code> and never wider than its parent.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">The padding of one button, left and right. The numbers are read from the component.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="mb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="mb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" style="--k:2" role="img" aria-label="Padding of a button in a button group"><div class="measure__item"><span class="measure__name">1 · Button</span><div class="measure__obj"><div class="btn-group" role="group" aria-label="Option"><button type="button" class="measure__subject" aria-pressed="true" tabindex="-1">Option</button></div><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">A button at 2× size. Change the Breakpoint to see the mobile values.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Mobile and tablet</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Height</th><td>32px</td><td>40px</td></tr><tr><th scope="row">Padding left and right</th><td>10px</td><td>16px</td></tr><tr><th scope="row">Padding above and below</th><td>None: the height is fixed and the content is centred</td><td>None</td></tr><tr><th scope="row">Frame</th><td>1px, inside the box, shared with the neighbour (<code>margin-left: -1px</code>)</td><td>The same</td></tr><tr><th scope="row">Focus ring</th><td>2px line, 2px gap, outside the box</td><td>The same</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The side padding as a spacing token.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding, desktop</th><td><code>space-16</code></td></tr><tr><th scope="row">Padding, mobile</th><td>10px: literal, no spacing token</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Selected is a black 12% fill (<code>aria-pressed="true"</code>). Hover darkens the frame and, when not selected, adds the fill. Hover and focus are forced on this page; in your code they come from <code>:hover</code> and the keyboard focus rule.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb2-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb2-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Not selected</th><th scope="col">Selected</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Type</th><th scope="col">Mobile and tablet</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Label</th><td><code>label-md</code></td><td>14/14, 0.42px</td><td>16/16, 0.48px</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed, weight 600, uppercase through CSS, so write the label in sentence case in the HTML. No font features, as for the Small button.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Group</th><td><code>btn-group</code></td><td><code>role="group"</code> with <code>aria-label</code> or <code>aria-labelledby</code>. <code>inline-flex</code>, <code>max-width: 100%</code>.</td></tr><tr><th scope="row">Button</th><td><code>button</code> inside the group</td><td>A real <code>&lt;button type="button"&gt;</code>. Selected is <code>aria-pressed="true"</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">The group is as wide as its buttons and never wider than its parent. It never wraps. Two to four options.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row">Fill: <code>opacity</code> of <code>::before</code></th><td><code>duration-fast-2</code> (100ms)</td><td><code>ease-standard</code></td></tr><tr><th scope="row">Frame: <code>box-shadow</code></th><td><code>duration-fast-2</code></td><td><code>ease-standard</code></td></tr><tr><th scope="row">Focus ring: <code>outline-color</code></th><td><code>duration-fast-2</code></td><td><code>ease-standard</code></td></tr></tbody></table></div><p class="ds-desc ds-note">The same dissolve as the Button. Under <code>prefers-reduced-motion: reduce</code> the transition is turned off.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Selection</th><td>One selected at a time, set by your script via <code>aria-pressed</code>. The CSS does not toggle it.</td></tr><tr><th scope="row">Markup</th><td><code>role="group"</code> with <code>aria-label</code> or <code>aria-labelledby</code>; real <code>&lt;button type="button"&gt;</code>.</td></tr><tr><th scope="row">Tab</th><td>Each button is focusable; 2px focus ring with a 2px gap on keyboard focus.</td></tr><tr><th scope="row">Not navigation</th><td>A System button group toggles state. Page navigation uses links.</td></tr><tr><th scope="row">Count</th><td>Two to four options. More: a select. When the group is wider than its container, show a select with the same options and keep the two in sync; never shrink, wrap or scroll the group.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Markup</th><td><code>role="group"</code> with an accessible name; real buttons with <code>aria-pressed</code>.</td></tr><tr><th scope="row">Focus</th><td>2px ring <code>border-focus</code> with a 2px gap, on keyboard use (WCAG 2.4.7, 1.4.11). It is set with <code>body.keyboard-nav</code>.</td></tr><tr><th scope="row">State</th><td>The selected button differs by its fill and by <code>aria-pressed</code>, not by color alone (WCAG 1.4.1).</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var tb = $('#matrix tbody');
+  [['Enabled', ''], ['Hover', 'hover'], ['Focus', 'focus'], ['Disabled', 'disabled']].forEach(function (r) {
+    var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+    [false, true].forEach(function (sel) {
+      var td = document.createElement('td'), g = document.createElement('div'); g.className = 'btn-group'; g.setAttribute('role', 'group'); g.setAttribute('aria-label', r[0]); g.style.alignSelf = 'center';
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Option'; b.setAttribute('aria-pressed', String(sel)); if (r[1] === 'disabled') b.disabled = true; else if (r[1]) b.dataset.state = r[1];
+      g.appendChild(b); td.appendChild(g); tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+  DK.tokenTable($('#tok-table tbody'), [['Enabled', 'Text', 'text-action-primary'], ['All', 'Frame', 'border-action-3'], ['Hover', 'Frame', 'border-hover'], ['Hover, not selected', 'Fill', 'surface-opacity-black-12'], ['Selected', 'Fill', 'surface-opacity-black-12'], ['Focus', 'Ring', 'border-focus'], ['Disabled', 'Text', 'text-disabled'], ['Disabled', 'Frame', 'border-disabled']]);
+  DK.bp(function () { if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

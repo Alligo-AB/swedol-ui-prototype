@@ -12,6 +12,7 @@ description: Use when building a system-generated Toast notification — short-l
 ## Notification – System Toast (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-29321
+**Documentation (three pages, converted 2026-10-13):** `eco-design-system/components/toast.html` (Examples & Guidelines), `toast-specifications.html`, `toast-code.html`; hub: `notifications.html`. Generator: `eco-design-system/gen/gen_toast.py` (starting point only: the pages are the real files).
 
 ### Used when
 - Responding to a user action (save, send, delete)
@@ -34,7 +35,7 @@ description: Use when building a system-generated Toast notification — short-l
 | **Warning** | Warns of soft errors, e.g. "Poor network connection. Retrying…". | May remain on screen until the user dismisses it or proceeds with their task. Dismissible or persistent depending on content. |
 | **Error** | Brief alerts about a background process crash: "Failed to upload attachment". | Probably requires immediate action — should include a retry CTA directly inside the toast. Stays until the user dismisses it or the error is resolved. |
 
-All four statuses support **Strong / Weak** emphasis.
+All four statuses support **Strong / Weak** emphasis. **Which one: Weak is the default** (normal feedback: "Saved", "Copied", "Could not save – try again", also for warnings and errors). Strong only exceptionally, when the feedback needs extra visual attention; never for a critical interruption or anything the user must notice or act on (use a Banner or an Inline notification near the content, a toast disappears). Pass `emphasis` on purpose; the runtime default is Weak. See `notifications-guide` → "Choosing the emphasis".
 
 ---
 

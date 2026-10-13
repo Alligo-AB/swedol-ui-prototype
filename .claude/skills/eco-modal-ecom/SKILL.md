@@ -10,6 +10,7 @@ description: Use when building a modal (E-Com Modal) that requires confirmation 
 ## Notification – E-Com Modal (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-48335
+**Documentation (three pages, converted 2026-10-13):** `eco-design-system/components/modal.html` (Examples & Guidelines), `modal-specifications.html`, `modal-code.html`; hub: `notifications.html`. Generator: `eco-design-system/gen/gen_modal.py` (starting point only: the pages are the real files).
 
 ### Used when
 - The action requires confirmation or an active choice before the user can continue
@@ -253,3 +254,9 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 ```
 
 ---
+
+---
+
+### Motion
+
+The overlay fades; the panel fades and moves **64px** (`space-64`, via `translate`, so the centering `transform` is untouched): up when it comes in, down when it leaves. **A trial (2026-10-13):** 8px and 24px were tried first. No scale. **Why 64px and no token:** the move is short, so the Fast durations apply. The distance is `space-64` in the keyframes, with no distance token or custom property: Carbon, Spectrum and Atlassian tokenize duration and easing only and leave the travel distance to the component. Add a shared distance scale only when a second component needs the same move. Everything below is for both. **Enter:** `--ease-decelerate-emphasized`, `--duration-fast-4` (200 ms). **Exit (added 2026-10-13):** `--ease-accelerate-generic`, `--duration-fast-3` (150 ms): an element that disappears accelerates, and a modal closes faster than it opens (as Material, Carbon and Atlassian do; Material also scales 0.9 to 1, ECO does not). Override with `--modal-in-ease` / `--modal-in-duration` / `--modal-out-ease` / `--modal-out-duration` on `<html>`. `openModal` adds `is-leaving` to the panel and the overlay and removes them when the animation has run (`.modal.is-leaving`, `@keyframes modal-out`); `onClose`, the scroll unlock and the focus return happen at once. Reduced motion: no fade, removed at once. Live comparison: the **Motion** section on `eco-design-system/components/modal.html`.

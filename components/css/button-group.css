@@ -22,3 +22,4 @@
 .btn-group button:is(:hover, [data-state="hover"]):not(:disabled) { z-index: 1; }  /* hover frame on top of the neighbours' */
 .btn-group button[data-state="focus"], body.keyboard-nav .btn-group button:focus { outline-color: var(--color-border-focus); z-index: 2; }
 @media (min-width: 769px) { .btn-group button { height: 40px; padding: 0 var(--dimension-spacing-space-16); font-size: 16px; line-height: 16px; letter-spacing: 0.48px; } }
+@media (prefers-reduced-motion: reduce) { .btn-group button, .btn-group button::before { transition: none; } }

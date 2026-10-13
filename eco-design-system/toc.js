@@ -8,6 +8,7 @@
 (function () {
   var doc = document.querySelector('.ds-doc');
   if (!doc) return;
+  var base = document.currentScript ? document.currentScript.src.replace(/toc\.js.*$/, '') : '';   // eco-design-system/, for the lazy notifications files
 
   function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
   var items = [];
@@ -49,6 +50,35 @@
     return '<li class="ds-sidetoc__item ds-sidetoc__item--' + i.level + '"><a href="#' + i.id + '">' + esc(i.text) + '</a></li>';
   }).join('') + '</ul></div>';
   doc.insertBefore(side, doc.firstChild);
+
+  // heading anchors: a link icon on every Contents heading copies the URL of that heading and shows a success toast.
+  // The toast is the ECO system toast (notifications.js / notifications.css), loaded on the first click. The stylesheet goes BEFORE docs.css,
+  // so docs.css and the component files win (notifications.css has its own .btn base).
+  function withToast(fn) {
+    if (window.ECO_N) return fn();
+    var docs = document.querySelector('link[href$="docs.css"]'), css = document.createElement('link');
+    css.rel = 'stylesheet'; css.href = base + 'notifications.css?v=16'; docs ? docs.parentNode.insertBefore(css, docs) : document.head.appendChild(css);
+    var js = document.createElement('script'); js.src = base + 'notifications.js'; js.onload = fn; document.body.appendChild(js);
+  }
+  function copyFallback(t) {
+    var ta = document.createElement('textarea'), ok = false; ta.value = t; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select(); try { ok = document.execCommand('copy'); } catch (e) {} ta.remove(); return ok;
+  }
+  function copyText(t) {   // resolves true when copied, false when the browser refused
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t).then(function () { return true; }, function () { return copyFallback(t); });
+    return Promise.resolve(copyFallback(t));
+  }
+  items.forEach(function (it) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'icon-btn ds-anchor'; b.setAttribute('aria-label', 'Copy link to ' + it.text); b.setAttribute('data-tooltip', 'Copy link to heading');
+    b.innerHTML = '<span class="btn__icon" aria-hidden="true">link</span>';
+    b.addEventListener('click', function () {
+      var url = location.origin + location.pathname + location.search + '#' + it.id;
+      history.replaceState(null, '', '#' + it.id);
+      copyText(url).then(function (ok) { withToast(function () { ECO_N.showToast(ok ? { status: 'success', emphasis: 'weak', text: 'URL to heading copied', autoHide: 4000 } : { status: 'error', emphasis: 'weak', text: 'Could not copy the URL. Copy it from the address bar.', autoHide: 6000 }); }); });
+    });
+    it.el.appendChild(b);
+  });
 
   // scrollspy: the last heading that has passed the top third of the window
   var links = [].slice.call(side.querySelectorAll('a'));

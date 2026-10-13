@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banner: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../notifications.css?v=22">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; align-items: stretch; width: 100%; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); justify-items: start; width: 100%; }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; } }
+    .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); flex-wrap: wrap; width: 100%; }
+    .pg-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-row:last-child { padding-bottom: 0; }
+    .pg-row__txt { flex: 1; min-width: 240px; }
+    .pg-row__txt b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-row__txt span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .ds-field[hidden], .form-range[hidden] { display: none; }
+    .pg-fig-host { width: 100%; max-width: 100%; overflow: hidden; }
+    .pg-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pg-form__region { min-height: 0; width: 100%; }
+    .pg-form__region:empty { display: none; }
+    body[data-bp="mobile"] :is(.toast, .ecom-toast, .banner-notification, .inline-notification) { max-width: 375px; }   /* the forced Mobile preview is as wide as a phone: in real use these fill the window */
+    .pg-figs { display: flex; flex-direction: column; gap: 32px; }
+    .pg-fig { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .pg-fig img { display: block; width: 100%; height: auto; border: 1px solid var(--color-border-secondary); }
+    .pg-fig--mobile img { max-width: 375px; }
+    .pg-fig figcaption { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); max-width: 720px; }
+    #prio-table th[scope="row"] { width: 22%; min-width: 150px; }
+    #prio-table td:nth-child(3) { width: 150px; white-space: nowrap; }
+    #prio-table td:nth-child(4) { width: 22%; min-width: 150px; }
+    /* Up to 1100px each row stacks: priority, banner, the Applies button, the result (labels come from data-label) */
+    @media (max-width: 1100px) {
+      #prio-table, #prio-table tbody, #prio-table tr, #prio-table th, #prio-table td { display: block; width: auto; min-width: 0; }
+      #prio-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      #prio-table tr { padding: 16px; border-bottom: 1px solid var(--color-border-secondary); }
+      #prio-table tr:last-child { border-bottom: 0; }
+      #prio-table th[scope="row"], #prio-table td { width: auto; min-width: 0; padding: 0; border: 0; }
+      #prio-table td { margin-top: 12px; }
+      #prio-table td[data-label]::before { content: attr(data-label); display: block; font-size: 12px; line-height: 16px; letter-spacing: 0.24px; font-weight: 600; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 4px; }
+      #prio-table td:nth-child(3) { white-space: normal; }
+      #prio-table th[scope="row"] .ds-na { display: block; white-space: normal; }
+    }
+    .ds-callout__art { padding: 56px 24px 56px 24px; width: 100%; box-sizing: border-box; }
+    .ms-banner .measure__obj { width: 560px; max-width: 100%; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="notifications.html" class="breadcrumb-item">Notifications</a><span class="breadcrumb-sep">/</span><a href="banner.html" class="breadcrumb-item">Banner</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Notifications</span></div>
+    <h1 class="ds-title">Banner</h1>
+    <p class="ds-lead">A banner carries a <strong>page-wide or system-level message</strong>: an outage, planned maintenance, a campaign or a notice to one customer group. It sits at the top and stays until it is closed or the situation changes.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-41997" target="_blank" rel="noopener">Banner</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Banner"><a class="tab" href="banner.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="banner-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="banner-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package. <code>{status}</code> is <code>information</code>, <code>success</code>, <code>warning</code> or <code>danger</code> (Error).</p><h3 class="ds-h3 ds-group">Emphasis</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Emphasis</th><th scope="col">Background</th><th scope="col">Left edge</th><th scope="col">Text</th><th scope="col">Shadow</th></tr></thead><tbody><tr><th scope="row">Strong</th><td><code>surface-{status}-default</code></td><td><code>surface-{status}-weaker</code></td><td><code>text-primary-inverted</code></td><td>Large only</td></tr><tr><th scope="row">Weak</th><td><code>surface-{status}-weaker</code></td><td><code>surface-{status}-default</code></td><td><code>text-primary</code></td><td>Large only</td></tr><tr><th scope="row">Weaker</th><td><code>surface-raised-primary</code></td><td><code>surface-{status}-default</code></td><td><code>text-primary</code></td><td>Always (<code>elevation-b-20</code>)</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Tokens</h3><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Emphasis</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Desktop (769px+)</th><th scope="col">Tablet (640–768px)</th><th scope="col">Mobile (below 640px)</th></tr></thead><tbody><tr><th scope="row">Small height</th><td>48px min</td><td>40px min</td><td>40px min</td></tr><tr><th scope="row">Small padding</th><td>12px / 16px</td><td>8px / 16px</td><td>8px / 16px</td></tr><tr><th scope="row">Small text</th><td>14/20, 0.36px; title 14px, 0.56px</td><td>12/18, 0.24px; title 12px, 0.48px</td><td>12/18; title 12px</td></tr><tr><th scope="row">Large left edge</th><td>8px</td><td>4px</td><td>4px</td></tr><tr><th scope="row">Large icon</th><td>48px</td><td>40px</td><td>24px</td></tr><tr><th scope="row">Large padding</th><td>24px</td><td>16px</td><td>12px, 12px, 16px (top, sides, bottom)</td></tr><tr><th scope="row">Large gap icon to text</th><td>12px</td><td>12px</td><td>8px</td></tr><tr><th scope="row">Large heading / body</th><td>20/24 / 17/24</td><td>18/22 / 16/22</td><td>18/22 / 16/22</td></tr><tr><th scope="row">Large action indent</th><td>60px</td><td>52px</td><td>32px</td></tr><tr><th scope="row">Promotion height</th><td>48px</td><td>40px</td><td>32px</td></tr><tr><th scope="row">Width</th><td>100% of the container</td><td>100%</td><td>100%</td></tr></tbody></table></div><p class="ds-desc ds-note">Promotion on tablet keeps the mobile layout (title left, link and × right); the Figma heights are 48px desktop and 32px mobile.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">The padding of a Small and a Large banner. The shaded area is the padding; the status edge sits outside it. The numbers are read from the component.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="mb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="mb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure ms-banner" id="ms" role="img" aria-label="Padding of a Small and a Large banner"></div></div><figcaption class="ds-fig__cap">A Small and a Large banner. Change the Breakpoint to see the tablet and mobile values.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Desktop (769px+)</th><th scope="col">Tablet (640–768px)</th><th scope="col">Mobile (below 640px)</th></tr></thead><tbody><tr><th scope="row">Small padding</th><td>12px above and below, 16px sides</td><td>8px above and below, 16px sides</td><td>same as tablet</td></tr><tr><th scope="row">Large padding</th><td>24px</td><td>16px</td><td>12px, 12px, 16px (top, sides, bottom)</td></tr><tr><th scope="row">Large left edge</th><td>8px</td><td>4px</td><td>4px</td></tr><tr><th scope="row">Large gap icon to text</th><td>12px</td><td>12px</td><td>8px</td></tr><tr><th scope="row">Large space above the actions</th><td>24px</td><td>24px</td><td>24px</td></tr><tr><th scope="row">Promotion padding</th><td>12px above and below, 48px sides</td><td>4px above and below, 8px sides</td><td>same as tablet</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same distances as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Small padding, desktop</th><td><code>space-12</code> and <code>space-16</code></td></tr><tr><th scope="row">Small padding, mobile</th><td><code>space-8</code> and <code>space-16</code></td></tr><tr><th scope="row">Large padding, desktop</th><td><code>space-24</code></td></tr><tr><th scope="row">Large padding, tablet</th><td><code>space-16</code></td></tr><tr><th scope="row">Large padding, mobile</th><td><code>space-12</code> and <code>space-16</code></td></tr><tr><th scope="row">Icon to text</th><td><code>space-8</code> (Large: <code>space-12</code> from 640px)</td></tr><tr><th scope="row">Left edge, Small</th><td><code>space-2</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="elevation"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Elevation</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Every banner</th><td><code>shadow-elevation-b-20</code></td><td>Small, Large and Promotion, all emphasis levels. Set once on <code>.banner-notification</code>.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Each status in three emphasis levels. A banner has no hover or focus state of its own; only the × and its links do. Choose the level by how much the user must notice it: see <a class="inline-link inline-link--large inline-link--secondary" href="notifications.html#emphasis">Choosing the emphasis</a>.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="ss-l">Size</span><div class="btn-group" role="group" aria-labelledby="ss-l" data-mx="size"><button type="button" data-v="small" aria-pressed="true">Small</button><button type="button" data-v="large" aria-pressed="false">Large</button></div><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">Status</th><th scope="col">Strong</th><th scope="col">Weak</th><th scope="col">Weaker</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Token</th><th scope="col">Mobile and tablet</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Small title</th><td><code>label-sm</code>, bold, uppercase</td><td>12/12, 0.48px</td><td>14/14, 0.56px</td></tr><tr><th scope="row">Small text</th><td><code>body-sm</code></td><td>12/18, 0.24px</td><td>14/20, 0.36px</td></tr><tr><th scope="row">Inline link, Small</th><td>Small Bold</td><td>14/20</td><td>14/20</td></tr><tr><th scope="row">Large heading</th><td><code>title-md</code></td><td>18/22, bold</td><td>20/24, bold</td></tr><tr><th scope="row">Large body</th><td><code>body-md</code></td><td>16/22, 0.32px</td><td>17/24, 0.32px</td></tr><tr><th scope="row">Promotion title</th><td><code>label-md</code></td><td>14/16, 0.42px</td><td>18/18, 0.18px</td></tr><tr><th scope="row">Promotion link</th><td><code>body-sm</code> / <code>body-md</code></td><td>14/16, 0.36px</td><td>17/24, 0.32px</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Banner</th><td><code>banner-notification banner-notification--{status} banner-notification--{emphasis}</code></td><td>Emphasis: <code>strong</code>, <code>weak</code>, <code>weaker</code>. Add <code>--large</code> for Large.</td></tr><tr><th scope="row">Small</th><td><code>__base</code>, <code>__left-border</code>, <code>__container</code>, <code>__inner</code>, <code>__content</code></td><td>Edge, container, text row.</td></tr><tr><th scope="row">Icon, title, text</th><td><code>__icon</code>, <code>__title</code>, <code>__text</code></td><td>The icon is a <code>material-symbols-outlined</code> span.</td></tr><tr><th scope="row">Inline link</th><td><code>__links</code></td><td>Small: between the text and the ×.</td></tr><tr><th scope="row">Large</th><td><code>__main</code>, <code>__textblock</code>, <code>__heading</code>, <code>__body</code>, <code>__footer</code>, <code>__btns</code></td><td>Icon, heading, body, actions.</td></tr><tr><th scope="row">Promotion</th><td><code>banner-notification--promotion banner-notification--{dark|light|accent-strong|accent-weak}</code></td><td>No status. <code>__promo</code> holds the title and the link.</td></tr><tr><th scope="row">Close</th><td><code>icon-btn icon-btn--close</code></td><td>Add <code>icon-btn--close-inverted</code> on Strong and Dark.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Kind</th><th scope="col">Emphasis</th><th scope="col">Statuses</th></tr></thead><tbody><tr><th scope="row">Small</th><td>Strong, Weak, Weaker</td><td>Informational, Success, Warning, Error</td></tr><tr><th scope="row">Large (My Pages only)</th><td>Strong, Weak, Weaker</td><td>Informational, Success, Warning, Error</td></tr><tr><th scope="row">Promotion</th><td>Dark, Light, Strong (accent), Weak (accent)</td><td>None</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">Always 100% of the container.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Close: <code>opacity</code>, <code>height</code>, margin and padding</th><td><code>--n-close-duration</code></td><td>Default <code>duration-fast-3</code> (150ms)</td></tr><tr><th scope="row">Easing</th><td><code>--n-close-ease</code></td><td>Default <code>ease-accelerate-generic</code></td></tr><tr><th scope="row">Height collapse</th><td><code>data-n-close="fade"</code> on an ancestor turns it off</td><td>On by default</td></tr></tbody></table></div><p class="ds-desc ds-note">Reduced motion: the banner is hidden at once. Slow durations (450ms or more) and decelerate easings are wrong for an exit. Compare values in the live Motion section on <a class="inline-link inline-link--medium inline-link--secondary" href="banner.html#motion">Examples &amp; Guidelines</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click ×</th><td>Hides the banner. Whether the × exists is decided by the banner’s owner.</td></tr><tr><th scope="row">Persistence</th><td>A banner never disappears by itself. It stays until it is closed or the state changes.</td></tr><tr><th scope="row">Tab</th><td>The ×, buttons and links take focus with a visible ring.</td></tr><tr><th scope="row">Inline link</th><td>Underlined when enabled; on hover the underline goes and the color changes (<code>eco-inline-link</code>, Medium; inverted on Strong and Promotion Dark). Brand-accent Promotion keeps its text color on hover.</td></tr><tr><th scope="row">Order</th><td>Place the banner at the top of the content in the DOM so screen reader users meet it first.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Markup</th><td>A Strong or Error banner for an outage should use <code>role="alert"</code>; other banners need no role.</td></tr><tr><th scope="row">Status</th><td>The icon and the text carry the status, not the color alone (WCAG 1.4.1).</td></tr><tr><th scope="row">Focus</th><td>The ×, buttons and links have a 2px ring, <code>border-focus</code>, on keyboard use (WCAG 2.4.7).</td></tr><tr><th scope="row">Contrast</th><td>Strong uses white text on the solid status color; Weak and Weaker use <code>text-primary</code>.</td></tr><tr><th scope="row">Reduced motion</th><td>The banner is hidden without a transition under <code>prefers-reduced-motion: reduce</code>.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../notifications.js?v=12"></script>
+<script src="../../components/js/range.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var N = ECO_N, H = N.html, IMG = '/images/product-hantverksbyxa.jpg';
+  var STATUS = [['info', 'Informational'], ['success', 'Success'], ['warning', 'Warning'], ['error', 'Error']];
+  function mk(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
+
+  var TXT = { info: 'Free shipping on orders over 1 000 kr.', success: 'Your price list was updated.', warning: 'Planned maintenance on Sunday 02:00–04:00.', error: 'The site is slow right now. We are working on it.' };
+  function ban(o) { return mk(H.banner(o)); }
+  function measureItem(name, el, subjSel, edge) {
+    var it = document.createElement('div'); it.className = 'measure__item';
+    var nm = document.createElement('span'); nm.className = 'measure__name'; nm.textContent = name;
+    var obj = document.createElement('div'); obj.className = 'measure__obj'; obj.appendChild(el);
+    var s = subjSel ? $(subjSel, el) : el; s.classList.add('measure__subject');
+    if (edge === true) s.setAttribute('data-measure-edge', ''); else if (edge) $(edge, el).setAttribute('data-measure-edge', '');
+    ['t', 'b', 'l', 'r'].forEach(function (d) { var i = document.createElement('i'); i.className = 'measure__pad measure__pad--' + d; obj.appendChild(i); });
+    [['v', 't'], ['v', 'b'], ['h', 'l'], ['h', 'r']].forEach(function (p) { var b = document.createElement('b'); b.className = 'measure__dim measure__dim--' + p[0] + ' measure__dim--' + p[1]; b.appendChild(document.createElement('span')); obj.appendChild(b); });
+    it.appendChild(nm); it.appendChild(obj); return it;
+  }
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Strong · Informational', 'Background', 'surface-information-default'], ['Weak · Informational', 'Background', 'surface-information-weaker'], ['Weak · Informational', 'Edge', 'border-information-weaker'], ['Weak · Informational', 'Icon', 'text-information-default'],
+    ['Weaker', 'Background', 'surface-raised-primary'], ['Weaker', 'Shadow', 'shadow-elevation-b-20'], ['Promotion · Dark', 'Background', 'surface-100'],
+    ['Promotion · Strong', 'Background (brand accent)', 'accent-default'], ['Promotion · Strong', 'Text', 'text-action-accent'], ['Promotion · Weak', 'Background (brand accent)', 'accent-light'], ['Promotion · Weak', 'Text', 'text-action-primary']]);
+
+  /* Measurements */
+  $('#ms').appendChild(measureItem('Small', ban({ size: 'small', status: 'warning', emphasis: 'weak', title: 'Title', text: 'Body text explains what is happening.' }), '.banner-notification__inner', '.banner-notification__left-border'));
+  $('#ms').appendChild(measureItem('Large', ban({ size: 'large', status: 'info', emphasis: 'weaker', icon: 'nest_eco_leaf', heading: 'Heading', body: 'Body text explains what is happening.', secondary: 'Secondary', primary: 'Blank' }), '.banner-notification__inner', '.banner-notification__left-border'));
+  DK.bp(function () { if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+
+  /* States */
+  var mx = { size: 'small' };
+  function matrix() {
+    var tb = clear($('#matrix tbody'));
+    STATUS.forEach(function (s) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = s[1]; tr.appendChild(th);
+      ['strong', 'weak', 'weaker'].forEach(function (e) {
+        var td = document.createElement('td');
+        td.appendChild(ban(mx.size === 'small' ? { size: 'small', status: s[0], emphasis: e, title: s[1], text: 'Banner text.', links: ['Link'] } : { size: 'large', status: s[0], emphasis: e, heading: s[1], body: 'Short body copy for the Large banner.', secondary: 'Action' }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  DK.seg($('[data-mx="size"]'), function (v) { mx.size = v; matrix(); });
+  matrix();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

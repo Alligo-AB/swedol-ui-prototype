@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Button: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .bt-row { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+    .bt-vrow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 12px 0; }
+    .bt-vrow + .bt-vrow { border-top: 1px solid var(--color-border-primary); }
+    .ds-stage--dark .bt-vrow + .bt-vrow { border-top-color: var(--color-surface-60); }
+    .bt-vlabel { flex: 0 0 100%; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; color: var(--color-text-tertiary); }
+    .ds-stage--dark .bt-vlabel { color: var(--color-text-tertiary-inverted); }
+    @media (min-width: 769px) { .bt-vlabel { flex-basis: 168px; } }
+    .bt-dark { background: var(--color-surface-100); }
+    .ds-matrix td.bt-dark, .ds-matrix th.bt-dark { color: var(--color-text-primary-inverted); border-color: var(--color-surface-60); }
+    .ds-matrix td { text-align: center; }
+    .ds-matrix td > .btn, .ds-matrix td > .icon-btn { vertical-align: middle; }
+    .bt-pair { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8); align-items: center; }
+    .bt-fig { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .bt-icons td, .bt-icons th { text-align: center; }
+    .bt-icons td:first-child, .bt-icons th:first-child { text-align: left; }
+    .bt-icons td { min-width: 72px; }
+    .bt-col { display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16); width: 100%; }
+    .bt-col .divider { width: 100%; margin: 0; }
+    .bt-toast { width: 100%; }
+    .bt-toast .ecom-toast--cart { position: static; width: 100%; }   /* demo: the real e-com toast card, in the flow and as wide as the figure */
+    .ds-callout__art { padding-right: 56px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="button.html" class="breadcrumb-item">Button</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Actions</span></div>
+    <h1 class="ds-title">Button</h1>
+    <p class="ds-lead">A button <strong>triggers an action</strong> or <strong>takes the user to another page</strong>. It lets the user make a choice with a single tap. Use a mix of styles on one page to point at the main action and still offer the alternatives.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=6098-342318" target="_blank" rel="noopener">Button</a>, <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23990-132193" target="_blank" rel="noopener">Icon buttons</a>, <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23998-178299" target="_blank" rel="noopener">Button dot &amp; badges</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Button"><a class="tab" href="button.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="button-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="button-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Variant · part</th><th scope="col">Where</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Open points:</strong> Figma sets <code>ss02</code> and <code>ss03</code> on <code>label-lg</code> and <code>label-sm</code> but not on <code>label-md</code> (Small): the CSS follows Figma, confirm that is meant. Disabled Primary inverted and Accent were read from the screenshot (grey <code>surface-disabled</code> fill). Figma uses both <code>text-primary-inverted</code> and <code>text-action-primary-inverted</code> for the white of the badge number: the CSS uses the action token. The badge pill uses a literal <code>100px</code> radius. The toggle icon button has no focus or disabled state in Figma: disabled uses <code>text-disabled</code>, because <code>icon/disabled</code> (#939595) has no token.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><p class="ds-desc">Heights and type per size and breakpoint. The table is generated from the same numbers the Breakpoint toggle previews.</p><div class="ds-table-wrap"><table class="ds-table" id="size-table"><thead><tr><th scope="col">Size</th><th scope="col">Height</th><th scope="col">Padding</th><th scope="col">Label inset</th><th scope="col">Icon</th><th scope="col">Label style</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Icon-only buttons are squares: width equals height (56 / 48 / 40 / 32px on desktop, 48 / 40 / 32 / 32px on mobile). The 1px frame of Secondary, System and their inverted versions is drawn inside the box, so it never changes the size: Primary and Secondary of the same size are equally wide. The tablet range (640 to 768px) uses the Mobile values.</p><h3 class="ds-h3 ds-group">Badge sizes</h3><p class="ds-desc">Number badge: a pill, as high as it is wide for one digit and wider for two or “99+”. Offsets are from the top and right edge of the button. Same numbers for a button with a label and an icon-only button, except XSmall icon only (2px).</p><div class="ds-table-wrap"><table class="ds-table" id="badge-table"><thead><tr><th scope="col">Size · breakpoint</th><th scope="col">Number: offset</th><th scope="col">Height</th><th scope="col">Side padding</th><th scope="col">Digits</th><th scope="col">Dot: offset</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">The badge is <code>surface-danger-default</code> with a white number (<code>text-action-primary-inverted</code>), uppercase, 600. The dot is a 6px circle in the same color.</p><h3 class="ds-h3 ds-group">Icon buttons</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Version</th><th scope="col">Box</th><th scope="col">Icon</th></tr></thead><tbody><tr><th scope="row">Toggle icon, Large</th><td>24px</td><td>24px</td></tr><tr><th scope="row">Toggle icon, Small</th><td>20px</td><td>20px</td></tr><tr><th scope="row">Close</th><td>24px (2px padding)</td><td>20px</td></tr></tbody></table></div><p class="ds-desc ds-note">Close is 24px in Figma, below the usual 44px touch target, and Figma has no larger hit-area version. It meets the WCAG 2.2 minimum (24px).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">The padding of each size: the space between the edge of the button and its content. The label has an extra inset on top of it (see the table). The numbers are read from the component.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="mb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="mb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" style="--k:2" role="img" aria-label="Padding of a button, left and right, per size"><div class="measure__item"><span class="measure__name">1 · Large</span><div class="measure__obj"><button type="button" class="btn btn--secondary btn--lg measure__subject" tabindex="-1"><span class="btn__label">Button label</span></button><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Medium</span><div class="measure__obj"><button type="button" class="btn btn--secondary btn--md measure__subject" tabindex="-1"><span class="btn__label">Button label</span></button><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">3 · Small</span><div class="measure__obj"><button type="button" class="btn btn--secondary btn--sm measure__subject" tabindex="-1"><span class="btn__label">Button label</span></button><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">4 · XSmall</span><div class="measure__obj"><button type="button" class="btn btn--secondary btn--xs measure__subject" tabindex="-1"><span class="btn__label">Button label</span></button><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">A Secondary button at 2× size. Change the Breakpoint to see the mobile values.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Large</th><th scope="col">Medium</th><th scope="col">Small</th><th scope="col">XSmall</th></tr></thead><tbody><tr><th scope="row">Height, desktop</th><td>56px</td><td>48px</td><td>40px</td><td>32px</td></tr><tr><th scope="row">Height, mobile</th><td>48px</td><td>40px</td><td>32px</td><td>32px</td></tr><tr><th scope="row">Padding left and right, desktop</th><td>16px</td><td>12px</td><td>8px</td><td>6px</td></tr><tr><th scope="row">Padding left and right, mobile</th><td>12px</td><td>8px</td><td>4px</td><td>6px</td></tr><tr><th scope="row">Label inset, left and right, desktop</th><td>8px</td><td>8px</td><td>8px</td><td>4px</td></tr><tr><th scope="row">Label inset, left and right, mobile</th><td>8px</td><td>8px</td><td>6px</td><td>4px</td></tr><tr><th scope="row">Icon</th><td>24px</td><td>24px</td><td>24px</td><td>20px</td></tr><tr><th scope="row">Padding above and below</th><td>None: the height is fixed and the content is centred</td><td>None</td><td>None</td><td>None</td></tr><tr><th scope="row">Frame</th><td>1px, inside the box</td><td>1px, inside the box</td><td>1px, inside the box</td><td>1px, inside the box</td></tr><tr><th scope="row">Focus ring</th><td>2px line, 2px gap, outside the box</td><td>2px line, 2px gap</td><td>2px line, 2px gap</td><td>2px line, 2px gap</td></tr></tbody></table></div><p class="ds-desc ds-note">An icon-only button has no padding: it is a square the size of its height, with the icon centred. The icon button has no padding either (Close has 2px).</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The padding and the label inset as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding, Large desktop</th><td><code>space-16</code></td></tr><tr><th scope="row">Padding, Large mobile and Medium desktop</th><td><code>space-12</code></td></tr><tr><th scope="row">Padding, Medium mobile and Small desktop</th><td><code>space-8</code></td></tr><tr><th scope="row">Padding, Small mobile</th><td><code>space-4</code></td></tr><tr><th scope="row">Padding, XSmall</th><td>6px: literal, no spacing token</td></tr><tr><th scope="row">Label inset</th><td><code>space-8</code> (Large, Medium, Small desktop), <code>space-4</code> (XSmall); Small mobile 6px: literal, no spacing token</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><h3 class="ds-h3 ds-group">Button</h3><p class="ds-desc">Every state for every variant. Hover and focus are forced on this page with <code>data-state</code> so they show at the same time; in your code they come from <code>:hover</code> and the keyboard focus rule. The buttons are live (the disabled ones do not respond).</p><h3 class="ds-h3">What each state means</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">State</th><th scope="col">Description</th></tr></thead><tbody><tr><th scope="row">Enabled</th><td>The standard state of a button: it is available for interaction and is not currently selected. It includes Hover and Focus of the button type.</td></tr><tr><th scope="row">Hover</th><td>Shown when the user hovers the cursor over the button, to show that the component is interactive.</td></tr><tr><th scope="row">Focus</th><td>The visual style shown when the button is reached with the keyboard (often with Tab). It shows that the button is ready to be activated. It is a blue outline (<code>border-focus</code>), so users can move through the interface without a mouse.</td></tr><tr><th scope="row">Disabled</th><td>A disabled button prevents interaction: hover, focus and click. It is not focusable, so Tab skips it. Screen readers may still announce it as unavailable when the user browses the page. Do not associate a <a class="inline-link inline-link--small" href="tooltip.html">tooltip</a> with a disabled button.</td></tr><tr><th scope="row">Selected</th><td>Used by the System button in some cases. A selected button has been actively chosen, toggled on, or is the item currently in focus within a group of options. It shows which option is active and confirms that the user’s action was registered.</td></tr></tbody></table></div><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb2-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb2-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div><span class="ds-toolbar__label" id="sm-s">Size</span><div class="btn-group" role="group" aria-labelledby="sm-s" data-mx="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="md" aria-pressed="false">Medium</button><button type="button" data-v="sm" aria-pressed="false">Small</button><button type="button" data-v="xs" aria-pressed="false">XSmall</button></div></div><div class="ds-table-wrap"><table class="ds-table ds-matrix" id="matrix"><thead><tr><th scope="col">Variant</th><th scope="col">Enabled</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Hover: Primary, Destructive and Accent get a <code>surface-opacity-white-20</code> layer on top of their color, Primary inverted a <code>surface-opacity-black-12</code> layer. Secondary and Blank get <code>surface-opacity-black-05</code>, the inverted ones <code>surface-opacity-white-20</code>. System hover and System selected hover are the same: a <code>surface-opacity-black-12</code> surface and a <code>border-hover</code> frame. The focus ring is a 2px <code>border-focus</code> line with a 2px gap, drawn outside the button. Disabled: Secondary, Secondary inverted and System keep a frame in <code>border-disabled</code> with no fill; Blank has neither; the others get <code>surface-disabled</code>.</p><h3 class="ds-h3 ds-group">Toggle icons</h3><p class="ds-desc">Eight icons. Each has Enabled, Hover, Selected and Selected hover, in Large (24px) and Small (20px).</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="ib-s">Size</span><div class="btn-group" role="group" aria-labelledby="ib-s" data-ib="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button></div></div><div class="ds-table-wrap"><table class="ds-table ds-matrix bt-icons" id="ib-matrix"><thead><tr id="ib-head"></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Hover changes the icon color to <code>text-action-primary-hover</code>; there is no surface. Selected hover is the filled icon in that color. Figma has no focus or disabled state for these icons: focus follows the button rule, disabled uses <code>text-disabled</code>. The “cancel” icon is always filled.</p><h3 class="ds-h3 ds-group">Close</h3><div class="ds-table-wrap"><table class="ds-table ds-matrix" id="close-matrix"><thead><tr><th scope="col">Version</th><th scope="col">Enabled</th><th scope="col">Hover</th><th scope="col">Focus</th><th scope="col">Disabled</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Figma only defines Enabled and Hover for Close. Focus follows the shared rule; disabled is not defined and is not used for a close control.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Type</th><th scope="col">Mobile (below 769px)</th><th scope="col">Desktop (769px+)</th><th scope="col">Font features</th></tr></thead><tbody><tr><th scope="row">Large</th><td><code>label-lg</code></td><td>16/16, 0.32px</td><td>18/18, 0.18px</td><td><code>ss02</code>, <code>ss03</code></td></tr><tr><th scope="row">Medium</th><td><code>label-lg</code></td><td>16/16, 0.32px</td><td>18/18, 0.18px</td><td><code>ss02</code>, <code>ss03</code></td></tr><tr><th scope="row">Small</th><td><code>label-md</code></td><td>14/14, 0.42px</td><td>16/16, 0.48px</td><td>None</td></tr><tr><th scope="row">XSmall</th><td><code>label-sm</code></td><td>12/12, 0.48px</td><td>14/14, 0.56px</td><td><code>ss02</code>, <code>ss03</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed, weight 600 (Figma bold 700 − 100), uppercase through CSS, so write the label in sentence case in the HTML. The badge number is 12/12 (Large and Medium mobile) or 14/14 (desktop), and 10/10 in Small and XSmall; see the badge sizes under <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#sizes">Sizes</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Button</th><td><code>btn</code></td><td>A <code>button</code> for actions, an <code>a</code> for navigation.</td></tr><tr><th scope="row">Label</th><td><code>btn__label</code></td><td>Always wrap the label in it: it carries the label inset. Without it the text sits too close to the edge.</td></tr><tr><th scope="row">Icon</th><td><code>btn__icon</code></td><td>Material Symbols, <code>aria-hidden="true"</code>.</td></tr><tr><th scope="row">Badge number</th><td><code>btn__badge</code></td><td>Top right corner, <code>aria-hidden="true"</code>.</td></tr><tr><th scope="row">Badge dot</th><td><code>btn__dot</code></td><td>6px circle, <code>aria-hidden="true"</code>.</td></tr><tr><th scope="row">Icon button</th><td><code>icon-btn</code>, <code>icon-btn--sm</code>, <code>icon-btn--filled</code></td><td>A single icon that is a control. <code>aria-pressed</code> gives the filled icon.</td></tr><tr><th scope="row">Close</th><td><code>icon-btn icon-btn--close</code>, <code>icon-btn--close-inverted</code></td><td>24px box, 20px icon.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>btn--primary</code>, <code>btn--primary-inverted</code></th><td>Main call to action. Inverted: the same role, where the standard variant lacks contrast.</td></tr><tr><th scope="row"><code>btn--secondary</code>, <code>btn--secondary-inverted</code></th><td>Second action, with a frame.</td></tr><tr><th scope="row"><code>btn--blank</code>, <code>btn--blank-inverted</code></th><td>The quietest action, no fill and no frame.</td></tr><tr><th scope="row"><code>btn--destructive</code></th><td>Removes something.</td></tr><tr><th scope="row"><code>btn--accent</code></th><td>Brand-colored call to action.</td></tr><tr><th scope="row"><code>btn--system</code></th><td>A toggle in a group of buttons, with <code>aria-pressed</code>.</td></tr><tr><th scope="row"><code>btn--lg</code>, <code>btn--md</code>, <code>btn--sm</code>, <code>btn--xs</code></th><td>Size. Each sets every <code>--btn-*</code> property, in the mobile block and again from 769px.</td></tr><tr><th scope="row"><code>btn--icon</code></th><td>Icon only: a square, needs an <code>aria-label</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">A button hugs its content. An icon-only button is a square. Full width comes from the page layout, not from a modifier.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row">Hover layer: <code>opacity</code> of <code>::before</code></th><td><code>duration-fast-2</code> (100ms)</td><td><code>ease-standard</code></td></tr><tr><th scope="row">Focus ring: <code>outline-color</code></th><td><code>duration-fast-2</code></td><td><code>ease-standard</code></td></tr><tr><th scope="row">Frame: <code>box-shadow</code> (System hover frame)</th><td><code>duration-fast-2</code></td><td><code>ease-standard</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Figma calls this transition “Dissolve”: a custom bezier .35, 0, .35, 1 over 100ms, which is <code>ease-standard</code>. Under <code>prefers-reduced-motion: reduce</code> the transition is turned off.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click, Enter, Space</th><td>Runs the action. Use <code>&lt;button&gt;</code> for actions and <code>&lt;a class="btn …"&gt;</code> for navigation.</td></tr><tr><th scope="row">Tab / Shift+Tab</th><td>Moves between buttons. The focus ring shows only when <code>body.keyboard-nav</code> is set (on Tab, removed on mousedown and touchstart), the same as the form controls.</td></tr><tr><th scope="row">Disabled</th><td>Use the <code>disabled</code> attribute. It is not focusable and has no hover. Say why in nearby text when the reason is not obvious.</td></tr><tr><th scope="row">System selected</th><td>Set <code>aria-pressed="true"</code>. It is a toggle, so it must not be used for page navigation.</td></tr><tr><th scope="row">Icon only</th><td>Add <code>aria-label</code>, and hide the icon with <code>aria-hidden="true"</code>.</td></tr><tr><th scope="row">Label</th><td>Uppercase through CSS, so write it in sentence case in the HTML. Keep it short and start with a verb.</td></tr><tr><th scope="row">Icon only tooltip</th><td>Always with a tooltip, shown after a 300ms hover delay (design guidance). <strong>Open point:</strong> the shared tooltip (<code>components/js/tooltip.js</code>) has no hover delay yet, so it appears at once. Never on a disabled button.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Element</th><td>A native <code>&lt;button type="button"&gt;</code> for an action, an <code>&lt;a class="btn …"&gt;</code> for navigation. Never a <code>div</code> with a click handler.</td></tr><tr><th scope="row">Name</th><td>A visible label, or an <code>aria-label</code> on an icon-only button. A badge is <code>aria-hidden="true"</code>: put the count in the <code>aria-label</code>.</td></tr><tr><th scope="row">Focus</th><td>2px ring <code>border-focus</code> with a 2px gap, on keyboard use (WCAG 2.4.7, 1.4.11). It is set with <code>body.keyboard-nav</code>, never <code>:focus-visible</code>.</td></tr><tr><th scope="row">State</th><td>System selected is <code>aria-pressed</code>. A disabled button uses the <code>disabled</code> attribute.</td></tr><tr><th scope="row">Target size</th><td>The smallest button is 32px high; Close is 24px, which meets WCAG 2.5.8 (24px) but is below the usual 44px touch target.</td></tr><tr><th scope="row">Contrast</th><td>Choose standard or inverted variants by context, visibility and contrast, not by background color alone. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var uid = 0;
+  var VARIANTS = [
+    ['primary', 'Primary', false], ['secondary', 'Secondary', false], ['blank', 'Blank', false], ['destructive', 'Destructive', false], ['accent', 'Accent', false], ['system', 'System', false],
+    ['primary-inverted', 'Primary inverted', true], ['secondary-inverted', 'Secondary inverted', true], ['blank-inverted', 'Blank inverted', true]
+  ];
+  var SIZE_NAME = { lg: 'Large', md: 'Medium', sm: 'Small', xs: 'XSmall' };
+  var ICON = { lead: 'shopping_cart', trail: 'arrow_forward', icon: 'shopping_cart' };
+  function isInv(v) { return /inverted/.test(v); }
+  /* The badge shows the count, and "99+" for anything over 99 (no value, or 0, shows 1 here so the preview is never empty) */
+  function badgeText(v) { if (v === '99+') return v; var n = parseInt(String(v == null ? '' : v).replace(/[^0-9]/g, ''), 10); return isNaN(n) || n < 1 ? '1' : n > 99 ? '99+' : String(n); }
+
+  /* The numbers behind the sizes (also used to force the Breakpoint preview and to fill the size table) */
+  /* bd: number badge {off, h, px, fs, ls}; dot: dot offset; offIcon: number offset on an icon-only button */
+  var SIZES = {
+    lg: { m: { h: 48, pad: 12, tx: 8, icon: 24, fs: 16, lh: 16, ls: 0.32, ff: true, style: 'label-lg', bd: { off: 4, h: 18, px: 4, fs: 12, ls: 0.48 }, dot: 8 }, d: { h: 56, pad: 16, tx: 8, icon: 24, fs: 18, lh: 18, ls: 0.18, ff: true, style: 'label-lg', bd: { off: 4, h: 20, px: 5, fs: 14, ls: 0.56 }, dot: 12 } },
+    md: { m: { h: 40, pad: 8, tx: 8, icon: 24, fs: 16, lh: 16, ls: 0.32, ff: true, style: 'label-lg', bd: { off: 3, h: 18, px: 4, fs: 12, ls: 0.48 }, dot: 7 }, d: { h: 48, pad: 12, tx: 8, icon: 24, fs: 18, lh: 18, ls: 0.18, ff: true, style: 'label-lg', bd: { off: 4, h: 20, px: 5, fs: 14, ls: 0.56 }, dot: 8 } },
+    sm: { m: { h: 32, pad: 4, tx: 6, icon: 24, fs: 14, lh: 14, ls: 0.42, ff: false, style: 'label-md', bd: { off: 3, h: 14, px: 2, fs: 10, ls: 0 }, dot: 4 }, d: { h: 40, pad: 8, tx: 8, icon: 24, fs: 16, lh: 16, ls: 0.48, ff: false, style: 'label-md', bd: { off: 4, h: 16, px: 3, fs: 10, ls: 0 }, dot: 6 } },
+    xs: { m: { h: 32, pad: 6, tx: 4, icon: 20, fs: 12, lh: 12, ls: 0.48, ff: true, style: 'label-sm', bd: { off: 3, offIcon: 2, h: 14, px: 2, fs: 10, ls: 0 }, dot: 4 }, d: { h: 32, pad: 6, tx: 4, icon: 20, fs: 14, lh: 14, ls: 0.56, ff: true, style: 'label-sm', bd: { off: 3, offIcon: 2, h: 16, px: 3, fs: 10, ls: 0 }, dot: 4 } }
+  };
+  /* Build a real button. o: {variant, size, content label|lead|trail|both|icon, label, state hover|focus, disabled, pressed, badge number|dot} */
+  function btn(o) {
+    var b = document.createElement('button'); b.type = 'button';
+    var c = o.content || 'label';
+    b.className = 'btn btn--' + o.variant + ' btn--' + o.size + (c === 'icon' ? ' btn--icon' : '');
+    b.disabled = !!o.disabled;
+    if (o.state === 'hover' || o.state === 'focus') b.dataset.state = o.state;
+    if (o.variant === 'system') {
+      b.setAttribute('aria-pressed', String(!!o.pressed));
+      b.addEventListener('click', function () { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); });
+    }
+    function icon(n) { var i = document.createElement('span'); i.className = 'btn__icon'; i.setAttribute('aria-hidden', 'true'); i.textContent = n; return i; }
+    if (c === 'lead' || c === 'both') b.appendChild(icon(ICON.lead));
+    if (c === 'icon') { b.appendChild(icon(ICON.icon)); b.setAttribute('aria-label', o.aria || o.label || 'Cart'); }
+    else { var l = document.createElement('span'); l.className = 'btn__label'; l.textContent = o.label || 'Button label'; b.appendChild(l); }
+    if (c === 'trail' || c === 'both') b.appendChild(icon(ICON.trail));
+    if (o.badge === 'number') { var n = document.createElement('span'); n.className = 'btn__badge'; n.textContent = badgeText(o.count); n.setAttribute('aria-hidden', 'true'); b.appendChild(n); }
+    if (o.badge === 'dot') { var d = document.createElement('span'); d.className = 'btn__dot'; d.setAttribute('aria-hidden', 'true'); b.appendChild(d); }
+    if (o.badge && c !== 'icon') b.setAttribute('aria-label', (o.label || 'Button label') + (o.badge === 'number' ? ', ' + badgeText(o.count) : ', new'));
+    return b;
+  }
+  function row(label) { var r = document.createElement('div'); r.className = 'bt-vrow'; var l = document.createElement('div'); l.className = 'bt-vlabel'; l.textContent = label; r.appendChild(l); return r; }
+
+  var IB = [['compare', 'compare_arrows'], ['add_card_favourite', 'favorite'], ['add_favourite_to_list', 'playlist_add'], ['edit', 'edit'], ['location_on', 'location_on'], ['cancel_filled', 'cancel', true], ['qr_code_scanner', 'qr_code_scanner'], ['list_selected', 'check_circle']];
+  function ibtn(o) {
+    var b = document.createElement('button'); b.type = 'button';
+    b.className = 'icon-btn' + (o.small ? ' icon-btn--sm' : '') + (o.filled ? ' icon-btn--filled' : '') + (o.cls ? ' ' + o.cls : '');
+    b.setAttribute('aria-label', o.aria); b.disabled = !!o.disabled;
+    if (o.pressed != null) { b.setAttribute('aria-pressed', String(!!o.pressed)); b.addEventListener('click', function () { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); }); }
+    if (o.state) b.dataset.state = o.state;
+    var i = document.createElement('span'); i.className = 'btn__icon'; i.setAttribute('aria-hidden', 'true'); i.textContent = o.glyph; b.appendChild(i);
+    return b;
+  }
+  /* ── State matrix ── */
+  var mx = { size: 'lg' };
+  $$('[data-mx]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      mx[g.dataset.mx] = b.dataset.v;
+      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      buildMatrix();
+    });
+  });
+  var STATES = ['enabled', 'hover', 'focus', 'disabled'];
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    var rows = VARIANTS.map(function (v) { return [v[0], v[1], v[2], false]; });
+    rows.splice(6, 0, ['system', 'System · selected', false, true]);
+    rows.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[1]; if (r[2]) th.className = 'bt-dark'; tr.appendChild(th);
+      STATES.forEach(function (s) {
+        var td = document.createElement('td'); if (r[2]) td.className = 'bt-dark';
+        td.appendChild(btn({ variant: r[0], size: mx.size, state: s, disabled: s === 'disabled', pressed: r[3], label: 'Button label' }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  var ib = { size: 'lg' };
+  $$('[data-ib]').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      ib[g.dataset.ib] = b.dataset.v;
+      $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      buildIcons();
+    });
+  });
+  function buildIcons() {
+    var small = ib.size === 'sm', head = clear($('#ib-head'));
+    var h0 = document.createElement('th'); h0.scope = 'col'; h0.textContent = 'State'; head.appendChild(h0);
+    IB.forEach(function (x) { var h = document.createElement('th'); h.scope = 'col'; h.textContent = x[0]; head.appendChild(h); });
+    var tb = clear($('#ib-matrix tbody'));
+    [['Enabled', null, false], ['Hover', 'hover', false], ['Selected', null, true], ['Selected hover', 'hover', true]].forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      IB.forEach(function (x) {
+        var td = document.createElement('td');
+        td.appendChild(ibtn({ small: small, glyph: x[1], filled: x[2], aria: x[0] + ', ' + r[0].toLowerCase(), state: r[1], pressed: r[2] }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+    var ct = clear($('#close-matrix tbody'));
+    [['Blank', ''], ['Blank inverted', ' icon-btn--close-inverted']].forEach(function (v) {
+      var inv = !!v[1], tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = v[0]; if (inv) th.className = 'bt-dark'; tr.appendChild(th);
+      [['enabled', null, false], ['hover', 'hover', false], ['focus', 'focus', false], ['disabled', null, true]].forEach(function (s) {
+        var td = document.createElement('td'); if (inv) td.className = 'bt-dark';
+        if (s[0] === 'disabled') { td.className += ' ds-na'; td.textContent = 'Not defined'; }
+        else td.appendChild(ibtn({ glyph: 'close', aria: 'Close, ' + s[0], cls: 'icon-btn--close' + v[1], state: s[1] }));
+        tr.appendChild(td);
+      });
+      ct.appendChild(tr);
+    });
+  }
+
+
+  var SZ = Object.keys(SIZES);
+  var st = $('#size-table tbody');
+  SZ.forEach(function (s) {
+    [['d', 'Desktop (769px and up)'], ['m', 'Mobile (below 769px)']].forEach(function (b) {
+      var v = SIZES[s][b[0]], tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = SIZE_NAME[s] + ' · ' + b[1]; tr.appendChild(th);
+      [v.h + 'px', v.pad + 'px', v.tx + 'px', v.icon + 'px', '<code>' + v.style + '</code> ' + v.fs + '/' + v.lh + ', ' + v.ls + 'px'].forEach(function (t) { var td = document.createElement('td'); td.innerHTML = t; tr.appendChild(td); });
+      st.appendChild(tr);
+    });
+  });
+  var bt = $('#badge-table tbody');
+  SZ.forEach(function (s) {
+    [['d', 'Desktop'], ['m', 'Mobile']].forEach(function (b) {
+      var v = SIZES[s][b[0]], x = v.bd, tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = SIZE_NAME[s] + ' · ' + b[1]; tr.appendChild(th);
+      [x.off + 'px' + (x.offIcon ? ' (icon only ' + x.offIcon + 'px)' : ''), x.h + 'px', x.px + 'px', x.fs + 'px' + (x.ls ? ', ' + x.ls + 'px' : ''), v.dot + 'px'].forEach(function (t) { var td = document.createElement('td'); td.textContent = t; tr.appendChild(td); });
+      bt.appendChild(tr);
+    });
+  });
+  var TOK = [
+    ['Primary · fill', 'Enabled', 'surface-action-1'], ['Primary · label', 'Enabled', 'text-action-primary-inverted'],
+    ['Primary inverted · fill', 'Enabled', 'surface-action-2'], ['Primary inverted · label', 'Enabled', 'text-action-primary'],
+    ['Secondary · frame', 'Enabled', 'border-action-1'], ['Secondary inverted · frame', 'Enabled', 'border-action-2'],
+    ['Blank, Secondary · label', 'Enabled', 'text-action-primary'], ['Inverted · label', 'Enabled', 'text-action-primary-inverted'],
+    ['Destructive · fill', 'Enabled', 'surface-danger-default'], ['Accent · fill', 'Enabled', 'accent-default'], ['Accent · label', 'Enabled', 'text-action-accent'],
+    ['Transparent variants · fill', 'Enabled', 'surface-opacity-white-0'],
+    ['System · frame', 'Enabled', 'border-action-3'], ['System · selected fill', 'Selected', 'surface-opacity-black-12'], ['System · frame', 'Hover, selected hover', 'border-hover'],
+    ['Primary, Destructive, Accent · layer', 'Hover', 'surface-opacity-white-20'],
+    ['Badge number text', 'Badge', 'text-action-primary-inverted'], ['Primary inverted · layer, System fill', 'Hover', 'surface-opacity-black-12'],
+    ['Secondary, Blank · layer', 'Hover', 'surface-opacity-black-05'], ['Secondary, Blank inverted · layer', 'Hover', 'surface-opacity-white-20'],
+    ['Focus ring', 'Focus', 'border-focus'],
+    ['Fill', 'Disabled', 'surface-disabled'], ['Label', 'Disabled', 'text-disabled'], ['Frame (Secondary, System)', 'Disabled', 'border-disabled'],
+    ['Badge fill', 'Badge', 'surface-danger-default'],
+    ['Icon button · icon', 'Enabled', 'icon-primary'], ['Icon button · icon', 'Hover', 'text-action-primary-hover'], ['Close inverted · icon', 'Enabled', 'icon-inverted']
+  ];
+
+  DK.tokenTable($('#tok-table tbody'), TOK);
+  DK.bp(function () { if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+  buildMatrix(); buildIcons();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

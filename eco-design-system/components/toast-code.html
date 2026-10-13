@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toast: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; align-items: stretch; width: 100%; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); justify-items: start; width: 100%; }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; } }
+    .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); flex-wrap: wrap; width: 100%; }
+    .pg-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-row:last-child { padding-bottom: 0; }
+    .pg-row__txt { flex: 1; min-width: 240px; }
+    .pg-row__txt b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-row__txt span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .ds-field[hidden], .form-range[hidden] { display: none; }
+    .pg-fig-host { width: 100%; max-width: 100%; overflow: hidden; }
+    .pg-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pg-form__region { min-height: 0; width: 100%; }
+    .pg-form__region:empty { display: none; }
+    body[data-bp="mobile"] :is(.toast, .ecom-toast, .banner-notification, .inline-notification) { max-width: 375px; }   /* the forced Mobile preview is as wide as a phone: in real use these fill the window */
+    .ds-callout__art { padding: 56px 24px 56px 64px; }
+    .ms-toast .measure__obj { width: 375px; max-width: 100%; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="notifications.html" class="breadcrumb-item">Notifications</a><span class="breadcrumb-sep">/</span><a href="toast.html" class="breadcrumb-item">Toast</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Notifications</span></div>
+    <h1 class="ds-title">Toast</h1>
+    <p class="ds-lead">A toast is <strong>short-lived feedback</strong> on something the user just did: saved, copied, failed. It slides in, says its piece and leaves without blocking the page.</p><p class="ds-lead">How to show a toast from script and the CSS behind it. The files are <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Toast"><a class="tab" href="toast.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="toast-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="toast-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared files once per page. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/eco-design-system/notifications.css"&gt;</code> and <code>&lt;script src="/eco-design-system/notifications.js"&gt;&lt;/script&gt;</code>. Link <code>button.css</code> first.</td></tr><tr><th scope="row">2. Show a toast</th><td>Call <code>ECO_N.showToast({ status, text })</code>. The script adds the fixed host, the slide and the dismissal.</td></tr><tr><th scope="row">3. Choose</th><td>Status <code>info | success | warning | error</code>. Emphasis <code>weak</code> (default) or <code>strong</code> (sparingly).</td></tr><tr><th scope="row">4. Actions</th><td>Optional: <code>actions.primary</code> and <code>actions.secondary</code> as buttons, <strong>or</strong> <code>actions.links</code> as inline links.</td></tr><tr><th scope="row">5. Auto-hide</th><td><code>autoHide: 4000</code> for a confirmation. Leave it out for a Warning or an Error.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="toast"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Toast</h2><div id="recipes"></div><p class="ds-desc ds-note">The markup has no motion. The slide is set in <a class="inline-link inline-link--medium inline-link--secondary" href="toast.html#motion">Motion</a> on Examples &amp; Guidelines.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Settings of showToast</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Setting</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>status</code></th><td><code>info</code> (default), <code>success</code>, <code>warning</code>, <code>error</code>.</td></tr><tr><th scope="row"><code>emphasis</code></th><td><code>weak</code> (default) or <code>strong</code>.</td></tr><tr><th scope="row"><code>title</code>, <code>text</code></th><td>Optional title and the text.</td></tr><tr><th scope="row"><code>icon</code></th><td>Informational only: a Material Symbols name, shown as Outlined.</td></tr><tr><th scope="row"><code>actions</code></th><td><code>{ primary, secondary }</code> (each <code>{ label, onClick }</code>) or <code>{ links: [{ label, onClick }] }</code>.</td></tr><tr><th scope="row"><code>autoHide</code></th><td>Milliseconds; <code>0</code> or empty = stays until dismissed.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Custom properties</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Name</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>--toast-in-ease</code>, <code>--toast-in-duration</code></th><td>Enter. Defaults: <code>ease-decelerate-emphasized</code>, <code>duration-medium-2</code>.</td></tr><tr><th scope="row"><code>--toast-out-ease</code>, <code>--toast-out-duration</code></th><td>Exit. Defaults: <code>ease-accelerate-generic</code>, <code>duration-medium-2</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>Only one toast is on screen: <code>showToast</code> replaces the current one.</li><li>Set the custom properties on <code>&lt;html&gt;</code> or on <code>.toast-host</code>.</li><li><code>ECO_N.dismissToast()</code> closes the current toast.</li><li>Buttons inside a toast are always 32px high, also when <code>button.css</code> is on the page.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file and one script, shared by every notification. Link them, never copy them. The code below is read from the files the page links, so it is always what you see.</p><div id="files"></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../notifications.js?v=12"></script>
+<script src="../../components/js/range.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var N = ECO_N, H = N.html, IMG = '/images/product-hantverksbyxa.jpg';
+  var STATUS = [['info', 'Informational'], ['success', 'Success'], ['warning', 'Warning'], ['error', 'Error']];
+  function mk(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
+
+  DK.recipes($('#recipes'), [
+    ['Default', H.toast({ status: 'success', emphasis: 'weak', text: 'Your changes were saved.' })],
+    ['Actionable error', H.toast({ status: 'error', emphasis: 'weak', title: 'Upload failed', text: 'Failed to upload attachment.', secondary: 'Details', primary: 'Retry' })],
+    ['Actionable with inline links', H.toast({ status: 'info', emphasis: 'weak', text: 'Address deleted.', links: ['Undo', 'Learn more'] })],
+    ['Show it from script', "ECO_N.showToast({\n  status: 'success',      // info | success | warning | error\n  emphasis: 'weak',       // weak (default) | strong (sparingly)\n  text: 'Your changes were saved.',\n  autoHide: 4000          // 0 = stays until dismissed\n});\n\n// Actionable\nECO_N.showToast({\n  status: 'error', title: 'Upload failed', text: 'Failed to upload attachment.',\n  actions: { primary: { label: 'Retry', onClick: retry }, secondary: { label: 'Dismiss' } }   // or { links: [{ label: 'Undo', onClick: undo }] }\n});"]]);
+  DK.printFile($('#files'), '../notifications.css', [['CSS: toast', ['toast']], ['CSS: shared close button, link and buttons', ['base']]])
+    .then(function () { return DK.printFile($('#files'), '../notifications.js', [['JavaScript: showToast', ['runtime']]]); });
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

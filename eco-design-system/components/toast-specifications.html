@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toast: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../notifications.css?v=22">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; align-items: stretch; width: 100%; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); justify-items: start; width: 100%; }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; } }
+    .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); flex-wrap: wrap; width: 100%; }
+    .pg-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-row:last-child { padding-bottom: 0; }
+    .pg-row__txt { flex: 1; min-width: 240px; }
+    .pg-row__txt b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-row__txt span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .ds-field[hidden], .form-range[hidden] { display: none; }
+    .pg-fig-host { width: 100%; max-width: 100%; overflow: hidden; }
+    .pg-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pg-form__region { min-height: 0; width: 100%; }
+    .pg-form__region:empty { display: none; }
+    body[data-bp="mobile"] :is(.toast, .ecom-toast, .banner-notification, .inline-notification) { max-width: 375px; }   /* the forced Mobile preview is as wide as a phone: in real use these fill the window */
+    .ds-callout__art { padding: 56px 24px 56px 64px; }
+    .ms-toast .measure__obj { width: 375px; max-width: 100%; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="notifications.html" class="breadcrumb-item">Notifications</a><span class="breadcrumb-sep">/</span><a href="toast.html" class="breadcrumb-item">Toast</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Notifications</span></div>
+    <h1 class="ds-title">Toast</h1>
+    <p class="ds-lead">A toast is <strong>short-lived feedback</strong> on something the user just did: saved, copied, failed. It slides in, says its piece and leaves without blocking the page.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-29321" target="_blank" rel="noopener">System Toast</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Toast"><a class="tab" href="toast.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="toast-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="toast-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Status · emphasis</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Width</th><td><code>375px</code> from 640px. Below 640px the full viewport width.</td></tr><tr><th scope="row">Padding</th><td>16px, with 8px between icon and text</td></tr><tr><th scope="row">Left edge</th><td>2px solid, status color</td></tr><tr><th scope="row">Shadow</th><td><code>var(--shadow-elevation-b-80)</code></td></tr><tr><th scope="row">Actionable footer</th><td>Indent 32px, 16px above the buttons, buttons 32px high, Primary fills the rest of the row. Or inline links, 16px gap between them. Buttons and links are alternatives.</td></tr><tr><th scope="row">Z-index</th><td>9999</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Position</h3><p class="ds-desc">The toast is <code>position: fixed</code> and always enters from the right, except on mobile where it enters from the top.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Top</th><th scope="col">Right</th><th scope="col">Width</th><th scope="col">Enters from</th></tr></thead><tbody><tr><th scope="row">lg (1024px+)</th><td>40px</td><td>40px</td><td>375px</td><td>The right</td></tr><tr><th scope="row">md (769–1023px)</th><td>32px</td><td>32px</td><td>375px</td><td>The right</td></tr><tr><th scope="row">sm (640–768px)</th><td>32px</td><td>32px</td><td>375px</td><td>The right</td></tr><tr><th scope="row">xs (0–639px)</th><td>0</td><td>0 (left 0)</td><td>Full viewport width</td><td>The top</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">The padding of the toast. The shaded area is the padding; the 2px status edge sits outside it. The numbers are read from the component. A toast is the same at every breakpoint.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure ms-toast" id="ms" role="img" aria-label="Padding of the toast: 16 on every side"></div></div><figcaption class="ds-fig__cap">An Informational toast at true size.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding</th><td>16px on every side</td></tr><tr><th scope="row">Left edge</th><td>2px, outside the padding</td></tr><tr><th scope="row">Gap icon to text</th><td>8px</td></tr><tr><th scope="row">Gap between title and text</th><td>2px</td></tr><tr><th scope="row">Close</th><td>24px box, 20px icon, 2px padding</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same distances as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding</th><td><code>space-16</code></td></tr><tr><th scope="row">Icon to text</th><td><code>space-8</code></td></tr><tr><th scope="row">Title to text</th><td><code>space-2</code></td></tr><tr><th scope="row">Left edge</th><td><code>space-2</code></td></tr><tr><th scope="row">Actions indent</th><td><code>space-32</code></td></tr><tr><th scope="row">Text to actions</th><td><code>space-16</code></td></tr><tr><th scope="row">Between buttons</th><td><code>space-8</code></td></tr><tr><th scope="row">Between links</th><td><code>space-8</code> row, <code>space-16</code> column</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="elevation"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Elevation</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Toast</th><td><code>shadow-elevation-b-80</code></td><td>The highest bottom shadow: the toast floats above everything except a modal.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Every status in both emphasis levels. A toast has no hover or disabled state of its own: the ×, the buttons and the links have. Its lifecycle (enter, visible, exit) is under <a class="inline-link inline-link--large inline-link--secondary" href="#motion">Motion</a>.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sl-l">Layout</span><div class="btn-group" role="group" aria-labelledby="sl-l" data-mx="layout"><button type="button" data-v="default" aria-pressed="true">Default</button><button type="button" data-v="actionable" aria-pressed="false">Buttons</button><button type="button" data-v="links" aria-pressed="false">Inline links</button></div><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">Status</th><th scope="col">Strong</th><th scope="col">Weak</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Token</th><th scope="col">Mobile and tablet</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Title (optional)</th><td><code>title-sm</code></td><td>16/18, bold</td><td>16/18, bold</td></tr><tr><th scope="row">Text</th><td><code>body-md</code></td><td>16/22, 0.32px</td><td>17/24, 0.32px</td></tr><tr><th scope="row">Buttons</th><td><code>label-md</code> / <code>label-sm</code></td><td>14/14, 0.42px</td><td>14/14, 0.56px</td></tr><tr><th scope="row">Inline link</th><td><code>body-md</code></td><td>16/22</td><td>17/24</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Toast</th><td><code>toast toast--{status} toast--{emphasis}</code></td><td>Status: <code>info</code>, <code>success</code>, <code>warning</code>, <code>error</code>. Emphasis: <code>strong</code>, <code>weak</code>.</td></tr><tr><th scope="row">Content</th><td><code>toast__inner</code>, <code>toast__row</code>, <code>toast__body</code></td><td>Padding, edge and the icon / text / × row.</td></tr><tr><th scope="row">Icon, title, text</th><td><code>toast__icon</code>, <code>toast__title</code>, <code>toast__text</code></td><td>The icon is a <code>material-symbols-outlined</code> span.</td></tr><tr><th scope="row">Close</th><td><code>icon-btn icon-btn--close</code></td><td>Blank icon button, <code>aria-label="Close"</code>.</td></tr><tr><th scope="row">Actions</th><td><code>toast__actions</code> with <code>toast__btns</code> or <code>toast__links</code></td><td>Buttons <strong>or</strong> inline links.</td></tr><tr><th scope="row">Position</th><td><code>toast-host</code></td><td>Added by <code>ECO_N.showToast</code>; fixed, <code>role="status"</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><p class="ds-desc">Eight combinations: four statuses × Strong and Weak, each Default or Actionable.</p><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">375px from 640px, the full width below. Never wider than the window.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Motion</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Duration</th><td><code>var(--duration-medium-2)</code> (300ms) enter and exit; no fade, the toast only slides</td></tr><tr><th scope="row">Enter easing</th><td><code>var(--ease-decelerate-emphasized)</code> (<code>cubic-bezier(0.16, 0, 0.16, 1)</code>)</td></tr><tr><th scope="row">Exit easing</th><td><code>var(--ease-accelerate-generic)</code> (<code>cubic-bezier(0.36, 0.09, 1, 0.58)</code>)</td></tr><tr><th scope="row">Auto-hide</th><td>4000ms for System Toast</td></tr><tr><th scope="row">Reduced motion</th><td>The toast appears and leaves without sliding</td></tr></tbody></table></div><p class="ds-desc ds-note">Compare other easing and duration values in the live Motion section on <a class="inline-link inline-link--medium inline-link--secondary" href="toast.html#motion">Examples &amp; Guidelines</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click ×</th><td>Runs the exit animation, then removes the toast.</td></tr><tr><th scope="row">Click outside</th><td>Same. The listener starts on the next tick so the click that opened the toast does not close it.</td></tr><tr><th scope="row">Wait</th><td>Auto-hide after 4 seconds (Success and Informational). Warning and Error stay until dismissed.</td></tr><tr><th scope="row">Tab</th><td>The × and any button or link take focus with a visible ring.</td></tr><tr><th scope="row">Inline link</th><td>Underlined when enabled; on hover the underline goes and the color changes (<code>eco-inline-link</code>, Medium).</td></tr><tr><th scope="row">Second toast</th><td>Replaces the first one at once. Only one toast is on screen.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Announcement</th><td>The toast area is <code>role="status"</code> with <code>aria-live="polite"</code>, so new toasts are announced without moving focus (WCAG 4.1.3).</td></tr><tr><th scope="row">Status</th><td>The icon and the text carry the status, not the color alone (WCAG 1.4.1).</td></tr><tr><th scope="row">Focus</th><td>The ×, buttons and links have a 2px ring, <code>border-focus</code>, on keyboard use (WCAG 2.4.7).</td></tr><tr><th scope="row">Timing</th><td>Success and Informational leave after 4 seconds; Warning and Error stay until dismissed. Anything the user must act on does not auto-hide (WCAG 2.2.1).</td></tr><tr><th scope="row">Reduced motion</th><td>No slide under <code>prefers-reduced-motion: reduce</code>.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../notifications.js?v=12"></script>
+<script src="../../components/js/range.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var N = ECO_N, H = N.html, IMG = '/images/product-hantverksbyxa.jpg';
+  var STATUS = [['info', 'Informational'], ['success', 'Success'], ['warning', 'Warning'], ['error', 'Error']];
+  function mk(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
+
+  var DEMO = { info: 'Syncing files in the background…', success: 'Your changes were saved.', warning: 'Poor network connection. Retrying…', error: 'Failed to upload attachment.' };
+  function sample(o) { return mk(H.toast(o)); }
+  function mkT(status, emphasis, actionable, extra) {
+    var o = { status: status, emphasis: emphasis, text: DEMO[status] };
+    if (extra && extra.title) o.title = STATUS.filter(function (s) { return s[0] === status; })[0][1];
+    if (actionable === 'links') o.links = ['Learn more', 'Undo'];
+    else if (actionable) { o.secondary = 'Details'; o.primary = status === 'error' ? 'Retry' : 'Undo'; }
+    return sample(o);
+  }
+
+  var T = [];
+  STATUS.forEach(function (s) {
+    var k = s[0] === 'error' ? 'danger' : s[0] === 'info' ? 'information' : s[0];
+    T.push([s[1] + ' · Strong', 'Background', 'surface-' + k + '-weaker'], [s[1] + ' · both', 'Left edge and icon', 'surface-' + k + '-default']);
+  });
+  T.push(['Weak', 'Background', 'surface-raised-primary'], ['All', 'Text', 'text-primary'], ['All', 'Shadow', 'shadow-elevation-b-80']);
+  DK.tokenTable($('#tok-table tbody'), T);
+
+  /* Measurements */
+
+  function measureItem(name, el, subjSel, edge) {
+    var it = document.createElement('div'); it.className = 'measure__item';
+    var nm = document.createElement('span'); nm.className = 'measure__name'; nm.textContent = name;
+    var obj = document.createElement('div'); obj.className = 'measure__obj'; obj.appendChild(el);
+    var s = subjSel ? $(subjSel, el) : el; s.classList.add('measure__subject');
+    if (edge === true) s.setAttribute('data-measure-edge', ''); else if (edge) $(edge, el).setAttribute('data-measure-edge', '');
+    ['t', 'b', 'l', 'r'].forEach(function (d) { var i = document.createElement('i'); i.className = 'measure__pad measure__pad--' + d; obj.appendChild(i); });
+    [['v', 't'], ['v', 'b'], ['h', 'l'], ['h', 'r']].forEach(function (p) { var b = document.createElement('b'); b.className = 'measure__dim measure__dim--' + p[0] + ' measure__dim--' + p[1]; b.appendChild(document.createElement('span')); obj.appendChild(b); });
+    it.appendChild(nm); it.appendChild(obj); return it;
+  }
+  $('#ms').appendChild(measureItem('Toast', sample({ status: 'info', emphasis: 'weak', text: 'Your changes were saved.' }), '.toast__inner', true));
+  DK.bp(function () { if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+
+  /* States */
+  var mx = { layout: 'default' };
+  function matrix() {
+    var tb = clear($('#matrix tbody'));
+    STATUS.forEach(function (s) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = s[1]; tr.appendChild(th);
+      ['strong', 'weak'].forEach(function (e) { var td = document.createElement('td'); td.appendChild(mkT(s[0], e, mx.layout === 'actionable' ? true : mx.layout === 'links' ? 'links' : false)); tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  }
+  DK.seg($('[data-mx="layout"]'), function (v) { mx.layout = v; matrix(); });
+  matrix();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

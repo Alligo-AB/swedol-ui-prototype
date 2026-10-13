@@ -130,3 +130,8 @@
     .icon-btn--close:is(:hover, [data-state="hover"]):not(:disabled) { color: var(--color-icon-primary); background: var(--color-surface-opacity-black-05); }
     .icon-btn--close-inverted { color: var(--color-icon-inverted); }
     .icon-btn--close-inverted:is(:hover, [data-state="hover"]):not(:disabled) { color: var(--color-icon-inverted); background: var(--color-surface-opacity-white-20); }
+
+    /* ── Reduced motion: no dissolve ── */
+    @media (prefers-reduced-motion: reduce) {
+      .btn, .btn::before, .icon-btn { transition: none; }
+    }

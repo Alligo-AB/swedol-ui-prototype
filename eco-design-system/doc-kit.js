@@ -22,15 +22,31 @@
   }
   /* Forced breakpoint for the shared component CSS (components/css/*.css): a toggle group with [data-bp-force] makes the component's own
      @media (min-width: 769px) / (max-width: 768px) rules apply (or not) whatever the window width, by switching those rules to "all" or "not all".
-     Window = the real window. Only the component stylesheets are touched, never docs.css, so the docs layout keeps following the window. */
-  var BP_ORIG = new Map();
+     Window = the real window. Only the component stylesheets are touched, never docs.css, so the docs layout keeps following the window.
+     notifications.css (eco-design-system/) has more breakpoints (640, 769, 1024, max 639, 640–768), so every width query in it is evaluated
+     against a virtual window: Desktop 1280px, Tablet 700px, Mobile 375px. */
+  var BP_ORIG = new Map(), BP_W = { desktop: 1280, tablet: 700, mobile: 375 };
+  function widthQuery(t, w) {   // "(min-width: 640px) and (max-width: 768px)" -> true/false for width w; null when the query holds anything else
+    var parts = t.split(/\s+and\s+/), ok = true;
+    for (var i = 0; i < parts.length; i++) {
+      var m = /^\((min|max)-width:\s*(\d+)px\)$/.exec(parts[i].trim()); if (!m) return null;
+      if (m[1] === 'min' ? w < +m[2] : w > +m[2]) ok = false;
+    }
+    return ok;
+  }
   function forceBp(v) {
     [].forEach.call(document.styleSheets, function (sh) {
-      if (!sh.href || sh.href.indexOf('/components/css/') < 0) return;
+      var notif = !!sh.href && /\/notifications\.css(\?|$)/.test(sh.href);
+      if (!sh.href || (sh.href.indexOf('/components/css/') < 0 && !notif)) return;
       var rules; try { rules = sh.cssRules; } catch (e) { return; }
       [].forEach.call(rules, function (r) {
         if (r.type !== 4) return;   // CSSMediaRule
         var t = BP_ORIG.has(r) ? BP_ORIG.get(r) : r.media.mediaText; BP_ORIG.set(r, t);
+        if (notif) {
+          if (v === 'auto') { r.media.mediaText = t; return; }
+          var on = widthQuery(t, BP_W[v]); if (on === null) return;   // prefers-reduced-motion and the like stay as they are
+          r.media.mediaText = on ? 'all' : 'not all'; return;
+        }
         var desk = /^\(min-width:\s*769px\)$/.test(t), mob = /^\(max-width:\s*768px\)$/.test(t);
         if (!desk && !mob) return;
         r.media.mediaText = v === 'auto' ? t : ((v === 'desktop' && desk) || (v === 'mobile' && mob) ? 'all' : 'not all');
@@ -205,7 +221,7 @@
       seg(hg, function (v) { pt0.st.collapse = v; apply(); });
     }
     var warn = document.createElement('div'); warn.style.cssText = 'display:flex;flex-direction:column;gap:8px'; warn.setAttribute('role', 'status'); controls.appendChild(warn);
-    var again = document.createElement('button'); again.type = 'button'; again.className = 'btn btn--secondary'; again.style.alignSelf = 'flex-start'; again.innerHTML = '<span class="btn__label"></span>'; again.firstChild.textContent = opts.show ? 'Show toast' : 'Show again';
+    var again = document.createElement('button'); again.type = 'button'; again.className = 'btn btn--secondary btn--sm'; again.style.alignSelf = 'flex-start'; again.innerHTML = '<span class="btn__label"></span>'; again.firstChild.textContent = opts.show ? (opts.showLabel || 'Show toast') : 'Show again';
     /* No visible × = nothing closes = no motion: the controls are disabled and the stage says why. */
     var off = document.createElement('p'); off.className = 'pg-note'; off.style.cssText = 'margin:12px 0 0;text-align:center'; off.hidden = true;
     off.textContent = 'This selection has no close button, so it has no closing motion. Change the selection in Playground.';
@@ -219,7 +235,7 @@
       if (opts.show) { opts.show(); return; }
       clear(host).appendChild(opts.preview()); check();
     }
-    if (opts.show) { var hint = document.createElement('p'); hint.className = 'pg-note'; hint.style.cssText = 'margin:0;text-align:center'; hint.textContent = 'The toast appears in the corner of your window. Press Show toast to see the motion.'; host.appendChild(hint); }
+    if (opts.show) { var hint = document.createElement('p'); hint.className = 'pg-note'; hint.style.cssText = 'margin:0;text-align:center'; hint.textContent = opts.hint || 'The toast appears in the corner of your window. Press Show toast to see the motion.'; host.appendChild(hint); }
     again.addEventListener('click', render); controls.appendChild(again);
     window.addEventListener('resize', check); document.addEventListener('click', function (e) { if (e.target.closest('[data-bp-toggle]')) setTimeout(check, 0); });
     if (!opts.show) render(); apply();

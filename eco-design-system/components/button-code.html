@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Button: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .bt-row { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+    .bt-vrow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 12px 0; }
+    .bt-vrow + .bt-vrow { border-top: 1px solid var(--color-border-primary); }
+    .ds-stage--dark .bt-vrow + .bt-vrow { border-top-color: var(--color-surface-60); }
+    .bt-vlabel { flex: 0 0 100%; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; color: var(--color-text-tertiary); }
+    .ds-stage--dark .bt-vlabel { color: var(--color-text-tertiary-inverted); }
+    @media (min-width: 769px) { .bt-vlabel { flex-basis: 168px; } }
+    .bt-dark { background: var(--color-surface-100); }
+    .ds-matrix td.bt-dark, .ds-matrix th.bt-dark { color: var(--color-text-primary-inverted); border-color: var(--color-surface-60); }
+    .ds-matrix td { text-align: center; }
+    .ds-matrix td > .btn, .ds-matrix td > .icon-btn { vertical-align: middle; }
+    .bt-pair { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8); align-items: center; }
+    .bt-fig { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .bt-icons td, .bt-icons th { text-align: center; }
+    .bt-icons td:first-child, .bt-icons th:first-child { text-align: left; }
+    .bt-icons td { min-width: 72px; }
+    .bt-col { display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16); width: 100%; }
+    .bt-col .divider { width: 100%; margin: 0; }
+    .bt-toast { width: 100%; }
+    .bt-toast .ecom-toast--cart { position: static; width: 100%; }   /* demo: the real e-com toast card, in the flow and as wide as the figure */
+    .ds-callout__art { padding-right: 56px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="button.html" class="breadcrumb-item">Button</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Actions</span></div>
+    <h1 class="ds-title">Button</h1>
+    <p class="ds-lead">A button <strong>triggers an action</strong> or <strong>takes the user to another page</strong>. It lets the user make a choice with a single tap. Use a mix of styles on one page to point at the main action and still offer the alternatives.</p><p class="ds-lead">How to add a button to a page. The file is <code>components/css/button.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Button"><a class="tab" href="button.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="button-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="button-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page. Never copy the rules into a page, and never write a parallel version.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/button.css"&gt;</code>. Both templates already have it. The icons need the Material Symbols Outlined font, as in the templates.</td></tr><tr><th scope="row">2. Markup</th><td>A <code>button.btn</code> (or <code>a.btn</code>) with a variant and a size class, and the label in <code>span.btn__label</code>.</td></tr><tr><th scope="row">3. Variant and size</th><td><code>btn--primary</code>, <code>btn--secondary</code>, … and <code>btn--lg</code>, <code>btn--md</code>, <code>btn--sm</code> or <code>btn--xs</code>. The size switches at 769px by itself.</td></tr><tr><th scope="row">4. Focus ring</th><td>Add the small script once per page: it sets <code>body.keyboard-nav</code> on Tab.</td></tr><tr><th scope="row">5. Next to a field</th><td>Use the matching size: Input Large with Medium, Small with Small, XSmall with XSmall.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="button"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Button</h2><p class="ds-desc">Copy the markup you need. Hover and focus come from <code>:hover</code> and the keyboard focus rule; the <code>[data-state]</code> selectors in the CSS exist only so the documentation can force a state.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="icon-button"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Icon button</h2><div id="recipes-icon"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>btn</code></th><td>The button. Needs a variant and a size.</td></tr><tr><th scope="row"><code>btn--primary</code> | <code>primary-inverted</code> | <code>secondary</code> | <code>secondary-inverted</code> | <code>blank</code> | <code>blank-inverted</code> | <code>destructive</code> | <code>accent</code> | <code>system</code></th><td>Variant.</td></tr><tr><th scope="row"><code>btn--lg</code> | <code>md</code> | <code>sm</code> | <code>xs</code></th><td>Size.</td></tr><tr><th scope="row"><code>btn--icon</code></th><td>Icon only: a square. Needs <code>aria-label</code>.</td></tr><tr><th scope="row"><code>btn__label</code>, <code>btn__icon</code>, <code>btn__badge</code>, <code>btn__dot</code></th><td>Parts of a button.</td></tr><tr><th scope="row"><code>icon-btn</code>, <code>icon-btn--sm</code>, <code>icon-btn--filled</code>, <code>icon-btn--close</code>, <code>icon-btn--close-inverted</code></th><td>The icon button.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>Always wrap the label in <code>span.btn__label</code>, also for buttons built in JS (<code>innerHTML</code>, and set the text on the span, never <code>button.textContent</code>).</li><li>Breakpoint: the sizes switch at 769px; 640–768px is still mobile.</li><li>Cap the badge count in your code: <code>n &gt; 99 ? '99+' : n</code>.</li><li>Never <code>:focus-visible</code> for buttons: use <code>body.keyboard-nav</code>.</li><li>Old prototype pages have their own <code>.btn-primary</code> and <code>.btn-blank</code> classes. New work uses the classes above.</li><li>The <code>[data-state]</code> selectors do nothing outside the documentation pages.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/button.css, button and icon button)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div><h3 class="ds-h3">Focus ring script</h3><div id="recipes-focus"></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var RECIPES = [
+    ['Primary', '<button type="button" class="btn btn--primary btn--lg">\n  <span class="btn__label">Add to cart</span>\n</button>'],
+    ['Secondary and Blank', '<button type="button" class="btn btn--secondary btn--md"><span class="btn__label">Cancel</span></button>\n<button type="button" class="btn btn--blank btn--md"><span class="btn__label">Read more</span></button>'],
+    ['Sizes', 'class="btn btn--primary btn--lg"   <!-- 56px desktop, 48px mobile -->\nclass="btn btn--primary btn--md"   <!-- 48px desktop, 40px mobile -->\nclass="btn btn--primary btn--sm"   <!-- 40px desktop, 32px mobile -->\nclass="btn btn--primary btn--xs"   <!-- 32px -->'],
+    ['Icon + label', '<button type="button" class="btn btn--primary btn--lg">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n  <span class="btn__label">Add to cart</span>\n</button>'],
+    ['Label + icon', '<button type="button" class="btn btn--secondary btn--md">\n  <span class="btn__label">Next</span>\n  <span class="btn__icon" aria-hidden="true">arrow_forward</span>\n</button>'],
+    ['Icon + label + icon', '<button type="button" class="btn btn--primary btn--lg">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n  <span class="btn__label">Add to cart</span>\n  <span class="btn__icon" aria-hidden="true">arrow_forward</span>\n</button>'],
+    ['Icon only', '<button type="button" class="btn btn--primary btn--lg btn--icon" aria-label="Cart">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n</button>'],
+    ['Badge: number on an icon-only button', '<button type="button" class="btn btn--primary btn--lg btn--icon" aria-label="Cart, 99+ items">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n  <span class="btn__badge" aria-hidden="true">99+</span>\n</button>'],
+    ['Badge: number on a button with a label', '<button type="button" class="btn btn--primary btn--lg" aria-label="Messages, 1 new">\n  <span class="btn__label">Messages</span>\n  <span class="btn__badge" aria-hidden="true">1</span>\n</button>'],
+    ['Badge: dot', '<button type="button" class="btn btn--primary btn--lg btn--icon" aria-label="Cart, new items">\n  <span class="btn__icon" aria-hidden="true">shopping_cart</span>\n  <span class="btn__dot" aria-hidden="true"></span>\n</button>'],
+    ['Destructive and Accent', '<button type="button" class="btn btn--destructive btn--md"><span class="btn__label">Delete</span></button>\n<button type="button" class="btn btn--accent btn--md"><span class="btn__label">Campaign</span></button>'],
+    ['System (toggle)', '<button type="button" class="btn btn--system btn--md" aria-pressed="false"><span class="btn__label">Brand</span></button>\n<button type="button" class="btn btn--system btn--md" aria-pressed="true"><span class="btn__label">Size</span></button>'],
+    ['Inverted (on a dark surface)', '<div style="background: var(--color-surface-100)">\n  <button type="button" class="btn btn--primary-inverted btn--md"><span class="btn__label">Shop now</span></button>\n  <button type="button" class="btn btn--secondary-inverted btn--md"><span class="btn__label">Learn more</span></button>\n  <button type="button" class="btn btn--blank-inverted btn--md"><span class="btn__label">Skip</span></button>\n</div>'],
+    ['Disabled', '<button type="button" class="btn btn--primary btn--md" disabled><span class="btn__label">Unavailable</span></button>'],
+    ['Link that looks like a button', '<a href="/checkout" class="btn btn--primary btn--md"><span class="btn__label">Go to checkout</span></a>'],
+    ['Icon button (toggle)', '<button type="button" class="icon-btn" aria-label="Add to favourites" aria-pressed="false">\n  <span class="btn__icon" aria-hidden="true">favorite</span>\n</button>'],
+    ['Close', '<button type="button" class="icon-btn icon-btn--close" aria-label="Close">\n  <span class="btn__icon" aria-hidden="true">close</span>\n</button>'],
+    ['Focus ring script (once per page)', "document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });\n['mousedown', 'touchstart'].forEach(function (t) {\n  document.addEventListener(t, function () { document.body.classList.remove('keyboard-nav'); }, { passive: true });\n});"]
+  ];
+
+  var ICN = RECIPES.filter(function (r) { return /^(Icon button|Close)/.test(r[0]); });
+  var FOC = RECIPES.filter(function (r) { return /^Focus ring/.test(r[0]); });
+  var BTN = RECIPES.filter(function (r) { return ICN.indexOf(r) < 0 && FOC.indexOf(r) < 0; });
+  DK.recipes($('#recipes'), BTN); DK.recipes($('#recipes-icon'), ICN); DK.recipes($('#recipes-focus'), FOC);
+  DK.printCss($('#css-code'), 'button', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/,\n    \.btn\[data-state="focus"\]/g, ''], [/,\n    \.icon-btn\[data-state="focus"\]/g, ''], [/^ {4}/gm, '']]);
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

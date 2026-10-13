@@ -10,6 +10,7 @@ description: Use when building an e-commerce toast — e.g. "product added to ca
 ## Notification – E-Com Toast (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-22983
+**Documentation (three pages, converted 2026-10-13):** `eco-design-system/components/toast-ecom.html` (Examples & Guidelines), `toast-ecom-specifications.html`, `toast-ecom-code.html`; hub: `notifications.html`. Generator: `eco-design-system/gen/gen_toast_ecom.py` (starting point only: the pages are the real files).
 
 ### Used when
 - An e-commerce action is confirmed without blocking the page: product added to cart, product added to wishlist
@@ -239,7 +240,7 @@ description: Use when building an e-commerce toast — e.g. "product added to ca
     <button type="button" class="icon-btn icon-btn--close" aria-label="Close"><span class="btn__icon" aria-hidden="true">close</span></button>
   </div>
   <div class="ecom-toast__footer">
-    <button type="button" class="btn btn--secondary"><span class="btn__label">Choose accessories</span></button>
+    <button type="button" class="btn btn--blank"><span class="btn__label">Choose accessories</span></button>
     <button type="button" class="btn btn--primary"><span class="btn__label">Go to cart</span></button>
   </div>
 </div>

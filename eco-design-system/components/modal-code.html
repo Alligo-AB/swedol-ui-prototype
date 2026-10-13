@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modal: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; align-items: stretch; width: 100%; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); justify-items: start; width: 100%; }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; } }
+    .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); flex-wrap: wrap; width: 100%; }
+    .pg-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-row:last-child { padding-bottom: 0; }
+    .pg-row__txt { flex: 1; min-width: 240px; }
+    .pg-row__txt b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-row__txt span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .ds-field[hidden], .form-range[hidden] { display: none; }
+    .pg-fig-host { width: 100%; max-width: 100%; overflow: hidden; }
+    .pg-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pg-form__region { min-height: 0; width: 100%; }
+    .pg-form__region:empty { display: none; }
+    body[data-bp="mobile"] :is(.toast, .ecom-toast, .banner-notification, .inline-notification) { max-width: 375px; }   /* the forced Mobile preview is as wide as a phone: in real use these fill the window */
+    /* demo: the real modal is fixed to the window, so a preview is a static copy inside a stage (a flex item honors z-index even when static: z-index auto keeps it under the sticky nav) */
+    .modal-preview { padding: 24px; display: flex; justify-content: center; width: 100%; overflow: hidden; box-sizing: border-box; }
+    .modal-preview .modal { position: static; transform: none; top: auto; left: auto; max-width: 100%; max-height: none; height: auto; animation: none; z-index: auto; }
+    body[data-bp="mobile"] .modal-preview .modal { width: 375px; }   /* the forced Mobile preview: Medium and Large fill the window in real use, here they are as wide as a phone */
+    .ds-callout__art { padding: 0; }
+    #m-anat .ds-callout__art { padding: 56px 44px 72px 60px; max-width: 100%; box-sizing: border-box; background: var(--color-surface-opacity-black-20); }
+    #m-anat .modal-preview { padding: 0; }
+    .ms-modal .modal-preview { padding: 0; width: auto; overflow: visible; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="notifications.html" class="breadcrumb-item">Notifications</a><span class="breadcrumb-sep">/</span><a href="modal.html" class="breadcrumb-item">Modal</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Notifications</span></div>
+    <h1 class="ds-title">Modal</h1>
+    <p class="ds-lead">A modal is the <strong>most disruptive</strong> notification. It blocks the page until the user makes a decision, so use it only when the user must confirm or choose before going on.</p><p class="ds-lead">How to open a modal from script and the CSS behind it. The files are <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Modal"><a class="tab" href="modal.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="modal-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="modal-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared files once per page. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/eco-design-system/notifications.css"&gt;</code> and <code>&lt;script src="/eco-design-system/notifications.js"&gt;&lt;/script&gt;</code>. Link <code>button.css</code> first.</td></tr><tr><th scope="row">2. Open</th><td>Call <code>ECO_N.openModal({ size, title, body, cancel, confirm })</code>. The script adds the overlay, the focus trap, the scroll lock and the three ways to close.</td></tr><tr><th scope="row">3. React</th><td><code>onConfirm</code> runs when the primary button is pressed; <code>onClose(reason)</code> runs on every close.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="modal"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Modal</h2><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Settings of openModal</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Setting</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>size</code></th><td><code>small</code> (default), <code>medium</code>, <code>large</code>.</td></tr><tr><th scope="row"><code>label</code></th><td>Optional uppercase label above the title.</td></tr><tr><th scope="row"><code>title</code>, <code>body</code></th><td>The title and the body text.</td></tr><tr><th scope="row"><code>cancel</code>, <code>confirm</code></th><td>The button labels. Defaults: Cancel, Confirm.</td></tr><tr><th scope="row"><code>onConfirm</code></th><td>Runs when the primary button is pressed.</td></tr><tr><th scope="row"><code>onClose(reason)</code></th><td>Reason: <code>close</code>, <code>esc</code>, <code>overlay</code>, <code>cancel</code> or <code>confirm</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Custom properties</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Name</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>--modal-in-ease</code>, <code>--modal-in-duration</code></th><td>Enter. Defaults: <code>ease-decelerate-emphasized</code>, <code>duration-fast-4</code>.</td></tr><tr><th scope="row"><code>--modal-out-ease</code>, <code>--modal-out-duration</code></th><td>Exit. Defaults: <code>ease-accelerate-generic</code>, <code>duration-fast-3</code>. Set on <code>&lt;html&gt;</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li><code>openModal</code> returns <code>{ close, el }</code>.</li><li>Page scroll is locked with <code>body.has-modal</code>. <code>onClose</code> and the focus return run at once; the dialog is removed after the fade out.</li><li>Buttons inside the modal are always 32px high, also when <code>button.css</code> is on the page.</li><li>Do not open a modal from a modal.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file and one script, shared by every notification. Link them, never copy them. The code below is read from the files the page links, so it is always what you see.</p><div id="files"></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../notifications.js?v=12"></script>
+<script src="../../components/js/range.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var N = ECO_N, H = N.html, IMG = '/images/product-hantverksbyxa.jpg';
+  var STATUS = [['info', 'Informational'], ['success', 'Success'], ['warning', 'Warning'], ['error', 'Error']];
+  function mk(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
+
+  DK.recipes($('#recipes'), [
+    ['Markup', H.modal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders and addresses are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account' })],
+    ['Open it from script', "var dialog = ECO_N.openModal({\n  size: 'small',                 // small | medium | large\n  label: 'Account',              // optional\n  title: 'Delete your account?',\n  body: 'This cannot be undone.',\n  cancel: 'Cancel',\n  confirm: 'Delete account',\n  onConfirm: deleteAccount,\n  onClose: function (reason) {}  // close | esc | overlay | cancel | confirm\n});"]]);
+  DK.printFile($('#files'), '../notifications.css', [['CSS: Modal', ['modal']], ['CSS: shared close button and buttons', ['base']]])
+    .then(function () { return DK.printFile($('#files'), '../notifications.js', [['JavaScript: openModal', ['runtime']]]); });
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

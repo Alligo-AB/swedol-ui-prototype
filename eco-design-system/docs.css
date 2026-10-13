@@ -179,7 +179,7 @@ body {
 @media (min-width: 1024px) {
   .ds-subnav--auto { display: none; }
   .ds-doc > .ds-section > .ds-inner { padding-right: calc(var(--toc-w) + var(--toc-gap)); }
-  .ds-sidetoc { display: block; position: absolute; top: 0; bottom: 0; right: var(--px-full); width: var(--toc-w); z-index: 1; }
+  .ds-sidetoc { display: block; position: absolute; top: 0; bottom: 80px; right: var(--px-full); width: var(--toc-w); z-index: 1; }
   .ds-sidetoc__in { position: sticky; top: 24px; margin-top: 72px; max-height: calc(100vh - 48px); overflow-y: auto; scrollbar-width: thin; }
   .ds-sidetoc__title { font-size: 16px; line-height: 18px; font-weight: 600; margin: 0 0 16px; color: var(--color-text-primary); }   /* title-sm */
   .ds-sidetoc__list { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--color-border-primary); }
@@ -926,3 +926,15 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 @media (min-width: 769px) { .btn.ds-top { right: 24px; bottom: 24px; } }
 @media (prefers-reduced-motion: reduce) { .btn.ds-top { transition: none; } }
 @media (min-width: 1024px) { .ds-sidetoc__in { max-height: calc(100vh - 48px - 72px); } }   /* the Contents list stops above the back-to-top button */
+
+/* Heading anchor (toc.js): a link icon that copies the URL of the heading. Shown on heading hover and on keyboard focus; always shown on touch screens.
+   Below 1024px it follows the heading text; from 1024px it hangs in the left margin, and the heading's ::before extends its hover area over the margin. */
+.ds-doc .ds-h2, .ds-doc .ds-h3.ds-group { position: relative; }
+.ds-doc .ds-anchor { margin-left: var(--dimension-spacing-space-8); vertical-align: middle; opacity: 0; transition: opacity var(--duration-fast-2) var(--ease-standard); }
+.ds-doc .ds-h2:hover > .ds-anchor, .ds-doc .ds-h3:hover > .ds-anchor, .ds-doc .ds-anchor:hover, .ds-doc .ds-anchor:focus { opacity: 1; }
+@media (hover: none) { .ds-doc .ds-anchor { opacity: 1; } }
+@media (min-width: 1024px) {
+  .ds-doc .ds-h2::before, .ds-doc .ds-h3.ds-group::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(-1 * var(--dimension-spacing-space-40)); width: var(--dimension-spacing-space-40); }
+  .ds-doc .ds-anchor { position: absolute; left: calc(-1 * var(--dimension-spacing-space-32)); top: 50%; margin: 0; transform: translateY(-50%); }
+}
+@media (prefers-reduced-motion: reduce) { .ds-doc .ds-anchor { transition: none; } }

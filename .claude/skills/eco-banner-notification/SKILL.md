@@ -14,6 +14,7 @@ description: Use when building a page-wide banner notification at the top of the
 ## Notification – Banner (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-41997
+**Documentation (three pages, converted 2026-10-13):** `eco-design-system/components/banner.html` (Examples & Guidelines), `banner-specifications.html`, `banner-code.html`; hub: `notifications.html`. Generator: `eco-design-system/gen/gen_banner.py` (starting point only: the pages are the real files).
 **Figma – component guide:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23432-270125
 
 > **2026-09 update:** Banner was restructured in Figma. `System Extra Strong` (the old centered, solid-color admin-impersonation variant) no longer exists as its own tier — it's merged into the top of the regular emphasis ladder (`Strong`, solid-color background). A new `Weaker` emphasis tier was added below `Weak`. A new `Size` property was added: `Small` (the existing 1-size banner) and `Large` (new — a richer, icon+heading+body+buttons banner, exclusive to signed-in/My Pages contexts). `E-Com Action` was renamed/restructured to **`Promotion`** with emphasis `Dark`/`Light`/`Strong`/`Weak`.
@@ -76,6 +77,8 @@ Both sizes take the full width of their container (`width: 100%`). No fixed widt
 ### Variants
 
 #### Emphasis — status banners (Informational / Success / Warning / Error)
+
+> **Which tier:** **Weak is the default** (an ordinary warning or error that can be handled locally); Weaker for general information and offers; Strong sparingly, for a critical outage, a blocked main flow, risk of data loss or anything that needs immediate attention. The status does not decide it, the consequence does. See `notifications-guide` → "Choosing the emphasis".
 
 Three tiers, same ladder for both `Small` and `Large` (only the left-border width and padding scale differ per Size — see tables above):
 
