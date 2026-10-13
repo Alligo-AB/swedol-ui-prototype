@@ -27,17 +27,29 @@ description: Use when building a modal (E-Com Modal) that requires confirmation 
 
 ---
 
+### Choosing a size, and the responsive strategy
+
+The modal comes in **two sizes to choose between: Small and Large**. Choose by the user's task and need for work area. The breakpoint does not change the choice; it decides how the chosen size is adapted to the screen. **There is no Medium** (removed 2026-10-13 from Figma, the docs and the CSS).
+- **Small: short decisions and simple content.** A quick, bounded decision or short information, easy to overview, no extensive scrolling: confirm or cancel an action, approve a message, choose between a few simple options.
+- **Large: tasks that need a work area.** Fill in a more extensive form, search or choose in a longer list, configure a product with several options, handle content with a more complex layout.
+- **Rules:** start with Small, use Large when the task needs more work area. Do not choose Large only because the screen is large, narrow or the text is long. Choose Large if Small makes the content cramped, hard to overview or hard to work with. **Keep the same size choice across breakpoints for the same task**; the presentation adapts without changing the use. Rule of thumb: Small for short decisions, Large for tasks that need more work area.
+- **Desktop (XLarge, Large, Medium breakpoints):** Small is compact, Large is a wider work area; height by content, limited by the available screen height.
+- **Tablet (Small breakpoint):** same rules, width adapts to the available area, both sizes keep side margins.
+- **Mobile (XSmall, below 640px):** Small is a centered dialog, height by content, at least 16px side margin: 343px max on a 375px viewport (the width follows the viewport up to a maximum; 343px is not a fixed width). Large is a full-screen presentation; long content scrolls and the layout works with the keyboard open.
+- **Common layout rules:** Small and Large have no fixed heights; avoid unnecessary empty space (except the full-screen view on mobile). Limit the height to the available screen area and allow scroll. Content and actions must be reachable in landscape and with the keyboard open. A short dialog must not be full width and vertically centered at once: a centered dialog uses side margins; a full-width bottom sheet is a separate presentation pattern (not part of this component). Clear title, button labels that name the action (Cancel, Delete). The footer is not sticky: when content is taller than the screen the whole panel scrolls.
+
 ### Sizes and widths per breakpoint
+
+**Three setups, one per Figma breakpoint group** (the node `Notification / Modal`, 13377:48335, has 6 variants since the `Size=Medium` ones were removed 2026-10-13; XSmall Small is 343px wide, XSmall Large 375 × 813): Figma `Breakpoint=XLarge-Large-Medium` (desktop, Small 440 / Large 705), `Breakpoint=Small` (tablet sm 640–768px: Small 440, **Large 576**, height by content, mobile type, padding 24px) and `Breakpoint=XSmall` (mobile xs: **Large fills the screen** 375 × 813 with the buttons pinned to the bottom, Small is a centered card, 343px max on a 375px viewport). The docs table: `eco-design-system/components/modal.html` → Sizes, and `modal-specifications.html` → Sizes → Setup per breakpoint.
 
 Desktop and Tablet: the modal is centered in the viewport. The background overlay is `var(--color-surface-opacity-black-20)`.
 
 | Size | Desktop (`md:` 769px+) | Tablet (`sm:` 640–768px) | Mobile (`xs:` 0–639px) |
 |---|---|---|---|
-| **Small** | `440px` | `440px` | `375px` wide card, height by content (not full screen) |
-| **Medium** | `600px` | `576px` | — (no xs variant in Figma; use Large) |
+| **Small** | `440px` | `440px` | Centered card, height by content (not full screen), **at least 16px side margin**: up to `375px`, `343px` on a 375px viewport (`max-width: calc(100vw - 32px)`) |
 | **Large** | `705px` | `576px` | Fills the whole viewport (`375px` × `813px` in Figma) |
 
-> Choose the size based on the amount of content. Small for simple confirmations, Medium/Large for more complex information.
+> Choose the size by the user's task, not the amount of content (see Choosing a size above).
 
 > **xs (Mobile), Large:** The modal is **not** centered. It fills the whole viewport (Small stays a compact `375px` card with `padding: 16px` and `24px` above the buttons): `position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; padding: 16px`. The header+body section has `flex: 1` so the buttons are pinned to the bottom. A close button (`×`) is shown at the top.
 
@@ -124,12 +136,10 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 }
 
 /* Sizes */
-.modal--medium { width: 600px; }
 .modal--large  { width: 705px; }
 
 /* Tablet */
 @media (min-width: 640px) and (max-width: 768px) {
-  .modal--medium,
   .modal--large { width: 576px; }
   .modal { padding: 24px; }
 }
@@ -137,11 +147,9 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 /* Mobile */
 @media (max-width: 639px) {
   .modal,
-  .modal--medium,
   .modal--large {
     width: 375px;
-    min-width: 375px;
-    max-width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);   /* at least 16px to the edges: 343px on a 375px viewport; no min-width */
     padding: 16px;
   }
 }

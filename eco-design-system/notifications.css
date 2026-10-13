@@ -239,24 +239,23 @@ body.keyboard-nav .btn:focus, body.keyboard-nav .icon-btn:focus, body.keyboard-n
 }
 .modal__footer { display: flex; gap: var(--dimension-spacing-space-8); align-items: center; padding-top: var(--dimension-spacing-space-24); width: 100%; }
 .modal__footer .btn--primary { flex: 1; }
-/* Tablet: medium and large are 576px */
+/* Tablet: large is 576px */
 @media (min-width: 640px) {
   .modal { padding: var(--dimension-spacing-space-24); width: 440px; }
-  .modal--medium, .modal--large { width: 576px; }
+  .modal--large { width: 576px; }
 }
 /* Desktop */
 @media (min-width: 769px) {
   .modal--small { width: 440px; }
-  .modal--medium { width: 600px; }
   .modal--large { width: 705px; }
   .modal__label { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
   .modal__title { font-size: 20px; line-height: 24px; }
   .modal__body { font-size: 17px; line-height: 24px; }
   .modal__footer { padding-top: var(--dimension-spacing-space-32); }
 }
-/* Mobile large (and medium, which has no xs variant): fills the viewport, buttons pinned to the bottom */
+/* Mobile large: fills the viewport, buttons pinned to the bottom */
 @media (max-width: 639px) {
-  .modal--medium, .modal--large {
+  .modal--large {
     top: 0; left: 0; transform: none; width: 100%; max-width: none; height: 100dvh; max-height: none;
   }
 }
