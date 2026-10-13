@@ -6,12 +6,12 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 5px;                 /* Medium, default */
+  padding: 3px 4px;                 /* Medium, default: mobile 3px 4px, 12/12 (Figma 3912:157194) */
   font-family: 'Breuer Condensed', Arial, sans-serif;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 14px;
-  letter-spacing: 0.56px;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.48px;
   white-space: nowrap;
   font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
 }
@@ -23,12 +23,16 @@
   text-transform: uppercase;
 }
 
-/* Sizes */
-.badge-basic--large  { padding: 6px 8px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
-.badge-basic--small  { padding: 3px 5px; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
-@media (max-width: 768px) {
-  .badge-basic--large { padding: 5px 6px; letter-spacing: 0.48px; }
-  .badge-basic--small { display: none; } /* Small is Desktop-only */
+/* Sizes. Mobile first (Figma Small-XSmall); desktop from 769px (XLarge-Large-Medium). Small = Medium on mobile.
+   Large  : mobile 5px 6px, 14/14, 0.48px   · desktop 6px 8px, 14/14, 0.56px
+   Medium : mobile 3px 4px, 12/12, 0.48px   · desktop 4px 5px, 14/14, 0.56px
+   Small  : mobile 3px 4px, 12/12, 0.48px   · desktop 3px 5px, 12/12, 0.48px */
+.badge-basic--large  { padding: 5px 6px; font-size: 14px; line-height: 14px; letter-spacing: 0.48px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.badge-basic--small  { font-feature-settings: 'ss02' 1, 'ss03' 1; }
+@media (min-width: 769px) {
+  .badge-basic { padding: 4px 5px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+  .badge-basic--large { padding: 6px 8px; letter-spacing: 0.56px; }
+  .badge-basic--small { padding: 3px 5px; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }
 }
 
 /* Neutral */
@@ -64,33 +68,110 @@ span.badge-basic__icon {
   text-transform: none; white-space: nowrap; overflow: hidden; user-select: none; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
 }
 
-/* Badge/Number-Icon (Figma, size Large): a 24px black circle with a number or a check icon. First used in the numbered
-   markers of anatomy diagrams (eco-design-system, DK.callouts). One size for every breakpoint: label-sm 14/14. */
+/* Badge/Number (Figma "Number", node 535:15785): a round badge with a number, or on Large a check icon. Sizes Large / Medium / Small;
+   the values change at 769px (Figma Small-XSmall = mobile, XLarge-Large-Medium = desktop). Mobile-first. Label: Breuer Condensed Bold, uppercase.
+   Large  : 20px mobile (12/12, 0.48px) · 24px desktop (14/14 = label-sm, 0.56px); the check icon is 20px.
+   Medium : 18px mobile (12/12) · 20px desktop (14/14).
+   Small  : 14px mobile · 16px desktop, number 10/10. A number with more digits makes the badge wider (min-width).
+   Check icon (Figma 2026-10-12, all three sizes): Large 20px, Medium 14px, Small 10px mobile / 11px desktop. */
 .badge-number {
   display: inline-flex;
+  vertical-align: middle;           /* a number and a check mark side by side in a line share the same centre */
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 24px;
-  height: 24px;
+  min-width: 20px;
+  height: 20px;
   padding: 0 5px;
   border-radius: 100px;
   background: var(--color-surface-100);
   color: var(--color-text-primary-inverted);
   font-family: 'Breuer Condensed', Arial, sans-serif;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 14px;
-  letter-spacing: 0.56px;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.48px;
   text-transform: uppercase;
   font-feature-settings: 'ss02' 1, 'ss03' 1;
 }
+.badge-number--md { min-width: 18px; height: 18px; padding: 0 4px; }
+.badge-number--sm { min-width: 14px; height: 14px; padding: 0 2px; font-size: 10px; line-height: 10px; letter-spacing: 0; font-feature-settings: normal; }
+@media (min-width: 769px) {
+  .badge-number { min-width: 24px; height: 24px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+  .badge-number--md { min-width: 20px; height: 20px; padding: 0 5px; }
+  .badge-number--sm { min-width: 16px; height: 16px; padding: 0 3px; font-size: 10px; line-height: 10px; letter-spacing: 0; }
+}
 .badge-number__icon {
   font-family: 'Material Symbols Outlined';
-  font-size: 20px;
+  font-size: 20px;                  /* Large; Medium 14px, Small 10px mobile / 11px desktop (below) */
   line-height: 1;
   font-weight: 400;
   text-transform: none;
   letter-spacing: normal;
   font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+}
+.badge-number:has(> .badge-number__icon) { padding: 0; }   /* a check mark badge is round: the icon is centered, never wider than the circle */
+.badge-number--md .badge-number__icon { font-size: 14px; }
+.badge-number--sm .badge-number__icon { font-size: 10px; }
+@media (min-width: 769px) { .badge-number--sm .badge-number__icon { font-size: 11px; } }
+
+/* Badge/Dot (Figma "Dot", node 4763:292600): a status dot, no text. Sizes Large 10px / Medium 8px / Small 6px (the same at every
+   breakpoint). Five states. Put it next to text or on the top right corner of an icon; never on its own, never stacked. */
+.badge-dot { display: inline-block; flex-shrink: 0; box-sizing: border-box; width: 10px; height: 10px; border-radius: 50%; background: var(--color-surface-danger-default); }
+.badge-dot--md { width: 8px; height: 8px; }
+.badge-dot--sm { width: 6px; height: 6px; }
+.badge-dot--warning { background: var(--color-surface-warning-default); }
+.badge-dot--success { background: var(--color-surface-success-default); }
+.badge-dot--info    { background: var(--color-surface-information-default); }
+.badge-dot--neutral { background: var(--color-surface-20); }
+
+/* Badge/Product and Badge/Discount (Figma node 328:8378): e-commerce only. Label: Breuer Condensed Bold, uppercase, 12/12 mobile,
+   14/14 desktop (label-sm). Discount = red; "Closing sale" is a second, black badge beside it (or under it: .badge-promo-stack).
+   Product (Standard assortment, Agreed assortment, Previously purchased) = light grey with a 1px border and a 14px icon. */
+.badge-promo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dimension-spacing-space-4);
+  box-sizing: border-box;
+  padding: 4px 4px;
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.48px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-feature-settings: 'ss02' 1, 'ss03' 1;
+  background: var(--color-surface-danger-default);   /* Discount */
+  color: var(--color-text-primary-inverted);
+}
+.badge-promo--closing { background: var(--color-surface-100); }
+.badge-promo--product { padding: 3px 4px; background: var(--color-surface-05); border: 1px solid var(--color-border-primary); color: var(--color-text-primary); }
+.badge-promo__icon { width: 14px; height: 14px; flex-shrink: 0; font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: 14px; line-height: 14px; letter-spacing: normal; text-transform: none; overflow: hidden; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+.badge-promo-group { display: inline-flex; align-items: flex-start; }
+.badge-promo-stack { display: inline-flex; flex-direction: column; align-items: flex-start; }
+@media (min-width: 769px) {
+  .badge-promo { padding: 4px 5px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+  .badge-promo--product { padding: 4px 5px; }
+}
+
+/* Badge/Purchase Info (Figma "Good buy" 459:19071 and "Good to know" 4518:196348): a badge with a beak (arrow) pointing at an explanation.
+   <div class="badge-purchase"><span class="badge-purchase__tag"><span class="badge-purchase__label">Bra köp</span><span class="badge-purchase__beak"></span></span><p class="badge-purchase__text">…</p></div>
+   Good buy = red (--badge-purchase-bg: danger), Good to know (.badge-purchase--know) = grey surface-50. E-commerce only. */
+.badge-purchase { --badge-purchase-bg: var(--color-surface-danger-default); display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
+.badge-purchase--know { --badge-purchase-bg: var(--color-surface-50); }
+.badge-purchase__tag { display: flex; align-items: flex-start; flex-shrink: 0; }
+.badge-purchase__label {
+  display: flex; align-items: center; box-sizing: border-box; padding: 3px 4px;
+  background: var(--badge-purchase-bg); color: var(--color-text-primary-inverted);
+  font-family: 'Breuer Condensed', Arial, sans-serif; font-weight: 600; font-size: 12px; line-height: 12px; letter-spacing: 0.48px;
+  text-transform: uppercase; white-space: nowrap; font-feature-settings: 'ss02' 1, 'ss03' 1;
+}
+.badge-purchase__beak { align-self: stretch; width: 8px; background: var(--badge-purchase-bg); clip-path: polygon(0 0, 100% 50%, 0 100%); }   /* 8 x 18 mobile, 10 x 22 desktop */
+.badge-purchase__text { flex: 1 1 0; min-width: 1px; margin: 0; color: var(--color-text-secondary); font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.badge-purchase__text a { color: inherit; text-decoration: underline; text-underline-position: from-font; }
+@media (min-width: 769px) {
+  .badge-purchase__label { padding: 4px 3px 4px 5px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+  .badge-purchase__beak { width: 10px; }
+  .badge-purchase__text { letter-spacing: 0.36px; }
 }

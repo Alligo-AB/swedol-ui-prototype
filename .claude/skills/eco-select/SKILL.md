@@ -114,7 +114,7 @@ A select opens the ECO **Menu** (`eco-menu`, Exposed dropdown menu) instead of t
 - **Placement:** opens below. If it does not fit and there is more room above, it opens upwards (`.menu--up`, `bottom: calc(100% + 4px)`); if it fits in neither direction the list height is capped and scrolls. Checked on open; window resize closes the menu.
 - Rows come from the `<option>`s; the empty placeholder option is skipped; a disabled `<option>` becomes a disabled row (`aria-disabled`, skipped by arrow keys); the chosen row shows the check (`aria-selected="true"`).
 - Click or Enter/Space/Arrow opens; Up/Down/Home/End move; Enter/Space choose and fire `change`; Escape closes and returns focus to the field; Tab or an outside click closes.
-- CSS and script: `/components/css/menu.css`, `/components/css/select.css` and `<script src="/components/js/select-menu.js"></script>` (the docs page `select.html` links the same files). Add each once per page.
+- CSS and script: `/components/css/menu.css`, `/components/css/select.css` and `<script src="/components/js/select-menu.js"></script>` (the docs pages `select.html`, `select-specifications.html` and `select-code.html` link the same files). Add each once per page.
 - Mobile: the same menu is used (no native picker), rows 40px Large / 32px Small.
 
 ---
@@ -129,7 +129,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/select.css">
 ```
 
-`components/css/select.css` is the single source for this component. The docs page `eco-design-system/components/select.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/select.css` is the single source for this component. The docs pages (`eco-design-system/components/select.html`, `select-specifications.html`, `select-code.html`) link the same file; the Code page prints it. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 Also link `/components/css/menu.css` when the select opens a custom menu (eco-menu).
 

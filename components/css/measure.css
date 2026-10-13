@@ -1,0 +1,47 @@
+/* ECO measurement figure (blueprint style): a component shown at true size (1:1) on a dotted grid, its padding shaded, dimension lines with the values.
+   Used on the Specifications pages (section Measurements). Skill: eco-doc-page. Link it, do not copy it: <link rel="stylesheet" href="/components/css/measure.css">
+   Markup: the subject sits inside its own wrapper (a tooltip inside .tooltip-wrap, so the component's own variables apply).
+   Script: /components/js/measure.js reads the padding from the real subject and sets the shading, the lines and the numbers (live, never typed).
+   Colours are the Information tokens (blue); tokens only. Needs `zoom` (all current browsers). */
+.measure {
+  width: 100%; --k: 1;                                  /* enlargement: 1 = true size (1:1); raise it on one figure with style="--k:2" if a component is too small to read */
+  display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 48px 72px;
+  padding: 40px 24px 40px;
+  background-color: var(--color-surface-raised-primary);
+  background-image: radial-gradient(var(--color-border-information-weak) 1px, transparent 1.5px);   /* blueprint dot grid */
+  background-size: 16px 16px;
+}
+@media (min-width: 769px) { .measure { padding: 48px 48px 48px; } }
+
+.measure__item { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.measure__name { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; text-transform: uppercase; color: var(--color-text-information-default); }   /* body-sm, bold */
+
+.measure__obj { position: relative; display: inline-block; zoom: var(--k); margin: 0 24px 24px 0; }   /* room on the right and below for the dimension lines */
+.measure__obj .measure__subject { position: static; z-index: auto; opacity: 1; pointer-events: none; }   /* the real component, shown in place (a tooltip is otherwise absolute and hidden) */
+
+/* Shaded padding: four strips; where two overlap the blue gets deeper */
+.measure__pad { position: absolute; background: var(--color-surface-information-weak); opacity: .85; pointer-events: none; }
+.measure__pad--t { top: 0; left: 0; right: 0; height: var(--pt, 0); }
+.measure__pad--b { bottom: 0; left: 0; right: 0; height: var(--pb, 0); }
+.measure__pad--l { top: 0; bottom: 0; left: 0; width: var(--pl, 0); }
+.measure__pad--r { top: 0; bottom: 0; right: 0; width: var(--pr, 0); }
+
+/* Dimension lines: a bracket (line + end ticks) beside the shaded strip, the value next to it. The label is counter-zoomed to stay 14px. */
+.measure__dim {
+  --line: calc(1px / var(--k));
+  --ink: var(--color-border-information-default);
+  position: absolute; display: block;
+}
+.measure__dim > span {
+  position: absolute; zoom: calc(1 / var(--k)); white-space: nowrap;
+  font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; color: var(--color-text-information-default);
+}
+.measure__dim--v { left: 100%; margin-left: 6px; width: 6px; border-top: var(--line) solid var(--ink); border-bottom: var(--line) solid var(--ink); background: linear-gradient(var(--ink), var(--ink)) center / var(--line) 100% no-repeat; }
+.measure__dim--v > span { left: calc(100% + 4px); top: 50%; transform: translateY(-50%); }
+.measure__dim--h { top: 100%; margin-top: 6px; height: 6px; border-left: var(--line) solid var(--ink); border-right: var(--line) solid var(--ink); background: linear-gradient(var(--ink), var(--ink)) center / 100% var(--line) no-repeat; }
+.measure__dim--h > span { top: calc(100% + 4px); left: 50%; transform: translateX(-50%); }
+.measure__dim--t { top: 0; height: var(--pt, 0); }
+.measure__dim--b { bottom: 0; height: var(--pb, 0); }
+.measure__dim--l { left: 0; width: var(--pl, 0); }
+.measure__dim--r { right: 0; width: var(--pr, 0); }
+.measure__pad[hidden], .measure__dim[hidden] { display: none; }

@@ -9,7 +9,7 @@ description: Use when building or reviewing tabs — a tab bar of Primary or Sec
 
 **Figma:** Tab Base Item `3034:330049`, Tab Items `2166:63997`, Tab Bar sizes `2515:77815`, Tab info `3521:126512` (file `42MgqJjV9vfplwQnrUB62r`).
 
-Documentation page: `eco-design-system/components/tabs.html`. Shared files, link them, never copy:
+Documentation: `eco-design-system/components/tabs.html`, `tabs-specifications.html`, `tabs-code.html` (three pages, see `eco-doc-page`). Shared files, link them, never copy:
 
 ```html
 <link rel="stylesheet" href="/components/css/tabs.css">
@@ -66,7 +66,7 @@ Breuer Condensed, weight `600` (Figma bold 700 − 100), uppercase, `font-featur
 
 **Focus ring** (Figma Focus, Active Focus, Enabled Focus; same principle for every variant): 2px solid `--color-border-focus`, square corners, drawn by `.tab::before` around icon + label: 4px clear above, left and right (ring 8px wider than the tab: Primary 36 → 44, Secondary 68 → 76), bottom 6px above the tab's bottom edge so the indicator line stays outside the ring. Shown on `:focus-visible` (and `data-state="focus"` for docs). The bar has `padding: 4px 4px 0; margin: -4px -4px 0` so the scroll container does not clip the ring and nothing shifts.
 
-**Accent colour** (the active line only; the docs page has a Black / Swedol / Tools toggle in the Playground and an Accent colour block under Variants): the line is black by default. Set `--tab-line-active` on the bar to the product's accent. Swedol: `var(--color-accent-default)` (`#c7d300`). Tools is a primitive in the token package: `--color-primitive-color-brand-tools-accent-brand` (`#cd1125`). The My Pages prototype pages use `var(--brand)`, their own alias of the Swedol accent. Works for Primary and Secondary, content tabs and link tabs. The grey hover line and the grey line under the arriving tab do not change with the accent. Never restyle `.tab::after` or `.tab-bar__indicator`.
+**Accent colour** (the active line only; the Examples page has a Black / Swedol / Tools toggle in the Playground and an Accent colour block under Variants): the line is black by default. Set `--tab-line-active` on the bar to the product's accent. Swedol: `var(--color-accent-default)` (`#c7d300`). Tools is a primitive in the token package: `--color-primitive-color-brand-tools-accent-brand` (`#cd1125`). The My Pages prototype pages use `var(--brand)`, their own alias of the Swedol accent. Works for Primary and Secondary, content tabs and link tabs. The grey hover line and the grey line under the arriving tab do not change with the accent. Never restyle `.tab::after` or `.tab-bar__indicator`.
 
 Status (Figma Tab Bar sizes, label-only bars): `.tab__dot` 6px circle and `.tab__count` red pill with a number (16px high, 10px text, no letter-spacing) sit after the label text with a 4px gap; both `--color-surface-danger-default`, count text `--color-text-primary-inverted`. An optional leading icon (`<span class="ms">`, 24px; 20px on Small below 769px) sits before the label text, 4px gap. `.tab__label` is locked to the line height, so the icon overflows evenly and neither the tab height nor the label position changes.
 
@@ -111,6 +111,10 @@ Icon only: `<button class="tab tab--icon-only" role="tab" aria-label="Settings">
 5. Prefer scrollable tabs (the bar scrolls sideways, scrollbar hidden) over wrapping or hiding tabs. Keep the active tab in view (`tabs.js` does `scrollIntoView`).
 6. Icon-only tabs need an `aria-label`. Status dot/number needs a text alternative where the meaning is not clear from context.
 7. Test at ~375px, ~700px and ≥1024px with `getComputedStyle`, and with real hover and keyboard (Tab, arrows).
+
+### On-page navigation (docs)
+
+Link tabs whose `href` is an `#anchor` work as an on-page nav (`eco-design-system/toc.js`, `data-subnav="tabs"`, see `eco-doc-page`): `tabs.js` does not add the pending look or keep a previous position for them, and a script that moves `aria-current` (a scrollspy) makes the line slide to the new tab (a `MutationObserver` on `aria-current` in link bars). The doc pages set the line to the ECO DS accent (`--ds-accent`, `#E94E19`) on that bar; it is a docs colour, products use `--tab-line-active` as above.
 
 ### Flags for design
 

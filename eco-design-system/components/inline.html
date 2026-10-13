@@ -44,7 +44,7 @@
     <span class="ds-eyebrow">Components · Notifications</span>
     <h1 class="ds-title">Inline notification</h1>
     <p class="ds-lead">An inline notification gives <strong>feedback right where the user is working</strong>: next to a form, a quantity field or a delivery estimate. It stays in the page until the user acts or the state changes. It never disappears by itself.</p>
-    <p class="ds-lead">The buttons in <a href="#action" class="ds-link">In action</a> show the statuses appearing in context. Specification: <code>.claude/skills/eco-inline-notification/SKILL.md</code>.</p>
+    <p class="ds-lead">The buttons in <a href="#action" class="inline-link inline-link--xlarge">In action</a> show the statuses appearing in context. Specification: <code>.claude/skills/eco-inline-notification/SKILL.md</code>.</p>
   </div>
 </section>
 
@@ -78,14 +78,14 @@
         <div class="ds-field form-field" id="pg-b1-f" hidden><label class="form-label form-label--sm" for="pg-b1">Primary button</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-b1" value="Continue" placeholder="Primary button" /></div></div></div>
         <div class="ds-field form-field" id="pg-l1-f" hidden><label class="form-label form-label--sm" for="pg-l1">Link 1</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-l1" value="Delivery terms" placeholder="Link 1" /></div></div></div>
         <div class="ds-field form-field" id="pg-l2-f" hidden><label class="form-label form-label--sm" for="pg-l2">Link 2</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-l2" value="Change address" placeholder="Link 2" /></div></div></div>
-        <p class="pg-note" style="margin:0">The animation when the × is clicked is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+        <p class="pg-note" style="margin:0">The animation when the × is clicked is set in <a href="#motion" class="inline-link inline-link--small inline-link--tertiary">Motion</a>.</p>
         <button type="button" class="btn btn--secondary" id="pg-reset" style="align-self:flex-start"><span class="btn__label">Show again</span></button>
       </div>
     </div>
     <p class="pg-note" id="pg-rule"></p>
     <h3 class="ds-h3">Markup for this selection</h3>
     <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
-    <p class="ds-desc ds-note">The markup has no motion. Closing animation is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+    <p class="ds-desc ds-note">The markup has no motion. Closing animation is set in <a href="#motion" class="inline-link inline-link--medium inline-link--secondary">Motion</a>.</p>
   </div>
 </section>
 
@@ -290,8 +290,8 @@
     ['Small · Warning · Weak', H.inline({ size: 'small', status: 'warning', emphasis: 'weak', text: 'That password is easy to guess.' })]]);
   DK.printFile($('#files'), '../notifications.css', [['CSS: Inline notification', ['inline']], ['CSS: shared icon, close button, link and buttons', ['base']]]);
   DK.rows($('#which'), [
-    ['belongs to one section, form or content block and must stay', 'Inline (this page)'], ['is a short confirmation of an action', '<a href="toast.html" class="ds-link">Toast</a>'],
-    ['concerns the whole page or system', '<a href="banner.html" class="ds-link">Banner</a>'], ['needs a decision before the user can go on', '<a href="modal.html" class="ds-link">Modal</a>']]);
+    ['belongs to one section, form or content block and must stay', 'Inline (this page)'], ['is a short confirmation of an action', '<a href="toast.html" class="inline-link inline-link--small">Toast</a>'],
+    ['concerns the whole page or system', '<a href="banner.html" class="inline-link inline-link--small">Banner</a>'], ['needs a decision before the user can go on', '<a href="modal.html" class="inline-link inline-link--small">Modal</a>']]);
 
   mo = DK.motion({ anchor: 'playground', prefix: 'n-close', rec: { ease: 'accelerate-generic', dur: 'fast-3', collapse: true }, role: 'exit', why: 'Closing removes the element: accelerate easing, fast fade, and the height collapses so no gap is left (eco-motion: element disappears).', preview: function () { return mk(pgOpts()); } });
   DK.bp(); renderPg(); matrix();

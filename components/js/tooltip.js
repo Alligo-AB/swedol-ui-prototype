@@ -10,6 +10,9 @@
       overflow or stacking context can clip or hide it). Optional data-tooltip-position="top|bottom" (default top). Works for
       elements added later (events are delegated). No markup besides the attribute; keep an aria-label with the same text.
 
+   3. Keyboard. A tooltip also shows when its trigger gets keyboard focus (:focus-visible, not the focus a mouse click gives),
+      and Esc hides it without moving focus or pointer (WCAG 1.4.13 dismissible). It comes back on the next hover or focus.
+
    A page with a sticky header sets --tooltip-safe-top (the header's height, in px) on :root: room above then counts from
    below the header. .tooltip--manual tooltips are never touched by the flip. */
 (function () {
@@ -85,7 +88,32 @@
   });
   document.addEventListener('pointerout', function (e) {
     var g = e.target.closest && e.target.closest('[data-tooltip]');
-    if (g && g === current && !(e.relatedTarget && g.contains(e.relatedTarget))) hide();
+    if (g && g === current && !g.matches(':focus-visible') && !(e.relatedTarget && g.contains(e.relatedTarget))) hide();   /* keyboard focus keeps it open */
+    var w = e.target.closest && e.target.closest('.tooltip-wrap');
+    if (w && !(e.relatedTarget && w.contains(e.relatedTarget))) w.classList.remove('is-dismissed');
+  });
+
+  /* 3. keyboard: focus shows, Esc hides, focus leaving ends it */
+  document.addEventListener('focusin', function (e) {
+    var t = e.target;
+    if (!t.matches || !t.matches(':focus-visible')) return;
+    var w = t.closest('.tooltip-wrap');
+    if (w) { w.classList.remove('is-dismissed'); placeWrap(w); }
+    var g = t.closest('[data-tooltip]');
+    if (g && g !== current) show(g);
+  });
+  document.addEventListener('focusout', function (e) {
+    var w = e.target.closest && e.target.closest('.tooltip-wrap');
+    if (w) w.classList.remove('is-dismissed');
+    var g = e.target.closest && e.target.closest('[data-tooltip]');
+    if (g && g === current) hide();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    hide();
+    document.querySelectorAll('.tooltip-wrap:not([data-state])').forEach(function (w) {   /* [data-state] wraps are forced-open docs demos */
+      if (w.matches(':hover, :has(:focus-visible)')) w.classList.add('is-dismissed');
+    });
   });
   /* a click closes it for the mouse; on touch the tap that opens it (pointerover comes first) stays, a tap elsewhere closes it */
   document.addEventListener('pointerdown', function (e) {

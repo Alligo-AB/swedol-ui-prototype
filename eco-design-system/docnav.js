@@ -21,7 +21,7 @@
         { title: 'Notifications', items: [c('notifications', 'Notifications guide'), c('toast', 'Toast'), c('toast-ecom', 'E-Com Toast'), c('modal', 'Modal'), c('banner', 'Banner'), c('inline', 'Inline notification')] },
         { title: 'Menus, lists and dividers', items: [c('menu', 'Menu'), c('list-item', 'List Item'), c('divider', 'Divider')] },
         { title: 'Links', items: [c('links-guide', 'Links guide', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
-        { title: 'Status and navigation', items: [c('badge', 'Badge'), c('breadcrumb', 'Breadcrumb'), c('pagination', 'Pagination'), c('tooltip-new', 'Tooltip')] },   // Tooltip → the new split pages (draft)
+        { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb'), c('pagination', 'Pagination'), c('tooltip', 'Tooltip')] },
         { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible'), c('table', 'Table'), c('role-tier-card', 'Role tier card')] }
       ]
     }
@@ -210,7 +210,7 @@
     menu: 'meny, rullgardinsmeny, dropdown', 'list-item': 'listobjekt, listrad, rad, lista', divider: 'avdelare, skiljelinje, delare, linje, separator',
     'links-guide': 'länkar, länk, hyperlänk, guide', 'inline-link': 'textlänk, länk i text, brödtext', 'action-link': 'åtgärdslänk, länk, fristående',
     'tile-link': 'länkkort, bricka, kort, ikonlänk', badge: 'märke, etikett, tagg, status, markering', breadcrumb: 'brödsmula, brödsmulor, sökväg, navigering',
-    pagination: 'sidnumrering, paginering, ladda fler, visa fler, sidor', 'tooltip-new': 'verktygstips, tips, hjälptext, ballong', section: 'sektion, avsnitt, block, yta',
+    pagination: 'sidnumrering, paginering, ladda fler, visa fler, sidor', 'tooltip': 'verktygstips, tips, hjälptext, ballong', section: 'sektion, avsnitt, block, yta',
     collapsible: 'fällbar, dragspel, expanderbar, fäll ut, accordion, faq', table: 'tabell, rader, kolumner, data', 'role-tier-card': 'rollkort, nivåkort, roller, behörighet, kort'
   };
   function fold(x) { return x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }   // å ä ö → a a o: "farg" finds "färg"
@@ -345,4 +345,50 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Tab') { root.setAttribute('data-kbd', ''); document.body.classList.add('keyboard-nav'); } }, true);   // focus ring for the shared components (same as subnav.js)
   document.addEventListener('pointerdown', function () { root.removeAttribute('data-kbd'); document.body.classList.remove('keyboard-nav'); }, true);
+})();
+
+/* Footer for every doc page that has the navigation: three columns (How you can help, Resources, Support) and the credit line.
+   Built here so the text lives in one place; styles are .ds-footer in docs.css. Skipped when a page already has a .ds-footer. */
+(function () {
+  var SLACK = 'https://alligo-it.slack.com/archives/C07QRNLU1L1';
+  var STORYBOOK = 'https://www.chromatic.com/build?appId=67b6063b450f52d85d87d37f&number=106';   // Storybook build on Chromatic (a build number: update it when the link should point to a newer build)
+  var FIGMA = 'https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?m=auto&t=AwSiA8PReQo5qH9J-6';   // the ECO Design System file
+  function build() {
+    if (document.querySelector('.ds-footer')) return;
+    var f = document.createElement('footer');
+    f.className = 'ds-footer';
+    f.innerHTML =
+      '<div class="ds-footer__grid">' +
+        '<div class="ds-footer__col ds-footer__col--help"><h2 class="ds-footer__title">How you can help</h2>' +
+          '<p>The ECO Design System has just started its journey. Your feedback and contributions help us refine the design system and make it better for everyone. If you got a question or if there are something you feel is missing or if you notice something out of the ordinary. Please connect with ECO team through our <a class="inline-link inline-link--medium inline-link--secondary" href="' + SLACK + '" target="_blank" rel="noopener">Slack channel</a>.</p>' +
+          '<p class="ds-footer__made">Made with <span class="mo-ic" aria-label="love">favorite</span> by Alligo E-com © ' + new Date().getFullYear() + '</p></div>' +
+        '<div class="ds-footer__col"><h2 class="ds-footer__title">Resources</h2><ul class="ds-footer__list">' +
+          '<li><a class="inline-link inline-link--medium inline-link--secondary" href="' + STORYBOOK + '" target="_blank" rel="noopener">Storybook</a></li>' +
+          '<li><a class="inline-link inline-link--medium inline-link--secondary" href="' + FIGMA + '" target="_blank" rel="noopener">Figma</a></li>' + '</ul></div>' +
+        '<div class="ds-footer__col"><h2 class="ds-footer__title">Support</h2><ul class="ds-footer__list">' +
+          '<li><a class="inline-link inline-link--medium inline-link--secondary" href="' + SLACK + '" target="_blank" rel="noopener">ECO Slack Channel</a></li>' + '</ul></div>' +
+      '</div>';
+    document.body.appendChild(f);
+  }
+  /* Back to top: one icon button, fixed bottom right, shown once the page has been scrolled (a long page). Smooth scroll (instant under reduced
+     motion), then focus moves to the page title so keyboard users start at the top. Its tooltip uses the shared tooltip.js. */
+  function top() {
+    if (document.getElementById('ds-top')) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.id = 'ds-top'; b.className = 'btn btn--secondary btn--md btn--icon ds-top';
+    b.setAttribute('aria-label', 'Back to top'); b.setAttribute('data-tooltip', 'Back to top');
+    b.innerHTML = '<span class="btn__icon" aria-hidden="true">arrow_upward</span>';
+    document.body.appendChild(b);
+    function show() { b.classList.toggle('is-visible', window.pageYOffset > window.innerHeight * 0.75); }
+    window.addEventListener('scroll', show, { passive: true }); window.addEventListener('resize', show); show();
+    b.addEventListener('click', function () {
+      var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, left: 0, behavior: still ? 'auto' : 'smooth' });
+      var h = document.querySelector('h1');
+      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    });
+    if (!document.querySelector('script[src*="tooltip.js"]')) { var t = document.createElement('script'); t.src = '/components/js/tooltip.js'; document.body.appendChild(t); }
+  }
+  function init() { build(); top(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

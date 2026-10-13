@@ -36,6 +36,8 @@ Choose easing based on how a transition moves relative to the screen:
 | `ease-accelerate-generic` | `cubic-bezier(.36,.09,1,.58)` | Ease In – Generic | Starts slow, speeds up. Like an object falling. | Removing elements from the screen (exit animations). |
 | `ease-standard` | `cubic-bezier(.35,0,.35,1)` | Ease InOut – Standard | Starts slow, speeds up, brakes. All-round easing. | Hover states (the majority). Button, Product Card, Text Link, Breadcrumb, Collapsible, Overflow menu, Form elements, Tab bar, Drawer Link. |
 
+> Doc pages with `data-subnav="tabs"` (the Tooltip draft) jump to a section with `ease-decelerate-generic` and durations one step faster than the default (fast-3 / fast-4 / medium-2 / slow-1 by distance); other doc pages keep `ease-decelerate-emphasized`. Scroll animations must scroll with `behavior: 'instant'` per frame, otherwise `html { scroll-behavior: smooth }` stretches them.
+
 > ★ `ease-decelerate-emphasized` is the first choice for enter animations. `ease-decelerate-generic` is used when a lighter emphasis is wanted.
 
 ```css

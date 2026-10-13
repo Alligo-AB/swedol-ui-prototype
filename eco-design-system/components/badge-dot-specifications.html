@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Badge Dot: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: demo layout only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-wide { width: 100%; max-width: 640px; }
+    .pg-top { align-items: flex-start; padding-top: 40px; }
+    .pg-btn { min-height: 120px; }
+    .pg-dotrow { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; line-height: 24px; }   /* demo: a dot beside a label */
+    .pg-dotwrap { position: relative; display: inline-flex; }   /* demo: a dot on the top right corner of an icon */
+    .pg-dotwrap .badge-dot { position: absolute; top: 2px; right: 2px; transform: translate(50%, -50%); }
+    .pg-ic { font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 24px; font-feature-settings: 'liga'; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="badge.html" class="breadcrumb-item">Badge</a><span class="breadcrumb-sep">/</span><a href="badge-dot.html" class="breadcrumb-item">Dot</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status</span></div>
+    <h1 class="ds-title">Badge Dot</h1>
+    <p class="ds-lead">A dot is a <strong>small status marker without text</strong>.</p><p class="ds-lead">Tokens, sizes and requirements. Values come from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=4763-292600" target="_blank" rel="noopener">Dot</a>.</p>
+  </div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Badge Dot"><a class="tab" href="badge-dot.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="badge-dot-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="badge-dot-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Variant</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Diameter</th><th scope="col">Class</th><th scope="col">Breakpoints</th></tr></thead><tbody><tr><th scope="row">Large</th><td>10px</td><td><code>badge-dot</code></td><td>Same on mobile and desktop</td></tr><tr><th scope="row">Medium</th><td>8px</td><td><code>badge-dot--md</code></td><td>Same</td></tr><tr><th scope="row">Small</th><td>6px</td><td><code>badge-dot--sm</code></td><td>Same</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Shape</th><td>A circle</td></tr><tr><th scope="row">Diameter</th><td>10px Large, 8px Medium, 6px Small</td></tr><tr><th scope="row">Text and icon</th><td>None</td></tr><tr><th scope="row">Distance to a text</th><td><code>space-4</code> to <code>space-8</code> (set by the page: the dot has no margin)</td></tr><tr><th scope="row">Position on an icon</th><td>The center of the dot sits on the top right corner of the icon</td></tr></tbody></table></div><p class="ds-desc ds-note">A dot has no padding, so there is no measurement figure. Diameter values are from Figma (<a class="inline-link inline-link--medium inline-link--secondary" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=4763-292600" target="_blank" rel="noopener">Dot</a>).</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The dot has no spacing of its own. The page sets the gap to the label or the position on the icon.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">A dot has no interaction states. Its state is the status it shows: Danger, Warning, Success, Information or Neutral.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Interaction</th><td>None. Never a link or a button.</td></tr><tr><th scope="row">Placement</th><td>Next to a text, or on the top right corner of an icon or a text.</td></tr><tr><th scope="row">Number</th><td>One dot. Never stacked or close to another dot.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Name</th><td>None: <code>aria-hidden="true"</code>. Say the status in text or in an <code>aria-label</code> on the item the dot belongs to.</td></tr><tr><th scope="row">Color</th><td>Not the only carrier of meaning (WCAG 1.4.1).</td></tr><tr><th scope="row">Contrast</th><td>A dot is a graphic: 3:1 against the background (WCAG 1.4.11). Neutral (<code>surface-20</code>) on white is below that: pair it with text.</td></tr><tr><th scope="row">Interactive content</th><td>None.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.tokenTable($('#tok-table tbody'), [['Danger', 'Fill', 'surface-danger-default'], ['Warning', 'Fill', 'surface-warning-default'], ['Success', 'Fill', 'surface-success-default'], ['Information', 'Fill', 'surface-information-default'], ['Neutral', 'Fill', 'surface-20']]);
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

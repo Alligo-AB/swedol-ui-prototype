@@ -48,7 +48,7 @@
   <div class="ds-page ds-inner">
     <span class="ds-eyebrow">Components · Other</span>
     <h1 class="ds-title">List Item</h1>
-    <p class="ds-lead">A list item is the <strong>content of one row</strong>: an optional leading element, a label and an optional trailing element. It is used inside <a href="menu.html">Menu</a>, Overflow menu, List Picker, Drawer link and Filter sections in drawer content.</p>
+    <p class="ds-lead">A list item is the <strong>content of one row</strong>: an optional leading element, a label and an optional trailing element. It is used inside <a class="inline-link inline-link--xlarge" href="menu.html">Menu</a>, Overflow menu, List Picker, Drawer link and Filter sections in drawer content.</p>
     <p class="ds-lead">The row itself (height, padding, divider, hover, focus) belongs to the container. Specification: <code>.claude/skills/eco-list-item/SKILL.md</code>.</p>
   </div>
 </section>
@@ -109,7 +109,7 @@
 <section class="ds-section ds-section--secondary" id="states">
   <div class="ds-page ds-inner">
     <h2 class="ds-h2">States</h2>
-    <p class="ds-desc">A list item has no hover or focus of its own: the container row draws them (see <a href="menu.html">Menu</a>). The item reflects <strong>selected</strong> and <strong>disabled</strong>. Inside a container the row carries <code>aria-selected</code> / <code>aria-disabled</code>. A standalone item with a check box, radio or switch is itself <code>role="checkbox"</code>, <code>"radio"</code> or <code>"switch"</code> with <code>aria-checked</code>: click or Space toggles it. Every item on this page is live, and each sits in a demo row that shows the Menu hover (<code>surface-navigation-hover</code>); the hover belongs to the row, not to the list item.</p>
+    <p class="ds-desc">A list item has no hover or focus of its own: the container row draws them (see <a class="inline-link inline-link--large inline-link--secondary" href="menu.html">Menu</a>). The item reflects <strong>selected</strong> and <strong>disabled</strong>. Inside a container the row carries <code>aria-selected</code> / <code>aria-disabled</code>. A standalone item with a check box, radio or switch is itself <code>role="checkbox"</code>, <code>"radio"</code> or <code>"switch"</code> with <code>aria-checked</code>: click or Space toggles it. Every item on this page is live, and each sits in a demo row that shows the Menu hover (<code>surface-navigation-hover</code>); the hover belongs to the row, not to the list item.</p>
     <div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix">
       <thead><tr><th scope="col">Leading</th><th scope="col">Unselected</th><th scope="col">Selected</th><th scope="col">Disabled</th></tr></thead>
       <tbody></tbody></table></div>
@@ -145,7 +145,7 @@
   <div class="ds-page ds-inner">
     <h2 class="ds-h2">Usage</h2>
     <p class="ds-desc">Use a list item to fill a row in a container that already exists. It is not a page element on its own.</p>
-    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The user…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">chooses from a list that opens from a button or a Select</th><td><a href="menu.html">Menu</a> with list items as rows</td></tr><tr><th scope="row">picks a value in a filter or picker row</th><td>List item with a check box, radio or swatch</td></tr><tr><th scope="row">sees one fixed label and value</th><td>Plain text, or a table (<code>eco-table</code>)</td></tr><tr><th scope="row">reads a long description with actions</th><td>Not a list item: use a card or section</td></tr></tbody></table></div>
+    <div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The user…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">chooses from a list that opens from a button or a Select</th><td><a class="inline-link inline-link--small" href="menu.html">Menu</a> with list items as rows</td></tr><tr><th scope="row">picks a value in a filter or picker row</th><td>List item with a check box, radio or swatch</td></tr><tr><th scope="row">sees one fixed label and value</th><td>Plain text, or a table (<code>eco-table</code>)</td></tr><tr><th scope="row">reads a long description with actions</th><td>Not a list item: use a card or section</td></tr></tbody></table></div>
     <div class="ds-rules">
       <div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Keep the label to one line.</li><li>Use one leading type per list: do not mix check boxes and icons.</li><li>Inside a Menu put the state (<code>aria-selected</code>) on the row. A standalone item with a control uses <code>role</code> and <code>aria-checked</code>.</li><li>Use the trailing value for a short number or text.</li></ul></div>
       <div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Use a list item outside a container (Menu, picker, drawer).</li><li>Put a real <code>&lt;input&gt;</code> inside an option row: the leading box is presentational.</li><li>Add hover or divider styles to the list item: the container owns them.</li><li>Hardcode colors or sizes: use the tokens and size classes.</li></ul></div>

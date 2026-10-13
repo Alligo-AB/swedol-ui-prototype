@@ -223,4 +223,4 @@ window.addEventListener('resize', function () {
 
 ### Motion
 
-The thumb slide uses `--sg-ease` / `--sg-duration` (fallback: `ease-standard`, `duration-medium-2`, the recommended values). The docs page has a Motion section (`DK.motion`, prefix `sg`) to compare other tokens live.
+The thumb slide uses `--sg-ease` / `--sg-duration` (fallback: `ease-standard`, `duration-medium-2`, the recommended values). The Examples page (`segment-control.html`) has a Motion section (`DK.motion`, prefix `sg`) to compare other tokens live.

@@ -53,7 +53,7 @@
     <span class="ds-eyebrow">Components · Notifications</span>
     <h1 class="ds-title">E-Com Toast</h1>
     <p class="ds-lead">An E-Com Toast confirms a <strong>shopping action</strong> without leaving the page: a product added to the cart, or saved to the wishlist. It has no status color; it speaks in the store’s own black and white.</p>
-    <p class="ds-lead">Try the buttons in <a href="#action" class="ds-link">In action</a> to see it triggered by a real click. System messages and errors use the <a href="toast.html" class="ds-link">System Toast</a>. Specification: <code>.claude/skills/eco-toast-ecom/SKILL.md</code>.</p>
+    <p class="ds-lead">Try the buttons in <a href="#action" class="inline-link inline-link--xlarge">In action</a> to see it triggered by a real click. System messages and errors use the <a href="toast.html" class="inline-link inline-link--xlarge">System Toast</a>. Specification: <code>.claude/skills/eco-toast-ecom/SKILL.md</code>.</p>
   </div>
 </section>
 
@@ -86,13 +86,13 @@
           <input class="form-range__input" id="pg-time" type="range" min="2" max="10" step="1" value="4">
           <div class="form-range__ticks"></div>
         </div>
-        <p class="pg-note" style="margin:0">The slide-in and slide-out animation is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+        <p class="pg-note" style="margin:0">The slide-in and slide-out animation is set in <a href="#motion" class="inline-link inline-link--small inline-link--tertiary">Motion</a>.</p>
         <button type="button" class="btn btn--primary" id="pg-show" style="align-self:flex-start"><span class="btn__label">Show toast</span></button>
       </div>
     </div>
     <h3 class="ds-h3">Markup for this selection</h3>
     <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
-    <p class="ds-desc ds-note">The markup has no motion. Slide-in and slide-out animation is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+    <p class="ds-desc ds-note">The markup has no motion. Slide-in and slide-out animation is set in <a href="#motion" class="inline-link inline-link--medium inline-link--secondary">Motion</a>.</p>
   </div>
 </section>
 
@@ -253,8 +253,8 @@
     .then(function () { return DK.printFile($('#files'), '../notifications.js', [['JavaScript: showEcomToast', ['runtime']]]); });
   DK.rows($('#which'), [
     ['confirms a product was added to the cart or wishlist', 'E-Com Toast (this page)'],
-    ['confirms any other action, or reports an error', '<a href="toast.html" class="ds-link">Toast</a>'],
-    ['needs the user to confirm before it happens', '<a href="modal.html" class="ds-link">Modal</a>']]);
+    ['confirms any other action, or reports an error', '<a href="toast.html" class="inline-link inline-link--small">Toast</a>'],
+    ['needs the user to confirm before it happens', '<a href="modal.html" class="inline-link inline-link--small">Modal</a>']]);
 
   DK.motion({ anchor: 'playground', parts: [{ title: 'Enter', prefix: 'toast-in', rec: { ease: 'decelerate-emphasized', dur: 'medium-2' } }, { title: 'Exit', prefix: 'toast-out', rec: { ease: 'accelerate-generic', dur: 'medium-2' }, exit: true }], collapse: false, role: 'exit', why: 'Same motion as the System Toast: the toast only slides, with no fade. It enters with decelerate emphasized and leaves with accelerate, both Medium 2 (eco-motion: element enters / element disappears).', show: function () { N.showEcomToast({ variant: 'cart', name: CART.name, text: CART.text, img: IMG, secondary: { label: CART.secondary }, primary: { label: CART.primary } }); } });
   DK.bp(); renderPg();

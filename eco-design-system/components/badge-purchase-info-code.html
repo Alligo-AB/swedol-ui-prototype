@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Badge Purchase Info: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: demo layout only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-wide { width: 100%; max-width: 640px; }
+    .pg-top { align-items: flex-start; padding-top: 40px; }
+    .pg-btn { min-height: 120px; }
+    .pg-dotrow { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; line-height: 24px; }   /* demo: a dot beside a label */
+    .pg-dotwrap { position: relative; display: inline-flex; }   /* demo: a dot on the top right corner of an icon */
+    .pg-dotwrap .badge-dot { position: absolute; top: 2px; right: 2px; transform: translate(50%, -50%); }
+    .pg-ic { font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 24px; font-feature-settings: 'liga'; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="badge.html" class="breadcrumb-item">Badge</a><span class="breadcrumb-sep">/</span><a href="badge-purchase-info.html" class="breadcrumb-item">Purchase Info</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status · E-commerce</span></div>
+    <h1 class="ds-title">Badge Purchase Info</h1>
+    <p class="ds-lead">A purchase info badge is a <strong>badge with a beak</strong> that introduces a short purchase tip.</p><p class="ds-lead">How to add it to a page. The file is <code>components/css/badge.css</code>.</p>
+  </div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Badge Purchase Info"><a class="tab" href="badge-purchase-info.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="badge-purchase-info-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="badge-purchase-info-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared file once per page. Never copy the rules.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/badge.css"&gt;</code>. Both templates already have it.</td></tr><tr><th scope="row">2. Build</th><td>A <code>badge-purchase</code> with a <code>__tag</code> (label + beak) and a <code>__text</code>.</td></tr><tr><th scope="row">3. Choose</th><td>Good buy is the default. Add <code>badge-purchase--know</code> for Good to know.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="purchase-info"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Purchase Info</h2><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>badge-purchase</code></th><td>The wrapper: badge and text, centered, 8px gap. Good buy (red).</td></tr><tr><th scope="row"><code>badge-purchase--know</code></th><td>Good to know (grey).</td></tr><tr><th scope="row"><code>badge-purchase__tag</code></th><td>Label and beak together.</td></tr><tr><th scope="row"><code>badge-purchase__label</code></th><td>The label. Text in sentence case; the CSS makes it upper case.</td></tr><tr><th scope="row"><code>badge-purchase__beak</code></th><td>The beak. Empty element.</td></tr><tr><th scope="row"><code>badge-purchase__text</code></th><td>The explanation. Links inside are underlined.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>E-commerce only.</li><li>The color is set by the custom property <code>--badge-purchase-bg</code> on the wrapper.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/badge.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Good buy', '<div class="badge-purchase">\n  <span class="badge-purchase__tag">\n    <span class="badge-purchase__label">Bra köp</span>\n    <span class="badge-purchase__beak"></span>\n  </span>\n  <p class="badge-purchase__text">Köp 100 för 3,80 kr st, spara 1 210 kr!</p>\n</div>'],
+    ['Good to know', '<div class="badge-purchase badge-purchase--know">\n  <span class="badge-purchase__tag">\n    <span class="badge-purchase__label">Bra att veta</span>\n    <span class="badge-purchase__beak"></span>\n  </span>\n  <p class="badge-purchase__text">Köp även till <a href="…">KNÄSKYDD GUMMI</a>, de ingår inte som standard.</p>\n</div>']]);
+  DK.printCss($('#css-code'), 'badge');
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

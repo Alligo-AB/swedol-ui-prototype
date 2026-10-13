@@ -45,7 +45,7 @@ Figma properties: `Mode` (Light/Dark), `Size` (Large/Small), `Breakpoint` (XLarg
 - Selected Hover exists for both sizes and looks the same (updated in Figma).
 - **Inline Menu** (all sizes, light and dark): box + 24×24px dropdown arrow (`.cb-arrow`, fill `icon-primary`, dark `icon-inverted`), no label (add `aria-label`), gap 8px Large / 4px Small. States: Enabled, Hover, Focus, Selected, Selected Hover, Selected Focus, Mixed, Mixed Hover, Mixed Focus, Disabled, Disabled Selected, Disabled Mixed. The arrow is `text-disabled` (`#939595`) when disabled, light and dark (`:has(input:disabled) .cb-arrow`).
 - Every state is defined in Figma for both sizes, both modes and the inline menu.
-- Live reference with all of this: `eco-design-system/components/checkbox.html` (it links `components/css/checkbox.css`, the single CSS source).
+- Live reference with all of this: `eco-design-system/components/checkbox.html` (Examples & Guidelines), `checkbox-specifications.html` and `checkbox-code.html` (they link `components/css/checkbox.css`, the single CSS source).
 
 ```html
 <label class="form-checkbox-item form-checkbox-item--sm"><input type="checkbox" /><span>Label</span></label>
@@ -55,7 +55,7 @@ Figma properties: `Mode` (Light/Dark), `Size` (Large/Small), `Breakpoint` (XLarg
 
 ### Tiles: Color swatch, Image, Number (PDP and filtering)
 
-Figma: Checkbox Color Swatch `4650:209393`, Checkbox Image / Number `14460:597851`. Used first and foremost on product pages (PDP) and in filtering, where the choice is a color or a picture instead of a text label. Native `<input type="checkbox">` visually hidden over a `.form-checkbox-tile__box`; **no visible label, so `aria-label` is required**; several can be chosen. Live reference: the **Tiles** section of `eco-design-system/components/checkbox.html` (its `#cb-css` block is the canonical CSS).
+Figma: Checkbox Color Swatch `4650:209393`, Checkbox Image / Number `14460:597851`. Used first and foremost on product pages (PDP) and in filtering, where the choice is a color or a picture instead of a text label. Native `<input type="checkbox">` visually hidden over a `.form-checkbox-tile__box`; **no visible label, so `aria-label` is required**; several can be chosen. Live reference: the **Tiles** section of `eco-design-system/components/checkbox.html`, the tile tables in `checkbox-specifications.html` (the CSS is `components/css/checkbox.css`, printed on `checkbox-code.html`).
 
 | Tile | Desktop | Mobile | Inside | Enabled border |
 |---|---|---|---|---|
@@ -103,7 +103,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/checkbox.css">
 ```
 
-`components/css/checkbox.css` is the single source for this component. The docs page `eco-design-system/components/checkbox.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/checkbox.css` is the single source for this component. The docs pages (`eco-design-system/components/checkbox.html`, `checkbox-specifications.html`, `checkbox-code.html`) link the same file; the Code page prints it. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 ---
 

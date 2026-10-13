@@ -52,7 +52,7 @@
     <span class="ds-eyebrow">Components · Notifications</span>
     <h1 class="ds-title">Toast</h1>
     <p class="ds-lead">A toast is <strong>short-lived feedback</strong> on something the user just did: saved, copied, failed. It slides in, says its piece and leaves without blocking the page.</p>
-    <p class="ds-lead">Every example is the real component, and every “Show toast” button fires a real toast in the corner of your window. Not sure it is the right component? Start at the <a href="notifications.html" class="ds-link">notification guide</a>. Specification: <code>.claude/skills/eco-toast-system/SKILL.md</code>.</p>
+    <p class="ds-lead">Every example is the real component, and every “Show toast” button fires a real toast in the corner of your window. Not sure it is the right component? Start at the <a href="notifications.html" class="inline-link inline-link--xlarge">notification guide</a>. Specification: <code>.claude/skills/eco-toast-system/SKILL.md</code>.</p>
   </div>
 </section>
 
@@ -91,13 +91,13 @@
         <div class="ds-field form-field" id="pg-b1-f" hidden><label class="form-label form-label--sm" for="pg-b1">Primary button</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-b1" value="Undo" placeholder="Primary button" /></div></div></div>
         <div class="ds-field form-field" id="pg-l1-f" hidden><label class="form-label form-label--sm" for="pg-l1">Link 1</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-l1" value="Learn more" placeholder="Link 1" /></div></div></div>
         <div class="ds-field form-field" id="pg-l2-f" hidden><label class="form-label form-label--sm" for="pg-l2">Link 2</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-l2" value="Undo" placeholder="Link 2" /></div></div></div>
-        <p class="pg-note" style="margin:0">The slide-in and slide-out animation is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+        <p class="pg-note" style="margin:0">The slide-in and slide-out animation is set in <a href="#motion" class="inline-link inline-link--small inline-link--tertiary">Motion</a>.</p>
         <button type="button" class="btn btn--primary" id="pg-show" style="align-self:flex-start"><span class="btn__label">Show toast</span></button>
       </div>
     </div>
     <h3 class="ds-h3">Markup for this selection</h3>
     <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div>
-    <p class="ds-desc ds-note">The markup has no motion. Slide-in and slide-out animation is set in <a href="#motion" class="ds-link">Motion</a>.</p>
+    <p class="ds-desc ds-note">The markup has no motion. Slide-in and slide-out animation is set in <a href="#motion" class="inline-link inline-link--medium inline-link--secondary">Motion</a>.</p>
   </div>
 </section>
 
@@ -131,7 +131,7 @@
 <section class="ds-section" id="states">
   <div class="ds-page ds-inner">
     <h2 class="ds-h2">States</h2>
-    <p class="ds-desc">Every status in both emphasis levels. A toast has no hover or disabled state of its own; its lifecycle (enter, visible, exit) is described under <a href="#specs" class="ds-link">Anatomy &amp; specs</a>.</p>
+    <p class="ds-desc">Every status in both emphasis levels. A toast has no hover or disabled state of its own; its lifecycle (enter, visible, exit) is described under <a href="#specs" class="inline-link inline-link--large inline-link--secondary">Anatomy &amp; specs</a>.</p>
     <div class="ds-toolbar"><span class="ds-toolbar__label" id="sl-l">Layout</span>
       <div class="btn-group" role="group" aria-labelledby="sl-l" data-mx="layout"><button type="button" data-v="default" aria-pressed="true">Default</button><button type="button" data-v="actionable" aria-pressed="false">Buttons</button><button type="button" data-v="links" aria-pressed="false">Inline links</button></div>
       <span class="ds-toolbar__label" id="sb-l">Breakpoint</span>
@@ -325,10 +325,10 @@
 
   DK.rows($('#which'), [
     ['confirms what the user just did, briefly', 'Toast (this page)'],
-    ['confirms an add to cart or wishlist', '<a href="toast-ecom.html" class="ds-link">E-Com Toast</a>'],
-    ['belongs to one section and must stay', '<a href="inline.html" class="ds-link">Inline</a>'],
-    ['concerns the whole page or system', '<a href="banner.html" class="ds-link">Banner</a>'],
-    ['needs a decision before the user can go on', '<a href="modal.html" class="ds-link">Modal</a>']]);
+    ['confirms an add to cart or wishlist', '<a href="toast-ecom.html" class="inline-link inline-link--small">E-Com Toast</a>'],
+    ['belongs to one section and must stay', '<a href="inline.html" class="inline-link inline-link--small">Inline</a>'],
+    ['concerns the whole page or system', '<a href="banner.html" class="inline-link inline-link--small">Banner</a>'],
+    ['needs a decision before the user can go on', '<a href="modal.html" class="inline-link inline-link--small">Modal</a>']]);
 
   DK.motion({ anchor: 'playground', parts: [{ title: 'Enter', prefix: 'toast-in', rec: { ease: 'decelerate-emphasized', dur: 'medium-2' } }, { title: 'Exit', prefix: 'toast-out', rec: { ease: 'accelerate-generic', dur: 'medium-2' }, exit: true }], collapse: false, role: 'exit', why: 'The toast only slides, with no fade. It enters with decelerate emphasized and leaves with accelerate, both Medium 2 (eco-motion: element enters / element disappears).', show: function () { N.showToast({ status: 'success', text: 'Your changes were saved.', autoHide: 4000 }); } });
   DK.bp(); renderPg(); matrix();

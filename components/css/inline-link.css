@@ -13,10 +13,13 @@
 .inline-link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); text-decoration: none; }
 
 /* Sizes — mobile first (xs/sm), desktop from 769px */
+/* XLarge (body-xl): for the intro text on the doc pages, 20/26 mobile · 24/32 desktop. Not in Figma yet. */
+.inline-link--xlarge { font-size: 20px; line-height: 26px; letter-spacing: 0; font-feature-settings: 'ss02' 1, 'ss03' 1; }
 .inline-link--large  { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
 .inline-link--medium { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
 .inline-link--small  { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
 @media (min-width: 769px) {
+  .inline-link--xlarge { font-size: 24px; line-height: 32px; }
   .inline-link--large  { font-size: 20px; line-height: 28px; }
   .inline-link--medium { font-size: 17px; line-height: 24px; }
 }

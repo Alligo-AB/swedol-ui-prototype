@@ -50,7 +50,9 @@
   line-height: 26px;
 }
 
-.tooltip-wrap:is(:hover, [data-state="hover"]) .tooltip { opacity: 1; }
+/* Shown on hover and on keyboard focus (:focus-visible: not on the focus a mouse click gives); Esc hides it (.is-dismissed, set by tooltip.js; WCAG 1.4.13) */
+.tooltip-wrap:is(:hover, [data-state="hover"], :has(:focus-visible)) .tooltip { opacity: 1; }
+.tooltip-wrap.is-dismissed .tooltip { opacity: 0; }
 
 /* Global tooltip: components/js/tooltip.js shows ONE shared tooltip (a popover, so it sits in the top layer: no clipping, no
    stacking context can hide it) for any element with data-tooltip="Label". Optional data-tooltip-position="top|bottom"

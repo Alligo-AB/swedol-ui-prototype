@@ -13,6 +13,9 @@
 
 @import url('eyebrow.css');
 @import url('../components/css/spacing.css');   /* space-md / space-lg for every doc page (var(--dimension-spacing-space-md)) */
+@import url('../components/css/inline-link.css');   /* links in the doc pages and the footer: the ECO Inline Link */
+@import url('../components/css/button.css');   /* the footer's back-to-top icon button */
+@import url('../components/css/tooltip.css');   /* … and its tooltip */
 
 /* ── Page frame (same variables as template.html) ─────────────── */
 :root {
@@ -159,13 +162,17 @@ body {
 /* ── Page tabs and side contents (pages split into Examples & Guidelines / Specifications / Code) ─────────
    .ds-tabs: the eco-tabs link bar under the intro. .ds-doc wraps the sections; toc.js builds the chip row (below 1024px) and the
    sticky "Contents" list (from 1024px, right margin) from the headings. See the eco-doc-page skill. */
-.ds-tabs { padding: 40px var(--px-full) 0; background: var(--color-surface-raised-primary); }
+.ds-tabs { padding: 48px var(--px-full) 0; background: var(--color-surface-raised-primary); }   /* space above the tabs: 48px mobile, 64px from 769px */
+@media (min-width: 769px) { .ds-tabs { padding-top: 64px; } }
 .ds-tabs .tab-bar { max-width: 1280px; margin-left: auto; margin-right: auto; }
 .ds-section--first:has(+ .ds-tabs) { padding-bottom: 0; }
 .ds-tabs + .ds-subnav, .ds-tabs + .ds-doc { margin-top: 0; }
 .ds-tabs + .ds-subnav { padding-top: 24px; }   /* air between the tab bar and the chips */
 .ds-doc { position: relative; }
 .ds-sidetoc { display: none; }
+.ds-sep { padding: 0 var(--px-full); background: var(--color-surface-raised-primary); }   /* divider between two sections (<div class="ds-sep"><hr class="divider"></div>, components/css/divider.css): same side margin as the sections */
+.ds-subnav--tabs .tab-bar { --tab-line-active: var(--ds-accent); }   /* eco-tabs accent colour: the on-page tab line uses the ECO DS accent */
+.ds-table-wrap:has(+ .ds-rules) { margin-bottom: var(--dimension-spacing-space-md); }   /* table, then Do / Don't: space-md (components/css/spacing.css) */
 @media (min-width: 769px) {   /* split pages: text measure = the width of a playground stage (100% minus 320px controls + 24px gap), never narrower than the 760px default */
   :root:has(.ds-doc) :is(.ds-lead, .ds-desc, .ds-bullets) { max-width: max(760px, calc(100% - 344px)); }
 }
@@ -183,7 +190,7 @@ body {
   }
   .ds-sidetoc__item--2 a { padding-left: 32px; }
   .ds-sidetoc__list a:hover { color: var(--color-text-primary); }
-  .ds-sidetoc__list a[aria-current="true"] { color: var(--color-text-action-primary); border-left-color: var(--color-text-action-primary); }
+  .ds-sidetoc__list a[aria-current="true"] { color: var(--color-text-action-primary); border-left-color: var(--ds-accent); }   /* indicator in the ECO DS accent, like the on-page tab line */
   .ds-sidetoc__list a:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: -2px; }
   /* Layout: the whole block (text column 1200px + gap + Contents list) is centred in the space beside the navigation, so both side margins are equal.
      --px-full is that margin; the Contents list hangs in the right part of the block, outside the text measure. */
@@ -194,6 +201,7 @@ body {
   }
   :root:has(.ds-doc) .ds-page:has(> .breadcrumb) { max-width: none; margin: 0; }   /* the breadcrumb starts where the text column starts */
   :root:has(.ds-doc) .breadcrumb { padding-left: var(--px-full); padding-right: var(--px-full); }
+  :root:has(.ds-doc) .ds-sep { padding-right: calc(var(--px-full) + var(--toc-w) + var(--toc-gap)); }   /* the divider ends with the text column, not under the Contents list */
   :root:has(.ds-doc) .ds-tabs .tab-bar { max-width: var(--max-w); margin-left: 0; margin-right: 0; }
 }
 
@@ -301,11 +309,15 @@ body[data-ds="foundation"] .ds-note + .ds-h3 { margin-top: 56px; }  /* note unde
 .ds-callout__line { position: absolute; background: var(--color-surface-100); pointer-events: none; }
 .ds-callout__dot { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--color-surface-100); box-shadow: 0 0 0 1px var(--color-surface-raised-primary); pointer-events: none; }   /* white ring: stays visible on a dark part */
 .ds-callout__pin { position: absolute; pointer-events: none; }
+.ds-callout__pin.badge-number { min-width: 24px; height: 24px; padding: 0 5px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }   /* Figma Marker = Number Large desktop (24px), also on mobile */
 /* numbered legend: the same black circle as the marker badge, in place of the bullet */
 .ds-bullets--num { counter-reset: ds-num; }
-.ds-bullets.ds-bullets--num li { counter-increment: ds-num; padding-left: 40px; }
-.ds-bullets.ds-bullets--num li::before { content: counter(ds-num); display: grid; place-items: center; width: 24px; height: 24px; top: 0; background: var(--color-surface-100); color: var(--color-text-primary-inverted); font-size: 14px; line-height: 14px; letter-spacing: 0.56px; font-weight: 600; }
-@media (min-width: 769px) { .ds-bullets.ds-bullets--num li::before { top: 2px; } }   /* centered on the first line: (24 − 24) / 2 mobile, (28 − 24) / 2 desktop */
+.ds-bullets.ds-bullets--num li { counter-increment: ds-num; padding-left: 34px; }   /* badge 18px + 16px gap */
+.ds-bullets.ds-bullets--num li::before { content: counter(ds-num); display: grid; place-items: center; width: 18px; height: 18px; top: 3px; border-radius: 100px; background: var(--color-surface-100); color: var(--color-text-primary-inverted); font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 600; }   /* Number badge, Medium (mobile 18px): centered on the first line */
+@media (min-width: 769px) {   /* Number badge, Medium desktop 20px: centered on the first line */
+  .ds-bullets.ds-bullets--num li { padding-left: 36px; }
+  .ds-bullets.ds-bullets--num li::before { width: 20px; height: 20px; top: 4px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+}
 
 /* Do / Don't figure: a live mini example (never a screenshot) with a caption, color bar on top as .ds-rule. Pair them in .ds-figs. */
 .ds-figs { display: grid; gap: 16px; grid-template-columns: 1fr; margin: 16px 0 32px; }
@@ -521,9 +533,6 @@ body[data-ds="component"] .ds-code pre { padding: 12px 24px; }
 .ty-mods small { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
 
 /* Inline link in doc text (eco-inline-link: always underlined) */
-.ds-link { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-.ds-link:hover { text-decoration-thickness: 2px; }
-.ds-link:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
 
 /* Line length ruler (typography page): positions are in em of the 14px body-sm container, 1 character = 0.336em */
 .ty-ruler { position: relative; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); padding: 56px 24px 24px 24px; overflow-x: auto; }
@@ -895,3 +904,25 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .ds-card__tags { margin-left: auto; }
 
 .mo-inline-tb { margin-top: 12px; }
+
+/* ── Footer (built by docnav.js on every page with the navigation) ──────────────
+   Three columns: How you can help · Resources · Support. Same side margin as the sections (--px-full), grey surface, 1px line on top.
+   Text body-md 16/22 (17/24 from 769px); titles title-sm 16/18. Stacked below 769px. */
+.ds-footer { background: var(--color-surface-raised-secondary); border-top: 1px solid var(--color-border-primary); padding: 48px var(--px-full) 40px; }
+.ds-footer__grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+@media (min-width: 769px) { .ds-footer { padding-top: 64px; padding-bottom: 56px; } .ds-footer__grid { grid-template-columns: 2fr 1fr 1fr; gap: 48px 40px; } }
+.ds-footer__title { font-size: 16px; line-height: 18px; font-weight: 600; margin: 0 0 16px; color: var(--color-text-primary); }   /* title-sm */
+.ds-footer p, .ds-footer li { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); }
+@media (min-width: 769px) { .ds-footer p, .ds-footer li { font-size: 17px; line-height: 24px; } }
+.ds-footer p { max-width: 560px; margin: 0 0 16px; }
+.ds-footer__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.ds-footer__made { display: flex; align-items: center; gap: 4px; margin-top: 24px; margin-bottom: 0; color: var(--color-text-tertiary); }
+.ds-footer__made .mo-ic { font-size: 20px; color: var(--ds-accent); font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
+
+/* Back to top (built by docnav.js): the ECO secondary icon button, fixed bottom right, hidden until the page is scrolled. */
+.btn.ds-top { position: fixed; right: 16px; bottom: 16px; z-index: 30; box-shadow: var(--shadow-elevation-b-20); opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity var(--duration-fast-3) var(--ease-standard), transform var(--duration-fast-3) var(--ease-standard), visibility 0s linear var(--duration-fast-3); }
+.btn.ds-top.is-visible { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+@media (min-width: 769px) { .btn.ds-top { right: 24px; bottom: 24px; } }
+@media (prefers-reduced-motion: reduce) { .btn.ds-top { transition: none; } }
+@media (min-width: 1024px) { .ds-sidetoc__in { max-height: calc(100vh - 48px - 72px); } }   /* the Contents list stops above the back-to-top button */

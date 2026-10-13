@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/radio.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { min-width: 260px; vertical-align: top; padding-top: 16px; padding-bottom: 16px; } .pg-matrix .form-field { min-width: 220px; }
+    .pg-col { display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 360px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .sl-fig { width: 100%; max-width: 320px; }
+    .sl-fig .form-radio-group { margin: 0; padding: 0; border: 0; }
+    .sl-measure { display: block; width: 280px; }   /* demo: a fixed width, so the padding strips have a select to sit on */
+    .sl-menu-room { min-height: 220px; }   /* room under the field for the open menu */
+    .ds-callout__art { padding-right: 24px; width: 100%; max-width: 360px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="select.html" class="breadcrumb-item">Select</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Select</h1>
+    <p class="ds-lead">A select lets the user choose <strong>one option from a list</strong>. It looks and behaves like an input field, with a dropdown arrow. It opens the ECO <strong>Menu</strong> as its list.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1475-44234" target="_blank" rel="noopener">Base Input</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Select"><a class="tab" href="select.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="select-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="select-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Hover is <code>border-hover</code> (<code>#333333</code>, the same value as <code>border-dark</code>). Active is read from the chosen option with <code>:has()</code>, so no script is needed.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint · size</th><th scope="col">Height</th><th scope="col">Padding (left, right)</th><th scope="col">Arrow</th><th scope="col">Label</th><th scope="col">Select text</th></tr></thead><tbody><tr><th scope="row">Desktop · Large</th><td>48px</td><td>12px, 40px</td><td>24px</td><td><code>label-md</code> 16/16, 0.48px</td><td><code>body-md</code> 17/24, 0.32px</td></tr><tr><th scope="row">Desktop · Small</th><td>40px</td><td>8px, 40px</td><td>24px</td><td><code>label-sm</code> 14/14, 0.56px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr><tr><th scope="row">Desktop · XSmall</th><td>32px</td><td>8px, 40px</td><td>24px</td><td><code>label-sm</code> 14/14, 0.56px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr><tr><th scope="row">Mobile · Large</th><td>40px</td><td>8px, 40px</td><td>24px</td><td><code>label-sm</code> 12/12, 0.48px</td><td><code>body-md</code> 16/22, 0.32px</td></tr><tr><th scope="row">Mobile · Small</th><td>32px</td><td>8px, 40px</td><td>24px</td><td><code>label-sm</code> 12/12, 0.48px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Padding of the select at each size. The shaded areas are the padding to the left and right (40px on the right leaves room for the arrow); the box is fixed in height. The numbers are read from the component.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="mb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="mb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Padding of the select: left and right, per size"><div class="measure__item"><span class="measure__name">1 · Large</span><div class="measure__obj"><span class="sl-measure"><div class="input-wrap"><select class="form-select measure__subject" tabindex="-1" aria-label="Large"><option>Choose an option</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Small</span><div class="measure__obj"><span class="sl-measure"><div class="input-wrap"><select class="form-select form-select--sm measure__subject" tabindex="-1" aria-label="Small"><option>Choose an option</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">3 · XSmall</span><div class="measure__obj"><span class="sl-measure"><div class="input-wrap"><select class="form-select form-select--xs measure__subject" tabindex="-1" aria-label="XSmall"><option>Choose an option</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">The select at true size (1:1). Change the Breakpoint to see the mobile values.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Large</th><th scope="col">Small</th><th scope="col">XSmall</th></tr></thead><tbody><tr><th scope="row">Height, Desktop</th><td>48px</td><td>40px</td><td>32px</td></tr><tr><th scope="row">Height, Mobile</th><td>40px</td><td>32px</td><td>Not available (use Small)</td></tr><tr><th scope="row">Padding left, Desktop</th><td>12px</td><td>8px</td><td>8px</td></tr><tr><th scope="row">Padding left, Mobile</th><td>8px</td><td>8px</td><td>Not available</td></tr><tr><th scope="row">Padding right</th><td colspan="3">40px: room for the arrow</td></tr><tr><th scope="row">Arrow</th><td colspan="3">24px icon, 12px from the right edge, centered vertically</td></tr><tr><th scope="row">Border</th><td colspan="3">1px</td></tr><tr><th scope="row">Corners</th><td colspan="3">Square</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same padding and distances as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Label to box</th><td><code>space-4</code></td></tr><tr><th scope="row">Box to message</th><td><code>space-4</code></td></tr><tr><th scope="row">Padding left, Desktop Large</th><td><code>space-12</code></td></tr><tr><th scope="row">Padding left, otherwise</th><td><code>space-8</code></td></tr><tr><th scope="row">Padding right</th><td>40px: literal, no token</td></tr><tr><th scope="row">Arrow from the right edge</th><td><code>space-12</code></td></tr><tr><th scope="row">Menu below the field</th><td><code>space-4</code></td></tr><tr><th scope="row">Focus ring</th><td>2px line, 3px outside the box</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">All seven states from Figma. Hover and focus are forced on this page; in your code they come from <code>:hover</code> and keyboard focus.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div><span class="ds-toolbar__label" id="ss-l">Size</span><div class="btn-group" role="group" aria-labelledby="ss-l" data-mx="size" data-size-toggle><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button><button type="button" data-v="xs" aria-pressed="false">XSmall</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">No value</th><th scope="col">Value chosen</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Active means an option is chosen. Click a field to open its Menu. Active without a value is not defined: it shows a dash.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Type</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Label, Desktop Large</th><td><code>label-md</code></td><td>16/16</td><td>0.48px</td><td>Bold, uppercase</td></tr><tr><th scope="row">Label, Desktop Small, XSmall</th><td><code>label-sm</code></td><td>14/14</td><td>0.56px</td><td>Bold, uppercase</td></tr><tr><th scope="row">Label, Mobile</th><td><code>label-sm</code></td><td>12/12</td><td>0.48px</td><td>Bold, uppercase</td></tr><tr><th scope="row">Select text, Large</th><td><code>body-md</code></td><td>16/22 mobile, 17/24 from 769px</td><td>0.32px</td><td>Regular</td></tr><tr><th scope="row">Select text, Small, XSmall</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr><tr><th scope="row">Message</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed with <code>ss02</code> and <code>ss03</code> (the select text and the message also <code>ss06</code>).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Field</th><td><code>form-field</code></td><td>Label, wrapper and message in a column, 4px apart.</td></tr><tr><th scope="row">Label</th><td><code>form-label</code>, <code>form-label--sm</code></td><td>Uppercase. <code>--sm</code> for Small and XSmall.</td></tr><tr><th scope="row">Wrapper</th><td><code>input-wrap</code></td><td>Carries the focus ring, the arrow and the open menu.</td></tr><tr><th scope="row">Select</th><td><code>form-select</code>, <code>--sm</code>, <code>--xs</code>, <code>--error</code>, <code>--success</code></td><td>The native <code>select</code>, <code>appearance: none</code>.</td></tr><tr><th scope="row">Arrow</th><td><code>form-select-arrow</code></td><td>Material Symbols <code>arrow_drop_down</code>, 24px.</td></tr><tr><th scope="row">Message</th><td><code>form-helper</code>, <code>--error</code>, <code>--success</code>, <code>--disabled</code></td><td>Optional icon (<code>form-helper-icon</code>).</td></tr><tr><th scope="row">Menu</th><td><code>menu</code>, <code>menu--sm</code></td><td>Added under the wrapper by <code>select-menu.js</code> while open.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><p class="ds-desc">There is one type. The Menu size follows the field: Large opens a Large menu, Small and XSmall open a Small menu.</p><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">The field fills its container. The menu is as wide as the field.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row"><code>border-color</code> of the select</th><td><code>duration-fast-3</code></td><td><code>ease-standard</code></td></tr><tr><th scope="row"><code>opacity</code> of the focus ring</th><td><code>duration-fast-3</code></td><td><code>ease-standard</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click</th><td>Opens the Menu under the field (no ring on mouse). Click a row to choose; click outside to close.</td></tr><tr><th scope="row">Tab</th><td>The blue ring shows on keyboard focus only (<code>body.keyboard-nav</code>).</td></tr><tr><th scope="row">Enter, Space, Arrow keys</th><td>Open the Menu on the chosen row. Up and Down, Home and End move; Enter or Space choose; Escape closes and returns focus to the field; Tab closes.</td></tr><tr><th scope="row">Placeholder</th><td>A first option with <code>value=""</code> (disabled, hidden) shows the placeholder in <code>text-tertiary</code>.</td></tr><tr><th scope="row">Menu position</th><td>Under the field. It flips upwards when it does not fit below and there is more room above; otherwise its height is capped and it scrolls.</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Grey fill, light border, <code>text-disabled</code> text and arrow.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Label</th><td>Always a <code>label</code> with <code>for</code> and <code>id</code>. A placeholder is never the label.</td></tr><tr><th scope="row">Error</th><td>Set <code>aria-invalid="true"</code> and point <code>aria-describedby</code> at the message.</td></tr><tr><th scope="row">List</th><td>The Menu is a <code>listbox</code> of <code>option</code> rows, with <code>aria-selected</code>, named by the label. The select gets <code>aria-expanded</code> while it is open.</td></tr><tr><th scope="row">Focus</th><td>A 2px ring on keyboard focus (<code>border-focus</code>), not on mouse click (WCAG 2.4.7, 1.4.11). Escape returns focus to the field.</td></tr><tr><th scope="row">Color</th><td>Error and success are not shown by color alone: the message says it, and the error message has an icon.</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var uid = 0, OPTS = ['Sweden', 'Norway', 'Denmark', 'Finland'];
+  function icon(name, cls) { var s = document.createElement('span'); s.className = cls; s.textContent = name; s.setAttribute('aria-hidden', 'true'); return s; }
+  /* o: {size lg|sm|xs, state, label, hint, value (true = option chosen)} */
+  function field(o) {
+    var id = 'sel' + (uid++), st = o.state || 'enabled', sz = o.size || 'lg';
+    var f = document.createElement('div'); f.className = 'form-field';
+    if (o.label) { var l = document.createElement('label'); l.className = 'form-label' + (sz !== 'lg' ? ' form-label--sm' : ''); l.htmlFor = id; l.textContent = o.label; f.appendChild(l); }
+    var wrap = document.createElement('div'); wrap.className = 'input-wrap'; if (st === 'focus') wrap.dataset.state = 'focus';
+    var s = document.createElement('select'); s.id = id; s.className = 'form-select' + (sz !== 'lg' ? ' form-select--' + sz : '') + (st === 'error' ? ' form-select--error' : '') + (st === 'success' ? ' form-select--success' : '');
+    if (st === 'hover' || st === 'active' || st === 'focus') s.dataset.state = st === 'focus' ? 'active' : st;  /* forced demo states: focus shows the selected border too */
+    var p = document.createElement('option'); p.value = ''; p.disabled = true; p.hidden = true; p.textContent = 'Choose an option'; s.appendChild(p);
+    OPTS.forEach(function (t) { var op = document.createElement('option'); op.value = t.toLowerCase(); op.textContent = t; s.appendChild(op); });
+    s.selectedIndex = (st === 'active' || o.value) ? 1 : 0;
+    if (st === 'disabled') s.disabled = true;
+    if (st === 'error') s.setAttribute('aria-invalid', 'true');
+    if (o.hint) s.setAttribute('aria-describedby', id + '-m');
+    wrap.appendChild(s); wrap.appendChild(icon('arrow_drop_down', 'form-select-arrow')); f.appendChild(wrap);
+    if (o.hint) {
+      var h = document.createElement('div'); h.id = id + '-m'; h.className = 'form-helper' + (st === 'error' ? ' form-helper--error' : st === 'success' ? ' form-helper--success' : st === 'disabled' ? ' form-helper--disabled' : '');
+      if (st === 'error') h.appendChild(icon('error', 'form-helper-icon'));
+      h.appendChild(document.createTextNode(o.hint)); f.appendChild(h);
+    }
+    return f;
+  }
+  var HINT = { enabled: 'Helper text', hover: 'Helper text', active: 'Helper text', focus: 'Helper text', error: 'Choose a country.', success: 'Country saved.', disabled: 'This field cannot be edited.' };
+
+
+  var bpNow = 'auto';
+  function syncSizes() {   /* XSmall does not exist on mobile */
+    $$('[data-size-toggle]').forEach(function (g) {
+      var x = $('[data-v="xs"]', g); x.disabled = bpNow === 'mobile';
+      if (bpNow === 'mobile' && x.getAttribute('aria-pressed') === 'true') { var s = $('[data-v="sm"]', g); s.click(); }
+    });
+  }
+  DK.bp(function (v) { bpNow = v; syncSizes(); if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+
+  var mx = { size: 'lg' };
+  var ROWS = [['Enabled', 'enabled'], ['Hover', 'hover'], ['Active', 'active'], ['Focus', 'focus'], ['Error', 'error'], ['Success', 'success'], ['Disabled', 'disabled']];
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    ROWS.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      [false, true].forEach(function (v) {
+        var td = document.createElement('td');
+        if (r[1] === 'active' && !v) { td.textContent = '—'; td.className = 'ds-na'; }
+        else td.appendChild(field({ size: mx.size, state: r[1], label: 'Label', hint: HINT[r[1]], value: v })); tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  DK.seg($('[data-mx="size"]'), function (v) { mx.size = v; buildMatrix(); });
+  buildMatrix();
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Enabled', 'Border', 'border-input-default'], ['Enabled', 'Fill', 'surface-raised-primary'], ['Enabled', 'Placeholder, message', 'text-tertiary'],
+    ['Hover', 'Border', 'border-hover'], ['Active', 'Border', 'border-selected'], ['Active', 'Select text', 'text-primary'],
+    ['Focus', 'Ring (2px, 3px outside)', 'border-focus'], ['Error', 'Border', 'border-danger-default'], ['Error', 'Message', 'text-danger-default'],
+    ['Success', 'Border', 'border-success-default'], ['Success', 'Message', 'text-success-default'],
+    ['Disabled', 'Border', 'border-disabled'], ['Disabled', 'Fill', 'surface-raised-secondary'], ['Disabled', 'Text, arrow, message', 'text-disabled'],
+    ['All', 'Arrow', 'icon-primary'], ['All', 'Label', 'text-primary']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

@@ -168,7 +168,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/input.css">
 ```
 
-`components/css/input.css` is the single source for this component. The docs page `eco-design-system/components/input.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/input.css` is the single source for this component. The docs pages (`eco-design-system/components/input.html`, `input-specifications.html`, `input-code.html`) link the same file; the Code page prints it. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 Clear icon shows only while the input has a value (e.g. `.input-wrap:has(.form-input:not(:placeholder-shown)) .input-actions__clear { display: flex; }`, hidden otherwise).
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Range: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .rg-wide { width: 100%; max-width: 480px; }
+    .rg-fig { width: 100%; max-width: 320px; }
+    .ds-callout__art { width: 100%; max-width: 480px; padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="range.html" class="breadcrumb-item">Range</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component exists. The range was designed in the repo (first used in the toast and motion playgrounds).">Not verified with Figma</span></div>
+    <h1 class="ds-title">Range</h1>
+    <p class="ds-lead">A range lets the user pick <strong>one value from an ordered series</strong> by dragging a thumb, with the current value shown as text.</p><p class="ds-lead">How to add a range to a page. The files are <code>components/css/range.css</code> and <code>components/js/range.js</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Range"><a class="tab" href="range.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="range-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="range-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared files once per page. Never copy the rules into a page, and never build a slider from <code>div</code>s.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/range.css"&gt;</code> and <code>&lt;script src="/components/js/range.js"&gt;&lt;/script&gt;</code> (from docs pages: <code>../../components/js/range.js</code>).</td></tr><tr><th scope="row">2. Markup</th><td>A <code>div.form-range[data-range]</code> with a head (label and <code>output</code>), the <code>input.form-range__input</code> and, for tick labels, an empty <code>div.form-range__ticks</code>.</td></tr><tr><th scope="row">3. Values</th><td>Named steps: <code>data-labels</code> and <code>data-ticks</code>. Numeric: <code>data-unit</code>.</td></tr><tr><th scope="row">4. React</th><td>Listen for the <code>input</code> event on the input.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="range"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Range</h2><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Attributes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute on <code>[data-range]</code></th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row"><code>data-labels="A|B|C"</code></th><td>Value text per step. Also <code>aria-valuetext</code>.</td></tr><tr><th scope="row"><code>data-ticks="a|b|c"</code></th><td>Tick labels, one per step. Defaults to <code>data-labels</code>.</td></tr><tr><th scope="row"><code>data-recommended="1"</code></th><td>Step index of the recommended default. Its tick gets a <code>*</code>.</td></tr><tr><th scope="row"><code>data-unit="px"</code></th><td>Suffix for numeric ranges without <code>data-labels</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Script</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Name</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>ECO_RANGE.init(container)</code></th><td>Wires range blocks added after load.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>The CSS alone gives a styled native range; the script adds the value text, the tick labels and the recommended mark.</li><li>The input fires the normal <code>input</code> event. The value is the step index for named steps.</li><li><code>.form-range[hidden] { display: none }</code> is in the CSS, so the <code>hidden</code> attribute works.</li><li>The track and thumb pseudo-elements are the only place where the browser prefixes (<code>-webkit-</code>, <code>-moz-</code>) are needed.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file and one script, shared by every page. Link them, never copy them.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/range.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div><div style="margin-top:16px"><div class="ds-code"><div class="ds-code__bar"><span>JS (components/js/range.js)</span><button type="button" class="mo-copy" data-copy="js-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="js-code"></pre></div></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/range.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [['Named steps (link range.css and range.js)', '<div class="form-range" data-range\n     data-labels="Fast 2 · 100 ms|Fast 3 · 150 ms|Fast 4 · 200 ms"\n     data-ticks="100|150|200" data-recommended="1">\n  <div class="form-range__head">\n    <label class="form-range__label" for="dur">Duration</label>\n    <output class="form-range__value" for="dur"></output>\n  </div>\n  <input class="form-range__input" id="dur" type="range" min="0" max="2" step="1" value="1">\n  <div class="form-range__ticks"></div>\n</div>'],
+    ['Numeric with a unit', '<div class="form-range" data-range data-unit=" s">\n  <div class="form-range__head">\n    <label class="form-range__label" for="hide">Auto-hide time</label>\n    <output class="form-range__value" for="hide"></output>\n  </div>\n  <input class="form-range__input" id="hide" type="range" min="2" max="10" step="1" value="5">\n</div>'],
+    ['React to a change', "document.getElementById('dur').addEventListener('input', function (e) {\n  console.log(e.target.value);   // the step index\n});"]]);
+  DK.printCss($('#css-code'), 'range');
+  fetch('../../components/js/range.js', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (t) { $('#js-code').textContent = t; });
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

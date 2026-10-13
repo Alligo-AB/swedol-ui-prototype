@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text area: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/textarea.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ta-col { display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 360px; }
+    .ta-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .ta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .ta-matrix td { min-width: 280px; vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .ta-matrix .form-field { min-width: 240px; }
+    .ta-fig { width: 100%; max-width: 320px; }
+    .ta-measure { display: block; width: 280px; }   /* demo: a fixed width, so the padding strips have a text area to sit on */
+    .ds-callout__art { padding-right: 24px; width: 100%; max-width: 360px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="textarea.html" class="breadcrumb-item">Text area</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Text area</h1>
+    <p class="ds-lead">A text area lets the user enter <strong>text over multiple lines</strong>: comments, feedback or longer passages that need more room than a single-line input.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1524-56967" target="_blank" rel="noopener">Text Area</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Text area"><a class="tab" href="textarea.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="textarea-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="textarea-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Min height</th><th scope="col">Padding</th><th scope="col">Label</th><th scope="col">Text</th><th scope="col">Word count, message</th></tr></thead><tbody><tr><th scope="row">Desktop (769px+)</th><td>66px</td><td>12px</td><td><code>label-md</code> 16/16, 0.48px</td><td><code>body-md</code> 17/24, 0.32px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr><tr><th scope="row">Mobile (below 769px)</th><td>66px</td><td>12px</td><td><code>label-sm</code> 12/12, 0.48px</td><td><code>body-md</code> 16/22, 0.32px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr></tbody></table></div><p class="ds-desc ds-note">There is one size. Figma has no Size axis and only a Desktop version, so the mobile type values are taken from <code>eco-input</code> (same label and body styles) until a Mobile frame exists.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Padding of the text area. The shaded area is the padding; the lines show its value. It is the same at every breakpoint.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Padding of the text area: 12 on every side"><div class="measure__item"><span class="measure__name">1 · Text area</span><div class="measure__obj"><span class="ta-measure"><textarea class="form-textarea measure__subject" placeholder="Placeholder text" tabindex="-1" aria-label="Text area"></textarea></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">The text area at true size (1:1). The numbers are read from the component.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding</th><td>12px on every side</td></tr><tr><th scope="row">Minimum height</th><td>66px (a literal: there is no token)</td></tr><tr><th scope="row">Border</th><td>1px</td></tr><tr><th scope="row">Corners</th><td>Square</td></tr><tr><th scope="row">Width</th><td>Fills the container</td></tr><tr><th scope="row">Resize</th><td>Vertical only, never below 66px</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same padding and distances as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding</th><td><code>space-12</code></td></tr><tr><th scope="row">Label row to box</th><td><code>space-4</code></td></tr><tr><th scope="row">Box to message</th><td><code>space-4</code></td></tr><tr><th scope="row">Label to word count</th><td><code>space-8</code> minimum</td></tr><tr><th scope="row">Focus ring</th><td>2px line, 3px outside the box</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">All seven states from Figma, with and without the word count. Hover and focus are forced on this page; in your code they come from <code>:hover</code> and keyboard focus. Active means the field has a value.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-table-wrap"><table class="ds-table ta-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">With word count</th><th scope="col">Without word count</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Type</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Label, Desktop</th><td><code>label-md</code></td><td>16/16</td><td>0.48px</td><td>Bold, uppercase</td></tr><tr><th scope="row">Label, Mobile</th><td><code>label-sm</code></td><td>12/12</td><td>0.48px</td><td>Bold, uppercase</td></tr><tr><th scope="row">Text, Desktop</th><td><code>body-md</code></td><td>17/24</td><td>0.32px</td><td>Regular</td></tr><tr><th scope="row">Text, Mobile</th><td><code>body-md</code></td><td>16/22</td><td>0.32px</td><td>Regular</td></tr><tr><th scope="row">Word count, message</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed with <code>ss02</code> and <code>ss03</code> (the text and the message also <code>ss06</code>).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Field</th><td><code>form-field</code></td><td>Label row, wrapper and message in a column, 4px apart.</td></tr><tr><th scope="row">Label row</th><td><code>form-field__head</code></td><td>Label on the left, word count on the right.</td></tr><tr><th scope="row">Label</th><td><code>form-label</code></td><td>Uppercase.</td></tr><tr><th scope="row">Word count</th><td><code>form-count</code></td><td>Optional. <code>0/100</code> format.</td></tr><tr><th scope="row">Wrapper</th><td><code>input-wrap</code></td><td>Carries the focus ring (2px, 3px outside the box).</td></tr><tr><th scope="row">Text area</th><td><code>form-textarea</code>, <code>--error</code>, <code>--success</code></td><td>The native <code>textarea</code>. Border, fill and height.</td></tr><tr><th scope="row">Message</th><td><code>form-helper</code>, <code>--error</code>, <code>--success</code>, <code>--disabled</code></td><td>Optional icon (<code>input-icon</code>).</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><p class="ds-desc">There is one type. The word count is optional.</p><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">The field fills its container.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row"><code>opacity</code> of the focus ring</th><td><code>duration-fast-3</code></td><td><code>ease-standard</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Type a value</th><td>The field becomes Active (black border). The word count updates; <code>maxlength</code> stops typing at the limit.</td></tr><tr><th scope="row">Drag the corner</th><td>The field grows or shrinks in height only. It never goes below the 66px minimum.</td></tr><tr><th scope="row">Tab</th><td>The blue ring shows on keyboard focus only (<code>body.keyboard-nav</code>, set by a small script).</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Grey fill, light border, <code>text-disabled</code> for text and message, no resize.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Label</th><td>Always a <code>label</code> with <code>for</code> and <code>id</code>. A placeholder is never the label.</td></tr><tr><th scope="row">Error</th><td>Set <code>aria-invalid="true"</code> and point <code>aria-describedby</code> at the message.</td></tr><tr><th scope="row">Focus</th><td>A 2px ring on keyboard focus (<code>border-focus</code>), not on mouse click (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Color</th><td>Error and success are not shown by color alone: the message says it, and the error message has an icon.</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div><p class="ds-desc ds-note"><strong>Open points:</strong> Figma has only a Desktop version, so the mobile type values are taken from the input. Disabled uses <code>border-primary</code> and focus uses a <code>text-secondary</code> placeholder, both as in Figma and both different from the input. The resizer is the browser’s own handle, not the 8px Figma icon. Details are in the skill’s Flags.</p></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var uid = 0, MAX = 100;
+  function icon(name) { var s = document.createElement('span'); s.className = 'input-icon'; s.textContent = name; s.setAttribute('aria-hidden', 'true'); return s; }
+
+  /* Build a real field. o: {state, label, count (bool), value, hint} */
+  function field(o) {
+    var id = 'ta' + (uid++), hid = id + '-m', st = o.state || 'enabled';
+    var f = document.createElement('div'); f.className = 'form-field';
+    var cnt = null;
+    if (o.label || o.count) {
+      var head = document.createElement('div'); head.className = 'form-field__head';
+      if (o.label) { var l = document.createElement('label'); l.className = 'form-label'; l.htmlFor = id; l.textContent = o.label; head.appendChild(l); }
+      if (o.count) { cnt = document.createElement('span'); cnt.className = 'form-count'; head.appendChild(cnt); }
+      f.appendChild(head);
+    }
+    var wrap = document.createElement('div'); wrap.className = 'input-wrap'; if (st === 'focus') wrap.dataset.state = 'focus';
+    var ta = document.createElement('textarea'); ta.id = id;
+    ta.className = 'form-textarea' + (st === 'error' ? ' form-textarea--error' : '') + (st === 'success' ? ' form-textarea--success' : '');
+    ta.placeholder = 'Placeholder text'; ta.maxLength = MAX;
+    if (!o.label) ta.setAttribute('aria-label', 'Text area');
+    if (st === 'hover' || st === 'active' || st === 'focus') ta.dataset.state = st === 'focus' ? 'active' : st;  /* forced demo states: focus shows the selected border too */
+    if (st === 'active' || st === 'error' || st === 'success') ta.value = o.value || 'Text';
+    if (st === 'disabled') ta.disabled = true;
+    if (st === 'error') ta.setAttribute('aria-invalid', 'true');
+    if (o.hint) ta.setAttribute('aria-describedby', hid);
+    wrap.appendChild(ta); f.appendChild(wrap);
+    if (cnt) { var upd = function () { cnt.textContent = ta.value.length + '/' + MAX; }; ta.addEventListener('input', upd); upd(); }
+    if (o.hint) {
+      var h = document.createElement('div'); h.id = hid; h.className = 'form-helper' + (st === 'error' ? ' form-helper--error' : st === 'success' ? ' form-helper--success' : st === 'disabled' ? ' form-helper--disabled' : '');
+      if (st === 'error') h.appendChild(icon('error'));
+      h.appendChild(document.createTextNode(o.hint)); f.appendChild(h);
+    }
+    return f;
+  }
+  function clear(n) { n.textContent = ''; return n; }
+  var HINT = { enabled: 'Message or hint text', hover: 'Message or hint text', active: 'Message or hint text', focus: 'Message or hint text', error: 'Enter at least 10 characters.', success: 'Thank you for your comment.', disabled: 'This field cannot be edited.' };
+
+
+  var ROWS = [['Enabled', 'enabled'], ['Hover', 'hover'], ['Active', 'active'], ['Focus', 'focus'], ['Error', 'error'], ['Success', 'success'], ['Disabled', 'disabled']];
+  var tb = clear($('#matrix tbody'));
+  ROWS.forEach(function (r) {
+    var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+    [true, false].forEach(function (cnt) {
+      var td = document.createElement('td');
+      td.appendChild(field({ state: r[1], label: 'Label', count: cnt, hint: HINT[r[1]] }));
+      tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Enabled', 'Border', 'border-input-default'], ['Enabled', 'Fill', 'surface-raised-primary'], ['Enabled', 'Placeholder, message', 'text-tertiary'],
+    ['All', 'Label', 'text-primary'], ['All', 'Word count', 'text-secondary'],
+    ['Hover', 'Border', 'border-hover'], ['Active', 'Border', 'border-selected'], ['Active', 'Text', 'text-primary'],
+    ['Focus', 'Ring (2px, 3px outside)', 'border-focus'], ['Focus', 'Placeholder', 'text-secondary'],
+    ['Error', 'Border', 'border-danger-default'], ['Error', 'Message', 'text-danger-default'],
+    ['Success', 'Border', 'border-success-default'], ['Success', 'Message', 'text-success-default'],
+    ['Disabled', 'Border', 'border-primary'], ['Disabled', 'Fill', 'surface-raised-secondary'], ['Disabled', 'Text, message', 'text-disabled'], ['Disabled', 'Label, word count', 'surface-60']
+  ]);
+  DK.bp();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

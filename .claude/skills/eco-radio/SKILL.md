@@ -89,7 +89,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/radio.css">
 ```
 
-`components/css/radio.css` is the single source for this component. The docs page `eco-design-system/components/radio.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/radio.css` is the single source for this component. The docs pages (`eco-design-system/components/radio.html`, `radio-specifications.html`, `radio-code.html`) link the same file; the Code page prints it. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 > `--border-brd-1-width` does not exist as a token (`--border-brd-1` is the full `width style color` shorthand, black). The `1px` fallback is intentional; only the colour changes per state. If a width-only token is added to `alligo-design-tokens`, switch to it.
 
 ### Rules

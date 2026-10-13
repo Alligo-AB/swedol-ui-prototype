@@ -90,7 +90,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/switch.css">
 ```
 
-`components/css/switch.css` is the single source for this component. The docs page `eco-design-system/components/switch.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/switch.css` is the single source for this component. The docs pages (`eco-design-system/components/switch.html`, `switch-specifications.html`, `switch-code.html`) link the same file; the Code page prints it. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 ### Rules
 1. **Never hardcode hex/px colours** — use `var(--color-…)` from `tokens.json` (`eco-tokens`, rule 6 in CLAUDE.md). The only literals are the two flagged below.

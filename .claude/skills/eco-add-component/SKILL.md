@@ -43,7 +43,8 @@ Frontmatter: `name: eco-<name>`, `description: Use when …` (one line: when to 
 Keep it thin: spec + template, no page-specific hacks.
 
 ## 5. Register it
-- Add the component's documentation page in `eco-design-system/components/<name>.html` following `eco-doc-page` (copy `components/checkbox.html`, the reference implementation) (replace its `Coming` card in `overview.html`, add a card in the root `index.html`).
+- Add the component's documentation page in `eco-design-system/components/<name>.html` following `eco-doc-page`: three pages, copy `components/tooltip.html`, `tooltip-specifications.html` and `tooltip-code.html` (the reference implementation; the Form components `checkbox`, `input`, `textarea`, `radio`, `select`, `switch`, `tabs`, `segment-control`, `range`, `icon-picker` are built the same way) (replace its `Coming` card in `overview.html`, add a card in the root `index.html`).
+- On a split page set (Examples / Specifications / Code, draft) the Specifications page gets a **Measurements** section: the blueprint figure `components/css/measure.css` + `measure.js` at 1:1 with the padding read live from the real component, plus an Attribute / Value table and the spacing tokens (see `eco-doc-page`, section Measurements). Fixed target sizes go in the table.
 - Add a row to the matching table in **`CLAUDE.md` → "Component library — skills index"** (Form components / Layout / Notifications / Links / Other), copying the skill's `description` as the "Used when" cell. New category → ask first.
 - If a guide skill exists for the family (`links-guide`, `notifications-guide`) add the new type there.
 - Update cross-references (e.g. `eco-pill-segment-control` says "never replaces Radio buttons" → link to `eco-radio`).

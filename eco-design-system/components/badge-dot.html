@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Badge Dot – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: demo layout only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-wide { width: 100%; max-width: 640px; }
+    .pg-top { align-items: flex-start; padding-top: 40px; }
+    .pg-btn { min-height: 120px; }
+    .pg-dotrow { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; line-height: 24px; }   /* demo: a dot beside a label */
+    .pg-dotwrap { position: relative; display: inline-flex; }   /* demo: a dot on the top right corner of an icon */
+    .pg-dotwrap .badge-dot { position: absolute; top: 2px; right: 2px; transform: translate(50%, -50%); }
+    .pg-ic { font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 24px; font-feature-settings: 'liga'; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="badge.html" class="breadcrumb-item">Badge</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Dot</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status</span></div>
+    <h1 class="ds-title">Badge Dot</h1>
+    <p class="ds-lead">A dot is a <strong>small status marker without text</strong>, next to a label or on the corner of an icon.</p><p class="ds-lead">Every example on this page is the real component. Specification: <code>.claude/skills/eco-badge/SKILL.md</code>. Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=4763-292600" target="_blank" rel="noopener">Dot</a>.</p>
+  </div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Badge Dot"><a class="tab" aria-current="page" href="badge-dot.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="badge-dot-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="badge-dot-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="playground"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Playground</h2><p class="ds-desc">Choose state and size. The dot is the same at every breakpoint, so there is no breakpoint control. A dot is shown next to a label here; on its own it carries no meaning.</p><div class="ds-playground"><div class="ds-stage ds-stage--center" style="min-height:160px" id="pg-stage" data-mode-stage><div id="pg-host"></div></div><div class="ds-controls"><div class="ds-field form-field"><label class="form-label form-label--sm" for="sel-state" id="l-state">State</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="state" id="sel-state"><option value="danger" selected>Danger</option><option value="warning">Warning</option><option value="success">Success</option><option value="info">Information</option><option value="neutral">Neutral</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div><div class="ds-field"><span class="form-label form-label--sm" id="l-size">Size</span><div class="btn-group" role="group" aria-labelledby="l-size" data-pg="size"><button type="button" data-v="large" aria-pressed="true">Large</button><button type="button" data-v="md" aria-pressed="false">Medium</button><button type="button" data-v="sm" aria-pressed="false">Small</button></div></div></div></div><h3 class="ds-h3">Markup for this selection</h3><div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Overview</h2><p class="ds-desc">A dot is a small colored circle, without text, that marks a status. Use it next to a text or an icon, or on the top right corner of an icon or a text, to show that a status has changed or that something needs attention.</p><p class="ds-desc">A short summary lives here; the three pages are: <strong>Examples &amp; Guidelines</strong> (this page), <a class="inline-link inline-link--large inline-link--secondary" href="badge-dot-specifications.html">Specifications</a> and <a class="inline-link inline-link--large inline-link--secondary" href="badge-dot-code.html">Code</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3><ul class="ds-bullets"><li>Show that a status has changed, next to a label.</li><li>Draw attention to an icon or a text link: place the dot on its top right corner.</li><li>Give more weight to an existing status with a color.</li></ul><h3 class="ds-h3 ds-group">When not to use</h3><ul class="ds-bullets"><li>On its own. A dot never stands alone: it needs a label or an icon next to it.</li><li>For critical alerts. Dots are an indication, not an alert: use an <a class="inline-link inline-link--large inline-link--secondary" href="inline.html">inline notification</a>.</li><li>Stacked, or close to other dots.</li><li>As the only carrier of meaning: color is not enough (WCAG 1.4.1).</li></ul><h3 class="ds-h3 ds-group">Quick reference</h3><div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The element…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">marks a changed status next to a text</th><td>Dot</td></tr><tr><th scope="row">shows a count</th><td><a class="inline-link inline-link--small" href="badge-number.html">Number</a></td></tr><tr><th scope="row">shows a status with a word</th><td><a class="inline-link inline-link--small" href="badge-basic.html">Basic</a></td></tr><tr><th scope="row">must be noticed</th><td><a class="inline-link inline-link--small" href="inline.html">Inline notification</a></td></tr></tbody></table></div><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="pg-row"><span class="pg-dotrow"><span class="badge-dot badge-dot--danger"></span> <span>Messages</span></span></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do put the dot next to a label.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div class="pg-row"><span class="badge-dot badge-dot--danger"></span><span class="badge-dot badge-dot--danger"></span><span class="badge-dot badge-dot--danger"></span></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not stack dots or put them close together.</figcaption></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="anatomy"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Anatomy</h2><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout" id="an-stage" role="img" aria-label="Anatomy of a dot: 1 dot, 2 the label it belongs to"><div class="ds-callout__art"><span class="pg-dotrow"><span class="badge-dot" id="an-d"></span><span id="an-t">Messages</span></span></div></div></figure></div><ol class="ds-bullets ds-bullets--num"><li><strong>Dot.</strong> A circle without text. Its color is the status: Danger, Warning, Success, Information or Neutral. Large 10px, Medium 8px, Small 6px.</li><li><strong>Label or icon.</strong> Not part of the dot. A dot sits next to a text, or on the top right corner of an icon, and the label says what the status is.</li></ol></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="variants"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Variants</h2><p class="ds-desc">Five states in three sizes.</p><div class="ds-table-wrap"><table class="ds-table pg-matrix"><thead><tr><th scope="col">State</th><th scope="col">Large</th><th scope="col">Medium</th><th scope="col">Small</th></tr></thead><tbody><tr><th scope="row">Danger</th><td><span class="badge-dot"></span></td><td><span class="badge-dot badge-dot--md"></span></td><td><span class="badge-dot badge-dot--sm"></span></td></tr><tr><th scope="row">Warning</th><td><span class="badge-dot badge-dot--warning"></span></td><td><span class="badge-dot badge-dot--warning badge-dot--md"></span></td><td><span class="badge-dot badge-dot--warning badge-dot--sm"></span></td></tr><tr><th scope="row">Success</th><td><span class="badge-dot badge-dot--success"></span></td><td><span class="badge-dot badge-dot--success badge-dot--md"></span></td><td><span class="badge-dot badge-dot--success badge-dot--sm"></span></td></tr><tr><th scope="row">Information</th><td><span class="badge-dot badge-dot--info"></span></td><td><span class="badge-dot badge-dot--info badge-dot--md"></span></td><td><span class="badge-dot badge-dot--info badge-dot--sm"></span></td></tr><tr><th scope="row">Neutral</th><td><span class="badge-dot badge-dot--neutral"></span></td><td><span class="badge-dot badge-dot--neutral badge-dot--md"></span></td><td><span class="badge-dot badge-dot--neutral badge-dot--sm"></span></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><p class="ds-desc">Large is 10px, Medium 8px and Small 6px. The size is the same at every breakpoint.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Diameter</th><th scope="col">Class</th></tr></thead><tbody><tr><th scope="row">Large (default)</th><td>10px</td><td><code>badge-dot</code></td></tr><tr><th scope="row">Medium</th><td>8px</td><td><code>badge-dot--md</code></td></tr><tr><th scope="row">Small</th><td>6px</td><td><code>badge-dot--sm</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="layout"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-group">Placement</h3><p class="ds-desc">Use a dot next to a text, or on the top right corner of an icon or of a text. Keep the dot away from other dots.</p><div class="ds-figs"><figure class="ds-fig"><div class="ds-fig__stage pg-btn"><span class="pg-dotrow"><span class="badge-dot badge-dot--danger"></span> <span>Messages</span></span></div><figcaption class="ds-fig__cap">Next to a text.</figcaption></figure><figure class="ds-fig"><div class="ds-fig__stage pg-btn"><span class="pg-dotwrap"><span class="pg-ic" aria-hidden="true">notifications</span><span class="badge-dot badge-dot--danger badge-dot--md"></span></span></div><figcaption class="ds-fig__cap">On the top right corner of an icon.</figcaption></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility</h2><p class="ds-desc">A dot has no text. All requirements are listed under <a class="inline-link inline-link--large inline-link--secondary" href="badge-dot-specifications.html#accessibility-requirements">Accessibility Requirements</a> in Specifications.</p><h3 class="ds-h3 ds-group">Screen reader support</h3><p class="ds-desc">A dot is decorative: <code>aria-hidden="true"</code>. If the status matters, say it in text: next to the dot, in an <code>aria-label</code> on the icon button (“Messages, new”) or in visually hidden text.</p><h3 class="ds-h3 ds-group">Color is not the only carrier</h3><p class="ds-desc">Pair the dot with a label or an icon that says the same thing.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="related"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="badge.html">Badge overview</a></strong>. All badge types.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="badge-number.html">Number</a></strong>. For a count.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="badge-basic.html">Basic</a></strong>. For a status in words.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="references"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">References</h2><ul class="ds-bullets"><li><a class="inline-link inline-link--large inline-link--secondary" href="https://m3.material.io/components/badges/overview" target="_blank" rel="noopener">Material Design 3: Badges</a>. Google.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://fluent2.microsoft.design/components/web/react/core/badge/usage" target="_blank" rel="noopener">Fluent 2: Badge</a>. Microsoft.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener">WCAG 2.2: Use of Color</a>. Success criterion 1.4.1.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html" target="_blank" rel="noopener">WCAG 2.2: Non-text Contrast</a>. Success criterion 1.4.11.</li></ul></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var st = { state: 'danger', size: 'large' };
+  function renderPg() {
+    var c = 'badge-dot' + (st.state === 'danger' ? '' : ' badge-dot--' + st.state) + (st.size === 'large' ? '' : ' badge-dot--' + st.size);
+    $('#pg-host').innerHTML = '<span class="pg-dotrow"><span class="' + c + '"></span> <span>Messages</span></span>';
+    $('#pg-code').textContent = '<span class="' + c + '" aria-hidden="true"></span>';
+  }
+  DK.callouts($('#an-stage'), [{ n: 1, el: $('#an-d'), side: 'top', len: 48 }, { n: 2, el: $('#an-t'), side: 'bottom', at: 'center', len: 56 }]);
+  DK.wire(st, renderPg); renderPg();
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

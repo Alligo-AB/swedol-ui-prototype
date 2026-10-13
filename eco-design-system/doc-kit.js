@@ -20,6 +20,23 @@
       fn(b.dataset.v);
     });
   }
+  /* Forced breakpoint for the shared component CSS (components/css/*.css): a toggle group with [data-bp-force] makes the component's own
+     @media (min-width: 769px) / (max-width: 768px) rules apply (or not) whatever the window width, by switching those rules to "all" or "not all".
+     Window = the real window. Only the component stylesheets are touched, never docs.css, so the docs layout keeps following the window. */
+  var BP_ORIG = new Map();
+  function forceBp(v) {
+    [].forEach.call(document.styleSheets, function (sh) {
+      if (!sh.href || sh.href.indexOf('/components/css/') < 0) return;
+      var rules; try { rules = sh.cssRules; } catch (e) { return; }
+      [].forEach.call(rules, function (r) {
+        if (r.type !== 4) return;   // CSSMediaRule
+        var t = BP_ORIG.has(r) ? BP_ORIG.get(r) : r.media.mediaText; BP_ORIG.set(r, t);
+        var desk = /^\(min-width:\s*769px\)$/.test(t), mob = /^\(max-width:\s*768px\)$/.test(t);
+        if (!desk && !mob) return;
+        r.media.mediaText = v === 'auto' ? t : ((v === 'desktop' && desk) || (v === 'mobile' && mob) ? 'all' : 'not all');
+      });
+    });
+  }
   /* Breakpoint preview toggle (Window / Desktop / Mobile) synced across every [data-bp-toggle] group */
   function bp(onChange) {
     $$('[data-bp-toggle]').forEach(function (g) {
@@ -28,6 +45,7 @@
         var v = b.dataset.v;
         if (v === 'auto') document.body.removeAttribute('data-bp'); else document.body.setAttribute('data-bp', v);
         $$('[data-bp-toggle]').forEach(function (x) { $$('button', x).forEach(function (y) { y.setAttribute('aria-pressed', String(y.dataset.v === v)); }); });
+        if (g.hasAttribute('data-bp-force')) forceBp(v);
         if (onChange) onChange(v);
       });
     });

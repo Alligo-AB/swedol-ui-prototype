@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text area: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/textarea.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ta-col { display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 360px; }
+    .ta-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .ta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .ta-matrix td { min-width: 280px; vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .ta-matrix .form-field { min-width: 240px; }
+    .ta-fig { width: 100%; max-width: 320px; }
+    .ta-measure { display: block; width: 280px; }   /* demo: a fixed width, so the padding strips have a text area to sit on */
+    .ds-callout__art { padding-right: 24px; width: 100%; max-width: 360px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="textarea.html" class="breadcrumb-item">Text area</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Text area</h1>
+    <p class="ds-lead">A text area lets the user enter <strong>text over multiple lines</strong>: comments, feedback or longer passages that need more room than a single-line input.</p><p class="ds-lead">How to add a text area to a page. The file is <code>components/css/textarea.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Text area"><a class="tab" href="textarea.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="textarea-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="textarea-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page, and add the keyboard script and, for a word count, the count script. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/textarea.css"&gt;</code>. Both templates already have it.</td></tr><tr><th scope="row">2. Markup</th><td>A <code>form-field</code> with a <code>label</code>, an <code>input-wrap</code> around the <code>textarea.form-textarea</code>, and an optional <code>form-helper</code> message.</td></tr><tr><th scope="row">3. Word count</th><td>Put the label and a <code>span.form-count</code> in a <code>div.form-field__head</code>, set <code>maxlength</code>, and bind the count (script under CSS / Tailwind).</td></tr><tr><th scope="row">4. Keyboard focus</th><td>Add the script under CSS / Tailwind once per page. Without it the ring never shows on keyboard focus.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="text-area"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Text area</h2><p class="ds-desc">Copy the markup you need. Hover and focus come from <code>:hover</code> and keyboard focus; the <code>[data-state]</code> selectors in the CSS exist only so the documentation can force a state.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>form-field</code></th><td>The column: label row, wrapper, message.</td></tr><tr><th scope="row"><code>form-field__head</code></th><td>The label row, with the word count on the right.</td></tr><tr><th scope="row"><code>form-label</code></th><td>The label. Use <code>form-label--sm</code> from <code>input.css</code> for the small label of a docs control.</td></tr><tr><th scope="row"><code>form-count</code></th><td>The word count.</td></tr><tr><th scope="row"><code>input-wrap</code></th><td>The wrapper that draws the focus ring.</td></tr><tr><th scope="row"><code>form-textarea</code>, <code>--error</code>, <code>--success</code></th><td>The text area and its error and success border.</td></tr><tr><th scope="row"><code>form-helper</code>, <code>--error</code>, <code>--success</code>, <code>--disabled</code></th><td>The message.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>The Active border (black) comes from <code>:placeholder-shown</code>, so the placeholder is required.</li><li>Resize is vertical only (<code>resize: vertical</code>) and never goes below 66px.</li><li>The word count is not automatic: bind it with the script under CSS / Tailwind and set <code>maxlength</code> to match.</li><li>The <code>[data-state]</code> selectors do nothing outside the documentation pages.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/textarea.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div><div style="margin-top:16px"><div class="ds-code"><div class="ds-code__bar"><span>JavaScript (focus ring on keyboard only, word count)</span><button type="button" class="mo-copy" data-copy="js-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="js-code"></pre></div></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Standard', '<div class="form-field">\n  <label class="form-label form-label--sm" for="comment">Comment</label>\n  <div class="input-wrap">\n    <textarea class="form-textarea" id="comment" placeholder="Placeholder text"></textarea>\n  </div>\n  <div class="form-helper">Message or hint text</div>\n</div>'],
+    ['With word count', '<div class="form-field">\n  <div class="form-field__head">\n    <label class="form-label form-label--sm" for="comment">Comment</label>\n    <span class="form-count" id="comment-count">0/100</span>\n  </div>\n  <div class="input-wrap">\n    <textarea class="form-textarea" id="comment" maxlength="100" placeholder="Placeholder text"></textarea>\n  </div>\n</div>\n<script>bindCount(document.getElementById("comment"), document.getElementById("comment-count"));<\/script>'],
+    ['Error', '<div class="form-field">\n  <label class="form-label form-label--sm" for="feedback">Feedback</label>\n  <div class="input-wrap">\n    <textarea class="form-textarea form-textarea--error" id="feedback" aria-invalid="true" aria-describedby="feedback-msg">Too short</textarea>\n  </div>\n  <div class="form-helper form-helper--error" id="feedback-msg"><span class="input-icon" aria-hidden="true">error</span>Enter at least 10 characters.</div>\n</div>'],
+    ['Disabled', '<div class="form-field">\n  <label class="form-label form-label--sm" for="note">Note</label>\n  <div class="input-wrap">\n    <textarea class="form-textarea" id="note" placeholder="Placeholder text" disabled></textarea>\n  </div>\n  <div class="form-helper form-helper--disabled">This field cannot be edited.</div>\n</div>']
+  ]);
+  DK.printCss($('#css-code'), 'textarea', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/,\n    \.input-wrap\[data-state="focus"\]::after/g, ''], [/^ {4}/gm, '']]);
+  $('#js-code').textContent = "document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });\ndocument.addEventListener('mousedown', function () { document.body.classList.remove('keyboard-nav'); });\n\n// word count: one textarea + its .form-count\nfunction bindCount(ta, count) {\n  var update = function () { count.textContent = ta.value.length + '/' + ta.maxLength; };\n  ta.addEventListener('input', update); update();\n}";
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

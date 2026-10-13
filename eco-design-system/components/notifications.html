@@ -47,7 +47,7 @@
     <span class="ds-eyebrow">Components · Notifications</span>
     <h1 class="ds-title">Notifications</h1>
     <p class="ds-lead">Notifications tell users that something changed. Five components cover it, from a toast that vanishes in four seconds to a modal that stops the page. <strong>The skill is choosing the right one</strong>, and as <em>quiet</em> a one as the situation allows.</p>
-    <p class="ds-lead">Use the chooser below, then open the page for the component: <a href="toast.html" class="ds-link">Toast</a>, <a href="toast-ecom.html" class="ds-link">E-Com Toast</a>, <a href="modal.html" class="ds-link">Modal</a>, <a href="banner.html" class="ds-link">Banner</a> and <a href="inline.html" class="ds-link">Inline</a>. Specification: <code>.claude/skills/notifications-guide/SKILL.md</code>.</p>
+    <p class="ds-lead">Use the chooser below, then open the page for the component: <a href="toast.html" class="inline-link inline-link--xlarge">Toast</a>, <a href="toast-ecom.html" class="inline-link inline-link--xlarge">E-Com Toast</a>, <a href="modal.html" class="inline-link inline-link--xlarge">Modal</a>, <a href="banner.html" class="inline-link inline-link--xlarge">Banner</a> and <a href="inline.html" class="inline-link inline-link--xlarge">Inline</a>. Specification: <code>.claude/skills/notifications-guide/SKILL.md</code>.</p>
   </div>
 </section>
 
@@ -174,11 +174,11 @@
   DK.$$('[data-q]').forEach(function (g) { DK.seg(g, function (v) { q[g.dataset.q] = v; res(); }); });
 
   DK.rows($('#mtx'), [
-    ['<a href="banner.html" class="ds-link">Banner</a>', 'Medium, at the top', 'System', 'Global or product-level messages: maintenance, outage, campaigns, notices to a customer group.', 'All four, plus Promotion'],
-    ['<a href="inline.html" class="ds-link">Inline</a>', 'Low, embedded', 'Task', 'Contextual feedback or status in the region of active work.', 'All four'],
-    ['<a href="toast.html" class="ds-link">Toast</a>', 'Low, slides in', 'Task', 'Brief, transient confirmation that needs minimal interaction.', 'All four'],
-    ['<a href="toast-ecom.html" class="ds-link">E-Com Toast</a>', 'Low, slides in', 'Task', 'Add to cart, wishlist or brief shopping information.', 'None (brand black and white)'],
-    ['<a href="modal.html" class="ds-link">Modal</a>', 'High, blocks the page', 'Either', 'Crucial information or a decision needed before the user can go on.', 'None']]);
+    ['<a href="banner.html" class="inline-link inline-link--small">Banner</a>', 'Medium, at the top', 'System', 'Global or product-level messages: maintenance, outage, campaigns, notices to a customer group.', 'All four, plus Promotion'],
+    ['<a href="inline.html" class="inline-link inline-link--small">Inline</a>', 'Low, embedded', 'Task', 'Contextual feedback or status in the region of active work.', 'All four'],
+    ['<a href="toast.html" class="inline-link inline-link--small">Toast</a>', 'Low, slides in', 'Task', 'Brief, transient confirmation that needs minimal interaction.', 'All four'],
+    ['<a href="toast-ecom.html" class="inline-link inline-link--small">E-Com Toast</a>', 'Low, slides in', 'Task', 'Add to cart, wishlist or brief shopping information.', 'None (brand black and white)'],
+    ['<a href="modal.html" class="inline-link inline-link--small">Modal</a>', 'High, blocks the page', 'Either', 'Crucial information or a decision needed before the user can go on.', 'None']]);
   [['info', 'Informational', 'info', 'information', 'Neutral guidance, status, helpful context.'], ['success', 'Success', 'check_circle', 'success', 'A completed or confirmed outcome.'], ['warning', 'Warning', 'warning', 'warning', 'Something to be careful about; not a failure.'], ['error', 'Error', 'error', 'danger', 'A failure or a blocking problem.']].forEach(function (s) {
     DK.rows($('#stat'), [[s[1], '<span class="material-symbols-outlined" aria-hidden="true" style="font-size:24px;color:var(--color-surface-' + s[3] + '-default)">' + s[2] + '</span> <code>' + s[2] + '</code>', '<span class="ds-dot" aria-hidden="true" style="background:var(--color-surface-' + s[3] + '-default)"></span><code>surface-' + s[3] + '-default</code>', s[4]]]);
   });

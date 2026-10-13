@@ -178,3 +178,7 @@ Used to build up contrast in the grayscale. The number indicates approximate opa
 ```
 
 ---
+
+### Information colours outside status messages
+
+The documentation pages use the Information tokens for the **blueprint measurement figure** (`components/css/measure.css`): `surface-information-weak` for shaded padding, `border-information-default` for dimension lines, `text-information-default` for the numbers. This is a docs use only; a product page uses Information for status messages (see `notifications-guide`). The ECO DS documentation accent `#E94E19` (`--ds-accent`, `eco-design-system/docs.css`) is not a token in the package and is not for products; Swedol's accent is `--color-accent-default`.

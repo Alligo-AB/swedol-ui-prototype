@@ -24,10 +24,13 @@ Used **inside sentences and text blocks**. Underlined in the Enabled state — t
 
 ### Sizes
 
+> **XLarge is not in Figma.** It was added for the intro text of the doc pages (`.ds-lead`, body-xl); confirm with design before using it in a product.
+
 #### Desktop (`md:`, 769px+)
 
 | Size | Typography token | Font-size | Line-height | Letter-spacing | Weight |
 |---|---|---|---|---|---|
+| **XLarge** (`inline-link--xlarge`) | `body-xl` | 24px | 32px | 0 | 400 |
 | **Large** | `body-lg` | 20px | 28px | 0.18px | 400 |
 | **Medium** | `body-md` | 17px | 24px | 0.32px | 400 |
 | **Small** | `body-sm` | 14px | 20px | 0.36px | 400 |
@@ -37,6 +40,7 @@ Used **inside sentences and text blocks**. Underlined in the Enabled state — t
 
 | Size | Font-size | Line-height | Letter-spacing |
 |---|---|---|---|
+| **XLarge** | 20px | 26px | 0 |
 | **Large** | 18px | 24px | 0.18px |
 | **Medium** | 16px | 22px | 0.32px |
 | **Small / Small Bold** | 14px | 20px | 0.36px |

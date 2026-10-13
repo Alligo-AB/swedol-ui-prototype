@@ -1,6 +1,6 @@
 ---
 name: eco-tooltip
-description: Use when adding a tooltip to an icon button or other element with no visible text — shown on hover, never on keyboard focus. Add data-tooltip="Label" (global tooltip, components/js/tooltip.js); never write a tooltip script of your own. Also the rules for when to use one and when not to (critical information, interactive content).
+description: Use when adding a tooltip to an icon button or other element with no visible text — shown on hover and on keyboard focus (:focus-visible), Esc hides it. Add data-tooltip="Label" (global tooltip, components/js/tooltip.js); never write a tooltip script of your own. Also the rules for when to use one and when not to (critical information, interactive content).
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -116,10 +116,10 @@ The docs page describes all of this for developers (Code section: steps, setting
 
 ### Interaction
 
-- The tooltip shows on **hover** (CSS `opacity: 1` via `.tooltip-wrap:hover .tooltip`).
+- The tooltip shows on **hover** and on **keyboard focus** (CSS `opacity: 1` via `.tooltip-wrap:is(:hover, :has(:focus-visible)) .tooltip`; the global tooltip: `focusin` on a `:focus-visible` trigger in `tooltip.js`). Not on the focus a mouse click gives. Decided 2026-10-12, after Carbon, Spectrum and Polaris (all show on focus) and WCAG 2.2 1.4.13.
+- **Esc** hides it without moving focus or pointer (`.tooltip-wrap.is-dismissed`, set by `tooltip.js`; the global tooltip is hidden). It comes back on the next hover or focus. Focus leaving hides it.
 - Easing: `ease-standard` (`cubic-bezier(.35,0,.35,1)`), `duration-fast-2` (`100ms`).
-- Never visible on keyboard navigation (`:focus`) — hover only.
-- **Open point (to be decided):** the "When to use" list says to use a tooltip for helpful information about a *focusable element*, which can imply showing it on focus. Until decided, the rule stays hover only. Also noted on the docs page (Specs → Behavior and accessibility).
+- **Open point (WCAG 1.4.13 hoverable):** the tooltip has `pointer-events: none`, so the pointer cannot move onto it. Dismissible and persistent are met. Hoverable would need a pointer-reachable tooltip. To be decided.
 - `pointer-events: none` on the tooltip element so it doesn't interfere with mouse interaction.
 
 ---

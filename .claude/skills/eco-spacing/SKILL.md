@@ -158,3 +158,4 @@ Strict reference from the ECO Figma file (Spacing, "Directional matrix"). One to
 
 - **Margin** is space outside the target boundary. **Padding** is space between a boundary and its content. **Gap** is space inserted between sibling items.
 - Live version with a token picker: `eco-design-system/foundations/spacing.html`, section Reference.
+- On a component's Specifications page the section **Measurements** shows padding and distances as a 1:1 blueprint figure (`components/css/measure.css`), with the matching spacing tokens in its *Spacing* group (see `eco-doc-page`).
