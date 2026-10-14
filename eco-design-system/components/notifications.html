@@ -24,8 +24,8 @@
     @media (min-width: 769px) { .pg-wiz { grid-template-columns: 360px minmax(0, 1fr); } }
     .pg-q { display: flex; flex-direction: column; gap: 20px; }
     .pg-res { display: flex; flex-direction: column; gap: 16px; }
-    .pg-res h3 { font-size: 28px; line-height: 32px; font-weight: 600; }
-    .pg-res p { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); }
+    .pg-res > h3 { font-size: 28px; line-height: 32px; font-weight: 600; }
+    .pg-res > p {   /* direct children only: a bare `p` also hit the text of the toast, banner and inline previews */ font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); }
     .pg-res .pg-prev { background: var(--color-surface-05); padding: 16px; border: 1px dashed var(--color-border-secondary); overflow: hidden; }
     .pg-res .pg-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .pg-ok { font-weight: 600; }
