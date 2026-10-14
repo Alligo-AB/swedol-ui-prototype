@@ -89,15 +89,16 @@ JS = JS_PRE + r'''
   var T = {
     toast: function () { N.showToast({ status: 'success', emphasis: 'weak', text: 'Settings saved.', autoHide: 4000 }); },
     ecom: function () { N.showEcomToast({ variant: 'cart', name: 'Carpenter Soul work pants stretch black', text: 'has been added to the cart.', img: IMG, secondary: { label: 'Choose accessories' }, primary: { label: 'Go to cart' } }); },
+    ecomInfo: function () { N.showEcomToast({ variant: 'info', name: 'Belt stretch black', text: 'added to your wishlist.', link: { label: 'View' } }); },   /* the chooser's example is this one: Show toast fires what the box shows */
     modal: function () { N.openModal({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'Cancel', confirm: 'Delete' }); },
     banner: function () { var s = clear($('#banner-slot')); s.appendChild(mk(H.banner({ size: 'small', status: 'warning', emphasis: 'weak', title: 'Planned maintenance', text: 'The site is unavailable on Sunday 02:00–04:00.' }))); s.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); },
     inline: function () { var s = clear($('#banner-slot')); s.appendChild(mk(H.inline({ size: 'large', status: 'error', emphasis: 'strong', title: 'Payment declined', text: 'Check your card details.', secondary: 'Change card', primary: 'Try again' }))); s.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
   };
   var COMP = {
     toast: { n: 'Toast', u: 'toast.html', why: 'A brief confirmation of what the user just did, away from the content so nothing is blocked. It leaves by itself.', prev: function () { return H.toast({ status: 'success', emphasis: 'weak', text: 'Settings saved.' }); }, trig: 'Show toast' },
-    ecom: { n: 'E-Com Toast', u: 'toast-ecom.html', why: 'A brief confirmation of a shopping action, with the natural next steps for the shopper.', prev: function () { return H.ecom({ variant: 'info', name: 'Belt stretch black', text: 'added to your wishlist.', link: 'View' }); }, trig: 'Show toast' },
-    inline: { n: 'Inline', u: 'inline.html', why: 'Feedback that belongs to one section or form and must stay visible until the user acts or the state changes.', prev: function () { return H.inline({ size: 'large', status: 'warning', emphasis: 'strong', text: 'That password is easy to guess.' }); }, trig: 'Show inline' },
-    banner: { n: 'Banner', u: 'banner.html', why: 'A message from the system or an administrator about the whole page, site or a customer group, set at the top.', prev: function () { return H.banner({ size: 'small', status: 'warning', emphasis: 'weak', title: 'Planned maintenance', text: 'The site is unavailable on Sunday.' }); }, trig: 'Show banner' },
+    ecom: { n: 'E-Com Toast', u: 'toast-ecom.html', why: 'A brief confirmation of a shopping action, with the natural next steps for the shopper.', prev: function () { return H.ecom({ variant: 'info', name: 'Belt stretch black', text: 'added to your wishlist.', link: 'View' }); }, trig: 'Show toast', fire: 'ecomInfo' },
+    inline: { n: 'Inline', u: 'inline.html', why: 'Feedback that belongs to one section or form and must stay visible until the user acts or the state changes.', prev: function () { return H.inline({ size: 'large', status: 'warning', emphasis: 'strong', text: 'That password is easy to guess.' }); }, trig: 'Show again', inplace: true },
+    banner: { n: 'Banner', u: 'banner.html', why: 'A message from the system or an administrator about the whole page, site or a customer group, set at the top.', prev: function () { return H.banner({ size: 'small', status: 'warning', emphasis: 'weak', title: 'Planned maintenance', text: 'The site is unavailable on Sunday.' }); }, trig: 'Show again', inplace: true },
     modal: { n: 'Modal', u: 'modal.html', why: 'The user must decide before going on. It blocks the page, so it is the last resort.', prev: function () { return null; }, trig: 'Open modal' }
   };
   var q = { block: 'no', origin: 'task', shop: 'no', life: 'brief' };
@@ -115,7 +116,10 @@ JS = JS_PRE + r'''
     var pv = c.prev(), box = $('.pg-prev', h);
     if (pv) box.appendChild(mk(pv)); else { box.textContent = 'A dialog over a dimmed page. Press the button to open the real one.'; box.style.fontSize = '14px'; }
     var b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn--primary btn--sm'; b.innerHTML = '<span class="btn__label"></span>'; $('span', b).textContent = c.trig;
-    b.addEventListener('click', function () { T[k](); }); $('.pg-actions', h).appendChild(b);
+    function again() { clear(box).appendChild(mk(c.prev())); b.disabled = true; }
+    if (c.inplace) { b.disabled = true; box.addEventListener('n-dismissed', function () { b.disabled = false; }); }   /* Show again only has something to do after the × has closed the example */
+    b.addEventListener('click', function () { if (c.inplace) again(); else T[c.fire || k](); }); $('.pg-actions', h).appendChild(b);
+    if (c.inplace) { var n = document.createElement('p'); n.className = 'pg-note'; n.textContent = 'Close the example with the × to enable Show again.'; box.insertAdjacentElement('afterend', n); }   /* right under the example, above the buttons */   /* Banner and Inline are the live example in the box (the × works): Show again brings it back; the others fire a real notification */
     var a = document.createElement('a'); a.href = c.u; a.className = 'btn btn--secondary btn--sm'; a.innerHTML = '<span class="btn__label"></span>'; $('span', a).textContent = 'Open ' + c.n + ' page'; a.style.textDecoration = 'none'; $('.pg-actions', h).appendChild(a);
   }
   $$('[data-q]').forEach(function (g) { DK.seg(g, function (v) { q[g.dataset.q] = v; res(); }); });
