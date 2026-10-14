@@ -13,7 +13,7 @@
 .inline-link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); text-decoration: none; }
 
 /* Sizes — mobile first (xs/sm), desktop from 769px */
-/* XLarge (body-xl): for the intro text on the doc pages, 20/26 mobile · 24/32 desktop. Not in Figma yet. */
+/* XLarge (body-xl): for the intro text on the doc pages, 20/26 mobile · 24/32 desktop. */
 .inline-link--xlarge { font-size: 20px; line-height: 26px; letter-spacing: 0; font-feature-settings: 'ss02' 1, 'ss03' 1; }
 .inline-link--large  { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
 .inline-link--medium { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
@@ -24,7 +24,16 @@
   .inline-link--medium { font-size: 17px; line-height: 24px; }
 }
 
-/* Small Bold */
+/* Weight modifiers (any size): Regular 400 is the default. Medium 500 and Bold 600. */
+.inline-link--weight-medium { font-weight: 500; }
+.inline-link--bold { font-weight: 600; }
+/* Italic modifier (the font ships italic faces for every weight) */
+.inline-link--italic { font-style: italic; }
+/* Reverse: no underline when enabled, underline on hover. Same look as the action link text, for a link in text that should stay quiet. */
+.inline-link--reverse { text-decoration: none; }
+.inline-link--reverse:is(:hover, [data-state="hover"]) { text-decoration: underline; }
+
+/* Small Bold (kept: same as .inline-link--small.inline-link--bold) */
 .inline-link--small-bold { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
 .inline-link--small-bold:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); text-decoration: none; }
 
@@ -37,3 +46,6 @@
 
 .inline-link--inverted { color: var(--color-text-primary-inverted); }
 .inline-link--inverted:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-inverted-hover); }
+
+/* Focus ring, as the action link and the tile link (keyboard only: body.keyboard-nav) */
+body.keyboard-nav .inline-link:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }

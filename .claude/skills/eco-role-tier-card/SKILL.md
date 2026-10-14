@@ -1,6 +1,6 @@
 ---
 name: eco-role-tier-card
-description: Use when building a role card/tier card pair that introduces two tiers within the same category (e.g. Standard/Administrator) side by side and links onward to a full comparison table.
+description: Draft / experiment, not an official component (docs page is in the Drafts group, one page). Use when building a role card/tier card pair that introduces two tiers within the same category (e.g. Standard/Administrator) side by side and links onward to a full comparison table.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.

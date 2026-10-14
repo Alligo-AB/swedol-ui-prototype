@@ -55,7 +55,7 @@ variants = '<h2 class="ds-h2">Variants</h2>' + desc('A modal has no status or em
 
 SETUP = table(['', 'Desktop (769px+)', 'Tablet, sm (640–768px)', 'Mobile, xs (below 640px)'], [
     ['Figma breakpoint', 'XLarge-Large-Medium', 'Small', 'XSmall (Large and Small only)'],
-    ['Small', '440px wide, centered', '440px wide (adapts to the available width), centered', 'Centered card, height by content, <strong>at least 16px side margin</strong>: up to 375px, <strong>343px on a 375px viewport</strong>'],
+    ['Small', '440px wide, centered', '440px wide (adapts to the available width), centered', 'Centered card, height by content, <strong>at least 16px side margin</strong>: max width 440px; <strong>343px on a 375px viewport</strong>'],
     ['Large', '705px wide, centered', '576px wide (adapts to the available width), centered', '<strong>Fills the whole screen</strong> (375 × 100dvh): content on top, buttons pinned to the bottom'],
     ['Height', 'By content, limited by the available screen height', 'By content, limited by the available screen height', 'Small: by content, limited by the screen height. Large: 100dvh'],
     ['Padding', '24px', '24px', '16px'],
@@ -74,7 +74,7 @@ sizes = '<h2 class="ds-h2">Sizes</h2>' + desc('The modal comes in two sizes to c
     '<h3 class="ds-h3 ds-group">Responsive behavior</h3>' + desc('The breakpoint controls how the chosen size is presented. The table sums up the three setups (the Figma breakpoint groups); exact values are under ' + sec_link(SLUG, 'sizes', 'Sizes') + ' in Specifications. The figures below follow the Breakpoint toolbar.') + SETUP + \
     '<h3 class="ds-h3 ds-group">Desktop (XLarge, Large and Medium breakpoints)</h3>' + desc('Small is a compact dialog. Large is a wider work area. The height follows the content and is limited by the available screen height.') + \
     '<h3 class="ds-h3 ds-group">Tablet (Small breakpoint, 640–768px)</h3>' + desc('The same usage rules apply, but the width adapts to the available area. Both sizes keep their side margins.') + \
-    '<h3 class="ds-h3 ds-group">Mobile (XSmall, below 640px)</h3>' + bullets(['<strong>Small:</strong> a centered dialog with a height that fits the content and at least 16px side margin on each side. On a 375px viewport it is at most 343px wide. The width follows the viewport up to a maximum, so 343px is not a fixed width for the whole breakpoint.', '<strong>Large:</strong> a full-screen presentation for tasks that need a larger work area. Long content scrolls, and the layout has to work with the keyboard open.']) + \
+    '<h3 class="ds-h3 ds-group">Mobile (XSmall, below 640px)</h3>' + bullets(['<strong>Small:</strong> a height that fits the content and a <strong>maximum width of 440px</strong>. The dialog is centered with at least 16px side margin on each side. On narrower screens the width adapts to the available space: on a 375px viewport it is at most 343px wide, so 343px is not a fixed width for the whole breakpoint.', '<strong>Large:</strong> a full-screen presentation for tasks that need a larger work area. Long content scrolls, and the layout has to work with the keyboard open.']) + \
     bp_toolbar('sb-l') + \
     '<h3 class="ds-h3">Small</h3>' + fig_one_id('v-s-small', None, 'modal-preview') + '<h3 class="ds-h3">Large</h3>' + fig_one_id('v-s-large', None, 'modal-preview modal-preview--screen') + \
     note('Choose <strong>Mobile</strong> in the Breakpoint toolbar to see Large as a full-screen view (a 375 × 560px screen here; the real one is 100dvh). Under Window the figure follows the width of your window.') + \
@@ -84,7 +84,7 @@ sizes = '<h2 class="ds-h2">Sizes</h2>' + desc('The modal comes in two sizes to c
 
 layout = '<h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-group">Alignment</h3>' + desc('The label and the title sit on the left with the × on the right, top-aligned. The buttons are on one row at the bottom: Cancel on the left, and the Primary button fills the rest.') + \
     '<h3 class="ds-h3 ds-group">Placement</h3>' + desc('Desktop and tablet: the modal is centered in the window over a dimmed overlay. Mobile (below 640px): Small stays a centered card with side margins; Large is not centered, they fill the whole screen. See the table and the layout rules under <a class="inline-link inline-link--large inline-link--secondary" href="#sizes">Sizes</a>.') + \
-    '<h3 class="ds-h3 ds-group">Width</h3>' + desc('Small 440px (on mobile: up to 375px, never closer than 16px to the screen edges: 343px on a 375px viewport). Large 705px on desktop, 576px on tablet, full screen on mobile.') + \
+    '<h3 class="ds-h3 ds-group">Width</h3>' + desc('Small 440px (on mobile too: max width 440px, never closer than 16px to the screen edges, so 343px on a 375px viewport). Large 705px on desktop, 576px on tablet, full screen on mobile.') + \
     '<h3 class="ds-h3 ds-group">Appearance</h3>' + desc('A white panel with the highest shadow, over a 20% black overlay. Token names and values are under ' + sec_link(SLUG, 'design-tokens', 'Design Tokens') + ' in Specifications.')
 
 behavior = '<h2 class="ds-h2">Behavior</h2><h3 class="ds-h3 ds-group">Dismissal</h3>' + desc('A modal always closes in three ways: the ×, the ESC key and a click on the overlay. A click inside the panel does not close it.') + \

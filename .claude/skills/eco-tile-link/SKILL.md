@@ -9,7 +9,7 @@ description: Use when building a graphical/prominent link presented as a card or
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1671-53188
 
-Used as a **card or button** when the link needs to be presented graphically and prominently — e.g. brand logos as a link group, or icons with text. Should **not** replace regular buttons or in-text link types.
+Figma description (2026-10-13): "A clickable tile featuring an SVG graphic or an icon with a label. Used to highlight navigation destinations in grids and horizontal scrollers when a more visual alternative to a text link or button is needed." Used as a **card or button** when the link needs to be presented graphically and prominently — e.g. brand logos as a link group, or icons with text. Should **not** replace regular buttons or in-text link types.
 
 ---
 
@@ -32,9 +32,9 @@ Used as a **card or button** when the link needs to be presented graphically and
 
 | Color | Background | Enabled border | Hover border |
 |---|---|---|---|
-| **White** | `var(--color-border-action-2)` (`surface-action-2`) | `var(--color-border-primary)` (`border-primary`) | `var(--color-border-hover)` (`border-hover`) |
-| **Grey** | `var(--color-border-secondary)` (`surface-raised-secondary`) | `var(--color-border-primary)` (`border-primary`) | `var(--color-border-hover)` (`border-hover`) |
-| **Black** | `var(--color-border-action-1)` (`surface-action-1`) | `var(--color-border-action-1)` (`border-action-1`) | `var(--color-border-action-1)` + white 20% overlay |
+| **White** | `var(--color-surface-action-2)` (`surface-action-2`) | `var(--color-border-primary)` (`border-primary`) | `var(--color-border-hover)` (`border-hover`) |
+| **Grey** | `var(--color-surface-raised-secondary)` (`surface-raised-secondary`) | `var(--color-border-primary)` (`border-primary`) | `var(--color-border-hover)` (`border-hover`) |
+| **Black** | `var(--color-surface-100)` (brand tile only; a white 20% overlay on hover) | `var(--color-border-action-1)` (`border-action-1`) | `var(--color-border-action-1)` + white 20% overlay |
 
 ---
 
@@ -106,7 +106,7 @@ Text color Enabled: `text-primary` (var(--color-text-action-primary)). Text colo
 
 ### CSS template
 
-> **Shared file:** `<link rel="stylesheet" href="/components/css/tile-link.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/tile-link.html`. Mobile-first; label sizes follow the typography table (17/24 desktop).
+> **Shared file:** `<link rel="stylesheet" href="/components/css/tile-link.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation: three pages, `eco-design-system/components/tile-link.html`, `tile-link-specifications.html`, `tile-link-code.html` (type of the Links guide hub). Mobile-first; label sizes follow the typography table (17/24 desktop).
 
 
 ```css
@@ -264,3 +264,26 @@ Text color Enabled: `text-primary` (var(--color-text-action-primary)). Text colo
 ```
 
 ---
+
+---
+
+### Modifiers: label weight and italic
+
+The variants are Breakpoint, Variant (Svg-brand, Label-icon, Label-only), Size, State, Placement and Color (White, Grey; Black on the brand tile). The modifiers below change the label weight and style. Figma weights are 100 higher than the CSS (see `eco-typography`).
+
+| Modifier | Class | CSS |
+|---|---|---|
+| Medium label | `tile-link--weight-medium` | `font-weight: 500` on `.tile-link__label` |
+| Bold label | `tile-link--bold` | `font-weight: 600` on `.tile-link__label` |
+| Italic label | `tile-link--italic` | `font-style: italic` on `.tile-link__label` |
+
+They change the label only, not the icon. Brand tiles have no label.
+
+---
+
+### Definition, destinations and states
+
+A Tile Link is a compact, tappable surface that navigates to a destination: a brand page, a product category or a pre-filled search. It behaves as both a card and a button, for links that need a more graphic and more prominent presentation than a regular button. It packages one link target (logo or SVG, icon + label, or label only) into one consistent tile shape so groups of destinations can be laid out in scannable grids or carousels. One line: a clickable tile with a logo, an SVG, or an icon and a short label that links to a brand, a category or a search result page.
+
+**States.** Brand (SVG): Enabled is a White container with a subtle border or a Black container with no visible border, content at full contrast. Hover, White: the border appears or darkens (`border-hover`, 1px), the logo is unchanged. Hover, Black: `surface-action-1` plus `surface-opacity-white-20`, the logo is unchanged. Label + icon and Label only: Enabled is a White or Grey container with a subtle border; Hover darkens the border (`border-hover`, 1px) and the label **and the icon** shift to the action hover color (Figma: label and icon are both `#737373` on hover).
+

@@ -5,7 +5,7 @@
 .tile-link__inner {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-  background: var(--color-surface-raised-primary);       /* White (default) */
+  background: var(--color-surface-action-2);       /* White (default) */
   transition: border-color var(--duration-fast-3) var(--ease-standard);
 }
 /* Border is its own layer (inset: 0), so it never changes the tile's size */
@@ -17,7 +17,7 @@
 .tile-link:is(:hover, [data-state="hover"]) .tile-link__inner::before { border-color: var(--color-border-hover); }
 
 /* Background */
-.tile-link--grey .tile-link__inner  { background: var(--color-surface-05); }
+.tile-link--grey .tile-link__inner  { background: var(--color-surface-raised-secondary); }
 .tile-link--black .tile-link__inner { background: var(--color-surface-100); }
 .tile-link--black .tile-link__inner::before { border-color: var(--color-border-action-1); }
 .tile-link--black:is(:hover, [data-state="hover"]) .tile-link__inner {
@@ -44,6 +44,11 @@
 .tile-link--black .tile-link__icon,
 .tile-link--black:is(:hover, [data-state="hover"]) .tile-link__label,
 .tile-link--black:is(:hover, [data-state="hover"]) .tile-link__icon { color: var(--color-text-primary-inverted); }
+
+/* Label modifiers: weight Medium 500 or Bold 600, italic. The font ships italic faces for every weight. */
+.tile-link--weight-medium .tile-link__label { font-weight: 500; }
+.tile-link--bold .tile-link__label { font-weight: 600; }
+.tile-link--italic .tile-link__label { font-style: italic; }
 
 /* Icon */
 .tile-link__icon {

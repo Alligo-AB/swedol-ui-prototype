@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Action link: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/action-link.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; }
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; width: 100%; }   /* links on one row, a divider between them */
+    .pg-p { margin: 0; color: var(--color-text-primary); max-width: 560px; }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-dark { background: var(--color-surface-100); }
+    .pg-exs { width: 100%; }   /* the lines of one Do or Don't box, one example per line */
+    .pg-ex { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-weight: 400; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }   /* body-md (16/22, 17/24 from 769px) */
+    @media (min-width: 769px) { .pg-ex { font-size: 17px; line-height: 24px; } }
+    .pg-ex + .pg-ex { margin-top: 12px; }
+    #usage .ds-fig__stage { align-items: flex-start; }   /* every Do / Don't box of this page: content at the top */
+    .pg-exfigs .ds-fig__stage { min-height: 0; padding: 16px 24px; justify-content: flex-start; align-items: flex-start; }   /* low boxes; JS makes a Do and a Don't box the same height */
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="links-guide.html" class="breadcrumb-item">Links guide</a><span class="breadcrumb-sep">/</span><a href="action-link.html" class="breadcrumb-item">Action link</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span></div>
+    <h1 class="ds-title">Action link</h1>
+    <p class="ds-lead">An action link is a <strong>standalone link</strong> for lightweight actions like downloads and “view all” navigation, with a leading icon, a trailing icon or both. It is underlined on hover.</p><p class="ds-lead">Tokens, sizes, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1671-52811" target="_blank" rel="noopener">Action link</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Action link"><a class="tab" href="action-link.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="action-link-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="action-link-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Type token</th><th scope="col">Desktop (769px+)</th><th scope="col">Mobile and tablet</th><th scope="col">Gap</th><th scope="col">Icon</th></tr></thead><tbody><tr><th scope="row">Large</th><td><code>body-lg</code></td><td>20/28, 0.18px</td><td>18/24, 0.18px</td><td>8px</td><td>24px</td></tr><tr><th scope="row">Medium</th><td><code>body-md</code></td><td>17/24, 0.32px</td><td>16/22, 0.32px</td><td>4px</td><td>20px</td></tr><tr><th scope="row">Small</th><td><code>body-sm</code></td><td>14/20, 0.36px</td><td>14/20, 0.36px</td><td>4px</td><td>20px</td></tr></tbody></table></div><p class="ds-desc ds-note"><code>sm</code> (640 to 768px) looks like mobile. Small is the same on every breakpoint. Weight is 400 (Regular) or 600 (Bold: Figma 700 minus 100 in this CSS).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Large</th><th scope="col">Medium</th><th scope="col">Small</th></tr></thead><tbody><tr><th scope="row">Height</th><td>The line height: 28px desktop, 24px mobile</td><td>24px desktop, 22px mobile</td><td>20px</td></tr><tr><th scope="row">Gap between icon and text</th><td>8px</td><td>4px</td><td>4px</td></tr><tr><th scope="row">Icon size</th><td>24px</td><td>20px</td><td>20px</td></tr><tr><th scope="row">Padding and margin</th><td colspan="3">None</td></tr><tr><th scope="row">Hit area (invisible)</th><td>28px / 24px (the link itself)</td><td>24px (22px on mobile: grown by 2px)</td><td>24px (20px: grown by 4px)</td></tr><tr><th scope="row">Focus ring</th><td colspan="3">2px, 2px outside the link</td></tr></tbody></table></div><p class="ds-desc ds-note">An action link has no padding or margin of its own, so there is no measurement figure.</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The gap as a spacing token.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Gap, Large</th><td><code>space-8</code></td></tr><tr><th scope="row">Gap, Medium and Small</th><td><code>space-4</code></td></tr><tr><th scope="row">Focus ring offset</th><td>2px</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc"><strong>Enabled</strong> has no underline: the placement and the icons carry the affordance. This is the reverse of the Inline link, whose underline is what tells it apart from the text it sits next to; an action link stands alone and is never embedded in prose. <strong>Hover</strong> is a color shift, and the underline appears under the label; the icons are never underlined. There is <strong>no Disabled state</strong>: hide the row or show plain text (see Usage). Hover is forced on this page; in your code it comes from <code>:hover</code>.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div><span class="ds-toolbar__label" id="ss-l">Size</span><div class="btn-group" role="group" aria-labelledby="ss-l" data-mx="size"><button type="button" data-v="large" aria-pressed="false">Large</button><button type="button" data-v="medium" aria-pressed="true">Medium</button><button type="button" data-v="small" aria-pressed="false">Small</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Primary</th><th scope="col">Primary bold</th><th scope="col">Inverted</th><th scope="col">Inverted bold</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><h3 class="ds-h3 ds-group">Features</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Type token</th><th scope="col">font-feature-settings</th></tr></thead><tbody><tr><th scope="row">Large</th><td><code>body-lg</code></td><td><code>ss02</code>, <code>ss03</code></td></tr><tr><th scope="row">Medium</th><td><code>body-md</code></td><td><code>ss02</code>, <code>ss03</code>, <code>ss06</code></td></tr><tr><th scope="row">Small</th><td><code>body-sm</code></td><td><code>ss02</code>, <code>ss03</code>, <code>ss06</code></td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Weight</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Modifier</th><th scope="col">Class</th><th scope="col">CSS</th></tr></thead><tbody><tr><th scope="row">Regular</th><td>(none)</td><td><code>font-weight: 400</code></td></tr><tr><th scope="row">Medium</th><td><code>action-link--weight-medium</code></td><td><code>font-weight: 500</code></td></tr><tr><th scope="row">Bold</th><td><code>action-link--bold</code></td><td><code>font-weight: 600</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Figma weights are 100 higher than the CSS (see <code>eco-typography</code>). The font package ships 300, 400, 500 and 700. </p><p class="ds-desc ds-note">Breuer Condensed. Sizes and line heights are under Sizes.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Link</th><td><code>action-link</code></td><td>A real <code>&lt;a href&gt;</code>, <code>display: inline-flex</code>.</td></tr><tr><th scope="row">Label</th><td><code>action-link__label</code></td><td>Always wrap the text in this span: the underline sits on it, so the icons never get one.</td></tr><tr><th scope="row">Icon</th><td><code>action-link__icon</code></td><td>A Material Symbol, <code>aria-hidden</code>. Leading, trailing (the chevron) or both; at least one.</td></tr><tr><th scope="row">Size</th><td><code>action-link--large</code>, <code>--medium</code>, <code>--small</code></td><td></td></tr><tr><th scope="row">Weight, variant</th><td><code>action-link--bold</code>, <code>--inverted</code></td><td>Regular and Primary are the defaults.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Primary</th><td><code>action-link</code></td><td>Light surfaces.</td></tr><tr><th scope="row">Inverted</th><td><code>action-link action-link--inverted</code></td><td>Dark surfaces.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">As wide as its content.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row"><code>color</code></th><td><code>duration-fast-3</code></td><td><code>ease-standard</code></td></tr></tbody></table></div><p class="ds-desc ds-note">The underline is not transitioned.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click text or icon</th><td>Follows the link. The whole row is the target.</td></tr><tr><th scope="row">Enter</th><td>Follows the focused link.</td></tr><tr><th scope="row">Tab</th><td>The 2px focus ring shows on keyboard focus only (<code>body.keyboard-nav</code>).</td></tr><tr><th scope="row">Icons</th><td>Never underlined: the underline is on <code>.action-link__label</code> only.</td></tr><tr><th scope="row">Group of links</th><td>Stacked (<code>action-link-group--stacked</code>): one column, 8px between the links. Divided (<code>action-link-group--divided</code>): one row, a vertical divider only between two links on the same line, wrapping where the row is full. The author chooses the layout; it does not change with the breakpoint.</td></tr><tr><th scope="row">Disabled</th><td>None. Hide the row or show plain text. If a disabled state must ship: <code>aria-disabled="true"</code>, exempt from the contrast minimum but still recognizable.</td></tr><tr><th scope="row">Markup</th><td>A real <code>&lt;a href&gt;</code>. Icons are <code>aria-hidden</code>.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Element</th><td>A real <code>&lt;a href&gt;</code>, also for a download (add the <code>download</code> attribute when the file is on the same origin). If an instance triggers a JavaScript action with no navigation, it must be a <code>&lt;button&gt;</code> styled the same way: never fake it with an <code>&lt;a&gt;</code>.</td></tr><tr><th scope="row">Name</th><td>The visible label, extended where needed so it still begins with the visible text (WCAG 2.5.3 Label in Name): “Download product sheet, PDF 2 megabytes”. Both icons are decorative: <code>aria-hidden="true"</code>, no alt text (WCAG 2.4.4).</td></tr><tr><th scope="row">Downloads</th><td>Announce the file behavior in the accessible name: do not rely on the icon alone.</td></tr><tr><th scope="row">Target size</th><td>A standalone link needs at least 24×24px (WCAG 2.5.8), and at least 8px between stacked links. The drawn size stays 20px (Small) and 22px (Medium on mobile), but an invisible layer (<code>.action-link::after</code>, at least 24px high) makes the clickable area 24px. Keep at least 8px between stacked links so the areas do not overlap.</td></tr><tr><th scope="row">Focus</th><td>A 2px ring around the whole link with <code>border-focus</code> (4.9:1 on white) and 2px offset, on keyboard focus (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Color</th><td>The default state has no underline, so the icons and the placement are the affordance. An action link must therefore never appear inside body copy, where it would rely on color alone (WCAG 1.4.1).</td></tr><tr><th scope="row">Contrast</th><td>Label and icons need at least 4.5:1 in the default and hover states (WCAG 1.4.3). On white: Primary 21:1, Primary hover (<code>#737373</code>) 4.7:1 (4.4:1 on <code>#f6f6f6</code>), Inverted on black 21:1 and Inverted hover about 12:1. <strong>Open point:</strong> Inverted hover on a mid-gray such as <code>#737373</code> is 2.8:1. Confirm with design.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  function icon(n) { var s = document.createElement('span'); s.className = 'action-link__icon'; s.setAttribute('aria-hidden', 'true'); s.textContent = n; return s; }
+  function al(o) {
+    var a = document.createElement('a'); a.href = '#';
+    a.className = 'action-link action-link--' + o.size + (o.bold ? ' action-link--bold' : '') + (o.medium ? ' action-link--weight-medium' : '') + (o.inv ? ' action-link--inverted' : '');
+    if (o.state === 'hover') a.dataset.state = 'hover';
+    if (o.leading) a.appendChild(icon(o.icon || 'file_download'));
+    var lb = document.createElement('span'); lb.className = 'action-link__label'; lb.textContent = o.label; a.appendChild(lb); if (o.trailing !== false) a.appendChild(icon('chevron_right'));
+    a.addEventListener('click', function (e) { e.preventDefault(); });
+    return a;
+  }
+
+  var mx = { size: 'medium' };
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    [['Enabled', 'enabled'], ['Hover', 'hover']].forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      [[false, false], [true, false], [false, true], [true, true]].forEach(function (c) {
+        var td = document.createElement('td'); if (c[1]) td.className = 'pg-dark';
+        td.appendChild(al({ size: mx.size, bold: c[0], inv: c[1], state: r[1], label: 'View all' })); tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  DK.seg($('[data-mx="size"]'), function (v) { mx.size = v; buildMatrix(); });
+  DK.bp(); buildMatrix();
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Primary · enabled', 'Text and icons', 'text-action-primary'], ['Primary · hover', 'Text and icons', 'text-action-primary-hover'],
+    ['Inverted · enabled', 'Text and icons', 'text-action-primary-inverted'], ['Inverted · hover', 'Text and icons', 'text-action-primary-inverted-hover'],
+    ['Keyboard focus', 'Ring', 'border-focus']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

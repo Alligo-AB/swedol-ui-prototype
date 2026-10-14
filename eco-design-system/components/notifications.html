@@ -34,9 +34,11 @@
     .pg-flow-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); }
     .pg-flow-row:first-child { border-top: 0; padding-top: 0; }
     .pg-flow-row > div { flex: 1; min-width: 240px; }
-    .pg-flow-row b { display: block; font-size: 16px; line-height: 22px; }
-    .pg-flow-row span { font-size: 14px; line-height: 20px; color: var(--color-text-secondary); }
+    .pg-flow-row > div b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-flow-row > div span {   /* the description only: a bare `span` also hit the button label (grey text on the black button) */
+      font-size: 14px; line-height: 20px; color: var(--color-text-secondary); }
     .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-ic-row { display: inline-flex; align-items: center; gap: 8px; }   /* an icon or a dot beside its label, on one center line */
     .ds-field[hidden] { display: none; }
   </style>
 </head>
@@ -125,7 +127,7 @@
     ['<a href="toast-ecom.html" class="inline-link inline-link--small">E-Com Toast</a>', 'Low, slides in', 'Task', 'Add to cart, wishlist or brief shopping information.', 'None (brand black and white)'],
     ['<a href="modal.html" class="inline-link inline-link--small">Modal</a>', 'High, blocks the page', 'Either', 'Crucial information or a decision needed before the user can go on.', 'None']]);
   [['info', 'Informational', 'info', 'information', 'Neutral guidance, status, helpful context.'], ['success', 'Success', 'check_circle', 'success', 'A completed or confirmed outcome.'], ['warning', 'Warning', 'warning', 'warning', 'Something to be careful about; not a failure.'], ['error', 'Error', 'error', 'danger', 'A failure or a blocking problem.']].forEach(function (s) {
-    DK.rows($('#stat'), [[s[1], '<span class="material-symbols-outlined" aria-hidden="true" style="font-size:24px;color:var(--color-surface-' + s[3] + '-default)">' + s[2] + '</span> <code>' + s[2] + '</code>', '<span class="ds-dot" aria-hidden="true" style="background:var(--color-surface-' + s[3] + '-default)"></span><code>surface-' + s[3] + '-default</code>', s[4]]]);
+    DK.rows($('#stat'), [[s[1], '<span class="pg-ic-row"><span class="material-symbols-outlined" aria-hidden="true" style="font-size:24px;color:var(--color-surface-' + s[3] + '-default)">' + s[2] + '</span><code>' + s[2] + '</code></span>', '<span class="pg-ic-row"><span class="ds-dot" aria-hidden="true" style="background:var(--color-surface-' + s[3] + '-default)"></span><code>surface-' + s[3] + '-default</code></span>', s[4]]]);
   });
   DK.rows($('#emph'), [['Banner', 'Strong, Weak, Weaker; Promotion: Dark, Light, Strong, Weak', 'Small, Large (Large: My Pages only)', 'Default'], ['Inline', 'Strong, Weak', 'Large, Small', 'Default, Actionable (Large)'],
     ['Toast', 'Strong, Weak', 'One', 'Default, Actionable'], ['E-Com Toast', 'None', 'One', 'Add to cart, Informational'], ['Modal', 'None', 'Small, Large', 'Label optional']]);

@@ -103,7 +103,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/menu.css">
 ```
 
-`components/css/menu.css` is the single source for this component. The docs page `eco-design-system/components/menu.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/menu.css` is the single source for this component. The docs (three pages: `components/menu.html`, `menu-specifications.html`, `menu-code.html`) link the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 **Name clash:** `.menu__item`, `.menu__item-icon` and `.menu__item-label` are also used by the main-menu drawer (`mypages/partials/main-menu.html`, styled in the page templates). Do not link `menu.css` on a page that includes that partial until one of the two is renamed (see Flags).
 

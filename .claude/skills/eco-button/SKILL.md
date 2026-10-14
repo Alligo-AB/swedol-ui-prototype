@@ -29,7 +29,7 @@ A button triggers an action or goes to another page, with a single tap. A page c
 
 **Standard or Inverted** is chosen by the surrounding context, visibility and contrast, not by the background color alone. Inverted variants do not change the action's role or priority and are not limited to dark or colored surfaces. Always keep the contrast accessible and the keyboard focus visible, and use clear, action-specific labels. (Source: the descriptions on the Figma Button component set `2007:68126`, updated 2026-10-13; the docs page shows the inverted variants on `surface-100` only as a preview.)
 
-### When not to use each variant (Supernova + Figma guidance, 2026-10-13)
+### When not to use each variant (Figma guidance, 2026-10-13)
 
 | Variant | Avoid when |
 |---|---|
@@ -40,7 +40,7 @@ A button triggers an action or goes to another page, with a single tap. A page c
 | **System Selected** | On/off settings (use `eco-switch`), actions needing confirmation (Primary/Destructive), actions without immediate effect (checkbox + Apply). Use for filter chips and sorting mode: an active mode with an immediate effect. |
 | **Accent** | Business-critical actions ("Add to cart"), or where it competes with Primary. |
 
-**Combining variants:** (the docs show two Do figures: a Secondary pair above a System pair with icons, and the E-Com Toast card with Blank + Primary as shipped, see `eco-toast-ecom`; where Supernova and the design system differ, the design system wins) buttons next to each other are 8px apart (`space-8`). Pair a high-emphasis button with a lower-emphasis one, usually Primary + Secondary (Secondary is the go-to partner). Many actions (page headers, data lists, dashboards): group low-emphasis buttons of the **same** variant, typically System. Dialogs and panels: Primary for the confirmation, Secondary for supporting actions, Blank for lesser ones such as Cancel or Back. Placement (Primary to the right or above), stacking and truncation are layout rules that go to the Foundations Layout page (not written yet; Supernova says Primary right or above).
+**Combining variants:** (the docs show two Do figures: a Secondary pair above a System pair with icons, and the E-Com Toast card with Blank + Primary as shipped, see `eco-toast-ecom`) buttons next to each other are 8px apart (`space-8`). Pair a high-emphasis button with a lower-emphasis one, usually Primary + Secondary (Secondary is the go-to partner). Many actions (page headers, data lists, dashboards): group low-emphasis buttons of the **same** variant, typically System. Dialogs and panels: Primary for the confirmation, Secondary for supporting actions, Blank for lesser ones such as Cancel or Back. Placement (Primary to the right or above), stacking and truncation are layout rules that go to the Foundations Layout page (not written yet).
 
 **Content:** every variant can have a leading icon, a trailing icon, both, or icon only. Leading and trailing icons together are uncommon. Icon only is for constrained space, always with an `aria-label` and a tooltip after a 300ms hover delay (design guidance; `tooltip.js` has no delay yet). Sizes behave the same at every breakpoint for all variants.
 

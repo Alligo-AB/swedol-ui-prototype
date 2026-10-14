@@ -340,7 +340,7 @@ body[data-ds="component"] .ds-fig__stage { box-shadow: var(--shadow-elevation-b-
 /* Bullet list in body text: same type as .ds-desc (body-lg: 18/24 mobile, 20/28 from 769px), round 8px bullets and 8px between items as the Typography article (.ty-list), so a list is never smaller than the text around it */
 .ds-bullets { max-width: 760px; margin-bottom: 32px; }
 .ds-bullets li { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; color: var(--color-text-secondary); padding-left: 16px; position: relative; }
-.ds-bullets li::before { top: calc(0.5lh - 4px); width: 8px; height: 8px; border-radius: 50%; }
+.ds-bullets li::before, .ds-rule li::before { top: calc(0.5lh - 4px); width: 8px; height: 8px; border-radius: 50%; }   /* the Do / Don't cards use the same round 8px bullet as .ds-bullets (text size stays the card's own) */
 @media (min-width: 769px) { .ds-bullets li { font-size: 20px; line-height: 28px; letter-spacing: 0.18px; } }
 /* Running text on a component page (Overview, When to use …): the spacing of the Typography article (text is Body Large like every .ds-desc).
    Paragraph gap 16 / 20px, above a heading 24 / 32px, heading to text 8 / 12px. Put .ds-prose on the .ds-inner that holds the text. */

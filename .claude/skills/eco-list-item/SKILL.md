@@ -8,7 +8,7 @@ description: Use when building or reviewing the content of one row in a list sur
 ## List Item (ECO Design System)
 
 Figma (file `42MgqJjV9vfplwQnrUB62r`): info `14965:36405`, List Item Content (all variants) `3140:104687`, Base/List Item `3137:104383`.
-Docs page: `eco-design-system/components/list-item.html` (it links `components/css/list-item.css`, the single CSS source).
+Docs (three pages: `components/list-item.html`, `list-item-specifications.html`, `list-item-code.html`; they link `components/css/list-item.css`, the single CSS source).
 
 ### When to use / not to use
 
@@ -60,7 +60,7 @@ Check box and radio: same parts as leading (`.list-item__check`, `.list-item__ra
 
 ### Typography
 
-`body-md` (Large) and `body-sm` (Small), see `eco-typography`. `font-family: 'Breuer Condensed'`, `font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1`, weight 400; **Bold label** weight 700. Trailing text uses the same style as the label.
+`body-md` (Large) and `body-sm` (Small), see `eco-typography`. `font-family: 'Breuer Condensed'`, `font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1`, weight 400; **Bold label** weight 600 (Figma 700 minus 100 in this CSS). Trailing text uses the same style as the label.
 
 ### States
 
@@ -77,7 +77,7 @@ Hover and focus: drawn by the container row (`eco-menu`). Check box, radio and s
 - **Inside a container row** (`role="option"`): `aria-selected` / `aria-disabled` on the row. The container handles click and keys.
 - **Standalone item with a control**: the `.list-item` itself is `role="checkbox"`, `"radio"` or `"switch"` (switch wins over check, check over radio) with `tabindex="0"` and `aria-checked`. Component CSS gives it `cursor: pointer` and a 2px `border-focus` ring (offset 2px); nothing else.
 
-Behavior for standalone items (script on the docs page, copy it with the markup): click, Space or Enter toggles `aria-checked`; a radio only selects, and clears the others inside its `role="radiogroup"`; in a group there is one tab stop (the checked radio, others `tabindex="-1"`) and Arrow keys move and select (wraps). `aria-disabled="true"` ignores clicks and keys, with `tabindex="-1"`. CSS reads both `aria-selected="true"` and `aria-checked="true"`.
+Behavior for standalone items (script on the Code page, copy it with the markup): click, Space or Enter toggles `aria-checked`; a radio only selects, and clears the others inside its `role="radiogroup"`; in a group there is one tab stop (the checked radio, others `tabindex="-1"`) and Arrow keys move and select (wraps). `aria-disabled="true"` ignores clicks and keys, with `tabindex="-1"`. CSS reads both `aria-selected="true"` and `aria-checked="true"`.
 
 ### HTML structure
 
@@ -113,7 +113,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/list-item.css">
 ```
 
-`components/css/list-item.css` is the single source for this component. The docs page `eco-design-system/components/list-item.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/list-item.css` is the single source for this component. The docs (three pages, `components/list-item*.html`) link the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 ### Rules
 
@@ -132,7 +132,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 - **Icon colors** are not readable in the Figma export. We use `icon-primary` for leading and trailing icons (black, same as `text-action-primary`).
 - **Leading icon is 20px** on Large desktop too (Figma), while the trailing check icon is 24px there.
 - **Derived, not in Figma:** selected and disabled states, label with icon/radio/swatch (Figma icon-only and swatch-only variants have no label), Small trailing text. Check box / radio selected looks copy `eco-checkbox` / `eco-radio`.
-- **Anatomy** is "TBA" in the Figma info frame; the "Anatomy & specs" section on the docs page is ours.
+- **Anatomy** is "TBA" in the Figma info frame; the Anatomy section of the docs page and the Specifications page are ours.
 - **Added from Material Design 3, not in Figma (confirm with design):** overline, supporting text (max 2 lines, so up to 3 lines with overline), and check box / radio / switch as trailing control. Overline uses `alt-label-sm` (tokens say 12/12 mobile, weight 600; we followed the documented 500, as `eco-typography`). Small supporting text and the 32×16px Small switch are derived. Leading/trailing are centered, not top-aligned as M3 does for three-line items.
 - **Switch literals:** the trailing switch reuses `eco-switch`; its flagged hover/disabled-on colors are not used here (no hover, no disabled-on).
 - **Not added, ask before adding:** avatar or video as leading, a standalone clickable/selectable row (the interactive row is the container's job today).

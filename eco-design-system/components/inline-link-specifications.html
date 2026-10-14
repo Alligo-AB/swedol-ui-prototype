@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inline link: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; }
+    .pg-p { margin: 0; color: var(--color-text-primary); max-width: 560px; }
+    .ds-stage--dark .pg-p { color: var(--color-text-primary-inverted); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-dark { background: var(--color-surface-100); }
+    .pg-dark .pg-p { color: var(--color-text-primary-inverted); }
+    .pg-ex { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-weight: 400; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }   /* body-md: the writing examples (16/22, 17/24 from 769px) */
+    @media (min-width: 769px) { .pg-ex { font-size: 17px; line-height: 24px; } }
+    #usage .ds-fig__stage { align-items: flex-start; }   /* every Do / Don't box of this page: content at the top */
+    .pg-exfigs .ds-fig__stage { min-height: 0; padding: 16px 24px; justify-content: flex-start; align-items: flex-start; }   /* low boxes for short examples; JS makes a Do and a Don't box the same height */
+    .pg-exs { width: 100%; }   /* the lines of one Do or Don't figure, one example per line */
+    .pg-ex + .pg-ex { margin-top: 12px; }
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="links-guide.html" class="breadcrumb-item">Links guide</a><span class="breadcrumb-sep">/</span><a href="inline-link.html" class="breadcrumb-item">Inline link</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span></div>
+    <h1 class="ds-title">Inline link</h1>
+    <p class="ds-lead">An inline link is an underlined text link that flows <strong>within body copy, lists and UI text</strong>. The underline is its affordance, and it is never paired with icons.</p><p class="ds-lead">Tokens, sizes, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1671-52629" target="_blank" rel="noopener">Inline link</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Inline link"><a class="tab" href="inline-link.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="inline-link-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="inline-link-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Color</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">A link has the same color as the text around it, so the enabled colors are the text colors (Secondary and Tertiary are the same values as <code>text-action-secondary</code> and <code>text-action-tertiary</code>). The hover colors are the three action hover tokens: <code>text-action-primary-hover</code>, <code>text-action-secondary-hover</code> and <code>text-action-tertiary-hover</code>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Type token</th><th scope="col">Desktop (769px+)</th><th scope="col">Mobile and tablet</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">XLarge</th><td><code>body-xl</code></td><td>24/32, 0</td><td>20/26, 0</td><td>400</td></tr><tr><th scope="row">Large</th><td><code>body-lg</code></td><td>20/28, 0.18px</td><td>18/24, 0.18px</td><td>400</td></tr><tr><th scope="row">Medium</th><td><code>body-md</code></td><td>17/24, 0.32px</td><td>16/22, 0.32px</td><td>400</td></tr><tr><th scope="row">Small</th><td><code>body-sm</code></td><td>14/20, 0.36px</td><td>14/20, 0.36px</td><td>400</td></tr></tbody></table></div><p class="ds-desc ds-note"><code>sm</code> (640 to 768px) looks like mobile. The weight is a modifier, see Typography. The old <code>inline-link--small-bold</code> is kept: it is Small with the Bold weight.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Height</th><td>The line height of the text: 32, 28, 24 or 20px (desktop)</td></tr><tr><th scope="row">Padding and margin</th><td>None</td></tr><tr><th scope="row">Underline</th><td>The browser’s default 1px underline</td></tr><tr><th scope="row">Icon</th><td>Never</td></tr></tbody></table></div><p class="ds-desc ds-note">An inline link has no padding or margin of its own, so there is no measurement figure. It takes its box from the text around it.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">The reverse of the action link: underlined when enabled, the underline is <strong>removed</strong> on hover and the color changes. Hover is forced on this page; in your code it comes from <code>:hover</code>.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Primary</th><th scope="col">Secondary</th><th scope="col">Tertiary</th><th scope="col">Inverted</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Enabled</strong> is underlined text (Default) or text with no underline (Reverse). <strong>Hover</strong> is a reduced-contrast text: the color shifts and the underline goes (Default), or the underline appears (Reverse). <strong>There is no Disabled state:</strong> remove the link or show plain text.</p><p class="ds-desc ds-note">The last two rows are the reverse underline (Figma “Reverse=yes”): no underline when enabled, underline on hover.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><h3 class="ds-h3 ds-group">Features</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">font-feature-settings</th></tr></thead><tbody><tr><th scope="row">XLarge, Large</th><td><code>ss02</code>, <code>ss03</code></td></tr><tr><th scope="row">Medium, Small</th><td><code>ss02</code>, <code>ss03</code>, <code>ss06</code></td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Weight and style</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Modifier</th><th scope="col">Class</th><th scope="col">CSS</th></tr></thead><tbody><tr><th scope="row">Regular</th><td>(none)</td><td><code>font-weight: 400</code></td></tr><tr><th scope="row">Medium</th><td><code>inline-link--weight-medium</code></td><td><code>font-weight: 500</code></td></tr><tr><th scope="row">Bold</th><td><code>inline-link--bold</code></td><td><code>font-weight: 600</code></td></tr><tr><th scope="row">Italic</th><td><code>inline-link--italic</code></td><td><code>font-style: italic</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Figma weights are 100 higher than the CSS (confirmed by design, see <code>eco-typography</code>). The font package ships 300, 400, 500 and 700, each with an italic face, so 600 renders with the 700 face. A weight or italic only makes a link follow the text around it, never emphasize it.</p><p class="ds-desc ds-note">Breuer Condensed. The type token, size and line height of each size are under Sizes.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Link</th><td><code>inline-link</code></td><td>A real <code>&lt;a href&gt;</code>. <code>display: inline</code>, underlined.</td></tr><tr><th scope="row">Size</th><td><code>inline-link--xlarge</code>, <code>--large</code>, <code>--medium</code>, <code>--small</code></td><td>Follows the text around the link.</td></tr><tr><th scope="row">Color</th><td><code>inline-link--secondary</code>, <code>--tertiary</code>, <code>--inverted</code></td><td>Primary is the default (no class).</td></tr><tr><th scope="row">Weight, style, underline</th><td><code>inline-link--weight-medium</code>, <code>--bold</code>, <code>--italic</code>, <code>--reverse</code></td><td>Modifiers on any size and color. Regular, normal and underlined when enabled are the defaults.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><p class="ds-desc">There is one type. A link with an icon is an <a class="inline-link inline-link--large inline-link--secondary" href="action-link.html">Action link</a>.</p><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">As wide as its text. It wraps with the text.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row"><code>color</code></th><td><code>duration-fast-3</code></td><td><code>ease-standard</code></td></tr></tbody></table></div><p class="ds-desc ds-note"><code>text-decoration</code> is not transitioned.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click, Enter</th><td>Follows the link. A link always navigates: an action in the page is a button.</td></tr><tr><th scope="row">Tab</th><td>Moves to the link. A 2px ring shows on keyboard focus only (<code>body.keyboard-nav</code>).</td></tr><tr><th scope="row">Underline</th><td>On when enabled, removed on hover. Never transitioned. With the reverse underline: off when enabled, on on hover.</td></tr><tr><th scope="row">Hover</th><td>Reduced contrast: a color shift and the underline removal.</td></tr><tr><th scope="row">Disabled</th><td>None. Remove the link or show plain text.</td></tr><tr><th scope="row">Icons</th><td>Never. A link with an icon is an Action link.</td></tr><tr><th scope="row">Markup</th><td><code>display: inline</code>, a real <code>&lt;a href&gt;</code> inside the text.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Element</th><td>A real <code>&lt;a href&gt;</code> only. Links navigate; anything else is a <code>&lt;button&gt;</code>. Never <code>href="#"</code> with a JavaScript handler (the documentation examples use it only to keep the page from jumping).</td></tr><tr><th scope="row">Accessible name</th><td>The visible text. When more context is needed, extend it with an <code>aria-label</code> that begins with the visible text (WCAG 2.5.3 Label in Name), for example the visible “Delivery terms” with <code>aria-label="Delivery terms (PDF)"</code>.</td></tr><tr><th scope="row">New tab or file</th><td>A link that opens a new tab or a file says so in its accessible name (“opens in a new tab”), and has <code>rel="noopener"</code>.</td></tr><tr><th scope="row">Target size</th><td>Inline links in a text block are exempt from the 24px minimum (WCAG 2.5.8 inline exception). A standalone list of links (a footer list) needs an effective height of at least 24px, from the line height or padding.</td></tr><tr><th scope="row">Name</th><td>The link text names the destination and makes sense out of context (WCAG 2.4.4). Never “click here”.</td></tr><tr><th scope="row">Color</th><td>The underline separates the link from the text, so color is not the only signal (WCAG 1.4.1).</td></tr><tr><th scope="row">Contrast</th><td>Text needs at least 4.5:1 against its background in every state, hover included (WCAG 1.4.3). The link color against the surrounding text needs at least 3:1 or a non-color indicator: the underline is that indicator, another reason to keep it. Use Inverted on dark surfaces. <strong>Open point:</strong> measured on white, Tertiary hover (<code>#939595</code>) is 3.0:1 and fails; Primary hover, Secondary hover and Tertiary (<code>#737373</code>) are 4.7:1 on white but 4.4:1 on <code>#f6f6f6</code>. Confirm with design.</td></tr><tr><th scope="row">Disabled</th><td>Never disable a link: a disabled <code>&lt;a&gt;</code> has no standard semantics. Remove it or render plain text.</td></tr><tr><th scope="row">Style</th><td>The size, line height, letter spacing, weight and italic match the surrounding text. A link is never larger or bolder than its text for emphasis.</td></tr><tr><th scope="row">Focus</th><td>A 2px ring with <code>border-focus</code> and 2px offset, on keyboard focus (WCAG 2.4.7, 1.4.11).</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var CLS = { primary: '', secondary: ' inline-link--secondary', tertiary: ' inline-link--tertiary', inverted: ' inline-link--inverted' };
+  $$('[data-prevent]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
+  var WT = { regular: '', medium: ' inline-link--weight-medium', bold: ' inline-link--bold' };
+  function cls(o) { return 'inline-link inline-link--' + o.size + CLS[o.color] + (WT[o.weight || 'regular']) + (o.italic ? ' inline-link--italic' : '') + (o.reverse === 'yes' ? ' inline-link--reverse' : ''); }
+  function link(o) { var a = document.createElement('a'); a.href = '#'; a.className = cls(o); a.textContent = o.label; if (o.state === 'hover') a.dataset.state = 'hover'; a.addEventListener('click', function (e) { e.preventDefault(); }); return a; }
+  /* The text around a link has the same type as the link: size, line height, letter spacing and features are copied from the link (also under a forced breakpoint) */
+  function syncText(root) {
+    $$('.pg-p', root || document).forEach(function (p) {
+      if (p.hasAttribute('data-nosync')) return;
+      var a = p.querySelector('a.inline-link'); if (!a) return; var c = getComputedStyle(a);
+      ['fontSize', 'lineHeight', 'letterSpacing', 'fontFeatureSettings'].forEach(function (k) { p.style[k] = c[k]; });
+    });
+  }
+  window.addEventListener('resize', function () { syncText(); });
+  function sentence(o) {
+    var p = document.createElement('p'); p.className = 'pg-p';
+    var PC = { secondary: 'var(--color-text-secondary)', tertiary: 'var(--color-text-tertiary)' }; if (PC[o.color]) p.style.color = PC[o.color];   /* the text has the color of the link */
+    if (o.weight === 'medium') p.style.fontWeight = '500'; else if (o.weight === 'bold') p.style.fontWeight = '600'; if (o.italic) p.style.fontStyle = 'italic';   /* the text has the style of the link */
+    p.appendChild(document.createTextNode('Read more about our products on the ')); p.appendChild(link(o)); p.appendChild(document.createTextNode('.')); return p;
+  }
+
+  var tb = $('#matrix tbody');
+  function buildMatrix() {
+    clear(tb);
+    [['Enabled', 'enabled', 'no'], ['Hover', 'hover', 'no'], ['Reverse · enabled', 'enabled', 'yes'], ['Reverse · hover', 'hover', 'yes']].forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      ['primary', 'secondary', 'tertiary', 'inverted'].forEach(function (c) { var td = document.createElement('td'); if (c === 'inverted') td.className = 'pg-dark'; td.appendChild(sentence({ size: 'medium', color: c, state: r[1], reverse: r[2], label: 'link' })); tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  }
+  buildMatrix(); syncText(); DK.bp(function () { syncText(); });
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Primary', 'Enabled', 'text-action-primary'], ['Primary', 'Hover', 'text-action-primary-hover'],
+    ['Secondary', 'Enabled', 'text-secondary'], ['Secondary', 'Hover', 'text-action-secondary-hover'],
+    ['Tertiary', 'Enabled', 'text-tertiary'], ['Tertiary', 'Hover', 'text-action-tertiary-hover'],
+    ['Inverted', 'Enabled', 'text-primary-inverted'], ['Inverted', 'Hover', 'text-action-primary-inverted-hover']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

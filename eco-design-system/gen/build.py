@@ -201,8 +201,15 @@ def three_pages(slug, what, spec_what, code_what):
             link_large(slug + '-specifications.html', 'Specifications') + ' holds %s. ' % spec_what + link_large(slug + '-code.html', 'Code') + ' shows %s.</p>' % code_what)
 
 
-def fig_one(inner, cap=None, stage_attr=''):
-    return '<div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"%s>%s</div>%s</figure></div>' % (stage_attr, inner, ('<figcaption class="ds-fig__cap">%s</figcaption>' % cap) if cap else '')
+def fig_one(inner, cap=None, stage_attr='', stage_cls=''):
+    return '<div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage%s"%s>%s</div>%s</figure></div>' % ((' ' + stage_cls) if stage_cls else '', stage_attr, inner, ('<figcaption class="ds-fig__cap">%s</figcaption>' % cap) if cap else '')
+
+
+def sel(lid, sid, label, pg, options, cur):
+    """A Small eco-select field for a playground (options: [(value, text)], cur = the selected value)."""
+    opts = ''.join('<option value="%s"%s>%s</option>' % (v, ' selected' if v == cur else '', t) for v, t in options)
+    return ('<div class="ds-field form-field"><label class="form-label form-label--sm" for="%s" id="%s">%s</label><div class="input-wrap"><select class="form-select form-select--sm" data-pg="%s" id="%s">%s</select>'
+            '<span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>') % (sid, lid, label, pg, sid, opts)
 
 
 def fig_pair(do_inner, do_cap, dont_inner, dont_cap):

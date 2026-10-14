@@ -35,7 +35,7 @@ The modal comes in **two sizes to choose between: Small and Large**. Choose by t
 - **Rules:** start with Small, use Large when the task needs more work area. Do not choose Large only because the screen is large, narrow or the text is long. Choose Large if Small makes the content cramped, hard to overview or hard to work with. **Keep the same size choice across breakpoints for the same task**; the presentation adapts without changing the use. Rule of thumb: Small for short decisions, Large for tasks that need more work area.
 - **Desktop (XLarge, Large, Medium breakpoints):** Small is compact, Large is a wider work area; height by content, limited by the available screen height.
 - **Tablet (Small breakpoint):** same rules, width adapts to the available area, both sizes keep side margins.
-- **Mobile (XSmall, below 640px):** Small is a centered dialog, height by content, at least 16px side margin: 343px max on a 375px viewport (the width follows the viewport up to a maximum; 343px is not a fixed width). Large is a full-screen presentation; long content scrolls and the layout works with the keyboard open.
+- **Mobile (XSmall, below 640px):** Small has height by content and a **max width of 440px**; it is centered with at least 16px side margin on each side, and on narrower screens the width adapts to the available space (343px on a 375px viewport; 343px is not a fixed width). Large is a full-screen presentation; long content scrolls and the layout works with the keyboard open.
 - **Common layout rules:** Small and Large have no fixed heights; avoid unnecessary empty space (except the full-screen view on mobile). Limit the height to the available screen area and allow scroll. Content and actions must be reachable in landscape and with the keyboard open. A short dialog must not be full width and vertically centered at once: a centered dialog uses side margins; a full-width bottom sheet is a separate presentation pattern (not part of this component). Clear title, button labels that name the action (Cancel, Delete). The footer is not sticky: when content is taller than the screen the whole panel scrolls.
 
 ### Sizes and widths per breakpoint
@@ -46,12 +46,12 @@ Desktop and Tablet: the modal is centered in the viewport. The background overla
 
 | Size | Desktop (`md:` 769px+) | Tablet (`sm:` 640–768px) | Mobile (`xs:` 0–639px) |
 |---|---|---|---|
-| **Small** | `440px` | `440px` | Centered card, height by content (not full screen), **at least 16px side margin**: up to `375px`, `343px` on a 375px viewport (`max-width: calc(100vw - 32px)`) |
+| **Small** | `440px` | `440px` | Centered card, height by content (not full screen), **max width `440px`, at least 16px side margin**: `343px` on a 375px viewport (`max-width: calc(100vw - 32px)`) |
 | **Large** | `705px` | `576px` | Fills the whole viewport (`375px` × `813px` in Figma) |
 
 > Choose the size by the user's task, not the amount of content (see Choosing a size above).
 
-> **xs (Mobile), Large:** The modal is **not** centered. It fills the whole viewport (Small stays a compact `375px` card with `padding: 16px` and `24px` above the buttons): `position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; padding: 16px`. The header+body section has `flex: 1` so the buttons are pinned to the bottom. A close button (`×`) is shown at the top.
+> **xs (Mobile), Large:** The modal is **not** centered. It fills the whole viewport (Small stays a centered card, max `440px`, with `padding: 16px` and `24px` above the buttons): `position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; padding: 16px`. The header+body section has `flex: 1` so the buttons are pinned to the bottom. A close button (`×`) is shown at the top.
 
 ---
 
@@ -148,7 +148,7 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 @media (max-width: 639px) {
   .modal,
   .modal--large {
-    width: 375px;
+    width: 440px;                    /* Small: max width 440px at every width */
     max-width: calc(100vw - 32px);   /* at least 16px to the edges: 343px on a 375px viewport; no min-width */
     padding: 16px;
   }

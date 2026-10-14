@@ -84,7 +84,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 <link rel="stylesheet" href="/components/css/divider.css">
 ```
 
-`components/css/divider.css` is the single source for this component. The docs page `eco-design-system/components/divider.html` links the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
+`components/css/divider.css` is the single source for this component. The docs (three pages: `components/divider.html`, `divider-specifications.html`, `divider-code.html`) link the same file and prints it in its Code section. Mobile-first, desktop from 769px, `var(--…)` only. The `[data-state="…"]` selectors in it are only for the docs pages' forced-state demos and do nothing elsewhere. To change the component, edit that file.
 
 Spacing around a divider comes from the **parent** (`gap`, or padding on neighbours), never from margin on the divider: see `eco-spacing`.
 

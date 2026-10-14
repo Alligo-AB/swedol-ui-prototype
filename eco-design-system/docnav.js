@@ -22,7 +22,8 @@
         { title: 'Menus, lists and dividers', items: [c('menu', 'Menu'), c('list-item', 'List Item'), c('divider', 'Divider')] },
         { title: 'Links', items: [c('links-guide', 'Links guide', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
         { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb'), c('pagination', 'Pagination'), c('tooltip', 'Tooltip')] },
-        { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible'), c('table', 'Table'), c('role-tier-card', 'Role tier card')] }
+        { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible')] },
+        { title: 'Drafts', items: [c('table', 'Table'), c('role-tier-card', 'Role tier card')] }
       ]
     }
   };

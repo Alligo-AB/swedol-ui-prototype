@@ -46,7 +46,7 @@ These values apply to every section except the first.
 
 ### CSS template
 
-> **Shared file:** `<link rel="stylesheet" href="/components/css/section.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/section.html`. Also holds `.page-divider` and the My Pages title spacing.
+> **Shared file:** `<link rel="stylesheet" href="/components/css/section.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation: three pages, `eco-design-system/components/section.html` (+ `-specifications`, `-code`). The file also holds `.page-divider` and the My Pages title spacing.
 
 
 ```css
@@ -57,7 +57,6 @@ These values apply to every section except the first.
 }
 
 /* First section */
-.section:first-of-type,
 .section--first {
   padding-top: 16px;    /* xs */
   padding-bottom: 40px; /* xs */
@@ -115,7 +114,7 @@ It's possible to use sections **without** built-in padding and let the content i
 ### Rules
 
 1. **Mobile-first** – write xs padding with no prefix, then build up with `sm:` → `md:` → `lg:` → `xl:`.
-2. **First section** – use the `.section--first` class (or `:first-of-type`) for reduced top padding.
+2. **First section** – use the `.section--first` class for reduced top padding (the shared `section.css` has no `:first-of-type` rule).
 3. **Surface** – always choose either `Surface Raised Primary` (`var(--color-surface-raised-primary)`) or `Surface Raised Secondary` (`var(--color-surface-raised-secondary)`) as the background. Never mix in other background colors without design approval.
 4. **Horizontal padding** – the section's side margins follow the breakpoint margin defined in the grid system (`16px` xs, `32px` sm/md, `40px` lg+). Use `--px-full` or `px-[16px] sm:px-[32px] lg:px-[40px]`.
 5. **Zeroed padding** – only turn off the built-in padding in the 5 defined use cases above. Never use zeroed padding without a clear purpose.
