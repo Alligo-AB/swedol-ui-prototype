@@ -218,3 +218,20 @@ html.dn-modal-open { overflow: hidden; }
   .dn-search__head { padding: var(--dimension-spacing-space-24); }
 }
 @media (prefers-reduced-motion: reduce) { .dn.is-ready .dn-search { transition: none; } }
+
+/* ── Arriving through a link to a #heading on another page (docnav.js): the navigation first, then the page fades in ── */
+html.dn-arriving body > :not(.dn):not(script):not(style) { opacity: 0; }
+html.dn-landing body > :not(.dn):not(script):not(style) { animation: dn-land var(--duration-slow-3) var(--ease-decelerate-emphasized) both; }
+@keyframes dn-land { from { opacity: 0; } to { opacity: 1; } }
+html.dn-hold-rail .dn-rail { transform: translateX(-100%); transition: none !important; }   /* 961-1599px: held off-screen until it slides in */
+html.dn-hold .dn-panel { transform: translateX(calc(-100% - var(--dn-rail))) !important; visibility: hidden !important; transition: none !important; }   /* held back until the navigation comes in */
+@media (prefers-reduced-motion: reduce) { html.dn-landing body > :not(.dn) { animation: none; } }
+
+/* ── The window crosses 961px or 1600px: the panel slides (docnav.js, Web Animations) and the page moves with it ──
+   --dn-offset is the width the page leaves for the navigation. Registered as a length, so its change is animated and the content glides instead of jumping.
+   No white strip: when the panel comes in (pinned), it leads and the page follows after a short delay; when it goes out, the page moves first and the panel follows.
+   Not on page load (dn-anim is set when the navigation is ready). */
+@property --dn-offset { syntax: '<length>'; inherits: true; initial-value: 0px; }
+html.dn-anim { transition: --dn-offset var(--duration-fast-4) var(--ease-decelerate-emphasized); }   /* the panel goes out, or the rail appears: the page moves first */
+@media (min-width: 1600px) { html.dn-anim.dn-has-panel { transition: --dn-offset var(--duration-medium-2) var(--ease-decelerate-generic) 60ms; } }   /* the panel comes in: it leads, the page follows */
+@media (prefers-reduced-motion: reduce) { html.dn-anim, html.dn-anim.dn-has-panel { transition: none; } }

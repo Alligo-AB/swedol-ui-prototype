@@ -97,3 +97,16 @@
   window.addEventListener('resize', spy);
   spy();
 })();
+
+/* A link with a #hash (a copied heading URL, a cross link between the pages of a set): the page content is built by scripts after load, so the browser's own jump lands too early.
+   Jump again when everything is built, and once more after the fonts and the images have loaded and the layout has settled. */
+(function () {
+  var id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  var touched = false;   // the reader scrolled: stop correcting
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { window.addEventListener(ev, function () { touched = true; }, { passive: true, once: true }); });
+  function go() { if (touched) return; var t = document.getElementById(id); if (t) t.scrollIntoView({ block: 'start', behavior: 'instant' }); }
+  go();
+  window.addEventListener('load', function () { go(); setTimeout(go, 400); });   // the late font swap can still move the page after the load event
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { go(); setTimeout(go, 400); });
+})();

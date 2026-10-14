@@ -35,6 +35,7 @@
   --duration-fast-4: 200ms;
   --duration-medium-2: 300ms;
   --duration-slow-1: 450ms;
+  --duration-slow-3: 550ms;
   --duration-slow-4: 600ms;
 }
 /* Page top padding per breakpoint (xs 16, sm 32, md 32, lg 40, xl 48) */
@@ -446,7 +447,7 @@ a.ds-card:hover { border-color: var(--color-border-dark); }
 .ds-stage + .ds-stage { margin-top: 16px; }
 .ds-desc:has(+ .ds-stage, + .ds-table-wrap, + .ds-playground, + .ds-layers, + .ds-ramp, + .ds-grid, + .ds-status) { margin-bottom: 12px; }  /* description sits close to the example it introduces: 12px mobile, 16px from 769px */
 /* Note under a block (table, stage, ruler …): explanatory text, body-md, 8px below the frame */
-.ds-desc.ds-note { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; margin-top: 8px; }
+.ds-desc.ds-note { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; margin-top: 16px; }   /* 16px below the block (was 8px, 2026-10-14) */
 @media (min-width: 769px) { .ds-desc.ds-note { font-size: 17px; line-height: 24px; } }
 .ds-table-wrap + .ds-desc + .ds-h3, .ds-stage + .ds-desc + .ds-h3 { margin-top: 32px; }  /* note under an example, then the next heading: 32px mobile, 48px from 769px */
 @media (min-width: 769px) {

@@ -13,9 +13,14 @@
    padding. Conditioned on the list's PARENT (e.g. .ehp-faq) itself
    being the section's last child, so the border stays as normal if
    the list is followed by other content in the same section. A boxed row keeps its frame. */
-section > *:last-child .collapsible-wrap:last-child:not(.collapsible-wrap--boxed) { border-bottom: none; }
+section > *:last-child .collapsible-wrap:last-child:not(.collapsible-wrap--boxed):not(.collapsible-wrap--divider-bottom) { border-bottom: none; }
 
 .collapsible-wrap--open { padding-bottom: 32px; }
+
+/* ── Dividers: the line under the row is on by default (rows in a list share it); the line above is off. Each can be switched on or off on its own (the last row in a section loses its bottom line unless it has --divider-bottom). Not for a boxed row (its frame is the line) ── */
+.collapsible-wrap--divider-top { border-top: 1px solid var(--color-border-primary); }
+.collapsible-wrap--no-divider-bottom { border-bottom: none; }
+.collapsible-wrap--divider-bottom { border-bottom: 1px solid var(--color-border-primary); }   /* force the bottom line also on the last row in a section, e.g. a section with one collapsible */
 
 /* ── Header (Large, 72px) ── */
 .collapsible-item {
@@ -67,13 +72,22 @@ body.keyboard-nav .collapsible-item:focus-visible { outline: 2px solid var(--col
   transition: color var(--duration-fast-3) var(--ease-standard);
 }
 /* body-sm: 14/20, 0.36px */
-.collapsible-item__helper { font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+.collapsible-item__helper { font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); transition: color var(--duration-fast-3) var(--ease-standard); }   /* hover: lighter, with the title */
+.collapsible-item:is(:hover, [data-state="hover"]) .collapsible-item__helper { color: var(--color-text-tertiary); }
+.collapsible-wrap--dark .collapsible-item__helper { color: var(--color-text-tertiary); }
 @media (min-width: 769px) {
   .collapsible-item__label, .collapsible-item__info { font-size: 20px; line-height: 24px; }
 }
 
+/* With helper text the header has two lines: icons, switch, badge and chevron line up with the title line (24px high), not with the middle of the block */
+.collapsible-item:has(.collapsible-item__helper) { align-items: flex-start; }
+.collapsible-item:has(.collapsible-item__helper) .collapsible-item__left { align-items: flex-start; }
+.collapsible-item:has(.collapsible-item__helper) .collapsible-item__left > .ms,
+.collapsible-item:has(.collapsible-item__helper) .collapsible-item__end { height: 24px; display: inline-flex; align-items: center; }
+
 /* right side: toggle switch, number badge, chevron (any of them can be left out; without the chevron the row does not open) */
 .collapsible-item__end { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.collapsible-item__chevron { display: inline-flex; }
 .collapsible-item__chevron .ms {
   color: var(--co-fg);
   font-size: 24px;
@@ -92,24 +106,52 @@ body.keyboard-nav .collapsible-item:focus-visible { outline: 2px solid var(--col
   .collapsible-wrap--small .collapsible-item__info { font-size: 17px; line-height: 24px; }
 }
 
-/* ── Boxed (Small only): a frame around the row; open: grey header, white body ── */
-.collapsible-wrap--boxed { border: 1px solid var(--color-border-primary); }
-.collapsible-wrap--boxed .collapsible-item { padding: 16px; }
+/* ── Boxed (Large and Small): a frame around the row; open: a line under the header, white body. The padding is the size's vertical padding on all sides:
+   24px Large, 16px Small (Small: Figma; Large: the same rule, not in Figma). The line under the open header is an inset shadow, so it takes no space ── */
+.collapsible-wrap--boxed { --co-box-pad: 24px; border: 1px solid var(--color-border-primary); }
+.collapsible-wrap--boxed.collapsible-wrap--small { --co-box-pad: 16px; }
+.collapsible-wrap--boxed .collapsible-item { padding: var(--co-box-pad); }
 .collapsible-wrap--boxed.collapsible-wrap--open { padding-bottom: 0; }
-.collapsible-wrap--boxed.collapsible-wrap--open > .collapsible-item { background: var(--color-surface-02); border-bottom: 1px solid var(--color-border-primary); }
-.collapsible-wrap--boxed .collapsible-item__body { display: flex; flex-direction: column; gap: 12px; padding: 16px; background: var(--color-background-primary); }
+.collapsible-wrap--boxed.collapsible-wrap--open > .collapsible-item { box-shadow: inset 0 -1px 0 var(--color-border-primary); }   /* no background of its own: grey only with --filled */
+.collapsible-wrap--boxed .collapsible-item__body { display: flex; flex-direction: column; gap: 12px; padding: var(--co-box-pad); background: var(--color-background-primary); }   /* 24px Large, 16px Small, on all sides, desktop and mobile */
 
-/* ── Dark theme: on a black surface ── */
-.collapsible-wrap--dark { border-bottom-color: var(--color-border-dark); }
+/* ── Filled: a surface-raised-secondary background on the header only; the content sits on white. 16px side padding keeps the text off the edge, and the content gets the same so it lines up with the header text (a boxed row has its own) ── */
+.collapsible-wrap--filled > .collapsible-item { background: var(--color-surface-raised-secondary); padding-left: 16px; padding-right: 16px; }
+.collapsible-wrap--filled > .collapsible-item__content { padding-left: 16px; padding-right: 16px; background: var(--color-background-primary); }
+.collapsible-wrap--boxed.collapsible-wrap--filled > .collapsible-item { padding: var(--co-box-pad); }
+.collapsible-wrap--boxed.collapsible-wrap--filled > .collapsible-item__content { padding-left: 0; padding-right: 0; }
+
+/* ── Dark theme: on a black surface. Title and descriptive text white (hover: 78% white); the helper text stays white ── */
+.collapsible-wrap--dark { border-top-color: var(--color-border-dark); border-bottom-color: var(--color-border-dark); }
 .collapsible-wrap--dark .collapsible-item { --co-fg: var(--color-text-action-primary-inverted); }
 .collapsible-wrap--dark .collapsible-item:is(:hover, [data-state="hover"]) { --co-fg: var(--color-text-action-primary-inverted-hover); }
+.collapsible-wrap--dark .collapsible-item .collapsible-item__helper { color: var(--color-text-primary-inverted); }   /* the descriptive text follows the title (white, hover 78% white) */
 .collapsible-wrap--dark .collapsible-item__content { color: var(--color-text-primary-inverted); }
 .collapsible-wrap--dark .badge-number { background: var(--color-surface-raised-primary); color: var(--color-text-primary); }
+/* dark + boxed / filled (not in Figma): frame border-dark; a filled header is surface-90, the body and the content stay on the black surface */
+.collapsible-wrap--dark.collapsible-wrap--boxed { border-color: var(--color-border-dark); }
+.collapsible-wrap--dark.collapsible-wrap--boxed.collapsible-wrap--open > .collapsible-item { box-shadow: inset 0 -1px 0 var(--color-border-dark); }
+.collapsible-wrap--dark.collapsible-wrap--filled > .collapsible-item { background: var(--color-surface-90); }
+.collapsible-wrap--dark .collapsible-item__body,
+.collapsible-wrap--dark.collapsible-wrap--filled > .collapsible-item__content { background: transparent; }
 
-/* ── Disabled: text and icons text-disabled, no hover, no opening ── */
+/* ── Disabled (Figma: under Theme Dark, but drawn with the light line): everything text-disabled, no hover, no opening ── */
+.collapsible-wrap--disabled { border-top-color: var(--color-border-primary); border-bottom-color: var(--color-border-primary); }
 .collapsible-wrap--disabled .collapsible-item,
 .collapsible-wrap--disabled .collapsible-item:is(:hover, [data-state="hover"]) { --co-fg: var(--color-text-disabled); cursor: not-allowed; }
+.collapsible-wrap--disabled .collapsible-item .collapsible-item__info,
+.collapsible-wrap--disabled .collapsible-item .collapsible-item__helper { color: var(--color-text-disabled); }
 .collapsible-wrap--disabled .badge-number { background: var(--color-surface-disabled); }
+
+/* ── Gap above the content text: 24px from the bottom of the header text to the first line of the content, in every size,
+   whatever the header holds (a boxed row is the exception: its body has 24px / 16px padding on all sides). Set --co-content-gap on the row or a wrapper to change it for all. ── */
+.collapsible-wrap { --co-content-gap: 24px; --co-content-top: calc(var(--co-content-gap) - 24px); }                 /* Large: the header padding is 24px */
+.collapsible-wrap--small { --co-content-top: calc(var(--co-content-gap) - 16px); }                                 /* Small: 16px */
+.collapsible-wrap--boxed { --co-content-top: 0; }                                                                 /* Boxed: the body padding, see above */
+.collapsible-item__content > :first-child { margin-top: var(--co-content-top); }
+/* Filled (not boxed): the grey header ends where the content starts, so the content gets the box padding above its text: 24px Large, 16px Small (as in a boxed row) */
+.collapsible-wrap--filled:not(.collapsible-wrap--boxed) { --co-content-top: 24px; }
+.collapsible-wrap--filled.collapsible-wrap--small:not(.collapsible-wrap--boxed) { --co-content-top: 16px; }
 
 /* ── Content ── */
 /* body-md (ECO Design System): mobile 16px/22px, desktop 17px/24px, 0.32px, text-primary; 12px between paragraphs.
@@ -133,10 +175,11 @@ body.keyboard-nav .collapsible-item:focus-visible { outline: 2px solid var(--col
 }
 
 /* content patterns (Figma "Collapsible Open Checkboxes", "Support + Visa mer") */
-.collapsible-item__list { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); padding: var(--dimension-spacing-space-8) 0 var(--dimension-spacing-space-24); }
+.collapsible-item__list { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); padding: 0 0 var(--dimension-spacing-space-24); }   /* the space above comes from the content gap */
 .collapsible-item__support { display: flex; flex-direction: column; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
 .collapsible-item__note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }   /* body-sm */
 
+.collapsible-item__content .input-wrap + .collapsible-item__list { padding-top: var(--dimension-spacing-space-32); }   /* a search field above the list: 32px between them (Figma PLP filter) */
 .collapsible-item__row { display: flex; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
 .collapsible-item__count { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-tertiary); }   /* the number of results beside a checkbox */
 /* "Show more": text-only action, body-md bold (Figma "Action Link Base" without icon) */

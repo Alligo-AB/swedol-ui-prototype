@@ -28,7 +28,7 @@ def sections(items):
 
 
 def head(c, kind):
-    names = {'ex': '', 'spec': ': Specifications', 'code': ': Code'}
+    names = {'ex': '', 'spec': ': Specifications', 'code': ': Code', 'sb': ': Storyblok'}
     css = list(c.get('css_before', [])) + list(BASE_CSS)   # css_before: component files whose rules the base files must override (textarea.css repeats .form-label)
     for n in c.get('css', []):
         if n not in css:
@@ -69,7 +69,7 @@ def crumbs(c, kind):
     if kind == 'ex':
         b += '<span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % c['title']
     else:
-        b += '<a href="%s.html" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % (c['slug'], c['title'], 'Specifications' if kind == 'spec' else 'Code')
+        b += '<a href="%s.html" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % (c['slug'], c['title'], {'spec': 'Specifications', 'code': 'Code', 'sb': 'Storyblok'}[kind])
     return '<div class="ds-page">\n  <nav class="breadcrumb" aria-label="Breadcrumbs">\n    <div class="breadcrumb__bar">%s</div>\n  </nav>\n</div>' % b
 
 
@@ -78,11 +78,11 @@ def tabs(c, kind):
         return '<a class="tab"%s href="%s"><span class="tab__label">%s</span></a>' % (' aria-current="page"' if cur else '', href, label)
     s = c['slug']
     return '<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="%s">%s%s%s</nav></div>' % (
-        c['title'], t(s + '.html', 'Examples &amp; Guidelines', kind == 'ex'), t(s + '-specifications.html', 'Specifications', kind == 'spec'), t(s + '-code.html', 'Code', kind == 'code'))
+        c['title'], t(s + '.html', 'Examples &amp; Guidelines', kind == 'ex'), t(s + '-specifications.html', 'Specifications', kind == 'spec'), t(s + '-code.html', 'Code', kind == 'code') + (t(s + '-storyblok.html', 'Storyblok', kind == 'sb') if c.get('sb') else ''))
 
 
 def intro(c, kind):
-    second = {'ex': c['lead_ex'], 'spec': c['lead_spec'], 'code': c['lead_code']}[kind]
+    second = {'ex': c['lead_ex'], 'spec': c['lead_spec'], 'code': c['lead_code'], 'sb': c.get('lead_sb', '')}[kind]
     return '''<section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
     <div class="ds-eyebrow-row"><span class="ds-eyebrow">%s</span>%s</div>
@@ -92,8 +92,8 @@ def intro(c, kind):
 
 
 def page(c, kind):
-    secs = {'ex': c['ex'], 'spec': c['spec'], 'code': c['code']}[kind]
-    script = {'ex': c.get('js_ex', ''), 'spec': c.get('js_spec', ''), 'code': c.get('js_code', '')}[kind]
+    secs = {'ex': c['ex'], 'spec': c['spec'], 'code': c['code'], 'sb': c.get('sb', [])}[kind]
+    script = {'ex': c.get('js_ex', ''), 'spec': c.get('js_spec', ''), 'code': c.get('js_code', ''), 'sb': c.get('js_sb', '')}[kind]
     tail = '<script src="../doc-kit.js"></script>\n'
     if c.get('select_menu', True):
         tail += '<script src="../../components/js/select-menu.js"></script>\n'
@@ -111,7 +111,7 @@ def page(c, kind):
 
 
 def emit(c):
-    for kind, suffix in (('ex', ''), ('spec', '-specifications'), ('code', '-code')):
+    for kind, suffix in (('ex', ''), ('spec', '-specifications'), ('code', '-code')) + ((('sb', '-storyblok'),) if c.get('sb') else ()):
         p = os.path.join(OUT, c['slug'] + suffix + '.html')
         if os.path.exists(p) and '--force' not in sys.argv:   # the pages are the real files: never overwrite a hand-edited page by accident
             print('exists, skipped (use --force to overwrite):', p)

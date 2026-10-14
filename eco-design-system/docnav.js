@@ -1,6 +1,6 @@
 /* ECO doc site navigation: builds the Navigation Rail + Secondary navigation panel (docnav.css, from 961px).
    Load it right after <body> (so the page does not jump) and link docnav.css. The page list below is the single source.
-   Current page = file name without .html and without -specifications / -code. Pages in no category (the start page) get the rail only. */
+   Current page = file name without .html and without -specifications / -code / -storyblok. Pages in no category (the start page) get the rail only. */
 (function () {
   var D = '/eco-design-system/';
   function c(id, t, extra) { var o = { id: id, t: t, href: D + 'components/' + id + '.html' }; for (var k in extra) o[k] = extra[k]; return o; }
@@ -28,7 +28,7 @@
     }
   };
 
-  var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code)$/, '');
+  var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code|storyblok)$/, '');
   var cur = null;   // { cat, id }
   Object.keys(NAV).forEach(function (k) {
     var n = NAV[k];
@@ -43,6 +43,18 @@
 
   var root = document.documentElement;
   if (cur) root.classList.add('dn-has-panel');
+
+  /* Arriving through a link to a #heading on another page of the docs (same site, other page): the navigation comes in first, then the page fades in with a small scroll to the heading.
+     The classes are set here, before the first paint, so the content never flashes. Reduced motion: nothing of this happens (the page jumps straight to the heading, toc.js). */
+  var arriving = false;
+  try {
+    var rf = new URL(document.referrer);
+    var nt = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];   // a link click, not reload or back/forward
+    arriving = (!nt || nt.type === 'navigate') && rf.origin === location.origin && rf.pathname !== location.pathname && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (e) {}
+  if (arriving) root.classList.add('dn-arriving');
+  if (arriving && cur && window.matchMedia('(min-width: 1600px)').matches) root.classList.add('dn-hold');   // from 1600px the pinned panel slides out
+  if (arriving && window.matchMedia('(min-width: 961px) and (max-width: 1599px)').matches) root.classList.add('dn-hold-rail');   // 961-1599px: the Navigation Rail itself slides in from the left
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
   function link(it, cls) {
@@ -117,7 +129,54 @@
     if (top < panel.scrollTop + 8 || top + h > panel.scrollTop + panel.clientHeight - 8) panel.scrollTop = top - panel.clientHeight / 2;
   }
   if (cur) reveal();
-  requestAnimationFrame(function () { requestAnimationFrame(function () { wrap.classList.add('is-ready'); }); });   // no slide on page load
+  requestAnimationFrame(function () { requestAnimationFrame(function () { wrap.classList.add('is-ready'); root.classList.add('dn-anim'); }); });   // no slide on page load
+  /* The window crosses 1600px: the pinned panel slides in or out. Animated here (Web Animations) rather than by the CSS transition, whose visibility delay left the panel invisible while the page had already moved (a white strip). */
+  pinned.addEventListener('change', function () {
+    if (still.matches || !panel.animate) return;
+    var out = !pinned.matches, hidden = 'translateX(calc(-100% - var(--dn-rail)))';
+    panel.animate(out ? [{ transform: 'none', visibility: 'visible' }, { transform: hidden, visibility: 'visible' }] : [{ transform: hidden, visibility: 'visible' }, { transform: 'none', visibility: 'visible' }],
+      { duration: ms('--duration-medium-2', 300), easing: (out ? cs.getPropertyValue('--ease-accelerate-generic') : cs.getPropertyValue('--ease-decelerate-generic')) || (out ? 'cubic-bezier(.36,.09,1,.58)' : 'cubic-bezier(.16,.38,.58,1)') });   // eco-motion: in = decelerate-generic, out = accelerate-generic
+  });
+
+  if (arriving) (function () {
+    var wide = !!cur && pinned.matches;   // the pinned Secondary navigation panel (from 1600px) slides out; below 1600px the Navigation Rail slides in
+    var bez = (cs.getPropertyValue('--ease-decelerate-emphasized').match(/[\d.]+/g) || [.16, 0, .16, 1]).map(Number);
+    function cubic(t) { var lo = 0, hi = 1, q = t; for (var i = 0; i < 24; i++) { q = (lo + hi) / 2; var x = 3 * (1 - q) * (1 - q) * q * bez[0] + 3 * (1 - q) * q * q * bez[2] + q * q * q; if (x < t) lo = q; else hi = q; } return 3 * (1 - q) * (1 - q) * q * bez[1] + 3 * (1 - q) * q * q * bez[3] + q * q * q; }
+    var railIn = root.classList.contains('dn-hold-rail'), navMs = railIn ? ms('--duration-medium-4', 400) : wide ? ms('--duration-medium-2', 300) : 0, fadeMs = ms('--duration-slow-3', 550), loaded = 0, navDone = false, landed = false;
+    function release() { root.classList.remove('dn-arriving', 'dn-hold', 'dn-hold-rail'); }
+    function land() {   // 2. the page fades in, with a small scroll to the heading (toc.js has already put the heading in place, behind the veil)
+      if (landed) return; landed = true;
+      var tg = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (tg) tg.scrollIntoView({ block: 'start', behavior: 'instant' });   // the layout may have moved since the first jump (late font swap)
+      var y = window.pageYOffset, off = Math.min(y, 120);
+      root.classList.remove('dn-arriving'); root.classList.add('dn-landing');
+      if (off > 2) {
+        window.scrollTo({ top: y - off, left: 0, behavior: 'instant' });
+        var t0 = performance.now();
+        (function step(now) {
+          var p = Math.min(1, (now - t0) / fadeMs);
+          window.scrollTo({ top: y - off + off * cubic(p), left: 0, behavior: 'instant' });   // instant: html { scroll-behavior: smooth } would smooth every frame
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      }
+      setTimeout(function () { root.classList.remove('dn-landing'); if (wide) close(); }, fadeMs + 600);   // clears is-open again; the pinned panel stays
+    }
+    function nav() {    // 1. the navigation first: the Secondary navigation panel slides out from the left
+      if (railIn) {   // below 1600px the Navigation Rail is the part that slides in (decelerate-emphasized)
+        wrap.querySelector('.dn-rail').animate([{ transform: 'translateX(-100%)' }, { transform: 'none' }], { duration: navMs, easing: cs.getPropertyValue('--ease-decelerate-emphasized') || 'cubic-bezier(.16,0,.16,1)' });
+      }
+      root.classList.remove('dn-hold', 'dn-hold-rail');
+      if (wide) open(cur.cat);   // pinned: is-open removes the visibility delay, so the panel really slides out
+      setTimeout(function () { navDone = true; tryLand(); }, wide ? navMs + 120 : 0);   // from 1600px: after the panel has slid out; below: the page starts fading in together with the rail slide (fade length unchanged)
+    }
+    function tryLand() { if (navDone && loaded >= 2) land(); }
+    function ready() { loaded++; tryLand(); }
+    // wait for the first frames (the panel must have its transition), then the navigation, then the page (fonts and images loaded)
+    requestAnimationFrame(function () { requestAnimationFrame(function () { setTimeout(nav, 80); }); });
+    if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(ready); else ready();
+    setTimeout(function () { release(); land(); }, 5000);   // never leave the page hidden
+  })();
 
   wrap.addEventListener('mouseover', function (e) {
     var d = e.target.closest('.dn-dest[data-cat]');
