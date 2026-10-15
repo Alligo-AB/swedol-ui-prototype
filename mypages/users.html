@@ -1591,7 +1591,7 @@
     .delete-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.2);
+      background: var(--color-surface-opacity-black-20);
       z-index: 9998;
       display: none;
     }
@@ -1604,13 +1604,12 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 9999;
-      background: #ffffff;
+      background: var(--color-surface-raised-primary);
       padding: 24px;
       display: none;
       flex-direction: column;
       align-items: flex-start;
-      box-shadow: 0px 16px 24px 0px rgba(0,0,0,0.10),
-                  0px 0px 1px 0px rgba(0,0,0,0.05);
+      box-shadow: var(--shadow-elevation-b-100);
       width: 440px;
       min-width: 440px;
       max-width: 800px;
@@ -1622,25 +1621,27 @@
     @media (max-width: 768px) {
       .delete-modal {
         width: 440px;
-        min-width: 375px;
-        max-width: 639px;
+        min-width: 0;
+        max-width: calc(100vw - 32px);
         padding: 24px;
       }
     }
 
-    /* xs (<640px): full viewport, pinned top:0 left:0 */
+    /* xs (<640px): Small = centered card, max 440px, ≥16px side margin, height by content (eco-modal-ecom) */
     @media (max-width: 639px) {
-      .delete-modal {
-        top: 0;
-        left: 0;
-        transform: none;
-        width: 100%;
-        height: 100dvh;
-        min-width: unset;
-        max-width: unset;
-        padding: 16px;
-      }
+      .delete-modal { padding: 16px; max-height: calc(100dvh - 32px); overflow-y: auto; }
     }
+
+    /* Motion (eco-modal-ecom): overlay fades, panel fades + moves 48px. Enter decelerate-emphasized/fast-4, exit accelerate-generic/fast-3. */
+    .delete-modal-overlay.is-open, .delete-modal.is-open { animation: modal-in var(--duration-fast-4) var(--ease-decelerate-emphasized) both; }
+    .delete-modal.is-open { animation-name: modal-panel-in; }
+    .delete-modal-overlay.is-leaving, .delete-modal.is-leaving { animation: modal-out var(--duration-fast-3) var(--ease-accelerate-generic) forwards; pointer-events: none; }
+    .delete-modal.is-leaving { animation-name: modal-panel-out; }
+    @keyframes modal-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes modal-out { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes modal-panel-in { from { opacity: 0; translate: 0 var(--dimension-spacing-space-48); } to { opacity: 1; translate: 0 0; } }
+    @keyframes modal-panel-out { from { opacity: 1; translate: 0 0; } to { opacity: 0; translate: 0 var(--dimension-spacing-space-48); } }
+    @media (prefers-reduced-motion: reduce) { .delete-modal-overlay, .delete-modal { animation: none !important; } }
 
     /* Inner container */
     .delete-modal__container {
@@ -1648,9 +1649,6 @@
       flex-direction: column;
       align-items: flex-start;
       width: 100%;
-    }
-    @media (max-width: 639px) {
-      .delete-modal__container { height: 100%; }
     }
 
     /* Header + Body — flex:1 on xs to push footer down */
@@ -1660,9 +1658,6 @@
       gap: 8px;
       align-items: flex-start;
       width: 100%;
-    }
-    @media (max-width: 639px) {
-      .delete-modal__header-body { flex: 1; }
     }
 
     /* Header row */
@@ -1688,7 +1683,7 @@
       font-weight: 600;
       line-height: 24px;
       letter-spacing: 0px;
-      color: #000;
+      color: var(--color-text-primary);
       font-feature-settings: 'ss02' 1, 'ss03' 1;
       width: 100%;
     }
@@ -1705,7 +1700,7 @@
       font-weight: 400;
       line-height: 22px;
       letter-spacing: 0.32px;
-      color: #4f4f4f;
+      color: var(--color-text-secondary);
       font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
       width: 100%;
     }
@@ -6301,10 +6296,18 @@
       }
 
       function closeDeleteModal() {
-        overlay.classList.remove('is-open');
-        modal.classList.remove('is-open');
         document.body.style.overflow = '';
         pendingRow = null;
+        if (!modal.classList.contains('is-open') || modal.classList.contains('is-leaving')) return;
+        var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        function done() {
+          overlay.classList.remove('is-open', 'is-leaving');
+          modal.classList.remove('is-open', 'is-leaving');
+        }
+        if (noMotion) return done();
+        overlay.classList.add('is-leaving');
+        modal.classList.add('is-leaving');
+        modal.addEventListener('animationend', done, { once: true });
       }
 
       function confirmDelete() {

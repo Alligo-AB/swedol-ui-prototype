@@ -259,13 +259,13 @@ body.keyboard-nav .btn:focus, body.keyboard-nav .icon-btn:focus, body.keyboard-n
     top: 0; left: 0; transform: none; width: 100%; max-width: none; height: 100dvh; max-height: none;
   }
 }
-/* Distance: space-64 (trial 2026-10-13, was 24) written in the keyframes on purpose. No distance token or custom property (Carbon, Spectrum, Atlassian tokenize duration and easing only). */
-/* Motion (eco-motion): the overlay fades; the panel fades and moves 64px (space-64): up when it comes in, down when it leaves. Enter: duration-fast-4 + ease-decelerate-emphasized. Exit: shorter and accelerating, duration-fast-3 + ease-accelerate-generic
+/* Distance: space-48 (trial 2026-10-13, was 24) written in the keyframes on purpose. No distance token or custom property (Carbon, Spectrum, Atlassian tokenize duration and easing only). */
+/* Motion (eco-motion): the overlay fades; the panel fades and moves 48px (space-48): up when it comes in, down when it leaves. Enter: duration-fast-4 + ease-decelerate-emphasized. Exit: shorter and accelerating, duration-fast-3 + ease-accelerate-generic
    (element disappears; Material, Carbon and Atlassian also close faster than they open). Override per page with --modal-in-* / --modal-out-* (on <html>). */
 @keyframes modal-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes modal-out { from { opacity: 1; } to { opacity: 0; } }
-@keyframes modal-panel-in { from { opacity: 0; translate: 0 var(--dimension-spacing-space-64); } to { opacity: 1; translate: 0 0; } }   /* `translate` is separate from the centering `transform` */
-@keyframes modal-panel-out { from { opacity: 1; translate: 0 0; } to { opacity: 0; translate: 0 var(--dimension-spacing-space-64); } }
+@keyframes modal-panel-in { from { opacity: 0; translate: 0 var(--dimension-spacing-space-48); } to { opacity: 1; translate: 0 0; } }   /* `translate` is separate from the centering `transform` */
+@keyframes modal-panel-out { from { opacity: 1; translate: 0 0; } to { opacity: 0; translate: 0 var(--dimension-spacing-space-48); } }
 .modal, .modal-overlay { animation: modal-in var(--modal-in-duration, var(--duration-fast-4)) var(--modal-in-ease, var(--ease-decelerate-emphasized)) both; }
 .modal.is-leaving, .modal-overlay.is-leaving { animation: modal-out var(--modal-out-duration, var(--duration-fast-3)) var(--modal-out-ease, var(--ease-accelerate-generic)) forwards; pointer-events: none; }
 .modal { animation-name: modal-panel-in; }
