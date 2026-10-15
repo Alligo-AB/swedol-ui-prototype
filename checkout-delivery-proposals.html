@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout leverans – tre förslag</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/eco-design-system/notifications.css">  <!-- before the component CSS: it carries its own .btn base that would win over .btn--lg -->
+  <!-- ECO component CSS, shared with the docs pages. Link it, do not copy it. -->
+  <link rel="stylesheet" href="/components/css/button.css">
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/radio.css">
+  <link rel="stylesheet" href="/components/css/checkbox.css">
+  <link rel="stylesheet" href="/components/css/switch.css">
+  <link rel="stylesheet" href="/components/css/badge.css">
+  <link rel="stylesheet" href="/components/css/collapsible.css">
+  <link rel="stylesheet" href="/components/css/tooltip.css">
+  <link rel="stylesheet" href="/components/css/inline-link.css">
+  <link rel="stylesheet" href="/components/css/action-link.css">
+  <link rel="stylesheet" href="/components/css/pill-segment-control.css">
+  <link rel="stylesheet" href="/components/css/spacing.css">
+  <script src="/components/js/collapsible.js"></script>
+  <script src="/components/js/tooltip.js"></script>
+  <script src="/components/js/pill-segment-control.js"></script>
+  <script src="/eco-design-system/notifications.js"></script>
+  <style>
+    /* ── Page frame. Tokens only; mobile-first, desktop from 769px (CLAUDE.md). ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--color-background-primary); color: var(--color-text-primary);
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1;
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px;           /* body-md */
+    }
+    @media (min-width: 769px) { body { font-size: 17px; line-height: 24px; } }
+    html:has(dialog[open]) { overflow: hidden; }
+    h1, h2, h3, p { margin: 0; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    .t-headline-sm { font-size: 22px; line-height: 24px; font-weight: 600; letter-spacing: 0; }
+    .t-title-md { font-size: 18px; line-height: 22px; font-weight: 600; letter-spacing: 0; }
+    .t-label-sm { font-size: 12px; line-height: 12px; font-weight: 600; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); }
+    .t-sm { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }  /* body-sm */
+    .muted { color: var(--color-text-tertiary); }
+    @media (min-width: 769px) {
+      .t-headline-sm { font-size: 28px; line-height: 32px; }
+      .t-title-md { font-size: 20px; line-height: 24px; }
+      .t-label-sm { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+    }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--dimension-spacing-space-16); } /* 1200px: content width of the docs pages, no token */
+    @media (min-width: 640px) { .wrap { padding: 0 var(--dimension-spacing-space-32); } }
+    @media (min-width: 1024px) { .wrap { padding: 0 var(--dimension-spacing-space-40); } }
+
+    /* ── Prototype bar (not part of the checkout) ── */
+    .proto { background: var(--color-background-secondary); border-bottom: 1px solid var(--color-border-primary); padding: var(--dimension-spacing-space-16) 0; }
+    .proto__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-16); }
+    .proto__why { margin-top: var(--dimension-spacing-space-16); max-width: 760px; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .proto .t-label-sm { margin-right: auto; }
+
+    /* ── Checkout header ── */
+    .co-header { background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+    .co-header__row { display: flex; align-items: center; justify-content: space-between; min-height: var(--dimension-spacing-space-56); }
+    .co-header img { display: block; width: 96px; height: auto; } /* logo native width is 119px; 96px on mobile */
+    @media (min-width: 769px) {
+      .co-header__row { min-height: var(--dimension-spacing-space-64); }
+      .co-header img { width: 119px; }
+    }
+
+    /* ── Stepper (not in ECO yet: flagged, see answer) ── */
+    .steps { display: flex; align-items: center; gap: var(--dimension-spacing-space-16); list-style: none; margin: 0; padding: var(--dimension-spacing-space-24) 0 var(--dimension-spacing-space-16); }
+    .step { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); font-size: 16px; line-height: 18px; font-weight: 600; letter-spacing: 0; color: var(--color-text-tertiary); }
+    .step[aria-current="step"] { color: var(--color-text-primary); }
+    .step__num { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--color-surface-10); color: var(--color-text-primary); font-size: 14px; line-height: 14px; }
+    .step[aria-current="step"] .step__num { background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+    .steps__line { flex: 1; height: 1px; background: var(--color-border-primary); }
+    .steps__line--short { flex: 0 0 var(--dimension-spacing-space-40); }
+    @media (min-width: 769px) { .step { font-size: 20px; line-height: 24px; } }
+
+    /* ── Layout ── */
+    .co { padding-bottom: var(--dimension-spacing-space-80); }
+    .co-grid { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); }
+    .co-summary { order: -1; }
+    .co-main { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-md); min-width: 0; }
+    @media (min-width: 1024px) {
+      .co-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--dimension-spacing-space-24); }
+      .co-main { grid-column: 1 / span 8; }
+      .co-summary { grid-column: 9 / span 4; order: 0; align-self: start; position: sticky; top: var(--dimension-spacing-space-24); }
+    }
+    .sum__title { background: var(--color-surface-100); color: var(--color-text-primary-inverted); padding: var(--dimension-spacing-space-12) var(--dimension-spacing-space-16); }
+    .sum__row { background: var(--color-background-secondary); border: 1px solid var(--color-border-primary); border-top: 0; padding: var(--dimension-spacing-space-16); font-weight: 600; }
+    .co-coupon { display: flex; gap: var(--dimension-spacing-space-8); align-items: flex-start; padding-bottom: var(--dimension-spacing-space-24); }
+    .co-coupon .form-field { flex: 1; }
+    .co-cta { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .co-cta .btn { width: 100%; }
+    @media (min-width: 769px) { .co-cta { align-items: flex-start; } .co-cta .btn { width: auto; } }
+    .hint { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .stack { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); }
+    .sec-head { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .group { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+
+    /* ── Address surface: shared by all three proposals (eco-elevation b-20 = address and contact cards) ── */
+    .addr {
+      background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary);
+      box-shadow: var(--shadow-elevation-b-20); position: relative;
+      outline: 1px solid transparent; outline-offset: -1px;                  /* becomes the second border pixel when selected, so nothing shifts */
+      transition: border-color var(--duration-fast-3) var(--ease-standard), outline-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .addr:hover { border-color: var(--color-border-hover); }
+    .addr:has(input[type="radio"]:checked) { border-color: var(--color-border-selected); outline-color: var(--color-border-selected); }
+    .addr:has(input[type="radio"]:checked):hover { border-color: var(--color-border-selected-hover); outline-color: var(--color-border-selected-hover); }
+    .addr--hero { background: var(--color-accent-light); }
+    .addr__label { align-items: flex-start; padding: var(--dimension-spacing-space-16); flex: 1; min-width: 0; }
+    .addr__text { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); min-width: 0; overflow-wrap: anywhere; }
+    .addr__top { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-8); min-height: 24px; }
+    .addr__name { font-size: 16px; line-height: 18px; font-weight: 600; letter-spacing: 0; }   /* title-sm */
+    .addr--hero .addr__name { font-size: 18px; line-height: 22px; }
+    @media (min-width: 769px) { .addr--hero .addr__name { font-size: 20px; line-height: 24px; } }
+
+    /* A: favorite on top, compact list below */
+    .addr-list { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .addr-row { display: flex; flex-direction: column; }
+    .addr-row__actions { padding: 0 var(--dimension-spacing-space-16) var(--dimension-spacing-space-16) calc(var(--dimension-spacing-space-16) + 24px + var(--dimension-spacing-space-8)); } /* 24px = radio area, lines the button up under the text */
+    @media (min-width: 769px) {
+      .addr-row { flex-direction: row; align-items: center; }
+      .addr-row__actions { padding: 0 var(--dimension-spacing-space-16) 0 0; flex-shrink: 0; }
+    }
+    .addr-none { display: flex; gap: var(--dimension-spacing-space-8); align-items: flex-start; padding: var(--dimension-spacing-space-16); background: var(--color-background-secondary); }
+    .addr-none .material-symbols-outlined { color: var(--color-icon-primary); }
+
+    /* B: card grid with a star per card */
+    .addr-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--dimension-spacing-space-8); }
+    @media (min-width: 769px) { .addr-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--dimension-spacing-space-16); } }
+    .addr-card { display: flex; }
+    .addr-card .addr__label { padding-right: calc(var(--dimension-spacing-space-16) + 24px + var(--dimension-spacing-space-8)); } /* room for the star */
+    .addr-card__star { position: absolute; top: var(--dimension-spacing-space-16); right: var(--dimension-spacing-space-16); }
+    .addr-card__star::before { content: ''; position: absolute; inset: -10px; }   /* 44px touch target around the 24px icon */
+    .addr-card__star[aria-pressed="true"] { color: var(--color-icon-primary); }
+
+    /* C: summary + drawer */
+    .addr--summary { padding: var(--dimension-spacing-space-16); display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); cursor: default; }
+    .addr--summary:hover { border-color: var(--color-border-primary); }
+    @media (min-width: 769px) { .addr--summary { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
+    .addr--summary .addr__text { gap: var(--dimension-spacing-space-4); }
+    .addr-drow { display: flex; padding: var(--dimension-spacing-space-16); }
+    .drawer {
+      margin: 0 0 0 auto; padding: 0; border: 0; width: min(480px, 100vw); max-width: none; height: 100dvh; max-height: none; /* 480px: drawer width, no token */
+      background: var(--color-surface-raised-primary); color: inherit; box-shadow: var(--shadow-elevation-drawer-right);
+      transform: translateX(100%);
+      transition: transform var(--duration-medium-3) var(--ease-accelerate-generic);
+    }
+    .drawer.is-open { transform: none; transition-timing-function: var(--ease-decelerate-emphasized); }
+    .drawer::backdrop { background: var(--color-surface-opacity-black-50); opacity: 0; transition: opacity var(--duration-medium-3) var(--ease-accelerate-generic); }
+    .drawer.is-open::backdrop { opacity: 1; transition-timing-function: var(--ease-decelerate-emphasized); }
+    .drawer__panel { display: flex; flex-direction: column; height: 100%; }
+    .drawer__head { display: flex; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-16); padding: var(--dimension-spacing-space-16); border-bottom: 1px solid var(--color-border-primary); }
+    .drawer__search { padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-16) 0; }
+    .drawer__body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: var(--dimension-spacing-space-16); display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .drawer__foot { padding: var(--dimension-spacing-space-16); box-shadow: var(--shadow-elevation-t-60); display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .drawer__foot .btn { width: 100%; }
+    @media (prefers-reduced-motion: reduce) { .drawer, .drawer::backdrop { transition: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- ══ PROTOTYPE BAR: switches between the three proposals (not part of the checkout) ══ -->
+  <div class="proto">
+    <div class="wrap">
+      <div class="proto__row">
+        <span class="t-label-sm">Prototyp · Checkout · Leverans</span>
+        <div class="pill-segment-control pill-segment-control--sm" role="group" aria-label="Välj förslag">
+          <span class="pill-segment-control__thumb" aria-hidden="true"></span>
+          <button type="button" class="pill-segment-control__btn" data-view="a">Förslag A</button>
+          <button type="button" class="pill-segment-control__btn" data-view="b">Förslag B</button>
+          <button type="button" class="pill-segment-control__btn" data-view="c">Förslag C</button>
+        </div>
+        <label class="form-switch-item form-switch-item--sm"><input type="checkbox" role="switch" id="demo-fav" checked /><span>Kunden har en favoritadress</span></label>
+      </div>
+      <div class="proto__why" id="why" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- ══ CHECKOUT ══ -->
+  <header class="co-header">
+    <div class="wrap co-header__row">
+      <a href="#" aria-label="Swedol, startsida"><img src="/images/swedol-logo.svg" alt="Swedol" width="119" height="23" /></a>
+      <a href="#" class="action-link action-link--medium action-link--inverted">
+        <span class="action-link__icon" aria-hidden="true">arrow_back</span>
+        <span class="action-link__label">Fortsätt handla</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="co wrap">
+    <ol class="steps" aria-label="Steg i kassan">
+      <li class="step" aria-current="step"><span class="step__num">1</span>Leverans</li>
+      <li class="steps__line steps__line--short" aria-hidden="true"></li>
+      <li class="step"><span class="step__num">2</span>Betalning</li>
+      <li class="steps__line" aria-hidden="true"></li>
+    </ol>
+
+    <div class="co-grid">
+      <div class="co-main">
+        <p>Dina varor skickas från din butik</p>
+
+        <div class="collapsible-wrap collapsible-wrap--boxed">
+          <button type="button" class="collapsible-item" onclick="toggleCollapsible(this)" aria-expanded="false" aria-controls="coupon">
+            <span class="collapsible-item__left">
+              <span class="ms material-symbols-outlined" aria-hidden="true">sell</span>
+              <span class="collapsible-item__label">Lägg till rabattkod</span>
+            </span>
+            <span class="collapsible-item__end"><span class="collapsible-item__chevron"><span class="ms material-symbols-outlined" aria-hidden="true">expand_more</span></span></span>
+          </button>
+          <div class="collapsible-item__content" id="coupon">
+            <div class="co-coupon">
+              <div class="form-field">
+                <div class="input-wrap"><div class="input-box"><input class="form-input" type="text" placeholder="Rabattkod" aria-label="Rabattkod" autocomplete="off" /></div></div>
+              </div>
+              <button type="button" class="btn btn--secondary btn--md"><span class="btn__label">Lägg till</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div id="view"></div>
+
+        <div class="co-cta">
+          <button type="button" class="btn btn--primary btn--lg" id="next" data-act="next"><span class="btn__label">Fortsätt till betalning</span></button>
+          <p class="hint" id="next-hint"></p>
+        </div>
+      </div>
+
+      <aside class="co-summary" aria-label="Sammanställning">
+        <h2 class="sum__title t-headline-sm">Sammanställning</h2>
+        <p class="sum__row">12 artiklar i varukorgen</p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Drawer for proposal C -->
+  <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
+    <div class="drawer__panel">
+      <div class="drawer__head">
+        <h2 class="t-title-md" id="drawer-title">Välj leveransadress</h2>
+        <button type="button" class="icon-btn" data-act="close" aria-label="Stäng" data-tooltip="Stäng"><span class="btn__icon" aria-hidden="true">close</span></button>
+      </div>
+      <div class="drawer__search">
+        <div class="form-field"><div class="input-wrap"><div class="input-box">
+          <span class="input-icon input-icon--lg" aria-hidden="true">search</span>
+          <input class="form-input" id="dq" type="text" placeholder="Sök på gata, postnummer eller stad" aria-label="Sök adress" autocomplete="off" />
+          <div class="input-actions"><button type="button" class="input-actions__btn input-actions__clear" data-act="clear" aria-label="Rensa sökning"><span class="input-icon input-icon--fill" aria-hidden="true">cancel</span></button></div>
+        </div></div></div>
+      </div>
+      <div class="drawer__body" id="dlist" role="radiogroup" aria-label="Leveransadress"></div>
+      <div class="drawer__foot">
+        <button type="button" class="btn btn--primary btn--md" data-act="use"><span class="btn__label">Använd adress</span></button>
+      </div>
+    </div>
+  </dialog>
+  <p class="sr-only" id="count" aria-live="polite"></p>
+
+<script>
+(function () {
+  // ── Data: the six addresses from today's checkout, cleaned (duplicate name line and "NA" removed, postcode spaced) ──
+  var ADDR = [
+    { id: 'a3', name: 'Adress3', l1: 'Springgatan 207-7', l2: '112 23 Gåinge', city: 'Gåinge' },
+    { id: 'ns', name: 'Nisses Svets', l1: 'Teststreet 40', l2: '464 50 Göteborg', city: 'Göteborg' },
+    { id: 'su', name: 'Susanne AB', l1: 'Erik Dahlbergsgatan', l2: '411 26 Göteborg', city: 'Göteborg' },
+    { id: 'tg', name: 'test göteborg', l1: 'Importgatan 25', l2: '422 46 Göteborg', city: 'Göteborg' },
+    { id: 'tb', name: 'Testbolaget', l1: 'Se tillfällig leveransadress', l2: 'i kommentarsfältet', city: '' },
+    { id: 'aa', name: 'Andreas Adielsson', l1: 'Myravägen 425', l2: '434 98 Kungsbacka', city: 'Kungsbacka' }
+  ];
+  var WHY = {
+    a: ['A · Favorit först', 'Favoritadressen får ett eget kort överst och är förvald. Övriga adresser är en kompakt lista med ”Gör till favorit” per rad.', 'Optimerar för: snabbast väg för återkommande kunder. Kompromiss: favorit-kortet skjuter ner listan.'],
+    b: ['B · Kort med stjärna', 'Samma kortrutnät som idag, men hela kortet är valbart och varje kort har en stjärna. Favoriten sorteras först och märks med badge.', 'Optimerar för: minst förändring mot dagens sida. Kompromiss: stjärnan är en ikon, så en hjälptext behövs.'],
+    c: ['C · Sammanfattning och panel', 'Sidan visar bara den valda adressen. ”Byt adress” öppnar en panel med sök och lista, och en kryssruta sparar valet som favorit.', 'Optimerar för: kunder med många adresser och en kort kassasida. Kompromiss: ett extra klick för att byta.']
+  };
+  var S = { view: 'a', fav: 'a3', sel: 'a3', q: '', draft: null };
+  var $ = function (s) { return document.querySelector(s); };
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var get = function (id) { return ADDR.filter(function (a) { return a.id === id; })[0]; };
+  var byCity = function (a, b) { return (!a.city - !b.city) || a.city.localeCompare(b.city, 'sv') || a.name.localeCompare(b.name, 'sv'); };
+  var match = function (a) { var q = S.q.trim().toLowerCase(); return !q || (a.name + ' ' + a.l1 + ' ' + a.l2).toLowerCase().indexOf(q) > -1; };
+  var badge = function () { return '<span class="badge-basic badge-basic--neutral-dark badge-basic--strong"><span class="badge-basic__icon material-symbols-outlined" aria-hidden="true">star</span>Favorit</span>'; };
+  var toast = function (status, text) { if (window.ECO_N) ECO_N.showToast({ status: status, text: text, autoHide: 4000 }); };
+  var radio = function (nm, a, on) { return '<input type="radio" name="' + nm + '" value="' + a.id + '"' + (on ? ' checked' : '') + ' />'; };
+  var lines = function (a) { return '<span class="addr__line">' + esc(a.l1) + '</span><span class="addr__line">' + esc(a.l2) + '</span>'; };
+  var search = function (id) {
+    return '<div class="form-field"><div class="input-wrap"><div class="input-box"><span class="input-icon input-icon--lg" aria-hidden="true">search</span>' +
+      '<input class="form-input" id="' + id + '" type="text" placeholder="Sök på gata, postnummer eller stad" aria-label="Sök adress" autocomplete="off" />' +
+      '<div class="input-actions"><button type="button" class="input-actions__btn input-actions__clear" data-act="clear" aria-label="Rensa sökning"><span class="input-icon input-icon--fill" aria-hidden="true">cancel</span></button></div></div></div></div>';
+  };
+  var empty = function () { return '<p class="muted">Inga adresser matchar ”' + esc(S.q) + '”. <button type="button" class="inline-link" data-act="clear">Rensa sökning</button></p>'; };
+
+  // ── A: favorite on top, compact list below ──
+  function renderA() {
+    var f = get(S.fav);
+    $('#hero').innerHTML = f
+      ? '<div class="addr addr--hero"><label class="form-radio-item addr__label">' + radio('addr', f, S.sel === f.id) +
+        '<span class="addr__text"><span class="addr__top"><span class="addr__name">' + esc(f.name) + '</span>' + badge() + '</span>' + lines(f) + '</span></label></div>'
+      : '<div class="addr-none"><span class="material-symbols-outlined" aria-hidden="true">star</span><p>Du har ingen favoritadress. Välj ”Gör till favorit” på en adress, så är den förvald nästa gång du handlar.</p></div>';
+    var rows = ADDR.filter(function (a) { return a.id !== S.fav && match(a); }).sort(byCity);
+    $('#list').innerHTML = rows.map(function (a) {
+      return '<div class="addr addr-row"><label class="form-radio-item addr__label">' + radio('addr', a, S.sel === a.id) +
+        '<span class="addr__text"><span class="addr__top"><span class="addr__name">' + esc(a.name) + '</span></span><span class="addr__line">' + esc(a.l1 + ', ' + a.l2) + '</span></span></label>' +
+        '<div class="addr-row__actions"><button type="button" class="btn btn--system btn--xs" data-act="fav" data-id="' + a.id + '" aria-label="Gör ' + esc(a.name) + ' till favorit"><span class="btn__icon" aria-hidden="true">star</span><span class="btn__label">Gör till favorit</span></button></div></div>';
+    }).join('') || (S.q ? empty() : '<p class="muted">Du har inga andra adresser.</p>');
+    $('#count').textContent = rows.length + ' adresser i listan';
+  }
+
+  // ── B: card grid, star per card ──
+  function renderB() {
+    var rows = ADDR.filter(match).sort(function (a, b) { return (b.id === S.fav) - (a.id === S.fav) || byCity(a, b); });
+    $('#list').innerHTML = rows.length ? rows.map(function (a) {
+      var on = S.fav === a.id;
+      return '<div class="addr addr-card"><label class="form-radio-item addr__label">' + radio('addr', a, S.sel === a.id) +
+        '<span class="addr__text"><span class="addr__top"><span class="addr__name">' + esc(a.name) + '</span>' + (on ? badge() : '') + '</span>' + lines(a) + '</span></label>' +
+        '<button type="button" class="icon-btn addr-card__star" data-act="fav" data-id="' + a.id + '" aria-pressed="' + on + '" aria-label="Favoritadress: ' + esc(a.name) + '" data-tooltip="' + (on ? 'Ta bort som favorit' : 'Gör till favorit') + '"><span class="btn__icon" aria-hidden="true">star</span></button></div>';
+    }).join('') : empty();
+    $('#count').textContent = rows.length + ' adresser i listan';
+  }
+
+  // ── C: summary + drawer ──
+  function renderC() {
+    var a = get(S.sel), f = get(S.fav), isFav = a && a.id === S.fav, h;
+    if (a) {
+      h = '<div class="addr addr--summary"><div class="addr__text"><span class="t-label-sm">Levereras till</span>' +
+        '<span class="addr__top"><span class="addr__name">' + esc(a.name) + '</span>' + (isFav ? badge() : '') + '</span>' + lines(a) + '</div>' +
+        '<button type="button" class="btn btn--secondary btn--sm" data-act="open"><span class="btn__icon" aria-hidden="true">edit_location_alt</span><span class="btn__label">Byt adress</span></button></div>' +
+        '<div class="group"><label class="form-checkbox-item"><input type="checkbox" id="favchk"' + (isFav ? ' checked' : '') + ' /><span>Spara som favoritadress</span></label>' +
+        '<p class="hint">' + (f && !isFav
+          ? 'Din favoritadress är ' + esc(f.name) + '. <button type="button" class="inline-link" data-act="usefav">Använd den</button>'
+          : 'Den blir förvald nästa gång du handlar. Du kan byta när som helst.') + '</p></div>';
+    } else {
+      h = '<div class="addr-none"><span class="material-symbols-outlined" aria-hidden="true">location_on</span><div class="stack"><p>Du har ingen leveransadress vald.</p>' +
+        '<div><button type="button" class="btn btn--secondary btn--md" data-act="open"><span class="btn__label">Välj adress</span></button></div></div></div>';
+    }
+    $('#summary').innerHTML = h;
+  }
+  function renderD() {
+    var rows = ADDR.filter(match).sort(function (a, b) { return (b.id === S.fav) - (a.id === S.fav) || byCity(a, b); });
+    $('#dlist').innerHTML = rows.length ? rows.map(function (a) {
+      return '<label class="addr addr-drow form-radio-item">' + radio('daddr', a, S.draft === a.id) +
+        '<span class="addr__text"><span class="addr__top"><span class="addr__name">' + esc(a.name) + '</span>' + (a.id === S.fav ? badge() : '') + '</span>' + lines(a) + '</span></label>';
+    }).join('') : empty();
+    $('#count').textContent = rows.length + ' adresser i listan';
+  }
+
+  // ── View switching ──
+  function render() {
+    closeD(true); S.q = '';
+    var v = $('#view'), w = WHY[S.view];
+    if (S.view === 'a') {
+      v.innerHTML = '<div class="stack"><h2 class="t-headline-sm">Leveransadress</h2><div id="hero"></div>' +
+        '<div class="sec-head"><h3 class="t-title-md">' + (S.fav ? 'Andra adresser' : 'Dina adresser') + '</h3><p class="t-sm muted">Sorterade efter stad</p></div>' + search('q') + '<div class="addr-list" id="list" role="presentation"></div></div>';
+      renderA();
+    } else if (S.view === 'b') {
+      v.innerHTML = '<div class="stack"><div class="sec-head"><h2 class="t-headline-sm">Leveransadress</h2><p class="t-sm muted">Favoriten visas först, därefter sorteras adresserna efter stad. Välj stjärnan på ett kort för att göra det till din favorit.</p></div>' +
+        search('q') + '<div class="addr-grid" id="list" role="presentation"></div></div>';
+      renderB();
+    } else {
+      v.innerHTML = '<div class="stack"><h2 class="t-headline-sm">Leveransadress</h2><div class="stack" id="summary"></div></div>';
+      renderC();
+    }
+    $('#why').innerHTML = '<h1 class="t-title-md">' + w[0] + '</h1><p>' + w[1] + '</p><p class="hint">' + w[2] + '</p>';
+    cta();
+  }
+  function cta() {
+    $('#next').disabled = !S.sel;
+    $('#next-hint').textContent = S.sel ? '' : 'Välj en leveransadress för att gå vidare.';
+  }
+  function refocus(sel) { var el = $(sel); if (el) el.focus(); }
+
+  function setFav(id) {
+    var on = S.fav !== id || S.view === 'a';              // A only changes favorite; B toggles it
+    S.fav = on ? id : null;
+    toast(on ? 'success' : 'info', on ? get(id).name + ' är nu din favoritadress.' : 'Favoritadressen är borttagen.');
+    render(); refocus('[data-act="fav"][data-id="' + id + '"], #hero input');
+  }
+
+  // ── Drawer (native <dialog>: focus trap, Esc and top layer for free) ──
+  var dlg = $('#drawer');
+  function openD() {
+    S.draft = S.sel || S.fav; S.q = ''; $('#dq').value = ''; renderD();
+    dlg.showModal(); void dlg.offsetWidth; dlg.classList.add('is-open');
+  }
+  function closeD(now) {
+    if (!dlg.open) return;
+    dlg.classList.remove('is-open');
+    var done = false, fin = function () { if (!done) { done = true; dlg.close(); } };
+    if (now || reduced) return fin();
+    dlg.addEventListener('transitionend', function h(e) { if (e.target === dlg && e.propertyName === 'transform') { dlg.removeEventListener('transitionend', h); fin(); } });
+    setTimeout(fin, 450);                                   // fallback if transitionend never fires
+  }
+  dlg.addEventListener('cancel', function (e) { e.preventDefault(); closeD(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) closeD(); });
+
+  // ── Events ──
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var act = b.dataset.act;
+    if (act === 'fav') setFav(b.dataset.id);
+    else if (act === 'open') openD();
+    else if (act === 'close') closeD();
+    else if (act === 'use') { S.sel = S.draft; closeD(); renderC(); cta(); refocus('[data-act="open"]'); }
+    else if (act === 'usefav') { S.sel = S.fav; renderC(); cta(); }
+    else if (act === 'clear') { S.q = ''; var i = dlg.open ? $('#dq') : $('#q'); i.value = ''; i.focus(); dlg.open ? renderD() : (S.view === 'a' ? renderA() : renderB()); }
+    else if (act === 'next') toast('info', 'Prototyp: här fortsätter kassan till steg 2, Betalning.');
+  });
+  document.addEventListener('input', function (e) {
+    if (e.target.id !== 'q' && e.target.id !== 'dq') return;
+    S.q = e.target.value; dlg.open ? renderD() : (S.view === 'a' ? renderA() : renderB());
+  });
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.name === 'addr') { S.sel = t.value; cta(); if (S.view === 'c') renderC(); }
+    else if (t.name === 'daddr') S.draft = t.value;
+    else if (t.id === 'favchk') {
+      S.fav = t.checked ? S.sel : null;
+      toast(t.checked ? 'success' : 'info', t.checked ? get(S.sel).name + ' är nu din favoritadress.' : 'Favoritadressen är borttagen.');
+      renderC(); refocus('#favchk');
+    }
+    else if (t.id === 'demo-fav') { S.fav = t.checked ? 'a3' : null; S.sel = S.fav; render(); }
+  });
+  $('.pill-segment-control').addEventListener('segment-change', function (e) {
+    S.view = e.detail.button.dataset.view; history.replaceState(null, '', '#' + S.view); render();
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+  document.addEventListener('mousedown', function () { document.body.classList.remove('keyboard-nav'); });
+
+  // ── Init: view from #a / #b / #c ──
+  var h = location.hash.slice(1); if (WHY[h]) S.view = h;
+  Array.prototype.forEach.call(document.querySelectorAll('.pill-segment-control__btn'), function (b) {
+    var on = b.dataset.view === S.view;
+    b.classList.toggle('pill-segment-control__btn--active', on); b.setAttribute('aria-pressed', String(on));
+  });
+  render();
+})();
+</script>
+</body>
+</html>
