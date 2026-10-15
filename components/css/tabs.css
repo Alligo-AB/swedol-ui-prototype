@@ -17,6 +17,11 @@
 .tab-bar--primary { gap: var(--dimension-spacing-space-24); }
 .tab-bar--on-grey { --tab-ind-hover: var(--color-surface-40); }   /* Background Colored = True: hover line must stay visible on grey */
 
+/* On-page navigation (tabs.js: scrollspy + jump to the section): the bar sticks to the top while the page scrolls.
+   --tab-sticky-top = distance from the top of the window (or the scrolling box) to the bar, for a fixed header above it. */
+.tab-bar--page { position: sticky; top: var(--tab-sticky-top, 0px); z-index: var(--tab-sticky-z, 2); background: var(--tab-bar-bg, var(--color-background-primary)); }
+.tab-bar--page.tab-bar--on-grey { --tab-bar-bg: var(--color-background-secondary); }
+
 /* Sizes. Medium mobile = Large mobile with a 8px gap; Desktop Medium = Large (identical in Figma). */
 .tab-bar--md { --tab-gap: 8px; }
 .tab-bar--sm { --tab-fs: 14px; --tab-lh: 14px; --tab-ls: 0.42px; --tab-gap: 8px; }   /* label-md, mobile */

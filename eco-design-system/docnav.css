@@ -88,6 +88,8 @@
   .dn-link:hover { background: var(--color-surface-raised-secondary); }
   .dn-link[aria-current="page"] { background: var(--ds-accent-light); }
   .dn-link[aria-current="page"]::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--ds-accent); }
+  .dn-link--soon { color: var(--color-text-tertiary); cursor: default; }
+  .dn-link--soon:hover { background: none; }
   .dn-item--parent .dn-link { padding-right: 56px; }
   .dn-chev {
     position: absolute; top: 12px; right: 24px; display: flex; width: 24px; height: 24px; padding: 0; background: none; border: 0; cursor: pointer; color: var(--color-text-primary);

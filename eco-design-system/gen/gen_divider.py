@@ -62,7 +62,7 @@ access = '<h2 class="ds-h2">Accessibility</h2>' + desc('All requirements are lis
     '<h3 class="ds-h3 ds-group">Keyboard support</h3>' + desc('None. A divider is not focusable.') + \
     '<h3 class="ds-h3 ds-group">Screen reader support</h3>' + desc('An <code>&lt;hr&gt;</code> is announced as a separator, so use it when the line separates content for everyone. A line that is only visual, inside a component, gets <code>aria-hidden="true"</code>.')
 
-related = '<h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong>' + link_large('menu.html', 'Menu') + '</strong>. Its rows carry their own divider (middle-inset, full-width or none).</li><li><strong>' + link_large('section.html', 'Section') + '</strong>. <code>.page-divider</code> for the boundary between page sections.</li><li><strong>' + link_large('table.html', 'Table') + '</strong>. Row lines are part of the table.</li></ul>'
+related = '<h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong>' + link_large('menu.html', 'Menu') + '</strong>. Its rows carry their own divider (middle-inset, full-width or none).</li><li><strong>' + link_large('section.html', 'Section') + '</strong>. <code>.page-divider</code> for the boundary between page sections.</li><li><strong>' + link_large('../foundations/docs-table.html', 'Docs table') + '</strong>. Row lines are part of the table.</li></ul>'
 
 references = '<h2 class="ds-h2">References</h2>' + refs([
     ('https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html', 'WCAG 2.2: Info and Relationships', 'Success criterion 1.3.1: structure must not depend on a line alone.'),

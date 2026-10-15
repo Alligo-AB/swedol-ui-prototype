@@ -10,7 +10,9 @@
     foundations: {
       label: 'Foundations', icon: 'interests',
       overview: { id: 'foundations-overview', t: 'Foundations Overview', href: D + 'foundations-overview.html' },
-      groups: [{ items: [f('colors', 'Colors'), f('typography', 'Typography'), f('spacing', 'Spacing'), f('elevation', 'Shadows & Elevation'), f('motion', 'Motion')] }]
+      groups: [
+        { items: [f('colors', 'Colors'), f('typography', 'Typography'), f('spacing', 'Spacing'), f('elevation', 'Shadows & Elevation'), f('motion', 'Motion')] }
+      ]
     },
     components: {
       label: 'Components', icon: 'palette',
@@ -23,7 +25,9 @@
         { title: 'Links', items: [c('links-guide', 'Links guide', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
         { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb'), c('pagination', 'Pagination'), c('tooltip', 'Tooltip')] },
         { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible')] },
-        { title: 'Drafts', items: [c('table', 'Table'), c('role-tier-card', 'Role tier card')] }
+        { title: 'Patterns', items: [{ id: 'hero-banner', t: 'Hero banner', soon: true }, { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }, f('docs-table', 'Docs table')] },
+        { title: 'Storyblok widget', items: [c('collapsible-storyblok', 'Collapsible', { sb: true })] },
+        { title: 'Drafts', items: [c('role-tier-card', 'Role tier card')] }
       ]
     }
   };
@@ -50,15 +54,19 @@
   try {
     var rf = new URL(document.referrer);
     var nt = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];   // a link click, not reload or back/forward
-    arriving = (!nt || nt.type === 'navigate') && rf.origin === location.origin && rf.pathname !== location.pathname && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var skip = +sessionStorage.getItem('dn-noarrive') || 0; sessionStorage.removeItem('dn-noarrive');   // set by a click inside the navigation itself (below)
+    arriving = Date.now() - skip > 4000 && (!nt || nt.type === 'navigate') && rf.origin === location.origin && rf.pathname !== location.pathname && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   } catch (e) {}
   if (arriving) root.classList.add('dn-arriving');
   if (arriving && cur && window.matchMedia('(min-width: 1600px)').matches) root.classList.add('dn-hold');   // from 1600px the pinned panel slides out
   if (arriving && window.matchMedia('(min-width: 961px) and (max-width: 1599px)').matches) root.classList.add('dn-hold-rail');   // 961-1599px: the Navigation Rail itself slides in from the left
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  var fullId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '');   // file name incl. -storyblok: the Storyblok group items match on it
   function link(it, cls) {
-    return '<a class="dn-link' + (cls ? ' ' + cls : '') + '" href="' + it.href + '"' + (it.id === pageId ? ' aria-current="page"' : '') + '>' + esc(it.t) + '</a>';
+    if (it.soon) return '<span class="dn-link dn-link--soon" aria-disabled="true">' + esc(it.t) + '</span>';
+    var here = it.sb ? it.id === fullId : it.id === pageId && !/-storyblok$/.test(fullId);
+    return '<a class="dn-link' + (cls ? ' ' + cls : '') + '" href="' + it.href + '"' + (here ? ' aria-current="page"' : '') + '>' + esc(it.t) + '</a>';
   }
   function panelHtml(key) {
     var n = NAV[key];
@@ -192,6 +200,17 @@
   wrap.addEventListener('focusout', function (e) { if (!e.relatedTarget || !wrap.contains(e.relatedTarget)) later(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 
+  function sameUrl(a) { return a.origin === location.origin && a.pathname.replace(/\.html$/, '') === location.pathname.replace(/\.html$/, '') && (!a.hash || a.hash === location.hash); }
+  document.addEventListener('click', function (e) {   // the tab bar of a component (Examples / Specifications / Code / Storyblok): the same component, no arrival sequence
+    var t = e.target.closest && e.target.closest('.ds-tabs a.tab');
+    if (t && !sameUrl(t)) { try { sessionStorage.setItem('dn-noarrive', Date.now()); } catch (err) {} }
+  });
+  wrap.querySelector('.dn-rail').addEventListener('click', function (e) {   // any category in the rail (hover has already opened its panel): no reload, no arrival sequence
+    var d = e.target.closest('a.dn-dest[data-cat]');
+    if (!d) return;
+    if (sameUrl(d)) { e.preventDefault(); return; }
+    try { sessionStorage.setItem('dn-noarrive', Date.now()); } catch (err) {}
+  });
   panel.addEventListener('click', function (e) {
     var ch = e.target.closest('.dn-chev');
     if (ch) {
@@ -199,8 +218,10 @@
       ch.setAttribute('aria-expanded', on); sub.hidden = !on;
       return;
     }
-    if (e.target.closest('a')) {
-      try { sessionStorage.setItem('dn-scroll', panel.scrollTop); } catch (err) {}
+    var pa = e.target.closest('a');
+    if (pa && sameUrl(pa)) { e.preventDefault(); return; }   // the page you are on: no reload
+    if (pa) {
+      try { sessionStorage.setItem('dn-scroll', panel.scrollTop); sessionStorage.setItem('dn-noarrive', Date.now()); } catch (err) {}   // a link in the panel: the panel stays, no arrival sequence
       wrap.classList.remove('is-open');   // slides back in while the next page loads
     }
   });
@@ -278,6 +299,7 @@
   ['components', 'foundations'].forEach(function (k) {
     NAV[k].groups.forEach(function (g) {
       g.items.forEach(function (it) {
+        if (it.soon) return;
         entries.push({ t: it.t, href: it.href, cat: NAV[k].label, group: g.title || '', sv: fold(SV[it.id] || ''), svl: (SV[it.id] || '').split(/,\s*/) });
         (it.children || []).forEach(function (ch) { entries.push({ t: ch.t, href: ch.href, cat: NAV[k].label, group: g.title || '', sv: fold(SV[ch.id] || ''), svl: (SV[ch.id] || '').split(/,\s*/) }); });
       });

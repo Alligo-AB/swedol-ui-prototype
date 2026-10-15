@@ -9,6 +9,21 @@
   <link rel="stylesheet" href="docs.css">
   <link rel="stylesheet" href="docnav.css">
   <link rel="stylesheet" href="../components/css/badge.css">
+  <link rel="stylesheet" href="../components/css/tabs.css">
+  <link rel="stylesheet" href="../components/css/divider.css">
+  <link rel="stylesheet" href="../components/css/action-link.css">
+  <script src="../components/js/tabs.js"></script>
+  <style>
+    /* category links stop exactly at the section's top edge (below the fixed mobile bar, flush at the top on desktop) */
+    .ds-section[id] { scroll-margin-top: 0; }
+    @media (max-width: 960px) { .ds-section[id] { scroll-margin-top: var(--dn-bar, 64px); } }
+    /* sticky tab bar: sits under the fixed mobile bar; while stuck 16px above the tabs and 16px of background below the line (the bar's own 4px top padding is replaced, margin-bottom keeps the content from moving) */
+    .tab-bar--page { --tab-sticky-top: var(--dn-bar, 0px); }
+    .tab-bar--page.is-stuck { padding-top: var(--dimension-spacing-space-16); margin-bottom: calc(4px - var(--dimension-spacing-space-16)); box-shadow: 0 var(--dimension-spacing-space-16) 0 var(--tab-bar-bg, var(--color-background-primary)); }
+    /* jump links: 24px under the lead on mobile (xs, sm), 32px from md (769px) */
+    .ds-jump { margin-top: var(--dimension-spacing-space-24); }
+    @media (min-width: 769px) { .ds-jump { margin-top: var(--dimension-spacing-space-32); } }
+  </style>
 </head>
 <body>
 <script src="docnav.js"></script>
@@ -29,11 +44,16 @@
     <span class="ds-eyebrow">Swedol · ECO Design System</span>
     <h1 class="ds-title">Components</h1>
     <p class="ds-lead">Reusable parts with sizes, states and usage rules. Each component has a specification skill; the pages are grouped by family.</p>
+    <nav aria-label="Categories" class="ds-jump" style="display:flex;flex-wrap:wrap;gap:8px 24px"><a href="#components" class="action-link action-link--large"><span class="action-link__label">Components</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#patterns" class="action-link action-link--large"><span class="action-link__label">Patterns</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#storyblok-widgets" class="action-link action-link--large"><span class="action-link__label">Storyblok widget</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a></nav>
   </div>
 </section>
 
+<div class="ds-section" style="padding-top:0;padding-bottom:0"><div class="ds-page ds-inner"><hr class="divider"></div></div>
+
 <section class="ds-section" id="components">
   <div class="ds-page ds-inner">
+    <h2 class="ds-h2" style="margin-bottom:calc(var(--dimension-spacing-space-32) + 4px)">Components</h2>
+    <nav class="tab-bar tab-bar--secondary tab-bar--md tab-bar--page" aria-label="On this page"><a class="tab" href="#actions"><span class="tab__label">Actions</span></a><a class="tab" href="#form"><span class="tab__label">Form</span></a><a class="tab" href="#notifications"><span class="tab__label">Notifications</span></a><a class="tab" href="#other"><span class="tab__label">Menus, lists and dividers</span></a><a class="tab" href="#links"><span class="tab__label">Links</span></a><a class="tab" href="#status"><span class="tab__label">Status and navigation</span></a><a class="tab" href="#layout"><span class="tab__label">Layout and content</span></a><a class="tab" href="#drafts"><span class="tab__label">Drafts</span></a></nav>
 
     <h3 class="ds-h3 ds-group" id="actions">Actions</h3>
     <p class="ds-desc">What the user presses to do something. Used everywhere: in forms, notifications, modals and banners.</p>
@@ -412,19 +432,8 @@
 
     </div>
     <h3 class="ds-h3 ds-group" id="drafts">Drafts</h3>
-    <p class="ds-desc">Pages that are not part of the official collection yet: a pattern from the documentation pages and a test. Each stays on one page until it becomes an official component.</p>
+    <p class="ds-desc">Pages that are not part of the official collection yet: a test built on the comparison pages. It has three pages like the other components, but no Figma component exists.</p>
     <div class="ds-cards">
-
-      <a class="ds-card" href="components/table.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-table"><span></span><span></span><span></span></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Table</span><span class="ds-card__tags"><span class="ds-tag">Docs only</span></span></div>
-          <p class="ds-card__desc">The table of the documentation pages. A table component for products is planned.</p>
-          <span class="ds-card__meta">6 header tones</span>
-        </div>
-      </a>
 
       <a class="ds-card" href="components/role-tier-card.html">
         <div class="ds-card__visual" aria-hidden="true">
@@ -440,5 +449,71 @@
     </div>
   </div>
 </section>
+<section class="ds-section ds-section--secondary" id="patterns">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Patterns</h2>
+    <p class="ds-desc">Composed solutions built from several components. The pages are coming.</p>
+    <div class="ds-cards">
+
+      <div class="ds-card" aria-disabled="true">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Hero banner</span><span class="ds-card__tags"><span class="ds-tag">Soon</span></span></div>
+          <p class="ds-card__desc">A full-width banner at the top of a page.</p>
+        </div>
+      </div>
+
+      <div class="ds-card" aria-disabled="true">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Splash card carousel</span><span class="ds-card__tags"><span class="ds-tag">Soon</span></span></div>
+          <p class="ds-card__desc">A carousel of splash cards.</p>
+        </div>
+      </div>
+
+    </div>
+    <h3 class="ds-h3 ds-group" id="documentation">Documentation</h3>
+    <p class="ds-desc">Patterns that belong to these documentation pages only. They are not components for the product.</p>
+    <div class="ds-cards">
+
+      <a class="ds-card" href="foundations/docs-table.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-table"><span></span><span></span><span></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Docs table</span><span class="ds-card__tags"><span class="ds-tag">Docs only</span></span></div>
+          <p class="ds-card__desc">The table of these documentation pages, not a product component. A table component for products is planned.</p>
+          <span class="ds-card__meta">6 header tones</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+<section class="ds-section" id="storyblok-widgets">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Storyblok widget</h2>
+    <p class="ds-desc">Widgets in the Storyblok admin tool. Each page shows how an editor sets up the widget and how its settings map to the component.</p>
+    <div class="ds-cards">
+
+      <a class="ds-card" href="components/collapsible-storyblok.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-coll"><span>Delivery<i class="mo-ic">expand_more</i></span><span>Returns<i class="mo-ic">expand_more</i></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Collapsible</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">The Collapsible block: editor steps, settings and how they map to the component.</p>
+          <span class="ds-card__meta">Storyblok widget</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var bar = document.querySelector('.tab-bar--page'); if (!bar) return;
+    function upd() { var top = parseFloat(getComputedStyle(bar).top) || 0; bar.classList.toggle('is-stuck', bar.getBoundingClientRect().top <= top + 0.5 && scrollY > 0); }
+    addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
+  })();
+</script>
 </body>
 </html>

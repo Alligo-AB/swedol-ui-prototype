@@ -14,7 +14,7 @@ Docs (three pages: `components/list-item.html`, `list-item-specifications.html`,
 
 - A List Item is the **content** of a row: `[leading] [label] … [trailing]`. It is used inside **Menu**, **Overflow menu**, **List Picker**, **Drawer link** and **Filter sections in drawer content**. Concrete usage is documented on those components.
 - The **container owns** row height, padding, divider, hover, focus and the selected fill (see `eco-menu`). The List Item never draws them.
-- Not for: a standalone form control (`eco-checkbox`, `eco-radio`), page navigation links (`links-guide`), tabular data (`eco-table`), or rich cards.
+- Not for: a standalone form control (`eco-checkbox`, `eco-radio`), page navigation links (`links-guide`), tabular data (`eco-docs-table`, the table of the docs pages; no product table yet), or rich cards.
 
 ### Axes
 

@@ -447,11 +447,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "arrive()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L31"
+      "source_location": "L34"
     },
     {
       "id": "components_js_tabs_arrive_done",
@@ -459,11 +459,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "done()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L35"
+      "source_location": "L38"
     },
     {
       "id": "components_js_tabs_arrive_end",
@@ -471,11 +471,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "end()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L36"
+      "source_location": "L39"
     },
     {
       "id": "components_js_tabs_barkey",
@@ -483,11 +483,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "barkey()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L20"
+      "source_location": "L23"
     },
     {
       "id": "components_js_tabs_current",
@@ -495,11 +495,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "current()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L19"
+      "source_location": "L22"
     },
     {
       "id": "components_js_tabs_init",
@@ -507,11 +507,179 @@
       "_callable": true,
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "init()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L54"
+      "source_location": "L129"
+    },
+    {
+      "id": "components_js_tabs_pagenav",
+      "label": "pageNav()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "pagenav()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L67"
+    },
+    {
+      "id": "components_js_tabs_pagenav_ease",
+      "label": "ease()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "ease()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L103"
+    },
+    {
+      "id": "components_js_tabs_pagenav_jumpto",
+      "label": "jumpTo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "jumpto()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L77"
+    },
+    {
+      "id": "components_js_tabs_pagenav_max",
+      "label": "max()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "max()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L76"
+    },
+    {
+      "id": "components_js_tabs_pagenav_offset",
+      "label": "offset()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "offset()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L79"
+    },
+    {
+      "id": "components_js_tabs_pagenav_onscroll",
+      "label": "onScroll()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "onscroll()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L96"
+    },
+    {
+      "id": "components_js_tabs_pagenav_pick",
+      "label": "pick()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "pick()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L80"
+    },
+    {
+      "id": "components_js_tabs_pagenav_pos",
+      "label": "pos()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "pos()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L75"
+    },
+    {
+      "id": "components_js_tabs_pagenav_setcurrent",
+      "label": "setCurrent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "setcurrent()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L86"
+    },
+    {
+      "id": "components_js_tabs_pagenav_setcurrent_reveal",
+      "label": "reveal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "reveal()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L91"
+    },
+    {
+      "id": "components_js_tabs_pagenav_spy",
+      "label": "spy()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "spy()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L95"
+    },
+    {
+      "id": "components_js_tabs_pagenav_stop",
+      "label": "stop()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "stop()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L97"
+    },
+    {
+      "id": "components_js_tabs_pagenav_vh",
+      "label": "vH()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "vh()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L74"
+    },
+    {
+      "id": "components_js_tabs_pagenav_vtop",
+      "label": "vTop()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "vtop()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L73"
     },
     {
       "id": "components_js_tabs_place",
@@ -519,11 +687,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "place()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L22"
+      "source_location": "L25"
+    },
+    {
+      "id": "components_js_tabs_scrollparent",
+      "label": "scrollParent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "scrollparent()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L59"
     },
     {
       "id": "components_js_tabs_select",
@@ -531,11 +711,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "select()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L40"
+      "source_location": "L43"
+    },
+    {
+      "id": "components_js_tabs_token",
+      "label": "token()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "pageNav",
+      "file_type": "code",
+      "norm_label": "token()",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L66"
     },
     {
       "id": "eco_design_system_gen_build_esc_attr",
@@ -2107,7 +2299,7 @@
       "file_type": "code",
       "norm_label": "build()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L416"
+      "source_location": "L438"
     },
     {
       "id": "eco_design_system_docnav_c",
@@ -2131,7 +2323,7 @@
       "file_type": "code",
       "norm_label": "close()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L117"
+      "source_location": "L125"
     },
     {
       "id": "eco_design_system_docnav_closedrawer",
@@ -2143,7 +2335,7 @@
       "file_type": "code",
       "norm_label": "closedrawer()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L242"
+      "source_location": "L263"
     },
     {
       "id": "eco_design_system_docnav_closesearch",
@@ -2155,7 +2347,7 @@
       "file_type": "code",
       "norm_label": "closesearch()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L376"
+      "source_location": "L398"
     },
     {
       "id": "eco_design_system_docnav_cubic",
@@ -2167,7 +2359,7 @@
       "file_type": "code",
       "norm_label": "cubic()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L144"
+      "source_location": "L152"
     },
     {
       "id": "eco_design_system_docnav_esc",
@@ -2179,7 +2371,7 @@
       "file_type": "code",
       "norm_label": "esc()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L59"
+      "source_location": "L64"
     },
     {
       "id": "eco_design_system_docnav_f",
@@ -2203,7 +2395,7 @@
       "file_type": "code",
       "norm_label": "fill()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L101"
+      "source_location": "L109"
     },
     {
       "id": "eco_design_system_docnav_fold",
@@ -2215,7 +2407,7 @@
       "file_type": "code",
       "norm_label": "fold()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L276"
+      "source_location": "L297"
     },
     {
       "id": "eco_design_system_docnav_init",
@@ -2227,7 +2419,7 @@
       "file_type": "code",
       "norm_label": "init()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L452"
+      "source_location": "L474"
     },
     {
       "id": "eco_design_system_docnav_land",
@@ -2239,7 +2431,7 @@
       "file_type": "code",
       "norm_label": "land()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L147"
+      "source_location": "L155"
     },
     {
       "id": "eco_design_system_docnav_later",
@@ -2251,7 +2443,7 @@
       "file_type": "code",
       "norm_label": "later()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L122"
+      "source_location": "L130"
     },
     {
       "id": "eco_design_system_docnav_level",
@@ -2263,7 +2455,7 @@
       "file_type": "code",
       "norm_label": "level()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L229"
+      "source_location": "L250"
     },
     {
       "id": "eco_design_system_docnav_link",
@@ -2275,7 +2467,7 @@
       "file_type": "code",
       "norm_label": "link()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L60"
+      "source_location": "L66"
     },
     {
       "id": "eco_design_system_docnav_mark",
@@ -2287,7 +2479,7 @@
       "file_type": "code",
       "norm_label": "mark()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L308"
+      "source_location": "L330"
     },
     {
       "id": "eco_design_system_docnav_ms",
@@ -2299,7 +2491,7 @@
       "file_type": "code",
       "norm_label": "ms()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L100"
+      "source_location": "L108"
     },
     {
       "id": "eco_design_system_docnav_nav",
@@ -2311,7 +2503,7 @@
       "file_type": "code",
       "norm_label": "nav()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L164"
+      "source_location": "L172"
     },
     {
       "id": "eco_design_system_docnav_open",
@@ -2323,7 +2515,7 @@
       "file_type": "code",
       "norm_label": "open()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L116"
+      "source_location": "L124"
     },
     {
       "id": "eco_design_system_docnav_opendrawer",
@@ -2335,7 +2527,7 @@
       "file_type": "code",
       "norm_label": "opendrawer()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L236"
+      "source_location": "L257"
     },
     {
       "id": "eco_design_system_docnav_opensearch",
@@ -2347,7 +2539,7 @@
       "file_type": "code",
       "norm_label": "opensearch()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L368"
+      "source_location": "L390"
     },
     {
       "id": "eco_design_system_docnav_panelhtml",
@@ -2359,7 +2551,7 @@
       "file_type": "code",
       "norm_label": "panelhtml()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L63"
+      "source_location": "L71"
     },
     {
       "id": "eco_design_system_docnav_ready",
@@ -2371,7 +2563,7 @@
       "file_type": "code",
       "norm_label": "ready()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L173"
+      "source_location": "L181"
     },
     {
       "id": "eco_design_system_docnav_regexesc",
@@ -2383,7 +2575,7 @@
       "file_type": "code",
       "norm_label": "regexesc()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L307"
+      "source_location": "L329"
     },
     {
       "id": "eco_design_system_docnav_release",
@@ -2395,7 +2587,7 @@
       "file_type": "code",
       "norm_label": "release()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L146"
+      "source_location": "L154"
     },
     {
       "id": "eco_design_system_docnav_render",
@@ -2407,7 +2599,7 @@
       "file_type": "code",
       "norm_label": "render()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L347"
+      "source_location": "L369"
     },
     {
       "id": "eco_design_system_docnav_reveal",
@@ -2419,7 +2611,19 @@
       "file_type": "code",
       "norm_label": "reveal()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L125"
+      "source_location": "L133"
+    },
+    {
+      "id": "eco_design_system_docnav_sameurl",
+      "label": "sameUrl()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "docnav.js",
+      "file_type": "code",
+      "norm_label": "sameurl()",
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L203"
     },
     {
       "id": "eco_design_system_docnav_score",
@@ -2431,7 +2635,7 @@
       "file_type": "code",
       "norm_label": "score()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L314"
+      "source_location": "L336"
     },
     {
       "id": "eco_design_system_docnav_setactive",
@@ -2443,7 +2647,7 @@
       "file_type": "code",
       "norm_label": "setactive()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L342"
+      "source_location": "L364"
     },
     {
       "id": "eco_design_system_docnav_show",
@@ -2455,7 +2659,7 @@
       "file_type": "code",
       "norm_label": "show()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L102"
+      "source_location": "L110"
     },
     {
       "id": "eco_design_system_docnav_svword",
@@ -2467,7 +2671,7 @@
       "file_type": "code",
       "norm_label": "svword()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L328"
+      "source_location": "L350"
     },
     {
       "id": "eco_design_system_docnav_top",
@@ -2479,7 +2683,7 @@
       "file_type": "code",
       "norm_label": "top()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L435"
+      "source_location": "L457"
     },
     {
       "id": "eco_design_system_docnav_top_show",
@@ -2491,7 +2695,7 @@
       "file_type": "code",
       "norm_label": "show()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L442"
+      "source_location": "L464"
     },
     {
       "id": "eco_design_system_docnav_tryland",
@@ -2503,7 +2707,7 @@
       "file_type": "code",
       "norm_label": "tryland()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L172"
+      "source_location": "L180"
     },
     {
       "id": "eco_design_system_gen_gen_notifications_hub",
@@ -2744,6 +2948,142 @@
       "norm_label": "typography_dimensions()",
       "source_file": ".claude/skills/eco-tokens/generate-tokens.py",
       "source_location": "L157"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill",
+      "label": "eco-docs-table/SKILL.md",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "frontmatter": {
+        "name": "eco-docs-table",
+        "description": "Use when building a data table (rows and columns of text, check icons or small controls) \u2014 row and header heights, cell padding, lines, header background and the card shadow. **The table of the documentation pages, not a product component** (a product table component is planned; its page is `Docs table` in the Documentation group of Foundations, one page). A first version: more variants and states (sorting, selection, sticky header, empty state) are added later. Not for layout, and not for a single key/valu"
+      },
+      "node_kind": "page",
+      "norm_label": "eco-docs-table/skill.md",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_css_template",
+      "label": "CSS template",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "css template",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L64"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_dimensions",
+      "label": "Dimensions",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "dimensions",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L18"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_flags",
+      "label": "Flags",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "flags",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L98"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_header_background",
+      "label": "Header background",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "header background",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L38"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_html_structure",
+      "label": "HTML structure",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "html structure",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L48"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_rules",
+      "label": "Rules",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "rules",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L90"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_surfaces_and_lines",
+      "label": "Surfaces and lines",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "surfaces and lines",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L27"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "label": "Table (ECO Design System) \u2014 first version",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "table (eco design system) \u2014 first version",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L8"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_typography",
+      "label": "Typography",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "typography",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "claude_skills_eco_docs_table_skill_used_when",
+      "label": "Used when",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Table (ECO Design System) \u2014 first version",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "used when",
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L14"
     },
     {
       "id": "claude_skills_eco_list_item_skill",
@@ -3065,142 +3405,6 @@
       "source_location": "L1"
     },
     {
-      "id": "claude_skills_eco_table_skill",
-      "label": "eco-table/SKILL.md",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "frontmatter": {
-        "name": "eco-table",
-        "description": "Use when building a data table (rows and columns of text, check icons or small controls) \u2014 row and header heights, cell padding, lines, header background and the card shadow. A first version: more variants and states (sorting, selection, sticky header, empty state) are added later. Not for layout, and not for a single key/value list."
-      },
-      "node_kind": "page",
-      "norm_label": "eco-table/skill.md",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_css_template",
-      "label": "CSS template",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "css template",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L64"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_dimensions",
-      "label": "Dimensions",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "dimensions",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L18"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_flags",
-      "label": "Flags",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "flags",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L98"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_header_background",
-      "label": "Header background",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "header background",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L38"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_html_structure",
-      "label": "HTML structure",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "html structure",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L48"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_rules",
-      "label": "Rules",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "rules",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L90"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_surfaces_and_lines",
-      "label": "Surfaces and lines",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "surfaces and lines",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L27"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "label": "Table (ECO Design System) \u2014 first version",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "table (eco design system) \u2014 first version",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L8"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_typography",
-      "label": "Typography",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "typography",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L45"
-    },
-    {
-      "id": "claude_skills_eco_table_skill_used_when",
-      "label": "Used when",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Table (ECO Design System) \u2014 first version",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "used when",
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L14"
-    },
-    {
       "id": "eco_design_system_gen_build",
       "label": "build.py",
       "_origin": "ast",
@@ -3242,6 +3446,17 @@
       "file_type": "code",
       "norm_label": "gen_range.py",
       "source_file": "eco-design-system/gen/gen_range.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "eco_design_system_gen_gen_role_tier_card",
+      "label": "gen_role_tier_card.py",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "build.py",
+      "file_type": "code",
+      "norm_label": "gen_role_tier_card.py",
+      "source_file": "eco-design-system/gen/gen_role_tier_card.py",
       "source_location": "L1"
     },
     {
@@ -3545,7 +3760,7 @@
       "file_type": "document",
       "frontmatter": {
         "name": "eco-tabs",
-        "description": "Use when building or reviewing tabs \u2014 a tab bar of Primary or Secondary tab items that switches content in the same context, or serves as sub-navigation (e.g. the My Pages account nav). Sizes (Large/Medium/Small), configurations (label, label + icon, icon only), states (enabled/hover/active), dot and number status, overflow. Not for sequential steps (use a stepper), not for a two-view toggle (use eco-pill-segment-control), not for choosing form values (use eco-radio / eco-select)."
+        "description": "Use when building or reviewing tabs \u2014 a tab bar of Primary or Secondary tab items that switches content in the same context, or serves as sub-navigation (e.g. the My Pages account nav), or navigates the sections of one long page (on-page navigation, `tab-bar--page`). Sizes (Large/Medium/Small), configurations (label, label + icon, icon only), states (enabled/hover/active), dot and number status, overflow. Not for sequential steps (use a stepper), not for a two-view toggle (use eco-pill-segment-control), not"
       },
       "node_kind": "page",
       "norm_label": "eco-tabs/skill.md",
@@ -3562,6 +3777,18 @@
       "node_kind": "heading",
       "norm_label": "anatomy",
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
+      "source_location": "L63"
+    },
+    {
+      "id": "claude_skills_eco_tabs_skill_choosing_primary_or_secondary",
+      "label": "Choosing Primary or Secondary",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "Tabs (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "choosing primary or secondary",
+      "source_file": ".claude/skills/eco-tabs/SKILL.md",
       "source_location": "L29"
     },
     {
@@ -3574,7 +3801,7 @@
       "node_kind": "heading",
       "norm_label": "flags for design",
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L119"
+      "source_location": "L153"
     },
     {
       "id": "claude_skills_eco_tabs_skill_html_structure",
@@ -3586,7 +3813,7 @@
       "node_kind": "heading",
       "norm_label": "html structure",
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L75"
+      "source_location": "L109"
     },
     {
       "id": "claude_skills_eco_tabs_skill_on_page_navigation_docs",
@@ -3598,7 +3825,19 @@
       "node_kind": "heading",
       "norm_label": "on-page navigation (docs)",
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L115"
+      "source_location": "L149"
+    },
+    {
+      "id": "claude_skills_eco_tabs_skill_on_page_navigation_tab_bar_page",
+      "label": "On-page navigation (`tab-bar--page`)",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "Tabs (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "on-page navigation (`tab-bar--page`)",
+      "source_file": ".claude/skills/eco-tabs/SKILL.md",
+      "source_location": "L42"
     },
     {
       "id": "claude_skills_eco_tabs_skill_rules",
@@ -3610,7 +3849,7 @@
       "node_kind": "heading",
       "norm_label": "rules",
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L105"
+      "source_location": "L139"
     },
     {
       "id": "claude_skills_eco_tabs_skill_size_model",
@@ -3622,7 +3861,7 @@
       "node_kind": "heading",
       "norm_label": "size model",
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L42"
+      "source_location": "L76"
     },
     {
       "id": "claude_skills_eco_tabs_skill_states",
@@ -3634,7 +3873,7 @@
       "node_kind": "heading",
       "norm_label": "states",
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L58"
+      "source_location": "L92"
     },
     {
       "id": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
@@ -3658,7 +3897,7 @@
       "node_kind": "heading",
       "norm_label": "typography",
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L54"
+      "source_location": "L88"
     },
     {
       "id": "claude_skills_eco_tabs_skill_when_to_use_not_to_use",
@@ -4137,7 +4376,7 @@
       "label": "tabs.js",
       "_origin": "ast",
       "community": 22,
-      "community_name": "tabs.js",
+      "community_name": "pageNav",
       "file_type": "code",
       "norm_label": "tabs.js",
       "source_file": "components/js/tabs.js",
@@ -6094,130 +6333,160 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_pagination_skill_pagination",
-      "label": "Pagination (load more)",
+      "id": "_claude_skills_eco_badge_skill_badge_basic",
+      "label": "Badge/Basic (.badge-basic)",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "pagination (load more)",
-      "rationale": "Load-more pattern with counter, progress bar and Secondary md button; 190px wide and centered.",
-      "source_file": ".claude/skills/eco-pagination/SKILL.md",
+      "norm_label": "badge/basic (.badge-basic)",
+      "rationale": "Non-interactive status/label indicator; class named .badge-basic to avoid clashing with the header cart counter .badge.",
+      "source_file": ".claude/skills/eco-badge/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_section_skill_mypages_title_spacing",
-      "label": "My Pages page-title section spacing",
+      "id": "_claude_skills_eco_badge_skill_emphasis",
+      "label": "Badge emphasis Strong/Weak/Weaker",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "my pages page-title section spacing",
-      "rationale": "main-content padding-top 24/40; page-preamble margin-bottom 24/32/40.",
-      "source_file": ".claude/skills/eco-section/SKILL.md",
+      "norm_label": "badge emphasis strong/weak/weaker",
+      "rationale": "Formula per state: surface-{state}-default/weak/weaker with matching border and text tokens.",
+      "source_file": ".claude/skills/eco-badge/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_section_skill_page_divider",
-      "label": "Page Divider",
+      "id": "_claude_skills_eco_badge_skill_letter_case",
+      "label": "Badge letter case parameter",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "page divider",
-      "rationale": "Thin horizontal line between two sections of the same background.",
-      "source_file": ".claude/skills/eco-section/SKILL.md",
+      "norm_label": "badge letter case parameter",
+      "rationale": "Sentence Case (500) is default; Upper Case (700 + uppercase) is a deliberate style switch for fixed category labels.",
+      "source_file": ".claude/skills/eco-badge/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_section_skill_section",
-      "label": "Section",
+      "id": "_claude_skills_eco_badge_skill_states",
+      "label": "Badge states Neutral Grey/Dark and Alert Info/Success/Warning/Danger",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "section",
-      "rationale": "Modular full-width block with breakpoint-adaptive padding and surface raised primary/secondary.",
-      "source_file": ".claude/skills/eco-section/SKILL.md",
+      "norm_label": "badge states neutral grey/dark and alert info/success/warning/danger",
+      "source_file": ".claude/skills/eco-badge/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_breadcrumb_skill_px_page_rule",
-      "label": "Breadcrumb uses --px-page not --px-full",
+      "id": "_claude_skills_eco_banner_notification_skill_emphasis",
+      "label": "Banner emphasis Strong/Weak/Weaker",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
       "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "breadcrumb uses --px-page not --px-full",
-      "rationale": "Breadcrumb sits inside width-constrained .page so the grid margin token is correct.",
-      "source_file": ".claude/skills/eco-breadcrumb/SKILL.md",
+      "file_type": "concept",
+      "norm_label": "banner emphasis strong/weak/weaker",
+      "rationale": "Three-tier ladder per status (information/success/warning/danger) shared by Small and Large.",
+      "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_pagination_skill_hide_whole_component_rule",
-      "label": "Hide the whole pagination once all items loaded",
+      "id": "_claude_skills_eco_colors_skill_surface_status_tokens",
+      "label": "Surface semantic status colors default/weak/weaker",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
       "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "hide the whole pagination once all items loaded",
-      "rationale": "Hiding only the button leaves a misleading counter and progress bar.",
-      "source_file": ".claude/skills/eco-pagination/SKILL.md",
+      "file_type": "concept",
+      "norm_label": "surface semantic status colors default/weak/weaker",
+      "source_file": ".claude/skills/eco-colors/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_pagination_skill_no_bottom_padding_rule",
-      "label": "Pagination has no bottom padding of its own",
+      "id": "_claude_skills_eco_inline_notification_skill_emphasis",
+      "label": "Inline Notification emphasis System Strong/Weak",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
       "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "pagination has no bottom padding of its own",
-      "rationale": "Section's own bottom padding already gives air; adding more would double spacing.",
-      "source_file": ".claude/skills/eco-pagination/SKILL.md",
+      "file_type": "concept",
+      "norm_label": "inline notification emphasis system strong/weak",
+      "rationale": "Only Strong/Weak; Weaker is a Banner-only concept.",
+      "source_file": ".claude/skills/eco-inline-notification/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_section_skill_px_full_rule",
-      "label": "Use --px-full not --px-page for divider/section",
+      "id": "_claude_skills_eco_badge_skill_color_meaning_mapping",
+      "label": "Badge color-meaning mapping for lifecycle status",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 1,
-      "community_name": "Section",
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
       "contributor": null,
       "file_type": "rationale",
-      "norm_label": "use --px-full not --px-page for divider/section",
-      "rationale": "--px-page lacks xl centering against max-w; --px-full keeps divider aligned with section content.",
-      "source_file": ".claude/skills/eco-section/SKILL.md",
+      "norm_label": "badge color-meaning mapping for lifecycle status",
+      "rationale": "Keep color to meaning consistent within a project (New=Success weak, Updated=Info weak, In progress=Warning weak, Archive=Neutral Grey weaker).",
+      "source_file": ".claude/skills/eco-badge/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_badge_skill_not_tag_or_counter",
+      "label": "Badge vs Tag vs counter bubble distinction",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "badge vs tag vs counter bubble distinction",
+      "rationale": "Badge is never interactive; Tag is interactive filtering; .badge is the circular cart counter.",
+      "source_file": ".claude/skills/eco-badge/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_banner_notification_skill_strong_replaces_extra_strong",
+      "label": "Strong emphasis replaces System Extra Strong",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 13,
+      "community_name": "Badge/Basic (.badge-basic)",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "strong emphasis replaces system extra strong",
+      "rationale": "2026-09 Figma restructure merged the centered admin-impersonation variant into left-aligned Strong.",
+      "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -6916,22 +7185,6 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_tile_link_skill_bg_colors",
-      "label": "Tile Link background colors White/Grey/Black",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 23,
-      "community_name": "Checkbox",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "tile link background colors white/grey/black",
-      "rationale": "Spec table lists border tokens as background tokens; likely a token mix-up.",
-      "source_file": ".claude/skills/eco-tile-link/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "_claude_skills_eco_checkbox_skill_disabled_selected_style",
       "label": "Checkbox Disabled Selected gray box with gray checkmark",
       "_origin": "semantic",
@@ -7174,128 +7427,145 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_motion_skill_combination_rule",
-      "label": "Distance + fade + easing combination table",
+      "id": "_claude_skills_eco_elevation_skill_drawer_mobile_base_styling",
+      "label": "Drawer mobile base styling at max-width 768px",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 41,
-      "community_name": "Duration tokens fast/medium/slow",
+      "community_name": "Input Field",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "distance + fade + easing combination table",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "norm_label": "drawer mobile base styling at max-width 768px",
+      "rationale": "Every component in the drawer switches to Mobile Base Styling (smaller title, 40px inputs, stacked form-row).",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_motion_skill_duration_tokens",
-      "label": "Duration tokens fast/medium/slow",
+      "id": "_claude_skills_eco_input_skill_input",
+      "label": "Input Field",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 41,
-      "community_name": "Duration tokens fast/medium/slow",
+      "community_name": "Input Field",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "duration tokens fast/medium/slow",
-      "rationale": "Fast 50-200ms, Medium 250-400ms, Slow 450-600ms with four steps each.",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_motion_skill_fades",
-      "label": "Fades fast/medium/slow",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 41,
-      "community_name": "Duration tokens fast/medium/slow",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "fades fast/medium/slow",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_motion_skill_motion",
-      "label": "Motion easing and duration",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 41,
-      "community_name": "Duration tokens fast/medium/slow",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "motion easing and duration",
-      "rationale": "Animation conveys intent; timing, spacing and ease as three basic concepts.",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_pagination_skill_progress_bar",
-      "label": "Pagination progress bar",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 41,
-      "community_name": "Duration tokens fast/medium/slow",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "pagination progress bar",
-      "rationale": "2px bar with width computed via JS as visible/total.",
-      "source_file": ".claude/skills/eco-pagination/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_button_skill_focus_outline_method",
-      "label": "Button keyboard-nav focus outline method",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 41,
-      "community_name": "Duration tokens fast/medium/slow",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "button keyboard-nav focus outline method",
-      "rationale": "Uses outline with offset, not ::after inset, because inset measures from padding edge and bordered buttons lose the gap; shown only under body.keyboard-nav, never :focus-visible.",
-      "source_file": ".claude/skills/eco-button/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_focus_ring_absolute",
-      "label": "Input focus ring is absolute inset -3px, keyboard-only",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 41,
-      "community_name": "Duration tokens fast/medium/slow",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "input focus ring is absolute inset -3px, keyboard-only",
-      "rationale": "Ring is an ::after element on the wrapper, shown only under body.keyboard-nav, animated with opacity.",
+      "norm_label": "input field",
+      "rationale": "Text input with sizes Large/Small/XSmall, seven states, label/hint anatomy; border-radius 0.",
       "source_file": ".claude/skills/eco-input/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_motion_skill_distance_drives_duration",
-      "label": "Distance drives duration group",
+      "id": "_claude_skills_eco_input_skill_label_hint_pattern",
+      "label": "Label above input, hint/message below pattern",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 41,
-      "community_name": "Duration tokens fast/medium/slow",
+      "community_name": "Input Field",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "label above input, hint/message below pattern",
+      "rationale": "Label uppercase Bold; message is body-sm with 4px gap.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_input_skill_sizes",
+      "label": "Input sizes per breakpoint",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 41,
+      "community_name": "Input Field",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "input sizes per breakpoint",
+      "rationale": "Desktop Large 48px, Small 40px, XSmall 32px; Mobile Large 40px, Small 32px.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_input_skill_states",
+      "label": "Input states enabled/hover/active/focus/error/success/disabled",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 41,
+      "community_name": "Input Field",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "input states enabled/hover/active/focus/error/success/disabled",
+      "rationale": "Every state must be implemented each time.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_select_skill_select",
+      "label": "Select",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 41,
+      "community_name": "Input Field",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "select",
+      "rationale": "Dropdown using appearance:none with custom 24px arrow; sizes and states follow Input.",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_select_skill_sizes",
+      "label": "Select sizes per breakpoint",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 41,
+      "community_name": "Input Field",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "select sizes per breakpoint",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_select_skill_states",
+      "label": "Select states",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 41,
+      "community_name": "Input Field",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "select states",
+      "rationale": "Seven states identical to Input.",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_select_skill_active_state_js_rule",
+      "label": "Select active state requires JS .is-active",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 41,
+      "community_name": "Input Field",
       "contributor": null,
       "file_type": "rationale",
-      "norm_label": "distance drives duration group",
-      "rationale": "Short <=25% of view uses fast; medium 26-50% medium; long 51-100% slow.",
-      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "norm_label": "select active state requires js .is-active",
+      "rationale": "Cannot use :not(:placeholder-shown) on select, so JS toggles the class when a non-default option is chosen.",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -7316,112 +7586,114 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_action_link_skill_action_link",
-      "label": "Action Link",
+      "id": "_claude_skills_eco_elevation_skill_component_specific",
+      "label": "Component-specific elevation tokens",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 49,
-      "community_name": "Action Link",
+      "community_name": "Elevation and shadows",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "action link",
-      "rationale": "Standalone clickable link with optional left/right icon; underline appears only on hover; used for navigation and downloads.",
-      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "norm_label": "component-specific elevation tokens",
+      "rationale": "Switch and table-overflow shadows are never used outside their component.",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_action_link_skill_inverted_variant",
-      "label": "Action Link Text Primary Inverted variant",
+      "id": "_claude_skills_eco_elevation_skill_designated_level",
+      "label": "Designated Level elevation-drawer-*",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 49,
-      "community_name": "Action Link",
+      "community_name": "Elevation and shadows",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "action link text primary inverted variant",
-      "rationale": "For dark backgrounds; uses text-action-primary-inverted tokens.",
-      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "norm_label": "designated level elevation-drawer-*",
+      "rationale": "Global drawers and navigation always use drawer shadows, never elevation-b-*.",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_action_link_skill_size_scale",
-      "label": "Action Link sizes Large/Medium/Small",
+      "id": "_claude_skills_eco_elevation_skill_drawer_conventions",
+      "label": "Drawer conventions",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 49,
-      "community_name": "Action Link",
+      "community_name": "Elevation and shadows",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "action link sizes large/medium/small",
-      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "norm_label": "drawer conventions",
+      "rationale": "Overlay opacity-black-20, width min(500px,100%), header scroll shadow b-60 toggled by JS.",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_inline_link_skill_color_variants",
-      "label": "Inline Link color variants Primary/Secondary/Tertiary/Inverted",
+      "id": "_claude_skills_eco_elevation_skill_elevation",
+      "label": "Elevation and shadows",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 49,
-      "community_name": "Action Link",
+      "community_name": "Elevation and shadows",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "inline link color variants primary/secondary/tertiary/inverted",
-      "source_file": ".claude/skills/eco-inline-link/SKILL.md",
+      "norm_label": "elevation and shadows",
+      "rationale": "Bigger and softer shadow means higher elevation; use sparingly.",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_inline_link_skill_inline_link",
-      "label": "Inline Link",
+      "id": "_claude_skills_eco_elevation_skill_shadow_bottom",
+      "label": "Shadow Bottom elevation-b-20 to b-100",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 49,
-      "community_name": "Action Link",
+      "community_name": "Elevation and shadows",
       "contributor": null,
       "file_type": "concept",
-      "norm_label": "inline link",
-      "rationale": "Used inside sentences; underlined when enabled, underline removed on hover, never with icons.",
-      "source_file": ".claude/skills/eco-inline-link/SKILL.md",
+      "norm_label": "shadow bottom elevation-b-20 to b-100",
+      "rationale": "Most common; b-20 cards/tables, b-40 tooltip, b-60 notification, b-80 header/menu, b-100 modals.",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_action_link_skill_icon_no_underline_rule",
-      "label": "Action Link icons never underlined on hover",
+      "id": "_claude_skills_eco_elevation_skill_shadow_top",
+      "label": "Shadow Top elevation-t-*",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 49,
-      "community_name": "Action Link",
+      "community_name": "Elevation and shadows",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "shadow top elevation-t-*",
+      "rationale": "Used sparingly; never mixed with Bottom on one component.",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_elevation_skill_lowest_level_rule",
+      "label": "Always choose lowest possible elevation level",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 49,
+      "community_name": "Elevation and shadows",
       "contributor": null,
       "file_type": "rationale",
-      "norm_label": "action link icons never underlined on hover",
-      "rationale": "Icon inherits text-decoration from hovered link, so .action-link .ms must set text-decoration:none explicitly.",
-      "source_file": ".claude/skills/eco-action-link/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_inline_link_skill_vs_action_link",
-      "label": "Inline Link vs Action Link difference",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 49,
-      "community_name": "Action Link",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "inline link vs action link difference",
-      "rationale": "Opposite underline behavior, inline vs inline-flex display, icons never vs optional.",
-      "source_file": ".claude/skills/eco-inline-link/SKILL.md",
+      "norm_label": "always choose lowest possible elevation level",
+      "rationale": "Excessive elevation distracts; b-20 is default for card-like surfaces, modals at b-100.",
+      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -7469,6 +7741,22 @@
       "file_type": "concept",
       "norm_label": "gotocompareview() switch-tab-then-scroll function",
       "rationale": "Reuses the table's setCompareView and scrolls with --header-top-h offset.",
+      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_role_tier_card_skill_light_dark_variants",
+      "label": "Role tier light vs dark card variants",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 50,
+      "community_name": "Role Card / Tier Card pair",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "role tier light vs dark card variants",
+      "rationale": "Base tier is light; extended tier .role-tier--dark uses surface-100 with accent-default title.",
       "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
       "source_location": null,
       "source_url": null
@@ -7616,22 +7904,6 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_role_tier_card_skill_light_dark_variants",
-      "label": "Role tier light vs dark card variants",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 57,
-      "community_name": "ECO semantic color tokens",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "role tier light vs dark card variants",
-      "rationale": "Base tier is light; extended tier .role-tier--dark uses surface-100 with accent-default title.",
-      "source_file": ".claude/skills/eco-role-tier-card/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "_claude_skills_eco_banner_notification_skill_promotion_brand_tokens",
       "label": "Promotion uses brand-scoped accent tokens",
       "_origin": "semantic",
@@ -7660,84 +7932,6 @@
       "norm_label": "never hardcode hex, use var(--color-*)",
       "rationale": "Single source of truth in tokens.json keeps brands consistent.",
       "source_file": ".claude/skills/eco-colors/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_section_skill_padding_scale",
-      "label": "Section padding per breakpoint first vs other",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 58,
-      "community_name": "Section padding per breakpoint first vs other",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "section padding per breakpoint first vs other",
-      "rationale": "First section has lower top padding; other sections 32/48/56/72 top, 40/48/64/80 bottom.",
-      "source_file": ".claude/skills/eco-section/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_spacing_skill_consumer_classes",
-      "label": "Spacing consumer classes mt-space, pt-space, gap-space",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 58,
-      "community_name": "Section padding per breakpoint first vs other",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "spacing consumer classes mt-space, pt-space, gap-space",
-      "source_file": ".claude/skills/eco-spacing/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_spacing_skill_layout_vertical_whitespace",
-      "label": "Layout Vertical Whitespace space-sm/md/lg",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 58,
-      "community_name": "Section padding per breakpoint first vs other",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "layout vertical whitespace space-sm/md/lg",
-      "rationale": "Breakpoint-adaptive T-shirt scale for air between a section's content blocks (space-lg 32-56px, space-md 24-48px).",
-      "source_file": ".claude/skills/eco-spacing/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_spacing_skill_scale",
-      "label": "Spacing Scale space-0 to space-120",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 58,
-      "community_name": "Section padding per breakpoint first vs other",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "spacing scale space-0 to space-120",
-      "source_file": ".claude/skills/eco-spacing/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_spacing_skill_spacing",
-      "label": "Spacing",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 58,
-      "community_name": "Section padding per breakpoint first vs other",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "spacing",
-      "rationale": "Spacing tokens apply to all margins, padding, gaps; mostly multiples of 8px.",
-      "source_file": ".claude/skills/eco-spacing/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -7821,6 +8015,22 @@
       "source_url": null
     },
     {
+      "id": "_claude_skills_eco_tile_link_skill_bg_colors",
+      "label": "Tile Link background colors White/Grey/Black",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 59,
+      "community_name": "Button",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "tile link background colors white/grey/black",
+      "rationale": "Spec table lists border tokens as background tokens; likely a token mix-up.",
+      "source_file": ".claude/skills/eco-tile-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "_claude_skills_eco_tile_link_skill_black_hover_overlay",
       "label": "Tile Link Black hover white 20% overlay",
       "_origin": "semantic",
@@ -7883,13 +8093,60 @@
       "source_url": null
     },
     {
+      "id": "_claude_skills_eco_action_link_skill_action_link",
+      "label": "Action Link",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "action link",
+      "rationale": "Standalone clickable link with optional left/right icon; underline appears only on hover; used for navigation and downloads.",
+      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_action_link_skill_inverted_variant",
+      "label": "Action Link Text Primary Inverted variant",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "action link text primary inverted variant",
+      "rationale": "For dark backgrounds; uses text-action-primary-inverted tokens.",
+      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_action_link_skill_size_scale",
+      "label": "Action Link sizes Large/Medium/Small",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "action link sizes large/medium/small",
+      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "_claude_skills_eco_breadcrumb_skill_active_state",
       "label": "Breadcrumb Active (last, current page) state",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "breadcrumb active (last, current page) state",
@@ -7905,7 +8162,7 @@
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "breadcrumb",
@@ -7921,7 +8178,7 @@
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "collapsible / accordion",
@@ -7937,12 +8194,74 @@
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "collapsible max-height animation via togglecollapsible()",
       "rationale": "CSS cannot transition to auto, so JS sets max-height to scrollHeight.",
       "source_file": ".claude/skills/eco-collapsible/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_inline_link_skill_color_variants",
+      "label": "Inline Link color variants Primary/Secondary/Tertiary/Inverted",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "inline link color variants primary/secondary/tertiary/inverted",
+      "source_file": ".claude/skills/eco-inline-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_inline_link_skill_inline_link",
+      "label": "Inline Link",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "inline link",
+      "rationale": "Used inside sentences; underlined when enabled, underline removed on hover, never with icons.",
+      "source_file": ".claude/skills/eco-inline-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_motion_skill_combination_rule",
+      "label": "Distance + fade + easing combination table",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "distance + fade + easing combination table",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_motion_skill_duration_tokens",
+      "label": "Duration tokens fast/medium/slow",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "duration tokens fast/medium/slow",
+      "rationale": "Fast 50-200ms, Medium 250-400ms, Slow 450-600ms with four steps each.",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -7953,12 +8272,139 @@
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "easing tokens decelerate/accelerate/standard",
       "rationale": "decelerate-emphasized for entrances, accelerate-generic for exits, standard for hover.",
       "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_motion_skill_fades",
+      "label": "Fades fast/medium/slow",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "fades fast/medium/slow",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_motion_skill_motion",
+      "label": "Motion easing and duration",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "motion easing and duration",
+      "rationale": "Animation conveys intent; timing, spacing and ease as three basic concepts.",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_pagination_skill_pagination",
+      "label": "Pagination (load more)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "pagination (load more)",
+      "rationale": "Load-more pattern with counter, progress bar and Secondary md button; 190px wide and centered.",
+      "source_file": ".claude/skills/eco-pagination/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_pagination_skill_progress_bar",
+      "label": "Pagination progress bar",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "pagination progress bar",
+      "rationale": "2px bar with width computed via JS as visible/total.",
+      "source_file": ".claude/skills/eco-pagination/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_section_skill_mypages_title_spacing",
+      "label": "My Pages page-title section spacing",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "my pages page-title section spacing",
+      "rationale": "main-content padding-top 24/40; page-preamble margin-bottom 24/32/40.",
+      "source_file": ".claude/skills/eco-section/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_section_skill_padding_scale",
+      "label": "Section padding per breakpoint first vs other",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "section padding per breakpoint first vs other",
+      "rationale": "First section has lower top padding; other sections 32/48/56/72 top, 40/48/64/80 bottom.",
+      "source_file": ".claude/skills/eco-section/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_section_skill_page_divider",
+      "label": "Page Divider",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "page divider",
+      "rationale": "Thin horizontal line between two sections of the same background.",
+      "source_file": ".claude/skills/eco-section/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_section_skill_section",
+      "label": "Section",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "section",
+      "rationale": "Modular full-width block with breakpoint-adaptive padding and surface raised primary/secondary.",
+      "source_file": ".claude/skills/eco-section/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -7969,12 +8415,90 @@
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "section zeroed-padding use cases",
       "rationale": "Five defined cases: divider, adjacent topic, fluid hero, first section next to spaced component, first section with fluid banner.",
       "source_file": ".claude/skills/eco-section/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_spacing_skill_consumer_classes",
+      "label": "Spacing consumer classes mt-space, pt-space, gap-space",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "spacing consumer classes mt-space, pt-space, gap-space",
+      "source_file": ".claude/skills/eco-spacing/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_spacing_skill_layout_vertical_whitespace",
+      "label": "Layout Vertical Whitespace space-sm/md/lg",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "layout vertical whitespace space-sm/md/lg",
+      "rationale": "Breakpoint-adaptive T-shirt scale for air between a section's content blocks (space-lg 32-56px, space-md 24-48px).",
+      "source_file": ".claude/skills/eco-spacing/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_spacing_skill_scale",
+      "label": "Spacing Scale space-0 to space-120",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "spacing scale space-0 to space-120",
+      "source_file": ".claude/skills/eco-spacing/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_spacing_skill_spacing",
+      "label": "Spacing",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "spacing",
+      "rationale": "Spacing tokens apply to all margins, padding, gaps; mostly multiples of 8px.",
+      "source_file": ".claude/skills/eco-spacing/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_action_link_skill_icon_no_underline_rule",
+      "label": "Action Link icons never underlined on hover",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "action link icons never underlined on hover",
+      "rationale": "Icon inherits text-decoration from hovered link, so .action-link .ms must set text-decoration:none explicitly.",
+      "source_file": ".claude/skills/eco-action-link/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -7985,12 +8509,44 @@
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "rationale",
       "norm_label": "breadcrumb built-in spacing zeroes following section top padding",
       "rationale": "Component has its own vertical padding, so .breadcrumb + .main-content/.section gets padding-top:0 to avoid stacking.",
       "source_file": ".claude/skills/eco-breadcrumb/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_breadcrumb_skill_px_page_rule",
+      "label": "Breadcrumb uses --px-page not --px-full",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "breadcrumb uses --px-page not --px-full",
+      "rationale": "Breadcrumb sits inside width-constrained .page so the grid margin token is correct.",
+      "source_file": ".claude/skills/eco-breadcrumb/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_button_skill_focus_outline_method",
+      "label": "Button keyboard-nav focus outline method",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "button keyboard-nav focus outline method",
+      "rationale": "Uses outline with offset, not ::after inset, because inset measures from padding edge and bordered buttons lose the gap; shown only under body.keyboard-nav, never :focus-visible.",
+      "source_file": ".claude/skills/eco-button/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -8001,7 +8557,7 @@
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "rationale",
       "norm_label": "hide last row bottom line when list closes a section",
@@ -8017,7 +8573,7 @@
       "author": null,
       "captured_at": null,
       "community": 60,
-      "community_name": "Breadcrumb",
+      "community_name": "Section",
       "contributor": null,
       "file_type": "rationale",
       "norm_label": "collapsible header uses min-height not height",
@@ -8027,65 +8583,98 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_badge_skill_badge_basic",
-      "label": "Badge/Basic (.badge-basic)",
+      "id": "_claude_skills_eco_inline_link_skill_vs_action_link",
+      "label": "Inline Link vs Action Link difference",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
+      "community": 60,
+      "community_name": "Section",
       "contributor": null,
-      "file_type": "concept",
-      "norm_label": "badge/basic (.badge-basic)",
-      "rationale": "Non-interactive status/label indicator; class named .badge-basic to avoid clashing with the header cart counter .badge.",
-      "source_file": ".claude/skills/eco-badge/SKILL.md",
+      "file_type": "rationale",
+      "norm_label": "inline link vs action link difference",
+      "rationale": "Opposite underline behavior, inline vs inline-flex display, icons never vs optional.",
+      "source_file": ".claude/skills/eco-inline-link/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_badge_skill_emphasis",
-      "label": "Badge emphasis Strong/Weak/Weaker",
+      "id": "_claude_skills_eco_input_skill_focus_ring_absolute",
+      "label": "Input focus ring is absolute inset -3px, keyboard-only",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
+      "community": 60,
+      "community_name": "Section",
       "contributor": null,
-      "file_type": "concept",
-      "norm_label": "badge emphasis strong/weak/weaker",
-      "rationale": "Formula per state: surface-{state}-default/weak/weaker with matching border and text tokens.",
-      "source_file": ".claude/skills/eco-badge/SKILL.md",
+      "file_type": "rationale",
+      "norm_label": "input focus ring is absolute inset -3px, keyboard-only",
+      "rationale": "Ring is an ::after element on the wrapper, shown only under body.keyboard-nav, animated with opacity.",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_badge_skill_letter_case",
-      "label": "Badge letter case parameter",
+      "id": "_claude_skills_eco_motion_skill_distance_drives_duration",
+      "label": "Distance drives duration group",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
+      "community": 60,
+      "community_name": "Section",
       "contributor": null,
-      "file_type": "concept",
-      "norm_label": "badge letter case parameter",
-      "rationale": "Sentence Case (500) is default; Upper Case (700 + uppercase) is a deliberate style switch for fixed category labels.",
-      "source_file": ".claude/skills/eco-badge/SKILL.md",
+      "file_type": "rationale",
+      "norm_label": "distance drives duration group",
+      "rationale": "Short <=25% of view uses fast; medium 26-50% medium; long 51-100% slow.",
+      "source_file": ".claude/skills/eco-motion/SKILL.md",
       "source_location": null,
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_badge_skill_states",
-      "label": "Badge states Neutral Grey/Dark and Alert Info/Success/Warning/Danger",
+      "id": "_claude_skills_eco_pagination_skill_hide_whole_component_rule",
+      "label": "Hide the whole pagination once all items loaded",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
+      "community": 60,
+      "community_name": "Section",
       "contributor": null,
-      "file_type": "concept",
-      "norm_label": "badge states neutral grey/dark and alert info/success/warning/danger",
-      "source_file": ".claude/skills/eco-badge/SKILL.md",
+      "file_type": "rationale",
+      "norm_label": "hide the whole pagination once all items loaded",
+      "rationale": "Hiding only the button leaves a misleading counter and progress bar.",
+      "source_file": ".claude/skills/eco-pagination/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_pagination_skill_no_bottom_padding_rule",
+      "label": "Pagination has no bottom padding of its own",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "pagination has no bottom padding of its own",
+      "rationale": "Section's own bottom padding already gives air; adding more would double spacing.",
+      "source_file": ".claude/skills/eco-pagination/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "_claude_skills_eco_section_skill_px_full_rule",
+      "label": "Use --px-full not --px-page for divider/section",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 60,
+      "community_name": "Section",
+      "contributor": null,
+      "file_type": "rationale",
+      "norm_label": "use --px-full not --px-page for divider/section",
+      "rationale": "--px-page lacks xl centering against max-w; --px-full keeps divider aligned with section content.",
+      "source_file": ".claude/skills/eco-section/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -8106,22 +8695,6 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_banner_notification_skill_emphasis",
-      "label": "Banner emphasis Strong/Weak/Weaker",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "banner emphasis strong/weak/weaker",
-      "rationale": "Three-tier ladder per status (information/success/warning/danger) shared by Small and Large.",
-      "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "_claude_skills_eco_banner_notification_skill_size",
       "label": "Banner size Small/Large",
       "_origin": "semantic",
@@ -8134,133 +8707,6 @@
       "norm_label": "banner size small/large",
       "rationale": "Small is general purpose; Large is a rich icon+heading+body+buttons banner exclusive to My Pages.",
       "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_colors_skill_surface_status_tokens",
-      "label": "Surface semantic status colors default/weak/weaker",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "surface semantic status colors default/weak/weaker",
-      "source_file": ".claude/skills/eco-colors/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_component_specific",
-      "label": "Component-specific elevation tokens",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "component-specific elevation tokens",
-      "rationale": "Switch and table-overflow shadows are never used outside their component.",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_designated_level",
-      "label": "Designated Level elevation-drawer-*",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "designated level elevation-drawer-*",
-      "rationale": "Global drawers and navigation always use drawer shadows, never elevation-b-*.",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_drawer_conventions",
-      "label": "Drawer conventions",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "drawer conventions",
-      "rationale": "Overlay opacity-black-20, width min(500px,100%), header scroll shadow b-60 toggled by JS.",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_drawer_mobile_base_styling",
-      "label": "Drawer mobile base styling at max-width 768px",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "drawer mobile base styling at max-width 768px",
-      "rationale": "Every component in the drawer switches to Mobile Base Styling (smaller title, 40px inputs, stacked form-row).",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_elevation",
-      "label": "Elevation and shadows",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "elevation and shadows",
-      "rationale": "Bigger and softer shadow means higher elevation; use sparingly.",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_shadow_bottom",
-      "label": "Shadow Bottom elevation-b-20 to b-100",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "shadow bottom elevation-b-20 to b-100",
-      "rationale": "Most common; b-20 cards/tables, b-40 tooltip, b-60 notification, b-80 header/menu, b-100 modals.",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_shadow_top",
-      "label": "Shadow Top elevation-t-*",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "shadow top elevation-t-*",
-      "rationale": "Used sparingly; never mixed with Bottom on one component.",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -8297,22 +8743,6 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_inline_notification_skill_emphasis",
-      "label": "Inline Notification emphasis System Strong/Weak",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "inline notification emphasis system strong/weak",
-      "rationale": "Only Strong/Weak; Weaker is a Banner-only concept.",
-      "source_file": ".claude/skills/eco-inline-notification/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "_claude_skills_eco_inline_notification_skill_inline_notification",
       "label": "System Inline Notification",
       "_origin": "semantic",
@@ -8341,70 +8771,6 @@
       "norm_label": "inline notification sizes large/small",
       "rationale": "Large 48px/24px icon, Small 32px/20px icon.",
       "source_file": ".claude/skills/eco-inline-notification/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_input",
-      "label": "Input Field",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "input field",
-      "rationale": "Text input with sizes Large/Small/XSmall, seven states, label/hint anatomy; border-radius 0.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_label_hint_pattern",
-      "label": "Label above input, hint/message below pattern",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "label above input, hint/message below pattern",
-      "rationale": "Label uppercase Bold; message is body-sm with 4px gap.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_sizes",
-      "label": "Input sizes per breakpoint",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "input sizes per breakpoint",
-      "rationale": "Desktop Large 48px, Small 40px, XSmall 32px; Mobile Large 40px, Small 32px.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_input_skill_states",
-      "label": "Input states enabled/hover/active/focus/error/success/disabled",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "input states enabled/hover/active/focus/error/success/disabled",
-      "rationale": "Every state must be implemented each time.",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -8457,85 +8823,6 @@
       "source_url": null
     },
     {
-      "id": "_claude_skills_eco_select_skill_select",
-      "label": "Select",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "select",
-      "rationale": "Dropdown using appearance:none with custom 24px arrow; sizes and states follow Input.",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_select_skill_sizes",
-      "label": "Select sizes per breakpoint",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "select sizes per breakpoint",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_select_skill_states",
-      "label": "Select states",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "select states",
-      "rationale": "Seven states identical to Input.",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_badge_skill_color_meaning_mapping",
-      "label": "Badge color-meaning mapping for lifecycle status",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "badge color-meaning mapping for lifecycle status",
-      "rationale": "Keep color to meaning consistent within a project (New=Success weak, Updated=Info weak, In progress=Warning weak, Archive=Neutral Grey weaker).",
-      "source_file": ".claude/skills/eco-badge/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_badge_skill_not_tag_or_counter",
-      "label": "Badge vs Tag vs counter bubble distinction",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "badge vs tag vs counter bubble distinction",
-      "rationale": "Badge is never interactive; Tag is interactive filtering; .badge is the circular cart counter.",
-      "source_file": ".claude/skills/eco-badge/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "_claude_skills_eco_banner_notification_skill_large_mypages_only",
       "label": "Large banner exclusive to My Pages",
       "_origin": "semantic",
@@ -8548,38 +8835,6 @@
       "norm_label": "large banner exclusive to my pages",
       "rationale": "Heavier content contract (icon, title, body, CTA group) only fits signed-in dashboard contexts.",
       "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_banner_notification_skill_strong_replaces_extra_strong",
-      "label": "Strong emphasis replaces System Extra Strong",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "strong emphasis replaces system extra strong",
-      "rationale": "2026-09 Figma restructure merged the centered admin-impersonation variant into left-aligned Strong.",
-      "source_file": ".claude/skills/eco-banner-notification/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_elevation_skill_lowest_level_rule",
-      "label": "Always choose lowest possible elevation level",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "always choose lowest possible elevation level",
-      "rationale": "Excessive elevation distracts; b-20 is default for card-like surfaces, modals at b-100.",
-      "source_file": ".claude/skills/eco-elevation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -8614,22 +8869,6 @@
       "source_file": ".claude/skills/eco-modal-ecom/SKILL.md",
       "source_location": null,
       "source_url": null
-    },
-    {
-      "id": "_claude_skills_eco_select_skill_active_state_js_rule",
-      "label": "Select active state requires JS .is-active",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 9,
-      "community_name": "System Inline Notification",
-      "contributor": null,
-      "file_type": "rationale",
-      "norm_label": "select active state requires js .is-active",
-      "rationale": "Cannot use :not(:placeholder-shown) on select, so JS toggles the class when a non-default option is chosen.",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
-      "source_location": null,
-      "source_url": null
     }
   ],
   "links": [
@@ -8642,7 +8881,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L36",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -9170,7 +9409,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L62",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -9182,7 +9421,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L65",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -9194,7 +9433,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L72",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -9206,7 +9445,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L73",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_init",
+      "target": "components_js_tabs_pagenav",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -9218,7 +9469,139 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_token",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L114",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_scrollparent",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_onscroll",
+      "target": "components_js_tabs_pagenav_spy",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_pick",
+      "target": "components_js_tabs_pagenav_offset",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
       "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_pick",
+      "target": "components_js_tabs_pagenav_vh",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_pick",
+      "target": "components_js_tabs_pagenav_vtop",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_pick",
+      "target": "components_js_tabs_pagenav_pos",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_setcurrent",
+      "target": "components_js_tabs_place",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_setcurrent",
+      "target": "components_js_tabs_arrive",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_spy",
+      "target": "components_js_tabs_pagenav_pick",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_spy",
+      "target": "components_js_tabs_pagenav_setcurrent",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -9230,7 +9613,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L23",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -9242,7 +9625,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L41",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -9254,7 +9637,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L50",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -9266,7 +9649,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L51",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -9566,7 +9949,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L120",
+      "source_location": "L128",
       "weight": 1.0
     },
     {
@@ -9578,7 +9961,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L379",
+      "source_location": "L401",
       "weight": 1.0
     },
     {
@@ -9590,7 +9973,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L101",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -9602,7 +9985,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L452",
+      "source_location": "L474",
       "weight": 1.0
     },
     {
@@ -9614,7 +9997,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L452",
+      "source_location": "L474",
       "weight": 1.0
     },
     {
@@ -9626,7 +10009,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L158",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -9638,7 +10021,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L162",
+      "source_location": "L170",
       "weight": 1.0
     },
     {
@@ -9650,7 +10033,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L230",
+      "source_location": "L251",
       "weight": 1.0
     },
     {
@@ -9662,7 +10045,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L61",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -9674,7 +10057,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L309",
+      "source_location": "L331",
       "weight": 1.0
     },
     {
@@ -9686,7 +10069,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L170",
+      "source_location": "L178",
       "weight": 1.0
     },
     {
@@ -9698,7 +10081,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L116",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -9710,7 +10093,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L237",
+      "source_location": "L258",
       "weight": 1.0
     },
     {
@@ -9722,7 +10105,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L370",
+      "source_location": "L392",
       "weight": 1.0
     },
     {
@@ -9734,7 +10117,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L374",
+      "source_location": "L396",
       "weight": 1.0
     },
     {
@@ -9746,7 +10129,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L65",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -9758,7 +10141,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L67",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -9770,7 +10153,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L173",
+      "source_location": "L181",
       "weight": 1.0
     },
     {
@@ -9782,7 +10165,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L350",
+      "source_location": "L372",
       "weight": 1.0
     },
     {
@@ -9794,7 +10177,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L352",
+      "source_location": "L374",
       "weight": 1.0
     },
     {
@@ -9806,7 +10189,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L360",
+      "source_location": "L382",
       "weight": 1.0
     },
     {
@@ -9818,7 +10201,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L360",
+      "source_location": "L382",
       "weight": 1.0
     },
     {
@@ -9830,7 +10213,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L360",
+      "source_location": "L382",
       "weight": 1.0
     },
     {
@@ -9842,7 +10225,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L317",
+      "source_location": "L339",
       "weight": 1.0
     },
     {
@@ -9854,7 +10237,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L321",
+      "source_location": "L343",
       "weight": 1.0
     },
     {
@@ -9866,7 +10249,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L106",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -9878,7 +10261,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L108",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -9890,7 +10273,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L332",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -9902,7 +10285,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L172",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -10614,6 +10997,114 @@
       "weight": 1.0
     },
     {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_ease",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L103",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_vtop",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_vh",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_pos",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_jumpto",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_offset",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_pick",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_setcurrent",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav_setcurrent",
+      "target": "components_js_tabs_pagenav_setcurrent_reveal",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L91",
+      "weight": 1.0
+    },
+    {
       "source": "eco_design_system_doc_kit_callouts",
       "target": "eco_design_system_doc_kit_callouts_draw",
       "relation": "contains",
@@ -10922,6 +11413,18 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eco-design-system/gen/gen_range.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_gen_gen_role_tier_card",
+      "target": "eco_design_system_gen_build",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "eco-design-system/gen/gen_role_tier_card.py",
       "source_location": "L1",
       "weight": 1.0
     },
@@ -11618,6 +12121,116 @@
       "weight": 1.0
     },
     {
+      "source": "claude_skills_eco_docs_table_skill",
+      "target": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_used_when",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_dimensions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_surfaces_and_lines",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_header_background",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_typography",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_html_structure",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_css_template",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_rules",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_docs_table_skill_table_eco_design_system_first_version",
+      "target": "claude_skills_eco_docs_table_skill_flags",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-docs-table/SKILL.md",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
       "source": "claude_skills_eco_icon_picker_skill",
       "target": "claude_skills_eco_icon_picker_skill_icon_picker_eco_design_system",
       "relation": "contains",
@@ -12256,116 +12869,6 @@
       "weight": 1.0
     },
     {
-      "source": "claude_skills_eco_table_skill",
-      "target": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_used_when",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L14",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_dimensions",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L18",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_surfaces_and_lines",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L27",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_header_background",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L38",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_typography",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_html_structure",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L48",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_css_template",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L64",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_rules",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L90",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_table_skill_table_eco_design_system_first_version",
-      "target": "claude_skills_eco_table_skill_flags",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-table/SKILL.md",
-      "source_location": "L98",
-      "weight": 1.0
-    },
-    {
       "source": "claude_skills_eco_tabs_skill",
       "target": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
       "relation": "contains",
@@ -12378,13 +12881,24 @@
     },
     {
       "source": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
+      "target": "claude_skills_eco_tabs_skill_html_structure",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-tabs/SKILL.md",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
       "target": "claude_skills_eco_tabs_skill_rules",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L105",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -12395,7 +12909,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L115",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -12406,7 +12920,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L119",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -12422,7 +12936,7 @@
     },
     {
       "source": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
-      "target": "claude_skills_eco_tabs_skill_anatomy",
+      "target": "claude_skills_eco_tabs_skill_choosing_primary_or_secondary",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12433,7 +12947,7 @@
     },
     {
       "source": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
-      "target": "claude_skills_eco_tabs_skill_size_model",
+      "target": "claude_skills_eco_tabs_skill_on_page_navigation_tab_bar_page",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12444,13 +12958,35 @@
     },
     {
       "source": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
+      "target": "claude_skills_eco_tabs_skill_anatomy",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-tabs/SKILL.md",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
+      "target": "claude_skills_eco_tabs_skill_size_model",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/eco-tabs/SKILL.md",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
       "target": "claude_skills_eco_tabs_skill_typography",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L54",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -12461,18 +12997,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L58",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_eco_tabs_skill_tabs_eco_design_system",
-      "target": "claude_skills_eco_tabs_skill_html_structure",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/eco-tabs/SKILL.md",
-      "source_location": "L75",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -12906,29 +13431,18 @@
     },
     {
       "source": "components_js_tabs",
+      "target": "components_js_tabs_init",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/js/tabs.js",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs",
       "target": "components_js_tabs_current",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/js/tabs.js",
-      "source_location": "L19",
-      "weight": 1.0
-    },
-    {
-      "source": "components_js_tabs",
-      "target": "components_js_tabs_barkey",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/js/tabs.js",
-      "source_location": "L20",
-      "weight": 1.0
-    },
-    {
-      "source": "components_js_tabs",
-      "target": "components_js_tabs_place",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12939,13 +13453,35 @@
     },
     {
       "source": "components_js_tabs",
+      "target": "components_js_tabs_barkey",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/js/tabs.js",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs",
+      "target": "components_js_tabs_place",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/js/tabs.js",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs",
       "target": "components_js_tabs_arrive",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/js/tabs.js",
-      "source_location": "L31",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -12956,18 +13492,62 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/js/tabs.js",
-      "source_location": "L40",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
       "source": "components_js_tabs",
-      "target": "components_js_tabs_init",
+      "target": "components_js_tabs_scrollparent",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/js/tabs.js",
-      "source_location": "L54",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs",
+      "target": "components_js_tabs_token",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/js/tabs.js",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs",
+      "target": "components_js_tabs_pagenav",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/js/tabs.js",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_max",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/js/tabs.js",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_spy",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/js/tabs.js",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -13286,7 +13866,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L100",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -13297,7 +13877,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L101",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -13308,7 +13888,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L102",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -13319,7 +13899,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L116",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -13330,7 +13910,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L117",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -13341,7 +13921,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L122",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -13352,7 +13932,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L125",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -13363,7 +13943,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L144",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -13374,7 +13954,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L146",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
@@ -13385,7 +13965,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L147",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -13396,7 +13976,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L164",
+      "source_location": "L172",
       "weight": 1.0
     },
     {
@@ -13407,7 +13987,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L172",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -13418,7 +13998,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L173",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_docnav",
+      "target": "eco_design_system_docnav_sameurl",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L203",
       "weight": 1.0
     },
     {
@@ -13429,7 +14020,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L229",
+      "source_location": "L250",
       "weight": 1.0
     },
     {
@@ -13440,7 +14031,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L236",
+      "source_location": "L257",
       "weight": 1.0
     },
     {
@@ -13451,7 +14042,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L242",
+      "source_location": "L263",
       "weight": 1.0
     },
     {
@@ -13462,7 +14053,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L276",
+      "source_location": "L297",
       "weight": 1.0
     },
     {
@@ -13473,7 +14064,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L307",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -13484,7 +14075,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L308",
+      "source_location": "L330",
       "weight": 1.0
     },
     {
@@ -13495,7 +14086,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L314",
+      "source_location": "L336",
       "weight": 1.0
     },
     {
@@ -13506,7 +14097,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L328",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -13517,7 +14108,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L342",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -13528,7 +14119,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L347",
+      "source_location": "L369",
       "weight": 1.0
     },
     {
@@ -13539,7 +14130,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L368",
+      "source_location": "L390",
       "weight": 1.0
     },
     {
@@ -13550,7 +14141,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L376",
+      "source_location": "L398",
       "weight": 1.0
     },
     {
@@ -13561,7 +14152,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L416",
+      "source_location": "L438",
       "weight": 1.0
     },
     {
@@ -13572,7 +14163,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L435",
+      "source_location": "L457",
       "weight": 1.0
     },
     {
@@ -13583,18 +14174,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L452",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_docnav",
-      "target": "eco_design_system_docnav_esc",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/docnav.js",
-      "source_location": "L59",
+      "source_location": "L474",
       "weight": 1.0
     },
     {
@@ -13610,24 +14190,24 @@
     },
     {
       "source": "eco_design_system_docnav",
+      "target": "eco_design_system_docnav_esc",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_docnav",
       "target": "eco_design_system_docnav_link",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L60",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_docnav",
-      "target": "eco_design_system_docnav_panelhtml",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/docnav.js",
-      "source_location": "L63",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -13639,6 +14219,17 @@
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
       "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_docnav",
+      "target": "eco_design_system_docnav_panelhtml",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -14972,7 +15563,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "components/js/tabs.js",
-      "source_location": "L37",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -14984,7 +15575,31 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "components/js/tabs.js",
-      "source_location": "L38",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_onscroll",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "components_js_tabs_pagenav",
+      "target": "components_js_tabs_pagenav_stop",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -15020,7 +15635,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L122",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -15032,7 +15647,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L310",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -15044,7 +15659,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L360",
+      "source_location": "L382",
       "weight": 1.0
     },
     {
@@ -15056,7 +15671,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L443",
+      "source_location": "L465",
       "weight": 1.0
     },
     {
@@ -19047,5 +19662,5 @@
       "source_file": "feature-comparison-roles.html"
     }
   ],
-  "built_at_commit": "8389e1deb656d20b2a8e3a35305a1fae1fdff5ba"
+  "built_at_commit": "aaf849b6fde2157e10957ac81d13457212f67669"
 }

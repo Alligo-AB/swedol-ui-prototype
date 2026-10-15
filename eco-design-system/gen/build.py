@@ -28,7 +28,7 @@ def sections(items):
 
 
 def head(c, kind):
-    names = {'ex': '', 'spec': ': Specifications', 'code': ': Code', 'sb': ': Storyblok'}
+    names = {'ex': '', 'spec': ': Specifications', 'code': ': Code', 'sb': ': Storyblok widget'}
     css = list(c.get('css_before', [])) + list(BASE_CSS)   # css_before: component files whose rules the base files must override (textarea.css repeats .form-label)
     for n in c.get('css', []):
         if n not in css:
@@ -69,7 +69,7 @@ def crumbs(c, kind):
     if kind == 'ex':
         b += '<span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % c['title']
     else:
-        b += '<a href="%s.html" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % (c['slug'], c['title'], {'spec': 'Specifications', 'code': 'Code', 'sb': 'Storyblok'}[kind])
+        b += '<a href="%s.html" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % (c['slug'], c['title'], {'spec': 'Specifications', 'code': 'Code', 'sb': 'Storyblok widget'}[kind])
     return '<div class="ds-page">\n  <nav class="breadcrumb" aria-label="Breadcrumbs">\n    <div class="breadcrumb__bar">%s</div>\n  </nav>\n</div>' % b
 
 
@@ -78,7 +78,7 @@ def tabs(c, kind):
         return '<a class="tab"%s href="%s"><span class="tab__label">%s</span></a>' % (' aria-current="page"' if cur else '', href, label)
     s = c['slug']
     return '<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="%s">%s%s%s</nav></div>' % (
-        c['title'], t(s + '.html', 'Examples &amp; Guidelines', kind == 'ex'), t(s + '-specifications.html', 'Specifications', kind == 'spec'), t(s + '-code.html', 'Code', kind == 'code') + (t(s + '-storyblok.html', 'Storyblok', kind == 'sb') if c.get('sb') else ''))
+        c['title'], t(s + '.html', 'Examples &amp; Guidelines', kind == 'ex'), t(s + '-specifications.html', 'Specifications', kind == 'spec'), t(s + '-code.html', 'Code', kind == 'code') + (t(s + '-storyblok.html', 'Storyblok widget', kind == 'sb') if c.get('sb') else ''))
 
 
 def intro(c, kind):

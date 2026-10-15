@@ -76,14 +76,14 @@ Read this before you decide a piece is "new". Every row is a finished component 
 | A text field, multi-line text, a dropdown | `eco-input`, `eco-textarea`, `eco-select`; an icon-name field: `eco-icon-picker` |
 | Yes/no, one-of-many, on/off, a value on a scale | `eco-checkbox`, `eco-radio`, `eco-switch`, `eco-range` |
 | Switch between 2–4 views of the same content | `eco-pill-segment-control` |
-| Tabs: sub-navigation or content sections (primary/secondary), e.g. My Pages account nav | `eco-tabs` |
+| Tabs: sub-navigation, content sections (primary/secondary), e.g. My Pages account nav, or a section nav for a whole page (`tab-bar--page`) | `eco-tabs` |
 | A link (decide the type first) | `links-guide` → `eco-inline-link`, `eco-action-link`, `eco-tile-link` |
 | Where am I / go back up | `eco-breadcrumb` |
 | Load more items into a list | `eco-pagination` |
 | A status label or role name (read-only) | `eco-badge` |
 | A name for an icon-only button | `eco-tooltip` |
 | FAQ or optional long content | `eco-collapsible` |
-| Rows and columns of data | `eco-table` |
+| Rows and columns of data | `eco-docs-table` (the docs table; a product table component is planned, ask before using it in a product page) |
 | A full-width page block, a divider between blocks | `eco-section`; small divider inside content: `eco-divider` |
 | Two tiers side by side that link to a comparison | `eco-role-tier-card` |
 | Tell the user something changed | `notifications-guide` → toast, inline, banner, modal |

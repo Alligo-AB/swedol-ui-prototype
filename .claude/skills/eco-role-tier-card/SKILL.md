@@ -1,6 +1,6 @@
 ---
 name: eco-role-tier-card
-description: Draft / experiment, not an official component (docs page is in the Drafts group, one page). Use when building a role card/tier card pair that introduces two tiers within the same category (e.g. Standard/Administrator) side by side and links onward to a full comparison table.
+description: Draft / experiment, not an official component (docs pages are in the Drafts group, three pages like every component: Examples & Guidelines / Specifications / Code). Use when building a role card/tier card pair that introduces two tiers within the same category (e.g. Standard/Administrator) side by side and links onward to a full comparison table.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -49,7 +49,7 @@ Several `.role-tier-pair` can be stacked one below another (one per category/tab
 | `.role-tiers__desc` (the section's intro) | `body-lg` | 18px/24px, 0.18px | 20px/28px |
 | `.role-tier__name` | `title-lg` | 20px/24px, 0px, weight 600 | 24px/28px |
 | `.role-tier__desc` | `body-md` | 16px/22px, 0.32px | 17px/24px |
-| `.role-tier__link` | Action Link, Medium, **Bold** variant | 17px/24px, 0.32px, weight 700, gap 6px, icon 24px | same |
+| `.role-tier__link` | Action Link, Medium, **Bold** variant | 16px/24px, 0.32px, weight 600 (Figma 700), gap 6px, icon 24px | 17px/24px, 0.32px |
 | `.role-tier__feature` | `body-sm` | 14px/20px, 0.36px | same |
 
 ### Rules
@@ -57,11 +57,11 @@ Several `.role-tier-pair` can be stacked one below another (one per category/tab
 1. **The link switches the active tab in the table BEFORE scrolling** — `.role-tier__link` calls a small wrapper function (e.g. `goToCompareView(event, view)`) that finds the right `.compare-view-btn[data-view="…"]` and reuses the table's own `setCompareView(view, btn)` — not its own separate copy of that logic — so the segment pill and visibility update identically to a normal tab click, before `scrollIntoView({behavior:'smooth'})` runs. `event.preventDefault()` is required so the browser's direct anchor jump doesn't "snap" mid-smooth-scroll.
 2. **Feature strips must be grounded in the actual comparison table's rows** — pick 3–4 rows that are unique to/relevant for that specific role (not made-up content) so the card matches what the table actually shows once the user scrolls there.
 3. **The card pair's order mirrors the tabs' order** in `.compare-view-toggle` — the first card pair belongs to the first tab, and so on.
-4. **The link uses the Bold variant (700) and a 24px icon**, not Regular/20px like `.compare-intro__link` — the card's CTA needs to hold its own against the surrounding body text and read clearly as the primary clickable element, whereas `.compare-intro__link` sits alone in an emptier area and works fine with Regular.
+4. **The link uses the Bold variant (600 in CSS) and a 24px icon**, not Regular/20px like `.compare-intro__link` — the card's CTA needs to hold its own against the surrounding body text and read clearly as the primary clickable element, whereas `.compare-intro__link` sits alone in an emptier area and works fine with Regular.
 
 ### CSS template (the core)
 
-> **Shared file:** `<link rel="stylesheet" href="/components/css/role-tier.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/role-tier-card.html`. Includes `.role-quicklinks`. Link `badge.css` too.
+> **Shared file:** `<link rel="stylesheet" href="/components/css/role-tier.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation: `eco-design-system/components/role-tier-card.html`, `-specifications.html`, `-code.html` (generator `eco-design-system/gen/gen_role_tier_card.py`, converted 2026-10-15). Includes `.role-quicklinks`. Link `badge.css` too.
 
 
 ```css

@@ -1,6 +1,6 @@
 ---
 name: eco-tabs
-description: Use when building or reviewing tabs — a tab bar of Primary or Secondary tab items that switches content in the same context, or serves as sub-navigation (e.g. the My Pages account nav). Sizes (Large/Medium/Small), configurations (label, label + icon, icon only), states (enabled/hover/active), dot and number status, overflow. Not for sequential steps (use a stepper), not for a two-view toggle (use eco-pill-segment-control), not for choosing form values (use eco-radio / eco-select).
+description: Use when building or reviewing tabs — a tab bar of Primary or Secondary tab items that switches content in the same context, or serves as sub-navigation (e.g. the My Pages account nav), or navigates the sections of one long page (on-page navigation, `tab-bar--page`). Sizes (Large/Medium/Small), configurations (label, label + icon, icon only), states (enabled/hover/active), dot and number status, overflow. Not for sequential steps (use a stepper), not for a two-view toggle (use eco-pill-segment-control), not for choosing form values (use eco-radio / eco-select).
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -25,6 +25,40 @@ Documentation: `eco-design-system/components/tabs.html`, `tabs-specifications.ht
 - Standalone icons (icon only): use only icons that are globally well known. Give each an `aria-label`.
 - Labels sit in one row. A second line (with truncation) is allowed, but **scrollable tabs are preferred** for long titles. When the tabs exceed the viewport (e.g. at `xs`) the divider line runs the full width, left to right.
 - Not for: a two-view or filter toggle (`eco-pill-segment-control`), joined option buttons (`eco-button`, Button group), a value chosen in a form (`eco-radio`, `eco-select`).
+
+### Choosing Primary or Secondary
+
+The same method is a chooser on the docs page (`tabs.html` → Usage → Primary or Secondary): up to five questions, the answer shows the type, why, and a live example. Ask in this order and take the first answer that decides it:
+
+1. **Must the content be read in a fixed order?** Yes → not tabs: use a stepper (`Steps`; no ECO page yet).
+2. **Are they views or filters of the same content (a list and a grid, all and key)?** Then **how many?** Two to four, and it stays so → not tabs: use `eco-pill-segment-control`. More, or the number is unknown and may grow → tabs (a tab bar has no upper limit: it scrolls sideways); carry on with 3.
+3. **What do the tabs switch: the whole page, or one area of it?**
+   - **The whole page → Primary.** With a main navigation they are sub-navigation (the main navigation divided into subcategories or pages); without one they are the top-level navigation (campaign pages). They show the main content destinations.
+   - **One area of it → Secondary.** A card or a sheet, an information pane, a carousel with categories, or the sections of one page (an article with titles, a campaign page, a brand page). They establish hierarchy and control the region shown below them.
+4. **Does the page already have primary tabs?** Then the secondary tabs go below them, never above, and there are never more than two levels.
+
+Placement summary: Primary = top of the content page, one bar per page, 24px between tabs, line as wide as the label, active line 3px. Secondary = inside the area it controls (below the primary tabs when there are any), one per area, 16px padding on each side of a tab, line wider than the label, active line 2px.
+
+### On-page navigation (`tab-bar--page`)
+
+Secondary tabs can navigate a whole page, as the on-page tab bar of the docs does. **Any number of sections**: the bar scrolls sideways and keeps the current tab in view.
+
+```html
+<nav class="tab-bar tab-bar--secondary tab-bar--md tab-bar--page" aria-label="On this page">
+  <a class="tab" href="#overview"><span class="tab__label">Overview</span></a>
+  <a class="tab" href="#dimensions"><span class="tab__label">Dimensions</span></a>
+  <!-- … one link per section, no limit -->
+</nav>
+<section id="overview">…</section>
+<section id="dimensions">…</section>
+```
+
+- **Opt in with `tab-bar--page`.** Other link bars with `#anchor` hrefs are left alone (the docs' own on-page bar is handled by `subnav.js`).
+- **Sticky.** The bar sticks to the top. Set `--tab-sticky-top` on it when a fixed header sits above (default `0px`). Background `--tab-bar-bg` (default `--color-background-primary`; `tab-bar--on-grey` uses `--color-background-secondary`); `--tab-sticky-z` (default 2).
+- **Scrollspy.** The current tab is the last section whose top is above a line 25% down the visible area; at the end of the page the last section. It gets `aria-current="location"` and the line slides to it.
+- **Click.** Scrolls so the section starts under the bar (plus the section's `scroll-margin-top`): 150 / 200 / 300 / 450 ms by distance (`duration-fast-3`, `fast-4`, `medium-2`, `slow-1`), `ease-decelerate-generic`; instant under reduced motion; wheel, touch or a key stops it. Focus moves to the section (`tabindex="-1"`) and the `#hash` is added with `pushState`. `data-tabs-hash="off"` keeps the address.
+- **Scroll box.** If the sections sit in a scrolling element (a card, a pane), the nearest scrollable parent of the sections is used instead of the window.
+- Secondary tabs only by design; the sections are the content of one page, never more than two levels of tabs.
 
 ### Anatomy
 

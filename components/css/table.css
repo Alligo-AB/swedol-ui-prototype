@@ -1,4 +1,4 @@
-/* ECO component CSS: table (first version, not from Figma). Skill: eco-table. Link it, do not copy it: <link rel="stylesheet" href="/components/css/table.css">
+/* ECO component CSS: table (first version, not from Figma). Skill: eco-docs-table. Link it, do not copy it: <link rel="stylesheet" href="/components/css/table.css">
    Same rules as .ds-table-wrap / .ds-table in eco-design-system/docs.css. Tokens only. Same on every breakpoint. */
 .table-wrap { overflow-x: auto; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); }
 .table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }   /* body-sm */

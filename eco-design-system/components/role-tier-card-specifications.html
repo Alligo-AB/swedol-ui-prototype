@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Role tier card: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/role-tier.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    #pg-host .role-tier-pair { grid-template-columns: minmax(0, 1fr); }   /* demo: these stages are narrower than the window, so the pair stacks (the component only knows the window width) */
+    .rt-callout.ds-fig__stage.ds-callout { padding: 72px 72px; }
+    .rt-callout .ds-callout__art { width: 100%; max-width: 640px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="role-tier-card.html" class="breadcrumb-item">Role tier card</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Drafts · Cards</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="A test built on the comparison pages. It is not an official component, and no Figma component exists.">Experiment</span></div>
+    <h1 class="ds-title">Role tier card</h1>
+    <p class="ds-lead">A role tier card pair introduces <strong>two tiers of one category</strong> side by side, for example Standard and Administrator, and links on to the full comparison table.</p><p class="ds-lead">Tokens, type, sizes, measurements and requirements. The values come from the live token package and from the comparison pages; there is no Figma component.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Role tier card"><a class="tab" href="role-tier-card.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="role-tier-card-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="role-tier-card-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Card</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><h3 class="ds-h3 ds-group">Colors</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Base card</th><th scope="col">Dark card (<code>.role-tier--dark</code>)</th></tr></thead><tbody><tr><th scope="row">Background</th><td><code>surface-raised-primary</code></td><td><code>surface-100</code></td></tr><tr><th scope="row">Border</th><td><code>border-primary</code></td><td><code>surface-90</code></td></tr><tr><th scope="row">Title and icon</th><td><code>text-primary</code></td><td><code>accent-default</code></td></tr><tr><th scope="row">Description</th><td><code>text-secondary</code></td><td><code>text-secondary-inverted</code></td></tr><tr><th scope="row">Link</th><td><code>text-action-primary</code>, hover <code>-hover</code></td><td><code>text-action-primary-inverted</code>, hover <code>-hover</code></td></tr><tr><th scope="row">Feature strips</th><td><code>surface-05</code>, lines <code>border-primary</code></td><td><code>surface-90</code>, lines white at 12%</td></tr></tbody></table></div><p class="ds-desc ds-note"><strong>Open point:</strong> the line between the feature strips on the dark card is <code>rgba(255, 255, 255, 0.12)</code>. There is no token for white at 12%, so it is written out with a comment in the CSS.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Token</th><th scope="col">Mobile</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Name</th><td><code>title-lg</code>, weight 600</td><td>20/24, 0</td><td>24/28, 0</td></tr><tr><th scope="row">Description</th><td><code>body-md</code></td><td>16/22, 0.32px</td><td>17/24, 0.32px</td></tr><tr><th scope="row">Link</th><td>Action link, Medium, Bold (600), 24px icon, gap 6px</td><td>16/24, 0.32px</td><td>17/24, 0.32px</td></tr><tr><th scope="row">Feature</th><td><code>body-sm</code></td><td>14/20, 0.36px</td><td>14/20, 0.36px</td></tr><tr><th scope="row">Quick link</th><td>System, small</td><td>14/14, 0.56px, uppercase, 600</td><td>The same</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Pair</th><td>1 column below 769px, 2 columns from 769px, gap 24px; stacked pairs 24px (xs) and 32px (md and up) apart</td></tr><tr><th scope="row">Card</th><td>Column below 640px, row from 640px; 1px border, sharp corners</td></tr><tr><th scope="row">Info block</th><td>24px padding (32px from 769px), gap 8px, 55% of the width</td></tr><tr><th scope="row">Feature strip</th><td>Min height 56px, 16px padding, text centered; 45% of the width</td></tr><tr><th scope="row">Quick link</th><td>Height 32px, padding 6px 12px, gap 6px, icon 16px</td></tr></tbody></table></div><p class="ds-desc ds-note">A card has one size. The parts change with the breakpoint, as the table shows.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Mobile (below 769px)</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Info block padding</th><td>24px</td><td>32px</td></tr><tr><th scope="row">Gap inside the info block</th><td>8px</td><td>8px</td></tr><tr><th scope="row">Gap between badge row and name</th><td>12px (8px gap + 4px margin)</td><td>12px</td></tr><tr><th scope="row">Link top margin</th><td>8px</td><td>8px</td></tr><tr><th scope="row">Feature strip</th><td>min 56px high, 16px padding</td><td>The same</td></tr><tr><th scope="row">Card border</th><td>1px</td><td>1px</td></tr><tr><th scope="row">Gap between the two cards</th><td>24px</td><td>24px</td></tr><tr><th scope="row">Gap between stacked pairs</th><td>24px</td><td>32px</td></tr></tbody></table></div><p class="ds-desc ds-note">The card changes at 640px and at 769px, and the Breakpoint control only switches at 769px, so there is no measurement figure and no Breakpoint control. The values are read from the component.</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The values as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Info block padding, mobile</th><td><code>space-24</code></td></tr><tr><th scope="row">Info block padding, desktop</th><td><code>space-32</code></td></tr><tr><th scope="row">Gap in the info block, link top margin</th><td><code>space-8</code></td></tr><tr><th scope="row">Feature strip padding</th><td><code>space-16</code></td></tr><tr><th scope="row">Gap, icon to link label</th><td>6px (no spacing token)</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">State</th><th scope="col">Link</th><th scope="col">Rest of the card</th></tr></thead><tbody><tr><th scope="row">Enabled</th><td>No underline. Base: <code>text-action-primary</code>. Dark: <code>text-action-primary-inverted</code>.</td><td>Static.</td></tr><tr><th scope="row">Hover</th><td>Label underlined. Color moves to the <code>-hover</code> token of its card.</td><td>Static.</td></tr><tr><th scope="row">Focus</th><td>2px ring, <code>border-focus</code>, 2px outside (keyboard only).</td><td>Static.</td></tr></tbody></table></div><p class="ds-desc">The card itself has no hover, active or disabled state.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Pair</th><td><code>role-tier-pair</code></td><td>A grid of two cards. Several pairs stack.</td></tr><tr><th scope="row">Card</th><td><code>role-tier</code>, <code>role-tier--dark</code></td><td>Light by default; <code>--dark</code> for the extended tier.</td></tr><tr><th scope="row">Info block</th><td><code>role-tier__info</code></td><td>Holds the badge row, name, description and link.</td></tr><tr><th scope="row">Badge row</th><td><code>role-tier__badge-row</code></td><td><code>role-tier__icon</code> and a <code>badge-basic</code>.</td></tr><tr><th scope="row">Name, description</th><td><code>role-tier__name</code>, <code>role-tier__desc</code></td><td>Paragraphs.</td></tr><tr><th scope="row">Link</th><td><code>role-tier__link</code></td><td><code>role-tier__link-label</code> and <code>role-tier__link-icon</code>.</td></tr><tr><th scope="row">Feature strips</th><td><code>role-tier__features</code>, <code>role-tier__feature</code></td><td>Three or four rows.</td></tr><tr><th scope="row">Quick links</th><td><code>role-quicklinks</code>, <code>role-quicklink</code></td><td>A row of small links above the cards.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">A pair fills its container. Two cards share the row equally from 769px.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Link</th><td>Switches the active tab in the table <strong>before</strong> scrolling, by calling the table’s own <code>setCompareView()</code>. Call <code>event.preventDefault()</code> so the anchor does not snap mid-scroll.</td></tr><tr><th scope="row">Scroll offset</th><td>Scroll to the section with the <code>--header-top-h</code> offset, never a plain <code>scrollIntoView()</code>.</td></tr><tr><th scope="row">Feature strips</th><td>Three or four rows taken from rows that really exist in the comparison table and are specific to that role.</td></tr><tr><th scope="row">Order</th><td>The pairs follow the order of the tabs.</td></tr><tr><th scope="row">Motion</th><td>The link color changes with <code>duration-fast-3</code> and <code>ease-standard</code>.</td></tr></tbody></table></div><p class="ds-desc ds-note"><strong>Open points:</strong> no Figma component. The card is built for the comparison pages, and the link needs their table script.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Link</th><td>A real <code>&lt;a&gt;</code> with a label that names the tier. The click handler calls <code>preventDefault()</code> and moves focus or scroll to the table.</td></tr><tr><th scope="row">Icons</th><td>The tier icon and the arrow are decorative: <code>aria-hidden="true"</code>.</td></tr><tr><th scope="row">Focus</th><td>Keyboard focus shows a 2px ring (<code>border-focus</code>) 2px outside the link.</td></tr><tr><th scope="row">Contrast</th><td>Text on the dark card uses the inverted tokens (<code>text-secondary-inverted</code> on <code>surface-100</code>).</td></tr><tr><th scope="row">Order</th><td>The reading order is badge, name, description, link, then the features.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.tokenTable($('#tok-table tbody'), [['Base', 'Background', 'surface-raised-primary'], ['Base', 'Border', 'border-primary'], ['Base', 'Name and icon', 'text-primary'], ['Base', 'Description', 'text-secondary'], ['Base', 'Feature background', 'surface-05'],
+    ['Dark', 'Background', 'surface-100'], ['Dark', 'Border', 'surface-90'], ['Dark', 'Name and icon', 'accent-default'], ['Dark', 'Description', 'text-secondary-inverted'], ['Dark', 'Feature background', 'surface-90'], ['Dark', 'Feature text', 'text-primary-inverted'],
+    ['Both · hover', 'Link', 'text-action-primary-hover'], ['Dark · hover', 'Link', 'text-action-primary-inverted-hover'], ['Both · focus', 'Ring', 'border-focus']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

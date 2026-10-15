@@ -1,13 +1,13 @@
 ---
-name: eco-table
-description: Use when building a data table (rows and columns of text, check icons or small controls) — row and header heights, cell padding, lines, header background and the card shadow. **Draft: the table of the documentation pages, not an official component yet** (a product table component is planned; its docs page is in the Drafts group, one page). A first version: more variants and states (sorting, selection, sticky header, empty state) are added later. Not for layout, and not for a single key/value list.
+name: eco-docs-table
+description: Use when building a data table (rows and columns of text, check icons or small controls) — row and header heights, cell padding, lines, header background and the card shadow. **The table of the documentation pages, not a product component** (a product table component is planned; its page is `Docs table` in the Documentation group of Foundations, one page). A first version: more variants and states (sorting, selection, sticky header, empty state) are added later. Not for layout, and not for a single key/value list.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
 ## Table (ECO Design System) — first version
 
-> **Status:** a start. The values below come from the documentation pages in `eco-design-system/` (set by the design owner), **not yet from a Figma component**. When a Figma table component exists, re-extract it (see `eco-add-component`) and replace or confirm these values. Add sorting, selection, sticky header, empty/loading state and a documentation page (`eco-design-system/components/table.html`) later.
+> **Status:** a start. The values below come from the documentation pages in `eco-design-system/` (set by the design owner), **not yet from a Figma component**. When a Figma table component exists, re-extract it (see `eco-add-component`) and replace or confirm these values. Add sorting, selection, sticky header and empty/loading state later. Documentation page: `eco-design-system/foundations/docs-table.html` (renamed from `Table` 2026-10-15: it belongs to the documentation, not to the component collection).
 
 A table shows rows of comparable data. It sits in a **wrap** that gives it the elevation of a dashboard card and scrolls sideways when the window is too narrow.
 
@@ -63,7 +63,7 @@ Use real `th` with `scope`. Check icons use `eco-checkbox` (`.check-icon`, disab
 
 ### CSS template
 
-> **Shared file:** `<link rel="stylesheet" href="/components/css/table.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/table.html`.
+> **Shared file:** `<link rel="stylesheet" href="/components/css/table.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/foundations/docs-table.html`.
 
 ```css
 .table-wrap {

@@ -131,7 +131,8 @@ body {
   position: sticky; top: 0; z-index: 10;
   padding: 12px var(--px-full);
   background: var(--color-surface-raised-primary);
-  margin-bottom: 28px;                      /* section padding-bottom (xs 40) − 12 */
+  --sub-mb: 28px;
+  margin-bottom: var(--sub-mb);             /* section padding-bottom (xs 40) − 12 */
 }
 /* Full-width divider between two white sections (eco-divider; the sections have their own padding). Place it after .ds-subnav when the first content section is white. */
 .ds-divider { margin: 0; width: 100%; height: 1px; border: 0; background: var(--color-border-primary); }
@@ -150,15 +151,15 @@ body {
 .ds-subnav :is(.ds-toc, .tab-bar).is-dragging { cursor: grabbing; user-select: none; }
 .ds-subnav .ds-toc a, .ds-subnav .tab { -webkit-user-drag: none; }
 .ds-subnav--tabs { padding-top: 0; padding-bottom: 0; }   /* the tab bar has its own height and divider */
-.ds-subnav--tabs.is-stuck { box-shadow: none; }
+.ds-subnav.ds-subnav--tabs.is-stuck { box-shadow: 0 var(--dimension-spacing-space-16) 0 var(--color-surface-raised-primary); padding-top: var(--dimension-spacing-space-16); margin-bottom: calc(var(--sub-mb) + var(--sub-pt, 0px) - var(--dimension-spacing-space-16)); }   /* stuck tab bar: 16px above the tabs, 16px of background below the line; margin-bottom keeps the content from moving */
 .ds-subnav.is-stuck { box-shadow: 0 1px 0 var(--color-border-primary); }   /* line only while stuck, no layout shift */
 .ds-toc a[aria-current="true"] { color: var(--color-text-primary); border-color: var(--color-border-dark); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }  /* in-page links (subnav, Motion links) glide instead of jump */
 .ds-section[id] { scroll-margin-top: 60px; }  /* clear the sticky bar when jumping to a section */
 .ds-section[id]:focus { outline: none; }       /* focus moves here after a nav jump (tabindex=-1), not a control */
-@media (min-width: 640px)  { .ds-subnav { margin-bottom: 36px; } }   /* 48 − 12 */
-@media (min-width: 769px)  { .ds-subnav { margin-bottom: 52px; } }   /* 64 − 12 */
-@media (min-width: 1024px) { .ds-subnav { margin-bottom: 68px; } }   /* 80 − 12 */
+@media (min-width: 640px)  { .ds-subnav { --sub-mb: 36px; } }   /* 48 − 12 */
+@media (min-width: 769px)  { .ds-subnav { --sub-mb: 52px; } }   /* 64 − 12 */
+@media (min-width: 1024px) { .ds-subnav { --sub-mb: 68px; } }   /* 80 − 12 */
 
 /* ── Page tabs and side contents (pages split into Examples & Guidelines / Specifications / Code) ─────────
    .ds-tabs: the eco-tabs link bar under the intro. .ds-doc wraps the sections; toc.js builds the chip row (below 1024px) and the
@@ -168,7 +169,7 @@ body {
 .ds-tabs .tab-bar { max-width: 1280px; margin-left: auto; margin-right: auto; }
 .ds-section--first:has(+ .ds-tabs) { padding-bottom: 0; }
 .ds-tabs + .ds-subnav, .ds-tabs + .ds-doc { margin-top: 0; }
-.ds-tabs + .ds-subnav { padding-top: 24px; }   /* air between the tab bar and the chips */
+.ds-tabs + .ds-subnav { --sub-pt: 24px; padding-top: var(--sub-pt); }   /* air between the tab bar and the chips */
 .ds-doc { position: relative; }
 .ds-sidetoc { display: none; }
 .ds-sep { padding: 0 var(--px-full); background: var(--color-surface-raised-primary); }   /* divider between two sections (<div class="ds-sep"><hr class="divider"></div>, components/css/divider.css): same side margin as the sections */
@@ -467,7 +468,7 @@ a.ds-card:hover { border-color: var(--color-border-dark); }
 .ds-field.form-field { gap: var(--dimension-spacing-space-4); }  /* text fields are the shared eco-input (components/css/input.css), same label gap */
 
 .ds-table-wrap { overflow-x: auto; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); }  /* same elevation as the dashboard stat-cards */
-.ds-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }  /* body-sm; see .claude/skills/eco-table */
+.ds-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }  /* body-sm; see .claude/skills/eco-docs-table */
 .ds-table th, .ds-table td { text-align: left; padding: 11px 24px; height: 48px; border-bottom: 1px solid var(--color-border-secondary); vertical-align: middle; }
 .ds-table tbody tr:last-child > * { border-bottom: 0; }
 .ds-table thead th { font-weight: 600; white-space: nowrap; height: 56px; border-bottom-color: var(--color-border-primary); background: var(--color-surface-02); }  /* header line stronger than the row lines */
@@ -493,7 +494,7 @@ a.ds-card:hover { border-color: var(--color-border-dark); }
 /* body-md desktop (17/24); mobile base is above */
 @media (min-width: 769px) { .ds-card__desc, .ds-rule li { font-size: 17px; line-height: 24px; } }
 
-/* Component pages: example boxes, controls, code blocks and rule cards use the same card treatment as the tables (eco-table):
+/* Component pages: example boxes, controls, code blocks and rule cards use the same card treatment as the tables (eco-docs-table):
    no 1px frame, elevation-b-20, 24px side padding. */
 body[data-ds="component"] :is(.ds-stage, .ds-controls, .ds-code, .ds-rule) { box-shadow: var(--shadow-elevation-b-20); }
 body[data-ds="component"] :is(.ds-stage, .ds-controls, .ds-code) { border: 0; }

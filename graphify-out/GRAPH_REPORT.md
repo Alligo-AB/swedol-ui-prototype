@@ -1,22 +1,22 @@
-# Graph Report - swedol-ui-prototype  (2026-10-14)
+# Graph Report - swedol-ui-prototype  (2026-10-15)
 
 ## Corpus Check
-- 101 files · ~977,797 words
+- 102 files · ~990,298 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 648 nodes · 916 edges · 68 communities (42 shown, 10 thin omitted)
-- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 69 edges (avg confidence: 0.85)
+- 668 nodes · 948 edges · 67 communities (41 shown, 10 thin omitted)
+- Extraction: 92% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 71 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8389e1de`
+- Built from commit: `aaf849b6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Shared header partial
-- Section
+- Table (ECO Design System) — first version
 - Component library skills index
 - eco-doc-page skill
 - notifications.js
@@ -28,7 +28,7 @@
 - List Item (ECO Design System)
 - Menu – Dropdown & Exposed Dropdown (ECO Design System)
 - attach
-- Table (ECO Design System) — first version
+- Badge/Basic (.badge-basic)
 - build.py
 - Divider (ECO Design System)
 - Switch (ECO Design System)
@@ -37,7 +37,7 @@
 - Adding a component to the design system
 - Pill Segment Control (ECO Design System)
 - Radio button (ECO Design System)
-- tabs.js
+- pageNav
 - Checkbox
 - notif.py
 - compose-helpers.py
@@ -54,17 +54,16 @@
 - init
 - run
 - watch
-- Duration tokens fast/medium/slow
+- Input Field
 - tokens/_test.html (unused placeholder)
 - old_js
 - gen_links_guide.py
-- Action Link
+- Elevation and shadows
 - Role Card / Tier Card pair
 - gen/README.md
 - ECO semantic color tokens
-- Section padding per breakpoint first vs other
 - Button
-- Breadcrumb
+- Section
 - gen_notifications.py
 - toolbar
 
@@ -72,13 +71,13 @@
 1. `eco-doc-page skill` - 24 edges
 2. `Shared header partial` - 17 edges
 3. `Users page (Användare)` - 17 edges
-4. `index.html site overview (sitemap)` - 16 edges
-5. `mypages-template.html (logged-in page template)` - 15 edges
-6. `Reviews page (Recensioner)` - 14 edges
-7. `Shared account-nav drawer partial` - 13 edges
-8. `Shared footer partial` - 13 edges
-9. `template.html (public page template)` - 13 edges
-10. `List Item (ECO Design System)` - 12 edges
+4. `pageNav()` - 16 edges
+5. `index.html site overview (sitemap)` - 16 edges
+6. `mypages-template.html (logged-in page template)` - 15 edges
+7. `Reviews page (Recensioner)` - 14 edges
+8. `Shared account-nav drawer partial` - 13 edges
+9. `Shared footer partial` - 13 edges
+10. `template.html (public page template)` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Reviews page backup 1` --semantically_similar_to--> `Reviews page (Recensioner)`  [INFERRED] [semantically similar]
@@ -105,15 +104,15 @@
 - **Banner, Inline and Modal notification family** — _claude_skills_eco_banner_notification_skill_banner_notification, _claude_skills_eco_inline_notification_skill_inline_notification, _claude_skills_eco_modal_ecom_skill_modal_ecom [INFERRED 0.85]
 - **Pages using role tier cards** — feature_comparison_roles, feature_comparison_roles_backup, e_handelspartner, claude_skills_eco_role_tier_card_skill [INFERRED 0.85]
 
-## Communities (68 total, 10 thin omitted)
+## Communities (67 total, 10 thin omitted)
 
 ### Community 0 - "Shared header partial"
 Cohesion: 0.10
 Nodes (51): Page templates: template.html and mypages-template.html, eco-role-tier-card skill (role/tier card component), alligo-design-tokens npm package (CDN-loaded CSS variables), E-handelspartner page, Welcome email (Valkommen till Swedol), Feature comparison page (earlier version), Feature comparison roles page (Jamfor behorighetsnivåer), Feature comparison roles page (backup) (+43 more)
 
-### Community 1 - "Section"
-Cohesion: 0.29
-Nodes (8): Breadcrumb uses --px-page not --px-full, Hide the whole pagination once all items loaded, Pagination has no bottom padding of its own, Pagination (load more), My Pages page-title section spacing, Page Divider, Use --px-full not --px-page for divider/section, Section
+### Community 1 - "Table (ECO Design System) — first version"
+Cohesion: 0.18
+Nodes (10): CSS template, Dimensions, Flags, Header background, HTML structure, Rules, Surfaces and lines, Table (ECO Design System) — first version (+2 more)
 
 ### Community 2 - "Component library skills index"
 Cohesion: 0.07
@@ -144,8 +143,8 @@ Cohesion: 0.36
 Nodes (13): extract_declarations(), fallback_value(), main(), normalize_typography_value(), parse_colors(), parse_radius_border(), parse_shadows(), parse_spacing() (+5 more)
 
 ### Community 9 - "System Inline Notification"
-Cohesion: 0.06
-Nodes (38): Badge/Basic (.badge-basic), Badge color-meaning mapping for lifecycle status, Badge emphasis Strong/Weak/Weaker, Badge letter case parameter, Badge vs Tag vs counter bubble distinction, Badge states Neutral Grey/Dark and Alert Info/Success/Warning/Danger, Banner Notification, Banner emphasis Strong/Weak/Weaker (+30 more)
+Cohesion: 0.18
+Nodes (12): Banner Notification, Large banner exclusive to My Pages, Banner size Small/Large, Inline Notification Actionable layout, Informational E-Com inline variant, System Inline Notification, Medium renamed to Large in 2026-09 update, Inline Notification sizes Large/Small (+4 more)
 
 ### Community 10 - "List Item (ECO Design System)"
 Cohesion: 0.15
@@ -159,12 +158,12 @@ Nodes (11): Container, CSS, Flags (for design), HTML structure, Menu – Dropdow
 Cohesion: 0.35
 Nodes (11): attach(), close(), group(), open(), pick(), render(), show(), loadData() (+3 more)
 
-### Community 13 - "Table (ECO Design System) — first version"
-Cohesion: 0.18
-Nodes (10): CSS template, Dimensions, Flags, Header background, HTML structure, Rules, Surfaces and lines, Table (ECO Design System) — first version (+2 more)
+### Community 13 - "Badge/Basic (.badge-basic)"
+Cohesion: 0.22
+Nodes (10): Badge/Basic (.badge-basic), Badge color-meaning mapping for lifecycle status, Badge emphasis Strong/Weak/Weaker, Badge letter case parameter, Badge vs Tag vs counter bubble distinction, Badge states Neutral Grey/Dark and Alert Info/Success/Warning/Danger, Banner emphasis Strong/Weak/Weaker, Strong emphasis replaces System Extra Strong (+2 more)
 
 ### Community 14 - "build.py"
-Cohesion: 0.11
+Cohesion: 0.10
 Nodes (9): crumbs(), emit(), head(), intro(), page(), Frame for the three-page component docs (reference: tooltip.html / tooltip-…, section(), sections() (+1 more)
 
 ### Community 15 - "Divider (ECO Design System)"
@@ -176,8 +175,8 @@ Cohesion: 0.20
 Nodes (9): CSS, Flags for design, HTML structure, Label typography (`eco-typography`), Rules, Size model, States, Switch (ECO Design System) (+1 more)
 
 ### Community 17 - "Tabs (ECO Design System)"
-Cohesion: 0.18
-Nodes (10): Anatomy, Flags for design, HTML structure, On-page navigation (docs), Rules, Size model, States, Tabs (ECO Design System) (+2 more)
+Cohesion: 0.15
+Nodes (12): Anatomy, Choosing Primary or Secondary, Flags for design, HTML structure, On-page navigation (docs), On-page navigation (`tab-bar--page`), Rules, Size model (+4 more)
 
 ### Community 18 - "Text Area (ECO Design System)"
 Cohesion: 0.20
@@ -195,13 +194,13 @@ Nodes (8): CSS template (Large, Primary/Pill — mobile-first), HTML and JS exam
 Cohesion: 0.22
 Nodes (8): CSS, HTML structure, Label & message typography (`eco-typography`), Radio button (ECO Design System), Rules, Size model, States, When to use
 
-### Community 22 - "tabs.js"
-Cohesion: 0.50
-Nodes (8): arrive(), done(), end(), barKey(), current(), init(), place(), select()
+### Community 22 - "pageNav"
+Cohesion: 0.15
+Nodes (19): arrive(), done(), end(), barKey(), current(), init(), pageNav(), offset() (+11 more)
 
 ### Community 23 - "Checkbox"
-Cohesion: 0.29
-Nodes (8): Checkbox, Checkbox dark mode (.form-checkbox-item--dark), Checkbox Disabled Selected gray box with gray checkmark, Checkbox light-mode focus ring deviates from border-focus, Checkbox 24x24 size model, Checkbox table check-icon variant (.check-icon), Border color tokens, Tile Link background colors White/Grey/Black
+Cohesion: 0.33
+Nodes (7): Checkbox, Checkbox dark mode (.form-checkbox-item--dark), Checkbox Disabled Selected gray box with gray checkmark, Checkbox light-mode focus ring deviates from border-focus, Checkbox 24x24 size model, Checkbox table check-icon variant (.check-icon), Border color tokens
 
 ### Community 24 - "notif.py"
 Cohesion: 0.11
@@ -239,37 +238,33 @@ Nodes (3): bp_field(), btn_group(), buttons: [(value, text, pressed)]
 Cohesion: 0.70
 Nodes (4): choose(), close(), holder(), openMenu()
 
-### Community 41 - "Duration tokens fast/medium/slow"
+### Community 41 - "Input Field"
 Cohesion: 0.25
-Nodes (8): Button keyboard-nav focus outline method, Input focus ring is absolute inset -3px, keyboard-only, Distance + fade + easing combination table, Distance drives duration group, Duration tokens fast/medium/slow, Fades fast/medium/slow, Motion easing and duration, Pagination progress bar
+Nodes (9): Drawer mobile base styling at max-width 768px, Input Field, Label above input, hint/message below pattern, Input sizes per breakpoint, Input states enabled/hover/active/focus/error/success/disabled, Select active state requires JS .is-active, Select, Select sizes per breakpoint (+1 more)
 
 ### Community 46 - "old_js"
 Cohesion: 0.33
 Nodes (4): old_js(), Slice of the old page's script: from the line containing `start` up to (not…, A Small eco-select field for a playground (options: [(value, text)], cur = the…, sel()
 
-### Community 49 - "Action Link"
+### Community 49 - "Elevation and shadows"
 Cohesion: 0.29
-Nodes (7): Action Link, Action Link icons never underlined on hover, Action Link Text Primary Inverted variant, Action Link sizes Large/Medium/Small, Inline Link color variants Primary/Secondary/Tertiary/Inverted, Inline Link, Inline Link vs Action Link difference
+Nodes (7): Component-specific elevation tokens, Designated Level elevation-drawer-*, Drawer conventions, Elevation and shadows, Always choose lowest possible elevation level, Shadow Bottom elevation-b-20 to b-100, Shadow Top elevation-t-*
 
 ### Community 50 - "Role Card / Tier Card pair"
-Cohesion: 0.29
-Nodes (7): Bordered box crumb with slash separator, System button variant, Feature strips must be grounded in comparison table rows, goToCompareView() switch-tab-then-scroll function, Scroll to anchored sections with --header-top-h offset, Role quicklinks (.role-quicklinks), Role Card / Tier Card pair
+Cohesion: 0.25
+Nodes (8): Bordered box crumb with slash separator, System button variant, Feature strips must be grounded in comparison table rows, goToCompareView() switch-tab-then-scroll function, Scroll to anchored sections with --header-top-h offset, Role tier light vs dark card variants, Role quicklinks (.role-quicklinks), Role Card / Tier Card pair
 
 ### Community 57 - "ECO semantic color tokens"
-Cohesion: 0.25
-Nodes (8): Banner Promotion variant, Promotion uses brand-scoped accent tokens, Accent color tokens accent-default/light/dark, ECO semantic color tokens, Never hardcode hex, use var(--color-*), Surface opacity tokens, Text color tokens, Role tier light vs dark card variants
-
-### Community 58 - "Section padding per breakpoint first vs other"
-Cohesion: 0.50
-Nodes (5): Section padding per breakpoint first vs other, Spacing consumer classes mt-space, pt-space, gap-space, Layout Vertical Whitespace space-sm/md/lg, Spacing Scale space-0 to space-120, Spacing
+Cohesion: 0.29
+Nodes (7): Banner Promotion variant, Promotion uses brand-scoped accent tokens, Accent color tokens accent-default/light/dark, ECO semantic color tokens, Never hardcode hex, use var(--color-*), Surface opacity tokens, Text color tokens
 
 ### Community 59 - "Button"
-Cohesion: 0.22
-Nodes (9): Button, Button hover white 20% overlay, Button sizes lg/md/sm/xs desktop vs mobile, Button variants Primary/Secondary/Blank/Destructive/Accent/System, Modal buttons always 32px tall, Tile Link border is absolute ::before inset 0, Tile Link Black hover white 20% overlay, Tile Link (+1 more)
+Cohesion: 0.20
+Nodes (10): Button, Button hover white 20% overlay, Button sizes lg/md/sm/xs desktop vs mobile, Button variants Primary/Secondary/Blank/Destructive/Accent/System, Modal buttons always 32px tall, Tile Link border is absolute ::before inset 0, Tile Link background colors White/Grey/Black, Tile Link Black hover white 20% overlay (+2 more)
 
-### Community 60 - "Breadcrumb"
-Cohesion: 0.22
-Nodes (8): Breadcrumb Active (last, current page) state, Breadcrumb, Breadcrumb built-in spacing zeroes following section top padding, Collapsible / Accordion, Hide last row bottom line when list closes a section, Collapsible header uses min-height not height, Easing tokens decelerate/accelerate/standard, Section zeroed-padding use cases
+### Community 60 - "Section"
+Cohesion: 0.06
+Nodes (36): Action Link, Action Link icons never underlined on hover, Action Link Text Primary Inverted variant, Action Link sizes Large/Medium/Small, Breadcrumb Active (last, current page) state, Breadcrumb, Breadcrumb built-in spacing zeroes following section top padding, Breadcrumb uses --px-page not --px-full (+28 more)
 
 ### Community 62 - "toolbar"
 Cohesion: 0.67
@@ -280,8 +275,8 @@ Nodes (3): items: [(label_id, label, attr, buttons, extra)] -> ds-toolbar, toolb
   .claude/skills/eco-tile-link/SKILL.md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **167 isolated node(s):** `1. Before you start — ask, don't guess`, `Prototype as a source (functionality)`, `Sweep systematically (do not sample)`, `4. WCAG check (separate section in the report)`, `5. Verify before you report` (+162 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 294 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **169 isolated node(s):** `1. Before you start — ask, don't guess`, `Prototype as a source (functionality)`, `Sweep systematically (do not sample)`, `4. WCAG check (separate section in the report)`, `5. Verify before you report` (+164 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 303 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -289,15 +284,15 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `Border color tokens` and `Tile Link background colors White/Grey/Black`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `ECO semantic color tokens` connect `ECO semantic color tokens` to `System Inline Notification`, `Checkbox`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **Why does `ECO semantic color tokens` connect `ECO semantic color tokens` to `Badge/Basic (.badge-basic)`, `Checkbox`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **Why does `Component library skills index` connect `Component library skills index` to `Shared header partial`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Why does `Accent color tokens accent-default/light/dark` connect `ECO semantic color tokens` to `Button`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `Accent color tokens accent-default/light/dark` connect `ECO semantic color tokens` to `Role Card / Tier Card pair`, `Button`?**
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Shared header partial` (e.g. with `Shared account-nav drawer partial` and `Shared main menu partial`) actually correct?**
   _`Shared header partial` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `Users page (Användare)` (e.g. with `mypages-template.html (logged-in page template)` and `Users dashboard page (Användare with stat cards)`) actually correct?**
   _`Users page (Användare)` has 3 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 4 inferred relationships involving `mypages-template.html (logged-in page template)` (e.g. with `Address book page (Adressbok)` and `My Pages dashboard test page`) actually correct?**
-  _`mypages-template.html (logged-in page template)` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 2 inferred relationships involving `pageNav()` (e.g. with `onScroll()` and `stop()`) actually correct?**
+  _`pageNav()` has 2 INFERRED edges - model-reasoned connections that need verification._
