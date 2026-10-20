@@ -33,7 +33,7 @@
 [data-hairline="radio"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-surface-20, #cccccc), #fff 40%); }
 [data-hairline="radio"] [data-part="track-wall"][data-hover] { fill: color-mix(in srgb, var(--color-surface-15, #d9d9d9), #fff 40%); }
 [data-hairline="radio"] [data-part="mark"] { fill: var(--color-surface-100, #000000); }
-.ds-card__visual--hairline [data-hairline-card="radio"] { transform: translateY(12px); }
+.ds-card__visual--hairline [data-hairline-card="radio"] { transform: translateY(-4px); }
 
 /* checkbox figure: white box with grey edge, black when checked/mixed, white tick */
 [data-hairline="checkbox"] [data-part="track"] { fill: var(--color-surface-raised-primary, #ffffff); }
@@ -45,12 +45,12 @@
 [data-hairline="checkbox"] [data-part="ink-wall"] { fill: color-mix(in srgb, var(--color-surface-100, #000000), #fff 25%); }
 [data-hairline="checkbox"] [data-part="ink-wall"][data-hover] { fill: color-mix(in srgb, var(--color-surface-50, #737373), #000 25%); }
 [data-hairline="checkbox"] [data-part="mark"] { fill: #ffffff; }
-.ds-card__visual--hairline [data-hairline-card="checkbox"] { transform: translateY(-9px); }
+.ds-card__visual--hairline [data-hairline-card="checkbox"] { transform: translateY(-4px); }
 
 /* select figure: label bars and chevron */
 [data-hairline="select"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
 [data-hairline="select"] [data-part="bar-on"], [data-hairline="select"] [data-part="chev"] { fill: var(--color-text-primary, #000000); }
-.ds-card__visual--hairline [data-hairline-card="select"] { transform: translateY(5px); }
+.ds-card__visual--hairline [data-hairline-card="select"] { transform: translateY(-4px); }
 [data-hairline="select"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
 /* the menu fades in and out with its unfold (the figure only sets data-open) */
 [data-hairline="select"] [data-part="menu"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
@@ -59,7 +59,7 @@
 
 /* input figure: label/value black, placeholder and hint grey */
 [data-hairline] [data-part="ph"], [data-hairline] [data-part="hint"] { fill: var(--color-surface-50, #737373); }
-.ds-card__visual--hairline [data-hairline-card="input"] { transform: translateY(-11px); }
+.ds-card__visual--hairline [data-hairline-card="input"] { transform: translateY(-4px); }
 [data-hairline="input"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field: a faint shade, the edges carry the depth */
 /* range figure: title, value, step labels, track, thumb, hover halo */
 [data-hairline] [data-part="title"] { fill: var(--color-text-secondary, #4d4d4d); }
