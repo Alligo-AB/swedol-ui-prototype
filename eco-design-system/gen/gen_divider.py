@@ -152,7 +152,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Divider', eyebrow='Components · Menus, lists and dividers',
     lead='A divider is a <strong>1px line</strong> that separates content groups, so users can scan and organize information. It is decorative and never interactive.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-divider/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Divider') + ' and ' + fig_link(FIGMA_G, 'guidelines') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Figma: ' + fig_link(FIGMA, 'Divider') + ' and ' + fig_link(FIGMA_G, 'guidelines') + '.',
     lead_spec='The line, the tokens and the requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Divider') + '.',
     lead_code='How to add a divider to a page. The file is <code>components/css/divider.css</code>.',
     select_menu=False,

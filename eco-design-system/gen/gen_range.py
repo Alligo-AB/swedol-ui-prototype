@@ -154,7 +154,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Range', eyebrow='Components · Form', eyebrow_extra=BADGE,
     lead='A range lets the user pick <strong>one value from an ordered series</strong> by dragging a thumb, with the current value shown as text.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-range/SKILL.md</code>. There is no Figma component: the range was designed in the repo.',
+    lead_ex='Every example on this page is the real component, not a picture. There is no Figma component: the range was designed in the repo.',
     lead_spec='Tokens, dimensions, states and requirements. There is no Figma component: values come from the live token package and the specification skill.',
     lead_code='How to add a range to a page. The files are <code>components/css/range.css</code> and <code>components/js/range.js</code>.',
     css=['range'], body_js=['../../components/js/range.js'], select_menu=False, style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

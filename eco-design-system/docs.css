@@ -30,9 +30,11 @@
   --ease-standard: cubic-bezier(.35, 0, .35, 1);
   --ease-decelerate-generic: cubic-bezier(.16, .38, .58, 1);
   --ease-decelerate-emphasized: cubic-bezier(.16, 0, .16, 1);
+  --ease-accelerate-generic: cubic-bezier(.36, .09, 1, .58);
   --duration-fast-2: 100ms;
   --duration-fast-3: 150ms;
   --duration-fast-4: 200ms;
+  --duration-medium-1: 250ms;
   --duration-medium-2: 300ms;
   --duration-slow-1: 450ms;
   --duration-slow-3: 550ms;
@@ -204,7 +206,8 @@ body {
   :root:has(.ds-doc) .ds-page:has(> .breadcrumb) { max-width: none; margin: 0; }   /* the breadcrumb starts where the text column starts */
   :root:has(.ds-doc) .breadcrumb { padding-left: var(--px-full); padding-right: var(--px-full); }
   :root:has(.ds-doc) .ds-sep { padding-right: calc(var(--px-full) + var(--toc-w) + var(--toc-gap)); }   /* the divider ends with the text column, not under the Contents list */
-  :root:has(.ds-doc) .ds-tabs .tab-bar { max-width: var(--max-w); margin-left: 0; margin-right: 0; }
+  :root:has(.ds-doc) .ds-tabs { padding-right: calc(var(--px-full) + var(--toc-w) + var(--toc-gap)); }   /* the tab bar line ends with the text column too, like the dividers */
+  :root:has(.ds-doc) .ds-tabs .tab-bar { max-width: none; margin-left: 0; margin-right: 0; }
 }
 
 /* ── Section heading ──────────────────────────────────────────── */
@@ -940,3 +943,21 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
   .ds-doc .ds-anchor { position: absolute; left: calc(-1 * var(--dimension-spacing-space-32)); top: 50%; margin: 0; transform: translateY(-50%); }
 }
 @media (prefers-reduced-motion: reduce) { .ds-doc .ds-anchor { transition: none; } }
+
+/* ── Entry-page eyebrow: Swedol + Tools name badges (components/css/badge.css) ── */
+.ds-eyebrow:has(.badge-basic) { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ds-eyebrow__swedol { background: var(--color-accent-default); color: var(--color-text-action-accent); }
+.ds-eyebrow__tools { background: var(--color-primitive-color-brand-tools-accent-brand); color: var(--color-text-primary-inverted); }   /* Tools accent: primitive from the package, not in tokens.json */
+
+/* ── Resources: link card (tool + one line) ───────────────────────── */
+.ds-linkcard { display: flex; flex-direction: column; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); text-decoration: none; color: inherit; max-width: 100%; }
+.ds-linkcard__visual { display: flex; align-items: center; justify-content: center; background: var(--color-surface-100); color: var(--color-icon-inverted); height: 120px; }
+.ds-linkcard__visual .mo-ic { font-size: 48px; }
+.ds-linkcard__body { display: flex; flex-direction: column; gap: 4px; padding: 16px 24px 20px; }
+.ds-linkcard__title { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-weight: 600; }
+.ds-linkcard__desc { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); }
+.ds-linkcard:hover .ds-linkcard__title { text-decoration: underline; }
+.ds-linkcard:focus-visible { outline: 2px solid var(--ds-accent); outline-offset: 2px; }
+@media (min-width: 640px) { .ds-linkcard:not(.ds-linkcard--row) { width: 260px; } .ds-linkcard--row { flex-direction: row; } .ds-linkcard--row .ds-linkcard__visual { width: 120px; height: auto; flex: none; } .ds-linkcard--row .ds-linkcard__body { justify-content: center; } }
+@media (min-width: 769px) { .ds-linkcard__title, .ds-linkcard__desc { font-size: 17px; line-height: 24px; } }
+

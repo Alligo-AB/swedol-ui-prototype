@@ -234,7 +234,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='List Item', eyebrow='Components · Menus, lists and dividers',
     lead='A list item is the <strong>content of one row</strong>: an optional leading element, a label and an optional trailing element. It is used inside Menu, Overflow menu, List Picker, Drawer link and Filter sections in drawer content.',
-    lead_ex='Every example on this page is the real component, not a picture. The row itself (height, padding, divider, hover, focus) belongs to the container. Specification: <code>.claude/skills/eco-list-item/SKILL.md</code>. Figma: ' + fig_link(FIGMA % '3140-104687', 'List Item Content') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. The row itself (height, padding, divider, hover, focus) belongs to the container. Figma: ' + fig_link(FIGMA % '3140-104687', 'List Item Content') + '.',
     lead_spec='Tokens, sizes, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA % '3137-104383', 'Base List Item') + '.',
     lead_code='How to add a list item to a page. The file is <code>components/css/list-item.css</code>.',
     select_menu=True,

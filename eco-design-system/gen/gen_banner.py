@@ -368,7 +368,7 @@ JS_CODE = JS_PRE + r'''
 
 C = dict(BASE, slug=SLUG, title='Banner',
     lead='A banner carries a <strong>page-wide or system-level message</strong>: an outage, planned maintenance, a campaign or a notice to one customer group. It sits at the top and stays until it is closed or the situation changes.',
-    lead_ex='Banners are set up by an administrator, not by user actions. Every example is the real component. Specification: <code>.claude/skills/eco-banner-notification/SKILL.md</code>. Figma: ' + FIG + ', ' + FIG_GUIDE + '.',
+    lead_ex='Banners are set up by an administrator, not by user actions. Every example is the real component. Figma: ' + FIG + ', ' + FIG_GUIDE + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from ' + FIG + '.',
     lead_code='How to build a banner and the CSS behind it. The files are <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.',
     ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

@@ -1,0 +1,84 @@
+/* Header art for a component docs page: the Hairline figure on the left fading into a technical drawing on the right.
+   Markup: .ds-hero-split > (.ds-hero-split__text + .ds-hero-art > [data-hairline-card] figure + svg.ds-hero-art__bp). Shown from 1360px only; the drawing's lines and labels use tokens. */
+.ds-hero-split { display: block; }
+.ds-hero-art { display: none; }
+@media (min-width: 1360px) {
+  .ds-hero-split { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-32); }
+  .ds-hero-split__text { flex: 1 0 440px; max-width: 620px; }
+  .ds-hero-art { display: block; position: relative; flex: 0 1 clamp(520px, 50vw, 760px); min-width: 400px; aspect-ratio: 700 / 352; margin-top: calc(-1 * var(--dimension-spacing-space-16)); margin-right: calc(-1 * (var(--toc-w) + var(--toc-gap))); }  /* bleeds into the Contents column */
+  /* the figure: a 5:4 stage on the left, fading out to the right (the mask is relative to the stage, about 63% of the art's width) */
+  .ds-hero-art [data-hairline-card] { position: absolute; left: 0; top: 0; height: 100%; width: auto; aspect-ratio: 5 / 4; transform: translateX(-12%);
+    -webkit-mask-image: linear-gradient(90deg, #000 0, #000 58%, transparent 100%); mask-image: linear-gradient(90deg, #000 0, #000 58%, transparent 100%); }
+  /* the drawing: fades in from the middle; it never takes the pointer */
+  .ds-hero-art__bp { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 40%, #000 66%); mask-image: linear-gradient(90deg, transparent 40%, #000 66%); }
+  .ds-hero-art__bp .g path, .ds-hero-art__bp .d path, .ds-hero-art__bp .c path, .ds-hero-art__bp .ghost { fill: none; stroke: var(--color-text-tertiary); stroke-width: 1; }
+  .ds-hero-art__bp .d .ar { fill: var(--color-text-tertiary); stroke: none; }
+  .ds-hero-art__bp .c circle { fill: var(--color-text-primary); }
+  .ds-hero-art__bp text { font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 12px; letter-spacing: 0.48px; fill: var(--color-text-secondary); }
+  .ds-hero-art__bp .c text { fill: var(--color-text-primary); }
+  .ds-hero-art__bp text.code { font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: 0; fill: var(--color-text-tertiary); }
+}
+
+/* ---- shared drawing styles for the isometric drawing (version 2) ---- */
+@media (min-width: 1360px) {
+  .ds-hero-art__bp .o { fill: none; stroke: var(--color-text-primary); stroke-width: 1.1; }
+  .ds-hero-art__bp .o.f { fill: var(--color-background-primary); }
+  .ds-hero-art__bp .x { fill: none; stroke: var(--color-text-tertiary); stroke-width: .8; }
+  .ds-hero-art__bp .gh { fill: none; stroke: var(--color-text-tertiary); stroke-width: 1; stroke-dasharray: 4 3; }
+  .ds-hero-art__bp .hatch { stroke: var(--color-text-primary); stroke-width: .8; }
+  .ds-hero-art__bp .grid path { fill: none; stroke: var(--color-text-tertiary); }
+  .ds-hero-art__bp .grid .gn { stroke-width: .4; opacity: .35; }
+  .ds-hero-art__bp .grid .gm { stroke-width: .7; opacity: .6; }
+
+  /* VERSION 2: the drawing is isometric and lies exactly over the figure (same camera): the figure fades out to the right while the drawing of the same object fades in */
+  .ds-hero-art--iso { flex-basis: clamp(600px, 54vw, 840px); margin-left: calc(-1 * var(--dimension-spacing-space-48)); aspect-ratio: 600 / 320; margin-top: calc(-1 * var(--dimension-spacing-space-32)); }
+  .ds-hero-art--iso [data-hairline-card] { left: 6.67%; width: 66.67%; transform: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 0, #000 46%, transparent 92%); mask-image: linear-gradient(90deg, #000 0, #000 46%, transparent 92%); }
+  .ds-hero-art--iso .ds-hero-art__bp { -webkit-mask-image: linear-gradient(90deg, transparent 34%, #000 62%); mask-image: linear-gradient(90deg, transparent 34%, #000 62%); }
+
+  /* VERSION 3: the flat drawing is a background element behind the whole header; the figure sits in front, unmasked */
+  .ds-hero-split--bg { position: relative; }
+  .ds-hero-split--bg > .ds-hero-split__text, .ds-hero-split--bg > .ds-hero-art { position: relative; z-index: 1; }
+  .ds-hero-split--bg > .ds-hero-art { flex: 0 1 clamp(440px, 36vw, 560px); aspect-ratio: 5 / 4; margin-top: calc(-1 * var(--dimension-spacing-space-32)); margin-right: 0; }
+  .ds-hero-split--bg > .ds-hero-art [data-hairline-card] { left: 0; width: 100%; transform: none; -webkit-mask-image: none; mask-image: none; }
+  .ds-hero-bg { position: absolute; z-index: 0; top: calc(-1 * var(--dimension-spacing-space-32)); bottom: calc(-1 * var(--dimension-spacing-space-32)); left: 46%; right: calc(-1 * (var(--toc-w) + var(--toc-gap))); pointer-events: none; opacity: .55;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 45%), linear-gradient(0deg, transparent 0, #000 22%); mask-image: linear-gradient(90deg, transparent 0, #000 45%), linear-gradient(0deg, transparent 0, #000 22%); -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .ds-hero-bg .ds-hero-art__bp { position: static; width: 100%; height: 100%; -webkit-mask-image: none; mask-image: none; }
+}
+@media (max-width: 1359px) { .ds-hero-bg { display: none; } }
+
+/* ---- VERSION 2b: the isometric drawing and the figure are one background scene behind the header text (the figure is a static picture here) ---- */
+.ds-hero-split--scene { position: relative; display: block; }
+.ds-hero-split--scene > .ds-hero-split__text { position: relative; z-index: 1; max-width: 620px; }
+.ds-hero-scene { display: none; position: absolute; z-index: 0; pointer-events: none; opacity: 1; --hs-draw: .3; --hs-fig: .5;
+  top: calc(-1 * var(--dimension-spacing-space-48)); bottom: calc(-1 * var(--dimension-spacing-space-32)); left: 0; right: calc(-1 * (var(--toc-w, 0px) + var(--toc-gap, 0px)));
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, transparent 14%, #000 54%), linear-gradient(270deg, transparent 0, #000 7%), linear-gradient(0deg, transparent 0, rgba(0, 0, 0, .35) 8%, #000 26%), linear-gradient(180deg, transparent 0, rgba(0, 0, 0, .35) 6%, #000 24%); mask-image: linear-gradient(90deg, transparent 0, transparent 14%, #000 54%), linear-gradient(270deg, transparent 0, #000 7%), linear-gradient(0deg, transparent 0, rgba(0, 0, 0, .35) 8%, #000 26%), linear-gradient(180deg, transparent 0, rgba(0, 0, 0, .35) 6%, #000 24%);
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+.ds-hero-scene > svg { display: block; width: 100%; height: 100%; }
+.ds-hero-scene > svg > :not(foreignObject) { opacity: var(--hs-draw); }  /* the drawing is faint ... */
+.ds-hero-scene > svg > foreignObject { opacity: var(--hs-fig); }       /* ... the figure is clearer */
+.ds-hero-scene [data-hairline-card] { position: static; }
+.ds-hero-scene [data-part="slab"] { fill: color-mix(in srgb, var(--color-background-primary) 30%, transparent); }  /* flat, see-through slab (the figure's data-flat option) */
+.ds-hero-scene .ds-hero-art__bp { position: static; width: 100%; height: 100%; -webkit-mask-image: none; mask-image: none; }
+.ds-hero-scene .g path, .ds-hero-scene .d path, .ds-hero-scene .c path, .ds-hero-scene .gh, .ds-hero-scene .x { fill: none; stroke: var(--color-text-tertiary); stroke-width: 1; }
+.ds-hero-scene .gh { stroke-dasharray: 4 3; }
+.ds-hero-scene .grid path { fill: none; stroke: var(--color-text-tertiary); }
+.ds-hero-scene .grid .gn { stroke-width: .4; opacity: .28; }
+.ds-hero-scene .grid .gm { stroke-width: .7; opacity: .6; }
+.ds-hero-scene .d .ar { fill: var(--color-text-tertiary); stroke: none; }
+.ds-hero-scene .c circle { fill: var(--color-text-primary); }
+/* the scene's text is texture, not copy: pale, small and tight, so it melts into the drawing */
+.ds-hero-scene text { font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 11px; letter-spacing: 0.3px; fill: var(--color-text-tertiary); opacity: .55; }
+.ds-hero-scene .c text { fill: var(--color-text-tertiary); opacity: .7; }
+.ds-hero-scene text.code { font-family: ui-monospace, Menlo, monospace; font-size: 8.5px; letter-spacing: 0; opacity: .3; filter: blur(.35px); }  /* far away: small, pale, a touch soft */
+.ds-hero-scene text.lab { font-size: 8.5px; letter-spacing: 1.2px; text-transform: uppercase; opacity: .35; }
+.ds-hero-scene .fr { fill: none; stroke: var(--color-border-focus); stroke-width: 1; stroke-dasharray: 3 2; opacity: .6; }
+.ds-hero-scene .sw { stroke: var(--color-text-tertiary); stroke-width: .8; opacity: .45; filter: grayscale(.65); }  /* swatches: a hint of colour, not a colour chart */
+/* below 769px the scene stays, as a faint picture behind the text: 2.2 x the header width, shifted so the figure shows; the header clips it */
+@media (max-width: 768px) {
+  .ds-hero-split--scene { overflow: hidden; }
+  .ds-hero-scene { display: block; opacity: .2; --hs-draw: 1; --hs-fig: 1; left: -80%; right: auto; width: 220%; top: var(--dimension-spacing-space-24); bottom: auto; height: 300px; -webkit-mask-image: none; mask-image: none; }
+}
+@media (min-width: 769px) { .ds-hero-scene { display: block; } }
+@media (min-width: 1301px) { .ds-hero-scene { --hs-fig: .8; } }  /* the figure is clearer above 1300px */

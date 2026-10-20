@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagination: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/pagination.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-list { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+    #pg-list { max-height: 320px; overflow-y: auto; }   /* demo: a long list scrolls inside the stage */
+    .pg-item { padding: 12px 16px; background: var(--color-surface-raised-primary); color: var(--color-text-primary); font-size: 16px; line-height: 22px; }
+    .pg-snaps { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 640px) { .pg-snaps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .pg-snap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .pg-snap > span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-callout.ds-fig__stage.ds-callout { padding-left: 64px; padding-right: 64px; }
+    .pg-callout .ds-callout__art { width: 190px; max-width: 100%; margin: 0 auto; }
+    .pg-callout .pagination, .pg-snap .pagination, .ds-fig__stage .pagination { margin-top: 0; }   /* demo: the top spacing belongs to the page, not to a figure */
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; width: 100%; align-items: center; }
+    .pg-ghost { font-size: 16px; line-height: 22px; color: var(--color-surface-60); text-align: center; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="pagination.html" class="breadcrumb-item">Pagination</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status and navigation</span></div>
+    <h1 class="ds-title">Pagination</h1>
+    <p class="ds-lead">Pagination here is a <strong>“load more” pattern</strong>: a counter, a thin progress bar and a button that adds more items to a list without a page load.</p><p class="ds-lead">How to add pagination to a list. The files are <code>components/css/pagination.css</code> and <code>components/js/pagination.js</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Pagination"><a class="tab" href="pagination.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="pagination-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="pagination-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared files once per page. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/button.css"&gt;</code> and <code>pagination.css</code>, then <code>&lt;script src="/components/js/pagination.js"&gt;&lt;/script&gt;</code>.</td></tr><tr><th scope="row">2. Place</th><td>Put the component last in the section or list. Add no padding below it.</td></tr><tr><th scope="row">3. Key</th><td>Pick a key (for example <code>products</code>). The ids <code>{key}-pagination-count</code>, <code>{key}-pagination-bar</code> and <code>pagination-{key}</code> must exist.</td></tr><tr><th scope="row">4. Update</th><td>After loading items call <code>updatePagination(key, visible, total)</code>.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="pagination"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Pagination</h2><p class="ds-desc">Copy the markup you need.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>pagination</code></th><td>The component: 190px, centered, space above.</td></tr><tr><th scope="row"><code>pagination__info</code></th><td>Counter and bar.</td></tr><tr><th scope="row"><code>pagination__count</code></th><td>The counter text.</td></tr><tr><th scope="row"><code>pagination__progress</code></th><td>The 2px track.</td></tr><tr><th scope="row"><code>pagination__progress-bar</code></th><td>The fill, width set by script.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Function</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Function</th><th scope="col">What it does</th></tr></thead><tbody><tr><th scope="row"><code>updatePagination(key, visible, total)</code></th><td>Sets the counter, the fill width and disables the button when <code>visible &gt;= total</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>No padding or margin below the component: the section provides it.</li><li>The button is always <code>btn btn--secondary btn--md</code>.</li><li>When everything is shown the button is disabled, never hidden or removed.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file and one JS file, shared by every page. Link them, never copy them. The code below is read from the files the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/pagination.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div><div style="height:24px"></div><div class="ds-code"><div class="ds-code__bar"><span>JS (components/js/pagination.js)</span><button type="button" class="mo-copy" data-copy="js-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="js-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/pagination.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Component (link button.css, pagination.css and pagination.js)', '<div class="pagination" id="pagination-products">\n  <div class="pagination__info">\n    <p class="pagination__count" aria-live="polite">Showing <span id="products-pagination-count">4</span> of 6 reviews</p>\n    <div class="pagination__progress" aria-hidden="true">\n      <div class="pagination__progress-bar" id="products-pagination-bar" style="width:66.6667%"></div>\n    </div>\n  </div>\n  <button type="button" class="btn btn--secondary btn--md" onclick="showMore(\'products\', this)">\n    <span class="btn__label">Show more reviews</span>\n  </button>\n</div>'],
+    ['Update after loading', 'function showMore(key, btn) {\n  // 1. add the next items to the list, 2. then:\n  updatePagination(key, visibleCount, totalCount);\n  // 3. when everything is shown, the button becomes disabled:\n  //    move focus to the first new item first\n}']
+  ]);
+  DK.printCss($('#css-code'), 'pagination', [[/^\n+/, '']]);
+  fetch('../../components/js/pagination.js', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (t) { $('#js-code').textContent = t; });
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

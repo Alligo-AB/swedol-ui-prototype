@@ -226,7 +226,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Radio button', eyebrow='Components · Form',
     lead='A radio button lets the user choose <strong>exactly one</strong> of two or more mutually exclusive options. Choosing one clears the others in the group.',
-    lead_ex='Every example on this page is the real component, not a picture. Click, tab and use the arrow keys to try it. Specification: <code>.claude/skills/eco-radio/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Radio Button') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Click, tab and use the arrow keys to try it. Figma: ' + fig_link(FIGMA, 'Radio Button') + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Radio Button') + '.',
     lead_code='How to add a radio button to a page. The file is <code>components/css/radio.css</code>.',
     css=['radio', 'checkbox'], style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

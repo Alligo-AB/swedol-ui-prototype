@@ -227,7 +227,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Menu', eyebrow='Components · Menus, lists and dividers',
     lead='A menu is the <strong>list surface</strong> that opens from a button or action (Dropdown menu) or from a Select field (Exposed dropdown menu). The two differ only in the element that opens the surface, so they share one component.',
-    lead_ex='Every example on this page is the real component, not a picture. Hover, click and tab to try it. Specification: <code>.claude/skills/eco-menu/SKILL.md</code>. Figma: ' + fig_link(FIGMA % '2724-88966', 'Menu') + '. Row content comes from ' + fig_link('list-item.html', 'List Item').replace(' target="_blank" rel="noopener"', '') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Hover, click and tab to try it. Figma: ' + fig_link(FIGMA % '2724-88966', 'Menu') + '. Row content comes from ' + fig_link('list-item.html', 'List Item').replace(' target="_blank" rel="noopener"', '') + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA % '2723-85186', 'Base Item') + ' and ' + fig_link(FIGMA % '2728-86374', 'Menu Item Divider') + '.',
     lead_code='How to add a menu to a page. The file is <code>components/css/menu.css</code>.',
     select_menu=False,

@@ -7,7 +7,9 @@ description: Use when building breadcrumbs for page-hierarchy navigation — pla
 
 ## Breadcrumb (ECO Design System)
 
-**Figma – design:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1986-64264
+**Figma – Breadcrumb Base (one crumb):** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1986-64264
+**Figma – Breadcrumb Bar (2–6 crumbs):** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=332-8639
+**Checked against Figma 2026-10-19:** padding, sizes, weights, colors and states match; Figma has no Focus or Disabled state; the bar has 2 to 6 crumbs. Open points (not changed in the shared CSS): the desktop separator is `body-sm` in Figma (letter spacing 0.36px, font feature `ss06`), the CSS has 0.28px and no `ss06`; the crumb letter spacing in Figma (0.24 / 0.28px) differs from the `label-sm` token (0.48 / 0.56px).
 **Figma – responsive behavior per breakpoint:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=9071-123361
 
 Breadcrumb is used to show the user's position in the page hierarchy and enable quick navigation upward through the structure (e.g. `Home / Category / Subpage`). Placed directly under the header, as the first element inside the page's content wrapper (`.page`).
@@ -65,7 +67,7 @@ Breadcrumb is used to show the user's position in the page hierarchy and enable 
 
 ### CSS template
 
-> **Shared file:** `<link rel="stylesheet" href="/components/css/breadcrumb.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation page: `eco-design-system/components/breadcrumb.html`.
+> **Shared file:** `<link rel="stylesheet" href="/components/css/breadcrumb.css">`. This is the single source; the template below is a reference copy. Never copy the rules into a page. Documentation: hub `eco-design-system/components/breadcrumb.html` (which part) with two three-page sets, `breadcrumb-base*.html` (one crumb, states Enabled / Hover / Current) and `breadcrumb-bar*.html` (the trail, 2–6 crumbs, placement, spacing; documented as a **pattern** under Patterns), converted 2026-10-19 (`gen_breadcrumb.py`, `gen_breadcrumb_base.py`, `gen_breadcrumb_bar.py`, shared `gen/bc.py`).
 
 
 ```css

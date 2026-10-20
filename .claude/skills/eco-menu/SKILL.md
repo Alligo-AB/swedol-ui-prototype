@@ -113,7 +113,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 
 1. **Never hardcode design tokens** — every color, spacing and shadow is a `var(--…)` (see `eco-tokens`).
 2. **Mobile-first, switch at `md` (769px)**, never `sm`. Verify with `getComputedStyle` at ~375px, ~700px and ~1024px+ (row 40/40/48 for Large).
-3. **Use `eco-menu` for the open list.** `eco-select` opens a `.menu` instead of the browser's native list (script: `components/js/select-menu.js`). The native `<select>` stays in the markup as the form control.
+3. **Use `eco-menu` for the open list.** `eco-select` opens a `.menu` instead of the browser's native list (script: `components/js/select-menu.js`). The native `<select>` stays in the markup as the form control. While the menu is open the select's arrow rotates 180° clockwise (`aria-expanded="true"`, rule in `components/css/select.css`).
 4. **Always set roles:** `role="listbox"` on the list, `role="option"` and `aria-selected` on each row, `aria-multiselectable="true"` for Multi Select. Rows are focusable (`tabindex`), Up/Down move, Enter/Space choose, Esc closes the menu and returns focus to the opener.
 5. **Disabled rows:** `aria-disabled="true"` and `tabindex="-1"`. Click and Enter are ignored, arrow keys skip them, no hover fill.
 6. **Never rely on the icon alone** for the selected state: `aria-selected` always matches what is shown.

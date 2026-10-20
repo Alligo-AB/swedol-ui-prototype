@@ -301,7 +301,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Action link', parent=PARENT, eyebrow='Components · Links',
     lead='An action link is a <strong>standalone link</strong> for lightweight actions like downloads and “view all” navigation, with a leading icon, a trailing icon or both. It is underlined on hover.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-action-link/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Action link') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Figma: ' + fig_link(FIGMA, 'Action link') + '.',
     lead_spec='Tokens, sizes, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Action link') + '.',
     lead_code='How to add an action link to a page. The file is <code>components/css/action-link.css</code>.',
     select_menu=False,

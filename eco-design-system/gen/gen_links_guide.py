@@ -75,7 +75,7 @@ JS = r'''
 C = dict(slug=SLUG, title='Links guide', eyebrow='Components · Links',
     css=['inline-link', 'action-link', 'tile-link'], style=STYLE, select_menu=False,
     lead='ECO has three link types: <strong>inline link</strong>, <strong>action link</strong> and <strong>tile link</strong>. Read this guide before you build a link.',
-    lead_ex='Choose the type below, then open the page for it: ' + ', '.join(link_large(h, n).replace(' inline-link--secondary', '').replace('inline-link--large', 'inline-link--xlarge') for h, n in [('inline-link.html', 'Inline link'), ('action-link.html', 'Action link'), ('tile-link.html', 'Tile link')]) + '. Every example is the real component. Specification: <code>.claude/skills/links-guide/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Links usage guidelines') + '.',
+    lead_ex='Choose the type below, then open the page for it: ' + ', '.join(link_large(h, n).replace(' inline-link--secondary', '').replace('inline-link--large', 'inline-link--xlarge') for h, n in [('inline-link.html', 'Inline link'), ('action-link.html', 'Action link'), ('tile-link.html', 'Tile link')]) + '. Every example is the real component. Figma: ' + fig_link(FIGMA, 'Links usage guidelines') + '.',
     lead_spec='', lead_code='', ex=secs, spec=[], code=[])
 
 

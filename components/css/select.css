@@ -38,11 +38,15 @@
       width: 24px; height: 24px; font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 1;
       font-weight: normal; font-style: normal; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr;
       font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; color: var(--color-icon-primary); user-select: none;
+      transition: transform var(--duration-fast-3) var(--ease-standard);
     }
+    /* Open (menu open; [data-state="open"] forces it on the docs pages): the arrow turns 180deg clockwise (points up); it turns back when the menu closes */
+    .form-select:is([aria-expanded="true"], [data-state="open"]) + .form-select-arrow { transform: translateY(-50%) rotate(180deg); }
+    @media (prefers-reduced-motion: reduce) { .form-select-arrow { transition: none; } }
 
     /* States */
     .form-select:is(:hover, [data-state="hover"]) { border-color: var(--color-border-hover); }
-    .form-select:is(:focus, [aria-expanded="true"], [data-state="active"]) { border-color: var(--color-border-selected); }  /* Active: the field is being used (focus or menu open). A chosen option alone does not select it. */
+    .form-select:is(:focus, [aria-expanded="true"], [data-state="active"], [data-state="open"]) { border-color: var(--color-border-selected); }  /* Active: the field is being used (focus or menu open). A chosen option alone does not select it. */
     .form-select--error { border-color: var(--color-border-danger-default); }
     .form-select--success { border-color: var(--color-border-success-default); }
     .form-select--error:focus { border-color: var(--color-border-danger-default); }
@@ -73,3 +77,12 @@
     /* Exposed dropdown: the menu opens under the field, as wide as the field */
     .input-wrap > .menu { position: absolute; top: calc(100% + var(--dimension-spacing-space-4)); left: 0; z-index: 10; } /* z-index 10: local, no z-index token */
     .input-wrap > .menu--up { top: auto; bottom: calc(100% + var(--dimension-spacing-space-4)); } /* not enough room below: open upwards */
+
+    /* Opening: the menu fades in while it moves 8px away from the field (down; up when it flips). eco-motion "Dropdown opens": duration-medium-1 (250ms) + ease-decelerate-generic. */
+    @keyframes select-menu-in { from { opacity: 0; transform: translateY(var(--menu-shift)); } to { opacity: 1; transform: none; } }
+    .input-wrap > .menu { --menu-shift: calc(-1 * var(--dimension-spacing-space-8)); animation: select-menu-in var(--duration-medium-1) var(--ease-decelerate-generic) backwards; }
+    .input-wrap > .menu--up { --menu-shift: var(--dimension-spacing-space-8); }
+    /* Closing: fade out and move back towards the field. eco-motion "Element disappears": fast-2 (100ms) + accelerate-generic. select-menu.js removes it afterwards. */
+    @keyframes select-menu-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(var(--menu-shift)); } }
+    .input-wrap > .menu--closing { animation: select-menu-out var(--duration-fast-2) var(--ease-accelerate-generic) forwards; pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { .input-wrap > .menu, .input-wrap > .menu--closing { animation: none; } }

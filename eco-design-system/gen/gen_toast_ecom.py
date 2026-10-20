@@ -241,7 +241,7 @@ JS_CODE = JS_PRE + r'''
 
 C = dict(BASE, slug=SLUG, title='E-Com Toast',
     lead='An E-Com Toast confirms a <strong>shopping action</strong> without leaving the page: a product added to the cart, or saved to the wishlist. It has no status color; it speaks in the store’s own black and white.',
-    lead_ex='Every example is the real component, and every “Show toast” button fires a real toast in the corner of your window. System messages and errors use the ' + lead_link('toast.html', 'Toast') + '. Specification: <code>.claude/skills/eco-toast-ecom/SKILL.md</code>. Figma: ' + FIG + '.',
+    lead_ex='Every example is the real component, and every “Show toast” button fires a real toast in the corner of your window. System messages and errors use the ' + lead_link('toast.html', 'Toast') + '. Figma: ' + FIG + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from ' + FIG + '.',
     lead_code='How to show an E-Com Toast from script and the CSS behind it. The files are <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.',
     ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE, select_menu=False)

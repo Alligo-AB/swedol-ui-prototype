@@ -31,6 +31,8 @@ Select is used to let the user choose one option from a list. The component's si
 | **Small** | 32px | `8px` all sides | 24px | `label-sm` (mobile): 12px/12px, 0.48px, Bold, uppercase | `body-sm`: 14px/20px, 0.36px, Regular |
 
 > The dropdown arrow is positioned absolutely: `right: 12px`, `top: 50%`, `transform: translateY(-50%)`. The right padding on the select must be at least `40px` to leave room for the arrow.
+>
+> **Open state:** while the menu is open (`aria-expanded="true"` on the `select`) the arrow rotates 180° clockwise (`transform: translateY(-50%) rotate(180deg)`) with `transition: transform var(--duration-fast-3) var(--ease-standard)`, and turns back when the menu closes. No transition under `prefers-reduced-motion`. Rule `.form-select:is([aria-expanded="true"], [data-state="open"]) + .form-select-arrow` in `components/css/select.css`. The docs pages force this state with `data-state="open"` (Open row in the States matrix, Open in the Playground): black border plus the turned arrow, without the list.
 
 ---
 
@@ -112,6 +114,7 @@ A select opens the ECO **Menu** (`eco-menu`, Exposed dropdown menu) instead of t
 
 - The menu is appended to `.input-wrap`, `position: absolute`, `top: calc(100% + 4px)`, as wide as the field, `z-index: 10` (local, no token).
 - **Placement:** opens below. If it does not fit and there is more room above, it opens upwards (`.menu--up`, `bottom: calc(100% + 4px)`); if it fits in neither direction the list height is capped and scrolls. Checked on open; window resize closes the menu.
+- **Opening animation:** the menu fades in (opacity 0 → 1) while it moves 8px away from the field: down normally, up when it has flipped (`--menu-shift`, keyframes `select-menu-in` in `components/css/select.css`). `duration-medium-1` (250ms) + `ease-decelerate-generic`, per `eco-motion` "Dropdown opens". **Closing:** the menu fades out (1 → 0) and moves the same 8px back towards the field, `duration-fast-2` (100ms) + `ease-accelerate-generic` (`eco-motion` "Element disappears"); the arrow turns back at the same time. While it fades the menu has `.menu--closing`, `inert` and `aria-hidden`, then `select-menu.js` removes it (`animationend`, 400ms safety timeout). No animation under `prefers-reduced-motion`: it opens and closes instantly.
 - Rows come from the `<option>`s; the empty placeholder option is skipped; a disabled `<option>` becomes a disabled row (`aria-disabled`, skipped by arrow keys); the chosen row shows the check (`aria-selected="true"`).
 - Click or Enter/Space/Arrow opens; Up/Down/Home/End move; Enter/Space choose and fire `change`; Escape closes and returns focus to the field; Tab or an outside click closes.
 - CSS and script: `/components/css/menu.css`, `/components/css/select.css` and `<script src="/components/js/select-menu.js"></script>` (the docs pages `select.html`, `select-specifications.html` and `select-code.html` link the same files). Add each once per page.

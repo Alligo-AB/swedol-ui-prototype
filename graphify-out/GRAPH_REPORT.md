@@ -1,16 +1,16 @@
-# Graph Report - swedol-ui-prototype  (2026-10-15)
+# Graph Report - swedol-ui-prototype  (2026-10-19)
 
 ## Corpus Check
-- 102 files · ~990,298 words
+- 125 files · ~1,457,791 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 668 nodes · 948 edges · 67 communities (41 shown, 10 thin omitted)
-- Extraction: 92% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 71 edges (avg confidence: 0.85)
+- 824 nodes · 1118 edges · 84 communities (53 shown, 14 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 76 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `aaf849b6`
+- Built from commit: `3869b3a0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -28,7 +28,7 @@
 - List Item (ECO Design System)
 - Menu – Dropdown & Exposed Dropdown (ECO Design System)
 - attach
-- Badge/Basic (.badge-basic)
+- Personas för designfeedback – Swedol och Tools
 - build.py
 - Divider (ECO Design System)
 - Switch (ECO Design System)
@@ -54,18 +54,34 @@
 - init
 - run
 - watch
-- Input Field
+- Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)
 - tokens/_test.html (unused placeholder)
 - old_js
 - gen_links_guide.py
-- Elevation and shadows
+- Persona 1 – Mats, egenföretagare (kundtyp *Få jobbet gjort*)
 - Role Card / Tier Card pair
 - gen/README.md
 - ECO semantic color tokens
+- Persona 3 – Karin, platschef och beställare (kundtyp *Trygghet och inköpsstyrning*)
 - Button
-- Section
+- Collapsible / Accordion
 - gen_notifications.py
-- toolbar
+- kernel.js
+- button-pair.js
+- Section
+- Duration tokens fast/medium/slow
+- Action Link
+- Section padding per breakpoint first vs other
+- bc.py
+- hero_switch.py
+- hero_switch_iso.py
+- Hairline-figurer för component-korten
+- card-check.mjs
+- eco-card-animation/SKILL.md
+- switch.js
+- make-eco.mjs
+- card-visuals-archive/README.md
+- sel
 
 ## God Nodes (most connected - your core abstractions)
 1. `eco-doc-page skill` - 24 edges
@@ -104,7 +120,7 @@
 - **Banner, Inline and Modal notification family** — _claude_skills_eco_banner_notification_skill_banner_notification, _claude_skills_eco_inline_notification_skill_inline_notification, _claude_skills_eco_modal_ecom_skill_modal_ecom [INFERRED 0.85]
 - **Pages using role tier cards** — feature_comparison_roles, feature_comparison_roles_backup, e_handelspartner, claude_skills_eco_role_tier_card_skill [INFERRED 0.85]
 
-## Communities (67 total, 10 thin omitted)
+## Communities (84 total, 14 thin omitted)
 
 ### Community 0 - "Shared header partial"
 Cohesion: 0.10
@@ -123,15 +139,15 @@ Cohesion: 0.08
 Nodes (29): eco-doc-page skill, Building blocks in `docs.css`, Component pages, Contents list (sticky side TOC), Controls in a playground are the real components, doc-kit.js (DK helpers), docs.css (shared doc-page styles), Foundation pages (+21 more)
 
 ### Community 4 - "notifications.js"
-Cohesion: 0.22
-Nodes (24): B(), banner(), button(), closeBtn(), e(), ecom(), el(), ic() (+16 more)
+Cohesion: 0.18
+Nodes (26): B(), banner(), button(), closeBtn(), e(), ecom(), el(), ic() (+18 more)
 
 ### Community 5 - "doc-kit.js"
 Cohesion: 0.13
 Nodes (22): block(), bp(), callouts(), draw(), node(), clear(), codeBox(), esc() (+14 more)
 
 ### Community 6 - "docnav.js"
-Cohesion: 0.11
+Cohesion: 0.10
 Nodes (30): build(), close(), closeDrawer(), closeSearch(), cubic(), esc(), fill(), fold() (+22 more)
 
 ### Community 7 - "Design review: implementation vs. Figma + ECO"
@@ -143,8 +159,8 @@ Cohesion: 0.36
 Nodes (13): extract_declarations(), fallback_value(), main(), normalize_typography_value(), parse_colors(), parse_radius_border(), parse_shadows(), parse_spacing() (+5 more)
 
 ### Community 9 - "System Inline Notification"
-Cohesion: 0.18
-Nodes (12): Banner Notification, Large banner exclusive to My Pages, Banner size Small/Large, Inline Notification Actionable layout, Informational E-Com inline variant, System Inline Notification, Medium renamed to Large in 2026-09 update, Inline Notification sizes Large/Small (+4 more)
+Cohesion: 0.05
+Nodes (42): Badge/Basic (.badge-basic), Badge color-meaning mapping for lifecycle status, Badge emphasis Strong/Weak/Weaker, Badge letter case parameter, Badge vs Tag vs counter bubble distinction, Badge states Neutral Grey/Dark and Alert Info/Success/Warning/Danger, Banner Notification, Banner emphasis Strong/Weak/Weaker (+34 more)
 
 ### Community 10 - "List Item (ECO Design System)"
 Cohesion: 0.15
@@ -158,9 +174,9 @@ Nodes (11): Container, CSS, Flags (for design), HTML structure, Menu – Dropdow
 Cohesion: 0.35
 Nodes (11): attach(), close(), group(), open(), pick(), render(), show(), loadData() (+3 more)
 
-### Community 13 - "Badge/Basic (.badge-basic)"
-Cohesion: 0.22
-Nodes (10): Badge/Basic (.badge-basic), Badge color-meaning mapping for lifecycle status, Badge emphasis Strong/Weak/Weaker, Badge letter case parameter, Badge vs Tag vs counter bubble distinction, Badge states Neutral Grey/Dark and Alert Info/Success/Warning/Danger, Banner emphasis Strong/Weak/Weaker, Strong emphasis replaces System Extra Strong (+2 more)
+### Community 13 - "Personas för designfeedback – Swedol och Tools"
+Cohesion: 0.14
+Nodes (13): Allvarlighetsskala, Antaganden och luckor, Filer, Gemensamma kriterier (gäller alla tre), Hur feedbacken används, Konflikter mellan personorna, Mall för en feedbackpunkt, Personas för designfeedback – Swedol och Tools (+5 more)
 
 ### Community 14 - "build.py"
 Cohesion: 0.10
@@ -203,8 +219,8 @@ Cohesion: 0.33
 Nodes (7): Checkbox, Checkbox dark mode (.form-checkbox-item--dark), Checkbox Disabled Selected gray box with gray checkmark, Checkbox light-mode focus ring deviates from border-focus, Checkbox 24x24 size model, Checkbox table check-icon variant (.check-icon), Border color tokens
 
 ### Community 24 - "notif.py"
-Cohesion: 0.11
-Nodes (7): esc_attr(), fig_one(), table(), fig_one_id(), Shared pieces of the five notification page sets (toast, toast-ecom, modal,…, txt_field(), which()
+Cohesion: 0.09
+Nodes (10): esc_attr(), fig_one(), items: [(label_id, label, attr, buttons, extra)] -> ds-toolbar, table(), toolbar(), bp_toolbar(), fig_one_id(), Shared pieces of the five notification page sets (toast, toast-ecom, modal,… (+2 more)
 
 ### Community 25 - "compose-helpers.py"
 Cohesion: 0.13
@@ -231,65 +247,113 @@ Cohesion: 0.33
 Nodes (5): Flags, Range (ECO Design System), Rules, States, Use it
 
 ### Community 31 - "btn_group"
-Cohesion: 0.67
+Cohesion: 0.30
 Nodes (3): bp_field(), btn_group(), buttons: [(value, text, pressed)]
 
 ### Community 32 - "select-menu.js"
-Cohesion: 0.70
-Nodes (4): choose(), close(), holder(), openMenu()
+Cohesion: 0.60
+Nodes (5): choose(), close(), holder(), leave(), openMenu()
 
-### Community 41 - "Input Field"
-Cohesion: 0.25
-Nodes (9): Drawer mobile base styling at max-width 768px, Input Field, Label above input, hint/message below pattern, Input sizes per breakpoint, Input states enabled/hover/active/focus/error/success/disabled, Select active state requires JS .is-active, Select, Select sizes per breakpoint (+1 more)
+### Community 41 - "Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)"
+Cohesion: 0.18
+Nodes (10): Acceptanskriterier (EOS), Behov i uppgiftsform, Exempel på granskning (mall), Frågor att ställa en prototyp som Lars, Kontext, Kort om Lars, Mål, smärtor och drivkrafter (översatt till gränssnittet), Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*) (+2 more)
 
-### Community 46 - "old_js"
-Cohesion: 0.33
-Nodes (4): old_js(), Slice of the old page's script: from the line containing `start` up to (not…, A Small eco-select field for a playground (options: [(value, text)], cur = the…, sel()
-
-### Community 49 - "Elevation and shadows"
-Cohesion: 0.29
-Nodes (7): Component-specific elevation tokens, Designated Level elevation-drawer-*, Drawer conventions, Elevation and shadows, Always choose lowest possible elevation level, Shadow Bottom elevation-b-20 to b-100, Shadow Top elevation-t-*
+### Community 49 - "Persona 1 – Mats, egenföretagare (kundtyp *Få jobbet gjort*)"
+Cohesion: 0.18
+Nodes (10): Acceptanskriterier (FJG), Behov i uppgiftsform, Exempel på granskning (mall), Frågor att ställa en prototyp som Mats, Kontext, Kort om Mats, Mål, smärtor och drivkrafter (översatt till gränssnittet), Persona 1 – Mats, egenföretagare (kundtyp *Få jobbet gjort*) (+2 more)
 
 ### Community 50 - "Role Card / Tier Card pair"
-Cohesion: 0.25
-Nodes (8): Bordered box crumb with slash separator, System button variant, Feature strips must be grounded in comparison table rows, goToCompareView() switch-tab-then-scroll function, Scroll to anchored sections with --header-top-h offset, Role tier light vs dark card variants, Role quicklinks (.role-quicklinks), Role Card / Tier Card pair
+Cohesion: 0.29
+Nodes (7): Bordered box crumb with slash separator, System button variant, Feature strips must be grounded in comparison table rows, goToCompareView() switch-tab-then-scroll function, Scroll to anchored sections with --header-top-h offset, Role quicklinks (.role-quicklinks), Role Card / Tier Card pair
 
 ### Community 57 - "ECO semantic color tokens"
 Cohesion: 0.29
-Nodes (7): Banner Promotion variant, Promotion uses brand-scoped accent tokens, Accent color tokens accent-default/light/dark, ECO semantic color tokens, Never hardcode hex, use var(--color-*), Surface opacity tokens, Text color tokens
+Nodes (7): Button variants Primary/Secondary/Blank/Destructive/Accent/System, Accent color tokens accent-default/light/dark, ECO semantic color tokens, Never hardcode hex, use var(--color-*), Surface opacity tokens, Text color tokens, Role tier light vs dark card variants
+
+### Community 58 - "Persona 3 – Karin, platschef och beställare (kundtyp *Trygghet och inköpsstyrning*)"
+Cohesion: 0.18
+Nodes (10): Acceptanskriterier (TIS), Behov i uppgiftsform, Exempel på granskning (mall), Frågor att ställa en prototyp som Karin, Kontext, Kort om Karin, Mål, smärtor och drivkrafter (översatt till gränssnittet), Persona 3 – Karin, platschef och beställare (kundtyp *Trygghet och inköpsstyrning*) (+2 more)
 
 ### Community 59 - "Button"
-Cohesion: 0.20
-Nodes (10): Button, Button hover white 20% overlay, Button sizes lg/md/sm/xs desktop vs mobile, Button variants Primary/Secondary/Blank/Destructive/Accent/System, Modal buttons always 32px tall, Tile Link border is absolute ::before inset 0, Tile Link background colors White/Grey/Black, Tile Link Black hover white 20% overlay (+2 more)
+Cohesion: 0.22
+Nodes (9): Button, Button keyboard-nav focus outline method, Button hover white 20% overlay, Input focus ring is absolute inset -3px, keyboard-only, Tile Link border is absolute ::before inset 0, Tile Link background colors White/Grey/Black, Tile Link Black hover white 20% overlay, Tile Link (+1 more)
 
-### Community 60 - "Section"
-Cohesion: 0.06
-Nodes (36): Action Link, Action Link icons never underlined on hover, Action Link Text Primary Inverted variant, Action Link sizes Large/Medium/Small, Breadcrumb Active (last, current page) state, Breadcrumb, Breadcrumb built-in spacing zeroes following section top padding, Breadcrumb uses --px-page not --px-full (+28 more)
+### Community 60 - "Collapsible / Accordion"
+Cohesion: 0.50
+Nodes (3): Collapsible / Accordion, Hide last row bottom line when list closes a section, Collapsible header uses min-height not height
 
-### Community 62 - "toolbar"
-Cohesion: 0.67
-Nodes (3): items: [(label_id, label, attr, buttons, extra)] -> ds-toolbar, toolbar(), bp_toolbar()
+### Community 62 - "kernel.js"
+Cohesion: 0.11
+Nodes (19): css(), entry(), fade(), fit(), frame(), ghost(), hull(), inject() (+11 more)
+
+### Community 65 - "button-pair.js"
+Cohesion: 0.16
+Nodes (10): ARROW, BOUNCE, BTN, DOWN, G, GW(), label(), mount() (+2 more)
+
+### Community 68 - "Section"
+Cohesion: 0.22
+Nodes (10): Breadcrumb built-in spacing zeroes following section top padding, Breadcrumb uses --px-page not --px-full, Hide the whole pagination once all items loaded, Pagination has no bottom padding of its own, Pagination (load more), My Pages page-title section spacing, Page Divider, Use --px-full not --px-page for divider/section (+2 more)
+
+### Community 69 - "Duration tokens fast/medium/slow"
+Cohesion: 0.33
+Nodes (6): Distance + fade + easing combination table, Distance drives duration group, Duration tokens fast/medium/slow, Fades fast/medium/slow, Motion easing and duration, Pagination progress bar
+
+### Community 70 - "Action Link"
+Cohesion: 0.22
+Nodes (10): Action Link, Action Link icons never underlined on hover, Action Link Text Primary Inverted variant, Action Link sizes Large/Medium/Small, Breadcrumb Active (last, current page) state, Breadcrumb, Inline Link color variants Primary/Secondary/Tertiary/Inverted, Inline Link (+2 more)
+
+### Community 71 - "Section padding per breakpoint first vs other"
+Cohesion: 0.50
+Nodes (5): Section padding per breakpoint first vs other, Spacing consumer classes mt-space, pt-space, gap-space, Layout Vertical Whitespace space-sm/md/lg, Spacing Scale space-0 to space-120, Spacing
+
+### Community 73 - "hero_switch.py"
+Cohesion: 0.36
+Nodes (4): call(), dim_h(), dim_v(), flat()
+
+### Community 74 - "hero_switch_iso.py"
+Cohesion: 0.43
+Nodes (7): circ(), dim(), ext(), line(), P(), pill(), a, b: world coordinate range along `along`; off: world coordinate of the…
+
+### Community 75 - "Hairline-figurer för component-korten"
+Cohesion: 0.29
+Nodes (6): Arbetsregler, Filer (referens: Button), Hairline-figurer för component-korten, På korten (Button, Switch), Önskemål för nya figurer, Öppet
+
+### Community 76 - "card-check.mjs"
+Cohesion: 0.29
+Nodes (6): c, { chromium }, [comp, out = "/tmp/card"], errs, play, require
+
+### Community 77 - "eco-card-animation/SKILL.md"
+Cohesion: 0.33
+Nodes (5): Also on the component page, Open / always ask, Procedure (one component), Reusable pieces (do not rewrite), Techniques learned on Switch (reuse)
+
+### Community 78 - "switch.js"
+Cohesion: 0.33
+Nodes (3): ARROW, mount(), SW
+
+### Community 79 - "make-eco.mjs"
+Cohesion: 0.50
+Nodes (3): css, dir, page
 
 ## Ambiguous Edges - Review These
 - `Border color tokens` → `Tile Link background colors White/Grey/Black`  [AMBIGUOUS]
   .claude/skills/eco-tile-link/SKILL.md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **169 isolated node(s):** `1. Before you start — ask, don't guess`, `Prototype as a source (functionality)`, `Sweep systematically (do not sample)`, `4. WCAG check (separate section in the report)`, `5. Verify before you report` (+164 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 303 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **236 isolated node(s):** `BTN`, `SNAP`, `BOUNCE`, `DOWN`, `UP` (+231 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 405 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `Border color tokens` and `Tile Link background colors White/Grey/Black`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `ECO semantic color tokens` connect `ECO semantic color tokens` to `Badge/Basic (.badge-basic)`, `Checkbox`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `ECO semantic color tokens` connect `ECO semantic color tokens` to `System Inline Notification`, `Checkbox`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Why does `Component library skills index` connect `Component library skills index` to `Shared header partial`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Why does `Accent color tokens accent-default/light/dark` connect `ECO semantic color tokens` to `Role Card / Tier Card pair`, `Button`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `Accent color tokens accent-default/light/dark` connect `ECO semantic color tokens` to `System Inline Notification`?**
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Shared header partial` (e.g. with `Shared account-nav drawer partial` and `Shared main menu partial`) actually correct?**
   _`Shared header partial` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `Users page (Användare)` (e.g. with `mypages-template.html (logged-in page template)` and `Users dashboard page (Användare with stat cards)`) actually correct?**

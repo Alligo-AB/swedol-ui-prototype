@@ -212,7 +212,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Section', eyebrow='Components · Layout and content', eyebrow_extra=BADGE,
     lead='A section is a <strong>full-width block of a page</strong>. Its padding adjusts at each breakpoint and its surface is white or grey.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-section/SKILL.md</code>.',
+    lead_ex='Every example on this page is the real component, not a picture.',
     lead_spec='The tokens, the padding per breakpoint, the measurements and the requirements. Values come from the live token package and from the specification skill.',
     lead_code='How to add a section to a page. The file is <code>components/css/section.css</code>.',
     select_menu=False,

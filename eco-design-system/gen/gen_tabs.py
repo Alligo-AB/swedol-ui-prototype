@@ -234,7 +234,7 @@ JS_CODE = TAB_JS + r'''
 C = dict(
     slug=SLUG, title='Tabs', eyebrow='Components · Navigation',
     lead='Tabs organise content across screens, data sets and interactions at the <strong>same level of hierarchy</strong>. A tab bar lets the user move between groups of related content without leaving the page. For content that must be read in order, use steps instead.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-tabs/SKILL.md</code>. Figma: ' + FIGS + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Figma: ' + FIGS + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + FIGS + '.',
     lead_code='How to add a tab bar to a page. The files are <code>components/css/tabs.css</code> and <code>components/js/tabs.js</code>.',
     css=[], style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE, select_menu=False)

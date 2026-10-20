@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagination: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/pagination.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-list { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+    #pg-list { max-height: 320px; overflow-y: auto; }   /* demo: a long list scrolls inside the stage */
+    .pg-item { padding: 12px 16px; background: var(--color-surface-raised-primary); color: var(--color-text-primary); font-size: 16px; line-height: 22px; }
+    .pg-snaps { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 640px) { .pg-snaps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .pg-snap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .pg-snap > span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-callout.ds-fig__stage.ds-callout { padding-left: 64px; padding-right: 64px; }
+    .pg-callout .ds-callout__art { width: 190px; max-width: 100%; margin: 0 auto; }
+    .pg-callout .pagination, .pg-snap .pagination, .ds-fig__stage .pagination { margin-top: 0; }   /* demo: the top spacing belongs to the page, not to a figure */
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; width: 100%; align-items: center; }
+    .pg-ghost { font-size: 16px; line-height: 22px; color: var(--color-surface-60); text-align: center; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="pagination.html" class="breadcrumb-item">Pagination</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status and navigation</span></div>
+    <h1 class="ds-title">Pagination</h1>
+    <p class="ds-lead">Pagination here is a <strong>“load more” pattern</strong>: a counter, a thin progress bar and a button that adds more items to a list without a page load.</p><p class="ds-lead">The tokens, the spacing per breakpoint, the measurements and the requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=11614-537671" target="_blank" rel="noopener">Pagination</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Pagination"><a class="tab" href="pagination.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="pagination-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="pagination-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Part</th><th scope="col">Use</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><h3 class="ds-h3">Open points</h3><p class="ds-desc"><code>pagination.css</code> writes the gaps (24px, 16px), the 190px width and the counter text (16/22, 17/24 from 769px) as pixels. The values match the spacing scale and the <code>body-md</code> pair, but are not yet written as tokens.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Width</th><td>190px, <code>max-width: 100%</code>, centered, never stretched</td></tr><tr><th scope="row">Gap: info block to button</th><td>24px</td></tr><tr><th scope="row">Gap: counter to bar</th><td>16px</td></tr><tr><th scope="row">Progress bar height</th><td>2px</td></tr><tr><th scope="row">Button</th><td><a class="inline-link inline-link--small" href="button.html">Button</a> Secondary, Medium: 40px high below 769px, 48px from 769px, full width</td></tr></tbody></table></div><p class="ds-desc ds-note">The component is one size. Only the space above it steps with the breakpoint, see Measurements.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Counter text</th><td>Body-md: 16/22 below 769px, 17/24 from 769px, letter spacing 0.32px</td></tr><tr><th scope="row">Progress bar</th><td>2px</td></tr><tr><th scope="row">Button label</th><td>Label-lg: 16/16 below 769px, 18/18 from 769px</td></tr></tbody></table></div><p class="ds-desc ds-note">The component has no padding of its own, so there is no measurement figure. The space above it is a margin and is listed below.</p><h3 class="ds-h3 ds-group">Spacing</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Space above</th><th scope="col">Token</th><th scope="col">Space below (the section)</th></tr></thead><tbody><tr><th scope="row">xs, 0–639px</th><td>24px</td><td><code>space-24</code></td><td>40px</td></tr><tr><th scope="row">sm, 640–768px</th><td>32px</td><td><code>space-32</code></td><td>48px</td></tr><tr><th scope="row">md, 769–1023px</th><td>40px</td><td><code>space-40</code></td><td>64px</td></tr><tr><th scope="row">lg, 1024–1280px</th><td>40px</td><td><code>space-40</code></td><td>80px</td></tr><tr><th scope="row">xl, 1281px and up</th><td>40px</td><td><code>space-40</code></td><td>80px</td></tr></tbody></table></div><p class="ds-desc ds-note">The space above is page spacing, so it steps at 640px, not at <code>space-md</code>. The space below is the bottom padding of the section the component sits in (<code>eco-section</code>), never padding on the component.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">The component has no states of its own. The button has the states of the <a class="inline-link inline-link--large inline-link--secondary" href="button-specifications.html#states">Secondary button</a>. When all items are shown, the button is <strong>disabled</strong> (Figma Secondary disabled) and the counter and the bar show the full count.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Style</th><th scope="col">Mobile</th><th scope="col">Desktop (769px)</th></tr></thead><tbody><tr><th scope="row">Counter text</th><td>body-md, regular, 0.32px</td><td>16/22</td><td>17/24</td></tr><tr><th scope="row">Button label</th><td>label-lg, bold, uppercase</td><td>16/16, 0.32px</td><td>18/18, 0.18px</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Component</th><td><code>pagination</code> (+ <code>id="pagination-{key}"</code>)</td><td>Flex column, 190px, centered. The button is disabled when all items are shown.</td></tr><tr><th scope="row">Info block</th><td><code>pagination__info</code></td><td>Counter and bar.</td></tr><tr><th scope="row">Counter</th><td><code>pagination__count</code></td><td>Holds <code>&lt;span id="{key}-pagination-count"&gt;</code>.</td></tr><tr><th scope="row">Progress</th><td><code>pagination__progress</code></td><td>The 2px track.</td></tr><tr><th scope="row">Fill</th><td><code>pagination__progress-bar</code> (+ <code>id="{key}-pagination-bar"</code>)</td><td>Width set by script.</td></tr><tr><th scope="row">Button</th><td><code>btn btn--secondary btn--md</code></td><td>The eco-button, full width of the component.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">190px, or the width of the parent when that is narrower.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Fill width</th><td><code>ease-standard</code></td><td>Changes over <code>duration-medium-2</code></td></tr></tbody></table></div><p class="ds-desc ds-note">The width change is a state change in place, so it uses the standard easing. Reduced motion is not handled in the component CSS (open point).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Fill width</th><td>Always <code>(visible / total) × 100%</code>, set by <code>updatePagination(key, visible, total)</code>. The first value may be rendered by the server.</td></tr><tr><th scope="row">All shown</th><td>The <code>disabled</code> attribute goes on the button. The component is never hidden and the button never removed.</td></tr><tr><th scope="row">Ids</th><td>The script reads <code>{key}-pagination-count</code>, <code>{key}-pagination-bar</code> and <code>pagination-{key}</code>.</td></tr><tr><th scope="row">Breakpoint</th><td>Text and button change at 769px. The space above changes at 640px and 769px.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Button</th><td>A native <code>&lt;button&gt;</code> with a specific label (“Show more reviews”). Keyboard: Tab, Enter, Space. Visible focus ring from eco-button.</td></tr><tr><th scope="row">Status message</th><td>Put <code>aria-live="polite"</code> on the counter so the new count is announced without moving focus (WCAG 4.1.3).</td></tr><tr><th scope="row">Progress bar</th><td>It repeats the counter, so give it <code>aria-hidden="true"</code>. Never rely on the bar alone (WCAG 1.4.1).</td></tr><tr><th scope="row">Focus</th><td>A button that becomes disabled loses focus: move focus to the first item that was just loaded (WCAG 2.4.3).</td></tr><tr><th scope="row">Contrast</th><td>Counter text is Surface 60 on white. The track (Surface 10) is decoration, the count carries the meaning.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/pagination.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Counter text', 'Text of the counter', 'surface-60'], ['Bar track', 'The 2px track', 'surface-10'], ['Bar fill', 'The visible share', 'surface-100'],
+    ['Space above (xs)', 'Margin top below 640px', 'dimension-spacing-space-24'], ['Space above (sm)', 'Margin top 640–768px', 'dimension-spacing-space-32'], ['Space above (md and up)', 'Margin top from 769px', 'dimension-spacing-space-40']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

@@ -267,7 +267,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Input', eyebrow='Components · Form',
     lead='An input field lets the user enter <strong>free text, numbers or search terms</strong>. It can have a label, a left icon, right-hand action icons and a message that explains or validates the value.',
-    lead_ex='Every example on this page is the real component, not a picture. Type, click, tab and clear the value to try it. Specification: <code>.claude/skills/eco-input/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Base Input') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Type, click, tab and clear the value to try it. Figma: ' + fig_link(FIGMA, 'Base Input') + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Base Input') + '.',
     lead_code='How to add an input field to a page. The file is <code>components/css/input.css</code>.',
     css=[], style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

@@ -6,6 +6,8 @@
   function c(id, t, extra) { var o = { id: id, t: t, href: D + 'components/' + id + '.html' }; for (var k in extra) o[k] = extra[k]; return o; }
   function f(id, t) { return { id: id, t: t, href: D + 'foundations/' + id + '.html' }; }
 
+  function r(id, t) { return { id: id, t: t, href: D + 'resources/' + id + '.html' }; }
+
   var NAV = {
     foundations: {
       label: 'Foundations', icon: 'interests',
@@ -23,11 +25,20 @@
         { title: 'Notifications', items: [c('notifications', 'Notifications guide', { children: [c('toast', 'Toast'), c('toast-ecom', 'E-Com Toast'), c('modal', 'Modal'), c('banner', 'Banner'), c('inline', 'Inline notification')] })] },
         { title: 'Menus, lists and dividers', items: [c('menu', 'Menu'), c('list-item', 'List Item'), c('divider', 'Divider')] },
         { title: 'Links', items: [c('links-guide', 'Links guide', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
-        { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb'), c('pagination', 'Pagination'), c('tooltip', 'Tooltip')] },
+        { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb', { children: [c('breadcrumb-base', 'Base')] }), c('pagination', 'Pagination'), c('tooltip', 'Tooltip')] },
         { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible')] },
-        { title: 'Patterns', items: [{ id: 'hero-banner', t: 'Hero banner', soon: true }, { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }, f('docs-table', 'Docs table')] },
+        { title: 'Patterns', items: [c('patterns-overview', 'Patterns overview'), c('breadcrumb-bar', 'Breadcrumb Bar'), { id: 'hero-banner', t: 'Hero banner', soon: true }, { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }, f('docs-table', 'Docs table')] },
         { title: 'Storyblok widget', items: [c('collapsible-storyblok', 'Collapsible', { sb: true })] },
         { title: 'Drafts', items: [c('role-tier-card', 'Role tier card')] }
+      ]
+    },
+    resources: {
+      label: 'Resources', icon: 'menu_book',
+      overview: { id: 'resources-overview', t: 'Resources Overview', href: D + 'resources-overview.html' },
+      groups: [
+        { title: 'Libraries', items: [r('web', 'Web'), r('design', 'Design')] },
+        { title: 'Help', items: [r('getting-help', 'Getting help')] },
+        { title: 'User guides', items: [r('introduction-for-developers', 'Introduction for Developers'), r('introduction-for-stakeholders', 'Introduction for Stakeholders')] }
       ]
     }
   };
@@ -290,9 +301,9 @@
     modal: 'dialog, dialogruta, modalruta, popup, fönster', banner: 'banderoll, kampanj, driftmeddelande, notis', inline: 'infogad, varning, felmeddelande, meddelande, notis',
     menu: 'meny, rullgardinsmeny, dropdown', 'list-item': 'listobjekt, listrad, rad, lista', divider: 'avdelare, skiljelinje, delare, linje, separator',
     'links-guide': 'länkar, länk, hyperlänk, guide', 'inline-link': 'textlänk, länk i text, brödtext', 'action-link': 'åtgärdslänk, länk, fristående',
-    'tile-link': 'länkkort, bricka, kort, ikonlänk', badge: 'märke, etikett, tagg, status, markering', breadcrumb: 'brödsmula, brödsmulor, sökväg, navigering',
+    'tile-link': 'länkkort, bricka, kort, ikonlänk', badge: 'märke, etikett, tagg, status, markering', breadcrumb: 'brödsmula, brödsmulor, sökväg, navigering', 'patterns-overview': 'mönster, pattern, komponent, skillnad, översikt, sammansatt', 'breadcrumb-base': 'brödsmula, enskild nivå, nivå, länk', 'breadcrumb-bar': 'brödsmulor, sökväg, navigering, rad, spår',
     pagination: 'sidnumrering, paginering, ladda fler, visa fler, sidor', 'tooltip': 'verktygstips, tips, hjälptext, ballong', section: 'sektion, avsnitt, block, yta',
-    collapsible: 'fällbar, dragspel, expanderbar, fäll ut, accordion, faq', table: 'tabell, rader, kolumner, data', 'role-tier-card': 'rollkort, nivåkort, roller, behörighet, kort'
+    web: 'webb, storybook, bibliotek, kod, html, css', design: 'figma, bibliotek, komponenter, variabler', 'getting-help': 'hjälp, support, slack, feedback, fråga', 'introduction-for-developers': 'introduktion, utvecklare, kom igång, github, chromatic, jira', 'introduction-for-stakeholders': 'introduktion, intressenter, storybook, guide, kom igång', collapsible: 'fällbar, dragspel, expanderbar, fäll ut, accordion, faq', table: 'tabell, rader, kolumner, data', 'role-tier-card': 'rollkort, nivåkort, roller, behörighet, kort'
   };
   function fold(x) { return x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }   // å ä ö → a a o: "farg" finds "färg"
   var entries = [];

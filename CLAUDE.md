@@ -23,11 +23,30 @@ A vague request like "make the page nicer" is handled with `prototype-guide` and
 - Font swaps (Inter → Geist, Outfit, etc.) → `eco-typography`
 - Replacing pill badges, accordion/FAQ or modals with "more modern" patterns → `eco-badge`, `eco-collapsible`, `eco-modal-ecom`
 - No pure black/white, a single accent, tinted shadows, varied border-radius → `eco-colors`, `eco-elevation`, tokens
-- Grain, glassmorphism, parallax, inertia scrolling, other motion → `eco-motion`
+- Glassmorphism → `eco-colors`, `eco-elevation` (still void; motion effects, grain and smooth scroll below are not)
 - Swapping the icon library or simplifying the shared footer/header partials
 - React/Next.js, Tailwind v4, or a `768px` mobile breakpoint → this file (HTML + vanilla JS + Tailwind, `md` = 769px)
 
+**Motion effects (scroll-reveal, text fill on scroll, count-up numbers, timers and countdowns to a campaign start/end, dark/light section transitions, parallax, smooth scroll with Lenis, grain) are not void; they are proposals, by page type:**
+
+| Page | Does Claude propose the effect? |
+|---|---|
+| Campaign / landing page | Yes, actively, as a numbered proposal with a short reason (e.g. focus on the CTA, conversion). Claude also suggests other fitting modern campaign techniques here, not only the ones listed |
+| Regular public page | Only if the user asks |
+| Logged-in page (My Pages), forms, tables | No. Effects disturb the workflow |
+
+Proposals follow the rule above: nothing is applied until the user picks. Once picked, the effect is built under the conditions in `eco-motion` ("Campaign motion"): ECO easing/duration tokens only, `prefers-reduced-motion` turns it off, xs/sm checked separately, nothing hides content or blocks CTAs and forms. A campaign page is still a public page (copy of `template.html`); campaign motion is an add-on, not a new page type. 3D scenes, pinned scenes and extra libraries are out of scope until a concrete project needs them (ask first).
+
 If a suggestion from any design skill has no matching token or `eco-*` skill, ask before implementing it (same as rule 7 in Quality control).
+
+### Identity is fixed, solutions are open
+
+Two layers, so ECO protects the brands without blocking good ideas:
+
+1. **Identity: always ECO, no exceptions without asking.** Colors, typefaces, foundations (spacing, elevation, breakpoints, motion tokens) and components. They are how the brands **Swedol** and **Tools** are shown correctly (Tools has its own brand primitives, see `eco-colors` and `foundations/colors.html`). Never replace or tint them.
+2. **Solutions: open to proposals.** Layout, composition, flow, effects, campaign techniques, new patterns, copy structure and improvements nobody has thought of yet are welcome. Claude should speak up when it sees a better way, even if no rule mentions it.
+
+How to read a rule here: a rule that says "never" protects identity (layer 1). A rule about *how* something is built (layer 2) is a default, not a ban. If an idea fits neither a token nor a skill, it is not refused: Claude proposes it as a numbered item with a short reason and what it would need (a new token, a new pattern in a skill), and the user picks (same as the proposals rule above and rule 7 in Quality control). If a rule seems to block a good idea, say so and propose changing the rule, instead of silently following or breaking it. A picked idea that proves itself is added to the matching skill and to this file.
 
 ### Why this section exists (read this if you wonder later)
 
@@ -53,6 +72,10 @@ Both templates carry only the page frame (header, footer, menu, drawers, breadcr
 See `index.html` (repo root) for the full sitemap — it's a page overview that links to every page in the prototype and tags each one as "new"/"updated"/"in progress"/"archive" per page type.
 
 **Component CSS and JS (shared, one source):** every component's CSS lives in `components/css/<name>.css` (button, input, select, textarea, checkbox, radio, switch, list-item, divider, menu, collapsible, tooltip, pagination, inline-link, action-link, tile-link, breadcrumb, pill-segment-control, role-tier, table, section, badge, range, button-group, tabs) and its behaviour JS in `components/js/` (`select-menu.js`, `collapsible.js`, `pagination.js`, `range.js`, `pill-segment-control.js`, `tooltip.js`, `tabs.js`; the icon picker in `components/icon-picker/`). The Specifications measurement figure (blueprint style) is `components/css/measure.css` + `components/js/measure.js` (skill `eco-doc-page`, section Measurements). Layout spacing `space-md` / `space-lg` (breakpoint-adaptive) is `components/css/spacing.css`, used as `var(--dimension-spacing-space-md)`; never hand-write its per-breakpoint pixel values (skill `eco-spacing`). Notifications use `eco-design-system/notifications.css` + `notifications.js` (a button inside a notification is always 32px, scoped in that file). The templates already link them. In a new page: `<link rel="stylesheet" href="/components/css/<name>.css">` for each component used, root-absolute, never a copy of the rules in the page. The ECO docs pages in `eco-design-system/` link the same files, so docs and product cannot drift. Changing a component means editing that file.
+
+**Docs categories:** the ECO docs rail (`eco-design-system/docnav.js`, `NAV`) has three categories: Foundations, Components and Resources (`resources-overview.html` + `resources/`: Libraries Web/Design, Getting help, User guides for developers and stakeholders; see `eco-doc-page`). New link-card block `.ds-linkcard` is in `docs.css`.
+
+**Docs dividers:** when two neighbouring blocks on a docs page are both white (header and first section, two sections, last section and what follows), put a divider between them (the inset `.ds-sep` + `divider`, never full page width, exactly one line per boundary); when one of them is grey, the color change is the divider and no line is added. Details in `eco-doc-page`.
 
 **Sticky tab bar (docs pages):** when a tab bar sticks to the top it gets 16px above the tabs and 16px of background below its line (`.is-stuck`: `padding-top: 16px` plus `box-shadow: 0 16px 0` in the surface colour; `margin-bottom` is reduced so the content does not move). Component pages: `.ds-subnav--tabs.is-stuck` in `docs.css`; `overview.html` and `components-overview.html`: inline rule and script in the page. Details in `eco-doc-page`.
 
@@ -151,6 +174,7 @@ Every component in the ECO Design System is its own skill under `.claude/skills/
 | Skill | Used when |
 |---|---|
 | `eco-add-component` | Use when adding a NEW component (a new `eco-*` skill from a Figma component) or substantially changing an existing one — Figma extraction → token mapping → skill template → CLAUDE.md index → verification checklist. Read this FIRST so every component skill keeps the same standard. |
+| `eco-card-animation` | Use when making an animated Hairline illustration (isometric line figure answering the pointer) for a component and putting it on its card on the ECO overview pages: procedure from concept to card, reusable files in `hairline/` (`make-eco.mjs`, `tools/card-check.mjs`, `embed.js`, `hairline-card.css`), ECO colouring, hover-triggered tour (no play button), archiving the old card visual, verification. References: Button and Switch. |
 | `eco-doc-page` | Use when building or changing a documentation/showcase page for the ECO Design System (foundations like colors, components like button/radio) in `eco-design-system/` — page structure, section order, shared `docs.css` classes, spacing and card rules, the component-page template (playground, variants, states matrix, specs, code, usage; reference: `components/checkbox.html`), and the split three-page structure every component page uses (Examples & Guidelines / Specifications / Code, tabs, sticky Contents list outside the 1200px content (with a link icon on every heading that copies its URL and shows a toast), white sections with dividers, on-page secondary tab bar via `data-subnav="tabs"`, `--ds-accent`; Measurements section; reference: `components/tooltip*.html`; an existing one-page component page is converted when you ask to update it; Form, Actions, Notifications, Menus, lists and dividers, Links and Layout and content (section, collapsible) components are converted, with the generator in `eco-design-system/gen/`; Role tier card is the one Draft and is converted too; the Docs table is a docs-only page in `foundations/` and stays one page), live-from-tokens rules, overview hub, registration in index.html. |
 
 **Reviewing what developers built**
@@ -168,7 +192,7 @@ Every component in the ECO Design System is its own skill under `.claude/skills/
 | `eco-colors` | Use when choosing or reviewing colors/design tokens — text, icon, background, surface, border, and status colors per the ECO Design System. |
 | `eco-spacing` | Use when setting margin, padding, or gap — the fixed Spacing Scale (space-0…space-120) and the breakpoint-adaptive space-md/space-lg tokens (`components/css/spacing.css`, `var(--dimension-spacing-space-md)`; no sm/xs/xl yet). |
 | `eco-elevation` | Use when choosing shadow/elevation for cards, modals, drawers, tooltips, or other raised surfaces — Shadow Bottom/Top, Designated Level (drawers), and component-specific shadows. |
-| `eco-motion` | Use when animating or transitioning something — easing curves (decelerate/accelerate/standard) and duration tokens (fast/medium/slow) per the ECO Design System. |
+| `eco-motion` | Use when animating or transitioning something — easing curves (decelerate/accelerate/standard) and duration tokens (fast/medium/slow) per the ECO Design System. Also "Campaign motion": scroll-reveal, text fill, count-up, timers/countdowns and parallax as user-picked proposals (campaign pages yes, regular public pages on request, My Pages/forms/tables no), with conditions. |
 
 **Actions**
 
@@ -230,7 +254,7 @@ Every component in the ECO Design System is its own skill under `.claude/skills/
 | `eco-docs-table` | **The table of the documentation pages, not a product component** (renamed from `eco-table` 2026-10-15; page `Docs table`, the Documentation group under Patterns, one page; a product table is planned). Use when building a data table (rows and columns of text, check icons or small controls) — row and header heights, cell padding, lines, header background and the card shadow. A first version: more variants and states (sorting, selection, sticky header, empty state) are added later. |
 | `eco-breadcrumb` | Use when building breadcrumbs for page-hierarchy navigation — placed directly under the header as the first element in `.page`. |
 | `eco-tabs` | Use when building or reviewing tabs — a tab bar of Primary or Secondary tab items that switches content in the same context, or serves as sub-navigation (e.g. the My Pages account nav), or navigates the sections of one long page (on-page navigation, `tab-bar--page`). Sizes (Large/Medium/Small), configurations (label, label + icon, icon only), states (enabled/hover/active), dot and number status, overflow. Not for sequential steps (use a stepper), not for a two-view toggle (use eco-pill-segment-control), not for choosing form values (use eco-radio / eco-select). |
-| `eco-pagination` | Use when building a "load more" pattern for progressively loading more results into a list (reviews, products, order history) — not numbered page navigation. |
+| `eco-pagination` | Use when building a "load more" pattern for progressively loading more results into a list (reviews, products, order history) — not numbered page navigation. Documentation is three pages (Examples & Guidelines / Specifications / Code), checked against Figma 2026-10-19. |
 
 ## graphify
 

@@ -236,7 +236,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Tile link', parent=PARENT, eyebrow='Components · Links',
     lead='A tile link is a clickable, <strong>graphical link</strong> with an SVG graphic or an icon with a label. It highlights navigation destinations in grids and horizontal scrollers.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-tile-link/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Tile link') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Figma: ' + fig_link(FIGMA, 'Tile link') + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Tile link') + '.',
     lead_code='How to add a tile link to a page. The file is <code>components/css/tile-link.css</code>.',
     select_menu=True,

@@ -192,7 +192,7 @@ JS_CODE = SG_JS + r'''
 C = dict(
     slug=SLUG, title='Pill segment control', eyebrow='Components · Form', eyebrow_extra=BADGE,
     lead='A pill segment control switches between <strong>two to four related views or filters</strong> in the same surface. A pill slides to the active segment.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-pill-segment-control/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Pill segment control') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Figma: ' + fig_link(FIGMA, 'Pill segment control') + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from the specification skill: ' + fig_link(FIGMA, 'Pill segment control') + '.',
     lead_code='How to add a pill segment control to a page. The files are <code>components/css/pill-segment-control.css</code> and <code>components/js/pill-segment-control.js</code>.',
     css=['pill-segment-control', 'range'], body_js=['../../components/js/pill-segment-control.js', '../../components/js/range.js'], select_menu=False, style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

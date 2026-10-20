@@ -205,7 +205,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Text area', eyebrow='Components · Form',
     lead='A text area lets the user enter <strong>text over multiple lines</strong>: comments, feedback or longer passages that need more room than a single-line input.',
-    lead_ex='Every example on this page is the real component, not a picture. Type, click and tab to try it. Specification: <code>.claude/skills/eco-textarea/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Text Area') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Type, click and tab to try it. Figma: ' + fig_link(FIGMA, 'Text Area') + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Text Area') + '.',
     lead_code='How to add a text area to a page. The file is <code>components/css/textarea.css</code>.',
     css_before=['textarea'], css=[], style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

@@ -234,7 +234,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Select', eyebrow='Components · Form',
     lead='A select lets the user choose <strong>one option from a list</strong>. It looks and behaves like an input field, with a dropdown arrow. It opens the ECO <strong>Menu</strong> as its list.',
-    lead_ex='Every example on this page is the real component, not a picture. Click, tab and choose an option to try it. Specification: <code>.claude/skills/eco-select/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Base Input') + ' (shared with Input).',
+    lead_ex='Every example on this page is the real component, not a picture. Click, tab and choose an option to try it. Figma: ' + fig_link(FIGMA, 'Base Input') + ' (shared with Input).',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Base Input') + '.',
     lead_code='How to add a select to a page. The files are <code>components/css/select.css</code>, <code>components/css/menu.css</code> and <code>components/js/select-menu.js</code>.',
     css=['select', 'menu', 'radio'], style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

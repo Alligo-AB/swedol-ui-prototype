@@ -335,7 +335,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Inline link', parent=PARENT, eyebrow='Components · Links',
     lead='An inline link is an underlined text link that flows <strong>within body copy, lists and UI text</strong>. The underline is its affordance, and it is never paired with icons.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-inline-link/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Inline link') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Figma: ' + fig_link(FIGMA, 'Inline link') + '.',
     lead_spec='Tokens, sizes, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Inline link') + '.',
     lead_code='How to add an inline link to a page. The file is <code>components/css/inline-link.css</code>.',
     select_menu=True,

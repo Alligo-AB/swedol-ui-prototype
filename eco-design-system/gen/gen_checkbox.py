@@ -467,7 +467,7 @@ JS_CODE = r'''
 C = dict(
     slug='checkbox', title='Checkbox', eyebrow='Components · Form',
     lead='A checkbox lets the user turn <strong>one or more options</strong> on or off, independently of each other. The choice is saved when the form is submitted.',
-    lead_ex='Every example on this page is the real component, not a picture. Click, tab and press Space to try it. Specification: <code>.claude/skills/eco-checkbox/SKILL.md</code>. Figma: <a class="inline-link inline-link--xlarge" href="%s" target="_blank" rel="noopener">Checkbox</a>.' % FIGMA,
+    lead_ex='Every example on this page is the real component, not a picture. Click, tab and press Space to try it. Figma: <a class="inline-link inline-link--xlarge" href="%s" target="_blank" rel="noopener">Checkbox</a>.' % FIGMA,
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="%s" target="_blank" rel="noopener">Checkbox</a>.' % FIGMA,
     lead_code='How to add a checkbox to a page. The file is <code>components/css/checkbox.css</code>.',
     css=['checkbox', 'radio'], style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE, tooltip=False,

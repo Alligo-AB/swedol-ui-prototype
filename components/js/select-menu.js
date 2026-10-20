@@ -6,9 +6,19 @@
   var open = null;
   function close(focus) {
     if (!open) return;
-    open.menu.remove(); open.sel.setAttribute('aria-expanded', 'false');
+    var menu = open.menu;
+    open.sel.setAttribute('aria-expanded', 'false');
     if (focus) open.sel.focus();
     open = null;
+    leave(menu);
+  }
+  /* Closing: the menu fades out and moves back towards the field (.menu--closing), then it is removed. Instant under reduced motion. */
+  function leave(menu) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { menu.remove(); return; }
+    menu.classList.add('menu--closing'); menu.setAttribute('aria-hidden', 'true'); menu.inert = true;
+    var done = function () { menu.remove(); };
+    menu.addEventListener('animationend', done, { once: true });
+    setTimeout(done, 400);   /* safety net if animationend never fires */
   }
   function holder(sel) { return sel.closest('.input-wrap'); }
   function openMenu(sel, byPointer) {
@@ -27,6 +37,7 @@
       li.innerHTML = '<span class="menu__item-label"></span><span class="menu__item-icon" aria-hidden="true"></span>';
       li.firstChild.textContent = o.textContent; ul.appendChild(li);
     });
+    Array.prototype.forEach.call(holder(sel).querySelectorAll('.menu--closing'), function (n) { n.remove(); });   /* reopen while the old one is still fading out */
     menu.appendChild(ul); holder(sel).appendChild(menu);
     /* Room check: flip upwards when it does not fit below and there is more room above; else cap the height and scroll */
     var r = sel.getBoundingClientRect(), gap = 12, room = window.innerHeight - r.bottom - gap;

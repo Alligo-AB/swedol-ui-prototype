@@ -180,7 +180,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Button group', eyebrow='Components · Actions', eyebrow_extra=BADGE,
     lead='A button group is a row of <strong>joined System buttons</strong> for choosing between two to four short options. The selected button has a black 12% fill.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-button/SKILL.md</code> (section Button group).',
+    lead_ex='Every example on this page is the real component, not a picture.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from the specification skill: no Figma component is linked.',
     lead_code='How to add a button group to a page. The file is <code>components/css/button-group.css</code>.',
     css=[], select_menu=False, style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

@@ -188,6 +188,11 @@ JS_SPEC = SW_JS + r'''
     ['Light · disabled', 'Off track', 'surface-disabled'], ['Light · disabled', 'Label', 'text-disabled'],
     ['Dark · off', 'Track', 'surface-60'], ['Dark · off hover', 'Track', 'surface-50'], ['Dark · disabled', 'Off track', 'surface-80'], ['Dark · disabled', 'Thumb', 'surface-40'],
     ['Dark · all', 'Label', 'text-primary-inverted']]);
+  DK.rows($('#tok-table tbody'), [
+    ['Light · on hover', 'Track', '<em>no token</em>', '<span class="ds-dot" style="background:#71b790" aria-hidden="true"></span>#71b790'],
+    ['Light · disabled', 'On track', '<em>no token</em>', '<span class="ds-dot" style="background:rgba(36, 134, 22, 0.5)" aria-hidden="true"></span>rgba(36, 134, 22, 0.5)'],
+    ['Dark · on hover', 'Track', '<em>no token</em>', '<span class="ds-dot" style="background:#71b790" aria-hidden="true"></span>#71b790'],
+    ['Dark · disabled', 'On track', '<em>no token</em>', '<span class="ds-dot" style="background:rgba(36, 134, 22, 0.5)" aria-hidden="true"></span>rgba(36, 134, 22, 0.5)']]);
 '''
 
 JS_CODE = r'''
@@ -204,7 +209,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Switch', eyebrow='Components · Form',
     lead='A switch turns <strong>one setting on or off</strong> and applies the change at once. It is for a single binary choice, not for picking between options.',
-    lead_ex='Every example on this page is the real component, not a picture. Click, tab and press Space to try it. Specification: <code>.claude/skills/eco-switch/SKILL.md</code>. Figma: ' + fig_link(FIGMA, 'Toggle Switch') + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Click, tab and press Space to try it. Figma: ' + fig_link(FIGMA, 'Toggle Switch') + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + fig_link(FIGMA, 'Toggle Switch') + '.',
     lead_code='How to add a switch to a page. The file is <code>components/css/switch.css</code>.',
     css=['switch'], style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

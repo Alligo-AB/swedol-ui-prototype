@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction for Stakeholders – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <script src="../../components/js/tabs.js"></script>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../resources-overview.html" class="breadcrumb-item">Resources</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Introduction for Stakeholders</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Resources · User guides</span></div>
+    <h1 class="ds-title">Introduction for Stakeholders</h1>
+    <p class="ds-lead">For content managers, marketers and others who work with or make decisions about digital products.</p><p class="ds-lead">You will learn what the design system is, how it helps your work, and how to find a component and use its code in your CMS.</p>
+  </div>
+</section>
+
+<div class="ds-sep"><hr class="divider" /></div>
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="about"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2" id="about">About</h2><p class="ds-desc">The ECO Design System gives Swedol and Tools one shared way to design and build. Three tools work together.</p><ul class="ds-bullets"><li><strong>Storybook</strong> is where components are built, tested and shown live. Each component has variations to try and code to copy.</li><li><strong>Figma</strong> holds the design library: variables and UI components for prototypes and designs.</li><li><strong>This documentation</strong> explains when and how to use each foundation and component, with guidelines, specifications and code.</li></ul><p class="ds-desc">Together they keep design and code in step, so every digital platform looks and behaves the same.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessing-storybook"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2" id="accessing-storybook">Accessing Storybook</h2><p class="ds-desc">Open the Storybook UAT URL in your web browser.</p><div class="ds-code"><div class="ds-code__bar"><span>Storybook (UAT)</span><button type="button" class="mo-copy" data-copy="cb2" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="cb2">https://test-acceptance--67b6063b450f52d85d87d37f.chromatic.com/</pre></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="navigating-storybook"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2" id="navigating-storybook">Navigating Storybook</h2><p class="ds-desc">Storybook has four parts.</p><ul class="ds-bullets"><li><strong>Sidebar (left):</strong> all components, grouped by category.</li><li><strong>Canvas (main):</strong> the selected component, live.</li><li><strong>Controls (right):</strong> settings for the component’s properties, when available.</li><li><strong>Docs tab:</strong> usage examples and guidelines.</li></ul><figure class="ds-figs ds-figs--one" style="margin:0 0 var(--ds-ps)"><a href="/images/storybook-ui-annotated.png" target="_blank" rel="noopener" aria-label="Open the image full size: Storybook with the sidebar, the Docs tab, the canvas and the controls marked"><img src="/images/storybook-ui-annotated.png" alt="Storybook with the sidebar, the Docs tab, the canvas and the controls marked" style="display:block;width:100%;height:auto;box-shadow:var(--shadow-elevation-b-20)"></a></figure></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="finding-components"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2" id="finding-components">Finding components</h2><p class="ds-desc">There are two ways to find a component.</p><ol class="ds-bullets ds-bullets--num"><li>Search in the <strong>search bar</strong> at the top of the sidebar.</li><li>Browse the categories, where components are grouped by type, for example Buttons, Forms and Modals.</li></ol></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="using-code"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2" id="using-code">Using a component in your page</h2><p class="ds-desc">Set the component up in Storybook, then copy its code into the CMS.</p><ol class="ds-bullets ds-bullets--num"><li>Set the controls to what you need, for example the bottom margin. The classes on the component update as you change them.</li><li>Click “Show code” on the component, then “Copy”.</li><li>Paste the code into your CMS page, for example in Storyblok or Magento CMS, and save.</li></ol><figure class="ds-figs ds-figs--one" style="margin:0 0 var(--ds-ps)"><a href="/images/storybook-controls-annotated.png" target="_blank" rel="noopener" aria-label="Open the image full size: Storybook code panel with the dynamic classes, the Copy button and the property controls marked"><img src="/images/storybook-controls-annotated.png" alt="Storybook code panel with the dynamic classes, the Copy button and the property controls marked" style="display:block;width:100%;height:auto;box-shadow:var(--shadow-elevation-b-20)"></a></figure><p class="ds-desc">Not sure which component to use? Read its guidelines in <a class="inline-link inline-link--large inline-link--primary" href="../components-overview.html">Components</a>, or ask in the <a class="inline-link inline-link--large inline-link--primary" href="https://alligo-it.slack.com/archives/C07QRNLU1L1" target="_blank" rel="noopener">Slack channel</a>.</p></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

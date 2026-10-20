@@ -359,7 +359,7 @@ JS_CODE = old_js('button', "  var RECIPES = [", "  var rh = $('#recipes');") + r
 C = dict(
     slug=SLUG, title='Button', eyebrow='Components · Actions',
     lead='A button <strong>triggers an action</strong> or <strong>takes the user to another page</strong>. It lets the user make a choice with a single tap. Use a mix of styles on one page to point at the main action and still offer the alternatives.',
-    lead_ex='Every example on this page is the real component, not a picture. Click, hover and press Tab to try it. Specification: <code>.claude/skills/eco-button/SKILL.md</code>. Figma: ' + FIGS + '.',
+    lead_ex='Every example on this page is the real component, not a picture. Click, hover and press Tab to try it. Figma: ' + FIGS + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + FIGS + '.',
     lead_code='How to add a button to a page. The file is <code>components/css/button.css</code>.',
     css=['menu'], head_extra='\n  <link rel="stylesheet" href="../notifications.css?v=16">', style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

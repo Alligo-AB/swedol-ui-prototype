@@ -161,7 +161,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Icon picker', eyebrow='Components · Form', eyebrow_extra=BADGE,
     lead='An icon picker is a text field that holds a <strong>Material Symbols name</strong>. A panel opens on top of it with instant search over all icons, Recent and Popular.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-icon-picker/SKILL.md</code>. There is no Figma component: the pattern was designed in the repo.',
+    lead_ex='Every example on this page is the real component, not a picture. There is no Figma component: the pattern was designed in the repo.',
     lead_spec='Tokens, dimensions, states and requirements. There is no Figma component: values come from the live token package and the specification skill.',
     lead_code='How to add the icon picker to a field. The file is <code>components/icon-picker/icon-picker.js</code>.',
     css=[], body_js=['../../components/icon-picker/icon-picker.js'], select_menu=False, style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)

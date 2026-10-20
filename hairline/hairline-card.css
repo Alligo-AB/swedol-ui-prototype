@@ -1,0 +1,28 @@
+/* Hairline figures on the overview cards: ECO colours and the card-sized stage. The figure marks its parts with data-part; this file paints them from tokens. */
+[data-hairline] {
+  --hl-plate: var(--color-background-primary, #ffffff);
+  --hl-hi: var(--color-surface-100, #000000);
+  --hl-edge: var(--color-surface-40, #939595);
+  --hl-mid: var(--color-surface-20, #cccccc);
+  --hl-lo: var(--color-border-primary, #e5e5e5);
+}
+[data-hairline] [data-part="ink"], [data-hairline] [data-part="ink-top"], [data-hairline] [data-part="label"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] path.m[data-part="ink-top"] { fill: var(--color-surface-90, #222222); } /* hover */
+[data-hairline] [data-part="cursor"] { fill: var(--color-surface-100, #000000); }
+/* switch figure: slot floor and far wall */
+[data-hairline] [data-part="track"] { fill: var(--color-surface-20, #cccccc); }
+[data-hairline] [data-part="track"][data-hover] { fill: var(--color-surface-15, #d9d9d9); }
+[data-hairline="switch"] [data-part="ink"] { fill: var(--color-surface-success-default, #248616); } /* on (Button's ink stays black) */
+[data-hairline="switch"] [data-part="ink"][data-hover] { fill: #71b790; } /* no token (see eco-switch flag) */
+[data-hairline] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-surface-20, #cccccc), #000 22%); }
+[data-hairline] [data-part="track-wall"][data-hover] { fill: color-mix(in srgb, var(--color-surface-15, #d9d9d9), #000 22%); }
+[data-hairline] [data-part="ink-wall"] { fill: color-mix(in srgb, var(--color-surface-success-default, #248616), #000 30%); }
+[data-hairline] [data-part="ink-wall"][data-hover] { fill: color-mix(in srgb, #71b790, #000 30%); }
+
+/* the card's stage: 5:4, drawn larger than the card visual and centred on the figure; the visual crops the rest */
+.ds-card__visual--hairline { padding: 0; }
+.ds-card__visual--hairline [data-hairline-card] { flex: none; width: 300px; transform: translateY(-16px); }
+/* per-figure vertical centring (the figures' drawn extents differ) */
+.ds-card__visual--hairline [data-hairline-card="switch"] { transform: translateY(-5px); }
+
+.ds-card__visual--hairline { position: relative; }

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../components/css/tabs.css">
   <link rel="stylesheet" href="../components/css/divider.css">
   <link rel="stylesheet" href="../components/css/action-link.css">
+  <link rel="stylesheet" href="../hairline/hairline-card.css">
   <script src="../components/js/tabs.js"></script>
   <style>
     /* category links stop exactly at the section's top edge (below the fixed mobile bar, flush at the top on desktop) */
@@ -41,7 +42,7 @@
 
 <section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
-    <span class="ds-eyebrow">Swedol · ECO Design System</span>
+    <span class="ds-eyebrow"><span class="badge-basic badge-basic--uppercase ds-eyebrow__swedol">Swedol</span><span class="badge-basic badge-basic--uppercase ds-eyebrow__tools">Tools</span>ECO Design System</span>
     <h1 class="ds-title">Components</h1>
     <p class="ds-lead">Reusable parts with sizes, states and usage rules. Each component has a specification skill; the pages are grouped by family.</p>
     <nav aria-label="Categories" class="ds-jump" style="display:flex;flex-wrap:wrap;gap:8px 24px"><a href="#components" class="action-link action-link--large"><span class="action-link__label">Components</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#patterns" class="action-link action-link--large"><span class="action-link__label">Patterns</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#storyblok-widgets" class="action-link action-link--large"><span class="action-link__label">Storyblok widget</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a></nav>
@@ -60,8 +61,9 @@
     <div class="ds-cards">
 
       <a class="ds-card" href="components/button.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-btn"><span>Primary</span><span>Secondary</span></div>
+        <!-- Hairline animation; the old CSS-button visual is archived in card-visuals-archive/button.html -->
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="button-pair" data-play data-src="../hairline/button-pair.js"></div>
         </div>
         <div class="ds-card__body">
           <div class="ds-card__top"><span class="ds-card__title">Button</span><span class="ds-tag ds-tag--live">Live</span></div>
@@ -142,8 +144,9 @@
       </a>
 
       <a class="ds-card" href="components/switch.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-switch"><span><i class="on"></i>Email</span><span><i></i>SMS</span></div>
+        <!-- Hairline animation; the old CSS-switch visual is archived in card-visuals-archive/switch.html -->
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="switch" data-play data-src="../hairline/switch.js"></div>
         </div>
         <div class="ds-card__body">
           <div class="ds-card__top"><span class="ds-card__title">Switch</span><span class="ds-tag ds-tag--live">Live</span></div>
@@ -168,7 +171,7 @@
           <div class="mini-seg"><span class="on">Roles</span><span>Plan</span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Pill segment control</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design">Not verified with Figma</span></span></div>
+          <div class="ds-card__top"><span class="ds-card__title">Pill segment control</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
           <p class="ds-card__desc">Switch between two to four related views with a sliding pill. Four sizes.</p>
           <span class="ds-card__meta">4 sizes · 3 states</span>
         </div>
@@ -377,7 +380,7 @@
         <div class="ds-card__body">
           <div class="ds-card__top"><span class="ds-card__title">Breadcrumb</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design">Not verified with Figma</span></span></div>
           <p class="ds-card__desc">Shows where the page sits in the site, with a bordered box for every step.</p>
-          <span class="ds-card__meta">4 breakpoints · 3 states</span>
+          <span class="ds-card__meta">Hub · Base (Bar is a pattern)</span>
         </div>
       </a>
 
@@ -386,7 +389,7 @@
           <div class="mini-pag"><em>Showing 4 of 6</em><i><b></b></i><span>Show more</span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Pagination</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design">Not verified with Figma</span></span></div>
+          <div class="ds-card__top"><span class="ds-card__title">Pagination</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
           <p class="ds-card__desc">A load-more pattern with a counter, a progress bar and a button.</p>
           <span class="ds-card__meta">Load more</span>
         </div>
@@ -452,8 +455,20 @@
 <section class="ds-section ds-section--secondary" id="patterns">
   <div class="ds-page ds-inner">
     <h2 class="ds-h2">Patterns</h2>
-    <p class="ds-desc">Composed solutions built from several components. The pages are coming.</p>
+    <p class="ds-desc">Composed solutions built from several components. <a class="inline-link inline-link--large inline-link--secondary" href="components/patterns-overview.html">Read how a pattern differs from a component</a>. Breadcrumb Bar is live; the others are coming.</p>
     <div class="ds-cards">
+
+      <a class="ds-card" href="components/breadcrumb-bar.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-bc"><span>Home</span><i>/</i><span>Pants</span><i>/</i><b>Carpenter</b></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Breadcrumb Bar</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">The trail at the top of a page: two to six crumbs with a slash between them, built from Breadcrumb Base.</p>
+          <span class="ds-card__meta">Navigation · 3 pages</span>
+        </div>
+      </a>
+
 
       <div class="ds-card" aria-disabled="true">
         <div class="ds-card__body">
@@ -515,5 +530,7 @@
     addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
   })();
 </script>
+  <script src="../hairline/kernel.js"></script>
+  <script src="../hairline/embed.js"></script>
 </body>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction for Developers – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <script src="../../components/js/tabs.js"></script>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../overview.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../resources-overview.html" class="breadcrumb-item">Resources</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Introduction for Developers</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Resources · User guides</span></div>
+    <h1 class="ds-title">Introduction for Developers</h1>
+    <p class="ds-lead">Everything a developer needs to start using and contributing to the design system: the tools, the access you need, local setup and the ticket workflow.</p>
+  </div>
+</section>
+
+<div class="ds-sep"><hr class="divider" /></div>
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="about"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2" id="about">About</h2><p class="ds-desc">The ECO Design System gives Swedol and Tools one shared way to design and build. Three tools work together.</p><ul class="ds-bullets"><li><strong>Storybook</strong> is where components are built, tested and shown live. Each component has variations to try and code to copy.</li><li><strong>Figma</strong> holds the design library: variables and UI components for prototypes and designs.</li><li><strong>This documentation</strong> explains when and how to use each foundation and component, with guidelines, specifications and code.</li></ul><p class="ds-desc">Together they keep design and code in step, so every digital platform looks and behaves the same.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="getting-started"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2" id="getting-started">Getting started</h2><h3 class="ds-h3 ds-group">Prerequisites and access</h3><p class="ds-desc">Before you begin, make sure you have access to these tools.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Tool</th><th scope="col">Used for</th><th scope="col">Access</th></tr></thead><tbody><tr><th scope="row">GitHub</th><td>The code, for local development: <code>alligo-eco-design-system</code></td><td>Request access to the repository.</td></tr><tr><th scope="row">Chromatic</th><td>Hosting and review of Storybook builds</td><td>Admin access is required. Ask a team admin for an invite.</td></tr><tr><th scope="row">Jira</th><td>The project board: tickets and swimlanes</td><td>Request access to the project board.</td></tr><tr><th scope="row">Confluence</th><td>General documentation, workflows and credentials</td><td>Request access.</td></tr><tr><th scope="row">Storybook</th><td>Browsing and testing components</td><td>Use the <a class="inline-link inline-link--small inline-link--primary" href="https://test-acceptance--67b6063b450f52d85d87d37f.chromatic.com/" target="_blank" rel="noopener">UAT environment</a>.</td></tr><tr><th scope="row">Documentation</th><td>Guidelines, specifications and design tokens</td><td>This site.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Setting up locally</h3><p class="ds-desc">Follow the setup instructions in the README file to run Storybook on your machine.</p><div class="ds-code"><div class="ds-code__bar"><span>README</span><button type="button" class="mo-copy" data-copy="cb1" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="cb1">alligo-eco-design-system/README.md</pre></div><p class="ds-desc">Builds are automatic. When a working branch is merged into UAT or production, the environment is built and deployed to Chromatic, where the latest version can be viewed. Chromatic access is granted by an admin: log in at <a class="inline-link inline-link--large inline-link--primary" href="https://www.chromatic.com/" target="_blank" rel="noopener">chromatic.com</a>.</p><p class="ds-desc"><strong>Public UAT branch:</strong> <a class="inline-link inline-link--large inline-link--primary" href="https://test-acceptance--67b6063b450f52d85d87d37f.chromatic.com/" target="_blank" rel="noopener">https://test-acceptance--67b6063b450f52d85d87d37f.chromatic.com/</a></p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="workflow"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2" id="workflow">Workflow and tickets</h2><p class="ds-desc">Branching follows the main system workflow: a working branch from develop, a merge request, code review, UAT test and customer test, then merge. The ticket name depends on the type of work.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col"></th><th scope="col">New feature</th><th scope="col">Design system component</th></tr></thead><tbody><tr><th scope="row">Jira swimlane</th><td>Standard ticket</td><td>“Design System Components”</td></tr><tr><th scope="row">Branch name</th><td><code>feature/AE-2247/drawer-slider</code></td><td><code>feature/EDS-2234/drawer-slider-component</code></td></tr><tr><th scope="row">Reviewed in</th><td>The main system, on UAT</td><td>Chromatic and Storybook only</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">New feature</h3><p class="ds-desc">Use this when a feature depends on the design system. Example: a new text area in a div that uses a Storybook button. The div and text are created in the feature, and the button is imported from Storybook.</p><p class="ds-desc">It is a two-part process. First create the component in the “Design System Components” workflow. Then include it in the standard ticket, which is reviewed as a whole.</p><h3 class="ds-h3 ds-group">Design system component</h3><p class="ds-desc">The steps:</p><ol class="ds-bullets ds-bullets--num"><li>Create a working branch from develop. When finished, make a merge request to staging.</li><li>Code review. Once approved, merge the working branch into the test/acceptance branch and push it to the remote.</li><li>An automatic build publishes the latest test/acceptance work.</li><li>Review and test on UAT (Storybook).</li><li>Once approved, merge the working branch into staging.</li></ol><p class="ds-desc">The main system then syncs automatically with the Storybook git repo (develop branch), and the styles become available in the main system.</p></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

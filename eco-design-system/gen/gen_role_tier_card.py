@@ -184,7 +184,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Role tier card', eyebrow='Drafts · Cards', eyebrow_extra=BADGE,
     lead='A role tier card pair introduces <strong>two tiers of one category</strong> side by side, for example Standard and Administrator, and links on to the full comparison table.',
-    lead_ex='Every example on this page is the real component, not a picture. Specification: <code>.claude/skills/eco-role-tier-card/SKILL.md</code>. There is no Figma component.',
+    lead_ex='Every example on this page is the real component, not a picture. There is no Figma component.',
     lead_spec='Tokens, type, sizes, measurements and requirements. The values come from the live token package and from the comparison pages; there is no Figma component.',
     lead_code='How to add a card pair to a page. The file is <code>components/css/role-tier.css</code>.',
     select_menu=False,

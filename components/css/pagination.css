@@ -9,7 +9,6 @@
   max-width: 100%;
   margin: var(--dimension-spacing-space-24) auto 0; /* xs: top 24px */
 }
-.pagination[hidden] { display: none; }
 /* Top spacing follows the 5 ECO breakpoints (Figma Pagination, eco-spacing), so it steps at 640px; the component itself (text, button) keeps Mobile Base Styling until 769px */
 @media (min-width: 640px) { .pagination { margin-top: var(--dimension-spacing-space-32); } } /* sm */
 @media (min-width: 769px) { .pagination { margin-top: var(--dimension-spacing-space-40); } } /* md + lg/xl */
