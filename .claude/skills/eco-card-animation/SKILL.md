@@ -3,7 +3,7 @@ name: eco-card-animation
 description: Use when making an animated Hairline illustration (isometric line figure that answers the pointer) for a component and putting it on its card on the ECO overview pages — the whole procedure from concept to card, with the reusable files, the ECO colouring, the card integration, hover tour, archiving the old visual and the verification scripts. Not for the component pages themselves and not for static images.
 ---
 
-> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack and the quality checklist. Everything lives in `hairline/` (read `hairline/README.md` too); the figure engine is the global skill `hairline-create` (never edit its kernel). Cards done: Button, Switch, Checkbox, Select, Input, Range, Textarea. References: **Button** (`hairline/button-pair.js`) and **Switch** (`hairline/switch.js`, the more complete one, copy from it). Press-and-pop springs for joined/segmented parts: `hairline/button-group.js` (selected part sinks, the former pick pops up, tint via `data-show` + CSS opacity transition).
+> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack and the quality checklist. Everything lives in `hairline/` (read `hairline/README.md` too); the figure engine is the global skill `hairline-create` (never edit its kernel). Cards done: Button, Switch, Checkbox, Select, Input, Range, Textarea, Toast (System). References: **Button** (`hairline/button-pair.js`) and **Switch** (`hairline/switch.js`, the more complete one, copy from it). Press-and-pop springs for joined/segmented parts: `hairline/button-group.js` (selected part sinks, the former pick pops up, tint via `data-show` + CSS opacity transition).
 
 ## When a figure in `hairline/` is changed (check this every time)
 
@@ -52,6 +52,7 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has two
 - **Tried and rejected on Switch** (do not redo without being asked): a pointing-hand cursor (outlined, thick stamped outline, finger lines): looked clumsy, user went back to the arrow.
 - **Sliding pill** (`hairline/pill.js`, Pill Segment Control): the thumb is a black `solid` whose `sil` gets `data-part="pill"`; labels are drawn twice, grey on the slot floor before the thumb and white on the thumb top after it, and `draw` shows whichever the thumb covers (`|s − i| < 0.5`); the inactive label's underline is a thin flat quad. Glyph set copied from `select.js`, pruned to the letters used (ALL/NEW) to stay under 200 lines.
 - **Testing the hover tour**: the tour only runs while the real pointer is *off* the figure (pointer over the stage = `hand`). In Playwright hover the card body below the visual, not its centre.
+- **Show/hide with a trigger** (`hairline/toast.js`): a group with `data-part="toast"` and `data-show`; CSS fades it (ECO medium-2 + standard) while the figure slides it on the component's own timed beziers; ghost presses the object (hides it), then a trigger button (shows it), `leave` restores shown. Spring/tween state objects need every field the tick reads (`t.t` missing gave NaN paths).
 - Range slider = one number in the figure's own units, three values moving one way; hover answers on a 240 px thumbnail are subtle, so `look.mjs` warns on item 3; that is accepted when the press is the big gesture.
 
 ## Also on the component page
