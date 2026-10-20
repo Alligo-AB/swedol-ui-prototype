@@ -106,7 +106,6 @@ function mount({ stage, svg, read }, value) {
   }
   bag.add(pointer(stage, {
     move: (p, e) => {
-      if (e?.pointerType === "ghost" && !ghost) for (const b of bxs) { b.kind = 0; b.sp.t = 0; } // the tour starts from three empty boxes
       ghost = e?.pointerType === "ghost"; set(pick(p), p); gt = performance.now(); },
     down: (p) => { const a = pick(p); set(a, p); ghost = false; if (a >= 0) flip(a); },
     leave: (e) => {
@@ -125,6 +124,6 @@ hairline({
   means: "Three checkboxes set into a slab, one checked, two empty: the pointer lights a box, a press fills it black and draws the tick.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 4],
-  tour: [[140, 129], [200, 159], [260, 189], [140, 129], [200, 159], [260, 189]],
+  tour: [[200, 159], [260, 189], [140, 129], [200, 159], [260, 189], [140, 129]], // box 2 on, 3 on, 1 off, 2 off, 3 off, 1 on: a lap ends where it began
   mount,
 });
