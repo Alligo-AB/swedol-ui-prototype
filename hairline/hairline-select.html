@@ -877,17 +877,17 @@ var HL = (() => {
 </script>
 <script type="module" id="hl-figure">
 /**
- * Select: a field with its label bar and a chevron, and a menu of three rows that unfolds under it. The pointer
+ * Select: a field with its label bar and a chevron, and one menu plate of three rows that unfolds under it. The pointer
  * over the field lights its edge and sinks it; a press opens the menu and turns the chevron; the pointer over a
  * row lifts it; a press chooses it, the menu folds and the field shows the choice. A drawn cursor follows the
  * pointer and rests above the field's chevron. The slider is how high the menu rows stand.
  */
 const {
-  Cam, clamp, facing, fit, lerp, poly, proj, ringAt, rings, prism,
+  Cam, clamp, facing, fit, lerp, open: polyline, poly, proj, ringAt, rings, prism,
   mk, pointer, reducedMotion, reflect, register, solid, put, disposer, spring, stepS, unproj,
 } = HL;
 
-const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 10, FY1 = 34, FH = 3, RY0 = 40, RH = 12, RG = 2, N = 3;
+const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 10, FY1 = 34, FH = 3, RY0 = 38, RH = 14, N = 3;
 const BARS = [30, 38, 24]; // label-bar length per row; the field's own bar is 22 empty, then the chosen row's
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 const NAMES = ["Sweden", "Norway", "Finland"];
@@ -916,16 +916,18 @@ function mount({ stage, svg, read }, value) {
   const field = solid(mk("g", {}, svg));
   const fbar = mk("path", { class: "dot", "data-part": "bar" }, svg);
   const chev = mk("path", { class: "dot", "data-part": "chev" }, svg);
-  // the menu: one raised row each, with its label bar on top
-  const rows = Array.from({ length: N }, (_, i) => {
-    const y0 = RY0 + i * (RH + RG), [o, n] = rings(FX0, y0, FX1, y0 + RH, 0, 1.2);
-    const s = solid(mk("g", {}, svg));
-    const bar = mk("path", { class: "dot", "data-part": "bar" }, svg);
-    return { y0, o, n, s, bar, hv: spring(0), last: "" };
-  });
+  // the menu: one plate holding three rows, set apart by hairlines; a hovered row gets a tint, a label bar each
+  const [mOut, mIn] = rings(FX0, RY0, FX1, RY0 + N * RH, 0, 1.2);
+  const menu = solid(mk("g", {}, svg));
+  const rows = Array.from({ length: N }, (_, i) => ({
+    y0: RY0 + i * RH,
+    tint: mk("path", { class: "dot", "data-part": "rowhi" }, svg),
+    line: i ? mk("path", { class: "nf lo" }, svg) : null,
+    bar: mk("path", { class: "dot", "data-part": "bar" }, svg),
+  }));
   const quad = (x0, y0, x1, y1, z) => poly([P(x0, y0, z), P(x1, y0, z), P(x1, y1, z), P(x0, y1, z)]);
 
-  let open = 0, sel = -1, hot = -1, lastF = "";
+  let open = 0, sel = -1, hot = -1, lastF = "", lastM = "";
   const fhv = spring(0), mo = spring(0, { k: 220, c: 26 }), ch = spring(0, { k: 220, c: 26 });
 
   function draw(force) {
@@ -940,15 +942,19 @@ function mount({ stage, svg, read }, value) {
       const a = lerp(25, 19, c), b = lerp(19, 25, c);
       chev.setAttribute("d", poly([P(72, b, zf + 0.1), P(80, b, zf + 0.1), P(76, a, zf + 0.1)]));
     }
+    const z1 = PT + m * (lift + 1), key = z1.toFixed(2) + sel + act;
+    if (!force && key === lastM) return;
+    lastM = key;
+    const show = m > 0.02;
+    menu.g.setAttribute("display", show ? "inline" : "none");
     rows.forEach((r, i) => {
-      const z1 = PT + m * (lift + 1) + 1.5 * clamp(r.hv.x, 0, 1), key = z1.toFixed(2) + (i === sel) + m;
-      if (!force && key === r.last) return;
-      r.last = key;
-      const show = m > 0.02;
-      for (const e of [r.s.g, r.bar]) e.setAttribute("display", show ? "inline" : "none");
+      for (const e of [r.tint, r.line, r.bar]) e?.setAttribute("display", show ? "inline" : "none");
       if (!show) return;
-      put(r.s, prism(P, front, r.o, r.n, PT, z1));
-      r.bar.setAttribute("d", quad(FX0 + 8, r.y0 + 4, FX0 + 8 + BARS[i], r.y0 + 8, z1 + 0.1));
+      if (i === 0) put(menu, prism(P, front, mOut, mIn, PT, z1));
+      r.tint.setAttribute("display", show && act === i + 1 ? "inline" : "none");
+      r.tint.setAttribute("d", quad(FX0 + 1.2, r.y0 + 0.6, FX1 - 1.2, r.y0 + RH - 0.6, z1 + 0.1));
+      r.line?.setAttribute("d", polyline([P(FX0 + 4, r.y0, z1 + 0.1), P(FX1 - 4, r.y0, z1 + 0.1)]));
+      r.bar.setAttribute("d", quad(FX0 + 8, r.y0 + 5, FX0 + 8 + BARS[i], r.y0 + 9, z1 + 0.2));
       r.bar.setAttribute("data-part", i === sel ? "bar-on" : "bar");
     });
   }
@@ -962,7 +968,7 @@ function mount({ stage, svg, read }, value) {
   const A = register(stage, (dt, now) => {
     let m = false;
     if (ghost && act >= 0 && !gdone) { m = true; if (now - gt > 250) { gdone = true; press(act); } }
-    for (const q of [fhv, mo, ch, ax, ay, pr, ...rows.map((r) => r.hv)]) if (stepS(q, dt)) m = true;
+    for (const q of [fhv, mo, ch, ax, ay, pr, ]) if (stepS(q, dt)) m = true;
     draw(); drawCur();
     return m;
   });
@@ -974,7 +980,7 @@ function mount({ stage, svg, read }, value) {
     if (x < FX0 - 2 || x > FX1 + 2) return -1;
     if (y > FY0 - 2 && y < FY1 + 2) return 0;
     if (!open) return -1;
-    const i = rows.findIndex((r) => y > r.y0 - 1 && y < r.y0 + RH + 1);
+    const i = rows.findIndex((r) => y >= r.y0 && y < r.y0 + RH);
     return i < 0 ? -1 : i + 1;
   };
   const say = () => { read.textContent = act > 0 ? NAMES[act - 1] : open ? "open" : act === 0 ? "field" : sel < 0 ? "rest" : NAMES[sel]; };
@@ -988,9 +994,8 @@ function mount({ stage, svg, read }, value) {
     if (a !== act) {
       act = a; gdone = !ghost; gt = performance.now();
       fhv.t = a === 0 ? 1 : 0;
-      rows.forEach((r, i) => { r.hv.t = i + 1 === a ? 1 : 0; });
       field.sil.classList.toggle("hi", a === 0 || (a < 0 && !open));
-      rows.forEach((r, i) => r.s.sil.classList.toggle("hi", i + 1 === a));
+      menu.sil.classList.toggle("hi", a > 0);
       say();
     }
     if (a < 0) { ax.t = rest[0]; ay.t = rest[1]; } else { ax.t = p[0]; ay.t = p[1]; }

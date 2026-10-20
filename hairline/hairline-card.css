@@ -31,3 +31,4 @@
 [data-hairline="select"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
 [data-hairline="select"] [data-part="bar-on"], [data-hairline="select"] [data-part="chev"] { fill: var(--color-text-primary, #000000); }
 .ds-card__visual--hairline [data-hairline-card="select"] { transform: translateY(5px); }
+[data-hairline="select"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
