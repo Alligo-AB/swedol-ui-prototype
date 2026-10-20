@@ -905,7 +905,7 @@ var HL = (() => {
 </script>
 <script type="module" id="hl-figure">
 /**
- * Checkbox: three boxes set into a slab, one checked, one empty, one mixed. The pointer over a box lights it; a press
+ * Checkbox: three boxes set into a slab, one checked, two empty. The pointer over a box lights it; a press
  * fills it black and draws its tick (an empty or mixed box becomes checked, a checked one empties). A drawn cursor
  * follows the pointer and rests above the empty box. The slider is how deep the boxes are cut.
  */
@@ -915,7 +915,7 @@ const {
 } = HL;
 
 const PW = 116, PD = 56, PT = 6, BS = 24, Y0 = 16;
-const BX = [{ name: "checked", x0: 12, st: 1 }, { name: "empty", x0: 46, st: 0 }, { name: "mixed", x0: 80, st: 2 }];
+const BX = [{ name: "checked", x0: 12, st: 1 }, { name: "empty", x0: 46, st: 0 }, { name: "empty", x0: 80, st: 0 }];
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 const bar = ([x0, y0], [x1, y1], w) => { const l = Math.hypot(x1 - x0, y1 - y0), nx = (-(y1 - y0) / l) * w / 2, ny = ((x1 - x0) / l) * w / 2; return [[x0 + nx, y0 + ny], [x1 + nx, y1 + ny], [x1 - nx, y1 - ny], [x0 - nx, y0 - ny]]; };
 const TICK = [bar([.2, .52], [.42, .74], .15), bar([.42, .74], [.8, .3], .15)]; // two bars in the unit box
@@ -1028,7 +1028,7 @@ function mount({ stage, svg, read }, value) {
 
 hairline({
   name: "checkbox",
-  means: "Three checkboxes set into a slab, checked, empty and mixed: the pointer lights a box, a press fills it black and draws the tick.",
+  means: "Three checkboxes set into a slab, one checked, two empty: the pointer lights a box, a press fills it black and draws the tick.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 4],
   tour: [[140, 129], [200, 159], [260, 189], [140, 129], [200, 159], [260, 189]],
