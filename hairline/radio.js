@@ -126,6 +126,6 @@ hairline({
   means: "Three radios set into a slab, one chosen: the pointer lights a radio, a press moves the black dot to it.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 4],
-  tour: [[140, 129], [200, 159], [260, 189], null],
+  tour: [[200, 159], [260, 189], [140, 129], null],
   mount,
 });
