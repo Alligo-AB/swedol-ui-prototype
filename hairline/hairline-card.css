@@ -87,3 +87,12 @@
 [data-hairline="tabs"] [data-part="bar-hover"] { fill: var(--color-surface-10, #e5e5e5); }
 .ds-card__visual--hairline [data-hairline-card="tabs"] { transform: translateY(0px); }
 [data-hairline="tabs"] [data-part="count"] { fill: var(--color-surface-danger-default, #d40f0f); }
+/* pill segment control figure: grey track (darker on hover), black pill, black labels, white on the pill */
+[data-hairline="pill"] [data-part="track"] { fill: var(--color-surface-disabled, #e5e5e5); }
+[data-hairline="pill"] [data-part="track"][data-hover] { fill: var(--color-border-tertiary, #cccccc); }
+[data-hairline="pill"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-surface-disabled, #e5e5e5), #000 22%); }
+[data-hairline="pill"] [data-part="track-wall"][data-hover] { fill: color-mix(in srgb, var(--color-border-tertiary, #cccccc), #000 22%); }
+[data-hairline="pill"] [data-part="pill"] { fill: var(--color-surface-100, #000000); }
+[data-hairline="pill"] [data-part="bar"] { fill: var(--color-text-action-primary, #000000); }
+[data-hairline="pill"] [data-part="bar-on"] { fill: #ffffff; }
+.ds-card__visual--hairline [data-hairline-card="pill"] { transform: translateY(-4px); }

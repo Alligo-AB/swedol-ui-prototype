@@ -50,6 +50,8 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has two
 - **Tour that presses**: the tour only calls `move(p, e)` (never `down`); the ghost has `e.pointerType === "ghost"`. Detect it, toggle after ~250 ms with no new ghost move (`gt`, `gdone` flag, tick keeps returning true meanwhile), and on the ghost's `leave` restore every state to its initial value so the lap ends at the rest pose.
 - **Drawn cursor**: black arrow polygon (`dot`, `data-part="cursor"` filled black in CSS), springs follow the pointer, rests above the main part, sinks 2.5 px on press. Breaks skill rule 10 on the user's request; say so at hand-over.
 - **Tried and rejected on Switch** (do not redo without being asked): a pointing-hand cursor (outlined, thick stamped outline, finger lines): looked clumsy, user went back to the arrow.
+- **Sliding pill** (`hairline/pill.js`, Pill Segment Control): the thumb is a black `solid` whose `sil` gets `data-part="pill"`; labels are drawn twice, grey on the slot floor before the thumb and white on the thumb top after it, and `draw` shows whichever the thumb covers (`|s − i| < 0.5`); the inactive label's underline is a thin flat quad. Glyph set copied from `select.js`, pruned to the letters used (ALL/NEW) to stay under 200 lines.
+- **Testing the hover tour**: the tour only runs while the real pointer is *off* the figure (pointer over the stage = `hand`). In Playwright hover the card body below the visual, not its centre.
 - Range slider = one number in the figure's own units, three values moving one way; hover answers on a 240 px thumbnail are subtle, so `look.mjs` warns on item 3; that is accepted when the press is the big gesture.
 
 ## Also on the component page
