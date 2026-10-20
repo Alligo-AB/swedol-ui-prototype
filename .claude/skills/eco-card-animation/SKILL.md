@@ -23,7 +23,7 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has one
 3. **Write `hairline/<name>.js`** (≤200 lines, in the shape of `switch.js`). Build + check from `hairline/`:
    `node ~/.claude/skills/hairline-create/look.mjs <name>.js --answer x,y,z --edge x,y,z --edge x,y,z` (world points; it prints the `?at=` screen points). Fix every failed line; read the sheet.
 4. **ECO skin**: `hairline/<name>.eco.css` (copy `switch.eco.css`), then `node hairline/make-eco.mjs <name>` → `hairline-<name>.eco.html`. Colours only via tokens, only in CSS keyed on the figure's `data-part` attributes (the validator rejects colours/fills inside the figure page).
-5. **Card**: `hairline/hairline-card.css` (colours for the card, keyed `[data-hairline="<name>"]` when a part name clashes with another figure, e.g. `ink` is black on Button, green on Switch). Then in `eco-design-system/components-overview.html` (ask first, README rule 1; also `overview.html` has its own cards — ask which):
+5. **Card**: `hairline/hairline-card.css` (colours for the card, keyed `[data-hairline="<name>"]` when a part name clashes with another figure, e.g. `ink` is black on Button, green on Switch). Then in `eco-design-system/components-overview.html` (ask first, README rule 1; also `index.html` has its own cards — ask which):
    - archive the old visual to `eco-design-system/card-visuals-archive/<component>.html` (markup + where it goes + how to switch back) and add a line to that folder's README;
    - replace the card's `ds-card__visual` with `<div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="<name>" data-play data-src="../hairline/<name>.js"></div></div>` (`data-play` runs the tour while the card is hovered or keyboard-focused, no play button; `kernel.js`, `embed.js`, `hairline-card.css` are already on the page);
    - centre it: the stage is 300 px wide, 5:4, `translateY(-16px)`; the figures' drawn extents differ, so add `.ds-card__visual--hairline [data-hairline-card="<name>"] { transform: translateY(Npx); }` in `hairline-card.css` until the content rows are centred (the check script prints them; Switch uses −5 px).
@@ -58,4 +58,4 @@ The same figure can sit in the docs page header, fading into a technical drawing
 
 ## Open / always ask
 
-Which cards on `overview.html` too; Swedol accent colours; dark mode (ECO has none); a new `eco-*` skill or CLAUDE.md row for anything not covered. Answer in Swedish, short; ask before putting a component on a card.
+Which cards on `index.html` too; Swedol accent colours; dark mode (ECO has none); a new `eco-*` skill or CLAUDE.md row for anything not covered. Answer in Swedish, short; ask before putting a component on a card.
