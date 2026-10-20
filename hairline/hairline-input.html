@@ -877,10 +877,9 @@ var HL = (() => {
 </script>
 <script type="module" id="hl-figure">
 /**
- * Input: a text field on a slab, with a label bar over it and a hint bar under it. The pointer over the field
- * darkens its edge (hover); a press focuses it: the edge goes black with a second line inside, the placeholder
- * leaves, a caret blinks and the value types itself in, five marks. A drawn cursor follows the pointer and
- * rests on the field's right end. The slider is how high the field stands.
+ * Input: a text field cut into a slab, with a label bar over it and a hint bar under it. The pointer over the
+ * field blackens the rim, turns the arrow into a blinking text caret that sits in the field and moves on as the
+ * value types itself in (five marks); a press focuses (second rim line). The slider is the slot's depth.
  */
 const {
   Cam, rrect, clamp, facing, fit, poly, proj, open, run, ringAt, prism, rings,
@@ -889,7 +888,7 @@ const {
 
 const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 41, FY1 = 63, N = 5, KEY = 130;
 const quad = (x0, y0, x1, y1) => [{ u: x0, v: y0 }, { u: x1, v: y0 }, { u: x1, v: y1 }, { u: x0, v: y1 }];
-const IBEAM = [[-3.5, -8], [3.5, -8], [3.5, -6.6], [0.8, -6.6], [0.8, 6.6], [3.5, 6.6], [3.5, 8], [-3.5, 8], [-3.5, 6.6], [-0.8, 6.6], [-0.8, -6.6], [-3.5, -6.6]];
+const IBEAM = [[-3, -7], [3, -7], [3, -5.8], [0.7, -5.8], [0.7, 5.8], [3, 5.8], [3, 7], [-3, 7], [-3, 5.8], [-0.7, 5.8], [-0.7, -5.8], [-3, -5.8]];
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 
 function mount({ stage, svg, read }, value) {
@@ -927,14 +926,13 @@ function mount({ stage, svg, read }, value) {
   const q = (x0, x1, h) => poly(ringAt(P, quad(x0, midY - h, x1, midY + h), zf));
   const ph = mk("path", { class: "dot", "data-part": "ph" }, svg);
   const chars = Array.from({ length: N }, () => mk("path", { class: "dot", "data-part": "ink" }, svg));
-  const caret = mk("path", { class: "dot", "data-part": "ink" }, svg);
   const inner = mk("path", { class: "nf" }, svg); // second line of the focused edge, on the floor
   const lip = mk("path", { class: "fo" }, svg), rimN = mk("path", { class: "nf" }, svg), rim = mk("path", { class: "nf" }, svg);
   slot.replaceChildren();
   // order matters: floor, wall, rim, marks, then the near lip over the sunk part
   const floor = mk("path", { class: "fo" }, slot), wall = mk("path", { class: "lo", "data-part": "track-wall" }, slot);
   slot.append(rim);
-  svg.append(ph, ...chars, caret, inner, lip, rimN);
+  svg.append(ph, ...chars, inner, lip, rimN);
 
   let focus = 0, n = 0, nt = 0, over = false, nextKey = 0;
   function draw() {
@@ -948,7 +946,6 @@ function mount({ stage, svg, read }, value) {
     inner.setAttribute("class", focus ? "nf hi" : "nf");
     ph.setAttribute("d", n === 0 ? q(tx(0), tx(0) + 22, 2) : "");
     chars.forEach((c, i) => c.setAttribute("d", i < n ? q(tx(i), tx(i) + 3.4, 3.6) : ""));
-    caret.setAttribute("d", focus && (Math.floor(performance.now() / 500) % 2 === 0) ? q(tx(n) - 1, tx(n) - 0.2, 4.6) : "");
   }
 
   // the cursor: an arrow, and over the field a blinking text caret (I-beam) that types
@@ -956,8 +953,8 @@ function mount({ stage, svg, read }, value) {
   const ax = spring(rest[0], { k: 140 }), ay = spring(rest[1], { k: 140 }), pr = spring(0);
   const cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
   const drawCur = (now) => {
-    const pts = over ? (Math.floor(now / 500) % 2 === 0 ? IBEAM : []) : ARROW;
-    cur.setAttribute("d", pts.length ? poly(pts.map(([u, v]) => [ax.x + u - (over ? 0 : 0.5), ay.x + v + (over ? 0 : 2.5 * clamp(pr.x, 0, 1))])) : "");
+    const pts = over || focus ? (Math.floor(now / 500) % 2 === 0 ? IBEAM : []) : ARROW;
+    cur.setAttribute("d", pts.length ? poly(pts.map(([u, v]) => [ax.x + u - (over || focus ? 0 : 0.5), ay.x + v + (over || focus ? 0 : 2.5 * clamp(pr.x, 0, 1))])) : "");
   };
 
   const A = register(stage, (dt, now) => {
@@ -966,6 +963,7 @@ function mount({ stage, svg, read }, value) {
       m = true; // the caret blinks and the value types while the pointer is over the field
       if (n < nt && now >= nextKey) { n = reducedMotion() ? nt : n + 1; nextKey = now + KEY; }
     }
+    if (over || focus) { const c = P(tx(n) - 0.6, midY, zf + 0.5); ax.t = c[0]; ay.t = c[1]; } // the caret sits in the field, after the last mark
     for (const s of [ax, ay, pr]) if (stepS(s, dt)) m = true;
     draw(); drawCur(now);
     return m;
@@ -980,7 +978,7 @@ function mount({ stage, svg, read }, value) {
   const start = () => { nt = N; n = 0; nextKey = performance.now() + KEY; };
   function set(o, p) {
     if (o !== over) { over = o; if (o) start(); else if (!focus) { n = 0; nt = 0; } say(); }
-    if (o || focus) { ax.t = p[0]; ay.t = p[1]; } else { ax.t = rest[0]; ay.t = rest[1]; }
+    if (!o && !focus) { ax.t = rest[0]; ay.t = rest[1]; }
     A.wake();
   }
   bag.add(pointer(stage, {
