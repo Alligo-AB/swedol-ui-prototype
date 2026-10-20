@@ -961,7 +961,7 @@ function mount({ stage, svg, read }, value) {
     if (!force && key === last) return;
     last = key;
     const o = rrect(x - R, TY - R, x + R, TY + R, R, 14), i = rrect(x - R + 1.4, TY - R + 1.4, x + R - 1.4, TY + R - 1.4, R - 1.4, 14);
-    put(thumb, prism(P, front, o, i, PT, PT + lift));
+    put(thumb, prism(P, front, o, i, PT, PT + 0.25 * lift));
     halo.setAttribute("d", poly(ringAt(P, rrect(x - HR, TY - HR, x + HR, TY + HR, HR, 14), PT)));
     labels.forEach((t, k) => t.setAttribute("data-part", k === step ? "tick-on" : "tick"));
     val.setAttribute("d", flat(text(VALUES[step], XR, 14, 1, U), PT));
@@ -973,12 +973,12 @@ function mount({ stage, svg, read }, value) {
   const cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
   const drawCur = () => cur.setAttribute("d", poly(ARROW.map(([u, v]) => [ax.x + u - 0.5, ay.x + v + 2.5 * clamp(pr.x, 0, 1)])));
 
-  // the thumb's slide: 150ms on ease-standard, like the Range component's neighbours
-  const ez = bezier(0.35, 0, 0.35, 1);
+  // the thumb's slide: slower than the component's 150ms so a step reads as a glide; ease-standard
+  const SLIDE = 360, ez = bezier(0.35, 0, 0.35, 1);
   const slide = (now) => {
     if (sp.t !== sp.to) { sp.from = sp.x; sp.to = sp.t; sp.t0 = now; }
     if (sp.x === sp.to) return false;
-    sp.x = reducedMotion() ? sp.to : sp.from + (sp.to - sp.from) * ez(clamp((now - sp.t0) / 150, 0, 1));
+    sp.x = reducedMotion() ? sp.to : sp.from + (sp.to - sp.from) * ez(clamp((now - sp.t0) / SLIDE, 0, 1));
     return sp.x !== sp.to;
   };
   const A = register(stage, (dt, now) => {
@@ -1033,7 +1033,7 @@ hairline({
   means: "A slab with the Range control: title, value, thin track, black thumb and step labels; a drag snaps the thumb step by step.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 3],
-  tour: [[120, 190], [290, 120], null],
+  tour: [[138, 127], [164, 140], [190, 153], [216, 166], [242, 179], [268, 192], null],
   mount,
 });
 </script>
