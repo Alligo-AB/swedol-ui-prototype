@@ -106,3 +106,12 @@
 [data-hairline="icon-picker"] [data-part="menu"][data-open] { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { [data-hairline="icon-picker"] [data-part="menu"] { transition: none; } }
 [data-hairline="icon-picker"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field */
+/* banner figure: warning banner (weaker surface, default edge and icon), text bars, x tile, page content */
+[data-hairline="banner"] [data-part="banner"] { fill: var(--color-surface-warning-weaker, #fdf3d9); }
+[data-hairline="banner"] [data-part="banner-edge"] { fill: var(--color-surface-warning-default, #f5a623); }
+[data-hairline="banner"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="banner"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="banner"] [data-part="title"] { fill: var(--color-text-secondary, #4d4d4d); }
+[data-hairline="banner"] [data-part="line"] { fill: var(--color-border-primary, #e5e5e5); }
+[data-hairline="banner"] [data-part="card"] { fill: var(--color-surface-5, #f2f2f2); }
+.ds-card__visual--hairline [data-hairline-card="banner"] { transform: translateY(-4px); }
