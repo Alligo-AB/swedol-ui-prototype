@@ -23,13 +23,14 @@ Experiment: isometriska linjefigurer (skillen `hairline-create`) som möjlig ers
 
 Hela förfarandet för en ny komponent står i skillen `eco-card-animation` (`.claude/skills/eco-card-animation/SKILL.md`). Verktyg: `node hairline/make-eco.mjs <namn>` (bygger `.eco.html`) och `node hairline/tools/card-check.mjs <komponent> <prefix>` (Chrome-kontroll av kortet).
 
-## På korten (Button, Switch, Checkbox)
+## På korten (Button, Switch, Checkbox, E-Com Toast)
 
 - Button-kortet i `eco-design-system/components-overview.html` visar figuren. Markup: `<div class="ds-card__visual ds-card__visual--hairline"><div data-hairline-card="button-pair" data-src="../hairline/button-pair.js"></div></div>`, plus `hairline/hairline-card.css` i `<head>` och två klassiska skript sist i `<body>` i ordning: `hairline/kernel.js` (kopia av skillens, med ett enda patch: `tour(..., delay)` så play-knappen startar direkt; skillens egen kärna är orörd) och `hairline/embed.js`. `embed.js` hämtar varje figurs `.js` och kör den i en egen funktion, så flera figurer på samma sida delar inga namn (inget behöver ändras i figurerna). Sidan måste köras via server (`npx serve .`), inte file://.
 - Scenen måste vara 5:4 (kärnan mappar pekaren på 400 × 320): `hairline-card.css` gör den 300 px bred och förskjuten uppåt, kortets visual (160 px) klipper resten. `hairline-card.css` har ECO-färgerna; håll den i synk med `<figur>.eco.css`.
 - Gamla kortbilder arkiveras i `eco-design-system/card-visuals-archive/` (en fil per kort, med instruktion för att byta tillbaka). Button: `button.html`, Switch: `switch.html`.
 - Switch-kortet i `components-overview.html` använder `data-hairline-card="switch"`; `index.html` har fortfarande CSS-switcharna. `hairline-card.css` skiljer Switchs gröna `ink` från Buttons svarta via `[data-hairline="switch"]`.
 - Select-kortet i `components-overview.html` använder `data-hairline-card="select"` (gammal visual i `card-visuals-archive/select.html`); `overview.html` har fortfarande CSS-selecten.
+- E-Com Toast-kortet i `components-overview.html` använder `data-hairline-card="toast-ecom"` (`toast-ecom.js`, gammal visual i `card-visuals-archive/toast-ecom.html`; figur: produktlåda som hoppar ner i en vagnsbricka, toast med produktbricka glider in; ECO-tid: in 300 ms `ease-decelerate-emphasized`, ut 150 ms `ease-accelerate-generic`); `index.html` orörd.
 - Nästa kort: arkivera den gamla visualen där först, lägg sedan till figuren på samma sätt.
 
 ## Önskemål för nya figurer

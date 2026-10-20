@@ -54,6 +54,8 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has two
 - **Testing the hover tour**: the tour only runs while the real pointer is *off* the figure (pointer over the stage = `hand`). In Playwright hover the card body below the visual, not its centre.
 - Range slider = one number in the figure's own units, three values moving one way; hover answers on a 240 px thumbnail are subtle, so `look.mjs` warns on item 3; that is accepted when the press is the big gesture.
 
+- **Two-state figure with a slide-in part** (`hairline/toast-ecom.js`, E-Com Toast): the pressed state is a pair of timed tweens (`slide`, own duration/bezier per direction: in = decelerate-emphasized 300 ms, out = accelerate-generic 150 ms, set on each target change). A hidden part is `display:none` until its tween starts; pick it only while its target is shown (rule 01). Card hover tour needs the press stop first, then a stop on the new part, then `null` (the ghost's `leave` resets).
+
 ## Also on the component page
 
 The same figure can sit in the docs page header, fading into a technical drawing: see `eco-doc-page`, section "Header art" (`doc-hero.css`, `gen/hero_switch.py`). Switch is the only one so far.
