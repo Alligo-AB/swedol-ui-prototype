@@ -76,3 +76,6 @@
 [data-hairline] [data-part="bg-tint"][data-show] { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="bg-tint"] { transition: none; } }
 .ds-card__visual--hairline [data-hairline-card="button-group"] { transform: translateY(-3px); }
+/* textarea figure: same colours as input (label/text black, placeholder and hint grey, faint far wall) */
+.ds-card__visual--hairline [data-hairline-card="textarea"] { transform: translateY(-4px); }
+[data-hairline="textarea"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); }

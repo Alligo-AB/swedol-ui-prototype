@@ -11,3 +11,4 @@ Each file holds the old markup and where it goes.
 - `input.html` – Input card, `components-overview.html` (CSS field "Label / Placeholder", replaced by the Hairline animation).
 - `range.html` – Range card, `components-overview.html` (CSS track + thumb, replaced by the Hairline animation).
 - `button-group.html` – Button group card, `components-overview.html` (CSS joined buttons "Small / Medium / Large", replaced by the Hairline animation).
+- `textarea.html` – Text area card, `components-overview.html` and `index.html` (CSS box "Label / Placeholder text", replaced by the Hairline animation).
