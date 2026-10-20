@@ -115,9 +115,8 @@ function mount({ stage, svg, read }, value) {
   bag.add(pointer(stage, {
     move: (p, e) => { ghost = e?.pointerType === "ghost"; set(pick(p)); aim(p); B.wake(); },
     down: (p) => { const a = pick(p); ghost = false; set(a); aim(p); if (a >= 0) choose(a); },
-    leave: (e) => {
-      if (e?.pointerType === "ghost") sel = 1; // the tour ends where it began
-      ghost = false; act = -2; set(-1); aim(null); B.wake();
+    leave: () => {
+      ghost = false; // the last pick stays selected until another button is pressed act = -2; set(-1); aim(null); B.wake();
     },
   }));
   bag.add(() => svg.replaceChildren());
@@ -129,7 +128,7 @@ function mount({ stage, svg, read }, value) {
 
 hairline({
   name: "button-group",
-  means: "Three joined buttons, S M L with M selected: the pointer dips one, a press sinks it and the former pick pops back up.",
+  means: "Three joined buttons, S M L with M selected: the pointer dips one, a press sinks it and the former pick pops up.",
   rules: [1, 4, 8, 9],
   range: [1.5, 3.5, 5],
   tour: [[148, 142], [200, 168], [249, 192], null],
