@@ -24,6 +24,7 @@
 .ds-card__visual--hairline [data-hairline-card] { flex: none; width: 300px; transform: translateY(-16px); }
 /* per-figure vertical centring (the figures' drawn extents differ) */
 .ds-card__visual--hairline [data-hairline-card="switch"] { transform: translateY(-5px); }
+.ds-card__visual--hairline [data-hairline-card="range"] { transform: translateY(-4px); }
 
 .ds-card__visual--hairline { position: relative; }
 /* radio figure: white wells, black dot */
@@ -60,3 +61,11 @@
 [data-hairline] [data-part="ph"], [data-hairline] [data-part="hint"] { fill: var(--color-surface-50, #737373); }
 .ds-card__visual--hairline [data-hairline-card="input"] { transform: translateY(-11px); }
 [data-hairline="input"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field: a faint shade, the edges carry the depth */
+/* range figure: title, value, step labels, track, thumb, hover halo */
+[data-hairline] [data-part="title"] { fill: var(--color-text-secondary, #4d4d4d); }
+[data-hairline] [data-part="value"], [data-hairline] [data-part="tick-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline] [data-part="tick"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline] [data-part="line"] { fill: var(--color-border-primary, #e5e5e5); }
+[data-hairline] [data-part="thumb"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="halo"] { fill: none; }
+[data-hairline] [data-part="halo"][data-hover] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
