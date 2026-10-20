@@ -7,7 +7,7 @@
   const addHoverTour = (el, figure) => {
     const card = el.closest(".ds-card") || el.parentElement;
     let run = null;
-    const on = () => { if (!run) run = HL.tour(el, figure.tour, () => {}, 0); };
+    const on = () => { if (!run) run = HL.tour(el, figure.tour, () => {}, 0, { travel: +el.dataset.travel || undefined, dwell: +el.dataset.dwell || undefined }); };
     const off = () => { run?.stop(); run = null; };
     card.addEventListener("mouseenter", on);
     card.addEventListener("mouseleave", off);

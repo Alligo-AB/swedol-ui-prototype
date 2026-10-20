@@ -536,7 +536,8 @@ var HL = (() => {
     const k = Math.min(dx ? (dx > 0 ? 200 : -200) / dx : Infinity, dy ? (dy > 0 ? 160 : -160) / dy : Infinity);
     return [200 + dx * k, 160 + dy * k];
   }
-  function tour(stage, stops, onStop, delay) {
+  function tour(stage, stops, onStop, delay, pace) {
+    const TR = pace?.travel ?? TRAVEL, DW = pace?.dwell ?? DWELL; // pace: optional per-card speed (patched copy)
     let i = 0;
     let wait = delay ?? RESUME + STAGGER * (started++ % 4); // delay: card play button starts at once (patched copy)
     let t = -1;
@@ -573,15 +574,15 @@ var HL = (() => {
         origin = at ?? entry(stop2);
         t = 0;
       }
-      t = Math.min(TRAVEL, t + dt * 1e3);
-      const k = EASE_LIFT(t / TRAVEL);
+      t = Math.min(TR, t + dt * 1e3);
+      const k = EASE_LIFT(t / TR);
       at = [origin[0] + (stop2[0] - origin[0]) * k, origin[1] + (stop2[1] - origin[1]) * k];
       h.move(at, GHOST);
-      if (t < TRAVEL) return true;
+      if (t < TR) return true;
       onStop?.(i);
       i = (i + 1) % stops.length;
       t = -1;
-      wait = DWELL;
+      wait = DW;
       return true;
     };
     const take = () => {
