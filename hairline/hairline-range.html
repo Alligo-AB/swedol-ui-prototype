@@ -993,7 +993,7 @@ function mount({ stage, svg, read }, value) {
   const world = ([sx, sy]) => unproj(C, sx, sy, PT);
   const inBand = ([x, y]) => x > 4 && x < PW - 4 && y > 18 && y < 58;
   const nearest = (x) => Math.round(clamp((x - X0) / (X1 - X0), 0, 1) * (N - 1));
-  let on = false, held = false;
+  let on = false, held = false, gin = false;
   const say = () => { read.textContent = on ? VALUES[step] : "rest"; };
   const goto = (k) => { step = k; sp.t = k; say(); A.wake(); };
   function set(p, a) {
@@ -1007,6 +1007,11 @@ function mount({ stage, svg, read }, value) {
     move: (p, e) => {
       const w = world(p), ghost = e?.pointerType === "ghost";
       if (!ghost && !(e?.buttons & 1)) held = false;
+      // the tour's unseen pointer only counts once it reaches the thumb: no fumbling on the way in
+      if (ghost && !gin) {
+        if (Math.abs(w[0] - tx()) < 4 && inBand(w)) gin = true;
+        else { ax.t = p[0]; ay.t = p[1]; A.wake(); return; }
+      }
       set(p, held || inBand(w));
       if (on && (ghost || held)) goto(nearest(w[0]));
     },
@@ -1016,7 +1021,7 @@ function mount({ stage, svg, read }, value) {
       if (on) { held = true; pr.x = 1; pr.t = 0; goto(nearest(w[0])); }
     },
     leave: (e) => {
-      held = false;
+      held = false; gin = false;
       if (e?.pointerType === "ghost") goto(REST);
       set(null, false);
     },
