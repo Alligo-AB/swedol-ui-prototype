@@ -69,6 +69,10 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
 [data-hairline] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); } /* placeholder / unchosen label */
 [data-hairline] [data-part="bar-on"], [data-hairline] [data-part="chev"] { fill: var(--color-text-primary, #000000); } /* chosen label, chevron */
 [data-hairline] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
+/* the menu fades in and out with its unfold (the figure only sets data-open) */
+[data-hairline] [data-part="menu"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
+[data-hairline] [data-part="menu"][data-open] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="menu"] { transition: none; } }
 </style>
 </head>
 <body>
@@ -982,13 +986,14 @@ function mount({ stage, svg, read }, value) {
   const chev = mk("path", { class: "dot", "data-part": "chev" }, svg);
   // the menu: one plate holding three rows, set apart by hairlines; a hovered row gets a tint, its name; the chosen one carries a check
   const [mOut, mIn] = rings(FX0, RY0, FX1, RY0 + N * RH, 0, 1.2);
-  const menu = solid(mk("g", {}, svg));
+  const mg = mk("g", { "data-part": "menu" }, svg); // one group, so the skin can fade the whole menu in and out
+  const menu = solid(mg);
   const rows = Array.from({ length: N }, (_, i) => ({
     y0: RY0 + i * RH,
-    tint: mk("path", { class: "dot", "data-part": "rowhi" }, svg),
-    line: i ? mk("path", { class: "nf lo" }, svg) : null,
-    bar: mk("path", { class: "dot", "data-part": "bar-on" }, svg),
-    tick: mk("path", { class: "dot", "data-part": "chev", "fill-rule": "nonzero" }, svg),
+    tint: mk("path", { class: "dot", "data-part": "rowhi" }, mg),
+    line: i ? mk("path", { class: "nf lo" }, mg) : null,
+    bar: mk("path", { class: "dot", "data-part": "bar-on" }, mg),
+    tick: mk("path", { class: "dot", "data-part": "chev", "fill-rule": "nonzero" }, mg),
   }));
   const quad = (x0, y0, x1, y1, z) => poly([P(x0, y0, z), P(x1, y0, z), P(x1, y1, z), P(x0, y1, z)]);
 
@@ -1049,7 +1054,7 @@ function mount({ stage, svg, read }, value) {
     return i < 0 ? -1 : i + 1;
   };
   const say = () => { read.textContent = act > 0 ? NAMES[act - 1] : open ? "open" : act === 0 ? "field" : sel < 0 ? "rest" : NAMES[sel]; };
-  const setOpen = (v) => { open = v; mo.t = v; ch.t = v; };
+  const setOpen = (v) => { open = v; mo.t = v; ch.t = v; if (v) mg.setAttribute("data-open", ""); else mg.removeAttribute("data-open"); };
   function press(a) {
     if (a === 0) setOpen(1 - open);
     else if (a > 0) { sel = a - 1; setOpen(0); }

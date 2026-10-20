@@ -16,3 +16,7 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
 [data-hairline] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); } /* placeholder / unchosen label */
 [data-hairline] [data-part="bar-on"], [data-hairline] [data-part="chev"] { fill: var(--color-text-primary, #000000); } /* chosen label, chevron */
 [data-hairline] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
+/* the menu fades in and out with its unfold (the figure only sets data-open) */
+[data-hairline] [data-part="menu"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
+[data-hairline] [data-part="menu"][data-open] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="menu"] { transition: none; } }
