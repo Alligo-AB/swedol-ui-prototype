@@ -10,3 +10,4 @@ Each file holds the old markup and where it goes.
 - `select.html` – Select card, `components-overview.html` (CSS select "Label / Choose an option", replaced by the Hairline animation).
 - `input.html` – Input card, `components-overview.html` (CSS field "Label / Placeholder", replaced by the Hairline animation).
 - `range.html` – Range card, `components-overview.html` (CSS track + thumb, replaced by the Hairline animation).
+- `pill-segment-control.html` – Pill segment control card, `components-overview.html` (CSS `.mini-seg` "Roles / Plan", replaced by the Hairline animation).
