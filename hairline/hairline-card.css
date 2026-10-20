@@ -30,4 +30,4 @@
 /* input figure: label/value black, placeholder and hint grey */
 [data-hairline] [data-part="ph"], [data-hairline] [data-part="hint"] { fill: var(--color-surface-50, #737373); }
 .ds-card__visual--hairline [data-hairline-card="input"] { transform: translateY(-11px); }
-[data-hairline="input"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-surface-20, #cccccc), #000 40%); } /* far wall of the recessed field */
+[data-hairline="input"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field: a faint shade, the edges carry the depth */
