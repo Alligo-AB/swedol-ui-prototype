@@ -34,7 +34,7 @@ function mount({ stage, svg, read }, value) {
     svg.lastChild.firstChild.setAttribute("class", "sil");
   }
 
-  // each box is a raised tile (height D+2): side faces from the prism, the coloured top and the tick on it
+  // each box is a raised tile (height D*0.5+0.5): side faces from the prism, the coloured top and the tick on it
   const bxs = BX.map((b) => {
     const out = rrect(b.x0, Y0, b.x0 + BS, Y0 + BS, 0, 14), inn = rrect(b.x0 + 1.4, Y0 + 1.4, b.x0 + BS - 1.4, Y0 + BS - 1.4, 0, 14);
     const tile = solid(mk("g", {}, svg));
@@ -47,10 +47,10 @@ function mount({ stage, svg, read }, value) {
   const grow = (pts, k) => pts.map(([u, v]) => [0.5 + (u - 0.5) * k, 0.5 + (v - 0.5) * k]);
   function draw(force) {
     for (const b of bxs) {
-      const x = clamp(b.sp.x, 0, 1), key = x.toFixed(2) + D.toFixed(2) + b.kind + b.hv.x.toFixed(2);
+      const x = clamp(b.sp.x, 0, 1), key = x.toFixed(2) + D.toFixed(2) + b.kind;
       if (!force && key === b.last) continue;
       b.last = key;
-      const zt = PT + D + 2 - 1.5 * clamp(b.hv.x, 0, 1); // hover presses the tile down
+      const zt = PT + D * 0.5 + 0.5; // fixed height: tiles do not move
       put(b.tile, prism(P, front, b.out, b.inn, PT, zt));
       b.top.setAttribute("d", poly(ringAt(P, b.out, zt)));
       const ink = x > 0.5;
