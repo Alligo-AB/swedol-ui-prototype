@@ -81,7 +81,7 @@ function mount({ stage, svg, read }, value) {
 
   // the notification: a thin raised block with a blue left edge; its icon, text and x show once it has opened
   const body = solid(mk("g", {}, svg)); body.sil.setAttribute("data-part", "note");
-  const edge = solid(mk("g", {}, svg)); edge.sil.setAttribute("data-part", "edge");
+  const edge = part("edge"); // flat on the block's top, not a solid
   const icon = part("icon"), ii = part("icon-i", "fo"), t1 = part("bar-dk"), t2 = part("txt");
   const TU = 0.42, tA = lay("INFO:", X0 + 16, 0, TU), tB = lay("ONLY 4 LEFT", tA[tA.length - 1].x1 + 4 * TU, 0, TU); // laid out at y 0, moved with the block
   const xg = mk("path", { class: "nf" }, svg), xhit = mk("path", { class: "nf" }, svg);
@@ -96,8 +96,8 @@ function mount({ stage, svg, read }, value) {
     const hh = cur0, vis = hh > NH - 0.4, cb = 42 + hh * (1 + 4 / NH), z = PT + Math.max(0.6, ZN());
     if (hh > 0.05) {
       put(body, prism(P, front, rrect(X0, NY, X1, NY + hh, 0, 4), null, PT, z));
-      put(edge, prism(P, front, rrect(X0, NY, X0 + 2.6, NY + hh, 0, 4), null, PT, z + 0.4));
-    } else { body.sil.setAttribute("d", ""); body.cr.setAttribute("d", ""); edge.sil.setAttribute("d", ""); edge.cr.setAttribute("d", ""); }
+      edge.setAttribute("d", flatRect(X0, NY, X0 + 2.6, NY + hh, z + 0.01));
+    } else { body.sil.setAttribute("d", ""); body.cr.setAttribute("d", ""); edge.setAttribute("d", ""); }
     const my = NY + hh / 2, zt = z + 0.01;
     const circ = rrect(X0 + 6.5, my - 3.2, X0 + 12.9, my + 3.2, 3.2, 10);
     icon.setAttribute("d", vis ? poly(ringAt(P, circ, zt)) : "");
