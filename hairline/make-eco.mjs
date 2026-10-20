@@ -9,5 +9,7 @@ const dir = dirname(fileURLToPath(import.meta.url)), name = process.argv[2];
 if (!name) { console.error("usage: make-eco.mjs <name>"); process.exit(2); }
 const page = readFileSync(join(dir, `hairline-${name}.html`), "utf8"), css = readFileSync(join(dir, `${name}.eco.css`), "utf8");
 const links = '<link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">\n<link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">\n';
-writeFileSync(join(dir, `hairline-${name}.eco.html`), page.replace("</head>", `${links}<style>\n${css}</style>\n</head>`));
+// the bench's play button starts the tour at once (same as the cards: kernel.js patch), not after the resume pause
+const eco = page.replace("</head>", `${links}<style>\n${css}</style>\n</head>`).replace("let wait = RESUME + STAGGER * (started++ % 4);", "let wait = 0; started++;");
+writeFileSync(join(dir, `hairline-${name}.eco.html`), eco);
 console.log(`wrote hairline-${name}.eco.html`);

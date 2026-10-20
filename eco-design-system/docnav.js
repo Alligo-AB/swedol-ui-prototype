@@ -105,7 +105,7 @@
   wrap.innerHTML =
     '<nav class="dn-rail" aria-label="ECO Design System">' +
       '<div class="dn-rail__top">' +
-        '<a class="dn-home" href="' + D + 'overview.html" aria-label="ECO Design System, start page"' + (pageId === 'overview' ? ' aria-current="page"' : '') + '><span class="dn-home__mark"></span><span>ECO<br>Design<br>System<br>V.1</span></a>' +
+        '<a class="dn-home" href="' + D + 'index.html" aria-label="ECO Design System, start page"' + (pageId === 'index' ? ' aria-current="page"' : '') + '><span class="dn-home__mark"></span><span>ECO<br>Design<br>System<br>V.1</span></a>' +
         '<button class="dn-dest" type="button" data-search><span class="dn-ms" aria-hidden="true">search</span><span>Search</span></button>' + dest +
       '</div><div class="dn-rail__gap"></div>' +
       '<div class="dn-rail__tools"><hr><button class="dn-tool" type="button" aria-label="Dark mode" data-dark disabled><span class="dn-ms" aria-hidden="true">dark_mode</span></button></div>' +
@@ -240,7 +240,7 @@
   var cats = Object.keys(NAV);
   var bar = document.createElement('div');
   bar.innerHTML =
-    '<header class="dn-bar"><a class="dn-bar__id" href="' + D + 'overview.html"><span class="dn-bar__mark"></span><span>ECO Design System <span class="dn-bar__v">V.1</span></span></a>' +
+    '<header class="dn-bar"><a class="dn-bar__id" href="' + D + 'index.html"><span class="dn-bar__mark"></span><span>ECO Design System <span class="dn-bar__v">V.1</span></span></a>' +
       '<button class="btn btn--blank btn--md btn--icon dn-bar__btn" type="button" aria-expanded="false" aria-controls="dn-drawer" aria-label="Menu"><span class="btn__icon" aria-hidden="true">menu</span></button></header>' +
     '<div class="dn-scrim"></div>' +
     '<nav class="dn-drawer" id="dn-drawer" aria-label="ECO Design System">' +
