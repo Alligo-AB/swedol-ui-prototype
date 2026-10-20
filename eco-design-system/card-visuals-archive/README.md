@@ -8,3 +8,4 @@ Each file holds the old markup and where it goes.
 - `radio.html` – Radio card, `components-overview.html` and `index.html` (CSS radios "Standard / Express", replaced by the Hairline animation).
 - `checkbox.html` – Checkbox card, `components-overview.html` (CSS checkboxes "Selected / Not selected", replaced by the Hairline animation).
 - `select.html` – Select card, `components-overview.html` (CSS select "Label / Choose an option", replaced by the Hairline animation).
+- `input.html` – Input card, `components-overview.html` (CSS field "Label / Placeholder", replaced by the Hairline animation).
