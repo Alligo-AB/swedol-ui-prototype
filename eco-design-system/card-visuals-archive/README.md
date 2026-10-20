@@ -14,3 +14,4 @@ Each file holds the old markup and where it goes.
 - `textarea.html` – Text area card, `components-overview.html` and `index.html` (CSS box "Label / Placeholder text", replaced by the Hairline animation).
 - `tabs.html` – Tabs card, `components-overview.html` (CSS mini tabs "Overview / Details / Reviews", replaced by the Hairline animation).
 - `pill-segment-control.html` – Pill segment control card, `components-overview.html` (CSS `.mini-seg` "Roles / Plan", replaced by the Hairline animation).
+- `icon-picker.html` – Icon picker card, `components-overview.html` (CSS field with search icon and "local_shipping", replaced by the Hairline animation).

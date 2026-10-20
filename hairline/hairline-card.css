@@ -96,3 +96,13 @@
 [data-hairline="pill"] [data-part="bar"] { fill: var(--color-text-action-primary, #000000); }
 [data-hairline="pill"] [data-part="bar-on"] { fill: #ffffff; }
 .ds-card__visual--hairline [data-hairline-card="pill"] { transform: translateY(-4px); }
+/* icon-picker figure: field value, panel title, search box, icons, cell tint; the panel fades with its unfold */
+[data-hairline="icon-picker"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="icon-picker"] [data-part="bar-on"], [data-hairline="icon-picker"] [data-part="chev"], [data-hairline="icon-picker"] [data-part="title"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="icon-picker"] [data-part="sbox"] { stroke: var(--color-surface-100, #000000); }
+[data-hairline="icon-picker"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
+.ds-card__visual--hairline [data-hairline-card="icon-picker"] { transform: translateY(-4px); }
+[data-hairline="icon-picker"] [data-part="menu"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
+[data-hairline="icon-picker"] [data-part="menu"][data-open] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { [data-hairline="icon-picker"] [data-part="menu"] { transition: none; } }
+[data-hairline="icon-picker"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field */
