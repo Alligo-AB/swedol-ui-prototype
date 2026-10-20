@@ -1007,7 +1007,7 @@ function mount({ stage, svg, read }, value) {
       bxs.forEach((b, i) => { b.hv.t = i === a ? 1 : 0; if (i === a) b.top.setAttribute("data-hover", ""); else b.top.removeAttribute("data-hover"); });
       say();
     }
-    if (a < 0) { ax.t = rest[0]; ay.t = rest[1]; } else { ax.t = p[0]; ay.t = p[1]; }
+    if (a < 0 && !ghost) { ax.t = rest[0]; ay.t = rest[1]; } else { ax.t = p[0]; ay.t = p[1]; }
     A.wake();
   }
   bag.add(pointer(stage, {
