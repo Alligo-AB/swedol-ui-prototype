@@ -877,7 +877,7 @@ var HL = (() => {
 </script>
 <script type="module" id="hl-figure">
 /**
- * Banner: a page plane with a warning banner anchored at its top edge (icon, title, text, a x) and page content
+ * Banner: a page plane with a warning banner anchored at its top edge (a ring icon, heading, two text lines, an action label, a x) and page content
  * under it. The pointer over the x lights its tile; a press closes the banner the way the component does (fades
  * out and collapses its height, 150 ms on ease-accelerate-generic) and the page content moves up. Leaving the
  * stage, or pressing the empty page, brings it back (300 ms on ease-decelerate-generic). A drawn cursor follows
@@ -888,9 +888,9 @@ const {
   mk, pointer, reflect, register, solid, put, disposer, spring, stepS, unproj,
 } = HL;
 
-const PW = 148, PD = 72, PT = 5, X0 = 6, X1 = 142, Y0 = 6, BH = 18, XC = 134, XY = 15;
+const PW = 148, PD = 84, PT = 5, X0 = 6, X1 = 142, Y0 = 6, BH = 34, XC = 134, XY = 8;
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
-const PAGE = [[6, 0, 70, 5], [6, 11, 126, 14], [6, 18, 100, 21], [6, 28, 60, 38]]; // y0 is relative to the page top
+const PAGE = [[6, 0, 70, 4], [6, 9, 126, 11.5], [6, 14, 100, 16.5], [6, 22, 60, 31]]; // y0 is relative to the page top
 
 function mount({ stage, svg, read }, value) {
   const bag = disposer();
@@ -918,7 +918,8 @@ function mount({ stage, svg, read }, value) {
   const g = mk("g", {}, svg), body = solid(mk("g", {}, g)), edge = solid(mk("g", {}, g));
   body.sil.setAttribute("class", "dot"); body.sil.setAttribute("data-part", "banner");
   edge.sil.setAttribute("class", "dot"); edge.sil.setAttribute("data-part", "banner-edge");
-  const icon = mk("path", { class: "dot", "data-part": "banner-edge" }, g);
+  const icon = mk("path", { class: "dot", "data-part": "banner-edge" }, g), leaf = mk("path", { class: "dot", "data-part": "banner-edge" }, g);
+  const b2 = mk("path", { class: "dot", "data-part": "bar" }, g), act = mk("path", { class: "dot", "data-part": "bar-on" }, g);
   const tbar = mk("path", { class: "dot", "data-part": "bar-on" }, g), bbar = mk("path", { class: "dot", "data-part": "bar" }, g);
   const tile = mk("path", { class: "dot", "data-part": "halo" }, g);
   const xs = [1, -1].map(() => mk("path", { class: "dot", "data-part": "bar-on" }, g));
@@ -944,13 +945,18 @@ function mount({ stage, svg, read }, value) {
     g.setAttribute("display", v < 0.02 ? "none" : "");
     const [o, i] = rings(X0, Y0, X1, y(BH), 0, 1);
     put(body, prism(P, front, o, i, PT, z));
-    const [eo, ei] = rings(X0, Y0, X0 + 3, y(BH), 0, 0.6);
+    const [eo, ei] = rings(X0, Y0, X0 + 4, y(BH), 0, 0.6);
     put(edge, prism(P, front, eo, ei, PT, z + 0.3));
-    const cy = y(BH / 2);
-    icon.setAttribute("d", poly(Array.from({ length: 14 }, (_, n) => P(16 + 3 * Math.cos((n / 14) * 2 * Math.PI), cy + 3 * v * Math.sin((n / 14) * 2 * Math.PI), z + 0.3))));
-    tbar.setAttribute("d", flat(24, y(5), 58, y(7.4), z + 0.3));
-    bbar.setAttribute("d", flat(24, y(10.6), 100, y(12.6), z + 0.3));
-    tile.setAttribute("d", clamp(hv.x, 0, 1) > 0.02 ? flat(XC - 6, y(3), XC + 6, y(15), z + 0.3) : "");
+    const cy = y(8);
+    // the icon: a ring (inner outline wound the other way, so the fill leaves it open) with a leaf stroke inside
+    const circ = (rad, up) => { const a = Array.from({ length: 20 }, (_, n) => P(22 + rad * Math.cos((n / 20) * 2 * Math.PI), y(10) + rad * v * Math.sin((n / 20) * 2 * Math.PI), z + 0.3)); return up ? a : a.reverse(); };
+    icon.setAttribute("d", poly(circ(7, 1)) + poly(circ(5.6, 0)));
+    leaf.setAttribute("d", poly([[-3, 2], [-2.4, 0.8], [2.4, -2.6], [3, -2], [-2.2, 2.6]].map(([a, b]) => P(22 + a, y(10) + b * v, z + 0.3))));
+    tbar.setAttribute("d", flat(36, y(4), 92, y(7.6), z + 0.3));
+    bbar.setAttribute("d", flat(36, y(12), 124, y(14.4), z + 0.3));
+    b2.setAttribute("d", flat(36, y(17), 100, y(19.4), z + 0.3));
+    act.setAttribute("d", flat(38, y(25.5), 78, y(28), z + 0.3));
+    tile.setAttribute("d", clamp(hv.x, 0, 1) > 0.02 ? flat(XC - 6, y(2), XC + 6, y(14), z + 0.3) : "");
     xs.forEach((s, n) => {
       const d = 3.2, w = 0.8;
       const q = n ? [[-d, -d + w], [-d + w, -d], [d, d - w], [d - w, d]] : [[-d, d - w], [-d + w, d], [d, -d + w], [d - w, -d]];
@@ -983,7 +989,7 @@ function mount({ stage, svg, read }, value) {
   // hit: the x's tile while the banner is open
   const pick = ([sx, sy]) => {
     const [x, y] = unproj(C, sx, sy, PT + h);
-    return c.to === 1 && x > XC - 8 && x < XC + 8 && y > Y0 && y < Y0 + BH;
+    return c.to === 1 && x > XC - 8 && x < XC + 8 && y > Y0 && y < Y0 + 16;
   };
   function press() { go(0); pr.x = 1; pr.t = 0; hot = false; hv.t = 0; say(); A.wake(); }
   function set(on, p) {
