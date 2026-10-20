@@ -69,3 +69,7 @@
 [data-hairline] [data-part="thumb"] { fill: var(--color-surface-100, #000000); }
 [data-hairline] [data-part="halo"] { fill: none; }
 [data-hairline] [data-part="halo"][data-hover] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+
+/* textarea figure: same colours as input (label/text black, placeholder and hint grey, faint far wall) */
+.ds-card__visual--hairline [data-hairline-card="textarea"] { transform: translateY(-4px); }
+[data-hairline="textarea"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); }

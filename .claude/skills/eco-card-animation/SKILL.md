@@ -3,7 +3,7 @@ name: eco-card-animation
 description: Use when making an animated Hairline illustration (isometric line figure that answers the pointer) for a component and putting it on its card on the ECO overview pages — the whole procedure from concept to card, with the reusable files, the ECO colouring, the card integration, hover tour, archiving the old visual and the verification scripts. Not for the component pages themselves and not for static images.
 ---
 
-> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack and the quality checklist. Everything lives in `hairline/` (read `hairline/README.md` too); the figure engine is the global skill `hairline-create` (never edit its kernel). References done: **Button** (`hairline/button-pair.js`) and **Switch** (`hairline/switch.js`, the more complete one, copy from it).
+> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack and the quality checklist. Everything lives in `hairline/` (read `hairline/README.md` too); the figure engine is the global skill `hairline-create` (never edit its kernel). Cards done: Button, Switch, Checkbox, Select, Input, Range, Textarea. References: **Button** (`hairline/button-pair.js`) and **Switch** (`hairline/switch.js`, the more complete one, copy from it).
 
 ## When a figure in `hairline/` is changed (check this every time)
 
@@ -28,7 +28,7 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has one
    - replace the card's `ds-card__visual` with `<div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="<name>" data-play data-src="../hairline/<name>.js"></div></div>` (`data-play` runs the tour while the card is hovered or keyboard-focused, no play button; `kernel.js`, `embed.js`, `hairline-card.css` are already on the page);
    - centre it: the stage is 300 px wide, 5:4, `translateY(-16px)`; the figures' drawn extents differ, so add `.ds-card__visual--hairline [data-hairline-card="<name>"] { transform: translateY(Npx); }` in `hairline-card.css` until the content rows are centred (the check script prints them; Switch uses −5 px).
 6. **Show it**: right after step 4, serve the repo (port ≠ 4173), `navigate` the built-in browser to `/hairline/hairline-<name>.eco` and `show_pane preview`, so the user sees it and can adjust at once (SendUserFile render does not work for it).
-7. **Verify**: `npx serve . -l 4173` (repo root; `file://` does not work for cards), then `node hairline/tools/card-check.mjs <component> <outPrefix>` and read the PNGs: rest, hover, play (4 s into the tour). Plus the working routine in `CLAUDE.md` (mobile width, real mouse). State what was not tested.
+7. **Verify**: `npx serve . -l 4173` (if another session already holds 4173, serve on another port and run a copy of `card-check.mjs` with the port changed; the script is hardcoded to 4173 and its play-button step is a no-op now that cards use hover-`data-play`, so also hover the card with a real mouse and screenshot a few seconds of the tour) (repo root; `file://` does not work for cards), then `node hairline/tools/card-check.mjs <component> <outPrefix>` and read the PNGs: rest, hover, play (4 s into the tour). Plus the working routine in `CLAUDE.md` (mobile width, real mouse). State what was not tested.
 8. **Sweep**: update `hairline/README.md` ("På korten"), this skill if something new was learned, the memory `project_hairline_card_animations.md`, and mention changed skills. Do not touch `index.html` unless asked.
 
 ## Reusable pieces (do not rewrite)

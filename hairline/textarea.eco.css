@@ -1,0 +1,12 @@
+/* ECO skin for the input figure and its bench. The figure only marks its parts with data-part; this file paints them from tokens. */
+:root, :root[data-theme] { --ground: var(--color-background-primary, #ffffff); --ink: var(--color-text-primary, #000000); --muted: var(--color-surface-50, #737373); --line: var(--color-border-primary, #e5e5e5); }
+body { font-family: 'Breuer Condensed', Arial, sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.tag, .label, output, button, #rules { font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase; }
+button, .plate { border-radius: 0; }
+input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
+
+[data-hairline] {
+  --hl-plate: var(--color-background-primary, #ffffff);
+[data-hairline] [data-part="cursor"], [data-hairline] [data-part="label"], [data-hairline] [data-part="ink"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="ph"], [data-hairline] [data-part="hint"] { fill: var(--color-surface-50, #737373); } /* placeholder and hint text */
+[data-hairline] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field: a faint shade, the edges carry the depth */
