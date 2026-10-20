@@ -69,3 +69,10 @@
 [data-hairline] [data-part="thumb"] { fill: var(--color-surface-100, #000000); }
 [data-hairline] [data-part="halo"] { fill: none; }
 [data-hairline] [data-part="halo"][data-hover] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+
+/* button group figure: label black, selected/hovered top = black-12 (shown by data-show) */
+[data-hairline] [data-part="bg-label"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="bg-tint"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); opacity: 0; transition: opacity var(--duration-fast-2, 150ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
+[data-hairline] [data-part="bg-tint"][data-show] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="bg-tint"] { transition: none; } }
+.ds-card__visual--hairline [data-hairline-card="button-group"] { transform: translateY(-3px); }
