@@ -33,3 +33,4 @@
 [data-hairline="radio"] [data-part="track-wall"][data-hover] { fill: color-mix(in srgb, var(--color-surface-15, #d9d9d9), #fff 40%); }
 [data-hairline="radio"] [data-part="mark"] { fill: var(--color-surface-100, #000000); }
 .ds-card__visual--hairline [data-hairline-card="radio"] { transform: translateY(12px); }
+[data-hairline="radio"] [data-part="rim"] { stroke: var(--color-surface-50, #737373); }
