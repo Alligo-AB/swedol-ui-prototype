@@ -899,7 +899,7 @@ var HL = (() => {
 </script>
 <script type="module" id="hl-figure">
 /**
- * Select: a field with its label bar and a chevron, and one menu plate of three rows that unfolds under it. The pointer
+ * Select: a field with its label and a chevron, and one menu plate of three rows that unfolds under it. The pointer
  * over the field lights its edge and sinks it; a press opens the menu and turns the chevron; the pointer over a
  * row lifts it; a press chooses it, the menu folds and the field shows the choice. A drawn cursor follows the
  * pointer and rests above the field's chevron. The slider is how high the menu rows stand.
@@ -910,9 +910,49 @@ const {
 } = HL;
 
 const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 10, FY1 = 34, FH = 3, RY0 = 38, RH = 14, N = 3;
-const BARS = [30, 38, 24]; // label-bar length per row; the field's own bar is 22 empty, then the chosen row's
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 const NAMES = ["Sweden", "Norway", "Finland"];
+const HOLD = "Choose an option";
+const G = {
+  P: [[[0, 0], [1.6, 0], [1.6, 3], [3.8, 3], [5, 4.2], [5, 6.8], [3.8, 8], [0, 8]], [[1.6, 4.5], [3, 4.5], [3.4, 4.9], [3.4, 6.1], [3, 6.5], [1.6, 6.5]]],
+  R: [[[0, 0], [1.6, 0], [1.6, 3], [2.6, 3], [3.4, 0], [5, 0], [4.2, 3.3], [5, 4.2], [5, 6.8], [3.8, 8], [0, 8]], [[1.6, 4.5], [3, 4.5], [3.4, 4.9], [3.4, 6.1], [3, 6.5], [1.6, 6.5]]],
+  I: [[[0, 0], [1.6, 0], [1.6, 8], [0, 8]]],
+  M: [[[0, 0], [1.6, 0], [1.6, 5], [3, 2], [4.4, 5], [4.4, 0], [6, 0], [6, 8], [4.2, 8], [3, 5.2], [1.8, 8], [0, 8]]],
+  A: [[[0, 0], [1.6, 0], [1.9, 2.2], [3.1, 2.2], [3.4, 0], [5, 0], [3.6, 8], [1.4, 8]], [[2.2, 3.6], [2.8, 3.6], [2.5, 5.6]]],
+  Y: [[[0, 8], [1.7, 8], [2.5, 5], [3.3, 8], [5, 8], [3.3, 3.6], [3.3, 0], [1.7, 0], [1.7, 3.6]]],
+  S: [[[0, 1.2], [1.2, 0], [3.8, 0], [5, 1.2], [5, 3.6], [3.8, 4.4], [1.6, 4.9], [1.6, 6.5], [5, 6.5], [5, 8], [1.2, 8], [0, 6.8], [0, 4.2], [1.2, 3.4], [3.4, 2.9], [3.4, 1.5], [0, 1.5]]],
+  E: [[[0, 0], [5, 0], [5, 1.5], [1.6, 1.5], [1.6, 3.3], [4.4, 3.3], [4.4, 4.7], [1.6, 4.7], [1.6, 6.5], [5, 6.5], [5, 8], [0, 8]]],
+  C: [[[0, 1.2], [1.2, 0], [3.8, 0], [5, 1.2], [5, 2.6], [3.4, 2.6], [3.4, 1.5], [1.6, 1.5], [1.6, 6.5], [3.4, 6.5], [3.4, 5.4], [5, 5.4], [5, 6.8], [3.8, 8], [1.2, 8], [0, 6.8]]],
+  O: [[[0, 1.2], [1.2, 0], [3.8, 0], [5, 1.2], [5, 6.8], [3.8, 8], [1.2, 8], [0, 6.8]], [[1.6, 1.5], [3.4, 1.5], [3.4, 6.5], [1.6, 6.5]]],
+  N: [[[0, 0], [1.6, 0], [1.6, 4.8], [3.4, 0], [5, 0], [5, 8], [3.4, 8], [3.4, 3.2], [1.6, 8], [0, 8]]],
+  D: [[[0, 0], [3.8, 0], [5, 1.2], [5, 6.8], [3.8, 8], [0, 8]], [[1.6, 1.5], [3.2, 1.5], [3.4, 1.7], [3.4, 6.3], [3.2, 6.5], [1.6, 6.5]]],
+  H: [[[0, 0], [1.6, 0], [1.6, 3.3], [3.4, 3.3], [3.4, 0], [5, 0], [5, 8], [3.4, 8], [3.4, 4.7], [1.6, 4.7], [1.6, 8], [0, 8]]],
+  T: [[[1.7, 0], [3.3, 0], [3.3, 6.5], [5, 6.5], [5, 8], [0, 8], [0, 6.5], [1.7, 6.5]]],
+  W: [[[0, 8], [1.6, 8], [1.6, 3], [3, 6], [4.4, 3], [4.4, 8], [6, 8], [6, 0], [4.2, 0], [3, 2.8], [1.8, 0], [0, 0]]],
+  F: [[[0, 0], [1.6, 0], [1.6, 3.3], [4.4, 3.3], [4.4, 4.7], [1.6, 4.7], [1.6, 6.5], [5, 6.5], [5, 8], [0, 8]]],
+  L: [[[0, 0], [5, 0], [5, 1.5], [1.6, 1.5], [1.6, 8], [0, 8]]],
+  " ": [],
+};
+const GW = (ch) => (ch === " " ? 2.4 : Math.max(...G[ch][0].map((q) => q[0])));
+const U = 0.55;
+/** A string as flat world outlines starting at (x0, ymid): condensed heavy capitals, counters wound the other way. */
+function label(text, x0, ym) {
+  let x = x0;
+  const out = [];
+  for (const ch of text) {
+    G[ch].forEach((o, k) => { const q = o.map(([u, v]) => [x + u * U, ym + (4 - v) * U]); out.push(k ? q.reverse() : q); });
+    x += (GW(ch) + 1.2) * U;
+  }
+  return out;
+}
+/** The circled check, flat: ring (a hole inside) plus a tick, centred on (cx, cy). */
+function check(cx, cy) {
+  const n = 16, ring = (r, d) => Array.from({ length: n }, (_, i) => [cx + r * Math.cos((i / n) * 2 * Math.PI * d), cy + r * Math.sin((i / n) * 2 * Math.PI * d)]);
+  const T = [[-1.6, 0.2], [-0.9, -0.5], [-0.3, 0.3], [1.5, -1.6], [2.2, -0.9], [-0.3, 1.7]].map(([u, v]) => [cx + u * 1.3, cy + v * 1.3]);
+  return [ring(4.4, 1), ring(3.5, -1), T];
+}
+const flat = (P, outs, z) => outs.map((o) => poly(o.map(([x, y]) => P(x, y, z)))).join("");
+
 
 function mount({ stage, svg, read }, value) {
   const bag = disposer();
@@ -933,19 +973,22 @@ function mount({ stage, svg, read }, value) {
     svg.lastChild.firstChild.setAttribute("class", "sil");
   }
 
+  const holdT = label(HOLD.toUpperCase(), FX0 + 8, 22);
+  const nameT = NAMES.map((n) => (ym) => label(n.toUpperCase(), FX0 + 8, ym));
   // the field, its label bar and its chevron
   const [fOut, fIn] = rings(FX0, FY0, FX1, FY1, 0, 1.2);
   const field = solid(mk("g", {}, svg));
   const fbar = mk("path", { class: "dot", "data-part": "bar" }, svg);
   const chev = mk("path", { class: "dot", "data-part": "chev" }, svg);
-  // the menu: one plate holding three rows, set apart by hairlines; a hovered row gets a tint, a label bar each
+  // the menu: one plate holding three rows, set apart by hairlines; a hovered row gets a tint, its name; the chosen one carries a check
   const [mOut, mIn] = rings(FX0, RY0, FX1, RY0 + N * RH, 0, 1.2);
   const menu = solid(mk("g", {}, svg));
   const rows = Array.from({ length: N }, (_, i) => ({
     y0: RY0 + i * RH,
     tint: mk("path", { class: "dot", "data-part": "rowhi" }, svg),
     line: i ? mk("path", { class: "nf lo" }, svg) : null,
-    bar: mk("path", { class: "dot", "data-part": "bar" }, svg),
+    bar: mk("path", { class: "dot", "data-part": "bar-on" }, svg),
+    tick: mk("path", { class: "dot", "data-part": "chev", "fill-rule": "nonzero" }, svg),
   }));
   const quad = (x0, y0, x1, y1, z) => poly([P(x0, y0, z), P(x1, y0, z), P(x1, y1, z), P(x0, y1, z)]);
 
@@ -958,11 +1001,10 @@ function mount({ stage, svg, read }, value) {
     if (force || kf !== lastF) {
       lastF = kf;
       put(field, prism(P, front, fOut, fIn, PT, zf));
-      const w = sel < 0 ? 22 : BARS[sel];
-      fbar.setAttribute("d", quad(FX0 + 8, 20, FX0 + 8 + w, 24, zf + 0.1));
+      fbar.setAttribute("d", flat(P, sel < 0 ? holdT : nameT[sel](22), zf + 0.1));
       fbar.setAttribute("data-part", sel < 0 ? "bar" : "bar-on");
       const a = lerp(25, 19, c), b = lerp(19, 25, c);
-      chev.setAttribute("d", poly([P(72, b, zf + 0.1), P(80, b, zf + 0.1), P(76, a, zf + 0.1)]));
+      chev.setAttribute("d", poly([P(74, b, zf + 0.1), P(82, b, zf + 0.1), P(78, a, zf + 0.1)]));
     }
     const z1 = PT + m * (lift + 1), key = z1.toFixed(2) + sel + act;
     if (!force && key === lastM) return;
@@ -970,14 +1012,15 @@ function mount({ stage, svg, read }, value) {
     const show = m > 0.02;
     menu.g.setAttribute("display", show ? "inline" : "none");
     rows.forEach((r, i) => {
-      for (const e of [r.tint, r.line, r.bar]) e?.setAttribute("display", show ? "inline" : "none");
+      for (const e of [r.tint, r.line, r.bar, r.tick]) e?.setAttribute("display", show ? "inline" : "none");
       if (!show) return;
       if (i === 0) put(menu, prism(P, front, mOut, mIn, PT, z1));
       r.tint.setAttribute("display", show && act === i + 1 ? "inline" : "none");
       r.tint.setAttribute("d", quad(FX0 + 1.2, r.y0 + 0.6, FX1 - 1.2, r.y0 + RH - 0.6, z1 + 0.1));
       r.line?.setAttribute("d", polyline([P(FX0 + 4, r.y0, z1 + 0.1), P(FX1 - 4, r.y0, z1 + 0.1)]));
-      r.bar.setAttribute("d", quad(FX0 + 8, r.y0 + 5, FX0 + 8 + BARS[i], r.y0 + 9, z1 + 0.2));
-      r.bar.setAttribute("data-part", i === sel ? "bar-on" : "bar");
+      r.bar.setAttribute("d", flat(P, nameT[i](r.y0 + RH / 2), z1 + 0.2));
+      r.tick.setAttribute("display", i === sel ? "inline" : "none");
+      r.tick.setAttribute("d", flat(P, check(FX1 - 8, r.y0 + RH / 2), z1 + 0.2));
     });
   }
 
