@@ -26,3 +26,7 @@
 .ds-card__visual--hairline [data-hairline-card="switch"] { transform: translateY(-5px); }
 
 .ds-card__visual--hairline { position: relative; }
+
+/* input figure: label/value black, placeholder and hint grey */
+[data-hairline] [data-part="ph"], [data-hairline] [data-part="hint"] { fill: var(--color-surface-50, #737373); }
+.ds-card__visual--hairline [data-hairline-card="input"] { transform: translateY(-11px); }
