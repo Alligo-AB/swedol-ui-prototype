@@ -1030,7 +1030,7 @@ function mount({ stage, svg, read }, value) {
 
   const setOpen = (v, now) => { open = v; o.t = v; closedAt = now; if (v) { sg.setAttribute("data-open", ""); mg.setAttribute("data-open", ""); } else { sg.removeAttribute("data-open"); mg.removeAttribute("data-open"); } };
   let ghost = false, gt = 0, gdone = true;
-  const press = (a) => { setOpen(0, performance.now()); pr.x = 1; pr.t = 0; set(-1); say(); A.wake(); };
+  const press = (a) => { setOpen(0, performance.now()); pr.x = 1; pr.t = 0; say(); A.wake(); };
   const A = register(stage, (dt, now) => {
     let m = false;
     if (ghost && act >= 0 && !gdone) { m = true; if (now - gt > 250) { gdone = true; press(act); } }
@@ -1055,7 +1055,7 @@ function mount({ stage, svg, read }, value) {
       btns.forEach((b, i) => { b.hv.t = i === a ? 1 : 0; if (b.ink) b.cap.top.setAttribute("class", i === a ? "dot m" : "dot"); else b.cap.sil.classList.toggle("hi", i === a); });
       say();
     }
-    if (p && a >= 0) { ax.t = p[0]; ay.t = p[1]; } else { ax.t = rest[0]; ay.t = rest[1]; }
+    if (p) { ax.t = p[0]; ay.t = p[1]; } else { ax.t = rest[0]; ay.t = rest[1]; }
     A.wake();
   }
   bag.add(pointer(stage, {
@@ -1075,7 +1075,7 @@ hairline({
   means: "A dialog panel floating over a dimmed slab with Cancel and Delete: a press on a button closes the modal and it opens again.",
   rules: [1, 4, 8, 9],
   range: [6, 12, 16],
-  tour: [[200, 180], null, [150, 180], null],
+  tour: [[197, 157], null, [133, 129], null],
   mount,
 });
 </script>
