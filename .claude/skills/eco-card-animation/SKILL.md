@@ -27,8 +27,9 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has one
    - archive the old visual to `eco-design-system/card-visuals-archive/<component>.html` (markup + where it goes + how to switch back) and add a line to that folder's README;
    - replace the card's `ds-card__visual` with `<div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="<name>" data-play data-src="../hairline/<name>.js"></div></div>` (`data-play` runs the tour while the card is hovered or keyboard-focused, no play button; `kernel.js`, `embed.js`, `hairline-card.css` are already on the page);
    - centre it: the stage is 300 px wide, 5:4, `translateY(-16px)`; the figures' drawn extents differ, so add `.ds-card__visual--hairline [data-hairline-card="<name>"] { transform: translateY(Npx); }` in `hairline-card.css` until the content rows are centred (the check script prints them; Switch uses −5 px).
-6. **Verify**: `npx serve . -l 4173` (repo root; `file://` does not work for cards), then `node hairline/tools/card-check.mjs <component> <outPrefix>` and read the PNGs: rest, hover, play (4 s into the tour). Plus the working routine in `CLAUDE.md` (mobile width, real mouse). State what was not tested.
-7. **Sweep**: update `hairline/README.md` ("På korten"), this skill if something new was learned, the memory `project_hairline_card_animations.md`, and mention changed skills. Do not touch `index.html` unless asked.
+6. **Show it**: right after step 4, serve the repo (port ≠ 4173), `navigate` the built-in browser to `/hairline/hairline-<name>.eco` and `show_pane preview`, so the user sees it and can adjust at once (SendUserFile render does not work for it).
+7. **Verify**: `npx serve . -l 4173` (repo root; `file://` does not work for cards), then `node hairline/tools/card-check.mjs <component> <outPrefix>` and read the PNGs: rest, hover, play (4 s into the tour). Plus the working routine in `CLAUDE.md` (mobile width, real mouse). State what was not tested.
+8. **Sweep**: update `hairline/README.md` ("På korten"), this skill if something new was learned, the memory `project_hairline_card_animations.md`, and mention changed skills. Do not touch `index.html` unless asked.
 
 ## Reusable pieces (do not rewrite)
 
