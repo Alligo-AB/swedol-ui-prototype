@@ -1,0 +1,32 @@
+/* ECO component CSS: breadcrumb. Skill: eco-breadcrumb. Link it, do not copy it: <link rel="stylesheet" href="/components/css/breadcrumb.css">
+   Needs --px-page (16/32/40px per breakpoint, defined by the page). Tokens only. Mobile-first (desktop from 769px). */
+.breadcrumb { padding: 0 var(--px-page); }
+.breadcrumb__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 16px 0; }
+.breadcrumb-item {
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--color-border-action-3);
+  padding: 6px 7px; background: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+  font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 12px; letter-spacing: 0.24px;
+  color: var(--color-text-tertiary);
+  font-feature-settings: 'ss02' 1, 'ss03' 1;
+  transition: color var(--duration-fast-3) var(--ease-standard);
+}
+.breadcrumb-item:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary); text-decoration: underline; }
+.breadcrumb-item--active { font-weight: 600; color: var(--color-text-primary); cursor: default; }
+.breadcrumb-item--active:is(:hover, [data-state="hover"]) { color: var(--color-text-primary); text-decoration: none; }
+.breadcrumb-sep {
+  flex-shrink: 0; width: 4px; height: 24px; display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-tertiary);
+  font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0.28px;
+}
+body.keyboard-nav .breadcrumb-item:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+
+@media (min-width: 769px) {                       /* md: Desktop Small */
+  .breadcrumb { padding-bottom: 8px; }
+  .breadcrumb-item { padding: 9px 10px; font-size: 14px; line-height: 14px; letter-spacing: 0.28px; }
+  .breadcrumb-sep { height: 32px; }
+}
+@media (min-width: 1024px) { .breadcrumb { padding-bottom: 16px; } }   /* lg + xl */
+
+/* Built-in spacing: the section that follows zeroes its top padding */
+.breadcrumb + .main-content, .breadcrumb + .section, .breadcrumb + .section--first { padding-top: 0; }

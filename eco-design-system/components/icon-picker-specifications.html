@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Icon picker: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-cap { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 600; }
+    .ip-measure { display: block; width: 320px; }   /* demo: a fixed width for the static panel */
+    .ip-demo { position: static; width: 320px; max-width: 100%; box-shadow: var(--shadow-elevation-b-80); }   /* inline copy of the open panel; set again inline because icon-picker.js adds its own rules after this block */
+    .ds-callout__art { width: 100%; max-width: 320px; padding-right: 0; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="icon-picker.html" class="breadcrumb-item">Icon picker</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component exists. The pattern was designed in the repo (first used on the banner page).">Not verified with Figma</span></div>
+    <h1 class="ds-title">Icon picker</h1>
+    <p class="ds-lead">An icon picker is a text field that holds a <strong>Material Symbols name</strong>. A panel opens on top of it with instant search over all icons, Recent and Popular.</p><p class="ds-lead">Tokens, dimensions, states and requirements. There is no Figma component: values come from the live token package and the specification skill.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Icon picker"><a class="tab" href="icon-picker.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="icon-picker-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="icon-picker-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Open points:</strong> no Figma component. The dimensions were decided in code. Colors, shadow and spacing in the picker are tokens only.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Panel</th><td>Top of the field, same width, 12px padding</td></tr><tr><th scope="row">Search box</th><td>42px high</td></tr><tr><th scope="row">Icon cell</th><td>40px</td></tr><tr><th scope="row">Grid height</th><td>176px (it scrolls)</td></tr><tr><th scope="row">Results</th><td>Up to 60</td></tr></tbody></table></div><p class="ds-desc ds-note">The same on every breakpoint.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Padding of the open panel. The shaded area is the 12px padding; the lines show its value. The panel is a static copy here.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Padding of the icon picker panel: 12 on every side"><div class="measure__item"><span class="measure__name">1 · Panel</span><div class="measure__obj"><span class="ip-measure" id="ip-meas"></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">The panel at true size (1:1). The numbers are read from the component.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Panel padding</th><td>12px on every side</td></tr><tr><th scope="row">Gap between the parts</th><td>12px</td></tr><tr><th scope="row">Search box</th><td>42px high, full width, 1px border</td></tr><tr><th scope="row">Icon cell</th><td>40px high; the grid fits as many 40px columns as the width allows</td></tr><tr><th scope="row">Gap between cells</th><td>4px</td></tr><tr><th scope="row">Grid</th><td>Up to 176px high, then it scrolls</td></tr><tr><th scope="row">Panel position</th><td>Top and sides 12px outside the field (<code>top: -12px; left: -12px; right: -12px</code>)</td></tr><tr><th scope="row">Corners</th><td>Square</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same padding and gaps as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Panel padding and gap between the parts</th><td><code>space-12</code></td></tr><tr><th scope="row">Gap between icon cells</th><td><code>space-4</code></td></tr><tr><th scope="row">Search box padding</th><td><code>space-8</code> above and below, <code>space-12</code> left and right</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">The field is an Input and has the Input states. The panel and its icons have the states below. Hover and focus come from the browser and are described here.</p><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Look</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Search text</th><td>16/24</td><td>inherited</td><td>Regular</td></tr><tr><th scope="row">Group label</th><td>12/18</td><td>0.24px</td><td>600</td></tr><tr><th scope="row">Icon</th><td>24px Material Symbols, Outlined, Fill 0, Weight 300, Grade 0</td><td>—</td><td>—</td></tr><tr><th scope="row">No match message</th><td>14/20</td><td>inherited</td><td>Regular</td></tr></tbody></table></div><p class="ds-desc ds-note">The sizes are set in the script’s CSS in pixels. <strong>Open point:</strong> bind them to type tokens if the picker moves into a design token pass.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Anchor</th><td><code>ip-wrap</code></td><td>Added to the <code>.input-wrap</code> of the field, or to a wrapper made around a bare input.</td></tr><tr><th scope="row">Panel</th><td><code>ip-panel</code></td><td>Hidden until the field opens. <code>ip-mouse</code> when opened with the mouse.</td></tr><tr><th scope="row">Search box</th><td><code>ip-search</code></td><td>A text input with <code>aria-label="Search icons"</code>.</td></tr><tr><th scope="row">Group label</th><td><code>ip-label</code></td><td>Recent, Popular or Results.</td></tr><tr><th scope="row">Grid and cell</th><td><code>ip-grid</code>, <code>ip-btn</code></td><td><code>aria-pressed</code> on the picked icon.</td></tr><tr><th scope="row">No match</th><td><code>ip-empty</code></td><td>The message under Results.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><p class="ds-desc">There is one type.</p><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">The panel has the width of the field.</p><h3 class="ds-h3 ds-group">Data and loading</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Detail</th></tr></thead><tbody><tr><th scope="row">Script</th><td><code>components/icon-picker/icon-picker.js</code>. It loads <code>icon-picker-data.js</code> (all names and search tags, sorted by popularity) from its own folder 0.5 s after page load. Never add the data file by hand.</td></tr><tr><th scope="row">Data size</th><td>1.4 MB, a copy of the Google Fonts Material Symbols metadata (August 2026). Fine for a prototype; serve a smaller list or search on the server in production.</td></tr><tr><th scope="row">Refresh</th><td>Download <code>https://fonts.google.com/metadata/icons?key=material_symbols&amp;incomplete=true</code> and rewrite the file as <code>window.ECO_ICONS=[[name,"tags"],…]</code> sorted by <code>popularity</code>.</td></tr><tr><th scope="row">Font</th><td>The page needs the Material Symbols Outlined font (in both page templates).</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><p class="ds-desc ds-note">None. The panel opens and closes at once, with no transition and no animation.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Moment</th><th scope="col">What happens</th></tr></thead><tbody><tr><th scope="row">Click or Tab into the field</th><td>A panel opens <strong>on top of the field</strong> (same width, 12px padding). The search box comes first and has focus.</td></tr><tr><th scope="row">Search box empty</th><td><strong>Recent</strong> (the last 8 picks, kept in <code>localStorage</code> and shared by all pages) and <strong>Popular</strong> (the top 60).</td></tr><tr><th scope="row">Typing</th><td>Instant search over all icons. Ranked: name starts with, then a name word starts with, then a tag word starts with; each group by popularity. Up to 60 shown; the header says <code>Results (n)</code>. No match: “No icons match …”.</td></tr><tr><th scope="row">Click an icon</th><td>The name goes into the field, an <code>input</code> event fires, the panel closes and focus returns to the field.</td></tr><tr><th scope="row">Esc, click outside</th><td>Closes without changing the value.</td></tr><tr><th scope="row">Focus ring on the search box</th><td>Hidden when the panel was opened with the mouse, shown when opened with Tab.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Field</th><td>A visible <code>label</code> with <code>for</code> and <code>id</code>, as for every Input.</td></tr><tr><th scope="row">Search box</th><td><code>aria-label="Search icons"</code>.</td></tr><tr><th scope="row">Icons</th><td>Real <code>button</code> elements named by the icon name (<code>aria-label</code> and <code>title</code>), with <code>aria-pressed</code> on the picked one. The glyph is <code>aria-hidden="true"</code>.</td></tr><tr><th scope="row">Focus</th><td>2px ring <code>border-focus</code> on the search box and the icons on keyboard focus (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Dismissal</th><td>Esc closes the panel and keeps the value.</td></tr><tr><th scope="row">Open point</th><td>The panel is not announced as a dialog or a combobox listbox. <strong>Open point:</strong> add the roles if the picker is used outside back-office forms.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  /* A static, non-interactive copy of the open panel, built from the picker's own classes (the script injects their CSS) */
+  function icoBtn(n, on) { return '<button type="button" class="ip-btn" tabindex="-1" aria-pressed="' + on + '" aria-label="' + n + '"><span class="material-symbols-outlined" aria-hidden="true">' + n + '</span></button>'; }
+  function staticPanel(extra) {
+    var rec = ['local_shipping', 'store', 'info', 'star'], pop = ['home', 'search', 'settings', 'check_circle', 'close', 'menu', 'person', 'favorite'];
+    return '<div class="ip-panel' + (extra || '') + '" style="position:static;display:flex;width:100%;max-width:320px" inert><input class="ip-search" type="text" placeholder="Search icons" aria-label="Search icons" tabindex="-1" /><div style="display:flex;flex-direction:column;gap:var(--dimension-spacing-space-12,12px)">' +
+      '<div class="ip-label">Recent</div><div class="ip-grid">' + rec.map(function (n, i) { return icoBtn(n, i === 0); }).join('') + '</div><div class="ip-label">Popular</div><div class="ip-grid">' + pop.map(function (n) { return icoBtn(n, false); }).join('') + '</div></div></div>';
+  }
+  function txt(el) { return function () { var r = document.createRange(); r.selectNodeContents(el); return r.getBoundingClientRect(); }; }
+
+  $('#ip-meas').insertAdjacentHTML('beforeend', staticPanel(' measure__subject'));
+  var tb = $('#matrix tbody');
+  [['Field, closed', 'Input', 'The Input field with the icon name. States as in <a class="inline-link inline-link--small" href="input-specifications.html#states">Input</a>.', null],
+   ['Panel, open', 'Panel', 'White <code>surface-raised-primary</code>, <code>elevation-b-80</code> shadow, on top of the field.', null],
+   ['Icon cell, enabled', 'Icon', 'Transparent, 1px transparent border, <code>icon-primary</code> glyph.', [false]],
+   ['Icon cell, hover', 'Icon', 'Fill <code>surface-navigation-hover</code>. Hover an icon to see it.', null],
+   ['Icon cell, picked', 'Icon', '1px <code>border-selected</code> frame (<code>aria-pressed="true"</code>).', [true]],
+   ['Icon cell, keyboard focus', 'Icon', '2px <code>border-focus</code> ring, drawn inside the cell. Press Tab to see it.', null],
+   ['Search box, focus', 'Search', 'Border <code>border-selected</code>; the ring (2px, 2px offset) shows when the panel was opened with Tab, not with the mouse.', null],
+   ['No match', 'Results', '“No icons match …” in <code>body-sm</code>.', null]].forEach(function (r) {
+    var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+    var p = document.createElement('td'); p.innerHTML = r[1]; tr.appendChild(p);
+    var d = document.createElement('td'); d.innerHTML = r[2]; if (r[3]) { var w = document.createElement('span'); w.style.cssText = 'display:inline-block;width:40px;margin-right:12px;vertical-align:middle'; w.innerHTML = icoBtn('local_shipping', r[3][0]); d.insertBefore(w, d.firstChild); } tr.appendChild(d); tb.appendChild(tr);
+  });
+  DK.tokenTable($('#tok-table tbody'), [['Panel', 'Fill', 'surface-raised-primary'], ['Panel', 'Shadow', 'shadow-elevation-b-80'], ['Search box', 'Fill', 'background-primary'], ['Search box', 'Border', 'border-input-default'], ['Search box', 'Border, focus', 'border-selected'], ['Search box', 'Ring', 'border-focus'], ['Icon', 'Glyph', 'icon-primary'], ['Icon', 'Hover fill', 'surface-navigation-hover'], ['Icon', 'Picked frame', 'border-selected'], ['Icon', 'Focus ring', 'border-focus']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

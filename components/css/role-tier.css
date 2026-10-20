@@ -1,0 +1,68 @@
+/* ECO component CSS: role tier card. Skill: eco-role-tier-card. Link it, do not copy it: <link rel="stylesheet" href="/components/css/role-tier.css">
+   Also link badge.css (the badge in the card). Needs the Material Symbols Outlined font. Tokens only, except one flagged value: no token exists for the 12% white line on the dark card (rgba(255, 255, 255, 0.12), kept from feature-comparison-roles.html). Mobile-first (desktop from 769px). */
+.role-tier-pair { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.role-tier-pair + .role-tier-pair { margin-top: 24px; }
+@media (min-width: 769px) { .role-tier-pair { grid-template-columns: 1fr 1fr; } .role-tier-pair + .role-tier-pair { margin-top: 32px; } }
+
+.role-tier { display: flex; flex-direction: column; border: 1px solid var(--color-border-primary); background: var(--color-surface-raised-primary); }
+@media (min-width: 640px) { .role-tier { flex-direction: row; } }
+.role-tier--dark { background: var(--color-surface-100); border-color: var(--color-surface-90); }
+
+.role-tier__info { flex: 1 1 55%; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 24px; }
+@media (min-width: 769px) { .role-tier__info { padding: 32px; } }
+.role-tier__badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.role-tier__icon {
+  font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; user-select: none;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; font-size: 24px; color: var(--color-text-primary);
+}
+.role-tier--dark .role-tier__icon { color: var(--color-accent-default); }
+
+/* title-lg */
+.role-tier__name { font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: 0; color: var(--color-text-primary); }
+@media (min-width: 769px) { .role-tier__name { font-size: 24px; line-height: 28px; } }
+.role-tier--dark .role-tier__name { color: var(--color-accent-default); }
+/* body-md */
+.role-tier__desc { font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+@media (min-width: 769px) { .role-tier__desc { font-size: 17px; line-height: 24px; } }
+.role-tier--dark .role-tier__desc { color: var(--color-text-secondary-inverted); }
+
+/* Action link, Medium, Bold, 24px icon */
+.role-tier__link {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 8px;
+  font-size: 16px; font-weight: 600; line-height: 24px; letter-spacing: 0.32px; text-decoration: none; cursor: pointer;
+  color: var(--color-text-action-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+  transition: color var(--duration-fast-3) var(--ease-standard);
+}
+@media (min-width: 769px) { .role-tier__link { font-size: 17px; } }
+.role-tier__link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-hover); }
+.role-tier__link:is(:hover, [data-state="hover"]) .role-tier__link-label { text-decoration: underline; }
+.role-tier__link-icon { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; line-height: 1; text-transform: none; font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+.role-tier--dark .role-tier__link { color: var(--color-text-action-primary-inverted); }
+.role-tier--dark .role-tier__link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-inverted-hover); }
+body.keyboard-nav .role-tier__link:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+
+.role-tier__features { flex: 1 1 45%; display: flex; flex-direction: column; border-top: 1px solid var(--color-border-primary); }
+@media (min-width: 640px) { .role-tier__features { border-top: none; border-left: 1px solid var(--color-border-primary); } }
+.role-tier--dark .role-tier__features { border-color: rgba(255, 255, 255, 0.12); }
+/* body-sm */
+.role-tier__feature {
+  flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px; min-height: 56px;
+  background: var(--color-surface-05); font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-primary);
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+}
+.role-tier__feature + .role-tier__feature { border-top: 1px solid var(--color-border-primary); }
+.role-tier--dark .role-tier__feature { background: var(--color-surface-90); color: var(--color-text-primary-inverted); }
+.role-tier--dark .role-tier__feature + .role-tier__feature { border-top-color: rgba(255, 255, 255, 0.12); }
+
+/* Quick links: one small System-style link per role, above the cards (skill: eco-role-tier-card, "Quick links") */
+.role-quicklinks { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 24px; }
+.role-quicklink {
+  display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 6px 12px; box-sizing: border-box;
+  border: 1px solid var(--color-border-action-3); background: transparent; color: var(--color-text-primary);
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  font-size: 14px; font-weight: 600; line-height: 14px; letter-spacing: 0.56px; text-transform: uppercase;
+  transition: background var(--duration-fast-3) var(--ease-standard), border-color var(--duration-fast-3) var(--ease-standard);
+}
+.role-quicklink:is(:hover, [data-state="hover"]) { background: var(--color-surface-opacity-black-05); border-color: var(--color-border-dark); }
+.role-quicklink__icon { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; line-height: 1; text-transform: none; font-size: 16px; color: currentColor; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+body.keyboard-nav .role-quicklink:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }

@@ -1,0 +1,17 @@
+/* Eyebrow (small uppercase label above a page title) — one definition for every place that uses it.
+   Change the values here and the doc pages (docs.css) and the root index.html follow.
+   Style: alt-label-sm (eco-typography / tokens.json): 12/12, 0.48px mobile; 14/14, 0.56px from 769px; weight 600.
+   Typography has no CSS variables in the alligo-design-tokens CDN package, hence the local ones. */
+:root {
+  --eyebrow-size: 12px;
+  --eyebrow-line-height: 12px;
+  --eyebrow-letter-spacing: 0.48px;
+  --eyebrow-weight: 600;
+}
+@media (min-width: 769px) {
+  :root {
+    --eyebrow-size: 14px;
+    --eyebrow-line-height: 14px;
+    --eyebrow-letter-spacing: 0.56px;
+  }
+}

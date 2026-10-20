@@ -1,0 +1,70 @@
+/* ECO component CSS: textarea. Shared by the docs page (eco-design-system/components/textarea.html) and every prototype/product page.
+   Skill: eco-textarea. Link it, do not copy it: <link rel="stylesheet" href="/components/css/textarea.css">
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only. */
+    /* ── Field: label + word count, text area, message ── */
+    .form-field { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .form-field__head { display: flex; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
+    .form-label {
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1;
+      font-size: 12px; font-weight: 600; line-height: 12px; letter-spacing: 0.48px; /* label-sm (mobile) */
+      text-transform: uppercase; color: var(--color-text-primary);
+    }
+    .form-count {
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.36px; /* body-sm */
+      color: var(--color-text-secondary);
+    }
+
+    /* Wrapper: carries the focus ring (2px, 3px outside the box) */
+    .input-wrap { position: relative; }
+    .input-wrap::after {
+      content: ''; position: absolute; inset: -3px; pointer-events: none; opacity: 0;
+      border: 2px solid var(--color-border-focus);
+      transition: opacity var(--duration-fast-3) var(--ease-standard);
+    }
+    body.keyboard-nav .input-wrap:focus-within::after,
+    .input-wrap[data-state="focus"]::after { opacity: 1; }
+
+    .form-textarea {
+      display: block; width: 100%; box-sizing: border-box; height: 66px; min-height: 66px; /* 66px: literal, no token */
+      padding: var(--dimension-spacing-space-12);
+      border: 1px solid var(--color-border-input-default); border-radius: 0; outline: 0; resize: vertical;
+      background: var(--color-surface-raised-primary); color: var(--color-text-primary);
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px; /* body-md (mobile) */
+    }
+    .form-textarea::placeholder { color: var(--color-text-tertiary); }
+
+    /* States (later rules win: hover, active, focus, then error / success, then disabled) */
+    .form-textarea:is(:hover, [data-state="hover"]) { border-color: var(--color-border-hover); }
+    .form-textarea:is(:focus, [data-state="active"]) { border-color: var(--color-border-selected); }  /* Active: the field is being used (focus). A value alone does not select it. */
+    .form-textarea:focus::placeholder { color: var(--color-text-secondary); }
+    .form-textarea.form-textarea--error { border-color: var(--color-border-danger-default); }
+    .form-textarea.form-textarea--success { border-color: var(--color-border-success-default); }
+    .form-textarea:disabled {
+      background: var(--color-surface-raised-secondary); border-color: var(--color-border-primary);
+      color: var(--color-text-disabled); cursor: not-allowed; resize: none;
+    }
+    .form-textarea:disabled::placeholder { color: var(--color-text-disabled); }
+    .form-field:has(.form-textarea:disabled) :is(.form-label, .form-count) { color: var(--color-surface-60); }
+
+    /* Message (Material Symbols icon for the error state) */
+    .input-icon {
+      flex-shrink: 0; width: 20px; height: 20px; font-family: 'Material Symbols Outlined'; font-size: 20px; line-height: 1;
+      font-weight: normal; font-style: normal; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; color: inherit; user-select: none;
+    }
+    .form-helper {
+      display: flex; align-items: center; gap: var(--dimension-spacing-space-4);
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); /* body-sm */
+    }
+    .form-helper--error { color: var(--color-text-danger-default); }
+    .form-helper--success { color: var(--color-text-success-default); }
+    .form-helper--disabled { color: var(--color-text-disabled); }
+
+    /* Desktop (769px and up) */
+    @media (min-width: 769px) {
+      .form-label { font-size: 16px; line-height: 16px; }   /* label-md */
+      .form-textarea { font-size: 17px; line-height: 24px; } /* body-md */
+    }

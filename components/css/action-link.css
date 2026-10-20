@@ -1,0 +1,60 @@
+/* ECO component CSS: action link. Skill: eco-action-link. Link it, do not copy it: <link rel="stylesheet" href="/components/css/action-link.css">
+   Needs the Material Symbols Outlined font. Tokens only. Mobile-first (desktop from 769px). */
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;                                          /* Large */
+  text-decoration: none;
+  color: var(--color-text-action-primary);
+  font-family: 'Breuer Condensed', Arial, sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  transition: color var(--duration-fast-3) var(--ease-standard);
+}
+/* Hit area: at least 24px high (WCAG 2.5.8) without changing the drawn size. A Small link is 20px and a Medium link on mobile 22px, so an invisible layer grows the clickable area to 24px. Keep 8px between stacked links so the areas do not overlap. */
+.action-link { position: relative; }
+.action-link::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 100%; min-height: 24px; transform: translateY(-50%); }
+.action-link:is(:hover, [data-state="hover"]) { color: var(--color-text-action-secondary-hover); }
+/* Underline sits on the text span only: text-decoration on the link itself would propagate to the (blockified) icon flex items and cannot be undone there */
+.action-link:is(:hover, [data-state="hover"]) .action-link__label { text-decoration: underline; }
+
+/* Icons never get the underline, only the link text (.action-link__label) */
+.action-link__icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none;
+  white-space: nowrap; flex-shrink: 0; text-decoration: none; user-select: none;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  font-size: 20px;
+}
+
+/* Sizes: mobile first, desktop from 769px */
+.action-link--large  { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.action-link--medium { gap: 4px; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.action-link--small  { gap: 4px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.action-link--large .action-link__icon { font-size: 24px; }
+@media (min-width: 769px) {
+  .action-link--large  { font-size: 20px; line-height: 28px; }
+  .action-link--medium { font-size: 17px; line-height: 24px; }
+}
+
+/* Weight modifiers: Regular 400 default, Medium 500, Bold 600. An action link is never italic. */
+.action-link--weight-medium { font-weight: 500; }
+.action-link--bold { font-weight: 600; }
+
+/* Inverted (on a dark surface) */
+.action-link--inverted { color: var(--color-text-action-primary-inverted); }
+.action-link--inverted:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-inverted-hover); }
+
+body.keyboard-nav .action-link:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+
+/* Group of action links. Stacked: one column, 8px between the links (the hit areas do not overlap). Divided: the links one after another on a row with a vertical divider (border-tertiary) between them, wrapping where the row is full.
+   The divider is a pseudo-element in the gap before each link, and the group clips whatever sits left of its edge, so a divider only ever appears BETWEEN two links on the same line, never at the start or the end of a line.
+   4px of padding (and the same negative margin) keep the 2px focus ring and the hit area from being clipped. The author chooses the layout; it does not change with the breakpoint. */
+.action-link-group, .action-link-group--stacked { display: flex; flex-direction: column; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
+.action-link-group--divided { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-32); overflow: hidden; padding: 4px; margin: -4px; }
+.action-link-group--divided > * { position: relative; }
+.action-link-group--divided > *::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(-1 * var(--dimension-spacing-space-16) - 0.5px); width: 1px; background: var(--color-border-tertiary); }
+
+/* An action link always has an icon. A link with no .action-link__icon is not styled: it falls back to the browser's default link, so the mistake shows. Use an inline link (inline-link--reverse for underline on hover only) in text. Keep this rule last. */
+.action-link:not(:has(.action-link__icon)) { all: revert; }
+.action-link:not(:has(.action-link__icon))::after { content: none; }

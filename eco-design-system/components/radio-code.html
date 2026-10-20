@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radio button: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/radio.css">
+  <link rel="stylesheet" href="../../components/css/checkbox.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix .form-radio-group { min-width: 200px; }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-col { display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 360px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .rd-fig { width: 100%; max-width: 320px; }
+    .rd-fig .form-radio-group, .rd-fig fieldset { margin: 0; padding: 0; border: 0; }
+    .rd-measure { display: inline-flex; }
+    .rd-cbgroup { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .rd-cbgroup legend { padding: 0; margin-bottom: var(--dimension-spacing-space-8); font-size: 12px; font-weight: 600; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; }
+    @media (min-width: 769px) { .rd-cbgroup legend { font-size: 16px; line-height: 16px; } }
+    .ds-callout__art { padding-right: 72px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="radio.html" class="breadcrumb-item">Radio button</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Radio button</h1>
+    <p class="ds-lead">A radio button lets the user choose <strong>exactly one</strong> of two or more mutually exclusive options. Choosing one clears the others in the group.</p><p class="ds-lead">How to add a radio button to a page. The file is <code>components/css/radio.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Radio button"><a class="tab" href="radio.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="radio-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="radio-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page. Never copy the rules into a page, and never draw the circle with an image.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/radio.css"&gt;</code>. Both templates already have it.</td></tr><tr><th scope="row">2. Markup</th><td>A <code>fieldset.form-radio-group</code> with a <code>legend</code>. Each option is a <code>label.form-radio-item</code> around an <code>input[type="radio"]</code> and a <code>span</code>.</td></tr><tr><th scope="row">3. Group</th><td>Give every radio in the group the same <code>name</code>, and preselect one with <code>checked</code>.</td></tr><tr><th scope="row">4. Size</th><td>Large is the default. Add <code>form-radio-item--sm</code> for Small.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="radio-button"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Radio button</h2><p class="ds-desc">Copy the markup you need. Hover and focus come from <code>:hover</code> and <code>:focus-visible</code>; the <code>[data-state]</code> selectors in the CSS exist only so the documentation can force a state.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>form-radio-group</code></th><td>The <code>fieldset</code>. Vertical by default.</td></tr><tr><th scope="row"><code>form-radio-item</code></th><td>The option label. Large.</td></tr><tr><th scope="row"><code>form-radio-item--sm</code></th><td>Small size.</td></tr><tr><th scope="row"><code>form-radio-field</code></th><td>Wraps an option and its message.</td></tr><tr><th scope="row"><code>form-radio-message</code></th><td>The hint under the label.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>The circle is the native input with <code>appearance: none</code>. The dot is a radial gradient, so no image file is loaded.</li><li>Arrow-key navigation needs the same <code>name</code> on every radio of a group.</li><li>For a horizontal group set <code>flex-direction: row</code> on the <code>fieldset</code> (two short options only).</li><li>Breakpoint: the Large label is 16/22 below 769px and 17/24 from 769px. The CSS does this by itself.</li><li>The <code>[data-state]</code> selectors do nothing outside the documentation pages.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/radio.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Group with a default', '<fieldset class="form-radio-group">\n  <legend>Delivery method</legend>\n  <label class="form-radio-item">\n    <input type="radio" name="delivery" value="standard" checked />\n    <span>Standard</span>\n  </label>\n  <label class="form-radio-item">\n    <input type="radio" name="delivery" value="express" />\n    <span>Express</span>\n  </label>\n</fieldset>'],
+    ['With a hint message', '<div class="form-radio-field">\n  <label class="form-radio-item">\n    <input type="radio" name="delivery" value="express" />\n    <span>Express</span>\n  </label>\n  <p class="form-radio-message">Delivered next business day.</p>\n</div>'],
+    ['Small', '<label class="form-radio-item form-radio-item--sm">\n  <input type="radio" name="delivery" value="pickup" />\n  <span>Pick up</span>\n</label>'],
+    ['Disabled', '<label class="form-radio-item">\n  <input type="radio" name="delivery" value="pickup" disabled />\n  <span>Pick up</span>\n</label>']
+  ]);
+  DK.printCss($('#css-code'), 'radio', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/:is\(:focus-visible, \[data-state="focus"\]\)/g, ':focus-visible'], [/^ {4}/gm, '']]);
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

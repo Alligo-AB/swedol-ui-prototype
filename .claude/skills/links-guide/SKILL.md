@@ -1,35 +1,45 @@
 ---
 name: links-guide
-description: Använd INNAN du bygger en länk, för att avgöra om det ska vara en Inline Link (i löptext), Action Link (fristående) eller Tile Link (grafisk/prominent). Läs sedan skillen för den specifika länktypen.
+description: Use BEFORE building a link, to decide whether it should be an Inline Link (in body text), Action Link (standalone), or Tile Link (graphical/prominent). Then read the skill for the specific link type.
 ---
 
-> Del av designsystemet i swedol-ui-prototype. Se `CLAUDE.md` för teknikstack, mallregler, breakpoints och kvalitetschecklistan som alltid gäller utöver denna spec.
+> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
-## Länkar – Användningsriktlinjer (ECO Design System)
+## Links – Usage Guidelines (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1221-33213
 
-ECO Design System har tre länktyper: **Inline Link**, **Action Link** och **Tile Link**.
+The ECO Design System has three link types: **Inline Link**, **Action Link**, and **Tile Link**.
 
-### När ska länk användas?
+Links take users somewhere: another page, another site, a section of the same page, or a resource such as a PDF, an email address or a phone number. They are the lightest interactive element: where a Button performs an action, **a link always navigates**. The three components share one foundation (semantics, keyboard behavior, state logic) and differ in context and visual weight. Choose in this order: an action instead of navigation is not a link (use `eco-button`); inside a sentence or paragraph is an Inline Link; a graphic, prominent surface in a grid of peers is a Tile Link; standing on its own with an icon is an Action Link.
 
-Använd länk när användaren ska:
-- Navigera till en annan sida inom sajten/applikationen
-- Navigera till en extern sajt
-- Hoppa till ett element på samma sida
-- Agera på något, t.ex. öppna e-post eller ringa ett nummer
+### When should a link be used?
 
-### Vilken länktyp?
+Use a link when the user should:
+- Navigate to another page within the site/application
+- Navigate to an external site
+- Jump to an element on the same page
+- Act on something, e.g. open email or call a number
 
-| Typ | Användning | Understrykning | Ikoner |
+### Which link type?
+
+| Type | Usage | Underline | Icons |
 |---|---|---|---|
-| **Inline Link** | Inuti meningar eller textblock | Alltid understruken | Aldrig |
-| **Action Link** | Fristående, inte i löptext | Understruken vid hover | Vänster och/eller höger |
-| **Tile Link** | Grafisk/prominent, som kort eller knapp | — | Med eller utan |
+| **Inline Link** | Inside sentences or text blocks | Underlined when enabled, removed on hover | Never |
+| **Action Link** | Standalone, not in body text | Underlined on hover only | Leading and/or trailing |
+| **Tile Link** | Graphical/prominent, like a card or button | — | With or without |
 
-### Interaktion (alla länktyper)
+### Interaction (all link types)
 
-- **Mus:** klick var som helst på länktexten eller associerad ikon
-- **Tangentbord:** Enter-tangent när länken har fokus
+- **Mouse:** click anywhere on the link text or associated icon
+- **Keyboard:** Enter key while the link has focus
+- The **entire element** is the click target; Tab moves focus; Enter activates.
+- **Sizing** follows the type scale: a link inside content matches the size of its context; a standalone link matches the page's default body copy size.
 
----
+### Documentation
+
+`eco-design-system/components/links-guide.html` is the hub (one page, no tab bar: which link type, in context, behavior, usage) and the three types are its children, each as three pages: `inline-link*.html`, `action-link*.html`, `tile-link*.html` (Examples & Guidelines / Specifications / Code, converted 2026-10-13). Breadcrumb: Components / Links guide / Inline link.
+
+### Modifiers (all link types)
+
+Figma's link info (1221:33213, read 2026-10-13): the action link is paired with a leading icon, a trailing icon or both (the earlier "in some cases none" was removed from Figma; a link without an icon in text is the Inline link, also its reverse underline), icons are the same color as the link text, the action link underlines on hover, inline links are not paired with icons, and the link size matches the type size of the text it is in (apart from other content: the default body copy size). Each type has the **weight** modifiers in the CSS (`--weight-medium`, `--bold`; Regular default); **italic** (`--italic`) is for the Inline Link and the Tile Link only, an Action Link is never italic; the Inline link also has `--reverse` (underline on hover only, in Figma as `Reverse=yes`). Which of these are in Figma is listed in each type skill; the others are added and need design confirmation.

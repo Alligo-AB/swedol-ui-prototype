@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Badge Basic: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: demo layout only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-wide { width: 100%; max-width: 640px; }
+    .pg-top { align-items: flex-start; padding-top: 40px; }
+    .pg-btn { min-height: 120px; }
+    .pg-dotrow { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; line-height: 24px; }   /* demo: a dot beside a label */
+    .pg-dotwrap { position: relative; display: inline-flex; }   /* demo: a dot on the top right corner of an icon */
+    .pg-dotwrap .badge-dot { position: absolute; top: 2px; right: 2px; transform: translate(50%, -50%); }
+    .pg-ic { font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 24px; font-feature-settings: 'liga'; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="badge.html" class="breadcrumb-item">Badge</a><span class="breadcrumb-sep">/</span><a href="badge-basic.html" class="breadcrumb-item">Basic</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status</span></div>
+    <h1 class="ds-title">Badge Basic</h1>
+    <p class="ds-lead">A basic badge is a <strong>read-only status or label</strong>. It is never clickable.</p><p class="ds-lead">Tokens, sizes, measurements and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=3912-157194" target="_blank" rel="noopener">Basic</a>.</p>
+  </div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Badge Basic"><a class="tab" href="badge-basic.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="badge-basic-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="badge-basic-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State · emphasis</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Open point:</strong> Alert warning uses <code>text-primary</code> at every emphasis: there is no warning text token with enough contrast.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><p class="ds-desc">Three sizes. Large and Medium look different on mobile and desktop. Small is the same size as Medium on mobile. Padding is under <a class="inline-link inline-link--large inline-link--secondary" href="#measurements">Measurements</a>.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Height desktop · mobile</th><th scope="col">Type desktop</th><th scope="col">Type mobile</th><th scope="col">Availability</th></tr></thead><tbody><tr><th scope="row">Large</th><td>26px · 24px</td><td>14/14, 0.56px</td><td>14/14, 0.48px</td><td>Desktop and mobile</td></tr><tr><th scope="row">Medium (default)</th><td>22px · 18px</td><td>14/14, 0.56px</td><td>12/12, 0.48px</td><td>Desktop and mobile</td></tr><tr><th scope="row">Small</th><td>18px · 18px</td><td>12/12, 0.48px</td><td>12/12, 0.48px</td><td>Desktop and mobile</td></tr></tbody></table></div><p class="ds-desc ds-note">Weight is 500 (sentence case) or 600 (upper case: Figma 700 minus 100). The icon is 14px, the gap 4px (<code>space-4</code>). Figma Badge/Basic: <a class="inline-link inline-link--medium inline-link--secondary" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=3912-157194" target="_blank" rel="noopener">node 3912:157194</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Padding of the three sizes, at true size. Window follows the window width; Desktop (769px and up) and Mobile force the breakpoint. The shaded areas are the padding; the numbers are read from the component.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="m-l-bp">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="m-l-bp" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Padding of Large, Medium and Small badge on desktop"><div class="measure__item"><span class="measure__name">1 · Large</span><div class="measure__obj"><span class="badge-basic badge-basic--neutral-grey badge-basic--weaker badge-basic--large measure__subject">Latest</span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Medium</span><div class="measure__obj"><span class="badge-basic badge-basic--neutral-grey badge-basic--weaker measure__subject">Latest</span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">3 · Small</span><div class="measure__obj"><span class="badge-basic badge-basic--neutral-grey badge-basic--weaker badge-basic--small measure__subject">Latest</span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">Padding of the three sizes at true size (1:1). Switch the breakpoint to see the mobile values.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Padding desktop</th><th scope="col">Padding mobile</th></tr></thead><tbody><tr><th scope="row">Large</th><td>6px 8px</td><td>5px 6px</td></tr><tr><th scope="row">Medium</th><td>4px 5px</td><td>3px 4px</td></tr><tr><th scope="row">Small</th><td>3px 5px</td><td>3px 4px</td></tr></tbody></table></div><p class="ds-desc ds-note">With an icon the height grows by the icon (14px) only when the icon is taller than the line: Medium 22px, Small 20px on desktop, Medium and Small 20px on mobile. The gap between icon and text is 4px (<code>space-4</code>).</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">Vertical and horizontal padding as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Vertical desktop · mobile</th><th scope="col">Horizontal desktop · mobile</th></tr></thead><tbody><tr><th scope="row">Large</th><td><code>6px</code> · <code>space-4</code> + 1px</td><td><code>space-8</code> · 6px</td></tr><tr><th scope="row">Medium</th><td><code>space-4</code> · 3px</td><td>5px · <code>space-4</code></td></tr><tr><th scope="row">Small</th><td>3px · 3px</td><td>5px · <code>space-4</code></td></tr></tbody></table></div><p class="ds-desc ds-note">6px, 5px, 3px and 1px have no spacing token; they are the values Figma uses.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Family</th><td>Breuer Condensed</td></tr><tr><th scope="row">Weight</th><td>500 sentence case · 600 upper case (Figma 700 minus 100)</td></tr><tr><th scope="row">Case</th><td>Sentence case by default; <code>badge-basic--uppercase</code> for categories</td></tr><tr><th scope="row">Feature settings</th><td><code>'ss02' 1, 'ss03' 1</code> (Medium also <code>'ss06' 1</code>)</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">A badge has no interaction states: no hover, no focus, no pressed, no disabled.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Interaction</th><td>None. A badge is never a link or a button, has no focus and no hover state.</td></tr><tr><th scope="row">Width</th><td>Hugs the text. No maximum: keep labels to one or two words.</td></tr><tr><th scope="row">Wrapping</th><td>Never wraps (<code>white-space: nowrap</code>).</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Name</th><td>The text of the badge. The icon is decorative: <code>aria-hidden="true"</code>.</td></tr><tr><th scope="row">Color</th><td>Not the only carrier of meaning (WCAG 1.4.1): pair an alert color with its icon or clear text.</td></tr><tr><th scope="row">Contrast</th><td>Text and background meet 4.5:1. Alert warning uses black text for that reason.</td></tr><tr><th scope="row">Interactive content</th><td>None.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var STATES = [['neutral-grey', 'Neutral grey', 'label'], ['neutral-dark', 'Neutral dark', 'label'], ['info', 'Alert info', 'info'], ['success', 'Alert success', 'check_circle'], ['warning', 'Alert warning', 'warning'], ['danger', 'Alert danger', 'error']];
+  var ICON = {}; STATES.forEach(function (s) { ICON[s[0]] = s[2]; });
+  function cls(o) { return 'badge-basic badge-basic--' + o.state + ' badge-basic--' + o.emph + (o.size === 'medium' ? '' : ' badge-basic--' + o.size) + (o.upper ? ' badge-basic--uppercase' : ''); }
+  function html(o) { return '<span class="' + cls(o) + '">' + (o.icon ? '<span class="badge-basic__icon" aria-hidden="true">' + ICON[o.state] + '</span>' : '') + esc(o.label) + '</span>'; }
+  function el(o) { var t = document.createElement('template'); t.innerHTML = html(o); return t.content.firstChild; }
+
+  var rows = [];
+  var BG = { 'neutral-grey': ['surface-50', 'surface-20', 'surface-05'], 'neutral-dark': ['surface-100', 'surface-100', 'surface-100'] };
+  var BD = { 'neutral-grey': 'border-primary', 'neutral-dark': 'border-dark' };
+  STATES.forEach(function (s) {
+    var k = s[0], n = k === 'info' ? 'information' : k, bg = BG[k] || ['surface-' + n + '-default', 'surface-' + n + '-weak', 'surface-' + n + '-weaker'];
+    ['Strong', 'Weak', 'Weaker'].forEach(function (e, i) { rows.push([s[1] + ' · ' + e, 'Background', bg[i]]); });
+    rows.push([s[1] + ' · Weaker', 'Border', BD[k] || 'border-' + n + '-weak']);
+  });
+  DK.tokenTable($('#tok-table tbody'), rows);
+  DK.bp(function () { if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inline notification: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../notifications.css?v=22">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; align-items: stretch; width: 100%; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); justify-items: start; width: 100%; }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; } }
+    .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); flex-wrap: wrap; width: 100%; }
+    .pg-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-row:last-child { padding-bottom: 0; }
+    .pg-row__txt { flex: 1; min-width: 240px; }
+    .pg-row__txt b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-row__txt span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .ds-field[hidden], .form-range[hidden] { display: none; }
+    .pg-fig-host { width: 100%; max-width: 100%; overflow: hidden; }
+    .pg-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pg-form__region { min-height: 0; width: 100%; }
+    .pg-form__region:empty { display: none; }
+    body[data-bp="mobile"] :is(.toast, .ecom-toast, .banner-notification, .inline-notification) { max-width: 375px; }   /* the forced Mobile preview is as wide as a phone: in real use these fill the window */
+    .pg-grid { display: grid; gap: 16px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-matrix td { min-width: 300px; }
+    .ds-callout__art { padding: 56px 24px 56px 56px; width: 100%; box-sizing: border-box; }
+    .ms-inline .measure__obj { width: 480px; max-width: 100%; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="notifications.html" class="breadcrumb-item">Notifications</a><span class="breadcrumb-sep">/</span><a href="inline.html" class="breadcrumb-item">Inline notification</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Notifications</span></div>
+    <h1 class="ds-title">Inline notification</h1>
+    <p class="ds-lead">An inline notification gives <strong>feedback right where the user is working</strong>: next to a form, a quantity field or a delivery estimate. It stays in the page until the user acts or the state changes. It never disappears by itself.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-35659" target="_blank" rel="noopener">Inline notification</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Inline notification"><a class="tab" href="inline.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="inline-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="inline-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Status · emphasis</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Large</th><th scope="col">Small</th></tr></thead><tbody><tr><th scope="row">Height</th><td>48px</td><td>32px</td></tr><tr><th scope="row">Padding</th><td>12px</td><td>4px</td></tr><tr><th scope="row">Icon</th><td>24px</td><td>20px</td></tr><tr><th scope="row">Left edge</th><td>2px</td><td>2px</td></tr><tr><th scope="row">Outline (Strong)</th><td>1px, <code>border-{status}-weaker</code>, inside the height</td><td>Same</td></tr><tr><th scope="row">Gap icon to text</th><td>8px</td><td>8px</td></tr><tr><th scope="row">Title</th><td><code>label-sm</code> 14px, 0.56px, bold, uppercase</td><td>Same</td></tr><tr><th scope="row">Text</th><td><code>body-sm</code> 14/20, 0.36px</td><td>Same</td></tr><tr><th scope="row">Actionable</th><td>Indent 32px; buttons 16px below the text, 32px high; link 8px below the buttons</td><td>Not defined</td></tr><tr><th scope="row">Shadow</th><td><code>var(--shadow-elevation-b-20)</code></td><td>Same</td></tr></tbody></table></div><p class="ds-desc ds-note">An inline notification is the same at every breakpoint.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">The padding of a Large and a Small notification. The shaded area is the padding; the 2px status edge sits outside it. The numbers are read from the component.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure ms-inline" id="ms" role="img" aria-label="Padding of a Large and a Small inline notification"></div></div><figcaption class="ds-fig__cap">A Large and a Small notification at true size.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Large</th><th scope="col">Small</th></tr></thead><tbody><tr><th scope="row">Padding</th><td>12px</td><td>4px (the header has 2px more on the left)</td></tr><tr><th scope="row">Icon</th><td>24px</td><td>20px, 2px down</td></tr><tr><th scope="row">Gap icon to text</th><td>8px</td><td>8px</td></tr><tr><th scope="row">Left edge</th><td>2px</td><td>2px</td></tr><tr><th scope="row">Space above buttons</th><td>16px</td><td>Not defined</td></tr><tr><th scope="row">Space above links</th><td>16px (8px under buttons)</td><td>Not defined</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same distances as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding, Large</th><td><code>space-12</code></td></tr><tr><th scope="row">Padding, Small</th><td><code>space-4</code></td></tr><tr><th scope="row">Icon to text</th><td><code>space-8</code></td></tr><tr><th scope="row">Left edge</th><td><code>space-2</code></td></tr><tr><th scope="row">Actions indent</th><td><code>space-32</code></td></tr><tr><th scope="row">Above the actions</th><td><code>space-16</code></td></tr><tr><th scope="row">Between buttons</th><td><code>space-8</code></td></tr><tr><th scope="row">Between links</th><td><code>space-8</code> row, <code>space-16</code> column</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="elevation"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Elevation</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Inline notification</th><td><code>shadow-elevation-b-20</code></td><td>Every size and emphasis.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Every status in both emphases. Combinations Figma does not define are marked. An inline notification has no hover or focus state of its own; its × and links do.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="ms-l">Size</span><div class="btn-group" role="group" aria-labelledby="ms-l" data-mx="size"><button type="button" data-v="large" aria-pressed="true">Large</button><button type="button" data-v="small" aria-pressed="false">Small</button></div><span class="ds-toolbar__label" id="ml-l">Layout</span><div class="btn-group" role="group" aria-labelledby="ml-l" data-mx="layout"><button type="button" data-v="default" aria-pressed="true">Default</button><button type="button" data-v="actionable" aria-pressed="false">Buttons</button><button type="button" data-v="links" aria-pressed="false">Inline links</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">Status</th><th scope="col">Strong</th><th scope="col">Weak</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note" id="mx-note"></p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Title (optional)</th><td><code>label-sm</code></td><td>14/14, 0.56px, bold, uppercase</td></tr><tr><th scope="row">Text</th><td><code>body-sm</code></td><td>14/20, 0.36px</td></tr><tr><th scope="row">Inline link</th><td><code>body-sm</code> (Small)</td><td>14/20</td></tr><tr><th scope="row">Buttons</th><td><code>label-md</code> / <code>label-sm</code></td><td>14/14, 0.42px (mobile), 0.56px (desktop)</td></tr></tbody></table></div><p class="ds-desc ds-note">The type is the same at every breakpoint.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Notification</th><td><code>inline-notification inline-notification--{status} inline-notification--{emphasis}</code></td><td>Status: <code>info</code>, <code>success</code>, <code>warning</code>, <code>error</code>. Emphasis: <code>strong</code>, <code>weak</code>. Add <code>--small</code> for Small.</td></tr><tr><th scope="row">Frame</th><td><code>__base</code>, <code>__left-border</code>, <code>__container</code>, <code>__inner</code></td><td>Edge, outline and padding.</td></tr><tr><th scope="row">Header</th><td><code>__header</code>, <code>__icon</code>, <code>__text</code>, <code>__title</code></td><td>The icon is a <code>material-symbols-outlined</code> span.</td></tr><tr><th scope="row">Actions</th><td><code>__actions</code> with <code>__btns</code> or <code>__links</code></td><td>Large only. Buttons <strong>or</strong> inline links.</td></tr><tr><th scope="row">Close</th><td><code>icon-btn icon-btn--close</code></td><td>Optional.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><p class="ds-desc">Large: Strong and Weak for all four statuses, Default or Actionable. Small: Strong for all four, Weak for Informational and Warning only, Default only.</p><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">The width of the container.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Close: <code>opacity</code>, <code>height</code>, margin and padding</th><td><code>--n-close-duration</code></td><td>Default <code>duration-fast-3</code> (150ms)</td></tr><tr><th scope="row">Easing</th><td><code>--n-close-ease</code></td><td>Default <code>ease-accelerate-generic</code></td></tr><tr><th scope="row">Height collapse</th><td><code>data-n-close="fade"</code> on an ancestor turns it off</td><td>On by default</td></tr></tbody></table></div><p class="ds-desc ds-note">Reduced motion: hidden at once. Compare values in the live Motion section on <a class="inline-link inline-link--medium inline-link--secondary" href="inline.html#motion">Examples &amp; Guidelines</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click ×</th><td>Hides the notification.</td></tr><tr><th scope="row">Persistence</th><td>It stays until the user acts, the state changes or it is closed. It never auto-hides.</td></tr><tr><th scope="row">Tab</th><td>The ×, buttons and link take focus with a visible ring.</td></tr><tr><th scope="row">Inline link</th><td>Underlined when enabled; on hover the underline goes and the color changes (<code>eco-inline-link</code>, Small).</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Announcement</th><td>Put the notification in a region with <code>aria-live="polite"</code> (<code>role="alert"</code> for errors that block progress) so it is announced when it appears (WCAG 4.1.3).</td></tr><tr><th scope="row">Status</th><td>The icon and the text carry the status, not the color alone (WCAG 1.4.1).</td></tr><tr><th scope="row">Focus</th><td>The ×, buttons and links have a 2px ring, <code>border-focus</code>, on keyboard use (WCAG 2.4.7).</td></tr><tr><th scope="row">Reduced motion</th><td>Hidden without a transition under <code>prefers-reduced-motion: reduce</code>.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../notifications.js?v=12"></script>
+<script src="../../components/js/range.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var N = ECO_N, H = N.html, IMG = '/images/product-hantverksbyxa.jpg';
+  var STATUS = [['info', 'Informational'], ['success', 'Success'], ['warning', 'Warning'], ['error', 'Error']];
+  function mk(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
+
+  var TXT = { info: 'Only 4 left in stock. Delivery in 2–3 days.', success: 'Your password was changed.', warning: 'That password is easy to guess.', error: 'The payment was declined. Check your card details.' };
+  function inl(o) { return mk(H.inline(o)); }
+  function measureItem(name, el, subjSel, edge) {
+    var it = document.createElement('div'); it.className = 'measure__item';
+    var nm = document.createElement('span'); nm.className = 'measure__name'; nm.textContent = name;
+    var obj = document.createElement('div'); obj.className = 'measure__obj'; obj.appendChild(el);
+    var s = subjSel ? $(subjSel, el) : el; s.classList.add('measure__subject');
+    if (edge === true) s.setAttribute('data-measure-edge', ''); else if (edge) $(edge, el).setAttribute('data-measure-edge', '');
+    ['t', 'b', 'l', 'r'].forEach(function (d) { var i = document.createElement('i'); i.className = 'measure__pad measure__pad--' + d; obj.appendChild(i); });
+    [['v', 't'], ['v', 'b'], ['h', 'l'], ['h', 'r']].forEach(function (p) { var b = document.createElement('b'); b.className = 'measure__dim measure__dim--' + p[0] + ' measure__dim--' + p[1]; b.appendChild(document.createElement('span')); obj.appendChild(b); });
+    it.appendChild(nm); it.appendChild(obj); return it;
+  }
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Informational · Strong', 'Background', 'surface-information-weaker'], ['Informational · Strong', 'Outline', 'border-information-weaker'], ['Informational · both', 'Left edge and icon', 'surface-information-default'],
+    ['Weak', 'Background', 'surface-raised-primary'], ['All', 'Text', 'text-primary'], ['All', 'Shadow', 'shadow-elevation-b-20'],
+    ['Error · Strong', 'Background', 'surface-danger-weaker'], ['Success · Strong', 'Background', 'surface-success-weaker'], ['Warning · Strong', 'Background', 'surface-warning-weaker']]);
+
+  /* Measurements */
+  $('#ms').appendChild(measureItem('Large', inl({ size: 'large', status: 'info', emphasis: 'weak', text: 'Message text.' }), '.inline-notification__inner', '.inline-notification__left-border'));
+  $('#ms').appendChild(measureItem('Small', inl({ size: 'small', status: 'info', emphasis: 'weak', text: 'Message text.' }), '.inline-notification__inner', '.inline-notification__left-border'));
+
+  /* States */
+  var mx = { size: 'large', layout: 'default' };
+  function matrix() {
+    var tb = clear($('#matrix tbody')), small = mx.size === 'small';
+    STATUS.forEach(function (s) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = s[1]; tr.appendChild(th);
+      ['strong', 'weak'].forEach(function (e) {
+        var td = document.createElement('td');
+        if (small && (mx.layout !== 'default' || (e === 'weak' && (s[0] === 'success' || s[0] === 'error')))) { td.innerHTML = '<span class="ds-na">Not defined</span>'; }
+        else td.appendChild(inl({ size: mx.size, status: s[0], emphasis: e, title: small ? '' : s[1], text: small ? 'Short message.' : 'Message text.', secondary: mx.layout === 'actionable' ? 'Secondary' : '', primary: mx.layout === 'actionable' ? 'Primary' : '', links: mx.layout === 'links' ? ['Link', 'Link'] : [] }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+    $('#mx-note').textContent = small ? 'Small has no Actionable layout, and Weak exists only for Informational and Warning.' : 'Large has every combination.';
+  }
+  $$('[data-mx]').forEach(function (g) { DK.seg(g, function (v) { mx[g.dataset.mx] = v; matrix(); }); });
+  matrix();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

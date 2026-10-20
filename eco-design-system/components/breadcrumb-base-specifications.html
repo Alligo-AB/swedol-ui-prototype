@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breadcrumb Base: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/breadcrumb.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; }
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-cell { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .pg-cell > .pg-note { margin: 0; }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-grey { background: var(--color-background-secondary); }
+    .pg-cap { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 600; }
+    .ds-stage .breadcrumb, .ds-fig__stage .breadcrumb { padding-left: 0; padding-right: 0; padding-bottom: 0; }   /* the page margin and the built-in bottom padding belong to a real page, not to a docs stage */
+    .ds-stage .breadcrumb__bar, .ds-fig__stage .breadcrumb__bar { padding: 0; }
+    .ds-fig__stage--bar { align-items: flex-start; justify-content: flex-start; }
+    .measure .breadcrumb__bar { padding: 16px 0; }   /* the Measurements figure draws the real bar padding */
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="breadcrumb.html" class="breadcrumb-item">Breadcrumb</a><span class="breadcrumb-sep">/</span><a href="breadcrumb-base.html" class="breadcrumb-item">Breadcrumb Base</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status and navigation</span></div>
+    <h1 class="ds-title">Breadcrumb Base</h1>
+    <p class="ds-lead">A breadcrumb base is <strong>one level</strong> of a breadcrumb trail: a bordered box with a label. A parent level is a link; the current page is bold and not clickable.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1986-64264" target="_blank" rel="noopener">Breadcrumb Base</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Breadcrumb Base"><a class="tab" href="breadcrumb-base.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="breadcrumb-base-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="breadcrumb-base-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Crumb padding</th><th scope="col">Text</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Mobile: xs and sm (0–768px)</th><td>6px 7px</td><td>12px / 12px</td><td>0.24px</td><td>Regular 400, current 600</td></tr><tr><th scope="row">Desktop: md, lg and xl (769px+)</th><td>9px 10px</td><td>14px / 14px</td><td>0.28px</td><td>Regular 400, current 600</td></tr></tbody></table></div><p class="ds-desc ds-note">The border is 1px and is part of the box. Figma writes the current weight as Bold (700); in CSS it is 600 (Figma − 100). Sizes change at 769px and never at 640px.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Padding of the crumb. The shaded areas are the padding; the numbers are read from the real component. Change the Breakpoint to see the mobile values.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="mb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="mb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage" style="padding:0;min-height:0"><div class="measure" style="--k:2" role="img" aria-label="Padding of a breadcrumb crumb"><div class="measure__item"><span class="measure__name">1 · Enabled</span><div class="measure__obj"><span class="breadcrumb-item measure__subject">Work pants</span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Current page</span><div class="measure__obj"><span class="breadcrumb-item breadcrumb-item--active measure__subject">Work pants</span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">The crumbs at twice their size (the figure is scaled 2×).</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding, desktop</th><td>9px top and bottom, 10px left and right</td></tr><tr><th scope="row">Padding, mobile</th><td>6px top and bottom, 7px left and right</td></tr><tr><th scope="row">Border</th><td>1px, <code>border-action-3</code>, in the box</td></tr><tr><th scope="row">Height, desktop</th><td>34px (14px line + 18px padding + 2px border)</td></tr><tr><th scope="row">Height, mobile</th><td>26px (12px line + 12px padding + 2px border)</td></tr><tr><th scope="row">Corners</th><td>Square</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The paddings (6, 7, 9 and 10px) have no spacing token.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding</th><td>6, 7, 9 and 10px: no spacing token</td></tr><tr><th scope="row">Focus ring offset</th><td>2px</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Hover is forced on this page; in your code it comes from <code>:hover</code>. Every state keeps the box and the border.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Crumb</th><th scope="col">Border</th><th scope="col">Text</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Figma has Enabled, Enabled Hover and Active for each breakpoint, and no Focus or Disabled state. Focus is the shared 2px ring; a crumb is never disabled.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Font</th><th scope="col">Size / line</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Label, desktop</th><td>Breuer Condensed</td><td>14px / 14px</td><td>0.28px</td><td>Regular 400, current 600</td></tr><tr><th scope="row">Label, mobile</th><td>Breuer Condensed</td><td>12px / 12px</td><td>0.24px</td><td>Regular 400, current 600</td></tr></tbody></table></div><p class="ds-desc ds-note">Font features <code>ss02</code> and <code>ss03</code> are on. Size and line height are the pair of <code>label-sm</code> (12/12 on mobile, 14/14 from 769px). Open point: Figma sets the letter spacing to 0.24px and 0.28px, the token has 0.48px and 0.56px; <code>breadcrumb.css</code> follows Figma and writes all values as pixels.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Crumb</th><td><code>breadcrumb-item</code></td><td>An <code>a</code> with an <code>href</code>. The bordered box and the label.</td></tr><tr><th scope="row">Current page</th><td><code>breadcrumb-item breadcrumb-item--active</code></td><td>A <code>span</code> with <code>aria-current="page"</code>. Bold and black.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Markup</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Enabled / Hover</th><td><code>a.breadcrumb-item</code></td><td>A parent level. Hover comes from <code>:hover</code>.</td></tr><tr><th scope="row">Current page</th><td><code>span.breadcrumb-item--active</code></td><td>The last crumb.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">A crumb is as wide as its label plus the side padding. The label never wraps (<code>white-space: nowrap</code>).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Text color on hover</th><td><code>duration-fast-3</code></td><td><span id="mo-dur"></span></td></tr><tr><th scope="row">Easing</th><td><code>ease-standard</code></td><td><span id="mo-ease"></span></td></tr></tbody></table></div><p class="ds-desc ds-note">The underline appears at once; only the color is animated.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Hover</th><td>Text color <code>text-action-primary</code> and an underline. The border does not change.</td></tr><tr><th scope="row">Focus</th><td>A 2px ring, 2px outside the box, on keyboard focus only (<code>:focus-visible</code> with <code>body.keyboard-nav</code>).</td></tr><tr><th scope="row">Current page</th><td>No hover, no underline, no pointer cursor, no focus.</td></tr><tr><th scope="row">Breakpoint</th><td>The size changes at 769px: 12/12 below, 14/14 from there.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Links</th><td>Every parent crumb is an <code>&lt;a href&gt;</code>. Figma draws the hover crumb as a button; in code it is a link, because it navigates.</td></tr><tr><th scope="row">Current page</th><td>A <code>span</code> with <code>aria-current="page"</code>, not a link.</td></tr><tr><th scope="row">Contrast</th><td>Text in <code>text-tertiary</code> on white and on grey must reach 4.5:1 (WCAG 1.4.3). The border (<code>border-action-3</code>) is decoration, not the only cue.</td></tr><tr><th scope="row">Target size</th><td>The box is 34px high on desktop and 26px on mobile. Keep the gap to the next crumb at 8px or more (WCAG 2.5.8).</td></tr><tr><th scope="row">Focus</th><td>A visible focus ring on every link (WCAG 2.4.7).</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var ALL = ['Home', 'Clothing and protective gear', 'Work pants', 'Carpenter pants', 'Winter pants', 'Insulated winter pants'];
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  /* one crumb: state = enabled | hover (forced for the demo) | active (the current page) */
+  function crumb(text, state) {
+    var c;
+    if (state === 'active') { c = el('span', 'breadcrumb-item breadcrumb-item--active', text); c.setAttribute('aria-current', 'page'); return c; }
+    c = el('a', 'breadcrumb-item', text); c.href = '#'; if (state === 'hover') c.dataset.state = 'hover';
+    c.addEventListener('click', function (e) { e.preventDefault(); });
+    return c;
+  }
+  function sep() { return el('span', 'breadcrumb-sep', '/'); }
+  /* the bar: n crumbs (2 to 6), the last one is the current page */
+  function bar(n, last, hover) {
+    var nav = el('nav', 'breadcrumb'), b = el('div', 'breadcrumb__bar'); nav.setAttribute('aria-label', 'Breadcrumb'); nav.appendChild(b);
+    ALL.slice(0, n - 1).concat([last]).forEach(function (t, i) { if (i) b.appendChild(sep()); b.appendChild(crumb(t, i === n - 1 ? 'active' : (hover && i === 0 ? 'hover' : 'enabled'))); });
+    return nav;
+  }
+  function barMarkup(n, last) {
+    var h = '<nav class="breadcrumb" aria-label="Breadcrumb">\n  <div class="breadcrumb__bar">\n';
+    ALL.slice(0, n - 1).forEach(function (t) { h += '    <a href="#" class="breadcrumb-item">' + esc(t) + '</a>\n    <span class="breadcrumb-sep">/</span>\n'; });
+    return h + '    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">' + esc(last) + '</span>\n  </div>\n</nav>';
+  }
+  function rng(n) { return function () { var r = document.createRange(); r.selectNodeContents(n); return r.getBoundingClientRect(); }; }
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['All states', 'Border', 'border-action-3'], ['Enabled', 'Text', 'text-tertiary'], ['Hover', 'Text', 'text-action-primary'], ['Current page', 'Text', 'text-primary'], ['Keyboard focus', 'Ring', 'border-focus']]);
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    [['Enabled', 'enabled', 'border-action-3', 'text-tertiary', 'Regular, no underline'], ['Hover', 'hover', 'border-action-3', 'text-action-primary', 'Regular, underline'], ['Current page', 'active', 'border-action-3', 'text-primary', 'Bold, no underline, not clickable']].forEach(function (r) {
+      var tr = el('tr'), th = el('th', '', r[0]); th.scope = 'row'; tr.appendChild(th);
+      var td = el('td'); td.appendChild(crumb('Work pants', r[1])); tr.appendChild(td);
+      td = el('td'); td.appendChild(el('code', '', r[2])); tr.appendChild(td);
+      td = el('td'); td.appendChild(el('code', '', r[3])); td.appendChild(document.createTextNode(' · ' + r[4])); tr.appendChild(td);
+      tb.appendChild(tr);
+    });
+  }
+  DK.bp(function () { buildMatrix(); if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+  buildMatrix();
+  var cs = getComputedStyle(document.documentElement);
+  $('#mo-dur').textContent = cs.getPropertyValue('--duration-fast-3').trim(); $('#mo-ease').textContent = cs.getPropertyValue('--ease-standard').trim();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

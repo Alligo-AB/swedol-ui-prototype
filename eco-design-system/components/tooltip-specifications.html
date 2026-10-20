@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tooltip: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/tooltip.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/measure.js" defer></script>
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-fig { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 320px; }
+    .pg-fig .tooltip-wrap { display: flex; }
+    .pg-tip-long { white-space: normal; width: 280px; }   /* demo only: a deliberately long tooltip, to show what not to do */
+    .pg-align { display: grid; grid-template-columns: 1fr; width: 100%; }
+    .pg-align > div { display: flex; justify-content: center; padding: 16px 0 72px; border-top: 1px solid var(--color-border-primary); }
+    .pg-align > div:first-child { border-top: 0; }
+    @media (min-width: 769px) { .pg-align { grid-template-columns: repeat(3, minmax(0, 1fr)); } .pg-align > div { border-top: 0; border-left: 1px solid var(--color-border-primary); } .pg-align > div:first-child { border-left: 0; } }
+    .pg-place { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+    .pg-place > div { display: flex; align-items: center; justify-content: center; min-height: 160px; }
+    .pg-place > div:nth-child(1) { padding-right: 72px; }   /* room beside the trigger for the tooltip, so the pair sits centered in its cell */
+    .pg-place > div:nth-child(2) { padding-left: 72px; }
+    .pg-place > div:nth-child(even) { border-left: 1px solid var(--color-border-primary); }
+    .pg-place > div:nth-child(n+3) { border-top: 1px solid var(--color-border-primary); }
+    .ds-callout__art { padding-right: 84px; }   /* room for the open tooltip to the right of the trigger: label (74px) + 10px distance */
+    .pg-top { align-items: flex-start; padding-top: 40px; }   /* both password examples start at the same height */
+    .pg-btn { padding-bottom: 72px; }   /* room for the open tooltip below the button */
+    .pg-tip-fill { width: 100%; box-sizing: border-box; }
+    .pg-tip-link { display: block; margin-top: 8px; color: var(--color-text-action-primary-inverted); text-decoration: underline; }
+
+    /* Variants: every type, forced open. Room around the trigger for the tooltip on its side. */
+    .pg-vars { display: grid; grid-template-columns: 1fr; gap: 32px 16px; width: 100%; }
+    @media (min-width: 640px) { .pg-vars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1280px) { .pg-vars { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .pg-var { display: flex; flex-direction: column; gap: 4px; }
+    .pg-var .ds-stage__cap { margin-bottom: 0; }
+    .pg-var code { align-self: flex-start; }
+    .pg-var__stage { display: flex; align-items: center; justify-content: center; padding: 8px; }
+    .pg-var__stage--a { padding-top: 52px; }   /* tooltip above the trigger */
+    .pg-var__stage--b { padding-bottom: 52px; }   /* tooltip below */
+    .pg-var__stage--r { padding: 16px 84px 16px 8px; }   /* tooltip to the right of the trigger */
+    .pg-var__stage--l { padding: 16px 8px 16px 84px; }   /* tooltip to the left */
+    .pg-wide { padding-bottom: 128px; }   /* room for a tooltip that wraps over three lines */
+    .pg-vars code, .pg-var code { font-family: ui-monospace, Menlo, monospace; font-size: 0.875em; background: var(--color-surface-05); padding: 1px 4px; width: fit-content; }
+  </style>
+</head><body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../index.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../components-overview.html" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="tooltip.html" class="breadcrumb-item">Tooltip</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Feedback</span></div>
+    <h1 class="ds-title">Tooltip</h1>
+    <p class="ds-lead">A tooltip gives an <strong>icon-only button a short name</strong> when the user hovers it or moves keyboard focus to it. Esc hides it.</p><p class="ds-lead">Tokens, sizes, spacing, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=316-14656" target="_blank" rel="noopener">Tooltip</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Tooltip"><a class="tab" href="tooltip.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="tooltip-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="tooltip-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">The background is <code>surface-100</code> at 90% opacity (in the CSS: <code>rgba(0, 0, 0, 0.9)</code>, because the opacity applies to the fill only, not to the text). Font is Breuer Condensed regular with <code>ss02</code>, <code>ss03</code>, <code>ss06</code>. The shadow is <code>elevation-b-40</code>: 0 2px 4px at 10% black plus 0 0 1px at 5% black.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Padding</th><th scope="col">Type</th></tr></thead><tbody><tr><th scope="row">Small (default)</th><td>8px 16px</td><td>14/20, 0.36px, regular (<code>body-sm</code>)</td></tr><tr><th scope="row">Large (<code>tooltip--lg</code>)</th><td>12px 16px</td><td>18/26, 0.36px, regular</td></tr></tbody></table></div><p class="ds-desc ds-note">Use Small for icon buttons in toolbars and table rows. Add <code>tooltip--lg</code> for Large.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Padding and size of each tooltip size. The shaded areas are the padding; the lines show its value.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Padding of the tooltip: Small 8 above and below and 16 left and right, Large 12 above and below and 16 left and right"><div class="measure__item"><span class="measure__name">1 · Small</span><div class="measure__obj"><span class="tooltip-wrap"><span class="tooltip tooltip--body tooltip--manual measure__subject">Add user</span></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Large</span><div class="measure__obj"><span class="tooltip-wrap"><span class="tooltip tooltip--body tooltip--manual measure__subject tooltip--lg">Add user</span></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">Padding of the two sizes at true size (1:1). The numbers are read from the component.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Small (default)</th><th scope="col">Large (<code>tooltip--lg</code>)</th></tr></thead><tbody><tr><th scope="row">Padding, top and bottom</th><td>8px</td><td>12px</td></tr><tr><th scope="row">Padding, left and right</th><td>16px</td><td>16px</td></tr><tr><th scope="row">Line height</th><td>20px</td><td>26px</td></tr><tr><th scope="row">Height, one line</th><td>36px</td><td>50px</td></tr><tr><th scope="row">Maximum width</th><td colspan="2">280px, and never wider than the window minus 8px on each side</td></tr><tr><th scope="row">Corners</th><td colspan="2">Square</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same padding and the beak and distance values as spacing tokens.</p><h3 class="ds-h3">Padding</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Vertical</th><th scope="col">Horizontal</th></tr></thead><tbody><tr><th scope="row">Small (default)</th><td><code>space-8</code></td><td><code>space-16</code></td></tr><tr><th scope="row">Large (<code>tooltip--lg</code>)</th><td><code>space-12</code></td><td><code>space-16</code></td></tr></tbody></table></div><h3 class="ds-h3">Beak and distance</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Beak size</th><td>6px high, 12.696px wide (rotated for the side types: 6px wide, 12.696px high)</td></tr><tr><th scope="row">Beak offset (Left, Right, Top Left, Top Right, Bottom Left, Bottom Right)</th><td>16px from the edge of the tooltip, to the near edge of the beak</td></tr><tr><th scope="row">Beak offset (Left Top, Right Top)</th><td>16px from the top of the tooltip</td></tr><tr><th scope="row">Distance to the element</th><td>The tip of the beak is 4px from the element (<code>space-4</code>), so the tooltip block is 10px away. This is a repo rule: the Figma frame holds no element.</td></tr></tbody></table></div>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="elevation"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Elevation</h2><p class="ds-desc">The shadow is <code>elevation-b-40</code>: 0 2px 4px at 10% black plus 0 0 1px at 5% black.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Rule</th></tr></thead><tbody><tr><th scope="row">Layer</th><td><code>z-index: var(--tooltip-z, 300)</code>, <code>elevation-b-40</code> shadow. A page with a sticky header sets <code>--tooltip-z</code> below the header’s <code>z-index</code> on <code>:root</code>, so a tooltip never paints over the menu.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Two triggers: hover and keyboard focus (<code>:focus-visible</code>) fade the tooltip in over <code>duration-fast-2</code> with <code>ease-standard</code>. The tooltip has <code>pointer-events: none</code> so it never gets in the way.</p><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Preview</th><th scope="col">Result</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Type</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Small (default)</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr><tr><th scope="row">Large (<code>tooltip--lg</code>)</th><td>As drawn in Figma</td><td>18/26</td><td>0.36px</td><td>Regular</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed with <code>ss02</code>, <code>ss03</code> and <code>ss06</code>. Never uppercase, also when the tooltip sits inside an uppercase button. Large uses 18/26 as drawn in Figma: no type token has this pair (<code>body-lg</code> is 18/24 on mobile).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Container</th><td>Fill</td><td>Surface 100 at 90% opacity (opacity on the fill only, not on the text)</td></tr><tr><th scope="row">Container</th><td>Corners, border</td><td>Square, none</td></tr><tr><th scope="row">Label</th><td>Length</td><td>One to three words</td></tr><tr><th scope="row">Caret (beak)</th><td>Size</td><td>6px high, 12.696px wide. Absent on Body.</td></tr><tr><th scope="row">Caret (beak)</th><td>Position</td><td>Points at the center of the trigger, 4px from it. On the start and end types it sits 16px from the edge of the tooltip.</td></tr><tr><th scope="row">Trigger</th><td>Element</td><td>Usually an icon button. The tooltip shows when the user hovers it.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><p class="ds-desc">Figma has 11 types in Small and 9 in Large. <strong>The Figma name says where the beak sits on the tooltip</strong>, not where the tooltip sits next to the element. Figma “Bottom” is a tooltip above the element, with the beak at its bottom. The CSS class names describe the placement, so they are the opposite.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Figma type</th><th scope="col">Beak</th><th scope="col">Tooltip sits</th><th scope="col">Small</th><th scope="col">Large</th><th scope="col">Class</th></tr></thead><tbody><tr><th scope="row">Body</th><td>None</td><td>—</td><td>Yes</td><td>Yes</td><td><code>tooltip--body</code></td></tr><tr><th scope="row">Bottom</th><td>Bottom edge, centered, points down</td><td>Above the element</td><td>Yes</td><td>Yes</td><td><code>tooltip--top</code></td></tr><tr><th scope="row">Bottom Left</th><td>Bottom edge, 16px from the left, points down</td><td>Above the element</td><td>Yes</td><td>Yes</td><td><code>tooltip--top-start</code></td></tr><tr><th scope="row">Bottom Right</th><td>Bottom edge, 16px from the right, points down</td><td>Above the element</td><td>Yes</td><td>Yes</td><td><code>tooltip--top-end</code></td></tr><tr><th scope="row">Top</th><td>Top edge, centered, points up</td><td>Below the element</td><td>Yes</td><td>Yes</td><td><code>tooltip--bottom</code></td></tr><tr><th scope="row">Top Left</th><td>Top edge, 16px from the left, points up</td><td>Below the element</td><td>Yes</td><td>Yes</td><td><code>tooltip--bottom-start</code></td></tr><tr><th scope="row">Top Right</th><td>Top edge, 16px from the right, points up</td><td>Below the element</td><td>Yes</td><td>Yes</td><td><code>tooltip--bottom-end</code></td></tr><tr><th scope="row">Left Middle</th><td>Left edge, vertically centered, points left</td><td>Right of the element</td><td>Yes</td><td>Yes</td><td><code>tooltip--right</code></td></tr><tr><th scope="row">Right Middle</th><td>Right edge, vertically centered, points right</td><td>Left of the element</td><td>Yes</td><td>Yes</td><td><code>tooltip--left</code></td></tr><tr><th scope="row">Left Top</th><td>Left edge, 16px from the top, points left</td><td>Right of the element</td><td>Yes</td><td>No</td><td><code>tooltip--right-start</code></td></tr><tr><th scope="row">Right Top</th><td>Right edge, 16px from the top, points right</td><td>Left of the element</td><td>Yes</td><td>No</td><td><code>tooltip--left-start</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Small widths in Figma are 59px (top/bottom types) and 65px (side types), set by the sample text “Tooltip”. In use, the width follows the text (<code>white-space: nowrap</code>).</p>
+<h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">One line when the text fits, otherwise it wraps at <code>max-width: min(280px, 100vw − 16px)</code>: never wider than 280px and never wider than the window minus the 8px edge margin. The tooltip is <code>width: max-content</code>, so a short label is as wide as its text.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row"><code>opacity</code>, hover in and out</th><td><code>duration-fast-2</code></td><td><code>ease-standard</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><h3 class="ds-h3 ds-group">Automatic placement</h3><p class="ds-desc">Top and Bottom tooltips are automatic by default. <code>components/js/tooltip.js</code> and CSS anchor positioning do the work:</p><ul class="ds-bullets"><li>The tooltip is centered on the trigger.</li><li>When a centered tooltip would leave the viewport sideways it aligns to the start or the end instead, as the Start and End examples under Layout &amp; Appearance: the beak sits 16px from the edge of the tooltip and on the center of the trigger, so the tooltip lines up with the outer edge of the trigger. The script adds <code>tooltip--align-start</code> or <code>tooltip--align-end</code>.</li><li>When the tooltip opens with too little room on its side and more on the other, it flips above or below, beak included (<code>tooltip--flip</code>). CSS alone cannot do this: a browser picks a flip from the layout-time scroll position, which is wrong on a page that scrolls.</li><li>A page with a sticky header sets <code>--tooltip-safe-top</code> (the height of the header), so room above counts from below the header.</li><li>Add <code>tooltip--manual</code> to keep a tooltip fixed and centered.</li><li>The tooltip is <code>position: fixed</code>, so a clipping container cannot cut it off. Where anchor positioning is not supported, the tooltip stays centered, as in manual mode.</li><li>The other types (start, end, left, right) are always manual.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Trigger</th><td>Hover over the wrapper (<code>.tooltip-wrap:hover</code>) or keyboard focus on the trigger (<code>:focus-visible</code>, not the focus a mouse click gives). Esc hides it without moving focus (WCAG 1.4.13 dismissible).</td></tr><tr><th scope="row">Name</th><td><code>aria-label</code> on the button with the same text as the tooltip. The tooltip itself is not announced.</td></tr><tr><th scope="row">Text</th><td>One to three words. No information the user needs to complete a task: it disappears when the pointer moves away.</td></tr><tr><th scope="row">Interactive content</th><td>None. A tooltip cannot take focus, so it never holds a button, link or image. Use a Toggletip (TBA).</td></tr></tbody></table></div><p class="ds-desc ds-note"><strong>Open point:</strong> hoverable (WCAG 1.4.13). The tooltip has <code>pointer-events: none</code>, so the pointer cannot move onto it to read it. Persistent and dismissible are met (it stays until the pointer or focus leaves, Esc hides it). Hoverable would need a pointer-reachable tooltip, which conflicts with “never in the way”. To be decided.</p></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  function btn(o) {
+    var w = document.createElement('div'); w.className = 'tooltip-wrap'; if (o.show) w.dataset.state = 'hover';
+    w.innerHTML = '<button type="button" class="btn btn--blank btn--sm btn--icon" aria-label="' + esc(o.label) + '"><span class="btn__icon" aria-hidden="true">' + (o.icon || 'person_add') + '</span></button><span class="tooltip tooltip--' + o.pos + (o.lg ? ' tooltip--lg' : '') + (o.manual ? ' tooltip--manual' : '') + '">' + esc(o.label) + '</span>';
+    return w;
+  }
+  var tb = $('#matrix tbody');
+  [['Enabled', false, 'Hidden: <code>opacity: 0</code>.'], ['Hover', true, 'Visible: <code>opacity: 1</code>.'], ['Focus (keyboard)', true, 'Visible: <code>opacity: 1</code> on <code>:focus-visible</code> of the trigger. Esc hides it (<code>.is-dismissed</code>); focus leaving hides it too.']].forEach(function (r) {
+    var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+    var td = document.createElement('td'); td.style.cssText = 'padding-top:16px;padding-bottom:56px'; td.appendChild(btn({ pos: 'bottom', label: 'Add user', show: r[1] })); tr.appendChild(td);
+    var d = document.createElement('td'); d.innerHTML = r[2]; tr.appendChild(d); tb.appendChild(tr);
+  });
+  DK.tokenTable($('#tok-table tbody'), [['All', 'Text', 'text-primary-inverted'], ['All', 'Shadow', 'shadow-elevation-b-40']]);
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/tooltip.js"></script>
+</body>
+</html>

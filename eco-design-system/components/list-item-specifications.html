@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>List Item: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/list-item.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { width: 100%; max-width: 408px; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-cap { display: block; margin-bottom: 8px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    /* demo row = what eco-menu draws around a list item: the side padding and the Menu hover fill */
+    .pg-box > .list-item, .pg-box > .pg-grp > .list-item { padding: var(--dimension-spacing-space-12) var(--dimension-spacing-space-16); }
+    .pg-box .list-item:hover:not([aria-disabled="true"]) { background: var(--color-surface-navigation-hover); }
+    .pg-box .list-item[role]:focus-visible { outline-offset: -2px; } /* inside the row, as in Menu */
+    .pg-box { background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-80); }
+    .pg-grp { display: flex; flex-direction: column; }
+    .pg-matrix td { vertical-align: middle; min-width: 260px; }
+    .li-fig { width: 100%; max-width: 360px; }
+    .li-anat { width: 320px; max-width: 100%; }
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="list-item.html" class="breadcrumb-item">List Item</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Menus, lists and dividers</span></div>
+    <h1 class="ds-title">List Item</h1>
+    <p class="ds-lead">A list item is the <strong>content of one row</strong>: an optional leading element, a label and an optional trailing element. It is used inside Menu, Overflow menu, List Picker, Drawer link and Filter sections in drawer content.</p><p class="ds-lead">Tokens, sizes, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=3137-104383" target="_blank" rel="noopener">Base List Item</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="List Item"><a class="tab" href="list-item.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="list-item-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="list-item-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Part</th><th scope="col">Use</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint · size</th><th scope="col">Text</th><th scope="col">Trailing icon</th><th scope="col">Check box / radio area</th></tr></thead><tbody><tr><th scope="row">Desktop · Large</th><td><code>body-md</code> 17/24, 0.32px</td><td>24px</td><td>24px (16px box)</td></tr><tr><th scope="row">Mobile · Large</th><td><code>body-md</code> 16/22, 0.32px</td><td>20px</td><td>24px (16px box)</td></tr><tr><th scope="row">Desktop and mobile · Small</th><td><code>body-sm</code> 14/20, 0.36px</td><td>20px</td><td>20px (14px box)</td></tr></tbody></table></div><p class="ds-desc ds-note"><code>sm</code> (640 to 768px) looks like mobile. Small is the same on every breakpoint.</p><h3 class="ds-h3 ds-group">Leading elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Leading</th><th scope="col">Size</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Icon</th><td>20px</td><td>Material Symbols Outlined, weight 300, <code>icon-primary</code></td></tr><tr><th scope="row">Check box</th><td>16px box in a 24px area</td><td>Same box as <code>eco-checkbox</code>; presentational</td></tr><tr><th scope="row">Radio button</th><td>16px circle in a 24px area</td><td>Same circle as <code>eco-radio</code>; presentational</td></tr><tr><th scope="row">Color swatch</th><td>16px</td><td>Swatch only, no frame</td></tr><tr><th scope="row">Color swatch + frame</th><td>24px frame, 16px swatch</td><td>1px <code>border-secondary</code>; 2px <code>border-selected</code> when selected</td></tr><tr><th scope="row">Image</th><td>48px</td><td>Product or brand image, <code>object-fit: cover</code></td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Trailing controls</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Trailing</th><th scope="col">Size</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Check box, radio</th><td>16px in a 24px area (Small 14px in 20px)</td><td>Same as the leading ones</td></tr><tr><th scope="row">Switch</th><td>Large 48×24px, Small 32×16px</td><td>Track and thumb as <code>eco-switch</code>; on = <code>surface-success-default</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Gap between leading, label and trailing</th><td>8px</td></tr><tr><th scope="row">Row height</th><td>Set by the container; the tallest part is the image (48px)</td></tr><tr><th scope="row">Padding and margin of the item</th><td>None: the container sets the row padding</td></tr><tr><th scope="row">Check box and radio margin</th><td>4px (Large), 3px (Small), so the area is 24px / 20px</td></tr></tbody></table></div><p class="ds-desc ds-note">A list item has no padding of its own, so there is no measurement figure. The row padding belongs to the container (a Menu row has 16px on each side).</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The gap as a spacing token.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Gap between the parts</th><td><code>space-8</code></td></tr><tr><th scope="row">Leading and trailing icon, check box, radio, swatch, image</th><td>Figma sizes: literal, no spacing token</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">A list item has no hover or focus of its own: the container row draws them. The item reflects <strong>selected</strong> and <strong>disabled</strong>. Every item here is live and sits in a demo row that shows the Menu hover (<code>surface-navigation-hover</code>); the hover belongs to the row, not to the list item.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div><span class="ds-toolbar__label" id="ss-l">Size</span><div class="btn-group" role="group" aria-labelledby="ss-l" data-mx="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">Part</th><th scope="col">Unselected</th><th scope="col">Selected</th><th scope="col">Disabled</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Figma shows the enabled item only. <strong>Derived here, not in Figma:</strong> the selected check box, radio and swatch frame (same look as <code>eco-checkbox</code>, <code>eco-radio</code> and the color swatch tile), and the disabled item.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Style</th><th scope="col">Color</th></tr></thead><tbody><tr><th scope="row">Overline</th><td><code>alt-label-sm</code> uppercase, 12/12 mobile, 14/14 desktop</td><td><code>text-tertiary</code></td></tr><tr><th scope="row">Label</th><td><code>body-md</code> / <code>body-sm</code>, regular or bold</td><td><code>text-primary</code></td></tr><tr><th scope="row">Trailing text</th><td>Same as the label</td><td><code>text-secondary</code> or <code>text-tertiary</code></td></tr><tr><th scope="row">Supporting text</th><td><code>body-sm</code> 14/20, max 2 lines</td><td><code>text-tertiary</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed with <code>ss02</code>, <code>ss03</code> and <code>ss06</code>. The bold label is weight 600 (Figma 700 minus 100 in this CSS).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Item</th><td><code>list-item</code>, <code>list-item--sm</code></td><td>A flex row.</td></tr><tr><th scope="row">Fill</th><td><code>list-item__fill</code></td><td>Holds the leading element and the label. Grows to push the trailing element to the right.</td></tr><tr><th scope="row">Leading</th><td><code>list-item__icon</code>, <code>__check</code>, <code>__radio</code>, <code>__swatch</code>, <code>__swatch--tile</code>, <code>__image</code></td><td>One of these.</td></tr><tr><th scope="row">Text</th><td><code>list-item__text</code>, <code>__overline</code>, <code>__label</code>, <code>__label--bold</code>, <code>__support</code></td><td><code>__text</code> is a column for overline, label and supporting text.</td></tr><tr><th scope="row">Trailing</th><td><code>list-item__trail-icon</code>, <code>__trail-text--secondary</code>, <code>__trail-text--tertiary</code>, <code>__check</code>, <code>__radio</code>, <code>__switch</code></td><td>One of these.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Large</th><td><code>list-item</code></td><td>The default.</td></tr><tr><th scope="row">Small</th><td><code>list-item--sm</code></td><td>Compact surfaces.</td></tr><tr><th scope="row">Standalone control</th><td><code>list-item</code> with <code>role="checkbox"</code>, <code>"radio"</code> or <code>"switch"</code></td><td>A pointer and a focus ring; the state is <code>aria-checked</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">The item is <code>width: 100%</code> of its container.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click, Space, Enter</th><td>On a standalone item: toggles <code>aria-checked</code>. A radio only selects and clears the others in its <code>radiogroup</code>.</td></tr><tr><th scope="row">Arrow keys</th><td>In a radio group: move to the next or previous radio and select it (wraps).</td></tr><tr><th scope="row">Tab</th><td>One tab stop per item. In a radio group the checked radio is the tab stop.</td></tr><tr><th scope="row">Disabled</th><td><code>aria-disabled="true"</code> and <code>tabindex="-1"</code>: clicks and keys are ignored.</td></tr><tr><th scope="row">Inside a Menu</th><td>The row handles clicks, keys, hover and focus.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Role</th><td>A standalone item with a control is <code>role="checkbox"</code>, <code>"radio"</code> or <code>"switch"</code> (switch wins over check, check over radio) with <code>aria-checked</code>.</td></tr><tr><th scope="row">State</th><td>Inside a container: <code>aria-selected</code> and <code>aria-disabled</code> on the row. The visual (check, dot, frame, switch) must match the attribute (WCAG 4.1.2).</td></tr><tr><th scope="row">Presentational parts</th><td>The check box, radio, swatch and switch are <code>aria-hidden</code>. Never put a real <code>&lt;input&gt;</code> inside an option row.</td></tr><tr><th scope="row">Focus</th><td>A 2px ring with <code>border-focus</code>, offset 2px, on a standalone item (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Color</th><td>The state is not shown by color alone: the check, the dot or the thumb position changes too (WCAG 1.4.1).</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var uid = 0;
+  var SW = '#1651aa';
+  function markup(o) {
+    var cls = 'list-item' + (o.size === 'sm' ? ' list-item--sm' : '');
+    var lead = { none: '', icon: '<span class="list-item__icon" aria-hidden="true">person</span>', check: '<span class="list-item__check" aria-hidden="true"></span>', radio: '<span class="list-item__radio" aria-hidden="true"></span>',
+      swatch: '<span class="list-item__swatch" style="--swatch: ' + SW + '" aria-hidden="true"></span>', tile: '<span class="list-item__swatch list-item__swatch--tile" style="--swatch: ' + SW + '" aria-hidden="true"></span>',
+      image: '<img class="list-item__image" src="../../images/product-skyddssko.jpg" alt="" />' }[o.lead];
+    var label = o.label === 'none' ? '' : '<span class="list-item__label' + (o.label === 'bold' ? ' list-item__label--bold' : '') + '">' + (o.lead === 'check' ? '0 – 999 kr' : 'Label text') + '</span>';
+    if (o.over === 'yes' || (o.sup && o.sup !== 'none')) label = '<span class="list-item__text">' + (o.over === 'yes' ? '<span class="list-item__overline">Overline</span>' : '') + label + (o.sup === 'one' ? '<span class="list-item__support">Supporting text on one line</span>' : o.sup === 'two' ? '<span class="list-item__support">Supporting text that is long enough to wrap onto a second line in a narrow list, then stops there.</span>' : '') + '</span>';
+    var trail = { none: '', icon: '<span class="list-item__trail-icon" aria-hidden="true">check_circle</span>', check: '<span class="list-item__check" aria-hidden="true"></span>', radio: '<span class="list-item__radio" aria-hidden="true"></span>', switch: '<span class="list-item__switch" aria-hidden="true"></span>', secondary: '<span class="list-item__trail-text list-item__trail-text--secondary">TXT or NUM</span>', tertiary: '<span class="list-item__trail-text list-item__trail-text--tertiary">TXT or NUM</span>' }[o.trail];
+    var role = o.trail === 'switch' ? 'switch' : (o.trail === 'check' || o.lead === 'check') ? 'checkbox' : (o.trail === 'radio' || o.lead === 'radio') ? 'radio' : '';
+    var attr = role ? ' role="' + role + '" tabindex="' + (o.sel === 'dis' ? '-1' : '0') + '" aria-checked="' + (o.sel === 'yes') + '"' + (o.sel === 'dis' ? ' aria-disabled="true"' : '')
+      : o.sel === 'yes' ? ' aria-selected="true"' : o.sel === 'dis' ? ' aria-disabled="true"' : '';
+    return '<div class="' + cls + '"' + attr + '>\n' + (lead || label ? '  <span class="list-item__fill">' + lead + label + '</span>\n' : '  <span class="list-item__fill"></span>\n') + (trail ? '  ' + trail + '\n' : '') + '</div>';
+  }
+  /* Behavior for standalone items: click or Space/Enter toggles aria-checked; a radio selects (never unselects) and clears the others in its role="radiogroup". */
+  function toggle(li) {
+    if (!li || li.getAttribute('aria-disabled') === 'true') return;
+    if (li.getAttribute('role') === 'radio') {
+      var g = li.closest('[role="radiogroup"]');
+      if (g) $$('.list-item[role="radio"]', g).forEach(function (x) { x.setAttribute('aria-checked', 'false'); x.tabIndex = -1; });
+      li.setAttribute('aria-checked', 'true'); li.tabIndex = 0;
+    } else li.setAttribute('aria-checked', String(li.getAttribute('aria-checked') !== 'true'));
+    if (li.id === 'pg-item') { var c = li.getAttribute('aria-checked') === 'true'; pg.sel = c ? 'yes' : 'no'; var sd = $('#pg-sel'); if (sd) { sd.value = pg.sel; sd.dispatchEvent(new Event('change')); } $('#pg-code').textContent = markup(pg); }
+  }
+  document.addEventListener('click', function (e) { toggle(e.target.closest('.list-item[role]')); });
+  document.addEventListener('keydown', function (e) {
+    var li = e.target.closest && e.target.closest('.list-item[role]');
+    if (!li || li !== e.target) return;
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(li); }
+    else if (li.getAttribute('role') === 'radio' && /^Arrow/.test(e.key) && li.closest('[role="radiogroup"]')) {
+      e.preventDefault(); var r = $$('.list-item[role="radio"]:not([aria-disabled="true"])', li.closest('[role="radiogroup"]')), i = r.indexOf(li) + (/Down|Right/.test(e.key) ? 1 : -1);
+      var n = r[(i + r.length) % r.length]; n.focus(); toggle(n);
+    }
+  });
+
+  function item(o) { var d = document.createElement('div'); d.innerHTML = markup(o); return d.firstChild; }
+  function boxed(node) { var b = document.createElement('div'); b.className = 'pg-box'; b.appendChild(node); return b; }
+  function cell(cap, node) { var d = document.createElement('div'); var c = document.createElement('span'); c.className = 'pg-cap'; c.textContent = cap; d.appendChild(c); var b = document.createElement('div'); b.className = 'pg-box'; b.appendChild(node); d.appendChild(b); return d; }
+  var base = { size: 'lg', lead: 'none', label: 'regular', trail: 'none', sel: 'no', over: 'no', sup: 'none' };
+  function o(x) { var r = {}; for (var k in base) r[k] = base[k]; for (k in x) r[k] = x[k]; return r; }
+  var pg = o({ lead: 'check', trail: 'secondary' });
+  var LEAD = [['none', 'None (label only)'], ['icon', 'Icon'], ['check', 'Check box'], ['radio', 'Radio button'], ['swatch', 'Color swatch'], ['tile', 'Color swatch + frame'], ['image', 'Image']];
+  var TRAIL = [['none', 'None'], ['icon', 'Icon'], ['secondary', 'Text secondary'], ['tertiary', 'Text tertiary'], ['check', 'Check box'], ['radio', 'Radio button'], ['switch', 'Switch']];
+
+  var mx = { size: 'lg' };
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    function row(name, x) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = name; tr.appendChild(th);
+      ['no', 'yes', 'dis'].forEach(function (s) { var td = document.createElement('td'); var cfg = {}; for (var k in x) cfg[k] = x[k]; cfg.sel = s; cfg.size = mx.size; td.appendChild(boxed(item(o(cfg)))); tr.appendChild(td); });
+      tb.appendChild(tr);
+    }
+    LEAD.filter(function (x) { return ['check', 'radio', 'tile', 'icon'].indexOf(x[0]) > -1; }).forEach(function (x) { row(x[1], { lead: x[0], trail: 'secondary' }); });
+    [['Trailing check box', 'check'], ['Trailing radio', 'radio'], ['Trailing switch', 'switch']].forEach(function (x) { row(x[0], { lead: 'none', trail: x[1] }); });
+  }
+  DK.seg($('[data-mx="size"]'), function (v) { mx.size = v; buildMatrix(); });
+  DK.bp(function () { buildMatrix(); });
+  buildMatrix();
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Label', 'Text', 'text-primary'], ['Trailing text', 'Secondary', 'text-secondary'], ['Trailing text', 'Tertiary', 'text-tertiary'], ['Icons', 'Leading and trailing', 'icon-primary'],
+    ['Check box, radio', 'Border (unselected)', 'border-input-control-default'], ['Check box, radio', 'Fill (unselected)', 'surface-raised-primary'], ['Check box', 'Fill (selected)', 'surface-100'], ['Radio', 'Border (selected)', 'border-selected'],
+    ['Swatch frame', 'Border', 'border-secondary'], ['Swatch frame', 'Border (selected)', 'border-selected'], ['Overline, supporting text', 'Text', 'text-tertiary'], ['Switch', 'Track off', 'surface-20'], ['Switch', 'Track on', 'surface-success-default'], ['Disabled', 'Text and icons', 'text-disabled'], ['Gap', '8px', 'dimension-spacing-space-8']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

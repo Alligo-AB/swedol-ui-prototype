@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Switch: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/switch.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ds-stage--dark .ds-table, .ds-stage--dark .ds-table th, .ds-stage--dark .ds-table td { color: var(--color-text-primary-inverted); border-color: var(--color-surface-60); }
+    .ds-stage--dark .ds-table thead th { background: transparent; }
+    .ds-table-wrap.ds-stage--dark { padding: 0; background: var(--color-surface-100); }
+    .pg-list { display: flex; flex-direction: column; gap: 16px; }
+    .pg-row { display: flex; flex-wrap: wrap; gap: 24px; }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .sw-fig { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; max-width: 320px; }
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="switch.html" class="breadcrumb-item">Switch</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Switch</h1>
+    <p class="ds-lead">A switch turns <strong>one setting on or off</strong> and applies the change at once. It is for a single binary choice, not for picking between options.</p><p class="ds-lead">How to add a switch to a page. The file is <code>components/css/switch.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Switch"><a class="tab" href="switch.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="switch-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="switch-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page. Never copy the rules into a page, and never build the switch from a <code>div</code> or a <code>button</code>.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/switch.css"&gt;</code>. Both templates already have it.</td></tr><tr><th scope="row">2. Markup</th><td>A <code>label.form-switch-item</code> around an <code>input type="checkbox" role="switch"</code> and a <code>span</code> with the label text.</td></tr><tr><th scope="row">3. Size</th><td>Large is the default. Add <code>form-switch-item--sm</code> or <code>form-switch-item--xs</code>.</td></tr><tr><th scope="row">4. Dark surface</th><td>Add <code>form-switch-item--dark</code> on <code>surface-100</code> or <code>surface-80</code>.</td></tr><tr><th scope="row">5. Effect</th><td>Listen for <code>change</code> and apply the setting at once.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="switch"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Switch</h2><p class="ds-desc">Copy the markup you need. Hover and focus come from <code>:hover</code> and <code>:focus-visible</code>; the <code>[data-state]</code> selectors in the CSS exist only so the documentation can force a state.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>form-switch-item</code></th><td>The label around the input and the text. Large, light.</td></tr><tr><th scope="row"><code>form-switch-item--sm</code></th><td>Small: same track, 14/20 label.</td></tr><tr><th scope="row"><code>form-switch-item--xs</code></th><td>X-Small: 32×16px track.</td></tr><tr><th scope="row"><code>form-switch-item--dark</code></th><td>Dark mode, for dark surfaces.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>The track is the native input with <code>appearance: none</code>; the thumb is its <code>::before</code>.</li><li>Breakpoint: the Large label is 16/22 below 769px and 17/24 from 769px. The CSS does this by itself.</li><li>Two colors have no token (the hover and disabled On track). They are written out in the CSS with a comment.</li><li>The <code>[data-state]</code> selectors do nothing outside the documentation pages.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/switch.css, light and dark)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Standard', '<label class="form-switch-item">\n  <input type="checkbox" role="switch" checked />\n  <span>Email notifications</span>\n</label>'],
+    ['Small and X-Small', '<label class="form-switch-item form-switch-item--sm">\n  <input type="checkbox" role="switch" />\n  <span>Small</span>\n</label>\n<label class="form-switch-item form-switch-item--xs">\n  <input type="checkbox" role="switch" />\n  <span>X-Small</span>\n</label>'],
+    ['Dark surface', '<label class="form-switch-item form-switch-item--dark">\n  <input type="checkbox" role="switch" />\n  <span>Dark mode</span>\n</label>'],
+    ['Without a visible label', '<label class="form-switch-item">\n  <input type="checkbox" role="switch" aria-label="Email notifications for this row" />\n</label>'],
+    ['Disabled', '<label class="form-switch-item">\n  <input type="checkbox" role="switch" checked disabled />\n  <span>Required service messages</span>\n</label>']
+  ]);
+  DK.printCss($('#css-code'), 'switch', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/:is\(:focus-visible, \[data-state="focus"\]\)/g, ':focus-visible'], [/^ {4}/gm, '']]);
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

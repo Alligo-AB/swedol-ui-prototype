@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkbox: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/checkbox.css">
+  <link rel="stylesheet" href="../../components/css/radio.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ds-stage--dark .pg-note { color: var(--color-text-tertiary-inverted); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .cb-pdp { display: flex; flex-direction: column; gap: 8px; padding: 24px; background: var(--color-surface-raised-secondary); }
+    .cb-pdp__label { font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 600; line-height: 16px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-primary); }
+    .cb-pdp__name { font-family: 'Breuer Condensed', sans-serif; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); margin-bottom: 4px; }
+    .cb-filter { max-width: 420px; background: var(--color-surface-raised-primary); }
+    .cb-filter__head { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 16px; }
+    .cb-filter__title { font-family: 'Breuer Condensed', sans-serif; font-size: 20px; font-weight: 600; line-height: 24px; color: var(--color-text-primary); } /* title-md */
+    .cb-filter__chev { font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 1; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .cb-filter__more { display: inline-block; margin: 8px 0 24px; padding: 0; border: 0; background: none; cursor: pointer; font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 600; line-height: 22px; color: var(--color-text-primary); }
+    .cb-filter__more:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .cb-filter__rule { border: 0; border-top: 1px solid var(--color-border-primary); margin: 0; }
+    .cb-colorlist { display: grid; gap: 0 32px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); width: 100%; }
+    .cb-colorlist > div { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--color-border-primary); }
+    .cb-colorlist__label { flex: 0 0 92.58px;  /* 92.58px: fixed label column, as in Figma */ font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1; font-size: 16px; font-weight: 500; line-height: 16px; letter-spacing: 0.32px; text-transform: uppercase; color: var(--color-text-tertiary); } /* alt-label-lg: 16/16 mobile, 18/18 desktop */
+    .cb-colorlist__swatch { width: 16px; height: 16px; background: var(--swatch); flex-shrink: 0; }
+    @media (min-width: 769px) { .cb-colorlist__label { font-size: 18px; line-height: 18px; letter-spacing: 0.36px; } }
+    .cb-tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cb-row { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+    .cb-col { display: flex; flex-direction: column; gap: 4px; }
+    .cb-group { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+    .cb-group legend { font-size: 16px; line-height: 18px; font-weight: 600; margin-bottom: var(--dimension-spacing-space-8); padding: 0; }   /* title-sm */
+    .cb-group--wrap { flex-direction: row; flex-wrap: wrap; gap: 4px 24px; }
+    .cb-group--wrap legend { width: 100%; }
+    .cb-indent { margin-left: 24px; display: flex; flex-direction: column; }
+    .cb-state { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; margin-top: 12px; color: var(--color-text-tertiary); }
+    .ds-stage--dark .cb-state { color: var(--color-text-tertiary-inverted); }
+    .cb-table td, .cb-table th { text-align: center; }
+    .cb-table .check-icon input { display: block; margin: 4px auto; } /* 24px area, so the row stays 48px */
+    .cb-table td:first-child, .cb-table th:first-child { text-align: left; }
+    .cb-fig { display: flex; flex-direction: column; gap: 4px; width: 100%; max-width: 320px; }
+    .ds-callout__art { padding-right: 72px; }   /* room for marker 4 to the right of the label */
+    .cb-measure { display: inline-flex; }
+    .cb-sizes { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 48px; }
+    .ds-table-wrap.ds-stage--dark { padding: 0; background: var(--color-surface-100); }
+    .ds-stage--dark .ds-table, .ds-stage--dark .ds-table th, .ds-stage--dark .ds-table td { color: var(--color-text-primary-inverted); border-color: var(--color-surface-60); }
+    .ds-stage--dark .ds-table thead th { background: transparent; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="checkbox.html" class="breadcrumb-item">Checkbox</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Checkbox</h1>
+    <p class="ds-lead">A checkbox lets the user turn <strong>one or more options</strong> on or off, independently of each other. The choice is saved when the form is submitted.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1548-53635" target="_blank" rel="noopener">Checkbox</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Checkbox"><a class="tab" href="checkbox.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="checkbox-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="checkbox-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Mode</th><th scope="col">Part · state</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">The checkmark and dash are SVG data URIs, which cannot use <code>var()</code>. Their colors (white, black, <code>#939595</code> for the disabled check) are set in the SVG and match <code>icon-inverted</code>, <code>surface-100</code> and <code>surface-40</code>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Area</th><th scope="col">Box</th><th scope="col">Margin</th><th scope="col">Gap to label</th><th scope="col">Label</th></tr></thead><tbody><tr><th scope="row">Large · Desktop</th><td>24×24px</td><td>16×16px</td><td>4px</td><td>8px</td><td><code>body-md</code>: 17/24, 0.32px (769px and up)</td></tr><tr><th scope="row">Large · Mobile</th><td>24×24px</td><td>16×16px</td><td>4px</td><td>8px</td><td><code>body-md</code>: 16/22, 0.32px (below 769px)</td></tr><tr><th scope="row">Small · both</th><td>20×20px</td><td>14×14px</td><td>3px</td><td>4px</td><td><code>body-sm</code>: 14/20</td></tr><tr><th scope="row">Inline menu</th><td colspan="5">Box as above, then a 24×24px dropdown arrow (<code>icon-primary</code>, dark: <code>icon-inverted</code>). Gap 8px Large, 4px Small. No label.</td></tr></tbody></table></div><p class="ds-desc ds-note"><strong>Breakpoint.</strong> Figma has two versions of every checkbox: “XLarge–Large–Medium” (Desktop) and “Small–XSmall” (Mobile). In Figma the box, area, gap and Small label are the same in both; only the Large label differs, following <code>body-md</code> (17/24 on Desktop, 16/22 on Mobile). The component switches at 769px by itself. The Breakpoint toggle in the Playground on Examples &amp; Guidelines forces one of them for preview only.</p><h3 class="ds-h3 ds-group">Tile sizes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Tile</th><th scope="col">Desktop</th><th scope="col">Mobile</th><th scope="col">Inside</th><th scope="col">Border (enabled)</th></tr></thead><tbody><tr><th scope="row">Color swatch</th><td>24×24px</td><td>24×24px</td><td>16px swatch, 2px padding</td><td>1px <code>border-secondary</code></td></tr><tr><th scope="row">Image</th><td>48×48px</td><td>40×40px</td><td>image 6px from the edge, <code>object-fit: contain</code></td><td>1px <code>border-primary</code></td></tr><tr><th scope="row">Number</th><td>48×48px</td><td>40×40px</td><td><code>label-md</code> 16/16, 0.48px, Bold, uppercase</td><td>1px <code>border-secondary</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Hover is 1px <code>border-hover</code>, selected is a 2px <code>border-selected</code> frame, selected hover is a 2px <code>border-selected-hover</code> frame. The fill is <code>surface-raised-primary</code>. In Figma the mobile Color Swatch has a 20×18px swatch box in the selected states; this page uses the 16px swatch for every state and breakpoint.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Box and margin of each size. The shaded area is the 4px margin (3px in Small) that leaves room for the focus ring; the lines show its value.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Margin of the checkbox: Large 4 on every side, Small 3 on every side" style="--k:4"><div class="measure__item"><span class="measure__name">1 · Large</span><div class="measure__obj"><span class="cb-measure"><label class="form-checkbox-item"><input type="checkbox" class="measure__subject" data-measure-margin tabindex="-1" aria-label="Large" /></label></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Small</span><div class="measure__obj"><span class="cb-measure"><label class="form-checkbox-item form-checkbox-item--sm"><input type="checkbox" class="measure__subject" data-measure-margin tabindex="-1" aria-label="Small" /></label></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">The box at 4× size. The numbers are read from the component and are real pixels.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Large</th><th scope="col">Small (<code>.form-checkbox-item--sm</code>)</th></tr></thead><tbody><tr><th scope="row">Area</th><td>24×24px</td><td>20×20px</td></tr><tr><th scope="row">Box</th><td>16×16px, 1px border (dark mode: 2px on hover)</td><td>14×14px</td></tr><tr><th scope="row">Margin around the box</th><td>4px</td><td>3px</td></tr><tr><th scope="row">Focus ring</th><td>2px line, 2px offset (fills the 4px margin)</td><td>2px line, 1px offset (fills the 3px margin)</td></tr><tr><th scope="row">Gap to the label</th><td>8px</td><td>4px</td></tr><tr><th scope="row">Checkmark</th><td>16px mark in the box</td><td>12px (<code>background-size</code>)</td></tr><tr><th scope="row">Corners</th><td colspan="2">Square</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same margin and gap values as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Large</th><th scope="col">Small</th></tr></thead><tbody><tr><th scope="row">Margin around the box</th><td><code>space-4</code></td><td>3px: no spacing token</td></tr><tr><th scope="row">Gap box to label</th><td><code>space-8</code></td><td><code>space-4</code></td></tr><tr><th scope="row">Gap box to arrow (Inline menu)</th><td><code>space-8</code></td><td><code>space-4</code></td></tr></tbody></table></div><p class="ds-desc ds-note">There is no spacing token for 3px. The Small margin is 3px in Figma. <strong>Open point:</strong> keep 3px, or add a token.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Every state for each value. Hover and focus are forced on this page with <code>data-state</code> so they can be seen at the same time; in your code they come from <code>:hover</code> and <code>:focus-visible</code>. The cells are live, so click to change the value (disabled cells do not respond).</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sm-l">Mode</span><div class="btn-group" role="group" aria-labelledby="sm-l" data-mode-toggle><button type="button" data-v="light" aria-pressed="true">Light</button><button type="button" data-v="dark" aria-pressed="false">Dark</button></div><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div><span class="ds-toolbar__label" id="sm-s">Size</span><div class="btn-group" role="group" aria-labelledby="sm-s" data-mx="size"><button type="button" data-v="large" aria-pressed="true">Large</button><button type="button" data-v="small" aria-pressed="false">Small</button></div><span class="ds-toolbar__label" id="sm-t">Type</span><div class="btn-group" role="group" aria-labelledby="sm-t" data-mx="type"><button type="button" data-v="standard" aria-pressed="true">Standard</button><button type="button" data-v="menu" aria-pressed="false">Inline menu</button></div></div><div class="ds-table-wrap" data-mode-stage-bg><table class="ds-table ds-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Unchecked</th><th scope="col">Checked</th><th scope="col">Mixed</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">A checked checkbox in hover is “Selected hover”, in focus “Selected focus”. Every state in Figma is shown: nothing is left out for any size, mode or type.</p><h3 class="ds-h3 ds-group">Tiles</h3><p class="ds-desc">Enabled, hover, selected and selected hover for each tile. Hover is forced on this page. The Number tile only has enabled and hover in Figma.</p><div class="ds-table-wrap"><table class="ds-table ds-matrix" id="tile-matrix"><thead><tr><th scope="col">State</th><th scope="col">Color swatch</th><th scope="col">Image</th><th scope="col">Number</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Selected is a 2px frame, drawn as a 1px border plus a 1px inset line so the tile never changes size. Disabled is not defined in Figma for tiles.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Type</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Label, Large</th><td><code>body-md</code></td><td>16/22 mobile, 17/24 from 769px</td><td>0.32px</td><td>Regular</td></tr><tr><th scope="row">Label, Small</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr><tr><th scope="row">Number tile</th><td><code>label-md</code></td><td>16/16</td><td>0.48px</td><td>Bold, uppercase</td></tr><tr><th scope="row">Filter row name and count</th><td><code>body-md</code></td><td>16/22 mobile, 17/24 from 769px</td><td>0.32px</td><td>Regular</td></tr><tr><th scope="row">Color name in the library</th><td><code>alt-label-lg</code></td><td>16/16 mobile, 18/18 from 769px</td><td>0.32px / 0.36px</td><td>Medium, uppercase</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed. The disabled label uses <code>text-disabled</code>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-group ds-h3">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Area</th><td>Size</td><td>24×24px (Large), 20×20px (Small): the box plus margin</td></tr><tr><th scope="row">Box</th><td>Shape</td><td>Square, 1px border, <code>appearance: none</code> on the native input</td></tr><tr><th scope="row">Checkmark and dash</th><td>Drawing</td><td>SVG data URI as <code>background-image</code>. Never an image file.</td></tr><tr><th scope="row">Label</th><td>Element</td><td><code>&lt;span&gt;</code> inside the <code>&lt;label&gt;</code>; 8px (Large) or 4px (Small) from the box</td></tr><tr><th scope="row">Arrow (Inline menu)</th><td>Size</td><td>24×24px, <code>.cb-arrow</code>, <code>icon-primary</code> (dark: <code>icon-inverted</code>)</td></tr></tbody></table></div><h3 class="ds-group ds-h3">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Standard</th><td><code>.form-checkbox-item</code></td><td>Box and label.</td></tr><tr><th scope="row">Small</th><td><code>.form-checkbox-item--sm</code></td><td>Dense layouts: tables, filters.</td></tr><tr><th scope="row">Dark</th><td><code>.form-checkbox-item--dark</code></td><td>On <code>surface-100</code> or <code>surface-80</code>.</td></tr><tr><th scope="row">Inline menu</th><td><code>.form-checkbox-item--menu</code> with <code>.cb-arrow</code></td><td>Table header: select all and open a menu. No label.</td></tr><tr><th scope="row">Check icon</th><td><code>.check-icon</code> on the cell</td><td>Read-only permission in a table. Always disabled, light only.</td></tr><tr><th scope="row">Tile: color swatch</th><td><code>.form-checkbox-tile</code></td><td>Filtering and PDP. Needs <code>--swatch</code>.</td></tr><tr><th scope="row">Tile: image</th><td><code>.form-checkbox-tile--image</code></td><td>PDP: one at a time with <code>radio</code>.</td></tr><tr><th scope="row">Tile: number</th><td><code>.form-checkbox-tile--number</code></td><td>A <code>&lt;button&gt;</code> with “+10”.</td></tr><tr><th scope="row">Filter row</th><td><code>.form-checkbox-tile--row</code></td><td>Color tile with name and count; the whole row is the click target.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><p class="ds-desc ds-note">None. The checkbox changes state at once, with no transition and no animation.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click box or label</th><td>Toggles checked. Clearing the mixed state also makes it checked.</td></tr><tr><th scope="row">Tab / Shift+Tab</th><td>Moves between checkboxes. The focus ring shows with <code>:focus-visible</code> only.</td></tr><tr><th scope="row">Space</th><td>Toggles the focused checkbox.</td></tr><tr><th scope="row">Mixed</th><td>Set <code>input.indeterminate = true</code> in JavaScript. It cannot be set in HTML.</td></tr><tr><th scope="row">Disabled</th><td>Not focusable, no hover. The label turns <code>text-disabled</code> through <code>:has(input:disabled)</code>.</td></tr><tr><th scope="row">Without label</th><td>Add <code>aria-label</code>. Never use an image or SVG file for the box.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Element</th><td>A native <code>&lt;input type="checkbox"&gt;</code>. The role, the state and the keyboard behavior come from the browser.</td></tr><tr><th scope="row">Name</th><td>A visible <code>&lt;label&gt;</code>, or <code>aria-label</code> when there is no text (Inline menu, tiles, table rows).</td></tr><tr><th scope="row">Group</th><td>Related checkboxes in a <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code>.</td></tr><tr><th scope="row">Mixed</th><td>Set with <code>indeterminate</code> in JavaScript, so assistive technology reads “mixed”.</td></tr><tr><th scope="row">Focus</th><td>Ring with <code>border-focus</code>, 2px, offset 2px, on <code>:focus-visible</code> (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. The label and the box use disabled tokens, which are exempt from contrast requirements.</td></tr><tr><th scope="row">Tiles</th><td>No visible label: <code>aria-label</code> is required. On a PDP, show the name of the chosen option next to the group so the choice is not carried by the picture alone.</td></tr><tr><th scope="row">Color</th><td>Selected is not shown by color alone: it adds a checkmark (box) or a thicker frame (tile).</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  /* Build a real component. o: {dark, checked, mixed, disabled, state, label, aria} */
+  function cb(o) {
+    var l = document.createElement('label');
+    l.className = 'form-checkbox-item' + (o.dark ? ' form-checkbox-item--dark' : '') + (o.small ? ' form-checkbox-item--sm' : '') + (o.menu ? ' form-checkbox-item--menu' : '');
+    var i = document.createElement('input');
+    i.type = 'checkbox'; i.checked = !!o.checked; i.indeterminate = !!o.mixed; i.disabled = !!o.disabled;
+    if (o.state === 'hover' || o.state === 'focus') i.dataset.state = o.state;
+    if (o.aria) i.setAttribute('aria-label', o.aria);
+    l.appendChild(i);
+    if (o.menu) {
+      var a = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      a.setAttribute('class', 'cb-arrow'); a.setAttribute('viewBox', '0 0 24 24'); a.setAttribute('aria-hidden', 'true');
+      a.innerHTML = '<path d="M7 10l5 5 5-5z"/>'; l.appendChild(a);
+    } else if (o.label != null) { var s = document.createElement('span'); s.textContent = o.label; l.appendChild(s); }
+    return l;
+  }
+
+  var mode = 'light';
+  /* ── State matrix ── */
+  var ROWS = [['Enabled', 'enabled'], ['Hover', 'hover'], ['Focus', 'focus'], ['Disabled', 'disabled']];
+  var mx = { size: 'large', type: 'standard' };
+  $$('[data-mx]').forEach(function (g) { DK.seg(g, function (v) { mx[g.dataset.mx] = v; buildMatrix(); }); });
+  var COLS = ['unchecked', 'checked', 'mixed'];
+  function buildMatrix() {
+    var d = mode === 'dark', tb = clear($('#matrix tbody'));
+    $('[data-mode-stage-bg]').classList.toggle('ds-stage--dark', d);
+    var menu = mx.type === 'menu', small = mx.size === 'small';
+    ROWS.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th');
+      th.scope = 'row'; th.textContent = r[0] + (r[1] === 'hover' ? ' / Selected hover' : r[1] === 'focus' ? ' / Selected focus' : '');
+      tr.appendChild(th);
+      COLS.forEach(function (c) {
+        var td = document.createElement('td');
+        td.appendChild(cb({ dark: d, small: small, menu: menu, checked: c === 'checked', mixed: c === 'mixed', disabled: r[1] === 'disabled', state: r[1], aria: r[0] + ', ' + c, label: menu ? null : undefined }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  DK.mode(function (m) { mode = m; buildMatrix(); });
+  buildMatrix();
+
+  var COLORS = [["Yellow", "conic-gradient(from 0deg, rgb(217,217,0) 0%, rgb(246,246,8) 51%, rgb(246,246,8) 100%)"], ["White", "conic-gradient(from 0deg, rgb(231,231,231) 0%, rgb(255,255,255) 50.5%, rgb(255,255,255) 100%)"], ["Beige", "conic-gradient(from 0deg, rgb(210,210,190) 0%, rgb(245,245,220) 51%, rgb(245,245,220) 100%)"], ["Black", "conic-gradient(from 0deg, rgb(0,0,0) 0%, rgb(0,0,0) 52%, rgb(8,8,8) 58%, rgb(17,17,17) 64%, rgb(33,33,33) 76%, rgb(50,50,50) 88%, rgb(67,67,67) 100%)"], ["Blue", "conic-gradient(from 0deg, rgb(22,81,170) 0%, rgb(11,91,212) 25%, rgb(0,102,255) 50%, rgb(18,113,255) 62.5%, rgb(35,123,255) 75%, rgb(70,144,255) 100%)"], ["Bronze", "conic-gradient(from 0deg, rgb(168,103,39) 0%, rgb(205,127,50) 48%, rgb(229,156,84) 100%)"], ["Brown", "conic-gradient(from 0deg, rgb(150,75,0) 0%, rgb(150,75,0) 50.5%, rgb(158,85,12) 62.875%, rgb(167,95,23) 75.25%, rgb(184,115,47) 100%)"], ["Gold", "conic-gradient(from 0deg, rgb(204,174,12) 0%, rgb(255,215,0) 50%, rgb(255,217,11) 62.5%, rgb(255,219,23) 75%, rgb(255,222,46) 100%)"], ["Green", "conic-gradient(from 0deg, rgb(8,131,8) 0%, rgb(4,166,4) 25.5%, rgb(0,200,0) 51%, rgb(0,233,0) 100%)"], ["Grey", "conic-gradient(from 0deg, rgb(116,113,113) 0%, rgb(128,128,128) 50%, rgb(156,154,154) 75%, rgb(184,181,181) 100%)"], ["Oak", "conic-gradient(from 0deg, rgb(178,147,109) 0%, rgb(216,181,137) 50%, rgb(235,205,166) 100%)"], ["Orange", "conic-gradient(from 0deg, rgb(190,128,13) 0%, rgb(255,165,0) 50%, rgb(255,170,14) 62.5%, rgb(255,175,28) 75%, rgb(255,185,56) 100%)"], ["Pink", "conic-gradient(from 0deg, rgb(253,155,172) 0%, rgb(255,192,203) 50.5%, rgb(255,192,203) 100%)"], ["Purple", "conic-gradient(from 0deg, rgb(104,0,169) 0%, rgb(136,15,212) 25%, rgb(169,31,255) 50%, rgb(180,60,255) 75%, rgb(192,90,255) 100%)"], ["Red", "conic-gradient(from 0deg, rgb(198,29,29) 0%, rgb(226,15,15) 25.75%, rgb(241,7,7) 38.625%, rgb(255,0,0) 51.5%, rgb(255,12,12) 63.625%, rgb(255,25,25) 75.75%, rgb(255,50,50) 100%)"], ["Silver", "conic-gradient(from 0deg, rgb(168,168,168) 0%, rgb(192,192,192) 49.5%, rgb(217,217,217) 100%)"], ["Teak", "conic-gradient(from 0deg, rgb(136,108,64) 0%, rgb(171,137,83) 50%, rgb(171,137,83) 100%)"], ["Pattern", "conic-gradient(var(--color-surface-100) 25%, var(--color-surface-raised-primary) 0 50%, var(--color-surface-100) 0 75%, var(--color-surface-raised-primary) 0) 0 0 / 8px 8px"], ["Dark", "conic-gradient(from 0deg, rgb(0,0,0) 0%, rgb(0,0,0) 52%, rgb(8,8,8) 58%, rgb(17,17,17) 64%, rgb(33,33,33) 76%, rgb(50,50,50) 88%, rgb(67,67,67) 100%)"], ["Multi color", "conic-gradient(from 180deg, rgb(255,0,0) 0%, rgb(254,15,1) 0.97%, rgb(254,31,1) 1.94%, rgb(253,62,2) 3.88%, rgb(252,92,3) 5.81%, rgb(251,123,4) 7.75%, rgb(248,185,6) 11.63%, rgb(246,246,8) 15.5%, rgb(170,246,8) 34%, rgb(130,247,8) 37.38%, rgb(90,248,9) 40.75%, rgb(50,249,9) 44.13%, rgb(30,249,10) 45.81%, rgb(10,250,10) 47.5%, rgb(19,236,24) 48.63%, rgb(29,223,39) 49.75%, rgb(47,195,67) 52%, rgb(66,168,96) 54.25%, rgb(85,141,125) 56.5%, rgb(104,114,154) 58.75%, rgb(122,86,182) 61%, rgb(141,59,211) 63.25%, rgb(160,32,240) 65.5%, rgb(168,72,228) 68.63%, rgb(176,112,216) 71.75%, rgb(184,152,204) 74.88%, rgb(192,192,192) 78%, rgb(192,192,192) 86.5%, rgb(208,144,144) 89.88%, rgb(224,96,96) 93.25%, rgb(231,72,72) 94.94%, rgb(239,48,48) 96.63%, rgb(247,24,24) 98.31%, rgb(251,12,12) 99.16%, rgb(255,0,0) 100%)"], ["Black mirror", "linear-gradient(90deg, rgb(233,233,233) 0%, rgb(158,158,158) 42.5%, rgb(0,0,0) 100%)"], ["Clear", "linear-gradient(90deg, rgb(255,255,255) 0%, rgb(243,243,243) 28%, rgb(237,237,237) 56%, rgb(212,212,212) 88.5%, rgb(203,203,203) 100%)"], ["Matte", "linear-gradient(90deg, rgb(196,192,192) 0%, rgb(131,131,131) 100%)"], ["Mirror lens", "linear-gradient(90deg, rgb(219,255,255) 0%, rgb(121,255,255) 100%)"], ["Semi shiny", "linear-gradient(90deg, rgb(233,233,233) 0%, rgb(131,131,131) 100%)"], ["Transparent", "conic-gradient(from 0deg, rgb(233 233 233 / 0.5), rgb(245 245 245 / 0.5))"]]; /* product colors from the Figma color library: product data, not design tokens */
+  var IMAGES = [['Orange', '/images/product-skaljacka-orange.webp'], ['Red', '/images/product-skaljacka-rod.webp'], ['Yellow / black', '/images/product-skaljacka-gul-svart.webp'], ['Yellow / navy', '/images/product-skaljacka-gul-marin.webp']];
+
+  function tile(o) {
+    var box = document.createElement('span'); box.className = 'form-checkbox-tile__box';
+    var el;
+    if (o.kind === 'number') {
+      el = document.createElement('button'); el.type = 'button'; el.className = 'form-checkbox-tile form-checkbox-tile--number'; el.setAttribute('aria-label', o.name || 'Show 10 more');
+      box.textContent = o.text || '+10'; el.appendChild(box);
+    } else {
+      el = document.createElement('label'); el.className = 'form-checkbox-tile' + (o.kind === 'image' ? ' form-checkbox-tile--image' : '');
+      var i = document.createElement('input'); i.type = 'checkbox'; i.checked = !!o.checked; i.setAttribute('aria-label', o.name); el.appendChild(i);
+      if (o.kind === 'image') { var im = document.createElement('img'); im.src = o.src; im.alt = ''; box.appendChild(im); }
+      else { var sw = document.createElement('span'); sw.className = 'form-checkbox-tile__swatch'; sw.style.setProperty('--swatch', o.color); box.appendChild(sw); }
+      el.appendChild(box);
+    }
+    if (o.state) el.dataset.state = o.state;
+    return el;
+  }
+  var tb = clear($('#tile-matrix tbody'));
+  [['Enabled', null, false], ['Hover', 'hover', false], ['Selected', null, true], ['Selected hover', 'hover', true]].forEach(function (r) {
+    var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+    [['color', COLORS[4]], ['image', IMAGES[0]], ['number', null]].forEach(function (k) {
+      var td = document.createElement('td');
+      if (k[0] === 'number' && r[2]) { td.className = 'ds-na'; td.textContent = 'Not defined'; }
+      else td.appendChild(tile({ kind: k[0], name: k[1] ? k[1][0] : 'Show 10 more', color: k[0] === 'color' ? k[1][1] : null, src: k[0] === 'image' ? k[1][1] : null, checked: r[2], state: r[1] }));
+      tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+
+  /* ── Token table (resolved live) ── */
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Light', 'Box border · enabled', 'border-input-control-default'], ['Light', 'Box fill · enabled', 'surface-raised-primary'],
+    ['Light', 'Box border · hover', 'border-hover'], ['Light', 'Box fill · hover', 'surface-raised-secondary'],
+    ['Light', 'Box fill · checked / mixed', 'surface-100'], ['Light', 'Box fill · checked / mixed hover', 'surface-50'],
+    ['Light', 'Box border · disabled', 'border-disabled'], ['Light', 'Box fill · disabled', 'surface-disabled'],
+    ['Light', 'Focus ring', 'border-focus'], ['Light', 'Label', 'text-primary'], ['Light', 'Label · disabled', 'text-disabled'],
+    ['Dark', 'Box border · enabled / checked', 'border-action-2'], ['Dark', 'Box fill · enabled', 'surface-opacity-white-0'],
+    ['Dark', 'Box fill · checked / mixed', 'surface-action-2'], ['Dark', 'Box fill · checked hover', 'surface-40'],
+    ['Dark', 'Box border / fill · disabled', 'surface-60'], ['Dark', 'Label', 'text-primary-inverted'], ['Dark', 'Label · disabled', 'text-disabled'],
+    ['Tile', 'Border · enabled (swatch, number)', 'border-secondary'], ['Tile', 'Border · enabled (image)', 'border-primary'], ['Tile', 'Border · hover', 'border-hover'],
+    ['Tile', 'Frame · selected (2px)', 'border-selected'], ['Tile', 'Frame · selected hover (2px)', 'border-selected-hover'], ['Tile', 'Fill', 'surface-raised-primary'], ['Tile', 'Number text', 'text-primary']
+  ]);
+  DK.bp(function () { ECO_MEASURE.init(); });
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

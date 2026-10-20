@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { width: 100%; max-width: 408px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-cap { display: block; margin-bottom: 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; min-width: 260px; }
+    .mn-fig { width: 100%; max-width: 320px; }
+    .mn-measure { display: block; width: 280px; }   /* demo: a fixed width, so the padding strips have a row to sit on */
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="menu.html" class="breadcrumb-item">Menu</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Menus, lists and dividers</span></div>
+    <h1 class="ds-title">Menu</h1>
+    <p class="ds-lead">A menu is the <strong>list surface</strong> that opens from a button or action (Dropdown menu) or from a Select field (Exposed dropdown menu). The two differ only in the element that opens the surface, so they share one component.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=2723-85186" target="_blank" rel="noopener">Base Item</a> and <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=2728-86374" target="_blank" rel="noopener">Menu Item Divider</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Menu"><a class="tab" href="menu.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="menu-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="menu-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint · size</th><th scope="col">Row height</th><th scope="col">Max height (14 rows)</th><th scope="col">Check icon</th><th scope="col">Text</th></tr></thead><tbody><tr><th scope="row">Desktop · Large</th><td>48px</td><td>672px</td><td>24px</td><td><code>body-md</code> 17/24, 0.32px</td></tr><tr><th scope="row">Desktop · Small</th><td>40px</td><td>560px</td><td>20px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr><tr><th scope="row">Mobile · Large</th><td>40px</td><td>560px</td><td>20px</td><td><code>body-md</code> 16/22, 0.32px</td></tr><tr><th scope="row">Mobile · Small</th><td>32px</td><td>448px</td><td>20px</td><td><code>body-sm</code> 14/20, 0.36px</td></tr></tbody></table></div><p class="ds-desc ds-note"><code>sm</code> (640 to 768px) looks like mobile. The scrollbar is 12px wide.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Padding of one row at each size. The shaded areas are the 16px padding to the left and right; the row height comes from the size, not from padding. The numbers are read from the component.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Padding of a menu row: left and right, per size"><div class="measure__item"><span class="measure__name">1 · Large</span><div class="measure__obj"><span class="mn-measure"><div class="menu"><ul class="menu__items" role="presentation"><li class="menu__item measure__subject"><span class="menu__item-label">Label text</span></li></ul></div></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Small</span><div class="measure__obj"><span class="mn-measure"><div class="menu menu--sm"><ul class="menu__items" role="presentation"><li class="menu__item measure__subject"><span class="menu__item-label">Label text</span></li></ul></div></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">A row at true size (1:1).</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Large</th><th scope="col">Small</th></tr></thead><tbody><tr><th scope="row">Row height, Desktop</th><td>48px</td><td>40px</td></tr><tr><th scope="row">Row height, Mobile</th><td>40px</td><td>32px</td></tr><tr><th scope="row">Padding left and right</th><td colspan="2">16px</td></tr><tr><th scope="row">Padding top and bottom</th><td colspan="2">0 (the row has a minimum height)</td></tr><tr><th scope="row">Gap, label to icon</th><td colspan="2">8px</td></tr><tr><th scope="row">Divider</th><td colspan="2">1px, inside the row height</td></tr><tr><th scope="row">Divider inset, middle-inset</th><td colspan="2">16px on each side</td></tr><tr><th scope="row">Focus ring</th><td colspan="2">2px, inside the row</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same padding and distances as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Row padding, left and right</th><td><code>space-16</code></td></tr><tr><th scope="row">Gap, label to icon</th><td><code>space-8</code></td></tr><tr><th scope="row">Divider inset</th><td><code>space-16</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="elevation"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Elevation</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th></tr></thead><tbody><tr><th scope="row">Menu surface</th><td><code>elevation-b-80</code></td></tr></tbody></table></div><p class="ds-desc ds-note">The shadow is listed with the other tokens under Design Tokens.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Enabled, hover, focus, selected and disabled for both selection types. Hover and focus are forced on this page; in your code they come from <code>:hover</code> and keyboard focus (<code>:focus-visible</code>).</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div><span class="ds-toolbar__label" id="ss-l">Size</span><div class="btn-group" role="group" aria-labelledby="ss-l" data-mx="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Select</th><th scope="col">Multi Select</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Figma defines Enabled, Hover, Selected and <strong>Disabled · selected</strong> (Select, all sizes), and Multi Select for Large on desktop only. <strong>Derived here, not in Figma:</strong> the Focus ring (2px <code>border-focus</code> inside the row, as in the other form components), the plain Disabled row, Disabled in Multi Select, and Multi Select for Small and mobile (same 20px icon as the Select variant on those sizes).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Type</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Label, Large</th><td><code>body-md</code></td><td>16/22 mobile, 17/24 from 769px</td><td>0.32px</td><td>Regular</td></tr><tr><th scope="row">Label, Small</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed with <code>ss02</code>, <code>ss03</code> and <code>ss06</code>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Menu</th><td><code>menu</code>, <code>menu--sm</code>, <code>--multi</code>, <code>--full</code>, <code>--none</code></td><td>The white surface with the shadow.</td></tr><tr><th scope="row">List</th><td><code>menu__items</code></td><td>A <code>ul</code> with <code>role="listbox"</code>. Scrolls after 14 rows.</td></tr><tr><th scope="row">Row</th><td><code>menu__item</code></td><td>An <code>li</code> with <code>role="option"</code> and <code>aria-selected</code>.</td></tr><tr><th scope="row">Label</th><td><code>menu__item-label</code></td><td>Fills the row.</td></tr><tr><th scope="row">Check icon</th><td><code>menu__item-icon</code></td><td>Draws <code>circle</code> or <code>check_circle</code> with a pseudo-element. Empty in the markup.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Select</th><td><code>menu</code></td><td>One choice, marked with a check.</td></tr><tr><th scope="row">Multi Select</th><td><code>menu menu--multi</code></td><td>Several choices: a circle on every row, a check on the chosen ones.</td></tr><tr><th scope="row">Small</th><td><code>menu--sm</code></td><td>Compact surfaces.</td></tr><tr><th scope="row">Full-width divider</th><td><code>menu--full</code></td><td>The line runs edge to edge.</td></tr><tr><th scope="row">No divider</th><td><code>menu--none</code></td><td>No line between rows.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">The menu is <code>width: 100%</code> of the container the opener gives it.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Hover</th><td>Row fill changes. In Multi Select an unselected row previews the check.</td></tr><tr><th scope="row">Click, Enter, Space</th><td>Chooses the row. Select replaces the choice; Multi Select toggles it.</td></tr><tr><th scope="row">Tab</th><td>Rows are focusable. A 2px ring shows inside the row on keyboard focus.</td></tr><tr><th scope="row">Arrow keys</th><td>Up and Down move between rows and skip a disabled row.</td></tr><tr><th scope="row">Disabled row</th><td><code>aria-disabled="true"</code>: <code>text-disabled</code> text and icon, no hover fill, not focusable, click and Enter ignored.</td></tr><tr><th scope="row">Escape</th><td>The opener closes the menu and returns focus to itself.</td></tr><tr><th scope="row">Scrolling</th><td>After 14 rows the list scrolls.</td></tr></tbody></table></div><p class="ds-desc ds-note">Open and close behavior belongs to the opener (button or Select field). This page shows the surface only.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Roles</th><td><code>role="listbox"</code> on the list, <code>role="option"</code> and <code>aria-selected</code> on each row, <code>aria-multiselectable="true"</code> for Multi Select. Name the list with <code>aria-label</code>.</td></tr><tr><th scope="row">Focus</th><td>Rows are focusable. A 2px ring on keyboard focus (<code>border-focus</code>) (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Keyboard</th><td>Arrow keys, Enter and Space work. Escape closes through the opener.</td></tr><tr><th scope="row">State</th><td>The check icon is not the only signal: <code>aria-selected</code> carries the state for assistive technology (WCAG 1.4.1).</td></tr><tr><th scope="row">Disabled</th><td>A disabled row is <code>aria-disabled</code> and not focusable. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var uid = 0;
+  function menu(o) {
+    var m = document.createElement('div');
+    m.className = 'menu' + (o.size === 'sm' ? ' menu--sm' : '') + (o.multi ? ' menu--multi' : '') + (o.divider === 'full' ? ' menu--full' : o.divider === 'none' ? ' menu--none' : '');
+    var ul = document.createElement('ul'); ul.className = 'menu__items'; ul.setAttribute('role', 'listbox'); ul.setAttribute('aria-label', 'Menu ' + (++uid));
+    if (o.multi) ul.setAttribute('aria-multiselectable', 'true');
+    for (var i = 0; i < (o.rows || 5); i++) {
+      var li = document.createElement('li'); li.className = 'menu__item'; li.setAttribute('role', 'option'); li.tabIndex = 0;
+      li.setAttribute('aria-selected', String((o.selected || []).indexOf(i) > -1));
+      if ((o.disabled || []).indexOf(i) > -1) { li.setAttribute('aria-disabled', 'true'); li.tabIndex = -1; }
+      if ((o.hover || []).indexOf(i) > -1) li.dataset.state = 'hover';
+      if ((o.focus || []).indexOf(i) > -1) li.dataset.state = 'focus';
+      li.innerHTML = '<span class="menu__item-label">Label text</span><span class="menu__item-icon" aria-hidden="true"></span>';
+      ul.appendChild(li);
+    }
+    ul.addEventListener('click', function (e) {
+      var li = e.target.closest('.menu__item'); if (!li || li.getAttribute('aria-disabled') === 'true') return;
+      if (o.multi) li.setAttribute('aria-selected', String(li.getAttribute('aria-selected') !== 'true'));
+      else $$('.menu__item', ul).forEach(function (x) { x.setAttribute('aria-selected', String(x === li)); });
+    });
+    ul.addEventListener('keydown', function (e) {
+      var li = e.target.closest('.menu__item'); if (!li) return;
+      var items = $$('.menu__item:not([aria-disabled="true"])', ul), i = items.indexOf(li);
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); li.click(); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); (items[i + 1] || li).focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); (items[i - 1] || li).focus(); }
+    });
+    m.appendChild(ul); return m;
+  }
+  function cell(cap, node) { var d = document.createElement('div'); var c = document.createElement('span'); c.className = 'pg-cap'; c.textContent = cap; d.appendChild(c); d.appendChild(node); return d; }
+
+
+  var mx = { size: 'lg' };
+  var ROWS = [['Enabled', {}], ['Hover', { hover: [0] }], ['Focus', { focus: [0] }], ['Selected', { selected: [0] }], ['Disabled', { disabled: [0] }], ['Disabled · selected', { disabled: [0], selected: [0] }]];
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    ROWS.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      [false, true].forEach(function (multi) {
+        var td = document.createElement('td');
+        td.appendChild(menu({ size: mx.size, multi: multi, rows: 1, hover: r[1].hover, focus: r[1].focus, selected: r[1].selected, disabled: r[1].disabled, divider: 'inset' }));
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  DK.seg($('[data-mx="size"]'), function (v) { mx.size = v; buildMatrix(); });
+  DK.bp(function () { buildMatrix(); });
+  buildMatrix();
+  DK.tokenTable($('#tok-table tbody'), [
+    ['All', 'Fill', 'surface-raised-primary'], ['All', 'Text', 'text-primary'], ['All', 'Divider', 'border-secondary'],
+    ['Hover', 'Row fill', 'surface-navigation-hover'], ['Hover (Multi)', 'Preview check', 'text-action-tertiary'],
+    ['Enabled (Multi)', 'Circle icon', 'text-action-tertiary'], ['Selected', 'Check icon', 'text-action-primary'], ['Focus', 'Ring (2px, inside)', 'border-focus'],
+    ['Disabled', 'Text and icon', 'text-disabled'], ['Scrollbar', 'Track', 'surface-02'], ['Scrollbar', 'Track edge', 'border-primary'], ['Scrollbar', 'Handle', 'surface-30'],
+    ['Container', 'Shadow', 'shadow-elevation-b-80']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

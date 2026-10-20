@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inline link: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; }
+    .pg-p { margin: 0; color: var(--color-text-primary); max-width: 560px; }
+    .ds-stage--dark .pg-p { color: var(--color-text-primary-inverted); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-dark { background: var(--color-surface-100); }
+    .pg-dark .pg-p { color: var(--color-text-primary-inverted); }
+    .pg-ex { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-weight: 400; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }   /* body-md: the writing examples (16/22, 17/24 from 769px) */
+    @media (min-width: 769px) { .pg-ex { font-size: 17px; line-height: 24px; } }
+    #usage .ds-fig__stage { align-items: flex-start; }   /* every Do / Don't box of this page: content at the top */
+    .pg-exfigs .ds-fig__stage { min-height: 0; padding: 16px 24px; justify-content: flex-start; align-items: flex-start; }   /* low boxes for short examples; JS makes a Do and a Don't box the same height */
+    .pg-exs { width: 100%; }   /* the lines of one Do or Don't figure, one example per line */
+    .pg-ex + .pg-ex { margin-top: 12px; }
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="links-guide.html" class="breadcrumb-item">Links guide</a><span class="breadcrumb-sep">/</span><a href="inline-link.html" class="breadcrumb-item">Inline link</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span></div>
+    <h1 class="ds-title">Inline link</h1>
+    <p class="ds-lead">An inline link is an underlined text link that flows <strong>within body copy, lists and UI text</strong>. The underline is its affordance, and it is never paired with icons.</p><p class="ds-lead">How to add an inline link to a page. The file is <code>components/css/inline-link.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Inline link"><a class="tab" href="inline-link.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="inline-link-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="inline-link-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/inline-link.css"&gt;</code>. Both templates already have it.</td></tr><tr><th scope="row">2. Markup</th><td>A real <code>&lt;a href&gt;</code> with <code>class="inline-link inline-link--medium"</code> inside the text.</td></tr><tr><th scope="row">3. Size</th><td>Choose the size that matches the text around the link.</td></tr><tr><th scope="row">4. Color</th><td>The same color as the text around the link: Primary (no class) in Primary text, <code>inline-link--secondary</code> in Secondary text, <code>--tertiary</code> in Tertiary text, <code>--inverted</code> on a dark surface.</td></tr><tr><th scope="row">5. Icons</th><td>None. For an icon use an Action link.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="inline-link"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Inline link</h2><p class="ds-desc">Copy the markup you need. Hover comes from <code>:hover</code>; the <code>[data-state]</code> selectors in the CSS exist only so the documentation can force a state.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>inline-link</code></th><td>The link. Primary color, underlined.</td></tr><tr><th scope="row"><code>inline-link--xlarge</code>, <code>--large</code>, <code>--medium</code>, <code>--small</code></th><td>Size.</td></tr><tr><th scope="row"><code>inline-link--weight-medium</code>, <code>--bold</code></th><td>Weight (any size). <code>--small-bold</code> is kept: Small and Bold.</td></tr><tr><th scope="row"><code>inline-link--italic</code></th><td>Italic style.</td></tr><tr><th scope="row"><code>inline-link--reverse</code></th><td>No underline when enabled, underline on hover.</td></tr><tr><th scope="row"><code>inline-link--secondary</code>, <code>--tertiary</code></th><td>Colors for grey text.</td></tr><tr><th scope="row"><code>inline-link--inverted</code></th><td>For a dark surface.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>Breakpoint: XLarge, Large and Medium change at 769px. The CSS does this by itself.</li><li>The color is the color of the text around the link: Primary (<code>text-primary</code>), <code>--secondary</code> in <code>text-secondary</code> text, <code>--tertiary</code> in <code>text-tertiary</code> text. The hover colors are <code>text-action-primary-hover</code>, <code>text-action-secondary-hover</code> and <code>text-action-tertiary-hover</code>.</li><li>Never add an icon: use an Action link.</li><li>The focus ring needs <code>body.keyboard-nav</code>, which the templates set on the first Tab press.</li><li>The <code>[data-state]</code> selectors do nothing outside the documentation pages.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/inline-link.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['In body text (Primary, Medium)', '<p>Read more about our products on the\n  <a href="/products" class="inline-link inline-link--medium">product page</a>.\n</p>'],
+    ['Secondary and Tertiary', '<p>See <a href="/terms" class="inline-link inline-link--medium inline-link--secondary">full terms</a> for details.</p>'],
+    ['Weight: Medium and Bold', '<a href="/news" class="inline-link inline-link--small inline-link--weight-medium">Read more</a>\n<a href="/news" class="inline-link inline-link--small inline-link--bold">Read more</a>'],
+    ['Italic', '<p><em>See <a href="/terms" class="inline-link inline-link--medium inline-link--italic">full terms</a>.</em></p>'],
+    ['Reverse underline', '<a href="/news" class="inline-link inline-link--medium inline-link--reverse">Read more</a>'],
+    ['Inverted, on a dark surface', '<p style="color: var(--color-text-primary-inverted)">Contact us at\n  <a href="mailto:info@example.com" class="inline-link inline-link--medium inline-link--inverted">info@example.com</a>.\n</p>']
+  ]);
+  DK.printCss($('#css-code'), 'inline-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/^ {4}/gm, '']]);
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

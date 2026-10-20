@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patterns overview – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/breadcrumb.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout of the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); margin: 0; }
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .ds-fig__stage--start { align-items: flex-start; justify-content: flex-start; }
+    .ds-fig__stage .breadcrumb { padding-left: 0; padding-right: 0; padding-bottom: 0; }   /* the page margin and the built-in bottom padding belong to a real page, not to a docs figure */
+    .ds-fig__stage .breadcrumb__bar { padding: 0; }
+    .pg-cmp td, .pg-cmp th { vertical-align: top; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="../index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../index.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../components-overview.html" class="breadcrumb-item">Components</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="../components-overview.html#patterns" class="breadcrumb-item">Patterns</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Patterns overview</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Patterns</span></div>
+    <h1 class="ds-title">Patterns overview</h1>
+    <p class="ds-lead">A component is one building block. A <strong>pattern</strong> is a recipe that puts several of them together to solve a task. Read this page to know which one you are building, and where it is documented.</p>
+  </div>
+</section>
+
+<div class="ds-sep"><hr class="divider" /></div>
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Overview</h2>
+  <p class="ds-desc">ECO documents two kinds of reusable parts. A <strong>component</strong> is one piece of interface with its own markup, states and sizes: a button, a checkbox, a single breadcrumb crumb. A <strong>pattern</strong> is a composed solution built from several components of the same kind or of different kinds, plus the layout rules that make them work together: how many, in which order, with which spacing and where on the page.</p>
+  <p class="ds-desc">The difference is not size. A pattern can be small (a breadcrumb bar is one row) and a component can be large (a modal). The difference is what the part is made of and what it decides.</p>
+  <h3 class="ds-h3 ds-group">In one line each</h3>
+  <ul class="ds-bullets">
+    <li><strong>Component:</strong> one building block that other things are made from.</li>
+    <li><strong>Pattern:</strong> several building blocks, arranged to do one job on a page.</li>
+  </ul>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="side-by-side"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Component or pattern</h2>
+  <p class="ds-desc">The same family can hold both. Breadcrumb is the clearest example: the single crumb is a component, and the row of crumbs is a pattern made from it.</p>
+  <div class="ds-figs">
+    <figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--start"><div class="pg-row" id="demo-comp"></div></div><figcaption class="ds-fig__cap">Component: <a class="inline-link inline-link--medium" href="breadcrumb-base.html">Breadcrumb Base</a>. One crumb, with its own states and sizes.</figcaption></figure>
+    <figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--start"><div id="demo-pat" style="width:100%"></div></div><figcaption class="ds-fig__cap">Pattern: <a class="inline-link inline-link--medium" href="breadcrumb-bar.html">Breadcrumb Bar</a>. Several crumbs, the separators and the page spacing.</figcaption></figure>
+  </div>
+  <h3 class="ds-h3 ds-group">The differences</h3>
+  <div class="ds-table-wrap"><table class="ds-table pg-cmp"><thead><tr><th scope="col"></th><th scope="col">Component</th><th scope="col">Pattern</th></tr></thead><tbody>
+    <tr><th scope="row">What it is</th><td>One piece of interface that does one thing</td><td>A composed solution to one task on a page</td></tr>
+    <tr><th scope="row">Made of</th><td>Its own markup, its own CSS and tokens</td><td>Components of ECO, plus arrangement rules. It adds no colors, type or elements of its own</td></tr>
+    <tr><th scope="row">Decides</th><td>Look, states, sizes, behavior of the part itself</td><td>How many parts, in which order, the spacing between them, where on the page, what happens when it does not fit</td></tr>
+    <tr><th scope="row">States and sizes</th><td>Has them (enabled, hover, focus, Large, Small …)</td><td>Inherits them from its components. It has variants of arrangement, not of states</td></tr>
+    <tr><th scope="row">Figma</th><td>A component or a component set</td><td>A composition of components, often a frame or a component that contains other components</td></tr>
+    <tr><th scope="row">Reused by</th><td>Patterns and pages</td><td>Pages</td></tr>
+    <tr><th scope="row">Example</th><td>Button, Checkbox, Badge, Breadcrumb Base</td><td>Breadcrumb Bar, Hero banner, Splash card carousel</td></tr>
+    <tr><th scope="row">In the documentation</th><td>Its group under Components, in the left navigation</td><td>The <a class="inline-link inline-link--small inline-link--primary" href="../components-overview.html#patterns">Patterns</a> group, after the component groups</td></tr>
+  </tbody></table></div>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="how-to-tell"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">How to tell which one</h2>
+  <p class="ds-desc">Ask in this order and take the first answer that fits.</p>
+  <ol class="ds-bullets ds-bullets--num">
+    <li><strong>Could you use the part inside another ECO part?</strong> If yes, it is a component. Other parts are built from it.</li>
+    <li><strong>Is it a group of the same component, repeated, with a rule for the group?</strong> If yes, the group is a pattern and the single item is the component (a bar of crumbs and one crumb).</li>
+    <li><strong>Does it combine different components to do one job?</strong> If yes, it is a pattern (a hero with a heading, text and buttons).</li>
+    <li><strong>Does it exist only to explain the documentation?</strong> Then it is neither: it is a Documentation item, like the Docs table. It is not for the product.</li>
+  </ol>
+  <h3 class="ds-h3 ds-group">If you are not sure</h3>
+  <p class="ds-desc">Start with the question of ownership: does the part own its look (a component), or does it only arrange parts that already own theirs (a pattern)? When it is still unclear, ask before you create the page. A part can be moved later, as the Breadcrumb Bar was; the file names stay and no link breaks.</p>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="how-patterns-are-built"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">How a pattern is built and documented</h2>
+  <h3 class="ds-h3 ds-group">Built from ECO only</h3>
+  <p class="ds-desc">A pattern uses the components and tokens that already exist. It does not introduce a color, a font, a size or an element that no component or token has. If it needs one, that is a proposal for a new token or a new component first: ask before you add it.</p>
+  <h3 class="ds-h3 ds-group">The arrangement is what you document</h3>
+  <p class="ds-desc">The page of a pattern spends its words on what the components alone do not say:</p>
+  <ul class="ds-bullets">
+    <li>Which components it uses, and the allowed number of them</li>
+    <li>The order and the spacing between them, as spacing tokens</li>
+    <li>Where it sits on the page, and what comes before and after it</li>
+    <li>What happens at each breakpoint and when the content does not fit (wrapping, stacking, truncating)</li>
+    <li>Accessibility of the whole: landmark, reading order, keyboard path</li>
+  </ul>
+  <h3 class="ds-h3 ds-group">Same three pages as a component</h3>
+  <p class="ds-desc">A pattern has the same three pages as a component: Examples &amp; Guidelines, Specifications and Code. The states of the parts are not repeated; the pattern page links to the component page that owns them. The Breadcrumb Bar links every crumb state to <a class="inline-link inline-link--large inline-link--secondary" href="breadcrumb-base.html">Breadcrumb Base</a>.</p>
+  <h3 class="ds-h3 ds-group">Cards and navigation</h3>
+  <p class="ds-desc">A pattern has a card in the Patterns section of the <a class="inline-link inline-link--large inline-link--secondary" href="../components-overview.html#patterns">Components overview</a> and an item in the Patterns group of the navigation. A pattern that is still only an idea shows a disabled card marked “Soon”.</p>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="patterns-today"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Patterns today</h2>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Pattern</th><th scope="col">Built from</th><th scope="col">Status</th></tr></thead><tbody>
+    <tr><th scope="row"><a class="inline-link inline-link--small inline-link--primary" href="breadcrumb-bar.html">Breadcrumb Bar</a></th><td>Breadcrumb Base, the slash separator, the page spacing</td><td>Live, three pages</td></tr>
+    <tr><th scope="row">Hero banner</th><td>To be decided</td><td>Soon</td></tr>
+    <tr><th scope="row">Splash card carousel</th><td>To be decided</td><td>Soon</td></tr>
+  </tbody></table></div>
+  <p class="ds-desc ds-note">Docs table is also listed under Patterns, in the Documentation group, but it is a docs-only item and not a pattern in this sense: see <a class="inline-link inline-link--medium inline-link--secondary" href="../foundations/docs-table.html">Docs table</a>.</p>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="related"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Related</h2>
+  <ul class="ds-bullets">
+    <li><strong><a class="inline-link inline-link--large inline-link--secondary" href="../components-overview.html">Components overview</a></strong>. All components, grouped by family, and the Patterns section.</li>
+    <li><strong><a class="inline-link inline-link--large inline-link--secondary" href="breadcrumb.html">Breadcrumb</a></strong>. The guide that shows a component and a pattern in one family.</li>
+    <li><strong><a class="inline-link inline-link--large inline-link--secondary" href="../resources/getting-help.html">Getting help</a></strong>. Ask in Slack when a part is missing or you are not sure what it is.</li>
+  </ul>
+</div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  function crumb(text, active) {
+    var c = document.createElement(active ? 'span' : 'a'); c.className = 'breadcrumb-item' + (active ? ' breadcrumb-item--active' : ''); c.textContent = text;
+    if (active) c.setAttribute('aria-current', 'page'); else { c.href = '#'; c.addEventListener('click', function (e) { e.preventDefault(); }); }
+    return c;
+  }
+  document.getElementById('demo-comp').appendChild(crumb('Work pants', false));
+  var nav = document.createElement('nav'); nav.className = 'breadcrumb'; nav.setAttribute('aria-label', 'Breadcrumb');
+  var bar = document.createElement('div'); bar.className = 'breadcrumb__bar'; nav.appendChild(bar);
+  ['Home', 'Work pants', 'Carpenter pants'].forEach(function (t, i, a) {
+    if (i) { var s = document.createElement('span'); s.className = 'breadcrumb-sep'; s.textContent = '/'; bar.appendChild(s); }
+    bar.appendChild(crumb(t, i === a.length - 1));
+  });
+  document.getElementById('demo-pat').appendChild(nav);
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

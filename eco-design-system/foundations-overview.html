@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundations – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="docs.css">
+  <link rel="stylesheet" href="docnav.css">
+  <link rel="stylesheet" href="../components/css/badge.css">
+  <link rel="stylesheet" href="../components/css/divider.css">
+</head>
+<body>
+<script src="docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="index.html" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="index.html" class="breadcrumb-item">ECO Design System</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Foundations</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <span class="ds-eyebrow"><span class="badge-basic badge-basic--uppercase ds-eyebrow__swedol">Swedol</span><span class="badge-basic badge-basic--uppercase ds-eyebrow__tools">Tools</span>ECO Design System</span>
+    <h1 class="ds-title">Foundations</h1>
+    <p class="ds-lead">The building blocks every component is made from. A value that is not a foundation is not allowed in a component.</p>
+  </div>
+</section>
+
+<div class="ds-section" style="padding-top:0;padding-bottom:0"><div class="ds-page ds-inner"><hr class="divider"></div></div>
+
+<section class="ds-section" id="foundations">
+  <div class="ds-page ds-inner">
+
+    <div class="ds-cards">
+
+      <a class="ds-card" href="foundations/colors.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-swatches">
+            <span style="background: var(--color-surface-100)"></span>
+            <span style="background: var(--color-surface-50)"></span>
+            <span style="background: var(--color-surface-raised-secondary)"></span>
+            <span style="background: var(--color-accent-default)"></span>
+            <span style="background: var(--color-surface-information-default)"></span>
+          </div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Colors</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Neutrals, brand accent, text, border and status colors, with token names, hex values and contrast.</p>
+          <span class="ds-card__meta" id="colors-meta">Semantic color tokens</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="foundations/typography.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-type"><b>Aa</b><span>Breuer Condensed</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Typography</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Display, headline, title, body and label styles for mobile and desktop, with modifiers, typesetting rules and examples.</p>
+          <span class="ds-card__meta" id="type-meta">Typography tokens</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="foundations/spacing.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-space">
+            <span style="height: 8px"></span><span style="height: 16px"></span><span style="height: 24px"></span><span style="height: 40px"></span><span style="height: 64px"></span>
+          </div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Spacing</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">The fixed spacing scale and the breakpoint-adaptive space tokens, with consumer classes and directional examples.</p>
+          <span class="ds-card__meta" id="space-meta">Spacing tokens</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="foundations/elevation.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-elev">
+            <span style="box-shadow: var(--shadow-elevation-b-20)"></span>
+            <span style="box-shadow: var(--shadow-elevation-b-40)"></span>
+            <span style="box-shadow: var(--shadow-elevation-b-80)"></span>
+          </div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Shadows &amp; Elevation</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Shadow levels for cards, drawers, modals and tooltips: Bottom, Top, Designated Level and Component Specific.</p>
+          <span class="ds-card__meta" id="elev-meta">Shadow tokens</span>
+        </div>
+      </a>
+
+      <a class="ds-card" href="foundations/motion.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-motion"><span></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Motion</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Easing curves and durations for transitions and animation, with a live demo of each.</p>
+          <span class="ds-card__meta">4 easings · 12 durations</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+<script src="tokens-loader.js"></script>
+<script>
+  ECO.watch('../.claude/skills/eco-tokens/tokens.json', function (j) {
+    if (j.typography) document.getElementById('type-meta').textContent = Object.keys(j.typography).length + ' typography tokens · 6 roles';
+    if (j.spacing) document.getElementById('space-meta').textContent = Object.keys(j.spacing).length + ' spacing tokens · 8px base';
+    if (j.shadow) document.getElementById('elev-meta').textContent = Object.keys(j.shadow).length + ' shadow tokens · 4 categories';
+    document.getElementById('colors-meta').textContent = Object.keys(j.color).length + ' semantic color tokens';
+  });
+</script>
+</body>
+</html>

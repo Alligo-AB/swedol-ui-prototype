@@ -1,0 +1,11 @@
+/* ECO layout spacing: the breakpoint-adaptive space-md and space-lg (skill: eco-spacing, docs: eco-design-system/foundations/spacing.html).
+   Use them for the air BETWEEN a section's own content blocks; the fixed scale (--dimension-spacing-space-24 …) stays for margins, gutters and detail.
+   Link it, do not copy it: <link rel="stylesheet" href="/components/css/spacing.css">
+   Usage: margin-bottom: var(--dimension-spacing-space-md);  (values per breakpoint xs / sm 640 / md 769 / lg 1024 / xl 1281) */
+:root {
+  --dimension-spacing-space-md: 24px;
+  --dimension-spacing-space-lg: 32px;
+}
+@media (min-width: 640px)  { :root { --dimension-spacing-space-md: 32px; --dimension-spacing-space-lg: 40px; } }
+@media (min-width: 769px)  { :root { --dimension-spacing-space-md: 40px; --dimension-spacing-space-lg: 48px; } }
+@media (min-width: 1024px) { :root { --dimension-spacing-space-md: 48px; --dimension-spacing-space-lg: 56px; } }   /* xl (1281px) is the same as lg */

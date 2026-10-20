@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Badge – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: demo layout only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-wide { width: 100%; max-width: 640px; }
+    .pg-top { align-items: flex-start; padding-top: 40px; }
+    .pg-btn { min-height: 120px; }
+    .pg-dotrow { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; line-height: 24px; }   /* demo: a dot beside a label */
+    .pg-dotwrap { position: relative; display: inline-flex; }   /* demo: a dot on the top right corner of an icon */
+    .pg-dotwrap .badge-dot { position: absolute; top: 2px; right: 2px; transform: translate(50%, -50%); }
+    .pg-ic { font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 24px; font-feature-settings: 'liga'; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Badge</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status</span></div>
+    <h1 class="ds-title">Badge</h1>
+    <p class="ds-lead">A badge is a <strong>read-only status or label</strong>: “New”, a count, a discount. It is never clickable.</p><p class="ds-lead">Every example is the real component, not a picture. Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=4752-241948" target="_blank" rel="noopener">Guidelines</a>.</p>
+  </div>
+</section>
+<div class="ds-sep"><hr class="divider" /></div>
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Overview</h2><p class="ds-desc">Badges and tags are visually similar, but <strong>tags are interactive and badges are not</strong>.</p><p class="ds-desc"><strong>Badge.</strong> A badge indicates a status or a count. Badges are read-only status indicators or labels and are not interactive. They can be placed next to, for example, text links.</p><p class="ds-desc"><strong>Tag</strong> (TBA). Use tags to let users group, sort or filter information. Tags often hold keywords or metadata and give quick access to categories.</p><p class="ds-desc">Badge has five types, one set of pages for each. All types come in a desktop and a mobile version.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Example</th><th scope="col">Use it for</th></tr></thead><tbody><tr><th scope="row"><a class="inline-link inline-link--small" href="badge-basic.html">Basic</a></th><td><span class="badge-basic badge-basic--info badge-basic--weak">Updated</span> <span class="badge-basic badge-basic--neutral-grey badge-basic--weaker">Archive</span></td><td>A status or a label in text. Six states, three emphasis levels, with or without an icon.</td></tr><tr><th scope="row"><a class="inline-link inline-link--small" href="badge-dot.html">Dot</a></th><td><span class="pg-row" style="gap:12px"><span class="badge-dot"></span><span class="badge-dot badge-dot--warning"></span><span class="badge-dot badge-dot--success"></span><span class="badge-dot badge-dot--info"></span><span class="badge-dot badge-dot--neutral"></span></span></td><td>A status marker without text, next to a label or on the corner of an icon.</td></tr><tr><th scope="row"><a class="inline-link inline-link--small" href="badge-number.html">Number</a></th><td><span class="badge-number">3</span> <span class="badge-number"><span class="badge-number__icon" aria-hidden="true">done</span></span></td><td>A count, a step number or a check mark. The default for numbers.</td></tr><tr><th scope="row"><a class="inline-link inline-link--small" href="badge-product-discount.html">Product &amp; Discount</a></th><td><span class="badge-promo-group"><span class="badge-promo">30% rabatt</span><span class="badge-promo badge-promo--closing">Utförsäljning</span></span></td><td>E-commerce only: discounts, closing sale and the assortment a product belongs to.</td></tr><tr><th scope="row"><a class="inline-link inline-link--small" href="badge-purchase-info.html">Purchase Info</a></th><td><span class="badge-purchase"><span class="badge-purchase__tag"><span class="badge-purchase__label">Bra köp</span><span class="badge-purchase__beak"></span></span></span></td><td>E-commerce only: a badge with a beak that introduces a purchase tip (Good buy, Good to know).</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3><p class="ds-desc">Use a badge to indicate status, item count, items that need attention, or featured content. A badge must not rely on color alone to carry its meaning: color is not a universal experience.</p><p class="ds-desc">Combine several elements in one badge (text, emphasis and an icon) to make the meaning easier to see.</p><h3 class="ds-h3 ds-group">Featured or highlighted content</h3><p class="ds-desc">Use a badge to emphasize a product feature or item. Think about badge color, placement and emphasis when it sits near buttons.</p><h3 class="ds-h3 ds-group">Attention and awareness</h3><h3 class="ds-h3">Urgent communication</h3><p class="ds-desc">Use a badge with an icon and a short label for items that need an action or immediate attention.</p><h3 class="ds-h3">Indication</h3><p class="ds-desc">Use a <a class="inline-link inline-link--large inline-link--secondary" href="badge-dot.html">dot</a> as an indicator to draw attention to an icon or a text link when a status has changed. Dots are not for critical alerts and not for standalone use.</p><h3 class="ds-h3 ds-group">Quick reference</h3><div class="ds-table-wrap" style="margin-bottom:24px"><table class="ds-table"><thead><tr><th scope="col">The element…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">shows a status or label and is read only</th><td>Badge</td></tr><tr><th scope="row">filters or groups when clicked</th><td>Tag (not built yet)</td></tr><tr><th scope="row">counts something on an icon (cart)</th><td>The header counter <code>.badge</code></td></tr><tr><th scope="row">must be noticed for a state change</th><td><a class="inline-link inline-link--small" href="inline.html">Inline notification</a></td></tr></tbody></table></div><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Keep labels short: one or two words.</li><li>Use the same color for the same meaning everywhere.</li><li>Pair an alert color with its icon or clear text.</li><li>Use Medium or Large on mobile.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Make a badge clickable.</li><li>Use color only to say “error” or “success”.</li><li>Stack dots or put them close together.</li><li>Use the e-commerce badges outside e-commerce.</li></ul></div></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="color"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Color</h2><h3 class="ds-h3 ds-group">Alert</h3><p class="ds-desc">Badge Basic comes in four alert colors. Each color is paired with an icon, so the meaning does not depend on color alone.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Color</th><th scope="col">Example</th><th scope="col">Meaning</th><th scope="col">Icon</th></tr></thead><tbody><tr><th scope="row">Informative (default)</th><td><span class="badge-basic badge-basic--info badge-basic--strong"><span class="badge-basic__icon" aria-hidden="true">info</span>Informative</span></td><td>Informative messages. Default color, the most flexible one.</td><td><code>info</code></td></tr><tr><th scope="row">Success</th><td><span class="badge-basic badge-basic--success badge-basic--strong"><span class="badge-basic__icon" aria-hidden="true">check_circle</span>Success</span></td><td>Positive feedback or success.</td><td><code>check_circle</code></td></tr><tr><th scope="row">Error</th><td><span class="badge-basic badge-basic--danger badge-basic--strong"><span class="badge-basic__icon" aria-hidden="true">error</span>Error</span></td><td>Negative feedback or an error.</td><td><code>error</code></td></tr><tr><th scope="row">Warning</th><td><span class="badge-basic badge-basic--warning badge-basic--strong"><span class="badge-basic__icon" aria-hidden="true">warning</span>Warning</span></td><td>The user needs to take notice.</td><td><code>warning</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Use an icon only with its own alert color: each icon has an established meaning. Any other icon from the icon gallery may be used where the guidelines do not forbid it.</p><h3 class="ds-h3 ds-group">Neutral</h3><p class="ds-desc">Neutral badges are best paired with alert colors to create contrast through emphasis. For example, an informative badge with strong emphasis next to a neutral badge with weak or weaker emphasis. Use neutral for information that is not an alert.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div class="pg-row"><span class="badge-basic badge-basic--neutral-grey badge-basic--weaker">Archive</span> <span class="badge-basic badge-basic--neutral-grey badge-basic--strong">Latest</span> <span class="badge-basic badge-basic--neutral-dark badge-basic--weaker">Ready for development</span></div></div><figcaption class="ds-fig__cap">Neutral grey and neutral dark.</figcaption></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="emphasis"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Emphasis</h2><p class="ds-desc">Use color emphasis to reinforce how important or visible a badge is. Without icons, mix emphasis to tell badges apart, so you do not rely on color alone.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Emphasis</th><th scope="col">Example</th><th scope="col">What it is</th></tr></thead><tbody><tr><th scope="row">Strong</th><td><span class="badge-basic badge-basic--info badge-basic--strong">Strong</span></td><td>Darker background.</td></tr><tr><th scope="row">Weak</th><td><span class="badge-basic badge-basic--info badge-basic--weak">Weak</span></td><td>A medium, more saturated background.</td></tr><tr><th scope="row">Weaker</th><td><span class="badge-basic badge-basic--info badge-basic--weaker">Weaker</span></td><td>A light background.</td></tr></tbody></table></div><p class="ds-desc">Do not mix emphasis without a reason. Do it only where it helps users understand, for example a high and a low emphasis badge side by side to tell two text-only badges apart.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="related"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong>Tag</strong> (TBA). Interactive, for grouping and filtering.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="inline.html">Inline notification</a></strong>. For a state change that must be noticed.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="tooltip.html">Tooltip</a></strong>. For a short explanation of an icon-only badge trigger.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="references"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">References</h2><ul class="ds-bullets"><li><a class="inline-link inline-link--large inline-link--secondary" href="https://m3.material.io/components/badges/overview" target="_blank" rel="noopener">Material Design 3: Badges</a>. Google.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://atlassian.design/components/badge/" target="_blank" rel="noopener">Atlassian Design System: Badge</a>. Atlassian.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://polaris.shopify.com/components/feedback-indicators/badge" target="_blank" rel="noopener">Polaris: Badge</a>. Shopify.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://fluent2.microsoft.design/components/web/react/core/badge/usage" target="_blank" rel="noopener">Fluent 2: Badge</a>. Microsoft.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://carbondesignsystem.com/components/tag/usage/" target="_blank" rel="noopener">Carbon Design System: Tag</a>. IBM. Carbon has tags instead of badges.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener">WCAG 2.2: Use of Color</a>. Success criterion 1.4.1.</li></ul></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collapsible: Storyblok widget – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/collapsible.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <link rel="stylesheet" href="../../components/css/switch.css">
+  <link rel="stylesheet" href="../../components/css/checkbox.css">
+  <link rel="stylesheet" href="../../components/css/section.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-cap { display: block; margin-bottom: 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; min-width: 300px; }
+    .pg-matrix td.co-dark { background: var(--color-surface-100); }
+    .co-fig { width: 100%; }
+    .ds-doc .co-lines .collapsible-wrap:last-child:not(.collapsible-wrap--boxed):not(.collapsible-wrap--no-divider-bottom) { border-bottom: 1px solid var(--color-border-primary); }   /* demo: collapsible.css hides the last line when a list ends the page section; a docs section always does, so the demos keep it */
+    .ds-doc .co-lines .collapsible-wrap.collapsible-wrap--dark:last-child:not(.collapsible-wrap--boxed):not(.collapsible-wrap--no-divider-bottom) { border-bottom-color: var(--color-border-dark); }
+    .ds-doc .co-lines .collapsible-wrap.collapsible-wrap--disabled:last-child:not(.collapsible-wrap--boxed):not(.collapsible-wrap--no-divider-bottom) { border-bottom-color: var(--color-border-primary); }
+    .co-measure { display: block; width: 280px; }   /* demo: a fixed width, so the strips have a row to sit on */
+    .co-callout.ds-fig__stage.ds-callout { padding-right: 112px; }
+    .co-callout .ds-callout__art { width: 100%; max-width: 560px; }
+    .co-anat .collapsible-wrap, .co-anat .collapsible-item__content, .co-anat .collapsible-item__chevron .ms { transition: none; }   /* demo: the markers are drawn on the finished size */
+    .co-narrow { width: 100%; max-width: 360px; }
+    .sb-stage.ds-fig__stage { display: block; padding: 0; min-height: 0; background: var(--color-surface-raised-primary); }   /* a Storyblok screenshot with numbered markers on top */
+    .sb-shot { position: relative; }
+    .sb-shot img { display: block; width: 100%; height: auto; }
+    .sb-pin { position: absolute; transform: translate(-50%, -50%); pointer-events: none; }
+    .sb-pin--red { background: var(--color-surface-danger-default); }
+    .sb-box { position: absolute; border: 3px solid var(--color-border-danger-default); pointer-events: none; }
+    .sb-tip { display: flex; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); }
+    .sb-tip__ic { display: grid; place-items: center; flex: 0 0 96px; background: var(--color-surface-100); color: var(--color-accent-default); }
+    .sb-tip__ic .mo-ic { font-size: 48px; }
+    .sb-tip__body { padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-24); }
+    .sb-tip__body .ds-h3 { margin: 0 0 var(--dimension-spacing-space-4); }
+    .sb-tip__body p { margin: 0; }
+    .sec-fig { --px-full: var(--dimension-spacing-space-24); width: 100%; }   /* demo: a fixed side margin, so a section fits a figure */
+    .sec-in { padding: var(--dimension-spacing-space-24) 0; }
+    .sec-ph { padding: var(--dimension-spacing-space-16); background: var(--color-surface-10); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
+    .sec-in > .ds-h3 { margin: 0 0 var(--dimension-spacing-space-8); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="collapsible.html" class="breadcrumb-item">Collapsible</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Storyblok widget</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Layout and content</span></div>
+    <h1 class="ds-title">Collapsible</h1>
+    <p class="ds-lead">A collapsible is a <strong>row that opens and closes</strong> to show more content, used for FAQ lists and filters. The header can carry a descriptive text, icons, a toggle switch and a number badge. The content animates open.</p><p class="ds-lead">How an editor adds and sets up the Collapsible block in Storyblok. The block is the Storyblok widget for the Collapsible component.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Collapsible"><a class="tab" href="collapsible.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="collapsible-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="collapsible-code.html"><span class="tab__label">Code</span></a><a class="tab" aria-current="page" href="collapsible-storyblok.html"><span class="tab__label">Storyblok widget</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Collapsible block</h2><p class="ds-desc">The <strong>Collapsible block</strong> is the Storyblok widget for the Collapsible component. An editor builds a group of collapsible rows in a section: first the container, then one <strong>Collapsible item</strong> for each row. The block works on a white or a grey section.</p><p class="ds-desc">This page shows the editing in Storyblok. For when to use a collapsible and how it looks, see <a class="inline-link inline-link--large inline-link--secondary" href="collapsible.html">Examples &amp; Guidelines</a>.</p><h3 class="ds-h3 ds-group">Steps</h3><ol class="ds-bullets ds-bullets--num"><li><strong>Add the block.</strong> Insert the Collapsible block in a section.</li><li><strong>Set up the container.</strong> Give the group an optional headline and add the items.</li><li><strong>Set up each item.</strong> Write the title, add the content, and choose Open and the two dividers.</li><li><strong>Add the content.</strong> Fill the item with a content block.</li></ol></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="add-the-block"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Add the block</h2><p class="ds-desc">In the section, choose <strong>Add block</strong> and pick <strong>Collapsible</strong> in the Insert block list. The block has the technical name <code>collapsible</code>.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="/images/storyblok-collapsible-insert-block.png" alt="The Insert block list in Storyblok with the Collapsible block marked" /><span class="sb-box" style="left:72.3%;top:27.8%;width:23.8%;height:6.8%"></span></div></div><figcaption class="ds-fig__cap">The Collapsible block in the Insert block list.</figcaption></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="container"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Collapsible block container</h2><p class="ds-desc">The container holds the group. It has an optional headline and a list of items.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="/images/storyblok-collapsible-container.png" alt="The Collapsible block container in Storyblok with the headline field and the Add Block button" /><span class="badge-number sb-pin" style="left:74.8%;top:38.5%">1</span><span class="badge-number sb-pin" style="left:74.8%;top:53.4%">2</span></div></div><figcaption class="ds-fig__cap">The container: the headline and the list of items.</figcaption></figure></div><ol class="ds-bullets ds-bullets--num"><li><strong>Headline.</strong> Optional. The title above the group, for example “Order and delivery”. When a headline is used, skip the top divider on the first item.</li><li><strong>Add Block.</strong> Adds a <strong>Collapsible item</strong> to the group. Each item is one row. Add one item for each question or topic.</li></ol></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="item"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Collapsible item</h2><p class="ds-desc">Each item is one row of the group. Set the title, add the content and choose how the row behaves.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="/images/storyblok-collapsible-item.png" alt="A Collapsible item in Storyblok with the headline, the content, the Open switch and the two divider switches" /><span class="badge-number sb-pin" style="left:74.8%;top:47.1%">1</span><span class="badge-number sb-pin sb-pin--red" style="left:74.8%;top:57.2%">2</span><span class="badge-number sb-pin" style="left:74.8%;top:72.1%">3</span><span class="badge-number sb-pin" style="left:74.8%;top:80.0%">4</span><span class="badge-number sb-pin" style="left:74.8%;top:87.9%">5</span></div></div><figcaption class="ds-fig__cap">The item: title, content and the three switches.</figcaption></figure></div><ol class="ds-bullets ds-bullets--num"><li><strong>Headline.</strong> Required. The title of the row. Keep it short and descriptive; for an FAQ, write the question.</li><li><strong>Content.</strong> Add Block. The content of the row: open it with Add Block and choose a content block. See the next step.</li><li><strong>Open.</strong> Off by default. Turn it on to show the row open when the page loads. Use it for the row that helps the user most, for example the first question in a grouped FAQ.</li><li><strong>Bottom divider.</strong> On by default. The line under the row. Rows in a group share it.</li><li><strong>Top divider.</strong> Off by default. The line above the row. Use it for the first row of a list in a panel, or for a single collapsible.</li></ol><h3 class="ds-h3 ds-group">In the component</h3><p class="ds-desc">The switches set the same states as the component classes.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Storyblok</th><th scope="col">Default</th><th scope="col">Component</th></tr></thead><tbody><tr><th scope="row">Open</th><td>Off</td><td><code>collapsible-wrap--open</code></td></tr><tr><th scope="row">Bottom divider</th><td>On</td><td>The default line under the row. Off: <code>collapsible-wrap--no-divider-bottom</code>. The last row in a section loses its line unless <code>collapsible-wrap--divider-bottom</code> is set.</td></tr><tr><th scope="row">Top divider</th><td>Off</td><td><code>collapsible-wrap--divider-top</code></td></tr></tbody></table></div><p class="ds-desc ds-note">When to switch the dividers on or off is described under <a class="inline-link inline-link--medium inline-link--secondary" href="collapsible.html#layout-dividers">Dividers</a> in Examples &amp; Guidelines: dividers only where they add clarity, none above the first or under the last row of a group, top and bottom for a single collapsible, and none on a colored section.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="content"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Content in a collapsible item</h2><p class="ds-desc">The content of an item is a content block. Open <strong>Add Block</strong> under Content and choose <strong>Content</strong>. The block has a rich text editor, so the text can have formatting such as bold, lists and links. The preview shows the row open while it is edited.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="/images/storyblok-collapsible-content.png" alt="A Collapsible item with a Content block in Storyblok, the item open in the preview" /><span class="badge-number sb-pin sb-pin--red" style="left:74.8%;top:30.3%">2</span></div></div><figcaption class="ds-fig__cap">A Content block in an item. The preview shows the open row.</figcaption></figure></div><p class="ds-desc">Keep the text short enough to digest. Review the line length (60–90 characters is ideal) under <a class="inline-link inline-link--large inline-link--secondary" href="../foundations/typography.html">Typography</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="section-column-width"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Section column width</h2><p class="ds-desc">The width of the group is set on the section, not on the block. In the section settings, <strong>Column Width Medium</strong> is <code>col-10</code> and <strong>Column Width Large</strong> is <code>col-8</code> for the group in the examples.</p><div class="sb-tip"><div class="sb-tip__ic"><span class="mo-ic" aria-hidden="true">lightbulb</span></div><div class="sb-tip__body"><h3 class="ds-h3">Pro tip</h3><p class="ds-desc">Use the section column width settings to make the content of a group of collapsibles easier to digest.</p></div></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="related"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="collapsible.html">Examples &amp; Guidelines</a></strong>. When to use a collapsible, the dividers and the best practices.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="collapsible-specifications.html">Specifications</a></strong>. Sizes, tokens and states.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="collapsible-code.html">Code</a></strong>. The markup and the classes.</li></ul></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/collapsible.js"></script>
+<script src="../../components/js/range.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

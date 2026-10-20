@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { width: 100%; max-width: 408px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-cap { display: block; margin-bottom: 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; min-width: 260px; }
+    .mn-fig { width: 100%; max-width: 320px; }
+    .mn-measure { display: block; width: 280px; }   /* demo: a fixed width, so the padding strips have a row to sit on */
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="menu.html" class="breadcrumb-item">Menu</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Menus, lists and dividers</span></div>
+    <h1 class="ds-title">Menu</h1>
+    <p class="ds-lead">A menu is the <strong>list surface</strong> that opens from a button or action (Dropdown menu) or from a Select field (Exposed dropdown menu). The two differ only in the element that opens the surface, so they share one component.</p><p class="ds-lead">How to add a menu to a page. The file is <code>components/css/menu.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Menu"><a class="tab" href="menu.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="menu-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="menu-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/menu.css"&gt;</code>. Both templates already have it.</td></tr><tr><th scope="row">2. Markup</th><td>A <code>div.menu</code> with a <code>ul.menu__items[role="listbox"]</code> of <code>li.menu__item[role="option"]</code> rows.</td></tr><tr><th scope="row">3. Row</th><td>Each row has a <code>span.menu__item-label</code> and an empty <code>span.menu__item-icon</code>. Set <code>aria-selected</code>.</td></tr><tr><th scope="row">4. Variants</th><td>Add <code>menu--sm</code>, <code>menu--multi</code>, <code>menu--full</code> or <code>menu--none</code>.</td></tr><tr><th scope="row">5. Behavior</th><td>Choosing, keyboard and closing belong to the opener. A Select field uses <code>components/js/select-menu.js</code>.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="menu"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Menu</h2><p class="ds-desc">Copy the markup you need. Hover and focus come from <code>:hover</code> and <code>:focus-visible</code>; the <code>[data-state]</code> selectors in the CSS exist only so the documentation can force a state.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>menu</code></th><td>The surface. Large, Select, middle-inset divider.</td></tr><tr><th scope="row"><code>menu--sm</code></th><td>Small rows.</td></tr><tr><th scope="row"><code>menu--multi</code></th><td>Multi Select: a circle on every row.</td></tr><tr><th scope="row"><code>menu--full</code></th><td>Full-width divider.</td></tr><tr><th scope="row"><code>menu--none</code></th><td>No divider.</td></tr><tr><th scope="row"><code>menu__items</code></th><td>The list. Scrolls after 14 rows.</td></tr><tr><th scope="row"><code>menu__item</code></th><td>One row.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>Breakpoint: Large rows are 40px below 769px and 48px from 769px. The CSS does this by itself.</li><li>The check icon is drawn with a pseudo-element; keep the <code>menu__item-icon</code> span empty.</li><li>Put a <code>.list-item</code> inside a row when it needs a leading element or trailing text.</li><li>The <code>[data-state]</code> selectors do nothing outside the documentation pages.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/menu.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Dropdown menu (Select)', '<div class="menu">\n  <ul class="menu__items" role="listbox" aria-label="Sort by">\n    <li class="menu__item" role="option" tabindex="0" aria-selected="false">\n      <span class="menu__item-label">Label text</span><span class="menu__item-icon" aria-hidden="true"></span>\n    </li>\n    <li class="menu__item" role="option" tabindex="0" aria-selected="true">\n      <span class="menu__item-label">Label text</span><span class="menu__item-icon" aria-hidden="true"></span>\n    </li>\n  </ul>\n</div>'],
+    ['Multi Select', '<div class="menu menu--multi">\n  <ul class="menu__items" role="listbox" aria-multiselectable="true">…</ul>\n</div>'],
+    ['Disabled row', '<li class="menu__item" role="option" tabindex="-1" aria-selected="false" aria-disabled="true">…</li>'],
+    ['Small, divider variants', '<div class="menu menu--sm">…</div>        <!-- Small -->\n<div class="menu menu--full">…</div>      <!-- Full-width divider -->\n<div class="menu menu--none">…</div>      <!-- No divider -->'],
+    ['A List Item inside a row', '<li class="menu__item" role="option" tabindex="0" aria-selected="true">\n  <div class="list-item">…</div>\n</li>\n<!-- the row sets padding, divider, hover and focus; the list item only fills it -->']
+  ]);
+  DK.printCss($('#css-code'), 'menu', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/:is\(:focus-visible, \[data-state="focus"\]\)/g, ':focus-visible'], [/^ {4}/gm, '']]);
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

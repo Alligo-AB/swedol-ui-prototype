@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Range: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .rg-wide { width: 100%; max-width: 480px; }
+    .rg-fig { width: 100%; max-width: 320px; }
+    .ds-callout__art { width: 100%; max-width: 480px; padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="range.html" class="breadcrumb-item">Range</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component exists. The range was designed in the repo (first used in the toast and motion playgrounds).">Not verified with Figma</span></div>
+    <h1 class="ds-title">Range</h1>
+    <p class="ds-lead">A range lets the user pick <strong>one value from an ordered series</strong> by dragging a thumb, with the current value shown as text.</p><p class="ds-lead">Tokens, dimensions, states and requirements. There is no Figma component: values come from the live token package and the specification skill.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Range"><a class="tab" href="range.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="range-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="range-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Open points:</strong> no Figma component. The sizes were decided in code. No dark-mode variant.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Hit area</th><td>24px high input</td></tr><tr><th scope="row">Track</th><td>2px, <code>border-primary</code></td></tr><tr><th scope="row">Thumb</th><td>16px circle, <code>surface-100</code></td></tr><tr><th scope="row">Hover halo</th><td>4px, <code>surface-opacity-black-12</code></td></tr><tr><th scope="row">Label</th><td><code>label-sm</code>: 14/20, 0.28px, weight 600</td></tr><tr><th scope="row">Value</th><td><code>body-sm</code>: 14/20, 0.36px</td></tr><tr><th scope="row">Ticks</th><td>12/16, 0.3px, <code>text-tertiary</code></td></tr></tbody></table></div><p class="ds-desc ds-note">The same on every breakpoint. The 24px hit area is below the usual 44px touch target; raise the input height at xs and sm if design wants it.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Control height</th><td>Head row (20px line) + 4px + hit area 24px + 4px + ticks 16px</td></tr><tr><th scope="row">Hit area</th><td>24px, full width of the container</td></tr><tr><th scope="row">Track</th><td>2px high</td></tr><tr><th scope="row">Thumb</th><td>16px circle, centered on the track (7px above the track top)</td></tr><tr><th scope="row">Halo</th><td>4px around the thumb, on hover</td></tr><tr><th scope="row">Focus ring</th><td>2px line, 2px offset, around the input</td></tr><tr><th scope="row">Corners</th><td>Round thumb, square track</td></tr></tbody></table></div><p class="ds-desc ds-note">A range has no padding of its own, so there is no measurement figure.</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The gaps between the parts as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Gap between head, input and ticks</th><td><code>space-4</code></td></tr><tr><th scope="row">Gap between label and value</th><td><code>space-8</code> minimum</td></tr><tr><th scope="row">Halo, focus ring offset</th><td>4px and 2px: literals</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Four states. Enabled and Disabled are shown. Hover and focus come from the browser: hover the thumb for the halo, press Tab for the ring.</p><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Control</th><th scope="col">Look</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Type</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Label</th><td><code>label-sm</code></td><td>14/20</td><td>0.28px</td><td>600</td></tr><tr><th scope="row">Value</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr><tr><th scope="row">Ticks</th><td>—</td><td>12/16</td><td>0.3px</td><td>Regular</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed with <code>ss02</code>, <code>ss03</code> and <code>ss06</code>. The same on every breakpoint.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Block</th><td><code>form-range</code> with <code>data-range</code></td><td>Column of head, input and ticks. <code>[hidden]</code> hides it.</td></tr><tr><th scope="row">Head</th><td><code>form-range__head</code></td><td>Label on the left, value on the right.</td></tr><tr><th scope="row">Label</th><td><code>form-range__label</code></td><td>A <code>label</code> with <code>for</code>.</td></tr><tr><th scope="row">Value</th><td><code>form-range__value</code></td><td>An <code>output</code>.</td></tr><tr><th scope="row">Input</th><td><code>form-range__input</code></td><td>The native range input.</td></tr><tr><th scope="row">Ticks</th><td><code>form-range__ticks</code></td><td>Optional. Filled by <code>range.js</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Attributes</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Named steps</th><td><code>data-labels</code>, <code>data-ticks</code>, optional <code>data-recommended</code></td><td>An ordered list of named values.</td></tr><tr><th scope="row">Numeric</th><td><code>data-unit</code></td><td>A number between a minimum and a maximum.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Attributes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute on <code>[data-range]</code></th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row"><code>data-labels="A|B|C"</code></th><td>Value text per step, shown right of the label and set as <code>aria-valuetext</code>. Without it the number is shown (plus <code>data-unit</code>).</td></tr><tr><th scope="row"><code>data-ticks="a|b|c"</code></th><td>Tick labels under the track, one per step. Defaults to <code>data-labels</code>. Omit the <code>.form-range__ticks</code> div for none.</td></tr><tr><th scope="row"><code>data-recommended="1"</code></th><td>Step index of the recommended default. Its tick gets a <code>*</code>; explain the * near the control.</td></tr><tr><th scope="row"><code>data-unit="px"</code></th><td>Suffix for numeric ranges without <code>data-labels</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">The range fills its container.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row"><code>box-shadow</code> of the thumb (the halo), hover in and out</th><td><code>duration-fast-2</code></td><td><code>ease-standard</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Drag, click the track</th><td>Moves the thumb; the value text updates.</td></tr><tr><th scope="row">Arrow keys, Home, End, PageUp, PageDown</th><td>Native keyboard control.</td></tr><tr><th scope="row">Tab</th><td>Focus ring on keyboard focus only.</td></tr><tr><th scope="row">Event</th><td>The normal <code>input</code> event on the <code>&lt;input&gt;</code>. For blocks added later: <code>ECO_RANGE.init(container)</code>.</td></tr><tr><th scope="row">Hide</th><td>The <code>hidden</code> attribute on the <code>.form-range</code> block.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Element</th><td>Always the native <code>&lt;input type="range"&gt;</code>, never a <code>div</code> imitation. Keyboard and screen readers then work for free.</td></tr><tr><th scope="row">Label</th><td>A visible label linked with <code>for</code> and <code>id</code>.</td></tr><tr><th scope="row">Value</th><td>Ticks are <code>aria-hidden</code>; the value is read through <code>aria-valuetext</code>.</td></tr><tr><th scope="row">Focus</th><td>2px ring <code>border-focus</code> on <code>:focus-visible</code> (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Target size</th><td>The 24px hit area meets WCAG 2.5.8 (24px) but not the 44px recommendation.</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/range.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var rid = 0, DUR = ['Fast 2 · 100 ms', 'Fast 3 · 150 ms', 'Fast 4 · 200 ms', 'Medium 2 · 300 ms', 'Medium 3 · 350 ms', 'Slow 1 · 450 ms'], TICKS = ['100', '150', '200', '300', '350', '450'];
+  function rng(o) {
+    var id = 'rg' + (rid++), d = document.createElement('div');
+    d.innerHTML = '<div class="form-range" data-range' + (o.kind === 'steps' ? ' data-labels="' + DUR.join('|') + '" data-ticks="' + TICKS.join('|') + '"' + (o.rec ? ' data-recommended="2"' : '') : ' data-unit="' + (o.unit || ' s') + '"') + '>' +
+      '<div class="form-range__head"><label class="form-range__label" for="' + id + '">' + esc(o.label) + '</label><output class="form-range__value" for="' + id + '"></output></div>' +
+      '<input class="form-range__input" id="' + id + '" type="range" min="' + (o.kind === 'steps' ? 0 : o.min) + '" max="' + (o.kind === 'steps' ? 5 : o.max) + '" step="1" value="' + (o.kind === 'steps' ? 2 : o.val) + '"' + (o.dis ? ' disabled' : '') + '>' + (o.kind === 'steps' ? '<div class="form-range__ticks"></div>' : '') + '</div>';
+    ECO_RANGE.init(d); return d.firstChild;
+  }
+  function mk(o) { var h = '<div class="form-range" data-range' + (o.kind === 'steps' ? ' data-labels="' + DUR.join('|') + '"\n     data-ticks="' + TICKS.join('|') + '"' + (o.rec ? ' data-recommended="2"' : '') : ' data-unit=" s"') + '>\n  <div class="form-range__head">\n    <label class="form-range__label" for="r1">' + esc(o.label) + '</label>\n    <output class="form-range__value" for="r1"></output>\n  </div>\n  <input class="form-range__input" id="r1" type="range" min="' + (o.kind === 'steps' ? 0 : 2) + '" max="' + (o.kind === 'steps' ? 5 : 10) + '" step="1" value="' + (o.kind === 'steps' ? 2 : 5) + '"' + (o.dis ? ' disabled' : '') + '>\n' + (o.kind === 'steps' ? '  <div class="form-range__ticks"></div>\n' : '') + '</div>'; return h; }
+
+  var tb = $('#matrix tbody');
+  [['Enabled', false, '2px track <code>border-primary</code>, 16px round thumb <code>surface-100</code>.'], ['Hover', null, '4px halo around the thumb, <code>surface-opacity-black-12</code>. Hover the thumb to see it.'], ['Focus (keyboard)', null, '2px <code>border-focus</code> ring with a 2px offset. Press Tab to see it.'], ['Disabled', true, 'Track <code>border-disabled</code>, thumb and text <code>text-disabled</code>, <code>not-allowed</code> cursor.']].forEach(function (r) {
+    var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+    var td = document.createElement('td'); td.style.cssText = 'text-align:left;min-width:240px'; td.appendChild(rng({ kind: 'num', label: 'Value', min: 2, max: 10, val: 5, unit: ' s', dis: r[1] === true })); tr.appendChild(td);
+    var d = document.createElement('td'); d.innerHTML = r[2]; tr.appendChild(d); tb.appendChild(tr);
+  });
+  DK.tokenTable($('#tok-table tbody'), [['Enabled', 'Track', 'border-primary'], ['Enabled', 'Thumb', 'surface-100'], ['Hover', 'Halo', 'surface-opacity-black-12'], ['Keyboard focus', 'Ring', 'border-focus'], ['Disabled', 'Track', 'border-disabled'], ['Disabled', 'Thumb and text', 'text-disabled'], ['All', 'Label', 'text-secondary'], ['All', 'Ticks', 'text-tertiary']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

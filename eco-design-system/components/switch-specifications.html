@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Switch: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/switch.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ds-stage--dark .ds-table, .ds-stage--dark .ds-table th, .ds-stage--dark .ds-table td { color: var(--color-text-primary-inverted); border-color: var(--color-surface-60); }
+    .ds-stage--dark .ds-table thead th { background: transparent; }
+    .ds-table-wrap.ds-stage--dark { padding: 0; background: var(--color-surface-100); }
+    .pg-list { display: flex; flex-direction: column; gap: 16px; }
+    .pg-row { display: flex; flex-wrap: wrap; gap: 24px; }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .sw-fig { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; max-width: 320px; }
+    .ds-callout__art { padding-right: 24px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="switch.html" class="breadcrumb-item">Switch</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Switch</h1>
+    <p class="ds-lead">A switch turns <strong>one setting on or off</strong> and applies the change at once. It is for a single binary choice, not for picking between options.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=278-9676" target="_blank" rel="noopener">Toggle Switch</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Switch"><a class="tab" href="switch.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="switch-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="switch-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Mode · state</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Open points:</strong> two colors have no token: the hover On track (<code>#71b790</code>) and the disabled On track (<code>rgba(36, 134, 22, 0.5)</code>). They are written out with a comment.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Track</th><th scope="col">Thumb</th><th scope="col">Inset</th><th scope="col">Travel</th><th scope="col">Label</th></tr></thead><tbody><tr><th scope="row">Large</th><td>48×24px</td><td>20px</td><td>2px</td><td>24px</td><td><code>body-md</code>: 16/22, from 769px 17/24, 0.32px</td></tr><tr><th scope="row">Small</th><td>48×24px</td><td>20px</td><td>2px</td><td>24px</td><td><code>body-sm</code>: 14/20, 0.36px</td></tr><tr><th scope="row">X-Small</th><td>32×16px</td><td>12px</td><td>2px</td><td>16px</td><td><code>body-sm</code>: 14/20, 0.36px</td></tr></tbody></table></div><p class="ds-desc ds-note">The size does not change with the breakpoint; only the Large label does.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Large and Small</th><th scope="col">X-Small</th></tr></thead><tbody><tr><th scope="row">Track</th><td>48×24px, a pill (<code>border-radius: 999px</code>)</td><td>32×16px</td></tr><tr><th scope="row">Thumb</th><td>20px circle</td><td>12px circle</td></tr><tr><th scope="row">Inset, thumb to track edge</th><td>2px</td><td>2px</td></tr><tr><th scope="row">Travel of the thumb</th><td>24px</td><td>16px</td></tr><tr><th scope="row">Gap to the label</th><td>8px</td><td>8px</td></tr><tr><th scope="row">Focus ring</th><td>2px line, 2px offset</td><td>2px line, 2px offset</td></tr><tr><th scope="row">Label line height</th><td>22px mobile, 24px from 769px (Large); 20px (Small)</td><td>20px</td></tr></tbody></table></div><p class="ds-desc ds-note">A switch has no padding or margin of its own, so there is no measurement figure: the track is the box and the thumb sits 2px inside it.</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The gap to the label as a spacing token.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Gap, track to label</th><td><code>space-8</code></td></tr><tr><th scope="row">Thumb inset</th><td>2px: literal, no spacing token</td></tr><tr><th scope="row">Focus ring offset</th><td>2px</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Enabled, hover, focus and disabled, each off and on. Hover and focus are forced on this page; in your code they come from <code>:hover</code> and <code>:focus-visible</code>.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sm-l">Mode</span><div class="btn-group" role="group" aria-labelledby="sm-l" data-mode-toggle><button type="button" data-v="light" aria-pressed="true">Light</button><button type="button" data-v="dark" aria-pressed="false">Dark</button></div><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div><span class="ds-toolbar__label" id="ss-l">Size</span><div class="btn-group" role="group" aria-labelledby="ss-l" data-mx="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button><button type="button" data-v="xs" aria-pressed="false">X-Small</button></div></div><div class="ds-table-wrap" data-mode-stage-bg><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Off</th><th scope="col">On</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Type</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Label, Large</th><td><code>body-md</code></td><td>16/22 mobile, 17/24 from 769px</td><td>0.32px</td><td>Regular</td></tr><tr><th scope="row">Label, Small and X-Small</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed with <code>ss02</code>, <code>ss03</code> and <code>ss06</code>. Some desktop Small and X-Small variants in Figma imply a smaller width than the 14px label: the CSS uses 14/20 for both.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Item</th><td><code>form-switch-item</code>, <code>--sm</code>, <code>--xs</code>, <code>--dark</code></td><td>The <code>label</code> around the input and the text.</td></tr><tr><th scope="row">Track and thumb</th><td><code>input[type="checkbox"][role="switch"]</code></td><td><code>appearance: none</code> on the native input. The thumb is its <code>::before</code>.</td></tr><tr><th scope="row">Label text</th><td><code>span</code></td><td>Optional. Without it the input needs an <code>aria-label</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Large</th><td><code>form-switch-item</code></td><td>The default.</td></tr><tr><th scope="row">Small</th><td><code>form-switch-item--sm</code></td><td>Same track, smaller label.</td></tr><tr><th scope="row">X-Small</th><td><code>form-switch-item--xs</code></td><td>Dense layouts: 32×16px track.</td></tr><tr><th scope="row">Dark</th><td><code>form-switch-item--dark</code></td><td>On <code>surface-100</code> or <code>surface-80</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">An item is as wide as the track plus its label.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead><tbody><tr><th scope="row"><code>background-color</code> of the track</th><td><code>duration-fast-3</code></td><td><code>ease-standard</code></td></tr><tr><th scope="row"><code>transform</code> of the thumb</th><td><code>duration-fast-3</code></td><td><code>ease-standard</code></td></tr></tbody></table></div><p class="ds-desc ds-note">Reduced motion (<code>prefers-reduced-motion: reduce</code>) turns the transition off. Figma specifies no thumb animation: this is the default for form elements in <code>eco-motion</code>. <strong>Open point:</strong> confirm with design.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click switch or label</th><td>Toggles on and off, and the change applies at once.</td></tr><tr><th scope="row">Space</th><td>Toggles the focused switch.</td></tr><tr><th scope="row">Tab</th><td>The ring shows on keyboard focus only (<code>:focus-visible</code>), for both off and on.</td></tr><tr><th scope="row">Markup</th><td>A native <code>input type="checkbox" role="switch"</code> inside a <code>label</code>. Never a <code>div</code> or <code>button</code> imitation.</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Muted track, no thumb shadow, <code>text-disabled</code> label.</td></tr><tr><th scope="row">Motion</th><td>Reduced motion turns the transition off.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Element</th><td>A native <code>&lt;input type="checkbox" role="switch"&gt;</code> in a <code>&lt;label&gt;</code>. The name, the role and the on/off state are announced.</td></tr><tr><th scope="row">Name</th><td>A visible label, or <code>aria-label</code> when the setting is named by its surroundings.</td></tr><tr><th scope="row">Focus</th><td>Ring with <code>border-focus</code>, 2px, offset 2px, on <code>:focus-visible</code> (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Color</th><td>On and off differ in the position of the thumb as well as the track color (WCAG 1.4.1).</td></tr><tr><th scope="row">Effect</th><td>The change applies at once. A switch that needs a Save button is a checkbox.</td></tr><tr><th scope="row">Motion</th><td>Reduced motion turns the transition off (WCAG 2.3.3).</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var uid = 0;
+  function sw(o) {
+    var l = document.createElement('label');
+    l.className = 'form-switch-item' + (o.size === 'sm' ? ' form-switch-item--sm' : o.size === 'xs' ? ' form-switch-item--xs' : '') + (o.dark ? ' form-switch-item--dark' : '');
+    var i = document.createElement('input'); i.type = 'checkbox'; i.setAttribute('role', 'switch'); i.checked = !!o.on; i.disabled = o.state === 'disabled';
+    if (o.state === 'hover' || o.state === 'focus') i.dataset.state = o.state;
+    if (!o.label) i.setAttribute('aria-label', o.aria || 'Setting');
+    l.appendChild(i);
+    if (o.label) { var s = document.createElement('span'); s.textContent = o.label; l.appendChild(s); }
+    return l;
+  }
+
+  var mode = 'light';
+  var mx = { size: 'lg' };
+  var ROWS = [['Enabled', 'enabled'], ['Hover', 'hover'], ['Focus', 'focus'], ['Disabled', 'disabled']];
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody')), d = mode === 'dark';
+    $('[data-mode-stage-bg]').classList.toggle('ds-stage--dark', d);
+    ROWS.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      [false, true].forEach(function (on) { var td = document.createElement('td'); td.appendChild(sw({ size: mx.size, dark: d, state: r[1], on: on, label: on ? 'On' : 'Off' })); tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+  }
+  DK.seg($('[data-mx="size"]'), function (v) { mx.size = v; buildMatrix(); });
+  DK.mode(function (m) { mode = m; buildMatrix(); });
+  DK.bp();
+  buildMatrix();
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Light · off', 'Track', 'surface-20'], ['Light · off hover', 'Track', 'surface-15'], ['Light · on', 'Track', 'surface-success-default'],
+    ['Light · all', 'Thumb', 'surface-raised-primary'], ['Light · all', 'Focus ring', 'border-focus'], ['Light · all', 'Label', 'text-primary'],
+    ['Light · disabled', 'Off track', 'surface-disabled'], ['Light · disabled', 'Label', 'text-disabled'],
+    ['Dark · off', 'Track', 'surface-60'], ['Dark · off hover', 'Track', 'surface-50'], ['Dark · disabled', 'Off track', 'surface-80'], ['Dark · disabled', 'Thumb', 'surface-40'],
+    ['Dark · all', 'Label', 'text-primary-inverted']]);
+  DK.rows($('#tok-table tbody'), [
+    ['Light · on hover', 'Track', '<em>no token</em>', '<span class="ds-dot" style="background:#71b790" aria-hidden="true"></span>#71b790'],
+    ['Light · disabled', 'On track', '<em>no token</em>', '<span class="ds-dot" style="background:rgba(36, 134, 22, 0.5)" aria-hidden="true"></span>rgba(36, 134, 22, 0.5)'],
+    ['Dark · on hover', 'Track', '<em>no token</em>', '<span class="ds-dot" style="background:#71b790" aria-hidden="true"></span>#71b790'],
+    ['Dark · disabled', 'On track', '<em>no token</em>', '<span class="ds-dot" style="background:rgba(36, 134, 22, 0.5)" aria-hidden="true"></span>rgba(36, 134, 22, 0.5)']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

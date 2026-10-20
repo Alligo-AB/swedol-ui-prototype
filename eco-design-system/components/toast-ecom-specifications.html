@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Com Toast: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../notifications.css?v=22">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/range.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-stack { display: flex; flex-direction: column; gap: 16px; align-items: stretch; width: 100%; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); justify-items: start; width: 100%; }
+    @media (min-width: 1100px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; } }
+    .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-border-secondary); flex-wrap: wrap; width: 100%; }
+    .pg-row:first-child { border-top: 0; padding-top: 0; }
+    .pg-row:last-child { padding-bottom: 0; }
+    .pg-row__txt { flex: 1; min-width: 240px; }
+    .pg-row__txt b { display: block; font-size: 16px; line-height: 22px; }
+    .pg-row__txt span { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .ds-field[hidden], .form-range[hidden] { display: none; }
+    .pg-fig-host { width: 100%; max-width: 100%; overflow: hidden; }
+    .pg-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pg-form__region { min-height: 0; width: 100%; }
+    .pg-form__region:empty { display: none; }
+    body[data-bp="mobile"] :is(.toast, .ecom-toast, .banner-notification, .inline-notification) { max-width: 375px; }   /* the forced Mobile preview is as wide as a phone: in real use these fill the window */
+    .pg-grid { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+    .ds-callout__art { padding: 56px 24px 56px 24px; }
+    .ms-ecom .measure__obj { max-width: 100%; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="notifications.html" class="breadcrumb-item">Notifications</a><span class="breadcrumb-sep">/</span><a href="toast-ecom.html" class="breadcrumb-item">E-Com Toast</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Notifications</span></div>
+    <h1 class="ds-title">E-Com Toast</h1>
+    <p class="ds-lead">An E-Com Toast confirms a <strong>shopping action</strong> without leaving the page: a product added to the cart, or saved to the wishlist. It has no status color; it speaks in the store’s own black and white.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=13377-22983" target="_blank" rel="noopener">E-Com Toast</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="E-Com Toast"><a class="tab" href="toast-ecom.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="toast-ecom-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="toast-ecom-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Variant</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Tablet is 640 to 768px. The Figma axes are Variant and Breakpoint.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Desktop (769px+)</th><th scope="col">Tablet (640–768px)</th><th scope="col">Mobile (below 640px)</th></tr></thead><tbody><tr><th scope="row">Width, Add to cart</th><td>440px</td><td>440px</td><td>375px</td></tr><tr><th scope="row">Width, Informational</th><td>375px</td><td>375px</td><td>375px</td></tr><tr><th scope="row">Padding</th><td>24px</td><td>24px</td><td>16px</td></tr><tr><th scope="row">Text</th><td>Name bold 16/18 + text <code>body-md</code> 17/24, 0.32px, at every breakpoint</td><td>same</td><td>same</td></tr><tr><th scope="row">Buttons</th><td>32px high, <code>label-sm</code> 14px, 0.56px, padding 6px</td><td>32px high, <code>label-md</code> 14px, 0.42px, padding 4px</td><td>same as tablet</td></tr><tr><th scope="row">Informational link</th><td><code>body-md</code> 17/24, underlined, wraps after the text with 8px / 12px gaps</td><td>17/24</td><td>16/22</td></tr><tr><th scope="row">Gap image to text</th><td>16px</td><td>16px</td><td>16px</td></tr><tr><th scope="row">Gap content to close</th><td>12px</td><td>12px</td><td>12px</td></tr><tr><th scope="row">Shadow</th><td><code>var(--shadow-elevation-b-80)</code></td><td>same</td><td>same</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Position</h3><p class="ds-desc">Same as the Toast: fixed in the top-right corner (from the top, full width, on mobile).</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Top</th><th scope="col">Right</th><th scope="col">Width</th></tr></thead><tbody><tr><th scope="row">lg (1024px+)</th><td>40px</td><td>40px</td><td>440px or 375px</td></tr><tr><th scope="row">md (769–1023px)</th><td>32px</td><td>32px</td><td>440px or 375px</td></tr><tr><th scope="row">sm (640–768px)</th><td>32px</td><td>32px</td><td>440px or 375px</td></tr><tr><th scope="row">xs (0–639px)</th><td>0</td><td>0 (left 0)</td><td>Full viewport width</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">The padding of the Add to cart toast. The numbers are read from the component.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="mb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="mb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure ms-ecom" id="ms" role="img" aria-label="Padding of the Add to cart toast"></div></div><figcaption class="ds-fig__cap">Add to cart at true size. Change the Breakpoint to see the mobile values.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Desktop (769px+) and tablet</th><th scope="col">Mobile (below 640px)</th></tr></thead><tbody><tr><th scope="row">Padding, Add to cart</th><td>24px</td><td>16px</td></tr><tr><th scope="row">Padding, Informational</th><td>24px, of which 1px is the edge (23px + 1px)</td><td>16px, of which 1px is the edge (15px + 1px)</td></tr><tr><th scope="row">Gap image to text</th><td>16px</td><td>16px</td></tr><tr><th scope="row">Gap content to close</th><td>12px</td><td>12px</td></tr><tr><th scope="row">Above the buttons</th><td>16px</td><td>16px</td></tr><tr><th scope="row">Between the buttons</th><td>8px</td><td>8px</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same distances as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding, tablet and desktop</th><td><code>space-24</code></td></tr><tr><th scope="row">Padding, mobile</th><td><code>space-16</code></td></tr><tr><th scope="row">Image to text</th><td><code>space-16</code></td></tr><tr><th scope="row">Content to close</th><td><code>space-12</code></td></tr><tr><th scope="row">Above the buttons</th><td><code>space-16</code></td></tr><tr><th scope="row">Between the buttons</th><td><code>space-8</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="elevation"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Elevation</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">E-Com Toast</th><td><code>shadow-elevation-b-80</code></td><td>The same shadow as the Toast.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">Both variants. An E-Com Toast has no hover or disabled state of its own: the buttons, the link and the × have. Its lifecycle is under <a class="inline-link inline-link--large inline-link--secondary" href="#motion">Motion</a>.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">Variant</th><th scope="col">Example</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Token</th><th scope="col">Mobile and tablet</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Product name</th><td><code>title-sm</code></td><td>16/18, bold</td><td>16/18, bold</td></tr><tr><th scope="row">Text</th><td><code>body-md</code></td><td>17/24, 0.32px</td><td>17/24, 0.32px</td></tr><tr><th scope="row">Buttons</th><td><code>label-md</code> / <code>label-sm</code></td><td>14/14, 0.42px</td><td>14/14, 0.56px</td></tr><tr><th scope="row">Informational link</th><td><code>body-md</code></td><td>16/22</td><td>17/24</td></tr></tbody></table></div><p class="ds-desc ds-note">The text is 17/24 at every breakpoint, as in Figma. This pair is <code>body-md</code> on desktop.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Toast</th><td><code>ecom-toast ecom-toast--cart</code> or <code>--info</code></td><td>Add to cart or Informational.</td></tr><tr><th scope="row">Header</th><td><code>ecom-toast__header</code>, <code>ecom-toast__image-text</code></td><td>Image, text and ×. Add to cart only.</td></tr><tr><th scope="row">Image</th><td><code>ecom-toast__img</code></td><td>40×40px, <code>alt=""</code>.</td></tr><tr><th scope="row">Text</th><td><code>ecom-toast__text</code>, <code>ecom-toast__name</code></td><td>The name is bold.</td></tr><tr><th scope="row">Footer</th><td><code>ecom-toast__footer</code></td><td>Blank and Primary buttons, 32px high.</td></tr><tr><th scope="row">Informational</th><td><code>ecom-toast__info-content</code>, <code>ecom-toast__info-text</code></td><td>Text and optional link.</td></tr><tr><th scope="row">Close</th><td><code>icon-btn icon-btn--close</code></td><td>Add <code>icon-btn--close-inverted</code> on Informational.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><p class="ds-desc">Two variants: Add to cart and Informational. No status and no emphasis.</p><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">440px (Add to cart) or 375px (Informational) from 640px; the full width below.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Property</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Slide in / out</th><td><code>var(--duration-medium-2)</code> (300ms), <code>var(--ease-decelerate-emphasized)</code> in, <code>var(--ease-accelerate-generic)</code> out</td></tr><tr><th scope="row">Auto-hide</th><td>4000ms (same as System Toast)</td></tr><tr><th scope="row">Position</th><td>Fixed. Top 40px / right 40px at 1024px+, 32px below, top and full width on mobile</td></tr></tbody></table></div><p class="ds-desc ds-note">Compare other easing and duration values in the live Motion section on <a class="inline-link inline-link--medium inline-link--secondary" href="toast-ecom.html#motion">Examples &amp; Guidelines</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click ×, click outside, wait</th><td>Exit animation, then removed. Auto-hide after 4 seconds.</td></tr><tr><th scope="row">Click a button or the link</th><td>Runs its action and closes the toast.</td></tr><tr><th scope="row">Tab</th><td>Buttons, link and × take focus with a visible ring.</td></tr><tr><th scope="row">Inline link</th><td>Informational: Inline Link, inverted (white). Underlined when enabled; on hover the underline goes and the color changes.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Announcement</th><td>Announced politely through <code>role="status"</code> and <code>aria-live="polite"</code>; focus is not moved (WCAG 4.1.3).</td></tr><tr><th scope="row">Image</th><td>The product image is decorative: <code>alt=""</code>. The name is in the text.</td></tr><tr><th scope="row">Focus</th><td>Buttons, link and × have a 2px ring, <code>border-focus</code>, on keyboard use (WCAG 2.4.7).</td></tr><tr><th scope="row">Contrast</th><td>White text on <code>surface-100</code> in Informational. Link and × use the inverted tokens.</td></tr><tr><th scope="row">Reduced motion</th><td>No slide under <code>prefers-reduced-motion: reduce</code>.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../notifications.js?v=12"></script>
+<script src="../../components/js/range.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var N = ECO_N, H = N.html, IMG = '/images/product-hantverksbyxa.jpg';
+  var STATUS = [['info', 'Informational'], ['success', 'Success'], ['warning', 'Warning'], ['error', 'Error']];
+  function mk(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
+
+  function sample(o) { return mk(H.ecom(o)); }
+  var CART = { variant: 'cart', name: 'Carpenter Soul work pants stretch black', text: 'has been added to the cart.', img: IMG, secondary: 'Choose accessories', primary: 'Go to cart' };
+  var INFO = { variant: 'info', name: 'Belt stretch black', text: 'added to your wishlist.', link: 'View' };
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Add to cart', 'Background', 'surface-raised-primary'], ['Add to cart', 'Text', 'text-primary'], ['Add to cart', 'Blank button text', 'text-action-primary'], ['Add to cart', 'Primary button', 'surface-action-1'],
+    ['Informational', 'Background', 'surface-100'], ['Informational', 'Edge', 'border-secondary'], ['Informational', 'Text, link, close', 'text-primary-inverted'], ['Both', 'Shadow', 'shadow-elevation-b-80']]);
+  function measureItem(name, el, subjSel, edge) {
+    var it = document.createElement('div'); it.className = 'measure__item';
+    var nm = document.createElement('span'); nm.className = 'measure__name'; nm.textContent = name;
+    var obj = document.createElement('div'); obj.className = 'measure__obj'; obj.appendChild(el);
+    var s = subjSel ? $(subjSel, el) : el; s.classList.add('measure__subject');
+    if (edge === true) s.setAttribute('data-measure-edge', ''); else if (edge) $(edge, el).setAttribute('data-measure-edge', '');
+    ['t', 'b', 'l', 'r'].forEach(function (d) { var i = document.createElement('i'); i.className = 'measure__pad measure__pad--' + d; obj.appendChild(i); });
+    [['v', 't'], ['v', 'b'], ['h', 'l'], ['h', 'r']].forEach(function (p) { var b = document.createElement('b'); b.className = 'measure__dim measure__dim--' + p[0] + ' measure__dim--' + p[1]; b.appendChild(document.createElement('span')); obj.appendChild(b); });
+    it.appendChild(nm); it.appendChild(obj); return it;
+  }
+  $('#ms').appendChild(measureItem('Add to cart', sample(CART), null, false));
+  DK.bp(function () { if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+  var tb = $('#matrix tbody');
+  [['Add to cart', CART], ['Informational, with a link', INFO], ['Informational, without a link', { variant: 'info', name: 'Belt stretch black', text: 'removed from your wishlist.' }]].forEach(function (r) {
+    var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+    var td = document.createElement('td'); td.appendChild(sample(r[1])); tr.appendChild(td); tb.appendChild(tr);
+  });
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

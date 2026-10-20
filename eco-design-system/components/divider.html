@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Divider – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 360px; }
+    .pg-row { display: flex; gap: 24px; height: 112px; align-items: stretch; justify-content: center; }
+    .pg-cell { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+    .pg-cell > span:first-child { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .pg-list { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 360px; }
+    .pg-inline { display: flex; align-items: center; gap: 16px; }
+    .pg-ph { height: 48px; background: var(--color-surface-05); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Divider</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Menus, lists and dividers</span></div>
+    <h1 class="ds-title">Divider</h1>
+    <p class="ds-lead">A divider is a <strong>1px line</strong> that separates content groups, so users can scan and organize information. It is decorative and never interactive.</p><p class="ds-lead">Every example on this page is the real component, not a picture. Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=894-27082" target="_blank" rel="noopener">Divider</a> and <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=18282-2867" target="_blank" rel="noopener">guidelines</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Divider"><a class="tab" aria-current="page" href="divider.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="divider-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="divider-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="playground"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Playground</h2><p class="ds-desc">Choose direction and color and the divider and its code update.</p><div class="ds-playground"><div class="ds-stage ds-stage--center" id="pg-stage"><div id="pg-host" style="width:100%;max-width:360px"></div></div><div class="ds-controls"><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-dir">Direction</span><div class="btn-group" role="group" aria-labelledby="pg-l-dir" data-pg="dir"><button type="button" data-v="h" aria-pressed="true">Horizontal</button><button type="button" data-v="v" aria-pressed="false">Vertical</button></div></div><div class="ds-field"><span class="form-label form-label--sm" id="pg-l-col">Color</span><div class="btn-group" role="group" aria-labelledby="pg-l-col" data-pg="color"><button type="button" data-v="primary" aria-pressed="true">Primary</button><button type="button" data-v="secondary" aria-pressed="false">Secondary</button><button type="button" data-v="tertiary" aria-pressed="false">Tertiary</button></div></div></div></div><h3 class="ds-h3">Markup for this selection</h3><div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pg-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pg-code"></pre></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Overview</h2><p class="ds-desc">A divider is a <strong>1px line</strong> that separates content groups, so users can scan and organize information. It is decorative: it carries no content and no interaction.</p><p class="ds-desc">Divider has two directions (horizontal and vertical) and three colors. It has no states and no size, and it looks the same on every breakpoint. The line fills its container, and the space around it comes from the parent <code>gap</code>.</p><p class="ds-desc">This documentation has three pages. <strong>Examples &amp; Guidelines</strong> (this page) shows when and how to use a divider. <a class="inline-link inline-link--large inline-link--secondary" href="divider-specifications.html">Specifications</a> holds the values: the line, the tokens and the requirements. <a class="inline-link inline-link--large inline-link--secondary" href="divider-code.html">Code</a> shows how to add one to a page.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3><p class="ds-desc">Add a divider only when spacing alone does not separate the content. Use it to:</p><ul class="ds-bullets"><li>Separate distinct content groups in a page or a container</li><li>Organize the rows of a list or a settings page</li><li>Create hierarchy where content lacks a clear separation</li><li>Separate form sections or interactive items, such as menu items</li></ul><h3 class="ds-h3 ds-group">When not to use</h3><h3 class="ds-h3">When whitespace is enough</h3><p class="ds-desc">Every line adds visual clutter. If the content is already grouped by space, a heading or a label, leave the line out.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="pg-list" id="fig-do"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do separate unrelated groups with a divider.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div class="pg-list" id="fig-dont"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not put a line between every row of related content.</figcaption></figure></div><h3 class="ds-h3">For a boundary between page sections</h3><p class="ds-desc">A full-width boundary between two page sections is not a divider. Use <code>.page-divider</code> from <code>eco-section</code>: it adds the page margin and padding around the same 1px line.</p><h3 class="ds-h3">Keep the space on the parent</h3><p class="ds-desc">Set the space above and below the line with the <code>gap</code> of the parent. A margin on the divider itself makes the space depend on where the divider is used.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div class="pg-list" id="fig-do2"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do set the space with the parent <code>gap</code>.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div class="pg-list" id="fig-dont2"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not add margin to the divider.</figcaption></figure></div><h3 class="ds-h3 ds-group">Quick reference</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">The user…</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">sees two groups of content that need a clear boundary</th><td>Divider</td></tr><tr><th scope="row">sees a boundary between two full-width page sections</th><td><code>.page-divider</code> (<code>eco-section</code>)</td></tr><tr><th scope="row">sees a boundary between two menu rows</th><td>The row’s own divider (<code>eco-menu</code>)</td></tr><tr><th scope="row">sees content that is grouped by a heading</th><td>No divider</td></tr></tbody></table></div><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Separate distinct groups when whitespace is not enough.</li><li>Create hierarchy between types of information.</li><li>Set the space around it from the parent <code>gap</code>.</li><li>Use Primary by default and Tertiary for short side-by-side items.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Overuse dividers: they create visual clutter.</li><li>Add a line only for decoration.</li><li>Use a divider where a heading or label is clearer.</li><li>Add margin to the divider itself.</li></ul></div></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="anatomy"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Anatomy</h2><h3 class="ds-h3 ds-group">Divider</h3><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout" id="dv-anat" role="img" aria-label="Anatomy of a divider: 1 line"><div class="ds-callout__art" style="width:100%;max-width:360px"><hr class="divider" id="an-line" /></div></div></figure></div><ol class="ds-bullets ds-bullets--num"><li><strong>Line.</strong> One 1px line in a border color. A horizontal divider is as wide as its container; a vertical one is as high as its row.</li></ol><p class="ds-desc">A divider has no label, no icon and no padding of its own. The space around it belongs to the parent.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="variants"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Variants</h2><p class="ds-desc">Two directions in three colors, six in all. A divider has no states.</p><h3 class="ds-h3 ds-group">Horizontal</h3><p class="ds-desc">Between sections, list rows or form groups. It fills the width of its container.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div class="pg-grid"><div class="pg-cell"><span>Border Primary (default)</span><hr class="divider" /></div><div class="pg-cell"><span>Border Secondary</span><hr class="divider divider--secondary" /></div><div class="pg-cell"><span>Border Tertiary</span><hr class="divider divider--tertiary" /></div></div></div></figure></div><h3 class="ds-h3 ds-group">Vertical</h3><p class="ds-desc">Between items placed side by side. Put it in a flex row; it stretches to the height of the row.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div class="pg-row"><span class="divider divider--vertical" role="separator" aria-orientation="vertical"></span><span class="divider divider--vertical divider--secondary" role="separator" aria-orientation="vertical"></span><span class="divider divider--vertical divider--tertiary" role="separator" aria-orientation="vertical"></span></div></div></figure></div><h3 class="ds-h3 ds-group">In a list</h3><p class="ds-desc">The space between the text and the line comes from the parent <code>gap</code>.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div class="pg-list"><span>Profile</span><hr class="divider" /><span>Addresses</span><hr class="divider" /><span>Users</span></div></div></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><p class="ds-desc">A divider has no sizes. The line is always <strong>1px</strong> thick, and there is no spacing token for a hairline. The length is set by the container: the full width for a horizontal divider, the full height of the row for a vertical one. Figma shows 335px and 112px as example lengths, not fixed values. The values are under <a class="inline-link inline-link--large inline-link--secondary" href="divider-specifications.html#sizes">Sizes</a> in Specifications.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="layout"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-group">Alignment</h3><p class="ds-desc">A horizontal divider starts at the left edge of its container and runs to the right edge. A vertical one sits between two items in a flex row and takes the height of the row.</p><h3 class="ds-h3 ds-group">Appearance</h3><p class="ds-desc">Primary is the default. Secondary is less prominent and has very low contrast, so use it on white only. Tertiary is more prominent and suits short separations, such as values placed side by side. Token names and values are under <a class="inline-link inline-link--large inline-link--secondary" href="divider-specifications.html#design-tokens">Design Tokens</a> in Specifications.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><p class="ds-desc">A divider is not interactive. It has no hover, focus or disabled state, it cannot be tabbed to, and it does not move or animate.</p><h3 class="ds-h3 ds-group">Breakpoints</h3><p class="ds-desc">It is the same on every breakpoint. There is no mobile or desktop value.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility</h2><p class="ds-desc">All requirements are listed under <a class="inline-link inline-link--large inline-link--secondary" href="divider-specifications.html#accessibility-requirements">Accessibility Requirements</a> in Specifications.</p><h3 class="ds-h3 ds-group">Keyboard support</h3><p class="ds-desc">None. A divider is not focusable.</p><h3 class="ds-h3 ds-group">Screen reader support</h3><p class="ds-desc">An <code>&lt;hr&gt;</code> is announced as a separator, so use it when the line separates content for everyone. A line that is only visual, inside a component, gets <code>aria-hidden="true"</code>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="related"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="menu.html">Menu</a></strong>. Its rows carry their own divider (middle-inset, full-width or none).</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="section.html">Section</a></strong>. <code>.page-divider</code> for the boundary between page sections.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="../foundations/docs-table.html">Docs table</a></strong>. Row lines are part of the table.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="references"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">References</h2><ul class="ds-bullets"><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html" target="_blank" rel="noopener">WCAG 2.2: Info and Relationships</a>. Success criterion 1.3.1: structure must not depend on a line alone.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/" target="_blank" rel="noopener">WAI-ARIA Authoring Practices: Names and descriptions</a>. The separator role.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://fluent2.microsoft.design/components/web/react/core/divider/usage" target="_blank" rel="noopener">Fluent 2: Divider</a>. Microsoft.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://m3.material.io/components/divider/overview" target="_blank" rel="noopener">Material Design 3: Divider</a>. Google.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://carbondesignsystem.com/elements/color/usage/" target="_blank" rel="noopener">Carbon Design System: Color</a>. IBM. Border colors for separation.</li></ul></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var pg = { dir: 'h', color: 'primary' };
+  function renderPg() {
+    var cls = 'divider' + (pg.color === 'primary' ? '' : ' divider--' + pg.color) + (pg.dir === 'v' ? ' divider--vertical' : '');
+    var host = clear($('#pg-host')), el = document.createElement(pg.dir === 'h' ? 'hr' : 'span'); el.className = cls;
+    if (pg.dir === 'v') { el.setAttribute('role', 'separator'); el.setAttribute('aria-orientation', 'vertical'); host.style.cssText = 'display:flex;gap:24px;height:112px;max-width:360px;width:100%;justify-content:center'; }
+    else host.style.cssText = 'width:100%;max-width:360px';
+    host.appendChild(el);
+    $('#pg-code').textContent = pg.dir === 'h' ? '<hr class="' + cls + '" />' : '<span class="' + cls + '" role="separator" aria-orientation="vertical"></span>';
+  }
+  DK.wire(pg, renderPg);
+
+  /* Usage figures */
+  function list(host, items, line) { clear($(host)); items.forEach(function (t, i) { var s = document.createElement('span'); s.textContent = t; $(host).appendChild(s); if (i < items.length - 1 && line(i)) $(host).appendChild(Object.assign(document.createElement('hr'), { className: 'divider' })); }); }
+  list('#fig-do', ['Profile', 'Name and email', 'Addresses', 'Billing address'], function (i) { return i === 1; });
+  list('#fig-dont', ['Profile', 'Name and email', 'Addresses', 'Billing address'], function () { return true; });
+  list('#fig-do2', ['Profile', 'Addresses'], function () { return true; });
+  list('#fig-dont2', ['Profile', 'Addresses'], function () { return true; });
+  $$('#fig-dont2 hr').forEach(function (h) { h.style.margin = '24px 0'; });
+
+  /* Anatomy */
+  DK.callouts($('#dv-anat'), [{ n: 1, el: $('#an-line'), side: 'top', len: 40, at: 'center' }]);
+  renderPg();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

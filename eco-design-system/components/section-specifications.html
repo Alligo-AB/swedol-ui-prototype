@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/section.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-cap { display: block; margin-bottom: 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .sec-fig { --px-full: var(--dimension-spacing-space-24); width: 100%; }   /* demo: a fixed side margin, so a section fits a figure */
+    .sec-ph { padding: var(--dimension-spacing-space-16); background: var(--color-surface-10); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
+    .sec-measure { --px-full: var(--px-page); display: block; width: 280px; }   /* demo: the side margin of the page, in a figure of fixed width */
+    .sec-callout.ds-fig__stage.ds-callout { padding-right: 112px; }
+    .sec-callout .ds-callout__art { width: 100%; max-width: 420px; }
+    .sec-read { display: block; margin-top: 8px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .sec-bp { background: var(--color-surface-02); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="section.html" class="breadcrumb-item">Section</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Layout and content</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="The skill has no Figma link. The values are the project’s own section rules.">Not verified with Figma</span></div>
+    <h1 class="ds-title">Section</h1>
+    <p class="ds-lead">A section is a <strong>full-width block of a page</strong>. Its padding adjusts at each breakpoint and its surface is white or grey.</p><p class="ds-lead">The tokens, the padding per breakpoint, the measurements and the requirements. Values come from the live token package and from the specification skill.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Section"><a class="tab" href="section.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="section-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="section-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Part</th><th scope="col">Use</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The padding values are on the fixed spacing scale (<code>eco-spacing</code>).</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Value</th><th scope="col">Token</th><th scope="col">Used for</th></tr></thead><tbody><tr><th scope="row">16px</th><td><code>space-16</code></td><td>Top padding, first section (xs). Side margin (xs).</td></tr><tr><th scope="row">24px</th><td><code>space-24</code></td><td>My Pages title (xs and sm).</td></tr><tr><th scope="row">32px</th><td><code>space-32</code></td><td>Top padding (xs), first section (sm, md). Side margin (sm, md).</td></tr><tr><th scope="row">40px</th><td><code>space-40</code></td><td>Bottom padding (xs), first section (lg). Side margin (lg).</td></tr><tr><th scope="row">48px</th><td><code>space-48</code></td><td>Top and bottom (sm), first section (xl). Page divider.</td></tr><tr><th scope="row">56px</th><td><code>space-56</code></td><td>Top padding (md).</td></tr><tr><th scope="row">64px</th><td><code>space-64</code></td><td>Bottom padding (md).</td></tr><tr><th scope="row">72px</th><td><code>space-72</code></td><td>Top padding (lg, xl).</td></tr><tr><th scope="row">80px</th><td><code>space-80</code></td><td>Bottom padding (lg, xl).</td></tr></tbody></table></div><p class="ds-desc ds-note"><strong>Open point:</strong> <code>section.css</code> writes these values as pixels, not as <code>var(--dimension-spacing-space-…)</code>. The values are the same; the file is not changed yet.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><p class="ds-desc">The padding steps at the five ECO breakpoints. The row for the current window width is marked.</p><h3 class="ds-h3 ds-group">First section</h3><div class="ds-table-wrap"><table class="ds-table" id="t-first"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Top</th><th scope="col">Bottom</th></tr></thead><tbody><tr><th scope="row">xs · 0–639px</th><td>16px</td><td>40px</td></tr><tr><th scope="row">sm · 640–768px</th><td>32px</td><td>48px</td></tr><tr><th scope="row">md · 769–1023px</th><td>32px</td><td>64px</td></tr><tr><th scope="row">lg · 1024–1280px</th><td>40px</td><td>80px</td></tr><tr><th scope="row">xl · 1281px+</th><td>48px</td><td>80px</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Other sections</h3><div class="ds-table-wrap"><table class="ds-table" id="t-other"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Top</th><th scope="col">Bottom</th></tr></thead><tbody><tr><th scope="row">xs · 0–639px</th><td>32px</td><td>40px</td></tr><tr><th scope="row">sm · 640–768px</th><td>48px</td><td>48px</td></tr><tr><th scope="row">md · 769–1023px</th><td>56px</td><td>64px</td></tr><tr><th scope="row">lg · 1024–1280px</th><td>72px</td><td>80px</td></tr><tr><th scope="row">xl · 1281px+</th><td>72px</td><td>80px</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Side margin</h3><p class="ds-desc"><code>var(--px-full)</code>: the grid margin that also centers the content against the 1200px maximum width.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Margin</th></tr></thead><tbody><tr><th scope="row">xs</th><td>16px</td></tr><tr><th scope="row">sm and md</th><td>32px</td></tr><tr><th scope="row">lg</th><td>40px</td></tr><tr><th scope="row">xl</th><td>Centered: the larger of 40px and half of the window minus 1200px</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Page divider</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding, top and bottom</th><td>48px (zero it between two sections that have padding)</td></tr><tr><th scope="row">Padding, sides</th><td><code>var(--px-full)</code></td></tr><tr><th scope="row">Line</th><td>1px</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">My Pages title block</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col"><code>.main-content</code> padding-top</th><th scope="col"><code>.page-preamble</code> margin-bottom</th></tr></thead><tbody><tr><th scope="row">xs</th><td>24px</td><td>24px</td></tr><tr><th scope="row">sm</th><td>24px</td><td>32px</td></tr><tr><th scope="row">md and up</th><td>40px</td><td>40px</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Padding of a section at the current window width. The shaded areas are the padding. The numbers are read from the real component, so they change when you resize the window.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Padding of a section: other section and first section"><div class="measure__item"><span class="measure__name">1 · Other section</span><div class="measure__obj"><span class="sec-measure"><section class="section measure__subject" style="background:var(--color-surface-raised-primary)"><div class="sec-ph">Content</div></section></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · First section</span><div class="measure__obj"><span class="sec-measure"><section class="section section--first measure__subject" style="background:var(--color-surface-raised-primary)"><div class="sec-ph">Content</div></section></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">A section at true size (1:1), in a figure 280px wide. The side margin is the page margin of the window.</figcaption></figure></div><p class="ds-desc ds-note">There is no Breakpoint toolbar: the padding steps at four widths, and the toolbar only switches at 769px. Resize the window, or read the table under Sizes.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Padding, top and bottom</th><td>See the figure and Sizes: per position and breakpoint</td></tr><tr><th scope="row">Padding, sides</th><td><code>var(--px-full)</code>: 16, 32 or 40px, then centered</td></tr><tr><th scope="row">Width</th><td>The full width of the window</td></tr><tr><th scope="row">Content maximum width</th><td>1200px</td></tr><tr><th scope="row">Corners</th><td>Square</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The padding as spacing tokens is listed under <a class="inline-link inline-link--large inline-link--secondary" href="#design-tokens">Design Tokens</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">A section has no states: no hover, focus, active or disabled.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Section</th><td><code>section</code></td><td>A <code>&lt;section&gt;</code>. White surface, padding per breakpoint, sides <code>var(--px-full)</code>.</td></tr><tr><th scope="row">Surface</th><td><code>section--secondary</code></td><td>Grey surface (<code>surface-raised-secondary</code>).</td></tr><tr><th scope="row">Position</th><td><code>section--first</code></td><td>Less top padding, for the first section on a page.</td></tr><tr><th scope="row">Padding</th><td><code>section--flush</code></td><td>Zero top and bottom padding.</td></tr><tr><th scope="row">Page divider</th><td><code>page-divider</code> and <code>page-divider__line</code></td><td>A <code>div</code> with a 1px line.</td></tr><tr><th scope="row">My Pages title</th><td><code>main-content</code> and <code>page-preamble</code></td><td>The spacing around the page title.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">White</th><td><code>section</code></td><td>The default.</td></tr><tr><th scope="row">Grey</th><td><code>section section--secondary</code></td><td>A clear change of content.</td></tr><tr><th scope="row">First</th><td><code>section section--first</code></td><td>The first section of a page.</td></tr><tr><th scope="row">Zeroed</th><td><code>section section--flush</code></td><td>The five cases only.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">A section is as wide as the window. The content is limited to 1200px by the side margin.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Input</th><td>None. A section has no hover, focus or click.</td></tr><tr><th scope="row">Breakpoint</th><td>The padding steps at 640, 769, 1024 and 1281px.</td></tr><tr><th scope="row">Window width</th><td>The side margin follows <code>--px-full</code>, so the content stays centered against 1200px.</td></tr><tr><th scope="row">Motion</th><td>None.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Headings</th><td>Give every section a heading, so the structure is in the markup and not only in the padding (WCAG 1.3.1).</td></tr><tr><th scope="row">Landmark</th><td>A <code>&lt;section&gt;</code> is a landmark only with an accessible name (<code>aria-labelledby</code> or <code>aria-label</code>). Add one when the part is important to navigate to.</td></tr><tr><th scope="row">Color</th><td>Never use the grey surface as the only sign of a change. The heading must also show it.</td></tr><tr><th scope="row">Reflow</th><td>The content must fit 320px without sideways scrolling (WCAG 1.4.10). The side margin is 16px at xs.</td></tr><tr><th scope="row">Page divider</th><td>An empty <code>div</code>: decorative and not announced. It must not carry meaning.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  function bpName() { var w = innerWidth; return w >= 1281 ? 'xl' : w >= 1024 ? 'lg' : w >= 769 ? 'md' : w >= 640 ? 'sm' : 'xs'; }
+  DK.tokenTable($('#tok-table tbody'), [['Section', 'Surface (default)', 'surface-raised-primary'], ['Section', 'Surface, grey', 'surface-raised-secondary'], ['Page divider', 'Line', 'border-primary']]);
+  function mark() {
+    var b = bpName();
+    ['#t-first', '#t-other'].forEach(function (id) {
+      $$(id + ' tbody tr').forEach(function (r) { var on = r.firstChild.textContent.split(' ')[0] === b; r.classList.toggle('sec-bp', on); if (on) r.setAttribute('aria-current', 'true'); else r.removeAttribute('aria-current'); });
+    });
+  }
+  mark(); window.addEventListener('resize', mark);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+/* ECO component CSS: switch. Shared by the docs page (eco-design-system/components/switch.html) and every prototype/product page.
+   Skill: eco-switch. Link it, do not copy it: <link rel="stylesheet" href="/components/css/switch.css">
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only. */
+    /* ── Switch (light) ── */
+    .form-switch-item {
+      display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-8); cursor: pointer;
+      font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px; /* body-md (Large) */
+      color: var(--color-text-primary);
+    }
+    .form-switch-item--sm, .form-switch-item--xs { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; } /* body-sm, all breakpoints */
+
+    .form-switch-item input[role="switch"] {
+      appearance: none; flex-shrink: 0; cursor: pointer; position: relative; margin: 0;
+      width: 48px; height: 24px; border-radius: 999px;
+      background-color: var(--color-surface-20);
+      transition: background-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .form-switch-item--xs input[role="switch"] { width: 32px; height: 16px; }
+
+    /* Thumb */
+    .form-switch-item input[role="switch"]::before {
+      content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%;
+      background-color: var(--color-surface-raised-primary);
+      box-shadow: var(--shadow-elevation-input-control-switch);
+      transition: transform var(--duration-fast-3) var(--ease-standard);
+    }
+    .form-switch-item--xs input[role="switch"]::before { width: 12px; height: 12px; }
+
+    /* On */
+    .form-switch-item input[role="switch"]:checked { background-color: var(--color-surface-success-default); }
+    .form-switch-item input[role="switch"]:checked::before { transform: translateX(24px); }
+    .form-switch-item--xs input[role="switch"]:checked::before { transform: translateX(16px); }
+
+    /* Hover */
+    .form-switch-item input[role="switch"]:is(:hover, [data-state="hover"]):not(:disabled) { background-color: var(--color-surface-15); }
+    .form-switch-item input[role="switch"]:checked:is(:hover, [data-state="hover"]):not(:disabled) { background-color: #71b790; } /* no token: flag for design */
+
+    /* Focus */
+    .form-switch-item input[role="switch"]:is(:focus-visible, [data-state="focus"]) { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+
+    /* Disabled */
+    .form-switch-item input[role="switch"]:disabled { background-color: var(--color-surface-disabled); cursor: not-allowed; }
+    .form-switch-item input[role="switch"]:disabled::before { box-shadow: none; }
+    .form-switch-item input[role="switch"]:disabled:checked { background-color: rgba(36, 134, 22, 0.5); } /* success-default at 50%: no token, flag */
+    .form-switch-item:has(input:disabled) { cursor: not-allowed; color: var(--color-text-disabled); }
+
+    /* ── Dark: on dark surfaces only ── */
+    .form-switch-item--dark { color: var(--color-text-primary-inverted); }
+    .form-switch-item--dark input[role="switch"] { background-color: var(--color-surface-60); }
+    .form-switch-item--dark input[role="switch"]:is(:hover, [data-state="hover"]):not(:disabled) { background-color: var(--color-surface-50); }
+    .form-switch-item--dark input[role="switch"]:checked { background-color: var(--color-surface-success-default); }
+    .form-switch-item--dark input[role="switch"]:checked:is(:hover, [data-state="hover"]):not(:disabled) { background-color: #71b790; } /* see flag */
+    .form-switch-item--dark input[role="switch"]:disabled { background-color: var(--color-surface-80); }
+    .form-switch-item--dark input[role="switch"]:disabled::before { background-color: var(--color-surface-40); }
+    .form-switch-item--dark input[role="switch"]:disabled:checked { background-color: rgba(36, 134, 22, 0.5); }
+    .form-switch-item--dark:has(input:disabled) { color: var(--color-text-disabled); }
+
+    @media (min-width: 769px) { .form-switch-item { font-size: 17px; line-height: 24px; } }
+    @media (min-width: 769px) { .form-switch-item--sm, .form-switch-item--xs { font-size: 14px; line-height: 20px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .form-switch-item input[role="switch"], .form-switch-item input[role="switch"]::before { transition: none; }
+    }

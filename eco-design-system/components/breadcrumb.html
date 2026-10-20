@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breadcrumb – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/breadcrumb.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; }
+    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
+    .pg-cell { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .pg-cell > .pg-note { margin: 0; }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .pg-grey { background: var(--color-background-secondary); }
+    .pg-cap { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); font-weight: 600; }
+    .ds-stage .breadcrumb, .ds-fig__stage .breadcrumb { padding-left: 0; padding-right: 0; padding-bottom: 0; }   /* the page margin and the built-in bottom padding belong to a real page, not to a docs stage */
+    .ds-stage .breadcrumb__bar, .ds-fig__stage .breadcrumb__bar { padding: 0; }
+    .ds-fig__stage--bar { align-items: flex-start; justify-content: flex-start; }
+    .measure .breadcrumb__bar { padding: 16px 0; }   /* the Measurements figure draws the real bar padding */
+    .ds-callout__art { padding-right: 24px; }
+    .pg-type td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Breadcrumb</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status and navigation</span></div>
+    <h1 class="ds-title">Breadcrumb</h1>
+    <p class="ds-lead">ECO has two breadcrumb parts: the <strong>base</strong>, one crumb (a component), and the <strong>bar</strong>, a row of crumbs (a pattern built from it). Read this guide before you build a trail.</p><p class="ds-lead">Choose the part below, then open the page for it: <a class="inline-link inline-link--xlarge" href="breadcrumb-bar.html">Breadcrumb Bar</a>, <a class="inline-link inline-link--xlarge" href="breadcrumb-base.html">Breadcrumb Base</a>. Every example is the real component. Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=332-8639" target="_blank" rel="noopener">Bar</a>, <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1986-64264" target="_blank" rel="noopener">Base</a> and <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=9071-123361" target="_blank" rel="noopener">responsive behavior</a>.</p></div>
+</section>
+<div class="ds-sep"><hr class="divider" /></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Overview</h2><p class="ds-desc">A breadcrumb shows <strong>where the page sits</strong> in the site and lets the user go back up in one click. It is made of two parts: the <strong>Breadcrumb Base</strong>, one level in a bordered box, and the <strong>Breadcrumb Bar</strong>, the row of crumbs with a slash between them. The base is a component; the bar is a <strong>pattern</strong>, because it is composed of several crumbs and the page spacing, so it is documented under Patterns.</p><h3 class="ds-h3 ds-group">When to use a breadcrumb</h3><p class="ds-desc">Use it when the page sits more than one step down the navigation tree, so the user can go up a level without the browser’s back button:</p><ul class="ds-bullets"><li>Category, product list, product and landing pages</li><li>Pages in My Pages that sit below another page</li></ul><h3 class="ds-h3 ds-group">When not to use it</h3><ul class="ds-bullets"><li>The home page, or a page directly under Home with no level in between</li><li>Tabs or a clear back link already lead the user up a level: avoid two ways to do the same thing</li></ul><h3 class="ds-h3 ds-group">How this guide is organized</h3><p class="ds-desc">This page chooses the part and shows them together. Each part has its own three pages: Examples &amp; Guidelines, Specifications and Code. Open one from the table below or from the navigation.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="which-part"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Which part</h2><p class="ds-desc">A page almost always uses the bar. The base is the piece the bar is built from.</p><div class="ds-table-wrap"><table class="ds-table pg-type"><thead><tr><th scope="col">Part</th><th scope="col">What it is, and what to use it for</th></tr></thead><tbody><tr><th scope="row"><a class="inline-link inline-link--large inline-link--secondary" href="breadcrumb-bar.html">Breadcrumb Bar</a> (pattern)</th><td><p style="margin:0 0 12px">A row of two to six crumbs with a “/” between them, and the page spacing. Use it for the trail at the top of a page.</p><div id="ch-bar"></div></td></tr><tr><th scope="row"><a class="inline-link inline-link--large inline-link--secondary" href="breadcrumb-base.html">Breadcrumb Base</a> (component)</th><td><p style="margin:0 0 12px">One level: a bordered box with a label, in three states. Use it to build a bar in a custom layout.</p><div id="ch-base"></div></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="in-context"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">In context</h2><p class="ds-desc">The bar sits directly under the header, as the first element of the page, before the title.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--bar"><div class="pg-col" style="gap:0;align-items:stretch"><div id="ctx-bar"></div><p class="pg-title" style="margin:0 0 8px;font-size:32px;line-height:36px;text-transform:uppercase;font-weight:600;font-family:'Breuer Condensed',Arial,sans-serif">Carpenter pants</p><p class="pg-note" style="margin:0">The block after the bar has no top padding of its own.</p></div></div></figure></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><p class="ds-desc">The bar and the crumbs follow one interaction model.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Links</th><td>Every crumb but the last is a link. The last is the current page and is not clickable.</td></tr><tr><th scope="row">Hover</th><td>The text turns to the action color and is underlined. The border does not change.</td></tr><tr><th scope="row">Keyboard</th><td>Tab moves through the parent crumbs. Enter follows a link.</td></tr><tr><th scope="row">Wrapping</th><td>A trail that is too long wraps to the next row. A crumb never wraps its label.</td></tr><tr><th scope="row">Breakpoint</th><td>Sizes change at 769px. A tablet looks like mobile.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When not to use</h3><h3 class="ds-h3">Use the bar, not loose crumbs</h3><p class="ds-desc">A trail is built with the bar, so the separators, the spacing and the landmark are right. A single crumb on its own does not show where the user is.</p><div class="ds-figs"><figure class="ds-fig ds-fig--do"><div class="ds-fig__stage"><div id="fig-do"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">check_circle</span>Do use the bar for a trail.</figcaption></figure><figure class="ds-fig ds-fig--dont"><div class="ds-fig__stage"><div id="fig-dont"></div></div><figcaption class="ds-fig__cap"><span class="ds-fig__ic" aria-hidden="true">cancel</span>Do not show one crumb as the whole navigation.</figcaption></figure></div><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Put the bar first in the page, under the header.</li><li>Make every crumb but the last a real link.</li><li>Use the page names as the labels, kept short.</li><li>Use the page margin <code>var(--px-page)</code> for the side padding.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Underline the crumbs in the enabled state.</li><li>Use chevrons or icons between the crumbs.</li><li>Make the current page a link.</li><li>Show a bar on the home page.</li></ul></div></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="related"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="breadcrumb-bar.html">Breadcrumb Bar</a></strong>. The whole trail.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="breadcrumb-base.html">Breadcrumb Base</a></strong>. One level of the trail.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="tabs.html">Tabs</a></strong>. Sub-navigation in the same context.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="links-guide.html">Links guide</a></strong>. Other links in a page.</li><li><strong><a class="inline-link inline-link--large inline-link--secondary" href="section.html">Section</a></strong>. The block after the bar zeroes its top padding.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="references"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">References</h2><ul class="ds-bullets"><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/" target="_blank" rel="noopener">WAI-ARIA Authoring Practices: Breadcrumb pattern</a>. The landmark, the list of links and aria-current.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.w3.org/WAI/WCAG22/Understanding/location.html" target="_blank" rel="noopener">WCAG 2.2: Location</a>. Success criterion 2.4.8: show where the user is.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://www.nngroup.com/articles/breadcrumbs/" target="_blank" rel="noopener">Nielsen Norman Group: Breadcrumbs</a>. Guidelines for location breadcrumbs.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://fluent2.microsoft.design/components/web/react/core/breadcrumb/usage" target="_blank" rel="noopener">Fluent 2: Breadcrumb</a>. Microsoft.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://carbondesignsystem.com/components/breadcrumb/usage/" target="_blank" rel="noopener">Carbon Design System: Breadcrumb</a>. IBM.</li></ul></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var ALL = ['Home', 'Clothing and protective gear', 'Work pants', 'Carpenter pants', 'Winter pants', 'Insulated winter pants'];
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  /* one crumb: state = enabled | hover (forced for the demo) | active (the current page) */
+  function crumb(text, state) {
+    var c;
+    if (state === 'active') { c = el('span', 'breadcrumb-item breadcrumb-item--active', text); c.setAttribute('aria-current', 'page'); return c; }
+    c = el('a', 'breadcrumb-item', text); c.href = '#'; if (state === 'hover') c.dataset.state = 'hover';
+    c.addEventListener('click', function (e) { e.preventDefault(); });
+    return c;
+  }
+  function sep() { return el('span', 'breadcrumb-sep', '/'); }
+  /* the bar: n crumbs (2 to 6), the last one is the current page */
+  function bar(n, last, hover) {
+    var nav = el('nav', 'breadcrumb'), b = el('div', 'breadcrumb__bar'); nav.setAttribute('aria-label', 'Breadcrumb'); nav.appendChild(b);
+    ALL.slice(0, n - 1).concat([last]).forEach(function (t, i) { if (i) b.appendChild(sep()); b.appendChild(crumb(t, i === n - 1 ? 'active' : (hover && i === 0 ? 'hover' : 'enabled'))); });
+    return nav;
+  }
+  function barMarkup(n, last) {
+    var h = '<nav class="breadcrumb" aria-label="Breadcrumb">\n  <div class="breadcrumb__bar">\n';
+    ALL.slice(0, n - 1).forEach(function (t) { h += '    <a href="#" class="breadcrumb-item">' + esc(t) + '</a>\n    <span class="breadcrumb-sep">/</span>\n'; });
+    return h + '    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">' + esc(last) + '</span>\n  </div>\n</nav>';
+  }
+  function rng(n) { return function () { var r = document.createRange(); r.selectNodeContents(n); return r.getBoundingClientRect(); }; }
+
+  function put(sel, node) { clear($(sel)).appendChild(node); }
+  put('#ch-bar', bar(3, 'Work pants')); put('#ch-base', crumb('Work pants', 'enabled'));
+  put('#ctx-bar', bar(3, 'Work pants'));
+  put('#fig-do', bar(3, 'Work pants')); put('#fig-dont', crumb('Work pants', 'enabled'));
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

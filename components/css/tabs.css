@@ -1,0 +1,107 @@
+/* ECO component CSS: tabs (tab bar + tab items). Skill: eco-tabs. Link it, do not copy it: <link rel="stylesheet" href="/components/css/tabs.css">
+   Behaviour: /components/js/tabs.js (arrow keys, panel switching). Tokens only. Mobile-first (desktop from 769px, sm = mobile).
+   Figma: Tab Items 2166:63997, Tab Bar sizes 2515:77815, Tab Base Item 3034:330049 */
+
+.tab-bar {
+  --tab-fs: 16px; --tab-lh: 16px; --tab-ls: 0.32px;   /* label-lg, mobile */
+  --tab-gap: 10px;                                      /* label to indicator; Large mobile */
+  --tab-icon-gap: 8px;                                  /* icon to label */
+  --tab-ind-hover: var(--color-surface-10);
+  --tab-line-active: var(--color-surface-100);          /* default black; set to the brand colour where the product uses it (My Pages: var(--brand)) */
+  position: relative; display: flex; box-sizing: border-box;
+  padding: 4px 4px 0; margin: -4px -4px 0;              /* room for the 4px focus ring (the scroll container would clip it), no layout shift */
+  overflow-x: auto; scrollbar-width: none;              /* scrollable tabs: the preferred way to fit long titles */
+  border-bottom: 1px solid var(--color-border-primary); /* the divider runs the full width, also when the tabs overflow */
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-bar--primary { gap: var(--dimension-spacing-space-24); }
+.tab-bar--on-grey { --tab-ind-hover: var(--color-surface-40); }   /* Background Colored = True: hover line must stay visible on grey */
+
+/* On-page navigation (tabs.js: scrollspy + jump to the section): the bar sticks to the top while the page scrolls.
+   --tab-sticky-top = distance from the top of the window (or the scrolling box) to the bar, for a fixed header above it. */
+.tab-bar--page { position: sticky; top: var(--tab-sticky-top, 0px); z-index: var(--tab-sticky-z, 2); background: var(--tab-bar-bg, var(--color-background-primary)); }
+.tab-bar--page.tab-bar--on-grey { --tab-bar-bg: var(--color-background-secondary); }
+
+/* Sizes. Medium mobile = Large mobile with a 8px gap; Desktop Medium = Large (identical in Figma). */
+.tab-bar--md { --tab-gap: 8px; }
+.tab-bar--sm { --tab-fs: 14px; --tab-lh: 14px; --tab-ls: 0.42px; --tab-gap: 8px; }   /* label-md, mobile */
+@media (min-width: 769px) {
+  .tab-bar { --tab-fs: 18px; --tab-lh: 18px; --tab-ls: 0.18px; --tab-gap: 12px; }     /* label-lg, desktop */
+  .tab-bar--md { --tab-gap: 12px; }
+  .tab-bar--sm { --tab-fs: 16px; --tab-lh: 16px; --tab-ls: 0.48px; --tab-gap: 8px; } /* label-md, desktop */
+}
+
+/* Tab item: icon (optional), label (optional), indicator line along the bottom */
+.tab {
+  position: relative; flex: none;
+  display: flex; flex-direction: column; align-items: center; gap: var(--tab-icon-gap);
+  --tab-pad: calc(var(--tab-gap) + 2px);               /* label to bottom edge: gap + the 2px indicator */
+  padding: 0 0 var(--tab-pad);
+  background: transparent; border: none; border-radius: 0; cursor: pointer;
+  font-family: 'Breuer Condensed', Arial, sans-serif; font-size: var(--tab-fs); font-weight: 600; line-height: var(--tab-lh); letter-spacing: var(--tab-ls);
+  font-feature-settings: 'ss02' 1, 'ss03' 1;
+  text-transform: uppercase; white-space: nowrap; text-decoration: none;
+  color: var(--color-text-primary);   /* label and icon colours change instantly, as in the My Pages nav; only the line animates */
+}
+.tab-bar--secondary .tab { padding-inline: var(--dimension-spacing-space-16); }   /* the indicator spans label + 16px each side */
+.tab__icon { font-size: 20px; line-height: 20px; color: var(--color-text-secondary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+.tab__label { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); height: var(--tab-lh); }   /* fixed to the line height: a 24px leading icon overflows evenly, the tab height and label position stay the same */
+.tab__label .ms { font-size: 24px; line-height: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }   /* optional leading icon */
+.tab-bar--sm .tab__label .ms { font-size: 20px; line-height: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }   /* Small, mobile: 20px icon */
+@media (min-width: 769px) { .tab-bar--sm .tab__label .ms { font-size: 24px; line-height: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; } }   /* Small, desktop: 24px like Large and Medium */
+
+/* Indicator: grows from the bottom edge */
+.tab::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: transparent; transform: scaleY(0); transform-origin: bottom;
+  transition: transform var(--duration-medium-2) var(--ease-decelerate-generic), background-color var(--duration-medium-2) var(--ease-standard);
+}
+.tab:is(:hover, [data-state="hover"]):not(.tab--active, [aria-selected="true"], [aria-current]) { color: var(--color-text-tertiary); }
+.tab:is(:hover, [data-state="hover"]):not(.tab--active, [aria-selected="true"], [aria-current]) .tab__icon { color: var(--color-text-tertiary); }
+.tab:is(:hover, [data-state="hover"]):not(.tab--active, [aria-selected="true"], [aria-current])::after { background: var(--tab-ind-hover); transform: scaleY(1); }
+
+/* Link tab clicked, next page loading: keeps the hover look (set by tabs.js) */
+.tab--pending:not(.tab--active, [aria-selected="true"], [aria-current]) { color: var(--color-text-tertiary); }
+.tab--pending:not(.tab--active, [aria-selected="true"], [aria-current]) .tab__icon { color: var(--color-text-tertiary); }
+.tab--pending:not(.tab--active, [aria-selected="true"], [aria-current])::after { background: var(--tab-ind-hover); transform: scaleY(1); }
+
+/* Active (aria-selected or aria-current): primary line is 3px, secondary 2px (the same 3px element scaled to 2/3, so hover to active does not jump) */
+.tab--active::after, .tab[aria-selected="true"]::after, .tab[aria-current]::after { background: var(--tab-line-active); transform: scaleY(1); }
+.tab-bar--secondary .tab--active::after, .tab-bar--secondary .tab[aria-selected="true"]::after, .tab-bar--secondary .tab[aria-current]::after { transform: scaleY(0.6667); }
+.tab--active .tab__icon, .tab[aria-selected="true"] .tab__icon, .tab[aria-current] .tab__icon { color: var(--color-icon-primary); }
+
+/* Sliding active line (content tabs): tabs.js adds one .tab-bar__indicator and sets data-slide; it moves to the selected tab.
+   Link tabs (no script) keep the per-tab line above. Hover line stays per tab. */
+.tab-bar__indicator { position: absolute; left: 0; bottom: 0; width: 0; height: 3px; background: var(--tab-line-active); pointer-events: none; }
+.tab-bar--secondary .tab-bar__indicator { height: 2px; }
+.tab-bar__indicator.is-ready { transition: transform var(--duration-medium-2) var(--ease-standard), width var(--duration-medium-2) var(--ease-standard); }
+.tab-bar[data-slide] :is(.tab--active, [aria-selected="true"], [aria-current])::after { display: none; }
+/* The target tab shows the grey hover line until the sliding line has arrived (tabs.js sets .tab--arriving) */
+.tab-bar[data-slide] .tab.tab--arriving::after { display: block; background: var(--tab-ind-hover); transform: scaleY(1); }
+/* Page change: tabs.js sets html.tabs-arrive while the head is parsed, so the new current tab shows grey (not its active colour) before the script has run */
+html.tabs-arrive .tab-bar .tab[aria-current]::after { display: block; background: var(--tab-ind-hover); transform: scaleY(1); }
+@media (prefers-reduced-motion: reduce) { .tab-bar__indicator.is-ready { transition: none; } }
+
+/* Icon only: the line sits under the icon; gap 12px on desktop Large/Medium, else 8px */
+.tab--icon-only { --tab-pad: calc(8px + 2px); }
+@media (min-width: 769px) { .tab-bar:not(.tab-bar--sm) .tab--icon-only { --tab-pad: calc(12px + 2px); } }
+
+/* Status: dot after the label, number badge after the label; icon-only gets a dot at the icon's top right */
+.tab__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-surface-danger-default); flex: none; }
+.tab__count {
+  box-sizing: border-box; min-width: 16px; padding: 3px; border-radius: 100px; flex: none;
+  background: var(--color-surface-danger-default); color: var(--color-text-primary-inverted);
+  font-size: 10px; line-height: 10px; letter-spacing: normal; text-align: center;
+}
+.tab--icon-only .tab__dot { position: absolute; top: 0; right: -2px; }
+
+/* Focus (all variants alike): 2px ring around icon + label (4px clear above, left, right; 6px below, so the ring is 56px high on Large); the indicator stays visible below the ring.
+   Figma: Focus / Active Focus / Enabled Focus. Label and line colours do not change. */
+.tab:is(:focus-visible, [data-state="focus"]) { outline: none; }
+.tab:is(:focus-visible, [data-state="focus"])::before {
+  content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: calc(var(--tab-pad) - 6px);
+  box-sizing: border-box; border: 2px solid var(--color-border-focus); pointer-events: none;
+}
+
+/* Panels (role="tabpanel") */
+.tab-panel[hidden] { display: none; }

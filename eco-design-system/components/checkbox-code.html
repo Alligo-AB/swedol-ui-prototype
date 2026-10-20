@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkbox: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/checkbox.css">
+  <link rel="stylesheet" href="../../components/css/radio.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ds-stage--dark .pg-note { color: var(--color-text-tertiary-inverted); }
+    .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }
+    .cb-pdp { display: flex; flex-direction: column; gap: 8px; padding: 24px; background: var(--color-surface-raised-secondary); }
+    .cb-pdp__label { font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 600; line-height: 16px; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-primary); }
+    .cb-pdp__name { font-family: 'Breuer Condensed', sans-serif; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); margin-bottom: 4px; }
+    .cb-filter { max-width: 420px; background: var(--color-surface-raised-primary); }
+    .cb-filter__head { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 16px; }
+    .cb-filter__title { font-family: 'Breuer Condensed', sans-serif; font-size: 20px; font-weight: 600; line-height: 24px; color: var(--color-text-primary); } /* title-md */
+    .cb-filter__chev { font-family: 'Material Symbols Outlined'; font-size: 24px; line-height: 1; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .cb-filter__more { display: inline-block; margin: 8px 0 24px; padding: 0; border: 0; background: none; cursor: pointer; font-family: 'Breuer Condensed', sans-serif; font-size: 16px; font-weight: 600; line-height: 22px; color: var(--color-text-primary); }
+    .cb-filter__more:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .cb-filter__rule { border: 0; border-top: 1px solid var(--color-border-primary); margin: 0; }
+    .cb-colorlist { display: grid; gap: 0 32px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); width: 100%; }
+    .cb-colorlist > div { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--color-border-primary); }
+    .cb-colorlist__label { flex: 0 0 92.58px;  /* 92.58px: fixed label column, as in Figma */ font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1; font-size: 16px; font-weight: 500; line-height: 16px; letter-spacing: 0.32px; text-transform: uppercase; color: var(--color-text-tertiary); } /* alt-label-lg: 16/16 mobile, 18/18 desktop */
+    .cb-colorlist__swatch { width: 16px; height: 16px; background: var(--swatch); flex-shrink: 0; }
+    @media (min-width: 769px) { .cb-colorlist__label { font-size: 18px; line-height: 18px; letter-spacing: 0.36px; } }
+    .cb-tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cb-row { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
+    .cb-col { display: flex; flex-direction: column; gap: 4px; }
+    .cb-group { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+    .cb-group legend { font-size: 16px; line-height: 18px; font-weight: 600; margin-bottom: var(--dimension-spacing-space-8); padding: 0; }   /* title-sm */
+    .cb-group--wrap { flex-direction: row; flex-wrap: wrap; gap: 4px 24px; }
+    .cb-group--wrap legend { width: 100%; }
+    .cb-indent { margin-left: 24px; display: flex; flex-direction: column; }
+    .cb-state { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; margin-top: 12px; color: var(--color-text-tertiary); }
+    .ds-stage--dark .cb-state { color: var(--color-text-tertiary-inverted); }
+    .cb-table td, .cb-table th { text-align: center; }
+    .cb-table .check-icon input { display: block; margin: 4px auto; } /* 24px area, so the row stays 48px */
+    .cb-table td:first-child, .cb-table th:first-child { text-align: left; }
+    .cb-fig { display: flex; flex-direction: column; gap: 4px; width: 100%; max-width: 320px; }
+    .ds-callout__art { padding-right: 72px; }   /* room for marker 4 to the right of the label */
+    .cb-measure { display: inline-flex; }
+    .cb-sizes { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 48px; }
+    .ds-table-wrap.ds-stage--dark { padding: 0; background: var(--color-surface-100); }
+    .ds-stage--dark .ds-table, .ds-stage--dark .ds-table th, .ds-stage--dark .ds-table td { color: var(--color-text-primary-inverted); border-color: var(--color-surface-60); }
+    .ds-stage--dark .ds-table thead th { background: transparent; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="checkbox.html" class="breadcrumb-item">Checkbox</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Checkbox</h1>
+    <p class="ds-lead">A checkbox lets the user turn <strong>one or more options</strong> on or off, independently of each other. The choice is saved when the form is submitted.</p><p class="ds-lead">How to add a checkbox to a page. The file is <code>components/css/checkbox.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Checkbox"><a class="tab" href="checkbox.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="checkbox-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="checkbox-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page. Never copy the rules, and never write a parallel version of the checkbox.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/checkbox.css"&gt;</code>. Both templates (<code>template.html</code>, <code>mypages/mypages-template.html</code>) already have it.</td></tr><tr><th scope="row">2. Markup</th><td>A <code>&lt;label class="form-checkbox-item"&gt;</code> around an <code>&lt;input type="checkbox"&gt;</code> and a <code>&lt;span&gt;</code> with the label text.</td></tr><tr><th scope="row">3. Dark surface</th><td>Add <code>form-checkbox-item--dark</code> on <code>surface-100</code> or <code>surface-80</code>. Never the light markup on a dark surface.</td></tr><tr><th scope="row">4. Mixed</th><td>Set <code>input.indeterminate = true</code> in JavaScript. It cannot be set in HTML.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="checkbox"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Checkbox</h2><p class="ds-desc">Copy the markup you need. Hover and focus come from <code>:hover</code> and <code>:focus-visible</code>; the <code>[data-state]</code> selectors in the CSS exist only so the documentation can force a state.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="tiles"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Tiles</h2><p class="ds-desc">Tiles have no visible label, so <code>aria-label</code> is required. Several can be chosen with <code>checkbox</code>; on a product page where only one can be chosen, use <code>radio</code> with the same markup.</p><div id="recipes-tiles"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="definition-checkbox"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Definition Checkbox</h2><p class="ds-desc ds-note">To be added. No such sibling exists in Figma yet.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>form-checkbox-item</code></th><td>The label around the input and the text. Large, light.</td></tr><tr><th scope="row"><code>form-checkbox-item--sm</code></th><td>Small size.</td></tr><tr><th scope="row"><code>form-checkbox-item--dark</code></th><td>Dark mode, for dark surfaces.</td></tr><tr><th scope="row"><code>form-checkbox-item--menu</code>, <code>cb-arrow</code></th><td>Inline menu: the box plus a dropdown arrow, no label.</td></tr><tr><th scope="row"><code>check-icon</code></th><td>On a table cell: a read-only checkmark.</td></tr><tr><th scope="row"><code>form-checkbox-tile</code>, <code>--image</code>, <code>--number</code>, <code>--row</code></th><td>Tiles. Inside: <code>form-checkbox-tile__box</code>, <code>__swatch</code> (with <code>--swatch</code>), <code>__text</code>, <code>__count</code>.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>The box is the native input with <code>appearance: none</code>. The checkmark and dash are SVG data URIs, so no image file is loaded.</li><li>A label that contains an input is enough: no <code>for</code>/<code>id</code> pair is needed.</li><li>Breakpoint: the Large label is 16/22 below 769px and 17/24 from 769px. The CSS does this by itself.</li><li>The <code>[data-state="hover"]</code> and <code>[data-state="focus"]</code> selectors do nothing outside the documentation pages.</li><li>A checkbox does not submit when it is unchecked: handle that on the server if a value is needed.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/checkbox.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Standard', '<label class="form-checkbox-item">\n  <input type="checkbox" />\n  <span>Label</span>\n</label>'],
+    ['Checked / disabled', '<label class="form-checkbox-item">\n  <input type="checkbox" checked disabled />\n  <span>Label</span>\n</label>'],
+    ['Small', '<label class="form-checkbox-item form-checkbox-item--sm">\n  <input type="checkbox" />\n  <span>Label</span>\n</label>'],
+    ['Inline menu', '<label class="form-checkbox-item">\n  <input type="checkbox" aria-label="Select all" />\n  <svg class="cb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>\n</label>'],
+    ['Dark surface', '<label class="form-checkbox-item form-checkbox-item--dark">\n  <input type="checkbox" />\n  <span>Label</span>\n</label>'],
+    ['Group', '<fieldset>\n  <legend>Delivery options</legend>\n  <label class="form-checkbox-item"><input type="checkbox" /><span>Leave at door</span></label>\n  <label class="form-checkbox-item"><input type="checkbox" /><span>Signature required</span></label>\n</fieldset>'],
+    ['Mixed (set in JavaScript)', 'document.querySelector(\'#select-all\').indeterminate = true;'],
+    ['Table check icon', '<td class="check-icon"><input type="checkbox" checked disabled aria-label="Administrator: yes" /></td>']
+  ]);
+  DK.recipes($('#recipes-tiles'), [
+    ['Tile: color swatch', '<fieldset>\n  <legend>Color</legend>\n  <label class="form-checkbox-tile">\n    <input type="checkbox" aria-label="Blue" />\n    <span class="form-checkbox-tile__box"><span class="form-checkbox-tile__swatch" style="--swatch: #0066ff"></span></span>\n  </label>\n</fieldset>'],
+    ['Tile: image', '<label class="form-checkbox-tile form-checkbox-tile--image">\n  <input type="checkbox" aria-label="Yellow / black" />\n  <span class="form-checkbox-tile__box"><img src="/images/product-skaljacka-gul-svart.webp" alt="" /></span>\n</label>'],
+    ['Tile: color row in a filter list', '<label class="form-checkbox-tile form-checkbox-tile--row">\n  <input type="checkbox" />\n  <span class="form-checkbox-tile__box"><span class="form-checkbox-tile__swatch" style="--swatch: #0066ff"></span></span>\n  <span class="form-checkbox-tile__text">Blue</span>\n  <span class="form-checkbox-tile__count">419</span>\n</label>'],
+    ['Tile: image on a PDP (one at a time)', '<fieldset>\n  <legend>Color</legend>\n  <label class="form-checkbox-tile form-checkbox-tile--image">\n    <input type="radio" name="color" aria-label="Yellow / black" checked />\n    <span class="form-checkbox-tile__box"><img src="/images/product-skaljacka-gul-svart.webp" alt="" /></span>\n  </label>\n  <label class="form-checkbox-tile form-checkbox-tile--image">\n    <input type="radio" name="color" aria-label="Yellow / navy" />\n    <span class="form-checkbox-tile__box"><img src="/images/product-skaljacka-gul-marin.webp" alt="" /></span>\n  </label>\n</fieldset>'],
+    ['Tile: number', '<button type="button" class="form-checkbox-tile form-checkbox-tile--number" aria-label="Show 10 more colors">\n  <span class="form-checkbox-tile__box">+10</span>\n</button>']
+  ]);
+  DK.printCss($('#css-code'), 'checkbox', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/:is\(:focus-visible, \[data-state="focus"\]\)/g, ':focus-visible'], [/,\n    \.form-checkbox-tile\[data-state="focus"\] \.form-checkbox-tile__box/g, ''], [/^ {4}/gm, '']]);
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

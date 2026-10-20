@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/section.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-cap { display: block; margin-bottom: 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .sec-fig { --px-full: var(--dimension-spacing-space-24); width: 100%; }   /* demo: a fixed side margin, so a section fits a figure */
+    .sec-ph { padding: var(--dimension-spacing-space-16); background: var(--color-surface-10); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
+    .sec-measure { --px-full: var(--px-page); display: block; width: 280px; }   /* demo: the side margin of the page, in a figure of fixed width */
+    .sec-callout.ds-fig__stage.ds-callout { padding-right: 112px; }
+    .sec-callout .ds-callout__art { width: 100%; max-width: 420px; }
+    .sec-read { display: block; margin-top: 8px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .sec-bp { background: var(--color-surface-02); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="section.html" class="breadcrumb-item">Section</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Layout and content</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="The skill has no Figma link. The values are the project’s own section rules.">Not verified with Figma</span></div>
+    <h1 class="ds-title">Section</h1>
+    <p class="ds-lead">A section is a <strong>full-width block of a page</strong>. Its padding adjusts at each breakpoint and its surface is white or grey.</p><p class="ds-lead">How to add a section to a page. The file is <code>components/css/section.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Section"><a class="tab" href="section.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="section-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="section-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/section.css"&gt;</code>. Both templates already have it.</td></tr><tr><th scope="row">2. Side margin</th><td>The page defines <code>--px-full</code>. The templates already do; a page without it has no side margin.</td></tr><tr><th scope="row">3. First section</th><td>Add <code>section--first</code> to the first section after the breadcrumb.</td></tr><tr><th scope="row">4. Surface</th><td>White is the default. Add <code>section--secondary</code> for a grey section.</td></tr><tr><th scope="row">5. Zeroed padding</th><td>Add <code>section--flush</code> only for the five cases.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="section"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Section</h2><p class="ds-desc">Copy the markup you need.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>section</code></th><td>The block: padding per breakpoint, white surface, sides <code>var(--px-full)</code>.</td></tr><tr><th scope="row"><code>section--first</code></th><td>Less top padding.</td></tr><tr><th scope="row"><code>section--secondary</code></th><td>Grey surface.</td></tr><tr><th scope="row"><code>section--flush</code></th><td>Zero top and bottom padding.</td></tr><tr><th scope="row"><code>page-divider</code>, <code>page-divider__line</code></th><td>A line between two sections.</td></tr><tr><th scope="row"><code>main-content</code>, <code>page-preamble</code></th><td>The My Pages page title block.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li><code>--px-full</code> must be defined by the page. Use it, never <code>--px-page</code>, for a divider’s sides.</li><li>The shared file marks the first section with <code>.section--first</code> only; <code>:first-of-type</code> is not in the file.</li><li>Between two sections that have padding, set <code>padding-top: 0; padding-bottom: 0</code> on the page divider.</li><li>Mobile-first: write xs with no prefix, then add sm, md, lg and xl.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/section.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['First section, then another (link section.css)', '<section class="section section--first">…</section>\n<section class="section section--secondary">…</section>'],
+    ['Zeroed padding (a fluid hero banner)', '<section class="section section--flush">\n  <img src="hero.jpg" alt="" style="display:block;width:100%" />\n</section>'],
+    ['Page divider between two sections of one color', '<div class="page-divider"><div class="page-divider__line"></div></div>'],
+    ['Page divider between two sections that have padding', '<div class="page-divider" style="padding-top:0;padding-bottom:0"><div class="page-divider__line"></div></div>'],
+    ['A section with a landmark name', '<section class="section" aria-labelledby="faq-title">\n  <h2 id="faq-title">Questions and answers</h2>\n</section>'],
+    ['My Pages title block', '<div class="main-content">\n  <div class="page-preamble">…</div>\n</div>']]);
+  DK.printCss($('#css-code'), 'section');
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

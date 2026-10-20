@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radio button: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/radio.css">
+  <link rel="stylesheet" href="../../components/css/checkbox.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-matrix .form-radio-group { min-width: 200px; }
+    .pg-matrix td { vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
+    .pg-col { display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 360px; }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .rd-fig { width: 100%; max-width: 320px; }
+    .rd-fig .form-radio-group, .rd-fig fieldset { margin: 0; padding: 0; border: 0; }
+    .rd-measure { display: inline-flex; }
+    .rd-cbgroup { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .rd-cbgroup legend { padding: 0; margin-bottom: var(--dimension-spacing-space-8); font-size: 12px; font-weight: 600; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; }
+    @media (min-width: 769px) { .rd-cbgroup legend { font-size: 16px; line-height: 16px; } }
+    .ds-callout__art { padding-right: 72px; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="radio.html" class="breadcrumb-item">Radio button</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Radio button</h1>
+    <p class="ds-lead">A radio button lets the user choose <strong>exactly one</strong> of two or more mutually exclusive options. Choosing one clears the others in the group.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1548-70504" target="_blank" rel="noopener">Radio Button</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Radio button"><a class="tab" href="radio.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="radio-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="radio-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">State</th><th scope="col">Part</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Total area</th><th scope="col">Circle</th><th scope="col">Margin</th><th scope="col">Dot</th><th scope="col">Label</th></tr></thead><tbody><tr><th scope="row">Large</th><td>24×24px</td><td>16px</td><td>4px</td><td>6px</td><td><code>body-md</code>: 16/22, from 769px 17/24, 0.32px</td></tr><tr><th scope="row">Small</th><td>20×20px</td><td>14px</td><td>3px</td><td>6px</td><td><code>body-sm</code>: 14/20, 0.36px</td></tr></tbody></table></div><p class="ds-desc ds-note">Only Large and Small exist. The hint message is <code>body-sm</code> (14/20, 0.36px) in both. The 1px border has no width token (<code>--border-brd-1</code> is a full shorthand), so <code>1px</code> is written out.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Circle and margin of each size. The shaded area is the 4px margin (3px in Small) that leaves room for the focus ring; the lines show its value.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Margin of the radio button: Large 4 on every side, Small 3 on every side" style="--k:4"><div class="measure__item"><span class="measure__name">1 · Large</span><div class="measure__obj"><span class="rd-measure"><label class="form-radio-item"><input type="radio" name="m1" class="measure__subject" data-measure-margin tabindex="-1" aria-label="Large" /></label></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Small</span><div class="measure__obj"><span class="rd-measure"><label class="form-radio-item form-radio-item--sm"><input type="radio" name="m2" class="measure__subject" data-measure-margin tabindex="-1" aria-label="Small" /></label></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">The circle at 4× size. The numbers are read from the component and are real pixels.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Large</th><th scope="col">Small (<code>.form-radio-item--sm</code>)</th></tr></thead><tbody><tr><th scope="row">Area</th><td>24×24px</td><td>20×20px</td></tr><tr><th scope="row">Circle</th><td>16px, 1px border</td><td>14px, 1px border</td></tr><tr><th scope="row">Margin around the circle</th><td>4px</td><td>3px</td></tr><tr><th scope="row">Dot</th><td colspan="2">6px, a radial gradient</td></tr><tr><th scope="row">Focus ring</th><td>2px line, 2px offset</td><td>2px line, 2px offset</td></tr><tr><th scope="row">Gap, circle to label</th><td>8px</td><td>8px</td></tr><tr><th scope="row">Gap, label to message</th><td>4px</td><td>4px</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The same margin and gaps as spacing tokens.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Large</th><th scope="col">Small</th></tr></thead><tbody><tr><th scope="row">Margin around the circle</th><td><code>space-4</code></td><td>3px: no spacing token</td></tr><tr><th scope="row">Gap circle to label</th><td><code>space-8</code></td><td><code>space-8</code></td></tr><tr><th scope="row">Gap label to message</th><td><code>space-4</code></td><td><code>space-4</code></td></tr><tr><th scope="row">Gap between options in a group</th><td><code>space-4</code></td><td><code>space-4</code></td></tr></tbody></table></div><p class="ds-desc ds-note">There is no spacing token for 3px. The Small margin is 3px in Figma. <strong>Open point:</strong> keep 3px, or add a token.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">All eight states from Figma. Hover and focus are forced on this page; in your code they come from <code>:hover</code> and <code>:focus-visible</code>. “Selected” rows are Selected, Selected hover, Selected focus and Disabled selected.</p><div class="ds-toolbar"><span class="ds-toolbar__label" id="sb-l">Breakpoint</span><div class="btn-group" role="group" aria-labelledby="sb-l" data-bp-toggle data-bp-force><button type="button" data-v="auto" aria-pressed="true">Window</button><button type="button" data-v="desktop" aria-pressed="false">Desktop</button><button type="button" data-v="mobile" aria-pressed="false">Mobile</button></div><span class="ds-toolbar__label" id="ss-l">Size</span><div class="btn-group" role="group" aria-labelledby="ss-l" data-mx="size"><button type="button" data-v="lg" aria-pressed="true">Large</button><button type="button" data-v="sm" aria-pressed="false">Small</button></div></div><div class="ds-table-wrap"><table class="ds-table pg-matrix" id="matrix"><thead><tr><th scope="col">State</th><th scope="col">Unselected</th><th scope="col">Selected</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Type</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Label, Large</th><td><code>body-md</code></td><td>16/22 mobile, 17/24 from 769px</td><td>0.32px</td><td>Regular</td></tr><tr><th scope="row">Label, Small</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr><tr><th scope="row">Message</th><td><code>body-sm</code></td><td>14/20</td><td>0.36px</td><td>Regular</td></tr><tr><th scope="row">Legend</th><td><code>label-sm</code> (mobile), <code>label-md</code> (desktop)</td><td>12/12 mobile, 16/16 from 769px</td><td>0.48px</td><td>Bold, uppercase</td></tr></tbody></table></div><p class="ds-desc ds-note">Breuer Condensed with <code>ss02</code>, <code>ss03</code> and <code>ss06</code> for the label. The disabled label and message use <code>text-disabled</code>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Group</th><td><code>form-radio-group</code></td><td>A <code>fieldset</code> with a <code>legend</code>. Vertical by default, options 4px apart.</td></tr><tr><th scope="row">Option</th><td><code>form-radio-item</code>, <code>--sm</code></td><td>The <code>label</code> around the input and the text.</td></tr><tr><th scope="row">Circle and dot</th><td><code>input[type="radio"]</code></td><td><code>appearance: none</code> on the native input. The dot is a radial gradient.</td></tr><tr><th scope="row">Option with message</th><td><code>form-radio-field</code></td><td>Wraps the option and its message.</td></tr><tr><th scope="row">Message</th><td><code>form-radio-message</code></td><td>Optional hint, 4px below the label.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">How</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Vertical group</th><td>Default</td><td>Any number of options.</td></tr><tr><th scope="row">Horizontal group</th><td><code>flex-direction: row</code> on the group</td><td>Two short options only.</td></tr><tr><th scope="row">With message</th><td><code>form-radio-field</code></td><td>An option that needs an explanation.</td></tr><tr><th scope="row">Small</th><td><code>form-radio-item--sm</code></td><td>Dense layouts.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">An option is as wide as its label. The click target is the whole label.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><p class="ds-desc ds-note">None. The radio changes state at once, with no transition and no animation.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Input</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click circle or label</th><td>Selects that option and clears the others in the group.</td></tr><tr><th scope="row">Tab</th><td>Enters the group once (the selected radio, or the first). The ring shows on keyboard focus only.</td></tr><tr><th scope="row">Arrow keys</th><td>Move and select the next or previous option in the group. Native: needs the same <code>name</code>.</td></tr><tr><th scope="row">Group</th><td><code>fieldset</code> with a <code>legend</code>; every radio shares one <code>name</code>.</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Grey fill, light border, <code>text-disabled</code> label and message.</td></tr><tr><th scope="row">Default</th><td>Preselect one option in every group unless the user must choose consciously.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Element</th><td>A native <code>&lt;input type="radio"&gt;</code>. The role, the state and the arrow-key behavior come from the browser.</td></tr><tr><th scope="row">Group</th><td>A <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code>; every radio shares one <code>name</code>.</td></tr><tr><th scope="row">Name</th><td>The input and the text are wrapped in one <code>&lt;label&gt;</code>.</td></tr><tr><th scope="row">Focus</th><td>Ring with <code>border-focus</code>, 2px, offset 2px, on <code>:focus-visible</code> (WCAG 2.4.7, 1.4.11).</td></tr><tr><th scope="row">Color</th><td>Selected is not shown by color alone: the dot is a shape and the border is thicker in color.</td></tr><tr><th scope="row">Disabled</th><td>Not focusable. Disabled tokens are exempt from contrast requirements.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+  var uid = 0;
+  /* Build a real radio item. o: {size lg|sm, state, checked, label, hint, name, id} */
+  function radio(o) {
+    var item = document.createElement('label'); item.className = 'form-radio-item' + (o.size === 'sm' ? ' form-radio-item--sm' : '');
+    var i = document.createElement('input'); i.type = 'radio'; i.name = o.name || 'r' + (uid++); i.value = o.label || 'option';
+    i.checked = !!o.checked; i.disabled = o.state === 'disabled';
+    if (o.state === 'hover' || o.state === 'focus') i.dataset.state = o.state;
+    var s = document.createElement('span'); s.textContent = o.label; item.appendChild(i); item.appendChild(s);
+    if (!o.hint) return item;
+    var f = document.createElement('div'); f.className = 'form-radio-field'; f.appendChild(item);
+    var p = document.createElement('p'); p.className = 'form-radio-message'; p.textContent = o.hint; f.appendChild(p); return f;
+  }
+  function group(legend, items, horizontal) {
+    var g = document.createElement('fieldset'); g.className = 'form-radio-group';
+    if (horizontal) { g.style.flexDirection = 'row'; g.style.flexWrap = 'wrap'; g.style.gap = '4px 24px'; }
+    var l = document.createElement('legend'); l.textContent = legend; if (horizontal) l.style.width = '100%'; g.appendChild(l);
+    items.forEach(function (n) { g.appendChild(n); }); return g;
+  }
+
+
+  var mx = { size: 'lg' };
+  var ROWS = [['Enabled', 'enabled'], ['Hover / Selected hover', 'hover'], ['Focus / Selected focus', 'focus'], ['Disabled / Disabled selected', 'disabled']];
+  function buildMatrix() {
+    var tb = clear($('#matrix tbody'));
+    ROWS.forEach(function (r) {
+      var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
+      [false, true].forEach(function (on) {
+        var td = document.createElement('td'), n = 'mx-' + (uid++);
+        td.appendChild(group('Group', [radio({ size: mx.size, state: r[1], checked: on, label: on ? 'Selected' : 'Unselected', name: n })])); tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  DK.seg($('[data-mx="size"]'), function (v) { mx.size = v; buildMatrix(); });
+  buildMatrix();
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Enabled', 'Border', 'border-input-control-default'], ['Enabled', 'Fill', 'surface-raised-primary'],
+    ['Hover', 'Fill', 'surface-opacity-black-05'], ['Hover', 'Border', 'border-hover'],
+    ['Focus', 'Ring (2px, offset 2px)', 'border-focus'],
+    ['Selected', 'Border', 'border-selected'], ['Selected', 'Dot', 'surface-100'], ['Selected hover', 'Border', 'border-selected-hover'],
+    ['Disabled', 'Fill', 'surface-disabled'], ['Disabled', 'Border', 'border-disabled'], ['Disabled', 'Label, message', 'text-disabled'], ['Disabled selected', 'Dot', 'surface-50'],
+    ['All', 'Label', 'text-primary'], ['All', 'Message', 'text-tertiary']]);
+  DK.bp(function () { ECO_MEASURE.init(); });
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

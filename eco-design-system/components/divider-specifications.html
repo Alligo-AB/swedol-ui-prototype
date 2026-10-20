@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Divider: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-col { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 360px; }
+    .pg-row { display: flex; gap: 24px; height: 112px; align-items: stretch; justify-content: center; }
+    .pg-cell { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+    .pg-cell > span:first-child { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .pg-list { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 360px; }
+    .pg-inline { display: flex; align-items: center; gap: 16px; }
+    .pg-ph { height: 48px; background: var(--color-surface-05); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="divider.html" class="breadcrumb-item">Divider</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Menus, lists and dividers</span></div>
+    <h1 class="ds-title">Divider</h1>
+    <p class="ds-lead">A divider is a <strong>1px line</strong> that separates content groups, so users can scan and organize information. It is decorative and never interactive.</p><p class="ds-lead">The line, the tokens and the requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=894-27082" target="_blank" rel="noopener">Divider</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Divider"><a class="tab" href="divider.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="divider-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="divider-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Color</th><th scope="col">Use</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Variant</th><th scope="col">Thickness</th><th scope="col">Length</th></tr></thead><tbody><tr><th scope="row">Horizontal</th><td>1px (height)</td><td>Fills the container (<code>width: 100%</code>)</td></tr><tr><th scope="row">Vertical</th><td>1px (width)</td><td>Fills the row height (<code>align-self: stretch</code>)</td></tr></tbody></table></div><p class="ds-desc ds-note">The thickness is a hairline: there is no spacing token for it, and a divider is never thicker. The size does not change with the breakpoint.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Thickness</th><td>1px</td></tr><tr><th scope="row">Horizontal length</th><td>The width of the container</td></tr><tr><th scope="row">Vertical length</th><td>The height of the row</td></tr><tr><th scope="row">Padding and margin</th><td>None: the space comes from the parent <code>gap</code></td></tr></tbody></table></div><p class="ds-desc ds-note">A divider has no padding or margin of its own, so there is no measurement figure.</p><h3 class="ds-h3 ds-group">Spacing</h3><p class="ds-desc">The space around a divider belongs to the parent. Use a spacing token for the <code>gap</code>.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Space above and below a horizontal divider</th><td>The parent <code>gap</code>, a spacing token such as <code>space-16</code></td></tr><tr><th scope="row">Space beside a vertical divider</th><td>The parent <code>gap</code>, a spacing token such as <code>space-24</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><p class="ds-desc">A divider has no states: no hover, focus, active or disabled.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Line</th><td><code>divider</code></td><td>An <code>&lt;hr&gt;</code> (horizontal) or a <code>span</code> (vertical). Primary color.</td></tr><tr><th scope="row">Color</th><td><code>divider--secondary</code>, <code>divider--tertiary</code></td><td>Replace the Primary color.</td></tr><tr><th scope="row">Direction</th><td><code>divider--vertical</code></td><td>A 1px wide line that stretches to the height of a flex row.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Types</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Type</th><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row">Horizontal</th><td><code>divider</code></td><td>Between sections, list rows or form groups.</td></tr><tr><th scope="row">Vertical</th><td><code>divider divider--vertical</code></td><td>Between items in a flex row.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Width</h3><p class="ds-desc">A horizontal divider is as wide as its container.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Input</th><td>None. A divider has no hover, focus or click.</td></tr><tr><th scope="row">Breakpoint</th><td>The same on every breakpoint.</td></tr><tr><th scope="row">Motion</th><td>None.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Semantics</th><td>Use <code>&lt;hr&gt;</code> (or <code>role="separator"</code>) when the line separates content for everyone. Use <code>aria-hidden="true"</code> when it is only visual.</td></tr><tr><th scope="row">Vertical</th><td>Set <code>role="separator"</code> and <code>aria-orientation="vertical"</code>.</td></tr><tr><th scope="row">Color</th><td>Never rely on color alone. If the line carries meaning, the structure (headings, lists) must also show the grouping (WCAG 1.3.1).</td></tr><tr><th scope="row">Contrast</th><td>Ensure enough contrast if the line carries meaning (WCAG 1.4.11). Prefer Primary or Tertiary over Secondary.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Border Primary (default)', 'Default separation', 'border-primary'], ['Border Secondary', 'Less prominent, still present. White surfaces only.', 'border-secondary'], ['Border Tertiary', 'Short or side-by-side separations', 'border-tertiary']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>
