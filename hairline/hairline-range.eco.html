@@ -1037,7 +1037,7 @@ function mount({ stage, svg, read }, value) {
       // the tour's unseen pointer only counts once it reaches the thumb: no fumbling on the way in
       if (ghost && !gin) {
         if (Math.abs(w[0] - tx()) < 4 && inBand(w)) gin = true;
-        else { ax.t = p[0]; ay.t = p[1]; A.wake(); return; }
+        else return;
       }
       set(p, held || inBand(w));
       if (on && (ghost || held)) goto(nearest(w[0]));
