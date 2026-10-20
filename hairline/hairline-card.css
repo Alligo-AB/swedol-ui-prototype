@@ -115,3 +115,4 @@
 [data-hairline="inline-notification"] [data-part="edge"], [data-hairline="inline-notification"] [data-part="icon"] { fill: var(--color-surface-information-default, #0066ff); }
 [data-hairline="inline-notification"] [data-part="icon-i"] { fill: #ffffff; }
 .ds-card__visual--hairline [data-hairline-card="inline-notification"] { transform: translateY(-4px); }
+[data-hairline="inline-notification"] [data-part="txt"] { fill: var(--color-text-secondary, #4d4d4d); }

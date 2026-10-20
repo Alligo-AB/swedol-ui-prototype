@@ -18,3 +18,4 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
 [data-hairline] [data-part="note"] { fill: var(--color-surface-information-weaker, #e2f1ff); }
 [data-hairline] [data-part="edge"], [data-hairline] [data-part="icon"] { fill: var(--color-surface-information-default, #0066ff); }
 [data-hairline] [data-part="icon-i"] { fill: #ffffff; }
+[data-hairline] [data-part="txt"] { fill: var(--color-text-secondary, #4d4d4d); }
