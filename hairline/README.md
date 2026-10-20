@@ -41,3 +41,5 @@ Hela förfarandet för en ny komponent står i skillen `eco-card-animation` (`.c
 - Swedol-accent på Primary (token ej vald; frågan var om bara Primary eller båda).
 - Mörkt läge är inte provat (ECO har inget mörkt tema).
 - Fler komponenter: Checkbox, Radio, Input, Tabs, Tooltip föreslagna, ingen vald.
+
+- **Radio button** (`radio.js`, `radio.eco.css`, kort-CSS i `hairline-card.css`): tre brunnar i en platta, en vald (svart prick). Tryck flyttar pricken. Inte bytt in på korten än (väntar på OK).
