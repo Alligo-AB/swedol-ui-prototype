@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
   <link rel="stylesheet" href="docs.css">
   <link rel="stylesheet" href="docnav.css">
+  <link rel="stylesheet" href="../hairline/hairline-card.css">
   <link rel="stylesheet" href="../components/css/badge.css">
   <link rel="stylesheet" href="../components/css/action-link.css">
   <link rel="stylesheet" href="../components/css/tabs.css">
@@ -199,8 +200,8 @@
       </a>
 
       <a class="ds-card" href="components/radio.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-radio"><span><i class="on"></i>Standard</span><span><i></i>Express</span></div>
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="radio" data-play data-src="../hairline/radio.js"></div>
         </div>
         <div class="ds-card__body">
           <div class="ds-card__top"><span class="ds-card__title">Radio button</span><span class="ds-tag ds-tag--live">Live</span></div>
@@ -623,6 +624,8 @@
     </div>
   </div>
 </section>
+<script src="../hairline/kernel.js"></script>
+<script src="../hairline/embed.js"></script>
 <script src="tokens-loader.js"></script>
 <script>
   ECO.watch('../.claude/skills/eco-tokens/tokens.json', function (j) {
