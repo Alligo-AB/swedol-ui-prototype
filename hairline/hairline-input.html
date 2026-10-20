@@ -888,7 +888,7 @@ const {
 
 const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 41, FY1 = 63, N = 5, KEY = 130;
 const quad = (x0, y0, x1, y1) => [{ u: x0, v: y0 }, { u: x1, v: y0 }, { u: x1, v: y1 }, { u: x0, v: y1 }];
-const IBEAM = [[-3, -7], [3, -7], [3, -5.8], [0.7, -5.8], [0.7, 5.8], [3, 5.8], [3, 7], [-3, 7], [-3, 5.8], [-0.7, 5.8], [-0.7, -5.8], [-3, -5.8]];
+const IBEAM = [[-2, -5.5], [2, -5.5], [2, -4.5], [0.5, -4.5], [0.5, 4.5], [2, 4.5], [2, 5.5], [-2, 5.5], [-2, 4.5], [-0.5, 4.5], [-0.5, -4.5], [-2, -4.5]]; // a text caret lying on the field's floor
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 
 function mount({ stage, svg, read }, value) {
@@ -952,9 +952,12 @@ function mount({ stage, svg, read }, value) {
   const rest = P(FX1 - 12, midY + 2, PT + 12);
   const ax = spring(rest[0], { k: 140 }), ay = spring(rest[1], { k: 140 }), pr = spring(0);
   const cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
+  const cu = spring(tx(0), { k: 140 }); // the caret's place along the field, in world units
   const drawCur = (now) => {
-    const pts = over || focus ? (Math.floor(now / 500) % 2 === 0 ? IBEAM : []) : ARROW;
-    cur.setAttribute("d", pts.length ? poly(pts.map(([u, v]) => [ax.x + u - (over || focus ? 0 : 0.5), ay.x + v + (over || focus ? 0 : 2.5 * clamp(pr.x, 0, 1))])) : "");
+    const typing = over || focus, blink = Math.floor(now / 500) % 2 === 0;
+    cur.setAttribute("d", typing
+      ? (blink ? poly(IBEAM.map(([u, v]) => P(cu.x + u, midY + v, zf + 0.3))) : "")
+      : poly(ARROW.map(([u, v]) => [ax.x + u - 0.5, ay.x + v + 2.5 * clamp(pr.x, 0, 1)])));
   };
 
   const A = register(stage, (dt, now) => {
@@ -963,8 +966,8 @@ function mount({ stage, svg, read }, value) {
       m = true; // the caret blinks and the value types while the pointer is over the field
       if (n < nt && now >= nextKey) { n = reducedMotion() ? nt : n + 1; nextKey = now + KEY; }
     }
-    if (over || focus) { const c = P(tx(n) - 0.6, midY, zf + 0.5); ax.t = c[0]; ay.t = c[1]; } // the caret sits in the field, after the last mark
-    for (const s of [ax, ay, pr]) if (stepS(s, dt)) m = true;
+    if (over || focus) cu.t = tx(n) - 0.6; // the caret sits in the field, after the last mark
+    for (const s of [ax, ay, pr, cu]) if (stepS(s, dt)) m = true;
     draw(); drawCur(now);
     return m;
   });
