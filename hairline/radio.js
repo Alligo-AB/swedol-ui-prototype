@@ -38,11 +38,11 @@ function mount({ stage, svg, read }, value) {
     const strip = (r) => poly([...ringAt(P, r, PT), ...ringAt(P, r, PT - D).reverse()]);
     const floor = mk("path", { d: "", class: "lo" }, svg);
     const wall = mk("path", { d: "", class: "lo" }, svg);
-    const fe = mk("path", { d: "", class: "nf lo", "data-part": "rim" }, svg);
-    const rim = mk("path", { d: poly(ringAt(P, out, PT)), class: "nf", "data-part": "rim" }, svg);
+    const fe = mk("path", { d: "", class: "nf lo" }, svg);
+    const rim = mk("path", { d: poly(ringAt(P, out, PT)), class: "nf" }, svg);
     const mark = mk("path", { d: "", class: "fo", "data-part": "mark" }, svg);
     const lip = mk("path", { d: "", class: "fo" }, svg);
-    const lipLine = mk("path", { d: open(ringAt(P, near, PT)), class: "nf", "data-part": "rim" }, svg);
+    const lipLine = mk("path", { d: open(ringAt(P, near, PT)), class: "nf" }, svg);
     return { ...b, cy: Y0 + BS / 2, out, far, near, strip, floor, wall, fe, mark, lip, sp: { x: b.st ? 1 : 0, t: b.st ? 1 : 0, to: b.st ? 1 : 0, from: 0, t0: 0 }, hv: spring(0), kind: b.st, init: b.st, last: "" };
   });
 
