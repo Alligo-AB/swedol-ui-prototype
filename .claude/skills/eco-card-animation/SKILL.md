@@ -3,7 +3,7 @@ name: eco-card-animation
 description: Use when making an animated Hairline illustration (isometric line figure that answers the pointer) for a component and putting it on its card on the ECO overview pages — the whole procedure from concept to card, with the reusable files, the ECO colouring, the card integration, hover tour, archiving the old visual and the verification scripts. Not for the component pages themselves and not for static images.
 ---
 
-> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack and the quality checklist. Everything lives in `hairline/` (read `hairline/README.md` too); the figure engine is the global skill `hairline-create` (never edit its kernel). References done: **Button** (`hairline/button-pair.js`) and **Switch** (`hairline/switch.js`, the more complete one, copy from it).
+> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack and the quality checklist. Everything lives in `hairline/` (read `hairline/README.md` too); the figure engine is the global skill `hairline-create` (never edit its kernel). Cards done: Button, Switch, Checkbox, Select, Input, Range, Textarea. References: **Button** (`hairline/button-pair.js`) and **Switch** (`hairline/switch.js`, the more complete one, copy from it). Press-and-pop springs for joined/segmented parts: `hairline/button-group.js` (selected part sinks, the former pick pops up, tint via `data-show` + CSS opacity transition).
 
 ## When a figure in `hairline/` is changed (check this every time)
 
@@ -14,7 +14,7 @@ The figure file `hairline/<name>.js` is the one source: the card (`embed.js`) an
 3. **Colours live in two places.** Cards and docs pages: `hairline/hairline-card.css` (scoped `[data-hairline="<name>"]` when part names clash). The bench: `hairline/<name>.eco.css`. Change both. Scene-only colours (slab, opacities) are in `eco-design-system/doc-hero.css`.
 4. **The header uses `data-flat`.** The figure's flat-slab branch (`stage.hasAttribute("data-flat")`) only runs in the header; a change to the slab can affect the header and not the card, or the reverse. Look at both.
 
-Also: browser cache after a change; the kernel copy `hairline/kernel.js` has one patch (`tour(..., delay)`).
+Also: browser cache after a change; the kernel copy `hairline/kernel.js` has two patches (`tour(..., delay, pace)`); a faster hover tour per card: `data-travel="450" data-dwell="450"` on the card div (defaults 900/1200 ms).
 
 ## Procedure (one component)
 
@@ -28,7 +28,7 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has one
    - replace the card's `ds-card__visual` with `<div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="<name>" data-play data-src="../hairline/<name>.js"></div></div>` (`data-play` runs the tour while the card is hovered or keyboard-focused, no play button; `kernel.js`, `embed.js`, `hairline-card.css` are already on the page);
    - centre it: the stage is 300 px wide, 5:4, `translateY(-16px)`; the figures' drawn extents differ, so add `.ds-card__visual--hairline [data-hairline-card="<name>"] { transform: translateY(Npx); }` in `hairline-card.css` until the content rows are centred (the check script prints them; Switch uses −5 px).
 6. **Show it**: right after step 4, serve the repo (port ≠ 4173), `navigate` the built-in browser to `/hairline/hairline-<name>.eco` and `show_pane preview`, so the user sees it and can adjust at once (SendUserFile render does not work for it).
-7. **Verify**: `npx serve . -l 4173` (repo root; `file://` does not work for cards), then `node hairline/tools/card-check.mjs <component> <outPrefix>` and read the PNGs: rest, hover, play (4 s into the tour). Plus the working routine in `CLAUDE.md` (mobile width, real mouse). State what was not tested.
+7. **Verify**: `npx serve . -l 4173` (if another session already holds 4173, serve on another port and run a copy of `card-check.mjs` with the port changed; the script is hardcoded to 4173 and its play-button step is a no-op now that cards use hover-`data-play`, so also hover the card with a real mouse and screenshot a few seconds of the tour) (repo root; `file://` does not work for cards), then `node hairline/tools/card-check.mjs <component> <outPrefix>` and read the PNGs: rest, hover, play (4 s into the tour). Plus the working routine in `CLAUDE.md` (mobile width, real mouse). State what was not tested.
 8. **Sweep**: update `hairline/README.md` ("På korten"), this skill if something new was learned, the memory `project_hairline_card_animations.md`, and mention changed skills. Do not touch `index.html` unless asked.
 
 ## Reusable pieces (do not rewrite)
@@ -50,6 +50,8 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has one
 - **Tour that presses**: the tour only calls `move(p, e)` (never `down`); the ghost has `e.pointerType === "ghost"`. Detect it, toggle after ~250 ms with no new ghost move (`gt`, `gdone` flag, tick keeps returning true meanwhile), and on the ghost's `leave` restore every state to its initial value so the lap ends at the rest pose.
 - **Drawn cursor**: black arrow polygon (`dot`, `data-part="cursor"` filled black in CSS), springs follow the pointer, rests above the main part, sinks 2.5 px on press. Breaks skill rule 10 on the user's request; say so at hand-over.
 - **Tried and rejected on Switch** (do not redo without being asked): a pointing-hand cursor (outlined, thick stamped outline, finger lines): looked clumsy, user went back to the arrow.
+- **Sliding pill** (`hairline/pill.js`, Pill Segment Control): the thumb is a black `solid` whose `sil` gets `data-part="pill"`; labels are drawn twice, grey on the slot floor before the thumb and white on the thumb top after it, and `draw` shows whichever the thumb covers (`|s − i| < 0.5`); the inactive label's underline is a thin flat quad. Glyph set copied from `select.js`, pruned to the letters used (ALL/NEW) to stay under 200 lines.
+- **Testing the hover tour**: the tour only runs while the real pointer is *off* the figure (pointer over the stage = `hand`). In Playwright hover the card body below the visual, not its centre.
 - Range slider = one number in the figure's own units, three values moving one way; hover answers on a 240 px thumbnail are subtle, so `look.mjs` warns on item 3; that is accepted when the press is the big gesture.
 
 ## Also on the component page
