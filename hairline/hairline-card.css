@@ -79,3 +79,11 @@
 /* textarea figure: same colours as input (label/text black, placeholder and hint grey, faint far wall) */
 .ds-card__visual--hairline [data-hairline-card="textarea"] { transform: translateY(-4px); }
 [data-hairline="textarea"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); }
+/* tabs figure: label, divider, active and hover line */
+[data-hairline="tabs"] [data-part="label"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="tabs"] [data-part="label-hover"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="tabs"] [data-part="line"] { fill: var(--color-surface-20, #cccccc); }
+[data-hairline="tabs"] [data-part="bar"] { fill: var(--color-surface-100, #000000); }
+[data-hairline="tabs"] [data-part="bar-hover"] { fill: var(--color-surface-10, #e5e5e5); }
+.ds-card__visual--hairline [data-hairline-card="tabs"] { transform: translateY(0px); }
+[data-hairline="tabs"] [data-part="count"] { fill: var(--color-surface-danger-default, #d40f0f); }
