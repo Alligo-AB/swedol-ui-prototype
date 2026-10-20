@@ -15,3 +15,4 @@ Each file holds the old markup and where it goes.
 - `tabs.html` – Tabs card, `components-overview.html` (CSS mini tabs "Overview / Details / Reviews", replaced by the Hairline animation).
 - `pill-segment-control.html` – Pill segment control card, `components-overview.html` (CSS `.mini-seg` "Roles / Plan", replaced by the Hairline animation).
 - `icon-picker.html` – Icon picker card, `components-overview.html` (CSS field with search icon and "local_shipping", replaced by the Hairline animation).
+- `inline-notification.html` – Inline notification card, `components-overview.html` (CSS `.mini-banner--inline` "Only 4 left in stock.", replaced by the Hairline animation).

@@ -106,3 +106,12 @@
 [data-hairline="icon-picker"] [data-part="menu"][data-open] { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { [data-hairline="icon-picker"] [data-part="menu"] { transition: none; } }
 [data-hairline="icon-picker"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field */
+
+/* inline-notification figure: blue block with icon, text bars, black button */
+[data-hairline="inline-notification"] [data-part="bar-dk"], [data-hairline="inline-notification"] [data-part="btn"] { fill: var(--color-surface-100, #000000); }
+[data-hairline="inline-notification"] [data-part="btn-top"] { fill: var(--color-surface-90, #222222); }
+[data-hairline="inline-notification"] [data-part="bar"] { fill: var(--color-surface-40, #939595); }
+[data-hairline="inline-notification"] [data-part="note"] { fill: var(--color-surface-information-weaker, #e2f1ff); }
+[data-hairline="inline-notification"] [data-part="edge"], [data-hairline="inline-notification"] [data-part="icon"] { fill: var(--color-surface-information-default, #0066ff); }
+[data-hairline="inline-notification"] [data-part="icon-i"] { fill: #ffffff; }
+.ds-card__visual--hairline [data-hairline-card="inline-notification"] { transform: translateY(-4px); }
