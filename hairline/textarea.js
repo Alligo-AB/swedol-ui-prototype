@@ -69,9 +69,9 @@ function mount({ stage, svg, read }, value) {
     svg.lastChild.firstChild.setAttribute("class", "sil");
   }
 
-  // flat text on the slab: label over the box, helper text under the largest box
+  // flat text on the slab: label over the box, helper text right under it (follows the box as it stretches)
   mk("path", { d: flat(P, PT, lay("COMMENT", FX0, 15, 0.7)), class: "dot", "data-part": "label" }, svg);
-  mk("path", { d: flat(P, PT, lay("ADD MORE DETAIL.", FX0, 90, 0.36)), class: "dot", "data-part": "hint" }, svg);
+  const hint = mk("path", { class: "dot", "data-part": "hint" }, svg), hintTxt = "ADD MORE DETAIL.";
 
   // the box: a slot cut into the slab (floor, far wall, rim, near lip); its rim is the state (grey, black on hover, doubled on focus)
   const rect = (a, y1) => rrect(FX0 + a, FY0 + a, FX1 - a, y1 - a, 0.5, 3);
@@ -105,6 +105,7 @@ function mount({ stage, svg, read }, value) {
     for (const e of [rim, rimN]) e.setAttribute("class", focus || over || corner ? "nf hi" : "nf");
     inner.setAttribute("d", focus ? poly(ringAt(P, rect(2.4, y1), zf)) : "");
     inner.setAttribute("class", focus ? "nf hi" : "nf");
+    hint.setAttribute("d", flat(P, PT, lay(hintTxt, FX0, y1 + 6, 0.36)));
     const gx = FX1 - 3, gy = y1 - 3;
     grip.setAttribute("d", seg(P(gx - 5, gy, zf), P(gx, gy - 5, zf)) + seg(P(gx - 9, gy, zf), P(gx, gy - 9, zf)));
     grip.setAttribute("class", corner ? "nf hi" : "nf");
