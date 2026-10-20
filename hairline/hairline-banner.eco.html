@@ -906,7 +906,7 @@ var HL = (() => {
 </script>
 <script type="module" id="hl-figure">
 /**
- * Banner: a page plane with a warning banner anchored at its top edge (a ring icon, heading, two text lines, an action label, a x) and page content
+ * Banner: a page plane with a large informational banner anchored at its top edge (a ring icon, heading, two text lines, an action label, a x) and page content
  * under it. The pointer over the x lights its tile; a press closes the banner the way the component does (fades
  * out and collapses its height, 150 ms on ease-accelerate-generic) and the page content moves up. Leaving the
  * stage, or pressing the empty page, brings it back (300 ms on ease-decelerate-generic). A drawn cursor follows
@@ -917,8 +917,37 @@ const {
   mk, pointer, reflect, register, solid, put, disposer, spring, stepS, unproj,
 } = HL;
 
-const PW = 148, PD = 84, PT = 5, X0 = 6, X1 = 142, Y0 = 6, BH = 34, XC = 134, XY = 8;
+const PW = 148, PD = 84, PT = 5, X0 = 6, X1 = 142, Y0 = 6, BH = 37, XC = 134, XY = 8;
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
+// condensed heavy capitals as closed outlines (from tabs.js), 8 high, u right, v up
+const G = {
+  P: [[[0, 0], [1.6, 0], [1.6, 3], [3.8, 3], [5, 4.2], [5, 6.8], [3.8, 8], [0, 8]], [[1.6, 4.5], [3, 4.5], [3.4, 4.9], [3.4, 6.1], [3, 6.5], [1.6, 6.5]]],
+  A: [[[0, 0], [1.6, 0], [1.9, 2.2], [3.1, 2.2], [3.4, 0], [5, 0], [3.6, 8], [1.4, 8]], [[2.2, 3.6], [2.8, 3.6], [2.5, 5.6]]],
+  E: [[[0, 0], [5, 0], [5, 1.5], [1.6, 1.5], [1.6, 3.3], [4.4, 3.3], [4.4, 4.7], [1.6, 4.7], [1.6, 6.5], [5, 6.5], [5, 8], [0, 8]]],
+  R: [[[0, 0], [1.6, 0], [1.6, 3], [2.6, 3], [3.4, 0], [5, 0], [4.2, 3.3], [5, 4.2], [5, 6.8], [3.8, 8], [0, 8]], [[1.6, 4.5], [3, 4.5], [3.4, 4.9], [3.4, 6.1], [3, 6.5], [1.6, 6.5]]],
+  L: [[[0, 0], [5, 0], [5, 1.5], [1.6, 1.5], [1.6, 8], [0, 8]]],
+  S: [[[0, 1.2], [1.2, 0], [3.8, 0], [5, 1.2], [5, 3.6], [3.8, 4.4], [1.6, 4.9], [1.6, 6.5], [5, 6.5], [5, 8], [1.2, 8], [0, 6.8], [0, 4.2], [1.2, 3.4], [3.4, 2.9], [3.4, 1.5], [0, 1.5]]],
+  I: [[[0, 0], [1.6, 0], [1.6, 8], [0, 8]]],
+  V: [[[0, 8], [1.7, 8], [2.5, 2.6], [3.3, 8], [5, 8], [3.3, 0], [1.7, 0]]],
+  O: [[[0, 1.2], [1.2, 0], [3.8, 0], [5, 1.2], [5, 6.8], [3.8, 8], [1.2, 8], [0, 6.8]], [[1.6, 1.5], [3.4, 1.5], [3.4, 6.5], [1.6, 6.5]]],
+  D: [[[0, 0], [3.8, 0], [5, 1.2], [5, 6.8], [3.8, 8], [0, 8]], [[1.6, 1.5], [3.2, 1.5], [3.4, 1.7], [3.4, 6.3], [3.2, 6.5], [1.6, 6.5]]],
+  T: [[[1.7, 0], [3.3, 0], [3.3, 6.5], [5, 6.5], [5, 8], [0, 8], [0, 6.5], [1.7, 6.5]]],
+  N: [[[0, 0], [1.6, 0], [1.6, 4.8], [3.4, 0], [5, 0], [5, 8], [3.4, 8], [3.4, 3.2], [1.6, 8], [0, 8]]],
+  C: [[[0, 1.2], [1.2, 0], [3.8, 0], [5, 1.2], [5, 2.6], [3.4, 2.6], [3.4, 1.5], [1.6, 1.5], [1.6, 6.5], [3.4, 6.5], [3.4, 5.4], [5, 5.4], [5, 6.8], [3.8, 8], [1.2, 8], [0, 6.8]]],
+  M: [[[0, 0], [1.6, 0], [1.6, 5], [3, 2], [4.4, 5], [4.4, 0], [6, 0], [6, 8], [4.2, 8], [3, 5.2], [1.8, 8], [0, 8]]],
+};
+const GW = (ch) => Math.max(...G[ch][0].map((q) => q[0]));
+/** Text as flat world outlines: x0, top y0, scale u, y squash q; a counter is wound the other way so a fill leaves it open. */
+function label(text, x0, y0, u, q) {
+  let x = x0;
+  const out = [];
+  for (const ch of text) {
+    if (ch === " ") { x += 3 * u; continue; }
+    G[ch].forEach((o, k) => { const w = o.map(([a, b]) => [x + a * u, y0 + (8 - b) * u * q]); out.push(k ? w.reverse() : w); });
+    x += (GW(ch) + 1.2) * u;
+  }
+  return out;
+}
 const PAGE = [[6, 0, 70, 4], [6, 9, 126, 11.5], [6, 14, 100, 16.5], [6, 22, 60, 31]]; // y0 is relative to the page top
 
 function mount({ stage, svg, read }, value) {
@@ -944,12 +973,11 @@ function mount({ stage, svg, read }, value) {
   const flat = (x0, y0, x1, y1, z) => poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]].map(([x, y]) => P(x, y, z)));
   const page = PAGE.map(([x0, y0, x1, y1], i) => ({ x0, y0, x1, y1, el: mk("path", { class: "dot", "data-part": i === 0 ? "title" : i === 3 ? "card" : "line" }, svg) }));
   // the banner: body, left edge, icon disc, two text bars, the x tile and its two strokes; all squash toward the top with c
-  const g = mk("g", {}, svg), body = solid(mk("g", {}, g)), edge = solid(mk("g", {}, g));
+  const g = mk("g", {}, svg), body = solid(mk("g", {}, g));
   body.sil.setAttribute("class", "dot"); body.sil.setAttribute("data-part", "banner");
-  edge.sil.setAttribute("class", "dot"); edge.sil.setAttribute("data-part", "banner-edge");
+  const edge = mk("path", { class: "dot", "data-part": "banner-edge" }, g); // the left border: flat, level with the banner top
   const icon = mk("path", { class: "dot", "data-part": "banner-edge" }, g), leaf = mk("path", { class: "dot", "data-part": "banner-edge" }, g);
-  const b2 = mk("path", { class: "dot", "data-part": "bar" }, g), act = mk("path", { class: "dot", "data-part": "bar-on" }, g);
-  const tbar = mk("path", { class: "dot", "data-part": "bar-on" }, g), bbar = mk("path", { class: "dot", "data-part": "bar" }, g);
+  const txt = [mk("path", { class: "dot", "data-part": "bar-on" }, g), mk("path", { class: "dot", "data-part": "bar-on" }, g), mk("path", { class: "dot", "data-part": "bar-on" }, g), mk("path", { class: "dot", "data-part": "bar-on" }, g)];
   const tile = mk("path", { class: "dot", "data-part": "halo" }, g);
   const xs = [1, -1].map(() => mk("path", { class: "dot", "data-part": "bar-on" }, g));
 
@@ -974,17 +1002,18 @@ function mount({ stage, svg, read }, value) {
     g.setAttribute("display", v < 0.02 ? "none" : "");
     const [o, i] = rings(X0, Y0, X1, y(BH), 0, 1);
     put(body, prism(P, front, o, i, PT, z));
-    const [eo, ei] = rings(X0, Y0, X0 + 4, y(BH), 0, 0.6);
-    put(edge, prism(P, front, eo, ei, PT, z + 0.3));
+    edge.setAttribute("d", flat(X0, Y0, X0 + 4, y(BH), z + 0.1));
     const cy = y(8);
-    // the icon: a ring (inner outline wound the other way, so the fill leaves it open) with a leaf stroke inside
-    const circ = (rad, up) => { const a = Array.from({ length: 20 }, (_, n) => P(22 + rad * Math.cos((n / 20) * 2 * Math.PI), y(10) + rad * v * Math.sin((n / 20) * 2 * Math.PI), z + 0.3)); return up ? a : a.reverse(); };
-    icon.setAttribute("d", poly(circ(7, 1)) + poly(circ(5.6, 0)));
-    leaf.setAttribute("d", poly([[-3, 2], [-2.4, 0.8], [2.4, -2.6], [3, -2], [-2.2, 2.6]].map(([a, b]) => P(22 + a, y(10) + b * v, z + 0.3))));
-    tbar.setAttribute("d", flat(36, y(4), 92, y(7.6), z + 0.3));
-    bbar.setAttribute("d", flat(36, y(12), 124, y(14.4), z + 0.3));
-    b2.setAttribute("d", flat(36, y(17), 100, y(19.4), z + 0.3));
-    act.setAttribute("d", flat(38, y(25.5), 78, y(28), z + 0.3));
+    // the icon: a ring and, inside it, a leaf outline with a vein that runs on as a stem (outlines wound the other way leave holes)
+    const IX = 22, IY = y(11), at = (a, b) => P(IX + a, IY + b * v, z + 0.3);
+    const circ = (rad, up) => { const a = Array.from({ length: 24 }, (_, n) => at(rad * Math.cos((n / 24) * 2 * Math.PI), rad * Math.sin((n / 24) * 2 * Math.PI))); return up ? a : a.reverse(); };
+    const lens = (bulge, up) => { const a = Array.from({ length: 13 }, (_, n) => { const t = n / 12, w = bulge * Math.sin(Math.PI * t); return at(-3.6 + 7.2 * t + w * 0.707, 3.6 - 7.2 * t + w * 0.707); }).concat(Array.from({ length: 11 }, (_, n) => { const t = 1 - (n + 1) / 12, w = bulge * Math.sin(Math.PI * t); return at(-3.6 + 7.2 * t - w * 0.707, 3.6 - 7.2 * t - w * 0.707); })); return up ? a : a.reverse(); };
+    icon.setAttribute("d", poly(circ(7.6, 1)) + poly(circ(5.9, 0)));
+    leaf.setAttribute("d", poly(lens(3.3, 1)) + poly(lens(1.9, 0)) + poly([[-4.4, 4.4], [-3.6, 4.4 + 0.1], [3.2, -2.4], [2.5, -3.1], [-4.3, 3.7]].map(([a, b]) => at(a, b))));
+    txt[0].setAttribute("d", label("PAPERLESS", 38, y(3), 0.62, v).map((o) => poly(o.map(([x, yy]) => P(x, yy, z + 0.3)))).join(""));
+    txt[1].setAttribute("d", label("INVOICES ARE SENT", 38, y(13.2), 0.42, v).map((o) => poly(o.map(([x, yy]) => P(x, yy, z + 0.3)))).join(""));
+    txt[2].setAttribute("d", label("VIA EMAIL", 38, y(19.2), 0.42, v).map((o) => poly(o.map(([x, yy]) => P(x, yy, z + 0.3)))).join(""));
+    txt[3].setAttribute("d", label("READ MORE", 40, y(28), 0.45, v).map((o) => poly(o.map(([x, yy]) => P(x, yy, z + 0.3)))).join(""));
     tile.setAttribute("d", clamp(hv.x, 0, 1) > 0.02 ? flat(XC - 6, y(2), XC + 6, y(14), z + 0.3) : "");
     xs.forEach((s, n) => {
       const d = 3.2, w = 0.8;
@@ -1039,10 +1068,10 @@ function mount({ stage, svg, read }, value) {
 
 hairline({
   name: "banner",
-  means: "A page with a warning banner at its top: a press on the x collapses the banner, the page moves up; leaving brings it back.",
+  means: "A page with a large informational banner at its top: a press on the x collapses the banner, the page moves up; leaving brings it back.",
   rules: [1, 4, 8, 9],
   range: [1.5, 2.5, 4],
-  tour: [[240, 215], [332, 189], [240, 215], null],
+  tour: [[240, 215], [353, 178], [240, 215], null],
   mount,
 });
 </script>
