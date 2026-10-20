@@ -9,7 +9,6 @@ const {
 } = HL;
 
 const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 41, FY1 = 63, VAL = "10482", PLH = "PLACEHOLDER", KEY = 130, N = VAL.length;
-const quad = (x0, y0, x1, y1) => [{ u: x0, v: y0 }, { u: x1, v: y0 }, { u: x1, v: y1 }, { u: x0, v: y1 }];
 const IBEAM = [[-2, -5.5], [2, -5.5], [2, -4.5], [0.5, -4.5], [0.5, 4.5], [2, 4.5], [2, 5.5], [-2, 5.5], [-2, 4.5], [-0.5, 4.5], [-0.5, -4.5], [-2, -4.5]]; // a text caret lying on the field's floor
 // condensed heavy capitals and digits as closed outlines (as in the Button figure), 8 high, u right, v up; a second outline is a counter
 const G = {
@@ -26,6 +25,11 @@ const G = {
   H: [[[0, 0], [1.6, 0], [1.6, 3.3], [3.4, 3.3], [3.4, 0], [5, 0], [5, 8], [3.4, 8], [3.4, 4.7], [1.6, 4.7], [1.6, 8], [0, 8]]],
   A: [[[0, 0], [1.6, 0], [1.9, 2.2], [3.1, 2.2], [3.4, 0], [5, 0], [3.6, 8], [1.4, 8]], [[2.2, 3.6], [2.8, 3.6], [2.5, 5.6]]],
   C: [[[0, 1.2], [1.2, 0], [3.8, 0], [5, 1.2], [5, 2.6], [3.4, 2.6], [3.4, 1.5], [1.6, 1.5], [1.6, 6.5], [3.4, 6.5], [3.4, 5.4], [5, 5.4], [5, 6.8], [3.8, 8], [1.2, 8], [0, 6.8]]],
+  F: [[[0, 0], [1.6, 0], [1.6, 3.3], [4.4, 3.3], [4.4, 4.7], [1.6, 4.7], [1.6, 6.5], [5, 6.5], [5, 8], [0, 8]]],
+  Y: [[[0, 8], [1.7, 8], [2.5, 5], [3.3, 8], [5, 8], [3.3, 3.6], [3.3, 0], [1.7, 0], [1.7, 3.6]]],
+  I: [[[0, 0], [1.6, 0], [1.6, 8], [0, 8]]],
+  T: [[[1.7, 0], [3.3, 0], [3.3, 6.5], [5, 6.5], [5, 8], [0, 8], [0, 6.5], [1.7, 6.5]]],
+  ".": [[[0, 0], [1.6, 0], [1.6, 1.6], [0, 1.6]]],
   1: [[[1.8, 0], [3.4, 0], [3.4, 8], [2, 8], [0, 6.2], [0, 4.9], [1.8, 6.2]]],
   2: [[[0, 0], [5, 0], [5, 1.5], [1.8, 1.5], [5, 4.2], [5, 6.8], [3.8, 8], [1.2, 8], [0, 6.8], [0, 5.4], [1.6, 5.4], [1.6, 6.5], [3.4, 6.5], [3.4, 5], [0, 2.2]]],
   4: [[[3, 0], [4.6, 0], [4.6, 2], [5, 2], [5, 3.4], [4.6, 3.4], [4.6, 8], [2.6, 8], [0, 3.6], [0, 2], [3, 2]], [[1.9, 3.4], [3, 3.4], [3, 5.4]]],
@@ -65,10 +69,9 @@ function mount({ stage, svg, read }, value) {
     svg.lastChild.firstChild.setAttribute("class", "sil");
   }
 
-  // flat marks on the slab: label over the field, hint under it
-  const bar = (x0, y0, x1, y1, z, cls, part) => mk("path", { d: poly(ringAt(P, quad(x0, y0, x1, y1), z)), class: cls, "data-part": part }, svg);
+  // flat text on the slab: label over the field, helper text under it
   mk("path", { d: flat(P, PT, lay("ORDER NUMBER", FX0, 28.5, 0.7)), class: "dot", "data-part": "label" }, svg);
-  bar(FX0, 69, FX0 + 46, 72, PT, "dot", "hint");
+  mk("path", { d: flat(P, PT, lay("FOUND ON YOUR ORDER CONFIRMATION.", FX0, 71, 0.36)), class: "dot", "data-part": "hint" }, svg); // helper text under the field
 
   // the field: a slot cut into the slab (floor, far wall, rim, near lip), its rim is the state (grey, black on hover, doubled on focus)
   const rect = (a, x0, y0, x1, y1) => rrect(x0 + a, y0 + a, x1 - a, y1 - a, 0.5, 3);
