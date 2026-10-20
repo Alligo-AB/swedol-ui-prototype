@@ -10,7 +10,7 @@ const {
 } = HL;
 
 const PW = 96, PD = 100, PT = 6, PX0 = 8, PX1 = 88, PY0 = 8, PY1 = 82, PH = 2.5, BH = 1.6, REOPEN = 1100;
-const BTN = [{ name: "cancel", text: "CANCEL", x0: 12, x1: 42, y0: 62, y1: 76 }, { name: "delete", text: "DELETE", x0: 46, x1: 84, y0: 62, y1: 76 }];
+const BTN = [{ name: "cancel", text: "CANCEL", x0: 12, x1: 36, y0: 62, y1: 76 }, { name: "delete", text: "DELETE", x0: 40, x1: 84, y0: 62, y1: 76 }];
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 const G = {
   P: [[[0, 0], [1.6, 0], [1.6, 3], [3.8, 3], [5, 4.2], [5, 6.8], [3.8, 8], [0, 8]], [[1.6, 4.5], [3, 4.5], [3.4, 4.9], [3.4, 6.1], [3, 6.5], [1.6, 6.5]]],
@@ -83,9 +83,10 @@ function mount({ stage, svg, read }, value) {
   const barsXY = [[16, 40, 76, 43.4], [16, 48, 56, 51.4]];
   const btns = BTN.map((b) => {
     const [out, inn] = rings(b.x0, b.y0, b.x1, b.y1, 0, 1.2), g = mk("g", {}, mg), ink = b.name === "delete";
-    const cap = ink ? { sil: mk("path", { class: "dot", "data-part": "ink" }, g), top: mk("path", { class: "dot", "data-part": "ink-top" }, g), edge: mk("path", { class: "nf lo" }, g) } : solid(g);
-    const text = mk("path", { class: ink ? "fo" : "dot", "data-part": ink ? "ink-label" : "label" }, mg);
-    return { ...b, ink, out, inn, cap, text, strokes: centred(b.text, b, 0.62), hv: spring(0) };
+    if (!ink) { const tint = mk("path", { class: "dot", "data-part": "rowhi" }, g); return { ...b, ink, out, inn, tint, text: mk("path", { class: "dot", "data-part": "label" }, mg), strokes: centred(b.text, b, 0.55), hv: spring(0) }; }
+    const cap = { sil: mk("path", { class: "dot", "data-part": "ink" }, g), top: mk("path", { class: "dot", "data-part": "ink-top" }, g), edge: mk("path", { class: "nf lo" }, g) };
+    const text = mk("path", { class: "fo", "data-part": "ink-label" }, mg);
+    return { ...b, ink, out, inn, cap, text, strokes: centred(b.text, b, 0.55), hv: spring(0) };
   });
 
   let open = 1, closedAt = 0, act = -1, last = "";
@@ -101,10 +102,11 @@ function mount({ stage, svg, read }, value) {
     const sh = (z0 - PT) * 0.45; // the shadow slides away as the panel rises
     shadow.setAttribute("d", rect(P, PX0 + sh, PY0 + sh, PX1 + sh, PY1 + sh, PT + 0.1));
     put(panel, prism(P, front, qOut, qIn, z0, zt));
-    title.setAttribute("d", flat(P, label("DELETE ADDRESS", 14, 20, 0.66), zt + 0.1));
-    x.setAttribute("d", flat(P, cross(78, 20, 2.6, 1.3), zt + 0.1));
+    title.setAttribute("d", flat(P, label("DELETE THIS ADDRESS", 12, 20, 0.55), zt + 0.1));
+    x.setAttribute("d", flat(P, cross(81, 20, 2.4, 1.2), zt + 0.1));
     bars.forEach((e, i) => e.setAttribute("d", rect(P, ...barsXY[i].slice(0, 2), ...barsXY[i].slice(2), zt + 0.1)));
     for (const b of btns) {
+      if (!b.ink) { b.tint.setAttribute("d", rect(P, b.x0, b.y0, b.x1, b.y1, zt + 0.05)); b.tint.setAttribute("display", b.hv.x > 0.5 ? "inline" : "none"); b.text.setAttribute("d", flat(P, b.strokes, zt + 0.1)); continue; }
       const z1 = zt + BH - 0.9 * clamp(b.hv.x, 0, 1);
       const pr = prism(P, front, b.out, b.inn, zt, z1);
       if (b.ink) { b.cap.sil.setAttribute("d", pr.sil); const t = poly(ringAt(P, b.out, z1)); b.cap.top.setAttribute("d", t); b.cap.edge.setAttribute("d", t); } else put(b.cap, pr);
@@ -135,7 +137,7 @@ function mount({ stage, svg, read }, value) {
   bag.add(A.unregister);
   sg.setAttribute("data-open", ""); mg.setAttribute("data-open", "");
 
-  const zr = PT + lift + PH + BH; // resting button tops
+  const zr = PT + lift + PH + 0.8; // resting button tops
   const pick = ([sx, sy]) => {
     if (!open) return -1;
     const [px, py] = unproj(C, sx, sy, zr);
@@ -145,7 +147,7 @@ function mount({ stage, svg, read }, value) {
   function set(a, p) {
     if (a !== act) {
       act = a; gdone = !ghost; gt = performance.now();
-      btns.forEach((b, i) => { b.hv.t = i === a ? 1 : 0; if (b.ink) b.cap.top.setAttribute("class", i === a ? "dot m" : "dot"); else b.cap.sil.classList.toggle("hi", i === a); });
+      btns.forEach((b, i) => { b.hv.t = i === a ? 1 : 0; if (b.ink) b.cap.top.setAttribute("class", i === a ? "dot m" : "dot"); });
       say();
     }
     if (p) { ax.t = p[0]; ay.t = p[1]; } else { ax.t = rest[0]; ay.t = rest[1]; }

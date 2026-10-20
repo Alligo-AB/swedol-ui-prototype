@@ -23,3 +23,4 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
 [data-hairline] [data-part="fade"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
 [data-hairline] [data-part="fade"][data-open] { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="fade"] { transition: none; } }
+[data-hairline] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); } /* hover on the blank Cancel */

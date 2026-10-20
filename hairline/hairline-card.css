@@ -114,3 +114,4 @@
 [data-hairline] [data-part="fade"][data-open] { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="fade"] { transition: none; } }
 .ds-card__visual--hairline [data-hairline-card="modal"] { transform: translateY(2px); }
+[data-hairline="modal"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); } /* hover on the blank Cancel */
