@@ -26,3 +26,8 @@
 .ds-card__visual--hairline [data-hairline-card="switch"] { transform: translateY(-5px); }
 
 .ds-card__visual--hairline { position: relative; }
+
+/* select figure: label bars and chevron */
+[data-hairline="select"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="select"] [data-part="bar-on"], [data-hairline="select"] [data-part="chev"] { fill: var(--color-text-primary, #000000); }
+.ds-card__visual--hairline [data-hairline-card="select"] { transform: translateY(5px); }

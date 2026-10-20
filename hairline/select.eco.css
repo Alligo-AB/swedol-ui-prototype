@@ -1,0 +1,17 @@
+/* ECO skin for the select figure and its bench. The figure only marks its parts with data-part; this file paints them from tokens. */
+:root, :root[data-theme] { --ground: var(--color-background-primary, #ffffff); --ink: var(--color-text-primary, #000000); --muted: var(--color-surface-50, #737373); --line: var(--color-border-primary, #e5e5e5); }
+body { font-family: 'Breuer Condensed', Arial, sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.tag, .label, output, button, #rules { font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase; }
+button, .plate { border-radius: 0; }
+input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
+
+[data-hairline] {
+  --hl-plate: var(--color-background-primary, #ffffff);
+  --hl-hi: var(--color-surface-100, #000000);
+  --hl-edge: var(--color-surface-40, #939595);
+  --hl-mid: var(--color-surface-20, #cccccc);
+  --hl-lo: var(--color-border-primary, #e5e5e5);
+}
+[data-hairline] [data-part="cursor"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); } /* placeholder / unchosen label */
+[data-hairline] [data-part="bar-on"], [data-hairline] [data-part="chev"] { fill: var(--color-text-primary, #000000); } /* chosen label, chevron */
