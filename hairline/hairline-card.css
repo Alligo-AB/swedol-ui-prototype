@@ -56,6 +56,7 @@
 [data-hairline="select"] [data-part="menu"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
 [data-hairline="select"] [data-part="menu"][data-open] { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { [data-hairline="select"] [data-part="menu"] { transition: none; } }
+<<<<<<< HEAD
 
 /* input figure: label/value black, placeholder and hint grey */
 [data-hairline] [data-part="ph"], [data-hairline] [data-part="hint"] { fill: var(--color-surface-50, #737373); }
@@ -69,3 +70,4 @@
 [data-hairline] [data-part="thumb"] { fill: var(--color-surface-100, #000000); }
 [data-hairline] [data-part="halo"] { fill: none; }
 [data-hairline] [data-part="halo"][data-hover] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+=======

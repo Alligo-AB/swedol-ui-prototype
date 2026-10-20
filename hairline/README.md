@@ -29,6 +29,7 @@ Hela förfarandet för en ny komponent står i skillen `eco-card-animation` (`.c
 - Scenen måste vara 5:4 (kärnan mappar pekaren på 400 × 320): `hairline-card.css` gör den 300 px bred och förskjuten uppåt, kortets visual (160 px) klipper resten. `hairline-card.css` har ECO-färgerna; håll den i synk med `<figur>.eco.css`.
 - Gamla kortbilder arkiveras i `eco-design-system/card-visuals-archive/` (en fil per kort, med instruktion för att byta tillbaka). Button: `button.html`, Switch: `switch.html`.
 - Switch-kortet i `components-overview.html` använder `data-hairline-card="switch"`; `index.html` har fortfarande CSS-switcharna. `hairline-card.css` skiljer Switchs gröna `ink` från Buttons svarta via `[data-hairline="switch"]`.
+- Select-kortet i `components-overview.html` använder `data-hairline-card="select"` (gammal visual i `card-visuals-archive/select.html`); `overview.html` har fortfarande CSS-selecten.
 - Nästa kort: arkivera den gamla visualen där först, lägg sedan till figuren på samma sätt.
 
 ## Önskemål för nya figurer
