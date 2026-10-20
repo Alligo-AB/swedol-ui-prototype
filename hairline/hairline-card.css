@@ -107,7 +107,9 @@
 @media (prefers-reduced-motion: reduce) { [data-hairline="icon-picker"] [data-part="menu"] { transition: none; } }
 [data-hairline="icon-picker"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field */
 
-/* toast-ecom figure: toast name/body/close bars, primary button */
-[data-hairline="toast-ecom"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+/* toast-ecom figure: floating toast with its shadow on the slab; text, tile, buttons */
+[data-hairline="toast-ecom"] [data-part="tshadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
 [data-hairline="toast-ecom"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
-.ds-card__visual--hairline [data-hairline-card="toast-ecom"] { transform: translateY(-4px); }
+[data-hairline="toast-ecom"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="toast-ecom"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
+.ds-card__visual--hairline [data-hairline-card="toast-ecom"] { transform: translateY(2px); }
