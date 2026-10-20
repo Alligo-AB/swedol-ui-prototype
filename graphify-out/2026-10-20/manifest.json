@@ -768,9 +768,9 @@
     "semantic_hash": "06ff44b8369a43c3ef46a1777b692213"
   },
   "eco-design-system/components-overview.html": {
-    "mtime": 1792505015.6910224,
-    "seen": 1792505281.87813,
-    "ast_hash": "27c47e1e01cbf712724b140b2a0b2396",
+    "mtime": 1792517820.6500227,
+    "seen": 1792517855.141366,
+    "ast_hash": "e68c3de8b41bf57062b0024966af7a0d",
     "semantic_hash": ""
   },
   "eco-design-system/components/tooltip-code.html": {
@@ -1668,16 +1668,16 @@
     "semantic_hash": "72155ddee04aca34708d38e471742514"
   },
   "hairline/embed.js": {
-    "mtime": 1792504839.200102,
-    "seen": 1792505281.878068,
-    "ast_hash": "8abe9f3fd14ee3c4aef7e6be574af38f",
-    "semantic_hash": "8abe9f3fd14ee3c4aef7e6be574af38f"
+    "mtime": 1792517820.6487858,
+    "seen": 1792517855.141299,
+    "ast_hash": "a2cb40bd8f07e6029cb9414e8995382e",
+    "semantic_hash": ""
   },
   "hairline/kernel.js": {
-    "mtime": 1792504839.2081792,
-    "seen": 1792505281.87807,
-    "ast_hash": "52b61cfc6a0f1ef9ab5c937ffb93e561",
-    "semantic_hash": "52b61cfc6a0f1ef9ab5c937ffb93e561"
+    "mtime": 1792517820.6302319,
+    "seen": 1792517855.1413,
+    "ast_hash": "438abc6c0283a509fc1769d38594bd2d",
+    "semantic_hash": ""
   },
   "hairline/make-eco.mjs": {
     "mtime": 1792504839.208427,
@@ -1698,9 +1698,9 @@
     "semantic_hash": ""
   },
   ".claude/skills/eco-card-animation/SKILL.md": {
-    "mtime": 1792505267.6398222,
-    "seen": 1792505281.878083,
-    "ast_hash": "4c074e215414d8d6f884e5b1afbf2178",
+    "mtime": 1792517848.4041061,
+    "seen": 1792517855.141315,
+    "ast_hash": "015bbcf8fe867ace5a2c7d4497872a20",
     "semantic_hash": ""
   },
   "docs-intro-ref/inspiration.md": {
@@ -1818,9 +1818,9 @@
     "semantic_hash": ""
   },
   "hairline/README.md": {
-    "mtime": 1792505267.5928435,
-    "seen": 1792505281.8782668,
-    "ast_hash": "721cd23a19a2c6f9352e571980488e09",
+    "mtime": 1792517848.492616,
+    "seen": 1792517855.141526,
+    "ast_hash": "e6dc9ad671589f4885b101c2bc188003",
     "semantic_hash": ""
   },
   "hairline/hairline-button-pair.eco.html": {
@@ -1980,9 +1980,9 @@
     "semantic_hash": "75ba6179fdaf41363012982563bb3f17"
   },
   "hairline/button-group.js": {
-    "mtime": 1792505004.4519594,
-    "seen": 1792505281.8780649,
-    "ast_hash": "bcb1337a854d1615cfc203067759e579",
+    "mtime": 1792517820.6936548,
+    "seen": 1792517855.141294,
+    "ast_hash": "147a52d43f3aacedf6dc9e03763164fe",
     "semantic_hash": ""
   },
   "hairline/checkbox.js": {
@@ -2046,15 +2046,15 @@
     "semantic_hash": ""
   },
   "hairline/hairline-button-group.eco.html": {
-    "mtime": 1792505015.6380045,
-    "seen": 1792505281.878268,
-    "ast_hash": "9134d239e99404ba0fec326d7fcf0344",
+    "mtime": 1792517828.7139983,
+    "seen": 1792517855.141527,
+    "ast_hash": "e1121c04797ac66ba7ef3defb896ba0c",
     "semantic_hash": ""
   },
   "hairline/hairline-button-group.html": {
-    "mtime": 1792504975.7004294,
-    "seen": 1792505281.87827,
-    "ast_hash": "9921a3fd19f51cf55b27be4170c626dd",
+    "mtime": 1792517820.7387445,
+    "seen": 1792517855.141527,
+    "ast_hash": "dbe73032b6c8dfc100c715a4404a14d3",
     "semantic_hash": ""
   },
   "hairline/hairline-checkbox.eco.html": {

@@ -81,10 +81,18 @@
   "79": "eco-pill-segment-control skill",
   "80": "button-group.js",
   "81": "select.js",
-  "82": "eco-radio skill",
+  "82": "hairline/icon-picker.js",
   "83": "input.js",
   "84": "checkbox.js",
   "85": "hairline/range.js",
   "86": "Resources overview page",
-  "87": "Icon picker (ECO Design System)"
+  "87": "Icon picker (ECO Design System)",
+  "88": "hairline/tabs.js",
+  "89": "pill.js",
+  "90": "textarea.js",
+  "91": "links-guide skill",
+  "92": "build-docs.mjs",
+  "93": "Range (ECO Design System)",
+  "94": "mount",
+  "95": "vercel.json"
 }
