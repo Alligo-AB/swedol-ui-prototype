@@ -1,6 +1,6 @@
 /**
  * Textarea: a tall text box cut into a slab, label over it, hint under it. The pointer over the box blackens the
- * rim, turns the arrow into a blinking text caret and types three lines in; a press focuses (second rim line).
+ * rim, turns the arrow into a blinking text caret and types three lines in (the box stretches when the third line no longer fits); a press focuses (second rim line).
  * The pointer over the resizer corner (two short strokes) stretches the box taller. The slider is the slot's depth.
  */
 const {
@@ -8,7 +8,7 @@ const {
   mk, pointer, reducedMotion, reflect, register, solid, put, disposer, spring, stepS, unproj,
 } = HL;
 
-const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 24, FY1 = 62, GROW = 12, LINES = ["THE ORDER", "CAME ON TIME", "AND FINE"], PLH = "PLACEHOLDER", KEY = 70;
+const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 24, FY1 = 46, GROW = 14, FIT = 8, LINES = ["THE ORDER", "CAME ON TIME", "AND FINE"], PLH = "PLACEHOLDER", KEY = 70;
 const CARET = [[-0.35, -2.6], [0.35, -2.6], [0.35, 2.6], [-0.35, 2.6]]; // a thin bar the height of a line of text, lying on the floor
 // condensed heavy capitals and digits as closed outlines (as in the Button figure), 8 high, u right, v up; a second outline is a counter
 const G = {
@@ -94,7 +94,7 @@ function mount({ stage, svg, read }, value) {
   svg.append(ph, ...chars, inner, grip, lip, rimN);
 
   let lastKey = 0, focus = 0, n = 0, nt = 0, over = false, corner = false, nextKey = 0;
-  const g = spring(0, { k: 120 }); // how far the box has been stretched
+  const g = spring(0, { k: 120 }); // how far the box has been stretched: by the corner (GROW) or by the text that no longer fits (FIT)
   function draw() {
     const y1 = FY1 + g.x, out = rect(0, y1), far = run(out, (q) => !front(q)), near = run(out, front);
     floor.setAttribute("d", poly(ringAt(P, out, zf)));
@@ -131,7 +131,7 @@ function mount({ stage, svg, read }, value) {
       m = true; // the caret blinks and the text types while the pointer is over the box
       if (n < nt && now >= nextKey) { n = reducedMotion() ? nt : n + 1; nextKey = now + KEY; lastKey = now; }
     }
-    if (over || focus) { const [u, v] = tx(n); cu.t = cu.x = u; cv.t = cv.x = v; } // snaps: the caret is the text's end, it does not trail it // the caret sits in the box, after the last mark
+    if (over || focus) { const [u, v] = tx(n); if (!corner) g.t = v > LY(1) + 1 ? FIT : 0; cu.t = cu.x = u; cv.t = cv.x = v; } // snaps: the caret is the text's end, it does not trail it // the caret sits in the box, after the last mark
     for (const s of [ax, ay, pr, cu, cv, g]) if (stepS(s, dt)) m = true;
     draw(); drawCur(now);
     return m;
@@ -141,7 +141,7 @@ function mount({ stage, svg, read }, value) {
   // hit areas are fixed to the rest pose (rule 01): the corner zone runs down to the stretched corner
   const pick = ([sx, sy]) => {
     const [x, y] = unproj(C, sx, sy, PT);
-    const inBox = x > FX0 - 2 && x < FX1 + 2 && y > FY0 - 2 && y < FY1 + 2;
+    const inBox = x > FX0 - 2 && x < FX1 + 2 && y > FY0 - 2 && y < FY1 + FIT + 2;
     const inCorner = x > FX1 - 12 && x < FX1 + 2 && y > FY1 - 12 && y < FY1 + GROW + 2;
     return [inBox || inCorner, inCorner];
   };
@@ -149,7 +149,7 @@ function mount({ stage, svg, read }, value) {
   const start = () => { nt = flatC.length; n = 0; nextKey = performance.now() + KEY; };
   function set([o, c], p) {
     if (o !== over) { over = o; if (o) start(); else if (!focus) { n = 0; nt = 0; } }
-    corner = c; g.t = c ? GROW : 0; say();
+    corner = c; if (c) g.t = GROW; else if (!over && !focus) g.t = 0; say();
     if (!o && !focus) { ax.t = rest[0]; ay.t = rest[1]; }
     if (c) { ax.t = p[0]; ay.t = p[1]; }
     A.wake();
@@ -173,6 +173,6 @@ hairline({
   means: "A text box on a slab: the pointer types three lines in, a press focuses, the corner stretches the box taller.",
   rules: [1, 4, 8, 9],
   range: [0, 1, 2],
-  tour: [[203, 145], [246, 202], null],
+  tour: [[207, 144], [262, 191], null],
   mount,
 });
