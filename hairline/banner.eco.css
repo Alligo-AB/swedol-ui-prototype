@@ -14,8 +14,8 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
 }
 [data-hairline] [data-part="cursor"] { fill: var(--color-surface-100, #000000); }
 [data-hairline] [data-part="label"] { fill: var(--color-text-primary, #000000); }
-[data-hairline] [data-part="banner"] { fill: var(--color-surface-warning-weaker, #fdf3d9); }
-[data-hairline] [data-part="banner-edge"] { fill: var(--color-surface-warning-default, #f5a623); }
+[data-hairline] [data-part="banner"] { fill: var(--color-surface-information-weaker, #deeefd); }
+[data-hairline] [data-part="banner-edge"] { fill: var(--color-surface-information-default, #1e57f5); }
 [data-hairline] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
 [data-hairline] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
 [data-hairline] [data-part="halo"] { fill: none; }
