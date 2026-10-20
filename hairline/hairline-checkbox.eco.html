@@ -638,7 +638,7 @@ var HL = (() => {
   }
   function tour(stage, stops, onStop) {
     let i = 0;
-    let wait = RESUME + STAGGER * (started++ % 4);
+    let wait = 0; started++;
     let t = -1;
     let at = null;
     let origin = [200, 320];
