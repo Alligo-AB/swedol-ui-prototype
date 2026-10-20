@@ -63,7 +63,7 @@ def head(c, kind):
 
 
 def crumbs(c, kind):
-    b = '<a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../overview.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span>'
+    b = '<a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span>'
     if c.get('parent'):   # a type of a hub (Badge, Notifications): Components / Notifications / Toast
         b += '<a href="%s" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span>' % c['parent']
     if kind == 'ex':
