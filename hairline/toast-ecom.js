@@ -1,6 +1,6 @@
 /**
  * E-Com Toast: a product box on a slab and a cart tray set into it. The pointer over the box lights it; a press
- * hops it into the cart, and a toast with a product tile and two buttons slides in at the back. A press on the
+ * hops it into the cart, and a toast with tile, text, close and two buttons slides in at the back. A press on the
  * box again takes it out; a press on the toast closes it. A drawn cursor follows the pointer and rests above
  * the box. The slider is how high the box and the toast stand.
  */
@@ -38,7 +38,7 @@ function mount({ stage, svg, read }, value) {
   const [tOut, tIn] = rings(TOAST.x0, TOAST.y0, TOAST.x1, TOAST.y1, 0, 1.2);
   const tg = mk("g", {}, svg), toast = solid(tg);
   const tile = solid(tg);
-  const tp = ["bar-on", "bar", "bar", "ink"].map((part) => mk("path", { class: "dot", "data-part": part }, tg));
+  const tp = ["bar-on", "bar", "bar", "bar-on", "bar-on", "ink"].map((part) => mk("path", { class: "dot", "data-part": part }, tg));
   const [kOut, kIn] = rings(TOAST.x0 + 6, TOAST.y0 + 6, TOAST.x0 + 22, TOAST.y0 + 22, 0, 1.2);
 
   // the cart: a tray cut into the slab (floor, far wall, rim, near lip over the sunk box)
@@ -77,10 +77,11 @@ function mount({ stage, svg, read }, value) {
     put(toast, prism(P, front, sh(tOut), sh(tIn), z, z + TOAST.h + lift * 0.3));
     const zt = z + TOAST.h + lift * 0.3 + 0.1, x = TOAST.x0 + dx;
     put(tile, prism(P, front, sh(kOut), sh(kIn), zt, zt + 3));
-    tp[0].setAttribute("d", quad(x + 28, TOAST.y0 + 8, x + 62, TOAST.y0 + 10.4, zt));
-    tp[1].setAttribute("d", quad(x + 28, TOAST.y0 + 14, x + 70, TOAST.y0 + 15.8, zt));
-    tp[2].setAttribute("d", quad(x + 8, TOAST.y1 - 9, x + 28, TOAST.y1 - 7.2, zt));
-    tp[3].setAttribute("d", quad(x + 36, TOAST.y1 - 12, x + 72, TOAST.y1 - 5, zt));
+    const bar = (i, x0, x1, y, h) => tp[i].setAttribute("d", quad(x + x0, TOAST.y0 + y, x + x1, TOAST.y0 + y + h, zt));
+    bar(0, 26, 50, 8, 2.6); bar(1, 52, 64, 8, 2.2); bar(2, 26, 42, 14, 2.2);
+    const xx = x + 72, xy = TOAST.y0 + 9, d = (u, v) => P(xx + u, xy + v, zt);
+    tp[3].setAttribute("d", poly([d(-2, -2.6), d(-2.6, -2), d(2, 2.6), d(2.6, 2)]) + poly([d(2, -2.6), d(2.6, -2), d(-2, 2.6), d(-2.6, 2)]));
+    bar(4, 6, 24, TOAST.y1 - TOAST.y0 - 9, 2.4); bar(5, 32, 74, TOAST.y1 - TOAST.y0 - 12, 7);
   }
   const slide = (s, now) => {
     if (s.t !== s.to) { s.from = s.x; s.to = s.t; s.t0 = now; }
@@ -148,7 +149,7 @@ function mount({ stage, svg, read }, value) {
 
 hairline({
   name: "toast-ecom",
-  means: "A product box and a cart tray set into a slab: a press hops the box into the cart and a toast with a product tile and two buttons slides in.",
+  means: "A product box hops into a cart tray set in a slab; a toast with tile, text, close and two buttons slides in.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 3],
   tour: [[104, 135], [226, 137], null],
