@@ -9,7 +9,7 @@ const {
 } = HL;
 
 const PW = 96, PD = 100, PT = 6, FX0 = 8, FX1 = 88, FY0 = 24, FY1 = 62, GROW = 12, LINES = ["THE ORDER", "CAME ON TIME", "AND FINE"], PLH = "PLACEHOLDER", KEY = 70;
-const IBEAM = [[-2, -5.5], [2, -5.5], [2, -4.5], [0.5, -4.5], [0.5, 4.5], [2, 4.5], [2, 5.5], [-2, 5.5], [-2, 4.5], [-0.5, 4.5], [-0.5, -4.5], [-2, -4.5]]; // a text caret lying on the field's floor
+const CARET = [[-0.35, -2.6], [0.35, -2.6], [0.35, 2.6], [-0.35, 2.6]]; // a thin bar the height of a line of text, lying on the floor
 // condensed heavy capitals and digits as closed outlines (as in the Button figure), 8 high, u right, v up; a second outline is a counter
 const G = {
   O: [[[0, 1.2], [1.2, 0], [3.8, 0], [5, 1.2], [5, 6.8], [3.8, 8], [1.2, 8], [0, 6.8]], [[1.6, 1.5], [3.4, 1.5], [3.4, 6.5], [1.6, 6.5]]],
@@ -81,7 +81,7 @@ function mount({ stage, svg, read }, value) {
   const TU = 0.6, TX = FX0 + 5, LY = (k) => FY0 + 7 + k * 8;
   const lines = LINES.map((t, k) => lay(t, TX, LY(k), TU));
   const flatC = lines.flat();
-  const tx = (i) => { const a = flatC[i - 1], k = lines.findIndex((l) => l.includes(a)); return a ? [a.x1 + 1.8 * TU, LY(k)] : [TX - 0.3, LY(0)]; }; // the caret's place after i marks
+  const tx = (i) => { const a = flatC[i - 1], k = lines.findIndex((l) => l.includes(a)); return a ? [a.x1 + 2 * TU, LY(k)] : [TX - 1, LY(0)]; }; // the caret's place after i marks
   const ph = mk("path", { class: "dot", "data-part": "ph" }, svg);
   const chars = flatC.map(() => mk("path", { class: "dot", "data-part": "ink" }, svg));
   const inner = mk("path", { class: "nf" }, svg); // second line of the focused edge, on the floor
@@ -93,7 +93,7 @@ function mount({ stage, svg, read }, value) {
   slot.append(rim);
   svg.append(ph, ...chars, inner, grip, lip, rimN);
 
-  let focus = 0, n = 0, nt = 0, over = false, corner = false, nextKey = 0;
+  let lastKey = 0, focus = 0, n = 0, nt = 0, over = false, corner = false, nextKey = 0;
   const g = spring(0, { k: 120 }); // how far the box has been stretched
   function draw() {
     const y1 = FY1 + g.x, out = rect(0, y1), far = run(out, (q) => !front(q)), near = run(out, front);
@@ -118,9 +118,9 @@ function mount({ stage, svg, read }, value) {
   const cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
   const cu = spring(tx(0)[0], { k: 140 }), cv = spring(tx(0)[1], { k: 140 }); // the caret's place in the box, in world units
   const drawCur = (now) => {
-    const typing = (over || focus) && !corner, blink = Math.floor(now / 500) % 2 === 0;
+    const typing = (over || focus) && !corner, blink = now - lastKey < 450 || Math.floor((now - lastKey) / 500) % 2 === 0; // solid while keys land, then blinks
     cur.setAttribute("d", typing
-      ? (blink ? poly(IBEAM.map(([u, v]) => P(cu.x + u, cv.x + v, zf + 0.3))) : "")
+      ? (blink ? poly(CARET.map(([u, v]) => P(cu.x + u, cv.x + v, zf + 0.3))) : "")
       : poly(ARROW.map(([u, v]) => [ax.x + u - 0.5, ay.x + v + 2.5 * clamp(pr.x, 0, 1)])));
   };
 
@@ -128,9 +128,9 @@ function mount({ stage, svg, read }, value) {
     let m = false;
     if (over || focus) {
       m = true; // the caret blinks and the text types while the pointer is over the box
-      if (n < nt && now >= nextKey) { n = reducedMotion() ? nt : n + 1; nextKey = now + KEY; }
+      if (n < nt && now >= nextKey) { n = reducedMotion() ? nt : n + 1; nextKey = now + KEY; lastKey = now; }
     }
-    if (over || focus) { const [u, v] = tx(n); cu.t = u; cv.t = v; } // the caret sits in the box, after the last mark
+    if (over || focus) { const [u, v] = tx(n); cu.t = cu.x = u; cv.t = cv.x = v; } // snaps: the caret is the text's end, it does not trail it // the caret sits in the box, after the last mark
     for (const s of [ax, ay, pr, cu, cv, g]) if (stepS(s, dt)) m = true;
     draw(); drawCur(now);
     return m;
