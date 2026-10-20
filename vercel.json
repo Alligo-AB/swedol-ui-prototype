@@ -1,5 +1,5 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/eco-design-system/index.html" }
+  "redirects": [
+    { "source": "/", "destination": "/eco-design-system/index.html", "permanent": false }
   ]
 }
