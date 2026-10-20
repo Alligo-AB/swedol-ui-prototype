@@ -615,8 +615,8 @@ var HL = (() => {
   var TRAVEL = 900;
   var DWELL = 1200;
   var REST = 1800;
-  var RESUME = 1200;
-  var STAGGER = 450;
+  var RESUME = 0; /* bench: play starts at once */
+  var STAGGER = 0;
   var GHOST = { pointerType: "ghost" };
   var started = 0;
   function entry([x, y]) {
