@@ -30,7 +30,7 @@ Hela förfarandet för en ny komponent står i skillen `eco-card-animation` (`.c
 - Gamla kortbilder arkiveras i `eco-design-system/card-visuals-archive/` (en fil per kort, med instruktion för att byta tillbaka). Button: `button.html`, Switch: `switch.html`.
 - Switch-kortet i `components-overview.html` använder `data-hairline-card="switch"`; `index.html` har fortfarande CSS-switcharna. `hairline-card.css` skiljer Switchs gröna `ink` från Buttons svarta via `[data-hairline="switch"]`.
 - Select-kortet i `components-overview.html` använder `data-hairline-card="select"` (gammal visual i `card-visuals-archive/select.html`); `overview.html` har fortfarande CSS-selecten.
-- E-Com Toast-kortet i `components-overview.html` använder `data-hairline-card="toast-ecom"` (`toast-ecom.js`, gammal visual i `card-visuals-archive/toast-ecom.html`; figur: produktlåda som hoppar ner i en vagnsbricka, toast med produktbricka glider in; ECO-tid: in 300 ms `ease-decelerate-emphasized`, ut 150 ms `ease-accelerate-generic`); `index.html` orörd.
+- E-Com Toast-kortet i `components-overview.html` använder `data-hairline-card="toast-ecom"` (`toast-ecom.js`, gammal visual i `card-visuals-archive/toast-ecom.html`; figur: själva "added to cart"-toasten på en platta (produktbricka, text, kryss, blank + primärknapp); tryck stänger den, den glider ut och tillbaka; ECO-tid: in 300 ms `ease-decelerate-emphasized`, ut 150 ms `ease-accelerate-generic`); `index.html` orörd.
 - Nästa kort: arkivera den gamla visualen där först, lägg sedan till figuren på samma sätt.
 
 ## Önskemål för nya figurer

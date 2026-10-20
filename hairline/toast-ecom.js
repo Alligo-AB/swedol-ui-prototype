@@ -1,17 +1,16 @@
 /**
- * E-Com Toast: a product box on a slab and a cart tray set into it. The pointer over the box lights it; a press
- * hops it into the cart, and a toast with tile, text, close and two buttons slides in at the back. A press on the
- * box again takes it out; a press on the toast closes it. A drawn cursor follows the pointer and rests above
- * the box. The slider is how high the box and the toast stand.
+ * E-Com Toast: the "added to cart" toast itself, standing on a slab: a product tile, a bold name and a line of
+ * text, a close mark, a blank and a primary button. The pointer over it lifts it; a press closes it (it slides out
+ * to the right) and after a pause it slides back in. A drawn cursor follows the pointer and rests above the
+ * primary button. The slider is how high the toast stands.
  */
 const {
   Cam, bezier, clamp, facing, fit, lerp, poly, proj, open, ringAt, rrect, run, prism, rings,
   mk, pointer, reducedMotion, reflect, register, solid, put, disposer, spring, stepS, unproj,
 } = HL;
 
-const PW = 96, PD = 100, PT = 6, D = 2, BH = 12;
-const BOX = { x0: 10, y0: 64, x1: 32, y1: 86 }, CART = { x0: 54, y0: 60, x1: 86, y1: 90 };
-const TOAST = { x0: 8, y0: 8, x1: 88, y1: 46, h: 3 };
+const PW = 96, PD = 100, PT = 6;
+const T = { x0: 6, y0: 30, x1: 90, y1: 70, h: 3 };
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 
 function mount({ stage, svg, read }, value) {
@@ -19,7 +18,7 @@ function mount({ stage, svg, read }, value) {
   let lift = value;
 
   const C = Cam(45, 0.5, 2.3);
-  fit(C, [[0, 0, 0], [PW, PD, 0], [PW, 0, 0], [0, PD, 0], [BOX.x0 + 40, 56, PT + 22], [TOAST.x1 + 30, 8, PT + 10]], 200, 172);
+  fit(C, [[0, 0, 0], [PW, PD, 0], [PW, 0, 0], [0, PD, 0], [T.x1 + 30, T.y0, PT + 12]], 200, 172);
   const P = proj(C), front = facing(C);
   const quad = (x0, y0, x1, y1, z) => poly([P(x0, y0, z), P(x1, y0, z), P(x1, y1, z), P(x0, y1, z)]);
 
@@ -34,99 +33,69 @@ function mount({ stage, svg, read }, value) {
     svg.lastChild.firstChild.setAttribute("class", "sil");
   }
 
-  // the toast (far side): a plate, a product tile, a name bar, a body bar, a blank and a primary button
-  const [tOut, tIn] = rings(TOAST.x0, TOAST.y0, TOAST.x1, TOAST.y1, 0, 1.2);
-  const tg = mk("g", {}, svg), toast = solid(tg);
-  const tile = solid(tg);
-  const tp = ["bar-on", "bar", "bar", "bar-on", "bar-on", "ink"].map((part) => mk("path", { class: "dot", "data-part": part }, tg));
-  const [kOut, kIn] = rings(TOAST.x0 + 6, TOAST.y0 + 6, TOAST.x0 + 22, TOAST.y0 + 22, 0, 1.2);
+  // the toast: a plate, a product tile, a name bar, text, a close mark, a blank and a primary button
+  const [tOut, tIn] = rings(T.x0, T.y0, T.x1, T.y1, 0, 1.2);
+  const [kOut, kIn] = rings(T.x0 + 4, T.y0 + 5, T.x0 + 18, T.y0 + 19, 0, 1);
+  const toast = solid(mk("g", {}, svg)), tile = solid(mk("g", {}, svg));
+  const tp = ["bar-on", "bar", "bar", "bar-on", "bar-on", "ink"].map((part) => mk("path", { class: "dot", "data-part": part }, svg));
 
-  // the cart: a tray cut into the slab (floor, far wall, rim, near lip over the sunk box)
-  const out = rrect(CART.x0, CART.y0, CART.x1, CART.y1, 3, 6);
-  const far = run(out, (q) => !front(q)), near = run(out, front);
-  const strip = (r) => poly([...ringAt(P, r, PT), ...ringAt(P, r, PT - D).reverse()]);
-  const floor = mk("path", { d: poly(ringAt(P, out, PT - D)), class: "lo", "data-part": "track" }, svg);
-  const wall = mk("path", { d: strip(far), class: "lo", "data-part": "track-wall" }, svg);
-  mk("path", { d: poly(ringAt(P, out, PT - D)), class: "nf lo" }, svg);
-  mk("path", { d: poly(ringAt(P, out, PT)), class: "nf" }, svg);
-  const box = solid(mk("g", {}, svg));
-  mk("path", { d: strip(near), class: "fo" }, svg);
-  mk("path", { d: open(ringAt(P, near, PT)), class: "nf" }, svg);
-
-  const bw = BOX.x1 - BOX.x0, bd = BOX.y1 - BOX.y0;
-  const q = { b: { x: 0, t: 0, to: 0, from: 0, t0: 0, d: 400, e: bezier(0.35, 0, 0.35, 1) }, t: { x: 0, t: 0, to: 0, from: 0, t0: 0, d: 300, e: bezier(0.16, 0, 0.16, 1) } };
+  const q = { x: 1, t: 1, to: 1, from: 1, t0: 0, d: 300, e: bezier(0.16, 0, 0.16, 1) };
+  const hv = spring(0);
   let last = "";
   function draw(force) {
-    const b = clamp(q.b.x, 0, 1), t = clamp(q.t.x, 0, 1), hv = clamp(bh.x, 0, 1);
-    const key = b.toFixed(3) + t.toFixed(3) + hv.toFixed(2) + lift.toFixed(2);
+    const t = clamp(q.x, 0, 1), h = clamp(hv.x, 0, 1), key = t.toFixed(3) + h.toFixed(2) + lift.toFixed(2);
     if (!force && key === last) return;
     last = key;
-    // the box hops: x along the slab, z on an arc, landing sunk in the tray
-    const cx = lerp(BOX.x0, CART.x0 + (CART.x1 - CART.x0 - bw) / 2, b), cy = lerp(BOX.y0, CART.y0 + (CART.y1 - CART.y0 - bd) / 2, b);
-    const z0 = lerp(PT, PT - D + 0.6, b) + 4 * 14 * b * (1 - b), h = BH + lift - 1.5 * hv;
-    const bo = rrect(cx, cy, cx + bw, cy + bd, 2, 4), bi = rrect(cx + 1.2, cy + 1.2, cx + bw - 1.2, cy + bd - 1.2, 1, 4);
-    put(box, prism(P, front, bo, bi, z0, z0 + h));
-    floor.setAttribute("class", b > 0.5 ? "dot" : "lo"); floor.setAttribute("data-part", b > 0.5 ? "ink" : "track");
-    wall.setAttribute("class", b > 0.5 ? "dot" : "lo"); wall.setAttribute("data-part", b > 0.5 ? "ink-wall" : "track-wall");
-    // the toast slides in from the right, dropping onto the slab
     const on = t > 0.01;
-    tg.setAttribute("display", on ? "inline" : "none");
+    for (const e of [toast.g, tile.g, ...tp]) e.setAttribute("display", on ? "inline" : "none");
     if (!on) return;
-    const dx = (1 - t) * 40, dz = (1 - t) * 10, z = PT + dz;
+    // it slides in from the right, dropping onto the slab
+    const dx = (1 - t) * 40, z = PT + (1 - t) * 10, top = z + T.h + lift * 0.3 + 1.2 * h, zt = top + 0.1, x = T.x0 + dx, y = T.y0;
     const sh = (r) => r.map((s) => ({ ...s, u: s.u + dx }));
-    put(toast, prism(P, front, sh(tOut), sh(tIn), z, z + TOAST.h + lift * 0.3));
-    const zt = z + TOAST.h + lift * 0.3 + 0.1, x = TOAST.x0 + dx;
-    put(tile, prism(P, front, sh(kOut), sh(kIn), zt, zt + 3));
-    const bar = (i, x0, x1, y, h) => tp[i].setAttribute("d", quad(x + x0, TOAST.y0 + y, x + x1, TOAST.y0 + y + h, zt));
-    bar(0, 26, 50, 8, 2.6); bar(1, 52, 64, 8, 2.2); bar(2, 26, 42, 14, 2.2);
-    const xx = x + 72, xy = TOAST.y0 + 9, d = (u, v) => P(xx + u, xy + v, zt);
+    put(toast, prism(P, front, sh(tOut), sh(tIn), z, top));
+    put(tile, prism(P, front, sh(kOut), sh(kIn), zt, zt + 2));
+    const bar = (i, u0, u1, v, hh) => tp[i].setAttribute("d", quad(x + u0, y + v, x + u1, y + v + hh, zt));
+    bar(0, 22, 52, 6, 3); bar(1, 54, 70, 6, 2.6); bar(2, 22, 46, 13, 2.6);
+    const d = (u, v) => P(x + 77 + u, y + 7.5 + v, zt);
     tp[3].setAttribute("d", poly([d(-2, -2.6), d(-2.6, -2), d(2, 2.6), d(2.6, 2)]) + poly([d(2, -2.6), d(2.6, -2), d(-2, 2.6), d(-2.6, 2)]));
-    bar(4, 6, 24, TOAST.y1 - TOAST.y0 - 9, 2.4); bar(5, 32, 74, TOAST.y1 - TOAST.y0 - 12, 7);
+    bar(4, 4, 22, 29.5, 2.2); bar(5, 30, 80, 25, 10);
   }
-  const slide = (s, now) => {
-    if (s.t !== s.to) { s.from = s.x; s.to = s.t; s.t0 = now; }
-    if (s.x === s.to) return false;
-    s.x = reducedMotion() ? s.to : s.from + (s.to - s.from) * s.e(clamp((now - s.t0) / s.d, 0, 1));
-    return s.x !== s.to;
+  const ez = { in: bezier(0.16, 0, 0.16, 1), out: bezier(0.36, 0.09, 1, 0.58) };
+  const slide = (now) => {
+    if (q.t !== q.to) { q.from = q.x; q.to = q.t; q.t0 = now; q.d = q.t ? 300 : 150; q.e = q.t ? ez.in : ez.out; }
+    if (q.x === q.to) return false;
+    q.x = reducedMotion() ? q.to : q.from + (q.to - q.from) * q.e(clamp((now - q.t0) / q.d, 0, 1));
+    return q.x !== q.to;
   };
 
-  const rest = P(BOX.x1 - 2, (BOX.y0 + BOX.y1) / 2, PT + BH + 9);
-  const ax = spring(rest[0], { k: 140 }), ay = spring(rest[1], { k: 140 }), pr = spring(0), bh = spring(0);
+  const rest = P(T.x0 + 66, T.y0 + 20, PT + T.h + 9);
+  const ax = spring(rest[0], { k: 140 }), ay = spring(rest[1], { k: 140 }), pr = spring(0);
   const cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
   const drawCur = () => cur.setAttribute("d", poly(ARROW.map(([u, v]) => [ax.x + u - 0.5, ay.x + v + 2.5 * clamp(pr.x, 0, 1)])));
 
-  let ghost = false, gt = 0, gdone = true, act = -1, added = 0, shown = 0;
+  let ghost = false, gt = 0, gdone = true, act = -1, back = 0;
   const A = register(stage, (dt, now) => {
-    let m = false;
-    if (ghost && act === 0 && !gdone) { m = true; if (now - gt > 250) { gdone = true; press(0); } }
-    for (const s of [q.b, q.t]) if (slide(s, now)) m = true;
-    for (const s of [ax, ay, pr, bh]) if (stepS(s, dt)) m = true;
+    let m = slide(now);
+    if (ghost && act === 0 && !gdone) { m = true; if (now - gt > 250) { gdone = true; press(); } }
+    if (back) { m = true; if (now > back) { back = 0; q.t = 1; } }
+    for (const s of [ax, ay, pr, hv]) if (stepS(s, dt)) m = true;
     draw(); drawCur();
     return m;
   });
   bag.add(A.unregister);
 
-  // hit: the box's resting top plane (while it is not in the cart), the cart, and the toast when it is meant to be shown
+  // hit: the toast's resting top plane, while it is meant to be shown
   const pick = ([sx, sy]) => {
-    const [x, y] = unproj(C, sx, sy, PT + BH);
-    if (x > BOX.x0 - 2 && x < BOX.x1 + 2 && y > BOX.y0 - 2 && y < BOX.y1 + 2 && !added) return 0;
-    const [u, v] = unproj(C, sx, sy, PT);
-    if (added && u > CART.x0 - 2 && u < CART.x1 + 2 && v > CART.y0 - 2 && v < CART.y1 + 2) return 0;
-    return shown && u > TOAST.x0 && u < TOAST.x1 && v > TOAST.y0 && v < TOAST.y1 ? 1 : -1;
+    const [x, y] = unproj(C, sx, sy, PT + T.h);
+    return q.t && x > T.x0 && x < T.x1 && y > T.y0 && y < T.y1 ? 0 : -1;
   };
-  const say = () => { read.textContent = act === 1 ? "toast" : act === 0 ? (added ? "cart" : "box") : added ? "added" : "rest"; };
-  const setAdded = (v) => { added = v; shown = v; q.b.t = v; q.t.t = v; q.t.d = v ? 300 : 150; q.t.e = v ? bezier(0.16, 0, 0.16, 1) : bezier(0.36, 0.09, 1, 0.58); };
-  function press(a) {
-    if (a === 0) setAdded(1 - added);
-    else if (a === 1) { shown = 0; q.t.t = 0; q.t.d = 150; q.t.e = bezier(0.36, 0.09, 1, 0.58); }
-    pr.x = 1; pr.t = 0; say(); A.wake();
-  }
+  const say = () => { read.textContent = act === 0 ? "toast" : q.t ? "rest" : "closed"; };
+  function press() { q.t = 0; back = performance.now() + 900; pr.x = 1; pr.t = 0; say(); A.wake(); }
   function set(a, p) {
     if (a !== act) {
       act = a; gdone = !ghost; gt = performance.now();
-      bh.t = a === 0 ? 1 : 0;
-      box.sil.classList.toggle("hi", a === 0 || (a < 0 && !added));
-      toast.sil.classList.toggle("hi", a === 1);
+      hv.t = a === 0 ? 1 : 0;
+      toast.sil.classList.toggle("hi", a === 0 || a < 0);
       say();
     }
     if (a < 0) { ax.t = rest[0]; ay.t = rest[1]; } else { ax.t = p[0]; ay.t = p[1]; }
@@ -134,24 +103,24 @@ function mount({ stage, svg, read }, value) {
   }
   bag.add(pointer(stage, {
     move: (p, e) => { ghost = e?.pointerType === "ghost"; set(pick(p), p); gt = performance.now(); },
-    down: (p) => { const a = pick(p); set(a, p); ghost = false; if (a >= 0) press(a); },
+    down: (p) => { const a = pick(p); set(a, p); ghost = false; if (a === 0) press(); },
     leave: (e) => {
-      if (e?.pointerType === "ghost") { setAdded(0); say(); }
+      if (e?.pointerType === "ghost") { back = 0; q.t = 1; say(); }
       ghost = false; set(-1);
     },
   }));
   bag.add(() => svg.replaceChildren());
 
-  box.sil.classList.add("hi");
+  toast.sil.classList.add("hi");
   draw(true); drawCur();
   return { set: (v) => { lift = v; draw(true); }, destroy: bag.dispose };
 }
 
 hairline({
   name: "toast-ecom",
-  means: "A product box hops into a cart tray set in a slab; a toast with tile, text, close and two buttons slides in.",
+  means: "The added-to-cart toast on a slab: a press closes it, it slides out, then back in.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 3],
-  tour: [[104, 135], [226, 137], null],
+  tour: [[154, 131], [272, 175], null],
   mount,
 });
