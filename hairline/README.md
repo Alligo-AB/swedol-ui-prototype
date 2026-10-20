@@ -28,7 +28,7 @@ Hela förfarandet för en ny komponent står i skillen `eco-card-animation` (`.c
 - Button-kortet i `eco-design-system/components-overview.html` visar figuren. Markup: `<div class="ds-card__visual ds-card__visual--hairline"><div data-hairline-card="button-pair" data-src="../hairline/button-pair.js"></div></div>`, plus `hairline/hairline-card.css` i `<head>` och två klassiska skript sist i `<body>` i ordning: `hairline/kernel.js` (kopia av skillens, med ett enda patch: `tour(..., delay)` så play-knappen startar direkt; skillens egen kärna är orörd) och `hairline/embed.js`. `embed.js` hämtar varje figurs `.js` och kör den i en egen funktion, så flera figurer på samma sida delar inga namn (inget behöver ändras i figurerna). Sidan måste köras via server (`npx serve .`), inte file://.
 - Scenen måste vara 5:4 (kärnan mappar pekaren på 400 × 320): `hairline-card.css` gör den 300 px bred och förskjuten uppåt, kortets visual (160 px) klipper resten. `hairline-card.css` har ECO-färgerna; håll den i synk med `<figur>.eco.css`.
 - Gamla kortbilder arkiveras i `eco-design-system/card-visuals-archive/` (en fil per kort, med instruktion för att byta tillbaka). Button: `button.html`, Switch: `switch.html`.
-- Switch-kortet i `components-overview.html` använder `data-hairline-card="switch"`; `overview.html` har fortfarande CSS-switcharna. `hairline-card.css` skiljer Switchs gröna `ink` från Buttons svarta via `[data-hairline="switch"]`.
+- Switch-kortet i `components-overview.html` använder `data-hairline-card="switch"`; `index.html` har fortfarande CSS-switcharna. `hairline-card.css` skiljer Switchs gröna `ink` från Buttons svarta via `[data-hairline="switch"]`.
 - Nästa kort: arkivera den gamla visualen där först, lägg sedan till figuren på samma sätt.
 
 ## Önskemål för nya figurer
@@ -41,4 +41,4 @@ Hela förfarandet för en ny komponent står i skillen `eco-card-animation` (`.c
 - Swedol-accent på Primary (token ej vald; frågan var om bara Primary eller båda).
 - Mörkt läge är inte provat (ECO har inget mörkt tema).
 - Fler komponenter: Checkbox, Radio, Input, Tabs, Tooltip föreslagna, ingen vald.
-- Range (`range.js`, `range.eco.css`, `hairline-range.html`/`.eco.html`): skåra i plattan med rund tumme och fem streck; drag snäpper tummen steg för steg och färgar nådda streck. Kortet i `components-overview.html` är inte utbytt än (väntar på besked).
+- Range (`range.js`, `range.eco.css`, `hairline-range.html`/`.eco.html`): efter riktiga komponenten (skärmdump): platta med titel DURATION, värde, tunn linje, svart tumme och stegetiketter 100–450; hover ger halo, drag snäpper steg för steg. Kortet i `components-overview.html` är inte utbytt än (väntar på besked).

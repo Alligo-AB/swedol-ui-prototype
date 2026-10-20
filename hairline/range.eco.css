@@ -13,10 +13,11 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
   --hl-lo: var(--color-border-primary, #e5e5e5);
 }
 [data-hairline] [data-part="cursor"] { fill: var(--color-surface-100, #000000); }
-[data-hairline] [data-part="track"] { fill: var(--color-surface-20, #cccccc); } /* off */
-[data-hairline] [data-part="track"][data-hover] { fill: var(--color-surface-15, #d9d9d9); }
-/* the far wall of the slot: the floor colour, darker, as a shaded face */
-[data-hairline] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-surface-20, #cccccc), #000 22%); }
-[data-hairline] [data-part="track-wall"][data-hover] { fill: color-mix(in srgb, var(--color-surface-15, #d9d9d9), #000 22%); }
-[data-hairline] [data-part="tick"] { fill: var(--color-surface-20, #cccccc); } /* a step not reached */
-[data-hairline] [data-part="tick-on"] { fill: var(--color-surface-100, #000000); } /* reached */
+/* range figure: title, value, step labels, track, thumb, hover halo */
+[data-hairline] [data-part="title"] { fill: var(--color-text-secondary, #4d4d4d); }
+[data-hairline] [data-part="value"], [data-hairline] [data-part="tick-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline] [data-part="tick"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline] [data-part="line"] { fill: var(--color-border-primary, #e5e5e5); }
+[data-hairline] [data-part="thumb"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="halo"] { fill: none; }
+[data-hairline] [data-part="halo"][data-hover] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }

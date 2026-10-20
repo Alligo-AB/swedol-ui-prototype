@@ -27,6 +27,11 @@
 .ds-card__visual--hairline [data-hairline-card="range"] { transform: translateY(-4px); }
 
 .ds-card__visual--hairline { position: relative; }
-/* range figure: ticks (a step not reached / reached) */
-[data-hairline="range"] [data-part="tick"] { fill: var(--color-surface-20, #cccccc); }
-[data-hairline="range"] [data-part="tick-on"] { fill: var(--color-surface-100, #000000); }
+/* range figure: title, value, step labels, track, thumb, hover halo */
+[data-hairline] [data-part="title"] { fill: var(--color-text-secondary, #4d4d4d); }
+[data-hairline] [data-part="value"], [data-hairline] [data-part="tick-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline] [data-part="tick"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline] [data-part="line"] { fill: var(--color-border-primary, #e5e5e5); }
+[data-hairline] [data-part="thumb"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="halo"] { fill: none; }
+[data-hairline] [data-part="halo"][data-hover] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
