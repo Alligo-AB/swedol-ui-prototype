@@ -912,18 +912,13 @@ function mount({ stage, svg, read }, value) {
     svg.lastChild.firstChild.setAttribute("class", "sil");
   }
 
+  // each box is a raised tile (height D+2): side faces from the prism, the coloured top and the tick on it
   const bxs = BX.map((b) => {
-    const out = rrect(b.x0, Y0, b.x0 + BS, Y0 + BS, 0, 14);
-    const far = run(out, (q) => !front(q)), near = run(out, front);
-    const strip = (r) => poly([...ringAt(P, r, PT), ...ringAt(P, r, PT - D).reverse()]);
-    const floor = mk("path", { d: "", class: "lo" }, svg);
-    const wall = mk("path", { d: "", class: "lo" }, svg);
-    const fe = mk("path", { d: "", class: "nf lo" }, svg);
-    const rim = mk("path", { d: poly(ringAt(P, out, PT)), class: "nf" }, svg);
+    const out = rrect(b.x0, Y0, b.x0 + BS, Y0 + BS, 0, 14), inn = rrect(b.x0 + 1.4, Y0 + 1.4, b.x0 + BS - 1.4, Y0 + BS - 1.4, 0, 14);
+    const tile = solid(mk("g", {}, svg));
+    const top = mk("path", { d: "", class: "lo" }, svg);
     const mark = mk("path", { d: "", class: "fo", "data-part": "mark" }, svg);
-    const lip = mk("path", { d: "", class: "fo" }, svg);
-    const lipLine = mk("path", { d: open(ringAt(P, near, PT)), class: "nf" }, svg);
-    return { ...b, cy: Y0 + BS / 2, out, far, near, strip, floor, wall, fe, mark, lip, sp: { x: b.st ? 1 : 0, t: b.st ? 1 : 0, to: b.st ? 1 : 0, from: 0, t0: 0 }, hv: spring(0), kind: b.st, init: b.st, last: "" };
+    return { ...b, cy: Y0 + BS / 2, out, inn, tile, top, mark, sp: { x: b.st ? 1 : 0, t: b.st ? 1 : 0, to: b.st ? 1 : 0, from: 0, t0: 0 }, hv: spring(0), kind: b.st, init: b.st, last: "" };
   });
 
   const q = (b, u, v, z) => P(b.x0 + u * BS, Y0 + v * BS, z);
@@ -933,16 +928,14 @@ function mount({ stage, svg, read }, value) {
       const x = clamp(b.sp.x, 0, 1), key = x.toFixed(2) + D.toFixed(2) + b.kind + b.hv.x.toFixed(2);
       if (!force && key === b.last) continue;
       b.last = key;
-      const zf = PT - D;
-      b.floor.setAttribute("d", poly(ringAt(P, b.out, zf)));
-      b.fe.setAttribute("d", poly(ringAt(P, b.out, zf)));
-      b.wall.setAttribute("d", poly([...ringAt(P, b.far, PT), ...ringAt(P, b.far, zf).reverse()]));
-      b.lip.setAttribute("d", b.strip(b.near));
+      const zt = PT + D + 2 - 1.5 * clamp(b.hv.x, 0, 1); // hover presses the tile down
+      put(b.tile, prism(P, front, b.out, b.inn, PT, zt));
+      b.top.setAttribute("d", poly(ringAt(P, b.out, zt)));
       const ink = x > 0.5;
-      for (const [e, w] of [[b.floor, ""], [b.wall, "-wall"]]) { e.setAttribute("class", ink ? "dot" : "lo"); e.setAttribute("data-part", (ink ? "ink" : "track") + w); }
-      const k = Math.max(x, 0.001), z = zf + 0.1;
+      b.top.setAttribute("class", ink ? "dot" : "lo"); b.top.setAttribute("data-part", ink ? "ink" : "track");
+      const k = Math.max(x, 0.001), z = zt + 0.1;
       const shapes = b.kind === 2 ? [DASH] : TICK;
-      b.mark.setAttribute("d", x < 0.05 ? "" : shapes.map((s) => poly(grow(s, k).map(([u, v]) => q(b, u, v, z)))).join(" "));
+      b.mark.setAttribute("d", x < 0.05 ? "" : shapes.map((sh) => poly(grow(sh, k).map(([u, v]) => q(b, u, v, z)))).join(" "));
     }
   }
 
@@ -983,14 +976,16 @@ function mount({ stage, svg, read }, value) {
     if (a !== act) {
       act = a;
       gdone = !ghost; gt = performance.now();
-      bxs.forEach((b, i) => { b.hv.t = i === a ? 1 : 0; for (const e of [b.floor, b.wall]) { if (i === a) e.setAttribute("data-hover", ""); else e.removeAttribute("data-hover"); } });
+      bxs.forEach((b, i) => { b.hv.t = i === a ? 1 : 0; if (i === a) b.top.setAttribute("data-hover", ""); else b.top.removeAttribute("data-hover"); });
       say();
     }
     if (a < 0) { ax.t = rest[0]; ay.t = rest[1]; } else { ax.t = p[0]; ay.t = p[1]; }
     A.wake();
   }
   bag.add(pointer(stage, {
-    move: (p, e) => { ghost = e?.pointerType === "ghost"; set(pick(p), p); gt = performance.now(); },
+    move: (p, e) => {
+      if (e?.pointerType === "ghost" && !ghost) for (const b of bxs) { b.kind = 0; b.sp.t = 0; } // the tour starts from three empty boxes
+      ghost = e?.pointerType === "ghost"; set(pick(p), p); gt = performance.now(); },
     down: (p) => { const a = pick(p); set(a, p); ghost = false; if (a >= 0) flip(a); },
     leave: (e) => {
       if (e?.pointerType === "ghost") for (const b of bxs) { b.kind = b.init; b.sp.t = b.init ? 1 : 0; }
@@ -1008,7 +1003,7 @@ hairline({
   means: "Three checkboxes set into a slab, checked, empty and mixed: the pointer lights a box, a press fills it black and draws the tick.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 4],
-  tour: [[0, 0], [0, 0], null],
+  tour: [[140, 129], [200, 159], [260, 189], [140, 129], [200, 159], [260, 189]],
   mount,
 });
 </script>
