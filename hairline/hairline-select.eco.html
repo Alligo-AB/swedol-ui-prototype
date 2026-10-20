@@ -630,9 +630,9 @@ var HL = (() => {
     const k = Math.min(dx ? (dx > 0 ? 200 : -200) / dx : Infinity, dy ? (dy > 0 ? 160 : -160) / dy : Infinity);
     return [200 + dx * k, 160 + dy * k];
   }
-  function tour(stage, stops, onStop) {
+  function tour(stage, stops, onStop, delay) {
     let i = 0;
-    let wait = RESUME + STAGGER * (started++ % 4);
+    let wait = delay ?? RESUME + STAGGER * (started++ % 4);
     let t = -1;
     let at = null;
     let origin = [200, 320];
@@ -880,7 +880,7 @@ var HL = (() => {
     play.addEventListener("click", () => {
       const was = play.getAttribute("aria-pressed") === "true";
       if (was) { window.hairline.playing.stop(); window.hairline.playing = null; }
-      else window.hairline.playing = HL.tour(stage, figure.tour || HL.LAP, (i) => { if (window.hairline.onStop) window.hairline.onStop(i); });
+      else window.hairline.playing = HL.tour(stage, figure.tour || HL.LAP, (i) => { if (window.hairline.onStop) window.hairline.onStop(i); }, 0);
       play.setAttribute("aria-pressed", String(!was));
     });
     if (params.get("play") === "1") play.click();
