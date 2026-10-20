@@ -1,7 +1,7 @@
 # Graph Report - hairline-button-group-24873c  (2026-10-20)
 
 ## Corpus Check
-- 131 files · ~1,554,979 words
+- 131 files · ~1,555,058 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a348cec6`
+- Built from commit: `e0c265d4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -435,11 +435,11 @@ Nodes (5): Behavior (same everywhere), Flags, Icon picker (ECO Design System), R
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `CLAUDE.md (project design guidelines)` connect `CLAUDE.md (project design guidelines)` to `eco-button skill`, `eco-doc-page skill (docs page structure)`, `eco-radio skill`, `Tabs (ECO Design System)`, `Table (ECO Design System) — first version`, `eco-card-animation/SKILL.md`?**
-  _High betweenness centrality (0.029) - this node is a cross-community bridge._
-- **Why does `eco-add-component skill` connect `eco-add-component skill` to `Adding a component to the design system`, `eco-button skill`, `eco-pill-segment-control skill`, `CLAUDE.md (project design guidelines)`, `eco-doc-page skill (docs page structure)`, `eco-radio skill`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
 - **Why does `ECO Design System` connect `CLAUDE.md (project design guidelines)` to `Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **Why does `eco-add-component skill` connect `eco-add-component skill` to `Adding a component to the design system`, `eco-button skill`, `eco-pill-segment-control skill`, `CLAUDE.md (project design guidelines)`, `eco-doc-page skill (docs page structure)`, `eco-radio skill`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **What connects `BTN`, `SNAP`, `DOWN` to the rest of the system?**
   _292 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `components/css/button-group.css` be split into smaller, more focused modules?**

@@ -14,7 +14,7 @@ The figure file `hairline/<name>.js` is the one source: the card (`embed.js`) an
 3. **Colours live in two places.** Cards and docs pages: `hairline/hairline-card.css` (scoped `[data-hairline="<name>"]` when part names clash). The bench: `hairline/<name>.eco.css`. Change both. Scene-only colours (slab, opacities) are in `eco-design-system/doc-hero.css`.
 4. **The header uses `data-flat`.** The figure's flat-slab branch (`stage.hasAttribute("data-flat")`) only runs in the header; a change to the slab can affect the header and not the card, or the reverse. Look at both.
 
-Also: browser cache after a change; the kernel copy `hairline/kernel.js` has one patch (`tour(..., delay)`).
+Also: browser cache after a change; the kernel copy `hairline/kernel.js` has two patches (`tour(..., delay, pace)`); a faster hover tour per card: `data-travel="450" data-dwell="450"` on the card div (defaults 900/1200 ms).
 
 ## Procedure (one component)
 

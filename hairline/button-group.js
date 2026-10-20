@@ -91,7 +91,7 @@ function mount({ stage, svg, read }, value) {
   const say = () => { read.textContent = act < 0 ? "rest" : btns[act].name + (act === sel ? " selected" : ""); };
   const B = register(stage, (dt, now) => {
     let m = false;
-    if (ghost && act >= 0 && !gdone) { m = true; if (now - gt > 520) { gdone = true; choose(act); } }
+    if (ghost && act >= 0 && !gdone) { m = true; if (now - gt > 200) { gdone = true; choose(act); } }
     for (const b of btns) if (stepS(b.sp, dt)) m = true;
     for (const q of [ax, ay, pr]) if (stepS(q, dt)) m = true;
     draw(); drawCur();
@@ -132,6 +132,6 @@ hairline({
   means: "Three joined buttons, S M L with M selected: the pointer dips one, a press sinks it and the former pick pops back up.",
   rules: [1, 4, 8, 9],
   range: [1.5, 3.5, 5],
-  tour: [[249, 192], [148, 142], null],
+  tour: [[148, 142], [200, 168], [249, 192], null],
   mount,
 });
