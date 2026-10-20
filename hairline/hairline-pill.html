@@ -977,7 +977,7 @@ function mount({ stage, svg, read }, value) {
   }
 
   // the cursor: tip at (ax, ay) on screen, pressed down by pr
-  const rest = P((SEG[0].x0 + SEG[0].x1) / 2 + 3, cy - 2, PT + 9);
+  const rest = P(SEG[1].x1 - 10, cy - 2, PT + 9); // rests above the inactive segment, outside the pill
   const ax = spring(rest[0], { k: 140 }), ay = spring(rest[1], { k: 140 }), pr = spring(0);
   const cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
   const drawCur = () => cur.setAttribute("d", poly(ARROW.map(([u, v]) => [ax.x + u - 0.5, ay.x + v + 2.5 * clamp(pr.x, 0, 1)])));
