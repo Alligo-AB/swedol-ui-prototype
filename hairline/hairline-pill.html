@@ -887,7 +887,7 @@ const {
   mk, pointer, reducedMotion, reflect, register, solid, put, disposer, spring, stepS, unproj,
 } = HL;
 
-const PW = 152, PD = 56, PT = 6, D = 2, TY0 = 12, TY1 = 44, PAD = 5, SEGPAD = 24;
+const PW = 140, PD = 56, PT = 6, D = 2, TY0 = 12, TY1 = 44, PAD = 5, SEGPAD = [16, 24];
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 const NAMES = ["ALL", "NEW"];
 const G = {
@@ -918,7 +918,7 @@ function mount({ stage, svg, read }, value) {
   let lift = value;
 
   // segments laid out by their labels, centred on the slab
-  const W = NAMES.map((n) => lw(n) + 2 * SEGPAD), TW = W[0] + W[1] + 2 * PAD, TX0 = (PW - TW) / 2, TX1 = TX0 + TW;
+  const W = NAMES.map((n, i) => lw(n) + 2 * SEGPAD[i]), TW = W[0] + W[1] + 2 * PAD, TX0 = (PW - TW) / 2, TX1 = TX0 + TW;
   const SEG = [{ x0: TX0 + PAD, x1: TX0 + PAD + W[0] }, { x0: TX0 + PAD + W[0], x1: TX1 - PAD }];
   const cy = (TY0 + TY1) / 2, H = TY1 - TY0 - 2 * PAD, TR = (TY1 - TY0) / 2;
   const labels = NAMES.map((n, i) => label(n, (SEG[i].x0 + SEG[i].x1) / 2 - lw(n) / 2, cy));
@@ -1038,7 +1038,7 @@ hairline({
   means: "A two-segment pill control set into a slab: the pointer darkens the track, a press slides the black pill under the other label.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 3],
-  tour: [[254, 187], [146, 133], null],
+  tour: [[241, 180], [145, 132], null],
   mount,
 });
 </script>
