@@ -41,3 +41,4 @@ Hela förfarandet för en ny komponent står i skillen `eco-card-animation` (`.c
 - Swedol-accent på Primary (token ej vald; frågan var om bara Primary eller båda).
 - Mörkt läge är inte provat (ECO har inget mörkt tema).
 - Fler komponenter: Checkbox, Radio, Input, Tabs, Tooltip föreslagna, ingen vald.
+- Range (`range.js`, `range.eco.css`, `hairline-range.html`/`.eco.html`): skåra i plattan med rund tumme och fem streck; drag snäpper tummen steg för steg och färgar nådda streck. Kortet i `components-overview.html` är inte utbytt än (väntar på besked).

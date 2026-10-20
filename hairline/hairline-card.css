@@ -24,5 +24,9 @@
 .ds-card__visual--hairline [data-hairline-card] { flex: none; width: 300px; transform: translateY(-16px); }
 /* per-figure vertical centring (the figures' drawn extents differ) */
 .ds-card__visual--hairline [data-hairline-card="switch"] { transform: translateY(-5px); }
+.ds-card__visual--hairline [data-hairline-card="range"] { transform: translateY(-4px); }
 
 .ds-card__visual--hairline { position: relative; }
+/* range figure: ticks (a step not reached / reached) */
+[data-hairline="range"] [data-part="tick"] { fill: var(--color-surface-20, #cccccc); }
+[data-hairline="range"] [data-part="tick-on"] { fill: var(--color-surface-100, #000000); }
