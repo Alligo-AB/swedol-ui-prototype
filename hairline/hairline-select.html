@@ -971,7 +971,7 @@ function mount({ stage, svg, read }, value) {
   const quad = (x0, y0, x1, y1, z) => poly([P(x0, y0, z), P(x1, y0, z), P(x1, y1, z), P(x0, y1, z)]);
 
   let open = 0, sel = -1, hot = -1, lastF = "", lastM = "";
-  const fhv = spring(0), mo = spring(0, { k: 110, c: 22 }), ch = spring(0, { k: 150, c: 25 });
+  const fhv = spring(0), mo = spring(0, { k: 45, c: 13.4 }), ch = spring(0, { k: 70, c: 16.7 });
 
   function draw(force) {
     const m = clamp(mo.x, 0, 1), c = clamp(ch.x, 0, 1), zf = PT + FH - 1.2 * clamp(fhv.x, 0, 1);
