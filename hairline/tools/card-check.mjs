@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Verifies a Hairline card on components-overview.html in Chrome (playwright-core from the hairline-look cache).
-// Needs the repo served:  npx serve . -l 4173   (from the repo root)
+// Needs the repo served:  npx serve . -l 4173   (from the repo root; another port: PORT=51111 node ...)
 // node hairline/tools/card-check.mjs <component> <outPrefix>      e.g.  switch /tmp/sw
 // Writes <outPrefix>-rest.png, -hover.png (pointer over the figure), -play.png (4 s into the tour, only with data-play);
 // prints: console errors, content rows (for vertical centring: want top ≈ 160 - bottom), play button state.
@@ -11,7 +11,7 @@ const [comp, out = "/tmp/card"] = process.argv.slice(2);
 const b = await chromium.launch({ channel: "chrome" });
 const p = await b.newPage({ viewport: { width: 1300, height: 900 } });
 const errs = []; p.on("console", (m) => m.type() === "error" && errs.push(m.text())); p.on("pageerror", (e) => errs.push(String(e)));
-await p.goto("http://localhost:4173/eco-design-system/components-overview.html"); await p.waitForTimeout(1500);
+await p.goto(`http://localhost:${process.env.PORT || 4173}/eco-design-system/components-overview.html`); await p.waitForTimeout(1500);
 const c = p.locator(`a.ds-card[href="components/${comp}.html"]`); await c.scrollIntoViewIfNeeded(); await p.waitForTimeout(400);
 await c.screenshot({ path: `${out}-rest.png` });
 const r = await c.locator("svg").boundingBox();
