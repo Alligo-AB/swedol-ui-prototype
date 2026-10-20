@@ -883,7 +883,7 @@ var HL = (() => {
  */
 const {
   Cam, clamp, facing, fit, lerp, open: polyline, poly, proj, ringAt, rings, prism,
-  mk, pointer, reducedMotion, reflect, register, solid, put, disposer, spring, stepS, unproj,
+  mk, pointer, reducedMotion, reflect, rrect, run, open: openP, register, solid, put, disposer, spring, stepS, unproj,
 } = HL;
 
 const PW = 96, PD = 100, PT = 6, FX0 = 8, FY0 = 16, FX1 = 88, FY1 = 40, FH = 3, PY0 = 4, PY1 = 94, CY0 = 34, CH = 25, N = 6;
@@ -959,10 +959,17 @@ function mount({ stage, svg, read }, value) {
   const searchT = label("SEARCH ICONS", FX0 + 6, 22);
   const tit = mk("path", { class: "dot", "data-part": "title" }, svg);
   tit.setAttribute("d", flat(P, titleT, PT + 0.1));
-  // the field
-  const [fOut, fIn] = rings(FX0, FY0, FX1, FY1, 0, 1.2);
-  const field = solid(mk("g", {}, svg));
+  // the field: a slot cut into the slab (floor, far wall, rim, near lip), as in the Input figure; the rim is the state
+  const out = rrect(FX0, FY0, FX1, FY1, 0.5, 3), D = 2, zf = PT - D;
+  const far = run(out, (q) => !front(q)), near = run(out, front);
+  const strip = (r) => poly([...ringAt(P, r, PT), ...ringAt(P, r, zf).reverse()]);
+  const slot = mk("g", {}, svg);
+  const floor = mk("path", { class: "fo" }, slot), wall = mk("path", { class: "lo", "data-part": "track-wall" }, slot), rim = mk("path", { class: "nf" }, slot);
   const fbar = mk("path", { class: "dot", "data-part": "bar-on" }, svg);
+  const lip = mk("path", { class: "fo" }, svg), rimN = mk("path", { class: "nf" }, svg);
+  floor.setAttribute("d", poly(ringAt(P, out, zf))); wall.setAttribute("d", strip(far));
+  rim.setAttribute("d", poly(ringAt(P, out, PT))); lip.setAttribute("d", strip(near)); rimN.setAttribute("d", openP(ringAt(P, near, PT)));
+  const hiField = (v) => { for (const e of [rim, rimN]) e.setAttribute("class", v ? "nf hi" : "nf"); };
   // the panel on top of it: one group, so the skin can fade it in and out
   const [mOut, mIn] = rings(4, PY0, 92, PY1, 0, 1.2);
   const mg = mk("g", { "data-part": "menu" }, svg);
@@ -978,14 +985,12 @@ function mount({ stage, svg, read }, value) {
   const quad = (x0, y0, x1, y1, z) => poly([P(x0, y0, z), P(x1, y0, z), P(x1, y1, z), P(x0, y1, z)]);
 
   let open = 0, sel = 0, lastF = "", lastM = "";
-  const fhv = spring(0), mo = spring(0, { k: 45, c: 13.4 });
+  const mo = spring(0, { k: 45, c: 13.4 });
 
   function draw(force) {
-    const m = clamp(mo.x, 0, 1), zf = PT + FH - 1.2 * clamp(fhv.x, 0, 1);
-    const kf = zf.toFixed(2) + sel;
-    if (force || kf !== lastF) {
-      lastF = kf;
-      put(field, prism(P, front, fOut, fIn, PT, zf));
+    const m = clamp(mo.x, 0, 1);
+    if (force || sel !== lastF) {
+      lastF = sel;
       fbar.setAttribute("d", flat(P, nameT[sel], zf + 0.1));
     }
     const z1 = PT + m * (lift + 1), key = z1.toFixed(2) + sel + act;
@@ -1005,7 +1010,7 @@ function mount({ stage, svg, read }, value) {
     });
   }
 
-  const rest = P(70, 64, PT + FH + 9);
+  const rest = P(70, 64, PT + 9);
   const ax = spring(rest[0], { k: 140 }), ay = spring(rest[1], { k: 140 }), pr = spring(0);
   const cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
   const drawCur = () => cur.setAttribute("d", poly(ARROW.map(([u, v]) => [ax.x + u - 0.5, ay.x + v + 2.5 * clamp(pr.x, 0, 1)])));
@@ -1014,7 +1019,7 @@ function mount({ stage, svg, read }, value) {
   const A = register(stage, (dt, now) => {
     let m = false;
     if (ghost && act >= 0 && !gdone) { m = true; if (now - gt > 250) { gdone = true; press(act); } }
-    for (const q of [fhv, mo, ax, ay, pr]) if (stepS(q, dt)) m = true;
+    for (const q of [mo, ax, ay, pr]) if (stepS(q, dt)) m = true;
     draw(); drawCur();
     return m;
   });
@@ -1022,7 +1027,7 @@ function mount({ stage, svg, read }, value) {
 
   // hit: the field's and the cells' resting planes; cells only count while the panel is open (act 1..6 = cell + 1)
   const pick = ([sx, sy]) => {
-    const [x, y] = unproj(C, sx, sy, PT + FH);
+    const [x, y] = unproj(C, sx, sy, open ? PT + FH : PT);
     if (open) {
       if (x < FX0 || x > FX1 || y < CY0 || y > CY0 + CH * 2 + 1) return -1;
       return Math.min(2, ((x - FX0) / ((FX1 - FX0) / 3)) | 0) + (y < CY0 + CH + 0.5 ? 0 : 3) + 1;
@@ -1039,8 +1044,7 @@ function mount({ stage, svg, read }, value) {
   function set(a, p) {
     if (a !== act) {
       act = a; gdone = !ghost; gt = performance.now();
-      fhv.t = a === 0 ? 1 : 0;
-      field.sil.classList.toggle("hi", a === 0 || (a < 0 && !open));
+      hiField(a === 0 || (a < 0 && !open));
       menu.sil.classList.toggle("hi", a > 0);
       say();
     }
@@ -1057,7 +1061,7 @@ function mount({ stage, svg, read }, value) {
   }));
   bag.add(() => svg.replaceChildren());
 
-  field.sil.classList.add("hi");
+  hiField(1);
   draw(true); drawCur();
   return { set: (v) => { lift = v; draw(true); }, destroy: bag.dispose };
 }
@@ -1067,7 +1071,7 @@ hairline({
   means: "An icon-name field with a panel on top of it: a press opens it, a press on an icon puts its name in the field.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 3],
-  tour: [[236, 136], [204, 191], null],
+  tour: [[236, 142], [204, 191], null],
   mount,
 });
 </script>

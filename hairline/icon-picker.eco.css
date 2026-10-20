@@ -22,3 +22,4 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
 @media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="menu"] { transition: none; } }
 [data-hairline] [data-part="title"] { fill: var(--color-text-primary, #000000); }
 [data-hairline] [data-part="sbox"] { stroke: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field: a faint shade, the edges carry the depth */

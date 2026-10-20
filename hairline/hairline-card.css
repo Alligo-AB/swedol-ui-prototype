@@ -79,3 +79,4 @@
 [data-hairline="icon-picker"] [data-part="menu"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
 [data-hairline="icon-picker"] [data-part="menu"][data-open] { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { [data-hairline="icon-picker"] [data-part="menu"] { transition: none; } }
+[data-hairline="icon-picker"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field */
