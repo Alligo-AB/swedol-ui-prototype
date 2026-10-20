@@ -946,17 +946,17 @@ function mount({ stage, svg, read }, value) {
     const tile = solid(mk("g", {}, svg));
     const top = mk("path", { d: "", class: "lo" }, svg);
     const mark = mk("path", { d: "", class: "fo", "data-part": "mark" }, svg);
-    return { ...b, cy: Y0 + BS / 2, out, inn, tile, top, mark, sp: { x: b.st ? 1 : 0, t: b.st ? 1 : 0, to: b.st ? 1 : 0, from: 0, t0: 0 }, hv: spring(0), kind: b.st, init: b.st, last: "" };
+    return { ...b, cy: Y0 + BS / 2, out, inn, tile, top, mark, sp: { x: b.st ? 1 : 0, t: b.st ? 1 : 0, to: b.st ? 1 : 0, from: 0, t0: 0 }, hv: spring(0), pz: spring(0), kind: b.st, init: b.st, last: "" };
   });
 
   const q = (b, u, v, z) => P(b.x0 + u * BS, Y0 + v * BS, z);
   const grow = (pts, k) => pts.map(([u, v]) => [0.5 + (u - 0.5) * k, 0.5 + (v - 0.5) * k]);
   function draw(force) {
     for (const b of bxs) {
-      const x = clamp(b.sp.x, 0, 1), key = x.toFixed(2) + D.toFixed(2) + b.kind;
+      const x = clamp(b.sp.x, 0, 1), key = x.toFixed(2) + D.toFixed(2) + b.kind + b.pz.x.toFixed(2);
       if (!force && key === b.last) continue;
       b.last = key;
-      const zt = PT + D * 0.5 + 0.5; // fixed height: tiles do not move
+      const zt = PT + D * 0.5 + 0.5 - 1.5 * clamp(b.pz.x, 0, 1); // only a press sinks the tile, hover does not
       put(b.tile, prism(P, front, b.out, b.inn, PT, zt));
       b.top.setAttribute("d", poly(ringAt(P, b.out, zt)));
       const ink = x > 0.5;
@@ -984,7 +984,7 @@ function mount({ stage, svg, read }, value) {
   const A = register(stage, (dt, now) => {
     let m = false;
     if (ghost && act >= 0 && !gdone) { m = true; if (now - gt > 250) { gdone = true; flip(act); } }
-    for (const b of bxs) { if (slide(b.sp, now)) m = true; if (stepS(b.hv, dt)) m = true; if (b.sp.x === 0 && b.sp.t === 0) b.kind = 0; }
+    for (const b of bxs) { if (slide(b.sp, now)) m = true; if (stepS(b.hv, dt)) m = true; if (stepS(b.pz, dt)) m = true; if (b.sp.x === 0 && b.sp.t === 0) b.kind = 0; }
     for (const s of [ax, ay, pr]) if (stepS(s, dt)) m = true;
     draw(); drawCur();
     return m;
@@ -997,7 +997,7 @@ function mount({ stage, svg, read }, value) {
   };
   let act = -1;
   // empty or mixed -> checked; checked -> empty
-  const flip = (a) => { const b = bxs[a]; if (b.sp.t === 1 && b.kind === 1) b.sp.t = 0; else { b.kind = 1; b.sp.t = 1; } pr.x = 1; pr.t = 0; say(); A.wake(); };
+  const flip = (a) => { const b = bxs[a]; if (b.sp.t === 1 && b.kind === 1) b.sp.t = 0; else { b.kind = 1; b.sp.t = 1; } pr.x = 1; pr.t = 0; b.pz.x = 1; b.pz.t = 0; say(); A.wake(); };
   const label = (b) => (b.sp.t === 0 ? "empty" : b.kind === 2 ? "mixed" : "checked");
   const say = () => { read.textContent = act < 0 ? "rest" : label(bxs[act]); };
   function set(a, p) {
