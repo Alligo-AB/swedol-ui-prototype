@@ -9,7 +9,7 @@ const {
   mk, pointer, reducedMotion, reflect, register, solid, put, disposer, spring, stepS, unproj,
 } = HL;
 
-const PW = 156, PD = 56, PT = 6, D = 2, TY0 = 12, TY1 = 44, PAD = 5, SEGPAD = 24;
+const PW = 148, PD = 56, PT = 6, D = 2, TY0 = 12, TY1 = 44, PAD = 5, SEGPAD = 22;
 const ARROW = [[0, 0], [0, 15], [3.6, 11.6], [6.2, 17], [8.6, 15.8], [6, 10.6], [10.8, 10.6]];
 const NAMES = ["ALL", "NEW"];
 const G = {
@@ -160,6 +160,6 @@ hairline({
   means: "A two-segment pill control set into a slab: the pointer darkens the track, a press slides the black pill under the other label.",
   rules: [1, 4, 8, 9],
   range: [1, 2, 3],
-  tour: [[252, 186], [145, 132], null],
+  tour: [[250, 185], [148, 134], null],
   mount,
 });
