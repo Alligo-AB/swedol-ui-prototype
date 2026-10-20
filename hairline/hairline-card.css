@@ -116,3 +116,4 @@
 [data-hairline="toast"] [data-part="line"] { fill: var(--color-surface-20, #cccccc); }
 [data-hairline="toast"] [data-part="ink"], [data-hairline="toast"] [data-part="ink-top"] { fill: var(--color-surface-100, #000000); }
 .ds-card__visual--hairline [data-hairline-card="toast"] { transform: translateY(4px); }
+[data-hairline="toast"] [data-part="tick"] { fill: var(--color-surface-raised-primary, #ffffff); }
