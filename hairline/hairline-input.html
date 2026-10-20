@@ -955,7 +955,7 @@ function mount({ stage, svg, read }, value) {
   const rect = (a, x0, y0, x1, y1) => rrect(x0 + a, y0 + a, x1 - a, y1 - a, 0.5, 3);
   const out = rect(0, FX0, FY0, FX1, FY1);
   const far = run(out, (q) => !front(q)), near = run(out, front);
-  const D = 2 + lift, zf = PT - D; // lift is the slot's depth
+  const D = 1 + lift, zf = PT - D; // lift is the slot's depth
   const strip = (r) => poly([...ringAt(P, r, PT), ...ringAt(P, r, zf).reverse()]);
   const slot = mk("g", {}, svg);
   const midY = (FY0 + FY1) / 2, TU = 0.85, TX = FX0 + 7;
