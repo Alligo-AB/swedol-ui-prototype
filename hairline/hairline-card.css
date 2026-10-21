@@ -115,4 +115,4 @@
 [data-hairline="banner"] [data-part="line"] { fill: var(--color-border-primary, #e5e5e5); }
 [data-hairline="banner"] [data-part="card"] { fill: var(--color-surface-5, #f2f2f2); }
 .ds-card__visual--hairline [data-hairline-card="banner"] { transform: translateY(-4px); }
-[data-hairline="banner"] [data-part="banner-rim"] { stroke: color-mix(in srgb, var(--color-surface-information-default, #1e57f5) 45%, #ffffff); } /* the banner's top outline, a little clearer */
+[data-hairline="banner"] [data-part="banner-rim"] { stroke: color-mix(in srgb, var(--color-surface-information-default, #1e57f5) 22%, #ffffff); } /* the banner's top outline, a little clearer */
