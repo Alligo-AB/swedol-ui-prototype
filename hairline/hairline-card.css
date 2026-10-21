@@ -114,3 +114,10 @@
 [data-hairline="toast"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
 [data-hairline="toast"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); } /* hover on the close mark */
 .ds-card__visual--hairline [data-hairline-card="toast"] { transform: translateY(14px); }
+
+/* toast-ecom figure: floating toast with its shadow on the slab; text, tile, buttons */
+[data-hairline="toast-ecom"] [data-part="tshadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+[data-hairline="toast-ecom"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="toast-ecom"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="toast-ecom"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
+.ds-card__visual--hairline [data-hairline-card="toast-ecom"] { transform: translateY(2px); }

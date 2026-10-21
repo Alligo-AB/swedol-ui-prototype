@@ -16,3 +16,4 @@ Each file holds the old markup and where it goes.
 - `pill-segment-control.html` – Pill segment control card, `components-overview.html` (CSS `.mini-seg` "Roles / Plan", replaced by the Hairline animation).
 - `icon-picker.html` – Icon picker card, `components-overview.html` (CSS field with search icon and "local_shipping", replaced by the Hairline animation).
 - `toast.html` – System Toast card, `components-overview.html` (CSS `.mini-toast` "Settings saved.", replaced by the Hairline animation).
+- `toast-ecom.html` – E-Com Toast card, `components-overview.html` (CSS `.mini-toast--dark` "Belt stretch black added to your wishlist.", replaced by the Hairline animation).

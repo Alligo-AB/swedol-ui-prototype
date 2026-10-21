@@ -55,6 +55,8 @@ Also: browser cache after a change; the kernel copy `hairline/kernel.js` has two
 - **Closing toast** (`hairline/toast.js`, copied from `toast-ecom.js`): floating panel + shadow path (`tshadow`), flat status strip, glyph text, close cross; a press closes it (out 150 ms accelerate, in 300 ms decelerate after `REOPEN`), the ghost's `leave` restores it. A tour needs at least three stops (two panel points and `null`s).
 - Range slider = one number in the figure's own units, three values moving one way; hover answers on a 240 px thumbnail are subtle, so `look.mjs` warns on item 3; that is accepted when the press is the big gesture.
 
+- **Figure = the component itself, floating panel + replay (modelled on `modal.js`: glyph text via `label()`, cast shadow that follows the panel, raised buttons that sink on hover, press on a button closes and it reopens)** (`hairline/toast-ecom.js`, E-Com Toast; a first version with a product box and cart tray was rejected as "not like the component": draw the real component, visible at rest): press closes it, a pause later it slides back; timed tweens (`slide`, own duration/bezier per direction: in = decelerate-emphasized 300 ms, out = accelerate-generic 150 ms, set on each target change). A hidden part is `display:none` while closed; pick it only while its target is shown (rule 01). The ghost's `leave` resets.
+
 ## Also on the component page
 
 The same figure can sit in the docs page header, fading into a technical drawing: see `eco-doc-page`, section "Header art" (`doc-hero.css`, `gen/hero_switch.py`). Switch is the only one so far.
