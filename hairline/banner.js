@@ -67,7 +67,7 @@ function mount({ stage, svg, read }, value) {
   const page = PAGE.map(([x0, y0, x1, y1], i) => ({ x0, y0, x1, y1, el: mk("path", { class: "dot", "data-part": i === 0 ? "title" : i === 3 ? "card" : "line" }, svg) }));
   // the banner: body, left edge, icon disc, two text bars, the x tile and its two strokes; all pushed up and off the page with c
   const g = mk("g", {}, svg), body = solid(mk("g", {}, g));
-  body.sil.setAttribute("class", "dot"); body.sil.setAttribute("data-part", "banner");
+  body.sil.setAttribute("class", "dot"); body.sil.setAttribute("data-part", "banner"); body.cr.setAttribute("data-part", "banner-rim");
   const edge = mk("path", { class: "dot", "data-part": "banner-edge" }, g); // the left border: flat, level with the banner top
   const icon = mk("path", { class: "dot", "data-part": "banner-edge" }, g), leaf = mk("path", { class: "dot", "data-part": "banner-edge" }, g);
   const txt = [mk("path", { class: "dot", "data-part": "bar-on" }, g), mk("path", { class: "dot", "data-part": "bar-on" }, g), mk("path", { class: "dot", "data-part": "bar-on" }, g), mk("path", { class: "dot", "data-part": "bar-on" }, g)];
@@ -164,6 +164,6 @@ hairline({
   means: "A page with a banner at its top: a press on the x pushes the banner off the page, the content moves up; leaving brings it back.",
   rules: [1, 4, 8, 9],
   range: [1.5, 2.5, 4],
-  tour: [[240, 215], [353, 178], [240, 215], null],
+  tour: [[353, 178], [240, 215], null],
   mount,
 });
