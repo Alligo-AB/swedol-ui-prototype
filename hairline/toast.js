@@ -1,6 +1,6 @@
 /**
  * System Toast: the "Your changes were saved." toast floats above a slab, casting a shadow: a flat green status
- * strip, a check icon, the text and a close mark. The pointer over it lifts its edge; a press (or the close mark) closes
+ * strip, a check icon, the text and a close mark. The pointer over the close mark lights it; a press on the close mark closes
  * it: it slides out to the right and its shadow follows, then it slides back in a moment later. A drawn cursor follows
  * the pointer and rests below the toast. The slider is how high the toast floats.
  */
@@ -70,7 +70,7 @@ function mount({ stage, svg, read }, value) {
   const [qOut, qIn] = rings(X0, Y0, X1, Y1, 0, 1.2);
   const panel = solid(mg);
   const part = (p) => mk("path", { class: "dot", "data-part": p }, mg);
-  const strip = part("status"), icon = part("icon"), tick = part("tick"), text = part("bar-on"), x = part("bar-on");
+  const hi = part("rowhi"), strip = part("status"), icon = part("icon"), tick = part("tick"), text = part("bar-on"), x = part("bar-on");
 
   // the toast slides in from the right (decelerate-emphasized, 300ms) and out again (accelerate-generic, 150ms)
   const q = { x: 1, t: 1, to: 1, from: 1, t0: 0, d: 300, e: null };
@@ -85,7 +85,7 @@ function mount({ stage, svg, read }, value) {
   const cy = (Y0 + Y1) / 2;
   function draw(force) {
     const m = clamp(q.x, 0, 1), z0 = PT + 0.4 + (lift - 0.4) * Math.min(1, m * 1.5), zt = z0 + PH, dx = (1 - m) * SLIDE;
-    const key = m.toFixed(3) + z0.toFixed(2);
+    const key = m.toFixed(3) + z0.toFixed(2) + act;
     if (!force && key === last) return;
     last = key;
     const show = m > 0.01;
@@ -98,6 +98,7 @@ function mount({ stage, svg, read }, value) {
     icon.setAttribute("d", poly(ringAt(P, rrect(cx - 7, cy - 7, cx + 7, cy + 7, 7, 14), z)));
     tick.setAttribute("d", poly(TICK.map(([u, v]) => P(cx + u * 0.9, cy + v * 0.9, z + 0.05))));
     text.setAttribute("d", flat(P, label("YOUR CHANGES WERE SAVED.", X0 + dx + 32, cy, U), z));
+    hi.setAttribute("d", rect(P, X1 - 17 + dx, cy - 7, X1 - 3 + dx, cy + 7, zt + 0.05)); hi.setAttribute("display", act >= 0 ? "inline" : "none");
     x.setAttribute("d", flat(P, cross(X1 - 10 + dx, cy, 3.4, 1.4), z));
   }
 
@@ -115,7 +116,7 @@ function mount({ stage, svg, read }, value) {
   const press = () => { setOpen(0, performance.now()); pr.x = 1; pr.t = 0; say(); A.wake(); };
   const A = register(stage, (dt, now) => {
     let m = slide(now);
-    if (ghost && act >= 0 && !gdone) { m = true; if (now - gt > 250) { gdone = true; press(); } }
+    if (ghost && act >= 0 && !gdone) { m = true; if (now - gt > 200) { gdone = true; press(); } }
     if (!q.t) { m = true; if (now - closedAt > REOPEN) setOpen(1, now); }
     for (const s of [ax, ay, pr]) if (stepS(s, dt)) m = true;
     draw(); drawCur();
@@ -127,18 +128,18 @@ function mount({ stage, svg, read }, value) {
   const pick = ([sx, sy]) => {
     if (!q.t) return -1;
     const [px, py] = unproj(C, sx, sy, PT + lift + PH);
-    return px > X0 - 2 && px < X1 + 2 && py > Y0 - 2 && py < Y1 + 2 ? 0 : -1;
+    return px > X1 - 18 && px < X1 - 2 && py > cy - 8 && py < cy + 8 ? 0 : -1; // only the close mark answers
   };
-  const say = () => { read.textContent = !q.t ? "closed" : act < 0 ? "open" : "toast"; };
+  const say = () => { read.textContent = !q.t ? "closed" : act < 0 ? "open" : "close"; };
   function set(a, p) {
-    if (a !== act) { act = a; gdone = !ghost; gt = performance.now(); panel.sil.classList.toggle("hi", a >= 0); say(); }
+    if (a !== act) { act = a; gdone = !ghost; gt = performance.now(); say(); }
     if (p) { ax.t = p[0]; ay.t = p[1]; } else { ax.t = rest[0]; ay.t = rest[1]; }
     A.wake();
   }
   bag.add(pointer(stage, {
     move: (p, e) => { ghost = e?.pointerType === "ghost"; set(pick(p), p); gt = performance.now(); },
     down: (p) => { const a = pick(p); ghost = false; set(a, p); if (a >= 0) press(); },
-    leave: (e) => { if (e?.pointerType === "ghost") setOpen(1, performance.now()); ghost = false; set(-1); },
+    leave: () => { ghost = false; set(-1); }, // a closed toast reopens on its own timer
   }));
   bag.add(() => svg.replaceChildren());
 
@@ -148,9 +149,9 @@ function mount({ stage, svg, read }, value) {
 
 hairline({
   name: "toast",
-  means: "The saved toast floating over a slab: a press on it closes it, it slides out to the right, then back in.",
+  means: "The saved toast floating over a slab: a press on its close mark closes it, it slides out to the right, then back in.",
   rules: [1, 4, 8, 9],
   range: [6, 12, 16],
-  tour: [[173, 135], null, [255, 168], null],
+  tour: [[259, 168], null, [259, 168], null],
   mount,
 });

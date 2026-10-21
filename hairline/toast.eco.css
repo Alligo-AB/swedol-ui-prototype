@@ -19,3 +19,4 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
 [data-hairline] [data-part="status"], [data-hairline] [data-part="icon"] { fill: var(--color-surface-success-default, #248616); }
 [data-hairline] [data-part="tick"] { fill: var(--color-surface-raised-primary, #ffffff); }
 [data-hairline] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); } /* hover on the close mark */
