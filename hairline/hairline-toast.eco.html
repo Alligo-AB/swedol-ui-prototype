@@ -1043,7 +1043,7 @@ function mount({ stage, svg, read }, value) {
   bag.add(pointer(stage, {
     move: (p, e) => { ghost = e?.pointerType === "ghost"; set(pick(p), p); gt = performance.now(); },
     down: (p) => { const a = pick(p); ghost = false; set(a, p); if (a >= 0) press(); },
-    leave: (e) => { if (e?.pointerType === "ghost") setOpen(1, performance.now()); ghost = false; set(-1); },
+    leave: () => { ghost = false; set(-1); }, // a closed toast reopens on its own timer
   }));
   bag.add(() => svg.replaceChildren());
 
@@ -1056,7 +1056,7 @@ hairline({
   means: "The saved toast floating over a slab: a press on its close mark closes it, it slides out to the right, then back in.",
   rules: [1, 4, 8, 9],
   range: [6, 12, 16],
-  tour: [[173, 135], null, [255, 168], null],
+  tour: [[259, 168], null, [259, 168], null],
   mount,
 });
 </script>

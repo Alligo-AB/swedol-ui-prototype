@@ -984,7 +984,15 @@ function mount({ stage, svg, read }, value) {
   const ax = spring(rest[0], { k: 140 }), ay = spring(rest[1], { k: 140 }), pr = spring(0);
   const halo = mk("path", { class: "fo" }, svg), cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
   const drawCur = () => {
-    const px = ax.x - 0.5, py = ay.x + 2.5 * clamp(pr.x, 0, 1);
+    let bx = ax.x, by = ay.x;
+    if (ghost) { // the tour's pointer travels to the close mark on an arc (bowed upward), not a straight line
+      const [tx, ty] = P(X1 - 10, cy, PT + lift + PH), L = Math.hypot(tx - rest[0], ty - rest[1]) || 1;
+      const pg = clamp(1 - Math.hypot(bx - tx, by - ty) / L, 0, 1), o = 0.45 * L * Math.sin(Math.PI * pg);
+      let nx = -(ty - rest[1]) / L, ny = (tx - rest[0]) / L;
+      if (ny > 0) { nx = -nx; ny = -ny; }
+      bx += nx * o; by += ny * o;
+    }
+    const px = bx - 0.5, py = by + 2.5 * clamp(pr.x, 0, 1);
     cur.setAttribute("d", poly(ARROW.map(([u, v]) => [px + u, py + v])));
     halo.setAttribute("d", [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]].map(([i, j]) => poly(ARROW.map(([u, v]) => [px + u + i * 0.8, py + v + j * 0.8]))).join(""));
   };
