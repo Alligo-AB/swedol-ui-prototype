@@ -121,3 +121,11 @@
 [data-hairline="toast-ecom"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
 [data-hairline="toast-ecom"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
 .ds-card__visual--hairline [data-hairline-card="toast-ecom"] { transform: translateY(2px); }
+/* modal figure: dimmed slab (scrim), floating panel with its shadow; all three fade with the open state */
+[data-hairline] [data-part="scrim"] { fill: var(--color-surface-opacity-black-20, rgba(0, 0, 0, 0.2)); }
+[data-hairline] [data-part="shadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+[data-hairline] [data-part="fade"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
+[data-hairline] [data-part="fade"][data-open] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="fade"] { transition: none; } }
+.ds-card__visual--hairline [data-hairline-card="modal"] { transform: translateY(2px); }
+[data-hairline="modal"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); } /* hover on the blank Cancel */

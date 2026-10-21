@@ -17,3 +17,4 @@ Each file holds the old markup and where it goes.
 - `icon-picker.html` – Icon picker card, `components-overview.html` (CSS field with search icon and "local_shipping", replaced by the Hairline animation).
 - `toast.html` – System Toast card, `components-overview.html` (CSS `.mini-toast` "Settings saved.", replaced by the Hairline animation).
 - `toast-ecom.html` – E-Com Toast card, `components-overview.html` (CSS `.mini-toast--dark` "Belt stretch black added to your wishlist.", replaced by the Hairline animation).
+- `modal.html` – Modal card, `components-overview.html` and `index.html` (CSS `.mini-modal` "Delete address?", replaced by the Hairline animation).
