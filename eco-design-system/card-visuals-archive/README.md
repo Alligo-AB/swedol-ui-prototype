@@ -19,3 +19,4 @@ Each file holds the old markup and where it goes.
 - `toast-ecom.html` – E-Com Toast card, `components-overview.html` (CSS `.mini-toast--dark` "Belt stretch black added to your wishlist.", replaced by the Hairline animation).
 - `modal.html` – Modal card, `components-overview.html` and `index.html` (CSS `.mini-modal` "Delete address?", replaced by the Hairline animation).
 - `banner.html` – Banner card, `components-overview.html` (CSS `.mini-banner` "Planned maintenance on Sunday.", replaced by the Hairline animation).
+- `inline-notification.html` – Inline notification card, `components-overview.html` (CSS `.mini-banner--inline` "Only 4 left in stock.", replaced by the Hairline animation).

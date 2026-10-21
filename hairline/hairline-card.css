@@ -139,3 +139,13 @@
 [data-hairline="banner"] [data-part="card"] { fill: var(--color-surface-5, #f2f2f2); }
 .ds-card__visual--hairline [data-hairline-card="banner"] { transform: translateY(-4px); }
 [data-hairline="banner"] [data-part="banner-rim"] { stroke: color-mix(in srgb, var(--color-surface-information-default, #1e57f5) 22%, #ffffff); } /* the banner's top outline, a little clearer */
+/* inline-notification figure: blue block with icon, text bars, black button */
+[data-hairline="inline-notification"] [data-part="bar-dk"], [data-hairline="inline-notification"] [data-part="btn"] { fill: var(--color-surface-100, #000000); }
+[data-hairline="inline-notification"] [data-part="btn-top"] { fill: var(--color-surface-90, #222222); }
+[data-hairline="inline-notification"] [data-part="bar"] { fill: var(--color-surface-40, #939595); }
+[data-hairline="inline-notification"] [data-part="note"] { fill: var(--color-surface-information-weaker, #e2f1ff); }
+[data-hairline="inline-notification"] [data-part="edge"], [data-hairline="inline-notification"] [data-part="icon"] { fill: var(--color-surface-information-default, #0066ff); }
+[data-hairline="inline-notification"] [data-part="icon-i"] { fill: #ffffff; }
+.ds-card__visual--hairline [data-hairline-card="inline-notification"] { transform: translateY(-4px); }
+[data-hairline="inline-notification"] [data-part="txt"] { fill: var(--color-text-secondary, #4d4d4d); }
+[data-hairline="inline-notification"] [data-part="note-line"] { stroke: color-mix(in srgb, var(--color-border-information-default, #0066ff), #fff 78%); }
