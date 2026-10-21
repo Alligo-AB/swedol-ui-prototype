@@ -689,7 +689,7 @@ var HL = (() => {
       if (hand || keys) return;
       i = 0;
       t = -1;
-      wait = RESUME;
+      wait = 0;
       board.wake();
     };
     const me = {
@@ -905,7 +905,7 @@ var HL = (() => {
  * Inline notification: a field, a blue notification block and a line of content on a slab. The notification sits
  * in the flow between field and content and pushes the content down. The pointer over its x lights it; a press
  * closes it (the block fades out and its height collapses, the content moves up); a press on the field brings it
- * back. A drawn cursor rests above the x. The slider is the notification's thickness.
+ * back. A drawn cursor rests below-right of the block, outside it. The slider is the notification's thickness.
  */
 const {
   Cam, bezier, clamp, facing, fit, lerp, poly, proj, ringAt, rrect, prism, rings, seg,
@@ -1018,8 +1018,8 @@ function mount({ stage, svg, read }, value) {
     bp.setAttribute("d", poly(ringAt(P, bo, bz)));
   };
 
-  // the cursor: tip at (ax, ay), rests above the x
-  const rest = P(XC + 6, NY + NH / 2 + 3, PT + 9);
+  // the cursor: tip at (ax, ay), rests below-right of the block, outside it
+  const rest = P(XC + 4, NY + NH + 8, PT + 9);
   const ax = spring(rest[0], { k: 140 }), ay = spring(rest[1], { k: 140 }), pr = spring(0);
   const cur = mk("path", { class: "dot", "data-part": "cursor" }, svg);
   const drawCur = () => cur.setAttribute("d", poly(ARROW.map(([u, v]) => [ax.x + u - 0.5, ay.x + v + 2.5 * clamp(pr.x, 0, 1)])));
