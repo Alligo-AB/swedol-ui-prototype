@@ -1,7 +1,7 @@
 /**
  * Banner: a page plane with a large informational banner anchored at its top edge (a ring icon, heading, two text lines, an action label, a x) and page content
  * under it. The pointer over the x lights its tile; a press closes the banner the way the component does (fades
- * out and collapses its height, 150 ms on ease-accelerate-generic) and the page content moves up. Leaving the
+ * out and slides it up off the page, 150 ms on ease-accelerate-generic) and the page content moves up. Leaving the
  * stage, or pressing the empty page, brings it back (300 ms on ease-decelerate-generic). A drawn cursor follows
  * the pointer and rests above the x. The slider is how high the banner stands.
  */
@@ -65,7 +65,7 @@ function mount({ stage, svg, read }, value) {
 
   const flat = (x0, y0, x1, y1, z) => poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]].map(([x, y]) => P(x, y, z)));
   const page = PAGE.map(([x0, y0, x1, y1], i) => ({ x0, y0, x1, y1, el: mk("path", { class: "dot", "data-part": i === 0 ? "title" : i === 3 ? "card" : "line" }, svg) }));
-  // the banner: body, left edge, icon disc, two text bars, the x tile and its two strokes; all squash toward the top with c
+  // the banner: body, left edge, icon disc, two text bars, the x tile and its two strokes; all pushed up and off the page with c
   const g = mk("g", {}, svg), body = solid(mk("g", {}, g));
   body.sil.setAttribute("class", "dot"); body.sil.setAttribute("data-part", "banner");
   const edge = mk("path", { class: "dot", "data-part": "banner-edge" }, g); // the left border: flat, level with the banner top
@@ -91,8 +91,8 @@ function mount({ stage, svg, read }, value) {
     const k = c.x.toFixed(3) + h + hv.x.toFixed(2);
     if (!force && k === key) return;
     key = k;
-    const v = c.x, y = (o) => Y0 + o * v, z = PT + h;
-    g.setAttribute("display", v < 0.02 ? "none" : "");
+    const v = 1, off = -(1 - c.x) * (BH + Y0 + 8), y = (o) => Y0 + o + off, z = PT + h; // closing pushes the banner off the page, up past its top edge
+    g.setAttribute("display", c.x < 0.02 ? "none" : "");
     const [o, i] = rings(X0, Y0, X1, y(BH), 0, 1);
     put(body, prism(P, front, o, i, PT, z));
     edge.setAttribute("d", flat(X0, Y0, X0 + 4, y(BH), z + 0.1));
@@ -114,7 +114,7 @@ function mount({ stage, svg, read }, value) {
       s.setAttribute("d", poly(q.map(([a, b]) => P(XC + a, cy + b * v, z + 0.3))));
     });
     // page content follows the banner's bottom edge
-    const top = y(BH) + 8;
+    const top = Y0 + BH * c.x + 8; // the space under the banner collapses with it
     for (const p of page) p.el.setAttribute("d", flat(p.x0, top + p.y0, p.x1, top + p.y1, PT));
   }
 
@@ -161,7 +161,7 @@ function mount({ stage, svg, read }, value) {
 
 hairline({
   name: "banner",
-  means: "A page with a large informational banner at its top: a press on the x collapses the banner, the page moves up; leaving brings it back.",
+  means: "A page with a banner at its top: a press on the x pushes the banner off the page, the content moves up; leaving brings it back.",
   rules: [1, 4, 8, 9],
   range: [1.5, 2.5, 4],
   tour: [[240, 215], [353, 178], [240, 215], null],
