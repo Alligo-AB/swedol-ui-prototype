@@ -14,15 +14,8 @@ input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
 }
 [data-hairline] [data-part="cursor"] { fill: var(--color-surface-100, #000000); }
 [data-hairline] [data-part="cursor"] { fill: var(--color-surface-100, #000000); }
-/* the button: Primary, as on the Button figure */
-[data-hairline] [data-part="ink"], [data-hairline] [data-part="ink-top"] { fill: var(--color-surface-100, #000000); }
-[data-hairline] path.m[data-part="ink-top"] { fill: var(--color-surface-90, #222222); }
-/* the toast: Success, Weak (raised white card, green left bar and icon); the figure fades it with its slide */
-[data-hairline] [data-part="toast"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
-[data-hairline] [data-part="toast"][data-show] { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="toast"] { transition: none; } }
-[data-hairline] [data-part="status"] { fill: var(--color-surface-success-default, #248616); }
-[data-hairline] [data-part="icon"] { fill: var(--color-surface-success-default, #248616); }
-[data-hairline] [data-part="line-on"] { fill: var(--color-text-primary, #000000); }
-[data-hairline] [data-part="line"] { fill: var(--color-surface-20, #cccccc); }
+/* the toast: Success, Weak (raised white card, flat green strip, green check disc, black text) floating with a shadow */
+[data-hairline] [data-part="tshadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+[data-hairline] [data-part="status"], [data-hairline] [data-part="icon"] { fill: var(--color-surface-success-default, #248616); }
 [data-hairline] [data-part="tick"] { fill: var(--color-surface-raised-primary, #ffffff); }
+[data-hairline] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }

@@ -107,13 +107,9 @@
 @media (prefers-reduced-motion: reduce) { [data-hairline="icon-picker"] [data-part="menu"] { transition: none; } }
 [data-hairline="icon-picker"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field */
 
-/* toast figure: Success Weak toast (green bar and icon, grey text lines) that fades with its slide, black Primary trigger button */
-[data-hairline="toast"] [data-part="toast"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
-[data-hairline="toast"] [data-part="toast"][data-show] { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { [data-hairline="toast"] [data-part="toast"] { transition: none; } }
+/* toast figure: Success Weak toast floating with a shadow (flat green strip, green check disc, black text) */
+[data-hairline="toast"] [data-part="tshadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
 [data-hairline="toast"] [data-part="status"], [data-hairline="toast"] [data-part="icon"] { fill: var(--color-surface-success-default, #248616); }
-[data-hairline="toast"] [data-part="line-on"] { fill: var(--color-text-primary, #000000); }
-[data-hairline="toast"] [data-part="line"] { fill: var(--color-surface-20, #cccccc); }
-[data-hairline="toast"] [data-part="ink"], [data-hairline="toast"] [data-part="ink-top"] { fill: var(--color-surface-100, #000000); }
-.ds-card__visual--hairline [data-hairline-card="toast"] { transform: translateY(4px); }
 [data-hairline="toast"] [data-part="tick"] { fill: var(--color-surface-raised-primary, #ffffff); }
+[data-hairline="toast"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+.ds-card__visual--hairline [data-hairline-card="toast"] { transform: translateY(14px); }
