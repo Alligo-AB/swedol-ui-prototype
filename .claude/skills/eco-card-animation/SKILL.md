@@ -4,6 +4,7 @@ description: Use when making an animated Hairline illustration (isometric line f
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack and the quality checklist. Everything lives in `hairline/` (read `hairline/README.md` too); the figure engine is the global skill `hairline-create` (never edit its kernel). Cards done: Button, Switch, Checkbox, Select, Input, Range, Textarea, Toast (System). References: **Button** (`hairline/button-pair.js`) and **Switch** (`hairline/switch.js`, the more complete one, copy from it). Press-and-pop springs for joined/segmented parts: `hairline/button-group.js` (selected part sinks, the former pick pops up, tint via `data-show` + CSS opacity transition).
+> Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack and the quality checklist. Everything lives in `hairline/` (read `hairline/README.md` too); the figure engine is the global skill `hairline-create` (never edit its kernel). Cards done: Button, Switch, Checkbox, Select, Input, Range, Textarea, Banner (close = banner slides off the page, content follows; no opacity allowed in figures). References: **Button** (`hairline/button-pair.js`) and **Switch** (`hairline/switch.js`, the more complete one, copy from it). Press-and-pop springs for joined/segmented parts: `hairline/button-group.js` (selected part sinks, the former pick pops up, tint via `data-show` + CSS opacity transition).
 
 ## When a figure in `hairline/` is changed (check this every time)
 
