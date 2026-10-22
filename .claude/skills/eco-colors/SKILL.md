@@ -80,6 +80,7 @@ Used to build up contrast in the grayscale. The number indicates approximate opa
 
 | Token | CSS variable | Description |
 |---|---|---|
+| `surface-00` | `var(--color-surface-00)` | Lightest solid neutral (`#ffffff`). Subtle section separation, vertical scrollbar tracks where a border is inappropriate. |
 | `surface-02` | `var(--color-surface-02)` | Very light surface. Navigation hover. |
 | `surface-05` | `var(--color-surface-05)` | Light gray surface. |
 | `surface-10` | `var(--color-surface-10)` | Disabled background, borders. |
@@ -181,4 +182,8 @@ Used to build up contrast in the grayscale. The number indicates approximate opa
 
 ### Information colours outside status messages
 
-The documentation pages use the Information tokens for the **blueprint measurement figure** (`components/css/measure.css`): `surface-information-weak` for shaded padding, `border-information-default` for dimension lines, `text-information-default` for the numbers. This is a docs use only; a product page uses Information for status messages (see `notifications-guide`). The ECO DS documentation accent `#E94E19` (`--ds-accent`, `eco-design-system/docs.css`) is not a token in the package and is not for products; Swedol's accent is `--color-accent-default`.
+The documentation pages use the Information tokens for the **blueprint measurement figure** (`components/css/measure.css`): `surface-information-weak` for shaded padding, `border-information-default` for dimension lines, `text-information-default` for the numbers. This is a docs use only; a product page uses Information for status messages (see `notifications-guide`). The ECO DS documentation accent `#E94E19` (`--ds-accent`, `eco-design-system/docs.css`) is now also a package token (`--color-eco-ds-accent-color`, plus `--color-eco-ds-accent-color-light`, since alligo-design-tokens 0.0.15) but is for the documentation only, not for products; Swedol's accent is `--color-accent-default`.
+
+## Where the colors are documented
+
+`eco-design-system/foundations/colors.html` (Overview: semantic vs primitive, how a token is derived, token families, Online vs traditional, contrast ratios), `colors-primitives.html` (the base palette, read live from the package file, with which semantic tokens use each primitive) and `colors-tokens.html` (every semantic token, cards or table). Primitives (`--color-primitive-color-*`) are references: a component never uses one; use the semantic token. If no token fits, ask before adding a value.

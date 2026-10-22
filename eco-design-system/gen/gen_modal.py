@@ -245,7 +245,7 @@ JS_CODE = JS_PRE + r'''
 '''
 
 C = dict(BASE, slug=SLUG, title='Modal',
-    lead='A modal is the <strong>most disruptive</strong> notification. It blocks the page until the user makes a decision, so use it only when the user must confirm or choose before going on.',
+    lead='A modal is the <strong>most disruptive</strong> notification. It blocks the page until the user makes a decision, so use it only when the user must confirm or choose before going on. Not sure it is the right notification? Start at the <a class="inline-link inline-link--xlarge" href="notifications.html">Notifications guide</a>.',
     lead_ex='Every “Open modal” button opens the real dialog: try ESC, a click on the dark overlay, Tab and the × to close it. Figma: ' + FIG + '.',
     lead_spec='Tokens, sizes, measurements and requirements. Values come from the live token package and from ' + FIG + '.',
     lead_code='How to open a modal from script and the CSS behind it. The files are <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.',

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero banner: Storyblok widget – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .sb-stage.ds-fig__stage { display: block; padding: 0; min-height: 0; background: var(--color-surface-raised-primary); }   /* a screenshot or banner picture, with numbered markers on top */
+    .sb-shot { position: relative; }
+    .sb-shot img { display: block; width: 100%; height: auto; }
+    .sb-pin { position: absolute; transform: translate(-50%, -50%); pointer-events: none; min-width: 24px; height: 24px; padding: 0 5px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }   /* Figma Marker = Number Large, also on mobile */
+    .sb-pin--red { background: var(--color-surface-danger-default); }
+    .sb-box { position: absolute; border: 3px solid var(--color-border-danger-default); pointer-events: none; }
+    .hb-note { display: flex; gap: var(--dimension-spacing-space-12); padding: var(--dimension-spacing-space-16); background: var(--color-surface-raised-secondary); }
+    .hb-note .mo-ic { font-size: 24px; flex: 0 0 auto; color: var(--color-icon-primary); }
+    .hb-note p { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md: 16/22 mobile, 17/24 from 769px */
+    @media (min-width: 769px) { .hb-note p { font-size: 17px; line-height: 24px; } }
+    .hb-ex-cap { margin: 0 0 var(--dimension-spacing-space-8); }
+    .hb-grid { display: grid; gap: var(--dimension-spacing-space-16); grid-template-columns: minmax(0, 1fr); margin: var(--dimension-spacing-space-16) 0; }
+    @media (min-width: 769px) { .hb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--dimension-spacing-space-24); } }
+    .hb-grid figure { margin: 0; }
+    .hb-grid img, .hb-one img { display: block; width: 100%; height: auto; border: 1px solid var(--color-border-primary); }
+    .hb-grid figcaption, .hb-one figcaption { padding-top: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .hb-grid img { width: 100%; aspect-ratio: 1139 / 780; object-fit: cover; object-position: top; }   /* every example in a grid is the same height: cropped from the bottom */
+    .hb-grid img:not(.hb-alpha) { object-fit: contain; box-sizing: border-box; padding: var(--dimension-spacing-space-24); background: var(--color-surface-raised-secondary); border: 0; }   /* a banner (not a page screenshot) is shown whole, centred on the same grey and at the same height */
+    .hb-grid img.hb-alpha, .hb-one img.hb-alpha { border: 0; box-sizing: border-box; padding: var(--dimension-spacing-space-32) var(--dimension-spacing-space-24) 0; background: var(--color-surface-raised-secondary); }   /* the PNG has a transparent shadow edge: it shows on the light grey, as in Supernova */
+    .hb-one { margin: var(--dimension-spacing-space-16) 0; max-width: 100%; }
+    .hb-one--narrow { max-width: 360px; }
+    .hb-sw { display: grid; gap: var(--dimension-spacing-space-16); grid-template-columns: minmax(0, 1fr); margin: var(--dimension-spacing-space-16) 0; }
+    @media (min-width: 769px) { .hb-sw { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--dimension-spacing-space-24); } }
+    .hb-sw__card { margin: 0; }
+    .hb-sw__stage { display: grid; place-items: center; min-height: 240px; padding: var(--dimension-spacing-space-48) var(--dimension-spacing-space-24); background: var(--color-surface-100); }
+    .hb-sw__stage--light { background: var(--color-surface-raised-secondary); }
+    .hb-sw__stage--grey { background: var(--color-surface-raised-secondary); }   /* the same light grey as the anatomy figures (ds-fig__stage) */
+    .hb-sw__cap { display: grid; grid-template-columns: auto 1fr; gap: var(--dimension-spacing-space-4) var(--dimension-spacing-space-12); padding-top: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; margin: 0; }
+    .hb-sw__cap dt { font-weight: 600; }
+    .hb-sw__cap dd { margin: 0; color: var(--color-text-tertiary); letter-spacing: 0.36px; }
+    .hb-border { display: block; width: 85%; max-width: 360px; height: auto; }
+    .hb-stripes { display: flex; gap: 6px; width: 80%; transform: skewX(-24deg); }
+    .hb-stripes i { flex: 1; height: 12px; background: var(--hb-accent); }
+    .hb-stripes i:first-child { background: linear-gradient(90deg, transparent, var(--hb-accent)); }
+    .hb-swedol { --hb-accent: var(--color-accent-default); }
+    .hb-tools { --hb-accent: var(--color-primitive-color-brand-tools-accent-brand); }
+    .hb-pdimg { display: block; width: 220px; max-width: 80%; height: auto; }
+    .hb-pd { display: flex; gap: 6px; color: var(--color-text-primary-inverted); font-size: 40px; line-height: 36px; font-style: italic; font-weight: 700; text-transform: uppercase; }
+    .hb-pd i { width: 5px; background: var(--hb-accent); transform: skewX(-12deg); }
+    .hb-newsimg { display: block; width: 120px; height: 120px; }
+    .hb-news { display: grid; place-items: center; width: 120px; height: 120px; border-radius: 50%; font-size: 28px; line-height: 28px; font-style: italic; font-weight: 700; text-transform: uppercase; background: var(--hb-bg); color: var(--hb-fg); }
+    .hb-news--white { --hb-bg: var(--color-surface-raised-primary); --hb-fg: var(--color-text-primary); }
+    .hb-news--black { --hb-bg: var(--color-surface-100); --hb-fg: var(--color-text-primary-inverted); }
+    .hb-news--green { --hb-bg: var(--color-accent-default); --hb-fg: var(--color-text-primary); }
+    .hb-news--red { --hb-bg: var(--color-primitive-color-brand-tools-accent-brand); --hb-fg: var(--color-text-primary-inverted); }
+    .hb-txt { text-align: left; }
+    .hb-txt b { display: block; font-size: 12px; line-height: 14px; letter-spacing: 0.48px; text-transform: uppercase; }
+    .hb-txt strong { display: block; font-size: 32px; line-height: 32px; text-transform: uppercase; }
+    .hb-txt span { display: block; font-size: 16px; line-height: 22px; }
+    .hb-txt--inv { color: var(--color-text-primary-inverted); }
+    .hb-btns { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8); }
+    .hb-yn { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-8); }   /* icon and text centred on one line */
+    .hb-ic { display: block; flex: 0 0 auto; font-size: 20px; line-height: 1; }
+    .hb-ic--yes { color: var(--color-text-success-default); }
+    .hb-ic--no { color: var(--color-text-danger-default); }
+    .hb-ic--maybe { color: var(--color-text-warning-default); }
+    .hb-anat .ds-callout__pin, .sb-pin { text-transform: none; }
+    .hb-anat.ds-fig__stage.ds-callout { padding-right: 72px; }
+    .hb-anat.ds-fig__stage.ds-callout { display: block; overflow-x: auto; }   /* mobile: the picture keeps its size, so the markers do not collide; the figure scrolls sideways */
+    .hb-anat .ds-callout__art { margin: 0 auto; width: 100%; min-width: 520px; max-width: 640px; }
+    .hb-anat img { display: block; width: 100%; height: auto; }
+    .ds-figs + .hb-legend, .ds-figs + .ds-bullets--num { margin-top: var(--dimension-spacing-space-16); }   /* the list under a figure: 16px */
+    
+    .hb-legend + .ds-figs, .ds-bullets + .ds-figs { margin-top: var(--dimension-spacing-space-40); }
+    .hb-dd { display: block; width: 100%; max-width: 480px; height: auto; }
+    /* spacing from the user's annotation (2026-10-21), on every page of this set */
+    /* one rule for pictures: whatever comes before or after a picture is 16px away; only a list or legend followed by the next picture gets 40px */
+    .ds-prose > :is(.ds-h2, .ds-h3, .hb-h4, .ds-desc, .ds-bullets, .hb-note) + :is(.hb-one, .ds-figs, .hb-grid) { margin-top: var(--dimension-spacing-space-16); }
+    .ds-prose > :is(.hb-one, .ds-figs, .hb-grid) + :is(.ds-h2, .ds-h3, .hb-h4, .ds-desc, .ds-bullets, .hb-note, .hb-legend) { margin-top: var(--dimension-spacing-space-16); }
+    .ds-prose > .ds-desc.ds-desc:has(+ :is(.hb-one, .ds-figs, .hb-grid)), .ds-prose > .ds-bullets.ds-bullets:not(.ds-bullets--num):has(+ :is(.hb-one, .ds-figs, .hb-grid)) { margin-bottom: 0; }   /* the paragraph's own bottom margin would collapse into the 16px */
+    .ds-prose > :is(.ds-bullets--num, .hb-legend) + :is(.hb-one, .ds-figs, .hb-grid) { margin-top: var(--dimension-spacing-space-40); }
+    .ds-prose > .ds-figs + .ds-h3 { margin-top: var(--dimension-spacing-space-16); }   /* figure with caption, then the next heading: 16px */
+    .ds-prose > .ds-bullets + .ds-h3 { margin-top: var(--dimension-spacing-space-24); }   /* list, then the next heading: 24px */
+    .ds-prose > .ds-h3.ds-h3.ds-h3:has(+ .hb-h4) { margin-bottom: 0; }   /* tripled class: beats docs.css group-heading rules */
+    .ds-prose > .ds-h3 + .hb-h4 { margin-top: var(--dimension-spacing-space-8); }   /* heading, then its sub-heading: 8px */
+    .hb-h4 + .hb-one, .hb-h4 + .ds-figs, .hb-h4 + .hb-grid { margin-top: var(--dimension-spacing-space-16); }   /* sub-heading, then the picture: 16px */
+    .hb-legend { list-style: none; margin: 0 0 var(--dimension-spacing-space-40);   /* 40px before the next figure (when a heading follows, its own margin applies) */ padding: 0; display: grid; gap: var(--dimension-spacing-space-12); }
+    .hb-legend li { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-12); }
+    .hb-legend .badge-number { flex: 0 0 auto; margin-top: 3px; text-transform: none; }
+    .hb-legend p { margin: 0; }
+    .hb-h4 { margin: var(--dimension-spacing-space-24) 0 var(--dimension-spacing-space-4); font-size: 16px; line-height: 22px; font-weight: 600; }
+    .hb-why { margin: 0 0 var(--dimension-spacing-space-4); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Hero banner</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Patterns</span></div>
+    <h1 class="ds-title">Hero banner</h1>
+    <p class="ds-lead">The Hero banner is a versatile component for campaign features and for the headers of landing pages, on campaign pages and sites and on brand pages. It has many settings for building responsive hero sections.</p><p class="ds-lead">The anatomy, the sizes and the colors of the hero banner. Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/Pec5PrArnMy6XyBzRZOyRp/Supernova-ECO-DS-Assets?node-id=3890-80829" target="_blank" rel="noopener">Main hero content</a>, <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/Pec5PrArnMy6XyBzRZOyRp/Supernova-ECO-DS-Assets?node-id=3895-5910" target="_blank" rel="noopener">Power Deal</a>, <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/Pec5PrArnMy6XyBzRZOyRp/Supernova-ECO-DS-Assets?node-id=3895-6125" target="_blank" rel="noopener">Brand logos</a> and <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/Pec5PrArnMy6XyBzRZOyRp/Supernova-ECO-DS-Assets?node-id=3895-6312" target="_blank" rel="noopener">News badge</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Hero banner"><a class="tab" aria-current="page" href="hero-banner-widget.html"><span class="tab__label">Design</span></a><a class="tab" href="hero-banner-widget-usage.html"><span class="tab__label">Usage</span></a><a class="tab" href="hero-banner-widget-reference.html"><span class="tab__label">Reference and Examples</span></a><a class="tab" href="hero-banner-widget-storyblok.html"><span class="tab__label">Storyblok</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="anatomy"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Anatomy</h2><p class="ds-desc">The hero banner combines an image, typography, campaign elements and call-to-action buttons into a high-impact page header. Every part is optional except the image and the title.</p><h3 class="ds-h3 ds-group">Main hero content</h3><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout hb-anat" id="an-main" role="img" aria-label="Anatomy of the hero banner content: 1 background image, 2 brand logo, 3a discount badge, 3b campaign price, 3c old price info, 4a pre title, 4b title, 4c preamble, 5 buttons, 6 overlay"><div class="ds-callout__art"><img id="an-main-img" src="/images/hero-banner-anatomy-main.png" alt="" /></div></figure></div><ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>Background image.</strong> An image for a campaign, or the header of a brand or campaign page. On a Fluid hero it fills to the left and right edge of the viewport.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">2*</span><p class="ds-desc"><strong>Brand logo, in content.</strong> For brand identity. *Only for brand pages, when the content is centred in breakpoint XSmall.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">3a</span><p class="ds-desc"><strong>Discount badge.</strong> A red badge with the discount or a short campaign message.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">3b</span><p class="ds-desc"><strong>Campaign price.</strong> The promotional price, next to the badge.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">3c</span><p class="ds-desc"><strong>Old price info.</strong> The price before the discount.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">4a</span><p class="ds-desc"><strong>Pre title.</strong> Categorises the content or adds context.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">4b</span><p class="ds-desc"><strong>Title.</strong> The headline or campaign message.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">4c</span><p class="ds-desc"><strong>Preamble.</strong> A longer description of the campaign, product or brand.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">5</span><p class="ds-desc"><strong>Buttons.</strong> Compelling calls to action. One primary and, optionally, one secondary button.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">6</span><p class="ds-desc"><strong>Visual enhancement overlay.</strong> A gradient that keeps the text readable on the image.</p></li></ul><h3 class="ds-h3 ds-group">Brand elements</h3><p class="ds-desc">Brand elements are placed on the image, never in the text column. They are the Power Deal concept, brand logos and the news badge.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout hb-anat" id="an-pd" role="img" aria-label="Anatomy of the Power Deal elements: 1 border, 2 logo"><div class="ds-callout__art"><img id="an-pd-img" src="/images/hero-banner-anatomy-powerdeal.png" alt="" /></div></figure></div><ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>Power Deal border.</strong> A graphic that is part of the Power Deal concept. Use it only together with the Power Deal logo.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">2</span><p class="ds-desc"><strong>Power Deal logo.</strong> The logo of the Power Deal concept. Always use it together with the Power Deal border to strengthen the concept. It can sit top left, top right or bottom right.</p></li></ul><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout hb-anat" id="an-logo" role="img" aria-label="Anatomy of the brand logo: 1 brand logo"><div class="ds-callout__art"><img id="an-logo-img" src="/images/hero-banner-anatomy-logos.png" alt="" /></div></figure></div><ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>Brand logo.</strong> For brand identity or a campaign-specific product logo. It can sit top right, bottom right or in the content.</p></li></ul><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout hb-anat" id="an-news" role="img" aria-label="Anatomy of the news badge: 1 news badge"><div class="ds-callout__art"><img id="an-news-img" src="/images/hero-banner-anatomy-news.png" alt="" /></div></figure></div><ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>News badge.</strong> A circular badge that promotes new products and other news.</p></li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="size"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Size</h2><p class="ds-desc">The size of the hero follows the breakpoint. The height is set per size; it is dynamic, so if the content does not fit, the hero grows to fit the content. All values come from Figma: <a class="inline-link inline-link--large" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=16892-132478" target="_blank" rel="noopener">Hero Component</a>.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Width, regular</th><th scope="col">Width, fluid</th><th scope="col">Height</th></tr></thead><tbody><tr><th scope="row">XLarge</th><td>1200px</td><td>1440px</td><td>450px</td></tr><tr><th scope="row">Large</th><td>1200px</td><td>1440px</td><td>450px</td></tr><tr><th scope="row">Medium</th><td>1023px</td><td>–</td><td>380px</td></tr><tr><th scope="row">Small</th><td>704px</td><td>–</td><td>350px</td></tr><tr><th scope="row">XSmall</th><td>375px</td><td>–</td><td>300px</td></tr></tbody></table></div><div class="hb-note"><span class="mo-ic" aria-hidden="true">info</span><p class="ds-desc">Figma has no separate XLarge frame: XLarge uses the Large frame, with the same width and height (Supernova also gives 450px). A fluid hero is drawn only for Large, and a fluid hero grows with the viewport. Small and XSmall use the mobile base styling.</p></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><p class="ds-desc">Spacing, type and element sizes of a hero, read from the Figma frames for the largest and the smallest size. Medium and Small are not listed yet.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">XLarge and Large (1200×450)</th><th scope="col">XSmall (375×300)</th></tr></thead><tbody><tr><th scope="row">Padding (all sides)</th><td>56px</td><td>24px</td></tr><tr><th scope="row">Content width</th><td>Up to 769px</td><td>The full width</td></tr><tr><th scope="row">Gap, texts to buttons</th><td>24px</td><td>16px</td></tr><tr><th scope="row">Gap, between text blocks</th><td>12px</td><td>12px</td></tr><tr><th scope="row">Pre title</th><td>18px / 18px line, 0.18px spacing (label-lg)</td><td>16px / 18px line, 0.32px spacing (label-lg)</td></tr><tr><th scope="row">Title</th><td>55px / 50px line</td><td>36px / 34px line (display-lg)</td></tr><tr><th scope="row">Preamble</th><td>24px / 32px line (body-xl)</td><td>20px / 24px line (body-xl)</td></tr><tr><th scope="row">Buttons</th><td>Large, 2 in a row, 8px gap</td><td>Medium, 2 in a row, 8px gap</td></tr><tr><th scope="row">Brand logo, in content</th><td>120×36px</td><td>100×30px</td></tr><tr><th scope="row">Brand logo, in the corner</th><td>120×36px, 56px from the edges</td><td>50×15px, 24px from the edges</td></tr><tr><th scope="row">Discount badge</th><td>24px high, 6px side padding, 20px italic text</td><td>20px high, 5px side padding, 17px italic text</td></tr><tr><th scope="row">Campaign price</th><td>54px / 52px line</td><td>42px / 44px line</td></tr><tr><th scope="row">Old price info</th><td>11px / 11px line</td><td>9px / 10px line</td></tr><tr><th scope="row">Power Deal border</th><td>24px high, 730px wide</td><td>8px high, 317px wide</td></tr><tr><th scope="row">Power Deal logo</th><td>156×79px, 56px from the left or right, 48px from the top or bottom</td><td>95×48px, 24px from the edges</td></tr><tr><th scope="row">News badge</th><td>104px circle, 30px italic text, 40px from the top right</td><td>64px circle, 19px italic text, 24px from the top right</td></tr><tr><th scope="row">Overlay</th><td>A gradient at about 167°: black at 60%, 40% and 0%</td><td>A gradient at about 152°: the same stops</td></tr></tbody></table></div><div class="hb-note"><span class="mo-ic" aria-hidden="true">info</span><p class="ds-desc">Discount badge, campaign price and old price info are the Campaign Price card. Typefaces are Breuer Condensed, see <a class="inline-link inline-link--medium inline-link--secondary" href="../foundations/typography.html">Typography</a>.</p></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="colors"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Colors</h2><h3 class="ds-h3 ds-group">Branding elements</h3><h4 class="hb-h4">Power Deal border</h4><p class="ds-desc">The color depends on the site where the campaign is shown. Swedol uses its accent color and Tools uses its own. The site decides, so the editor never picks it. Figma: <a class="inline-link inline-link--large" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=16448-139687" target="_blank" rel="noopener">Power Deal border</a>.</p><div class="hb-sw"><figure class="hb-sw__card"><div class="hb-sw__stage " role="img" aria-label="Power Deal border / Swedol / Swedol accent brand"><img class="hb-border" src="/images/hero-banner-power-deal-border-swedol.svg" alt="Power Deal border" width="730" height="24" loading="lazy" /></div><dl class="hb-sw__cap"><dt>Element</dt><dd>Power Deal border</dd><dt>Brand</dt><dd>Swedol</dd><dt>Color</dt><dd>Swedol accent brand</dd></dl></figure><figure class="hb-sw__card"><div class="hb-sw__stage " role="img" aria-label="Power Deal border / Tools / Tools accent brand"><img class="hb-border" src="/images/hero-banner-power-deal-border-tools.svg" alt="Power Deal border" width="730" height="24" loading="lazy" /></div><dl class="hb-sw__cap"><dt>Element</dt><dd>Power Deal border</dd><dt>Brand</dt><dd>Tools</dd><dt>Color</dt><dd>Tools accent brand</dd></dl></figure></div><h4 class="hb-h4">Power Deal logo</h4><p class="ds-desc">The logo follows the same rule: the slash takes the accent color of the site. Figma: <a class="inline-link inline-link--large" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1473-44183" target="_blank" rel="noopener">Power Deal logo</a>.</p><div class="hb-sw"><figure class="hb-sw__card"><div class="hb-sw__stage " role="img" aria-label="Power Deal, Swedol accent brand / Swedol"><img class="hb-pdimg" src="/images/hero-banner-power-deal-logo-swedol.svg" alt="Power Deal logo" width="220" height="112" loading="lazy" /></div><dl class="hb-sw__cap"><dt>Logo</dt><dd>Power Deal, Swedol accent brand</dd><dt>Brand</dt><dd>Swedol</dd></dl></figure><figure class="hb-sw__card"><div class="hb-sw__stage " role="img" aria-label="Power Deal, Tools accent brand / Tools"><img class="hb-pdimg" src="/images/hero-banner-power-deal-logo-tools.svg" alt="Power Deal logo" width="220" height="112" loading="lazy" /></div><dl class="hb-sw__cap"><dt>Logo</dt><dd>Power Deal, Tools accent brand</dd><dt>Brand</dt><dd>Tools</dd></dl></figure></div><h4 class="hb-h4">News badge</h4><p class="ds-desc">The text “NYHET!” follows the language of the country. The badge is only for promoting news. White and black work on both brands. Green belongs to Swedol and red to Tools. Figma: <a class="inline-link inline-link--large" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=16973-133757" target="_blank" rel="noopener">News badge</a>.</p><div class="hb-sw"><figure class="hb-sw__card"><div class="hb-sw__stage " role="img" aria-label="Swedol &amp;amp; Tools / White"><img class="hb-newsimg" src="/images/hero-banner-news-white.png" alt="News badge, white" width="120" height="120" loading="lazy" /></div><dl class="hb-sw__cap"><dt>Brand</dt><dd>Swedol &amp; Tools</dd><dt>Color</dt><dd>White</dd></dl></figure><figure class="hb-sw__card"><div class="hb-sw__stage hb-sw__stage--grey" role="img" aria-label="Swedol &amp;amp; Tools / Black"><img class="hb-newsimg" src="/images/hero-banner-news-black.png" alt="News badge, black" width="120" height="120" loading="lazy" /></div><dl class="hb-sw__cap"><dt>Brand</dt><dd>Swedol &amp; Tools</dd><dt>Color</dt><dd>Black</dd></dl></figure><figure class="hb-sw__card"><div class="hb-sw__stage hb-sw__stage--grey" role="img" aria-label="Swedol / Swedol accent brand"><img class="hb-newsimg" src="/images/hero-banner-news-green.png" alt="News badge, green" width="120" height="120" loading="lazy" /></div><dl class="hb-sw__cap"><dt>Brand</dt><dd>Swedol</dd><dt>Color</dt><dd>Swedol accent brand</dd></dl></figure><figure class="hb-sw__card"><div class="hb-sw__stage hb-sw__stage--grey" role="img" aria-label="Tools / Tools accent brand"><img class="hb-newsimg" src="/images/hero-banner-news-red.png" alt="News badge, red" width="120" height="120" loading="lazy" /></div><dl class="hb-sw__cap"><dt>Brand</dt><dd>Tools</dd><dt>Color</dt><dd>Tools accent brand</dd></dl></figure></div><h3 class="ds-h3 ds-group">Text elements</h3><p class="ds-desc">Text uses Primary (black) or Primary inverted (white). Choose the one that is most readable on the image, and test it with the overlay.</p><div class="hb-sw"><figure class="hb-sw__card"><div class="hb-sw__stage " role="img" aria-label="Primary inverted"><div class="hb-txt hb-txt--inv"><b>Pre title</b><strong>Title</strong><span>Preamble</span></div></div><dl class="hb-sw__cap"><dt>Color</dt><dd>Primary inverted</dd></dl></figure><figure class="hb-sw__card"><div class="hb-sw__stage hb-sw__stage--grey" role="img" aria-label="Primary"><div class="hb-txt"><b>Pre title</b><strong>Title</strong><span>Preamble</span></div></div><dl class="hb-sw__cap"><dt>Color</dt><dd>Primary</dd></dl></figure></div><h3 class="ds-h3 ds-group">Buttons</h3><p class="ds-desc">The button group uses Primary and Secondary on a light image, and Primary inverted and Secondary inverted on a dark one. See <a class="inline-link inline-link--large inline-link--secondary" href="button.html">Button</a>.</p><div class="hb-sw"><figure class="hb-sw__card"><div class="hb-sw__stage hb-sw__stage--grey" role="img" aria-label="Primary + Secondary / 2 in a row"><div class="hb-btns"><button type="button" class="btn btn--primary btn--lg"><span class="btn__label">Button label</span></button><button type="button" class="btn btn--secondary btn--lg"><span class="btn__label">Button label</span></button></div></div><dl class="hb-sw__cap"><dt>Color</dt><dd>Primary + Secondary</dd><dt>Button group</dt><dd>2 in a row</dd></dl></figure><figure class="hb-sw__card"><div class="hb-sw__stage " role="img" aria-label="Primary inverted + Secondary inverted / 2 in a row"><div class="hb-btns"><button type="button" class="btn btn--primary-inverted btn--lg"><span class="btn__label">Button label</span></button><button type="button" class="btn btn--secondary-inverted btn--lg"><span class="btn__label">Button label</span></button></div></div><dl class="hb-sw__cap"><dt>Color</dt><dd>Primary inverted + Secondary inverted</dd><dt>Button group</dt><dd>2 in a row</dd></dl></figure></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  function box(img, x, y, w, h) { return function () { var r = img.getBoundingClientRect(); return { left: r.left + r.width * x / 672, top: r.top + r.height * y / 350, width: r.width * (w || 0) / 672, height: r.height * (h || 0) / 350 }; }; }
+  function col(img) { return function (r) { return r.left - (img.getBoundingClientRect().left - 36); }; }   /* every badge in the figure sits in one column, 24px gap between badge and picture */
+  function colR(img) { return function (r) { return img.getBoundingClientRect().right + 36 - (r.left + r.width); }; }
+  function figs() {
+    var m = $('#an-main-img'), p = $('#an-pd-img'), l = $('#an-logo-img'), n = $('#an-news-img');
+    DK.callouts($('#an-main'), [
+      { n: '1', box: box(m, 22, 14), side: 'left', len: col(m) },
+      { n: '2*', box: box(m, 22, 51), side: 'left', len: col(m) },
+      { n: '3a', box: box(m, 22, 90), side: 'left', len: col(m) },
+      { n: '3b', box: box(m, 22, 122), side: 'left', len: col(m) },
+      { n: '3c', box: box(m, 22, 149), side: 'left', len: col(m) },
+      { n: '4a', box: box(m, 22, 175), side: 'left', len: col(m) },
+      { n: '4b', box: box(m, 22, 210), side: 'left', len: col(m) },
+      { n: '4c', box: box(m, 22, 242), side: 'left', len: col(m) },
+      { n: '5', box: box(m, 22, 298), side: 'left', len: col(m) },
+      { n: '6', box: box(m, 336, 348), side: 'bottom', len: 44 }
+    ]);
+    DK.callouts($('#an-pd'), [{ n: '1', box: box(p, 60, 8), side: 'left', len: col(p) }, { n: '2', box: box(p, 36, 60), side: 'left', len: col(p) }]);
+    DK.callouts($('#an-logo'), [{ n: '1', box: box(l, 642, 48), side: 'right', len: colR(l) }]);
+    DK.callouts($('#an-news'), [{ n: '1', box: box(n, 640, 72), side: 'right', len: colR(n) }]);
+  }
+  var imgs = $$('.hb-anat img'), left = imgs.length;
+  imgs.forEach(function (i) { if (i.complete) left--; else i.addEventListener('load', function () { if (--left === 0) figs(); }); });
+  if (left === 0) figs();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

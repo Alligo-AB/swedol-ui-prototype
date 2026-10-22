@@ -118,9 +118,9 @@
   }
   .dn-bar__id {
     display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-text-primary);
-    font-size: 16px; line-height: 16px; font-weight: 600; letter-spacing: 0.48px; text-transform: uppercase;   /* label-md */
+    font-size: 20px; line-height: 24px; font-weight: 600; letter-spacing: 0; text-transform: uppercase;   /* title-lg (mobile), uppercase for the brand */
   }
-  .dn-bar__mark { flex: none; width: 16px; height: 16px; background: var(--ds-accent); }
+  .dn-bar__mark { flex: none; width: 0.7em; height: 0.7em;   /* = cap height of the uppercase brand text */ background: var(--ds-accent); }
   .dn-bar__v { color: var(--color-text-tertiary); margin-left: 4px; }
   .btn.dn-bar__btn { --btn-fg: var(--ds-accent); margin-right: calc((var(--btn-h) - var(--btn-icon)) / -2); }   /* eco-button Blank, icon only, Medium (components/css/button.css); icon in ECO DS Accent, 16px from the edge */
 
@@ -135,7 +135,7 @@
   }
   .dn.is-ready .dn-drawer { transition: transform var(--duration-medium-2) var(--ease-standard), visibility 0s linear var(--duration-medium-2); }
   .dn.is-ready .dn-scrim { transition: opacity var(--duration-medium-2) var(--ease-standard), visibility 0s linear var(--duration-medium-2); }
-  .dn-drawer.is-open { transform: none; visibility: visible; box-shadow: var(--shadow-elevation-drawer-left); transition-delay: 0s; transition-timing-function: var(--ease-decelerate-emphasized); }
+  .dn.is-ready .dn-drawer.is-open, .dn-drawer.is-open { transform: none; visibility: visible; box-shadow: var(--shadow-elevation-drawer-left); transition-delay: 0s; transition-timing-function: var(--ease-decelerate-emphasized); }
   .dn.is-drawer .dn-scrim { opacity: 1; visibility: visible; transition-delay: 0s; }
 
   .dn-lv { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--color-background-primary); }

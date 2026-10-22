@@ -23,6 +23,11 @@ Optional keys of the component dict: `pre_css` (links placed **before** `docs.cs
 
 Optional keys for a Storyblok tab (fourth page, `<slug>-storyblok.html`): `sb` (list of `(id, html)` sections, turns the tab on), `lead_sb` (second lead paragraph), `js_sb` (page script). Reference: `gen_collapsible.py` (`shot()` builds a screenshot with numbered `badge-number` markers in percent positions). One widget per tab: the tab documents only the widget of its own component; other widgets get their own tab on their own component page.
 
+`gen_colors.py` (2026-10-22) builds the three Colors pages in `../foundations/` (Overview / Primitive colors / Semantic tokens) with the custom page set; keys `out`, `crumb_group`, `first_plain` of `build.py` were added for it. The shared script is `../color-kit.js`. Old page: `old-source/colors.html`.
+
 `hero_switch.py` is not a page generator: it prints the blueprint SVG of the Switch header art (see `eco-doc-page`, section Header art).
 `hero_switch_iso.py` (isometric version, same camera as the figure) and `build_switch_header_versions.py` (builds `components/switch-header-versions.html`, the three header layouts side by side) belong to the same header-art experiment.
 `hero_switch_iso.py scene` prints the wide background scene (version 2b, figure included as a foreignObject).
+
+`gen_hero_banner_widget.py` (2026-10-21) builds the four-tab Hero banner Storyblok widget docs with the custom page set `pages=[…]` (see `build.py` `PG()`); `hero_pins.py` holds the marker positions for the Storyblok screenshots.
+`doc-kit.js` `DK.callouts`: `len` may be a function(rect) (used by `gen_hero_banner_widget.py` to put all badges of a figure in one column). `badge_list()` there renders legends with the round number badge.

@@ -75,10 +75,11 @@
 .ds-hero-scene text.lab { font-size: 8.5px; letter-spacing: 1.2px; text-transform: uppercase; opacity: .35; }
 .ds-hero-scene .fr { fill: none; stroke: var(--color-border-focus); stroke-width: 1; stroke-dasharray: 3 2; opacity: .6; }
 .ds-hero-scene .sw { stroke: var(--color-text-tertiary); stroke-width: .8; opacity: .45; filter: grayscale(.65); }  /* swatches: a hint of colour, not a colour chart */
-/* below 769px the scene stays, as a faint picture behind the text: 2.2 x the header width, shifted so the figure shows; the header clips it */
+/* 640-768px the scene stays, as a faint picture behind the text: 2.2 x the header width, shifted so the figure shows; the header clips it */
 @media (max-width: 768px) {
   .ds-hero-split--scene { overflow: hidden; }
   .ds-hero-scene { display: block; opacity: .2; --hs-draw: 1; --hs-fig: 1; left: -80%; right: auto; width: 220%; top: var(--dimension-spacing-space-24); bottom: auto; height: 300px; -webkit-mask-image: none; mask-image: none; }
 }
+@media (max-width: 639px) { .ds-hero-scene { display: none; } }  /* xs: too busy behind the text, the scene is off */
 @media (min-width: 769px) { .ds-hero-scene { display: block; } }
 @media (min-width: 1301px) { .ds-hero-scene { --hs-fig: .8; } }  /* the figure is clearer above 1300px */

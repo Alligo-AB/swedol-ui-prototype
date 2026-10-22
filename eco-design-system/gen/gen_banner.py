@@ -45,7 +45,7 @@ playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose a size, status a
     note('The markup has no motion. Closing animation is set in <a href="#motion" class="inline-link inline-link--medium inline-link--secondary">Motion</a>.')
 
 overview = '<h2 class="ds-h2">Overview</h2>' + desc('A banner carries a <strong>page-wide or system-level message</strong>: an outage, planned maintenance, a campaign or a notice to one customer group. It sits at the top and stays until it is closed or the situation changes.') + \
-    desc('Banners are set up by an administrator, not by user actions. See <a class="inline-link inline-link--large inline-link--secondary" href="#placement-and-priority">Placement and priority</a> for where they go and which one wins. Feedback on a click belongs in a ' + link_large('toast.html', 'Toast') + '; status next to one form or block in an ' + link_large('inline.html', 'Inline notification') + '.') + \
+    desc('Banners are set up by an administrator, not by user actions. See <a class="inline-link inline-link--large inline-link--secondary" href="#placement-and-priority">Placement and priority</a> for where they go and which one wins. Feedback on a click belongs in a ' + link_large('toast.html', 'Toast') + '; status next to one form or block in an ' + link_large('inline.html', 'Inline notification') + '. Not sure it is the right component? Start at the ' + link_large('notifications.html', 'Notifications guide') + '.') + \
     three_pages(SLUG, 'a banner', 'the values: tokens, sizes, measurements, states and requirements', 'how to build a banner and the CSS behind it')
 
 usage = '<h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3>' + desc('Use a banner for what concerns the whole page, the whole site or a customer group. Use it to:') + \
@@ -367,7 +367,7 @@ JS_CODE = JS_PRE + r'''
 '''
 
 C = dict(BASE, slug=SLUG, title='Banner',
-    lead='A banner carries a <strong>page-wide or system-level message</strong>: an outage, planned maintenance, a campaign or a notice to one customer group. It sits at the top and stays until it is closed or the situation changes.',
+    lead='A banner carries a <strong>page-wide or system-level message</strong>: an outage, planned maintenance, a campaign or a notice to one customer group. It sits at the top and stays until it is closed or the situation changes. Not sure it is the right notification? Start at the <a class="inline-link inline-link--xlarge" href="notifications.html">Notifications guide</a>.',
     lead_ex='Banners are set up by an administrator, not by user actions. Every example is the real component. Figma: ' + FIG + ', ' + FIG_GUIDE + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from ' + FIG + '.',
     lead_code='How to build a banner and the CSS behind it. The files are <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.',
