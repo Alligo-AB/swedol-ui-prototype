@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colors: Primitive colors – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/pill-segment-control.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    :root { --ds-subnav-h: 0px; }   /* the table header of the Cards / Table view sticks to the top of the window: no sticky bar above it from 1024px, where the table exists */
+    .ds-linkcard__visual svg { width: 100%; max-width: 176px; height: auto; padding: 0 12px; box-sizing: border-box; }
+    .ck-flow { display: flex; flex-direction: column; align-items: stretch; gap: 8px; width: 100%; }
+    .ck-flow__col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .ck-flow__h { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; text-transform: uppercase; color: var(--color-text-tertiary); }
+    .ck-flow__arrow { align-self: center; font-size: 24px; color: var(--color-icon-primary); }
+    .ck-box { display: block; padding: 8px 12px; background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; overflow-wrap: anywhere; }
+    .ck-box--hex { display: flex; align-items: center; gap: 8px; }
+    .ck-box--hex i { flex: none; width: 20px; height: 20px; background: var(--color-primitive-color-neutral-white); border: 1px solid var(--color-border-primary); }
+    .ck-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ck-btn { display: inline-flex; align-items: center; gap: 4px; min-height: 40px; padding: 0 16px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; text-transform: uppercase; }
+    .ck-btn--light { background: var(--color-surface-action-2); color: var(--color-text-primary); border: 1px solid var(--color-border-primary); }
+    .ck-btn--dark { background: var(--color-surface-action-1); color: var(--color-text-primary-inverted); }
+    .ck-btn .mo-ic { font-size: 20px; }
+    .ck-btn--dark .mo-ic { color: var(--color-icon-inverted); }
+    @media (min-width: 769px) {
+      .ck-flow { flex-direction: row; align-items: center; gap: 16px; }
+      .ck-flow__col { flex: 1 1 0; }
+      .ck-flow__arrow { transform: rotate(-90deg); }
+    }
+    .ck-use { display: flex; flex-direction: column; width: 100%; border: 1px solid var(--color-border-primary); background: var(--color-surface-raised-primary); }
+    .ck-ramp { display: flex; height: 40px; }
+    .ck-ramp span { flex: 1; }
+    .ck-split { display: flex; height: 120px; }
+    .ck-split span { height: 100%; }
+    .ck-bars { display: flex; }
+    .ck-bars span { flex: 1; padding: 8px 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; text-transform: uppercase; }
+    .ck-bars .ck-swedol { background: var(--color-accent-default); color: var(--color-text-primary); }
+    .ck-bars .ck-tools { background: var(--color-primitive-color-brand-tools-accent-brand); color: var(--color-text-primary-inverted); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../foundations-overview.html" class="breadcrumb-item">Foundations</a><span class="breadcrumb-sep">/</span><a href="colors.html" class="breadcrumb-item">Colors</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Primitive colors</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Foundations</span></div>
+    <h1 class="ds-title">Colors</h1>
+    <p class="ds-lead">Color in ECO is <strong>semantic</strong>. A token says what a color is <em>for</em>, not what it looks like, so text, surfaces, borders and status each have their own family and a component never needs a raw hex value.</p><p class="ds-lead">The base palette that the semantic tokens derive from, read live from the token package. Primitives are references: a component uses a semantic token, never a primitive.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Colors"><a class="tab" href="colors.html"><span class="tab__label">Overview</span></a><a class="tab" aria-current="page" href="colors-primitives.html"><span class="tab__label">Primitive colors</span></a><a class="tab" href="colors-tokens.html"><span class="tab__label">Semantic tokens</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="about"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">About primitive colors</h2><p class="ds-desc">Primitive colors are our base palette, which the semantic palette derives from. Below are the colors that define it. They are the references the <a class="inline-link inline-link--large inline-link--secondary" href="colors-tokens.html">semantic tokens</a> point to: a component uses the semantic token, never the primitive.</p><p class="ds-desc">Every swatch shows which semantic tokens use it. If you need a color that no primitive has, consult a designer before adding one.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="neutral"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Neutral (grey)</h2><p class="ds-desc">The neutral palette is foundational and dominant in our UI, which makes it easier to add specific brand colors and system colors and make them stand out.</p><p class="ds-desc">Neutral colors apply to most backgrounds, text and shapes. They do not typically have a meaning of their own, though they can imply things like disabled states.</p><p class="ds-desc">A mainly grey palette gives the designs nuance and creates opportunities for a purposeful use of color, which makes a good user experience. Each screen should be dominated by the greys and the core colors of black, white and the appropriate brand color for accent.</p><div class="ds-grid" id="g-neutral"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="system"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">System</h2><p class="ds-desc">The system colors help communicate messages. Use them for elements such as badges, alert and critical message boxes, or areas and sections that require immediate attention.</p><div class="ds-grid" id="g-system"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="concept-brand-colors"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Concept brand colors</h2><p class="ds-desc">Alligo concept brands each have their own set of these colors. They put some flavor into the site and accent the brand that it represents.</p><p class="ds-desc">Brand colors are mostly placed in common elements that occur throughout the site, which leaves the other colors, for example the customer price and the system colors, to give the visual aid they are there for.</p><h3 class="ds-h3">Swedol</h3><div class="ds-grid" id="g-swedol"></div><h3 class="ds-h3">Tools</h3><div class="ds-grid" id="g-tools"></div><div id="brand-more" hidden><h3 class="ds-h3">Other concept brands in the package</h3><p class="ds-desc">These primitives exist in the token package. No semantic token uses them yet.</p><div class="ds-grid" id="g-brand-more"></div></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="text-emphasis"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Text emphasis</h2><p class="ds-desc">Primitives named after how strong the text is. The text tokens derive from them, so a hex that looks like a grey here is still not a neutral.</p><div class="ds-grid" id="g-text"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="opacity"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Opacity</h2><p class="ds-desc">Transparent black and white. The overlay tokens (hover fills, scrims, layers) derive from them. The checkerboard shows the transparency.</p><div class="ds-grid" id="g-opacity"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="coverage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Coverage</h2><p class="ds-desc" id="coverage-text"></p></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../tokens-loader.js"></script>
+<script src="../color-kit.js"></script>
+<script src="../../components/js/pill-segment-control.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var K = COLORKIT, GROUPS = ['g-neutral', 'g-system', 'g-swedol', 'g-tools', 'g-brand-more', 'g-text', 'g-opacity'];
+  var NEUTRAL = ['neutral-black'].concat(['90', '80', '70', '60', '50', '40', '30', '20', '15', '10', '05', '02'].map(function (n) { return 'neutral-grey-' + n; }), ['neutral-white']);
+  var SYSTEM = ['dark-navy', 'ultramarine', 'sky-blue', 'ice-blue', 'deep-forrest-green', 'forrest-green', 'mint', 'mint-white', 'brownish-yellow', 'mustard-yellow', 'sun-yellow', 'light-yellow', 'maroon', 'dark-red', 'bright-red', 'coral-pink', 'light-pink', 'electric-blue', 'dark-cyan'].map(function (n) { return 'system-' + n; });
+  function render(pkg) {
+    K.clear(GROUPS);
+    var old = document.getElementById('other'); if (old) { old.previousElementSibling.remove(); old.remove(); }
+    var names = Object.keys(pkg.prim), shown = {};
+    function rest(prefix, list) { return list.concat(names.filter(function (n) { return n.indexOf(prefix) === 0 && list.indexOf(n) < 0; })); }
+    function place(id, list) {
+      var host = document.getElementById(id); host._cols = K.PRIMITIVE;
+      list.forEach(function (n) {
+        if (!pkg.prim[n] || shown[n]) return; shown[n] = 1;
+        K.add(host, { key: n, t: { var: pkg.prim[n].var, value: pkg.prim[n].value }, kind: 'fill', prim: true, used: pkg.used[n] });
+      });
+      return host._recs ? host._recs.length : 0;
+    }
+    place('g-neutral', rest('neutral-', NEUTRAL));
+    place('g-system', rest('system-', SYSTEM));
+    place('g-swedol', ['brand-swedol-accent-brand', 'brand-swedol-accent-light', 'brand-swedol-accent-dark']);
+    place('g-tools', ['brand-tools-accent-brand', 'brand-tools-accent-light', 'brand-tools-accent-dark']);
+    var more = place('g-brand-more', names.filter(function (n) { return n.indexOf('brand-') === 0; }));
+    document.getElementById('brand-more').hidden = !more;
+    place('g-text', names.filter(function (n) { return n.indexOf('text-') === 0; }));
+    place('g-opacity', names.filter(function (n) { return n.indexOf('opacity-') === 0; }));
+    var left = names.filter(function (n) { return !shown[n]; });
+    if (left.length) {   // anything the page above did not place (a new group in a later package version)
+      var cs = document.getElementById('coverage'), sep = cs.previousElementSibling.cloneNode(true), s = document.createElement('section');
+      s.className = 'ds-section'; s.id = 'other';
+      s.innerHTML = '<div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Other</h2><p class="ds-desc">Primitive colors not yet placed in a group on this page.</p><div class="ds-grid" id="g-other"></div></div>';
+      cs.parentNode.insertBefore(sep, cs); cs.parentNode.insertBefore(s, sep);
+      place('g-other', left);
+    }
+    K.finish();
+    var usedBy = {}; Object.keys(pkg.used).forEach(function (k) { pkg.used[k].forEach(function (t) { usedBy[t] = 1; }); });
+    document.getElementById('coverage-text').textContent = names.length + ' primitive colors in the token package, all shown on this page' + (left.length ? ' (' + left.length + ' in “Other”)' : '') + '. ' + Object.keys(usedBy).length + ' semantic tokens use one of them directly. Source: the package file ' + 'dist/css/base/color.css, read when the page loads.';
+  }
+  K.fetchPackage(render, function () {
+    var m = document.createElement('p'); m.className = 'ds-desc'; m.textContent = 'Could not load the token package (alligo-design-tokens) from the CDN. Check the connection and reload.';
+    document.getElementById('about').querySelector('.ds-inner').appendChild(m);
+  });
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

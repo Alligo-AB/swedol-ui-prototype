@@ -231,9 +231,6 @@ body[data-ds="foundation"] .ds-note + .ds-h3 { margin-top: 56px; }  /* note unde
 @media (min-width: 1024px) { .ds-grid { gap: 24px; grid-template-columns: repeat(4, 1fr); } }
 .ds-grid--3 { grid-template-columns: repeat(1, 1fr); }
 @media (min-width: 640px)  { .ds-grid--3 { grid-template-columns: repeat(3, 1fr); } }
-.ds-grid--feature { grid-template-columns: repeat(1, 1fr); }
-@media (min-width: 640px)  { .ds-grid--feature { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .ds-grid--feature { grid-template-columns: repeat(4, 1fr); } }
 
 .ds-swatch { display: flex; flex-direction: column; background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary); min-width: 0; }
 .ds-section--secondary .ds-swatch { background: var(--color-surface-raised-primary); }
@@ -258,6 +255,42 @@ body[data-ds="foundation"] .ds-note + .ds-h3 { margin-top: 56px; }  /* note unde
 .ds-swatch__name { font-size: 16px; line-height: 22px; font-weight: 600; overflow-wrap: anywhere; }
 .ds-swatch__meta { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); overflow-wrap: anywhere; }
 .ds-swatch__desc { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); margin-top: 4px; }
+.ds-swatch__row { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; min-width: 0; }
+.ds-swatch__label { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; color: var(--color-text-secondary); }
+.ds-swatch__val { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-primary); overflow-wrap: anywhere; }
+/* Colors page: cards / table switch (page level and per section) */
+.ds-viewbar { margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+.ds-viewbar .ds-h2 { margin: 0; }
+.ds-viewall { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 24px; }
+.ds-viewall__label { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; color: var(--color-text-secondary); }
+.ds-ctable { display: none; }
+.ds-section[data-view="table"] .ds-ctable { display: block; }
+.ds-section[data-view="table"] .ds-grid, .ds-section[data-view="table"] .ds-status { display: none; }
+.ds-ctable + .ds-h3, .ds-ctable + .ds-desc { margin-top: 32px; }
+/* Table view only when the text column is wide enough for the seven columns: color-kit.js sets html.ck-wide (column of at least 880px). On a page with a Contents list that is from about 1300px; below it the sections always show cards and the switches are hidden. */
+.ds-table-wrap.ds-ctable { overflow: visible; }   /* a scroll container would stop the sticky header */
+.ds-ctable .ds-table thead th { white-space: normal; position: sticky; top: var(--ds-subnav-h, 64px); z-index: 2; vertical-align: top; padding-top: 18px; border-bottom: 0; box-shadow: inset 0 -1px 0 var(--color-border-primary); }   /* sticks under the sticky on-page nav; line as shadow because collapsed borders do not travel with a sticky cell */
+:root:not(.ck-wide) :is(.ds-ctable, .ds-viewall, .ds-viewbar .pill-segment-control) { display: none !important; }
+:root:not(.ck-wide) .ds-section[data-view="table"] .ds-grid { display: grid; }
+:root:not(.ck-wide) .ds-section[data-view="table"] .ds-status { display: grid; }
+
+.ds-ctable .ds-table td, .ds-ctable .ds-table th { vertical-align: top; padding: 22px 12px 11px; }   /* 12px side padding so the seven columns fit the column */
+/* Row content starts on the first line and that line is centered on the 40px swatch (swatch cell: 12px top; text line 20px: 12 + (40 − 20) / 2 = 22px; copy button 32px: 12 + 4 = 16px) */
+.ds-ctable .ds-table td.ds-ctable__prevcol { padding-top: 12px; }
+/* header: the first label line stays centered in the 56px header, a wrapped label grows downwards (18px + 20px line + 18px = 56px) */
+.ds-ctable .ds-table td.ds-ctable__tok { padding-top: 16px; }
+.ds-ctable .ds-table td.ds-ctable__tok .ds-copyname { min-height: 32px; align-items: flex-start; }   /* a wrapped token grows downwards: first line stays centered on the 32px button */
+.ds-ctable .ds-table td.ds-ctable__tok .ds-copyname__text { padding-top: 6px; }
+.ds-ctable .ds-table td:nth-child(4), .ds-ctable .ds-table td:nth-child(5) { white-space: nowrap; }   /* hex and rgb on one line */
+.ds-ctable__prevcol { width: 1%; white-space: nowrap; }
+.ds-ctable .ds-ctable__text { min-width: 140px; max-width: 320px; }
+.ds-ctable .ds-copyname { margin-top: 0; }
+.ds-ctable .ds-copyname__text { white-space: normal; overflow-wrap: anywhere; min-width: 0; }   /* a long token wraps in the table instead of widening it */
+.ds-ctable .ds-table tbody th { white-space: normal; overflow-wrap: anywhere; }
+.ds-swatch__row .ds-copyname, .ds-ctable .ds-copyname { display: flex; justify-content: space-between; width: 100%; }   /* copy button at the far right of its table cell */
+.ds-swatch__row .ds-copyname { gap: 8px; }   /* cards: token and copy button on one line; a long token scrolls inside its own box */
+.ds-ctable__prev { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--color-border-primary); font-size: 18px; font-weight: 600; line-height: 1; overflow: hidden; }
+.ds-ctable__prev > span { display: block; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 .ds-swatch__warn { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; color: var(--color-text-danger-default); }
 
 /* ── Neutral ramp ─────────────────────────────────────────────── */
@@ -360,6 +393,9 @@ body[data-ds="component"] .ds-fig__stage { box-shadow: var(--shadow-elevation-b-
 .ds-prose > .ds-figs { margin: var(--ds-ps) 0 0; }
 .ds-prose > .ds-figs + :is(.ds-h2, .ds-h3, .ds-desc, .ds-bullets) { margin-top: var(--dimension-spacing-space-32); }  /* a new block after a figure and its caption: 32px mobile, 48px from 769px */
 @media (min-width: 769px) { .ds-prose > .ds-figs + :is(.ds-h2, .ds-h3, .ds-desc, .ds-bullets) { margin-top: var(--dimension-spacing-space-48); } }
+.ds-prose > .ds-figs + .ds-bullets--num { margin-top: var(--dimension-spacing-space-16); }   /* anatomy figure, then its numbered list: 16px (2026-10-21, from the user's spacing annotation) */
+.ds-prose > .ds-bullets--num:has(+ .ds-figs) { margin-bottom: 0; }
+.ds-prose > .ds-bullets--num + .ds-figs { margin-top: var(--dimension-spacing-space-40); }   /* the list, then the next figure: 40px */
 .ds-prose > :last-child { margin-bottom: 0; }
 
 /* ── Hub cards (index) ────────────────────────────────────────── */

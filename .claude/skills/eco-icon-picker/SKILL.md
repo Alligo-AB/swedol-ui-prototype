@@ -28,12 +28,12 @@ A text field with `data-icon-picker`. The value is the Material Symbols name (`l
 
 | Moment | What happens |
 |---|---|
-| Click or Tab into the field | A panel opens **on top of the field** (`top:0`, same width, 12px padding). Search box first, focused. |
+| Click or Tab into the field | A panel opens **on top of the field**: same width, 12px padding, and it grows upward over the field label and repeats it, so the label stays visible. The search box is a standard `eco-input` (`.input-wrap > .input-box > .form-input`, same size as the field) and lands exactly on the field, never taller or moved. Focused first. |
 | Search box empty | **Recent** (last 8 picks, `localStorage`, shared by all pages) and **Popular** (top 60). |
 | Typing | Instant search over all icons. Ranked: name starts with > a name word starts with > a tag word starts with; each group by popularity. Max 60 shown, header says `Results (n)`. No match: "No icons match …". |
 | Click an icon | Name goes into the field, `input` event fires, panel closes, focus back on the field. |
 | Esc / click outside | Closes without changing the value. |
-| Focus ring on the search box | Hidden when opened with the mouse, shown when opened with Tab. |
+| Focus ring on the search box | Standard eco-input ring (`body.keyboard-nav`): shown with Tab, not with the mouse. |
 
 Icons in the grid are shown Outlined, Fill 0, Weight 300, Grade 0, 24px, the same as icons in the components.
 
@@ -47,6 +47,6 @@ Icons in the grid are shown Outlined, Fill 0, Weight 300, Grade 0, 24px, the sam
 
 ### Flags
 
-- No Figma component. Dimensions (42px search, 40px icon cells, 176px grid height, 60 results) are decided in code. If design wants a Figma version, replace this section.
+- No Figma component. Dimensions (40px icon cells, 176px grid height, 60 results) are decided in code. If design wants a Figma version, replace this section.
 - `icon-picker-data.js` is a 1.4 MB copy of the Google Fonts Material Symbols metadata (August 2026 snapshot). Refresh by re-downloading `https://fonts.google.com/metadata/icons?key=material_symbols&incomplete=true` and rewriting the file as `window.ECO_ICONS=[[name,"tags"],...]` sorted by `popularity`.
 - The 1.4 MB file is fine for a prototype. For production, serve a smaller list or search server-side.

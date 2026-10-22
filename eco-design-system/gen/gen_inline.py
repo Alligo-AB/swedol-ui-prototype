@@ -277,7 +277,7 @@ JS_CODE = JS_PRE + r'''
 '''
 
 C = dict(BASE, slug=SLUG, title='Inline notification',
-    lead='An inline notification gives <strong>feedback right where the user is working</strong>: next to a form, a quantity field or a delivery estimate. It stays in the page until the user acts or the state changes. It never disappears by itself.',
+    lead='An inline notification gives <strong>feedback right where the user is working</strong>: next to a form, a quantity field or a delivery estimate. It stays in the page until the user acts or the state changes. It never disappears by itself. Not sure it is the right notification? Start at the <a class="inline-link inline-link--xlarge" href="notifications.html">Notifications guide</a>.',
     lead_ex='The buttons in <a class="inline-link inline-link--xlarge" href="#in-action">In action</a> show the statuses appearing in context. Figma: ' + FIG + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from ' + FIG + '.',
     lead_code='How to build an inline notification and the CSS behind it. The files are <code>eco-design-system/notifications.css</code> and <code>notifications.js</code>.',

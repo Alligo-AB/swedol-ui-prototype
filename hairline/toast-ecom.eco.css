@@ -1,0 +1,21 @@
+/* ECO skin for the toast-ecom figure and its bench. The figure only marks its parts with data-part; this file paints them from tokens. */
+:root, :root[data-theme] { --ground: var(--color-background-primary, #ffffff); --ink: var(--color-text-primary, #000000); --muted: var(--color-surface-50, #737373); --line: var(--color-border-primary, #e5e5e5); }
+body { font-family: 'Breuer Condensed', Arial, sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.tag, .label, output, button, #rules { font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.56px; text-transform: uppercase; }
+button, .plate { border-radius: 0; }
+input[type="range"]::-webkit-slider-thumb { border-radius: 0; }
+
+[data-hairline] {
+  --hl-plate: var(--color-background-primary, #ffffff);
+  --hl-hi: var(--color-surface-100, #000000);
+  --hl-edge: var(--color-surface-40, #939595);
+  --hl-mid: var(--color-surface-20, #cccccc);
+  --hl-lo: var(--color-border-primary, #e5e5e5);
+}
+[data-hairline] [data-part="cursor"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline] [data-part="ink"], [data-hairline] [data-part="ink-top"], [data-hairline] [data-part="label"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] path.m[data-part="ink-top"] { fill: var(--color-surface-90, #222222); } /* hover */
+[data-hairline] [data-part="tshadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+[data-hairline] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); } /* hover on the blank button */

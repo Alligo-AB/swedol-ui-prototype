@@ -69,3 +69,83 @@
 [data-hairline] [data-part="thumb"] { fill: var(--color-surface-100, #000000); }
 [data-hairline] [data-part="halo"] { fill: none; }
 [data-hairline] [data-part="halo"][data-hover] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+
+/* button group figure: label black, selected/hovered top = black-12 (shown by data-show) */
+[data-hairline] [data-part="bg-label"] { fill: var(--color-surface-100, #000000); }
+[data-hairline] [data-part="bg-tint"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); opacity: 0; transition: opacity var(--duration-fast-2, 150ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
+[data-hairline] [data-part="bg-tint"][data-show] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="bg-tint"] { transition: none; } }
+.ds-card__visual--hairline [data-hairline-card="button-group"] { transform: translateY(-3px); }
+/* textarea figure: same colours as input (label/text black, placeholder and hint grey, faint far wall) */
+.ds-card__visual--hairline [data-hairline-card="textarea"] { transform: translateY(-4px); }
+[data-hairline="textarea"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); }
+/* tabs figure: label, divider, active and hover line */
+[data-hairline="tabs"] [data-part="label"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="tabs"] [data-part="label-hover"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="tabs"] [data-part="line"] { fill: var(--color-surface-20, #cccccc); }
+[data-hairline="tabs"] [data-part="bar"] { fill: var(--color-surface-100, #000000); }
+[data-hairline="tabs"] [data-part="bar-hover"] { fill: var(--color-surface-10, #e5e5e5); }
+.ds-card__visual--hairline [data-hairline-card="tabs"] { transform: translateY(0px); }
+[data-hairline="tabs"] [data-part="count"] { fill: var(--color-surface-danger-default, #d40f0f); }
+/* pill segment control figure: grey track (darker on hover), black pill, black labels, white on the pill */
+[data-hairline="pill"] [data-part="track"] { fill: var(--color-surface-disabled, #e5e5e5); }
+[data-hairline="pill"] [data-part="track"][data-hover] { fill: var(--color-border-tertiary, #cccccc); }
+[data-hairline="pill"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-surface-disabled, #e5e5e5), #000 22%); }
+[data-hairline="pill"] [data-part="track-wall"][data-hover] { fill: color-mix(in srgb, var(--color-border-tertiary, #cccccc), #000 22%); }
+[data-hairline="pill"] [data-part="pill"] { fill: var(--color-surface-100, #000000); }
+[data-hairline="pill"] [data-part="bar"] { fill: var(--color-text-action-primary, #000000); }
+[data-hairline="pill"] [data-part="bar-on"] { fill: #ffffff; }
+.ds-card__visual--hairline [data-hairline-card="pill"] { transform: translateY(-4px); }
+/* icon-picker figure: field value, panel title, search box, icons, cell tint; the panel fades with its unfold */
+[data-hairline="icon-picker"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="icon-picker"] [data-part="bar-on"], [data-hairline="icon-picker"] [data-part="chev"], [data-hairline="icon-picker"] [data-part="title"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="icon-picker"] [data-part="sbox"] { stroke: var(--color-surface-100, #000000); }
+[data-hairline="icon-picker"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
+.ds-card__visual--hairline [data-hairline-card="icon-picker"] { transform: translateY(-4px); }
+[data-hairline="icon-picker"] [data-part="menu"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
+[data-hairline="icon-picker"] [data-part="menu"][data-open] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { [data-hairline="icon-picker"] [data-part="menu"] { transition: none; } }
+[data-hairline="icon-picker"] [data-part="track-wall"] { fill: color-mix(in srgb, var(--color-background-primary, #ffffff), #000 7%); } /* far wall of the recessed field */
+
+/* toast figure: Success Weak toast floating with a shadow (flat green strip, green check disc, black text) */
+[data-hairline="toast"] [data-part="tshadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+[data-hairline="toast"] [data-part="status"], [data-hairline="toast"] [data-part="icon"] { fill: var(--color-surface-success-default, #248616); }
+[data-hairline="toast"] [data-part="tick"] { fill: var(--color-surface-raised-primary, #ffffff); }
+[data-hairline="toast"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="toast"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); } /* hover on the close mark */
+.ds-card__visual--hairline [data-hairline-card="toast"] { transform: translateY(14px); }
+
+/* toast-ecom figure: floating toast with its shadow on the slab; text, tile, buttons */
+[data-hairline="toast-ecom"] [data-part="tshadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+[data-hairline="toast-ecom"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="toast-ecom"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="toast-ecom"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); }
+.ds-card__visual--hairline [data-hairline-card="toast-ecom"] { transform: translateY(2px); }
+/* modal figure: dimmed slab (scrim), floating panel with its shadow; all three fade with the open state */
+[data-hairline] [data-part="scrim"] { fill: var(--color-surface-opacity-black-20, rgba(0, 0, 0, 0.2)); }
+[data-hairline] [data-part="shadow"] { fill: var(--color-surface-opacity-black-12, rgba(0, 0, 0, 0.12)); }
+[data-hairline] [data-part="fade"] { opacity: 0; transition: opacity var(--duration-medium-2, 300ms) var(--ease-standard, cubic-bezier(.35, 0, .35, 1)); }
+[data-hairline] [data-part="fade"][data-open] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { [data-hairline] [data-part="fade"] { transition: none; } }
+.ds-card__visual--hairline [data-hairline-card="modal"] { transform: translateY(2px); }
+[data-hairline="modal"] [data-part="rowhi"] { fill: var(--color-surface-5, #f2f2f2); } /* hover on the blank Cancel */
+/* banner figure: informational banner (weaker surface, default edge and icon), text bars, x tile, page content */
+[data-hairline="banner"] [data-part="banner"] { fill: var(--color-surface-information-weaker, #deeefd); }
+[data-hairline="banner"] [data-part="banner-edge"] { fill: var(--color-surface-information-default, #1e57f5); }
+[data-hairline="banner"] [data-part="bar-on"] { fill: var(--color-text-primary, #000000); }
+[data-hairline="banner"] [data-part="bar"] { fill: var(--color-text-tertiary, #737373); }
+[data-hairline="banner"] [data-part="title"] { fill: var(--color-text-secondary, #4d4d4d); }
+[data-hairline="banner"] [data-part="line"] { fill: var(--color-border-primary, #e5e5e5); }
+[data-hairline="banner"] [data-part="card"] { fill: var(--color-surface-5, #f2f2f2); }
+.ds-card__visual--hairline [data-hairline-card="banner"] { transform: translateY(-4px); }
+[data-hairline="banner"] [data-part="banner-rim"] { stroke: color-mix(in srgb, var(--color-surface-information-default, #1e57f5) 22%, #ffffff); } /* the banner's top outline, a little clearer */
+/* inline-notification figure: blue block with icon, text bars, black button */
+[data-hairline="inline-notification"] [data-part="bar-dk"], [data-hairline="inline-notification"] [data-part="btn"] { fill: var(--color-surface-100, #000000); }
+[data-hairline="inline-notification"] [data-part="btn-top"] { fill: var(--color-surface-90, #222222); }
+[data-hairline="inline-notification"] [data-part="bar"] { fill: var(--color-surface-40, #939595); }
+[data-hairline="inline-notification"] [data-part="note"] { fill: var(--color-surface-information-weaker, #e2f1ff); }
+[data-hairline="inline-notification"] [data-part="edge"], [data-hairline="inline-notification"] [data-part="icon"] { fill: var(--color-surface-information-default, #0066ff); }
+[data-hairline="inline-notification"] [data-part="icon-i"] { fill: #ffffff; }
+.ds-card__visual--hairline [data-hairline-card="inline-notification"] { transform: translateY(-4px); }
+[data-hairline="inline-notification"] [data-part="txt"] { fill: var(--color-text-secondary, #4d4d4d); }
+[data-hairline="inline-notification"] [data-part="note-line"] { stroke: color-mix(in srgb, var(--color-border-information-default, #0066ff), #fff 78%); }

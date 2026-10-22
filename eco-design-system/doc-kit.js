@@ -247,7 +247,7 @@
        el / box(): the part (an element, or a function returning a viewport rect).
        side: where the badge sits relative to the part: 'left' | 'right' | 'top' | 'bottom'.
        at: 'edge' (default, the middle of the edge that faces the badge) or 'center' (the middle of the part).
-       len: distance from the dot to the center of the badge, default 48px.
+       len: distance from the dot to the center of the badge, default 48px; or a function(rect) returning it (to line badges up in one column).
      Needs components/css/badge.css (.badge-number) and .ds-callout__* in docs.css. Redrawn on resize and when fonts load. */
   function callouts(fig, items) {
     var P = 24;
@@ -256,7 +256,7 @@
       $$('.ds-callout__line, .ds-callout__dot, .ds-callout__pin', fig).forEach(function (n) { n.remove(); });
       var fr = fig.getBoundingClientRect();
       items.forEach(function (it) {
-        var r = it.el ? it.el.getBoundingClientRect() : it.box(), L = it.len || 48, ctr = it.at === 'center';
+        var r = it.el ? it.el.getBoundingClientRect() : it.box(), L = typeof it.len === 'function' ? it.len(r) : (it.len || 48), ctr = it.at === 'center';
         var x = r.left - fr.left, y = r.top - fr.top, cx = x + r.width / 2, cy = y + r.height / 2, tx, ty, px, py;
         if (it.side === 'left')       { tx = ctr ? cx : x;               ty = cy; px = tx - L; py = ty; node('line', { left: px + P / 2, top: ty - 0.5, width: L - P / 2, height: 1 }); }
         else if (it.side === 'right') { tx = ctr ? cx : x + r.width;     ty = cy; px = tx + L; py = ty; node('line', { left: tx, top: ty - 0.5, width: L - P / 2, height: 1 }); }

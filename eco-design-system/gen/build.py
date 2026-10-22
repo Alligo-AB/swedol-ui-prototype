@@ -27,8 +27,15 @@ def sections(items):
     return ('\n' + SEP + '\n').join(out)
 
 
+def PG(c, kind):
+    """Custom page set (c['pages'], e.g. the Hero banner Storyblok widget docs): dict with kind, suffix, label, lead, secs, js."""
+    return [p for p in c['pages'] if p['kind'] == kind][0]
+
+
 def head(c, kind):
     names = {'ex': '', 'spec': ': Specifications', 'code': ': Code', 'sb': ': Storyblok widget'}
+    if c.get('pages'):
+        names = {p['kind']: (': ' + p['label'] if i else ('' if c.get('first_plain') else ': Storyblok widget')) for i, p in enumerate(c['pages'])}   # first_plain: the first page of the set has the plain title (Colors)
     css = list(c.get('css_before', [])) + list(BASE_CSS)   # css_before: component files whose rules the base files must override (textarea.css repeats .form-label)
     for n in c.get('css', []):
         if n not in css:
@@ -63,10 +70,13 @@ def head(c, kind):
 
 
 def crumbs(c, kind):
-    b = '<a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span>'
+    b = '<a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="%s" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span>' % c.get('crumb_group', ('../components-overview.html', 'Components'))   # crumb_group: (href, title) of the category, e.g. Foundations
     if c.get('parent'):   # a type of a hub (Badge, Notifications): Components / Notifications / Toast
         b += '<a href="%s" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span>' % c['parent']
-    if kind == 'ex':
+    if c.get('pages'):
+        first = c['pages'][0]['kind']
+        b += ('<span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % c['title']) if kind == first else '<a href="%s%s.html" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % (c['slug'], c['pages'][0]['suffix'], c['title'], PG(c, kind)['label'])
+    elif kind == 'ex':
         b += '<span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % c['title']
     else:
         b += '<a href="%s.html" class="breadcrumb-item">%s</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">%s</span>' % (c['slug'], c['title'], {'spec': 'Specifications', 'code': 'Code', 'sb': 'Storyblok widget'}[kind])
@@ -77,12 +87,14 @@ def tabs(c, kind):
     def t(href, label, cur):
         return '<a class="tab"%s href="%s"><span class="tab__label">%s</span></a>' % (' aria-current="page"' if cur else '', href, label)
     s = c['slug']
+    if c.get('pages'):
+        return '<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="%s">%s</nav></div>' % (c['title'], ''.join(t(s + p['suffix'] + '.html', p['label'], p['kind'] == kind) for p in c['pages']))
     return '<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="%s">%s%s%s</nav></div>' % (
         c['title'], t(s + '.html', 'Examples &amp; Guidelines', kind == 'ex'), t(s + '-specifications.html', 'Specifications', kind == 'spec'), t(s + '-code.html', 'Code', kind == 'code') + (t(s + '-storyblok.html', 'Storyblok widget', kind == 'sb') if c.get('sb') else ''))
 
 
 def intro(c, kind):
-    second = {'ex': c['lead_ex'], 'spec': c['lead_spec'], 'code': c['lead_code'], 'sb': c.get('lead_sb', '')}[kind]
+    second = PG(c, kind)['lead'] if c.get('pages') else {'ex': c['lead_ex'], 'spec': c['lead_spec'], 'code': c['lead_code'], 'sb': c.get('lead_sb', '')}[kind]
     return '''<section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
     <div class="ds-eyebrow-row"><span class="ds-eyebrow">%s</span>%s</div>
@@ -92,8 +104,8 @@ def intro(c, kind):
 
 
 def page(c, kind):
-    secs = {'ex': c['ex'], 'spec': c['spec'], 'code': c['code'], 'sb': c.get('sb', [])}[kind]
-    script = {'ex': c.get('js_ex', ''), 'spec': c.get('js_spec', ''), 'code': c.get('js_code', ''), 'sb': c.get('js_sb', '')}[kind]
+    secs = PG(c, kind)['secs'] if c.get('pages') else {'ex': c['ex'], 'spec': c['spec'], 'code': c['code'], 'sb': c.get('sb', [])}[kind]
+    script = PG(c, kind).get('js', '') if c.get('pages') else {'ex': c.get('js_ex', ''), 'spec': c.get('js_spec', ''), 'code': c.get('js_code', ''), 'sb': c.get('js_sb', '')}[kind]
     tail = '<script src="../doc-kit.js"></script>\n'
     if c.get('select_menu', True):
         tail += '<script src="../../components/js/select-menu.js"></script>\n'
@@ -101,7 +113,7 @@ def page(c, kind):
         tail += '<script src="%s"></script>\n' % j
     if script.strip():
         tail += '<script>\n(function () {\n  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;\n%s\n})();\n</script>\n' % script
-    if kind == 'code':
+    if kind == 'code' and not c.get('pages'):
         tail += '<script src="../tailwind-note.js"></script>\n'
     tail += '<script src="../toc.js"></script>\n<script src="../subnav.js"></script>\n'
     if c.get('tooltip', False):
@@ -111,8 +123,9 @@ def page(c, kind):
 
 
 def emit(c):
-    for kind, suffix in (('ex', ''), ('spec', '-specifications'), ('code', '-code')) + ((('sb', '-storyblok'),) if c.get('sb') else ()):
-        p = os.path.join(OUT, c['slug'] + suffix + '.html')
+    kinds = [(p['kind'], p['suffix']) for p in c['pages']] if c.get('pages') else (('ex', ''), ('spec', '-specifications'), ('code', '-code')) + ((('sb', '-storyblok'),) if c.get('sb') else ())
+    for kind, suffix in kinds:
+        p = os.path.join(c.get('out', OUT), c['slug'] + suffix + '.html')   # out: another folder, e.g. foundations/
         if os.path.exists(p) and '--force' not in sys.argv:   # the pages are the real files: never overwrite a hand-edited page by accident
             print('exists, skipped (use --force to overwrite):', p)
             continue

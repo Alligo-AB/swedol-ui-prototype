@@ -3343,9 +3343,13 @@
 
     /* ── Huvudmeny-drawer ─────────────────────────────────────── */
     function openMainMenuDrawer() {
+      var panel = document.getElementById('main-menu-panel');
+      void panel.offsetWidth; // flush stängt läge så slide-in alltid startar
       document.getElementById('main-menu-overlay').classList.add('is-open');
-      document.getElementById('main-menu-panel').classList.add('is-open');
-      document.body.style.overflow = 'hidden';
+      panel.classList.add('is-open');
+      // Scroll-lås först efter transitionen startat — på mobil ändrar overflow:hidden
+      // viewporten och kan annars få slide-in att hoppa över (visas utan animation)
+      requestAnimationFrame(function() { if (panel.classList.contains('is-open')) document.body.style.overflow = 'hidden'; });
     }
 
     function closeMainMenuDrawer() {

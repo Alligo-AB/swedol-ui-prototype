@@ -1,0 +1,21 @@
+<svg width="730" height="24" viewBox="0 0 730 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Hero / Components">
+<g id="Hero Banner/Power Deal Border">
+<g id="Border Placed=Top, Version=Large, Brand=Tools, Color=Tools Accent Brand" clip-path="url(#clip0_279_9641)">
+<path id="Vector" d="M461.5 24C467.718 15.2686 477.205 -0.100952 477.205 -0.100952H0V23.9999C0 23.9999 356.755 171.087 461.5 24Z" fill="url(#paint0_linear_279_9641)"/>
+<path id="Vector_2" d="M491.664 0L475.5 24H567L581.604 0H491.664Z" fill="#CD1125"/>
+<path id="Vector_3" d="M595.796 0L582.332 24.1009H647.778L662.819 0H595.796Z" fill="#CD1125"/>
+<path id="Vector_4" d="M677.17 0L663.09 24.1009H714.501L730 0H677.17Z" fill="#CD1125"/>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_279_9641" x1="473.104" y1="0.000111191" x2="0" y2="0.000111196" gradientUnits="userSpaceOnUse">
+<stop stop-color="#CD1125"/>
+<stop offset="1" stop-color="#CD1125" stop-opacity="0"/>
+</linearGradient>
+<clipPath id="clip0_279_9641">
+<rect width="730" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>

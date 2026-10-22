@@ -28,12 +28,8 @@
     '.ip-wrap>input{width:100%;box-sizing:border-box}' +
     '.ip-panel{position:absolute;top:calc(-1 * var(--dimension-spacing-space-12,12px));left:calc(-1 * var(--dimension-spacing-space-12,12px));right:calc(-1 * var(--dimension-spacing-space-12,12px));z-index:20;display:flex;flex-direction:column;gap:var(--dimension-spacing-space-12,12px);padding:var(--dimension-spacing-space-12,12px);background:var(--color-surface-raised-primary);box-shadow:var(--shadow-elevation-b-80)}' +
     '.ip-panel[hidden]{display:none}' +
-    '.ip-search{width:100%;box-sizing:border-box;height:42px;padding:var(--dimension-spacing-space-8,8px) var(--dimension-spacing-space-12,12px);font:inherit;font-size:16px;line-height:24px;color:inherit;background:var(--color-background-primary);border:1px solid var(--color-border-input-default)}' +
-    '.ip-search:focus-visible{outline:2px solid var(--color-border-focus);outline-offset:2px}' +
-    '.ip-search:focus{border-color:var(--color-border-selected)}' +
     '.ip-label{font-size:12px;line-height:18px;letter-spacing:0.24px;font-weight:600}' +
     '.ip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:var(--dimension-spacing-space-4,4px);max-height:176px;overflow-y:auto}' +
-    '.ip-panel.ip-mouse .ip-search[type="text"]:focus-visible{outline:0}' +
     '.ip-btn{display:flex;align-items:center;justify-content:center;height:40px;padding:0;color:var(--color-icon-primary);background:transparent;border:1px solid transparent;cursor:pointer}' +
     '.ip-btn:hover{background:var(--color-surface-navigation-hover)}' +
     '.ip-btn:focus-visible{outline:2px solid var(--color-border-focus);outline-offset:-2px}' +
@@ -49,9 +45,12 @@
     if (wrap) wrap.classList.add('ip-wrap'); else { wrap = mk('div', 'ip-wrap'); input.parentNode.insertBefore(wrap, input); wrap.appendChild(input); }
     var panel = mk('div', 'ip-panel'); panel.hidden = true; wrap.appendChild(panel);
     input.setAttribute('autocomplete', 'off');
-    var search = mk('input', 'ip-search'); search.type = 'text'; search.placeholder = 'Search icons'; search.setAttribute('aria-label', 'Search icons');
+    /* search = standard eco-input, same size as the field, so it lands on it without growing */
+    var fieldBox = input.closest('.input-box');
+    var searchWrap = mk('div', 'input-wrap'), searchBox = mk('div', 'input-box' + (fieldBox && fieldBox.classList.contains('input-box--sm') ? ' input-box--sm' : fieldBox && fieldBox.classList.contains('input-box--xs') ? ' input-box--xs' : ''));
+    var search = mk('input', 'form-input ip-search'); search.type = 'text'; search.placeholder = 'Search icons'; search.setAttribute('aria-label', 'Search icons');
     var body = mk('div'); body.style.cssText = 'display:flex;flex-direction:column;gap:var(--dimension-spacing-space-12,12px)';
-    panel.appendChild(search); panel.appendChild(body);
+    searchBox.appendChild(search); searchWrap.appendChild(searchBox); panel.appendChild(searchWrap); panel.appendChild(body);
 
     var skip = false, mouse = false;   /* mouse open: no focus ring on the search box; keyboard (Tab) open keeps it */
     input.addEventListener('pointerdown', function () { mouse = true; });
@@ -90,7 +89,16 @@
       if (!total) body.appendChild(mk('div', 'ip-empty', 'No icons match "' + search.value.trim() + '".'));
     }
     function open() { loadData(function () { show(); }); }
-    function show() { panel.classList.toggle('ip-mouse', mouse); mouse = false; search.value = ''; render(); panel.hidden = false; search.focus(); }
+    function show() {
+      /* panel grows upward over the field label and repeats it, so the label stays visible */
+      var old = panel.querySelector('.ip-field-label'); if (old) old.remove();
+      var lab = wrap.parentNode.querySelector('label');
+      panel.style.top = '';
+      if (lab) {
+        var up = wrap.getBoundingClientRect().top - lab.getBoundingClientRect().top;
+        if (up > 0) { var c = lab.cloneNode(true); c.classList.add('ip-field-label'); c.removeAttribute('for'); c.style.margin = '0 0 calc(' + (up - lab.getBoundingClientRect().height) + 'px - var(--dimension-spacing-space-12,12px)) 0'; /* search box lands exactly on the input */ panel.insertBefore(c, panel.firstChild); panel.style.top = 'calc(-1 * (' + up + 'px + var(--dimension-spacing-space-12,12px)))'; }
+      }
+      panel.classList.toggle('ip-mouse', mouse); mouse = false; search.value = ''; render(); panel.hidden = false; search.focus(); }
     function close() { panel.hidden = true; skip = true; input.focus(); skip = false; }
 
     input.addEventListener('focus', function () { if (!skip) open(); });

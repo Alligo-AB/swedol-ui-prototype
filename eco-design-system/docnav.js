@@ -27,8 +27,8 @@
         { title: 'Links', items: [c('links-guide', 'Links guide', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
         { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb', { children: [c('breadcrumb-base', 'Base')] }), c('pagination', 'Pagination'), c('tooltip', 'Tooltip')] },
         { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible')] },
-        { title: 'Patterns', items: [c('patterns-overview', 'Patterns overview'), c('breadcrumb-bar', 'Breadcrumb Bar'), { id: 'hero-banner', t: 'Hero banner', soon: true }, { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }, f('docs-table', 'Docs table')] },
-        { title: 'Storyblok widget', items: [c('collapsible-storyblok', 'Collapsible', { sb: true })] },
+        { title: 'Patterns', items: [c('patterns-overview', 'Patterns overview'), c('breadcrumb-bar', 'Breadcrumb Bar'), c('hero-banner-widget', 'Hero banner'), { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }, f('docs-table', 'Docs table')] },
+        { title: 'Storyblok widget', items: [c('hero-banner-widget-storyblok', 'Hero banner widget', { sb: true }), c('collapsible-storyblok', 'Collapsible', { sb: true })] },
         { title: 'Drafts', items: [c('role-tier-card', 'Role tier card')] }
       ]
     },
@@ -43,7 +43,7 @@
     }
   };
 
-  var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code|storyblok)$/, '');
+  var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code|storyblok|usage|reference|primitives|tokens)$/, '');
   var cur = null;   // { cat, id }
   Object.keys(NAV).forEach(function (k) {
     var n = NAV[k];
@@ -105,7 +105,7 @@
   wrap.innerHTML =
     '<nav class="dn-rail" aria-label="ECO Design System">' +
       '<div class="dn-rail__top">' +
-        '<a class="dn-home" href="' + D + 'index.html" aria-label="ECO Design System, start page"' + (pageId === 'index' ? ' aria-current="page"' : '') + '><span class="dn-home__mark"></span><span>ECO<br>Design<br>System<br>V.1</span></a>' +
+        '<a class="dn-home" href="' + D + '" aria-label="ECO Design System, start page"' + (pageId === 'index' ? ' aria-current="page"' : '') + '><span class="dn-home__mark"></span><span>ECO<br>Design<br>System<br>V.1</span></a>' +
         '<button class="dn-dest" type="button" data-search><span class="dn-ms" aria-hidden="true">search</span><span>Search</span></button>' + dest +
       '</div><div class="dn-rail__gap"></div>' +
       '<div class="dn-rail__tools"><hr><button class="dn-tool" type="button" aria-label="Dark mode" data-dark disabled><span class="dn-ms" aria-hidden="true">dark_mode</span></button></div>' +
@@ -240,7 +240,7 @@
   var cats = Object.keys(NAV);
   var bar = document.createElement('div');
   bar.innerHTML =
-    '<header class="dn-bar"><a class="dn-bar__id" href="' + D + 'index.html"><span class="dn-bar__mark"></span><span>ECO Design System <span class="dn-bar__v">V.1</span></span></a>' +
+    '<header class="dn-bar"><a class="dn-bar__id" href="' + D + '"><span class="dn-bar__mark"></span><span>ECO Design System <span class="dn-bar__v">V.1</span></span></a>' +
       '<button class="btn btn--blank btn--md btn--icon dn-bar__btn" type="button" aria-expanded="false" aria-controls="dn-drawer" aria-label="Menu"><span class="btn__icon" aria-hidden="true">menu</span></button></header>' +
     '<div class="dn-scrim"></div>' +
     '<nav class="dn-drawer" id="dn-drawer" aria-label="ECO Design System">' +
