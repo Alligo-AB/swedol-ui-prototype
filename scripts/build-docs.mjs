@@ -1,6 +1,6 @@
 // Builds the ECO Design System docs into dist/ with the same folder layout as the repo,
 // so the root-absolute and relative paths in the docs keep working unchanged.
-import { cpSync, copyFileSync, mkdirSync, rmSync } from 'node:fs';
+import { cpSync, copyFileSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -28,3 +28,6 @@ for (const dir of ['components', 'hairline', 'images']) {
 const tokensRel = join('.claude', 'skills', 'eco-tokens', 'tokens.json');
 mkdirSync(dirname(join(out, tokensRel)), { recursive: true });
 copyFileSync(join(root, tokensRel), join(out, tokensRel));
+
+// Ask search engines not to crawl or index the docs (internal site)
+writeFileSync(join(out, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
