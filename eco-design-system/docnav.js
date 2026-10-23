@@ -224,7 +224,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     if (t && !sameUrl(t)) { try { sessionStorage.setItem('dn-noarrive', Date.now()); } catch (err) {} }
   });
   wrap.querySelector('.dn-rail').addEventListener('click', function (e) {   // any category in the rail (hover has already opened its panel): no reload, no arrival sequence
-    var d = e.target.closest('a.dn-dest[data-cat]');
+    var d = e.target.closest('a.dn-dest[data-cat], a.dn-home');   // the home button too: the rail is already out, it must not slide in again
     if (!d) return;
     if (sameUrl(d)) { e.preventDefault(); return; }
     try { sessionStorage.setItem('dn-noarrive', Date.now()); } catch (err) {}
@@ -254,6 +254,11 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
       '<button class="btn btn--blank btn--md btn--icon dn-bar__search" type="button" data-search aria-label="Search"><span class="btn__icon" aria-hidden="true">search</span></button></header>' +
     '<div class="dn-scrim"></div>' +
     '<nav class="dn-drawer" id="dn-drawer" aria-label="ECO Design System">' +
+      '<div class="dn-drawer__bar">' +
+        '<button class="btn btn--blank btn--md btn--icon dn-drawer__btn" type="button" aria-label="Close menu"><span class="btn__icon" aria-hidden="true">menu_open</span></button>' +
+        '<span class="dn-bar__div" aria-hidden="true"></span>' +
+        '<a class="btn btn--blank btn--md dn-bar__id" href="' + D + '"><span class="btn__label"><span class="dn-bar__mark"></span><span>ECO Design System <span class="dn-bar__v">V.1</span></span></span></a>' +
+      '</div>' +
       '<div class="dn-lv dn-lv1">' +
         cats.map(function (k) {
           if (NAV[k].direct) return '<a class="dn-mrow" href="' + NAV[k].overview.href + '"' + (cur && cur.cat === k ? ' aria-current="true"' : '') + '><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">' + NAV[k].icon + '</span><span class="dn-mrow__t">' + NAV[k].label + '</span></a>';
@@ -289,6 +294,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
   btn.addEventListener('click', function () { if (drawer.classList.contains('is-open')) { closeDrawer(); } else { openDrawer(); } });
   wrap.querySelector('.dn-scrim').addEventListener('click', closeDrawer);
   drawer.addEventListener('click', function (e) {
+    if (e.target.closest('.dn-drawer__btn')) { closeDrawer(); return; }
     var cat = e.target.closest('.dn-mrow[data-cat]');
     if (cat) { level(cat.getAttribute('data-cat')); return; }
     if (e.target.closest('.dn-back')) { drawer.classList.remove('is-l2'); return; }

@@ -153,7 +153,7 @@
 
 /* ── Mobile / tablet (below 961px): header bar + drawer ─────────────────────────────── */
 @media (max-width: 960px) {
-  :root { --dn-bar: 64px; }
+  :root { --dn-bar: 80px; }
   .dn-rail, .dn-panel { display: none; }
   body { padding-top: calc(var(--dn-bar) + var(--pt-page)); }
   .ds-subnav { top: calc(var(--dn-bar) - var(--dn-hide, 0px)); }   /* the sticky on-page nav sits under the header, and follows it while it slides away */
@@ -162,30 +162,31 @@
   .dn-bar {
     transform: translateY(calc(-1 * var(--dn-hide, 0px)));   /* slides away with the scroll (docnav.js) */
     position: fixed; z-index: 103; top: 0; left: 0; right: 0; height: var(--dn-bar); display: flex; align-items: center; justify-content: space-between;
-    padding: 0 16px; background: var(--color-background-primary); border-bottom: 1px solid var(--color-border-primary);
+    padding: 0 16px; background: var(--color-background-primary); border-bottom: 1px solid var(--color-border-primary); box-shadow: var(--shadow-elevation-b-60);
   }
+  .dn.is-drawer .dn-bar { z-index: 100; }   /* menu open: the scrim (101) and the drawer (104) cover the header, which stays underneath; closed, the header keeps z-index 103 over the page */
   .dn-bar__id {
     display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-text-primary);
     font-size: 20px; line-height: 24px; font-weight: 600; letter-spacing: 0; text-transform: uppercase;   /* title-lg (mobile), uppercase for the brand */
   }
   .dn-bar__mark { flex: none; width: 0.7em; height: 0.7em;   /* = cap height of the uppercase brand text */ background: var(--ds-accent); }
   .dn-bar__v { color: var(--color-text-tertiary); margin-left: 4px; }
-  .btn.dn-bar__btn, .btn.dn-bar__search { --btn-fg: var(--ds-accent); }   /* eco-button Blank, icon only, Medium (components/css/button.css); icon in ECO DS Accent, 16px from the edge */
-  .btn.dn-bar__btn { margin-left: calc((var(--btn-h) - var(--btn-icon)) / -2); }
+  .btn.dn-bar__btn, .btn.dn-drawer__btn, .btn.dn-bar__search { --btn-fg: var(--ds-accent); }   /* eco-button Blank, icon only, Medium (components/css/button.css); icon in ECO DS Accent, 16px from the edge */
+  .btn.dn-bar__btn, .btn.dn-drawer__btn { margin-left: calc((var(--btn-h) - var(--btn-icon)) / -2); }
   .btn.dn-bar__search { margin-right: calc((var(--btn-h) - var(--btn-icon)) / -2); }
   .dn-bar__div { flex: none; width: 1px; height: 24px; margin-left: 8px; background: var(--color-border-primary); }
   .btn.dn-bar__id {   /* eco-button Blank, Medium; label keeps the brand type */
-    --btn-fg: var(--color-text-primary); --btn-tx: 0px; width: auto; margin-right: auto; margin-left: 8px;   /* 8px padding all round, like the icon buttons */
+    --btn-fg: var(--color-text-primary); --btn-hover: transparent; --btn-tx: 0px; width: auto; margin-right: auto; margin-left: 8px;   /* 8px padding all round, like the icon buttons */
     font-size: 20px; line-height: 24px; letter-spacing: 0; text-transform: uppercase;
   }
   .dn-bar__id .btn__label { display: flex; align-items: center; gap: 8px; }
 
   .dn-scrim {
-    position: fixed; z-index: 101; top: var(--dn-bar); left: 0; right: 0; bottom: 0; background: var(--color-surface-opacity-black-20);
+    position: fixed; z-index: 101; top: 0; left: 0; right: 0; bottom: 0; background: var(--color-surface-opacity-black-20);   /* covers the header too: the drawer opens on top of it */
     opacity: 0; visibility: hidden;
   }
   .dn-drawer {
-    position: fixed; z-index: 102; top: var(--dn-bar); bottom: 0; left: 0; width: min(320px, 100%); overflow: hidden;
+    position: fixed; z-index: 104; top: 0; bottom: 0; left: 0; width: min(320px, 100%); overflow: hidden;
     background: var(--color-background-primary); border-right: 1px solid var(--color-border-primary);
     transform: translateX(-100%); visibility: hidden;
   }
@@ -194,7 +195,11 @@
   .dn.is-ready .dn-drawer.is-open, .dn-drawer.is-open { transform: none; visibility: visible; box-shadow: var(--shadow-elevation-drawer-left); transition-delay: 0s; transition-timing-function: var(--ease-decelerate-emphasized); }
   .dn.is-drawer .dn-scrim { opacity: 1; visibility: visible; transition-delay: 0s; }
 
-  .dn-lv { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--color-background-primary); }
+  .dn-drawer__bar {   /* the header's hamburger, divider and logo, at the same place inside the drawer */
+    position: absolute; z-index: 2; top: 0; left: 0; right: 0; height: var(--dn-bar); display: flex; align-items: center;
+    padding: 0 16px; background: var(--color-background-primary); border-bottom: 1px solid var(--color-border-primary); box-shadow: var(--shadow-elevation-b-60);
+  }
+  .dn-lv { position: absolute; inset: var(--dn-bar) 0 0 0; display: flex; flex-direction: column; background: var(--color-background-primary); }
   .dn.is-ready .dn-lv { transition: transform var(--duration-medium-2) var(--ease-standard), visibility 0s linear var(--duration-medium-2); }
   .dn-lv2 { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-bottom: 32px; display: block; transform: translateX(100%); visibility: hidden; }
   .dn-drawer.is-l2 .dn-lv2 { transform: none; visibility: visible; transition-delay: 0s; }
