@@ -55,10 +55,12 @@
       .tk-drawer__lead { font-size: 16px; line-height: 22px; }   /* body-md mobile */
       .tk-drawer__foot { padding: 16px 24px; }
     }
-    .tk-drawer.is-leaving, .tk-scrim.is-leaving { animation: tk-out var(--duration-fast-3) var(--ease-accelerate-generic) forwards; }
+    .tk-scrim.is-leaving { animation: tk-out var(--duration-fast-3) var(--ease-accelerate-generic) forwards; }
+    .tk-drawer.is-leaving { animation: tk-out-right var(--duration-fast-3) var(--ease-accelerate-generic) forwards; }
     @keyframes tk-fade { from { opacity: 0; } }
-    @keyframes tk-in { from { opacity: 0; transform: translateX(24px); } }
+    @keyframes tk-in { from { transform: translateX(100px); } }
     @keyframes tk-out { to { opacity: 0; } }
+    @keyframes tk-out-right { to { transform: translateX(100px); } }
     @media (prefers-reduced-motion: reduce) { .tk-scrim, .tk-drawer { animation: none; } }
     .tk-count { margin: 12px 0 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
     .tk-wrap { margin-top: 16px; overflow: visible; }   /* a scroll container would stop the sticky header */
