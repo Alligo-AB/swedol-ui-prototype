@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Tokens – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="docs.css">
+  <link rel="stylesheet" href="docnav.css">
+  <link rel="stylesheet" href="../components/css/badge.css">
+  <link rel="stylesheet" href="../components/css/input.css">
+  <link rel="stylesheet" href="../components/css/list-item.css">
+  <link rel="stylesheet" href="../components/css/button.css">
+  <style>
+    /* page-local: layout of the toolbar and the token table; no component or token values */
+    body { min-width: 0; }   /* docs.css sets 320px; this page keeps shrinking below it */
+    .ds-section.ds-section--first { padding-bottom: 24px; }   /* lead text to the search: 24px mobile, 40px from 769px */
+    #tokens.ds-section { padding-top: 0; }
+    #tokens .tk-wrap { margin-top: 0; }
+    @media (min-width: 769px) { .ds-section.ds-section--first { padding-bottom: 40px; } }
+    .tk-sticky { position: sticky; top: var(--dn-bar, 0px); z-index: 3; padding: 16px 0 12px; background: var(--color-background-primary); box-shadow: -16px 0 0 var(--color-background-primary), 16px 0 0 var(--color-background-primary); }   /* the side shadows of the table card must not show beside the stuck bar */   /* search, filter and count stay in view; the table header sticks right under it (--tk-sticky-h, set by the script) */
+    .tk-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; }
+    .tk-bar .tk-search { flex: 1 1 280px; min-width: 0; }
+    .tk-filter { position: relative; flex: none; }
+    .tk-filter .btn__badge { background: var(--color-surface-100); }   /* black count, not the red alert badge */
+    @media (max-width: 768px) {   /* mobile: icon only, same square as .btn--icon, stays beside the search field */
+      .tk-bar { flex-wrap: nowrap; gap: 8px; }
+      .tk-bar .tk-search { flex: 1 1 0; }
+      .tk-filter { width: var(--btn-h); padding: 0; }
+      .tk-filter .btn__label { display: none; }
+    }
+    .tk-search :is(.input-wrap, .input-box, .form-input) { min-width: 0; }   /* the search field shrinks with the window (below ~334px too) while the filter button keeps its size */
+    .tk-search .form-input { width: 100%; text-overflow: ellipsis; }
+    .tk-filters { display: flex; flex-direction: column; margin: 0; }
+    .tk-filters { border: 0; padding: 0; min-width: 0; }
+    .tk-scrim { position: fixed; inset: 0; z-index: 9998; background: var(--color-surface-opacity-black-20); animation: tk-fade var(--duration-fast-4) var(--ease-decelerate-emphasized); }
+    /* Same build as the drawers on mypages/users.html (header 24/32, content 0/32/32, footer 24/32); the space around is for this docs site only, a product drawer sits flush at the edge */
+    .tk-drawer { position: fixed; z-index: 9999; top: 16px; right: 16px; bottom: 16px; width: min(500px, calc(100vw - 32px)); box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-drawer-right); animation: tk-in var(--duration-medium-3) var(--ease-decelerate-emphasized); }
+    .tk-drawer__head { position: relative; z-index: 1; display: flex; align-items: center; flex-shrink: 0; padding: 24px 32px; transition: box-shadow var(--duration-fast-3) var(--ease-standard); }
+    .tk-drawer__head.is-elevated { box-shadow: var(--shadow-elevation-b-60); }
+    .tk-drawer__head-text { flex: 1; padding: 4px 0; }
+    .tk-drawer__title { margin: 0; font-size: 26px; line-height: 26px; font-weight: 600; letter-spacing: 0; text-transform: uppercase; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* display-sm desktop */
+    .tk-drawer__body { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; padding: 0 32px 32px; }
+    .tk-drawer__lead { margin: 0; font-size: 17px; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-secondary); }   /* body-md desktop */
+    .tk-row { display: flex; align-items: center; min-height: 48px; }   /* the container owns the row height (eco-list-item rule 3); 48px like a Large menu row */
+    .tk-row .list-item { flex: 1; }
+    .tk-drawer__foot { position: relative; z-index: 1; flex-shrink: 0; padding: 24px 32px; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-t-60); }
+    .tk-drawer__foot .btn { width: 100%; }
+    @media (max-width: 768px) {   /* xs/sm: same values as the drawers on mypages/users.html */
+      .tk-drawer { top: 0; right: 0; bottom: 0; width: min(500px, 100%); }
+      .tk-drawer__head { padding: 16px 24px; }
+      .tk-drawer__title { font-size: 22px; line-height: 22px; }   /* display-sm mobile */
+      .tk-drawer__body { gap: 16px; padding: 0 24px 24px; }
+      .tk-drawer__lead { font-size: 16px; line-height: 22px; }   /* body-md mobile */
+      .tk-drawer__foot { padding: 16px 24px; }
+    }
+    .tk-drawer.is-leaving, .tk-scrim.is-leaving { animation: tk-out var(--duration-fast-3) var(--ease-accelerate-generic) forwards; }
+    @keyframes tk-fade { from { opacity: 0; } }
+    @keyframes tk-in { from { opacity: 0; transform: translateX(24px); } }
+    @keyframes tk-out { to { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .tk-scrim, .tk-drawer { animation: none; } }
+    .tk-count { margin: 12px 0 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .tk-wrap { margin-top: 16px; overflow: visible; }   /* a scroll container would stop the sticky header */
+    .tk-table { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md */
+    @media (min-width: 769px) { .tk-table { font-size: 17px; line-height: 24px; } }
+    .ds-table.tk-table thead th { position: sticky; top: calc(var(--dn-bar, 0px) + var(--tk-sticky-h, 0px)); z-index: 2; border-bottom: 0; box-shadow: inset 0 -1px 0 var(--color-border-primary), inset 0 4px 3px -3px var(--color-surface-opacity-black-05); }   /* grey header + one line under it; the frame is the card's own 1px border. The line is an inset shadow: a border of a collapsed table does not travel with a sticky header */
+    .ds-table.tk-table td, .ds-table.tk-table th { padding: 12px; vertical-align: middle; height: 64px; }
+    .ds-table.tk-table td:first-child, .ds-table.tk-table th:first-child { padding-left: 24px; width: 1%; white-space: nowrap; }
+    .ds-table.tk-table td:last-child, .ds-table.tk-table th:last-child { padding-right: 12px; width: 1%; }
+    .ds-table.tk-table tbody th.tk-name { white-space: normal; overflow-wrap: anywhere; word-break: normal; }   /* docs.css sets nowrap on row headers: a long token breaks downwards, at the hyphens first */
+    .tk-val { color: var(--color-text-secondary); overflow-wrap: anywhere; }
+    .tk-prev { display: flex; align-items: center; justify-content: flex-start; min-width: 40px; max-width: 100%; min-height: 40px; overflow: hidden; line-height: 1; }
+    .tk-prev--none { color: var(--color-text-tertiary); }
+    .tk-prev__aa { white-space: nowrap; color: var(--color-text-primary); }
+    .tk-prev__sw { flex: none; width: 32px; height: 32px; border: 1px solid var(--color-border-primary); background-color: var(--color-surface-raised-primary); background-image: linear-gradient(45deg, var(--color-surface-10) 25%, transparent 25%, transparent 75%, var(--color-surface-10) 75%), linear-gradient(45deg, var(--color-surface-10) 25%, transparent 25%, transparent 75%, var(--color-surface-10) 75%); background-size: 8px 8px; background-position: 0 0, 4px 4px; position: relative; }
+    .tk-prev__sw i { position: absolute; inset: 0; }
+    .tk-prev__bar { flex: none; height: 8px; background: var(--color-accent-default); outline: 1px solid var(--color-border-primary); }
+    .tk-prev__box { flex: none; width: 32px; height: 32px; background: var(--color-surface-raised-primary); }
+    .tk-prev__line { flex: none; width: 40px; height: 0; }
+    .tk-prev svg { flex: none; width: 40px; height: 40px; background: var(--color-surface-05); }
+    .tk-table tr[hidden] { display: none; }
+    .tk-empty { margin-top: 32px; }
+    .tk-empty[hidden] { display: none; }
+    .tk-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    @media (max-width: 1023px) {   /* cards up to the end of md; the table starts at lg (1024px) */
+      .ds-table.tk-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }   /* header hidden; each row is a small card */
+      .tk-table { display: block; }
+      .tk-wrap { background: none; box-shadow: none; }
+      .tk-table tbody { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }   /* every token is a card; one column below 640px (xs), two from 640px */
+      @media (max-width: 639px) { .tk-table tbody { gap: var(--dimension-spacing-space-12); } }   /* xs: 12px between the cards */
+      @media (min-width: 640px) { .tk-table tbody { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      .ds-table.tk-table tr { display: grid; grid-template-columns: minmax(40px, auto) minmax(0, 1fr) 32px; grid-template-areas: "prev name copy" "prev value copy" "type type type"; column-gap: 12px; row-gap: 4px; padding: 16px; background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary); }
+      .ds-table.tk-table td { display: block; padding: 0; height: auto; border: 0; width: auto; }
+      .ds-table.tk-table td:first-child { padding-left: 0; grid-area: prev; align-self: center; }
+      .ds-table.tk-table th.tk-name { display: block; grid-area: name; padding: 0; height: auto; border: 0; width: auto; }
+      .ds-table.tk-table td:nth-child(3) { grid-area: value; }
+      .ds-table.tk-table td:nth-child(4) { grid-area: type; padding-top: 8px; }
+      .ds-table.tk-table td:last-child { grid-area: copy; padding-right: 0; align-self: center; }
+    }
+  </style>
+</head>
+<body data-ds="component">
+<script src="docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Tokens</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Tokens</span></div>
+    <h1 class="ds-title">Design Tokens</h1>
+    <p class="ds-lead">Design tokens are the foundational values that define the visual design of the ECO Design System: colors, typography, spacing, borders, shadows and motion. Using the tokens keeps every product consistent, and a change to a token reaches every component that uses it.</p>
+    <p class="ds-lead">Every token from <code>alligo-design-tokens</code>, read live from the CDN this site already loads, plus the motion tokens of this site. Search by name or value, filter by category and copy a token as <code>var(--…)</code>.</p>
+  </div>
+</section>
+
+<section class="ds-section" id="tokens">
+  <div class="ds-page ds-inner">
+    <div class="tk-sticky" id="tk-sticky">
+    <div class="tk-bar">
+      <div class="form-field tk-search">
+        <label class="form-label" for="tk-q">Search tokens</label>
+        <div class="input-wrap"><div class="input-box">
+          <span class="input-icon input-icon--lg" aria-hidden="true">search</span>
+          <input class="form-input" id="tk-q" type="text" placeholder="Search by name or value" autocomplete="off" spellcheck="false">
+          <div class="input-actions"><button type="button" class="input-actions__btn input-actions__clear" aria-label="Clear"><span class="input-icon input-icon--fill" aria-hidden="true">cancel</span></button></div>
+        </div></div>
+      </div>
+      <button type="button" class="btn btn--secondary btn--md tk-filter" id="tk-filter" aria-haspopup="dialog"><span class="btn__icon" aria-hidden="true">tune</span><span class="btn__label">Filters</span></button>
+    </div>
+    <p class="tk-count" id="tk-count" role="status" aria-live="polite">Loading tokens…</p>
+    </div>
+
+    <div class="ds-table-wrap tk-wrap">
+      <table class="ds-table tk-table">
+        <thead><tr><th scope="col">Preview</th><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Category</th><th scope="col"><span class="tk-vh">Copy</span></th></tr></thead>
+        <tbody id="tk-body"></tbody>
+      </table>
+    </div>
+    <p class="ds-desc tk-empty" id="tk-empty" hidden>No tokens match. Try another word or clear the filters.</p>
+  </div>
+</section>
+
+<script src="doc-kit.js"></script>
+
+<script>
+(function () {
+  var BASE = 'https://unpkg.com/alligo-design-tokens@latest/dist/css/base/';
+  var FILES = ['dimension', 'string', 'font-family', 'font-weight', 'color', 'border', 'shadow', 'typography'];
+  var MOTION = [   // not in the package: defined in docs.css from the eco-motion skill, values read live from the page
+    ['--ease-decelerate-generic', 'Motion curve'], ['--ease-decelerate-emphasized', 'Motion curve'], ['--ease-accelerate-generic', 'Motion curve'], ['--ease-standard', 'Motion curve'],
+    ['--duration-fast-1', 'Motion duration'], ['--duration-fast-2', 'Motion duration'], ['--duration-fast-3', 'Motion duration'], ['--duration-fast-4', 'Motion duration'],
+    ['--duration-medium-1', 'Motion duration'], ['--duration-medium-2', 'Motion duration'], ['--duration-medium-3', 'Motion duration'], ['--duration-medium-4', 'Motion duration'],
+    ['--duration-slow-1', 'Motion duration'], ['--duration-slow-2', 'Motion duration'], ['--duration-slow-3', 'Motion duration'], ['--duration-slow-4', 'Motion duration']
+  ];
+  var RULES = [   // first match wins: [name test, type]
+    [/^--color-/, 'Color'], [/^--typography-/, 'Typography'], [/^--font-family-/, 'Font family'], [/^--font-weight-|^--dimension-font-weight-/, 'Font weight'],
+    [/^--dimension-font-size-/, 'Font size'], [/^--dimension-line-height-/, 'Line height'], [/^--dimension-letter-spacing-/, 'Letter spacing'], [/^--dimension-paragraph-spacing-/, 'Paragraph spacing'],
+    [/^--dimension-spacing-/, 'Spacing'], [/^--dimension-size-/, 'Size'], [/^--dimension-border-size-|^--border-/, 'Border'], [/^--dimension-layout-/, 'Layout'], [/^--dimension-breakpoint-/, 'Breakpoint'],
+    [/^--shadow-/, 'Shadow'], [/^--string-/, 'String']
+  ];
+  var TONE = { 'Color': 'info', 'Typography': 'warning', 'Font family': 'warning', 'Font weight': 'warning', 'Font size': 'warning', 'Line height': 'warning', 'Letter spacing': 'warning', 'Paragraph spacing': 'warning',
+    'Spacing': 'success', 'Size': 'success', 'Layout': 'success', 'Breakpoint': 'success', 'Border': 'neutral-grey', 'Shadow': 'neutral-grey', 'String': 'neutral-grey', 'Motion curve': 'neutral-dark', 'Motion duration': 'neutral-dark', 'Other': 'neutral-grey' };
+
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function typeOf(n) { for (var i = 0; i < RULES.length; i++) if (RULES[i][0].test(n)) return RULES[i][1]; return 'Other'; }
+  function parse(css, out, seen) {
+    css = css.replace(/\/\*[\s\S]*?\*\//g, '');
+    var re = /(--[\w-]+)\s*:\s*([^;]+);/g, m;
+    while ((m = re.exec(css))) {
+      var n = m[1], v = m[2].replace(/\s+/g, ' ').trim();
+      if (/^--string-/.test(n) && !/^--string-font-/.test(n)) continue;   // webshop content strings (store names, filter labels, states): data, not design; the font strings stay, the typography tokens use them
+      if (/-eco-ds-/.test(n)) continue;   // tokens of this documentation site (accent color, doc text style), not part of the product
+      if (seen[n] != null) { out[seen[n]].value = v; continue; }
+      seen[n] = out.length; out.push({ name: n, value: v, type: typeOf(n) });
+    }
+  }
+  function preview(t) {
+    var n = 'var(' + t.name + ')', none = '<span class="tk-prev tk-prev--none" aria-hidden="true">–</span>';
+    switch (t.type) {
+      case 'Color': return '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__sw"><i style="background:' + n + '"></i></span></span>';
+      case 'Typography': return '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__aa" style="font:' + n + '; font-size: min(' + (/var\(--dimension-font-size[^,]*,\s*([\d.]+px)/.exec(t.value) || [0, '24px'])[1] + ', 32px); line-height: 1">Aa</span></span>';
+      case 'Font family': return '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__aa" style="font-family:' + n + '; font-size: 24px">Aa</span></span>';
+      case 'Font weight': return '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__aa" style="font-weight:' + n + '; font-size: 24px">Aa</span></span>';
+      case 'Font size': return '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__aa" style="font-size: min(' + n + ', 32px); line-height: 1">Aa</span></span>';
+      case 'Letter spacing': return '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__aa" style="letter-spacing:' + n + '; font-size: 24px">Aa</span></span>';
+      case 'Spacing': case 'Size': return /px|rem|em/.test(t.value) ? '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__bar" style="width: min(' + n + ', 48px)"></span></span>' : none;
+      case 'Border': return '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__line" style="border-top:' + (/solid/.test(t.value) ? n : n + ' solid var(--color-border-dark)') + '"></span></span>';
+      case 'Shadow': return '<span class="tk-prev" aria-hidden="true"><span class="tk-prev__box" style="box-shadow:' + n + '"></span></span>';
+      case 'Motion curve':
+        var b = (t.value.match(/-?[\d.]+/g) || []).map(Number);
+        if (b.length !== 4) return none;
+        var s = 40, p = 6, w = s - 2 * p, x = function (v) { return (p + v * w).toFixed(1); }, y = function (v) { return (s - p - v * w).toFixed(1); };
+        return '<span class="tk-prev" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M' + x(0) + ' ' + y(0) + ' C' + x(b[0]) + ' ' + y(b[1]) + ' ' + x(b[2]) + ' ' + y(b[3]) + ' ' + x(1) + ' ' + y(1) + '" fill="none" stroke="var(--color-text-primary)" stroke-width="1.5"/></svg></span>';
+      default: return none;
+    }
+  }
+  function row(t) {
+    var txt = 'var(' + t.name + ')';
+    return '<tr data-type="' + esc(t.type) + '" data-q="' + esc((t.name + ' ' + t.value + ' ' + t.type).toLowerCase()) + '">' +
+      '<td>' + preview(t) + '</td>' +
+      '<th scope="row" class="tk-name" style="font-weight:400">' + esc(t.name) + '</th>' +
+      '<td class="tk-val">' + esc(t.value) + '</td>' +
+      '<td><span class="badge-basic badge-basic--' + TONE[t.type] + ' badge-basic--weaker">' + esc(t.type) + '</span></td>' +
+      '<td><button type="button" class="mo-copy" data-copy="' + esc(txt) + '" aria-label="Copy ' + esc(txt) + '"><span class="mo-ic" aria-hidden="true">content_copy</span></button></td></tr>';
+  }
+
+  var $ = DK.$, body = $('#tk-body'), q = $('#tk-q'), fb = $('#tk-filter'), picked = [], order = [], cnt = {}, count = $('#tk-count'), empty = $('#tk-empty'), box = q.closest('.input-box'), rows = [], total = 0;
+  function apply() {
+    var words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean), shown = 0;
+    box.classList.toggle('has-value', !!q.value);
+    rows.forEach(function (r) {
+      var ok = (!picked.length || picked.indexOf(r.dataset.type) > -1) && words.every(function (w) { return r.dataset.q.indexOf(w) > -1; });
+      r.hidden = !ok; if (ok) shown++;
+    });
+    count.textContent = shown === total ? total + ' tokens' : shown + ' of ' + total + ' tokens';
+    empty.hidden = shown > 0;
+  }
+
+  Promise.all(FILES.map(function (f) { return fetch(BASE + f + '.css').then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }); })).then(function (parts) {
+    var list = [], seen = {}, cs = getComputedStyle(document.documentElement);
+    parts.forEach(function (c) { parse(c, list, seen); });
+    MOTION.forEach(function (m) { var v = cs.getPropertyValue(m[0]).trim(); if (v) list.push({ name: m[0], value: v, type: m[1] }); });
+    total = list.length;
+    body.innerHTML = list.map(row).join('');
+    rows = [].slice.call(body.children);
+    list.forEach(function (t) { if (!cnt[t.type]) { cnt[t.type] = 0; order.push(t.type); } cnt[t.type]++; });
+    apply();
+  }).catch(function () {
+    count.textContent = 'Could not load the token package. Open this page through the local server (npx serve) with an internet connection.';
+  });
+
+  var sticky = $('#tk-sticky');
+  function stickyH() { document.documentElement.style.setProperty('--tk-sticky-h', sticky.offsetHeight + 'px'); }
+  if (window.ResizeObserver) new ResizeObserver(stickyH).observe(sticky); else addEventListener('resize', stickyH);
+  stickyH();
+  q.addEventListener('input', apply);
+  function badge() {
+    var b = fb.querySelector('.btn__badge'); if (b) b.remove();
+    if (picked.length) { b = document.createElement('span'); b.className = 'btn__badge'; b.setAttribute('aria-hidden', 'true'); b.textContent = picked.length; fb.appendChild(b); }
+    fb.setAttribute('aria-label', picked.length ? 'Filters, ' + picked.length + ' selected' : 'Filters');
+  }
+  function listHtml() {   // List Item (eco-list-item): check box + label, count as trailing text tertiary; the row around it is the container
+    return '<legend class="tk-vh">Category</legend>' + order.map(function (t) {
+      return '<div class="tk-row"><div class="list-item" role="checkbox" tabindex="0" aria-checked="' + (picked.indexOf(t) > -1) + '" data-value="' + esc(t) + '"><span class="list-item__fill"><span class="list-item__check" aria-hidden="true"></span><span class="list-item__label">' + esc(t) + '</span></span><span class="list-item__trail-text list-item__trail-text--tertiary">' + cnt[t] + '</span></div></div>';
+    }).join('');
+  }
+  function commit(root) {
+    picked = [].slice.call(root.querySelectorAll('.tk-filters [aria-checked="true"]')).map(function (i) { return i.dataset.value; });
+    badge(); apply();
+  }
+  function toggle(li) { li.setAttribute('aria-checked', String(li.getAttribute('aria-checked') !== 'true')); li.dispatchEvent(new CustomEvent('tk-toggle', { bubbles: true })); }
+  document.addEventListener('click', function (e) { var li = e.target.closest('.tk-filters .list-item[role]'); if (li) toggle(li); });
+  document.addEventListener('keydown', function (e) { var li = e.target.closest && e.target.closest('.tk-filters .list-item[role]'); if (li && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); toggle(li); } });
+  function openDrawer() {   // right-hand drawer at every width; padding, title size and button sizes follow the users.html drawers per breakpoint
+    var mob = !matchMedia('(min-width: 769px)').matches, opener = document.activeElement, still = matchMedia('(prefers-reduced-motion: reduce)').matches, closed = false;
+    var ov = document.createElement('div'), d = document.createElement('aside');
+    ov.className = 'tk-scrim'; d.className = 'tk-drawer'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'tk-dt'); d.tabIndex = -1;
+    d.innerHTML = '<div class="tk-drawer__head"><div class="tk-drawer__head-text"><h2 class="tk-drawer__title" id="tk-dt">Filter tokens</h2></div><button type="button" class="btn btn--blank btn--' + (mob ? 'md' : 'sm') + ' btn--icon" data-x aria-label="Close"><span class="btn__icon" aria-hidden="true">close</span></button></div>' +
+      '<div class="tk-drawer__body"><p class="tk-drawer__lead">Select the categories you want to see in the table.</p><fieldset class="tk-filters">' + listHtml() + '</fieldset></div>' +
+      '<div class="tk-drawer__foot"><button type="button" class="btn btn--primary btn--' + (mob ? 'lg' : 'sm') + '" data-x><span class="btn__label">Close</span></button></div>';
+    var hd = d.querySelector('.tk-drawer__head'), bd = d.querySelector('.tk-drawer__body');
+    bd.addEventListener('scroll', function () { hd.classList.toggle('is-elevated', bd.scrollTop > 0); });
+    function close() {
+      if (closed) return; closed = true; document.removeEventListener('keydown', key);
+      ov.classList.add('is-leaving'); d.classList.add('is-leaving');
+      var ms = still ? 0 : parseFloat(getComputedStyle(d).animationDuration) * 1000 || 0;
+      setTimeout(function () { ov.remove(); d.remove(); }, ms + 20);
+      if (opener && opener.focus) opener.focus();
+    }
+    function key(e) {
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key !== 'Tab') return;
+      var f = [].slice.call(d.querySelectorAll('button, [role=checkbox]')), first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && (document.activeElement === first || document.activeElement === d)) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+    d.addEventListener('click', function (e) {
+      if (e.target.closest('[data-x]')) close();
+    });
+    d.addEventListener('tk-toggle', function () { commit(d); });   // like the column settings drawer: a choice applies at once, the button only closes
+    ov.addEventListener('click', close);
+    document.addEventListener('keydown', key);
+    document.body.appendChild(ov); document.body.appendChild(d); d.focus();
+  }
+  fb.addEventListener('click', function () {
+    if (!order.length) return;
+    openDrawer();
+  });
+  body.addEventListener('click', function (e) {
+    var b = e.target.closest('.mo-copy'); if (!b) return;
+    var ic = b.firstChild, done = function () { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); };
+    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(done, done); else done();
+  });
+})();
+</script>
+</body>
+</html>

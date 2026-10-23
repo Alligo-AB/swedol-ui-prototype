@@ -1,6 +1,7 @@
 /* ECO doc site navigation: builds the Navigation Rail + Secondary navigation panel (docnav.css, from 961px).
    Load it right after <body> (so the page does not jump) and link docnav.css. The page list below is the single source.
    Current page = file name without .html and without -specifications / -code / -storyblok. Pages in no category (the start page) get the rail only. */
+document.documentElement.classList.add('ds-frame');   // framed layout on every page that has the navigation (docnav.css, from 961px)
 (function () {
   var D = '/eco-design-system/';
   function c(id, t, extra) { var o = { id: id, t: t, href: D + 'components/' + id + '.html' }; for (var k in extra) o[k] = extra[k]; return o; }
@@ -13,7 +14,7 @@
       label: 'Foundations', icon: 'interests',
       overview: { id: 'foundations-overview', t: 'Foundations Overview', href: D + 'foundations-overview.html' },
       groups: [
-        { items: [f('colors', 'Colors'), f('typography', 'Typography'), f('spacing', 'Spacing'), f('elevation', 'Shadows & Elevation'), f('motion', 'Motion')] }
+        { items: [f('colors', 'Colors'), f('typography', 'Typography'), f('layout', 'Layout'), f('elevation', 'Shadows & Elevation'), f('motion', 'Motion')] }
       ]
     },
     components: {
@@ -32,6 +33,11 @@
         { title: 'Drafts', items: [c('role-tier-card', 'Role tier card')] }
       ]
     },
+    tokens: {
+      label: 'Tokens', icon: 'token', direct: true,   // one page, no Secondary navigation panel
+      overview: { id: 'tokens', t: 'Design Tokens', href: D + 'tokens.html' },
+      groups: []
+    },
     resources: {
       label: 'Resources', icon: 'menu_book',
       overview: { id: 'resources-overview', t: 'Resources Overview', href: D + 'resources-overview.html' },
@@ -43,7 +49,7 @@
     }
   };
 
-  var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code|storyblok|usage|reference|primitives|tokens)$/, '');
+  var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code|storyblok|usage|reference|primitives|tokens|breakpoints|spacing)$/, '');
   var cur = null;   // { cat, id }
   Object.keys(NAV).forEach(function (k) {
     var n = NAV[k];
@@ -57,7 +63,8 @@
   });
 
   var root = document.documentElement;
-  if (cur) root.classList.add('dn-has-panel');
+  var hasPanel = !!cur && !NAV[cur.cat].direct;
+  if (hasPanel) root.classList.add('dn-has-panel');
 
   /* Arriving through a link to a #heading on another page of the docs (same site, other page): the navigation comes in first, then the page fades in with a small scroll to the heading.
      The classes are set here, before the first paint, so the content never flashes. Reduced motion: nothing of this happens (the page jumps straight to the heading, toc.js). */
@@ -69,7 +76,7 @@
     arriving = Date.now() - skip > 4000 && (!nt || nt.type === 'navigate') && rf.origin === location.origin && rf.pathname !== location.pathname && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   } catch (e) {}
   if (arriving) root.classList.add('dn-arriving');
-  if (arriving && cur && window.matchMedia('(min-width: 1600px)').matches) root.classList.add('dn-hold');   // from 1600px the pinned panel slides out
+  if (arriving && hasPanel && window.matchMedia('(min-width: 1600px)').matches) root.classList.add('dn-hold');   // from 1600px the pinned panel slides out
   if (arriving && window.matchMedia('(min-width: 961px) and (max-width: 1599px)').matches) root.classList.add('dn-hold-rail');   // 961-1599px: the Navigation Rail itself slides in from the left
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
@@ -106,9 +113,9 @@
     '<nav class="dn-rail" aria-label="ECO Design System">' +
       '<div class="dn-rail__top">' +
         '<a class="dn-home" href="' + D + '" aria-label="ECO Design System, start page"' + (pageId === 'index' ? ' aria-current="page"' : '') + '><span class="dn-home__mark"></span><span>ECO<br>Design<br>System<br>V.1</span></a>' +
-        '<button class="dn-dest" type="button" data-search><span class="dn-ms" aria-hidden="true">search</span><span>Search</span></button>' + dest +
+        dest +
       '</div><div class="dn-rail__gap"></div>' +
-      '<div class="dn-rail__tools"><hr><button class="dn-tool" type="button" aria-label="Dark mode" data-dark disabled><span class="dn-ms" aria-hidden="true">dark_mode</span></button></div>' +
+      '<div class="dn-rail__tools"><button class="dn-dest" type="button" data-search><span class="dn-ms" aria-hidden="true">search</span><span>Search</span></button><hr><button class="dn-tool" type="button" aria-label="Dark mode" data-dark disabled><span class="dn-ms" aria-hidden="true">dark_mode</span></button></div>' +
     '</nav>' +
     '<nav class="dn-panel" id="dn-panel" aria-label="Pages"></nav>';
   document.body.insertBefore(wrap, document.body.firstChild);
@@ -119,7 +126,7 @@
   function ms(n, d) { return parseFloat(cs.getPropertyValue(n)) || d; }
   function fill(key) { panel.innerHTML = '<div class="dn-body">' + panelHtml(key) + '</div>'; panel.scrollTop = 0; }
   function show(key) {
-    if (shown === key) return;
+    if (shown === key || NAV[key].direct) return;
     shown = key;
     var id = ++swap, old = panel.firstElementChild;
     if (!old || !wrap.classList.contains('is-ready') || still.matches || getComputedStyle(panel).visibility !== 'visible') { fill(key); return; }
@@ -132,22 +139,22 @@
         { duration: 400 /* between medium-2 (300) and slow-1 (450): tested value, no token */, easing: cs.getPropertyValue('--ease-decelerate-emphasized') || 'ease-out' });
     };
   }
-  function open(key) { clearTimeout(timer); show(key); wrap.classList.add('is-open'); }
+  function open(key) { if (NAV[key].direct) { close(); return; } clearTimeout(timer); show(key); wrap.classList.add('is-open'); }
   function close() {
     clearTimeout(timer);
     wrap.classList.remove('is-open');
-    if (cur && pinned.matches) show(cur.cat);   // pinned: back to the category of this page
+    if (hasPanel && pinned.matches) show(cur.cat);   // pinned: back to the category of this page
   }
   function later() { clearTimeout(timer); timer = setTimeout(close, 150); }
 
-  if (cur) { show(cur.cat); try { panel.scrollTop = +sessionStorage.getItem('dn-scroll') || 0; } catch (e) {} }
+  if (hasPanel) { show(cur.cat); try { panel.scrollTop = +sessionStorage.getItem('dn-scroll') || 0; } catch (e) {} }
   function reveal() {   // keep the current page's item inside the panel (the panel may be hidden: measure by offset, not by rect)
     var on = panel.querySelector('[aria-current="page"]');
     if (!on) return;
     var top = on.getBoundingClientRect().top - panel.getBoundingClientRect().top + panel.scrollTop, h = on.offsetHeight;
     if (top < panel.scrollTop + 8 || top + h > panel.scrollTop + panel.clientHeight - 8) panel.scrollTop = top - panel.clientHeight / 2;
   }
-  if (cur) reveal();
+  if (hasPanel) reveal();
   requestAnimationFrame(function () { requestAnimationFrame(function () { wrap.classList.add('is-ready'); root.classList.add('dn-anim'); }); });   // no slide on page load
   /* The window crosses 1600px: the pinned panel slides in or out. Animated here (Web Animations) rather than by the CSS transition, whose visibility delay left the panel invisible while the page had already moved (a white strip). */
   pinned.addEventListener('change', function () {
@@ -158,7 +165,7 @@
   });
 
   if (arriving) (function () {
-    var wide = !!cur && pinned.matches;   // the pinned Secondary navigation panel (from 1600px) slides out; below 1600px the Navigation Rail slides in
+    var wide = hasPanel && pinned.matches;   // the pinned Secondary navigation panel (from 1600px) slides out; below 1600px the Navigation Rail slides in
     var bez = (cs.getPropertyValue('--ease-decelerate-emphasized').match(/[\d.]+/g) || [.16, 0, .16, 1]).map(Number);
     function cubic(t) { var lo = 0, hi = 1, q = t; for (var i = 0; i < 24; i++) { q = (lo + hi) / 2; var x = 3 * (1 - q) * (1 - q) * q * bez[0] + 3 * (1 - q) * q * q * bez[2] + q * q * q; if (x < t) lo = q; else hi = q; } return 3 * (1 - q) * (1 - q) * q * bez[1] + 3 * (1 - q) * q * q * bez[3] + q * q * q; }
     var railIn = root.classList.contains('dn-hold-rail'), navMs = railIn ? ms('--duration-medium-4', 400) : wide ? ms('--duration-medium-2', 300) : 0, fadeMs = ms('--duration-slow-3', 550), loaded = 0, navDone = false, landed = false;
@@ -240,17 +247,20 @@
   var cats = Object.keys(NAV);
   var bar = document.createElement('div');
   bar.innerHTML =
-    '<header class="dn-bar"><a class="dn-bar__id" href="' + D + '"><span class="dn-bar__mark"></span><span>ECO Design System <span class="dn-bar__v">V.1</span></span></a>' +
-      '<button class="btn btn--blank btn--md btn--icon dn-bar__btn" type="button" aria-expanded="false" aria-controls="dn-drawer" aria-label="Menu"><span class="btn__icon" aria-hidden="true">menu</span></button></header>' +
+    '<header class="dn-bar">' +
+      '<button class="btn btn--blank btn--md btn--icon dn-bar__btn" type="button" aria-expanded="false" aria-controls="dn-drawer" aria-label="Menu"><span class="btn__icon" aria-hidden="true">menu</span></button>' +
+      '<span class="dn-bar__div" aria-hidden="true"></span>' +
+      '<a class="btn btn--blank btn--md dn-bar__id" href="' + D + '"><span class="btn__label"><span class="dn-bar__mark"></span><span>ECO Design System <span class="dn-bar__v">V.1</span></span></span></a>' +
+      '<button class="btn btn--blank btn--md btn--icon dn-bar__search" type="button" data-search aria-label="Search"><span class="btn__icon" aria-hidden="true">search</span></button></header>' +
     '<div class="dn-scrim"></div>' +
     '<nav class="dn-drawer" id="dn-drawer" aria-label="ECO Design System">' +
       '<div class="dn-lv dn-lv1">' +
         cats.map(function (k) {
-          return '<button class="dn-mrow" type="button" data-cat="' + k + '"><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">' + NAV[k].icon + '</span><span class="dn-mrow__t">' + NAV[k].label + '</span><span class="dn-ms dn-ms--sm" aria-hidden="true">arrow_right_alt</span></button>';
+          if (NAV[k].direct) return '<a class="dn-mrow" href="' + NAV[k].overview.href + '"' + (cur && cur.cat === k ? ' aria-current="true"' : '') + '><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">' + NAV[k].icon + '</span><span class="dn-mrow__t">' + NAV[k].label + '</span></a>';
+          return '<button class="dn-mrow" type="button" data-cat="' + k + '"' + (cur && cur.cat === k ? ' aria-current="true"' : '') + '><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">' + NAV[k].icon + '</span><span class="dn-mrow__t">' + NAV[k].label + '</span><span class="dn-ms dn-ms--sm" aria-hidden="true">arrow_right_alt</span></button>';
         }).join('') +
-        '<button class="dn-mrow" type="button" data-search><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">search</span><span class="dn-mrow__t">Sök</span></button>' +
         '<div class="dn-lv1__gap"></div>' +
-        '<div class="dn-lv1__tools"><hr><button class="dn-dark" type="button" data-dark disabled><span class="dn-ms" aria-hidden="true">dark_mode</span><span>Dark mode</span></button></div>' +
+        '<div class="dn-lv1__tools"><button class="dn-mrow" type="button" data-search><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">search</span><span class="dn-mrow__t">Sök</span></button><hr><button class="dn-dark" type="button" data-dark disabled><span class="dn-ms" aria-hidden="true">dark_mode</span><span>Dark mode</span></button></div>' +
       '</div>' +
       '<div class="dn-lv dn-lv2"><button class="dn-mrow dn-back" type="button"><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">arrow_back</span><span class="dn-mrow__t">Main menu</span></button><div class="dn-lv2__body"></div></div>' +
     '</nav>';
@@ -266,9 +276,9 @@
     if (on) lv2.scrollTop = Math.max(0, on.getBoundingClientRect().top - lv2.getBoundingClientRect().top - (lv2.clientHeight - on.offsetHeight) / 2);
   }
   function openDrawer() {
-    level(cur ? cur.cat : null);   // on a page of a category the menu opens straight on its pages
+    level(hasPanel ? cur.cat : null);   // on a page of a category the menu opens straight on its pages
     drawer.classList.add('is-open'); wrap.classList.add('is-drawer');
-    requestAnimationFrame(function () { level(cur ? cur.cat : null); });   // once more after layout/fonts have settled
+    requestAnimationFrame(function () { level(hasPanel ? cur.cat : null); });   // once more after layout/fonts have settled
     btn.setAttribute('aria-expanded', 'true'); btn.firstChild.textContent = 'menu_open'; root.classList.add('dn-lock');
   }
   function closeDrawer() {
@@ -292,7 +302,8 @@
   /* ── Search: modal with instant results, grouped by category (Components, Foundations) ── */
   /* Swedish search words per page (search only: results always show the English title). Comma separated; accents are ignored when matching. */
   var SV = {
-    colors: 'färg, färger, färgpalett, nyans', typography: 'typografi, typsnitt, teckensnitt, text, rubrik, font', spacing: 'avstånd, mellanrum, marginal, luft, padding',
+    tokens: 'designtokens, tokens, variabler, css-variabler, värden, färgvärden, typografivärden',
+    colors: 'färg, färger, färgpalett, nyans', typography: 'typografi, typsnitt, teckensnitt, text, rubrik, font', layout: 'layout, rutnät, grid, brytpunkt, brytpunkter, breakpoint, responsiv, kolumner, marginal, avstånd, mellanrum, luft, padding, spacing',
     elevation: 'skugga, skuggor, höjd, djup, lager', motion: 'rörelse, animation, animering, övergång, tid',
     button: 'knapp, knappar', 'button-group': 'knappgrupp, knappar, grupp', checkbox: 'kryssruta, kryssrutor, markera, bockruta', input: 'inmatning, inmatningsfält, textfält, fält, formulär',
     textarea: 'textruta, textområde, flerradig, kommentar', radio: 'radioknapp, alternativ, val, väljare', select: 'rullgardin, rullista, väljare, lista, dropdown', 'switch': 'reglage, brytare, omkopplare, växla',
@@ -316,6 +327,7 @@
       });
     });
   });
+  entries.push({ t: NAV.tokens.overview.t, href: NAV.tokens.overview.href, cat: 'Tokens', group: '', sv: fold(SV.tokens), svl: SV.tokens.split(/,\s*/) });
   var sm = document.createElement('div');
   sm.className = 'dn-search';
   sm.hidden = true;
@@ -385,7 +397,7 @@
     entries.forEach(function (e, i) { var sc = score(e, tokens); if (sc > -1) hits.push({ e: e, sc: sc, i: i }); });
     hits.sort(function (a, b) { return a.sc - b.sc || a.i - b.i; });
     var html = '', n = 0;
-    ['Components', 'Foundations'].forEach(function (cat) {
+    ['Components', 'Foundations', 'Tokens'].forEach(function (cat) {
       var list = hits.filter(function (h) { return h.e.cat === cat; });
       if (!list.length) return;
       html += '<div class="dn-search__group" role="presentation">' + cat + '</div>';
@@ -461,7 +473,7 @@
         '<div class="ds-footer__col"><h2 class="ds-footer__title">Support</h2><ul class="ds-footer__list">' +
           '<li><a class="inline-link inline-link--medium inline-link--secondary" href="' + SLACK + '" target="_blank" rel="noopener">ECO Slack Channel</a></li>' + '</ul></div>' +
       '</div>';
-    document.body.appendChild(f);
+    (window.matchMedia('(min-width: 961px)').matches ? document.documentElement : document.body).appendChild(f);   // desktop: the footer sits outside the white panel, on the grey surround
   }
   /* Back to top: one icon button, fixed bottom right, shown once the page has been scrolled (a long page). Smooth scroll (instant under reduced
      motion), then focus moves to the page title so keyboard users start at the top. Its tooltip uses the shared tooltip.js. */
@@ -484,4 +496,29 @@
   }
   function init() { build(); top(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+/* Framed pages (html.ds-frame): the overlay panel's right edge is a line that starts under the content panel's corner at the top of the page
+   (gap + radius) and runs up to the window edge once the page is scrolled. --dn-line is where that line starts, in px from the top of the window. */
+(function () {
+  var root = document.documentElement;
+  if (!root.classList.contains('ds-frame')) return;
+  function set() { var r = parseFloat(getComputedStyle(root).getPropertyValue('--dn-radius')) || 0; root.style.setProperty('--dn-line', Math.max(0, 16 + r - window.pageYOffset) + 'px'); }   // 16px gap + the corner radius
+  window.addEventListener('scroll', set, { passive: true }); set();
+})();
+
+/* Mobile header (below 961px): it scrolls away with the page and comes back as the user scrolls back up, the same distance as it left.
+   --dn-hide = how many px of the header are hidden (0 to its height). Paused while the drawer is open (the page is locked then). */
+(function () {
+  var root = document.documentElement, mq = window.matchMedia('(max-width: 960px)'), last = window.pageYOffset, hide = 0, tick = false;
+  function bar() { return parseFloat(getComputedStyle(root).getPropertyValue('--dn-bar')) || 64; }
+  function apply() {
+    tick = false;
+    var y = Math.max(0, window.pageYOffset), h = bar();
+    if (!mq.matches || root.classList.contains('dn-lock')) { hide = 0; } else { hide = Math.min(h, Math.max(0, hide + y - last)); }
+    last = y;
+    root.style.setProperty('--dn-hide', hide + 'px');
+  }
+  window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(apply); } }, { passive: true });
+  window.addEventListener('resize', apply);
 })();

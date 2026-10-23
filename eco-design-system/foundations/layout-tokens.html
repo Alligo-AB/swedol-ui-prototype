@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layout: Tokens – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <script src="../../components/js/tabs.js"></script>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../foundations-overview.html" class="breadcrumb-item">Foundations</a><span class="breadcrumb-sep">/</span><a href="layout.html" class="breadcrumb-item">Layout</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Tokens</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Foundations</span></div>
+    <h1 class="ds-title">Layout</h1>
+    <p class="ds-lead">The layout is the foundation for all visual elements. It guides creative choices, supports the content and gives every page the same <strong>flexible</strong> frame: a grid, five breakpoints and one spacing scale.</p><p class="ds-lead">Every layout token from <code>alligo-design-tokens</code>: the breakpoints, the site margin, the gutter and the columns, read live from the package.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Layout"><a class="tab" href="layout.html"><span class="tab__label">Grid</span></a><a class="tab" href="layout-breakpoints.html"><span class="tab__label">Breakpoints</span></a><a class="tab" href="layout-spacing.html"><span class="tab__label">Spacing</span></a><a class="tab" aria-current="page" href="layout-tokens.html"><span class="tab__label">Tokens</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="about"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">About the layout tokens</h2><p class="ds-desc">The layout tokens set up the <a class="inline-link inline-link--large inline-link--secondary" href="layout.html">grid</a> for each <a class="inline-link inline-link--large inline-link--secondary" href="layout-breakpoints.html">breakpoint</a>: the window widths, the site margin, the gutter and the number of columns. They are in the token package <code>alligo-design-tokens</code>, and the tables below are read from it when the page loads.</p><p class="ds-desc">The margin and gutter tokens point at a step of the <a class="inline-link inline-link--large inline-link--secondary" href="layout-spacing.html">spacing scale</a> (the column “Points at”), so a change to the scale reaches the grid. The spacing sizes themselves are on the Spacing tab.</p><div id="tk-live-msg"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="breakpoint"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Breakpoint</h2><p class="ds-desc">The window widths. The value of <code>bp-sm</code>, <code>bp-md</code> and <code>bp-lg</code> is the <em>end</em> of its range, <code>bp-xs</code> is the smallest supported width and <code>bp-xl</code> is the <em>start</em> of its range. <code>bp-xl-figma</code> is the width of the largest Figma prototype.</p><div class="ds-table-wrap"><table class="ds-table lg-tok" id="tk-bp"><thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Points at</th><th scope="col">Description</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="margin"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Margin</h2><p class="ds-desc">The space at the left and right of the window, per breakpoint. On XLarge the margin is considered infinite: the content area stops at 1200px and is centered. <code>site-margin-xl</code> is the margin at 1440px, the largest prototype width.</p><div class="ds-table-wrap"><table class="ds-table lg-tok" id="tk-margin"><thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Points at</th><th scope="col">Description</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="gutter"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Gutter</h2><p class="ds-desc">The space between columns, per breakpoint. There is no <code>gutter-xl</code>: XLarge uses <code>gutter-lg</code>.</p><div class="ds-table-wrap"><table class="ds-table lg-tok" id="tk-gutter"><thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Points at</th><th scope="col">Description</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="column"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Column</h2><p class="ds-desc">The number of columns per breakpoint. There is no <code>column-xl</code>: XLarge uses <code>column-lg</code>.</p><div class="ds-table-wrap"><table class="ds-table lg-tok" id="tk-cols"><thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Points at</th><th scope="col">Description</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="section-padding"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Section padding</h2><p class="ds-desc">The top and bottom padding of the full-width sections. The package holds one set of these, the one of the Large breakpoint. The padding per breakpoint is on the <a class="inline-link inline-link--large inline-link--secondary" href="../components/section-specifications.html#sizes">Section</a> page.</p><div class="ds-table-wrap"><table class="ds-table lg-tok" id="tk-section"><thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Points at</th><th scope="col">Description</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="layout-whitespace"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Layout whitespace</h2><p class="ds-desc">The air between groups of components. These are the values of the Large breakpoint; <code>space-md</code> and <code>space-lg</code> of the <a class="inline-link inline-link--large inline-link--secondary" href="layout-spacing.html#layout">Layout spacing</a> step with the window.</p><div class="ds-table-wrap"><table class="ds-table lg-tok" id="tk-white"><thead><tr><th scope="col">Token</th><th scope="col">Value</th><th scope="col">Points at</th><th scope="col">Description</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="coverage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Coverage</h2><p class="ds-desc" id="tk-cov"></p><h3 class="ds-h3">Open points in the package</h3><ul class="ds-bullets"><li>The values of <code>bp-sm</code>, <code>bp-md</code> and <code>bp-lg</code> are range ends, not the width where the breakpoint starts. Use the start values in code (640, 769, 1024 and 1281px).</li><li>The column count exists twice: <code>--dimension-breakpoint-columns-column-*</code> (a number) and <code>--dimension-column-*</code> (with a px unit). Read the number one.</li><li>The package has one value for the tokens that have no breakpoint in their name (<code>--dimension-breakpoint-margin</code>, <code>-gutter</code>, <code>-column</code>): the Large one.</li><li><code>space-md</code> and <code>space-lg</code> are not in the package, they come from <code>components/css/spacing.css</code>.</li></ul></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../tokens-loader.js"></script>
+<script src="../layout-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var L = LAYOUT, ORDER = ['xs', 'sm', 'md', 'lg', 'xl'];
+  var GROUPS = [
+    ['bp', /^--dimension-breakpoint-bp-|^--dimension-breakpoint-width$|^--dimension-layout-max-width-/],
+    ['margin', /^--dimension-margin-site-margin-|^--dimension-breakpoint-margin$/],
+    ['gutter', /^--dimension-gutter-|^--dimension-breakpoint-gutter$/],
+    ['cols', /^--dimension-breakpoint-columns-column-|^--dimension-column-|^--dimension-breakpoint-column$/],
+    ['section', /^--dimension-breakpoint-section-paddings-/],
+    ['white', /^--dimension-layout-vertical-whitespace-/]
+  ];
+  function key(n) { var m = /-(xs|sm|md|lg|xl)(?:-|$)/.exec(n); return m ? ORDER.indexOf(m[1]) : 9; }
+  function copyName(text) {
+    var w = document.createElement('span'); w.className = 'ds-copyname';
+    w.innerHTML = '<span class="ds-copyname__text"></span><button type="button" class="mo-copy" aria-label="Copy ' + text + '"><span class="mo-ic" aria-hidden="true">content_copy</span></button>';
+    w.firstChild.textContent = text;
+    w.lastChild.addEventListener('click', function () { var ic = w.lastChild.firstChild, done = function () { ic.textContent = 'check'; setTimeout(function () { ic.textContent = 'content_copy'; }, 1200); }; if (navigator.clipboard) navigator.clipboard.writeText('var(' + text + ')').then(done, done); else done(); });
+    return w;
+  }
+  function fallback(n) {   // the package has no comment on these: say what each one is
+    var m = /-(xs|sm|md|lg|xl)$/.exec(n); if (!m) return '-';
+    var bp = 'bp-' + m[1];
+    if (/site-margin/.test(n)) return 'Left and right site margin at ' + bp + '.';
+    if (/gutter/.test(n)) return 'Space between columns at ' + bp + '.';
+    if (/breakpoint-columns/.test(n)) return 'Number of columns at ' + bp + '.';
+    if (/^--dimension-column-/.test(n)) return 'Number of columns at ' + bp + ', written with a px unit.';
+    return '-';
+  }
+  function value(name, raw) {
+    var v = L.resolve(name);
+    if (isNaN(v)) return raw;
+    return /px\b/.test(raw) || /var\(/.test(raw) ? v + 'px' : String(v);
+  }
+  function pointsAt(raw) {
+    var m = /var\((--[a-z0-9-]+)/.exec(raw); if (!m) return '-';
+    return m[1].replace('--dimension-spacing-', '').replace('--dimension-layout-max-width-', 'max-width-').replace('--dimension-', '');
+  }
+  L.fetchDoc(function (doc) {
+    var names = Object.keys(doc), shown = 0;
+    GROUPS.forEach(function (g) {
+      var rows = names.filter(function (n) { return g[1].test(n); }).sort(function (a, b) { return key(a) - key(b); });
+      var tb = document.querySelector('#tk-' + g[0] + ' tbody'); tb.textContent = '';
+      rows.forEach(function (n) {
+        var tr = document.createElement('tr'), c1 = document.createElement('th'); c1.scope = 'row'; c1.appendChild(copyName(n)); tr.appendChild(c1);
+        [value(n, doc[n].raw), pointsAt(doc[n].raw), doc[n].desc || fallback(n)].forEach(function (t) { var td = document.createElement('td'); td.textContent = t; tr.appendChild(td); });
+        tb.appendChild(tr); shown++;
+      });
+    });
+    $('#tk-cov').textContent = shown + ' layout tokens from the package are shown on this page. Source: the package file dist/css/base/dimension.css, read when the page loads.';
+  }, function () {
+    var m = document.createElement('p'); m.className = 'ds-desc'; m.textContent = 'Could not load the token package (alligo-design-tokens) from the CDN. Check the connection and reload.';
+    $('#tk-live-msg').appendChild(m);
+  });
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

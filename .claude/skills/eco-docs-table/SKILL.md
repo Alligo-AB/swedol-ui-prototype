@@ -32,6 +32,7 @@ A table shows rows of comparable data. It sits in a **wrap** that gives it the e
 | Wrap shadow | `var(--shadow-elevation-b-20)` (same as the dashboard stat cards) |
 | Header background | `var(--color-surface-02)` by default, see "Header background" |
 | Line between header and first row | `var(--color-border-primary)`, 1px |
+| Top edge of the header (2026-10-23) | inset shadow `inset 0 4px 3px -3px var(--color-surface-opacity-black-05)`: soft, only along the top edge (the negative spread keeps it off the cell sides, so no streaks between columns). No lines on the top or sides of the header: the card shadow already frames it |
 | Lines between body rows | `var(--color-border-secondary)`, 1px |
 | Last row | no bottom line |
 
@@ -81,6 +82,7 @@ Use real `th` with `scope`. Check icons use `eco-checkbox` (`.check-icon`, disab
   height: 56px; font-weight: 600; white-space: nowrap;
   background: var(--color-surface-02);
   border-bottom-color: var(--color-border-primary);
+  box-shadow: inset 0 4px 3px -3px var(--color-surface-opacity-black-05);   /* soft top edge */
 }
 .table tbody th { font-weight: 600; white-space: nowrap; }
 .table tbody tr:last-child > * { border-bottom: 0; }

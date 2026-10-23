@@ -68,16 +68,14 @@
         </div>
       </a>
 
-      <a class="ds-card" href="foundations/spacing.html">
+      <a class="ds-card" href="foundations/layout.html">
         <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-space">
-            <span style="height: 8px"></span><span style="height: 16px"></span><span style="height: 24px"></span><span style="height: 40px"></span><span style="height: 64px"></span>
-          </div>
+          <div class="mini-grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Spacing</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">The fixed spacing scale and the breakpoint-adaptive space tokens, with consumer classes and directional examples.</p>
-          <span class="ds-card__meta" id="space-meta">Spacing tokens</span>
+          <div class="ds-card__top"><span class="ds-card__title">Layout</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">The grid, the five breakpoints, the spacing scale and every layout token: what you need to build a page that adapts to the window.</p>
+          <span class="ds-card__meta" id="space-meta">Layout tokens</span>
         </div>
       </a>
 
@@ -114,7 +112,7 @@
 <script>
   ECO.watch('../.claude/skills/eco-tokens/tokens.json', function (j) {
     if (j.typography) document.getElementById('type-meta').textContent = Object.keys(j.typography).length + ' typography tokens · 6 roles';
-    if (j.spacing) document.getElementById('space-meta').textContent = Object.keys(j.spacing).length + ' spacing tokens · 8px base';
+    if (j.spacing) document.getElementById('space-meta').textContent = Object.keys(j.spacing).length + ' spacing tokens · 5 breakpoints';
     if (j.shadow) document.getElementById('elev-meta').textContent = Object.keys(j.shadow).length + ' shadow tokens · 4 categories';
     document.getElementById('colors-meta').textContent = Object.keys(j.color).length + ' semantic color tokens';
   });

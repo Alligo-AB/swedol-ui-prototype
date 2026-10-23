@@ -78,8 +78,6 @@ def parse_colors(dist):
             continue
         fallback_match = re.search(r'#[0-9a-fA-F]{3,8}', value)
         literal = fallback_match.group(0) if fallback_match else value
-        if len(comment) > 160:
-            comment = comment[:157] + "..."
         colors[name] = {"var": f"--color-{name}", "value": literal, "description": comment or None}
     return colors
 

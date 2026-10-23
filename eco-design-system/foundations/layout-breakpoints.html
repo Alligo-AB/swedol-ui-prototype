@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layout: Breakpoints – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <script src="../../components/js/tabs.js"></script>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../foundations-overview.html" class="breadcrumb-item">Foundations</a><span class="breadcrumb-sep">/</span><a href="layout.html" class="breadcrumb-item">Layout</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Breakpoints</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Foundations</span></div>
+    <h1 class="ds-title">Layout</h1>
+    <p class="ds-lead">The layout is the foundation for all visual elements. It guides creative choices, supports the content and gives every page the same <strong>flexible</strong> frame: a grid, five breakpoints and one spacing scale.</p><p class="ds-lead">Five breakpoints decide when the layout and the components change. Learn the ranges, how to write them in code and how to check a page.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Layout"><a class="tab" href="layout.html"><span class="tab__label">Grid</span></a><a class="tab" aria-current="page" href="layout-breakpoints.html"><span class="tab__label">Breakpoints</span></a><a class="tab" href="layout-spacing.html"><span class="tab__label">Spacing</span></a><a class="tab" href="layout-tokens.html"><span class="tab__label">Tokens</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Overview</h2><p class="ds-desc">In responsive design a breakpoint is the window width at which the layout and the content adapt, so that the experience stays good on every screen size.</p><p class="ds-desc">The responsive grid changes the margins, the width of the content and the number of columns at each breakpoint, and the components change size with it. ECO has <strong>five</strong> breakpoints, and they are the same for every page and every component.</p><p class="ds-desc">Breakpoints work together with the <a class="inline-link inline-link--large inline-link--secondary" href="layout.html">grid</a>, and the values of each one are listed on the <a class="inline-link inline-link--large inline-link--secondary" href="layout-tokens.html">Tokens</a> tab.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="where-your-window-is"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Where your window is</h2><p class="ds-desc">The breakpoint of the window you are reading this in. Resize the window and it follows.</p><div class="ds-stage"><div class="lg-ruler" id="ruler" role="list"></div><p class="lg-read" id="here" aria-live="polite"></p></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="breakpoints"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Breakpoints</h2><p class="ds-desc">ECO uses five breakpoints. The grid values are read from the token package.</p><div class="ds-table-wrap"><table class="ds-table" id="bp-table"><thead><tr><th scope="col">Breakpoint</th><th scope="col">Token</th><th scope="col">Range</th><th scope="col">Margin</th><th scope="col">Gutter</th><th scope="col">Columns</th><th scope="col">Base styling</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Mobile base styling</strong> is used by XSmall and Small. <strong>Desktop base styling</strong> is used by Medium, Large and XLarge. On XLarge the margin is infinite: the content area is centered and stops at 1200px.</p><h3 class="ds-h3 ds-group">Small is mobile</h3><p class="ds-desc">The Desktop base styling starts at <strong>769px</strong>, not at 768px and not at 640px. A tablet (Small, 640px to 768px) has more columns and a wider margin than a phone, but its type and components are the Mobile ones. Never write the desktop style at <code>sm</code>.</p><h3 class="ds-h3 ds-group">Components can have more</h3><p class="ds-desc">A component can change at other widths than these five. For example a <a class="inline-link inline-link--large inline-link--secondary" href="../components/section-specifications.html#sizes">section</a> changes its padding at 640, 769, 1024 and 1281px. Such breakpoints are specified with the component.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="what-changes-at-desktop"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">What changes at Desktop</h2><p class="ds-desc">The breakpoint where the base styling switches is Medium, 769px. These are the main things that change there.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">What</th><th scope="col">Mobile base styling (XSmall, Small)</th><th scope="col">Desktop base styling (Medium and up)</th></tr></thead><tbody><tr><th scope="row">Type styles</th><td>Mobile size of each style, for example body-md 16/22 and body-lg 18/24. See <a class="inline-link inline-link--large inline-link--secondary" href="typography.html">Typography</a>.</td><td>Desktop size, for example body-md 17/24 and body-lg 20/28.</td></tr><tr><th scope="row">Components</th><td>Mobile size of buttons, fields and other controls.</td><td>Desktop size. Each component page has a Breakpoint control and lists both values.</td></tr><tr><th scope="row">Layout spacing</th><td><code>space-md</code> 24px, <code>space-lg</code> 32px, then steps up at 640px.</td><td>Steps up at 769px and 1024px, see <a class="inline-link inline-link--large inline-link--secondary" href="layout-spacing.html#layout">Layout spacing</a>.</td></tr><tr><th scope="row">Grid</th><td>4 columns (XSmall) or 8 (Small), margin 16px or 32px.</td><td>12 columns, margin 32px (Medium) or 40px (Large and up).</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Usage</h2><p class="ds-desc">Write mobile first: the style with no prefix is the phone, and each larger breakpoint adds to it with a <code>min-width</code> query. The queries use the start of each range.</p><div id="code-mq-host"></div><p class="ds-desc">In Tailwind the same five breakpoints are the screens of the config. <code>xs</code> is the default (no prefix).</p><div id="code-twc-host"></div><h3 class="ds-h3 ds-group">Check a breakpoint</h3><p class="ds-desc">A page is not done until it has been checked at the breakpoints, with the real values and not by eye.</p><ul class="ds-bullets"><li>Check at least three widths: XSmall (about 375px), Small (about 700px) and Medium or Large (1024px or more).</li><li>Read the computed values with <code>getComputedStyle</code>: Small must show the mobile values.</li><li>Check the 769px edge: 768px is mobile and 769px is desktop.</li><li>Test the interaction at every breakpoint, not just the look.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="dos-and-donts"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Dos and don’ts</h2><div class="ds-rules"><div class="ds-rule ds-rule--do"><h3 class="ds-rule__title">Do</h3><ul><li>Write mobile-first: the style with no prefix is XSmall.</li><li>Switch to the Desktop styling at <code>md</code> (769px).</li><li>Let a tablet look like mobile, with more columns and a wider margin.</li><li>Specify extra component breakpoints with the component.</li></ul></div><div class="ds-rule ds-rule--dont"><h3 class="ds-rule__title">Don’t</h3><ul><li>Switch to the Desktop styling at 640px or 768px.</li><li>Write a query for one device, for example an iPad.</li><li>Use <code>max-width</code> queries for the main layout.</li><li>Make a breakpoint of your own for one page.</li></ul></div></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="references"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">References</h2><ul class="ds-bullets"><li><a class="inline-link inline-link--large inline-link--secondary" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries" target="_blank" rel="noopener">MDN: Using media queries</a>. Mozilla.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://tailwindcss.com/docs/responsive-design" target="_blank" rel="noopener">Tailwind CSS: Responsive design</a>. Mobile-first breakpoints.</li><li><a class="inline-link inline-link--large inline-link--secondary" href="https://m3.material.io/foundations/layout/applying-layout/window-size-classes" target="_blank" rel="noopener">Material Design 3: Window size classes</a>. Google.</li></ul></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../tokens-loader.js"></script>
+<script src="../layout-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  var L = LAYOUT, BPS = L.BPS;
+  function rng(b) { return b.to == null ? b.from + 'px and up' : b.from + 'px to ' + b.to + 'px'; }
+  function table() {
+    var tb = $('#bp-table tbody'); clear(tb);
+    BPS.forEach(function (b) {
+      var v = L.vals(b), tr = document.createElement('tr');
+      tr.innerHTML = '<th scope="row">' + b.name + '<br><span class="ds-na">' + b.device + '</span></th><td><code>' + b.token + '</code></td><td>' + rng(b) + (b.id === 'xs' ? '<br><span class="ds-na">supported from 375px</span>' : '') + '</td><td>' + (b.infinite ? 'Infinite<br><span class="ds-na">' + L.px(v.margin) + ' at 1440px</span>' : L.px(v.margin)) + '</td><td>' + L.px(v.gutter) + '</td><td>' + v.cols + '</td><td>' + b.base + '</td>';
+      tb.appendChild(tr);
+    });
+  }
+  function ruler() {
+    var r = $('#ruler'); clear(r);
+    BPS.forEach(function (b) {
+      var s = document.createElement('div'); s.className = 'lg-step'; s.setAttribute('role', 'listitem'); s.dataset.id = b.id;
+      s.innerHTML = '<b>' + b.id + '</b><span>' + rng(b) + '</span>'; r.appendChild(s);
+    });
+  }
+  function here() {
+    var w = window.innerWidth, b = L.bpFor(w), v = L.vals(b);
+    $$('.lg-step').forEach(function (s) { s.setAttribute('aria-current', String(s.dataset.id === b.id)); });
+    $('#here').textContent = 'Window ' + w + 'px: ' + b.name + ' (' + b.token + '), ' + b.base + ' base styling, ' + v.cols + ' columns, gutter ' + L.px(v.gutter) + ', margin ' + (b.infinite ? 'infinite (content area ' + L.CONTENT_MAX + 'px)' : L.px(v.margin)) + '.';
+  }
+  function codes() {
+    var mq = '/* XSmall: the style with no query */\n.card { padding: var(--dimension-spacing-space-16); }\n\n' +
+      BPS.slice(1).map(function (b) { return '@media (min-width: ' + b.from + 'px) { /* ' + b.name.toLowerCase() + ' */ }'; }).join('\n') +
+      '\n\n/* Mobile only, when a style must not reach the desktop */\n@media (max-width: ' + (BPS[2].from - 1) + 'px) { }';
+    var tw = 'module.exports = {\n  theme: {\n    screens: {\n' + BPS.slice(1).map(function (b) { return '      ' + b.id + ': \'' + b.from + 'px\',   // ' + b.device; }).join('\n') + '\n    },\n  },\n}';
+    [['#code-mq-host', 'CSS: media queries', mq, 'code-mq'], ['#code-twc-host', 'Tailwind config', tw, 'code-twc']].forEach(function (c) {
+      var host = $(c[0]); clear(host);
+      var box = document.createElement('div'); box.className = 'ds-code';
+      box.innerHTML = '<div class="ds-code__bar"><span>' + c[1] + '</span><button type="button" class="mo-copy" data-copy="' + c[3] + '" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="' + c[3] + '"></pre>';
+      host.appendChild(box); $('#' + c[3]).textContent = c[2];
+    });
+  }
+  function init() { table(); ruler(); here(); codes(); }
+  window.addEventListener('resize', here);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(init); else init();
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>
