@@ -11,7 +11,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
 
   var NAV = {
     foundations: {
-      label: 'Foundations', icon: 'interests',
+      label: 'Foundations', icon: 'grid_view',
       overview: { id: 'foundations-overview', t: 'Foundations Overview', href: D + 'foundations-overview.html' },
       groups: [
         { items: [f('colors', 'Colors'), f('typography', 'Typography'), f('layout', 'Layout'), f('elevation', 'Shadows & Elevation'), f('motion', 'Motion')] }
