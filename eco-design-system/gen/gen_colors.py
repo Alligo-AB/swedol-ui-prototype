@@ -109,7 +109,7 @@ families = '<h2 class="ds-h2">Token families</h2>' + \
         ['Brand accent', 'Emphasis and brand moments. Not decoration, and not text on white.', '<code>accent-default</code>'],
         ['Text and icon', 'Content, support text, links and buttons. The badge on each swatch is the contrast.', '<code>text-primary</code>, <code>icon-inverted</code>'],
         ['Border', 'Structure and outline, and the borders of interactive states.', '<code>border-primary</code>, <code>border-focus</code>'],
-        ['Status', 'Information, success, warning and danger, each as default, weak and weaker. Never branding.', '<code>surface-danger-weak</code>'],
+        ['System', 'Information, success, warning and danger, each as default, weak and weaker. Status only, never branding.', '<code>surface-danger-weak</code>'],
         ['Action and state', 'Fills for buttons, navigation and disabled controls.', '<code>surface-action-1</code>'],
         ['Overlays', 'Transparent black and white for hover fills, scrims and layers.', '<code>surface-opacity-black-20</code>']])
 
@@ -154,7 +154,8 @@ def grid(id_, cap=None):
 
 p_about = '<h2 class="ds-h2">About primitive colors</h2>' + \
     desc('Primitive colors are our base palette, which the semantic palette derives from. Below are the colors that define it. They are the references the ' + sec('colors-tokens.html', 'semantic tokens') + ' point to: a component uses the semantic token, never the primitive.') + \
-    desc('Every swatch shows which semantic tokens use it. If you need a color that no primitive has, consult a designer before adding one.')
+    desc('Every swatch shows which semantic tokens use it. If you need a color that no primitive has, consult a designer before adding one.') + \
+    desc('To see how a hex value becomes a primitive, a semantic token and a component color, read '+sec('colors.html#how-color-tokens-work', 'How color tokens work')+' on the Overview page.')
 
 p_neutral = '<h2 class="ds-h2">Neutral (grey)</h2>' + \
     desc('The neutral palette is foundational and dominant in our UI, which makes it easier to add specific brand colors and system colors and make them stand out.') + \
@@ -169,8 +170,7 @@ p_brand = '<h2 class="ds-h2">Concept brand colors</h2>' + \
     desc('Alligo concept brands each have their own set of these colors. They put some flavor into the site and accent the brand that it represents.') + \
     desc('Brand colors are mostly placed in common elements that occur throughout the site, which leaves the other colors, for example the customer price and the system colors, to give the visual aid they are there for.') + \
     '<h3 class="ds-h3">Swedol</h3>' + grid('g-swedol') + \
-    '<h3 class="ds-h3">Tools</h3>' + grid('g-tools') + \
-    '<div id="brand-more" hidden><h3 class="ds-h3">Other concept brands in the package</h3>' + desc('These primitives exist in the token package. No semantic token uses them yet.') + grid('g-brand-more') + '</div>'
+    '<h3 class="ds-h3">Tools</h3>' + grid('g-tools')
 
 p_text = '<h2 class="ds-h2">Text emphasis</h2>' + \
     desc('Primitives named after how strong the text is. The text tokens derive from them, so a hex that looks like a grey here is still not a neutral.') + grid('g-text')
@@ -183,13 +183,13 @@ p_cov = '<h2 class="ds-h2">Coverage</h2><p class="ds-desc" id="coverage-text"></
 prim = [('about', p_about), ('neutral', p_neutral), ('system', p_system), ('concept-brand-colors', p_brand), ('text-emphasis', p_text), ('opacity', p_opacity), ('coverage', p_cov)]
 
 JS_PRIM = r'''
-  var K = COLORKIT, GROUPS = ['g-neutral', 'g-system', 'g-swedol', 'g-tools', 'g-brand-more', 'g-text', 'g-opacity'];
+  var K = COLORKIT, GROUPS = ['g-neutral', 'g-system', 'g-swedol', 'g-tools', 'g-text', 'g-opacity'];
   var NEUTRAL = ['neutral-black'].concat(['90', '80', '70', '60', '50', '40', '30', '20', '15', '10', '05', '02'].map(function (n) { return 'neutral-grey-' + n; }), ['neutral-white']);
   var SYSTEM = ['dark-navy', 'ultramarine', 'sky-blue', 'ice-blue', 'deep-forrest-green', 'forrest-green', 'mint', 'mint-white', 'brownish-yellow', 'mustard-yellow', 'sun-yellow', 'light-yellow', 'maroon', 'dark-red', 'bright-red', 'coral-pink', 'light-pink', 'electric-blue', 'dark-cyan'].map(function (n) { return 'system-' + n; });
   function render(pkg) {
     K.clear(GROUPS);
     var old = document.getElementById('other'); if (old) { old.previousElementSibling.remove(); old.remove(); }
-    var names = Object.keys(pkg.prim), shown = {};
+    var SKIP = /^brand-(grolls|univern)-/, all = Object.keys(pkg.prim), names = all.filter(function (n) { return !SKIP.test(n); }), shown = {};   // Grolls and Univern are in the package but not documented here
     function rest(prefix, list) { return list.concat(names.filter(function (n) { return n.indexOf(prefix) === 0 && list.indexOf(n) < 0; })); }
     function place(id, list) {
       var host = document.getElementById(id); host._cols = K.PRIMITIVE;
@@ -203,8 +203,6 @@ JS_PRIM = r'''
     place('g-system', rest('system-', SYSTEM));
     place('g-swedol', ['brand-swedol-accent-brand', 'brand-swedol-accent-light', 'brand-swedol-accent-dark']);
     place('g-tools', ['brand-tools-accent-brand', 'brand-tools-accent-light', 'brand-tools-accent-dark']);
-    var more = place('g-brand-more', names.filter(function (n) { return n.indexOf('brand-') === 0; }));
-    document.getElementById('brand-more').hidden = !more;
     place('g-text', names.filter(function (n) { return n.indexOf('text-') === 0; }));
     place('g-opacity', names.filter(function (n) { return n.indexOf('opacity-') === 0; }));
     var left = names.filter(function (n) { return !shown[n]; });
@@ -217,7 +215,7 @@ JS_PRIM = r'''
     }
     K.finish();
     var usedBy = {}; Object.keys(pkg.used).forEach(function (k) { pkg.used[k].forEach(function (t) { usedBy[t] = 1; }); });
-    document.getElementById('coverage-text').textContent = names.length + ' primitive colors in the token package, all shown on this page' + (left.length ? ' (' + left.length + ' in “Other”)' : '') + '. ' + Object.keys(usedBy).length + ' semantic tokens use one of them directly. Source: the package file ' + 'dist/css/base/color.css, read when the page loads.';
+    document.getElementById('coverage-text').textContent = names.length + ' primitive colors shown on this page (' + (all.length - names.length) + ' Grolls and Univern primitives in the package are not documented)' + (left.length ? ' (' + left.length + ' in “Other”)' : '') + '. ' + Object.keys(usedBy).length + ' semantic tokens use one of them directly. Source: the package file ' + 'dist/css/base/color.css, read when the page loads.';
   }
   K.fetchPackage(render, function () {
     var m = document.createElement('p'); m.className = 'ds-desc'; m.textContent = 'Could not load the token package (alligo-design-tokens) from the CDN. Check the connection and reload.';
@@ -226,6 +224,10 @@ JS_PRIM = r'''
 '''
 
 # ---------------------------------------------------------------- Semantic tokens
+t_about = '<h2 class="ds-h2">About semantic tokens</h2>' + \
+    desc('A semantic token says what a color is for. It points at a primitive color, so a change to the palette reaches every component that uses the role. Pick the token by role: surface, text, icon, border, status, action or overlay.') + \
+    desc('To see how a hex value becomes a primitive, a semantic token and a component color, read ' + sec('colors.html#how-color-tokens-work', 'How color tokens work') + ' on the Overview page.')
+
 t_neutrals = '<h2 class="ds-h2">Neutrals</h2>' + \
     desc('Black, white and a ladder of greys carry most of the interface. Swedol is monochrome by design, which keeps the brand accent scarce and meaningful. Numbers follow the share of black: <code>surface-100</code> is black, <code>surface-02</code> is almost white.') + \
     '<div class="ds-ramp" id="ramp" role="img" aria-label="Neutral surface scale from surface-100 (black) to surface-02 (near white)"></div>' + \
@@ -254,9 +256,9 @@ t_neutrals = '<h2 class="ds-h2">Neutrals</h2>' + \
 
 t_brand = '<h2 class="ds-h2">Brand accent</h2>' + \
     desc('The Swedol lime. Use it for emphasis and brand moments, not for decoration and not for text on white: its contrast is too low. Light accent works as a highlight surface, for example in table headings.') + \
-    '<h3 class="ds-h3">Swedol</h3><div class="ds-grid ds-grid--feature" id="g-accent"></div>' + \
+    '<h3 class="ds-h3">Swedol</h3><div class="ds-grid" id="g-accent"></div>' + \
     '<h3 class="ds-h3">Tools</h3>' + desc('Tools has its own accent. These are primitive tokens from the package (<code>--color-primitive-color-brand-tools-accent-*</code>), so they are not in <code>tokens.json</code>; the Swedol <code>accent-*</code> tokens above are what the components use. All primitives are on the ' + sec('colors-primitives.html', 'Primitive colors') + ' page.') + \
-    '<div class="ds-grid ds-grid--feature" id="g-tools"></div>'
+    '<div class="ds-grid" id="g-tools"></div>'
 
 t_text = '<h2 class="ds-h2">Text &amp; icon</h2>' + \
     desc('Choose the text token by role: <code>primary</code> for content, <code>secondary</code> and <code>tertiary</code> for support, <code>action</code> for links and buttons. The badge on each swatch is the WCAG contrast on the intended surface: white, or black for inverted and on-black tokens.') + \
@@ -265,7 +267,7 @@ t_text = '<h2 class="ds-h2">Text &amp; icon</h2>' + \
 t_border = '<h2 class="ds-h2">Border</h2>' + \
     desc('Borders separate and outline. Default structure uses <code>primary</code> to <code>tertiary</code>; interactive states (hover, focus, selected) have their own tokens so the change is always the same across components.') + '<div class="ds-grid" id="g-border"></div>'
 
-t_status = '<h2 class="ds-h2">Status</h2>' + \
+t_status = '<h2 class="ds-h2">System</h2>' + \
     desc('Information, success, warning and danger each come as a matched set. <code>default</code> is the strong version, <code>weak</code> and <code>weaker</code> tone it down for backgrounds. Use them for status only, never for branding.') + '<div class="ds-status" id="g-status"></div>'
 
 t_state = '<h2 class="ds-h2">Action &amp; state</h2>' + desc('Fills for buttons, navigation and disabled controls.') + '<div class="ds-grid" id="g-state"></div>'
@@ -274,7 +276,7 @@ t_overlay = '<h2 class="ds-h2">Overlays</h2>' + desc('Transparent black and whit
 
 t_cov = '<h2 class="ds-h2">Coverage</h2><p class="ds-desc" id="coverage-text"></p>'
 
-tok = [('neutrals', t_neutrals), ('brand', t_brand), ('text', t_text), ('border', t_border), ('status', t_status), ('state', t_state), ('overlay', t_overlay), ('coverage', t_cov)]
+tok = [('about', t_about), ('neutrals', t_neutrals), ('brand', t_brand), ('text', t_text), ('border', t_border), ('system', t_status), ('state', t_state), ('overlay', t_overlay), ('coverage', t_cov)]
 
 JS_TOK = r'''
   var K = COLORKIT, el = K.el, TOKENS_URL = '../../.claude/skills/eco-tokens/tokens.json';
@@ -295,7 +297,8 @@ JS_TOK = r'''
     K.clear(GROUPS);
     var old = document.getElementById('other'); if (old) { old.previousElementSibling.remove(); old.remove(); }
     shown = {};
-    var keys = Object.keys(colors), rootCS = K.rootCS();
+    var HIDE = ['greyscale-black'];   // in the package and tokens.json, but no description and no component uses it: left out on purpose (user, 2026-10-22)
+    var all = Object.keys(colors), keys = all.filter(function (k) { return HIDE.indexOf(k) < 0; }), rootCS = K.rootCS();
     var isStatus = function (k) { return new RegExp('^(surface|border)-(' + STATUS.join('|') + ')-').test(k); };
 
     // Ramp + neutral cards
@@ -308,7 +311,7 @@ JS_TOK = r'''
       s.style.color = K.contrast(K.parseHex(t.value), [0, 0, 0]) > 4.5 ? 'var(--color-text-primary)' : 'var(--color-text-primary-inverted)';
       ramp.appendChild(s);
     });
-    place('g-neutral', rk.concat(['greyscale-black']), colors, 'fill');
+    place('g-neutral', rk, colors, 'fill');
     place('g-page', ['background-primary', 'background-secondary', 'surface-raised-primary', 'surface-raised-secondary'], colors, 'fill');
 
     place('g-accent', keys.filter(function (k) { return k.indexOf('accent-') === 0; }), colors, 'fill');
@@ -318,6 +321,7 @@ JS_TOK = r'''
       var v = '--color-primitive-color-brand-tools-accent-' + a[0], val = rootCS.getPropertyValue(v).trim();
       if (val) K.add(tools, { key: 'tools-accent-' + a[0], t: { var: v, value: val, description: a[1] }, kind: 'fill', prim: true });
     });
+    document.getElementById('g-text')._tcols = document.getElementById('g-icon')._tcols = K.SEMANTIC_CONTRAST;   // contrast column in the table view
     place('g-text', keys.filter(function (k) { return k.indexOf('text-') === 0; }), colors, 'text');
     place('g-icon', keys.filter(function (k) { return k.indexOf('icon-') === 0; }), colors, 'icon');
     place('g-border', keys.filter(function (k) { return k.indexOf('border-') === 0 && !isStatus(k); }), colors, 'border');
@@ -368,7 +372,7 @@ JS_TOK = r'''
     }
     var drift = K.finish();
     document.getElementById('coverage-text').textContent =
-      keys.length + ' semantic color tokens, all shown on this page' + (rest.length ? ' (' + rest.length + ' in “Other”)' : '') +
+      keys.length + ' semantic color tokens shown on this page' + (rest.length ? ' (' + rest.length + ' in “Other”)' : '') + (all.length > keys.length ? ' (' + (all.length - keys.length) + ' left out: ' + HIDE.join(', ') + ')' : '') +
       '. Source: .claude/skills/eco-tokens/tokens.json (this page reloads its content when that file changes).' +
       (drift ? ' ' + drift + ' token(s) differ from the live package and are flagged on their swatches: regenerate tokens.json with generate-tokens.py.' : ' All values match the live package.');
   }
@@ -380,7 +384,7 @@ JS_TOK = r'''
     if (document.getElementById('load-error')) return;
     var m = el('p', 'ds-desc', 'Could not load tokens.json. Open this page through the local server (npx serve), not as a file.');
     m.id = 'load-error';
-    document.getElementById('neutrals').querySelector('.ds-inner').appendChild(m);
+    document.getElementById('about').querySelector('.ds-inner').appendChild(m);
   });
 '''
 

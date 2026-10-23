@@ -125,6 +125,10 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 6. **Keep the label on one line**; use trailing text only for a short number or value.
 7. When `eco-menu` rows are built from this component, keep the menu's 48/40/32px row heights and dividers.
 
+### Filter list in a drawer (reference: `eco-design-system/tokens.html`, 2026-10-23)
+
+The category filter of the Tokens page is a **List Item list in drawer content**: each row is a standalone `role="checkbox"` item (check box + label) with the **count as trailing text tertiary** at the far right (`list-item__trail-text--tertiary`). The row around it is a page-local container (`.tk-row`: flex, `min-height: 48px`, the row height belongs to the container, rule 3). One tap toggles `aria-checked` and applies at once; the drawer button only closes. Use this pattern for every "choose categories, with a count" list in a drawer or modal, not a bare `form-checkbox-item`.
+
 ### Flags (for design)
 
 - **Weight:** Figma exports `body-md` / `body-sm` as 500; the repo (and `eco-menu`, `eco-select`) use 400. Followed the repo.

@@ -73,12 +73,24 @@ var COLORKIT = (function () {
     tok:     { label: 'Design token', cell: function (r) { return copyBtn(r.t); } },
     hex:     { label: 'Hex code',     cell: function (r) { return r.t.value; } },
     rgb:     { label: 'RGB Value',    cell: function (r) { return rgbText(parseHex(r.t.value)); } },
-    purpose: { label: 'Purpose',      cell: function (r) { return r.t.description && r.t.description !== 'TBA' ? r.t.description : '-'; }, text: true },
-    suit:    { label: 'Suitable for', cell: function () { return '-'; }, text: true },   // dash until the text is added
+    purpose: { label: 'Purpose',      cell: function (r) { return splitDesc(r.t.description).purpose || '-'; }, text: true },
+    contrast: { label: 'Contrast', cell: function (r) {   // WCAG ratio on the intended surface (white, black for inverted and on-black), the same as the badge on the card
+        ready();
+        var dark = isDarkText(r.key), cr = contrast(getLive(r.t) || parseHex(r.t.value), dark ? [0, 0, 0] : [255, 255, 255]);
+        var grade = r.kind === 'icon' ? (cr >= 3 ? 'AA' : 'Fail') : cr >= 7 ? 'AAA' : cr >= 4.5 ? 'AA' : cr >= 3 ? 'AA large' : 'Fail';
+        return cr.toFixed(1) + ':1 · ' + grade; } },
+    suit:    { label: 'Suitable for', cell: function (r) { return splitDesc(r.t.description).suit || '-'; }, text: true },   // dash when the description has no Suitable / Use sentence
     used:    { label: 'Used by',      cell: function (r) { return r.used && r.used.length ? r.used.join(', ') : 'No semantic token uses it.'; }, text: true }
   };
+  /* tokens.json has one description per token. The sentence that starts with "Suitable" or "Use(d)" goes to Suitable for, the rest is the Purpose (the "Purpose:" prefix is dropped, the column says it). */
+  function splitDesc(d) {
+    d = d && d !== 'TBA' ? d.replace(/^Purpose:\s*/, '') : '';
+    var m = d.match(/^([\s\S]*?[.;])\s+((?:Suitable|Used?)\b[\s\S]*)$/);
+    return m ? { purpose: m[1].trim(), suit: m[2].trim() } : { purpose: d.trim(), suit: '' };
+  }
   var SEMANTIC = ['tok', 'hex', 'rgb', 'purpose', 'suit'];
   var PRIMITIVE = ['tok', 'hex', 'rgb', 'used'];
+  var SEMANTIC_CONTRAST = ['tok', 'hex', 'rgb', 'contrast', 'purpose', 'suit'];   // table of the text and icon tokens; the card shows the ratio as a badge
 
   /* ── swatch card ─────────────────────────────────────────── */
   function card(r, cols) {
@@ -153,6 +165,7 @@ var COLORKIT = (function () {
       cols.forEach(function (id) {
         var def = COLS[id], v = def.cell(r);
         td = el('td', id === 'tok' ? 'ds-ctable__tok' : def.text ? 'ds-ctable__text' : null);
+        if (id === 'contrast') td.style.whiteSpace = 'nowrap';
         if (typeof v === 'string') td.textContent = v; else td.appendChild(v);
         row.appendChild(td);
       });
@@ -164,12 +177,13 @@ var COLORKIT = (function () {
 
   /* ── Cards / Table switch ────────────────────────────────── */
   var SEG = [['cards', 'Cards'], ['table', 'Table']];
+  var DEFAULT_VIEW = 'table';   // the view every section starts in (where the column is too narrow for the table, CSS shows cards anyway)
   function segment(label, onPick) {
     var c = el('div', 'pill-segment-control pill-segment-control--sm'), th = el('span', 'pill-segment-control__thumb');
     c.setAttribute('role', 'group'); c.setAttribute('aria-label', label); th.setAttribute('aria-hidden', 'true'); c.appendChild(th);
     SEG.forEach(function (o, i) {
-      var b = el('button', 'pill-segment-control__btn' + (i ? '' : ' pill-segment-control__btn--active'), o[1]);
-      b.type = 'button'; b.dataset.view = o[0]; b.setAttribute('aria-pressed', String(!i)); c.appendChild(b);
+      var b = el('button', 'pill-segment-control__btn' + (o[0] === DEFAULT_VIEW ? ' pill-segment-control__btn--active' : ''), o[1]);
+      b.type = 'button'; b.dataset.view = o[0]; b.setAttribute('aria-pressed', String(o[0] === DEFAULT_VIEW)); c.appendChild(b);
     });
     c.addEventListener('segment-change', function (e) { onPick(e.detail.button.dataset.view); });
     return c;
@@ -188,7 +202,7 @@ var COLORKIT = (function () {
     var h2 = sec.querySelector('.ds-h2'), bar = el('div', 'ds-viewbar');
     h2.parentNode.insertBefore(bar, h2); bar.appendChild(h2);
     bar.appendChild(segment('View ' + h2.textContent + ' as', function (v) { sec.dataset.view = v; }));
-    sec.dataset.view = 'cards';
+    sec.dataset.view = DEFAULT_VIEW;
     ECO_SEGMENT.init(bar);   // controls added after page load
   }
 
@@ -215,7 +229,7 @@ var COLORKIT = (function () {
   }
   function finish(skipId) {   // tables next to every grid, a switch per section, one for the whole page
     document.querySelectorAll('.ds-grid, .ds-status').forEach(function (h) {
-      if (h._recs && h._recs.length) h.parentNode.insertBefore(tableFor(h._recs, h._cols || SEMANTIC), h.nextSibling);
+      if (h._recs && h._recs.length) h.parentNode.insertBefore(tableFor(h._recs, h._tcols || h._cols || SEMANTIC), h.nextSibling);
     });
     document.querySelectorAll('.ds-section[id]').forEach(function (sec) { if (sec.querySelector('.ds-grid, .ds-status')) wireSection(sec); });
     if (!document.querySelector('.ds-viewall')) {
@@ -242,6 +256,6 @@ var COLORKIT = (function () {
     }).catch(fail || function () {});
   }
 
-  return { el: el, parseHex: parseHex, contrast: contrast, rgbText: rgbText, copyBtn: copyBtn, COLS: COLS, SEMANTIC: SEMANTIC, PRIMITIVE: PRIMITIVE, ready: ready,
+  return { el: el, parseHex: parseHex, contrast: contrast, rgbText: rgbText, copyBtn: copyBtn, COLS: COLS, SEMANTIC: SEMANTIC, SEMANTIC_CONTRAST: SEMANTIC_CONTRAST, PRIMITIVE: PRIMITIVE, ready: ready,
            clear: clear, add: add, finish: finish, tableFor: tableFor, fetchPackage: fetchPackage, drift: function () { return drift; }, rootCS: function () { ready(); return rootCS; } };
 })();

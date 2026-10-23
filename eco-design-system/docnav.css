@@ -15,6 +15,53 @@
   :root { --px-full: max(var(--px-page), calc((100vw - var(--dn-offset) - var(--max-w)) / 2)); }
   body { padding-left: var(--dn-offset); }
 
+  /* ── Framed content (proof of concept, opt-in: <html class="ds-frame">) ──
+     Grey surround; the content is a white panel with a 1px border on top and right and a rounded top-right corner.
+     On the left it meets the rail/panel border, so the edge reads as one line around the content. */
+  html.ds-frame { --dn-radius: 0px;   /* corner of the content panel: 16px = rounded, 0px = square (90 degrees) */
+    background: var(--color-surface-02); overflow: auto; }   /* non-visible on html stops body overflow from propagating to the viewport (clip would act as hidden = no scroll) */
+  html.ds-frame body {
+    padding-left: 0; margin: 16px 16px 16px var(--dn-offset); background: var(--color-background-primary);
+    border: 1px solid var(--color-border-primary); border-width: 1px; border-radius: var(--dn-radius);
+    overflow: clip;   /* clip, not hidden: keeps the sticky tab bar working */
+  }
+  html.ds-frame .dn-rail, html.ds-frame .dn-panel { background: var(--color-surface-02); }
+  html.ds-frame .dn-rail { border-right: 0; }   /* the content panel's own left border is the edge */
+  @media (min-width: 1600px) { html.ds-frame.dn-has-panel .dn-panel { border-right: 0; } }
+  html.ds-frame .dn.is-open .dn-panel { box-shadow: none; }   /* the border is the edge; a shadow would fall over the content corner */
+  html.ds-frame .dn.is-open .dn-rail { border-right: 1px solid var(--color-border-primary); }   /* line between rail and a visible panel */
+  @media (min-width: 1600px) { html.ds-frame.dn-has-panel .dn-rail { border-right: 1px solid var(--color-border-primary); } }   /* pinned panel */
+  /* Panel scrollbar (overlay and pinned): rounded 8px thumb, inset from the edge and from top and bottom. scrollbar-width must be auto for the ::-webkit-scrollbar rules to apply. */
+  html.ds-frame .dn-panel { scrollbar-width: auto; }
+  html.ds-frame .dn-panel::-webkit-scrollbar { width: 12px; }
+  html.ds-frame .dn-panel::-webkit-scrollbar-track { margin: 16px 0; background: none; }
+  html.ds-frame .dn-panel::-webkit-scrollbar-thumb { background: var(--color-surface-30) padding-box; border: 2px solid transparent; border-radius: 6px; }
+  /* Overlay panel (below 1600px): the content panel's rounded corner follows the panel out. The corner is an absolutely positioned
+     inverse-corner (so it scrolls away with the page, and the panel's right border shows full height once it has), grey box-shadow hides the
+     panel border above the arc. Pinned (1600px+) the content panel's own corner is visible, so no extra piece. */
+  @media (max-width: 1599px) {
+    html.ds-frame .dn-panel {   /* the right edge is a drawn line (not a border), so it can start below the corner arc */
+      border-right: 0; background: linear-gradient(var(--color-border-primary), var(--color-border-primary)) right top var(--dn-line, 16px) / 1px 100% no-repeat, var(--color-surface-02);
+    }
+    html.ds-frame .dn-panel { padding-top: 32px; }
+    html.ds-frame .dn-panel::-webkit-scrollbar-track { margin-top: 32px; }   /* starts below the corner piece */
+    html.ds-frame .dn::after {
+      content: ''; position: absolute; z-index: 101; top: 16px; left: calc(var(--dn-rail) + var(--dn-panel) - 1px); width: var(--dn-radius); height: var(--dn-radius); pointer-events: none;
+      border: 1px solid var(--color-border-primary); border-width: 1px 0 0 1px; border-top-left-radius: var(--dn-radius);
+      box-shadow: -8px -8px 0 8px var(--color-surface-02);
+      transform: translateX(calc(-1 * (var(--dn-rail) + var(--dn-panel)))); visibility: hidden;   /* slides in behind the rail with the panel */
+    }
+    html.ds-frame .dn.is-ready::after { transition: transform var(--duration-medium-2) var(--ease-standard), visibility 0s linear var(--duration-medium-2); }
+    html.ds-frame .dn.is-open::after { transform: none; visibility: visible; transition-delay: 0s; transition-timing-function: var(--ease-decelerate-emphasized); }
+  }
+  html.ds-frame :is(.dn-home, .dn-dest, .dn-tool:not(:disabled), .dn-link:not(.dn-link--soon)):not([aria-current="true"], [aria-current="page"]):hover { background: var(--color-surface-05); }   /* the active item keeps its accent background */
+  html.ds-frame .dn-link--soon:hover { background: none; }
+  html.ds-frame > .ds-footer {   /* on the grey surround, no box of its own; text aligned with the panel content */
+    font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1; color: var(--color-text-primary);
+    background: none; border-top: 0; margin: 0 16px 0 var(--dn-offset); padding-top: 40px; padding-bottom: 40px;
+  }
+  html.ds-frame { --px-full: max(var(--px-page), calc((100vw - var(--dn-offset) - 17px - var(--max-w)) / 2)); }
+
   /* ── Navigation Rail ─────────────────────────────────────── */
   .dn-rail {
     position: fixed; z-index: 102; top: 0; bottom: 0; left: 0; width: var(--dn-rail);
@@ -109,10 +156,11 @@
   :root { --dn-bar: 64px; }
   .dn-rail, .dn-panel { display: none; }
   body { padding-top: calc(var(--dn-bar) + var(--pt-page)); }
-  .ds-subnav { top: var(--dn-bar); }   /* the sticky on-page nav sits under the header */
+  .ds-subnav { top: calc(var(--dn-bar) - var(--dn-hide, 0px)); }   /* the sticky on-page nav sits under the header, and follows it while it slides away */
   html.dn-lock { overflow: hidden; }
 
   .dn-bar {
+    transform: translateY(calc(-1 * var(--dn-hide, 0px)));   /* slides away with the scroll (docnav.js) */
     position: fixed; z-index: 103; top: 0; left: 0; right: 0; height: var(--dn-bar); display: flex; align-items: center; justify-content: space-between;
     padding: 0 16px; background: var(--color-background-primary); border-bottom: 1px solid var(--color-border-primary);
   }
@@ -122,7 +170,15 @@
   }
   .dn-bar__mark { flex: none; width: 0.7em; height: 0.7em;   /* = cap height of the uppercase brand text */ background: var(--ds-accent); }
   .dn-bar__v { color: var(--color-text-tertiary); margin-left: 4px; }
-  .btn.dn-bar__btn { --btn-fg: var(--ds-accent); margin-right: calc((var(--btn-h) - var(--btn-icon)) / -2); }   /* eco-button Blank, icon only, Medium (components/css/button.css); icon in ECO DS Accent, 16px from the edge */
+  .btn.dn-bar__btn, .btn.dn-bar__search { --btn-fg: var(--ds-accent); }   /* eco-button Blank, icon only, Medium (components/css/button.css); icon in ECO DS Accent, 16px from the edge */
+  .btn.dn-bar__btn { margin-left: calc((var(--btn-h) - var(--btn-icon)) / -2); }
+  .btn.dn-bar__search { margin-right: calc((var(--btn-h) - var(--btn-icon)) / -2); }
+  .dn-bar__div { flex: none; width: 1px; height: 24px; margin-left: 8px; background: var(--color-border-primary); }
+  .btn.dn-bar__id {   /* eco-button Blank, Medium; label keeps the brand type */
+    --btn-fg: var(--color-text-primary); --btn-tx: 0px; width: auto; margin-right: auto; margin-left: 8px;   /* 8px padding all round, like the icon buttons */
+    font-size: 20px; line-height: 24px; letter-spacing: 0; text-transform: uppercase;
+  }
+  .dn-bar__id .btn__label { display: flex; align-items: center; gap: 8px; }
 
   .dn-scrim {
     position: fixed; z-index: 101; top: var(--dn-bar); left: 0; right: 0; bottom: 0; background: var(--color-surface-opacity-black-20);
@@ -150,7 +206,10 @@
     transition: background-color var(--duration-fast-3) var(--ease-standard);
   }
   .dn-dark:disabled { cursor: not-allowed; }
-  .dn-mrow:hover, .dn-dark:not(:disabled):hover { background: var(--color-surface-raised-secondary); }
+  .dn-mrow:not([aria-current]):hover, .dn-dark:not(:disabled):hover { background: var(--color-surface-raised-secondary); }
+  .dn-mrow { position: relative; text-decoration: none; }
+  .dn-mrow[aria-current="true"] { background: var(--ds-accent-light); }   /* the category of the current page, like the active link in the panel */
+  .dn-mrow[aria-current="true"]::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--ds-accent); }
   .dn-mrow__t { flex: 1 1 auto; }
   .dn-mrow__ico { color: var(--ds-accent); }
   .dn-lv1__gap { flex: 1 1 auto; }

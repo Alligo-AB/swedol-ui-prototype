@@ -750,7 +750,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "file_type": "code",
       "norm_label": "togglecollapsible()",
       "source_file": "components/js/collapsible.js",
@@ -762,35 +762,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "file_type": "code",
       "norm_label": "init()",
       "source_file": "components/js/measure.js",
       "source_location": "L4"
-    },
-    {
-      "id": "components_js_range_init",
-      "label": "init()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "file_type": "code",
-      "norm_label": "init()",
-      "source_file": "components/js/range.js",
-      "source_location": "L5"
-    },
-    {
-      "id": "components_js_range_init_show",
-      "label": "show()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "file_type": "code",
-      "norm_label": "show()",
-      "source_file": "components/js/range.js",
-      "source_location": "L10"
     },
     {
       "id": "eco_design_system_tokens_loader_watch",
@@ -798,7 +774,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "file_type": "code",
       "norm_label": "watch()",
       "source_file": "eco-design-system/tokens-loader.js",
@@ -810,7 +786,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "file_type": "code",
       "norm_label": "check()",
       "source_file": "eco-design-system/tokens-loader.js",
@@ -1477,30 +1453,6 @@
       "source_location": "L78"
     },
     {
-      "id": "components_js_pill_segment_control_init",
-      "label": "init()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "docs.css",
-      "file_type": "code",
-      "norm_label": "init()",
-      "source_file": "components/js/pill-segment-control.js",
-      "source_location": "L11"
-    },
-    {
-      "id": "components_js_pill_segment_control_move",
-      "label": "move()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "docs.css",
-      "file_type": "code",
-      "norm_label": "move()",
-      "source_file": "components/js/pill-segment-control.js",
-      "source_location": "L5"
-    },
-    {
       "id": "eco_design_system_gen_build_esc_attr",
       "label": "esc_attr()",
       "_callable": true,
@@ -1859,18 +1811,6 @@
       "norm_label": "bullets()",
       "source_file": "eco-design-system/gen/build.py",
       "source_location": "L237"
-    },
-    {
-      "id": "eco_design_system_gen_build_desc",
-      "label": "desc()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "gen_hero_banner_widget.py",
-      "file_type": "code",
-      "norm_label": "desc()",
-      "source_file": "eco-design-system/gen/build.py",
-      "source_location": "L245"
     },
     {
       "id": "eco_design_system_gen_build_rules",
@@ -3133,6 +3073,30 @@
       "source_location": "L14"
     },
     {
+      "id": "eco_design_system_docnav_apply",
+      "label": "apply()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "docnav.js",
+      "file_type": "code",
+      "norm_label": "apply()",
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L515"
+    },
+    {
+      "id": "eco_design_system_docnav_bar",
+      "label": "bar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "docnav.js",
+      "file_type": "code",
+      "norm_label": "bar()",
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L514"
+    },
+    {
       "id": "eco_design_system_docnav_build",
       "label": "build()",
       "_callable": true,
@@ -3142,7 +3106,7 @@
       "file_type": "code",
       "norm_label": "build()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L449"
+      "source_location": "L461"
     },
     {
       "id": "eco_design_system_docnav_c",
@@ -3154,7 +3118,7 @@
       "file_type": "code",
       "norm_label": "c()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L6"
+      "source_location": "L7"
     },
     {
       "id": "eco_design_system_docnav_close",
@@ -3166,7 +3130,7 @@
       "file_type": "code",
       "norm_label": "close()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L136"
+      "source_location": "L143"
     },
     {
       "id": "eco_design_system_docnav_closedrawer",
@@ -3178,7 +3142,7 @@
       "file_type": "code",
       "norm_label": "closedrawer()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L274"
+      "source_location": "L284"
     },
     {
       "id": "eco_design_system_docnav_closesearch",
@@ -3190,7 +3154,7 @@
       "file_type": "code",
       "norm_label": "closesearch()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L409"
+      "source_location": "L421"
     },
     {
       "id": "eco_design_system_docnav_cubic",
@@ -3202,7 +3166,7 @@
       "file_type": "code",
       "norm_label": "cubic()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L163"
+      "source_location": "L170"
     },
     {
       "id": "eco_design_system_docnav_esc",
@@ -3214,7 +3178,7 @@
       "file_type": "code",
       "norm_label": "esc()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L75"
+      "source_location": "L82"
     },
     {
       "id": "eco_design_system_docnav_f",
@@ -3226,7 +3190,7 @@
       "file_type": "code",
       "norm_label": "f()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L7"
+      "source_location": "L8"
     },
     {
       "id": "eco_design_system_docnav_fill",
@@ -3238,7 +3202,7 @@
       "file_type": "code",
       "norm_label": "fill()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L120"
+      "source_location": "L127"
     },
     {
       "id": "eco_design_system_docnav_fold",
@@ -3250,7 +3214,7 @@
       "file_type": "code",
       "norm_label": "fold()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L308"
+      "source_location": "L319"
     },
     {
       "id": "eco_design_system_docnav_init",
@@ -3262,7 +3226,7 @@
       "file_type": "code",
       "norm_label": "init()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L485"
+      "source_location": "L497"
     },
     {
       "id": "eco_design_system_docnav_land",
@@ -3274,7 +3238,7 @@
       "file_type": "code",
       "norm_label": "land()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L166"
+      "source_location": "L173"
     },
     {
       "id": "eco_design_system_docnav_later",
@@ -3286,7 +3250,7 @@
       "file_type": "code",
       "norm_label": "later()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L141"
+      "source_location": "L148"
     },
     {
       "id": "eco_design_system_docnav_level",
@@ -3298,7 +3262,7 @@
       "file_type": "code",
       "norm_label": "level()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L261"
+      "source_location": "L271"
     },
     {
       "id": "eco_design_system_docnav_link",
@@ -3310,7 +3274,7 @@
       "file_type": "code",
       "norm_label": "link()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L77"
+      "source_location": "L84"
     },
     {
       "id": "eco_design_system_docnav_mark",
@@ -3322,7 +3286,7 @@
       "file_type": "code",
       "norm_label": "mark()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L341"
+      "source_location": "L353"
     },
     {
       "id": "eco_design_system_docnav_ms",
@@ -3334,7 +3298,7 @@
       "file_type": "code",
       "norm_label": "ms()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L119"
+      "source_location": "L126"
     },
     {
       "id": "eco_design_system_docnav_nav",
@@ -3346,7 +3310,7 @@
       "file_type": "code",
       "norm_label": "nav()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L183"
+      "source_location": "L190"
     },
     {
       "id": "eco_design_system_docnav_open",
@@ -3358,7 +3322,7 @@
       "file_type": "code",
       "norm_label": "open()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L135"
+      "source_location": "L142"
     },
     {
       "id": "eco_design_system_docnav_opendrawer",
@@ -3370,7 +3334,7 @@
       "file_type": "code",
       "norm_label": "opendrawer()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L268"
+      "source_location": "L278"
     },
     {
       "id": "eco_design_system_docnav_opensearch",
@@ -3382,7 +3346,7 @@
       "file_type": "code",
       "norm_label": "opensearch()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L401"
+      "source_location": "L413"
     },
     {
       "id": "eco_design_system_docnav_panelhtml",
@@ -3394,7 +3358,7 @@
       "file_type": "code",
       "norm_label": "panelhtml()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L82"
+      "source_location": "L89"
     },
     {
       "id": "eco_design_system_docnav_r",
@@ -3406,7 +3370,7 @@
       "file_type": "code",
       "norm_label": "r()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L9"
+      "source_location": "L10"
     },
     {
       "id": "eco_design_system_docnav_ready",
@@ -3418,7 +3382,7 @@
       "file_type": "code",
       "norm_label": "ready()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L192"
+      "source_location": "L199"
     },
     {
       "id": "eco_design_system_docnav_regexesc",
@@ -3430,7 +3394,7 @@
       "file_type": "code",
       "norm_label": "regexesc()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L340"
+      "source_location": "L352"
     },
     {
       "id": "eco_design_system_docnav_release",
@@ -3442,7 +3406,7 @@
       "file_type": "code",
       "norm_label": "release()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L165"
+      "source_location": "L172"
     },
     {
       "id": "eco_design_system_docnav_render",
@@ -3454,7 +3418,7 @@
       "file_type": "code",
       "norm_label": "render()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L380"
+      "source_location": "L392"
     },
     {
       "id": "eco_design_system_docnav_reveal",
@@ -3466,7 +3430,7 @@
       "file_type": "code",
       "norm_label": "reveal()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L144"
+      "source_location": "L151"
     },
     {
       "id": "eco_design_system_docnav_sameurl",
@@ -3478,7 +3442,7 @@
       "file_type": "code",
       "norm_label": "sameurl()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L214"
+      "source_location": "L221"
     },
     {
       "id": "eco_design_system_docnav_score",
@@ -3490,7 +3454,19 @@
       "file_type": "code",
       "norm_label": "score()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L347"
+      "source_location": "L359"
+    },
+    {
+      "id": "eco_design_system_docnav_set",
+      "label": "set()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "docnav.js",
+      "file_type": "code",
+      "norm_label": "set()",
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L506"
     },
     {
       "id": "eco_design_system_docnav_setactive",
@@ -3502,7 +3478,7 @@
       "file_type": "code",
       "norm_label": "setactive()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L375"
+      "source_location": "L387"
     },
     {
       "id": "eco_design_system_docnav_show",
@@ -3514,7 +3490,7 @@
       "file_type": "code",
       "norm_label": "show()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L121"
+      "source_location": "L128"
     },
     {
       "id": "eco_design_system_docnav_svword",
@@ -3526,7 +3502,7 @@
       "file_type": "code",
       "norm_label": "svword()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L361"
+      "source_location": "L373"
     },
     {
       "id": "eco_design_system_docnav_top",
@@ -3538,7 +3514,7 @@
       "file_type": "code",
       "norm_label": "top()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L468"
+      "source_location": "L480"
     },
     {
       "id": "eco_design_system_docnav_top_show",
@@ -3550,7 +3526,7 @@
       "file_type": "code",
       "norm_label": "show()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L475"
+      "source_location": "L487"
     },
     {
       "id": "eco_design_system_docnav_tryland",
@@ -3562,7 +3538,7 @@
       "file_type": "code",
       "norm_label": "tryland()",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L191"
+      "source_location": "L198"
     },
     {
       "id": "eco_design_system_gen_hero_switch_iso_circ",
@@ -4138,7 +4114,7 @@
       "file_type": "code",
       "norm_label": "add()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L210"
+      "source_location": "L224"
     },
     {
       "id": "eco_design_system_color_kit_card",
@@ -4150,7 +4126,7 @@
       "file_type": "code",
       "norm_label": "card()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L84"
+      "source_location": "L96"
     },
     {
       "id": "eco_design_system_color_kit_clear",
@@ -4162,7 +4138,7 @@
       "file_type": "code",
       "norm_label": "clear()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L205"
+      "source_location": "L219"
     },
     {
       "id": "eco_design_system_color_kit_contrast",
@@ -4210,7 +4186,7 @@
       "file_type": "code",
       "norm_label": "fetchpackage()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L234"
+      "source_location": "L248"
     },
     {
       "id": "eco_design_system_color_kit_finish",
@@ -4222,7 +4198,7 @@
       "file_type": "code",
       "norm_label": "finish()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L216"
+      "source_location": "L230"
     },
     {
       "id": "eco_design_system_color_kit_fit",
@@ -4234,7 +4210,7 @@
       "file_type": "code",
       "norm_label": "fit()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L197"
+      "source_location": "L211"
     },
     {
       "id": "eco_design_system_color_kit_getlive",
@@ -4306,7 +4282,7 @@
       "file_type": "code",
       "norm_label": "previewcell()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L129"
+      "source_location": "L141"
     },
     {
       "id": "eco_design_system_color_kit_ready",
@@ -4342,7 +4318,7 @@
       "file_type": "code",
       "norm_label": "segment()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L167"
+      "source_location": "L181"
     },
     {
       "id": "eco_design_system_color_kit_setview",
@@ -4354,7 +4330,19 @@
       "file_type": "code",
       "norm_label": "setview()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L177"
+      "source_location": "L191"
+    },
+    {
+      "id": "eco_design_system_color_kit_splitdesc",
+      "label": "splitDesc()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "color-kit.js",
+      "file_type": "code",
+      "norm_label": "splitdesc()",
+      "source_file": "eco-design-system/color-kit.js",
+      "source_location": "L86"
     },
     {
       "id": "eco_design_system_color_kit_tablefor",
@@ -4366,7 +4354,7 @@
       "file_type": "code",
       "norm_label": "tablefor()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L142"
+      "source_location": "L154"
     },
     {
       "id": "eco_design_system_color_kit_wiresection",
@@ -4378,7 +4366,7 @@
       "file_type": "code",
       "norm_label": "wiresection()",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L186"
+      "source_location": "L200"
     },
     {
       "id": "eco_design_system_gen_build_bp_field",
@@ -4894,7 +4882,7 @@
       "file_type": "code",
       "norm_label": "grid()",
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L148"
+      "source_location": "L151"
     },
     {
       "id": "eco_design_system_gen_gen_colors_ramp",
@@ -4906,7 +4894,7 @@
       "file_type": "code",
       "norm_label": "ramp()",
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L56"
+      "source_location": "L59"
     },
     {
       "id": "eco_design_system_gen_gen_colors_sec",
@@ -4918,7 +4906,7 @@
       "file_type": "code",
       "norm_label": "sec()",
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L18"
+      "source_location": "L20"
     },
     {
       "id": "eco_design_system_gen_gen_colors_use_fig",
@@ -4930,7 +4918,7 @@
       "file_type": "code",
       "norm_label": "use_fig()",
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L60"
+      "source_location": "L63"
     },
     {
       "id": "hairline_button_group_gw",
@@ -5989,6 +5977,174 @@
       "source_location": "L150"
     },
     {
+      "id": "components_js_pill_segment_control_init",
+      "label": "init()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "js/range.js",
+      "file_type": "code",
+      "norm_label": "init()",
+      "source_file": "components/js/pill-segment-control.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "components_js_pill_segment_control_move",
+      "label": "move()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "js/range.js",
+      "file_type": "code",
+      "norm_label": "move()",
+      "source_file": "components/js/pill-segment-control.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "components_js_range_init",
+      "label": "init()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "js/range.js",
+      "file_type": "code",
+      "norm_label": "init()",
+      "source_file": "components/js/range.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "components_js_range_init_show",
+      "label": "show()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "js/range.js",
+      "file_type": "code",
+      "norm_label": "show()",
+      "source_file": "components/js/range.js",
+      "source_location": "L10"
+    },
+    {
+      "id": "eco_design_system_layout_kit_bpfor",
+      "label": "bpFor()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "bpfor()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L30"
+    },
+    {
+      "id": "eco_design_system_layout_kit_el",
+      "label": "el()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "el()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L32"
+    },
+    {
+      "id": "eco_design_system_layout_kit_fetchdoc",
+      "label": "fetchDoc()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "fetchdoc()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L71"
+    },
+    {
+      "id": "eco_design_system_layout_kit_fit",
+      "label": "fit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "fit()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L57"
+    },
+    {
+      "id": "eco_design_system_layout_kit_gridfig",
+      "label": "gridFig()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "gridfig()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L35"
+    },
+    {
+      "id": "eco_design_system_layout_kit_onfit",
+      "label": "onFit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "onfit()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L65"
+    },
+    {
+      "id": "eco_design_system_layout_kit_px",
+      "label": "px()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "px()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L31"
+    },
+    {
+      "id": "eco_design_system_layout_kit_refit",
+      "label": "refit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "refit()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L66"
+    },
+    {
+      "id": "eco_design_system_layout_kit_resolve",
+      "label": "resolve()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "resolve()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L21"
+    },
+    {
+      "id": "eco_design_system_layout_kit_vals",
+      "label": "vals()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 93,
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "vals()",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L29"
+    },
+    {
       "id": "hairline_inline_notification_flat",
       "label": "flat()",
       "_callable": true,
@@ -6061,11 +6217,83 @@
       "source_location": "L156"
     },
     {
+      "id": "eco_design_system_gen_build_desc",
+      "label": "desc()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 96,
+      "community_name": "gen_layout.py",
+      "file_type": "code",
+      "norm_label": "desc()",
+      "source_file": "eco-design-system/gen/build.py",
+      "source_location": "L245"
+    },
+    {
+      "id": "eco_design_system_gen_gen_layout_code_static",
+      "label": "code_static()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 96,
+      "community_name": "gen_layout.py",
+      "file_type": "code",
+      "norm_label": "code_static()",
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "eco_design_system_gen_gen_layout_lv",
+      "label": "lv()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 96,
+      "community_name": "gen_layout.py",
+      "file_type": "code",
+      "norm_label": "lv()",
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "eco_design_system_gen_gen_layout_sec",
+      "label": "sec()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 96,
+      "community_name": "gen_layout.py",
+      "file_type": "code",
+      "norm_label": "sec()",
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "eco_design_system_gen_gen_layout_tgroup",
+      "label": "tgroup()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 96,
+      "community_name": "gen_layout.py",
+      "file_type": "code",
+      "norm_label": "tgroup()",
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L314"
+    },
+    {
+      "id": "middleware_middleware",
+      "label": "middleware()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "middleware.js",
+      "file_type": "code",
+      "norm_label": "middleware()",
+      "source_file": "middleware.js",
+      "source_location": "L7"
+    },
+    {
       "id": "components_js_collapsible",
       "label": "collapsible.js",
       "_origin": "ast",
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "file_type": "code",
       "norm_label": "collapsible.js",
       "source_file": "components/js/collapsible.js",
@@ -6076,21 +6304,10 @@
       "label": "measure.js",
       "_origin": "ast",
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "file_type": "code",
       "norm_label": "measure.js",
       "source_file": "components/js/measure.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_js_range",
-      "label": "js/range.js",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "file_type": "code",
-      "norm_label": "js/range.js",
-      "source_file": "components/js/range.js",
       "source_location": "L1"
     },
     {
@@ -6098,7 +6315,7 @@
       "label": "tokens-loader.js",
       "_origin": "ast",
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "file_type": "code",
       "norm_label": "tokens-loader.js",
       "source_file": "eco-design-system/tokens-loader.js",
@@ -6109,7 +6326,7 @@
       "label": "Generator for the three-page component docs",
       "_origin": "ast",
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "generator for the three-page component docs",
@@ -6136,17 +6353,6 @@
       "file_type": "code",
       "norm_label": "doc-kit.js",
       "source_file": "eco-design-system/doc-kit.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_js_pill_segment_control",
-      "label": "pill-segment-control.js",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "docs.css",
-      "file_type": "code",
-      "norm_label": "pill-segment-control.js",
-      "source_file": "components/js/pill-segment-control.js",
       "source_location": "L1"
     },
     {
@@ -9981,6 +10187,66 @@
       "source_location": "L1"
     },
     {
+      "id": "claude_skills_eco_range_skill_flags",
+      "label": "Flags",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "Range (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "flags",
+      "source_file": ".claude/skills/eco-range/SKILL.md",
+      "source_location": "L64"
+    },
+    {
+      "id": "claude_skills_eco_range_skill_range_eco_design_system",
+      "label": "Range (ECO Design System)",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "Range (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "range (eco design system)",
+      "source_file": ".claude/skills/eco-range/SKILL.md",
+      "source_location": "L8"
+    },
+    {
+      "id": "claude_skills_eco_range_skill_rules",
+      "label": "Rules",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "Range (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "rules",
+      "source_file": ".claude/skills/eco-range/SKILL.md",
+      "source_location": "L55"
+    },
+    {
+      "id": "claude_skills_eco_range_skill_states",
+      "label": "States",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "Range (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "states",
+      "source_file": ".claude/skills/eco-range/SKILL.md",
+      "source_location": "L44"
+    },
+    {
+      "id": "claude_skills_eco_range_skill_use_it",
+      "label": "Use it",
+      "_origin": "ast",
+      "community": 79,
+      "community_name": "Range (ECO Design System)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "use it",
+      "source_file": ".claude/skills/eco-range/SKILL.md",
+      "source_location": "L14"
+    },
+    {
       "id": "hairline_button_group",
       "label": "button-group.js",
       "_origin": "ast",
@@ -10591,6 +10857,28 @@
       "source_location": "L11"
     },
     {
+      "id": "components_js_pill_segment_control",
+      "label": "pill-segment-control.js",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "js/range.js",
+      "file_type": "code",
+      "norm_label": "pill-segment-control.js",
+      "source_file": "components/js/pill-segment-control.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_js_range",
+      "label": "js/range.js",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "js/range.js",
+      "file_type": "code",
+      "norm_label": "js/range.js",
+      "source_file": "components/js/range.js",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_build_docs",
       "label": "build-docs.mjs",
       "_origin": "ast",
@@ -10657,64 +10945,15 @@
       "source_location": "L28"
     },
     {
-      "id": "claude_skills_eco_range_skill_flags",
-      "label": "Flags",
+      "id": "eco_design_system_layout_kit",
+      "label": "layout-kit.js",
       "_origin": "ast",
       "community": 93,
-      "community_name": "Range (ECO Design System)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "flags",
-      "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L64"
-    },
-    {
-      "id": "claude_skills_eco_range_skill_range_eco_design_system",
-      "label": "Range (ECO Design System)",
-      "_origin": "ast",
-      "community": 93,
-      "community_name": "Range (ECO Design System)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "range (eco design system)",
-      "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L8"
-    },
-    {
-      "id": "claude_skills_eco_range_skill_rules",
-      "label": "Rules",
-      "_origin": "ast",
-      "community": 93,
-      "community_name": "Range (ECO Design System)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "rules",
-      "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L55"
-    },
-    {
-      "id": "claude_skills_eco_range_skill_states",
-      "label": "States",
-      "_origin": "ast",
-      "community": 93,
-      "community_name": "Range (ECO Design System)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "states",
-      "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L44"
-    },
-    {
-      "id": "claude_skills_eco_range_skill_use_it",
-      "label": "Use it",
-      "_origin": "ast",
-      "community": 93,
-      "community_name": "Range (ECO Design System)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "use it",
-      "source_file": ".claude/skills/eco-range/SKILL.md",
-      "source_location": "L14"
+      "community_name": "layout-kit.js",
+      "file_type": "code",
+      "norm_label": "layout-kit.js",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L1"
     },
     {
       "id": "hairline_inline_notification",
@@ -10761,6 +11000,17 @@
       "source_location": "L1"
     },
     {
+      "id": "vercel_headers",
+      "label": "headers",
+      "_origin": "ast",
+      "community": 95,
+      "community_name": "vercel.json",
+      "file_type": "code",
+      "norm_label": "headers",
+      "source_file": "vercel.json",
+      "source_location": "L5"
+    },
+    {
       "id": "vercel_redirects",
       "label": "redirects",
       "_origin": "ast",
@@ -10772,13 +11022,57 @@
       "source_location": "L2"
     },
     {
+      "id": "eco_design_system_gen_gen_layout",
+      "label": "gen_layout.py",
+      "_origin": "ast",
+      "community": 96,
+      "community_name": "gen_layout.py",
+      "file_type": "code",
+      "norm_label": "gen_layout.py",
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "eco_design_system_gen_gen_layout_rationale_1",
+      "label": "Layout: the second Foundation in the three-page structure (2026-10-22), after\u2026",
+      "_origin": "ast",
+      "community": 96,
+      "community_name": "gen_layout.py",
+      "file_type": "rationale",
+      "norm_label": "layout: the second foundation in the three-page structure (2026-10-22), after...",
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "middleware",
+      "label": "middleware.js",
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "middleware.js",
+      "file_type": "code",
+      "norm_label": "middleware.js",
+      "source_file": "middleware.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "middleware_config",
+      "label": "config",
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "middleware.js",
+      "file_type": "code",
+      "norm_label": "config",
+      "source_file": "middleware.js",
+      "source_location": "L5"
+    },
+    {
       "id": "c_collapsible_css",
       "label": "components/css/collapsible.css",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/collapsible.css",
@@ -10793,7 +11087,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/js/collapsible.js",
@@ -10808,7 +11102,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "badge.css",
@@ -10823,7 +11117,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/breadcrumb.css",
@@ -10838,7 +11132,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "button.css",
@@ -10853,7 +11147,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/button-group.css",
@@ -10868,7 +11162,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/checkbox.css",
@@ -10883,7 +11177,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/collapsible.css",
@@ -10898,7 +11192,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "divider.css",
@@ -10913,7 +11207,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "input.css",
@@ -10928,7 +11222,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/measure.css",
@@ -10943,7 +11237,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "menu.css",
@@ -10958,7 +11252,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "radio.css",
@@ -10973,7 +11267,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "range.css",
@@ -10988,7 +11282,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "section.css",
@@ -11003,7 +11297,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "select.css",
@@ -11018,7 +11312,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/table.css",
@@ -11033,7 +11327,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "tabs.css",
@@ -11048,7 +11342,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/tooltip.css",
@@ -11063,7 +11357,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "storyblok collapsible widget",
@@ -11078,41 +11372,11 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "eco tabs component",
       "source_file": "eco-design-system/components/tabs-code.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_eco_toast",
-      "label": "ECO Toast component",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "eco toast component",
-      "source_file": "eco-design-system/components/toast-code.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_eco_toast_ecom",
-      "label": "ECO E-Com Toast component",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "eco e-com toast component",
-      "source_file": "eco-design-system/components/toast-ecom-code.html",
       "source_location": null,
       "source_url": null
     },
@@ -11123,7 +11387,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "doc page generator (gen/)",
@@ -11138,7 +11402,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "eco foundations: colors, typography, spacing, elevation, motion",
@@ -11153,7 +11417,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "toast notification family (system and e-com)",
@@ -11168,7 +11432,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "eco tooltip (data-tooltip global)",
@@ -11183,7 +11447,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "badge (docs page)",
@@ -11198,7 +11462,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "banner.html",
@@ -11213,7 +11477,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "banner: code (docs page)",
@@ -11228,7 +11492,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "banner-specifications.html",
@@ -11243,7 +11507,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "breadcrumb.html",
@@ -11258,7 +11522,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "breadcrumb-bar.html",
@@ -11273,7 +11537,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "breadcrumb bar: code (docs page)",
@@ -11288,7 +11552,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "breadcrumb-bar-specifications.html",
@@ -11303,7 +11567,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "breadcrumb-base.html",
@@ -11318,7 +11582,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "breadcrumb base: code (docs page)",
@@ -11333,7 +11597,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "breadcrumb-base-specifications.html",
@@ -11348,7 +11612,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "components/button.html",
@@ -11363,7 +11627,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "button: code (docs page)",
@@ -11378,7 +11642,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "button-group.html",
@@ -11393,7 +11657,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "button group: code (docs page)",
@@ -11408,7 +11672,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "button-group-specifications.html",
@@ -11423,7 +11687,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "button-specifications.html",
@@ -11438,7 +11702,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "checkbox.html",
@@ -11453,7 +11717,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "checkbox: code (docs page)",
@@ -11468,7 +11732,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "checkbox-specifications.html",
@@ -11483,7 +11747,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "collapsible.html",
@@ -11498,7 +11762,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "collapsible: code (docs page)",
@@ -11513,7 +11777,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "collapsible-specifications.html",
@@ -11528,7 +11792,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "collapsible-storyblok.html",
@@ -11543,7 +11807,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "notifications.html",
@@ -11558,7 +11822,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "tabs.html",
@@ -11573,7 +11837,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "tabs: code",
@@ -11588,7 +11852,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "tabs: specifications",
@@ -11603,26 +11867,11 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "toast.html",
       "source_file": "eco-design-system/components/toast.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "eco_design_system_components_toast_code",
-      "label": "Toast: Code",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "toast: code",
-      "source_file": "eco-design-system/components/toast-code.html",
       "source_location": null,
       "source_url": null
     },
@@ -11633,41 +11882,11 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "e-com toast",
       "source_file": "eco-design-system/components/toast-ecom.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "eco_design_system_components_toast_ecom_code",
-      "label": "E-Com Toast: Code",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "e-com toast: code",
-      "source_file": "eco-design-system/components/toast-ecom-code.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "eco_design_system_components_toast_ecom_specifications",
-      "label": "E-Com Toast: Specifications",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "e-com toast: specifications",
-      "source_file": "eco-design-system/components/toast-ecom-specifications.html",
       "source_location": null,
       "source_url": null
     },
@@ -11678,7 +11897,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "toast: specifications",
@@ -11693,7 +11912,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "tooltip.html",
@@ -11708,7 +11927,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "tooltip: code",
@@ -11723,7 +11942,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "tooltip: specifications",
@@ -11738,7 +11957,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "colors",
@@ -11753,7 +11972,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "docs-table.html",
@@ -11768,7 +11987,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "shadows &amp; elevation",
@@ -11783,7 +12002,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "motion",
@@ -11798,26 +12017,11 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "foundations",
       "source_file": "eco-design-system/foundations-overview.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "eco_design_system_foundations_spacing",
-      "label": "Spacing",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "components/css/button-group.css",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "spacing",
-      "source_file": "eco-design-system/foundations/spacing.html",
       "source_location": null,
       "source_url": null
     },
@@ -11828,7 +12032,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "typography",
@@ -11843,7 +12047,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "button_header_text.html",
@@ -11858,7 +12062,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "action link",
@@ -11873,7 +12077,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "banner",
@@ -11888,7 +12092,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "breadcrumb",
@@ -11903,7 +12107,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "button",
@@ -11918,7 +12122,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "button group",
@@ -11933,7 +12137,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "checkbox",
@@ -11948,7 +12152,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "collapsible",
@@ -11963,7 +12167,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "input (old docs page)",
@@ -11978,7 +12182,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "select (old docs page)",
@@ -11993,7 +12197,7 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "document",
       "norm_label": "gen/readme.md",
@@ -12008,26 +12212,11 @@
       "author": null,
       "captured_at": null,
       "community": 0,
-      "community_name": "components/css/button-group.css",
+      "community_name": "input.css",
       "contributor": null,
       "file_type": "rationale",
       "norm_label": "three-page component docs structure (examples / specifications / code)",
       "source_file": "eco-design-system/gen/README.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "file_components_css_action_link_css",
-      "label": "components/css/action-link.css",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "eco-spacing skill",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "components/css/action-link.css",
-      "source_file": ".claude/skills/eco-action-link/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -12038,11 +12227,26 @@
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "eco-spacing skill",
+      "community_name": "eco-add-component skill",
       "contributor": null,
       "file_type": "code",
       "norm_label": "components/css/divider.css",
       "source_file": ".claude/skills/eco-divider/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "file_components_css_measure_css",
+      "label": "components/css/measure.css",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "eco-add-component skill",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "components/css/measure.css",
+      "source_file": ".claude/skills/eco-colors/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -12053,7 +12257,7 @@
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "eco-spacing skill",
+      "community_name": "eco-add-component skill",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "section padding per breakpoint",
@@ -12068,7 +12272,7 @@
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "eco-spacing skill",
+      "community_name": "eco-add-component skill",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "breakpoint-adaptive space-md/space-lg",
@@ -12083,7 +12287,7 @@
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "eco-spacing skill",
+      "community_name": "eco-add-component skill",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "spacing scale space-0..space-120",
@@ -12092,17 +12296,93 @@
       "source_url": null
     },
     {
-      "id": "claude_skills_eco_action_link_skill",
-      "label": "eco-action-link skill",
+      "id": "claude_skills_eco_tokens_skill_tokens_rule",
+      "label": "Always reference tokens, never hardcode",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "eco-spacing skill",
+      "community_name": "eco-add-component skill",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "always reference tokens, never hardcode",
+      "rationale": "tokens.json is lookup for Claude, real tokens loaded from alligo-design-tokens CDN",
+      "source_file": ".claude/skills/eco-tokens/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_typography_skill_type_scale",
+      "label": "Body/Alt-Label/Label/Title/Headline/Display scale",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "eco-add-component skill",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "body/alt-label/label/title/headline/display scale",
+      "source_file": ".claude/skills/eco-typography/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_typography_skill_weight_minus_100",
+      "label": "Font weight CSS = Figma - 100",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "eco-add-component skill",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "font weight css = figma - 100",
+      "source_file": ".claude/skills/eco-typography/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_design_review_skill",
+      "label": "design-review skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "eco-add-component skill",
       "contributor": null,
       "file_type": "document",
-      "norm_label": "eco-action-link skill",
-      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "norm_label": "design-review skill",
+      "source_file": ".claude/skills/design-review/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_add_component_skill",
+      "label": "eco-add-component skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "eco-add-component skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-add-component skill",
+      "source_file": ".claude/skills/eco-add-component/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_colors_skill",
+      "label": "eco-colors skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "eco-add-component skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-colors skill",
+      "source_file": ".claude/skills/eco-colors/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -12113,7 +12393,7 @@
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "eco-spacing skill",
+      "community_name": "eco-add-component skill",
       "contributor": null,
       "file_type": "document",
       "norm_label": "eco-divider skill",
@@ -12128,7 +12408,7 @@
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "eco-spacing skill",
+      "community_name": "eco-add-component skill",
       "contributor": null,
       "file_type": "document",
       "norm_label": "eco-section skill",
@@ -12143,11 +12423,41 @@
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "eco-spacing skill",
+      "community_name": "eco-add-component skill",
       "contributor": null,
       "file_type": "document",
       "norm_label": "eco-spacing skill",
       "source_file": ".claude/skills/eco-spacing/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_tokens_skill",
+      "label": "eco-tokens skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "eco-add-component skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-tokens skill",
+      "source_file": ".claude/skills/eco-tokens/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_typography_skill",
+      "label": "eco-typography skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "eco-add-component skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-typography skill",
+      "source_file": ".claude/skills/eco-typography/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -12227,21 +12537,6 @@
       "source_url": null
     },
     {
-      "id": "components_css_pill_segment_control",
-      "label": "pill-segment-control.css",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 12,
-      "community_name": "docs.css",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "pill-segment-control.css",
-      "source_file": "eco-design-system/gen/old-source/segment-control.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "components_css_role_tier",
       "label": "role-tier.css",
       "_origin": "semantic",
@@ -12268,66 +12563,6 @@
       "file_type": "code",
       "norm_label": "docs.css",
       "source_file": "eco-design-system/gen/old-source/divider.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_eco_segment_control",
-      "label": "ECO Pill segment control component",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 12,
-      "community_name": "docs.css",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "eco pill segment control component",
-      "source_file": "eco-design-system/components/segment-control-code.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "eco_design_system_components_segment_control",
-      "label": "segment-control.html",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 12,
-      "community_name": "docs.css",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "segment-control.html",
-      "source_file": "eco-design-system/components/segment-control.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "eco_design_system_components_segment_control_code",
-      "label": "Pill segment control: Code",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 12,
-      "community_name": "docs.css",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "pill segment control: code",
-      "source_file": "eco-design-system/components/segment-control-code.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "eco_design_system_components_segment_control_specifications",
-      "label": "Pill segment control: Specifications",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 12,
-      "community_name": "docs.css",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "pill segment control: specifications",
-      "source_file": "eco-design-system/components/segment-control-specifications.html",
       "source_location": null,
       "source_url": null
     },
@@ -12629,21 +12864,6 @@
       "norm_label": "hairline card embed (embed.js, hairline-card.css, kernel.js)",
       "rationale": "embed.js runs each figure in its own function so several figures on one page share no names; scene must be 5:4 and clipped by the 160px card visual.",
       "source_file": "hairline/README.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_hairline_figure",
-      "label": "Hairline animated figure",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 13,
-      "community_name": "hairline/README.md",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "hairline animated figure",
-      "source_file": ".claude/skills/eco-card-animation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -13725,6 +13945,21 @@
       "file_type": "document",
       "norm_label": "section-specifications.html docs page",
       "source_file": "eco-design-system/components/section-specifications.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_hairline_figure",
+      "label": "Hairline animated figure",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 29,
+      "community_name": "eco-card-animation/SKILL.md",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "hairline animated figure",
+      "source_file": ".claude/skills/eco-card-animation/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -15276,6 +15511,51 @@
       "source_url": null
     },
     {
+      "id": "file_components_css_checkbox_css",
+      "label": "components/css/checkbox.css",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "components/css/checkbox.css",
+      "source_file": ".claude/skills/eco-checkbox/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "file_components_css_input_css",
+      "label": "components/css/input.css",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "components/css/input.css",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "file_components_icon_picker_icon_picker_js",
+      "label": "components/icon-picker/icon-picker.js",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "components/icon-picker/icon-picker.js",
+      "source_file": ".claude/skills/eco-icon-picker/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "claude_skills_eco_pill_segment_control_skill_fluid_width_xs_only",
       "label": "Fluid width at xs only",
       "_origin": "semantic",
@@ -15370,6 +15650,36 @@
       "source_url": null
     },
     {
+      "id": "claude_skills_eco_textarea_skill_single_size",
+      "label": "Single size, desktop-only Figma",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "single size, desktop-only figma",
+      "source_file": ".claude/skills/eco-textarea/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_checkbox_skill",
+      "label": "eco-checkbox skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-checkbox skill",
+      "source_file": ".claude/skills/eco-checkbox/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "claude_skills_eco_elevation_skill",
       "label": "eco-elevation skill",
       "_origin": "semantic",
@@ -15381,6 +15691,36 @@
       "file_type": "document",
       "norm_label": "eco-elevation skill",
       "source_file": ".claude/skills/eco-elevation/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_icon_picker_skill",
+      "label": "eco-icon-picker skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-icon-picker skill",
+      "source_file": ".claude/skills/eco-icon-picker/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_input_skill",
+      "label": "eco-input skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-input skill",
+      "source_file": ".claude/skills/eco-input/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -15400,6 +15740,21 @@
       "source_url": null
     },
     {
+      "id": "claude_skills_eco_radio_skill",
+      "label": "eco-radio skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-radio skill",
+      "source_file": ".claude/skills/eco-radio/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "claude_skills_eco_range_skill",
       "label": "eco-range skill",
       "_origin": "semantic",
@@ -15415,6 +15770,21 @@
       "source_url": null
     },
     {
+      "id": "claude_skills_eco_select_skill",
+      "label": "eco-select skill (Select)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-select skill (select)",
+      "source_file": ".claude/skills/eco-select/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "claude_skills_eco_switch_skill",
       "label": "eco-switch skill",
       "_origin": "semantic",
@@ -15426,6 +15796,21 @@
       "file_type": "document",
       "norm_label": "eco-switch skill",
       "source_file": ".claude/skills/eco-switch/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_textarea_skill",
+      "label": "eco-textarea skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 67,
+      "community_name": "eco-pill-segment-control skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-textarea skill",
+      "source_file": ".claude/skills/eco-textarea/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -15490,21 +15875,6 @@
       "source_url": null
     },
     {
-      "id": "claude_skills_eco_tile_link_skill_tile_link_variants",
-      "label": "Tile Link variants Brand/Label+Icon/Label Only",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "eco-button skill",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "tile link variants brand/label+icon/label only",
-      "source_file": ".claude/skills/eco-tile-link/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "claude_skills_eco_toast_ecom_skill_ecom_toast_variants",
       "label": "Add to cart / Informational variants",
       "_origin": "semantic",
@@ -15532,21 +15902,6 @@
       "norm_label": "weak emphasis is default for toasts",
       "rationale": "Strong only exceptionally; critical info belongs in Banner or Inline",
       "source_file": ".claude/skills/eco-toast-system/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_links_guide_skill_link_types",
-      "label": "Inline / Action / Tile link decision",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "eco-button skill",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "inline / action / tile link decision",
-      "source_file": ".claude/skills/links-guide/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -15686,21 +16041,6 @@
       "source_url": null
     },
     {
-      "id": "claude_skills_eco_tile_link_skill",
-      "label": "eco-tile-link skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "eco-button skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-tile-link skill",
-      "source_file": ".claude/skills/eco-tile-link/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "claude_skills_eco_toast_ecom_skill",
       "label": "eco-toast-ecom skill",
       "_origin": "semantic",
@@ -15727,21 +16067,6 @@
       "file_type": "document",
       "norm_label": "eco-toast-system skill",
       "source_file": ".claude/skills/eco-toast-system/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_links_guide_skill",
-      "label": "links-guide skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 7,
-      "community_name": "eco-button skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "links-guide skill",
-      "source_file": ".claude/skills/links-guide/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -15818,292 +16143,6 @@
       "norm_label": "tokens/_test.html (unused placeholder)",
       "rationale": "Contains only the comment 'unused, safe to delete'.",
       "source_file": "tokens/_test.html",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "file_components_css_checkbox_css",
-      "label": "components/css/checkbox.css",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "components/css/checkbox.css",
-      "source_file": ".claude/skills/eco-checkbox/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "file_components_css_input_css",
-      "label": "components/css/input.css",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "components/css/input.css",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "file_components_css_measure_css",
-      "label": "components/css/measure.css",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "components/css/measure.css",
-      "source_file": ".claude/skills/eco-colors/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "file_components_icon_picker_icon_picker_js",
-      "label": "components/icon-picker/icon-picker.js",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "components/icon-picker/icon-picker.js",
-      "source_file": ".claude/skills/eco-icon-picker/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_textarea_skill_single_size",
-      "label": "Single size, desktop-only Figma",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "single size, desktop-only figma",
-      "source_file": ".claude/skills/eco-textarea/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_tokens_skill_tokens_rule",
-      "label": "Always reference tokens, never hardcode",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "always reference tokens, never hardcode",
-      "rationale": "tokens.json is lookup for Claude, real tokens loaded from alligo-design-tokens CDN",
-      "source_file": ".claude/skills/eco-tokens/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_typography_skill_type_scale",
-      "label": "Body/Alt-Label/Label/Title/Headline/Display scale",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "body/alt-label/label/title/headline/display scale",
-      "source_file": ".claude/skills/eco-typography/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_typography_skill_weight_minus_100",
-      "label": "Font weight CSS = Figma - 100",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "font weight css = figma - 100",
-      "source_file": ".claude/skills/eco-typography/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_design_review_skill",
-      "label": "design-review skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "design-review skill",
-      "source_file": ".claude/skills/design-review/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_add_component_skill",
-      "label": "eco-add-component skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-add-component skill",
-      "source_file": ".claude/skills/eco-add-component/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_checkbox_skill",
-      "label": "eco-checkbox skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-checkbox skill",
-      "source_file": ".claude/skills/eco-checkbox/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_colors_skill",
-      "label": "eco-colors skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-colors skill",
-      "source_file": ".claude/skills/eco-colors/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_icon_picker_skill",
-      "label": "eco-icon-picker skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-icon-picker skill",
-      "source_file": ".claude/skills/eco-icon-picker/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_input_skill",
-      "label": "eco-input skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-input skill",
-      "source_file": ".claude/skills/eco-input/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_radio_skill",
-      "label": "eco-radio skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-radio skill",
-      "source_file": ".claude/skills/eco-radio/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_select_skill",
-      "label": "eco-select skill (Select)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-select skill (select)",
-      "source_file": ".claude/skills/eco-select/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_textarea_skill",
-      "label": "eco-textarea skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-textarea skill",
-      "source_file": ".claude/skills/eco-textarea/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_tokens_skill",
-      "label": "eco-tokens skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-tokens skill",
-      "source_file": ".claude/skills/eco-tokens/SKILL.md",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_skills_eco_typography_skill",
-      "label": "eco-typography skill",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 79,
-      "community_name": "eco-add-component skill",
-      "contributor": null,
-      "file_type": "document",
-      "norm_label": "eco-typography skill",
-      "source_file": ".claude/skills/eco-typography/SKILL.md",
       "source_location": null,
       "source_url": null
     },
@@ -16674,6 +16713,246 @@
       "file_type": "document",
       "norm_label": "resources: web (storybook library)",
       "source_file": "eco-design-system/resources/web.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "components_css_pill_segment_control",
+      "label": "pill-segment-control.css",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "pill-segment-control.css",
+      "source_file": "eco-design-system/gen/old-source/segment-control.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_eco_segment_control",
+      "label": "ECO Pill segment control component",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "eco pill segment control component",
+      "source_file": "eco-design-system/components/segment-control-code.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_eco_toast",
+      "label": "ECO Toast component",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "eco toast component",
+      "source_file": "eco-design-system/components/toast-code.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_eco_toast_ecom",
+      "label": "ECO E-Com Toast component",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "eco e-com toast component",
+      "source_file": "eco-design-system/components/toast-ecom-code.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "eco_design_system_components_segment_control",
+      "label": "segment-control.html",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "segment-control.html",
+      "source_file": "eco-design-system/components/segment-control.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "eco_design_system_components_segment_control_code",
+      "label": "Pill segment control: Code",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "pill segment control: code",
+      "source_file": "eco-design-system/components/segment-control-code.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "eco_design_system_components_segment_control_specifications",
+      "label": "Pill segment control: Specifications",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "pill segment control: specifications",
+      "source_file": "eco-design-system/components/segment-control-specifications.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "eco_design_system_components_toast_code",
+      "label": "Toast: Code",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "toast: code",
+      "source_file": "eco-design-system/components/toast-code.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "eco_design_system_components_toast_ecom_code",
+      "label": "E-Com Toast: Code",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "e-com toast: code",
+      "source_file": "eco-design-system/components/toast-ecom-code.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "eco_design_system_components_toast_ecom_specifications",
+      "label": "E-Com Toast: Specifications",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 91,
+      "community_name": "js/range.js",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "e-com toast: specifications",
+      "source_file": "eco-design-system/components/toast-ecom-specifications.html",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "file_components_css_action_link_css",
+      "label": "components/css/action-link.css",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 97,
+      "community_name": "links-guide skill",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "components/css/action-link.css",
+      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_tile_link_skill_tile_link_variants",
+      "label": "Tile Link variants Brand/Label+Icon/Label Only",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 97,
+      "community_name": "links-guide skill",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "tile link variants brand/label+icon/label only",
+      "source_file": ".claude/skills/eco-tile-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_links_guide_skill_link_types",
+      "label": "Inline / Action / Tile link decision",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 97,
+      "community_name": "links-guide skill",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "inline / action / tile link decision",
+      "source_file": ".claude/skills/links-guide/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_action_link_skill",
+      "label": "eco-action-link skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 97,
+      "community_name": "links-guide skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-action-link skill",
+      "source_file": ".claude/skills/eco-action-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_eco_tile_link_skill",
+      "label": "eco-tile-link skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 97,
+      "community_name": "links-guide skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "eco-tile-link skill",
+      "source_file": ".claude/skills/eco-tile-link/SKILL.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "claude_skills_links_guide_skill",
+      "label": "links-guide skill",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 97,
+      "community_name": "links-guide skill",
+      "contributor": null,
+      "file_type": "document",
+      "norm_label": "links-guide skill",
+      "source_file": ".claude/skills/links-guide/SKILL.md",
       "source_location": null,
       "source_url": null
     }
@@ -17552,7 +17831,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L211",
+      "source_location": "L225",
       "weight": 1.0
     },
     {
@@ -17564,43 +17843,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L214",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_color_kit_card",
-      "target": "eco_design_system_color_kit_livestatus",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L121",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_color_kit_card",
-      "target": "eco_design_system_color_kit_parsehex",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L85",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_color_kit_card",
-      "target": "eco_design_system_color_kit_el",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L86",
+      "source_location": "L228",
       "weight": 1.0
     },
     {
@@ -17612,7 +17855,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L91",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
@@ -17624,7 +17867,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L96",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -17636,7 +17879,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_color_kit_card",
+      "target": "eco_design_system_color_kit_livestatus",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/color-kit.js",
+      "source_location": "L133",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_color_kit_card",
+      "target": "eco_design_system_color_kit_parsehex",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/color-kit.js",
       "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_color_kit_card",
+      "target": "eco_design_system_color_kit_el",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/color-kit.js",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -17672,7 +17951,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L218",
+      "source_location": "L232",
       "weight": 1.0
     },
     {
@@ -17684,7 +17963,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L220",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -17696,7 +17975,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L222",
+      "source_location": "L236",
       "weight": 1.0
     },
     {
@@ -17708,7 +17987,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L224",
+      "source_location": "L238",
       "weight": 1.0
     },
     {
@@ -17720,7 +17999,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L225",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -17732,7 +18011,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L229",
+      "source_location": "L243",
       "weight": 1.0
     },
     {
@@ -17744,7 +18023,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L130",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -17756,7 +18035,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L130",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -17768,7 +18047,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L135",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -17792,7 +18071,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L168",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -17804,7 +18083,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L143",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -17816,7 +18095,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L151",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -17828,7 +18107,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L188",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -17840,7 +18119,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L190",
+      "source_location": "L204",
       "weight": 1.0
     },
     {
@@ -18060,6 +18339,18 @@
       "weight": 1.0
     },
     {
+      "source": "eco_design_system_docnav_apply",
+      "target": "eco_design_system_docnav_bar",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L517",
+      "weight": 1.0
+    },
+    {
       "source": "eco_design_system_docnav_close",
       "target": "eco_design_system_docnav_top_show",
       "relation": "calls",
@@ -18068,7 +18359,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L139",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -18080,7 +18371,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L412",
+      "source_location": "L424",
       "weight": 1.0
     },
     {
@@ -18092,7 +18383,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L120",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -18104,7 +18395,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L485",
+      "source_location": "L497",
       "weight": 1.0
     },
     {
@@ -18116,7 +18407,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L485",
+      "source_location": "L497",
       "weight": 1.0
     },
     {
@@ -18128,7 +18419,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L177",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -18140,7 +18431,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L181",
+      "source_location": "L188",
       "weight": 1.0
     },
     {
@@ -18152,7 +18443,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L262",
+      "source_location": "L272",
       "weight": 1.0
     },
     {
@@ -18164,7 +18455,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L78",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -18176,7 +18467,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L342",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -18188,7 +18479,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L189",
+      "source_location": "L196",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_docnav_open",
+      "target": "eco_design_system_docnav_close",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -18200,7 +18503,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L135",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -18212,7 +18515,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L269",
+      "source_location": "L279",
       "weight": 1.0
     },
     {
@@ -18224,7 +18527,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L403",
+      "source_location": "L415",
       "weight": 1.0
     },
     {
@@ -18236,7 +18539,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L407",
+      "source_location": "L419",
       "weight": 1.0
     },
     {
@@ -18248,7 +18551,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L84",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -18260,7 +18563,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L86",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -18272,7 +18575,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L192",
+      "source_location": "L199",
       "weight": 1.0
     },
     {
@@ -18284,7 +18587,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L383",
+      "source_location": "L395",
       "weight": 1.0
     },
     {
@@ -18296,7 +18599,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L385",
+      "source_location": "L397",
       "weight": 1.0
     },
     {
@@ -18308,7 +18611,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L393",
+      "source_location": "L405",
       "weight": 1.0
     },
     {
@@ -18320,7 +18623,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L393",
+      "source_location": "L405",
       "weight": 1.0
     },
     {
@@ -18332,7 +18635,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L393",
+      "source_location": "L405",
       "weight": 1.0
     },
     {
@@ -18344,7 +18647,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L350",
+      "source_location": "L362",
       "weight": 1.0
     },
     {
@@ -18356,7 +18659,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L354",
+      "source_location": "L366",
       "weight": 1.0
     },
     {
@@ -18368,7 +18671,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L125",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -18380,7 +18683,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L127",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
@@ -18392,7 +18695,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L365",
+      "source_location": "L377",
       "weight": 1.0
     },
     {
@@ -18404,7 +18707,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L191",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
@@ -18584,7 +18887,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L62",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -18777,6 +19080,54 @@
       "context": "call",
       "source_file": "eco-design-system/gen/hero_switch_iso.py",
       "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit_gridfig",
+      "target": "eco_design_system_layout_kit_el",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit_gridfig",
+      "target": "eco_design_system_layout_kit_vals",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit_refit",
+      "target": "eco_design_system_layout_kit_fit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit_vals",
+      "target": "eco_design_system_layout_kit_resolve",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -21213,6 +21564,18 @@
       "context": "import",
       "source_file": "eco-design-system/gen/gen_input.py",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_gen_gen_layout",
+      "target": "eco_design_system_gen_build",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -24128,18 +24491,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L129",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_color_kit",
-      "target": "eco_design_system_color_kit_tablefor",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L142",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -24155,13 +24507,24 @@
     },
     {
       "source": "eco_design_system_color_kit",
+      "target": "eco_design_system_color_kit_tablefor",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/color-kit.js",
+      "source_location": "L154",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_color_kit",
       "target": "eco_design_system_color_kit_segment",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L167",
+      "source_location": "L181",
       "weight": 1.0
     },
     {
@@ -24172,7 +24535,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L177",
+      "source_location": "L191",
       "weight": 1.0
     },
     {
@@ -24183,29 +24546,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L186",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_color_kit",
-      "target": "eco_design_system_color_kit_fit",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L197",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_color_kit",
-      "target": "eco_design_system_color_kit_clear",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L205",
+      "source_location": "L200",
       "weight": 1.0
     },
     {
@@ -24221,13 +24562,35 @@
     },
     {
       "source": "eco_design_system_color_kit",
+      "target": "eco_design_system_color_kit_fit",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/color-kit.js",
+      "source_location": "L211",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_color_kit",
+      "target": "eco_design_system_color_kit_clear",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/color-kit.js",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_color_kit",
       "target": "eco_design_system_color_kit_add",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L210",
+      "source_location": "L224",
       "weight": 1.0
     },
     {
@@ -24238,7 +24601,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L216",
+      "source_location": "L230",
       "weight": 1.0
     },
     {
@@ -24249,7 +24612,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L234",
+      "source_location": "L248",
       "weight": 1.0
     },
     {
@@ -24331,13 +24694,13 @@
     },
     {
       "source": "eco_design_system_color_kit",
-      "target": "eco_design_system_color_kit_card",
+      "target": "eco_design_system_color_kit_splitdesc",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
-      "source_location": "L84",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -24349,6 +24712,17 @@
       "confidence_score": 1.0,
       "source_file": "eco-design-system/color-kit.js",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_color_kit",
+      "target": "eco_design_system_color_kit_card",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/color-kit.js",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -24584,13 +24958,24 @@
     },
     {
       "source": "eco_design_system_docnav",
+      "target": "eco_design_system_docnav_r",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_docnav",
       "target": "eco_design_system_docnav_ms",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L119",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -24601,7 +24986,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L120",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -24612,7 +24997,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L121",
+      "source_location": "L128",
       "weight": 1.0
     },
     {
@@ -24623,7 +25008,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L135",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -24634,7 +25019,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L136",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -24645,7 +25030,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L141",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -24656,7 +25041,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L144",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -24667,7 +25052,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L163",
+      "source_location": "L170",
       "weight": 1.0
     },
     {
@@ -24678,7 +25063,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L165",
+      "source_location": "L172",
       "weight": 1.0
     },
     {
@@ -24689,7 +25074,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L166",
+      "source_location": "L173",
       "weight": 1.0
     },
     {
@@ -24700,7 +25085,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L183",
+      "source_location": "L190",
       "weight": 1.0
     },
     {
@@ -24711,7 +25096,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L191",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
@@ -24722,7 +25107,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L192",
+      "source_location": "L199",
       "weight": 1.0
     },
     {
@@ -24733,7 +25118,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L214",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -24744,7 +25129,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L261",
+      "source_location": "L271",
       "weight": 1.0
     },
     {
@@ -24755,7 +25140,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L268",
+      "source_location": "L278",
       "weight": 1.0
     },
     {
@@ -24766,7 +25151,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L274",
+      "source_location": "L284",
       "weight": 1.0
     },
     {
@@ -24777,7 +25162,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L308",
+      "source_location": "L319",
       "weight": 1.0
     },
     {
@@ -24788,7 +25173,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L340",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -24799,7 +25184,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L341",
+      "source_location": "L353",
       "weight": 1.0
     },
     {
@@ -24810,7 +25195,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L347",
+      "source_location": "L359",
       "weight": 1.0
     },
     {
@@ -24821,7 +25206,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L361",
+      "source_location": "L373",
       "weight": 1.0
     },
     {
@@ -24832,7 +25217,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L375",
+      "source_location": "L387",
       "weight": 1.0
     },
     {
@@ -24843,7 +25228,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L380",
+      "source_location": "L392",
       "weight": 1.0
     },
     {
@@ -24854,7 +25239,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L401",
+      "source_location": "L413",
       "weight": 1.0
     },
     {
@@ -24865,7 +25250,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L409",
+      "source_location": "L421",
       "weight": 1.0
     },
     {
@@ -24876,7 +25261,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L449",
+      "source_location": "L461",
       "weight": 1.0
     },
     {
@@ -24887,7 +25272,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L468",
+      "source_location": "L480",
       "weight": 1.0
     },
     {
@@ -24898,7 +25283,40 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L485",
+      "source_location": "L497",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_docnav",
+      "target": "eco_design_system_docnav_set",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L506",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_docnav",
+      "target": "eco_design_system_docnav_bar",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L514",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_docnav",
+      "target": "eco_design_system_docnav_apply",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/docnav.js",
+      "source_location": "L515",
       "weight": 1.0
     },
     {
@@ -24909,7 +25327,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -24920,7 +25338,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -24931,7 +25349,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L75",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -24942,7 +25360,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L77",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -24953,18 +25371,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L82",
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_docnav",
-      "target": "eco_design_system_docnav_r",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/docnav.js",
-      "source_location": "L9",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -25470,7 +25877,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L148",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -25481,7 +25888,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L18",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -25492,7 +25899,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L56",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -25503,7 +25910,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/gen/gen_colors.py",
-      "source_location": "L60",
+      "source_location": "L63",
       "weight": 1.0
     },
     {
@@ -25702,6 +26109,50 @@
       "confidence_score": 1.0,
       "source_file": "eco-design-system/gen/gen_input.py",
       "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_gen_gen_layout",
+      "target": "eco_design_system_gen_gen_layout_sec",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_gen_gen_layout",
+      "target": "eco_design_system_gen_gen_layout_code_static",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_gen_gen_layout",
+      "target": "eco_design_system_gen_gen_layout_lv",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_gen_gen_layout",
+      "target": "eco_design_system_gen_gen_layout_tgroup",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -26131,6 +26582,116 @@
       "confidence_score": 1.0,
       "source_file": "eco-design-system/gen/README.md",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_resolve",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_vals",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_bpfor",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_px",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_el",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_gridfig",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_fit",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_onfit",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_refit",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_layout_kit",
+      "target": "eco_design_system_layout_kit_fetchdoc",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/layout-kit.js",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -28532,6 +29093,28 @@
       "weight": 1.0
     },
     {
+      "source": "middleware",
+      "target": "middleware_config",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "middleware.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "middleware",
+      "target": "middleware_middleware",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "middleware.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
       "source": "scripts_build_docs",
       "target": "scripts_build_docs_excluded",
       "relation": "contains",
@@ -28595,6 +29178,17 @@
       "confidence_score": 1.0,
       "source_file": "vercel.json",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "vercel",
+      "target": "vercel_headers",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "vercel.json",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -28851,6 +29445,17 @@
       "weight": 1.0
     },
     {
+      "source": "eco_design_system_gen_gen_layout_rationale_1",
+      "target": "eco_design_system_gen_gen_layout",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "eco_design_system_gen_gen_links_guide_rationale_1",
       "target": "eco_design_system_gen_gen_links_guide",
       "relation": "rationale_for",
@@ -29032,7 +29637,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L141",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -29044,7 +29649,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L343",
+      "source_location": "L355",
       "weight": 1.0
     },
     {
@@ -29056,7 +29661,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L393",
+      "source_location": "L405",
       "weight": 1.0
     },
     {
@@ -29068,7 +29673,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eco-design-system/docnav.js",
-      "source_location": "L476",
+      "source_location": "L488",
       "weight": 1.0
     },
     {
@@ -29237,6 +29842,18 @@
       "context": "call",
       "source_file": "eco-design-system/gen/gen_inline_link.py",
       "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "eco_design_system_gen_gen_layout_tgroup",
+      "target": "eco_design_system_gen_build_desc",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "eco-design-system/gen/gen_layout.py",
+      "source_location": "L315",
       "weight": 1.0
     },
     {
@@ -29942,17 +30559,6 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/foundations/motion.html",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "eco_foundations",
-      "target": "eco_design_system_foundations_spacing",
-      "relation": "conceptually_related_to",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/foundations/spacing.html",
       "source_location": null,
       "weight": 1.0
     },
@@ -33594,17 +34200,6 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eco-design-system/foundations/motion.html",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "components_css_button_group",
-      "target": "eco_design_system_foundations_spacing",
-      "relation": "references",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/foundations/spacing.html",
       "source_location": null,
       "weight": 1.0
     },
@@ -39616,17 +40211,6 @@
     },
     {
       "source": "eco_design_system_tokens_loader",
-      "target": "eco_design_system_foundations_spacing",
-      "relation": "references",
-      "_origin": "semantic",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "eco-design-system/foundations/spacing.html",
-      "source_location": null,
-      "weight": 1.0
-    },
-    {
-      "source": "eco_design_system_tokens_loader",
       "target": "eco_design_system_foundations_typography",
       "relation": "references",
       "_origin": "semantic",
@@ -41609,5 +42193,5 @@
       "source_file": "mypages/users.html"
     }
   ],
-  "built_at_commit": "e28577d670a492d380c28fe2edd8ed2db415daa2"
+  "built_at_commit": "9921d0d023daa282e9c9456404778b45c59b0fdd"
 }

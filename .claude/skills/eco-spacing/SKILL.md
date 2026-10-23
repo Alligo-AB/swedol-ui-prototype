@@ -157,5 +157,5 @@ Strict reference from the ECO Figma file (Spacing, "Directional matrix"). One to
 | Vertical, between rows | `gap-y-space` | row-gap |
 
 - **Margin** is space outside the target boundary. **Padding** is space between a boundary and its content. **Gap** is space inserted between sibling items.
-- Live version with a token picker: `eco-design-system/foundations/spacing.html`, section Reference.
+- Live version with a token picker: `eco-design-system/foundations/layout-spacing.html` (the Spacing tab of the Layout foundation), section Reference. The grid margins and gutters that use this scale, and the breakpoints, are on the other Layout tabs (`layout.html`, `layout-breakpoints.html`, `layout-tokens.html`).
 - On a component's Specifications page the section **Measurements** shows padding and distances as a 1:1 blueprint figure (`components/css/measure.css`), with the matching spacing tokens in its *Spacing* group (see `eco-doc-page`).

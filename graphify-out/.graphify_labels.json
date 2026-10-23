@@ -1,6 +1,6 @@
 {
-  "0": "components/css/button-group.css",
-  "1": "eco-spacing skill",
+  "0": "input.css",
+  "1": "eco-add-component skill",
   "2": "tabs.js",
   "3": "Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)",
   "4": "docnav.js",
@@ -78,7 +78,7 @@
   "76": "Welcome email (Valkommen till Swedol)",
   "77": "embed.js",
   "78": "tokens/_test.html (unused placeholder)",
-  "79": "eco-add-component skill",
+  "79": "Range (ECO Design System)",
   "80": "button-group.js",
   "81": "select.js",
   "82": "hairline/icon-picker.js",
@@ -90,8 +90,12 @@
   "88": "hairline/tabs.js",
   "89": "pill.js",
   "90": "textarea.js",
+  "91": "js/range.js",
   "92": "build-docs.mjs",
-  "93": "Range (ECO Design System)",
+  "93": "layout-kit.js",
   "94": "inline-notification.js",
-  "95": "vercel.json"
+  "95": "vercel.json",
+  "96": "gen_layout.py",
+  "97": "links-guide skill",
+  "98": "middleware.js"
 }

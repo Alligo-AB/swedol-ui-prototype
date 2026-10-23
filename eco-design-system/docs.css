@@ -256,8 +256,10 @@ body[data-ds="foundation"] .ds-note + .ds-h3 { margin-top: 56px; }  /* note unde
 .ds-swatch__meta { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); overflow-wrap: anywhere; }
 .ds-swatch__desc { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); margin-top: 4px; }
 .ds-swatch__row { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; min-width: 0; }
-.ds-swatch__label { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; color: var(--color-text-secondary); }
-.ds-swatch__val { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-primary); overflow-wrap: anywhere; }
+.ds-swatch__label { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-weight: 600; color: var(--color-text-secondary); }   /* body-md (2026-10-22, was body-sm) */
+.ds-swatch__val { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); overflow-wrap: anywhere; }
+.ds-swatch__row .ds-copyname__text { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+@media (min-width: 769px) { .ds-swatch__label, .ds-swatch__val, .ds-swatch__row .ds-copyname__text { font-size: 17px; line-height: 24px; } }
 /* Colors page: cards / table switch (page level and per section) */
 .ds-viewbar { margin-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
 .ds-viewbar .ds-h2 { margin: 0; }
@@ -269,23 +271,26 @@ body[data-ds="foundation"] .ds-note + .ds-h3 { margin-top: 56px; }  /* note unde
 .ds-ctable + .ds-h3, .ds-ctable + .ds-desc { margin-top: 32px; }
 /* Table view only when the text column is wide enough for the seven columns: color-kit.js sets html.ck-wide (column of at least 880px). On a page with a Contents list that is from about 1300px; below it the sections always show cards and the switches are hidden. */
 .ds-table-wrap.ds-ctable { overflow: visible; }   /* a scroll container would stop the sticky header */
-.ds-ctable .ds-table thead th { white-space: normal; position: sticky; top: var(--ds-subnav-h, 64px); z-index: 2; vertical-align: top; padding-top: 18px; border-bottom: 0; box-shadow: inset 0 -1px 0 var(--color-border-primary); }   /* sticks under the sticky on-page nav; line as shadow because collapsed borders do not travel with a sticky cell */
+.ds-ctable .ds-table thead th { white-space: normal; position: sticky; top: var(--ds-subnav-h, 64px); z-index: 2; vertical-align: top; padding-top: 16px; padding-bottom: 16px; border-bottom: 0; box-shadow: inset 0 -1px 0 var(--color-border-primary), inset 0 4px 3px -3px var(--color-surface-opacity-black-05); }   /* sticks under the sticky on-page nav; line as shadow because collapsed borders do not travel with a sticky cell */
 :root:not(.ck-wide) :is(.ds-ctable, .ds-viewall, .ds-viewbar .pill-segment-control) { display: none !important; }
 :root:not(.ck-wide) .ds-section[data-view="table"] .ds-grid { display: grid; }
 :root:not(.ck-wide) .ds-section[data-view="table"] .ds-status { display: grid; }
 
-.ds-ctable .ds-table td, .ds-ctable .ds-table th { vertical-align: top; padding: 22px 12px 11px; }   /* 12px side padding so the seven columns fit the column */
-/* Row content starts on the first line and that line is centered on the 40px swatch (swatch cell: 12px top; text line 20px: 12 + (40 − 20) / 2 = 22px; copy button 32px: 12 + 4 = 16px) */
+.ds-ctable .ds-table { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md (2026-10-22, was body-sm); the table only exists from ~1300px, so the 769px pair always applies */
+@media (min-width: 769px) { .ds-ctable .ds-table { font-size: 17px; line-height: 24px; } }
+.ds-ctable .ds-table td, .ds-ctable .ds-table th { vertical-align: top; padding: 20px 12px 11px; }   /* 12px side padding so the seven columns fit the column */
+/* Row content starts on the first line and that line is centered on the 40px swatch (swatch cell: 12px top; text line 24px: 12 + (40 − 24) / 2 = 20px; copy button 32px: 12 + 4 = 16px) */
 .ds-ctable .ds-table td.ds-ctable__prevcol { padding-top: 12px; }
-/* header: the first label line stays centered in the 56px header, a wrapped label grows downwards (18px + 20px line + 18px = 56px) */
+/* header: the first label line stays centered in the 56px header, a wrapped label grows downwards (16px + 24px line + 16px = 56px) */
 .ds-ctable .ds-table td.ds-ctable__tok { padding-top: 16px; }
 .ds-ctable .ds-table td.ds-ctable__tok .ds-copyname { min-height: 32px; align-items: flex-start; }   /* a wrapped token grows downwards: first line stays centered on the 32px button */
-.ds-ctable .ds-table td.ds-ctable__tok .ds-copyname__text { padding-top: 6px; }
-.ds-ctable .ds-table td:nth-child(4), .ds-ctable .ds-table td:nth-child(5) { white-space: nowrap; }   /* hex and rgb on one line */
+.ds-ctable .ds-table td.ds-ctable__tok .ds-copyname__text { padding-top: 4px; }
+.ds-ctable .ds-table :is(thead th, td):nth-child(4) { white-space: nowrap; }   /* the Hex code header on one line too */
+.ds-ctable .ds-table td:nth-child(5) { white-space: nowrap; }   /* hex and rgb on one line */
 .ds-ctable__prevcol { width: 1%; white-space: nowrap; }
 .ds-ctable .ds-ctable__text { min-width: 140px; max-width: 320px; }
 .ds-ctable .ds-copyname { margin-top: 0; }
-.ds-ctable .ds-copyname__text { white-space: normal; overflow-wrap: anywhere; min-width: 0; }   /* a long token wraps in the table instead of widening it */
+.ds-ctable .ds-copyname__text { font-size: inherit; line-height: inherit; letter-spacing: inherit; white-space: normal; overflow-wrap: anywhere; min-width: 0; }   /* a long token wraps in the table instead of widening it */
 .ds-ctable .ds-table tbody th { white-space: normal; overflow-wrap: anywhere; }
 .ds-swatch__row .ds-copyname, .ds-ctable .ds-copyname { display: flex; justify-content: space-between; width: 100%; }   /* copy button at the far right of its table cell */
 .ds-swatch__row .ds-copyname { gap: 8px; }   /* cards: token and copy button on one line; a long token scrolls inside its own box */
@@ -433,6 +438,8 @@ a.ds-card:hover { border-color: var(--color-border-dark); }
 .mini-type { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
 .mini-type b { font-size: 48px; line-height: 48px; font-weight: 600; }
 .mini-type span { font-size: 16px; line-height: 22px; color: var(--color-text-secondary); }
+.mini-grid { display: flex; gap: 4px; padding: 0 12px; height: 56px; }
+.mini-grid span { width: 14px; background: var(--color-surface-information-weak); }
 .mini-space { display: flex; align-items: flex-end; gap: 6px; }
 .mini-space span { width: 24px; background: var(--color-surface-100); }
 .mini-elev { display: flex; gap: 16px; }
@@ -510,7 +517,7 @@ a.ds-card:hover { border-color: var(--color-border-dark); }
 .ds-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }  /* body-sm; see .claude/skills/eco-docs-table */
 .ds-table th, .ds-table td { text-align: left; padding: 11px 24px; height: 48px; border-bottom: 1px solid var(--color-border-secondary); vertical-align: middle; }
 .ds-table tbody tr:last-child > * { border-bottom: 0; }
-.ds-table thead th { font-weight: 600; white-space: nowrap; height: 56px; border-bottom-color: var(--color-border-primary); background: var(--color-surface-02); }  /* header line stronger than the row lines */
+.ds-table thead th { font-weight: 600; white-space: nowrap; height: 56px; border-bottom-color: var(--color-border-primary); background: var(--color-surface-02); box-shadow: inset 0 4px 3px -3px var(--color-surface-opacity-black-05); }  /* header line stronger than the row lines; soft inset shadow along the top edge only (negative spread keeps it off the cell sides) */
 .ds-table tbody th { font-weight: 600; white-space: nowrap; }
 .ds-table code { font-family: ui-monospace, Menlo, monospace; font-size: 0.875em; background: var(--color-surface-05); padding: 1px 4px; }
 .ds-matrix td { text-align: center; }
@@ -705,7 +712,7 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .ds-desc + .ds-h3.ds-group { margin-top: 0; }
 @media (min-width: 769px) { .ds-h3.ds-group { font-size: 28px; line-height: 32px; margin-top: 72px; } }
 
-/* ── Spacing foundation page (foundations/spacing.html) ───────────────────
+/* ── Spacing tab of the Layout foundation (foundations/layout-spacing.html) ───────────────────
    Scale bars and the directional reference. --sp is set on .sp-cols from the chosen token. */
 .sp-table td:first-child { width: 200px; vertical-align: top; padding-top: 16px; padding-bottom: 16px; }
 .sp-bar { display: block; background: var(--color-surface-information-weak); margin-bottom: 8px; max-width: 100%; }
@@ -997,3 +1004,32 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 @media (min-width: 640px) { .ds-linkcard:not(.ds-linkcard--row) { width: 260px; } .ds-linkcard--row { flex-direction: row; } .ds-linkcard--row .ds-linkcard__visual { width: 120px; height: auto; flex: none; } .ds-linkcard--row .ds-linkcard__body { justify-content: center; } }
 @media (min-width: 769px) { .ds-linkcard__title, .ds-linkcard__desc { font-size: 17px; line-height: 24px; } }
 
+/* ── Layout grid figure (layout-kit.js, foundations/layout*.html) ─────────────
+   A frame drawn at the real width of a breakpoint (375 … 1440px) and scaled to its container. Margins are grey, columns are blue, gutters are the white between them, gutters are the grey between them. */
+:is(.ds-fig__stage, .ds-stage) > :has(> .lg-fig) { width: 100%; min-width: 0; }   /* a flex stage would size the host to the 1440px frame */
+.lg-fig { position: relative; width: 100%; overflow: hidden; }
+.lg-scale { transform-origin: 0 0; width: max-content; }
+.lg-frame { position: relative; background: var(--color-surface-raised-primary); box-sizing: border-box; }
+.lg-margin { position: absolute; top: 0; bottom: 0; background: var(--color-surface-15); }
+.lg-margin--l { left: 0; } .lg-margin--r { right: 0; }
+.lg-cols, .lg-items { position: absolute; top: 0; bottom: 0; display: grid; }
+.lg-col { background: var(--color-surface-information-weaker); }
+.lg-items { align-content: center; row-gap: var(--dimension-spacing-space-8); }
+.lg-item { display: flex; align-items: center; justify-content: center; height: 48px; background: var(--color-surface-action-1); color: var(--color-text-primary-inverted); font-size: 14px; line-height: 14px; letter-spacing: 0.56px; font-weight: 600; text-transform: uppercase; }
+.lg-cap { margin-top: 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+.lg-read { margin-top: 16px; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); }
+@media (min-width: 769px) { .lg-read { font-size: 17px; line-height: 24px; } }
+/* breakpoint ruler (Layout → Breakpoints): five steps, the one the window is in is marked */
+.lg-ruler { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
+.lg-step { padding: 12px 8px; background: var(--color-surface-raised-secondary); color: var(--color-text-secondary); min-width: 0; }
+.lg-step b { display: block; font-size: 16px; line-height: 22px; font-weight: 600; text-transform: uppercase; }
+.lg-step span { display: block; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; overflow-wrap: anywhere; }
+.lg-step[aria-current="true"] { background: var(--color-surface-action-1); color: var(--color-text-primary-inverted); }
+.lg-tok th[scope="row"] .ds-copyname { display: flex; justify-content: space-between; align-items: center; gap: 8px; }   /* Layout → Tokens: the copy buttons sit in one vertical line at the right edge of the token column */
+.lg-tok { table-layout: fixed; min-width: 760px; }   /* same column widths in every table, so the copy buttons line up across the whole page */
+.lg-tok th:nth-child(1) { width: 40%; } .lg-tok th:nth-child(2) { width: 11%; } .lg-tok th:nth-child(3) { width: 17%; }
+.lg-tok .ds-copyname__text { overflow-wrap: anywhere; min-width: 0; }
+.lg-tok td { overflow-wrap: anywhere; }
+
+/* Hub cards as a list: no visual, one column */
+.ds-cards--list { grid-template-columns: 1fr; gap: 16px; }
