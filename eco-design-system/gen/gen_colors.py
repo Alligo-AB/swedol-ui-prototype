@@ -41,23 +41,23 @@ STYLE = r'''    :root { --ds-subnav-h: 0px; }   /* the table header of the Cards
       .ck-flow__col { flex: 1 1 0; }
       .ck-flow__arrow { transform: rotate(-90deg); }
     }
-    .ck-use { display: flex; flex-direction: column; width: 100%; border: 1px solid var(--color-border-primary); background: var(--color-surface-raised-primary); }
-    .ck-ramp { display: flex; height: 40px; }
-    .ck-ramp span { flex: 1; }
-    .ck-split { display: flex; height: 120px; }
+    .ck-use { display: flex; flex-direction: column; width: 100%; background: var(--color-surface-raised-primary); }
+    .ck-ramp { display: grid; grid-template-columns: repeat(14, 1fr); height: 40px; }   /* 14 slots, the first one empty: the 13 steps run light to dark, right-aligned */
+    .ck-ramp span { grid-column: auto; }
+    .ck-ramp::before { content: ''; }
+    .ck-split { display: flex; height: 160px; }
     .ck-split span { height: 100%; }
     .ck-bars { display: flex; }
-    .ck-bars span { flex: 1; padding: 8px 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; text-transform: uppercase; }
-    .ck-bars .ck-swedol { background: var(--color-accent-default); color: var(--color-text-primary); }
+    .ck-bars span { flex: 1; text-align: center; padding: 8px 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; text-transform: uppercase; }
+    .ck-bars .ck-swedol { border-bottom-left-radius: 8px; /* no radius token for this corner; 8px from the reference image */ background: var(--color-accent-default); color: var(--color-text-primary); }
     .ck-bars .ck-tools { background: var(--color-primitive-color-brand-tools-accent-brand); color: var(--color-text-primary-inverted); }'''
 
 # ---------------------------------------------------------------- Overview
-RAMP_DARK = ['100', '90', '80', '70', '60', '50', '40', '30', '20', '15', '10', '05', '02']
-RAMP_LIGHT = ['15', '10', '05', '02']
+RAMP = ['02', '05', '10', '15', '20', '30', '40', '50', '60', '70', '80', '90', '100']   # light to dark, same in both figures
 
 
 def ramp(steps):
-    return '<div class="ck-ramp" aria-hidden="true">' + ''.join('<span style="background:var(--color-surface-%s)"></span>' % n for n in steps) + '<span style="background:var(--color-surface-00)"></span></div>'
+    return '<div class="ck-ramp" aria-hidden="true">' + ''.join('<span style="background:var(--color-surface-%s)"></span>' % n for n in steps) + '</div>'
 
 
 def use_fig(black_pct, steps, cap):
@@ -117,10 +117,10 @@ online = '<h2 class="ds-h2">Online vs traditional</h2>' + \
     desc('The colors divide into main and complementary colors, which together represent the visual identity. Swedol, for example, is primarily perceived as a black and lime green company, while Tools is white and red. To make that visible online we use, for example, a dark header for Swedol and a lighter touch for Tools.') + \
     '<h3 class="ds-h3 ds-group">Traditional media</h3>' + \
     desc('Black is generally the base color for the whole Alligo group and is used on larger surfaces. It represents professionalism and puts competence in what we do.') + \
-    use_fig(75, RAMP_DARK, 'Alligo general color use: a black base, with the Swedol and Tools accents.') + \
+    use_fig(50, RAMP, 'Alligo general color use: a black base, with the Swedol and Tools accents.') + \
     '<h3 class="ds-h3 ds-group">E-com</h3>' + \
     desc('The colors for e-com are weighted towards a lighter, white base. White is a proven color for creating higher online sales and for mediating a positive user experience.') + \
-    use_fig(0, RAMP_LIGHT, 'E-com color use: a white base, with the same accents.')
+    use_fig(0, RAMP, 'E-com color use: a white base, with the same accents.')
 
 contrast = '<h2 class="ds-h2">Contrast ratios</h2>' + \
     desc('Contrast is the difference in brightness between two elements. The Web Content Accessibility Guidelines (WCAG) set the ratios that give the minimum contrast for legibility.') + \

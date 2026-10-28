@@ -1,0 +1,59 @@
+/* ECO component CSS: chip. Shared by the docs page (eco-design-system/components/chip.html) and every prototype/product page.
+   Skill: eco-chip. Link it, do not copy it: <link rel="stylesheet" href="/components/css/chip.css">
+   Behaviour (filter chip toggles aria-pressed): /components/js/chip.js.
+   [data-state="…"] selectors only serve the docs pages' forced-state demos; they are inert elsewhere. Tokens only.
+   Figma: Chip with states 17345:30209, Chip base 17345:30170, info 17345:28873. Mobile-first, desktop from 769px. */
+    /* ── Chip, Medium (default): 32px high, 8px sides, body-md ── */
+    .chip {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--dimension-spacing-space-4);
+      box-sizing: border-box; height: 32px; padding: 0 var(--dimension-spacing-space-8); margin: 0; flex-shrink: 0;
+      border: 1px solid var(--color-border-primary); border-radius: 0;   /* ECO is sharp-cornered (Figma has a 1px radius on Medium desktop only) */
+      background: transparent; color: var(--color-text-primary); cursor: pointer;
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-weight: 400; white-space: nowrap;
+      font-size: 16px; line-height: 22px; letter-spacing: 0.32px;   /* body-md (mobile) */
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      outline: 2px solid transparent; outline-offset: 2px;   /* focus ring as eco-button: 2px gap + 2px line */
+      transition: border-color var(--duration-fast-2, 100ms) var(--ease-standard, ease), background-color var(--duration-fast-2, 100ms) var(--ease-standard, ease);
+    }
+    @media (min-width: 769px) {
+      .chip { font-size: 17px; line-height: 24px; }   /* body-md (desktop) */
+    }
+
+    /* ── Small: 24px high, 8px sides, body-sm on every breakpoint ── */
+    .chip--sm { height: 24px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }   /* body-sm */
+    @media (min-width: 769px) {
+      .chip--sm { font-size: 14px; line-height: 20px; }
+    }
+
+    /* ── Icons: leading 16px, trailing close 14px (Material Symbols) ── */
+    .chip__icon, .chip__close {
+      flex-shrink: 0; font-family: 'Material Symbols Outlined'; font-weight: 300; font-style: normal; letter-spacing: normal;
+      text-transform: none; line-height: 1; direction: ltr; -webkit-font-smoothing: antialiased; color: var(--color-icon-primary);
+    }
+    .chip__icon  { width: 16px; height: 16px; font-size: 16px; }
+    .chip__close { width: 14px; height: 14px; font-size: 14px; display: none; }   /* shown on a selected chip */
+    .chip--removable .chip__close { display: block; }                             /* input/action chip: always has the close icon */
+
+    /* ── States ── */
+    @media (hover: hover) {
+      .chip:hover { border-color: var(--color-border-hover); }
+    }
+    .chip[data-state="hover"] { border-color: var(--color-border-hover); }
+
+    /* Selected: grey 10% surface, no frame, close icon */
+    .chip[aria-pressed="true"], .chip[data-state="selected"], .chip[data-state="selected-hover"] {
+      background: var(--color-surface-opacity-black-10); border-color: transparent;
+    }
+    .chip[aria-pressed="true"] .chip__close, .chip[data-state^="selected"] .chip__close { display: block; }
+    .chip--sm[aria-pressed="true"], .chip--sm[data-state^="selected"], .chip--sm.chip--removable { padding-right: var(--dimension-spacing-space-4); }   /* Small with close icon: 8px left, 4px right */
+    @media (hover: hover) {
+      .chip[aria-pressed="true"]:hover { border-color: var(--color-border-selected-hover); }
+    }
+    .chip[data-state="selected-hover"] { border-color: var(--color-border-selected-hover); }
+
+    .chip:focus-visible, .chip[data-state="focus"] { outline-color: var(--color-border-focus); }
+
+    /* No disabled state: Figma has none (see eco-chip Flags). Hide a chip that cannot be used. */
+
+    /* ── Group: a wrapping row of chips ── */
+    .chip-group { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8); }

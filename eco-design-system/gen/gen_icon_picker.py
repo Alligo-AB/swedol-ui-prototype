@@ -1,7 +1,7 @@
 from build import *
 
 SLUG = 'icon-picker'
-BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component exists. The pattern was designed in the repo (first used on the banner page).">Not verified with Figma</span>'
+BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component exists. The pattern was designed in the repo (first used on the banner page).">In progress</span>'
 
 STYLE = r'''    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
     .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }

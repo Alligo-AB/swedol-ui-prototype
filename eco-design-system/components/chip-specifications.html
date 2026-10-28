@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chip: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/chip.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-states { display: grid; gap: 24px 32px; grid-template-columns: repeat(2, max-content); align-items: center; justify-content: center; }
+    @media (min-width: 769px) { .pg-states { grid-template-columns: repeat(4, max-content); } }
+    .pg-cell { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .pg-cell > span:first-child { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="chip.html" class="breadcrumb-item">Chip</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Form</span></div>
+    <h1 class="ds-title">Chip</h1>
+    <p class="ds-lead">A chip is a <strong>small, interactive element</strong> that represents an input, an attribute or an action, most often a filter the user can select and unselect.</p><p class="ds-lead">Sizes, tokens, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=17345-30209" target="_blank" rel="noopener">Chip with states</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Chip"><a class="tab" href="chip.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="chip-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="chip-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Part</th><th scope="col">Use</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Height</th><th scope="col">Padding</th><th scope="col">Text</th><th scope="col">Close icon</th></tr></thead><tbody><tr><th scope="row">Medium (default)</th><td>32px</td><td>0 8px</td><td>body-md: 16/22 mobile, 17/24 from 769px</td><td>14px</td></tr><tr><th scope="row">Small (<code>chip--sm</code>)</th><td>24px</td><td>0 8px; 0 4px 0 8px with the close icon</td><td>body-sm: 14/20</td><td>14px</td></tr></tbody></table></div><p class="ds-desc ds-note">The height is fixed and the label is centred, so the vertical padding is 0. The leading icon is 16px and the gap between the parts is 4px on both sizes.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3><p class="ds-desc">Side padding of both sizes, enabled and selected. The shaded areas are the padding; the lines show its value.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Side padding of the chip: 8px; Small selected 8px left and 4px right"><div class="measure__item"><span class="measure__name">1 · Medium</span><div class="measure__obj"><button type="button" class="chip  measure__subject" aria-pressed="false"><span class="chip__label">Chip label</span><span class="chip__close" aria-hidden="true">close</span></button><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Medium, selected</span><div class="measure__obj"><button type="button" class="chip  measure__subject" aria-pressed="true"><span class="chip__label">Chip label</span><span class="chip__close" aria-hidden="true">close</span></button><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">3 · Small</span><div class="measure__obj"><button type="button" class="chip chip--sm measure__subject" aria-pressed="false"><span class="chip__label">Chip label</span><span class="chip__close" aria-hidden="true">close</span></button><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">4 · Small, selected</span><div class="measure__obj"><button type="button" class="chip chip--sm measure__subject" aria-pressed="true"><span class="chip__label">Chip label</span><span class="chip__close" aria-hidden="true">close</span></button><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">At true size (1:1). The numbers are read from the component.</figcaption></figure></div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Attribute</th><th scope="col">Medium</th><th scope="col">Small</th></tr></thead><tbody><tr><th scope="row">Height</th><td>32px</td><td>24px</td></tr><tr><th scope="row">Padding, left</th><td>8px</td><td>8px</td></tr><tr><th scope="row">Padding, right</th><td>8px</td><td>8px; 4px with the close icon</td></tr><tr><th scope="row">Gap</th><td>4px</td><td>4px</td></tr><tr><th scope="row">Border</th><td>1px</td><td>1px</td></tr><tr><th scope="row">Corners</th><td>Square</td><td>Square</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Spacing</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Token</th></tr></thead><tbody><tr><th scope="row">Side padding</th><td><code>space-8</code></td></tr><tr><th scope="row">Right padding, Small with close icon</th><td><code>space-4</code></td></tr><tr><th scope="row">Gap between icon and label</th><td><code>space-4</code></td></tr><tr><th scope="row">Gap between chips (<code>chip-group</code>)</th><td><code>space-8</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">State</th><th scope="col">Surface</th><th scope="col">Frame</th><th scope="col">Text and icon</th><th scope="col">Close icon</th></tr></thead><tbody><tr><th scope="row">Enabled</th><td>None</td><td><code>border-primary</code></td><td><code>text-primary</code>, <code>icon-primary</code></td><td>Hidden</td></tr><tr><th scope="row">Hover</th><td>None</td><td><code>border-hover</code></td><td>Same</td><td>Hidden</td></tr><tr><th scope="row">Selected</th><td><code>surface-opacity-black-10</code></td><td>None</td><td>Same</td><td>Shown</td></tr><tr><th scope="row">Selected hover</th><td><code>surface-opacity-black-10</code></td><td><code>border-selected-hover</code></td><td>Same</td><td>Shown</td></tr><tr><th scope="row">Focus (keyboard)</th><td>As the state below it</td><td>Plus a 2px <code>border-focus</code> ring, 2px out</td><td>Same</td><td>As the state below it</td></tr></tbody></table></div><p class="ds-desc ds-note">Figma has no disabled state. Hide a chip that cannot be used.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Mobile (0–768px)</th><th scope="col">Desktop (769px+)</th></tr></thead><tbody><tr><th scope="row">Medium</th><td>body-md 16/22, 0.32px</td><td>body-md 17/24, 0.32px</td></tr><tr><th scope="row">Small</th><td>body-sm 14/20, 0.36px</td><td>body-sm 14/20, 0.36px</td></tr></tbody></table></div><p class="ds-desc ds-note">Weight Regular (400). Figma sets the line height to 16 (Medium) and 14 (Small); the page uses the token pairs, and the fixed height keeps the chip the same size.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Chip</th><td><code>chip</code></td><td>A <code>&lt;button type="button"&gt;</code>. Filter chip: add <code>aria-pressed</code>.</td></tr><tr><th scope="row">Size</th><td><code>chip--sm</code></td><td>Small. Medium is the default.</td></tr><tr><th scope="row">Removable</th><td><code>chip--removable</code></td><td>Always shows the close icon; a click removes it.</td></tr><tr><th scope="row">Leading icon</th><td><code>chip__icon</code></td><td>Material Symbols, 16px, <code>aria-hidden</code>.</td></tr><tr><th scope="row">Label</th><td><code>chip__label</code></td><td></td></tr><tr><th scope="row">Close icon</th><td><code>chip__close</code></td><td>Material Symbols <code>close</code>, 14px, <code>aria-hidden</code>.</td></tr><tr><th scope="row">Row</th><td><code>chip-group</code></td><td>Wrapping flex row, 8px gap.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Click on a filter chip</th><td>Toggles <code>aria-pressed</code> and fires <code>chip:change</code> (<code>components/js/chip.js</code>).</td></tr><tr><th scope="row">Click on a removable chip</th><td>Fires <code>chip:remove</code>; the page removes the chip.</td></tr><tr><th scope="row">Breakpoint</th><td>Only the Medium text changes, at 769px.</td></tr><tr><th scope="row">Motion</th><td>Frame and surface change with <code>duration-fast-2</code>, <code>ease-standard</code>.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Role</th><td>A native <code>&lt;button&gt;</code>. A filter chip has <code>aria-pressed="true|false"</code>.</td></tr><tr><th scope="row">Name</th><td>The label. A removable chip: <code>aria-label="Remove &lt;label&gt;"</code>.</td></tr><tr><th scope="row">Focus</th><td>Visible ring on <code>:focus-visible</code> (WCAG 2.4.7).</td></tr><tr><th scope="row">Target size</th><td>Small is 24px high: the minimum (WCAG 2.5.8). Keep 8px between chips.</td></tr><tr><th scope="row">Selected</th><td>Never only color: the close icon and <code>aria-pressed</code> also show it.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/chip.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Frame', 'Enabled', 'border-primary'], ['Frame', 'Hover', 'border-hover'], ['Frame', 'Selected hover', 'border-selected-hover'],
+    ['Surface', 'Selected', 'surface-opacity-black-10'], ['Text', 'Label', 'text-primary'], ['Icon', 'Leading and close icon', 'icon-primary'], ['Focus ring', 'Keyboard focus', 'border-focus']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

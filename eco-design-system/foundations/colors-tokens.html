@@ -39,14 +39,15 @@
       .ck-flow__col { flex: 1 1 0; }
       .ck-flow__arrow { transform: rotate(-90deg); }
     }
-    .ck-use { display: flex; flex-direction: column; width: 100%; border: 1px solid var(--color-border-primary); background: var(--color-surface-raised-primary); }
-    .ck-ramp { display: flex; height: 40px; }
-    .ck-ramp span { flex: 1; }
-    .ck-split { display: flex; height: 120px; }
+    .ck-use { display: flex; flex-direction: column; width: 100%; background: var(--color-surface-raised-primary); }
+    .ck-ramp { display: grid; grid-template-columns: repeat(14, 1fr); height: 40px; }   /* 14 slots, the first one empty: the 13 steps run light to dark, right-aligned */
+    .ck-ramp span { grid-column: auto; }
+    .ck-ramp::before { content: ''; }
+    .ck-split { display: flex; height: 160px; }
     .ck-split span { height: 100%; }
     .ck-bars { display: flex; }
-    .ck-bars span { flex: 1; padding: 8px 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; text-transform: uppercase; }
-    .ck-bars .ck-swedol { background: var(--color-accent-default); color: var(--color-text-primary); }
+    .ck-bars span { flex: 1; text-align: center; padding: 8px 12px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; font-weight: 600; text-transform: uppercase; }
+    .ck-bars .ck-swedol { border-bottom-left-radius: 8px; /* no radius token for this corner; 8px from the reference image */ background: var(--color-accent-default); color: var(--color-text-primary); }
     .ck-bars .ck-tools { background: var(--color-primitive-color-brand-tools-accent-brand); color: var(--color-text-primary-inverted); }
   </style>
 </head>

@@ -77,6 +77,8 @@ Font: `Breuer Condensed`, sans-serif. `font-feature-settings: 'ss02' 1, 'ss03' 1
 | `display-md` | Display Medium | 36px | 36px | 0px | 600 |
 | `display-lg` | Display Large | 66px | 60px | 0px | 600 |
 
+> **`display-xl`** (in Figma 2026-10-27, **not in `tokens.json` yet**, the user adds it): desktop **84/76**, mobile **48/44**, letter-spacing **0.48px**, weight 600, uppercase. Only for the start page hero and campaign heroes, never with `display-lg` or `headline-xl` as a second H1. Use the class `.display-xl` from `components/css/premium.css` (switches at 769px); never hand-write the sizes. When `tokens.json` has it, add it to the tables here and delete the class comment's "not yet" (`eco-design-system/figma-sync.md`, item 5).
+
 > Display: `text-transform: uppercase`. Reserved for hero banners, campaign headlines, and numerals. Use sparingly. `display-lg` = H1 on a page/article (never together with `headline-xl`).
 
 ### Modified Styles (modified variants)

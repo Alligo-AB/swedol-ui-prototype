@@ -1,7 +1,7 @@
 from build import *
 
 SLUG = 'range'
-BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component exists. The range was designed in the repo (first used in the toast and motion playgrounds).">Not verified with Figma</span>'
+BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component exists. The range was designed in the repo (first used in the toast and motion playgrounds).">In progress</span>'
 
 STYLE = r'''    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
     .pg-matrix td { vertical-align: middle; padding-top: 16px; padding-bottom: 16px; }

@@ -1,0 +1,33 @@
+/* Premium extras (2026-10-27): optional layers for a more premium feel where there is room and it fits the context
+   (docs start page, campaign heroes). Never on My Pages, forms or tables. Rules: CLAUDE.md ("Premium extras"), eco-motion.
+
+   PROVISIONAL TOKENS: not in Figma or alligo-design-tokens yet. Each one is listed in eco-design-system/figma-sync.md.
+   When the token owner ships one with the same name, delete its line here. */
+:root {
+  --duration-loop-slow: 90s;                        /* continuous loops (marquee, scrolling column grid); no ECO duration is longer than 600ms */
+  --color-surface-opacity-black-80: rgba(0, 0, 0, 0.8);   /* scrim behind inverted text over moving imagery; the package stops at black-50 */
+  --blur-edge: 12px;                                /* edge softening on decorative motion backgrounds only, never glass panels */
+  --opacity-grain: 0.05;                            /* grain layer; eco-motion rule 8 */
+}
+
+/* Display XL text style: in Figma since 2026-10-27, not in tokens.json yet (the user adds it). Then move these pairs to eco-typography.
+   Start page hero and campaign heroes only. Same weight and case as display-lg. */
+.display-xl { font-size: 48px; line-height: 44px; letter-spacing: 0.48px; font-weight: 600; text-transform: uppercase; }
+@media (min-width: 769px) { .display-xl { font-size: 84px; line-height: 76px; } }
+
+/* Edge blur: soft bands at the top and bottom of a decorative moving background. Desktop only (backdrop-filter is heavy on phones).
+   Place inside a position:relative container, above the background and below the content. */
+.fx-edge-blur { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+@media (min-width: 769px) {
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .fx-edge-blur::before, .fx-edge-blur::after { content: ''; position: absolute; left: 0; right: 0; height: var(--dimension-spacing-space-120);
+      -webkit-backdrop-filter: blur(var(--blur-edge)); backdrop-filter: blur(var(--blur-edge)); }
+    /* mask colours are alpha only, not visible colours, so no colour token applies */
+    .fx-edge-blur::before { top: 0; -webkit-mask-image: linear-gradient(to bottom, #000, transparent); mask-image: linear-gradient(to bottom, #000, transparent); }
+    .fx-edge-blur::after { bottom: 0; -webkit-mask-image: linear-gradient(to top, #000, transparent); mask-image: linear-gradient(to top, #000, transparent); }
+  }
+}
+
+/* Grain: static white noise, low opacity, no animation. Not over text-heavy areas; check text contrast on top of it. */
+.fx-grain { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: var(--opacity-grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }

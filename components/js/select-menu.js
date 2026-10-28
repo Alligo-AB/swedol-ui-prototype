@@ -61,6 +61,17 @@
   document.addEventListener('click', function (e) {
     var li = e.target.closest('.menu__item'); if (li && open && open.menu.contains(li) && li.getAttribute('aria-disabled') !== 'true') choose(li);
   });
+  /* Touch: iOS opens its native picker from the tap on a <select> (mousedown preventDefault does not stop it) and reopens it after a choice.
+     Handle the tap ourselves and cancel it, so the browser never sees a click on the select. A swipe (page scroll) is not a tap. */
+  var t0 = null;
+  document.addEventListener('touchstart', function (e) { var t = e.touches[0]; t0 = e.touches.length === 1 ? { x: t.clientX, y: t.clientY } : null; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    var sel = e.target.closest && e.target.closest('.form-select'), t = e.changedTouches[0];
+    if (!sel || !t0 || Math.abs(t.clientX - t0.x) > 10 || Math.abs(t.clientY - t0.y) > 10) return;
+    e.preventDefault();   /* no emulated mouse/click events follow */
+    if (sel.disabled) return;
+    if (open && open.sel === sel) close(); else openMenu(sel, true);
+  }, { passive: false });
   window.addEventListener('resize', function () { close(); });
   document.addEventListener('keydown', function (e) {
     var t = e.target;

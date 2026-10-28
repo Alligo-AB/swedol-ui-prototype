@@ -81,6 +81,8 @@ Read this before you decide a piece is "new". Every row is a finished component 
 | Where am I / go back up | `eco-breadcrumb` |
 | Load more items into a list | `eco-pagination` |
 | A status label or role name (read-only) | `eco-badge` |
+| The active filters above a result list (each with a remove ×) | `eco-tag` |
+| Filters the user selects and unselects, or entered values as removable items | `eco-chip` |
 | A name for an icon-only button | `eco-tooltip` |
 | FAQ or optional long content | `eco-collapsible` |
 | Rows and columns of data | `eco-docs-table` (the docs table; a product table component is planned, ask before using it in a product page) |

@@ -125,7 +125,10 @@
     html.dn-has-panel .dn-panel { transform: none; visibility: visible; box-shadow: none; }   /* pinned: no overlay shadow, the border is the edge */
   }
 
-  .dn-group { padding: 20px 24px 8px; font-size: 14px; line-height: 14px; font-weight: 600; letter-spacing: 0.56px; text-transform: uppercase; color: var(--color-text-tertiary); }   /* label-sm / alt-label */
+  /* group label: label-sm / alt-label, secondary text, inset divider above every group except the first (it follows the overview link) */
+  .dn-group { margin: 8px 24px 0; padding: 16px 0 4px; border-top: 1px solid var(--color-border-secondary); font-size: 14px; line-height: 14px; font-weight: 600; letter-spacing: 0.56px; text-transform: uppercase; color: var(--color-text-secondary); }
+  .dn-item:first-child + .dn-group { margin-top: 0; border-top: 0; }
+  .dn-group ~ .dn-item .dn-link { padding-left: 41px; }   /* items sit 16px in from their group label */
   .dn-item { position: relative; }
   .dn-link {
     position: relative; display: flex; align-items: center; min-height: 48px; padding: 15px 24px 15px 25px;
@@ -143,7 +146,7 @@
   }
   .dn-chev .dn-ms { transition: transform var(--duration-fast-4) var(--ease-standard); }
   .dn-chev[aria-expanded="true"] .dn-ms { transform: rotate(180deg); }
-  .dn-sub .dn-link { padding-left: 40px; }
+  .dn-sub .dn-link { padding-left: 56px; }
   .dn-sub .dn-link[aria-current="page"]::before { left: 0; }
 }
 
@@ -229,7 +232,9 @@
   .dn-ms--sm { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
 
   /* level 2: same markup as the desktop panel, text starts under the back arrow label (12 + 20 + 12 = 44px) */
-  .dn-group { padding: 20px 16px 8px 44px; font-size: 14px; line-height: 14px; font-weight: 600; letter-spacing: 0.56px; text-transform: uppercase; color: var(--color-text-tertiary); }
+  .dn-group { margin: 8px 16px 0 44px; padding: 16px 0 4px; border-top: 1px solid var(--color-border-secondary); font-size: 14px; line-height: 14px; font-weight: 600; letter-spacing: 0.56px; text-transform: uppercase; color: var(--color-text-secondary); }
+  .dn-item:first-child + .dn-group { margin-top: 0; border-top: 0; }
+  .dn-group ~ .dn-item .dn-link { padding-left: 60px; }   /* items sit 16px in from their group label */
   .dn-item { position: relative; }
   .dn-link {
     position: relative; display: flex; align-items: center; min-height: 48px; padding: 15px 16px 15px 44px; text-decoration: none; color: var(--color-text-primary);
@@ -239,7 +244,7 @@
   .dn-link[aria-current="page"] { background: var(--ds-accent-light); }
   .dn-link[aria-current="page"]::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--ds-accent); }
   .dn-item--parent .dn-link { padding-right: 56px; }
-  .dn-sub .dn-link { padding-left: 56px; }
+  .dn-sub .dn-link { padding-left: 76px; }
   .dn-chev { position: absolute; top: 14px; right: 16px; display: flex; width: 20px; height: 20px; padding: 0; background: none; border: 0; cursor: pointer; color: var(--color-text-primary); }
   .dn-chev .dn-ms { font-size: 20px; transition: transform var(--duration-fast-4) var(--ease-standard); }
   .dn-chev[aria-expanded="true"] .dn-ms { transform: rotate(180deg); }

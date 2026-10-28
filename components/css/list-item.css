@@ -58,6 +58,9 @@
     /* Standalone interactive item (role="checkbox" | "radio" | "switch"): pointer and focus ring only. Hover, divider and row padding stay with the container. */
     .list-item[role]:not([aria-disabled="true"]) { cursor: pointer; }
     .list-item[role]:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    /* ...and the check box / radio part shows the eco-checkbox / eco-radio hover while the item is hovered (no container row draws a hover here, e.g. the docs filter drawer) */
+    .list-item[role]:not([aria-disabled="true"], [aria-checked="true"]):is(:hover, [data-state="hover"]) :is(.list-item__check, .list-item__radio) { background-color: var(--color-surface-raised-secondary); border-color: var(--color-border-hover); }
+    .list-item[role][aria-checked="true"]:not([aria-disabled="true"]):is(:hover, [data-state="hover"]) .list-item__check { background-color: var(--color-surface-50); border-color: var(--color-surface-50); }
     .list-item[role][aria-disabled="true"] { cursor: not-allowed; }
 
     /* Disabled (not in Figma, derived from eco-menu) */

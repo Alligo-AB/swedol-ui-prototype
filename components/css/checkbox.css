@@ -6,6 +6,7 @@
     .form-checkbox-item input[type="checkbox"],
     .check-icon input[type="checkbox"] {
       appearance: none; -webkit-appearance: none;
+      border-radius: 0;   /* iOS rounds appearance:none checkboxes by default; ECO checkbox is square */
       width: 16px; height: 16px;
       border: 1px solid var(--color-border-input-control-default);
       background: var(--color-surface-raised-primary);

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tag: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/tag.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-cell { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .pg-cell > span:first-child { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-grey { padding: 16px; background: var(--color-surface-raised-secondary); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="tag.html" class="breadcrumb-item">Tag</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status and navigation</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></div>
+    <h1 class="ds-title">Tag</h1>
+    <p class="ds-lead">A tag shows an <strong>active filter</strong> above a product list or a search result. Its × button removes the filter.</p><p class="ds-lead">How to add a tag to a page. The file is <code>components/css/tag.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Tag"><a class="tab" href="tag.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="tag-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="tag-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared stylesheet once per page. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/tag.css"&gt;</code>. Both templates already have it.</td></tr><tr><th scope="row">2. Tag</th><td>A <code>span.tag</code> with the label.</td></tr><tr><th scope="row">3. Variant and size</th><td>Add <code>tag--white</code> and/or <code>tag--sm</code>.</td></tr><tr><th scope="row">4. Remove</th><td>Add <code>tag--remove</code> and a <code>button.tag__remove</code> after the label. Your script removes the tag and moves focus.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="tag"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Tag</h2><p class="ds-desc">Copy the markup you need.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Classes</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>tag</code></th><td>The tag: Medium, Grey.</td></tr><tr><th scope="row"><code>tag--white</code></th><td>White surface, for grey backgrounds.</td></tr><tr><th scope="row"><code>tag--sm</code></th><td>Small.</td></tr><tr><th scope="row"><code>tag--remove</code></th><td>Remove state: padding for the ×.</td></tr><tr><th scope="row"><code>tag__remove</code></th><td>The × button.</td></tr></tbody></table></div><h3 class="ds-h3 ds-group">Things to know</h3><ul class="ds-bullets"><li>There is no shared script: removing a tag is page logic.</li><li>Put tags in a flex row with <code>gap: var(--dimension-spacing-space-8)</code> and <code>flex-wrap: wrap</code>.</li><li>The class <code>ds-tag</code> belongs to the docs pages; it is not this component.</li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links, so it is always what you see.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/tag.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Default', '<span class="tag">Gloves</span>\n<span class="tag tag--sm">Gloves</span>\n<span class="tag tag--white">Gloves</span>'],
+    ['Remove', '<span class="tag tag--remove">Gloves\n  <button type="button" class="tag__remove" aria-label="Remove Gloves"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>\n</span>'],
+    ['A group of tags', '<div style="display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8)">\n  <span class="tag">Workwear</span>\n  <span class="tag">Safety</span>\n</div>']
+  ]);
+  DK.printCss($('#css-code'), 'tag', [[/^ {4}/gm, ''], [/:is\(:has\(\.tag__remove:focus-visible\), \[data-state="focus"\]\)/g, ':has(.tag__remove:focus-visible)']]);
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

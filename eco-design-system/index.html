@@ -6,78 +6,469 @@
   <title>ECO Design System – Documentation</title>
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
-  <link rel="stylesheet" href="docs.css">
-  <link rel="stylesheet" href="docnav.css">
-  <link rel="stylesheet" href="../hairline/hairline-card.css">
-  <link rel="stylesheet" href="../components/css/badge.css">
-  <link rel="stylesheet" href="../components/css/action-link.css">
-  <link rel="stylesheet" href="../components/css/tabs.css">
-  <script src="../components/js/tabs.js"></script>
+  <link rel="stylesheet" href="/eco-design-system/docs.css">
+  <link rel="stylesheet" href="/eco-design-system/docnav.css">
+  <link rel="stylesheet" href="/hairline/hairline-card.css">
+  <link rel="stylesheet" href="/components/css/premium.css">
+  <link rel="stylesheet" href="/components/css/button.css">
+  <link rel="stylesheet" href="/components/css/switch.css">
+  <link rel="stylesheet" href="/components/css/checkbox.css">
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/pill-segment-control.css">
+  <link rel="stylesheet" href="/components/css/badge.css">
+  <link rel="stylesheet" href="/components/css/divider.css">
+  <link rel="stylesheet" href="/components/css/action-link.css">
+    <link rel="stylesheet" href="/components/css/tooltip.css">
+  <script>/* set before the first paint, so the hero entrance and scroll-reveal never flash; without JS or with reduced motion everything is simply visible */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('hx-motion');</script>
   <style>
-    /* category links stop exactly at the section's top edge (below the fixed mobile bar, flush at the top on desktop) */
-    .ds-section[id] { scroll-margin-top: 0; }
+    /* ── Hero: full screen, the Hairline figures glide behind the text in a tilted grid ── */
+    .hx-hero {
+      position: relative; overflow: hidden; isolation: isolate;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      /* fills the first screen: --hx-top / --hx-bottom are measured by the script (frame, fixed mobile bar) */
+      min-height: calc(100svh - var(--hx-top, 0px) - var(--hx-bottom, 0px));
+      margin-top: calc(-1 * var(--pt-page));   /* flush with the top of the page panel */
+      background: var(--color-surface-100); color: var(--color-text-primary-inverted);
+      padding: var(--dimension-spacing-space-80) var(--px-page); text-align: center;
+    }
+    /* the grid: columns that run up and down, tilted and enlarged so no edge shows (composition taken from the reference) */
+    .hx-field { position: absolute; inset: -20%; z-index: -2; display: flex; gap: var(--dimension-spacing-space-16); padding: 0 var(--dimension-spacing-space-16); transform: rotate(-8deg) scale(1.2);
+      opacity: 0; transition: opacity var(--duration-slow-4) var(--ease-standard); }
+    .hx-field { pointer-events: none; }   /* the figures do not react to the pointer: the loop stays smooth */
+    .hx-field.is-ready { opacity: 1; }
+    @media (min-width: 769px) { .hx-field { gap: var(--dimension-spacing-space-48); padding: 0 var(--dimension-spacing-space-48); } }
+    /* fixed column width = the figure's stage (300px, hairline-card.css); the script builds as many columns as fit, so the gaps never grow */
+    .hx-field { justify-content: center; }
+    .hx-col { flex: 0 0 300px; }
+    /* ponytail: loop length has no motion token (tokens stop at 600ms); 90s (60s in the reference, slowed 2026-10-27), confirm or replace */
+    .hx-strip { animation: hx-up var(--duration-loop-slow) linear infinite; }
+    .hx-col:nth-child(even) .hx-strip { animation-name: hx-down; }
+    @keyframes hx-up   { from { transform: translateY(0); }    to { transform: translateY(-50%); } }
+    @keyframes hx-down { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+    .hx-hero[data-paused] .hx-strip { animation-play-state: paused; }
+    /* a tile = the card visual of components-overview.html (same 160px stage, same per-figure offsets), on a white plate; sharp corners (ECO) */
+    .hx-tile.ds-card__visual { width: 100%; margin-bottom: var(--dimension-spacing-space-8); border: 0; background: none; overflow: visible; opacity: 0.7; }   /* no plate: the figures float on the dark field; opacity 0.7 is a trial value (no opacity token), user to confirm */
+    /* hero only: no pointer arrow in the figures; some figures draw a white halo (path.fo, no data-part) right before the arrow, hidden with it */
+    .hx-tile [data-part="cursor"], .hx-tile path.fo:not([data-part]):has(+ [data-part="cursor"]) { display: none; }
+    @media (min-width: 769px) { .hx-tile.ds-card__visual { margin-bottom: var(--dimension-spacing-space-24); } }    /* scrim: two layers of opacity-black-50 (75% black) + a vignette to the top and bottom edge, tokens only, so white text passes contrast */
+    .hx-shade, .hx-shade::after { position: absolute; inset: 0; z-index: -1; }
+    .hx-shade { background: var(--color-surface-opacity-black-80); }
+    .hx-shade::after { content: ''; background: linear-gradient(to top, var(--color-surface-opacity-black-50), var(--color-surface-opacity-white-0) 50%, var(--color-surface-opacity-black-50)); }
+    .hx-content { position: relative; max-width: 960px; }
+    /* Scroll-out (md+, set by the script): the content fades and lifts as the hero leaves; `translate` so it does not fight the .hx-in transform */
+    .hx-hero[data-out] .hx-content { translate: 0 calc(var(--hx-out, 0) * -1 * var(--dimension-spacing-space-48)); }
+    .hx-hero[data-out] .hx-content > :not(.hx-ctas) { opacity: calc(1 - var(--hx-out, 0)); }   /* the buttons never fade (user 2026-10-27) */
+    .hx-hero .ds-eyebrow { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--dimension-spacing-space-8); color: var(--color-text-secondary-inverted); margin-bottom: var(--dimension-spacing-space-24); }
+    .hx-hero .ds-title { color: var(--color-text-primary-inverted); margin-bottom: var(--dimension-spacing-space-24); text-wrap: balance; }
+    .hx-hero .ds-lead { color: var(--color-text-secondary-inverted); max-width: 640px; margin: 0 auto; text-wrap: balance; }
+    .hx-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--dimension-spacing-space-16); margin-top: var(--dimension-spacing-space-40); }
+    .hx-stats { display: flex; justify-content: center; margin-top: var(--dimension-spacing-space-56); }
+    @media (min-width: 769px) { .hx-stats { margin-top: var(--dimension-spacing-space-80); } }
+    .hx-stat { display: flex; flex-direction: column-reverse; padding: 0 var(--dimension-spacing-space-16); }   /* number above its label; dt stays first in the markup */
+    /* divider: shorter than the stat, centred; surface-70 is the user's choice 2026-10-27 (no border token between #333 and white) */
+    .hx-stat { position: relative; }
+    .hx-stat + .hx-stat::before { content: ''; position: absolute; left: 0; top: 50%; width: 1px; height: var(--dimension-spacing-space-32); transform: translateY(-50%); background: var(--color-surface-70); }    @media (min-width: 769px) { .hx-stat { padding: 0 var(--dimension-spacing-space-40); } }
+    @media (min-width: 1024px) { .hx-stat { padding: 0 var(--dimension-spacing-space-56); } }
+    .hx-stat dd { font-size: 28px; line-height: 28px; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: var(--dimension-spacing-space-8); }   /* display-md */
+    .hx-stat dt { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary-inverted); }   /* same as .ds-card__meta */
+    @media (min-width: 769px) { .hx-stat dd { font-size: 36px; line-height: 36px; } .hx-stat dt { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; } }
+    /* bottom bar: scroll cue in the middle, pause on the right */
+    .hx-cue { position: absolute; left: 50%; bottom: var(--dimension-spacing-space-16); transform: translateX(-50%); }
+    .hx-pause { position: absolute; right: var(--dimension-spacing-space-16); bottom: var(--dimension-spacing-space-16); }
+    @media (min-width: 769px) { .hx-cue, .hx-pause { bottom: var(--dimension-spacing-space-32); } .hx-pause { right: var(--dimension-spacing-space-32); } }
+    /* entrance: eyebrow, title, lead, buttons and counts rise in one after another on load */
+    /* backwards fill: hidden during the delay, then the normal styles (incl. the scroll-out opacity) take over */
+    .hx-motion .hx-in { animation: hx-in var(--duration-slow-4) var(--ease-decelerate-emphasized) backwards; animation-delay: calc(var(--i) * var(--duration-fast-4)); }
+    @keyframes hx-in { from { opacity: 0; transform: translateY(var(--dimension-spacing-space-24)); } }
+    /* count-up: the number is a registered property, animated with the motion tokens */
+    @property --hx-n { syntax: '<integer>'; inherits: false; initial-value: 0; }
+    .hx-num[data-anim] { counter-reset: hx var(--hx-n); }
+    .hx-num[data-anim]::after { content: counter(hx); }
+
+    /* the scroll cue's target stops below the fixed mobile bar */
     @media (max-width: 960px) { .ds-section[id] { scroll-margin-top: var(--dn-bar, 64px); } }
-    /* sticky tab bar: sits under the fixed mobile bar; while stuck 16px above the tabs and 16px of background below the line (the bar's own 4px top padding is replaced, margin-bottom keeps the content from moving) */
-    .tab-bar--page { --tab-sticky-top: var(--dn-bar, 0px); }
-    .tab-bar--page.is-stuck { padding-top: var(--dimension-spacing-space-16); margin-bottom: calc(4px - var(--dimension-spacing-space-16)); box-shadow: 0 var(--dimension-spacing-space-16) 0 var(--tab-bar-bg, var(--color-background-primary)); }
-    /* jump links: 24px under the lead on mobile (xs, sm), 32px from md (769px) */
-    .ds-jump { margin-top: var(--dimension-spacing-space-24); }
-    @media (min-width: 769px) { .ds-jump { margin-top: var(--dimension-spacing-space-32); } }
+
+    /* ── Section headings: two-tone (primary + tertiary) ─────────────── */
+    .hx-h2 span { display: block; color: var(--color-text-tertiary); }
+    
+    /* ── Foundation mini visuals (live from tokens) ─────────────────── */
+    .hx-space { display: flex; align-items: flex-end; gap: var(--dimension-spacing-space-8); height: var(--dimension-spacing-space-80); }
+    .hx-space span { width: var(--dimension-spacing-space-16); background: var(--color-surface-100); }
+    .hx-cols { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--dimension-spacing-space-4); width: 100%; max-width: 280px; height: var(--dimension-spacing-space-80); }
+    .hx-cols span { background: var(--color-surface-information-weaker); border: 1px solid var(--color-border-information-default); }
+    .hx-elev { display: flex; gap: var(--dimension-spacing-space-24); }
+    .hx-elev span { width: var(--dimension-spacing-space-56); height: var(--dimension-spacing-space-56); background: var(--color-surface-raised-primary); }
+    .hx-track { position: relative; width: 100%; max-width: 240px; height: var(--dimension-spacing-space-24); border-bottom: 1px solid var(--color-border-primary); }
+    .hx-dot { position: absolute; left: 0; bottom: var(--dimension-spacing-space-4); width: var(--dimension-spacing-space-16); height: var(--dimension-spacing-space-16); border-radius: var(--radius-full); background: var(--color-surface-100);
+      transition: left var(--duration-slow-4) var(--ease-decelerate-emphasized); }
+    a.ds-card:is(:hover, :focus-visible) .hx-dot { left: calc(100% - var(--dimension-spacing-space-16)); }
+    .ds-card__body .action-link { margin-top: auto; padding-top: var(--dimension-spacing-space-8); }
+    .ds-cards > .ds-card { min-width: 0; }   /* equal columns: a live visual must not widen its track */
+    .hx-stack { display: flex; flex-direction: column; align-items: flex-start; gap: var(--dimension-spacing-space-16); }
+    .hx-row-x { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--dimension-spacing-space-8); }
+
+    /* ── Entry rows (Foundations, Components): text left, live visuals right ── */
+    .hx-entry { display: grid; gap: var(--dimension-spacing-space-32); align-items: center; }
+    @media (min-width: 769px) { .hx-entry { grid-template-columns: 5fr 7fr; gap: var(--dimension-spacing-space-64); } }
+    .hx-entry__text .ds-desc { margin-bottom: var(--dimension-spacing-space-24); }
+    /* one long dark panel per row (ECO is sharp-cornered) with one abstract composition drawn from the system's own tokens */
+    .hx-panel { background: var(--color-surface-100); color: var(--color-text-primary-inverted); overflow: hidden; }
+    .hx-entry { color: inherit; text-decoration: none; }
+    .hx-entry:hover .action-link { color: var(--color-text-action-secondary-hover); }   /* hovering the row (text or picture) triggers the link's hover state */
+    .hx-entry:hover .action-link__label { text-decoration: underline; }
+    .hx-art { display: block; width: 100%; height: auto; }
+    .hx-art :is(.hx-art__grid, .hx-art__line, .hx-art__dash) { fill: none; }
+    .hx-art__grid { stroke: var(--color-surface-70); stroke-width: 1; opacity: .5; }
+    .hx-art__line { stroke: var(--color-surface-00); stroke-width: 2; }
+    .hx-art__line--accent { stroke: var(--ds-accent); }
+    .hx-art__line--soft { stroke: var(--color-surface-70); }
+    .hx-art__dash path, .hx-art__dash { stroke-dasharray: 6 6; stroke: var(--color-surface-70); stroke-width: 2; }
+    .hx-art__line--accent .hx-art__dash { stroke: var(--ds-accent); }
+    .hx-art__bg { fill: var(--color-surface-100); }
+    .hx-art__accent, .hx-art__accentfill, .hx-art__dot { fill: var(--ds-accent); }
+    .hx-art__dot { stroke: var(--color-surface-00); stroke-width: 2; fill: var(--color-surface-00); }
+    .hx-art__bgfill { fill: var(--color-surface-100); }
+    .hx-art__type { font-size: 96px; font-weight: 600; fill: var(--color-surface-00); }
+    .hx-art__check { fill: none; stroke: var(--ds-accent); stroke-width: 5; }
+    .hx-art__caret { stroke: var(--color-surface-00); stroke-width: 2; }
+    .hx-art__underline { stroke: var(--ds-accent); stroke-width: 4; }
+
+    /* ── Roles ──────────────────────────────────────────────────────── */
+    .hx-roles { display: grid; gap: var(--dimension-spacing-space-16); grid-template-columns: 1fr; }
+    @media (min-width: 640px)  { .hx-roles { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .hx-roles { grid-template-columns: repeat(4, 1fr); gap: var(--dimension-spacing-space-24); } }
+    /* the whole card is the link (<a class="ds-card">); the action link inside is a span that takes the hover state from the card */
+    :is(a.hx-role, a.hx-dest):hover { border-color: var(--color-border-primary); }   /* no darker frame on hover */
+    :is(.hx-role, .hx-dest):hover .action-link { color: var(--color-text-action-secondary-hover); }
+    :is(.hx-role, .hx-dest):hover .action-link__label { text-decoration: underline; }
+    /* Components section: one wide card (Components) + Patterns + Storyblok, each a dark picture on top. The small pictures are 320×360 and
+       the wide one 640×360, so on lg (2fr 1fr 1fr) all three pictures are the same height */
+    .hx-dests { display: grid; gap: var(--dimension-spacing-space-16); grid-template-columns: 1fr; margin-top: var(--dimension-spacing-space-32); }
+    @media (min-width: 640px)  { .hx-dests { grid-template-columns: 1fr 1fr; } .hx-dest--wide { grid-column: 1 / -1; } }
+    @media (min-width: 1024px) { .hx-dests { grid-template-columns: 2fr 1fr 1fr; gap: var(--dimension-spacing-space-24); } .hx-dest--wide { grid-column: auto; } }
+    .hx-dest { min-width: 0; overflow: hidden; }
+    .hx-dest .hx-panel { border-bottom: 1px solid var(--color-border-primary); }
+    @media (max-width: 639px) { .hx-dest .hx-art { aspect-ratio: 16 / 9; } }   /* one column: same height as the wide picture, the art is centred on black */
+    .hx-role .mo-ic { font-size: 40px; color: var(--color-icon-primary); }
+    .hx-role .badge-basic { align-self: flex-start; }
+    .hx-motion .hx-reveal.ds-card--soon.is-in { opacity: .64; }   /* the reveal would set 1; same value as .ds-card--soon in docs.css */
+
+    .ds-linkcard__visual .hx-art { width: 100%; height: 100%; }
+    .hx-art__lime { fill: var(--color-accent-default); }   /* Swedol accent */
+    .hx-art__red { fill: var(--color-primitive-color-brand-tools-accent-brand); }   /* Tools accent */
+    .hx-art__limeline { fill: none; stroke: var(--color-accent-default); stroke-width: 2; }
+    .hx-art__accentline { fill: none; stroke: var(--ds-accent); stroke-width: 2; }
+    /* ── Help ───────────────────────────────────────────────────────── */
+    .hx-help { display: grid; gap: var(--dimension-spacing-space-16); }
+    @media (min-width: 640px)  { .hx-help { grid-template-columns: repeat(2, 1fr); gap: var(--dimension-spacing-space-24); } .hx-help .ds-linkcard { width: auto; } }
+    @media (min-width: 1024px) { .hx-help { grid-template-columns: repeat(4, 1fr); } }
+
+    /* ── Scroll-reveal (only when JS has set .hx-motion, so without JS everything is visible) ── */
+    .hx-motion .hx-reveal { opacity: 0; transform: translateY(var(--dimension-spacing-space-24));
+      transition: opacity var(--duration-medium-3) var(--ease-decelerate-emphasized), transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
+      transition-delay: calc(var(--i, 0) * var(--duration-fast-2)); }
+    .hx-motion .hx-reveal.is-in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hx-strip { animation: none; }
+      .hx-field { transition: none; }
+      .hx-pause { display: none; }
+      .hx-dot { transition: none; }
+    }
   </style>
 </head>
 <body>
-<script src="docnav.js"></script>
-<div class="ds-page">
-  <nav class="breadcrumb" aria-label="Breadcrumbs">
-    <div class="breadcrumb__bar">
-      <a href="index.html" class="breadcrumb-item">Home</a>
-      <span class="breadcrumb-sep">/</span>
-      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">ECO Design System</span>
+<script src="/eco-design-system/docnav.js"></script>
+<!-- ── 1. Hero ────────────────────────────────────────────────────── -->
+<section class="hx-hero" aria-labelledby="hx-title">
+  <div class="hx-field" id="hx-field" aria-hidden="true"></div>
+  <div class="hx-shade" aria-hidden="true"></div>
+  <div class="fx-edge-blur" aria-hidden="true"></div>
+  <div class="fx-grain" aria-hidden="true"></div>
+  <div class="hx-content">
+    <span class="ds-eyebrow hx-in" style="--i:0"><span class="badge-basic badge-basic--uppercase ds-eyebrow__swedol">Swedol</span><span class="badge-basic badge-basic--uppercase ds-eyebrow__tools">Tools</span> ECO Design System</span>
+    <h1 class="ds-title display-xl hx-in" style="--i:1" id="hx-title">The toolbox behind Swedol and Tools</h1>
+    <p class="ds-lead hx-in" style="--i:2">ECO is the foundation for creating products, user interfaces and digital experiences for Swedol and Tools. It brings every Alligo e-com experience into one cohesive, unified framework.</p>
+    <div class="hx-ctas hx-in" style="--i:3">
+      <a class="btn btn--primary-inverted btn--lg" href="/eco-design-system/components-overview.html"><span class="btn__label">Explore components</span></a>
+      <a class="btn btn--secondary-inverted btn--lg" href="#help"><span class="btn__label">Get started</span></a>
     </div>
-  </nav>
-</div>
+    <dl class="hx-stats hx-in" style="--i:4">
+      <div class="hx-stat"><dt>Foundations</dt><dd class="hx-num" data-count="foundations">–</dd></div>
+      <div class="hx-stat"><dt>Components</dt><dd class="hx-num" data-count="components">–</dd></div>
+      <div class="hx-stat"><dt>Tokens</dt><dd class="hx-num" data-count="tokens">–</dd></div>
+    </dl>
+  </div>
+  <a class="btn btn--blank-inverted btn--sm btn--icon hx-cue" href="#foundations" aria-label="Scroll to content" data-tooltip="Scroll to content"><span class="btn__icon" aria-hidden="true">arrow_downward</span></a>
+  <button type="button" class="btn btn--secondary-inverted btn--sm btn--icon hx-pause" id="hx-pause" aria-label="Pause animation" data-tooltip="Pause animation"><span class="btn__icon" aria-hidden="true">pause</span></button>
+</section>
 
-<!-- ── Intro ─────────────────────────────────────────────────── -->
-<section class="ds-section ds-section--first">
+<!-- ── 2. Foundations: entry ──────────────────────────────────────── -->
+<section class="ds-section" id="foundations">
   <div class="ds-page ds-inner">
-    <span class="ds-eyebrow"><span class="badge-basic badge-basic--uppercase ds-eyebrow__swedol">Swedol</span><span class="badge-basic badge-basic--uppercase ds-eyebrow__tools">Tools</span>ECO Design System</span>
-    <h1 class="ds-title">Design system</h1>
-    <p class="ds-lead"><strong>ECO</strong> is the shared language for every Swedol interface: the foundations (color, type, space) and the components built on top of them.</p>
-    <p class="ds-lead">Every example on these pages is rendered live from the <code>alligo-design-tokens</code> package, so what you see is what the prototypes use.</p>
+    <a class="hx-entry" href="/eco-design-system/foundations/colors.html">
+      <div class="hx-entry__text hx-reveal">
+        <h2 class="ds-h2 hx-h2">Foundations.<span>The base of everything.</span></h2>
+        <p class="ds-desc">Style and structure commonly used throughout our products. Tailored for brand identity and accessibility standards.</p>
+        <span class="action-link action-link--large"><span class="action-link__label">Explore the foundations</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span>
+      </div>
+      <div class="hx-panel hx-panel--found hx-reveal" aria-hidden="true">
+        <svg class="hx-art" viewBox="0 0 640 360" focusable="false">
+          <g class="hx-art__grid"><path d="M40 20V340"/><path d="M90 20V340"/><path d="M140 20V340"/><path d="M190 20V340"/><path d="M240 20V340"/><path d="M290 20V340"/><path d="M340 20V340"/><path d="M390 20V340"/><path d="M440 20V340"/><path d="M490 20V340"/><path d="M540 20V340"/><path d="M590 20V340"/></g>
+          <g class="hx-art__line">
+            <rect x="120" y="100" width="130" height="130" class="hx-art__bg"/>
+            <rect x="95" y="125" width="130" height="130" class="hx-art__bg"/>
+            <rect x="70" y="150" width="130" height="130" class="hx-art__accent"/>
+          </g>
+          <text x="290" y="140" class="hx-art__type">Aa</text>
+          <g>
+            <rect x="290" y="170" width="40" height="40" style="fill:var(--color-accent-default)"/>
+            <rect x="336" y="170" width="40" height="40" style="fill:var(--color-primitive-color-brand-tools-accent-brand)"/>
+            <rect x="382" y="170" width="40" height="40" style="fill:var(--color-surface-00)"/>
+            <rect x="428" y="170" width="40" height="40" style="fill:var(--color-surface-information-default)"/>
+            <rect x="474" y="170" width="40" height="40" style="fill:var(--color-surface-success-default)"/>
+          </g>
+          <g class="hx-art__line hx-art__line--accent">
+            <path d="M290 300C390 300 430 236 560 236" />
+            <path d="M530 50H600M530 130H600" class="hx-art__dash"/>
+            <path d="M565 62V118M559 70l6-8 6 8M559 110l6 8 6-8"/>
+          </g>
+          <circle cx="560" cy="236" r="8" class="hx-art__dot"/>
+        </svg>
+      </div>
+    </a>
   </div>
 </section>
 
-<section class="ds-section ds-section--secondary" id="overview">
+<div class="ds-sep"><hr class="divider" /></div>
+
+<!-- ── 3. Components: entry ───────────────────────────────────────── -->
+<section class="ds-section" id="components">
   <div class="ds-page ds-inner">
-    <div class="ds-cards">
-
-      <a class="ds-card" href="foundations-overview.html">
-        <div class="ds-card__visual" aria-hidden="true"><span class="mo-ic" style="font-size:56px;color:var(--color-icon-primary)">grid_view</span></div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Foundations</span></div>
-          <p class="ds-card__desc">Colors, typography, layout, shadows and motion: the building blocks every component is made from.</p>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components-overview.html">
-        <div class="ds-card__visual" aria-hidden="true"><span class="mo-ic" style="font-size:56px;color:var(--color-icon-primary)">palette</span></div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Components</span></div>
-          <p class="ds-card__desc">Reusable parts with sizes, states and usage rules, plus patterns and Storyblok widgets.</p>
-        </div>
-      </a>
-
-      <a class="ds-card" href="resources-overview.html">
-        <div class="ds-card__visual" aria-hidden="true"><span class="mo-ic" style="font-size:56px;color:var(--color-icon-primary)">menu_book</span></div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Resources</span></div>
-          <p class="ds-card__desc">Web and Design libraries, getting help, and introductions for developers and stakeholders.</p>
-        </div>
-      </a>
-
+    <div class="hx-reveal">
+      <h2 class="ds-h2 hx-h2">Components.<span>Try them here.</span></h2>
+      <p class="ds-desc">The design system library is an ever-expanding collection of accessible, brand-compliant components, each designed for a different scenario. Use them to launch faster and stay aligned with the current standard.</p>
+    </div>
+    <div class="hx-dests">
+    <a class="ds-card hx-dest hx-dest--wide hx-reveal" href="/eco-design-system/components-overview.html#components">
+      <div class="hx-panel hx-panel--comp" aria-hidden="true">
+        <svg class="hx-art" viewBox="0 0 640 360" focusable="false">
+          <g class="hx-art__line hx-art__dash"><path d="M210 82L290 150M430 92L350 150M114 262L290 210M350 262L350 210M490 262L350 210"/></g>
+          <rect x="60" y="60" width="150" height="44" style="fill:var(--color-surface-00)"/>
+          <rect x="90" y="79" width="90" height="6" class="hx-art__bgfill"/>
+          <g class="hx-art__line"><rect x="430" y="70" width="100" height="44" rx="22"/></g>
+          <circle cx="508" cy="92" r="16" style="fill:var(--color-surface-success-default)"/>
+          <rect x="270" y="130" width="100" height="100" style="fill:var(--color-surface-00)"/>
+          <rect x="300" y="160" width="20" height="40" class="hx-art__lime"/>
+          <rect x="320" y="160" width="20" height="40" style="fill:var(--color-primitive-color-brand-tools-accent-brand)"/>
+          <g class="hx-art__line"><rect x="70" y="240" width="44" height="44"/><rect x="150" y="240" width="200" height="44"/></g>
+          <path d="M82 262l10 10 12-22" class="hx-art__check"/>
+          <path d="M170 252V272" class="hx-art__caret"/>
+          <g class="hx-art__line"><path d="M400 262H560M400 262H440" /></g>
+          <path d="M400 290H460" class="hx-art__underline"/>
+          <g class="hx-art__line hx-art__line--soft"><path d="M470 290H520M530 290H560"/></g>
+        </svg>
+      </div>
+      <div class="ds-card__body"><span class="ds-card__title">Components</span><p class="ds-card__desc">Buttons, fields, menus and more, live and ready to use.</p>
+        <span class="action-link action-link--medium"><span class="action-link__label">All components</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span></div>
+    </a>
+    <a class="ds-card hx-dest hx-reveal" href="/eco-design-system/components-overview.html#patterns">
+      <div class="hx-panel" aria-hidden="true">
+        <!-- Patterns: a page put together from blocks, one block lifted out -->
+        <svg class="hx-art" viewBox="0 0 320 360" focusable="false">
+          <g class="hx-art__grid"><path d="M40 20V340"/><path d="M80 20V340"/><path d="M120 20V340"/><path d="M160 20V340"/><path d="M200 20V340"/><path d="M240 20V340"/><path d="M280 20V340"/></g>
+          <rect x="60" y="40" width="200" height="24" style="fill:var(--color-surface-00)"/>
+          <g class="hx-art__line">
+            <rect x="60" y="40" width="200" height="280"/>
+            <rect x="76" y="80" width="168" height="80"/>
+            <rect x="164" y="176" width="80" height="80"/>
+          </g>
+          <rect x="92" y="104" width="96" height="6" style="fill:var(--color-surface-00)"/>
+          <rect x="92" y="120" width="64" height="6" style="fill:var(--color-surface-70)"/>
+          <rect x="92" y="136" width="48" height="12" class="hx-art__lime"/>
+          <g class="hx-art__dash"><path d="M76 176H156V256H76Z"/></g>
+          <rect x="44" y="196" width="80" height="80" style="fill:var(--color-surface-00)"/>
+          <rect x="60" y="212" width="24" height="24" class="hx-art__accent"/>
+          <rect x="60" y="248" width="48" height="6" class="hx-art__bgfill"/>
+          <rect x="180" y="192" width="24" height="24" class="hx-art__red"/>
+          <g class="hx-art__line hx-art__line--soft"><path d="M76 284H244M76 300H180"/></g>
+        </svg>
+      </div>
+      <div class="ds-card__body"><span class="ds-card__title">Patterns</span><p class="ds-card__desc">Components put together for tasks that come back again and again.</p>
+        <span class="action-link action-link--medium"><span class="action-link__label">Patterns</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span></div>
+    </a>
+    <a class="ds-card hx-dest hx-reveal" href="/eco-design-system/components-overview.html#storyblok-widgets">
+      <div class="hx-panel" aria-hidden="true">
+        <!-- Storyblok: editor fields on top flow into the finished block below -->
+        <svg class="hx-art" viewBox="0 0 320 360" focusable="false">
+          <g class="hx-art__grid"><path d="M40 20V340"/><path d="M80 20V340"/><path d="M120 20V340"/><path d="M160 20V340"/><path d="M200 20V340"/><path d="M240 20V340"/><path d="M280 20V340"/></g>
+          <g class="hx-art__line">
+            <rect x="40" y="40" width="160" height="176"/>
+            <rect x="56" y="74" width="128" height="24"/>
+            <rect x="56" y="128" width="128" height="24"/>
+            <rect x="56" y="176" width="44" height="24" rx="12"/>
+          </g>
+          <rect x="56" y="60" width="48" height="6" style="fill:var(--color-surface-00)"/>
+          <rect x="56" y="114" width="64" height="6" style="fill:var(--color-surface-00)"/>
+          <circle cx="88" cy="188" r="7" class="hx-art__lime"/>
+          <g class="hx-art__dash"><path d="M200 128C256 128 256 200 240 232"/></g>
+          <rect x="120" y="232" width="160" height="88" style="fill:var(--color-surface-00)"/>
+          <rect x="136" y="248" width="40" height="40" class="hx-art__accent"/>
+          <rect x="188" y="254" width="76" height="6" class="hx-art__bgfill"/>
+          <rect x="188" y="268" width="52" height="6" style="fill:var(--color-surface-40)"/>
+          <rect x="136" y="300" width="56" height="8" class="hx-art__red"/>
+          <circle cx="240" cy="232" r="6" class="hx-art__dot"/>
+        </svg>
+      </div>
+      <div class="ds-card__body"><span class="ds-card__title">Storyblok</span><p class="ds-card__desc">The widgets editors use to build pages, with the fields they fill in.</p>
+        <span class="action-link action-link--medium"><span class="action-link__label">Storyblok widgets</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span></div>
+    </a>
     </div>
   </div>
 </section>
 
+<!-- ── 5. Who it is for ───────────────────────────────────────────── -->
+<section class="ds-section ds-section--secondary" id="roles">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2 hx-h2">Who is it for?<span>Everyone who builds the product.</span></h2>
+    <p class="ds-desc">Start where your work starts.</p>
+    <div class="hx-roles">
+      <a class="ds-card hx-role hx-reveal" href="/eco-design-system/resources/design.html"><div class="ds-card__body"><span class="mo-ic" aria-hidden="true">design_services</span><span class="ds-card__title">Designers</span><p class="ds-card__desc">Use the Figma library and check measures and states before handoff.</p>
+        <span class="action-link action-link--medium"><span class="action-link__label">Design library</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span></div></a>
+      <a class="ds-card hx-role hx-reveal" href="/eco-design-system/resources/introduction-for-developers.html"><div class="ds-card__body"><span class="mo-ic" aria-hidden="true">code</span><span class="ds-card__title">Developers</span><p class="ds-card__desc">Copy the markup, link the shared files and use the tokens, never raw values.</p>
+        <span class="action-link action-link--medium"><span class="action-link__label">Developer intro</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span></div></a>
+      <a class="ds-card hx-role hx-reveal" href="/eco-design-system/resources/introduction-for-stakeholders.html"><div class="ds-card__body"><span class="mo-ic" aria-hidden="true">groups</span><span class="ds-card__title">Project managers</span><p class="ds-card__desc">See what exists, what is coming and what a new feature can reuse.</p>
+        <span class="action-link action-link--medium"><span class="action-link__label">Stakeholder intro</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span></div></a>
+      <!-- disabled until there is a UX copy guide (2026-10-28): a div, not a link -->
+      <div class="ds-card ds-card--soon hx-role hx-reveal"><div class="ds-card__body"><span class="mo-ic" aria-hidden="true">edit_note</span><span class="ds-card__title">UX copy</span><p class="ds-card__desc">How we write labels, messages and notifications, for everyone who writes in the interface.</p>
+        <span class="badge-basic badge-basic--neutral-grey badge-basic--weak">Coming soon</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. Help and get started ────────────────────────────────────── -->
+<section class="ds-section" id="help">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2 hx-h2">Get started.<span>We are here to help.</span></h2>
+    <p class="ds-desc">We work together on tools, guidelines and resources that let you build new products quickly and efficiently, with excellent usability and accessibility. Start with the libraries and tokens below.</p>
+    <div class="hx-help">
+      <a class="ds-linkcard hx-reveal" href="/eco-design-system/resources/web.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><rect x="50" y="22" width="140" height="76"/><path d="M50 40H190"/><path d="M96 60l-14 14 14 14M144 60l14 14-14 14"/></g><path d="M126 58l-12 32" class="hx-art__accentline"/><circle cx="62" cy="31" r="3" class="hx-art__lime"/><circle cx="73" cy="31" r="3" class="hx-art__red"/><circle cx="84" cy="31" r="3" class="hx-art__accent"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Web library</span><span class="ds-linkcard__desc">Storybook and the component code.</span></span></a>
+      <a class="ds-linkcard hx-reveal" href="/eco-design-system/resources/design.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><circle cx="92" cy="62" r="26"/><path d="M130 30l30 52h-60z" transform="translate(30 0)"/></g><rect x="104" y="42" width="40" height="40" class="hx-art__accent"/><circle cx="92" cy="36" r="5" class="hx-art__lime"/><rect x="156" y="26" width="9" height="9" class="hx-art__red"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Design library</span><span class="ds-linkcard__desc">The ECO file in Figma.</span></span></a>
+      <a class="ds-linkcard hx-reveal" href="/eco-design-system/tokens.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><rect x="66" y="26" width="20" height="20"/><rect x="98" y="26" width="20" height="20"/><rect x="130" y="26" width="20" height="20"/><rect x="66" y="54" width="20" height="20"/><rect x="130" y="54" width="20" height="20"/><rect x="162" y="54" width="20" height="20"/><rect x="98" y="82" width="20" height="20"/><rect x="130" y="82" width="20" height="20"/><rect x="162" y="82" width="20" height="20"/></g><rect x="98" y="54" width="20" height="20" class="hx-art__accent"/><rect x="162" y="26" width="20" height="20" class="hx-art__lime"/><rect x="66" y="82" width="20" height="20" class="hx-art__red"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Design tokens</span><span class="ds-linkcard__desc">Every value, searchable and ready to copy.</span></span></a>
+      <a class="ds-linkcard hx-reveal" href="/eco-design-system/resources/getting-help.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><path d="M58 28H152V70H100L80 88V70H58Z"/><path d="M74 44H136"/></g><path d="M74 56H112" class="hx-art__limeline"/><circle cx="152" cy="28" r="5" class="hx-art__red"/><path d="M118 74H190V108H170L160 96H118Z" class="hx-art__accent"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Getting help</span><span class="ds-linkcard__desc">Ask a question or give feedback.</span></span></a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Hero columns: the Hairline figures (hairline/*.js). Each column's four figures twice = one half, long enough to cover a tall screen;
+     the half is repeated once so the loop (translateY -50%) is seamless. As many columns as fit the field (fixed 300px width), FIGS reused in turn */
+  var FIGS = [['button-pair', 'select', 'toast', 'radio'], ['input', 'modal', 'checkbox', 'banner'], ['switch', 'tabs', 'pill', 'range'],
+              ['textarea', 'toast-ecom', 'button-group', 'icon-picker'], ['inline-notification', 'radio', 'select', 'modal'], ['checkbox', 'switch', 'input', 'tabs'],
+              ['range', 'banner', 'button-pair', 'toast']];
+  var field = document.getElementById('hx-field');
+  function column(i) {
+    var col = FIGS[i % FIGS.length], half = col.concat(col);
+    return '<div class="hx-col"><div class="hx-strip">' + half.concat(half).map(function (n) {
+      return '<div class="hx-tile ds-card__visual ds-card__visual--hairline"><div data-hairline-card="' + n + '" data-src="/hairline/' + n + '.js"></div></div>';
+    }).join('') + '</div></div>';
+  }
+  function needed() {   /* columns that cover the field's width (rounded up, the overflow is clipped evenly on both sides) */
+    var gap = parseFloat(getComputedStyle(field).columnGap) || 0;
+    return Math.max(1, Math.ceil((field.clientWidth + gap) / (300 + gap)));
+  }
+  function columns() {   /* add or remove columns at the end only when the count changes; new ones are mounted by embed.js */
+    var have = field.children.length, want = needed();
+    while (have > want) { field.lastElementChild.remove(); have--; }
+    if (have < want) {
+      var tmp = document.createElement('div'), html = '';
+      for (var i = have; i < want; i++) html += column(i);
+      tmp.innerHTML = html;
+      var added = [].slice.call(tmp.children);
+      added.forEach(function (c) { field.appendChild(c); });
+      if (window.HLmount) added.forEach(window.HLmount);   /* undefined on first run: embed.js mounts everything at load */
+    }
+  }
+  columns();
+  var colRaf = 0;
+  addEventListener('resize', function () { colRaf = colRaf || requestAnimationFrame(function () { colRaf = 0; columns(); }); });
+  requestAnimationFrame(function () { field.classList.add('is-ready'); });   /* the grid fades in (duration-slow-4) */
+
+  var hero = document.querySelector('.hx-hero'), pause = document.getElementById('hx-pause');
+  function fit() {   /* the hero fills what is left of the first screen: below the fixed mobile bar, inside the 16px frame on desktop */
+    hero.style.setProperty('--hx-top', '0px');
+    var top = hero.getBoundingClientRect().top + scrollY, frame = document.documentElement.classList.contains('ds-frame') && matchMedia('(min-width: 961px)').matches;
+    hero.style.setProperty('--hx-top', top + 'px');
+    hero.style.setProperty('--hx-bottom', frame ? getComputedStyle(document.body).marginTop : '0px');
+  }
+  fit(); addEventListener('resize', fit);
+  pause.addEventListener('click', function () {
+    var on = hero.toggleAttribute('data-paused'), t = on ? 'Play animation' : 'Pause animation';
+    pause.setAttribute('aria-label', t); pause.setAttribute('data-tooltip', t);
+    pause.querySelector('.btn__icon').textContent = on ? 'play_arrow' : 'pause';
+  });
+
+  /* Counts, live: pages from the rail (docnav.js), tokens from the package (same filter as tokens.html) */
+  var NAV = window.ECO_NAV, SKIP = ['Patterns', 'Storyblok widget', 'Drafts', 'Cards'], comp = 0;
+  NAV.components.groups.forEach(function (g) {
+    if (SKIP.indexOf(g.title) > -1) return;
+    g.items.forEach(function (it) {
+      var kids = (it.children || []).filter(function (c) { return !c.sb; });
+      comp += kids.length || (it.soon ? 0 : 1);
+    });
+  });
+  function show(key, n) {
+    var el = document.querySelector('[data-count="' + key + '"]');
+    if (still || !el.animate) { el.textContent = n; return; }
+    var cs = getComputedStyle(document.documentElement);
+    el.textContent = ''; el.setAttribute('data-anim', '');
+    el.animate([{ '--hx-n': 0 }, { '--hx-n': n }], { duration: parseFloat(cs.getPropertyValue('--duration-slow-4')), easing: cs.getPropertyValue('--ease-decelerate-emphasized').trim(), fill: 'forwards' });
+  }
+  show('foundations', NAV.foundations.groups[0].items.length);
+  show('components', comp);
+  var BASE = 'https://unpkg.com/alligo-design-tokens@latest/dist/css/base/', FILES = ['dimension', 'string', 'font-family', 'font-weight', 'color', 'border', 'shadow', 'typography'];
+  Promise.all(FILES.map(function (f) { return fetch(BASE + f + '.css').then(function (r) { return r.text(); }); })).then(function (parts) {
+    var seen = {}, n = 16;   // + the 16 motion tokens of docs.css, as on tokens.html
+    parts.join('').replace(/\/\*[\s\S]*?\*\//g, '').replace(/(--[\w-]+)\s*:/g, function (m, name) {
+      if (/^--string-/.test(name) && !/^--string-font-/.test(name)) return;
+      if (/-eco-ds-/.test(name) || seen[name]) return;
+      seen[name] = 1; n++;
+    });
+    show('tokens', n);
+  }).catch(function () { document.querySelector('[data-count="tokens"]').textContent = '–'; });
+
+  if (still) return;
+
+  /* Scroll-out: desktop only (md+) */
+  var desk = matchMedia('(min-width: 769px)'), fine = matchMedia('(pointer: fine)'), raf = 0;
+  function out() {
+    raf = 0;
+    if (!desk.matches) { hero.removeAttribute('data-out'); return; }
+    var r = hero.getBoundingClientRect();
+    hero.setAttribute('data-out', '');
+    hero.style.setProperty('--hx-out', Math.min(1, Math.max(0, -r.top / r.height)).toFixed(3));
+  }
+  addEventListener('scroll', function () { raf = raf || requestAnimationFrame(out); }, { passive: true });
+  out(); addEventListener('resize', out);
+
+  /* Scroll-reveal: once, staggered per group */
+  if (!('IntersectionObserver' in window)) return;
+  document.querySelectorAll('.hx-dests, .hx-roles, .hx-help').forEach(function (g) {
+    [].forEach.call(g.querySelectorAll('.hx-reveal'), function (el, i) { el.style.setProperty('--i', i); });
+  });
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.hx-reveal').forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script src="/components/js/pill-segment-control.js"></script>
+<script src="/components/js/tooltip.js"></script>
+<script src="/hairline/kernel.js"></script>
+<script src="/hairline/embed.js"></script>
 </body>
 </html>

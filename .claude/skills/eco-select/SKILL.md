@@ -105,6 +105,8 @@ Every state must be implemented each time a select field is created.
 
 ### Dropdown list
 
+**Touch (2026-10-27):** `components/js/select-menu.js` handles a tap on `.form-select` itself (`touchend`, non-passive, `preventDefault`, ignores a swipe of more than 10px). Without it iOS opens its native picker from the tap (`mousedown` `preventDefault` does not stop it) and again after a choice. Never remove that handler; test the choose flow on an iPhone.
+
 A select opens the ECO **Menu** (`eco-menu`, Exposed dropdown menu) instead of the browser's list. The native `<select>` stays in the markup as the form control (value, label, `disabled`, `:has()` active state, forms); a small script only replaces the popup.
 
 | Field size | Menu size |

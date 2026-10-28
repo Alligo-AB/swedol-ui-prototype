@@ -7,6 +7,8 @@ description: Use when choosing or reviewing colors/design tokens — text, icon,
 
 ## Colors – Semantic Tokens (ECO Design System)
 
+> **Brand separation (rule, 2026-10-28):** besides the logos, colour is what separates Swedol and Tools. A **Tools** product uses only the accent and colours designated for Tools (the Tools brand primitives); a **Swedol** product uses only Swedol's accent and designated colours. Never mix them in one product. The ECO docs accent orange (`--ds-accent`) is for the design system documentation only, never a product. Both brands side by side, plus the orange, appear only in the documentation (illustrations, examples).
+
 All tokens have the `color/` prefix in Figma. Values are always sourced from `var(--color-[token])`, never hardcoded hex — see `tokens.json` in the `eco-tokens` skill for the actual hex values.
 
 ### Accent
@@ -135,6 +137,7 @@ Used to build up contrast in the grayscale. The number indicates approximate opa
 | `surface-opacity-black-10` | `var(--color-surface-opacity-black-10)` | Black at 10% opacity. Subtle overlay. |
 | `surface-opacity-black-20` | `var(--color-surface-opacity-black-20)` | Black at 20% opacity. |
 | `surface-opacity-black-50` | `var(--color-surface-opacity-black-50)` | Black at 50% opacity. Modal background. |
+| `surface-opacity-black-80` | `var(--color-surface-opacity-black-80)` | **Provisional** (2026-10-27, `components/css/premium.css`, not in the package or Figma yet, see `eco-design-system/figma-sync.md`). Scrim behind inverted text over moving imagery (premium hero). Link `premium.css` to use it. |
 | `surface-opacity-white-0` | `var(--color-surface-opacity-white-0)` | White, fully transparent. |
 | `surface-opacity-white-20` | `var(--color-surface-opacity-white-20)` | White at 20% opacity. Subtle lightening on a dark background. |
 | `surface-opacity-black-12` | `var(--color-surface-opacity-black-12)` | Hover surface for Primary Inverted, System Enabled & System. |

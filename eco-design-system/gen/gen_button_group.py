@@ -1,7 +1,7 @@
 from build import *
 
 SLUG = 'button-group'
-BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for the button group (section “Button group” in eco-button). This page documents the repo implementation.">Not verified with Figma</span>'
+BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for the button group (section “Button group” in eco-button). This page documents the repo implementation.">In progress</span>'
 
 STYLE = r'''    .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
     .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }

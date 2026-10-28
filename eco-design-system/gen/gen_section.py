@@ -1,7 +1,7 @@
 from build import *
 
 SLUG = 'section'
-BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="The skill has no Figma link. The values are the project’s own section rules.">Not verified with Figma</span>'
+BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="The skill has no Figma link. The values are the project’s own section rules.">In progress</span>'
 
 STYLE = r'''    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
     .pg-grid { display: grid; gap: 32px 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }

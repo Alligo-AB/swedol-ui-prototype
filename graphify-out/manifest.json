@@ -24,9 +24,9 @@
     "semantic_hash": "b35fdae09cd0b4f417e3b6b4401500ff"
   },
   "CLAUDE.md": {
-    "mtime": 1792680320.1054466,
-    "seen": 1792680330.751211,
-    "ast_hash": "c7e08dcade81de97aa44e5eceed6c2be",
+    "mtime": 1793181853.064818,
+    "seen": 1793181856.507838,
+    "ast_hash": "3dac2d15471318fa867291a30a10afe0",
     "semantic_hash": ""
   },
   "README.md": {
@@ -60,9 +60,9 @@
     "semantic_hash": "6f4cfe3b968d2f2a78c8b9b3470ccf38"
   },
   "index.html": {
-    "mtime": 1792662762.8026576,
-    "seen": 1792673809.919136,
-    "ast_hash": "873d2326beed88e935d96091072af4fc",
+    "mtime": 1793176539.205671,
+    "seen": 1793176579.744289,
+    "ast_hash": "1cf7daed281c90082a44c533e131ab34",
     "semantic_hash": ""
   },
   "mypages/partials/footer.html": {
@@ -102,9 +102,9 @@
     "semantic_hash": "af8483ad3a32fa77ed693df1bfcecbf4"
   },
   "template.html": {
-    "mtime": 1792662762.8053958,
-    "seen": 1792673809.919153,
-    "ast_hash": "e1330f56b679c5854c6ccf6615645163",
+    "mtime": 1793179467.1607072,
+    "seen": 1793179519.7020721,
+    "ast_hash": "b2ec4bd2554a2122416f0512f2dc13b3",
     "semantic_hash": ""
   },
   ".claude/skills/links-guide/SKILL.md": {
@@ -156,10 +156,10 @@
     "semantic_hash": "0e53932bc9b7dcd8227f8441a716a820"
   },
   ".claude/skills/eco-tokens/generate-tokens.py": {
-    "mtime": 1792662620.9722588,
-    "seen": 1792673809.918798,
-    "ast_hash": "939dcdc53ef7001bd42e65a61c3f48a4",
-    "semantic_hash": "939dcdc53ef7001bd42e65a61c3f48a4"
+    "mtime": 1792746458.7575495,
+    "seen": 1793028042.6138618,
+    "ast_hash": "09d969a0a0a1956a17c43b1801db73c4",
+    "semantic_hash": ""
   },
   ".claude/skills/eco-action-link/SKILL.md": {
     "mtime": 1792662620.9204328,
@@ -168,10 +168,10 @@
     "semantic_hash": "31478c5df8d00eba999d611f7f8834e2"
   },
   ".claude/skills/eco-badge/SKILL.md": {
-    "mtime": 1792662620.9229877,
-    "seen": 1792673809.9188962,
-    "ast_hash": "a6a4c5445ef103cbce20a26447a1d7db",
-    "semantic_hash": "a6a4c5445ef103cbce20a26447a1d7db"
+    "mtime": 1793181738.906388,
+    "seen": 1793181758.090556,
+    "ast_hash": "36b5003de0e5cda923f47d2c9d7aee8d",
+    "semantic_hash": ""
   },
   ".claude/skills/eco-banner-notification/SKILL.md": {
     "mtime": 1792662620.925815,
@@ -192,10 +192,10 @@
     "semantic_hash": "f6faa1c52bd4a575de779928e848ac4a"
   },
   ".claude/skills/eco-checkbox/SKILL.md": {
-    "mtime": 1792662620.9421694,
-    "seen": 1792673809.9189,
-    "ast_hash": "65744e7410303132822beb8b1a854e57",
-    "semantic_hash": "65744e7410303132822beb8b1a854e57"
+    "mtime": 1793095489.3547678,
+    "seen": 1793104040.163472,
+    "ast_hash": "5c7491c282f34eb258d3095a5faae46d",
+    "semantic_hash": ""
   },
   ".claude/skills/eco-collapsible/SKILL.md": {
     "mtime": 1792662620.9432397,
@@ -204,9 +204,9 @@
     "semantic_hash": "6e7beaf005139bd6ae7deb28675e75c4"
   },
   ".claude/skills/eco-colors/SKILL.md": {
-    "mtime": 1792662761.2314074,
-    "seen": 1792673809.918902,
-    "ast_hash": "de4a7924151c9f436385d61144a89be6",
+    "mtime": 1793176086.0958397,
+    "seen": 1793176579.744031,
+    "ast_hash": "68aaf4b16784317ee96de8401a59c0f1",
     "semantic_hash": ""
   },
   ".claude/skills/eco-elevation/SKILL.md": {
@@ -240,10 +240,10 @@
     "semantic_hash": "42aa03bb796d1391849b2765fc2e509f"
   },
   ".claude/skills/eco-motion/SKILL.md": {
-    "mtime": 1792662620.9598625,
-    "seen": 1792673809.918912,
-    "ast_hash": "93113595412f12eec036d74f4081bdc9",
-    "semantic_hash": "93113595412f12eec036d74f4081bdc9"
+    "mtime": 1793134671.6787026,
+    "seen": 1793170651.9476311,
+    "ast_hash": "2916df3883c26d8a60a5eb40b6ef1030",
+    "semantic_hash": ""
   },
   ".claude/skills/eco-pagination/SKILL.md": {
     "mtime": 1792662620.960621,
@@ -264,10 +264,10 @@
     "semantic_hash": "e6e79fdbfcbe413360af648782795e32"
   },
   ".claude/skills/eco-select/SKILL.md": {
-    "mtime": 1792662620.965116,
-    "seen": 1792673809.918918,
-    "ast_hash": "85bdaee9d6daf5e57be2a3601b6310b6",
-    "semantic_hash": "85bdaee9d6daf5e57be2a3601b6310b6"
+    "mtime": 1793095489.3541093,
+    "seen": 1793104040.163491,
+    "ast_hash": "9bc176a835b4ceedc4eec7931cba2a50",
+    "semantic_hash": ""
   },
   ".claude/skills/eco-spacing/SKILL.md": {
     "mtime": 1792673799.50833,
@@ -306,16 +306,16 @@
     "semantic_hash": "91f4aaa19527350df73904b78fc28f7c"
   },
   ".claude/skills/eco-typography/SKILL.md": {
-    "mtime": 1792662620.974205,
-    "seen": 1792673809.9189272,
-    "ast_hash": "e17e378a40e46b073b41bd67583dc773",
-    "semantic_hash": "e17e378a40e46b073b41bd67583dc773"
+    "mtime": 1793127812.7016027,
+    "seen": 1793127821.499073,
+    "ast_hash": "e555e412b355040376711cfc8f66b141",
+    "semantic_hash": ""
   },
   ".claude/skills/prototype-guide/SKILL.md": {
-    "mtime": 1792662620.9767845,
-    "seen": 1792673809.9189289,
-    "ast_hash": "7b156eaf46b5ea19e30cd0bc403e566e",
-    "semantic_hash": "7b156eaf46b5ea19e30cd0bc403e566e"
+    "mtime": 1793181738.9058967,
+    "seen": 1793181758.0905962,
+    "ast_hash": "d151d09e69f8a408b54d0ffbc4852242",
+    "semantic_hash": ""
   },
   "mypages/memory/MEMORY.md": {
     "mtime": 1777023497.316439,
@@ -330,10 +330,10 @@
     "semantic_hash": "09fc81aef67d494c01957ac06e42fcf3"
   },
   "mypages/mypages-template.html": {
-    "mtime": 1792662621.8817132,
-    "seen": 1792673809.919143,
-    "ast_hash": "a65e87578c325bd4caaa0f299bcaf218",
-    "semantic_hash": "a65e87578c325bd4caaa0f299bcaf218"
+    "mtime": 1793179467.2253997,
+    "seen": 1793179519.7020621,
+    "ast_hash": "4a387596a964020ca46f7774cb83288c",
+    "semantic_hash": ""
   },
   "mypages/users-dashboard.html": {
     "mtime": 1792662621.8853645,
@@ -402,9 +402,9 @@
     "semantic_hash": "58d9c2cc73ac9734e744e0c2ed44e2d3"
   },
   ".claude/skills/eco-doc-page/SKILL.md": {
-    "mtime": 1792680322.9803672,
-    "seen": 1792680330.751182,
-    "ast_hash": "49f55ac4ca9ad1f376e0cb620a2ebf5d",
+    "mtime": 1793181853.0635376,
+    "seen": 1793181856.507807,
+    "ast_hash": "847e18713e2661f37fb88a31342b76eb",
     "semantic_hash": ""
   },
   ".claude/skills/eco-switch/SKILL.md": {
@@ -414,9 +414,9 @@
     "semantic_hash": "de557095124d39aa4461fab43c23877e"
   },
   "eco-design-system/foundations/colors.html": {
-    "mtime": 1792675034.2496426,
-    "seen": 1792680330.7513542,
-    "ast_hash": "502726efff626c11664d09044d8f5673",
+    "mtime": 1793089426.5855272,
+    "seen": 1793104040.16364,
+    "ast_hash": "91cd3d60049573d685d48b4958be2025",
     "semantic_hash": ""
   },
   "eco-design-system/components/checkbox.html": {
@@ -468,9 +468,9 @@
     "semantic_hash": "17b5568e7c9624d9f045e4e217e14057"
   },
   "eco-design-system/components/divider.html": {
-    "mtime": 1792662621.1638312,
-    "seen": 1792673809.918994,
-    "ast_hash": "a0bc54afd916aa7f8d296f4cd41ea95f",
+    "mtime": 1793174766.4842882,
+    "seen": 1793175376.744003,
+    "ast_hash": "85ab2304db2f5455021ab4e9f9da3785",
     "semantic_hash": ""
   },
   ".claude/skills/eco-menu/SKILL.md": {
@@ -480,21 +480,21 @@
     "semantic_hash": "76c120bff1c35e1006a57f79a7467914"
   },
   "eco-design-system/components/menu.html": {
-    "mtime": 1792662621.1844137,
-    "seen": 1792673809.919015,
-    "ast_hash": "e515065b243eec091f69fb1186980cc4",
+    "mtime": 1793174766.5376909,
+    "seen": 1793175376.744024,
+    "ast_hash": "3eb853503341c5b2b24ed28ef8e1ba43",
     "semantic_hash": ""
   },
   ".claude/skills/eco-list-item/SKILL.md": {
-    "mtime": 1792662620.9528186,
-    "seen": 1792673809.91891,
-    "ast_hash": "1dd18c2c6ef0cbd62fee776dc10b5ff4",
-    "semantic_hash": "1dd18c2c6ef0cbd62fee776dc10b5ff4"
+    "mtime": 1793182922.7351248,
+    "seen": 1793182931.687677,
+    "ast_hash": "8ea269d7f0e852c8ff33b30b90425769",
+    "semantic_hash": ""
   },
   "eco-design-system/components/list-item.html": {
-    "mtime": 1792662621.1818776,
-    "seen": 1792673809.919012,
-    "ast_hash": "61a1db70a96868414695a58b69fdca6f",
+    "mtime": 1793174766.5122552,
+    "seen": 1793175376.744021,
+    "ast_hash": "5cf7b623cb3f84e39372fa8ad6f0610b",
     "semantic_hash": ""
   },
   "eco-design-system/doc-kit.js": {
@@ -594,10 +594,10 @@
     "semantic_hash": ""
   },
   "components/js/select-menu.js": {
-    "mtime": 1792662621.0692885,
-    "seen": 1792673809.918807,
-    "ast_hash": "2d617662e01534e24c0bf9d33714be07",
-    "semantic_hash": "2d617662e01534e24c0bf9d33714be07"
+    "mtime": 1793095351.6838617,
+    "seen": 1793104040.1633742,
+    "ast_hash": "e844a08968ee5413ce6cf678a23e8b5c",
+    "semantic_hash": ""
   },
   "components/js/collapsible.js": {
     "mtime": 1792662621.0665622,
@@ -642,9 +642,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/badge.html": {
-    "mtime": 1792662621.13727,
-    "seen": 1792673809.918972,
-    "ast_hash": "ca33a29143c97e828b69371f3b9e30ff",
+    "mtime": 1793174766.4673424,
+    "seen": 1793175376.743979,
+    "ast_hash": "a719af8e6343dfb4f600e2af1f4ca3f3",
     "semantic_hash": ""
   },
   "eco-design-system/components/breadcrumb.html": {
@@ -654,9 +654,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/button-group.html": {
-    "mtime": 1792662761.3090389,
-    "seen": 1792673809.918984,
-    "ast_hash": "5cef6ec23c488c125b2aa9f02e7d9496",
+    "mtime": 1793174356.6285458,
+    "seen": 1793175376.743992,
+    "ast_hash": "95633188e98f691a9ff0bf3fbc7e8422",
     "semantic_hash": ""
   },
   "eco-design-system/components/collapsible.html": {
@@ -666,9 +666,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/icon-picker.html": {
-    "mtime": 1792662621.1666582,
-    "seen": 1792673809.919001,
-    "ast_hash": "61d3bdfdc1220d01e0af591de746e892",
+    "mtime": 1793174356.5782833,
+    "seen": 1793175376.74401,
+    "ast_hash": "2990cfda877cf6a545ec50f6604894a5",
     "semantic_hash": ""
   },
   "eco-design-system/components/inline-link.html": {
@@ -684,15 +684,15 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/pagination.html": {
-    "mtime": 1792662621.189158,
-    "seen": 1792673809.9190211,
-    "ast_hash": "d6fae97c167caf43608dc5d2dbd1a766",
+    "mtime": 1793174766.5561597,
+    "seen": 1793175376.74403,
+    "ast_hash": "697cb72cca207981d82c327ae160ecf7",
     "semantic_hash": ""
   },
   "eco-design-system/components/range.html": {
-    "mtime": 1792662621.1957412,
-    "seen": 1792673809.9190269,
-    "ast_hash": "29d4c188678a04a0c7aefaba659bc252",
+    "mtime": 1793174356.6831133,
+    "seen": 1793175376.7440362,
+    "ast_hash": "308377f43dcfc36bd60e9216b6b69bdb",
     "semantic_hash": ""
   },
   "eco-design-system/components/role-tier-card.html": {
@@ -702,15 +702,15 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/section.html": {
-    "mtime": 1792662621.1989055,
-    "seen": 1792673809.919032,
-    "ast_hash": "73dd831b1e74a6e85fabcdbfa0c86569",
+    "mtime": 1793174356.675159,
+    "seen": 1793175376.744041,
+    "ast_hash": "167989bf3d2ea4df2f0fc7faed39d5b6",
     "semantic_hash": ""
   },
   "eco-design-system/components/segment-control.html": {
-    "mtime": 1792662621.200615,
-    "seen": 1792673809.919035,
-    "ast_hash": "5eb317b42a972ac4c6c71aaae39851f9",
+    "mtime": 1793174356.6501217,
+    "seen": 1793175376.744044,
+    "ast_hash": "3c0171fcfd1b162e1e99e5d8ab6774b6",
     "semantic_hash": ""
   },
   "eco-design-system/components/tile-link.html": {
@@ -750,9 +750,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/docnav.js": {
-    "mtime": 1792680261.1171055,
-    "seen": 1792680330.751086,
-    "ast_hash": "44cbf99f40633b9dd7dae392c4ffc9a3",
+    "mtime": 1793179458.385782,
+    "seen": 1793179519.701699,
+    "ast_hash": "2f75d92f27b9d3a1d90e758a357c26a9",
     "semantic_hash": ""
   },
   "eco-design-system/toc.js": {
@@ -762,9 +762,9 @@
     "semantic_hash": "06ff44b8369a43c3ef46a1777b692213"
   },
   "eco-design-system/components-overview.html": {
-    "mtime": 1792662761.2941694,
-    "seen": 1792673809.918955,
-    "ast_hash": "946c5cde73ef4e1ea680567237c34a1d",
+    "mtime": 1793181810.2094927,
+    "seen": 1793181856.5078652,
+    "ast_hash": "b0457003354605b763a5fa76efb6e84e",
     "semantic_hash": ""
   },
   "eco-design-system/components/tooltip-code.html": {
@@ -798,93 +798,93 @@
     "semantic_hash": "35ce826247ebfccc0a1c7e6f76f484a9"
   },
   "eco-design-system/components/badge-basic-code.html": {
-    "mtime": 1792662621.1231048,
-    "seen": 1792673809.9189591,
-    "ast_hash": "830b4f85b08b2c8e2abf7135c3abee1b",
+    "mtime": 1793174766.346454,
+    "seen": 1793175376.7439659,
+    "ast_hash": "086dcbf86a0cea6f79c0772a26947ca6",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-basic-specifications.html": {
-    "mtime": 1792662621.1236715,
-    "seen": 1792673809.91896,
-    "ast_hash": "3bd0c4aabe30820910272b9e7d51a15d",
+    "mtime": 1793174766.3589904,
+    "seen": 1793175376.743967,
+    "ast_hash": "a55200b09d3b074183685b9e15bd7d01",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-basic.html": {
-    "mtime": 1792662621.1241598,
-    "seen": 1792673809.9189608,
-    "ast_hash": "99593201920188913987f8348593bda6",
+    "mtime": 1793174766.375499,
+    "seen": 1793175376.743968,
+    "ast_hash": "03f86430bd1474e7377474efbaac0d71",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-dot-code.html": {
-    "mtime": 1792662621.1246629,
-    "seen": 1792673809.9189608,
-    "ast_hash": "fb3d486395a300ecd72ec26835476edd",
+    "mtime": 1793174766.3842442,
+    "seen": 1793175376.743969,
+    "ast_hash": "49555c81e8fab29946cf040b1603235c",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-dot-specifications.html": {
-    "mtime": 1792662621.1256504,
-    "seen": 1792673809.918962,
-    "ast_hash": "aa7941a5ea7aa02805e5ba56930a5add",
+    "mtime": 1793174766.3925948,
+    "seen": 1793175376.7439702,
+    "ast_hash": "301ba3d97d4b5a6851db5f44701c72c3",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-dot.html": {
-    "mtime": 1792662621.1261158,
-    "seen": 1792673809.918963,
-    "ast_hash": "6a353d68a58464d70c90bf36f860f279",
+    "mtime": 1793174766.3932874,
+    "seen": 1793175376.743971,
+    "ast_hash": "6a8161f3de53f7a45b32e151654ef2d7",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-number-code.html": {
-    "mtime": 1792662621.1266744,
-    "seen": 1792673809.918964,
-    "ast_hash": "9d0edde5017c5889caae40585b0e233f",
+    "mtime": 1793174766.39914,
+    "seen": 1793175376.743972,
+    "ast_hash": "ccc6fa442530d4fdcab3eff4623e18e3",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-number-specifications.html": {
-    "mtime": 1792662621.12738,
-    "seen": 1792673809.918965,
-    "ast_hash": "ef19d8ea079bb48da3ba9fbf7a3f12a2",
+    "mtime": 1793174766.4065585,
+    "seen": 1793175376.743972,
+    "ast_hash": "bdc07da2802c8e9fbc0081296d4ff895",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-number.html": {
-    "mtime": 1792662621.1291811,
-    "seen": 1792673809.918966,
-    "ast_hash": "a3f4146e6bc5058ee55cf2bb73c6fea2",
+    "mtime": 1793174766.4155169,
+    "seen": 1793175376.743973,
+    "ast_hash": "6503c0302328085337ce42981286f119",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-product-discount-code.html": {
-    "mtime": 1792662621.1304054,
-    "seen": 1792673809.918967,
-    "ast_hash": "f5f18c3bd6ed568a0aa9a43cca7ad6ae",
+    "mtime": 1793174766.4251566,
+    "seen": 1793175376.743974,
+    "ast_hash": "110282a01b63b874990953fcf224d497",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-product-discount-specifications.html": {
-    "mtime": 1792662621.1325543,
-    "seen": 1792673809.918967,
-    "ast_hash": "f975caf189c3a7027afc76a28b199392",
+    "mtime": 1793174766.4322202,
+    "seen": 1793175376.743975,
+    "ast_hash": "e38e2a4b523ff8600662fced90edb34c",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-product-discount.html": {
-    "mtime": 1792662621.133596,
-    "seen": 1792673809.918968,
-    "ast_hash": "7b904f59a1bab61774386e5901ad34e5",
+    "mtime": 1793174766.4413443,
+    "seen": 1793175376.7439759,
+    "ast_hash": "a6e3aa41df80425e2aad2c63066da089",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-purchase-info-code.html": {
-    "mtime": 1792662621.1342678,
-    "seen": 1792673809.9189692,
-    "ast_hash": "c98e39acf5f4dae58caedfdfd214e143",
+    "mtime": 1793174766.4503038,
+    "seen": 1793175376.7439759,
+    "ast_hash": "dadfb8cb5201b3d4400752ae03b6cf6d",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-purchase-info-specifications.html": {
-    "mtime": 1792662621.1358252,
-    "seen": 1792673809.91897,
-    "ast_hash": "c0c86465306aa2342dcad43396fea51b",
+    "mtime": 1793174766.4572675,
+    "seen": 1793175376.743977,
+    "ast_hash": "80eefb54ee7123713e8dc1f1cd78d902",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-purchase-info.html": {
-    "mtime": 1792662621.1365614,
-    "seen": 1792673809.9189708,
-    "ast_hash": "68ff4f0fba400ccc5d99f047f0889518",
+    "mtime": 1793174766.4665666,
+    "seen": 1793175376.743978,
+    "ast_hash": "cfdc7aaef68268217fa81f094bf341ab",
     "semantic_hash": ""
   },
   "eco-design-system/components/checkbox-code.html": {
@@ -900,15 +900,15 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/icon-picker-code.html": {
-    "mtime": 1792662621.1647823,
-    "seen": 1792673809.918999,
-    "ast_hash": "a2a1398366eabb49fe7b2eb6aa50dd27",
+    "mtime": 1793174356.6355245,
+    "seen": 1793175376.7440078,
+    "ast_hash": "6c4ae3e8bd5118476a8d5e70a4ce3c93",
     "semantic_hash": ""
   },
   "eco-design-system/components/icon-picker-specifications.html": {
-    "mtime": 1792662621.1651173,
-    "seen": 1792673809.9190001,
-    "ast_hash": "91b792fb50fb5d296a7cbde600c23905",
+    "mtime": 1793174356.5876193,
+    "seen": 1793175376.744009,
+    "ast_hash": "40f858629457aaa51ab3ac4dc7e7e1a1",
     "semantic_hash": ""
   },
   "eco-design-system/components/input-code.html": {
@@ -936,27 +936,27 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/range-code.html": {
-    "mtime": 1792662621.195007,
-    "seen": 1792673809.919025,
-    "ast_hash": "ef1f36e5153c093c46148fcb5595df32",
+    "mtime": 1793174356.6898384,
+    "seen": 1793175376.744034,
+    "ast_hash": "64bade133c1bd835d73f404c020c5e78",
     "semantic_hash": ""
   },
   "eco-design-system/components/range-specifications.html": {
-    "mtime": 1792662621.1953826,
-    "seen": 1792673809.919026,
-    "ast_hash": "caf01dccae501dc96b097f27c5afc734",
+    "mtime": 1793174356.656821,
+    "seen": 1793175376.744035,
+    "ast_hash": "aafd680fa7817616010c1646669dcb61",
     "semantic_hash": ""
   },
   "eco-design-system/components/segment-control-code.html": {
-    "mtime": 1792662621.1994467,
-    "seen": 1792673809.919033,
-    "ast_hash": "65d6b82ad42e313b9ad8cce0d3e3c631",
+    "mtime": 1793174356.6677945,
+    "seen": 1793175376.744042,
+    "ast_hash": "14a270004691911e94cd964d1dce3707",
     "semantic_hash": ""
   },
   "eco-design-system/components/segment-control-specifications.html": {
-    "mtime": 1792662621.1999793,
-    "seen": 1792673809.919034,
-    "ast_hash": "8a4b3b7dad4f2ebd77c18427ee463f4c",
+    "mtime": 1793174356.5968225,
+    "seen": 1793175376.744043,
+    "ast_hash": "aa726ecf7d99407a42f4f8688f5ae93e",
     "semantic_hash": ""
   },
   "eco-design-system/components/select-code.html": {
@@ -1020,10 +1020,10 @@
     "semantic_hash": "3f40ada51dedaffe8f099b34cf82e0f9"
   },
   "eco-design-system/gen/gen_button_group.py": {
-    "mtime": 1792662621.2378075,
-    "seen": 1792673809.9188259,
-    "ast_hash": "ad634b46ac8f496f44258fc27c00b374",
-    "semantic_hash": "ad634b46ac8f496f44258fc27c00b374"
+    "mtime": 1793174356.7110639,
+    "seen": 1793175376.743825,
+    "ast_hash": "e898de345b36f2749b841cb4ba9e11c1",
+    "semantic_hash": ""
   },
   "eco-design-system/gen/gen_checkbox.py": {
     "mtime": 1792662621.2382653,
@@ -1032,10 +1032,10 @@
     "semantic_hash": "710d8539d3d2be563b87d5674778ae8b"
   },
   "eco-design-system/gen/gen_icon_picker.py": {
-    "mtime": 1792662621.2393756,
-    "seen": 1792673809.9188328,
-    "ast_hash": "2085a448908aa037a321fee99c360d74",
-    "semantic_hash": "2085a448908aa037a321fee99c360d74"
+    "mtime": 1793174356.7184613,
+    "seen": 1793175376.7438312,
+    "ast_hash": "3038e3bde039abf03836c7081d131e32",
+    "semantic_hash": ""
   },
   "eco-design-system/gen/gen_input.py": {
     "mtime": 1792662621.2409086,
@@ -1050,16 +1050,16 @@
     "semantic_hash": "704a3e50a48a79bf1410d9c64ef476a0"
   },
   "eco-design-system/gen/gen_range.py": {
-    "mtime": 1792662621.2453501,
-    "seen": 1792673809.918844,
-    "ast_hash": "344c1a0ac1833c3bd7d95d96f1bd0959",
-    "semantic_hash": "344c1a0ac1833c3bd7d95d96f1bd0959"
+    "mtime": 1793174356.7260137,
+    "seen": 1793175376.7438421,
+    "ast_hash": "10a919094ed005fe2b2119facecfad9a",
+    "semantic_hash": ""
   },
   "eco-design-system/gen/gen_segment_control.py": {
-    "mtime": 1792662621.2463157,
-    "seen": 1792673809.918847,
-    "ast_hash": "9a71bb49b36a2e316f5d6fb43578cb7a",
-    "semantic_hash": "9a71bb49b36a2e316f5d6fb43578cb7a"
+    "mtime": 1793174356.7409623,
+    "seen": 1793175376.7438452,
+    "ast_hash": "8c35336b7f36db5f7f731b4c29e8e1f9",
+    "semantic_hash": ""
   },
   "eco-design-system/gen/gen_select.py": {
     "mtime": 1792662621.2466831,
@@ -1092,15 +1092,15 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/button-group-code.html": {
-    "mtime": 1792662621.152019,
-    "seen": 1792673809.9189818,
-    "ast_hash": "faee6b8e6b126162d9a5ad630d4a9506",
+    "mtime": 1793174356.6972895,
+    "seen": 1793175376.74399,
+    "ast_hash": "205739ee8094dfaa3cdf3c1cbaeadb70",
     "semantic_hash": ""
   },
   "eco-design-system/components/button-group-specifications.html": {
-    "mtime": 1792662621.1558926,
-    "seen": 1792673809.918983,
-    "ast_hash": "7fdbe30b030773d29638ca3389c1ae92",
+    "mtime": 1793174356.6426466,
+    "seen": 1793175376.7439911,
+    "ast_hash": "6a6bb3b8bd2d906e2879a45f8c17114a",
     "semantic_hash": ""
   },
   "eco-design-system/components/button-specifications.html": {
@@ -1110,9 +1110,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/gen/README.md": {
-    "mtime": 1792662761.3641143,
-    "seen": 1792673809.919065,
-    "ast_hash": "624b02323eafbe2b34d4a4ba7ce4d72b",
+    "mtime": 1793179572.0316975,
+    "seen": 1793179575.7084491,
+    "ast_hash": "994ec58b47f6aa248ef027fec4e8e72f",
     "semantic_hash": ""
   },
   "eco-design-system/gen/old-source/button-group.html": {
@@ -1380,15 +1380,15 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/divider-code.html": {
-    "mtime": 1792662621.1625717,
-    "seen": 1792673809.918993,
-    "ast_hash": "32ae218fa2aefec93365719bb3fc8e9f",
+    "mtime": 1793174766.476517,
+    "seen": 1793175376.744002,
+    "ast_hash": "283779515095afb1aafaca3ceb098951",
     "semantic_hash": ""
   },
   "eco-design-system/components/divider-specifications.html": {
-    "mtime": 1792662621.1630547,
-    "seen": 1792673809.918994,
-    "ast_hash": "3ca589dda5708a0d9c0e0c809ab2b36d",
+    "mtime": 1793174766.4833624,
+    "seen": 1793175376.744003,
+    "ast_hash": "fdf58a4c5587925cfdb9901bc6fb6fc5",
     "semantic_hash": ""
   },
   "eco-design-system/components/inline-link-code.html": {
@@ -1404,27 +1404,27 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/list-item-code.html": {
-    "mtime": 1792662621.180585,
-    "seen": 1792673809.9190102,
-    "ast_hash": "d97a20892f89ee612b6abcd1f75c6683",
+    "mtime": 1793174766.4956362,
+    "seen": 1793175376.74402,
+    "ast_hash": "68ff872e0f1cf59b3ba0d62ea84215dc",
     "semantic_hash": ""
   },
   "eco-design-system/components/list-item-specifications.html": {
-    "mtime": 1792662621.1812637,
-    "seen": 1792673809.919012,
-    "ast_hash": "5e64750e639999cd3e0523972dc18a71",
+    "mtime": 1793174766.5111504,
+    "seen": 1793175376.744021,
+    "ast_hash": "ed60a5d68d4601526490b726dba8b6fd",
     "semantic_hash": ""
   },
   "eco-design-system/components/menu-code.html": {
-    "mtime": 1792662621.183418,
-    "seen": 1792673809.919013,
-    "ast_hash": "7d08b9eadb75009977a5674a3847400a",
+    "mtime": 1793174766.521945,
+    "seen": 1793175376.7440221,
+    "ast_hash": "d761b0618e4a503cdec620f7830917dd",
     "semantic_hash": ""
   },
   "eco-design-system/components/menu-specifications.html": {
-    "mtime": 1792662621.1839566,
-    "seen": 1792673809.919014,
-    "ast_hash": "8bf2cb2bd4db1d8007a383d21d743692",
+    "mtime": 1793174766.5371096,
+    "seen": 1793175376.744023,
+    "ast_hash": "53de10a7e6e2df03665e3a772784c01a",
     "semantic_hash": ""
   },
   "eco-design-system/components/tile-link-code.html": {
@@ -1488,10 +1488,10 @@
     "semantic_hash": "b2c583e26421359f92c90e2b47790d81"
   },
   "eco-design-system/gen/gen_section.py": {
-    "mtime": 1792662621.2459984,
-    "seen": 1792673809.918846,
-    "ast_hash": "1469dd5968837c8530f6746e7d381982",
-    "semantic_hash": "1469dd5968837c8530f6746e7d381982"
+    "mtime": 1793174356.7336628,
+    "seen": 1793175376.743844,
+    "ast_hash": "fdebc77e4e010f927eff4758defa6b77",
+    "semantic_hash": ""
   },
   "eco-design-system/components/collapsible-code.html": {
     "mtime": 1792662621.160351,
@@ -1506,15 +1506,15 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/section-code.html": {
-    "mtime": 1792662621.1979208,
-    "seen": 1792673809.91903,
-    "ast_hash": "229a54859d9c3c05ff28fb636a78a111",
+    "mtime": 1793174356.6207378,
+    "seen": 1793175376.74404,
+    "ast_hash": "9e14202c14617380a7087b6783b6e157",
     "semantic_hash": ""
   },
   "eco-design-system/components/section-specifications.html": {
-    "mtime": 1792662621.1984084,
-    "seen": 1792673809.9190311,
-    "ast_hash": "1e0bf57dcb44a93959dbdbc370e6ed12",
+    "mtime": 1793174356.605293,
+    "seen": 1793175376.744041,
+    "ast_hash": "2b6c9a2e0a562eba6f46d44862a7945b",
     "semantic_hash": ""
   },
   "eco-design-system/gen/old-source/collapsible.html": {
@@ -1542,10 +1542,10 @@
     "semantic_hash": "a300b8ceb4579df4da7615a6cbf2ef9a"
   },
   ".claude/skills/eco-docs-table/SKILL.md": {
-    "mtime": 1792662620.9479222,
-    "seen": 1792673809.918905,
-    "ast_hash": "c1686733d48793e22e82cbdac7150149",
-    "semantic_hash": "c1686733d48793e22e82cbdac7150149"
+    "mtime": 1793176553.6935265,
+    "seen": 1793176579.744034,
+    "ast_hash": "13699e6a183ce385270503cc4b52497b",
+    "semantic_hash": ""
   },
   "eco-design-system/components/role-tier-card-code.html": {
     "mtime": 1792662621.1963007,
@@ -1560,9 +1560,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/foundations/docs-table.html": {
-    "mtime": 1792662621.2285116,
-    "seen": 1792673809.919059,
-    "ast_hash": "3ff3818291995499a10537d3f37c12c1",
+    "mtime": 1793176562.5728679,
+    "seen": 1793176579.744205,
+    "ast_hash": "b24c5cf09e858f6eef8b11c4ce3dd113",
     "semantic_hash": ""
   },
   "eco-design-system/gen/old-source/role-tier-card.html": {
@@ -1662,9 +1662,9 @@
     "semantic_hash": "72155ddee04aca34708d38e471742514"
   },
   "hairline/embed.js": {
-    "mtime": 1792662761.5455325,
-    "seen": 1792673809.918873,
-    "ast_hash": "a2cb40bd8f07e6029cb9414e8995382e",
+    "mtime": 1793171012.4059365,
+    "seen": 1793171055.4410958,
+    "ast_hash": "0ba642241d960525db7302ab73beb46b",
     "semantic_hash": ""
   },
   "hairline/kernel.js": {
@@ -1692,15 +1692,15 @@
     "semantic_hash": ""
   },
   ".claude/skills/eco-card-animation/SKILL.md": {
-    "mtime": 1792662761.229386,
-    "seen": 1792673809.918899,
-    "ast_hash": "b25f3ce1fd41472e6ce8d48dc35ea267",
+    "mtime": 1793175368.5741067,
+    "seen": 1793175376.7438989,
+    "ast_hash": "f09778a1f45690121ee21c2554bdee1e",
     "semantic_hash": ""
   },
   "docs-intro-ref/inspiration.md": {
-    "mtime": 1792662621.0895696,
-    "seen": 1792673809.918933,
-    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "mtime": 1793101866.259713,
+    "seen": 1793104040.163506,
+    "ast_hash": "cda865b09f2a76b0858bf966c2bb6d28",
     "semantic_hash": ""
   },
   "eco-design-system/card-visuals-archive/README.md": {
@@ -1895,12 +1895,6 @@
     "ast_hash": "aab927fc9656cf75485d10c054b863bd",
     "semantic_hash": "aab927fc9656cf75485d10c054b863bd"
   },
-  "docs-intro-ref/gamla-startsidan.png.png": {
-    "mtime": 1792662621.078666,
-    "seen": 1792673809.919163,
-    "ast_hash": "1c0d881bbeeb0a7849a411a8ecfceb68",
-    "semantic_hash": "1c0d881bbeeb0a7849a411a8ecfceb68"
-  },
   "docs-intro-ref/hero.png": {
     "mtime": 1792662621.0864887,
     "seen": 1792673809.919164,
@@ -1914,21 +1908,21 @@
     "semantic_hash": "59aad78eb8eb8ef76d55f6fe92d8ad89"
   },
   "eco-design-system/components/pagination-code.html": {
-    "mtime": 1792662621.1872253,
-    "seen": 1792673809.91902,
-    "ast_hash": "9ba1079006ad70bdf0ffb8b47e666ebc",
+    "mtime": 1793174766.5481417,
+    "seen": 1793175376.7440279,
+    "ast_hash": "5e874b998521a75e3e7ebf08da6043ea",
     "semantic_hash": ""
   },
   "eco-design-system/components/pagination-specifications.html": {
-    "mtime": 1792662621.1885452,
-    "seen": 1792673809.91902,
-    "ast_hash": "a271486ccf7b7334f2c2e2e32b8dddc8",
+    "mtime": 1793174766.555031,
+    "seen": 1793175376.744029,
+    "ast_hash": "ddcfc65f2dcb36940cb1b62ed0dd1b2b",
     "semantic_hash": ""
   },
   "eco-design-system/components/patterns-overview.html": {
-    "mtime": 1792662761.3346546,
-    "seen": 1792673809.919022,
-    "ast_hash": "39b3f08188b710cadd8e86cdf3000ac3",
+    "mtime": 1793173125.8777559,
+    "seen": 1793173223.3292139,
+    "ast_hash": "f4ea96a9b01dd78b07bfa6896e44cca8",
     "semantic_hash": ""
   },
   "eco-design-system/gen/switch_header_text.html": {
@@ -2034,9 +2028,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/index.html": {
-    "mtime": 1792673612.0683937,
-    "seen": 1792673809.919095,
-    "ast_hash": "a2a43acdeae7d8a0df19aade3f10090f",
+    "mtime": 1793176700.40376,
+    "seen": 1793176734.140492,
+    "ast_hash": "aca122f79023cdb2bbede6f8520bf37f",
     "semantic_hash": ""
   },
   "hairline/hairline-button-group.eco.html": {
@@ -2448,15 +2442,15 @@
     "semantic_hash": ""
   },
   "eco-design-system/gen/gen_colors.py": {
-    "mtime": 1792675034.194661,
-    "seen": 1792680330.751103,
-    "ast_hash": "4281f75e3ac6dace70942980f1b3c4c4",
+    "mtime": 1793089426.5134077,
+    "seen": 1793104040.1633978,
+    "ast_hash": "8f7e5a1affee07bbd8cb30b3bb097e0b",
     "semantic_hash": ""
   },
   "eco-design-system/foundations/colors-primitives.html": {
-    "mtime": 1792675034.25044,
-    "seen": 1792680330.751353,
-    "ast_hash": "abe70b1f2a0e45b603097d5dcbff4af0",
+    "mtime": 1793089426.6109712,
+    "seen": 1793104040.163639,
+    "ast_hash": "8d622f007007cc499861999ddad6d947",
     "semantic_hash": ""
   },
   "eco-design-system/gen/old-source/colors.html": {
@@ -2466,9 +2460,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/gen/gen_layout.py": {
-    "mtime": 1792673758.91052,
-    "seen": 1792673809.918837,
-    "ast_hash": "0556bd3a7819ca5e8810da1e9d10c228",
+    "mtime": 1792680545.0702636,
+    "seen": 1793028042.613903,
+    "ast_hash": "57f6d8b41226d639089732dfd60fbcdc",
     "semantic_hash": ""
   },
   "eco-design-system/layout-kit.js": {
@@ -2484,20 +2478,20 @@
     "semantic_hash": ""
   },
   "eco-design-system/foundations/layout-breakpoints.html": {
-    "mtime": 1792673759.0399992,
-    "seen": 1792673809.919061,
+    "mtime": 1792680545.1626384,
+    "seen": 1793028042.6141388,
     "ast_hash": "2681231e94202f274dee3f36c5dbec8b",
     "semantic_hash": ""
   },
   "eco-design-system/foundations/layout-spacing.html": {
-    "mtime": 1792673759.0734057,
-    "seen": 1792673809.919062,
+    "mtime": 1792680545.163193,
+    "seen": 1793028042.6141398,
     "ast_hash": "44365944e5781771e1581356a19035d9",
     "semantic_hash": ""
   },
   "eco-design-system/foundations/layout.html": {
-    "mtime": 1792678421.6791077,
-    "seen": 1792680330.751359,
+    "mtime": 1792680545.161903,
+    "seen": 1793028042.614141,
     "ast_hash": "6867fe63531890bc74abab75639d2ce7",
     "semantic_hash": ""
   },
@@ -2505,6 +2499,156 @@
     "mtime": 1792662621.2298021,
     "seen": 1792673809.9190881,
     "ast_hash": "22145114682c1f93732838d584c44e2c",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/crop_ah_group_card.py": {
+    "mtime": 1793086410.2050326,
+    "seen": 1793104040.163386,
+    "ast_hash": "df6cd30e0d708224ca72d50a384b2c61",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/gen_ah_group_card_widget.py": {
+    "mtime": 1793085924.3537045,
+    "seen": 1793104040.163389,
+    "ast_hash": "5958bcf2cd78dbb26a1a5fd2afe887c0",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/ah-group-card-widget-storyblok.html": {
+    "mtime": 1793174766.3370237,
+    "seen": 1793175376.743964,
+    "ast_hash": "b328e06eef8a2446d841624c042692af",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/ah_pins.py": {
+    "mtime": 1793086433.5086575,
+    "seen": 1793104040.16338,
+    "ast_hash": "b4faf26c9b418fcb9e1564ba7355ee84",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/cards.html": {
+    "mtime": 1793174125.0074062,
+    "seen": 1793174128.310406,
+    "ast_hash": "008e6196455a2418d4f2b96242ea982f",
+    "semantic_hash": ""
+  },
+  "eco-design-system/index_old.html": {
+    "mtime": 1793103749.0231462,
+    "seen": 1793104040.16368,
+    "ast_hash": "e1237831bb9afcf0a1362e77e1d99e59",
+    "semantic_hash": ""
+  },
+  "docs-intro-ref/Designsystem_startpage.png": {
+    "mtime": 1793101894.7064137,
+    "seen": 1793104040.163751,
+    "ast_hash": "cc35e2838db1c60dfc64fe5b0bff1469",
+    "semantic_hash": ""
+  },
+  "docs-intro-ref/Example of startpage_with_moving-animated Hero.png": {
+    "mtime": 1793101517.249358,
+    "seen": 1793104040.1637518,
+    "ast_hash": "b3a77269a5d0b563bed08e58f6fd8ec4",
+    "semantic_hash": ""
+  },
+  "eco-design-system/figma-sync.md": {
+    "mtime": 1793134665.7526288,
+    "seen": 1793170651.947786,
+    "ast_hash": "806109b3fec3e6060adf3fd95a05adf7",
+    "semantic_hash": ""
+  },
+  "docs-intro-ref/gamla-designsystem startsidan p\u00e5 supernova.png": {
+    "mtime": 1792662621.078666,
+    "seen": 1793170651.947905,
+    "ast_hash": "1c0d881bbeeb0a7849a411a8ecfceb68",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/ah-single-row-card-widget-storyblok.html": {
+    "mtime": 1793174124.9633043,
+    "seen": 1793174128.3103712,
+    "ast_hash": "2eba444d001fb09d4962fe0b120e1ef0",
+    "semantic_hash": ""
+  },
+  "eco-design-system/foundations/docs-cards.html": {
+    "mtime": 1793176562.5734468,
+    "seen": 1793176579.744204,
+    "ast_hash": "394a0755a23de983704ab715ff436a6b",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/ah-single-row-card-widget.html": {
+    "mtime": 1793174119.053251,
+    "seen": 1793174128.310372,
+    "ast_hash": "6008f2f05593b2a43f6039823c5b185a",
+    "semantic_hash": ""
+  },
+  "eco-design-system/filter-drawer.js": {
+    "mtime": 1793177605.3930323,
+    "seen": 1793177720.381378,
+    "ast_hash": "60ebce10428c60473433e43043212ce8",
+    "semantic_hash": ""
+  },
+  "components/js/chip.js": {
+    "mtime": 1793179359.330897,
+    "seen": 1793179519.701687,
+    "ast_hash": "8902e69c8bc115efaaf411d67a93ce47",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/gen_chip.py": {
+    "mtime": 1793180376.7301884,
+    "seen": 1793181591.738988,
+    "ast_hash": "8041abf92f4c001ebe5a1cad7fd0e54c",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/gen_tag.py": {
+    "mtime": 1793181746.1757967,
+    "seen": 1793181758.090506,
+    "ast_hash": "73800275402e05196da1c2a951a42add",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-tag/SKILL.md": {
+    "mtime": 1793181738.904443,
+    "seen": 1793181758.090587,
+    "ast_hash": "33a18de6504e9e7a32899a18afb08f79",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/chip-code.html": {
+    "mtime": 1793180376.744843,
+    "seen": 1793181591.7391849,
+    "ast_hash": "1ef007cff13341a4ad9bf533c8c1c28a",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/chip-specifications.html": {
+    "mtime": 1793180376.7440178,
+    "seen": 1793181591.7391858,
+    "ast_hash": "6f4d72200013f4c7ffd3d507de0af6f8",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/chip.html": {
+    "mtime": 1793180376.7428327,
+    "seen": 1793181591.739187,
+    "ast_hash": "420940062e6e0974bd1d9c5b4c86cc66",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/tag-code.html": {
+    "mtime": 1793181746.2220082,
+    "seen": 1793181758.090731,
+    "ast_hash": "3a9a4e0b381d881d742b8f461720a88c",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/tag-specifications.html": {
+    "mtime": 1793181746.221601,
+    "seen": 1793181758.090732,
+    "ast_hash": "6141b0666c5fd26a76a29196b931776f",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/tag.html": {
+    "mtime": 1793181746.221087,
+    "seen": 1793181758.090733,
+    "ast_hash": "0f2162daa695fa81079a6cc58416d8bd",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-chip/SKILL.md": {
+    "mtime": 1793181887.445888,
+    "seen": 1793182931.687665,
+    "ast_hash": "a0e88185e8faa68cfc50ea1c247e8fb6",
     "semantic_hash": ""
   }
 }

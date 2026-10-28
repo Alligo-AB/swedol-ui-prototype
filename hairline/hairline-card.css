@@ -22,6 +22,8 @@
 /* the card's stage: 5:4, drawn larger than the card visual and centred on the figure; the visual crops the rest */
 .ds-card__visual--hairline { padding: 0; }
 .ds-card__visual--hairline [data-hairline-card] { flex: none; width: 300px; transform: translateY(-16px); }
+/* overview cards (data-play): the figure does not follow the mouse, only the hover tour (started by the card) moves it */
+.ds-card__visual--hairline [data-hairline-card][data-play] { pointer-events: none; }
 /* per-figure vertical centring (the figures' drawn extents differ) */
 .ds-card__visual--hairline [data-hairline-card="switch"] { transform: translateY(-5px); }
 .ds-card__visual--hairline [data-hairline-card="range"] { transform: translateY(-4px); }
