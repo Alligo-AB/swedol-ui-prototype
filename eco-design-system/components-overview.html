@@ -9,18 +9,16 @@
   <link rel="stylesheet" href="docs.css">
   <link rel="stylesheet" href="docnav.css">
   <link rel="stylesheet" href="../components/css/badge.css">
-  <link rel="stylesheet" href="../components/css/tabs.css">
   <link rel="stylesheet" href="../components/css/divider.css">
+  <link rel="stylesheet" href="../components/css/tag.css">
+  <link rel="stylesheet" href="../components/css/button.css">
+  <link rel="stylesheet" href="../components/css/list-item.css">
   <link rel="stylesheet" href="../components/css/action-link.css">
   <link rel="stylesheet" href="../hairline/hairline-card.css">
-  <script src="../components/js/tabs.js"></script>
   <style>
     /* category links stop exactly at the section's top edge (below the fixed mobile bar, flush at the top on desktop) */
     .ds-section[id] { scroll-margin-top: 0; }
     @media (max-width: 960px) { .ds-section[id] { scroll-margin-top: var(--dn-bar, 64px); } }
-    /* sticky tab bar: sits under the fixed mobile bar; while stuck 16px above the tabs and 16px of background below the line (the bar's own 4px top padding is replaced, margin-bottom keeps the content from moving) */
-    .tab-bar--page { --tab-sticky-top: var(--dn-bar, 0px); }
-    .tab-bar--page.is-stuck { padding-top: var(--dimension-spacing-space-16); margin-bottom: calc(4px - var(--dimension-spacing-space-16)); box-shadow: 0 var(--dimension-spacing-space-16) 0 var(--tab-bar-bg, var(--color-background-primary)); }
     /* jump links: 24px under the lead on mobile (xs, sm), 32px from md (769px) */
     .ds-jump { margin-top: var(--dimension-spacing-space-24); }
     @media (min-width: 769px) { .ds-jump { margin-top: var(--dimension-spacing-space-32); } }
@@ -44,8 +42,12 @@
   <div class="ds-page ds-inner">
     <span class="ds-eyebrow"><span class="badge-basic badge-basic--uppercase ds-eyebrow__swedol">Swedol</span><span class="badge-basic badge-basic--uppercase ds-eyebrow__tools">Tools</span>ECO Design System</span>
     <h1 class="ds-title">Components</h1>
-    <p class="ds-lead">Reusable parts with sizes, states and usage rules. Each component has a specification skill; the pages are grouped by family.</p>
-    <nav aria-label="Categories" class="ds-jump" style="display:flex;flex-wrap:wrap;gap:8px 24px"><a href="#components" class="action-link action-link--large"><span class="action-link__label">Components</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#patterns" class="action-link action-link--large"><span class="action-link__label">Patterns</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#storyblok-widgets" class="action-link action-link--large"><span class="action-link__label">Storyblok widget</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a></nav>
+    <p class="ds-lead">Reusable parts with sizes, states and usage rules. Each component has a specification skill; the pages are listed A–Z. Use the filters to narrow them down by type, category or status.</p>
+    <nav aria-label="Categories" class="ds-jump" style="display:flex;flex-wrap:wrap;gap:8px 24px"><a href="#components" class="action-link action-link--large"><span class="action-link__label">Components</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#patterns" class="action-link action-link--large"><span class="action-link__label">Patterns</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#storyblok-widgets" class="action-link action-link--large"><span class="action-link__label">Storyblok widget</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a><a href="#drafts" class="action-link action-link--large"><span class="action-link__label">Drafts</span><span class="action-link__icon" aria-hidden="true">arrow_downward</span></a></nav>
+    <div class="ds-fbar" role="toolbar" aria-label="Filters"><button type="button" class="btn btn--system btn--md" data-facet="" aria-haspopup="dialog"><span class="btn__icon" aria-hidden="true">tune</span><span class="btn__label">All filters</span></button><button type="button" class="btn btn--system btn--md" data-facet="type" aria-haspopup="dialog"><span class="btn__label">Type</span></button><button type="button" class="btn btn--system btn--md" data-facet="cat" aria-haspopup="dialog"><span class="btn__label">Category</span></button><button type="button" class="btn btn--system btn--md" data-facet="status" aria-haspopup="dialog"><span class="btn__label">Status</span></button></div>
+    <div class="ds-fpicked" id="co-picked" hidden></div>
+    <p class="ds-fcount" id="co-count" role="status" aria-live="polite"></p>
+    <p class="ds-desc" id="co-empty" hidden>No pages match. Clear a filter to see more.</p>
   </div>
 </section>
 
@@ -53,14 +55,68 @@
 
 <section class="ds-section" id="components">
   <div class="ds-page ds-inner">
-    <h2 class="ds-h2" style="margin-bottom:calc(var(--dimension-spacing-space-32) + 4px)">Components</h2>
-    <nav class="tab-bar tab-bar--secondary tab-bar--md tab-bar--page" aria-label="On this page"><a class="tab" href="#actions"><span class="tab__label">Actions</span></a><a class="tab" href="#form"><span class="tab__label">Form</span></a><a class="tab" href="#notifications"><span class="tab__label">Notifications</span></a><a class="tab" href="#other"><span class="tab__label">Menus, lists and dividers</span></a><a class="tab" href="#links"><span class="tab__label">Links</span></a><a class="tab" href="#status"><span class="tab__label">Status and navigation</span></a><a class="tab" href="#layout"><span class="tab__label">Layout and content</span></a><a class="tab" href="#drafts"><span class="tab__label">Drafts</span></a></nav>
-
-    <h3 class="ds-h3 ds-group" id="actions">Actions</h3>
-    <p class="ds-desc">What the user presses to do something. Used everywhere: in forms, notifications, modals and banners.</p>
+    <h2 class="ds-h2">Components</h2>
     <div class="ds-cards">
 
-      <a class="ds-card" href="components/button.html">
+      <a class="ds-card" data-type="Component" data-cat="Links" data-status="Live" href="components/action-link.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-link"><p>Read the <u>product page</u>.</p><p>View all <span class="mo-ic">chevron_right</span></p></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Action link</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">A standalone link with an optional left icon and a right chevron.</p>
+          <span class="ds-card__meta">3 sizes · 2 variants</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Cards" data-status="Live|In progress" href="components/ah-group-card-widget-storyblok.html">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Article Highlight Group Card</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></span></div>
+          <p class="ds-card__desc">Cards for articles, campaigns and brands in a grid or a carousel, with the AH Group widget in Storyblok.</p>
+          <span class="ds-card__meta">Storyblok widget</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Cards" data-status="In progress" href="components/ah-single-row-card-widget.html">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Article Highlight Single Row Card</span><span class="ds-card__tags"><span class="ds-tag">In progress</span></span></div>
+          <p class="ds-card__desc">A single card in one row, with the AH Single Row widget in Storyblok. Page started, details to be filled in.</p>
+          <span class="ds-card__meta">Storyblok widget</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Status and navigation" data-status="Live|In progress" href="components/badge.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-badge"><span>Latest</span><span class="ok">New</span><span class="info">Updated</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Badge</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></span></div>
+          <p class="ds-card__desc">A read-only status, label or count. Five types: Basic, Dot, Number, Product &amp; Discount, Purchase Info.</p>
+          <span class="ds-card__meta">5 types · 3 pages each</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Notifications" data-status="Live" href="components/banner.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="banner" data-play data-travel="450" data-dwell="450" data-src="../hairline/banner.js"></div></div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Banner</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Page-wide and system messages. Small, Large and Promotion, with placement and priority rules.</p>
+          <span class="ds-card__meta">3 sizes · 3 emphasis · 4 statuses</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Status and navigation" data-status="Live|In progress" href="components/breadcrumb.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-bc"><span>Home</span><i>/</i><span>Pants</span><i>/</i><b>Carpenter</b></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Breadcrumb</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design">In progress</span></span></div>
+          <p class="ds-card__desc">Shows where the page sits in the site, with a bordered box for every step.</p>
+          <span class="ds-card__meta">Hub · Base (Bar is a pattern)</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Actions" data-status="Live" href="components/button.html">
         <!-- Hairline animation; the old CSS-button visual is archived in card-visuals-archive/button.html -->
         <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
           <div data-hairline-card="button-pair" data-play data-src="../hairline/button-pair.js"></div>
@@ -72,21 +128,24 @@
         </div>
       </a>
 
-      <a class="ds-card" href="components/button-group.html">
+      <a class="ds-card" data-type="Component" data-cat="Actions" data-status="Live|In progress" href="components/button-group.html">
         <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="button-group" data-play data-travel="450" data-dwell="450" data-src="../hairline/button-group.js"></div></div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Button group</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for this page">Not verified with Figma</span></span></div>
+          <div class="ds-card__top"><span class="ds-card__title">Button group</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for this page">In progress</span></span></div>
           <p class="ds-card__desc">Joined System buttons for choosing between two and four short options on one row.</p>
           <span class="ds-card__meta">2–4 options · 4 states</span>
         </div>
       </a>
 
-    </div>
-    <h3 class="ds-h3 ds-group" id="form">Form</h3>
-    <p class="ds-desc">Controls the user fills in or sets. They share states, sizes and the same page layout.</p>
-    <div class="ds-cards">
+      <a class="ds-card" data-type="Component" data-cat="Cards" data-status="Live" href="components/cards.html">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Cards</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">Overview of the cards in ECO and which one to use.</p>
+          <span class="ds-card__meta">Overview</span>
+        </div>
+      </a>
 
-      <a class="ds-card" href="components/checkbox.html">
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live" href="components/checkbox.html">
         <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
           <div data-hairline-card="checkbox" data-play data-src="../hairline/checkbox.js"></div>
         </div>
@@ -97,7 +156,82 @@
         </div>
       </a>
 
-      <a class="ds-card" href="components/input.html">
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live" href="components/chip.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-chips"><span>Gloves</span><span class="is-on">Workwear<i class="mo-ic">close</i></span><span>Shoes</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Chip</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Pick and drop filters or show what the user entered. Two sizes, four states, removable.</p>
+          <span class="ds-card__meta">2 sizes · 4 states</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Layout and content" data-status="Live" href="components/collapsible.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-coll"><span>Delivery<i class="mo-ic">expand_more</i></span><span>Returns<i class="mo-ic">expand_more</i></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Collapsible</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">A row that opens and closes to show more content, for FAQ lists and filters. Two sizes, boxed and dark.</p>
+          <span class="ds-card__meta">2 sizes · boxed · dark</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Menus, lists and dividers" data-status="Live|In progress" href="components/divider.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-divider"><i></i><i></i><i></i></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Divider</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></span></div>
+          <p class="ds-card__desc">Separate content groups with a 1px line. Horizontal and vertical, three colors, with an interactive playground.</p>
+          <span class="ds-card__meta">2 directions · 3 colors</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Notifications" data-status="Live" href="components/toast-ecom.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="toast-ecom" data-play data-src="../hairline/toast-ecom.js"></div></div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">E-Com Toast</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Confirm add to cart or wishlist without leaving the page. Try it on a product card.</p>
+          <span class="ds-card__meta">2 variants · 2 breakpoints</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live|In progress" href="components/icon-picker.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="icon-picker" data-play data-src="../hairline/icon-picker.js"></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Icon picker</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for this page">In progress</span></span></div>
+          <p class="ds-card__desc">A field for a Material Symbols name, with instant search over every icon.</p>
+          <span class="ds-card__meta">6,000+ icons</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Links" data-status="Live" href="components/inline-link.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-link"><p>Read the <u>product page</u>.</p><p>View all <span class="mo-ic">chevron_right</span></p></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Inline link</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">A link inside a sentence. Underlined when enabled, never with an icon.</p>
+          <span class="ds-card__meta">4 sizes · 4 colors</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Notifications" data-status="Live" href="components/inline.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="inline-notification" data-play data-travel="500" data-src="../hairline/inline-notification.js"></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Inline notification</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Feedback next to the work, until the user acts. See it react in a form.</p>
+          <span class="ds-card__meta">2 sizes · 2 emphasis · 5 statuses</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live" href="components/input.html">
         <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
           <div data-hairline-card="input" data-play data-src="../hairline/input.js"></div>
         </div>
@@ -108,18 +242,73 @@
         </div>
       </a>
 
-      <a class="ds-card" href="components/textarea.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
-          <div data-hairline-card="textarea" data-play data-src="../hairline/textarea.js"></div>
+      <a class="ds-card" data-type="Component" data-cat="Links" data-status="Live" href="components/links-guide.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-link"><p>Read the <u>product page</u>.</p><p>View all <span class="mo-ic">chevron_right</span></p></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Text area</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">Enter text over several lines, with an optional word count. Seven states and a resizer, with an interactive playground.</p>
-          <span class="ds-card__meta">1 size · 7 states · 2 breakpoints</span>
+          <div class="ds-card__top"><span class="ds-card__title">Links guide</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">Which link type to use: inline, action or tile. A decision table and the three types side by side.</p>
+          <span class="ds-card__meta">3 link types</span>
         </div>
       </a>
 
-      <a class="ds-card" href="components/radio.html">
+      <a class="ds-card" data-type="Component" data-cat="Menus, lists and dividers" data-status="Live|In progress" href="components/list-item.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-list"><span><i class="on"></i>Label text<em>24</em></span><span><i></i>Label text<em>8</em></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">List Item</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></span></div>
+          <p class="ds-card__desc">The content of one row in a menu or picker: leading, label, trailing, with optional overline and supporting text.</p>
+          <span class="ds-card__meta">2 sizes · 7 leading · 7 trailing</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Menus, lists and dividers" data-status="Live|In progress" href="components/menu.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-menu"><span>Label text</span><span class="on">Label text<i></i></span><span>Label text</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Menu</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></span></div>
+          <p class="ds-card__desc">The list surface of a dropdown and an exposed dropdown (Select). Two sizes, three dividers, single and multi select.</p>
+          <span class="ds-card__meta">2 sizes · 3 dividers · 2 selection types</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Notifications" data-status="Live" href="components/modal.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="modal" data-play data-src="../hairline/modal.js"></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Modal</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Block the page until the user decides. Three sizes; try ESC, overlay click and focus return.</p>
+          <span class="ds-card__meta">2 sizes · 3 ways to close</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Status and navigation" data-status="Live|In progress" href="components/pagination.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-pag"><em>Showing 4 of 6</em><i><b></b></i><span>Show more</span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Pagination</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></span></div>
+          <p class="ds-card__desc">A load-more pattern with a counter, a progress bar and a button.</p>
+          <span class="ds-card__meta">Load more</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live|In progress" href="components/segment-control.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="pill" data-play data-src="../hairline/pill.js"></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Pill segment control</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></span></div>
+          <p class="ds-card__desc">Switch between two to four related views with a sliding pill. Four sizes.</p>
+          <span class="ds-card__meta">4 sizes · 3 states</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live" href="components/radio.html">
         <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
           <div data-hairline-card="radio" data-play data-src="../hairline/radio.js"></div>
         </div>
@@ -130,7 +319,29 @@
         </div>
       </a>
 
-      <a class="ds-card" href="components/select.html">
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live|In progress" href="components/range.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="range" data-play data-src="../hairline/range.js"></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Range</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for this page">In progress</span></span></div>
+          <p class="ds-card__desc">Pick one value from an ordered series by dragging a thumb. Named steps or numeric.</p>
+          <span class="ds-card__meta">2 types · 4 states</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Layout and content" data-status="Live|In progress" href="components/section.html">
+        <div class="ds-card__visual" aria-hidden="true">
+          <div class="mini-sec"><span></span><span class="g"></span></div>
+        </div>
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Section</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for this page">In progress</span></span></div>
+          <p class="ds-card__desc">A full-width page block with padding that steps at the five breakpoints, plus the page divider.</p>
+          <span class="ds-card__meta">5 breakpoints · 2 surfaces</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live" href="components/select.html">
         <!-- Hairline animation; the old CSS-select visual is archived in card-visuals-archive/select.html -->
         <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
           <div data-hairline-card="select" data-play data-src="../hairline/select.js"></div>
@@ -142,7 +353,7 @@
         </div>
       </a>
 
-      <a class="ds-card" href="components/switch.html">
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live" href="components/switch.html">
         <!-- Hairline animation; the old CSS-switch visual is archived in card-visuals-archive/switch.html -->
         <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
           <div data-hairline-card="switch" data-play data-src="../hairline/switch.js"></div>
@@ -154,7 +365,7 @@
         </div>
       </a>
 
-      <a class="ds-card" href="components/tabs.html">
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live" href="components/tabs.html">
         <!-- Hairline animation; the old CSS-tabs visual is archived in card-visuals-archive/tabs.html -->
         <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
           <div data-hairline-card="tabs" data-play data-src="../hairline/tabs.js"></div>
@@ -166,172 +377,29 @@
         </div>
       </a>
 
-      <a class="ds-card" href="components/segment-control.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
-          <div data-hairline-card="pill" data-play data-src="../hairline/pill.js"></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Pill segment control</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">Switch between two to four related views with a sliding pill. Four sizes.</p>
-          <span class="ds-card__meta">4 sizes · 3 states</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/range.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
-          <div data-hairline-card="range" data-play data-src="../hairline/range.js"></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Range</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for this page">Not verified with Figma</span></span></div>
-          <p class="ds-card__desc">Pick one value from an ordered series by dragging a thumb. Named steps or numeric.</p>
-          <span class="ds-card__meta">2 types · 4 states</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/icon-picker.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
-          <div data-hairline-card="icon-picker" data-play data-src="../hairline/icon-picker.js"></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Icon picker</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for this page">Not verified with Figma</span></span></div>
-          <p class="ds-card__desc">A field for a Material Symbols name, with instant search over every icon.</p>
-          <span class="ds-card__meta">6,000+ icons</span>
-        </div>
-      </a>
-
-    </div>
-<h3 class="ds-h3 ds-group" id="notifications">Notifications</h3>
-    <p class="ds-desc">Tell the user that something changed. Five components from a short-lived toast to a blocking modal. <a class="inline-link inline-link--large inline-link--secondary" href="components/notifications.html">Read the Notifications guide to choose the right one</a>.</p>
-    <div class="ds-cards">
-
-      <a class="ds-card" href="components/toast.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
-          <div data-hairline-card="toast" data-play data-travel="450" data-dwell="600" data-src="../hairline/toast.js"></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Toast</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">Short-lived feedback on a user action. Trigger real toasts, in four statuses and two emphasis levels.</p>
-          <span class="ds-card__meta">4 statuses · 2 emphasis · 2 layouts</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/toast-ecom.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="toast-ecom" data-play data-src="../hairline/toast-ecom.js"></div></div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">E-Com Toast</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">Confirm add to cart or wishlist without leaving the page. Try it on a product card.</p>
-          <span class="ds-card__meta">2 variants · 2 breakpoints</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/modal.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
-          <div data-hairline-card="modal" data-play data-src="../hairline/modal.js"></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Modal</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">Block the page until the user decides. Three sizes; try ESC, overlay click and focus return.</p>
-          <span class="ds-card__meta">2 sizes · 3 ways to close</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/banner.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true"><div data-hairline-card="banner" data-play data-travel="450" data-dwell="450" data-src="../hairline/banner.js"></div></div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Banner</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">Page-wide and system messages. Small, Large and Promotion, with placement and priority rules.</p>
-          <span class="ds-card__meta">3 sizes · 3 emphasis · 4 statuses</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/inline.html">
-        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
-          <div data-hairline-card="inline-notification" data-play data-travel="500" data-src="../hairline/inline-notification.js"></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Inline notification</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">Feedback next to the work, until the user acts. See it react in a form.</p>
-          <span class="ds-card__meta">2 sizes · 2 emphasis · 5 statuses</span>
-        </div>
-      </a>
-
-    </div>
-<h3 class="ds-h3 ds-group" id="other">Menus, lists and dividers</h3>
-    <p class="ds-desc">Surfaces and separators that organise content.</p>
-    <div class="ds-cards">
-
-      <a class="ds-card" href="components/menu.html">
+      <a class="ds-card" data-type="Component" data-cat="Status and navigation" data-status="Live|In progress" href="components/tag.html">
         <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-menu"><span>Label text</span><span class="on">Label text<i></i></span><span>Label text</span></div>
+          <div style="display:flex;gap:8px"><span class="tag tag--remove">Gloves<span class="tag__remove"><span class="material-symbols-outlined">close</span></span></span><span class="tag tag--remove">Workwear<span class="tag__remove"><span class="material-symbols-outlined">close</span></span></span></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Menu</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">The list surface of a dropdown and an exposed dropdown (Select). Two sizes, three dividers, single and multi select.</p>
-          <span class="ds-card__meta">2 sizes · 3 dividers · 2 selection types</span>
+          <div class="ds-card__top"><span class="ds-card__title">Tag</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="Open questions for design: typography, focus state not in Figma">In progress</span></span></div>
+          <p class="ds-card__desc">Shows an active filter above a product list. Grey and White, Medium and Small, with a remove button.</p>
+          <span class="ds-card__meta">2 variants · 2 sizes · 2 states</span>
         </div>
       </a>
 
-      <a class="ds-card" href="components/list-item.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-list"><span><i class="on"></i>Label text<em>24</em></span><span><i></i>Label text<em>8</em></span></div>
+      <a class="ds-card" data-type="Component" data-cat="Form" data-status="Live" href="components/textarea.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="textarea" data-play data-src="../hairline/textarea.js"></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">List Item</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">The content of one row in a menu or picker: leading, label, trailing, with optional overline and supporting text.</p>
-          <span class="ds-card__meta">2 sizes · 7 leading · 7 trailing</span>
+          <div class="ds-card__top"><span class="ds-card__title">Text area</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Enter text over several lines, with an optional word count. Seven states and a resizer, with an interactive playground.</p>
+          <span class="ds-card__meta">1 size · 7 states · 2 breakpoints</span>
         </div>
       </a>
 
-      <a class="ds-card" href="components/divider.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-divider"><i></i><i></i><i></i></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Divider</span><span class="ds-tag ds-tag--live">Live</span></div>
-          <p class="ds-card__desc">Separate content groups with a 1px line. Horizontal and vertical, three colors, with an interactive playground.</p>
-          <span class="ds-card__meta">2 directions · 3 colors</span>
-        </div>
-      </a>
-
-    </div>
-    <h3 class="ds-h3 ds-group" id="links">Links</h3>
-    <p class="ds-desc">Take the user somewhere. Start with the guide to choose between the three types.</p>
-    <div class="ds-cards">
-
-      <a class="ds-card" href="components/links-guide.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-link"><p>Read the <u>product page</u>.</p><p>View all <span class="mo-ic">chevron_right</span></p></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Links guide</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">Which link type to use: inline, action or tile. A decision table and the three types side by side.</p>
-          <span class="ds-card__meta">3 link types</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/inline-link.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-link"><p>Read the <u>product page</u>.</p><p>View all <span class="mo-ic">chevron_right</span></p></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Inline link</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">A link inside a sentence. Underlined when enabled, never with an icon.</p>
-          <span class="ds-card__meta">4 sizes · 4 colors</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/action-link.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-link"><p>Read the <u>product page</u>.</p><p>View all <span class="mo-ic">chevron_right</span></p></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Action link</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">A standalone link with an optional left icon and a right chevron.</p>
-          <span class="ds-card__meta">3 sizes · 2 variants</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/tile-link.html">
+      <a class="ds-card" data-type="Component" data-cat="Links" data-status="Live" href="components/tile-link.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-tile"><span class="mo-ic">bolt</span><em>Generator</em></div>
         </div>
@@ -342,45 +410,18 @@
         </div>
       </a>
 
-    </div>
-    <h3 class="ds-h3 ds-group" id="status">Status and navigation</h3>
-    <p class="ds-desc">Small parts that show where you are, what state something is in, or how to get more.</p>
-    <div class="ds-cards">
-
-      <a class="ds-card" href="components/badge.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-badge"><span>Latest</span><span class="ok">New</span><span class="info">Updated</span></div>
+      <a class="ds-card" data-type="Component" data-cat="Notifications" data-status="Live" href="components/toast.html">
+        <div class="ds-card__visual ds-card__visual--hairline" aria-hidden="true">
+          <div data-hairline-card="toast" data-play data-travel="450" data-dwell="600" data-src="../hairline/toast.js"></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Badge</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">A read-only status, label or count. Five types: Basic, Dot, Number, Product &amp; Discount, Purchase Info.</p>
-          <span class="ds-card__meta">5 types · 3 pages each</span>
+          <div class="ds-card__top"><span class="ds-card__title">Toast</span><span class="ds-tag ds-tag--live">Live</span></div>
+          <p class="ds-card__desc">Short-lived feedback on a user action. Trigger real toasts, in four statuses and two emphasis levels.</p>
+          <span class="ds-card__meta">4 statuses · 2 emphasis · 2 layouts</span>
         </div>
       </a>
 
-      <a class="ds-card" href="components/breadcrumb.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-bc"><span>Home</span><i>/</i><span>Pants</span><i>/</i><b>Carpenter</b></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Breadcrumb</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design">Not verified with Figma</span></span></div>
-          <p class="ds-card__desc">Shows where the page sits in the site, with a bordered box for every step.</p>
-          <span class="ds-card__meta">Hub · Base (Bar is a pattern)</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/pagination.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-pag"><em>Showing 4 of 6</em><i><b></b></i><span>Show more</span></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Pagination</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">A load-more pattern with a counter, a progress bar and a button.</p>
-          <span class="ds-card__meta">Load more</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/tooltip.html">
+      <a class="ds-card" data-type="Component" data-cat="Status and navigation" data-status="Live" href="components/tooltip.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-tip"><span class="mo-ic">edit</span><em>Edit</em></div>
         </div>
@@ -392,38 +433,95 @@
       </a>
 
     </div>
-    <h3 class="ds-h3 ds-group" id="layout">Layout and content</h3>
-    <p class="ds-desc">Blocks that structure a page and present content.</p>
+  </div>
+</section>
+<section class="ds-section ds-section--secondary" id="patterns">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Patterns</h2>
+    <p class="ds-desc">Composed solutions built from several components. <a class="inline-link inline-link--large inline-link--secondary" href="components/patterns-overview.html">Read how a pattern differs from a component</a>. Breadcrumb Bar and Hero banner are live; the others are coming.</p>
     <div class="ds-cards">
 
-      <a class="ds-card" href="components/section.html">
+      <a class="ds-card" data-type="Pattern" data-status="Live" href="components/breadcrumb-bar.html">
         <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-sec"><span></span><span class="g"></span></div>
+          <div class="mini-bc"><span>Home</span><i>/</i><span>Pants</span><i>/</i><b>Carpenter</b></div>
         </div>
         <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Section</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="No Figma component is linked for this page">Not verified with Figma</span></span></div>
-          <p class="ds-card__desc">A full-width page block with padding that steps at the five breakpoints, plus the page divider.</p>
-          <span class="ds-card__meta">5 breakpoints · 2 surfaces</span>
+          <div class="ds-card__top"><span class="ds-card__title">Breadcrumb Bar</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">The trail at the top of a page: two to six crumbs with a slash between them, built from Breadcrumb Base.</p>
+          <span class="ds-card__meta">Navigation · 3 pages</span>
         </div>
       </a>
 
-      <a class="ds-card" href="components/collapsible.html">
+
+      <a class="ds-card" data-type="Pattern" data-status="Live" href="components/hero-banner-widget.html">
         <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-coll"><span>Delivery<i class="mo-ic">expand_more</i></span><span>Returns<i class="mo-ic">expand_more</i></span></div>
+          <img src="/images/hero-banner-banner-power-deal.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block" />
         </div>
         <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Hero banner</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">A full-width banner at the top of a page: anatomy, usage, examples and the Storyblok widget in four tabs.</p>
+          <span class="ds-card__meta">Campaign · 4 pages</span>
+        </div>
+      </a>
+
+      <div class="ds-card" data-type="Pattern" data-status="Soon" aria-disabled="true">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Splash card carousel</span><span class="ds-card__tags"><span class="ds-tag">Soon</span></span></div>
+          <p class="ds-card__desc">A carousel of splash cards.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section class="ds-section" id="storyblok-widgets">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Storyblok widget</h2>
+    <p class="ds-desc">Widgets in the Storyblok admin tool. Each page shows how an editor sets up the widget and how its settings map to the component.</p>
+    <div class="ds-cards ds-cards--list">
+
+      <a class="ds-card" data-type="Storyblok widget" data-status="Live" href="components/hero-banner-widget-storyblok.html">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Hero banner widget</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
+          <p class="ds-card__desc">The Hero Responsive block: editor steps and settings in Storyblok.</p>
+          <span class="ds-card__meta">Storyblok widget</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Storyblok widget" data-status="Live|In progress" href="components/ah-group-card-widget-storyblok.html">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Article Highlight Group Card</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></span></div>
+          <p class="ds-card__desc">The AH Group block: cards in a grid or a carousel, and the settings of the AH Group Card.</p>
+          <span class="ds-card__meta">Storyblok widget</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Storyblok widget" data-status="In progress" href="components/ah-single-row-card-widget-storyblok.html">
+        <div class="ds-card__body">
+          <div class="ds-card__top"><span class="ds-card__title">Article Highlight Single Row Card</span><span class="ds-card__tags"><span class="ds-tag">In progress</span></span></div>
+          <p class="ds-card__desc">The AH Single Row block in Storyblok. Page started, fields to be added from the Storyblok schema.</p>
+          <span class="ds-card__meta">Storyblok widget</span>
+        </div>
+      </a>
+
+      <a class="ds-card" data-type="Storyblok widget" data-status="Live" href="components/collapsible-storyblok.html">
+        <div class="ds-card__body">
           <div class="ds-card__top"><span class="ds-card__title">Collapsible</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">A row that opens and closes to show more content, for FAQ lists and filters. Two sizes, boxed and dark.</p>
-          <span class="ds-card__meta">2 sizes · boxed · dark</span>
+          <p class="ds-card__desc">The Collapsible block: editor steps, settings and how they map to the component.</p>
+          <span class="ds-card__meta">Storyblok widget</span>
         </div>
       </a>
 
     </div>
-    <h3 class="ds-h3 ds-group" id="drafts">Drafts</h3>
+  </div>
+</section>
+<section class="ds-section ds-section--secondary" id="drafts">
+  <div class="ds-page ds-inner">
+    <h2 class="ds-h2">Drafts</h2>
     <p class="ds-desc">Pages that are not part of the official collection yet: a test built on the comparison pages. It has three pages like the other components, but no Figma component exists.</p>
     <div class="ds-cards">
 
-      <a class="ds-card" href="components/role-tier-card.html">
+      <a class="ds-card" data-type="Draft" data-status="Experiment" href="components/role-tier-card.html">
         <div class="ds-card__visual" aria-hidden="true">
           <div class="mini-tier"><span></span><span class="d"></span></div>
         </div>
@@ -437,91 +535,60 @@
     </div>
   </div>
 </section>
-<section class="ds-section ds-section--secondary" id="patterns">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">Patterns</h2>
-    <p class="ds-desc">Composed solutions built from several components. <a class="inline-link inline-link--large inline-link--secondary" href="components/patterns-overview.html">Read how a pattern differs from a component</a>. Breadcrumb Bar and Hero banner are live; the others are coming.</p>
-    <div class="ds-cards">
-
-      <a class="ds-card" href="components/breadcrumb-bar.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-bc"><span>Home</span><i>/</i><span>Pants</span><i>/</i><b>Carpenter</b></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Breadcrumb Bar</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">The trail at the top of a page: two to six crumbs with a slash between them, built from Breadcrumb Base.</p>
-          <span class="ds-card__meta">Navigation · 3 pages</span>
-        </div>
-      </a>
-
-
-      <a class="ds-card" href="components/hero-banner-widget.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <img src="/images/hero-banner-banner-power-deal.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block" />
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Hero banner</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">A full-width banner at the top of a page: anatomy, usage, examples and the Storyblok widget in four tabs.</p>
-          <span class="ds-card__meta">Campaign · 4 pages</span>
-        </div>
-      </a>
-
-      <div class="ds-card" aria-disabled="true">
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Splash card carousel</span><span class="ds-card__tags"><span class="ds-tag">Soon</span></span></div>
-          <p class="ds-card__desc">A carousel of splash cards.</p>
-        </div>
-      </div>
-
-    </div>
-    <h3 class="ds-h3 ds-group" id="documentation">Documentation</h3>
-    <p class="ds-desc">Patterns that belong to these documentation pages only. They are not components for the product.</p>
-    <div class="ds-cards">
-
-      <a class="ds-card" href="foundations/docs-table.html">
-        <div class="ds-card__visual" aria-hidden="true">
-          <div class="mini-table"><span></span><span></span><span></span></div>
-        </div>
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Docs table</span><span class="ds-card__tags"><span class="ds-tag">Docs only</span></span></div>
-          <p class="ds-card__desc">The table of these documentation pages, not a product component. A table component for products is planned.</p>
-          <span class="ds-card__meta">6 header tones</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-<section class="ds-section" id="storyblok-widgets">
-  <div class="ds-page ds-inner">
-    <h2 class="ds-h2">Storyblok widget</h2>
-    <p class="ds-desc">Widgets in the Storyblok admin tool. Each page shows how an editor sets up the widget and how its settings map to the component.</p>
-    <div class="ds-cards ds-cards--list">
-
-      <a class="ds-card" href="components/hero-banner-widget-storyblok.html">
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Hero banner widget</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">The Hero Responsive block: editor steps and settings in Storyblok.</p>
-          <span class="ds-card__meta">Storyblok widget</span>
-        </div>
-      </a>
-
-      <a class="ds-card" href="components/collapsible-storyblok.html">
-        <div class="ds-card__body">
-          <div class="ds-card__top"><span class="ds-card__title">Collapsible</span><span class="ds-card__tags"><span class="ds-tag ds-tag--live">Live</span></span></div>
-          <p class="ds-card__desc">The Collapsible block: editor steps, settings and how they map to the component.</p>
-          <span class="ds-card__meta">Storyblok widget</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
+<script src="filter-drawer.js"></script>
 <script>
-  (function () {
-    var bar = document.querySelector('.tab-bar--page'); if (!bar) return;
-    function upd() { var top = parseFloat(getComputedStyle(bar).top) || 0; bar.classList.toggle('is-stuck', bar.getBoundingClientRect().top <= top + 0.5 && scrollY > 0); }
-    addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
+  (function () {   /* filter bar + drawer (filter-drawer.js): within one filter any picked value matches, across filters all must match; a section with no match is hidden */
+    var FACETS = [['type', 'Type'], ['cat', 'Category'], ['status', 'Status']];
+    var cards = [].slice.call(document.querySelectorAll('.ds-card[data-type]')), picked = {}, vals = {}, cnt = {};
+    function of(c, k) { return (c.dataset[k] || '').split('|').filter(Boolean); }
+    FACETS.forEach(function (f) { var k = f[0]; picked[k] = []; cnt[k] = {}; cards.forEach(function (c) { of(c, k).forEach(function (v) { cnt[k][v] = (cnt[k][v] || 0) + 1; }); }); vals[k] = Object.keys(cnt[k]).sort(function (a, b) { return a.localeCompare(b); }); });
+    var count = document.getElementById('co-count'), empty = document.getElementById('co-empty'), btns = [].slice.call(document.querySelectorAll('.ds-fbar [data-facet]')), chips = document.getElementById('co-picked'), seq = [];
+    function apply() {
+      var shown = 0;
+      cards.forEach(function (c) {
+        var ok = FACETS.every(function (f) { var p = picked[f[0]]; return !p.length || of(c, f[0]).some(function (v) { return p.indexOf(v) > -1; }); });
+        c.hidden = !ok; if (ok) shown++;
+      });
+      ['components', 'patterns', 'storyblok-widgets', 'drafts'].forEach(function (id) { var s = document.getElementById(id); s.hidden = !s.querySelector('.ds-card[data-type]:not([hidden])'); });
+      count.textContent = shown === cards.length ? cards.length + ' pages' : shown + ' of ' + cards.length + ' pages';
+      empty.hidden = shown > 0;
+      btns.forEach(function (b) {
+        var n = b.dataset.facet ? picked[b.dataset.facet].length : FACETS.reduce(function (a, f) { return a + picked[f[0]].length; }, 0), bd = b.querySelector('.btn__badge'), lbl = b.querySelector('.btn__label').textContent;
+        if (bd) bd.remove();
+        if (n && !b.dataset.facet) { bd = document.createElement('span'); bd.className = 'btn__badge'; bd.setAttribute('aria-hidden', 'true'); bd.textContent = n; b.appendChild(bd); }   /* the count on All filters, a grey fill on a filter that has a choice (as on the e-com site) */
+        b.classList.toggle('is-active', !!(n && b.dataset.facet));
+        b.setAttribute('aria-label', n ? lbl + ', ' + n + ' selected' : lbl);
+      });
+      seq = seq.filter(function (x) { return picked[x[0]].indexOf(x[1]) > -1; });   /* the active filters as Remove tags (eco-tag), in the order chosen; Clear filters from two */
+      FACETS.forEach(function (f) { picked[f[0]].forEach(function (v) { if (!seq.some(function (x) { return x[0] === f[0] && x[1] === v; })) seq.push([f[0], v]); }); });
+      chips.hidden = !seq.length;
+      chips.innerHTML = seq.map(function (x) {
+        var v = DSFilter.esc(x[1]);
+        return '<span class="tag tag--remove">' + v + '<button type="button" class="tag__remove" data-k="' + x[0] + '" data-v="' + v + '" aria-label="Remove ' + v + '"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></span>';
+      }).join('') + (seq.length > 1 ? '<button type="button" class="action-link action-link--medium" data-clear><span class="action-link__label">Clear filters</span></button>' : '');
+    }
+    function fieldset(f, one) {
+      return '<fieldset class="tk-filters" data-k="' + f[0] + '"><legend class="' + (one ? 'tk-vh' : 'tk-legend') + '">' + f[1] + '</legend>' + vals[f[0]].map(function (v) { return DSFilter.row(v, v, cnt[f[0]][v], picked[f[0]].indexOf(v) > -1); }).join('') + '</fieldset>';
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var one = FACETS.filter(function (f) { return f[0] === b.dataset.facet; })[0];
+        DSFilter.open({ title: one ? one[1] : 'All filters', body: (one ? [one] : FACETS).map(function (f) { return fieldset(f, !!one); }).join(''), onChange: function (d) {
+          [].slice.call(d.querySelectorAll('.tk-filters')).forEach(function (fs) { picked[fs.dataset.k] = [].slice.call(fs.querySelectorAll('[aria-checked="true"]')).map(function (i) { return i.dataset.value; }); });
+          apply();
+        } });
+      });
+    });
+    chips.addEventListener('click', function (e) {
+      var c = e.target.closest('.tag__remove'), all = e.target.closest('[data-clear]');
+      if (c) {   /* focus to the next ×, else the previous one, else back to All filters */
+        var xs = [].slice.call(chips.querySelectorAll('.tag__remove')), i = xs.indexOf(c);
+        picked[c.dataset.k] = picked[c.dataset.k].filter(function (v) { return v !== c.dataset.v; }); apply();
+        xs = chips.querySelectorAll('.tag__remove'); (xs[i] || xs[i - 1] || btns[0]).focus();
+      }
+      if (all) { FACETS.forEach(function (f) { picked[f[0]] = []; }); apply(); btns[0].focus(); }
+    });
+    apply();
   })();
 </script>
   <script src="../hairline/kernel.js"></script>

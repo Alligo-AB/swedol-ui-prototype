@@ -19,11 +19,10 @@
     #tokens.ds-section { padding-top: 0; }
     #tokens .tk-wrap { margin-top: 0; }
     @media (min-width: 769px) { .ds-section.ds-section--first { padding-bottom: 40px; } }
-    .tk-sticky { position: sticky; top: var(--dn-bar, 0px); z-index: 3; padding: 16px 0 12px; background: var(--color-background-primary); box-shadow: -16px 0 0 var(--color-background-primary), 16px 0 0 var(--color-background-primary); }   /* the side shadows of the table card must not show beside the stuck bar */   /* search, filter and count stay in view; the table header sticks right under it (--tk-sticky-h, set by the script) */
+    .tk-sticky { position: sticky; top: calc(var(--dn-bar, 0px) - var(--dn-hide, 0px)); z-index: 3; padding: 16px 0 12px; background: var(--color-background-primary); box-shadow: -16px 0 0 var(--color-background-primary), 16px 0 0 var(--color-background-primary); }   /* the side shadows of the table card must not show beside the stuck bar */   /* search, filter and count stay in view; the table header sticks right under it (--tk-sticky-h, set by the script) */
     .tk-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; }
     .tk-bar .tk-search { flex: 1 1 280px; min-width: 0; }
     .tk-filter { position: relative; flex: none; }
-    .tk-filter .btn__badge { background: var(--color-surface-100); }   /* black count, not the red alert badge */
     @media (max-width: 768px) {   /* mobile: icon only, same square as .btn--icon, stays beside the search field */
       .tk-bar { flex-wrap: nowrap; gap: 8px; }
       .tk-bar .tk-search { flex: 1 1 0; }
@@ -32,39 +31,11 @@
     }
     .tk-search :is(.input-wrap, .input-box, .form-input) { min-width: 0; }   /* the search field shrinks with the window (below ~334px too) while the filter button keeps its size */
     .tk-search .form-input { width: 100%; text-overflow: ellipsis; }
-    .tk-filters { display: flex; flex-direction: column; margin: 0; }
-    .tk-filters { border: 0; padding: 0; min-width: 0; }
-    .tk-scrim { position: fixed; inset: 0; z-index: 9998; background: var(--color-surface-opacity-black-20); animation: tk-fade var(--duration-fast-4) var(--ease-decelerate-emphasized); }
-    /* Same build as the drawers on mypages/users.html (header 24/32, content 0/32/32, footer 24/32); the space around is for this docs site only, a product drawer sits flush at the edge */
-    .tk-drawer { position: fixed; z-index: 9999; top: 16px; right: 16px; bottom: 16px; width: min(500px, calc(100vw - 32px)); box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-drawer-right); animation: tk-in var(--duration-medium-3) var(--ease-decelerate-emphasized); }
-    .tk-drawer__head { position: relative; z-index: 1; display: flex; align-items: center; flex-shrink: 0; padding: 24px 32px; transition: box-shadow var(--duration-fast-3) var(--ease-standard); }
-    .tk-drawer__head.is-elevated { box-shadow: var(--shadow-elevation-b-60); }
-    .tk-drawer__head-text { flex: 1; padding: 4px 0; }
-    .tk-drawer__title { margin: 0; font-size: 26px; line-height: 26px; font-weight: 600; letter-spacing: 0; text-transform: uppercase; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* display-sm desktop */
-    .tk-drawer__body { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; padding: 0 32px 32px; }
-    .tk-drawer__lead { margin: 0; font-size: 17px; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-secondary); }   /* body-md desktop */
-    .tk-row { display: flex; align-items: center; min-height: 48px; }   /* the container owns the row height (eco-list-item rule 3); 48px like a Large menu row */
-    .tk-row .list-item { flex: 1; }
-    .tk-drawer__foot { position: relative; z-index: 1; flex-shrink: 0; padding: 24px 32px; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-t-60); }
-    .tk-drawer__foot .btn { width: 100%; }
-    @media (max-width: 768px) {   /* xs/sm: same values as the drawers on mypages/users.html */
-      .tk-drawer { top: 0; right: 0; bottom: 0; width: min(500px, 100%); }
-      .tk-drawer__head { padding: 16px 24px; }
-      .tk-drawer__title { font-size: 22px; line-height: 22px; }   /* display-sm mobile */
-      .tk-drawer__body { gap: 16px; padding: 0 24px 24px; }
-      .tk-drawer__lead { font-size: 16px; line-height: 22px; }   /* body-md mobile */
-      .tk-drawer__foot { padding: 16px 24px; }
-    }
-    .tk-drawer.is-leaving, .tk-scrim.is-leaving { animation: tk-out var(--duration-fast-3) var(--ease-accelerate-generic) forwards; }
-    @keyframes tk-fade { from { opacity: 0; } }
-    @keyframes tk-in { from { opacity: 0; transform: translateX(24px); } }
-    @keyframes tk-out { to { opacity: 0; } }
-    @media (prefers-reduced-motion: reduce) { .tk-scrim, .tk-drawer { animation: none; } }
     .tk-count { margin: 12px 0 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
     .tk-wrap { margin-top: 16px; overflow: visible; }   /* a scroll container would stop the sticky header */
     .tk-table { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md */
     @media (min-width: 769px) { .tk-table { font-size: 17px; line-height: 24px; } }
-    .ds-table.tk-table thead th { position: sticky; top: calc(var(--dn-bar, 0px) + var(--tk-sticky-h, 0px)); z-index: 2; border-bottom: 0; box-shadow: inset 0 -1px 0 var(--color-border-primary), inset 0 4px 3px -3px var(--color-surface-opacity-black-05); }   /* grey header + one line under it; the frame is the card's own 1px border. The line is an inset shadow: a border of a collapsed table does not travel with a sticky header */
+    .ds-table.tk-table thead th { position: sticky; top: calc(var(--dn-bar, 0px) - var(--dn-hide, 0px) + var(--tk-sticky-h, 0px)); z-index: 2; border-bottom: 0; box-shadow: inset 0 -1px 0 var(--color-border-primary), inset 0 4px 3px -3px var(--color-surface-opacity-black-05); }   /* grey header + one line under it; the frame is the card's own 1px border. The line is an inset shadow: a border of a collapsed table does not travel with a sticky header */
     .ds-table.tk-table td, .ds-table.tk-table th { padding: 12px; vertical-align: middle; height: 64px; }
     .ds-table.tk-table td:first-child, .ds-table.tk-table th:first-child { padding-left: 24px; width: 1%; white-space: nowrap; }
     .ds-table.tk-table td:last-child, .ds-table.tk-table th:last-child { padding-right: 12px; width: 1%; }
@@ -82,7 +53,6 @@
     .tk-table tr[hidden] { display: none; }
     .tk-empty { margin-top: 32px; }
     .tk-empty[hidden] { display: none; }
-    .tk-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     @media (max-width: 1023px) {   /* cards up to the end of md; the table starts at lg (1024px) */
       .ds-table.tk-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }   /* header hidden; each row is a small card */
       .tk-table { display: block; }
@@ -145,6 +115,7 @@
 </section>
 
 <script src="doc-kit.js"></script>
+<script src="filter-drawer.js"></script>
 
 <script>
 (function () {
@@ -243,48 +214,14 @@
     if (picked.length) { b = document.createElement('span'); b.className = 'btn__badge'; b.setAttribute('aria-hidden', 'true'); b.textContent = picked.length; fb.appendChild(b); }
     fb.setAttribute('aria-label', picked.length ? 'Filters, ' + picked.length + ' selected' : 'Filters');
   }
-  function listHtml() {   // List Item (eco-list-item): check box + label, count as trailing text tertiary; the row around it is the container
-    return '<legend class="tk-vh">Category</legend>' + order.map(function (t) {
-      return '<div class="tk-row"><div class="list-item" role="checkbox" tabindex="0" aria-checked="' + (picked.indexOf(t) > -1) + '" data-value="' + esc(t) + '"><span class="list-item__fill"><span class="list-item__check" aria-hidden="true"></span><span class="list-item__label">' + esc(t) + '</span></span><span class="list-item__trail-text list-item__trail-text--tertiary">' + cnt[t] + '</span></div></div>';
-    }).join('');
+  function listHtml() {
+    return '<fieldset class="tk-filters"><legend class="tk-vh">Category</legend>' + order.map(function (t) { return DSFilter.row(t, t, cnt[t], picked.indexOf(t) > -1); }).join('') + '</fieldset>';
   }
-  function commit(root) {
-    picked = [].slice.call(root.querySelectorAll('.tk-filters [aria-checked="true"]')).map(function (i) { return i.dataset.value; });
-    badge(); apply();
-  }
-  function toggle(li) { li.setAttribute('aria-checked', String(li.getAttribute('aria-checked') !== 'true')); li.dispatchEvent(new CustomEvent('tk-toggle', { bubbles: true })); }
-  document.addEventListener('click', function (e) { var li = e.target.closest('.tk-filters .list-item[role]'); if (li) toggle(li); });
-  document.addEventListener('keydown', function (e) { var li = e.target.closest && e.target.closest('.tk-filters .list-item[role]'); if (li && (e.key === ' ' || e.key === 'Enter')) { e.preventDefault(); toggle(li); } });
-  function openDrawer() {   // right-hand drawer at every width; padding, title size and button sizes follow the users.html drawers per breakpoint
-    var mob = !matchMedia('(min-width: 769px)').matches, opener = document.activeElement, still = matchMedia('(prefers-reduced-motion: reduce)').matches, closed = false;
-    var ov = document.createElement('div'), d = document.createElement('aside');
-    ov.className = 'tk-scrim'; d.className = 'tk-drawer'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'tk-dt'); d.tabIndex = -1;
-    d.innerHTML = '<div class="tk-drawer__head"><div class="tk-drawer__head-text"><h2 class="tk-drawer__title" id="tk-dt">Filter tokens</h2></div><button type="button" class="btn btn--blank btn--' + (mob ? 'md' : 'sm') + ' btn--icon" data-x aria-label="Close"><span class="btn__icon" aria-hidden="true">close</span></button></div>' +
-      '<div class="tk-drawer__body"><p class="tk-drawer__lead">Select the categories you want to see in the table.</p><fieldset class="tk-filters">' + listHtml() + '</fieldset></div>' +
-      '<div class="tk-drawer__foot"><button type="button" class="btn btn--primary btn--' + (mob ? 'lg' : 'sm') + '" data-x><span class="btn__label">Close</span></button></div>';
-    var hd = d.querySelector('.tk-drawer__head'), bd = d.querySelector('.tk-drawer__body');
-    bd.addEventListener('scroll', function () { hd.classList.toggle('is-elevated', bd.scrollTop > 0); });
-    function close() {
-      if (closed) return; closed = true; document.removeEventListener('keydown', key);
-      ov.classList.add('is-leaving'); d.classList.add('is-leaving');
-      var ms = still ? 0 : parseFloat(getComputedStyle(d).animationDuration) * 1000 || 0;
-      setTimeout(function () { ov.remove(); d.remove(); }, ms + 20);
-      if (opener && opener.focus) opener.focus();
-    }
-    function key(e) {
-      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
-      if (e.key !== 'Tab') return;
-      var f = [].slice.call(d.querySelectorAll('button, [role=checkbox]')), first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && (document.activeElement === first || document.activeElement === d)) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-    d.addEventListener('click', function (e) {
-      if (e.target.closest('[data-x]')) close();
-    });
-    d.addEventListener('tk-toggle', function () { commit(d); });   // like the column settings drawer: a choice applies at once, the button only closes
-    ov.addEventListener('click', close);
-    document.addEventListener('keydown', key);
-    document.body.appendChild(ov); document.body.appendChild(d); d.focus();
+  function openDrawer() {
+    DSFilter.open({ title: 'Filter tokens', lead: 'Select the categories you want to see in the table.', body: listHtml(), onChange: function (d) {
+      picked = [].slice.call(d.querySelectorAll('.tk-filters [aria-checked="true"]')).map(function (i) { return i.dataset.value; });
+      badge(); apply();
+    } });
   }
   fb.addEventListener('click', function () {
     if (!order.length) return;

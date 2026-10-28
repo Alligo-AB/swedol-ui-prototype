@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs cards – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/switch.css">
+  <link rel="stylesheet" href="../../components/css/checkbox.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/pill-segment-control.css">
+  <link rel="stylesheet" href="../../components/css/action-link.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/pill-segment-control.js" defer></script>
+  <style>
+    /* page-local copy of the visual rules the docs start page used for these two layouts (.hx-*), kept here until they move to a shared file (see "Open points"). Tokens only. */
+    .hx-space { display: flex; align-items: flex-end; gap: var(--dimension-spacing-space-8); height: var(--dimension-spacing-space-80); }
+    .hx-space span { width: var(--dimension-spacing-space-16); background: var(--color-surface-100); }
+    .hx-cols { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--dimension-spacing-space-4); width: 100%; max-width: 280px; height: var(--dimension-spacing-space-80); }
+    .hx-cols span { background: var(--color-surface-information-weaker); border: 1px solid var(--color-border-information-default); }
+    .hx-elev { display: flex; gap: var(--dimension-spacing-space-24); }
+    .hx-elev span { width: var(--dimension-spacing-space-56); height: var(--dimension-spacing-space-56); background: var(--color-surface-raised-primary); }
+    .hx-track { position: relative; width: 100%; max-width: 240px; height: var(--dimension-spacing-space-24); border-bottom: 1px solid var(--color-border-primary); }
+    .hx-dot { position: absolute; left: 0; bottom: var(--dimension-spacing-space-4); width: var(--dimension-spacing-space-16); height: var(--dimension-spacing-space-16); border-radius: var(--radius-full); background: var(--color-surface-100); transition: left var(--duration-slow-4) var(--ease-decelerate-emphasized); }
+    a.ds-card:is(:hover, :focus-visible) .hx-dot { left: calc(100% - var(--dimension-spacing-space-16)); }
+    .ds-card__body .action-link { margin-top: auto; padding-top: var(--dimension-spacing-space-8); }
+    .ds-cards > .ds-card { min-width: 0; }   /* equal columns: a live visual must not widen its track */
+    .hx-stack { display: flex; flex-direction: column; align-items: flex-start; gap: var(--dimension-spacing-space-16); }
+    .hx-row-x { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--dimension-spacing-space-8); }
+    .pc-cards { margin: var(--dimension-spacing-space-16) 0; }
+    .pc-cards .ds-card { height: 100%; }
+    .pc-note { display: flex; gap: var(--dimension-spacing-space-12); padding: var(--dimension-spacing-space-16); background: var(--color-surface-raised-secondary); margin-top: var(--dimension-spacing-space-16); }
+    .pc-note .mo-ic { font-size: 24px; flex: 0 0 auto; color: var(--color-icon-primary); }
+    .pc-note p { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md: 16/22 mobile, 17/24 from 769px */
+    @media (min-width: 769px) { .pc-note p { font-size: 17px; line-height: 24px; } }
+    .pc-legend { list-style: none; margin: var(--dimension-spacing-space-16) 0 0; padding: 0; display: grid; gap: var(--dimension-spacing-space-12); }
+    .pc-legend li { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-12); }
+    .pc-legend .badge-number { flex: 0 0 auto; margin-top: 3px; }
+    .pc-legend p { margin: 0; }
+    .ds-prose > :is(.ds-desc, .ds-bullets) + .ds-table-wrap { margin-top: var(--dimension-spacing-space-16); }
+    code { font-size: 0.9em; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar">
+      <a href="/" class="breadcrumb-item">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="/#eco-docs-internal" class="breadcrumb-item">ECO docs – internal</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Docs cards</span>
+    </div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Docs internal</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></div>
+    <h1 class="ds-title">Docs cards</h1>
+    <p class="ds-lead">Two card layouts for the documentation pages: a <strong>Foundations card</strong> with a small live picture of a token, and a <strong>Components card</strong> with a working ECO component inside it. Both are made of the docs card (<code>.ds-card</code>).</p>
+    <p class="ds-lead">They are documentation items, not product components. They are still being built: the layout may change.</p>
+  </div>
+</section>
+
+<div class="ds-sep"><hr class="divider" /></div>
+<div class="ds-doc" data-subnav="tabs">
+
+<section class="ds-section" id="overview"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Overview</h2>
+  <p class="ds-desc">Use a docs card to send the reader from a hub page (a start page, an overview) to a page about one subject. The picture in the top of the card shows the subject, so the reader sees what it is before reading. Both layouts have the same parts: visual, title, description. They differ in what the visual is and in what is clickable.</p>
+  <h3 class="ds-h3 ds-group">Which layout</h3>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col"></th><th scope="col">Foundations card</th><th scope="col">Components card</th></tr></thead><tbody>
+    <tr><th scope="row">Subject</th><td>A foundation or a token group: colors, typography, spacing, elevation, motion</td><td>A component the reader can try: button, switch, checkbox, input</td></tr>
+    <tr><th scope="row">Visual</th><td>A small picture built from the tokens (static or one movement on hover). It is decoration: <code>aria-hidden</code></td><td>The real ECO component, working. It is content the reader can use</td></tr>
+    <tr><th scope="row">Clickable</th><td>The whole card is one link (<code>a.ds-card</code>)</td><td>Only the action link at the bottom (<code>div.ds-card</code>). The component in the visual must stay clickable, and a link cannot contain controls</td></tr>
+    <tr><th scope="row">Hover</th><td>Border darkens, the picture can move (the dot)</td><td>The component reacts as itself. The card does not change</td></tr>
+  </tbody></table></div>
+  <div class="pc-note"><span class="mo-ic" aria-hidden="true">info</span><p>Use six cards or fewer in a set, in the grid of <code>.ds-cards</code> (1 column, 2 from 640px, 3 from 1024px). Every card in a set has the same layout.</p></div>
+</div></section>
+
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="foundations-card"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Foundations card</h2>
+  <p class="ds-desc">The whole card is a link. The visual is built from the tokens it describes, so it cannot drift from the system. Hover or focus a card: the dot moves.</p>
+  <div class="ds-cards pc-cards" id="pc-found">
+    <a class="ds-card" href="colors.html">
+      <div class="ds-card__visual" aria-hidden="true"><div class="mini-swatches">
+        <span style="background: var(--color-surface-100)"></span><span style="background: var(--color-surface-50)"></span><span style="background: var(--color-surface-raised-secondary)"></span><span style="background: var(--color-accent-default)"></span><span style="background: var(--color-surface-information-default)"></span>
+      </div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Colors</span><p class="ds-card__desc">Primitive colors and semantic tokens for text, border and status.</p></div>
+    </a>
+    <a class="ds-card" href="colors.html">
+      <div class="ds-card__visual" aria-hidden="true"><div class="mini-type"><b>Aa</b><span>Breuer Condensed</span></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Typography</span><p class="ds-card__desc">Display, headline, title, body and label styles.</p></div>
+    </a>
+    <a class="ds-card" href="layout.html">
+      <div class="ds-card__visual" aria-hidden="true"><div class="hx-cols"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Grid</span><p class="ds-card__desc">Twelve columns that adapt over five breakpoints.</p></div>
+    </a>
+    <a class="ds-card" href="layout-spacing.html">
+      <div class="ds-card__visual" aria-hidden="true"><div class="hx-space"><span style="height: var(--dimension-spacing-space-16)"></span><span style="height: var(--dimension-spacing-space-24)"></span><span style="height: var(--dimension-spacing-space-40)"></span><span style="height: var(--dimension-spacing-space-56)"></span><span style="height: var(--dimension-spacing-space-80)"></span></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Spacing</span><p class="ds-card__desc">One fixed scale for margin, padding and gap.</p></div>
+    </a>
+    <a class="ds-card" href="elevation.html">
+      <div class="ds-card__visual" aria-hidden="true"><div class="hx-elev"><span style="box-shadow: var(--shadow-elevation-b-20)"></span><span style="box-shadow: var(--shadow-elevation-b-40)"></span><span style="box-shadow: var(--shadow-elevation-b-80)"></span></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Shadows &amp; Elevation</span><p class="ds-card__desc">Shadow levels for cards, drawers and modals.</p></div>
+    </a>
+    <a class="ds-card" href="motion.html">
+      <div class="ds-card__visual" aria-hidden="true"><div class="hx-track"><span class="hx-dot"></span></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Motion</span><p class="ds-card__desc">Easing curves and durations for transitions.</p></div>
+    </a>
+  </div>
+  <h3 class="ds-h3 ds-group">Anatomy</h3>
+  <ol class="pc-legend">
+    <li><span class="badge-number badge-number--large">1</span><p><strong>Card</strong>: <code>a.ds-card</code>. The whole card is the link, with the hover border and the focus ring of <code>docs.css</code>.</p></li>
+    <li><span class="badge-number badge-number--large">2</span><p><strong>Visual</strong>: <code>.ds-card__visual</code> with <code>aria-hidden="true"</code>. One small picture from the tokens: <code>.mini-swatches</code>, <code>.mini-type</code>, <code>.hx-cols</code>, <code>.hx-space</code>, <code>.hx-elev</code> or <code>.hx-track</code> with <code>.hx-dot</code>.</p></li>
+    <li><span class="badge-number badge-number--large">3</span><p><strong>Title</strong>: <code>.ds-card__title</code>, one to three words.</p></li>
+    <li><span class="badge-number badge-number--large">4</span><p><strong>Description</strong>: <code>.ds-card__desc</code>, one sentence.</p></li>
+  </ol>
+  <h3 class="ds-h3 ds-group">Markup</h3>
+  <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pc-code-found" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pc-code-found" data-src="#pc-found .ds-card:nth-child(6)"></pre></div>
+</div></section>
+
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="components-card"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Components card</h2>
+  <p class="ds-desc">The card is a <code>div</code>: the component in the visual is real and the reader can use it, so the card cannot be a link. The action link at the bottom goes to the component page. The visual is centred and the stack can hold more than one state.</p>
+  <div class="ds-cards pc-cards" id="pc-comp">
+    <div class="ds-card">
+      <div class="ds-card__visual"><div class="hx-stack"><button type="button" class="btn btn--primary btn--md"><span class="btn__label">Place order</span></button><button type="button" class="btn btn--secondary btn--md"><span class="btn__label">Cancel</span></button></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Button</span><p class="ds-card__desc">Actions in six variants and four sizes.</p><a class="action-link action-link--medium" href="../components/button.html"><span class="action-link__label">Button</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></a></div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card__visual"><div class="hx-stack"><label class="form-switch-item"><input type="checkbox" role="switch" checked /><span>Email notifications</span></label><label class="form-switch-item"><input type="checkbox" role="switch" /><span>SMS notifications</span></label></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Switch</span><p class="ds-card__desc">An immediate on/off setting.</p><a class="action-link action-link--medium" href="../components/switch.html"><span class="action-link__label">Switch</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></a></div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card__visual"><div class="hx-stack"><label class="form-checkbox-item"><input type="checkbox" checked /><span>Work gloves</span></label><label class="form-checkbox-item"><input type="checkbox" /><span>Safety boots</span></label></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Checkbox</span><p class="ds-card__desc">Pick none, one or several options.</p><a class="action-link action-link--medium" href="../components/checkbox.html"><span class="action-link__label">Checkbox</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></a></div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card__visual"><div class="form-field" style="width:100%;max-width:280px"><label class="form-label form-label--sm" for="pc-in">Article number</label><div class="input-wrap"><div class="input-box"><input class="form-input" id="pc-in" type="text" placeholder="Search" /></div></div></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Input</span><p class="ds-card__desc">Single-line text with label and states.</p><a class="action-link action-link--medium" href="../components/input.html"><span class="action-link__label">Input</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></a></div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card__visual"><div class="pill-segment-control" role="group" aria-label="Select view"><span class="pill-segment-control__thumb" aria-hidden="true"></span><button type="button" class="pill-segment-control__btn pill-segment-control__btn--active">Retail</button><button type="button" class="pill-segment-control__btn">Business</button></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Pill segment control</span><p class="ds-card__desc">Switch between two related views.</p><a class="action-link action-link--medium" href="../components/segment-control.html"><span class="action-link__label">Pill segment control</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></a></div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-card__visual"><div class="hx-row-x"><span class="badge-basic badge-basic--success badge-basic--weak">In stock</span><span class="badge-basic badge-basic--warning badge-basic--weak">Few left</span><span class="badge-basic badge-basic--neutral-grey badge-basic--weaker">New</span></div></div>
+      <div class="ds-card__body"><span class="ds-card__title">Badge</span><p class="ds-card__desc">Status, label and count markers.</p><a class="action-link action-link--medium" href="../components/badge.html"><span class="action-link__label">Badge</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></a></div>
+    </div>
+  </div>
+  <h3 class="ds-h3 ds-group">Anatomy</h3>
+  <ol class="pc-legend">
+    <li><span class="badge-number badge-number--large">1</span><p><strong>Card</strong>: <code>div.ds-card</code>. Not a link.</p></li>
+    <li><span class="badge-number badge-number--large">2</span><p><strong>Visual</strong>: <code>.ds-card__visual</code> without <code>aria-hidden</code>. The real component, linked from its shared CSS. Several states of one component go in <code>.hx-stack</code> (a column) or <code>.hx-row-x</code> (a wrapping row).</p></li>
+    <li><span class="badge-number badge-number--large">3</span><p><strong>Title and description</strong>: as in the Foundations card.</p></li>
+    <li><span class="badge-number badge-number--large">4</span><p><strong>Action link</strong>: <code>.action-link</code>, pushed to the bottom of the card, to the component page.</p></li>
+  </ol>
+  <h3 class="ds-h3 ds-group">Markup</h3>
+  <div class="ds-code"><div class="ds-code__bar"><span>HTML</span><button type="button" class="mo-copy" data-copy="pc-code-comp" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="pc-code-comp" data-src="#pc-comp .ds-card:nth-child(2)"></pre></div>
+</div></section>
+
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="usage"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Usage</h2>
+  <ul class="ds-bullets">
+    <li>Do not put a control inside a Foundations card. The card is a link, and a link must not contain buttons or inputs.</li>
+    <li>Do not make a Components card a link. Use the action link.</li>
+    <li>Do not mix the two layouts in one grid.</li>
+    <li>Take every visual from tokens and shared component CSS. A picture that has its own hex or pixel values drifts from the system.</li>
+    <li>Keep the live component small: one or two states, no more than the visual can hold at 375px.</li>
+  </ul>
+</div></section>
+
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="open-points"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Open points</h2>
+  <ul class="ds-bullets">
+    <li><strong>Where the CSS lives.</strong> The <code>.hx-*</code> visual rules are copied into this page. The docs start page (<code>index.html</code>) had them page-local. Proposal: move them to a shared file (for example <code>eco-design-system/cards-visual.css</code>) so both pages link one source. Not done yet; it needs a decision.</li>
+    <li><strong>Start page.</strong> The start page now uses wide entry rows for Foundations and Components. These cards are used where a set of subjects is listed.</li>
+    <li><strong>Names.</strong> The class names (<code>.hx-*</code>, <code>.mini-*</code>) belong to the old split between pages. A shared file is the time to rename them.</li>
+  </ul>
+</div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  // print the real markup of a live card, indented, so the code never drifts from the example
+  document.querySelectorAll('pre[data-src]').forEach(function (pre) {
+    var src = document.querySelector(pre.getAttribute('data-src'));
+    if (!src) return;
+    var html = src.outerHTML.replace(/\s*(<\/?(div|a|span|button|label|input|p|b)\b)/g, function (m, t) { return t; });
+    var out = '', depth = 0;
+    html.replace(/(<[^>]+>|[^<]+)/g, function (tok) {
+      if (/^<\//.test(tok)) { depth = Math.max(0, depth - 1); out += '  '.repeat(depth) + tok + '\n'; }
+      else if (/^</.test(tok)) { out += '  '.repeat(depth) + tok + '\n'; if (!/\/>$/.test(tok) && !/^<(input|br|img)\b/.test(tok)) depth++; }
+      else if (tok.trim()) out += '  '.repeat(depth) + tok.trim() + '\n';
+    });
+    pre.textContent = out.trim();
+  });
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

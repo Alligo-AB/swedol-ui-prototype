@@ -97,6 +97,8 @@ States (all tiles, fill `surface-raised-primary`): **Hover** 1px `border-hover`;
 
 ### CSS
 
+**Square on iOS (2026-10-27):** `checkbox.css` sets `border-radius: 0` on the input. iOS rounds `appearance: none` checkboxes by default; the ECO checkbox is always square.
+
 Link the shared stylesheet. Never copy its rules into a page, and never write a parallel version:
 
 ```html

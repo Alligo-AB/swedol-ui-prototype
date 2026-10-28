@@ -21,10 +21,13 @@
     figure.mount({ stage: el, svg, read: { textContent: "" } }, figure.range[1]); // no read-out on a card
     if (el.hasAttribute("data-play") && figure.tour) addHoverTour(el, figure);
   };
-  document.querySelectorAll("[data-hairline-card][data-src]").forEach((el) => {
+  /* HLmount(root): mounts every figure inside root; runs once for the page, and pages that add figures later call it on the new part */
+  const mountAll = (root) => root.querySelectorAll("[data-hairline-card][data-src]").forEach((el) => {
     fetch(el.dataset.src)
       .then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); })
       .then((src) => new Function("HL", "hairline", src)(HL, mountInto(el))) // the figure's own scope; it calls hairline({...}) itself
       .catch((e) => console.error("hairline card " + el.dataset.hairlineCard + ": " + e.message));
   });
+  window.HLmount = mountAll;
+  mountAll(document);
 })();

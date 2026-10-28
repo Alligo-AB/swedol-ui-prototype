@@ -75,7 +75,7 @@ The item has no hover or focus of its own. It reflects two things, set on the ro
 Hover and focus: drawn by the container row (`eco-menu`). Check box, radio and switch parts are **presentational** (`aria-hidden`). Who carries the state:
 
 - **Inside a container row** (`role="option"`): `aria-selected` / `aria-disabled` on the row. The container handles click and keys.
-- **Standalone item with a control**: the `.list-item` itself is `role="checkbox"`, `"radio"` or `"switch"` (switch wins over check, check over radio) with `tabindex="0"` and `aria-checked`. Component CSS gives it `cursor: pointer` and a 2px `border-focus` ring (offset 2px); nothing else.
+- **Standalone item with a control**: the `.list-item` itself is `role="checkbox"`, `"radio"` or `"switch"` (switch wins over check, check over radio) with `tabindex="0"` and `aria-checked`. Component CSS gives it `cursor: pointer`, a 2px `border-focus` ring (offset 2px) and, while it is hovered, the eco-checkbox / eco-radio hover on its check box or radio part (unchecked: `surface-raised-secondary` fill + `border-hover`; checked check box: `surface-50`), added 2026-10-28 because no container row draws a hover there (docs filter drawer). Nothing else.
 
 Behavior for standalone items (script on the Code page, copy it with the markup): click, Space or Enter toggles `aria-checked`; a radio only selects, and clears the others inside its `role="radiogroup"`; in a group there is one tab stop (the checked radio, others `tabindex="-1"`) and Arrow keys move and select (wraps). `aria-disabled="true"` ignores clicks and keys, with `tabindex="-1"`. CSS reads both `aria-selected="true"` and `aria-checked="true"`.
 
@@ -119,7 +119,7 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 
 1. **Never hardcode design tokens** — every color, spacing and border is a `var(--…)` (see `eco-tokens`). The 8px gap uses `--dimension-spacing-space-8`; the 20/16/48px element sizes are Figma sizes without a token.
 2. **Mobile-first, switch at `md` (769px)**, never `sm`. Verify with `getComputedStyle` at ~375px, ~700px and ~1024px+ (Large label 16/22, 16/22, 17/24; trailing icon 20/20/24).
-3. **The container owns the row.** Never add height, divider or hover styles to `.list-item` (focus ring and pointer only for a standalone item with a `role`); never put a real `<input>` inside an option row.
+3. **The container owns the row.** Never add height, divider or hover styles to `.list-item` (focus ring, pointer and the control part's hover only for a standalone item with a `role`); never put a real `<input>` inside an option row.
 4. **State by attribute:** `aria-selected` (row in a container) or `aria-checked` (standalone `role` item), plus `aria-disabled`, on the `.list-item` or an ancestor. The visual (check, dot, frame, switch) must match the attribute. Keep `aria-checked` in sync when toggling.
 5. **One leading type per list.** Do not mix check boxes with icons in the same list.
 6. **Keep the label on one line**; use trailing text only for a short number or value.

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tag: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/tag.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .pg-grid { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); width: 100%; }
+    @media (min-width: 769px) { .pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .pg-cell { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .pg-cell > span:first-child { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pg-grey { padding: 16px; background: var(--color-surface-raised-secondary); }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="tag.html" class="breadcrumb-item">Tag</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Status and navigation</span><span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span></div>
+    <h1 class="ds-title">Tag</h1>
+    <p class="ds-lead">A tag shows an <strong>active filter</strong> above a product list or a search result. Its × button removes the filter.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=326-7714" target="_blank" rel="noopener">Tag</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Tag"><a class="tab" href="tag.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="tag-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="tag-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Part</th><th scope="col">Use</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note">Figma binds <code>border-secondary</code> to the White tag, but with a border width of 0, so no border is drawn.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">State</th><th scope="col">Height</th><th scope="col">Padding (top right bottom left)</th><th scope="col">Gap</th><th scope="col">Icon</th></tr></thead><tbody><tr><th scope="row">Medium</th><td>Default</td><td>32px</td><td>9 12 9 12</td><td>–</td><td>–</td></tr><tr><th scope="row">Medium</th><td>Remove</td><td>32px (fixed, <code>space-32</code>)</td><td>8 8 8 12</td><td>6px mobile, 8px from 769px</td><td>16px</td></tr><tr><th scope="row">Small</th><td>Default</td><td>24px</td><td>5 8 5 8</td><td>–</td><td>–</td></tr><tr><th scope="row">Small</th><td>Remove</td><td>24px</td><td>4 6 4 8</td><td>4px</td><td>16px</td></tr></tbody></table></div><p class="ds-desc ds-note">Values from Figma. Medium is 32px in both states; Medium Remove has a fixed height (<code>space-32</code>) around 8px padding. The × icon is 16px in both sizes.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="measurements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Measurements</h2><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="Padding of the tag in four configurations" style="--k:3"><div class="measure__item"><span class="measure__name">1 · Medium</span><div class="measure__obj"><span class="tag measure__subject">Tag</span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">2 · Medium, Remove</span><div class="measure__obj"><span class="tag tag--remove measure__subject">Tag<button type="button" class="tag__remove" tabindex="-1" aria-label="Remove Tag"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">3 · Small</span><div class="measure__obj"><span class="tag tag--sm measure__subject">Tag</span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div><div class="measure__item"><span class="measure__name">4 · Small, Remove</span><div class="measure__obj"><span class="tag tag--sm tag--remove measure__subject">Tag<button type="button" class="tag__remove" tabindex="-1" aria-label="Remove Tag"><span class="material-symbols-outlined" aria-hidden="true">close</span></button></span><i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i><b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b></div></div></div></div><figcaption class="ds-fig__cap">The tag at 3× size. The numbers are read from the component and are real pixels.</figcaption></figure></div><h3 class="ds-h3 ds-group">Spacing</h3><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Gap between label and × (Medium)</th><td>6px below 769px, <code>space-8</code> from 769px</td></tr><tr><th scope="row">Gap between label and × (Small)</th><td><code>space-4</code></td></tr><tr><th scope="row">Gap between tags in a row</th><td><code>space-8</code>, set on the parent</td></tr></tbody></table></div><p class="ds-desc ds-note">9px, 6px and 5px have no spacing token; they are as drawn in Figma and written with a comment in <code>tag.css</code>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">State</th><th scope="col">Container</th><th scope="col">Label</th><th scope="col">Icon</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Default, Grey</th><td><code>surface-opacity-black-10</code></td><td><code>text-primary</code></td><td>–</td><td>Not interactive.</td></tr><tr><th scope="row">Default, White</th><td><code>surface-action-2</code></td><td><code>text-primary</code></td><td>–</td><td>Not interactive.</td></tr><tr><th scope="row">Remove, Grey</th><td><code>surface-opacity-black-10</code></td><td><code>text-primary</code></td><td><code>close</code>, <code>icon-primary</code></td><td>The × is a button.</td></tr><tr><th scope="row">Remove, White</th><td><code>surface-action-2</code></td><td><code>text-primary</code></td><td><code>close</code>, <code>icon-primary</code></td><td>The × is a button.</td></tr><tr><th scope="row">Focus (× has keyboard focus)</th><td>2px <code>border-focus</code> ring around the whole tag, 2px offset</td><td><code>text-primary</code></td><td>No own ring</td><td>Only on <code>:focus-visible</code>, not on a mouse click.</td></tr></tbody></table></div><p class="ds-desc ds-note">Figma has no focus or hover state yet. The focus ring uses the same token, width and offset as the other ECO components; a hover state is open for design.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="typography"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Typography</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Font</th><th scope="col">Size / line height</th><th scope="col">Letter spacing</th><th scope="col">Weight</th><th scope="col">Case</th></tr></thead><tbody><tr><th scope="row">Label</th><td>Breuer Condensed</td><td>14/14</td><td>0.28px</td><td>600 (Figma Bold)</td><td>Normal</td></tr></tbody></table></div><p class="ds-desc ds-note">No ECO text style is 14/14 with 0.28px letter spacing (Label Large mobile and Alt-Label Small are 14/14 with 0.56px, uppercase). Flagged for design. The same on every breakpoint.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Container</th><td><code>tag</code></td><td>A <code>span</code>: Medium, Grey.</td></tr><tr><th scope="row">Variant</th><td><code>tag--white</code></td><td>White surface.</td></tr><tr><th scope="row">Size</th><td><code>tag--sm</code></td><td>Small.</td></tr><tr><th scope="row">State</th><td><code>tag--remove</code></td><td>Padding for the ×.</td></tr><tr><th scope="row">Remove button</th><td><code>tag__remove</code></td><td>A <code>button</code> with <code>aria-label</code> and a <code>close</code> Material Symbol.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="behavior"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Behavior</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Result</th></tr></thead><tbody><tr><th scope="row">Input</th><td>Only the × reacts: click, Enter or Space removes the tag.</td></tr><tr><th scope="row">Focus after removing</th><td>The next ×, or the previous one when it was the last.</td></tr><tr><th scope="row">Breakpoint</th><td>Medium Remove gap: 6px below 769px, 8px from 769px.</td></tr><tr><th scope="row">Motion</th><td>None.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Semantics</th><td>The tag is text, never a <code>button</code> or a link. The × is a native <code>&lt;button type="button"&gt;</code>.</td></tr><tr><th scope="row">Name</th><td>The × has <code>aria-label="Remove &lt;label&gt;"</code> (WCAG 4.1.2).</td></tr><tr><th scope="row">Focus</th><td>When the × has <code>:focus-visible</code>, a ring is drawn around the whole tag (WCAG 2.4.7). After removing, focus moves to a neighbour, never to the page start (WCAG 2.4.3).</td></tr><tr><th scope="row">Target size</th><td>The × is 16px. Leave space around it, so the target with its spacing reaches 24×24px (WCAG 2.5.8).</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Container, Grey', 'Default background', 'surface-opacity-black-10'], ['Container, White', 'On grey surfaces', 'surface-action-2'],
+    ['Label', 'Text', 'text-primary'], ['× icon', 'Remove button', 'icon-primary'], ['Focus', 'Ring around the tag', 'border-focus']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

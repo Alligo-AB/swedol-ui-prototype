@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article Highlight Single Row Card: Storyblok widget – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: the placeholder frame only; no component or token values. Same screenshot frame as the Group Card page (.sb-*, .ah-narrow). */
+    .sb-stage.ds-fig__stage { display: block; padding: 0; min-height: 0; background: var(--color-surface-raised-primary); }
+    .sb-shot { position: relative; }
+    .sb-shot img { display: block; width: 100%; height: auto; }
+    .ah-narrow { max-width: 480px; }
+    .tbd { display: flex; gap: var(--dimension-spacing-space-12); padding: var(--dimension-spacing-space-16); margin: var(--dimension-spacing-space-16) 0 0; border: 1px dashed var(--color-border-dark); background: var(--color-surface-raised-secondary); }   /* a placeholder: to be replaced when the Storyblok schema or the Figma node is given */
+    .tbd .mo-ic { font-size: 24px; flex: 0 0 auto; color: var(--color-icon-primary); }
+    .tbd p { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md: 16/22 mobile, 17/24 from 769px */
+    @media (min-width: 769px) { .tbd p { font-size: 17px; line-height: 24px; } }
+    .tbd--shot { min-height: 160px; align-items: center; justify-content: center; text-align: center; }
+    .ds-prose > .ds-table-wrap { margin-top: var(--dimension-spacing-space-16); }
+    code { font-size: 0.9em; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="cards.html" class="breadcrumb-item">Cards</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Article Highlight Single Row Card</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Cards</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="The page is started. Storyblok fields and Figma details are still to be added.">In progress</span></div>
+    <h1 class="ds-title">Article Highlight Single Row Card</h1>
+    <p class="ds-lead">A card that promotes one article, campaign or brand in a single row. <span data-tbd>[To be confirmed from Figma: layout of the row, image side, what a card can hold.]</span></p>
+    <p class="ds-lead">How an editor adds and sets up the AH Single Row widget in Storyblok, and its settings. The page is a skeleton, built like the <a class="inline-link inline-link--large inline-link--secondary" href="ah-group-card-widget-storyblok.html">Article Highlight Group Card</a> page. Every grey dashed box is a placeholder.</p>
+  </div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Article Highlight Single Row Card"><a class="tab" href="ah-single-row-card-widget.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="ah-single-row-card-widget-storyblok.html"><span class="tab__label">Storyblok</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+
+<section class="ds-section" id="widget"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">AH Single Row widget</h2>
+  <p class="ds-desc">The Article Highlight Single Row Card is available as a widget in the admin tool Storyblok, for the content managers and content creators of our e-commerce sites. In Storyblok the widget is called <strong>[name to be confirmed]</strong> (technical name <code>[to be confirmed]</code>).</p>
+  <p class="ds-desc">The widget is built from these blocks:</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Block</th><th scope="col">Technical name</th><th scope="col">Used for</th></tr></thead><tbody>
+    <tr><th scope="row">[Block name]</th><td><code>[technical-name]</code></td><td>[What it does]</td></tr>
+    <tr><th scope="row">[Block name]</th><td><code>[technical-name]</code></td><td>[What it does]</td></tr>
+  </tbody></table></div>
+  <div class="tbd"><span class="mo-ic" aria-hidden="true">edit_note</span><p><strong>To add:</strong> the block names and technical names from the Storyblok schema (pulled with the Storyblok CLI, <code>components pull</code>). Do not guess them.</p></div>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+
+
+<section class="ds-section" id="start"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Start</h2>
+  <p class="ds-desc">Add a section to the page, or pick an existing one, and place the widget in it with <strong>Add Block</strong>. <span data-tbd>[Folder and name in the Insert block list: to be confirmed.]</span></p>
+  <div class="ds-figs ds-figs--one"><figure class="ds-fig ah-narrow"><div class="tbd tbd--shot"><span class="mo-ic" aria-hidden="true">image</span><p>Screenshot: Add Block in the Components list of the section.</p></div></figure></div>
+  <div class="ds-figs ds-figs--one"><figure class="ds-fig ah-narrow"><div class="tbd tbd--shot"><span class="mo-ic" aria-hidden="true">image</span><p>Screenshot: the widget in the Insert block list.</p></div></figure></div>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+
+<section class="ds-section" id="settings"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">1. Settings</h2>
+  <p class="ds-desc">One heading per field or group of fields, numbered 1a, 1b… The numbers on the screenshots match the numbers in the headings (a <code>badge-number sb-pin</code> on the picture, as on the Group Card page).</p>
+  <h3 class="ds-h3 ds-group" id="field-a">1a. [Field name]</h3>
+  <p class="ds-desc">[What the field does, its options and default.]</p>
+  <div class="ds-figs ds-figs--one"><figure class="ds-fig ah-narrow"><div class="tbd tbd--shot"><span class="mo-ic" aria-hidden="true">image</span><p>Screenshot of the field in Storyblok, with a number.</p></div></figure></div>
+  <h3 class="ds-h3 ds-group" id="field-b">1b. [Field name]</h3>
+  <p class="ds-desc">[Text, and a before/after pair when the field changes how the card looks.]</p>
+  <div class="tbd"><span class="mo-ic" aria-hidden="true">edit_note</span><p><strong>To add:</strong> the field names, options and defaults from the Storyblok schema, and a screenshot of each field and of the card it produces.</p></div>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+
+<section class="ds-section" id="design"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Design</h2>
+  <p class="ds-desc">Measurements, colors, text styles and the behaviour at the five breakpoints come from Figma, not from guesses.</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">xs</th><th scope="col">sm</th><th scope="col">md</th><th scope="col">lg</th><th scope="col">xl</th></tr></thead><tbody>
+    <tr><th scope="row">[Image]</th><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td></tr>
+    <tr><th scope="row">[Text block]</th><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td><td>[ ]</td></tr>
+  </tbody></table></div>
+  <div class="tbd"><span class="mo-ic" aria-hidden="true">edit_note</span><p><strong>To add:</strong> one Figma frame link per breakpoint (see the breakpoints in <a class="inline-link inline-link--large inline-link--secondary" href="../foundations/layout-breakpoints.html">Layout</a>), then the measures and the live example.</p></div>
+</div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

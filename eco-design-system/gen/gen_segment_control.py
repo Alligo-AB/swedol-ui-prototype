@@ -2,7 +2,7 @@ from build import *
 
 FIGMA = 'https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23144-268049'
 SLUG = 'segment-control'
-BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design (linked in the intro).">Not verified with Figma</span>'
+BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="Built from the specification skill, not compared against the Figma design (linked in the intro).">In progress</span>'
 
 STYLE = r'''    .pg-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; }
     .pg-col { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }

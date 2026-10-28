@@ -1,6 +1,6 @@
 ---
 name: eco-docs-table
-description: Use when building a data table (rows and columns of text, check icons or small controls) — row and header heights, cell padding, lines, header background and the card shadow. **The table of the documentation pages, not a product component** (a product table component is planned; its page is `Docs table` in the Documentation group of Foundations, one page). A first version: more variants and states (sorting, selection, sticky header, empty state) are added later. Not for layout, and not for a single key/value list.
+description: Use when building a data table (rows and columns of text, check icons or small controls) — row and header heights, cell padding, lines, header background and the card shadow. **The table of the documentation pages, not a product component** (a product table component is planned; its page is `Docs table`, one page, linked only from the ECO docs – internal section of the root index.html). A first version: more variants and states (sorting, selection, sticky header, empty state) are added later. Not for layout, and not for a single key/value list.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.

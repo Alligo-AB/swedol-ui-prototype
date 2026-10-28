@@ -22,14 +22,15 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
       overview: { id: 'components-overview', t: 'Component Overview', href: D + 'components-overview.html' },
       groups: [
         { title: 'Actions', items: [c('button', 'Button'), c('button-group', 'Button group')] },
-        { title: 'Form', items: [c('checkbox', 'Checkbox'), c('input', 'Input'), c('textarea', 'Text area'), c('radio', 'Radio button'), c('select', 'Select'), c('switch', 'Switch'), c('tabs', 'Tabs'), c('segment-control', 'Pill segment control'), c('range', 'Range'), c('icon-picker', 'Icon picker')] },
-        { title: 'Notifications', items: [c('notifications', 'Notifications guide', { children: [c('toast', 'Toast'), c('toast-ecom', 'E-Com Toast'), c('modal', 'Modal'), c('banner', 'Banner'), c('inline', 'Inline notification')] })] },
+        { title: 'Form', items: [c('checkbox', 'Checkbox'), c('chip', 'Chip'), c('input', 'Input'), c('textarea', 'Text area'), c('radio', 'Radio button'), c('select', 'Select'), c('switch', 'Switch'), c('tabs', 'Tabs'), c('segment-control', 'Pill segment control'), c('range', 'Range'), c('icon-picker', 'Icon picker')] },
+        { title: 'Notifications', items: [c('notifications', 'Notifications', { children: [c('toast', 'Toast'), c('toast-ecom', 'E-Com Toast'), c('modal', 'Modal'), c('banner', 'Banner'), c('inline', 'Inline notification')] })] },
         { title: 'Menus, lists and dividers', items: [c('menu', 'Menu'), c('list-item', 'List Item'), c('divider', 'Divider')] },
-        { title: 'Links', items: [c('links-guide', 'Links guide', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
-        { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb', { children: [c('breadcrumb-base', 'Base')] }), c('pagination', 'Pagination'), c('tooltip', 'Tooltip')] },
+        { title: 'Links', items: [c('links-guide', 'Links', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
+        { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb', { children: [c('breadcrumb-base', 'Base')] }), c('pagination', 'Pagination'), c('tag', 'Tag'), c('tooltip', 'Tooltip')] },
         { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible')] },
-        { title: 'Patterns', items: [c('patterns-overview', 'Patterns overview'), c('breadcrumb-bar', 'Breadcrumb Bar'), c('hero-banner-widget', 'Hero banner'), { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }, f('docs-table', 'Docs table')] },
-        { title: 'Storyblok widget', items: [c('hero-banner-widget-storyblok', 'Hero banner widget', { sb: true }), c('collapsible-storyblok', 'Collapsible', { sb: true })] },
+        { title: 'Cards', items: [c('cards', 'Cards', { children: [c('ah-group-card-widget-storyblok', 'Article Highlight Group Card', { sb: true }), c('ah-single-row-card-widget', 'Article Highlight Single Row Card')] })] },
+        { title: 'Patterns', items: [c('patterns-overview', 'Patterns overview'), c('breadcrumb-bar', 'Breadcrumb Bar'), c('hero-banner-widget', 'Hero banner'), { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }] },
+        { title: 'Storyblok widget', items: [c('hero-banner-widget-storyblok', 'Hero banner widget', { sb: true }), c('ah-group-card-widget-storyblok', 'AH Group widget', { sb: true }), c('ah-single-row-card-widget-storyblok', 'AH Single Row widget', { sb: true }), c('collapsible-storyblok', 'Collapsible', { sb: true })] },
         { title: 'Drafts', items: [c('role-tier-card', 'Role tier card')] }
       ]
     },
@@ -49,7 +50,10 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     }
   };
 
+  window.ECO_NAV = NAV;   // read by the start page (index.html) to count the pages live
+
   var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code|storyblok|usage|reference|primitives|tokens|breakpoints|spacing)$/, '');
+  var fullId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '');   // file name incl. -storyblok: the Storyblok group items match on it
   var cur = null;   // { cat, id }
   Object.keys(NAV).forEach(function (k) {
     var n = NAV[k];
@@ -57,7 +61,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     n.groups.forEach(function (g) {
       g.items.forEach(function (it) {
         if (it.id === pageId) cur = { cat: k };
-        (it.children || []).forEach(function (ch) { if (ch.id === pageId) cur = { cat: k }; });
+        (it.children || []).forEach(function (ch) { if (ch.id === pageId || ch.id === fullId) cur = { cat: k }; });
       });
     });
   });
@@ -80,7 +84,6 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
   if (arriving && window.matchMedia('(min-width: 961px) and (max-width: 1599px)').matches) root.classList.add('dn-hold-rail');   // 961-1599px: the Navigation Rail itself slides in from the left
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
-  var fullId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '');   // file name incl. -storyblok: the Storyblok group items match on it
   function link(it, cls) {
     if (it.soon) return '<span class="dn-link dn-link--soon" aria-disabled="true">' + esc(it.t) + '</span>';
     var here = it.sb ? it.id === fullId : it.id === pageId && !/-storyblok$/.test(fullId);
@@ -89,11 +92,15 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
   function panelHtml(key) {
     var n = NAV[key];
     var h = '<div class="dn-item">' + link(n.overview) + '</div>';
-    n.groups.forEach(function (g) {
+    // Trial 2026-10-28: no group titles, one A-Z list after the overview (group titles stay in NAV for search and the start page); Storyblok widget and Drafts keep their titles, last
+    var all = [], kept = n.groups.filter(function (g) { return g.title === 'Storyblok widget' || g.title === 'Drafts'; });
+    n.groups.forEach(function (g) { if (kept.indexOf(g) > -1) return; g.items.forEach(function (it) { if (!all.some(function (a) { return a.href && a.href === it.href; })) all.push(it); }); });
+    all.sort(function (a, b) { return a.t.localeCompare(b.t, 'en', { sensitivity: 'base' }); });
+    [{ items: all }].concat(kept).forEach(function (g) {
       if (g.title) h += '<div class="dn-group">' + esc(g.title) + '</div>';
       g.items.forEach(function (it) {
         if (!it.children) { h += '<div class="dn-item">' + link(it) + '</div>'; return; }
-        var open = it.id === pageId || it.children.some(function (ch) { return ch.id === pageId; });
+        var open = it.id === pageId || it.children.some(function (ch) { return ch.id === pageId || ch.id === fullId; });
         h += '<div class="dn-item dn-item--parent">' + link(it) +
           '<button class="dn-chev" type="button" aria-expanded="' + open + '" aria-label="' + esc(it.t) + ' pages"><span class="dn-ms" aria-hidden="true">expand_more</span></button></div>' +
           '<div class="dn-sub"' + (open ? '' : ' hidden') + '>' + it.children.map(function (ch) { return '<div class="dn-item">' + link(ch) + '</div>'; }).join('') + '</div>';
@@ -224,7 +231,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     if (t && !sameUrl(t)) { try { sessionStorage.setItem('dn-noarrive', Date.now()); } catch (err) {} }
   });
   wrap.querySelector('.dn-rail').addEventListener('click', function (e) {   // any category in the rail (hover has already opened its panel): no reload, no arrival sequence
-    var d = e.target.closest('a.dn-dest[data-cat]');
+    var d = e.target.closest('a.dn-dest[data-cat], a.dn-home');   // the home button too: the rail is already out, it must not slide in again
     if (!d) return;
     if (sameUrl(d)) { e.preventDefault(); return; }
     try { sessionStorage.setItem('dn-noarrive', Date.now()); } catch (err) {}
@@ -254,6 +261,11 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
       '<button class="btn btn--blank btn--md btn--icon dn-bar__search" type="button" data-search aria-label="Search"><span class="btn__icon" aria-hidden="true">search</span></button></header>' +
     '<div class="dn-scrim"></div>' +
     '<nav class="dn-drawer" id="dn-drawer" aria-label="ECO Design System">' +
+      '<div class="dn-drawer__bar">' +
+        '<button class="btn btn--blank btn--md btn--icon dn-drawer__btn" type="button" aria-label="Close menu"><span class="btn__icon" aria-hidden="true">menu_open</span></button>' +
+        '<span class="dn-bar__div" aria-hidden="true"></span>' +
+        '<a class="btn btn--blank btn--md dn-bar__id" href="' + D + '"><span class="btn__label"><span class="dn-bar__mark"></span><span>ECO Design System <span class="dn-bar__v">V.1</span></span></span></a>' +
+      '</div>' +
       '<div class="dn-lv dn-lv1">' +
         cats.map(function (k) {
           if (NAV[k].direct) return '<a class="dn-mrow" href="' + NAV[k].overview.href + '"' + (cur && cur.cat === k ? ' aria-current="true"' : '') + '><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">' + NAV[k].icon + '</span><span class="dn-mrow__t">' + NAV[k].label + '</span></a>';
@@ -289,6 +301,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
   btn.addEventListener('click', function () { if (drawer.classList.contains('is-open')) { closeDrawer(); } else { openDrawer(); } });
   wrap.querySelector('.dn-scrim').addEventListener('click', closeDrawer);
   drawer.addEventListener('click', function (e) {
+    if (e.target.closest('.dn-drawer__btn')) { closeDrawer(); return; }
     var cat = e.target.closest('.dn-mrow[data-cat]');
     if (cat) { level(cat.getAttribute('data-cat')); return; }
     if (e.target.closest('.dn-back')) { drawer.classList.remove('is-l2'); return; }
@@ -312,8 +325,8 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     modal: 'dialog, dialogruta, modalruta, popup, fönster', banner: 'banderoll, kampanj, driftmeddelande, notis', inline: 'infogad, varning, felmeddelande, meddelande, notis',
     menu: 'meny, rullgardinsmeny, dropdown', 'list-item': 'listobjekt, listrad, rad, lista', divider: 'avdelare, skiljelinje, delare, linje, separator',
     'links-guide': 'länkar, länk, hyperlänk, guide', 'inline-link': 'textlänk, länk i text, brödtext', 'action-link': 'åtgärdslänk, länk, fristående',
-    'tile-link': 'länkkort, bricka, kort, ikonlänk', badge: 'märke, etikett, tagg, status, markering', breadcrumb: 'brödsmula, brödsmulor, sökväg, navigering', 'patterns-overview': 'mönster, pattern, komponent, skillnad, översikt, sammansatt', 'breadcrumb-base': 'brödsmula, enskild nivå, nivå, länk', 'breadcrumb-bar': 'brödsmulor, sökväg, navigering, rad, spår',
-    pagination: 'sidnumrering, paginering, ladda fler, visa fler, sidor', 'tooltip': 'verktygstips, tips, hjälptext, ballong', section: 'sektion, avsnitt, block, yta',
+    'tile-link': 'länkkort, bricka, kort, ikonlänk', badge: 'märke, etikett, tagg, status, markering', breadcrumb: 'brödsmula, brödsmulor, sökväg, navigering', cards: 'kort, kortgrupp, artikel, kampanj', 'patterns-overview': 'mönster, pattern, komponent, skillnad, översikt, sammansatt', 'breadcrumb-base': 'brödsmula, enskild nivå, nivå, länk', 'breadcrumb-bar': 'brödsmulor, sökväg, navigering, rad, spår',
+    pagination: 'sidnumrering, paginering, ladda fler, visa fler, sidor', tag: 'tagg, etikett, kategori, märkning, filter', 'tooltip': 'verktygstips, tips, hjälptext, ballong', section: 'sektion, avsnitt, block, yta',
     web: 'webb, storybook, bibliotek, kod, html, css', design: 'figma, bibliotek, komponenter, variabler', 'getting-help': 'hjälp, support, slack, feedback, fråga', 'introduction-for-developers': 'introduktion, utvecklare, kom igång, github, chromatic, jira', 'introduction-for-stakeholders': 'introduktion, intressenter, storybook, guide, kom igång', collapsible: 'fällbar, dragspel, expanderbar, fäll ut, accordion, faq', table: 'tabell, rader, kolumner, data', 'role-tier-card': 'rollkort, nivåkort, roller, behörighet, kort'
   };
   function fold(x) { return x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }   // å ä ö → a a o: "farg" finds "färg"

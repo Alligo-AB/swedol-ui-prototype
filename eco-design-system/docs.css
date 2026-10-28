@@ -36,6 +36,7 @@
   --duration-fast-4: 200ms;
   --duration-medium-1: 250ms;
   --duration-medium-2: 300ms;
+  --duration-medium-3: 350ms;
   --duration-slow-1: 450ms;
   --duration-slow-3: 550ms;
   --duration-slow-4: 600ms;
@@ -943,6 +944,10 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .mini-coll { display: flex; flex-direction: column; width: 200px; }
 .mini-coll span { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 16px; font-weight: 600; border-bottom: 1px solid var(--color-border-primary); }
 .mini-coll .mo-ic { font-size: 20px; }
+.mini-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; width: 220px; }
+.mini-chips span { display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 0 8px; border: 1px solid var(--color-border-primary); font-size: 16px; }
+.mini-chips .is-on { background: var(--color-surface-opacity-black-10); border-color: transparent; }
+.mini-chips .mo-ic { font-size: 14px; }
 .mini-table { display: flex; flex-direction: column; width: 200px; box-shadow: var(--shadow-elevation-b-20); background: var(--color-surface-raised-primary); }
 .mini-table span { height: 28px; border-bottom: 1px solid var(--color-border-secondary); }
 .mini-table span:first-child { background: var(--color-surface-02); }
@@ -1033,3 +1038,51 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 
 /* Hub cards as a list: no visual, one column */
 .ds-cards--list { grid-template-columns: 1fr; gap: 16px; }
+
+/* ── Filter drawer + filter bar (shared: tokens.html, components-overview.html; script filter-drawer.js) ── */
+.tk-filter .btn__badge, .ds-fbar .btn__badge { background: var(--color-surface-100); }   /* black count, not the red alert badge */
+.tk-filters { display: flex; flex-direction: column; margin: 0; }
+.tk-filters { border: 0; padding: 0; min-width: 0; }
+.tk-scrim { position: fixed; inset: 0; z-index: 9998; background: var(--color-surface-opacity-black-20); animation: tk-fade var(--duration-fast-4) var(--ease-decelerate-emphasized); }
+/* Same build as the drawers on mypages/users.html (header 24/32, content 0/32/32, footer 24/32); the space around is for this docs site only, a product drawer sits flush at the edge */
+.tk-drawer { position: fixed; z-index: 9999; top: 16px; right: 16px; bottom: 16px; width: min(500px, calc(100vw - 32px)); box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-drawer-right); animation: tk-in var(--duration-medium-3) var(--ease-decelerate-emphasized); }
+.tk-drawer__head { position: relative; z-index: 1; display: flex; align-items: center; flex-shrink: 0; padding: 24px 32px; transition: box-shadow var(--duration-fast-3) var(--ease-standard); }
+.tk-drawer__head.is-elevated { box-shadow: var(--shadow-elevation-b-60); }
+.tk-drawer__head-text { flex: 1; padding: 4px 0; }
+.tk-drawer__title { margin: 0; font-size: 26px; line-height: 26px; font-weight: 600; letter-spacing: 0; text-transform: uppercase; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* display-sm desktop */
+.tk-drawer__body { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; padding: 0 32px 32px; }
+.tk-drawer__lead { margin: 0; font-size: 17px; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-secondary); }   /* body-md desktop */
+.tk-row { display: flex; align-items: center; min-height: 48px; }   /* the container owns the row height (eco-list-item rule 3); 48px like a Large menu row */
+.tk-row .list-item { flex: 1; }
+.tk-drawer__foot { position: relative; z-index: 1; flex-shrink: 0; padding: 24px 32px; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-t-60); }
+.tk-drawer__foot .btn { width: 100%; }
+@media (max-width: 768px) {   /* xs/sm: same values as the drawers on mypages/users.html */
+  .tk-drawer { top: 0; right: 0; bottom: 0; width: min(500px, 100%); }
+  .tk-drawer__head { padding: 16px 24px; }
+  .tk-drawer__title { font-size: 22px; line-height: 22px; }   /* display-sm mobile */
+  .tk-drawer__body { gap: 16px; padding: 0 24px 24px; }
+  .tk-drawer__lead { font-size: 16px; line-height: 22px; }   /* body-md mobile */
+  .tk-drawer__foot { padding: 16px 24px; }
+}
+.tk-scrim.is-leaving { animation: tk-out var(--duration-fast-3) var(--ease-accelerate-generic) forwards; }
+.tk-drawer.is-leaving { animation: tk-out-right var(--duration-fast-3) var(--ease-accelerate-generic) forwards; }
+@keyframes tk-fade { from { opacity: 0; } }
+@keyframes tk-in { from { transform: translateX(100px); } }
+@keyframes tk-out { to { opacity: 0; } }
+@keyframes tk-out-right { to { transform: translateX(100px); } }
+@media (prefers-reduced-motion: reduce) { .tk-scrim, .tk-drawer { animation: none; } }
+.tk-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tk-legend { padding: 16px 0 4px; font-size: 14px; line-height: 14px; font-weight: 600; letter-spacing: 0.56px; text-transform: uppercase; color: var(--color-text-secondary); }   /* group label inside the drawer, same style as the Secondary navigation group label */
+.tk-filters + .tk-filters { border-top: 1px solid var(--color-border-secondary); }
+/* filter bar: "All filters" + one button per filter (components-overview.html); scrolls sideways when it does not fit */
+.ds-fbar { display: flex; gap: 8px; margin-top: var(--dimension-spacing-space-24); overflow-x: auto; scrollbar-width: none; }
+.ds-fbar::-webkit-scrollbar { display: none; }
+.ds-fbar .btn { position: relative; flex: none; }
+@media (min-width: 769px) { .ds-fbar { margin-top: var(--dimension-spacing-space-32); } }
+.ds-fcount { margin: 12px 0 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+.ds-card[hidden], .ds-section[hidden] { display: none; }
+/* active filters under the filter bar (components-overview.html): Remove tags (eco-tag, components/css/tag.css) + Clear filters as an action link */
+.ds-fbar .btn.is-active { --btn-bg: var(--color-surface-opacity-black-12); }   /* System selected fill */
+.ds-fpicked { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-8); margin-top: var(--dimension-spacing-space-16); }
+.ds-fpicked[hidden] { display: none; }
+.ds-fpicked button.action-link { padding: 0; border: 0; background: none; margin-left: var(--dimension-spacing-space-8); }   /* a button as action link */

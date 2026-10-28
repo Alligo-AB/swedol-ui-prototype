@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article Highlight Single Row Card – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <link rel="stylesheet" href="../../components/css/action-link.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: the placeholder frame only; no component or token values. Same screenshot frame as the Group Card page (.sb-*, .ah-narrow). */
+    .sb-stage.ds-fig__stage { display: block; padding: 0; min-height: 0; background: var(--color-surface-raised-primary); }
+    .sb-shot { position: relative; }
+    .sb-shot img { display: block; width: 100%; height: auto; }
+    .ah-narrow { max-width: 480px; }
+    .tbd { display: flex; gap: var(--dimension-spacing-space-12); padding: var(--dimension-spacing-space-16); margin: var(--dimension-spacing-space-16) 0 0; border: 1px dashed var(--color-border-dark); background: var(--color-surface-raised-secondary); }   /* a placeholder: to be replaced when the Storyblok schema or the Figma node is given */
+    .tbd .mo-ic { font-size: 24px; flex: 0 0 auto; color: var(--color-icon-primary); }
+    .tbd p { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md: 16/22 mobile, 17/24 from 769px */
+    @media (min-width: 769px) { .tbd p { font-size: 17px; line-height: 24px; } }
+    .tbd--shot { min-height: 160px; align-items: center; justify-content: center; text-align: center; }
+    .ds-prose > .ds-table-wrap { margin-top: var(--dimension-spacing-space-16); }
+    /* row layout copied from the docs start page (.hx-*), page-local until moved to a shared file */
+    .hx-h2 span { display: block; color: var(--color-text-tertiary); }
+    .hx-entry { display: grid; gap: var(--dimension-spacing-space-32); align-items: center; }
+    .hx-entry__text .ds-desc { margin-bottom: var(--dimension-spacing-space-24); }
+    .hx-panel { background: var(--color-surface-100); color: var(--color-text-primary-inverted); overflow: hidden; }
+    .hx-entry { color: inherit; text-decoration: none; }
+    .hx-entry:hover .action-link { color: var(--color-text-action-secondary-hover); }   /* hovering the row (text or picture) triggers the link's hover state */
+    .hx-entry:hover .action-link__label { text-decoration: underline; }
+    .hx-art { display: block; width: 100%; height: auto; }
+    .hx-art :is(.hx-art__grid, .hx-art__line, .hx-art__dash) { fill: none; }
+    .hx-art__grid { stroke: var(--color-surface-70); stroke-width: 1; opacity: .5; }
+    .hx-art__line { stroke: var(--color-surface-00); stroke-width: 2; }
+    .hx-art__line--accent { stroke: var(--ds-accent); }
+    .hx-art__line--soft { stroke: var(--color-surface-70); }
+    .hx-art__dash path, .hx-art__dash { stroke-dasharray: 6 6; stroke: var(--color-surface-70); stroke-width: 2; }
+    .hx-art__line--accent .hx-art__dash { stroke: var(--ds-accent); }
+    .hx-art__bg { fill: var(--color-surface-100); }
+    .hx-art__accent, .hx-art__accentfill, .hx-art__dot { fill: var(--ds-accent); }
+    .hx-art__dot { stroke: var(--color-surface-00); stroke-width: 2; fill: var(--color-surface-00); }
+    .hx-art__bgfill { fill: var(--color-surface-100); }
+    .hx-art__type { font-size: 96px; font-weight: 600; fill: var(--color-surface-00); }
+    .hx-art__check { fill: none; stroke: var(--ds-accent); stroke-width: 5; }
+    .hx-art__caret { stroke: var(--color-surface-00); stroke-width: 2; }
+    .hx-art__underline { stroke: var(--ds-accent); stroke-width: 4; }
+    .hx-art__lime { fill: var(--color-accent-default); }   /* Swedol accent */
+    .hx-art__red { fill: var(--color-primitive-color-brand-tools-accent-brand); }   /* Tools accent */
+    .hx-art__limeline { fill: none; stroke: var(--color-accent-default); stroke-width: 2; }
+    .hx-art__accentline { fill: none; stroke: var(--ds-accent); stroke-width: 2; }
+    @media (min-width: 769px) { .hx-entry { grid-template-columns: 5fr 7fr; gap: var(--dimension-spacing-space-64); } }
+    .pc-row { margin: var(--dimension-spacing-space-16) 0; }
+    code { font-size: 0.9em; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="cards.html" class="breadcrumb-item">Cards</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Article Highlight Single Row Card</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Cards</span><span class="badge-basic badge-basic--warning badge-basic--weak" title="The page is started. Storyblok fields and Figma details are still to be added.">In progress</span></div>
+    <h1 class="ds-title">Article Highlight Single Row Card</h1>
+    <p class="ds-lead">A card that promotes one article, campaign or brand in a single row. <span data-tbd>[To be confirmed from Figma: layout of the row, image side, what a card can hold.]</span></p>
+    <p class="ds-lead">This page shows the card and how to use it. The editor steps are on the Storyblok tab. The page is a skeleton, built like the <a class="inline-link inline-link--large inline-link--secondary" href="ah-group-card-widget-storyblok.html">Article Highlight Group Card</a> page. Every grey dashed box is a placeholder.</p>
+  </div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Article Highlight Single Row Card"><a class="tab" aria-current="page" href="ah-single-row-card-widget.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="ah-single-row-card-widget-storyblok.html"><span class="tab__label">Storyblok</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+
+<section class="ds-section" id="preview"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Preview</h2>
+  <p class="ds-desc">The Single Row Card as used on the docs start page: text on the left (heading, description, action link), one wide dark picture on the right. The whole row is one link. The row stacks on mobile and goes side by side from 769px. This is the example row with placeholder text; details are added later. <strong>The grey second line under the title is for the documentation site only.</strong> The real card has a single-line title.</p>
+  <a class="hx-entry pc-row" href="#preview">
+    <div class="hx-entry__text">
+      <h3 class="ds-h2 hx-h2">[Title.]<span>[Second line.]</span></h3>
+      <p class="ds-desc">[Supporting text, one or two sentences.]</p>
+      <span class="action-link action-link--large"><span class="action-link__label">[Link label]</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span>
+    </div>
+    <div class="hx-panel" aria-hidden="true">
+      <svg class="hx-art" viewBox="0 0 640 360" focusable="false">
+          <g class="hx-art__grid"><path d="M40 20V340"/><path d="M90 20V340"/><path d="M140 20V340"/><path d="M190 20V340"/><path d="M240 20V340"/><path d="M290 20V340"/><path d="M340 20V340"/><path d="M390 20V340"/><path d="M440 20V340"/><path d="M490 20V340"/><path d="M540 20V340"/><path d="M590 20V340"/></g>
+          <g class="hx-art__line">
+            <rect x="120" y="100" width="130" height="130" class="hx-art__bg"/>
+            <rect x="95" y="125" width="130" height="130" class="hx-art__bg"/>
+            <rect x="70" y="150" width="130" height="130" class="hx-art__accent"/>
+          </g>
+          <text x="290" y="140" class="hx-art__type">Aa</text>
+          <g>
+            <rect x="290" y="170" width="40" height="40" style="fill:var(--color-accent-default)"/>
+            <rect x="336" y="170" width="40" height="40" style="fill:var(--color-primitive-color-brand-tools-accent-brand)"/>
+            <rect x="382" y="170" width="40" height="40" style="fill:var(--color-surface-00)"/>
+            <rect x="428" y="170" width="40" height="40" style="fill:var(--color-surface-information-default)"/>
+            <rect x="474" y="170" width="40" height="40" style="fill:var(--color-surface-success-default)"/>
+          </g>
+          <g class="hx-art__line hx-art__line--accent">
+            <path d="M290 300C390 300 430 236 560 236" />
+            <path d="M530 50H600M530 130H600" class="hx-art__dash"/>
+            <path d="M565 62V118M559 70l6-8 6 8M559 110l6 8 6-8"/>
+          </g>
+          <circle cx="560" cy="236" r="8" class="hx-art__dot"/>
+        </svg>
+    </div>
+  </a>
+  <div class="tbd"><span class="mo-ic" aria-hidden="true">edit_note</span><p><strong>To add:</strong> anatomy, the Storyblok fields, measures per breakpoint from Figma, and which side the picture is on.</p></div>
+</div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+
+<section class="ds-section" id="guidelines"><div class="ds-page ds-inner ds-prose">
+  <h2 class="ds-h2">Guidelines</h2>
+  <p class="ds-desc">When to use the card, when to use another card, and how to write the title and text.</p>
+  <div class="tbd"><span class="mo-ic" aria-hidden="true">edit_note</span><p><strong>To add:</strong> when to use and when to avoid, the difference from the <a class="inline-link inline-link--large inline-link--secondary" href="ah-group-card-widget-storyblok.html">Article Highlight Group Card</a>, and do/don't examples. Content comes from the user.</p></div>
+</div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

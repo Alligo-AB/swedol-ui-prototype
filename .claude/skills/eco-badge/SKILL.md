@@ -1,6 +1,6 @@
 ---
 name: eco-badge
-description: Use when building a non-interactive status, label, count or marker (Badge) — Basic ("New", "Archive", a role name), Dot, Number, and the e-commerce badges Product & Discount and Purchase Info (Good buy, Good to know). Five types, one page set each under components/badge.html. Not to be confused with Tag (interactive filtering) or the cart counter's `.badge` class.
+description: Use when building a non-interactive status, label, count or marker (Badge) — Basic ("New", "Archive", a role name), Dot, Number, and the e-commerce badges Product & Discount and Purchase Info (Good buy, Good to know). Five types, one page set each under components/badge.html. Not to be confused with Tag (`eco-tag`: shows an active filter, only its remove × is interactive) or the cart counter's `.badge` class.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -174,4 +174,4 @@ Figma "Good buy" `459:19071`, "Good to know" `4518:196348`. A label with a right
 
 ### Guidelines from Figma (node `4752:241948`, summarised in the hub page)
 
-Badge indicates status or count, read-only; Tag (TBA) is interactive. Do not rely on color alone; combine text, emphasis and icon. Alert colors have reserved icons (info, check_circle, error, warning). Neutral pairs with alert colors for contrast. Emphasis: Strong = darker, Weak = more saturated medium, Weaker = light; do not mix emphasis without a reason. Dots are indicators, not alerts, never standalone.
+Badge indicates status or count, read-only; Tag (`eco-tag`) shows an active filter; only its remove × is interactive. Do not rely on color alone; combine text, emphasis and icon. Alert colors have reserved icons (info, check_circle, error, warning). Neutral pairs with alert colors for contrast. Emphasis: Strong = darker, Weak = more saturated medium, Weaker = light; do not mix emphasis without a reason. Dots are indicators, not alerts, never standalone.
