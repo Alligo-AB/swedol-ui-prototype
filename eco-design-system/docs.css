@@ -421,7 +421,8 @@ a.ds-card:hover { border-color: var(--color-border-dark); }
   display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
 .ds-section--secondary .ds-card__visual { background: var(--color-surface-raised-primary); }
-.ds-card__body { display: flex; flex-direction: column; gap: 8px; padding: 16px 20px 20px; flex: 1; }
+.ds-card__body { display: flex; flex-direction: column; gap: 8px; padding: var(--dimension-spacing-space-16); flex: 1; }
+@media (min-width: 640px) { .ds-card__body { padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-24) var(--dimension-spacing-space-24); } }   /* card footer: 16px sides + bottom in xs, 24px from sm; top 16px */
 .ds-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .ds-card__title { font-size: 20px; line-height: 24px; font-weight: 600; }
 .ds-card__desc { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); }
@@ -1073,12 +1074,15 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 @media (prefers-reduced-motion: reduce) { .tk-scrim, .tk-drawer { animation: none; } }
 .tk-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .tk-legend { padding: 16px 0 4px; font-size: 14px; line-height: 14px; font-weight: 600; letter-spacing: 0.56px; text-transform: uppercase; color: var(--color-text-secondary); }   /* group label inside the drawer, same style as the Secondary navigation group label */
-.tk-filters + .tk-filters { border-top: 1px solid var(--color-border-secondary); }
+.tk-filters + .tk-filters { margin-top: 8px; }   /* 32px from the last row to the next group label: body gap 24px + 8px (16px + 16px below 769px) */
+.tk-filters + .tk-filters .tk-legend { padding-top: 0; }
+@media (max-width: 768px) { .tk-filters + .tk-filters { margin-top: 16px; } }
 /* filter bar: "All filters" + one button per filter (components-overview.html); scrolls sideways when it does not fit */
-.ds-fbar { display: flex; gap: 8px; margin-top: var(--dimension-spacing-space-24); overflow-x: auto; scrollbar-width: none; }
+.ds-fbar { display: flex; gap: 8px; margin-top: var(--dimension-spacing-space-32); overflow-x: auto; scrollbar-width: none; }
 .ds-fbar::-webkit-scrollbar { display: none; }
 .ds-fbar .btn { position: relative; flex: none; }
-@media (min-width: 769px) { .ds-fbar { margin-top: var(--dimension-spacing-space-32); } }
+@media (min-width: 769px) { .ds-fbar { margin-top: var(--dimension-spacing-space-40); } }   /* xs/sm 32px, md 40px, lg+ 48px */
+@media (min-width: 1024px) { .ds-fbar { margin-top: var(--dimension-spacing-space-48); } }
 .ds-fcount { margin: 12px 0 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
 .ds-card[hidden], .ds-section[hidden] { display: none; }
 /* active filters under the filter bar (components-overview.html): Remove tags (eco-tag, components/css/tag.css) + Clear filters as an action link */
