@@ -2656,5 +2656,11 @@
     "seen": 1793196257.722899,
     "ast_hash": "c48a8afac0587341fcb7cfef0eaccc2e",
     "semantic_hash": ""
+  },
+  "checkout.html": {
+    "mtime": 1793260875.610115,
+    "seen": 1793260904.754069,
+    "ast_hash": "288d55cb8e905627282e64a12e563d88",
+    "semantic_hash": ""
   }
 }
