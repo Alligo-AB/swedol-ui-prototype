@@ -58,21 +58,17 @@
     .hx-content { position: relative; max-width: 960px; }
     /* Scroll-out (md+, set by the script): the content fades and lifts as the hero leaves; `translate` so it does not fight the .hx-in transform */
     .hx-hero[data-out] .hx-content { translate: 0 calc(var(--hx-out, 0) * -1 * var(--dimension-spacing-space-48)); }
-    .hx-hero[data-out] .hx-content > :not(.hx-ctas) { opacity: calc(1 - var(--hx-out, 0)); }   /* the buttons never fade (user 2026-10-27) */
+    .hx-hero[data-out] .hx-content > :not(.hx-ctas, .hx-search) { opacity: calc(1 - var(--hx-out, 0)); }   /* the buttons and the search field never fade (user 2026-10-27) */
     .hx-hero .ds-eyebrow { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--dimension-spacing-space-8); color: var(--color-text-secondary-inverted); margin-bottom: var(--dimension-spacing-space-24); }
     .hx-hero .ds-title { color: var(--color-text-primary-inverted); margin-bottom: var(--dimension-spacing-space-24); text-wrap: balance; }
     .hx-hero .ds-lead { color: var(--color-text-secondary-inverted); max-width: 640px; margin: 0 auto; text-wrap: balance; }
-    .hx-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--dimension-spacing-space-16); margin-top: var(--dimension-spacing-space-40); }
-    .hx-stats { display: flex; justify-content: center; margin-top: var(--dimension-spacing-space-56); }
-    @media (min-width: 769px) { .hx-stats { margin-top: var(--dimension-spacing-space-80); } }
-    .hx-stat { display: flex; flex-direction: column-reverse; padding: 0 var(--dimension-spacing-space-16); }   /* number above its label; dt stays first in the markup */
-    /* divider: shorter than the stat, centred; surface-70 is the user's choice 2026-10-27 (no border token between #333 and white) */
-    .hx-stat { position: relative; }
-    .hx-stat + .hx-stat::before { content: ''; position: absolute; left: 0; top: 50%; width: 1px; height: var(--dimension-spacing-space-32); transform: translateY(-50%); background: var(--color-surface-70); }    @media (min-width: 769px) { .hx-stat { padding: 0 var(--dimension-spacing-space-40); } }
-    @media (min-width: 1024px) { .hx-stat { padding: 0 var(--dimension-spacing-space-56); } }
-    .hx-stat dd { font-size: 28px; line-height: 28px; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: var(--dimension-spacing-space-8); }   /* display-md */
-    .hx-stat dt { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary-inverted); }   /* same as .ds-card__meta */
-    @media (min-width: 769px) { .hx-stat dd { font-size: 36px; line-height: 36px; } .hx-stat dt { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; } }
+    /* search field: looks like Input Large (eco-input), is a button that opens the search modal of docnav.js; as wide as the lead's visible text (--hx-lead-w, measured by the script; 640px = the lead's box) */
+    .hx-search { max-width: var(--hx-lead-w, 640px); margin: var(--dimension-spacing-space-32) auto 0; }
+    .hx-search .input-box { width: 100%; cursor: text; text-align: left; font: inherit; }
+    .hx-search .form-input { display: flex; align-items: center; color: var(--color-text-tertiary); white-space: nowrap; overflow: hidden; }
+    .hx-search .dn-kbds { margin-right: var(--dimension-spacing-space-4); }
+    .hx-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-32); margin-top: var(--dimension-spacing-space-32); }
+    @media (min-width: 769px) { .hx-search { margin-top: var(--dimension-spacing-space-40); } .hx-ctas { margin-top: var(--dimension-spacing-space-40); } }
     /* bottom bar: scroll cue in the middle, pause on the right */
     .hx-cue { position: absolute; left: 50%; bottom: var(--dimension-spacing-space-16); transform: translateX(-50%); }
     .hx-pause { position: absolute; right: var(--dimension-spacing-space-16); bottom: var(--dimension-spacing-space-16); }
@@ -81,10 +77,6 @@
     /* backwards fill: hidden during the delay, then the normal styles (incl. the scroll-out opacity) take over */
     .hx-motion .hx-in { animation: hx-in var(--duration-slow-4) var(--ease-decelerate-emphasized) backwards; animation-delay: calc(var(--i) * var(--duration-fast-4)); }
     @keyframes hx-in { from { opacity: 0; transform: translateY(var(--dimension-spacing-space-24)); } }
-    /* count-up: the number is a registered property, animated with the motion tokens */
-    @property --hx-n { syntax: '<integer>'; inherits: false; initial-value: 0; }
-    .hx-num[data-anim] { counter-reset: hx var(--hx-n); }
-    .hx-num[data-anim]::after { content: counter(hx); }
 
     /* the scroll cue's target stops below the fixed mobile bar */
     @media (max-width: 960px) { .ds-section[id] { scroll-margin-top: var(--dn-bar, 64px); } }
@@ -190,15 +182,17 @@
     <span class="ds-eyebrow hx-in" style="--i:0"><span class="badge-basic badge-basic--uppercase ds-eyebrow__swedol">Swedol</span><span class="badge-basic badge-basic--uppercase ds-eyebrow__tools">Tools</span> ECO Design System</span>
     <h1 class="ds-title display-xl hx-in" style="--i:1" id="hx-title">The toolbox behind Swedol and Tools</h1>
     <p class="ds-lead hx-in" style="--i:2">ECO is the foundation for creating products, user interfaces and digital experiences for Swedol and Tools. It brings every Alligo e-com experience into one cohesive, unified framework.</p>
-    <div class="hx-ctas hx-in" style="--i:3">
-      <a class="btn btn--primary-inverted btn--lg" href="/eco-design-system/components-overview.html"><span class="btn__label">Explore components</span></a>
-      <a class="btn btn--secondary-inverted btn--lg" href="#help"><span class="btn__label">Get started</span></a>
+    <div class="input-wrap hx-search hx-in" style="--i:3">
+      <button type="button" class="input-box" data-search aria-label="Search components and foundations" aria-keyshortcuts="Meta+K Control+K">
+        <span class="input-icon input-icon--lg" aria-hidden="true">search</span>
+        <span class="form-input">Search components and foundations</span>
+        <span class="dn-kbds" id="hx-search-key" aria-hidden="true"><kbd class="dn-kbd">Ctrl</kbd><kbd class="dn-kbd">K</kbd></span>
+      </button>
     </div>
-    <dl class="hx-stats hx-in" style="--i:4">
-      <div class="hx-stat"><dt>Foundations</dt><dd class="hx-num" data-count="foundations">–</dd></div>
-      <div class="hx-stat"><dt>Components</dt><dd class="hx-num" data-count="components">–</dd></div>
-      <div class="hx-stat"><dt>Tokens</dt><dd class="hx-num" data-count="tokens">–</dd></div>
-    </dl>
+    <div class="hx-ctas hx-in" style="--i:4">
+      <a class="action-link action-link--large action-link--inverted" href="/eco-design-system/components-overview.html"><span class="action-link__icon" aria-hidden="true">palette</span><span class="action-link__label">Explore components</span></a>
+      <a class="action-link action-link--large action-link--inverted" href="#help"><span class="action-link__icon" aria-hidden="true">rocket_launch</span><span class="action-link__label">Get started</span></a>
+    </div>
   </div>
   <a class="btn btn--blank-inverted btn--sm btn--icon hx-cue" href="#foundations" aria-label="Scroll to content" data-tooltip="Scroll to content"><span class="btn__icon" aria-hidden="true">arrow_downward</span></a>
   <button type="button" class="btn btn--secondary-inverted btn--sm btn--icon hx-pause" id="hx-pause" aria-label="Pause animation" data-tooltip="Pause animation"><span class="btn__icon" aria-hidden="true">pause</span></button>
@@ -207,11 +201,11 @@
 <!-- ── 2. Foundations: entry ──────────────────────────────────────── -->
 <section class="ds-section" id="foundations">
   <div class="ds-page ds-inner">
-    <a class="hx-entry" href="/eco-design-system/foundations/colors.html">
+    <a class="hx-entry" href="/eco-design-system/foundations-overview.html">
       <div class="hx-entry__text hx-reveal">
         <h2 class="ds-h2 hx-h2">Foundations.<span>The base of everything.</span></h2>
         <p class="ds-desc">Style and structure commonly used throughout our products. Tailored for brand identity and accessibility standards.</p>
-        <span class="action-link action-link--large"><span class="action-link__label">Explore the foundations</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span>
+        <span class="action-link action-link--large"><span class="action-link__label">Explore the <span data-count="foundations"></span>foundations</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span>
       </div>
       <div class="hx-panel hx-panel--found hx-reveal" aria-hidden="true">
         <svg class="hx-art" viewBox="0 0 640 360" focusable="false">
@@ -271,7 +265,7 @@
         </svg>
       </div>
       <div class="ds-card__body"><span class="ds-card__title">Components</span><p class="ds-card__desc">Buttons, fields, menus and more, live and ready to use.</p>
-        <span class="action-link action-link--medium"><span class="action-link__label">All components</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span></div>
+        <span class="action-link action-link--medium"><span class="action-link__label">All <span data-count="components"></span>components</span><span class="action-link__icon" aria-hidden="true">arrow_forward</span></span></div>
     </a>
     <a class="ds-card hx-dest hx-reveal" href="/eco-design-system/components-overview.html#patterns">
       <div class="hx-panel" aria-hidden="true">
@@ -355,7 +349,7 @@
     <div class="hx-help">
       <a class="ds-linkcard hx-reveal" href="/eco-design-system/resources/web.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><rect x="50" y="22" width="140" height="76"/><path d="M50 40H190"/><path d="M96 60l-14 14 14 14M144 60l14 14-14 14"/></g><path d="M126 58l-12 32" class="hx-art__accentline"/><circle cx="62" cy="31" r="3" class="hx-art__lime"/><circle cx="73" cy="31" r="3" class="hx-art__red"/><circle cx="84" cy="31" r="3" class="hx-art__accent"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Web library</span><span class="ds-linkcard__desc">Storybook and the component code.</span></span></a>
       <a class="ds-linkcard hx-reveal" href="/eco-design-system/resources/design.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><circle cx="92" cy="62" r="26"/><path d="M130 30l30 52h-60z" transform="translate(30 0)"/></g><rect x="104" y="42" width="40" height="40" class="hx-art__accent"/><circle cx="92" cy="36" r="5" class="hx-art__lime"/><rect x="156" y="26" width="9" height="9" class="hx-art__red"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Design library</span><span class="ds-linkcard__desc">The ECO file in Figma.</span></span></a>
-      <a class="ds-linkcard hx-reveal" href="/eco-design-system/tokens.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><rect x="66" y="26" width="20" height="20"/><rect x="98" y="26" width="20" height="20"/><rect x="130" y="26" width="20" height="20"/><rect x="66" y="54" width="20" height="20"/><rect x="130" y="54" width="20" height="20"/><rect x="162" y="54" width="20" height="20"/><rect x="98" y="82" width="20" height="20"/><rect x="130" y="82" width="20" height="20"/><rect x="162" y="82" width="20" height="20"/></g><rect x="98" y="54" width="20" height="20" class="hx-art__accent"/><rect x="162" y="26" width="20" height="20" class="hx-art__lime"/><rect x="66" y="82" width="20" height="20" class="hx-art__red"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Design tokens</span><span class="ds-linkcard__desc">Every value, searchable and ready to copy.</span></span></a>
+      <a class="ds-linkcard hx-reveal" href="/eco-design-system/tokens.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><rect x="66" y="26" width="20" height="20"/><rect x="98" y="26" width="20" height="20"/><rect x="130" y="26" width="20" height="20"/><rect x="66" y="54" width="20" height="20"/><rect x="130" y="54" width="20" height="20"/><rect x="162" y="54" width="20" height="20"/><rect x="98" y="82" width="20" height="20"/><rect x="130" y="82" width="20" height="20"/><rect x="162" y="82" width="20" height="20"/></g><rect x="98" y="54" width="20" height="20" class="hx-art__accent"/><rect x="162" y="26" width="20" height="20" class="hx-art__lime"/><rect x="66" y="82" width="20" height="20" class="hx-art__red"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Design tokens</span><span class="ds-linkcard__desc" data-count="tokens">Every value, searchable and ready to copy.</span></span></a>
       <a class="ds-linkcard hx-reveal" href="/eco-design-system/resources/getting-help.html"><span class="ds-linkcard__visual" aria-hidden="true"><svg class="hx-art" viewBox="0 0 240 120" focusable="false"><g class="hx-art__line"><path d="M58 28H152V70H100L80 88V70H58Z"/><path d="M74 44H136"/></g><path d="M74 56H112" class="hx-art__limeline"/><circle cx="152" cy="28" r="5" class="hx-art__red"/><path d="M118 74H190V108H170L160 96H118Z" class="hx-art__accent"/></svg></span><span class="ds-linkcard__body"><span class="ds-linkcard__title">Getting help</span><span class="ds-linkcard__desc">Ask a question or give feedback.</span></span></a>
     </div>
   </div>
@@ -398,6 +392,13 @@
   addEventListener('resize', function () { colRaf = colRaf || requestAnimationFrame(function () { colRaf = 0; columns(); }); });
   requestAnimationFrame(function () { field.classList.add('is-ready'); });   /* the grid fades in (duration-slow-4) */
 
+  if (window.ECO_SEARCH_KEY) document.getElementById('hx-search-key').innerHTML = window.ECO_SEARCH_KEY;
+  (function () {   /* the lead is balanced, so its box is wider than its text: measure the text */
+    var lead = document.querySelector('.hx-hero .ds-lead'), box = document.querySelector('.hx-search'), range = document.createRange();
+    function match() { range.selectNodeContents(lead); box.style.setProperty('--hx-lead-w', Math.ceil(range.getBoundingClientRect().width) + 'px'); }
+    match(); new ResizeObserver(match).observe(lead);
+    if (document.fonts) document.fonts.ready.then(match);
+  })();
   var hero = document.querySelector('.hx-hero'), pause = document.getElementById('hx-pause');
   function fit() {   /* the hero fills what is left of the first screen: below the fixed mobile bar, inside the 16px frame on desktop */
     hero.style.setProperty('--hx-top', '0px');
@@ -421,15 +422,9 @@
       comp += kids.length || (it.soon ? 0 : 1);
     });
   });
-  function show(key, n) {
-    var el = document.querySelector('[data-count="' + key + '"]');
-    if (still || !el.animate) { el.textContent = n; return; }
-    var cs = getComputedStyle(document.documentElement);
-    el.textContent = ''; el.setAttribute('data-anim', '');
-    el.animate([{ '--hx-n': 0 }, { '--hx-n': n }], { duration: parseFloat(cs.getPropertyValue('--duration-slow-4')), easing: cs.getPropertyValue('--ease-decelerate-emphasized').trim(), fill: 'forwards' });
-  }
-  show('foundations', NAV.foundations.groups[0].items.length);
-  show('components', comp);
+  function show(key, text) { document.querySelector('[data-count="' + key + '"]').textContent = text; }   /* live counts in the section links; without them the text still reads */
+  show('foundations', NAV.foundations.groups[0].items.length + ' ');
+  show('components', comp + ' ');
   var BASE = 'https://unpkg.com/alligo-design-tokens@latest/dist/css/base/', FILES = ['dimension', 'string', 'font-family', 'font-weight', 'color', 'border', 'shadow', 'typography'];
   Promise.all(FILES.map(function (f) { return fetch(BASE + f + '.css').then(function (r) { return r.text(); }); })).then(function (parts) {
     var seen = {}, n = 16;   // + the 16 motion tokens of docs.css, as on tokens.html
@@ -438,8 +433,8 @@
       if (/-eco-ds-/.test(name) || seen[name]) return;
       seen[name] = 1; n++;
     });
-    show('tokens', n);
-  }).catch(function () { document.querySelector('[data-count="tokens"]').textContent = '–'; });
+    show('tokens', n + ' values, searchable and ready to copy.');
+  }).catch(function () {});
 
   if (still) return;
 
