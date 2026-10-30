@@ -147,6 +147,38 @@ When the task's layout/composition is genuinely open (mostly mode B from step 0 
 - Skip this step when the structure is already dictated (mode A with a finished Figma prototype, mode C with a spec that specifies layout, or a small addition to an existing page) — there's no real direction to choose between.
 - If genuinely unsure whether the task calls for this step, ask rather than guessing (see Guardrail 5).
 
+### 4c. Saved compositions (ready to reuse)
+
+Groupings that were tried and judged, kept here so they can be rebuilt in another context. They are starting points, not components: always built from ECO components and tokens, and proposed like any other composition. When one is reused twice, ask whether it should become a skill.
+
+**Search-first hero** (`eco-design-system/index.html`, 2026-10-30). For a page whose visitors come looking for something specific.
+- Order: eyebrow, title, lead, search field, two Action links Large with a leading icon, centred.
+- Spacing: 24px title to lead, 40px lead to search and search to links (32px below 769px), 32px between the links.
+- The search field is the only filled block, so it takes the eye first. It is as wide as the lead's visible text.
+- On a dark surface use the inverted Action links. Show a keyboard hint only from 769px with a fine pointer.
+- Tried and rejected: buttons between title and lead (buttons before the text explains the page); Primary and Secondary buttons beside the field (two light blocks compete); Action links at lead size (not in ECO); counts in the bottom bar beside the scroll cue, and counts below the links (they compete with the search field).
+
+**Stat row** (removed from the same hero 2026-10-30, the idea is sound where numbers are the point). Use it for facts that help a decision or show scale (campaign results, "500 stores"), not as decoration above the main action.
+
+```html
+<dl class="stats">
+  <div class="stat"><dt>Components</dt><dd>35</dd></div>
+  <div class="stat"><dt>Tokens</dt><dd>529</dd></div>
+</dl>
+```
+
+```css
+.stats { display: flex; justify-content: center; }
+.stat { position: relative; display: flex; flex-direction: column-reverse; padding: 0 var(--dimension-spacing-space-16); } /* number above its label; dt stays first in the markup */
+.stat + .stat::before { content: ''; position: absolute; left: 0; top: 50%; width: 1px; height: var(--dimension-spacing-space-32); transform: translateY(-50%); background: var(--color-surface-70); } /* on dark; border-tertiary on light */
+.stat dd { font-size: 28px; line-height: 28px; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: var(--dimension-spacing-space-8); } /* display-md */
+.stat dt { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary-inverted); } /* text-secondary on light */
+@media (min-width: 769px) { .stat { padding: 0 var(--dimension-spacing-space-40); } .stat dd { font-size: 36px; line-height: 36px; } .stat dt { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; } }
+@media (min-width: 1024px) { .stat { padding: 0 var(--dimension-spacing-space-56); } }
+```
+
+Three items fit at 375px. A count-up on the numbers belongs to campaign motion (`eco-motion`), as a proposal only.
+
 ### 5. Copy is design content, not decoration
 
 Words earn their place in a design for one reason: making it easier to understand and use. Bring the same intentionality to copy that you bring to spacing and color — before writing anything, ask what the page needs to say and how to say it in a way that helps someone navigate.

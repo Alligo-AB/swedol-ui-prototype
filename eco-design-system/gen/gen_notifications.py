@@ -164,7 +164,7 @@ JS = JS_PRE + r'''
   res();
 '''
 
-C = dict(slug=SLUG, title='Notifications', eyebrow='Components · Notifications', pre_css=PRE, css=['menu'], style=STYLE, head_js=[], body_js=['../notifications.js?v=12'], select_menu=False,
+C = dict(slug=SLUG, title='Notifications', eyebrow='Components · Notifications', eyebrow_extra='<span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span>', pre_css=PRE, css=['menu'], style=STYLE, head_js=[], body_js=['../notifications.js?v=12'], select_menu=False,
     lead='Notifications tell users that something changed. Five components cover it, from a toast that vanishes in four seconds to a modal that stops the page. <strong>The skill is choosing the right one</strong>, and as <em>quiet</em> a one as the situation allows.',
     lead_ex='Use the chooser below, then open the page for the component: ' + ', '.join(lead_link(h, n) for h, n in [('toast.html', 'Toast'), ('toast-ecom.html', 'E-Com Toast'), ('modal.html', 'Modal'), ('banner.html', 'Banner'), ('inline.html', 'Inline')]) + '.',
     lead_spec='', lead_code='', ex=secs, spec=[], code=[])

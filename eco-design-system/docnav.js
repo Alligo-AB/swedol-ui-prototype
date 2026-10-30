@@ -87,11 +87,14 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
   function link(it, cls) {
     if (it.soon) return '<span class="dn-link dn-link--soon" aria-disabled="true">' + esc(it.t) + '</span>';
     var here = it.sb ? it.id === fullId : it.id === pageId && !/-storyblok$/.test(fullId);
-    return '<a class="dn-link' + (cls ? ' ' + cls : '') + '" href="' + it.href + '"' + (here ? ' aria-current="page"' : '') + '>' + esc(it.t) + '</a>';
+    return '<a class="dn-link' + (cls ? ' ' + cls : '') + '" href="' + it.href + '"' + (here ? ' aria-current="page"' : '') + '><span class="dn-link__t">' + esc(it.t) + '</span></a>';
   }
   function panelHtml(key) {
     var n = NAV[key];
-    var h = '<div class="dn-item">' + link(n.overview) + '</div>';
+    // the overview is the start page of the category: category icon, arrow and a line below it set it apart from the pages (trial 2026-10-30)
+    var o = n.overview;
+    var h = '<div class="dn-item dn-item--overview"><a class="dn-link dn-link--overview" href="' + o.href + '"' + (o.id === pageId ? ' aria-current="page"' : '') + '>' +
+      '<span class="dn-ms dn-link__ico" aria-hidden="true">' + n.icon + '</span><span class="dn-link__t">' + esc(o.t) + '</span></a></div>';
     // Trial 2026-10-28: no group titles, one A-Z list after the overview (group titles stay in NAV for search and the start page); Storyblok widget and Drafts keep their titles, last
     var all = [], kept = n.groups.filter(function (g) { return g.title === 'Storyblok widget' || g.title === 'Drafts'; });
     n.groups.forEach(function (g) { if (kept.indexOf(g) > -1) return; g.items.forEach(function (it) { if (!all.some(function (a) { return a.href && a.href === it.href; })) all.push(it); }); });
@@ -341,6 +344,17 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     });
   });
   entries.push({ t: NAV.tokens.overview.t, href: NAV.tokens.overview.href, cat: 'Tokens', group: '', sv: fold(SV.tokens), svl: SV.tokens.split(/,\s*/) });
+  var pf = navigator.userAgentData && navigator.userAgentData.platform || navigator.platform || '';
+  var SEARCH_KEY = (/mac|iphone|ipad|ipod/i.test(pf) ? ['⌘', 'K'] : ['Ctrl', 'K']).map(function (k) { return '<kbd class="dn-kbd">' + k + '</kbd>'; }).join('');   // same shortcut as the handler below, shown as the user's system writes it
+  window.ECO_SEARCH_KEY = SEARCH_KEY;   // read by the start page (index.html) for the search field in the hero
+  var QUICK = [
+    { t: 'Get started', href: D + 'index.html#help', icon: 'rocket_launch' },
+    { t: 'Foundations', href: NAV.foundations.overview.href, icon: NAV.foundations.icon },
+    { t: 'Components', href: NAV.components.overview.href, icon: NAV.components.icon },
+    { t: 'Design tokens', href: NAV.tokens.overview.href, icon: NAV.tokens.icon },
+    { t: 'Resources', href: NAV.resources.overview.href, icon: NAV.resources.icon },
+    { t: 'Getting help', href: D + 'resources/getting-help.html', icon: 'help' }
+  ];
   var sm = document.createElement('div');
   sm.className = 'dn-search';
   sm.hidden = true;
@@ -351,7 +365,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
         '<div class="form-field dn-search__field"><div class="input-wrap"><div class="input-box">' +
           '<span class="input-icon input-icon--lg" aria-hidden="true">search</span>' +
           '<input class="form-input" type="text" placeholder="Search components and foundations" aria-label="Search components and foundations" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="dn-results" aria-autocomplete="list">' +
-          '<div class="input-actions"><button type="button" class="input-actions__btn input-actions__clear" aria-label="Clear"><span class="input-icon input-icon--fill" aria-hidden="true">cancel</span></button></div>' +
+          '<div class="input-actions"><span class="dn-kbds" aria-hidden="true">' + SEARCH_KEY + '</span><button type="button" class="input-actions__btn input-actions__clear" aria-label="Clear"><span class="input-icon input-icon--fill" aria-hidden="true">cancel</span></button></div>' +
         '</div></div></div>' +
         '<button type="button" class="btn btn--blank btn--md btn--icon dn-search__close" aria-label="Close search"><span class="btn__icon" aria-hidden="true">close</span></button>' +
       '</div>' +
@@ -405,7 +419,12 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
   function render() {
     var q = sInput.value.trim(), tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
     sm.classList.toggle('has-value', !!q);
-    if (!tokens.length) { sBody.innerHTML = '<p class="dn-search__msg">Search for a component or a foundation.</p>'; sOpts = []; sLive.textContent = ''; setActive(-1); return; }
+    if (!tokens.length) {   // nothing typed: quick links, no row active until the arrow keys or the pointer pick one
+      sBody.innerHTML = '<div class="dn-search__group" role="presentation">Quick links</div>' + QUICK.map(function (q, i) {
+        return '<a class="dn-search__opt dn-search__opt--quick" role="option" id="dn-opt-' + i + '" aria-selected="false" href="' + q.href + '"><span class="dn-ms dn-ms--sm" aria-hidden="true">' + q.icon + '</span><span class="dn-search__t">' + q.t + '</span></a>';
+      }).join('');
+      sOpts = [].slice.call(sBody.querySelectorAll('.dn-search__opt')); sLive.textContent = ''; setActive(-1); return;
+    }
     var hits = [];
     entries.forEach(function (e, i) { var sc = score(e, tokens); if (sc > -1) hits.push({ e: e, sc: sc, i: i }); });
     hits.sort(function (a, b) { return a.sc - b.sc || a.i - b.i; });
@@ -437,7 +456,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     setTimeout(function () { if (!sm.classList.contains('is-open')) sm.hidden = true; }, ms('--duration-medium-2', 300));
     if (sFrom && sFrom.focus) sFrom.focus();
   }
-  wrap.addEventListener('click', function (e) { if (e.target.closest('[data-search]')) openSearch(e.target.closest('[data-search]')); });
+  document.addEventListener('click', function (e) { if (e.target.closest('[data-search]')) openSearch(e.target.closest('[data-search]')); });
   sm.querySelector('.dn-search__scrim').addEventListener('click', closeSearch);
   sClose.addEventListener('click', closeSearch);
   sClear.addEventListener('click', function () { sInput.value = ''; render(); sInput.focus(); });
@@ -448,7 +467,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     if (e.key === 'Escape') { e.preventDefault(); closeSearch(); return; }
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       if (!sOpts.length) return;
-      e.preventDefault(); setActive((sActive + (e.key === 'ArrowDown' ? 1 : -1) + sOpts.length) % sOpts.length);
+      e.preventDefault(); setActive(sActive < 0 && e.key === 'ArrowUp' ? sOpts.length - 1 : (sActive + (e.key === 'ArrowDown' ? 1 : -1) + sOpts.length) % sOpts.length);
     } else if (e.key === 'Enter' && sOpts[sActive] && e.target === sInput) {
       e.preventDefault(); location.href = sOpts[sActive].href;
     } else if (e.key === 'Tab') {   // keep Tab inside the dialog: input → clear (when shown) → close

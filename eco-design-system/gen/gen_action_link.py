@@ -49,7 +49,7 @@ playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose a size, weight, 
     bp_field('pg-l-bp') + btn_group('pg-l-size', 'Size', 'data-pg="size"', [('large', 'Large', False), ('medium', 'Medium', True), ('small', 'Small', False)]) + \
     btn_group('pg-l-w', 'Weight', 'data-pg="weight"', [('regular', 'Regular', True), ('medium', 'Medium', False), ('bold', 'Bold', False)]) + \
     btn_group('pg-l-v', 'Variant', 'data-pg="variant"', [('primary', 'Primary', True), ('inverted', 'Inverted', False)]) + \
-    btn_group('pg-l-st', 'State', 'data-pg="state"', [('enabled', 'Enabled', True), ('hover', 'Hover', False)]) + \
+    btn_group('pg-l-st', 'State', 'data-pg="state"', [('enabled', 'Enabled', True), ('hover', 'Hover', False), ('focus', 'Focus', False)]) + \
     btn_group('pg-l-i', 'Icons', 'data-pg="icons"', [('trailing', 'Trailing', False), ('leading', 'Leading', False), ('both', 'Both', True)]) + \
     '<div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-label">Label</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-label" value="View all products" placeholder="Label" /></div></div></div>' + \
     '</div></div><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
@@ -113,7 +113,7 @@ layout = '<h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-grou
     '<h3 class="ds-h3 ds-group">Appearance</h3>' + desc('No underline when enabled. On hover the text gets the underline and the color changes; the icons are never underlined. This is the reverse of the Inline link. Token names and values are under ' + sec_link(SLUG, 'design-tokens', 'Design Tokens') + ' in Specifications.')
 
 behavior = '<h2 class="ds-h2">Behavior</h2><h3 class="ds-h3 ds-group">Hover</h3>' + desc('The text is underlined and the color changes for the whole link, icons included. The color changes over <code>duration-fast-3</code> with <code>ease-standard</code>.') + \
-    '<h3 class="ds-h3 ds-group">Focus</h3>' + desc('A 2px ring shows on keyboard focus only (<code>body.keyboard-nav</code>).') + \
+    '<h3 class="ds-h3 ds-group">Focus</h3>' + desc('A 2px ring in <code>border-focus</code>, 2px from the link, shows on keyboard focus only (<code>body.keyboard-nav</code>). Shown forced below; press Tab on this page to see it live.') + fig_one('<div class="pg-col" id="v-focus"></div>') + fig_one('<div class="pg-col" id="v-focus-inv"></div>', stage_cls='ds-stage--dark') + \
     '<h3 class="ds-h3 ds-group">Click and Enter</h3>' + desc('A click on the text or an icon, or Enter, follows the link. The whole row is the target. All states are listed under ' + sec_link(SLUG, 'states', 'States') + ' in Specifications.') + \
     '<h3 class="ds-h3 ds-group">Layout of a group: stacked or divided</h3>' + desc('A group of action links has two layouts, and the author chooses one on every breakpoint. <strong>Stacked</strong> puts the links in one column. <strong>Divided</strong> puts the links one after another on a row, with a vertical Divider between them, where there is room, and the row wraps onto the next line when it is full. A divided group does not turn into a column by itself on mobile: choose Stacked when the links need a column. The group classes draw the layout and the dividers.') + \
     '<h3 class="ds-h3">Stacked</h3>' + fig_one('<div class="action-link-group action-link-group--stacked" id="v-stacked"></div>') + \
@@ -188,7 +188,7 @@ AL_JS = r'''
   function al(o) {
     var a = document.createElement('a'); a.href = '#';
     a.className = 'action-link action-link--' + o.size + (o.bold ? ' action-link--bold' : '') + (o.medium ? ' action-link--weight-medium' : '') + (o.inv ? ' action-link--inverted' : '');
-    if (o.state === 'hover') a.dataset.state = 'hover';
+    if (o.state && o.state !== 'enabled') a.dataset.state = o.state;
     if (o.leading) a.appendChild(icon(o.icon || 'file_download'));
     var lb = document.createElement('span'); lb.className = 'action-link__label'; lb.textContent = o.label; a.appendChild(lb); if (o.trailing !== false) a.appendChild(icon('chevron_right'));
     a.addEventListener('click', function (e) { e.preventDefault(); });
@@ -207,7 +207,7 @@ JS_EX = AL_JS + r'''
     $('#pg-stage').classList.toggle('ds-stage--dark', o.inv);
     clear($('#pg-host')).appendChild(al(o));
     var h = markup(o);
-    if (o.state === 'hover') h = '<!-- hover is forced here for preview; in production it comes from :hover -->\n' + h;
+    if (o.state !== 'enabled') h = '<!-- ' + o.state + ' is forced here for preview; in production it comes from ' + (o.state === 'focus' ? 'keyboard focus (body.keyboard-nav :focus-visible)' : ':hover') + ' -->\n' + h;
     $('#pg-code').textContent = h;
   }
   DK.wire(st, renderPg); $('#pg-label').addEventListener('input', renderPg);
@@ -223,6 +223,7 @@ JS_EX = AL_JS + r'''
   }
   var wv = clear($('#v-weights')); [['', 'Regular'], ['medium', 'Medium'], ['bold', 'Bold']].forEach(function (z) { var r = document.createElement('div'); r.className = 'pg-row'; r.appendChild(al({ size: 'medium', medium: z[0] === 'medium', bold: z[0] === 'bold', label: z[1] })); wv.appendChild(r); });
   rowsOf('#v-sizes'); rowsOf('#v-primary', 'View all products'); rowsOf('#v-icon', 'Download document', { leading: true }); rowsOf('#v-inv', 'Read more', { inv: true });
+  var fo = clear($('#v-focus')), fi = clear($('#v-focus-inv')); [['large', 'Large'], ['medium', 'Medium'], ['small', 'Small']].forEach(function (z) { fo.appendChild(al({ size: z[0], state: 'focus', label: z[1] })); fi.appendChild(al({ size: z[0], inv: true, state: 'focus', label: z[1] })); });
 
   $$('[data-prevent]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
   /* Usage figures */
@@ -269,7 +270,7 @@ JS_SPEC = AL_JS + r'''
   var mx = { size: 'medium' };
   function buildMatrix() {
     var tb = clear($('#matrix tbody'));
-    [['Enabled', 'enabled'], ['Hover', 'hover']].forEach(function (r) {
+    [['Enabled', 'enabled'], ['Hover', 'hover'], ['Focus', 'focus']].forEach(function (r) {
       var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
       [[false, false], [true, false], [false, true], [true, true]].forEach(function (c) {
         var td = document.createElement('td'); if (c[1]) td.className = 'pg-dark';
@@ -295,7 +296,7 @@ JS_CODE = r'''
     ['A group of links, divided', '<div class="action-link-group action-link-group--divided">\n  <a href="/order" class="action-link action-link--medium">…</a>\n  <a href="/waybill" class="action-link action-link--medium">…</a>\n</div>\n<!-- the divider is drawn by the group: no extra element between the links -->'],
     ['Small, bold, inverted (on a dark surface)', '<a href="/news" class="action-link action-link--small action-link--bold action-link--inverted">\n  <span class="action-link__label">Read more</span>\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>']
   ]);
-  DK.printCss($('#css-code'), 'action-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover']]);
+  DK.printCss($('#css-code'), 'action-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/, \.[\w-]+\[data-state="focus"\]/g, '']]);
 '''
 
 C = dict(

@@ -81,4 +81,4 @@
   .tile-link--brand img { height: 48px; }
 }
 
-body.keyboard-nav .tile-link:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+body.keyboard-nav .tile-link:focus-visible, .tile-link[data-state="focus"] { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }

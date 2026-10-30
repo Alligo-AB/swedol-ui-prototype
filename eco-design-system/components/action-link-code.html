@@ -45,7 +45,7 @@
 
 <section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
-    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span></div>
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span></div>
     <h1 class="ds-title">Action link</h1>
     <p class="ds-lead">An action link is a <strong>standalone link</strong> for lightweight actions like downloads and “view all” navigation, with a leading icon, a trailing icon or both. It is underlined on hover.</p><p class="ds-lead">How to add an action link to a page. The file is <code>components/css/action-link.css</code>.</p></div>
 </section>
@@ -74,7 +74,7 @@
     ['A group of links, divided', '<div class="action-link-group action-link-group--divided">\n  <a href="/order" class="action-link action-link--medium">…</a>\n  <a href="/waybill" class="action-link action-link--medium">…</a>\n</div>\n<!-- the divider is drawn by the group: no extra element between the links -->'],
     ['Small, bold, inverted (on a dark surface)', '<a href="/news" class="action-link action-link--small action-link--bold action-link--inverted">\n  <span class="action-link__label">Read more</span>\n  <span class="action-link__icon" aria-hidden="true">chevron_right</span>\n</a>']
   ]);
-  DK.printCss($('#css-code'), 'action-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover']]);
+  DK.printCss($('#css-code'), 'action-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/, \.[\w-]+\[data-state="focus"\]/g, '']]);
 
 })();
 </script>

@@ -48,4 +48,4 @@
 .inline-link--inverted:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-inverted-hover); }
 
 /* Focus ring, as the action link and the tile link (keyboard only: body.keyboard-nav) */
-body.keyboard-nav .inline-link:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+body.keyboard-nav .inline-link:focus-visible, .inline-link[data-state="focus"] { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }

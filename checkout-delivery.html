@@ -100,7 +100,7 @@
     .addr {
       background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary);
       box-shadow: var(--shadow-elevation-b-20); position: relative;
-      outline: 1px solid transparent; outline-offset: -1px;                  /* becomes the second border pixel when selected, so nothing shifts */
+      outline: 1px solid transparent; outline-offset: -2px;                  /* inside the 1px border; becomes the second border pixel when selected, so nothing shifts */
       transition: border-color var(--duration-fast-3) var(--ease-standard), outline-color var(--duration-fast-3) var(--ease-standard);
     }
     .addr:hover { border-color: var(--color-border-hover); }

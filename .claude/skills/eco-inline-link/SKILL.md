@@ -75,7 +75,7 @@ An inline link inherits the typography of its surrounding context and signals in
 
 > Transition: `color` with `duration-fast-3` (150ms) and `ease-standard`. `text-decoration` is not transitioned.
 >
-> **Focus (2026-10-13):** `body.keyboard-nav .inline-link:focus-visible` has a 2px `border-focus` ring, offset 2px, the same as Action link and Tile link.
+> **Focus (2026-10-13):** `body.keyboard-nav .inline-link:focus-visible` has a 2px `border-focus` ring, offset 2px, the same as Action link and Tile link. **Docs (2026-10-29):** `.inline-link[data-state="focus"]` (also `.action-link`, `.tile-link`) forces the ring for the docs only: State Focus in each playground, a Focus row in each states matrix, and a forced example under Behavior > Focus. The Code tab hides that selector via `DK.printCss`.
 
 ---
 
