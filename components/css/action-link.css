@@ -45,7 +45,7 @@
 .action-link--inverted { color: var(--color-text-action-primary-inverted); }
 .action-link--inverted:is(:hover, [data-state="hover"]) { color: var(--color-text-action-primary-inverted-hover); }
 
-body.keyboard-nav .action-link:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+body.keyboard-nav .action-link:focus-visible, .action-link[data-state="focus"] { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
 
 /* Group of action links. Stacked: one column, 8px between the links (the hit areas do not overlap). Divided: the links one after another on a row with a vertical divider (border-tertiary) between them, wrapping where the row is full.
    The divider is a pseudo-element in the gap before each link, and the group clips whatever sits left of its edge, so a divider only ever appears BETWEEN two links on the same line, never at the start or the end of a line.

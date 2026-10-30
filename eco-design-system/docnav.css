@@ -32,7 +32,7 @@
   html.ds-frame .dn.is-open .dn-rail { border-right: 1px solid var(--color-border-primary); }   /* line between rail and a visible panel */
   @media (min-width: 1600px) { html.ds-frame.dn-has-panel .dn-rail { border-right: 1px solid var(--color-border-primary); } }   /* pinned panel */
   /* Panel scrollbar (overlay and pinned): rounded 8px thumb, inset from the edge and from top and bottom. scrollbar-width must be auto for the ::-webkit-scrollbar rules to apply. */
-  html.ds-frame .dn-panel { scrollbar-width: auto; }
+  html.ds-frame .dn-panel { scrollbar-width: auto; padding-top: 16px; }   /* the overview row's top edge lines up with the content panel's top border */
   html.ds-frame .dn-panel::-webkit-scrollbar { width: 12px; }
   html.ds-frame .dn-panel::-webkit-scrollbar-track { margin: 16px 0; background: none; }
   html.ds-frame .dn-panel::-webkit-scrollbar-thumb { background: var(--color-surface-30) padding-box; border: 2px solid transparent; border-radius: 6px; }
@@ -43,8 +43,6 @@
     html.ds-frame .dn-panel {   /* the right edge is a drawn line (not a border), so it can start below the corner arc */
       border-right: 0; background: linear-gradient(var(--color-border-primary), var(--color-border-primary)) right top var(--dn-line, 16px) / 1px 100% no-repeat, var(--color-surface-02);
     }
-    html.ds-frame .dn-panel { padding-top: 32px; }
-    html.ds-frame .dn-panel::-webkit-scrollbar-track { margin-top: 32px; }   /* starts below the corner piece */
     html.ds-frame .dn::after {
       content: ''; position: absolute; z-index: 101; top: 16px; left: calc(var(--dn-rail) + var(--dn-panel) - 1px); width: var(--dn-radius); height: var(--dn-radius); pointer-events: none;
       border: 1px solid var(--color-border-primary); border-width: 1px 0 0 1px; border-top-left-radius: var(--dn-radius);
@@ -148,10 +146,19 @@
   .dn-chev[aria-expanded="true"] .dn-ms { transform: rotate(180deg); }
   .dn-sub .dn-link { padding-left: 56px; }
   .dn-sub .dn-link[aria-current="page"]::before { left: 0; }
+  /* overview link: the start page of the category, set apart from the page list (trial 2026-10-30) */
+  .dn-item--overview { margin-bottom: 1px; }   /* line sits right under the row, no gap */
+  .dn-item--overview::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--color-border-primary); }
+  .dn-link--overview { gap: 12px; }
+  .dn-link__ico { color: var(--ds-accent); }
+  .dn-link--overview[aria-current="page"] .dn-link__ico { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .dn-link__t { flex: 1 1 auto; }
+  .dn-link__t { transition: transform var(--duration-fast-3) var(--ease-standard); }
+  a.dn-link:hover .dn-link__t { transform: translateX(4px); }   /* every link label moves on hover (2026-10-30) */
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dn.is-ready .dn-panel, .dn-dest, .dn-link, .dn-chev .dn-ms { transition: none; }
+  .dn.is-ready .dn-panel, .dn-dest, .dn-link, .dn-chev .dn-ms, .dn-link__t { transition: none; }
 }
 
 /* ── Mobile / tablet (below 961px): header bar + drawer ─────────────────────────────── */
@@ -245,6 +252,13 @@
   .dn-link[aria-current="page"]::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--ds-accent); }
   .dn-item--parent .dn-link { padding-right: 56px; }
   .dn-sub .dn-link { padding-left: 76px; }
+  .dn-item--overview { margin-bottom: 1px; }   /* line sits right under the row, no gap */
+  .dn-item--overview::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--color-border-primary); }
+  .dn-link--overview { gap: 8px; padding-left: 16px; }   /* the 20px icon sits under the back arrow, the label still starts at 44px */
+  .dn-link__ico { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+  .dn-link__ico { color: var(--ds-accent); }
+  .dn-link--overview[aria-current="page"] .dn-link__ico { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+  .dn-link__t { flex: 1 1 auto; }
   .dn-chev { position: absolute; top: 14px; right: 16px; display: flex; width: 20px; height: 20px; padding: 0; background: none; border: 0; cursor: pointer; color: var(--color-text-primary); }
   .dn-chev .dn-ms { font-size: 20px; transition: transform var(--duration-fast-4) var(--ease-standard); }
   .dn-chev[aria-expanded="true"] .dn-ms { transform: rotate(180deg); }

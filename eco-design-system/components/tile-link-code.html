@@ -36,7 +36,7 @@
 
 <section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
-    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span></div>
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span></div>
     <h1 class="ds-title">Tile link</h1>
     <p class="ds-lead">A tile link is a clickable, <strong>graphical link</strong> with an SVG graphic or an icon with a label. It highlights navigation destinations in grids and horizontal scrollers.</p><p class="ds-lead">How to add a tile link to a page. The file is <code>components/css/tile-link.css</code>.</p></div>
 </section>
@@ -65,7 +65,7 @@
     ['Bold italic label', '<a href="/generators" class="tile-link tile-link--large tile-link--horizontal tile-link--white tile-link--bold tile-link--italic">\n  <div class="tile-link__inner">\n    <span class="tile-link__label">Generator</span>\n  </div>\n</a>'],
     ['Brand, black', '<a href="/brands/bjornklader" class="tile-link tile-link--brand tile-link--large tile-link--black">\n  <div class="tile-link__inner">\n    <img src="/images/bjornklader-logo-white.svg" alt="Björnkläder" />\n  </div>\n</a>']
   ]);
-  DK.printCss($('#css-code'), 'tile-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover']]);
+  DK.printCss($('#css-code'), 'tile-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/, \.[\w-]+\[data-state="focus"\]/g, '']]);
 
 })();
 </script>

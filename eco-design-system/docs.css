@@ -427,12 +427,6 @@ a.ds-card:hover { border-color: var(--color-border-dark); }
 .ds-card__title { font-size: 20px; line-height: 24px; font-weight: 600; }
 .ds-card__desc { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); }
 .ds-card__meta { margin-top: auto; padding-top: 8px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
-.ds-tag {
-  flex-shrink: 0; display: inline-flex; align-items: center; background: var(--color-surface-05);
-  border: 1px solid var(--color-border-primary); padding: 4px 5px;
-  font-size: 14px; font-weight: 500; line-height: 14px; letter-spacing: 0.56px; white-space: nowrap;
-}
-.ds-tag--live { background: var(--color-surface-success-weaker); border-color: var(--color-border-success-weaker); }
 
 /* mini illustrations (built from tokens, so they follow the system) */
 .mini-swatches { display: flex; gap: 6px; }

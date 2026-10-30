@@ -73,7 +73,7 @@ playground = '<h2 class="ds-h2">Playground</h2>' + desc('The link sits in a sent
     sel('pg-l-c', 'pg-color', 'Color', 'color', [('primary', 'Primary'), ('secondary', 'Secondary'), ('tertiary', 'Tertiary'), ('inverted', 'Inverted')], 'primary') + \
     sel('pg-l-w', 'pg-weight', 'Weight', 'weight', WEIGHTS, 'regular') + btn_group('pg-l-it', 'Style', 'data-pg="italic"', [('no', 'Normal', True), ('yes', 'Italic', False)]) + \
     btn_group('pg-l-rv', 'Underline', 'data-pg="reverse"', [('no', 'Default', True), ('yes', 'Reverse', False)]) + \
-    btn_group('pg-l-st', 'State', 'data-pg="state"', [('enabled', 'Enabled', True), ('hover', 'Hover', False)]) + \
+    btn_group('pg-l-st', 'State', 'data-pg="state"', [('enabled', 'Enabled', True), ('hover', 'Hover', False), ('focus', 'Focus', False)]) + \
     '<div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-label">Label</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-label" value="product page" placeholder="Label" /></div></div></div>' + \
     '</div></div><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
 
@@ -158,7 +158,7 @@ layout = '<h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-grou
 
 behavior = '<h2 class="ds-h2">Behavior</h2><h3 class="ds-h3 ds-group">Hover</h3>' + desc('The underline is removed and the color changes to the hover color of the variant. The color changes over <code>duration-fast-3</code> with <code>ease-standard</code>; the underline is not transitioned.') + \
     '<h3 class="ds-h3 ds-group">Click and Enter</h3>' + desc('A click or Enter follows the link. All states are listed under ' + sec_link(SLUG, 'states', 'States') + ' in Specifications.') + \
-    '<h3 class="ds-h3 ds-group">Focus</h3>' + desc('A 2px ring shows on keyboard focus only (<code>body.keyboard-nav</code>), the same as on the Action link and the Tile link.')
+    '<h3 class="ds-h3 ds-group">Focus</h3>' + desc('A 2px ring in <code>border-focus</code>, 2px from the text, shows on keyboard focus only (<code>body.keyboard-nav</code>), the same as on the Action link and the Tile link. Shown forced below; press Tab on this page to see it live.') + fig_one('<div class="pg-col" id="v-focus"></div>') + fig_one('<div class="pg-col" id="v-focus-inv"></div>', stage_cls='ds-stage--dark')
 
 access = '<h2 class="ds-h2">Accessibility</h2>' + desc('All requirements are listed under ' + sec_link(SLUG, 'accessibility-requirements', 'Accessibility Requirements') + ' in Specifications.') + \
     '<h3 class="ds-h3 ds-group">Keyboard support</h3>' + desc('Tab moves between links. Enter follows the focused link.') + \
@@ -230,7 +230,7 @@ IL_JS = r'''
   $$('[data-prevent]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
   var WT = { regular: '', medium: ' inline-link--weight-medium', bold: ' inline-link--bold' };
   function cls(o) { return 'inline-link inline-link--' + o.size + CLS[o.color] + (WT[o.weight || 'regular']) + (o.italic ? ' inline-link--italic' : '') + (o.reverse === 'yes' ? ' inline-link--reverse' : ''); }
-  function link(o) { var a = document.createElement('a'); a.href = '#'; a.className = cls(o); a.textContent = o.label; if (o.state === 'hover') a.dataset.state = 'hover'; a.addEventListener('click', function (e) { e.preventDefault(); }); return a; }
+  function link(o) { var a = document.createElement('a'); a.href = '#'; a.className = cls(o); a.textContent = o.label; if (o.state && o.state !== 'enabled') a.dataset.state = o.state; a.addEventListener('click', function (e) { e.preventDefault(); }); return a; }
   /* The text around a link has the same type as the link: size, line height, letter spacing and features are copied from the link (also under a forced breakpoint) */
   function syncText(root) {
     $$('.pg-p', root || document).forEach(function (p) {
@@ -255,7 +255,7 @@ JS_EX = IL_JS + r'''
     $('#pg-stage').classList.toggle('ds-stage--dark', o.color === 'inverted');
     clear($('#pg-host')).appendChild(sentence(o));
     var h = '<p>Read more about our products on the\n  <a href="#" class="' + cls(o) + '">' + esc(o.label) + '</a>.\n</p>';
-    if (o.state === 'hover') h = '<!-- hover is forced here for preview; in production it comes from :hover -->\n' + h;
+    if (o.state !== 'enabled') h = '<!-- ' + o.state + ' is forced here for preview; in production it comes from ' + (o.state === 'focus' ? 'keyboard focus (body.keyboard-nav :focus-visible)' : ':hover') + ' -->\n' + h;
     $('#pg-code').textContent = h;
     syncText($('#pg-host'));
   }
@@ -268,6 +268,8 @@ JS_EX = IL_JS + r'''
   var rv = clear($('#v-reverse')); rv.appendChild(sentence({ size: 'medium', color: 'primary', reverse: 'yes', label: 'Reverse link' })); rv.appendChild(sentence({ size: 'medium', color: 'primary', reverse: 'yes', state: 'hover', label: 'Reverse link, hover' }));
   var co = clear($('#v-colors')); [['primary', 'Primary'], ['secondary', 'Secondary'], ['tertiary', 'Tertiary']].forEach(function (z) { co.appendChild(sentence({ size: 'medium', color: z[0], label: z[1] + ' link' })); });
   clear($('#v-inv')).appendChild(sentence({ size: 'medium', color: 'inverted', label: 'Inverted link' }));
+  var fo = clear($('#v-focus')); [['primary', 'Primary'], ['secondary', 'Secondary'], ['tertiary', 'Tertiary']].forEach(function (z) { fo.appendChild(sentence({ size: 'medium', color: z[0], state: 'focus', label: z[1] + ' link' })); });
+  clear($('#v-focus-inv')).appendChild(sentence({ size: 'medium', color: 'inverted', state: 'focus', label: 'Inverted link' })); $('#v-focus-inv .pg-p').style.color = 'var(--color-text-primary-inverted)';
   $('#v-inv .pg-p').style.color = 'var(--color-text-primary-inverted)';
 
   /* Usage figures */
@@ -306,7 +308,7 @@ JS_SPEC = IL_JS + r'''
   var tb = $('#matrix tbody');
   function buildMatrix() {
     clear(tb);
-    [['Enabled', 'enabled', 'no'], ['Hover', 'hover', 'no'], ['Reverse · enabled', 'enabled', 'yes'], ['Reverse · hover', 'hover', 'yes']].forEach(function (r) {
+    [['Enabled', 'enabled', 'no'], ['Hover', 'hover', 'no'], ['Focus', 'focus', 'no'], ['Reverse · enabled', 'enabled', 'yes'], ['Reverse · hover', 'hover', 'yes']].forEach(function (r) {
       var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
       ['primary', 'secondary', 'tertiary', 'inverted'].forEach(function (c) { var td = document.createElement('td'); if (c === 'inverted') td.className = 'pg-dark'; td.appendChild(sentence({ size: 'medium', color: c, state: r[1], reverse: r[2], label: 'link' })); tr.appendChild(td); });
       tb.appendChild(tr);
@@ -329,7 +331,7 @@ JS_CODE = r'''
     ['Reverse underline', '<a href="/news" class="inline-link inline-link--medium inline-link--reverse">Read more</a>'],
     ['Inverted, on a dark surface', '<p style="color: var(--color-text-primary-inverted)">Contact us at\n  <a href="mailto:info@example.com" class="inline-link inline-link--medium inline-link--inverted">info@example.com</a>.\n</p>']
   ]);
-  DK.printCss($('#css-code'), 'inline-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/^ {4}/gm, '']]);
+  DK.printCss($('#css-code'), 'inline-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/, \.[\w-]+\[data-state="focus"\]/g, ''], [/^ {4}/gm, '']]);
 '''
 
 C = dict(

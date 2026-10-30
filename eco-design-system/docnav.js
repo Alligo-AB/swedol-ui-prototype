@@ -87,11 +87,14 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
   function link(it, cls) {
     if (it.soon) return '<span class="dn-link dn-link--soon" aria-disabled="true">' + esc(it.t) + '</span>';
     var here = it.sb ? it.id === fullId : it.id === pageId && !/-storyblok$/.test(fullId);
-    return '<a class="dn-link' + (cls ? ' ' + cls : '') + '" href="' + it.href + '"' + (here ? ' aria-current="page"' : '') + '>' + esc(it.t) + '</a>';
+    return '<a class="dn-link' + (cls ? ' ' + cls : '') + '" href="' + it.href + '"' + (here ? ' aria-current="page"' : '') + '><span class="dn-link__t">' + esc(it.t) + '</span></a>';
   }
   function panelHtml(key) {
     var n = NAV[key];
-    var h = '<div class="dn-item">' + link(n.overview) + '</div>';
+    // the overview is the start page of the category: category icon, arrow and a line below it set it apart from the pages (trial 2026-10-30)
+    var o = n.overview;
+    var h = '<div class="dn-item dn-item--overview"><a class="dn-link dn-link--overview" href="' + o.href + '"' + (o.id === pageId ? ' aria-current="page"' : '') + '>' +
+      '<span class="dn-ms dn-link__ico" aria-hidden="true">' + n.icon + '</span><span class="dn-link__t">' + esc(o.t) + '</span></a></div>';
     // Trial 2026-10-28: no group titles, one A-Z list after the overview (group titles stay in NAV for search and the start page); Storyblok widget and Drafts keep their titles, last
     var all = [], kept = n.groups.filter(function (g) { return g.title === 'Storyblok widget' || g.title === 'Drafts'; });
     n.groups.forEach(function (g) { if (kept.indexOf(g) > -1) return; g.items.forEach(function (it) { if (!all.some(function (a) { return a.href && a.href === it.href; })) all.push(it); }); });

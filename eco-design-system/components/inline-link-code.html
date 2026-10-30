@@ -45,7 +45,7 @@
 
 <section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
-    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span></div>
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span></div>
     <h1 class="ds-title">Inline link</h1>
     <p class="ds-lead">An inline link is an underlined text link that flows <strong>within body copy, lists and UI text</strong>. The underline is its affordance, and it is never paired with icons.</p><p class="ds-lead">How to add an inline link to a page. The file is <code>components/css/inline-link.css</code>.</p></div>
 </section>
@@ -75,7 +75,7 @@
     ['Reverse underline', '<a href="/news" class="inline-link inline-link--medium inline-link--reverse">Read more</a>'],
     ['Inverted, on a dark surface', '<p style="color: var(--color-text-primary-inverted)">Contact us at\n  <a href="mailto:info@example.com" class="inline-link inline-link--medium inline-link--inverted">info@example.com</a>.\n</p>']
   ]);
-  DK.printCss($('#css-code'), 'inline-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/^ {4}/gm, '']]);
+  DK.printCss($('#css-code'), 'inline-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/, \.[\w-]+\[data-state="focus"\]/g, ''], [/^ {4}/gm, '']]);
 
 })();
 </script>

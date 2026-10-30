@@ -38,7 +38,7 @@
 
 <section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
-    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span></div>
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span></div>
     <h1 class="ds-title">Tile link</h1>
     <p class="ds-lead">A tile link is a clickable, <strong>graphical link</strong> with an SVG graphic or an icon with a label. It highlights navigation destinations in grids and horizontal scrollers.</p><p class="ds-lead">Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1671-53188" target="_blank" rel="noopener">Tile link</a>.</p></div>
 </section>
@@ -73,7 +73,7 @@
   var WT = { regular: '', medium: ' tile-link--weight-medium', bold: ' tile-link--bold' };
   function cls(o) { return 'tile-link ' + (o.kind === 'brand' ? 'tile-link--brand tile-link--large' : 'tile-link--' + o.size + ' tile-link--' + (o.kind === 'label' ? 'horizontal' : o.place)) + ' tile-link--' + o.bg + (o.kind === 'brand' ? '' : WT[o.weight || 'regular'] + (o.italic ? ' tile-link--italic' : '')); }
   function tile(o) {
-    var a = document.createElement('a'); a.href = '#'; a.className = cls(o); if (o.state === 'hover') a.dataset.state = 'hover';
+    var a = document.createElement('a'); a.href = '#'; a.className = cls(o); if (o.state && o.state !== 'enabled') a.dataset.state = o.state;
     a.addEventListener('click', function (e) { e.preventDefault(); });
     var inner = document.createElement('div'); inner.className = 'tile-link__inner';
     if (o.kind === 'brand') { var im = document.createElement('img'); im.src = '../../images/' + (o.bg === 'black' ? 'bjornklader-logo-white.svg' : 'bjornklader-logo.svg'); im.alt = 'Björnkläder'; inner.appendChild(im); }
@@ -87,7 +87,7 @@
   var mx = { kind: 'icon' };
   function buildMatrix() {
     var tb = clear($('#matrix tbody'));
-    [['Enabled', 'enabled'], ['Hover', 'hover']].forEach(function (r) {
+    [['Enabled', 'enabled'], ['Hover', 'hover'], ['Focus', 'focus']].forEach(function (r) {
       var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
       ['white', 'grey', 'black'].forEach(function (b) { var td = document.createElement('td'); td.appendChild(tile({ kind: mx.kind, size: 'large', place: 'vertical', bg: b, state: r[1], label: 'Generator' })); tr.appendChild(td); });
       tb.appendChild(tr);

@@ -100,7 +100,7 @@ def intro(c, kind):
     <div class="ds-eyebrow-row"><span class="ds-eyebrow">%s</span>%s</div>
     <h1 class="ds-title">%s</h1>
     <p class="ds-lead">%s</p><p class="ds-lead">%s</p></div>
-</section>''' % (c.get('eyebrow', 'Components · Form'), c.get('eyebrow_extra', ''), c['title'], c['lead'], second)
+</section>''' % (c.get('eyebrow', 'Components · Form'), (('' if c.get('no_live') else '<span class="badge-basic badge-basic--success badge-basic--weak">Live</span>') + c.get('eyebrow_extra', '')).replace('class="badge-basic ', 'class="badge-basic badge-basic--large '), c['title'], c['lead'], second)
 
 
 def page(c, kind):

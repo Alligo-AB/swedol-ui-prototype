@@ -97,5 +97,5 @@ JS_PRE = r'''
   function mk(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstChild; }
 '''
 
-# the page frame of a type: eyebrow, hub parent, no Figma badge
-BASE = dict(eyebrow='Components · Notifications', parent=('notifications.html', 'Notifications'), pre_css=PRE, body_js=BODY, css=['menu', 'range'], style=STYLE)
+# the page frame of a type: eyebrow, In progress badge, hub parent
+BASE = dict(eyebrow='Components · Notifications', eyebrow_extra='<span class="badge-basic badge-basic--warning badge-basic--weak">In progress</span>', parent=('notifications.html', 'Notifications'), pre_css=PRE, body_js=BODY, css=['menu', 'range'], style=STYLE)

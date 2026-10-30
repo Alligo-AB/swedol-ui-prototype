@@ -18,7 +18,7 @@ playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose content, size, p
     btn_group('pg-l-pl', 'Placement', 'data-pg="place"', [('vertical', 'Vertical', True), ('horizontal', 'Horizontal', False)]) + \
     btn_group('pg-l-bg', 'Background', 'data-pg="bg"', [('white', 'White', True), ('grey', 'Grey', False), ('black', 'Black', False)]) + \
     btn_group('pg-l-w', 'Label weight', 'data-pg="weight"', [('regular', 'Regular', True), ('medium', 'Medium', False), ('bold', 'Bold', False)]) + btn_group('pg-l-it', 'Label style', 'data-pg="italic"', [('no', 'Normal', True), ('yes', 'Italic', False)]) + \
-    btn_group('pg-l-st', 'State', 'data-pg="state"', [('enabled', 'Enabled', True), ('hover', 'Hover', False)]) + \
+    btn_group('pg-l-st', 'State', 'data-pg="state"', [('enabled', 'Enabled', True), ('hover', 'Hover', False), ('focus', 'Focus', False)]) + \
     '<div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-label">Label</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-label" value="Generator" placeholder="Label" /></div></div></div>' + \
     '</div></div><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
 
@@ -61,7 +61,7 @@ layout = '<h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-grou
     '<h3 class="ds-h3 ds-group">Appearance</h3>' + desc('A 1px border in <code>border-primary</code> on White and Grey, <code>border-action-1</code> on Black. Token names and values are under ' + sec_link(SLUG, 'design-tokens', 'Design Tokens') + ' in Specifications.')
 
 behavior = '<h2 class="ds-h2">Behavior</h2><h3 class="ds-h3 ds-group">Hover</h3>' + desc('The border appears or darkens to <code>border-hover</code> (1px). On a Label + icon or Label only tile the label and the icon change to the action hover color. On a brand tile the logo is unchanged. The Black tile keeps its content and gets a 20% white overlay on <code>surface-action-1</code>.') + \
-    '<h3 class="ds-h3 ds-group">Focus</h3>' + desc('A 2px ring shows on keyboard focus only (<code>body.keyboard-nav</code>).') + \
+    '<h3 class="ds-h3 ds-group">Focus</h3>' + desc('A 2px ring in <code>border-focus</code>, 2px outside the tile, shows on keyboard focus only (<code>body.keyboard-nav</code>). Shown forced below; press Tab on this page to see it live.') + fig_one('<div class="pg-row" id="v-focus"></div>') + \
     '<h3 class="ds-h3 ds-group">Click and Enter</h3>' + desc('A click anywhere on the tile, or Enter, follows the link. All states are listed under ' + sec_link(SLUG, 'states', 'States') + ' in Specifications.')
 
 access = '<h2 class="ds-h2">Accessibility</h2>' + desc('All requirements are listed under ' + sec_link(SLUG, 'accessibility-requirements', 'Accessibility Requirements') + ' in Specifications.') + \
@@ -147,7 +147,7 @@ TL_JS = r'''
   var WT = { regular: '', medium: ' tile-link--weight-medium', bold: ' tile-link--bold' };
   function cls(o) { return 'tile-link ' + (o.kind === 'brand' ? 'tile-link--brand tile-link--large' : 'tile-link--' + o.size + ' tile-link--' + (o.kind === 'label' ? 'horizontal' : o.place)) + ' tile-link--' + o.bg + (o.kind === 'brand' ? '' : WT[o.weight || 'regular'] + (o.italic ? ' tile-link--italic' : '')); }
   function tile(o) {
-    var a = document.createElement('a'); a.href = '#'; a.className = cls(o); if (o.state === 'hover') a.dataset.state = 'hover';
+    var a = document.createElement('a'); a.href = '#'; a.className = cls(o); if (o.state && o.state !== 'enabled') a.dataset.state = o.state;
     a.addEventListener('click', function (e) { e.preventDefault(); });
     var inner = document.createElement('div'); inner.className = 'tile-link__inner';
     if (o.kind === 'brand') { var im = document.createElement('img'); im.src = '../../images/' + (o.bg === 'black' ? 'bjornklader-logo-white.svg' : 'bjornklader-logo.svg'); im.alt = 'Björnkläder'; inner.appendChild(im); }
@@ -169,7 +169,7 @@ JS_EX = TL_JS + r'''
   function renderPg() {
     var o = { kind: st.kind, size: st.size, place: st.place, bg: st.bg, state: st.state, weight: st.weight, italic: st.italic === 'yes', label: $('#pg-label').value };
     clear($('#pg-host')).appendChild(tile(o));
-    var h = markup(o); if (o.state === 'hover') h = '<!-- hover is forced here for preview; in production it comes from :hover -->\n' + h;
+    var h = markup(o); if (o.state !== 'enabled') h = '<!-- ' + o.state + ' is forced here for preview; in production it comes from ' + (o.state === 'focus' ? 'keyboard focus (body.keyboard-nav :focus-visible)' : ':hover') + ' -->\n' + h;
     $('#pg-code').textContent = h;
   }
   DK.wire(st, renderPg); $('#pg-label').addEventListener('input', renderPg);
@@ -180,6 +180,7 @@ JS_EX = TL_JS + r'''
   var vl = clear($('#v-label')); [['large', 'Large'], ['small', 'Small']].forEach(function (z) { vl.appendChild(tile({ kind: 'label', size: z[0], bg: 'white', label: z[1] + ' label only' })); });
   var vb = clear($('#v-brand')); ['white', 'grey', 'black'].forEach(function (b) { vb.appendChild(tile({ kind: 'brand', bg: b })); });
   var vw = clear($('#v-weights')); [['regular', false, 'Regular'], ['medium', false, 'Medium'], ['bold', false, 'Bold'], ['regular', true, 'Italic'], ['bold', true, 'Bold italic']].forEach(function (z) { vw.appendChild(tile({ kind: 'icon', size: 'large', place: 'vertical', bg: 'white', weight: z[0], italic: z[1], label: z[2] })); });
+  var vf = clear($('#v-focus')); ['white', 'grey', 'black'].forEach(function (b) { vf.appendChild(tile({ kind: 'icon', size: 'large', place: 'vertical', bg: b, state: 'focus', label: b.charAt(0).toUpperCase() + b.slice(1) })); });
   var vg = clear($('#v-bg')); ['white', 'grey', 'black'].forEach(function (b) { vg.appendChild(tile({ kind: 'icon', size: 'large', place: 'vertical', bg: b, label: b.charAt(0).toUpperCase() + b.slice(1) })); });
   var vs = clear($('#v-sizes')); [['large', 'vertical', 'Large'], ['small', 'vertical', 'Small'], ['large', 'horizontal', 'Large'], ['small', 'horizontal', 'Small']].forEach(function (z) { vs.appendChild(tile({ kind: 'icon', size: z[0], place: z[1], bg: 'white', label: z[2] })); });
 
@@ -206,7 +207,7 @@ JS_SPEC = TL_JS + r'''
   var mx = { kind: 'icon' };
   function buildMatrix() {
     var tb = clear($('#matrix tbody'));
-    [['Enabled', 'enabled'], ['Hover', 'hover']].forEach(function (r) {
+    [['Enabled', 'enabled'], ['Hover', 'hover'], ['Focus', 'focus']].forEach(function (r) {
       var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
       ['white', 'grey', 'black'].forEach(function (b) { var td = document.createElement('td'); td.appendChild(tile({ kind: mx.kind, size: 'large', place: 'vertical', bg: b, state: r[1], label: 'Generator' })); tr.appendChild(td); });
       tb.appendChild(tr);
@@ -230,7 +231,7 @@ JS_CODE = r'''
     ['Bold italic label', '<a href="/generators" class="tile-link tile-link--large tile-link--horizontal tile-link--white tile-link--bold tile-link--italic">\n  <div class="tile-link__inner">\n    <span class="tile-link__label">Generator</span>\n  </div>\n</a>'],
     ['Brand, black', '<a href="/brands/bjornklader" class="tile-link tile-link--brand tile-link--large tile-link--black">\n  <div class="tile-link__inner">\n    <img src="/images/bjornklader-logo-white.svg" alt="Björnkläder" />\n  </div>\n</a>']
   ]);
-  DK.printCss($('#css-code'), 'tile-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover']]);
+  DK.printCss($('#css-code'), 'tile-link', [[/:is\(:hover, \[data-state="hover"\]\)/g, ':hover'], [/, \.[\w-]+\[data-state="focus"\]/g, '']]);
 '''
 
 C = dict(

@@ -60,7 +60,7 @@ Classes: `tag` (Medium Grey), `tag--white`, `tag--sm`, `tag--remove`, `tag__remo
 
 ## CSS
 
-All rules live in `components/css/tag.css`; never copy them into a page. `.ds-tag` is the docs pages' status chip, not this component.
+All rules live in `components/css/tag.css`; never copy them into a page. A status on a docs page or card is a Badge (`eco-badge`), not this component.
 
 ## Rules
 

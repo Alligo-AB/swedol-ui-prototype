@@ -47,7 +47,7 @@
 
 <section class="ds-section ds-section--first">
   <div class="ds-page ds-inner">
-    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span></div>
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Links</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span></div>
     <h1 class="ds-title">Inline link</h1>
     <p class="ds-lead">An inline link is an underlined text link that flows <strong>within body copy, lists and UI text</strong>. The underline is its affordance, and it is never paired with icons.</p><p class="ds-lead">Tokens, sizes, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=1671-52629" target="_blank" rel="noopener">Inline link</a>.</p></div>
 </section>
@@ -83,7 +83,7 @@
   $$('[data-prevent]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
   var WT = { regular: '', medium: ' inline-link--weight-medium', bold: ' inline-link--bold' };
   function cls(o) { return 'inline-link inline-link--' + o.size + CLS[o.color] + (WT[o.weight || 'regular']) + (o.italic ? ' inline-link--italic' : '') + (o.reverse === 'yes' ? ' inline-link--reverse' : ''); }
-  function link(o) { var a = document.createElement('a'); a.href = '#'; a.className = cls(o); a.textContent = o.label; if (o.state === 'hover') a.dataset.state = 'hover'; a.addEventListener('click', function (e) { e.preventDefault(); }); return a; }
+  function link(o) { var a = document.createElement('a'); a.href = '#'; a.className = cls(o); a.textContent = o.label; if (o.state && o.state !== 'enabled') a.dataset.state = o.state; a.addEventListener('click', function (e) { e.preventDefault(); }); return a; }
   /* The text around a link has the same type as the link: size, line height, letter spacing and features are copied from the link (also under a forced breakpoint) */
   function syncText(root) {
     $$('.pg-p', root || document).forEach(function (p) {
@@ -103,7 +103,7 @@
   var tb = $('#matrix tbody');
   function buildMatrix() {
     clear(tb);
-    [['Enabled', 'enabled', 'no'], ['Hover', 'hover', 'no'], ['Reverse · enabled', 'enabled', 'yes'], ['Reverse · hover', 'hover', 'yes']].forEach(function (r) {
+    [['Enabled', 'enabled', 'no'], ['Hover', 'hover', 'no'], ['Focus', 'focus', 'no'], ['Reverse · enabled', 'enabled', 'yes'], ['Reverse · hover', 'hover', 'yes']].forEach(function (r) {
       var tr = document.createElement('tr'), th = document.createElement('th'); th.scope = 'row'; th.textContent = r[0]; tr.appendChild(th);
       ['primary', 'secondary', 'tertiary', 'inverted'].forEach(function (c) { var td = document.createElement('td'); if (c === 'inverted') td.className = 'pg-dark'; td.appendChild(sentence({ size: 'medium', color: c, state: r[1], reverse: r[2], label: 'link' })); tr.appendChild(td); });
       tb.appendChild(tr);
