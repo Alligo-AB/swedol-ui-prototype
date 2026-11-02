@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dn-search-center">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -80,6 +80,8 @@
 
     /* the scroll cue's target stops below the fixed mobile bar */
     @media (max-width: 960px) { .ds-section[id] { scroll-margin-top: var(--dn-bar, 64px); } }
+    /* desktop has no fixed bar: the scroll cue lands edge to edge with the section below the hero */
+    @media (min-width: 961px) { #foundations { scroll-margin-top: 0; } }
 
     /* ── Section headings: two-tone (primary + tertiary) ─────────────── */
     .hx-h2 span { display: block; color: var(--color-text-tertiary); }
@@ -194,7 +196,7 @@
       <a class="action-link action-link--large action-link--inverted" href="#help"><span class="action-link__icon" aria-hidden="true">rocket_launch</span><span class="action-link__label">Get started</span></a>
     </div>
   </div>
-  <a class="btn btn--blank-inverted btn--sm btn--icon hx-cue" href="#foundations" aria-label="Scroll to content" data-tooltip="Scroll to content"><span class="btn__icon" aria-hidden="true">arrow_downward</span></a>
+  <a class="btn btn--blank-inverted btn--md btn--icon hx-cue" href="#foundations" aria-label="Scroll to content" data-tooltip="Scroll to content"><span class="btn__icon" aria-hidden="true">arrow_downward</span></a>
   <button type="button" class="btn btn--secondary-inverted btn--sm btn--icon hx-pause" id="hx-pause" aria-label="Pause animation" data-tooltip="Pause animation"><span class="btn__icon" aria-hidden="true">pause</span></button>
 </section>
 

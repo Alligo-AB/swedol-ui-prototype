@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Icon: Library – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/icon.css">
+  <link rel="stylesheet" href="../../components/css/chip.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/chip.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ic-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; }
+    .ic-cell { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 64px; }
+    .ic-cell span:last-child, .ic-cell code { font-size: 12px; line-height: 16px; color: var(--color-text-tertiary); text-align: center; overflow-wrap: anywhere; }
+    .ic-dark { background: var(--color-surface-opacity-black-80); padding: 8px; }
+    .il-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+    .il-bar .il-search { flex: 1 1 240px; min-width: 0; }
+    .il-bar .il-cat { flex: 0 0 200px; max-width: 100%; }
+    .il-sub { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .il-sub[hidden] { display: none; }
+    .il-count { margin: 16px 0 0; }
+    .il-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 24px; margin-top: 24px; }
+    .il-heading { margin-top: 48px; }
+    .il-heading:first-child { margin-top: 24px; }
+    .il-n { color: var(--color-text-tertiary); }
+    @media (max-width: 768px) { .il-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 16px; } .il-bar .il-cat { flex: 1 1 100%; } }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="icon.html" class="breadcrumb-item">Icon</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Library</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Layout and content</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span><span class="badge-basic badge-basic--large badge-basic--warning badge-basic--weak" title="The library categories and the size examples are proposals.">In progress</span></div>
+    <h1 class="ds-title">Icon</h1>
+    <p class="ds-lead">Icons symbolize common actions, features and themes in our products. The set is <strong>Material Symbols</strong> and <strong>custom icons</strong>: customized symbols, brand icons for Swedol and Tools, social icons and logos.</p><p class="ds-lead">Search every icon in the system and copy its name. Source: Figma Icon Library.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Icon"><a class="tab" href="icon.html"><span class="tab__label">Examples & Guidelines</span></a><a class="tab" href="icon-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="icon-code.html"><span class="tab__label">Code</span></a><a class="tab" aria-current="page" href="icon-library.html"><span class="tab__label">Library</span></a><a class="tab" href="icon-add.html"><span class="tab__label">Add an icon</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="search-the-library"><div class="ds-page ds-inner"><h2 class="ds-h2">Search the library</h2><p class="ds-desc">Search by name, or choose a category. Click an icon to copy its name. The Material Symbols listed are the ones in use on the site today. Custom icons are grouped under headings. Three custom icons are marked <strong>Reserved</strong>: they belong to the Product &amp; Discount badges and must not be used for anything else.</p><div data-icon-library><div class="il-bar"><div class="il-search form-field"><label class="form-label form-label--sm" for="il-search">Search for an icon</label><div class="input-wrap"><div class="input-box"><span class="input-icon input-icon--lg" aria-hidden="true">search</span><input class="form-input" type="search" id="il-search" placeholder="Search for an icon" data-il-search autocomplete="off" /></div></div></div><div class="il-cat form-field"><label class="form-label form-label--sm" for="il-cat">Categories</label><div class="input-wrap"><select class="form-select" id="il-cat" data-il-cat><option value="all" selected>All icons</option><option value="material">Material Symbols</option><option value="custom">Custom icons</option></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div></div><div class="il-sub" data-il-sub role="group" aria-label="Subcategory" hidden></div><p class="il-count pg-note" data-il-count aria-live="polite"></p><div class="il-groups" data-il-grid></div></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="categories"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Categories</h2><p class="ds-desc">Icons are grouped in two categories. Choose Custom icons to filter its four groups. Fill icons are not in the library: developers use them for the active state, for example a cart that holds a product.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Category</th><th scope="col">Subcategory</th><th scope="col">Holds</th></tr></thead><tbody><tr><th scope="row">Material Symbols</th><td>—</td><td>Material Symbols in use on the site, Outlined (Fill 0, Weight 300). The Fill style is not listed: it is for developers, as the active state of an icon.</td></tr><tr><th scope="row">Custom icons</th><td>Customized symbols</td><td>Material Symbols that are changed, and icons in the style of Material Symbols (<code>_custom</code>).</td></tr><tr><th scope="row">Custom icons</th><td>Brand</td><td>Icons that are specific to Swedol and Tools (<code>_brand</code>).</td></tr><tr><th scope="row">Custom icons</th><td>Social</td><td>Icons of social media (<code>_social</code>).</td></tr><tr><th scope="row">Custom icons</th><td>Logo</td><td>Logos (<code>_logo</code>).</td></tr></tbody></table></div><p class="ds-desc ds-note"><strong>Open points:</strong> <code>favourite</code> is spelled <code>favorite</code> in Material Symbols (the library shows the Material glyph), <code>return_shipment_custom_1</code> has a number suffix, and the brand icons have no per-brand split yet (Swedol or Tools).</p></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+<script src="../../components/icon-library/icon-library-data.js"></script>
+<script src="../../components/js/icon-library.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

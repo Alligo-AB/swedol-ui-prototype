@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Icon: Add an icon – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/icon.css">
+  <link rel="stylesheet" href="../../components/css/chip.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/chip.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ic-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; }
+    .ic-cell { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 64px; }
+    .ic-cell span:last-child, .ic-cell code { font-size: 12px; line-height: 16px; color: var(--color-text-tertiary); text-align: center; overflow-wrap: anywhere; }
+    .ic-dark { background: var(--color-surface-opacity-black-80); padding: 8px; }
+    .il-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+    .il-bar .il-search { flex: 1 1 240px; min-width: 0; }
+    .il-bar .il-cat { flex: 0 0 200px; max-width: 100%; }
+    .il-sub { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .il-sub[hidden] { display: none; }
+    .il-count { margin: 16px 0 0; }
+    .il-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 24px; margin-top: 24px; }
+    @media (max-width: 768px) { .il-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 16px; } .il-bar .il-cat { flex: 1 1 100%; } }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="icon.html" class="breadcrumb-item">Icon</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Add an icon</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Layout and content</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span><span class="badge-basic badge-basic--large badge-basic--warning badge-basic--weak" title="The library categories and the size examples are proposals.">In progress</span></div>
+    <h1 class="ds-title">Icon</h1>
+    <p class="ds-lead">Icons symbolize common actions, features and themes in our products. The set is <strong>Material Symbols</strong> and <strong>custom icons</strong>: customized symbols, brand icons for Swedol and Tools, social icons and logos.</p><p class="ds-lead">How a designer adds or changes an icon. Source: Figma Add icons to our system.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Icon"><a class="tab" href="icon.html"><span class="tab__label">Examples & Guidelines</span></a><a class="tab" href="icon-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="icon-code.html"><span class="tab__label">Code</span></a><a class="tab" href="icon-library.html"><span class="tab__label">Library</span></a><a class="tab" aria-current="page" href="icon-add.html"><span class="tab__label">Add an icon</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="step-1"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Step 1: Find an icon</h2><p class="ds-desc">Material Symbols consolidates over 2,500 glyphs in a single font file with a wide range of design variants.</p><p class="ds-desc">Get started by finding the icon on the <a class="inline-link inline-link--large inline-link--secondary" href="https://fonts.google.com/icons" target="_blank" rel="noopener">Google Fonts icon site</a> or in the Figma app. Check the <a class="inline-link inline-link--large inline-link--secondary" href="icon-library.html">Library</a> first: the icon may already exist.</p><p class="ds-desc">If your needs are not met by Material Symbols, reach out to the Design Systems team about custom solutions.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="step-2"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Step 2: Add the icon to our Figma kit</h2><p class="ds-desc">All of our icons are stored in <a class="inline-link inline-link--large inline-link--secondary" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System" target="_blank" rel="noopener">our ALLIGO ECO Design System Figma file</a>, in the section “Icons”. Designers with edit access in our Figma account can add and edit icons.</p><p class="ds-desc">To add a new icon to the library, follow these steps:</p><ol class="ds-bullets ds-bullets--num"><li><strong>Import the icon with the customization settings.</strong> Material Symbols Outlined: Fill 0, Weight 300, Grade 0, optical sizes 20, 24, 40 and 48; additional sizes 12 and 14. Material Symbols Fill: Fill 1, Weight 300, Grade 0, optical sizes 20, 24, 40 and 48.</li><li><strong>Create a component.</strong> Add the four size variants of the icon. Convert the icon’s frame to a component: select the frame and press the “Create Component” button (⌥ + ⌘ + K). Look at the other icons in the file for a reference.</li></ol><h3 class="ds-h3 ds-group" id="naming-icons">Naming icons</h3><ul class="ds-bullets"><li>Use an underscore “_” as the delimiter between words.</li><li>Use lowercase rather than UPPERCASE, camelCase or PascalCase.</li><li>Use the generic Material Symbols names that come with the icon, for example <code>icon_name</code>.</li><li>If it is a customized Material Symbol, or an icon in the style of Material Symbols, add <strong>custom</strong>, for example <code>icon_name_custom</code>.</li><li>Use specific names for logo, brand-specific and feature-specific icons that do not come from Material Symbols (for example <strong>_logo</strong>, <strong>_brand</strong>, <strong>_social</strong>), for example <code>name_of_logo_logo</code>.</li></ul><p class="ds-desc ds-note">The full naming rules are in <a class="inline-link inline-link--large inline-link--secondary" href="icon-specifications.html#naming">Specifications</a>.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="step-3"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Step 3: Add the icon to the library page</h2><p class="ds-desc ds-note"><strong>Proposed step, not in the Figma instructions.</strong> The library page reads one data file, so a new icon has to be added to it.</p><ol class="ds-bullets ds-bullets--num"><li><strong>Material Symbols icon.</strong> Add the Figma name to <code>eco-design-system/gen/icons-material.txt</code> under <code>[outline]</code> or <code>[fill]</code>.</li><li><strong>Custom icon.</strong> Export the 24px variant as SVG. Add one line to <code>eco-design-system/gen/icons-custom.txt</code>: <code>name|group|viewBox|svg content</code> (group: custom, brand, social or logo; fill colors as <code>currentColor</code>).</li><li><strong>Rebuild.</strong> Run <code>python3 gen_icon.py data</code> in <code>eco-design-system/gen</code>. Never edit <code>icon-library-data.js</code> by hand.</li></ol></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+<script src="../../components/icon-library/icon-library-data.js"></script>
+<script src="../../components/js/icon-library.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

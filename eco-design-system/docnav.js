@@ -27,7 +27,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
         { title: 'Menus, lists and dividers', items: [c('menu', 'Menu'), c('list-item', 'List Item'), c('divider', 'Divider')] },
         { title: 'Links', items: [c('links-guide', 'Links', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
         { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb', { children: [c('breadcrumb-base', 'Base')] }), c('pagination', 'Pagination'), c('tag', 'Tag'), c('tooltip', 'Tooltip')] },
-        { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible')] },
+        { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible'), c('icon', 'Icon')] },
         { title: 'Cards', items: [c('cards', 'Cards', { children: [c('ah-group-card-widget-storyblok', 'Article Highlight Group Card', { sb: true }), c('ah-single-row-card-widget', 'Article Highlight Single Row Card')] })] },
         { title: 'Patterns', items: [c('patterns-overview', 'Patterns overview'), c('breadcrumb-bar', 'Breadcrumb Bar'), c('hero-banner-widget', 'Hero banner'), { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }] },
         { title: 'Storyblok widget', items: [c('hero-banner-widget-storyblok', 'Hero banner widget', { sb: true }), c('ah-group-card-widget-storyblok', 'AH Group widget', { sb: true }), c('ah-single-row-card-widget-storyblok', 'AH Single Row widget', { sb: true }), c('collapsible-storyblok', 'Collapsible', { sb: true })] },
@@ -52,7 +52,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
 
   window.ECO_NAV = NAV;   // read by the start page (index.html) to count the pages live
 
-  var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code|storyblok|usage|reference|primitives|tokens|breakpoints|spacing)$/, '');
+  var pageId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '').replace(/-(specifications|code|storyblok|usage|reference|primitives|tokens|breakpoints|spacing|library|add)$/, '');
   var fullId = decodeURIComponent(location.pathname).replace(/\/+$/, '').split('/').pop().replace(/\.html$/, '');   // file name incl. -storyblok: the Storyblok group items match on it
   var cur = null;   // { cat, id }
   Object.keys(NAV).forEach(function (k) {
@@ -323,7 +323,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
     elevation: 'skugga, skuggor, höjd, djup, lager', motion: 'rörelse, animation, animering, övergång, tid',
     button: 'knapp, knappar', 'button-group': 'knappgrupp, knappar, grupp', checkbox: 'kryssruta, kryssrutor, markera, bockruta', input: 'inmatning, inmatningsfält, textfält, fält, formulär',
     textarea: 'textruta, textområde, flerradig, kommentar', radio: 'radioknapp, alternativ, val, väljare', select: 'rullgardin, rullista, väljare, lista, dropdown', 'switch': 'reglage, brytare, omkopplare, växla',
-    tabs: 'flikar, flik', 'segment-control': 'segmentkontroll, växlare, segment, pill', range: 'skjutreglage, reglage, intervall, slider', 'icon-picker': 'ikonväljare, ikon, ikoner, symbol',
+    tabs: 'flikar, flik', 'segment-control': 'segmentkontroll, växlare, segment, pill', range: 'skjutreglage, reglage, intervall, slider', 'icon-picker': 'ikonväljare, ikon, ikoner, symbol', icon: 'ikon, ikoner, ikonbibliotek, symbol, symboler, material symbols, logotyp, sociala medier',
     notifications: 'notiser, notis, meddelanden, avisering, aviseringar, status', toast: 'snackbar, notis, meddelande, popup', 'toast-ecom': 'varukorg, kundvagn, tillagd, notis',
     modal: 'dialog, dialogruta, modalruta, popup, fönster', banner: 'banderoll, kampanj, driftmeddelande, notis', inline: 'infogad, varning, felmeddelande, meddelande, notis',
     menu: 'meny, rullgardinsmeny, dropdown', 'list-item': 'listobjekt, listrad, rad, lista', divider: 'avdelare, skiljelinje, delare, linje, separator',

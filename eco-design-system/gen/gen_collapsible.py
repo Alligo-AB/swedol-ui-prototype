@@ -24,12 +24,6 @@ STYLE = r'''    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0
     .sb-pin { position: absolute; transform: translate(-50%, -50%); pointer-events: none; }
     .sb-pin--red { background: var(--color-surface-danger-default); }
     .sb-box { position: absolute; border: 3px solid var(--color-border-danger-default); pointer-events: none; }
-    .sb-tip { display: flex; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); }
-    .sb-tip__ic { display: grid; place-items: center; flex: 0 0 96px; background: var(--color-surface-100); color: var(--color-accent-default); }
-    .sb-tip__ic .mo-ic { font-size: 48px; }
-    .sb-tip__body { padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-24); }
-    .sb-tip__body .ds-h3 { margin: 0 0 var(--dimension-spacing-space-4); }
-    .sb-tip__body p { margin: 0; }
     .sec-fig { --px-full: var(--dimension-spacing-space-24); width: 100%; }   /* demo: a fixed side margin, so a section fits a figure */
     .sec-in { padding: var(--dimension-spacing-space-24) 0; }
     .sec-ph { padding: var(--dimension-spacing-space-16); background: var(--color-surface-10); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
@@ -424,7 +418,7 @@ sb_content = '<h2 class="ds-h2">Content in a collapsible item</h2>' + desc('The 
     desc('Keep the text short enough to digest. Review the line length (60–90 characters is ideal) under ' + link_large('../foundations/typography.html', 'Typography') + '.')
 
 sb_width = '<h2 class="ds-h2">Section column width</h2>' + desc('The width of the group is set on the section, not on the block. In the section settings, <strong>Column Width Medium</strong> is <code>col-10</code> and <strong>Column Width Large</strong> is <code>col-8</code> for the group in the examples.') + \
-    '<div class="sb-tip"><div class="sb-tip__ic"><span class="mo-ic" aria-hidden="true">lightbulb</span></div><div class="sb-tip__body"><h3 class="ds-h3">Pro tip</h3><p class="ds-desc">Use the section column width settings to make the content of a group of collapsibles easier to digest.</p></div></div>'
+    '<div class="ds-tip"><div class="ds-tip__ic"><span class="mo-ic" aria-hidden="true">lightbulb</span></div><div class="ds-tip__body"><h3 class="ds-h3">Pro tip</h3><p class="ds-desc">Use the section column width settings to make the content of a group of collapsibles easier to digest.</p></div></div>'
 
 sb_related = '<h2 class="ds-h2">Related</h2><ul class="ds-bullets"><li><strong>' + link_large('collapsible.html', 'Examples &amp; Guidelines') + '</strong>. When to use a collapsible, the dividers and the best practices.</li><li><strong>' + link_large('collapsible-specifications.html', 'Specifications') + '</strong>. Sizes, tokens and states.</li><li><strong>' + link_large('collapsible-code.html', 'Code') + '</strong>. The markup and the classes.</li></ul>'
 

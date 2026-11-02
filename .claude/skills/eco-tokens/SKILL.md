@@ -59,4 +59,14 @@ Example — avoid:
 
 ## Generation / verification
 
+Run exactly this, from the repo root. Do not edit `tokens.json` by hand.
+
+```bash
+cd .claude/skills/eco-tokens
+python3 generate-tokens.py --dist /path/to/alligo-design-tokens/dist
+git diff tokens.json
+```
+
+`--dist` is the package's `dist/` folder: from a clone of `Alligo-AB/alligo-design-tokens`, or from `npm pack alligo-design-tokens@latest` unpacked (`package/dist`). A renamed or removed token in the diff must be a deliberate change: report it before committing.
+
 `tokens.json` is generated from the `dist/` folder supplied to `generate-tokens.py`; do not hand-edit token values. Typography is sourced from the current Supernova export structure: `css/base/typography.css` supplies the semantic type-scale names and descriptions, while `css/base/dimension.css` and `css/mobiletypography/dimension.css` supply desktop/base and mobile dimensions respectively. The generator preserves the ECO mobile-first output contract: a complete `mobile` block plus only changed values in `desktopOverride` at 769px. Typography modifier tokens are intentionally excluded from the canonical 20 type-scale entries.

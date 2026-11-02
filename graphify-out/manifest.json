@@ -24,9 +24,9 @@
     "semantic_hash": "b35fdae09cd0b4f417e3b6b4401500ff"
   },
   "CLAUDE.md": {
-    "mtime": 1793353726.4375222,
-    "seen": 1793353729.3835351,
-    "ast_hash": "18abe4ffe90a7d31f06b2aef18a716be",
+    "mtime": 1793541746.2355552,
+    "seen": 1793541753.5630069,
+    "ast_hash": "d7edda59e85a83638abbddb393b5c442",
     "semantic_hash": ""
   },
   "README.md": {
@@ -102,9 +102,9 @@
     "semantic_hash": "af8483ad3a32fa77ed693df1bfcecbf4"
   },
   "template.html": {
-    "mtime": 1793179467.1607072,
-    "seen": 1793179519.7020721,
-    "ast_hash": "b2ec4bd2554a2122416f0512f2dc13b3",
+    "mtime": 1793541737.9815881,
+    "seen": 1793541753.5632708,
+    "ast_hash": "71740fdea6f0d3dadba3f6e324840cbe",
     "semantic_hash": ""
   },
   ".claude/skills/links-guide/SKILL.md": {
@@ -174,10 +174,10 @@
     "semantic_hash": ""
   },
   ".claude/skills/eco-banner-notification/SKILL.md": {
-    "mtime": 1792662620.925815,
-    "seen": 1792673809.918897,
-    "ast_hash": "1893c5117fe1074b7783d7f6329b257d",
-    "semantic_hash": "1893c5117fe1074b7783d7f6329b257d"
+    "mtime": 1793447713.3332026,
+    "seen": 1793447719.549397,
+    "ast_hash": "473e29a800035c09ce4f83c085ff4dfb",
+    "semantic_hash": ""
   },
   ".claude/skills/eco-breadcrumb/SKILL.md": {
     "mtime": 1792662620.9277854,
@@ -294,9 +294,9 @@
     "semantic_hash": "0f9601243b5e49b12b2ff246af42cdf3"
   },
   ".claude/skills/eco-tokens/SKILL.md": {
-    "mtime": 1792662761.2399025,
-    "seen": 1792673809.918925,
-    "ast_hash": "f37f45ebede603c891c2161a7a5af16d",
+    "mtime": 1793447713.340579,
+    "seen": 1793447719.54944,
+    "ast_hash": "209ba16c23626c7bedeb7fd68c2ded77",
     "semantic_hash": ""
   },
   ".claude/skills/eco-tooltip/SKILL.md": {
@@ -312,9 +312,9 @@
     "semantic_hash": ""
   },
   ".claude/skills/prototype-guide/SKILL.md": {
-    "mtime": 1793354063.8493953,
-    "seen": 1793354067.756774,
-    "ast_hash": "120f000beb68ed033bc12f6bbd91addb",
+    "mtime": 1793541737.982558,
+    "seen": 1793541753.563006,
+    "ast_hash": "ff851c2c5222df4de7209c297e23b153",
     "semantic_hash": ""
   },
   "mypages/memory/MEMORY.md": {
@@ -330,9 +330,9 @@
     "semantic_hash": "09fc81aef67d494c01957ac06e42fcf3"
   },
   "mypages/mypages-template.html": {
-    "mtime": 1793179467.2253997,
-    "seen": 1793179519.7020621,
-    "ast_hash": "4a387596a964020ca46f7774cb83288c",
+    "mtime": 1793541737.9820335,
+    "seen": 1793541753.5632598,
+    "ast_hash": "dbcf3f2a1a44930ec386fab92206894d",
     "semantic_hash": ""
   },
   "mypages/users-dashboard.html": {
@@ -402,9 +402,9 @@
     "semantic_hash": "58d9c2cc73ac9734e744e0c2ed44e2d3"
   },
   ".claude/skills/eco-doc-page/SKILL.md": {
-    "mtime": 1793353735.8208401,
-    "seen": 1793353738.583421,
-    "ast_hash": "68e2a774adb094a52d71ca1644feacfa",
+    "mtime": 1793447713.2832167,
+    "seen": 1793447719.549407,
+    "ast_hash": "c04ed59808be9d56f9c0df48c91cadf4",
     "semantic_hash": ""
   },
   ".claude/skills/eco-switch/SKILL.md": {
@@ -750,9 +750,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/docnav.js": {
-    "mtime": 1793351782.1444354,
-    "seen": 1793351785.330156,
-    "ast_hash": "228cd99d62a6781938c3c893f3f26375",
+    "mtime": 1793541566.3294554,
+    "seen": 1793541753.562864,
+    "ast_hash": "4d365a847f1c3643ee6d6068b6076848",
     "semantic_hash": ""
   },
   "eco-design-system/toc.js": {
@@ -762,9 +762,9 @@
     "semantic_hash": "06ff44b8369a43c3ef46a1777b692213"
   },
   "eco-design-system/components-overview.html": {
-    "mtime": 1793346826.7001944,
-    "seen": 1793350694.2002392,
-    "ast_hash": "f9efd69e05f259a060481a9b3799290b",
+    "mtime": 1793541575.828522,
+    "seen": 1793541753.563036,
+    "ast_hash": "40cf738020fab5cb6838df013adcb109",
     "semantic_hash": ""
   },
   "eco-design-system/components/tooltip-code.html": {
@@ -1110,9 +1110,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/gen/README.md": {
-    "mtime": 1793179572.0316975,
-    "seen": 1793179575.7084491,
-    "ast_hash": "994ec58b47f6aa248ef027fec4e8e72f",
+    "mtime": 1793541746.2773795,
+    "seen": 1793541753.563173,
+    "ast_hash": "20f6a5499bebc7475ff5c11d0296d426",
     "semantic_hash": ""
   },
   "eco-design-system/gen/old-source/button-group.html": {
@@ -2028,9 +2028,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/index.html": {
-    "mtime": 1793354063.8485558,
-    "seen": 1793354067.7569668,
-    "ast_hash": "18007904676116455c0fb8dacba5521f",
+    "mtime": 1793367395.6493354,
+    "seen": 1793367398.561176,
+    "ast_hash": "dc058ae9232264697f2965360698b4be",
     "semantic_hash": ""
   },
   "hairline/hairline-button-group.eco.html": {
@@ -2124,15 +2124,9 @@
     "semantic_hash": ""
   },
   "scripts/build-docs.mjs": {
-    "mtime": 1792662709.497662,
-    "seen": 1792673809.918891,
-    "ast_hash": "7fd39eddda42e71bc691200a3fd82694",
-    "semantic_hash": ""
-  },
-  "vercel.json": {
-    "mtime": 1792662709.498855,
-    "seen": 1792673809.9188921,
-    "ast_hash": "c620e70f0ff6709dd331695de1871bee",
+    "mtime": 1793354435.8440926,
+    "seen": 1793366951.645579,
+    "ast_hash": "14831dee0854c840f62b4e3df30662b5",
     "semantic_hash": ""
   },
   "eco-design-system/card-visuals-archive/icon-picker.html": {
@@ -2661,6 +2655,138 @@
     "mtime": 1793263118.8466446,
     "seen": 1793290888.583522,
     "ast_hash": "fd8b1d4e385ff1ca0ae62fb7b536fe5c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-banner-notification/references/css-template.md": {
+    "mtime": 1793447713.3327231,
+    "seen": 1793447719.549398,
+    "ast_hash": "68b63cb3bd7916a4a334f4501a1372f7",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/building-blocks.md": {
+    "mtime": 1793447713.279119,
+    "seen": 1793447719.549408,
+    "ast_hash": "6613aed82398e6203811c428fce42bf2",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/component-families.md": {
+    "mtime": 1793541746.2372582,
+    "seen": 1793541753.5629709,
+    "ast_hash": "648dad1a201497279b936b70f1c68834",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/component-pages.md": {
+    "mtime": 1793447713.280124,
+    "seen": 1793447719.54941,
+    "ast_hash": "16837d2d05b781b28c449dd909e131eb",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/docs-shell.md": {
+    "mtime": 1793447713.2811399,
+    "seen": 1793447719.54941,
+    "ast_hash": "ad60bf9a33c64fb7aab72427fc5b0e36",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/file-map.md": {
+    "mtime": 1793447713.2785048,
+    "seen": 1793447719.549411,
+    "ast_hash": "01df657389be2b37614132ac954fb12c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/foundations.md": {
+    "mtime": 1793447713.279607,
+    "seen": 1793447719.549412,
+    "ast_hash": "3f8622eac1c631489be1334f5e867e49",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/header-art.md": {
+    "mtime": 1793447713.2815473,
+    "seen": 1793447719.5494132,
+    "ast_hash": "ff2ec877e81697c308caf4b9de3d296e",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/history.md": {
+    "mtime": 1793447713.2829034,
+    "seen": 1793447719.549414,
+    "ast_hash": "0fadb705ba20ca08ee05185eb24d16b6",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-doc-page/references/storyblok-widgets.md": {
+    "mtime": 1793447713.2822309,
+    "seen": 1793447719.549414,
+    "ast_hash": "897382ed59b4fa8fb7f1b2cc5108e1f9",
+    "semantic_hash": ""
+  },
+  "design-reviews/AE-3540-notification-banner.md": {
+    "mtime": 1793370646.067163,
+    "seen": 1793447719.549451,
+    "ast_hash": "5fcf85569e4a73599ea75b5b8979532e",
+    "semantic_hash": ""
+  },
+  "components/icon-library/icon-library-data.js": {
+    "mtime": 1793541352.95641,
+    "seen": 1793541753.562847,
+    "ast_hash": "bb253f7aa2a88817375851435f166c9a",
+    "semantic_hash": ""
+  },
+  "components/js/icon-library.js": {
+    "mtime": 1793541438.8749454,
+    "seen": 1793541753.5628538,
+    "ast_hash": "8256299125c0dd5760e16b29b8470061",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/gen_icon.py": {
+    "mtime": 1793541556.782541,
+    "seen": 1793541753.562888,
+    "ast_hash": "ce8c7f83ac308527668aef9519ccb15e",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-icon/SKILL.md": {
+    "mtime": 1793541737.681417,
+    "seen": 1793541753.5629811,
+    "ast_hash": "364f2494162b995af4248ee5e59f2619",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/icon-add.html": {
+    "mtime": 1793541556.8388944,
+    "seen": 1793541753.563092,
+    "ast_hash": "e65f7f2861f5fb3800d22dee34dc0d4d",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/icon-code.html": {
+    "mtime": 1793541556.8379931,
+    "seen": 1793541753.563093,
+    "ast_hash": "195e2d2ce49ec2c6d40e2f98dbf7634c",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/icon-library.html": {
+    "mtime": 1793541556.8383696,
+    "seen": 1793541753.563093,
+    "ast_hash": "0a44d3132783746245e092f1f2fd5306",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/icon-specifications.html": {
+    "mtime": 1793541556.8375793,
+    "seen": 1793541753.563097,
+    "ast_hash": "1842916ae5ed7c954e9b2ad6b3001a01",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/icon.html": {
+    "mtime": 1793541556.8370883,
+    "seen": 1793541753.5630982,
+    "ast_hash": "c9342cb4056dde7ad7d697308f4da201",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/icons-custom.txt": {
+    "mtime": 1793541328.2996883,
+    "seen": 1793541753.563175,
+    "ast_hash": "b271ef4c4c79330fae0c6e15cad776d6",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/icons-material.txt": {
+    "mtime": 1793541466.721977,
+    "seen": 1793541753.563176,
+    "ast_hash": "84deff502156977f1ca708ee1a5abb0f",
     "semantic_hash": ""
   }
 }

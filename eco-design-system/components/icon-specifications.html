@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Icon: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/icon.css">
+  <link rel="stylesheet" href="../../components/css/chip.css">
+  <link rel="stylesheet" href="../../components/css/menu.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/chip.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ic-row { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; }
+    .ic-cell { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 64px; }
+    .ic-cell span:last-child, .ic-cell code { font-size: 12px; line-height: 16px; color: var(--color-text-tertiary); text-align: center; overflow-wrap: anywhere; }
+    .ic-dark { background: var(--color-surface-opacity-black-80); padding: 8px; }
+    .il-bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+    .il-bar .il-search { flex: 1 1 240px; min-width: 0; }
+    .il-bar .il-cat { flex: 0 0 200px; max-width: 100%; }
+    .il-sub { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .il-sub[hidden] { display: none; }
+    .il-count { margin: 16px 0 0; }
+    .il-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 24px; margin-top: 24px; }
+    @media (max-width: 768px) { .il-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 16px; } .il-bar .il-cat { flex: 1 1 100%; } }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="icon.html" class="breadcrumb-item">Icon</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Layout and content</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span><span class="badge-basic badge-basic--large badge-basic--warning badge-basic--weak" title="The library categories and the size examples are proposals.">In progress</span></div>
+    <h1 class="ds-title">Icon</h1>
+    <p class="ds-lead">Icons symbolize common actions, features and themes in our products. The set is <strong>Material Symbols</strong> and <strong>custom icons</strong>: customized symbols, brand icons for Swedol and Tools, social icons and logos.</p><p class="ds-lead">Material Symbols settings, sizes, naming, color tokens and the icon item.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Icon"><a class="tab" href="icon.html"><span class="tab__label">Examples & Guidelines</span></a><a class="tab" aria-current="page" href="icon-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="icon-code.html"><span class="tab__label">Code</span></a><a class="tab" href="icon-library.html"><span class="tab__label">Library</span></a><a class="tab" href="icon-add.html"><span class="tab__label">Add an icon</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Part</th><th scope="col">Use</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div><p class="ds-desc ds-note"><strong>Open point:</strong> there are only two icon color tokens, primary and inverted. Status colors for icons (success, warning, error) are not defined; icons in a notification follow the notification.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="material-symbols-settings"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Material Symbols settings</h2><p class="ds-desc">Import Material Symbols with these settings. The font on the pages has the same axes.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Style</th><th scope="col">Fill</th><th scope="col">Weight</th><th scope="col">Grade</th><th scope="col">Optical sizes</th></tr></thead><tbody><tr><th scope="row">Material Symbols Outlined</th><td>0</td><td>300</td><td>0</td><td>20, 24, 40 and 48. Additional sizes: 12 and 14.</td></tr><tr><th scope="row">Material Symbols Fill</th><td>1</td><td>300</td><td>0</td><td>20, 24, 40 and 48</td></tr></tbody></table></div><p class="ds-desc">In CSS the settings are <code>font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24</code>. <code>icon.css</code> sets them from the size class.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Class</th><th scope="col">Width and height</th><th scope="col">Optical size</th></tr></thead><tbody><tr><th scope="row">XXSmall</th><td><code>icon--xxs</code></td><td>12px</td><td>20</td></tr><tr><th scope="row">XSmall</th><td><code>icon--xs</code></td><td>14px</td><td>20</td></tr><tr><th scope="row">Small</th><td><code>icon--sm</code></td><td>20px</td><td>20</td></tr><tr><th scope="row">Medium</th><td><code>icon--md</code></td><td>24px</td><td>24</td></tr><tr><th scope="row">Large</th><td><code>icon--lg</code></td><td>40px</td><td>40</td></tr><tr><th scope="row">XLarge</th><td><code>icon--xl</code></td><td>48px</td><td>48</td></tr></tbody></table></div><p class="ds-desc ds-note">The same on every breakpoint. A custom icon is drawn on a 24px grid and is scaled to the size (one SVG for all sizes).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="naming"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Naming</h2><p class="ds-desc">Rules for the name of an icon in Figma and in code. They are from the Figma instructions for adding an icon.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Rule</th><th scope="col">Example</th></tr></thead><tbody><tr><th scope="row">Use an underscore <code>_</code> between words.</th><td><code>shopping_cart</code></td></tr><tr><th scope="row">Use lowercase, never UPPERCASE, camelCase or PascalCase.</th><td><code>chevron_right</code></td></tr><tr><th scope="row">Use the Material Symbols name that comes with the icon.</th><td><code>icon_name</code></td></tr><tr><th scope="row">A customized Material Symbol, or an icon in the style of Material Symbols, ends with <code>_custom</code>.</th><td><code>grid_view_custom</code></td></tr><tr><th scope="row">A logo ends with <code>_logo</code>.</th><td><code>bank_id_logo</code></td></tr><tr><th scope="row">A Swedol or Tools specific icon ends with <code>_brand</code>.</th><td><code>foot_scan_brand</code></td></tr><tr><th scope="row">A social icon ends with <code>_social</code>.</th><td><code>instagram_social</code></td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="icon-item"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Icon item</h2><p class="ds-desc">The item of the <a class="inline-link inline-link--large inline-link--secondary" href="icon-library.html">Library</a>: an icon at 40px with its name. Hover or focus shows the copy icon and a grey name bar.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Part</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Container</th><td>A button. Width: fills its grid cell (160px at least).</td></tr><tr><th scope="row">Copy icon</th><td>20px, 8px from the top and from the left. Hidden until hover or keyboard focus.</td></tr><tr><th scope="row">Icon</th><td>40px, centered, 8px left and right, 16px below.</td></tr><tr><th scope="row">Name</th><td>Body small (14/20), 8px padding on every side. Grey bar (<code>surface-navigation-hover</code>) on hover and focus.</td></tr><tr><th scope="row">Hover</th><td>White, <code>elevation-b-60</code>.</td></tr><tr><th scope="row">Focus</th><td>2px <code>border-focus</code> ring, 2px offset.</td></tr><tr><th scope="row">Grid</th><td>24px gap on desktop, 16px below 769px.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="motion"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Motion</h2><p class="ds-desc ds-note">None. An icon has no motion of its own. The change from Outline to Fill is made by the component that holds the icon.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Decorative icon</th><td><code>aria-hidden="true"</code> on the icon when a label is next to it.</td></tr><tr><th scope="row">Icon with meaning</th><td>An accessible name on the control that holds it (<code>aria-label</code>), or on a stand-alone svg: <code>role="img"</code> and <code>aria-label</code>.</td></tr><tr><th scope="row">Contrast</th><td>At least 3:1 against the surface (WCAG 1.4.11). The two icon color tokens meet it.</td></tr><tr><th scope="row">Font icon</th><td>The name is text. Always set <code>aria-hidden="true"</code> or the screen reader reads “local_shipping”.</td></tr><tr><th scope="row">Icon item</th><td>A real <code>button</code> named “Copy name …”. Focus ring on keyboard focus.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script src="../../components/icon-picker/icon-picker.js"></script>
+<script src="../../components/icon-library/icon-library-data.js"></script>
+<script src="../../components/js/icon-library.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.tokenTable($('#tok-table tbody'), [['Icon on a light surface', 'Default', 'icon-primary'], ['Icon on a dark surface', 'Inverted', 'icon-inverted'], ['Icon item, hover', 'Name bar', 'surface-navigation-hover'], ['Icon item, hover', 'Surface', 'surface-raised-primary'], ['Icon item, hover', 'Shadow', 'shadow-elevation-b-60'], ['Icon item, focus', 'Ring', 'border-focus']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>
