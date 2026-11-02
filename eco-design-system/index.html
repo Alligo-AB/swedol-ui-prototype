@@ -80,6 +80,8 @@
 
     /* the scroll cue's target stops below the fixed mobile bar */
     @media (max-width: 960px) { .ds-section[id] { scroll-margin-top: var(--dn-bar, 64px); } }
+    /* desktop has no fixed bar: the scroll cue lands edge to edge with the section below the hero */
+    @media (min-width: 961px) { #foundations { scroll-margin-top: 0; } }
 
     /* ── Section headings: two-tone (primary + tertiary) ─────────────── */
     .hx-h2 span { display: block; color: var(--color-text-tertiary); }
