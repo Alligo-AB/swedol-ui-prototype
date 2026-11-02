@@ -1,7 +1,7 @@
 # Graph Report - swedol-ui-prototype  (2026-10-30)
 
 ## Corpus Check
-- 166 files · ~2,227,510 words
+- 166 files · ~2,228,853 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a37ae4f9`
+- Built from commit: `bf3933cb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

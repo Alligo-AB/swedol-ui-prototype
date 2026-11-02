@@ -1084,3 +1084,12 @@ body[data-bp="mobile"] .ty-hero { min-height: 360px; padding: 24px 16px; }
 .ds-fpicked { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-8); margin-top: var(--dimension-spacing-space-16); }
 .ds-fpicked[hidden] { display: none; }
 .ds-fpicked button.action-link { padding: 0; border: 0; background: none; margin-left: var(--dimension-spacing-space-8); }   /* a button as action link */
+
+/* Pro tip (2026-11-01): a short pointer to a related page or guide, at the top of a section. Used on Icon and on the Collapsible Storyblok tab. */
+.ds-tip { display: flex; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); margin: 0 0 var(--dimension-spacing-space-24); }
+.ds-tip__ic { display: grid; place-items: center; flex: 0 0 96px; background: var(--color-surface-100); color: var(--ds-accent); }
+.ds-tip__ic .mo-ic { font-size: 48px; }
+.ds-tip__body { padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-24); }
+.ds-tip__body .ds-h3 { margin: 0 0 var(--dimension-spacing-space-4); }
+.ds-tip__body p { margin: 0; }
+@media (max-width: 768px) { .ds-tip__ic { flex-basis: 64px; } .ds-tip__ic .mo-ic { font-size: 32px; } }

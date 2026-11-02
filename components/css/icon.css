@@ -1,0 +1,65 @@
+/* ECO component CSS: icon. Shared by the docs pages (eco-design-system/components/icon*.html) and every prototype/product page.
+   Skill: eco-icon. Link it, do not copy it: <link rel="stylesheet" href="/components/css/icon.css">
+   Figma: Icon Documentation 3886:157988, Icon Library 262:10207, Icon Library design 3914:166380, Icon Item Container 3914:166984.
+   Material Symbols (font, Outlined or Fill) and custom icons (inline SVG, 24 viewBox) use the same .icon class and size classes.
+   Tokens only; the sizes are the Figma icon sizes (12, 14, 20, 24, 40, 48), no spacing token exists for 14 and 20 px glyphs. */
+
+/* ── Icon ─────────────────────────────────────────────────── */
+.icon {
+  --icon-size: 24px; --icon-opsz: 24; --icon-fill: 0;
+  display: inline-block; flex-shrink: 0; box-sizing: border-box;
+  width: var(--icon-size); height: var(--icon-size);
+  color: var(--color-icon-primary);
+  user-select: none;
+}
+/* Material Symbols glyph: <span class="icon" aria-hidden="true">search</span> (Outlined, Weight 300, Grade 0) */
+.icon:not(svg) {
+  font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: var(--icon-size); line-height: 1;
+  letter-spacing: normal; text-transform: none; white-space: nowrap; word-wrap: normal; direction: ltr; overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' var(--icon-fill), 'wght' 300, 'GRAD' 0, 'opsz' var(--icon-opsz);
+}
+/* Custom icon: <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">…</svg> */
+svg.icon { fill: currentColor; }
+
+/* Sizes (Figma: XXSmall 12, XSmall 14, Small 20, Medium 24, Large 40, XLarge 48). The Material optical size axis runs 20–48. */
+.icon--xxs { --icon-size: 12px; --icon-opsz: 20; }
+.icon--xs  { --icon-size: 14px; --icon-opsz: 20; }
+.icon--sm  { --icon-size: 20px; --icon-opsz: 20; }
+.icon--md  { --icon-size: 24px; --icon-opsz: 24; }
+.icon--lg  { --icon-size: 40px; --icon-opsz: 40; }
+.icon--xl  { --icon-size: 48px; --icon-opsz: 48; }
+
+/* Fill style (Material Symbols Fill). Outline is the default. */
+.icon--fill { --icon-fill: 1; }
+
+/* Color: icon-primary on light surfaces; icon-inverted on dark ones; inherit takes the color of the parent (inside a button or link). */
+.icon--inverted { color: var(--color-icon-inverted); }
+.icon--inherit { color: inherit; }
+
+/* ── Icon item (icon library) ──────────────────────────────
+   Figma Icon Item Container: Enabled (copy icon hidden) and Hover (white, shadow elevation-b-60, grey label bar, copy icon visible). */
+.icon-item {
+  position: relative; display: flex; flex-direction: column; align-items: center; box-sizing: border-box;
+  margin: 0; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; text-align: center;
+  width: 100%; min-width: 0;
+}
+.icon-item__copy { align-self: flex-start; display: flex; padding: var(--dimension-spacing-space-8) 0 0 var(--dimension-spacing-space-8); opacity: 0; }
+.icon-item__glyph { display: flex; align-items: center; justify-content: center; padding: 0 var(--dimension-spacing-space-8) var(--dimension-spacing-space-16); }
+.icon-item__name {
+  display: block; box-sizing: border-box; width: 100%; padding: var(--dimension-spacing-space-8);
+  font-family: 'Breuer Condensed', Arial, sans-serif; font-weight: 400; font-size: 14px; line-height: 20px; letter-spacing: 0.36px;
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; color: var(--color-text-primary);
+  overflow-wrap: anywhere;
+}
+@media (hover: hover) {
+  .icon-item:hover { background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-60); }
+  .icon-item:hover .icon-item__copy { opacity: 1; }
+  .icon-item:hover .icon-item__name { background: var(--color-surface-navigation-hover); }
+}
+.icon-item:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+.icon-item:focus-visible .icon-item__copy { opacity: 1; }
+.icon-item:focus-visible .icon-item__name { background: var(--color-surface-navigation-hover); }
+
+/* Reserved icon (library): a tag in the top right corner. verified_500_custom, assignment_turned_in_500_custom and history_500_custom belong to the Product & Discount badges. */
+.icon-item__tag { position: absolute; top: var(--dimension-spacing-space-8); right: var(--dimension-spacing-space-8); }

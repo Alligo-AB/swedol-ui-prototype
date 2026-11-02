@@ -32,3 +32,5 @@ Optional keys for a Storyblok tab (fourth page, `<slug>-storyblok.html`): `sb` (
 `gen_hero_banner_widget.py` (2026-10-21) builds the four-tab Hero banner Storyblok widget docs with the custom page set `pages=[…]` (see `build.py` `PG()`); `hero_pins.py` holds the marker positions for the Storyblok screenshots.
 `gen_ah_group_card_widget.py` (2026-10-26) builds the Storyblok page of the Article Highlight Group Card (custom page set with one page so far; schema from the Storyblok CLI, pictures by `crop_ah_group_card.py`, which crops `images/AhGroupCard_*.png` into `images/ah-group-card-sb-*.webp`; needs Pillow).
 `doc-kit.js` `DK.callouts`: `len` may be a function(rect) (used by `gen_hero_banner_widget.py` to put all badges of a figure in one column). `badge_list()` there renders legends with the round number badge.
+
+`gen_icon.py` (2026-11-01) builds the five Icon pages (custom page set: Examples / Specifications / Code / Library / Add an icon). `python3 gen_icon.py data` rebuilds `components/icon-library/icon-library-data.js` from `icons-material.txt` and `icons-custom.txt` (the SVG exports of the custom icons from Figma). Skill `eco-icon`.

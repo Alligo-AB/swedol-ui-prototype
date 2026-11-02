@@ -309,6 +309,8 @@ html.dn-modal-open { overflow: hidden; }
   .dn-search__box { width: 600px; height: auto; max-height: 76vh; box-shadow: var(--shadow-elevation-b-100); }
   .dn-search__head { padding: var(--dimension-spacing-space-24); }
 }
+/* Start page only (<html class="dn-search-center">): from 961px, where the rail appears, the modal is centred horizontally on the hero content (framed panel: rail on the left, 16px frame gap on the right); the top stays fixed, so it grows downward */
+@media (min-width: 961px) { .dn-search-center .dn-search { padding-left: var(--dn-rail); padding-right: var(--dimension-spacing-space-16); } }
 @media (prefers-reduced-motion: reduce) { .dn.is-ready .dn-search { transition: none; } }
 
 /* ── Arriving through a link to a #heading on another page (docnav.js): the navigation first, then the page fades in ── */

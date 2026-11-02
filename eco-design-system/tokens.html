@@ -50,7 +50,7 @@
     .tk-prev__box { flex: none; width: 32px; height: 32px; background: var(--color-surface-raised-primary); }
     .tk-prev__line { flex: none; width: 40px; height: 0; }
     .tk-prev svg { flex: none; width: 40px; height: 40px; background: var(--color-surface-05); }
-    .tk-table tr[hidden] { display: none; }
+    .ds-table.tk-table tr[hidden] { display: none; }
     .tk-empty { margin-top: 32px; }
     .tk-empty[hidden] { display: none; }
     @media (max-width: 1023px) {   /* cards up to the end of md; the table starts at lg (1024px) */
@@ -209,6 +209,7 @@
   if (window.ResizeObserver) new ResizeObserver(stickyH).observe(sticky); else addEventListener('resize', stickyH);
   stickyH();
   q.addEventListener('input', apply);
+  box.querySelector('.input-actions__clear').addEventListener('click', function () { q.value = ''; apply(); q.focus(); });
   function badge() {
     var b = fb.querySelector('.btn__badge'); if (b) b.remove();
     if (picked.length) { b = document.createElement('span'); b.className = 'btn__badge'; b.setAttribute('aria-hidden', 'true'); b.textContent = picked.length; fb.appendChild(b); }
