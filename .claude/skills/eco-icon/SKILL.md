@@ -42,6 +42,21 @@ Figma guidance (`24755:7811`): standard sizes 20, 24, 40, 48; 12 and 14 reserved
 - Library page categories: Material Symbols (Outlined only; Fill is for developers, as the active state, and is not listed) and Custom icons (Customized symbols, Brand, Social, Logo). Data: `components/icon-library/icon-library-data.js` (generated, never by hand: `python3 gen_icon.py data` from `gen/icons-material.txt` and `gen/icons-custom.txt`); script `components/js/icon-library.js`.
 - Icon item (library): button, copy icon 20px hidden until hover/focus, icon 40px, name body-sm, hover white + `shadow-elevation-b-60` + `surface-navigation-hover` name bar, focus ring `border-focus`.
 
+## Forward and back arrows (2026-11-03, rule for every component)
+
+With a text label the direction icon is a **chevron** (`chevron_right` forward, `chevron_left` back), on links, buttons and menu rows alike. Without text it is an **arrow**: `arrow_right_alt` (forward) and `arrow_left_alt` (back). Never `arrow_forward` or `arrow_back`. Same rule in Action Link, Button and cards.
+
+| Case | Icon |
+|---|---|
+| A link with a text label ("Till Gesto", "View all products") | `chevron_right`, trailing (default) |
+| No text, only a mark on a clickable card (article card): the only signal that the card leads on | `arrow_right_alt`, inside an `.action-link` (an icon button does not give an even left edge) |
+| A single link that closes a section, or a campaign link where the signal should be stronger | `arrow_right_alt`, trailing, sparingly |
+| Button, link or menu row with a text label | trailing `chevron_right` (forward), leading `chevron_left` (back) |
+| Forward or back with no text (icon only) | `arrow_right_alt` / `arrow_left_alt` |
+| Download | `file_download`, leading (unchanged) |
+
+Never mix chevron and arrow in one group of cards or links. A decorative arrow is `aria-hidden="true"`; on a card where the whole card is the link, the link takes its name from the headline (`aria-labelledby`).
+
 ## Rules
 
 0. **Reserved:** `verified_500_custom`, `assignment_turned_in_500_custom` and `history_500_custom` are only for the Product & Discount badges (`eco-badge`). Never use them elsewhere. The library marks them Reserved. The Material Symbols in the library are the ones in use on the site.

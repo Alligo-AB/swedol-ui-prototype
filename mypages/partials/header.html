@@ -18,6 +18,19 @@
        - /mypages/addressbook.html
 ════════════════════════════════════════════════════════════ -->
 
+<link rel="stylesheet" href="/components/css/input.css">
+<style>
+  /* Header search = ECO input (components/css/input.css, skill eco-input). These lines only turn off the old per-page
+     custom field rules (.site-header__search / .sh-sm__search visuals) that many pages still carry. */
+  .site-header__search { display: block; position: static; background: none; border: 0; padding: 0; height: auto; gap: 0; flex: 1; min-width: 0; }
+  .site-header__search::after { display: none; }
+  .site-header__search .form-input, .sh-sm__search .form-input { flex: 1; min-width: 0; height: 100%; padding: 0; border: 0; background: transparent; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); }
+  @media (min-width: 769px) { .site-header__search .form-input { font-size: 17px; line-height: 24px; } }
+  .sh-sm__search { display: block; height: auto; padding: 0; background: none; border: 0; gap: 0; }
+  .sh-sm__search:hover, .sh-sm__search:focus-within { border-color: transparent; }
+  @media (min-width: 640px) { .sh-sm__location { display: none; } }   /* Figma: the store icon only on xs */
+</style>
+
   <!-- ══ SITE HEADER SM (xs + sm: 0–768px) ══════════════════ -->
   <div class="site-header__sm">
 
@@ -69,16 +82,18 @@
     <!-- Row 2: search bar on dark background -->
     <div class="sh-sm__bar2">
       <div class="sh-sm__search">
-        <span class="ms">search</span>
-        <input type="text" placeholder="Sök produkt, kategori, varumärke" />
-        <div class="sh-sm__search-right">
-          <div class="sh-sm__search-divider"></div>
-          <button class="sh-sm__search-action sh-sm__location-btn" aria-label="Välj butik">
-            <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">location_on</span>
-          </button>
-          <button class="sh-sm__search-action" aria-label="Skanna">
-            <span class="ms" style="font-size:20px;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 20">qr_code_scanner</span>
-          </button>
+        <div class="input-wrap">
+          <div class="input-box input-box--search">
+            <span class="input-icon input-icon--lg" aria-hidden="true">search</span>
+            <input class="form-input" type="text" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Sök produkt, kategori, varumärke" aria-label="Sök" />
+            <div class="input-actions">
+              <button type="button" class="input-actions__btn input-actions__clear" aria-label="Rensa sökning" onclick="var f=this.closest('.input-box').querySelector('input');f.value='';f.dispatchEvent(new Event('input',{bubbles:true}));f.focus();"><span class="input-icon input-icon--fill">cancel</span></button>
+              <span class="input-actions__divider"></span>
+              <button type="button" class="input-actions__btn sh-sm__location" aria-label="Välj butik"><span class="input-icon">location_on</span></button>
+              <button type="button" class="input-actions__btn" aria-label="Skanna"><span class="input-icon">qr_code_scanner</span></button>
+              <button type="button" class="input-actions__btn" aria-label="Sök med kamera"><span class="input-icon">photo_camera</span></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -121,16 +136,17 @@
 
       <!-- Search -->
       <div class="site-header__search">
-        <span class="ms">search</span>
-        <input type="text" placeholder="Sök produkt, varumärke, kategori" id="header-search-field" oninput="handleHeaderSearch(this.value)" />
-        <div class="site-header__search-right">
-          <div class="site-header__search-divider"></div>
-          <button class="search-scan-btn" id="header-scan-btn" aria-label="Skanna">
-            <span class="ms">qr_code_scanner</span>
-          </button>
-          <button class="search-scan-btn" id="header-clear-btn" aria-label="Rensa sökning" style="display:none" onclick="var f=document.getElementById('header-search-field');f.value='';f.focus();handleHeaderSearch('');">
-            <span class="ms" style="font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 0,'opsz' 24;color:var(--color-text-tertiary);">cancel</span>
-          </button>
+        <div class="input-wrap">
+          <div class="input-box input-box--search">
+            <span class="input-icon input-icon--lg" aria-hidden="true">search</span>
+            <input class="form-input" type="text" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Sök produkt, varumärke, kategori" id="header-search-field" aria-label="Sök" />
+            <div class="input-actions">
+              <button type="button" class="input-actions__btn input-actions__clear" id="header-clear-btn" aria-label="Rensa sökning" onclick="var f=document.getElementById('header-search-field');f.value='';f.dispatchEvent(new Event('input',{bubbles:true}));f.focus();"><span class="input-icon input-icon--fill">cancel</span></button>
+              <span class="input-actions__divider"></span>
+              <button type="button" class="input-actions__btn" id="header-scan-btn" aria-label="Skanna"><span class="input-icon">qr_code_scanner</span></button>
+              <button type="button" class="input-actions__btn" aria-label="Sök med kamera"><span class="input-icon">photo_camera</span></button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -185,3 +201,13 @@
       </button>
     </nav>
   </header>
+
+<!-- Search panel (part of the header): loaded here so every page with the header has the search. Root-absolute path (the page may be in / or /mypages/). -->
+<script>
+  document.write((function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/mypages/partials/search-panel.html?v=' + Date.now(), false);
+    xhr.send(null);
+    return xhr.responseText;
+  })());
+</script>

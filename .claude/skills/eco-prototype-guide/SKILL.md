@@ -1,5 +1,5 @@
 ---
-name: prototype-guide
+name: eco-prototype-guide
 description: Use BEFORE and DURING work on any new prototype, page, product/service page, UI/UX flow, or functionality for Swedol — whether the task starts from a Figma prototype, a loose brainstorm/spec, or a one-line brief like "make a nice page"/"design X"/"build functionality for Y". This is the entry point that ties general web-design quality (hierarchy, layout, copy, interaction, micro-animation, structured critique) to the ECO Design System rules in CLAUDE.md and the component skills. Read this BEFORE choosing a starting point/template and BEFORE building individual components.
 ---
 
@@ -68,7 +68,7 @@ Go through the intended interface piece by piece and match every part against th
 
 #### 3a. Component map: "I need X → use skill Y"
 
-Read this before you decide a piece is "new". Every row is a finished component with a docs page in `eco-design-system/components/` and shared CSS/JS in `components/`. The templates already link the CSS. **Keep this map in sync by hand:** the step "add to `prototype-guide` map" in `eco-add-component` does it when a component is added. The full list with descriptions is in `CLAUDE.md` → skills index.
+Read this before you decide a piece is "new". Every row is a finished component with a docs page in `eco-design-system/components/` and shared CSS/JS in `components/`. The templates already link the CSS. **Keep this map in sync by hand:** the step "add to `eco-prototype-guide` map" in `eco-add-component` does it when a component is added. The full list with descriptions is in `CLAUDE.md` → skills index.
 
 | I need… | Use |
 |---|---|

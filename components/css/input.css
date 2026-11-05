@@ -74,6 +74,13 @@
     .input-box:not(:has(.form-input:not(:placeholder-shown))) :is(.input-actions__clear, .input-actions__divider) { display: none; } /* clear only with a value */
     .input-box:has(.form-input:disabled) .input-actions__btn { cursor: not-allowed; color: var(--color-text-disabled); background: transparent; }
 
+    /* Header search (Figma Header Components > Base / Search Input, 2026-11-05): the same input on a grey fill with no border while
+       enabled, placeholder and typed text as in every input (enabled text-tertiary, active text-primary), divider always visible before the action icons (scan, camera; location on xs). */
+    .input-box--search { background: var(--color-surface-raised-secondary); border-color: transparent; }
+    .input-box--search:is(:hover, [data-state="hover"]) { border-color: var(--color-border-hover); }
+    .input-box--search:is(:focus-within, [data-state="active"]) { border-color: var(--color-border-selected); background: var(--color-surface-raised-primary); }
+    .input-box.input-box--search:not(:has(.form-input:not(:placeholder-shown))) .input-actions__divider { display: block; }
+
     /* Message */
     .form-helper {
       display: flex; align-items: center; gap: var(--dimension-spacing-space-4);

@@ -911,16 +911,7 @@
       padding: 0 32px;
       box-sizing: border-box;
     }
-    .tab-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      height: 48px;
-      overflow: hidden;
-      flex: 1;
-      min-width: 0;
-    }
+    /* legacy My Pages .tab-bar rule removed (2026-11-05): it overrode components/css/tabs.css (overflow hidden, 48px high, centred) */
     .tab-item {
       display: flex;
       align-items: center;
@@ -3778,8 +3769,8 @@
 
     /* Icon buttons – 20px icon, space-12 padding = 44px */
     .sh-sm__icon-btn {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -3795,8 +3786,8 @@
     .sh-sm__icon-btn:hover { background: var(--color-surface-opacity-white-20); }
     .sh-sm__icon-btn .ms {
       color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      font-size: 24px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
     }
     .sh-sm__icon-btn--24 .ms {
       font-size: 24px;
@@ -4583,6 +4574,14 @@
       </div>
       <p class="site-index-card__desc">Saved backup version of the reviews page.</p>
       <span class="site-index-card__path">reviews_backup_1.html</span>
+    </a>
+    <a href="search.html" class="site-index-card" target="_blank" rel="noopener">
+      <div class="site-index-card__top">
+        <span class="site-index-card__title">Search</span>
+        <span class="site-index-card__tag site-index-card__tag--wip">In progress</span>
+      </div>
+      <p class="site-index-card__desc">Header search with suggestions, result tabs (products, categories, stores, brands, guides) and a full-screen view on mobile. Mock data.</p>
+      <span class="site-index-card__path">search.html</span>
     </a>
   </div>
 </section>

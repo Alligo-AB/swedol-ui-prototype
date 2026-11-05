@@ -622,16 +622,7 @@
       box-shadow: var(--elevation-b-40);
     }
     .avatar--lg img { width: 100%; height: 100%; object-fit: cover; }
-    .tab-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      height: 48px;
-      overflow: hidden;
-      flex: 1;
-      min-width: 0;
-    }
+    /* legacy My Pages .tab-bar rule removed (2026-11-05): it overrode components/css/tabs.css (overflow hidden, 48px high, centred) */
     .tab-item {
       display: flex;
       align-items: center;
@@ -2413,8 +2404,8 @@
 
     /* Icon buttons – 20px icon, space-12 padding = 44px */
     .sh-sm__icon-btn {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2430,8 +2421,8 @@
     .sh-sm__icon-btn:hover { background: var(--color-surface-opacity-white-20); }
     .sh-sm__icon-btn .ms {
       color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      font-size: 24px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
     }
     .sh-sm__icon-btn--24 .ms {
       font-size: 24px;

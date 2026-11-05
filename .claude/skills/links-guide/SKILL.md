@@ -1,6 +1,6 @@
 ---
 name: links-guide
-description: Use BEFORE building a link, to decide whether it should be an Inline Link (in body text), Action Link (standalone), or Tile Link (graphical/prominent). Then read the skill for the specific link type.
+description: Use BEFORE building a link, to decide whether it should be an Inline Link (in text, also standalone in quiet contexts), Action Link (standalone, more weight), or Tile Link (graphical/prominent). Then read the skill for the specific link type.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -25,9 +25,20 @@ Use a link when the user should:
 
 | Type | Usage | Underline | Icons |
 |---|---|---|---|
-| **Inline Link** | Inside sentences or text blocks | Underlined when enabled, removed on hover | Never |
-| **Action Link** | Standalone, not in body text | Underlined on hover only | Leading and/or trailing |
+| **Inline Link** | Inside sentences or text blocks, and standalone in quiet contexts | Underlined when enabled, removed on hover | Never |
+| **Action Link** | Standalone, with more weight than a text link | Underlined on hover only | Leading and/or trailing |
 | **Tile Link** | Graphical/prominent, like a card or button | — | With or without |
+
+### Inline link or action link when the link stands alone
+
+An Inline Link is not only for running text. It is also the standard in footers, legal copy and helper text, and it can stand alone (reverse underline) where the context allows: link groups (stacked or divided) in the Article Highlight Group Card, the site footer, the brand index. What separates the two types is the icon and the weight, not the placement.
+
+| | Inline link | Action link |
+|---|---|---|
+| Icon | Never | At least one |
+| Underline | Always when enabled (reverse: on hover only) | On hover only, on the text |
+| Fits where | The text is the message and the context is quiet: footer, link lists in a component (stacked or divided), brand index | The link needs more weight than a text link: go on to something, download, "view all" |
+| Size | Follows the surrounding text | Follows the default body copy size of the page |
 
 ### Interaction (all link types)
 

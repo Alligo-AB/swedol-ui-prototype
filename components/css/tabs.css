@@ -14,6 +14,14 @@
   border-bottom: 1px solid var(--color-border-primary); /* the divider runs the full width, also when the tabs overflow */
 }
 .tab-bar::-webkit-scrollbar { display: none; }
+.tab-bar, .swipe-row { touch-action: pan-y; }   /* sideways swipes are handled by tabs.js (glide + bounce); vertical scroll stays native */
+.tab-bar > *, .swipe-row > * { translate: var(--tab-over, 0px) 0; }   /* rubber-band stretch at either end (set by tabs.js); `translate` composes with the indicator's own transform */
+.tab-bar.is-dragging, .swipe-row.is-dragging { cursor: grabbing; user-select: none; }
+.tab-bar.is-dragging .tab, .swipe-row.is-dragging > * { pointer-events: none; }
+/* .swipe-row: any other row that overflows sideways (tile links, chips, cards). Add overflow-x: auto and hide the scrollbar yourself; tabs.js swipes it on load or with ECO_TABS.swipe(el). */
+.swipe-row { overflow-x: auto; scrollbar-width: none; }
+.swipe-row::-webkit-scrollbar { display: none; }
+.swipe-row a, .swipe-row img { -webkit-user-drag: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }   /* a pressed link must not start a native drag, callout or text selection: that cancels the pointer events on touch */
 .tab-bar--primary { gap: var(--dimension-spacing-space-24); }
 .tab-bar--on-grey { --tab-ind-hover: var(--color-surface-40); }   /* Background Colored = True: hover line must stay visible on grey */
 
@@ -44,6 +52,9 @@
   color: var(--color-text-primary);   /* label and icon colours change instantly, as in the My Pages nav; only the line animates */
 }
 .tab-bar--secondary .tab { padding-inline: var(--dimension-spacing-space-16); }   /* the indicator spans label + 16px each side */
+.tab-bar--secondary.tab-bar--sm .tab { padding-inline: var(--dimension-spacing-space-8); }   /* Small: 8px each side, mobile and desktop (Figma 3524:131494, 2515:77816, checked 2026-11-05) */
+.tab-bar--secondary.tab-bar--md .tab { padding-inline: var(--dimension-spacing-space-12); }   /* Medium, mobile: 12px each side (Figma 2880:92158, checked 2026-11-05) */
+@media (min-width: 769px) { .tab-bar--secondary.tab-bar--md .tab { padding-inline: var(--dimension-spacing-space-16); } }   /* Medium, desktop: 16px */
 .tab__icon { font-size: 20px; line-height: 20px; color: var(--color-text-secondary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
 .tab__label { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); height: var(--tab-lh); }   /* fixed to the line height: a 24px leading icon overflows evenly, the tab height and label position stay the same */
 .tab__label .ms { font-size: 24px; line-height: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }   /* optional leading icon */

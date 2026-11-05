@@ -1,0 +1,261 @@
+<!-- ═══════════════════════════════════════════════════════════
+     GLOBAL PARTIAL — Search panel (live search, mock data)
+     Enda källan för sökpanelen: CSS, markup och JS. Sökningen hör till
+     headern, så header.html laddar in den här partialen själv (synkron
+     XHR, sist i header.html): varje sida som har headern får sökningen.
+     Partialen länkar själv de komponent-CSS och tabs.js den behöver. Mockdatan ligger
+     överst i skriptet, byt ut mot riktiga sökanrop senare.
+═══════════════════════════════════════════════════════════ -->
+<link rel="stylesheet" href="/components/css/button.css">
+<link rel="stylesheet" href="/components/css/input.css">
+<link rel="stylesheet" href="/components/css/tabs.css">
+<link rel="stylesheet" href="/components/css/badge.css">
+<link rel="stylesheet" href="/components/css/tile-link.css">
+<script>if (!window.ECO_TABS) document.write('<script src="/components/js/tabs.js"><\/script>');</script>
+<style>
+/* ══ SEARCH PANEL (Figma Desktop/Mobile - Search, 2026-11-05) ══
+     md+: dropdown under header search field. xs/sm: full-screen overlay. */
+  .sp { position: fixed; z-index: 120; inset: 0; background: var(--color-background-primary); display: none; flex-direction: column; }
+  .sp.is-open { display: flex; }
+  body.sp-lock { overflow: hidden; }
+
+  .sp__bar { display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--color-surface-100); border-bottom: 1px solid var(--color-accent-default); flex-shrink: 0; }
+  .sp__back { color: var(--color-accent-default); }
+  .sp__back .ms { font-size: 24px; }   /* Figma: 24px chevron (8px padding + 24px icon = 40px) */
+  .sp__bar .input-wrap { flex: 1; min-width: 0; }   /* the field is the ECO input (input.css), Large: 40px mobile, 48px from 769px */
+  .sp__camera { display: none; }
+  @media (max-width: 639px) { .sp__camera { display: flex; } }   /* Figma: camera only on xs */
+
+  .sp__suggest { display: flex; gap: 8px; padding: 16px 16px 0; overflow-x: auto; flex-shrink: 0; scrollbar-width: none; }
+  .sp__suggest::-webkit-scrollbar { display: none; }
+  .sp__suggest .tile-link { flex-shrink: 0; }
+  /* swipe: the row has class swipe-row (tabs.css + tabs.js: glide + rubber band like the tab bars) */
+  .sp__suggest { overscroll-behavior-x: contain; }
+  .sp__tabs { margin-top: 24px; flex-shrink: 0; min-width: 0; }
+  /* Figma container: 16px before the first tab, 8px after the last (mobile padding 16/16); the bar itself scrolls sideways (tabs.css) */
+  .sp__tabs .tab-bar { margin-inline: 0; padding-inline: 16px 8px; overscroll-behavior-x: contain; }
+  .sp__body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+
+  .sp__row { display: flex; gap: 12px; align-items: flex-start; padding: 12px; color: inherit; text-decoration: none; box-sizing: border-box; }
+  .sp__row:hover, .sp__row:focus-visible { background: var(--color-surface-02); }
+  .sp__row--center { align-items: center; padding-block: 8px; }
+  .sp__thumb { width: 48px; height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--color-surface-raised-primary); }
+  .sp__thumb .ms { font-size: 24px; }
+  .sp__thumb--img { background: var(--color-surface-05); color: var(--color-text-tertiary); }
+  .sp__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; justify-content: center; }
+  .sp__brand { font-size: 12px; line-height: 12px; font-weight: 500; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 4px; }
+  .sp__name { font-size: 18px; line-height: 18px; letter-spacing: 0.32px; text-transform: uppercase; margin: 0; }
+  .sp__title { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; margin: 0; }
+  .sp__title--lg { font-size: 18px; }
+  .sp__name b, .sp__title b { font-weight: 600; }
+  .sp__meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+  .sp__crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0 8px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+  .sp__crumbs { gap: 4px 8px; }
+  .sp__crumbs span:not(:last-child)::after { content: '/'; margin-left: 8px; color: var(--color-text-tertiary); }   /* Figma: separator after each crumb, the current page on its own line */
+  .sp__crumbs .is-current { flex-basis: 100%; font-weight: 600; color: var(--color-text-primary); }
+  /* Category row (Figma Search Item - Category 22467:8510): white icon tile, 18px title */
+  .sp__row--cat { gap: 12px; }   /* white at rest, grey on hover like every other row (the Figma frame shows the hover state) */
+  .sp__row--cat .sp__title { font-size: 18px; line-height: 18px; }
+  @media (min-width: 640px) { .sp__row--cat { gap: 16px; padding-inline: 24px; } }
+  /* Product row (Figma Search Item - Product 22465:206011): the links row (Visa varianter + purchase-history badge) is 277px wide from 769px, 316px at sm, full width at xs, so the badge sits at its right end */
+  .sp__row--prod .sp__meta { width: 100%; }
+  @media (min-width: 640px) { .sp__row--prod { align-items: center; gap: 16px; padding-inline: 24px; } .sp__row--prod .sp__meta { max-width: 316px; } }
+  .sp__empty { padding: 32px 16px; color: var(--color-text-secondary); font-size: 16px; line-height: 22px; }
+
+  .sp__foot { padding: 16px 24px; background: var(--color-background-primary); box-shadow: var(--elevation-t-60); flex-shrink: 0; position: relative; }
+  .sp__foot .btn { width: 100%; }
+
+  @media (min-width: 769px) {
+    .sp { inset: auto; width: auto; background: var(--color-background-primary); box-shadow: var(--elevation-drawer-right); }   /* same shadow as an open drawer */
+    .sp-scrim { position: fixed; inset: 0; z-index: 119; background: rgba(0, 0, 0, 0.2); opacity: 0; pointer-events: none; transition: opacity var(--duration-medium-2) var(--ease-standard); }   /* same scrim as .drawer-overlay */
+    .sp-scrim.is-open { opacity: 1; pointer-events: all; }
+    .sp__bar { background: var(--color-background-primary); border-bottom: 0; }   /* Figma Desktop - Search: the field is the top of the white panel, 8px around it */
+    .sp__back { display: none; }
+    .sp__suggest { padding: 16px 16px 0; }
+    .sp__row { padding: 12px 16px; }
+    .sp__row--cat { align-items: center; padding-inline: 16px; }
+    .sp__row--prod { align-items: flex-start; padding-inline: 16px; }
+    .sp__row--prod .sp__meta { max-width: 277px; }
+    .sp__row--cat .sp__text { gap: 2px; }
+    .sp__row--cat .sp__title { line-height: 24px; }
+    .sp__row--center { gap: 16px; padding: 8px 16px; }
+    .sp__foot { padding: 8px; }
+    .sp__title { font-size: 17px; line-height: 24px; }
+    .sp__body { min-height: 120px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .sp.is-open { animation: sp-in var(--duration-fast-3) var(--ease-decelerate-generic); }
+    @keyframes sp-in { from { opacity: 0; } to { opacity: 1; } }
+  }
+</style>
+<!-- ══ SEARCH PANEL ═════════════════════════════════════════════ -->
+<div class="sp-scrim" id="sp-scrim"></div>
+<div class="sp" id="sp" role="dialog" aria-label="Sökresultat" aria-modal="false">
+  <div class="sp__bar">
+    <button class="btn btn--blank-inverted btn--md btn--icon sp__back" id="sp-back" aria-label="Stäng sök"><span class="ms btn__icon">chevron_left</span></button>
+    <div class="input-wrap">
+      <div class="input-box">
+        <span class="input-icon input-icon--lg" aria-hidden="true">search</span>
+        <input class="form-input" id="sp-input" type="text" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Sök produkt, kategori, varumärke" aria-label="Sök" />
+        <div class="input-actions">
+          <button type="button" class="input-actions__btn input-actions__clear" id="sp-clear" aria-label="Rensa sökning"><span class="input-icon input-icon--fill">cancel</span></button>
+          <span class="input-actions__divider"></span>
+          <button type="button" class="input-actions__btn" aria-label="Skanna"><span class="input-icon">qr_code_scanner</span></button>
+          <button type="button" class="input-actions__btn sp__camera" aria-label="Sök med kamera"><span class="input-icon">photo_camera</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sp__suggest swipe-row" id="sp-suggest"></div>
+  <div class="sp__tabs">
+    <div class="tab-bar tab-bar--secondary tab-bar--md" role="tablist" aria-label="Sökresultat" id="sp-tabs">
+      <button class="tab tab--active" role="tab" aria-selected="true" data-tab="all"><span class="tab__label">Alla (0)</span></button>
+      <button class="tab" role="tab" aria-selected="false" tabindex="-1" data-tab="products"><span class="tab__label">Produkter (0)</span></button>
+      <button class="tab" role="tab" aria-selected="false" tabindex="-1" data-tab="categories"><span class="tab__label">Kategorier (0)</span></button>
+      <button class="tab" role="tab" aria-selected="false" tabindex="-1" data-tab="stores"><span class="tab__label">Butiker (0)</span></button>
+      <button class="tab" role="tab" aria-selected="false" tabindex="-1" data-tab="brands"><span class="tab__label">Varumärken (0)</span></button>
+      <button class="tab" role="tab" aria-selected="false" tabindex="-1" data-tab="guides"><span class="tab__label">Guider (0)</span></button>
+    </div>
+  </div>
+  <div class="sp__body" id="sp-body" aria-live="polite"></div>
+  <div class="sp__foot"><a class="btn btn--primary btn--sm" id="sp-all" href="#"><span class="btn__label">Visa alla sökresultat</span></a></div>
+</div>
+
+  <script>
+  /* ══ SEARCH PROTOTYPE ═══════════════════════════════════════════
+     Mock data; matching = substring, case-insensitive. Placeholders
+     (ponytail: no backend, no debounce): brand + guide rows are invented. */
+  (function () {
+    var P = function (brand, name, art, n) { return { brand: brand, name: name, art: art, n: n, variants: !art }; };
+    var C = function (path) { return { name: path[path.length - 1], path: path }; };
+    var VM = 'Verktyg och maskiner', HV = 'Handverktyg', AK = 'Arbetskläder', SK = 'Skyddsutrustning', FK = 'Fordon och bygg';
+    var DATA = {
+      products: [
+        P('Ampro', 'Spårskruvmejsel "Xtro-soft" Ampro'), P('Ampro', 'Spårskruvmejsel slag Ampro'), P('Ampro', 'Precision spårmejsel Ampro', '7400048409', 23), P('Ampro', 'Isolerad spårmejsel'),
+        P('Bahco', 'Skiftnyckel justerbar 8072', '7400051123', 12), P('Bahco', 'Kombinationstång 2171', '7400051877', 6), P('Bahco', 'Hylsnyckelsats 3/8" 24 delar'),
+        P('Milwaukee', 'Borrskruvdragare M18 FUEL', '7400062201', 9), P('Milwaukee', 'Slagborrmaskin M18 FPD3'), P('Milwaukee', 'Vinkelslip M18 FSAG125X', '7400062455', 4), P('Milwaukee', 'Batteri M18 5,0 Ah', '7400062010', 31),
+        P('Makita', 'Cirkelsåg DHS680Z 18V', '7400055310', 7), P('Makita', 'Sticksåg DJV182Z'), P('Makita', 'Borrhammare HR2470'),
+        P('DeWalt', 'Skruvdragare DCD791 18V', '7400057780', 14), P('DeWalt', 'Multiverktyg DCS355'),
+        P('Hultafors', 'Tumstock 2 m'), P('Hultafors', 'Brytkniv HVK med bladförvaring', '7400049002', 18), P('Hultafors', 'Hammare 600 g'),
+        P('Stanley', 'Måttband 8 m FatMax', '7400049541', 22), P('Stanley', 'Vattenpass 120 cm'),
+        P('Blåkläder', 'Arbetsbyxa Hantverkare 1501', '7400071100', 40), P('Blåkläder', 'Piquétröja högsynlig 3324'), P('Blåkläder', 'Vinterjacka 4801 isolerad'),
+        P('Snickers Workwear', 'Hantverkarbyxa 6201 AllroundWork'), P('Snickers Workwear', 'Hoodie 2800 med dragkedja', '7400072310', 8),
+        P('Fristads', 'Varselväst 5000 klass 2'), P('Fristads', 'Softshelljacka 4390 vattenavvisande'),
+        P('Jalas', 'Skyddsskor 1628 Exalter S3', '7400080145', 16), P('Jalas', 'Arbetssko 1925 Heavy Duty'), P('Jalas', 'Skyddsstövel 5638 S5'),
+        P('3M', 'Hörselskydd Peltor X4A', '7400090677', 11), P('3M', 'Andningsskydd 6000 halvmask'), P('3M', 'Skyddsglasögon Solus 1000'),
+        P('Ansell', 'Skyddshandske HyFlex 11-840', '7400093320', 27), P('Ansell', 'Kemikaliehandske AlphaTec'),
+        P('Würth', 'Skruv spårskruv 4,0x40 mm 200 st', '7400101234', 5), P('Würth', 'Bits sats spår/kors 32 delar'),
+        P('Loctite', 'Gänglåsning 243 50 ml', '7400104410', 3), P('Sika', 'Fogmassa SikaFlex-11 FC'),
+        P('Kärcher', 'Högtryckstvätt K5 Premium'), P('Biltema', 'Arbetslampa LED uppladdningsbar')
+      ],
+      categories: [
+        C([VM, 'Tryckluftsverktyg och kompressorer', HV, 'Tänger', 'Spårringstänger och låsringstänger']),
+        C([VM, HV, 'Skruvmejslar', 'Spårskruvmejslar']), C([VM, HV, 'Bits och hållare', 'Bits spår']),
+        C([VM, HV, 'Skruvmejslar', 'Krysskruvmejslar']), C([VM, HV, 'Nycklar', 'Skiftnycklar']), C([VM, HV, 'Nycklar', 'Hylsnycklar och spärrar']),
+        C([VM, HV, 'Tänger', 'Kombinationstänger']), C([VM, HV, 'Mätverktyg', 'Måttband och tumstockar']), C([VM, HV, 'Mätverktyg', 'Vattenpass']),
+        C([VM, 'Eldrivna verktyg', 'Borrmaskiner och skruvdragare']), C([VM, 'Eldrivna verktyg', 'Slipmaskiner', 'Vinkelslipar']), C([VM, 'Eldrivna verktyg', 'Sågar', 'Cirkelsågar']),
+        C([VM, 'Batterier och laddare', 'Batterier 18 V']),
+        C([AK, 'Arbetsbyxor', 'Hantverkarbyxor']), C([AK, 'Jackor', 'Vinterjackor']), C([AK, 'Tröjor', 'Piquétröjor och hoodies']), C([AK, 'Varselkläder', 'Varselvästar']),
+        C([SK, 'Skor och stövlar', 'Skyddsskor S3']), C([SK, 'Hörselskydd']), C([SK, 'Andningsskydd']), C([SK, 'Handskar', 'Skyddshandskar']), C([SK, 'Ögonskydd', 'Skyddsglasögon']),
+        C(['Förbrukning', 'Skruv och montage', 'Spårskruv']), C(['Förbrukning', 'Kemiskt-tekniskt', 'Gänglåsning och fogmassa']),
+        C([FK, 'Belysning', 'Arbetslampor']), C(['Städ och rengöring', 'Högtryckstvättar'])
+      ],
+      stores: ['Spånga', 'Borås', 'Göteborg Backa', 'Göteborg Mölndal', 'Stockholm Kungens Kurva', 'Stockholm Sickla', 'Stockholm Barkarby', 'Uppsala', 'Västerås', 'Örebro', 'Norrköping', 'Linköping', 'Jönköping', 'Helsingborg', 'Malmö Svedala', 'Lund', 'Kristianstad', 'Växjö', 'Kalmar', 'Karlstad', 'Falun', 'Gävle', 'Sundsvall', 'Umeå', 'Luleå', 'Östersund', 'Skövde', 'Halmstad', 'Trollhättan', 'Eskilstuna', 'Södertälje', 'Nacka'].map(function (c) { return { name: c + ', Swedol' }; }),
+      brands: ['Ampro', 'Bahco', 'Milwaukee', 'Makita', 'DeWalt', 'Hultafors', 'Stanley', 'Blåkläder', 'Snickers Workwear', 'Fristads', 'Jalas', '3M', 'Ansell', 'Würth', 'Loctite', 'Sika', 'Kärcher', 'Spårex', 'Bosch Professional', 'Hilti', 'Festool', 'Husqvarna', 'Leatherman', 'Mascot', 'Portwest', 'Tranemo', 'Dunlop', 'Hellberg Safety', 'Biltema', 'Tools'].map(function (b) { return { name: b }; }),
+      guides: ['Så väljer du rätt spårskruvmejsel', 'Spårskruv eller krysskruv – vad passar?', 'Skötsel av spårringstänger', 'Bits för spårskruv: guide', 'Spårmejsel i elarbete',
+        'Så väljer du skyddsskor – S1, S2 eller S3', 'Arbetskläder för vintern: lager på lager', 'Varselkläder – klass 1, 2 och 3 förklarade', 'Vilket hörselskydd passar din arbetsplats?',
+        'Så väljer du rätt batteriverktyg: 12 V eller 18 V', 'Borrskruvdragare eller slagskruvdragare?', 'Så väljer du skiftnyckel och hylsnyckelsats', 'Skyddshandskar: skärskydd, grepp och passform',
+        'Andningsskydd: rätt filter för rätt jobb', 'Så tvättar du dina arbetskläder så de håller längre', 'Mäta rätt – tumstock, måttband eller laser?', 'Skruvguide: material, huvud och längd',
+        'Gänglåsning och fogmassa – så använder du dem', 'Första hjälpen på bygget: vad ska finnas i lådan?', 'Så underhåller du din vinkelslip'].map(function (g) { return { name: g }; })
+    };
+    var POPULAR = ['Spårskruv', 'Skyddsskor', 'Arbetsbyxor', 'Borrskruvdragare', 'Hörselskydd', 'Skyddshandskar'];
+    var TABS = ['all', 'products', 'categories', 'stores', 'brands', 'guides'];
+
+    var sp = document.getElementById('sp'), scrim = document.getElementById('sp-scrim'), body = document.getElementById('sp-body'),
+        suggest = document.getElementById('sp-suggest'), tabs = document.getElementById('sp-tabs'),
+        all = document.getElementById('sp-all'), mIn = document.getElementById('sp-input'),
+        dIn = document.getElementById('header-search-field'),
+        hIn = document.querySelector('.sh-sm__search input'),
+        mq = window.matchMedia('(min-width: 769px)');
+    var q = '', tab = 'all';
+
+    function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function hl(s) {   /* bold the matched part */
+      var i = s.toLowerCase().indexOf(q.toLowerCase()); if (!q || i < 0) return esc(s);
+      return esc(s.slice(0, i)) + '<b>' + esc(s.slice(i, i + q.length)) + '</b>' + esc(s.slice(i + q.length));
+    }
+    function hit(o) { var t = q.toLowerCase(); return o.name.toLowerCase().indexOf(t) > -1 || (o.brand || '').toLowerCase().indexOf(t) > -1; }
+    var TERMS = (function () { var seen = {}, out = [];   /* suggestion terms (brands, category names, product/category words, store cities) so a search never ends with no tile links */
+      function add(w) { var k = w.toLowerCase(); if (w.length > 3 && !seen[k]) { seen[k] = 1; out.push(w); } }
+      DATA.brands.forEach(function (o) { add(o.name); });
+      DATA.categories.forEach(function (o) { add(o.name); o.name.split(/\s+/).forEach(add); });
+      DATA.products.forEach(function (o) { o.name.split(/[\s"]+/).forEach(function (w) { if (/^[A-Za-zÅÄÖåäö]+$/.test(w)) add(w); }); });
+      DATA.stores.forEach(function (o) { add(o.name.replace(', Swedol', '')); });
+      return out; })();
+    function suggestions() { var t = q.toLowerCase(), m = TERMS.filter(function (w) { return w.toLowerCase().indexOf(t) === 0 && w.toLowerCase() !== t; }).slice(0, 8);
+      if (m.length < 8) TERMS.forEach(function (w) { if (m.length < 8 && w.toLowerCase().indexOf(t) > 0 && m.indexOf(w) < 0) m.push(w); });
+      return m.length ? m : POPULAR; }
+    function matches() { var r = {}; TABS.slice(1).forEach(function (k) { r[k] = DATA[k].filter(hit); }); return r; }
+
+    function row(type, o) {
+      if (type === 'products') return '<a class="sp__row sp__row--prod" href="#"><span class="sp__thumb sp__thumb--img" aria-hidden="true"><span class="ms">image</span></span><span class="sp__text"><span><span class="sp__brand" style="display:block">' + esc(o.brand) + '</span><span class="sp__name" style="display:block">' + hl(o.name) + '</span></span><span class="sp__meta"><span>' + (o.variants ? 'Visa varianter' : 'Art.Nr: ' + o.art) + '</span>' + (o.n ? '<span class="badge-promo badge-promo--product" title="Tidigare köp" aria-label="' + o.n + ' tidigare köp"><span class="badge-promo__icon" aria-hidden="true">history</span>' + o.n + '</span>' : '') + '</span></span></a>';
+      if (type === 'categories') return '<a class="sp__row sp__row--cat" href="#"><span class="sp__thumb" aria-hidden="true"><span class="ms">stacks</span></span><span class="sp__text"><span class="sp__title">' + hl(o.name) + '</span><span class="sp__crumbs">' + o.path.map(function (p, i) { return '<span' + (i === o.path.length - 1 ? ' class="is-current"' : '') + '>' + esc(p) + '</span>'; }).join('') + '</span></span></a>';
+      var icon = type === 'stores' ? 'store' : type === 'brands' ? 'branding_watermark' : 'menu_book';
+      return '<a class="sp__row sp__row--center" href="#"><span class="sp__thumb" aria-hidden="true"><span class="ms">' + icon + '</span></span><span class="sp__text"><span class="sp__title sp__title--lg">' + hl(o.name) + '</span></span></a>';
+    }
+
+    function render() {
+      var m = matches(), total = 0;
+      TABS.slice(1).forEach(function (k) { total += m[k].length; });
+      var counts = { all: total }; TABS.slice(1).forEach(function (k) { counts[k] = m[k].length; });
+      tabs.querySelectorAll('[data-tab]').forEach(function (t) { var l = t.querySelector('.tab__label'); l.textContent = l.textContent.replace(/\(\d+\)/, '(' + counts[t.dataset.tab] + ')'); });
+      var html = '';
+      (tab === 'all' ? TABS.slice(1) : [tab]).forEach(function (k) { m[k].forEach(function (o) { html += row(k, o); }); });
+      body.innerHTML = html || '<p class="sp__empty">Inga träffar på ”' + esc(q) + '”. Kontrollera stavningen eller prova ett kortare ord.</p>';
+      var off = tab === 'stores' || !total;   /* Figma: disabled on Butiker */
+      all.classList.toggle('is-disabled', off); all.setAttribute('aria-disabled', off); all.tabIndex = off ? -1 : 0;
+      all.style.pointerEvents = off ? 'none' : ''; all.style.opacity = off ? '.4' : '';
+      suggest.innerHTML = suggestions().map(function (s) {
+        return '<a href="#" class="tile-link tile-link--small tile-link--horizontal tile-link--white" data-s="' + esc(s) + '"><div class="tile-link__inner"><span class="material-symbols-outlined tile-link__icon">search</span><span class="tile-link__label">' + hl(s) + '</span></div></a>';
+      }).join('');
+      suggest.hidden = !suggest.innerHTML;
+    }
+
+    function place() {
+      if (!mq.matches) { sp.style.cssText = ''; return; }
+      var r = document.querySelector('.site-header__search').getBoundingClientRect();   /* the panel starts 8px outside the header field and covers it: its own field is the top of the panel */
+      sp.style.left = (r.left - 8) + 'px'; sp.style.width = (r.width + 16) + 'px'; sp.style.top = (r.top - 8) + 'px';
+      sp.style.maxHeight = Math.min(720, window.innerHeight - r.top - 8 - 16) + 'px';
+    }
+    function open() {
+      if (sp.classList.contains('is-open')) return;
+      sp.classList.add('is-open'); scrim.classList.add('is-open'); place();
+      mIn.value = dIn.value;
+      if (!mq.matches) document.body.classList.add('sp-lock');
+      setTimeout(function () { mIn.focus(); mIn.setSelectionRange(mIn.value.length, mIn.value.length); }, 0);   /* hand the typing over to the panel's own field */
+    }
+    function close() { sp.classList.remove('is-open'); scrim.classList.remove('is-open'); document.body.classList.remove('sp-lock'); }
+    scrim.addEventListener('click', close);
+    function set(v, from) {
+      q = v.trim(); if (from !== dIn) dIn.value = v; if (from !== mIn) mIn.value = v; if (from !== hIn && hIn) hIn.value = v;
+      if (!q) { close(); return; }
+      render(); open();
+    }
+
+    [dIn, mIn, hIn].forEach(function (el) { if (el) el.addEventListener('input', function () { set(el.value, el); }); });
+    dIn.addEventListener('focus', function () { if (q) open(); });
+    if (hIn) hIn.addEventListener('focus', function () { if (!mq.matches) { open(); render(); } });
+    var sBtn = document.querySelector('.sh-sm__icon-btn[aria-label="Sök"]');
+    if (sBtn) sBtn.addEventListener('click', function () { open(); render(); });
+    document.getElementById('sp-back').addEventListener('click', close);
+    document.getElementById('sp-clear').addEventListener('click', function () { set('', null); mIn.focus(); });
+    tabs.addEventListener('click', function (e) { var t = e.target.closest('[data-tab]'); if (t) { tab = t.dataset.tab; render(); body.scrollTop = 0; } });
+    suggest.addEventListener('click', function (e) { var a = e.target.closest('[data-s]'); if (a) { e.preventDefault(); set(a.dataset.s, null); } });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && sp.classList.contains('is-open')) close(); });
+    document.addEventListener('pointerdown', function (e) {   /* pointerdown, not click: the scrim appears under the pointer while the field is pressed, so the click would land on it and close the panel again */
+      if (mq.matches && sp.classList.contains('is-open') && !sp.contains(e.target) && !e.target.closest('.site-header__search')) close();
+    });
+    window.addEventListener('resize', place);
+    mq.addEventListener('change', function () { close(); });
+  })();
+  </script>

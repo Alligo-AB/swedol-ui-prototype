@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article Highlight Group Card: Storyblok widget – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/inline-link.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .sb-stage.ds-fig__stage { display: block; padding: 0; min-height: 0; background: var(--color-surface-raised-primary); }   /* a screenshot or banner picture, with numbered markers on top */
+    .sb-shot { position: relative; }
+    .sb-shot img { display: block; width: 100%; height: auto; }
+    .sb-pin { position: absolute; transform: translate(-50%, -50%); pointer-events: none; min-width: 24px; height: 24px; padding: 0 5px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }   /* Figma Marker = Number Large, also on mobile */
+    .sb-pin--red { background: var(--color-surface-danger-default); }
+    .sb-box { position: absolute; border: 3px solid var(--color-border-danger-default); pointer-events: none; }
+    .hb-note { display: flex; gap: var(--dimension-spacing-space-12); padding: var(--dimension-spacing-space-16); background: var(--color-surface-raised-secondary); }
+    .hb-note .mo-ic { font-size: 24px; flex: 0 0 auto; color: var(--color-icon-primary); }
+    .hb-note p { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md: 16/22 mobile, 17/24 from 769px */
+    @media (min-width: 769px) { .hb-note p { font-size: 17px; line-height: 24px; } }
+    .hb-ex-cap { margin: 0 0 var(--dimension-spacing-space-8); }
+    .hb-grid { display: grid; gap: var(--dimension-spacing-space-16); grid-template-columns: minmax(0, 1fr); margin: var(--dimension-spacing-space-16) 0; }
+    @media (min-width: 769px) { .hb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--dimension-spacing-space-24); } }
+    .hb-grid figure { margin: 0; }
+    .hb-grid img, .hb-one img { display: block; width: 100%; height: auto; border: 1px solid var(--color-border-primary); }
+    .hb-grid figcaption, .hb-one figcaption { padding-top: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .hb-grid img { width: 100%; aspect-ratio: 1139 / 780; object-fit: cover; object-position: top; }   /* every example in a grid is the same height: cropped from the bottom */
+    .hb-grid img:not(.hb-alpha) { object-fit: contain; box-sizing: border-box; padding: var(--dimension-spacing-space-24); background: var(--color-surface-raised-secondary); border: 0; }   /* a banner (not a page screenshot) is shown whole, centred on the same grey and at the same height */
+    .hb-grid img.hb-alpha, .hb-one img.hb-alpha { border: 0; box-sizing: border-box; padding: var(--dimension-spacing-space-32) var(--dimension-spacing-space-24) 0; background: var(--color-surface-raised-secondary); }   /* the PNG has a transparent shadow edge: it shows on the light grey, as in Supernova */
+    .hb-one { margin: var(--dimension-spacing-space-16) 0; max-width: 100%; }
+    .hb-one--narrow { max-width: 360px; }
+    .hb-sw { display: grid; gap: var(--dimension-spacing-space-16); grid-template-columns: minmax(0, 1fr); margin: var(--dimension-spacing-space-16) 0; }
+    @media (min-width: 769px) { .hb-sw { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--dimension-spacing-space-24); } }
+    .hb-sw__card { margin: 0; }
+    .hb-sw__stage { display: grid; place-items: center; min-height: 240px; padding: var(--dimension-spacing-space-48) var(--dimension-spacing-space-24); background: var(--color-surface-100); }
+    .hb-sw__stage--light { background: var(--color-surface-raised-secondary); }
+    .hb-sw__stage--grey { background: var(--color-surface-raised-secondary); }   /* the same light grey as the anatomy figures (ds-fig__stage) */
+    .hb-sw__cap { display: grid; grid-template-columns: auto 1fr; gap: var(--dimension-spacing-space-4) var(--dimension-spacing-space-12); padding-top: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; margin: 0; }
+    .hb-sw__cap dt { font-weight: 600; }
+    .hb-sw__cap dd { margin: 0; color: var(--color-text-tertiary); letter-spacing: 0.36px; }
+    .hb-border { display: block; width: 85%; max-width: 360px; height: auto; }
+    .hb-stripes { display: flex; gap: 6px; width: 80%; transform: skewX(-24deg); }
+    .hb-stripes i { flex: 1; height: 12px; background: var(--hb-accent); }
+    .hb-stripes i:first-child { background: linear-gradient(90deg, transparent, var(--hb-accent)); }
+    .hb-swedol { --hb-accent: var(--color-accent-default); }
+    .hb-tools { --hb-accent: var(--color-primitive-color-brand-tools-accent-brand); }
+    .hb-pdimg { display: block; width: 220px; max-width: 80%; height: auto; }
+    .hb-pd { display: flex; gap: 6px; color: var(--color-text-primary-inverted); font-size: 40px; line-height: 36px; font-style: italic; font-weight: 700; text-transform: uppercase; }
+    .hb-pd i { width: 5px; background: var(--hb-accent); transform: skewX(-12deg); }
+    .hb-newsimg { display: block; width: 120px; height: 120px; }
+    .hb-news { display: grid; place-items: center; width: 120px; height: 120px; border-radius: 50%; font-size: 28px; line-height: 28px; font-style: italic; font-weight: 700; text-transform: uppercase; background: var(--hb-bg); color: var(--hb-fg); }
+    .hb-news--white { --hb-bg: var(--color-surface-raised-primary); --hb-fg: var(--color-text-primary); }
+    .hb-news--black { --hb-bg: var(--color-surface-100); --hb-fg: var(--color-text-primary-inverted); }
+    .hb-news--green { --hb-bg: var(--color-accent-default); --hb-fg: var(--color-text-primary); }
+    .hb-news--red { --hb-bg: var(--color-primitive-color-brand-tools-accent-brand); --hb-fg: var(--color-text-primary-inverted); }
+    .hb-txt { text-align: left; }
+    .hb-txt b { display: block; font-size: 12px; line-height: 14px; letter-spacing: 0.48px; text-transform: uppercase; }
+    .hb-txt strong { display: block; font-size: 32px; line-height: 32px; text-transform: uppercase; }
+    .hb-txt span { display: block; font-size: 16px; line-height: 22px; }
+    .hb-txt--inv { color: var(--color-text-primary-inverted); }
+    .hb-btns { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-8); }
+    .hb-yn { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-8); }   /* icon and text centred on one line */
+    .hb-ic { display: block; flex: 0 0 auto; font-size: 20px; line-height: 1; }
+    .hb-ic--yes { color: var(--color-text-success-default); }
+    .hb-ic--no { color: var(--color-text-danger-default); }
+    .hb-ic--maybe { color: var(--color-text-warning-default); }
+    .hb-anat .ds-callout__pin, .sb-pin { text-transform: none; }
+    .hb-anat.ds-fig__stage.ds-callout { padding-right: 72px; }
+    .hb-anat.ds-fig__stage.ds-callout { display: block; overflow-x: auto; }   /* mobile: the picture keeps its size, so the markers do not collide; the figure scrolls sideways */
+    .hb-anat .ds-callout__art { margin: 0 auto; width: 100%; min-width: 520px; max-width: 640px; }
+    .hb-anat img { display: block; width: 100%; height: auto; }
+    .ds-figs + .hb-legend, .ds-figs + .ds-bullets--num { margin-top: var(--dimension-spacing-space-16); }   /* the list under a figure: 16px */
+    
+    .hb-legend + .ds-figs, .ds-bullets + .ds-figs { margin-top: var(--dimension-spacing-space-40); }
+    .hb-dd { display: block; width: 100%; max-width: 480px; height: auto; }
+    /* spacing from the user's annotation (2026-10-21), on every page of this set */
+    /* one rule for pictures: whatever comes before or after a picture is 16px away; only a list or legend followed by the next picture gets 40px */
+    .ds-prose > :is(.ds-h2, .ds-h3, .hb-h4, .ds-desc, .ds-bullets, .hb-note) + :is(.hb-one, .ds-figs, .hb-grid) { margin-top: var(--dimension-spacing-space-16); }
+    .ds-prose > :is(.hb-one, .ds-figs, .hb-grid) + :is(.ds-h2, .ds-h3, .hb-h4, .ds-desc, .ds-bullets, .hb-note, .hb-legend) { margin-top: var(--dimension-spacing-space-16); }
+    .ds-prose > .ds-desc.ds-desc:has(+ :is(.hb-one, .ds-figs, .hb-grid)), .ds-prose > .ds-bullets.ds-bullets:not(.ds-bullets--num):has(+ :is(.hb-one, .ds-figs, .hb-grid)) { margin-bottom: 0; }   /* the paragraph's own bottom margin would collapse into the 16px */
+    .ds-prose > :is(.ds-bullets--num, .hb-legend) + :is(.hb-one, .ds-figs, .hb-grid) { margin-top: var(--dimension-spacing-space-40); }
+    .ds-prose > .ds-figs + .ds-h3 { margin-top: var(--dimension-spacing-space-16); }   /* figure with caption, then the next heading: 16px */
+    .ds-prose > .ds-bullets + .ds-h3 { margin-top: var(--dimension-spacing-space-24); }   /* list, then the next heading: 24px */
+    .ds-prose > .ds-h3.ds-h3.ds-h3:has(+ .hb-h4) { margin-bottom: 0; }   /* tripled class: beats docs.css group-heading rules */
+    .ds-prose > .ds-h3 + .hb-h4 { margin-top: var(--dimension-spacing-space-8); }   /* heading, then its sub-heading: 8px */
+    .hb-h4 + .hb-one, .hb-h4 + .ds-figs, .hb-h4 + .hb-grid { margin-top: var(--dimension-spacing-space-16); }   /* sub-heading, then the picture: 16px */
+    .hb-legend { list-style: none; margin: 0 0 var(--dimension-spacing-space-40);   /* 40px before the next figure (when a heading follows, its own margin applies) */ padding: 0; display: grid; gap: var(--dimension-spacing-space-12); }
+    .hb-legend li { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-12); }
+    .hb-legend .badge-number { flex: 0 0 auto; margin-top: 3px; text-transform: none; }
+    .hb-legend p { margin: 0; }
+    .hb-h4 { margin: var(--dimension-spacing-space-24) 0 var(--dimension-spacing-space-4); font-size: 16px; line-height: 22px; font-weight: 600; }
+    .hb-why { margin: 0 0 var(--dimension-spacing-space-4); }
+    .ah-narrow { max-width: 480px; }   /* a cropped settings panel is shown at its own size, not stretched over the page width */
+    .ds-figs--one .ah-narrow .sb-shot img { width: 100%; }
+    .ah-pair .sb-stage { height: 100%; }
+    .ds-prose > :is(.ds-h2, .ds-h3, .hb-h4, .ds-desc, .ds-bullets, .hb-note) + .ah-pair, .ds-prose > .ah-pair + :is(.hb-h4, .ds-desc, .ds-bullets, .hb-note, .hb-legend) { margin-top: var(--dimension-spacing-space-16); }
+    .ds-prose > .ds-figs + :is(.ds-h2, .ds-h3) { margin-top: var(--dimension-spacing-space-32); }   /* a new heading after a picture (single, pair or trio) and its caption: 32px mobile, 48px from 769px (overrides the 16px of the Hero banner set) */
+    @media (min-width: 769px) { .ds-prose > .ds-figs + :is(.ds-h2, .ds-h3) { margin-top: var(--dimension-spacing-space-48); } }
+    .ds-prose > .ds-desc.ds-desc:has(+ .ah-pair), .ds-prose > .ds-bullets.ds-bullets:not(.ds-bullets--num):has(+ .ah-pair) { margin-bottom: 0; }
+    .ah-pair.ds-figs { align-items: start; }
+    .sb-pin { white-space: nowrap; }   /* sub-numbered badges such as 7d-3 stay on one line, also at the edge of a picture */
+    @media (min-width: 769px) { .ah-trio.ah-pair { grid-template-columns: repeat(3, 1fr); } }   /* three settings pictures side by side */
+    .ds-prose > :is(.ds-figs, .ah-pair) + :is(.ds-figs, .ah-pair) { margin-top: var(--dimension-spacing-space-16); }
+    .ds-prose > .ds-table-wrap + :is(.ds-desc, .ds-h3, .hb-note, .ds-figs, .ah-pair) { margin-top: var(--dimension-spacing-space-16); }   /* the table's own bottom edge: 16px to what follows */
+    .ds-prose > :is(.ds-desc, .ds-bullets, .ds-figs, .ah-pair) + .ds-table-wrap { margin-top: var(--dimension-spacing-space-16); }
+    .ds-prose > .ds-desc.ds-desc:has(+ .ds-table-wrap) { margin-bottom: 0; }
+    code { font-size: 0.9em; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Article Highlight Group Card</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Cards</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span></div>
+    <h1 class="ds-title">Article Highlight Group Card</h1>
+    <p class="ds-lead">Cards that promote articles, campaigns and brands, placed in a grid or in a carousel. A card can have an image, logos and graphics, badges, text, links and a button.</p><p class="ds-lead">The anatomy of the card, the brand elements and the ways to combine the settings into variants. Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=549-27485" target="_blank" rel="noopener">Variants</a>, <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=24811-111461" target="_blank" rel="noopener">Anatomy</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Article Highlight Group Card"><a class="tab" aria-current="page" href="ah-group-card-widget.html"><span class="tab__label">Design</span></a><a class="tab" href="ah-group-card-widget-storyblok.html"><span class="tab__label">Storyblok</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="anatomy"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Anatomy</h2><p class="ds-desc">A card is built from an image holder and a footer. Every part except the image is optional. The numbers match the list below.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig ah-narrow"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="/images/ah-group-card-design-anatomy.webp" alt="Anatomy of an Article Highlight card: 1 image, 2 badge, 3 preheadline, 4 title, 5 supporting text, 6 list, 7 supporting text 2, 8 links, 9 date, 10 action link or button" loading="lazy" /><span class="badge-number sb-pin" style="left:93%;top:22%">1</span><span class="badge-number sb-pin" style="left:14%;top:4.4%">2</span><span class="badge-number sb-pin" style="left:96%;top:44.5%">3</span><span class="badge-number sb-pin" style="left:96%;top:48%">4</span><span class="badge-number sb-pin" style="left:96%;top:53%">5</span><span class="badge-number sb-pin" style="left:96%;top:63%">6</span><span class="badge-number sb-pin" style="left:96%;top:76%">7</span><span class="badge-number sb-pin" style="left:96%;top:86.7%">8</span><span class="badge-number sb-pin" style="left:96%;top:92%">9</span><span class="badge-number sb-pin" style="left:96%;top:95.5%">10</span></div></div><figcaption class="ds-fig__cap">Figma: <a class="inline-link inline-link--large" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=24811-111461" target="_blank" rel="noopener">Article Highlight Card Prototypes for Anatomy</a></figcaption></figure></div><ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>Image.</strong> The image, a color or a video, with an optional overlay, brand elements and logo.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">2</span><p class="ds-desc"><strong>Badge.</strong> A short label on the image, for example “Nyhet”.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">3</span><p class="ds-desc"><strong>Preheadline.</strong> Also called eyebrow. It gives context.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">4</span><p class="ds-desc"><strong>Title.</strong> The headline of the card.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">5</span><p class="ds-desc"><strong>Supporting text 1.</strong> Body text before the list.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">6</span><p class="ds-desc"><strong>Bulletlist.</strong> Bullet, numbered or checkmark list.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">7</span><p class="ds-desc"><strong>Supporting text 2.</strong> Body text after the list.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">8</span><p class="ds-desc"><strong>Links.</strong> Extra links, with or without icons, stacked or divided.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">9</span><p class="ds-desc"><strong>Date.</strong> A date or another short, related note.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">10</span><p class="ds-desc"><strong>Action link or button.</strong> The call to action of the card.</p></li></ul><h3 class="ds-h3 ds-group" id="brand-elements">Brand elements</h3><p class="ds-desc">Brand elements sit on the image, never in the footer. They are part of the picture, so they follow the image when it is cropped. The two examples below show a campaign concept and a discount with a brand logo.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig ah-narrow"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="/images/ah-group-card-design-brand-powerdeal.webp" alt="A Power Deal image: 1 Power Deal logo, 2 Power Deal border" loading="lazy" /><span class="badge-number sb-pin" style="left:6%;top:20%">1</span><span class="badge-number sb-pin" style="left:72%;top:9%">2</span><span class="badge-number sb-pin" style="left:40%;top:93%">2</span></div></div><figcaption class="ds-fig__cap">Power Deal. Figma: <a class="inline-link inline-link--large" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=24811-112608" target="_blank" rel="noopener">Brand Elements 1</a></figcaption></figure></div><ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>Power Deal logo.</strong> The logo of the Power Deal concept.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">2</span><p class="ds-desc"><strong>Power Deal border.</strong> The graphic stripes at the top and bottom edge. Use it together with the logo.</p></li></ul><div class="ds-figs ds-figs--one"><figure class="ds-fig ah-narrow"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="/images/ah-group-card-design-brand-discount.webp" alt="An image with a discount and a brand logo: 1 discount, 2 brand logo" loading="lazy" /><span class="badge-number sb-pin" style="left:28%;top:33%">1</span><span class="badge-number sb-pin" style="left:79%;top:79%">2</span></div></div><figcaption class="ds-fig__cap">Discount and brand logo. Figma: <a class="inline-link inline-link--large" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=24811-112612" target="_blank" rel="noopener">Brand Elements 2</a></figcaption></figure></div><ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>Discount.</strong> A large, red campaign message, for example a percentage.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">2</span><p class="ds-desc"><strong>Brand logo.</strong> For brand identity. It sits bottom right.</p></li></ul></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="variants"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Variants</h2><p class="ds-desc">A card can be used in many ways, depending on how the settings are combined. The grid shows Large cards (left) and Small cards (right) with the same content, in four setups with and without footer padding, border and badge. See <a class="inline-link inline-link--large inline-link--secondary" href="ah-group-card-widget-storyblok.html#footer">6. Footer</a> for the settings. Figma: <a class="inline-link inline-link--large" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=549-27485" target="_blank" rel="noopener">AH Highlight Card Variants</a>.</p><div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="/images/ah-group-card-design-variants.webp" alt="Four rows of cards. Each row shows two Large and two Small cards with an image, a preheadline, a title, a supporting text and a text link" loading="lazy" /></div></div></figure></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+</body>
+</html>

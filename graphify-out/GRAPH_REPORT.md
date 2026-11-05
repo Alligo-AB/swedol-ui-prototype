@@ -1,22 +1,21 @@
-# Graph Report - swedol-ui-prototype  (2026-11-01)
+# Graph Report - swedol-ui-prototype  (2026-11-05)
 
 ## Corpus Check
-- 180 files · ~2,260,788 words
+- 180 files · ~2,284,156 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1439 nodes · 2369 edges · 120 communities (91 shown, 20 thin omitted)
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 114 edges (avg confidence: 0.83)
+- 1472 nodes · 2413 edges · 122 communities (92 shown, 21 thin omitted)
+- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 119 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `89889319`
+- Built from commit: `2919a8f0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - input.css
-- eco-add-component skill
 - js/tabs.js
 - Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)
 - docnav.js
@@ -44,12 +43,12 @@
 - Table (ECO Design System) — first version
 - 🟠 Major
 - Role Tier Card component
-- js/range.js
+- tooltip.js
 - Docs shell: navigation, hub, footer, frame
 - Switch (ECO Design System)
 - Text Area (ECO Design System)
 - modal.js
-- eco-pill-segment-control skill
+- Pill Segment Control (ECO Design System)
 - toast-ecom.js
 - Menu – Dropdown & Exposed Dropdown (ECO Design System)
 - Old ECO Libraries Web Page (Storybook)
@@ -79,7 +78,7 @@
 - patterns-overview.html docs page
 - banner.js
 - hero_scene_lib.py
-- eco-radio skill
+- eco-add-component skill
 - Divider (ECO Design System)
 - eco-chip/SKILL.md
 - Radio button (ECO Design System)
@@ -126,6 +125,9 @@
 - history.md
 - Page templates (template.html, mypages-template.html)
 - gen_icon.py
+- gen_layout.py
+- eco-tabs/SKILL.md
+- Workflow
 
 ## God Nodes (most connected - your core abstractions)
 1. `input.css` - 39 edges
@@ -137,7 +139,7 @@
 7. `eco-doc-page skill (docs page structure)` - 30 edges
 8. `Three-page component doc structure (Examples / Specifications / Code)` - 24 edges
 9. `docs.css` - 22 edges
-10. `CLAUDE.md (project design guidelines)` - 21 edges
+10. `CLAUDE.md (project design guidelines)` - 20 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Recensioner page` --semantically_similar_to--> `Recensioner backup 1`  [INFERRED] [semantically similar]
@@ -206,23 +208,19 @@
 - **Användare page versions** — mypages_users, mypages_users_v1, mypages_users_dashboard [INFERRED 0.85]
 - **Användare page versions** — mypages_users, mypages_users_v1, mypages_users_dashboard [INFERRED 0.85]
 
-## Communities (120 total, 20 thin omitted)
+## Communities (122 total, 21 thin omitted)
 
 ### Community 0 - "input.css"
 Cohesion: 0.10
 Nodes (55): components/css/collapsible.css, components/js/collapsible.js, Storyblok collapsible widget, badge.css, button.css, divider.css, input.css, menu.css (+47 more)
 
-### Community 1 - "eco-add-component skill"
-Cohesion: 0.14
-Nodes (22): design-review skill, eco-action-link skill, eco-add-component skill, eco-colors skill, eco-divider skill, eco-section skill, Section padding per breakpoint, eco-spacing skill (+14 more)
-
 ### Community 2 - "js/tabs.js"
-Cohesion: 0.08
-Nodes (42): switch.css, textarea.css, tile-link.css, choose(), close(), holder(), leave(), openMenu() (+34 more)
+Cohesion: 0.07
+Nodes (47): switch.css, textarea.css, tile-link.css, choose(), close(), holder(), leave(), openMenu() (+39 more)
 
 ### Community 3 - "Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)"
 Cohesion: 0.04
-Nodes (44): Persona feedback protocol (severity, G-xx criteria), Acceptanskriterier (EOS), Behov i uppgiftsform, Exempel på granskning (mall), Frågor att ställa en prototyp som Lars, Kontext, Kort om Lars, Mål, smärtor och drivkrafter (översatt till gränssnittet) (+36 more)
+Nodes (45): ECO Design System, Persona feedback protocol (severity, G-xx criteria), Acceptanskriterier (EOS), Behov i uppgiftsform, Exempel på granskning (mall), Frågor att ställa en prototyp som Lars, Kontext, Kort om Lars (+37 more)
 
 ### Community 4 - "docnav.js"
 Cohesion: 0.09
@@ -237,8 +235,8 @@ Cohesion: 0.05
 Nodes (8): bp_field(), btn_group(), old_js(), Frame for the three-page component docs (reference: tooltip.html / tooltip-…, buttons: [(value, text, pressed)], Slice of the old page's script: from the line containing `start` up to (not…, A Small eco-select field for a playground (options: [(value, text)], cur = the…, sel()
 
 ### Community 7 - "eco-button skill"
-Cohesion: 0.21
-Nodes (18): eco-banner-notification skill, eco-button skill, eco-inline-link skill, eco-inline-notification skill, eco-modal-ecom skill (E-Com Modal), eco-motion skill (easing, duration, campaign motion), eco-toast-ecom skill, Add to cart / Informational variants (+10 more)
+Cohesion: 0.15
+Nodes (24): eco-action-link skill, eco-banner-notification skill, eco-button skill, eco-inline-link skill, eco-inline-notification skill, eco-modal-ecom skill (E-Com Modal), eco-motion skill (easing, duration, campaign motion), eco-tile-link skill (+16 more)
 
 ### Community 8 - "Public page template (Regular Page)"
 Cohesion: 0.10
@@ -257,8 +255,8 @@ Cohesion: 0.13
 Nodes (22): block(), bp(), callouts(), draw(), node(), clear(), codeBox(), esc() (+14 more)
 
 ### Community 12 - "crop_ah_group_card.py"
-Cohesion: 0.39
-Nodes (8): frac(), load(), prev(), Crop the AhGroupCard_* browser screenshots (images/, full browser windows) into…, panel contact-sheet coordinates (470px wide tile = crop .74W..965W, from .08H), preview contact-sheet coordinates (900px wide tile = crop .02W..76W, from .07H), save(), tile()
+Cohesion: 0.36
+Nodes (9): _crop(), frac(), load(), prev(), Crop the AhGroupCard_* browser screenshots (images/, full browser windows) into…, panel contact-sheet coordinates (470px wide tile = crop .74W..965W, from .08H), preview contact-sheet coordinates (900px wide tile = crop .02W..76W, from .07H), save() (+1 more)
 
 ### Community 13 - "eco-card-animation/SKILL.md"
 Cohesion: 0.09
@@ -273,16 +271,16 @@ Cohesion: 0.13
 Nodes (15): box(), font(), panel(), Add a title strip above an image., sheet(), vbrace(), fig_pair(), AX() (+7 more)
 
 ### Community 16 - "CLAUDE.md (project design guidelines)"
-Cohesion: 0.18
-Nodes (11): CLAUDE.md (project design guidelines), eco-breadcrumb skill (Breadcrumb), eco-pagination skill (load more), prototype-guide skill (entry point for creative work), Design-skill suggestions are proposals, ECO breakpoints (xs/sm/md/lg/xl, md=769px), ECO Design System, Identity is fixed, solutions are open (+3 more)
+Cohesion: 0.20
+Nodes (9): CLAUDE.md (project design guidelines), eco-breadcrumb skill (Breadcrumb), eco-pagination skill (load more), Design-skill suggestions are proposals, ECO breakpoints (xs/sm/md/lg/xl, md=769px), Identity is fixed, solutions are open, Quality control before delivery, Shared component CSS/JS (components/css, components/js) (+1 more)
 
 ### Community 17 - "eco-doc-page skill (docs page structure)"
 Cohesion: 0.12
 Nodes (17): eco-doc-page skill (docs page structure), Building blocks in `docs.css`, Component pages, Controls in a playground are the real components, Foundation pages, Hub (`overview.html`), Motion section, Page anatomy (in this order) (+9 more)
 
 ### Community 18 - "gen_hero_banner_widget.py"
-Cohesion: 0.07
-Nodes (27): bullets(), desc(), rules(), cap(), dont(), img(), pair(), Article Highlight Group Card (Storyblok widget AH Group): the Storyblok page,… (+19 more)
+Cohesion: 0.08
+Nodes (29): bullets(), rules(), anat(), cap(), dont(), half(), img(), pair() (+21 more)
 
 ### Community 19 - "Radio component"
 Cohesion: 0.18
@@ -324,9 +322,9 @@ Nodes (46): C1 – Large banner layout follows the `version` prop, not the viewp
 Cohesion: 0.29
 Nodes (9): components css role tier stylesheet, components css section stylesheet, role-tier-card.html docs page, role-tier-card-code.html docs page, Role Tier Card component, role-tier-card-specifications.html docs page, section-code.html docs page, Section component (+1 more)
 
-### Community 29 - "js/range.js"
-Cohesion: 0.21
-Nodes (12): pill-segment-control.css, init(), move(), init(), ECO Pill segment control component, ECO Toast component, ECO E-Com Toast component, Pill segment control: Code (+4 more)
+### Community 29 - "tooltip.js"
+Cohesion: 0.46
+Nodes (6): alignSide(), globalTip(), needsFlip(), placeWrap(), safeTop(), show()
 
 ### Community 30 - "Docs shell: navigation, hub, footer, frame"
 Cohesion: 0.22
@@ -344,9 +342,9 @@ Nodes (9): CSS, Flags, HTML structure, Rules, Size model, States, Text Area (ECO
 Cohesion: 0.24
 Nodes (13): ARROW, BODY, BTN, centred(), cross(), flat(), G, GW() (+5 more)
 
-### Community 34 - "eco-pill-segment-control skill"
-Cohesion: 0.14
-Nodes (13): eco-pill-segment-control skill, CSS template (Large, Primary/Pill — mobile-first), Fluid width at xs only, HTML and JS example, Interaction (sliding pill), Motion, Pill Segment Control (ECO Design System), Sizes (+5 more)
+### Community 34 - "Pill Segment Control (ECO Design System)"
+Cohesion: 0.25
+Nodes (8): CSS template (Large, Primary/Pill — mobile-first), HTML and JS example, Interaction (sliding pill), Motion, Pill Segment Control (ECO Design System), Sizes, States, Variants
 
 ### Community 35 - "toast-ecom.js"
 Cohesion: 0.24
@@ -436,13 +434,13 @@ Nodes (7): ARROW, G, GW(), label(), mount(), draw(), PAGE
 Cohesion: 0.44
 Nodes (4): make(), Shared builder for the header-art scene (see eco-doc-page, Header art).…, k = make(...) tuple; ax_x/ax_y = long axes through the figure's parts; extras =…, scene()
 
-### Community 67 - "eco-radio skill"
-Cohesion: 0.19
-Nodes (17): eco-checkbox skill, eco-elevation skill, eco-icon-picker skill, eco-input skill, eco-radio skill, Native input type=radio, eco-range skill, Native input type=range (+9 more)
+### Community 67 - "eco-add-component skill"
+Cohesion: 0.14
+Nodes (29): design-review skill, eco-add-component skill, eco-checkbox skill, eco-colors skill, eco-elevation skill, eco-icon-picker skill, eco-input skill, eco-pill-segment-control skill (+21 more)
 
 ### Community 69 - "Divider (ECO Design System)"
-Cohesion: 0.22
-Nodes (9): CSS, Divider (ECO Design System), Flags, HTML structure, NOT used when, Rules, Size, Used when (+1 more)
+Cohesion: 0.13
+Nodes (16): eco-divider skill, CSS, Divider (ECO Design System), Flags, HTML structure, NOT used when, Rules, Size (+8 more)
 
 ### Community 70 - "eco-chip/SKILL.md"
 Cohesion: 0.20
@@ -505,8 +503,8 @@ Cohesion: 0.27
 Nodes (9): ARROW, CARET, flat(), G, GW(), lay(), LINES, mount() (+1 more)
 
 ### Community 91 - "docs.css"
-Cohesion: 0.11
-Nodes (26): action-link.css, inline-link.css, list-item.css, notifications.css, pagination.css, role-tier.css, docs.css, Divider (old docs page) (+18 more)
+Cohesion: 0.09
+Nodes (32): action-link.css, inline-link.css, list-item.css, notifications.css, pagination.css, pill-segment-control.css, role-tier.css, init() (+24 more)
 
 ### Community 92 - "build-docs.mjs"
 Cohesion: 0.29
@@ -521,8 +519,8 @@ Cohesion: 0.31
 Nodes (6): ARROW, flat(), G, GW(), lay(), mount()
 
 ### Community 95 - "eco-icon/SKILL.md"
-Cohesion: 0.25
-Nodes (7): Color, Flags (for design), Icon (ECO Design System), Library and naming, Rules, Sizes, Two sources
+Cohesion: 0.22
+Nodes (8): Color, Flags (for design), Forward and back arrows (2026-11-03, rule for every component), Icon (ECO Design System), Library and naming, Rules, Sizes, Two sources
 
 ### Community 96 - "Adding a component to the design system"
 Cohesion: 0.25
@@ -545,8 +543,8 @@ Cohesion: 0.24
 Nodes (10): crumbs(), emit(), head(), intro(), page(), PG(), Custom page set (c['pages'], e.g. the Hero banner Storyblok widget docs): dict…, section() (+2 more)
 
 ### Community 104 - "icon-library.js"
-Cohesion: 0.53
-Nodes (3): esc(), glyph(), render()
+Cohesion: 0.48
+Nodes (4): esc(), glyph(), render(), item()
 
 ### Community 106 - "Foundation pages"
 Cohesion: 0.33
@@ -572,25 +570,33 @@ Nodes (3): Component families: what is specific to each, Contents, Icon (2026-11
 Cohesion: 0.50
 Nodes (4): Checkout leverans - tre forslag (page), eco-role-tier-card skill (Draft), Page templates (template.html, mypages-template.html), Swedol E-handelspartner (page)
 
+### Community 120 - "gen_layout.py"
+Cohesion: 0.29
+Nodes (3): desc(), Layout: the second Foundation in the three-page structure (2026-10-22), after…, tgroup()
+
+### Community 122 - "Workflow"
+Cohesion: 0.11
+Nodes (18): 0. Understand the task — and which starting point you have, 10. Run the quality checklist in CLAUDE.md, 1. Ground yourself in what Swedol actually is, 2. Choose the right starting point (for new pages), 3. Map out which components/patterns are needed, 3a. Component map: "I need X → use skill Y", 3b. Structural checklist for product/service/marketing pages (a prompt, not a requirement), 4. Compose with general design quality — but our own building blocks (+10 more)
+
 ## Knowledge Gaps
-- **429 isolated node(s):** `ARROW`, `G`, `PAGE`, `BTN`, `SNAP` (+424 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 634 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **446 isolated node(s):** `ARROW`, `G`, `PAGE`, `BTN`, `SNAP` (+441 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 655 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `eco-doc-page skill (docs page structure)` connect `eco-doc-page skill (docs page structure)` to `eco-add-component skill`, `eco-pill-segment-control skill`, `Component pages: template and three-page split`, `Foundation pages`, `Building blocks, spacing and cards`, `eco-card-animation/SKILL.md`, `Header art`, `CLAUDE.md (project design guidelines)`, `Component families: what is specific to each`, `storyblok-widgets.md`, `file-map.md`, `history.md`, `Table (ECO Design System) — first version`, `Docs shell: navigation, hub, footer, frame`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **Why does `CLAUDE.md (project design guidelines)` connect `CLAUDE.md (project design guidelines)` to `eco-pill-segment-control skill`, `eco-radio skill`, `eco-button skill`, `eco-card-animation/SKILL.md`, `eco-doc-page skill (docs page structure)`, `Page templates (template.html, mypages-template.html)`, `Table (ECO Design System) — first version`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `eco-doc-page skill (docs page structure)` connect `eco-doc-page skill (docs page structure)` to `eco-add-component skill`, `Component pages: template and three-page split`, `Foundation pages`, `Building blocks, spacing and cards`, `eco-card-animation/SKILL.md`, `Header art`, `CLAUDE.md (project design guidelines)`, `Component families: what is specific to each`, `storyblok-widgets.md`, `file-map.md`, `history.md`, `eco-tabs/SKILL.md`, `Table (ECO Design System) — first version`, `Docs shell: navigation, hub, footer, frame`?**
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Why does `CLAUDE.md (project design guidelines)` connect `CLAUDE.md (project design guidelines)` to `eco-add-component skill`, `Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)`, `eco-button skill`, `eco-card-animation/SKILL.md`, `eco-doc-page skill (docs page structure)`, `Page templates (template.html, mypages-template.html)`, `eco-tabs/SKILL.md`, `Table (ECO Design System) — first version`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Why does `dismiss()` connect `notifications.js` to `doc-kit.js`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+  _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **What connects `ARROW`, `G`, `PAGE` to the rest of the system?**
-  _429 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _446 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `input.css` be split into smaller, more focused modules?**
-  _Cohesion score 0.09654043945769052 - nodes in this community are weakly interconnected._
-- **Should `eco-add-component skill` be split into smaller, more focused modules?**
-  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09630668536699392 - nodes in this community are weakly interconnected._
 - **Should `js/tabs.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.08295625942684766 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07247223845704266 - nodes in this community are weakly interconnected._
+- **Should `Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)` be split into smaller, more focused modules?**
+  _Cohesion score 0.041666666666666664 - nodes in this community are weakly interconnected._

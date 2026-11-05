@@ -134,6 +134,10 @@ Every state must be implemented each time an input field is created. States cont
 
 ---
 
+### Header search variant (`input-box--search`, 2026-11-05)
+
+Figma Header Components > Base / Search Input (desktop `5782:343390` default, `21732:93843` active; the other breakpoints are the Header Components variants Medium `5782:343398`, Small `5782:343360` and XSmall `1765:52927`). The same Large input on a **grey fill** (`--color-surface-raised-secondary`) with **no border** while enabled; text colours as in every input: enabled (placeholder) `--color-text-tertiary`, active (typed) `--color-text-primary` (confirmed by the user 2026-11-05, no special placeholder colour); the **divider is always visible**, before the action icons. Hover and active keep the component's borders; an active (focused) field turns white with the black border. Right-hand icons by breakpoint: desktop and Small `scan` + `camera` (with a value: `clear` first); XSmall `location_on` + `scan` + `camera`. Sizes follow the component: 48px from 769px, 40px below. Used by the site header only (`mypages/partials/header.html`); `components/css/input.css` carries the modifier. Search active state (the panel in `search.html`) is the standard white input.
+
 ### Right-hand icons ("Pair Icons right")
 
 Optional group at the right end of the input, `display: flex; align-items: center; justify-content: flex-end; gap: var(--dimension-spacing-space-4, 4px)`. Each part is individually toggleable in Figma (`cancel`, `divider`, `locationOn`, `qrCodeReader`, `photo`) and appears in this order:
@@ -175,6 +179,8 @@ Clear icon shows only while the input has a value (e.g. `.input-wrap:has(.form-i
 ---
 
 ### Rules
+
+0. **The site header search fields are this component** (`mypages/partials/header.html`, 2026-11-05); never write a custom search field (grey fill, own focus ring, own icon buttons). A search that opens a panel (see `search.html`) puts a second ECO input Large at the top of the panel.
 
 1. Never hardcode design tokens – `var(--…)` from `tokens.json` (see `eco-tokens`); the two flagged literals are the only exceptions.
 2. Always associate the `<label>` with the input (`for`/`id`); icon buttons need `aria-label`.
