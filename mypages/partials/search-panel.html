@@ -6,12 +6,14 @@
      Partialen länkar själv de komponent-CSS och tabs.js den behöver. Mockdatan ligger
      överst i skriptet, byt ut mot riktiga sökanrop senare.
 ═══════════════════════════════════════════════════════════ -->
-<link rel="stylesheet" href="/components/css/button.css">
-<link rel="stylesheet" href="/components/css/input.css">
-<link rel="stylesheet" href="/components/css/tabs.css">
-<link rel="stylesheet" href="/components/css/badge.css">
-<link rel="stylesheet" href="/components/css/tile-link.css">
-<script>if (!window.ECO_TABS) document.write('<script src="/components/js/tabs.js"><\/script>');</script>
+<script>
+  /* Link the component CSS only when the page does not have it already. A link added here would come after the page's own <style>
+     and override its rules (the header icon buttons shrank that way). */
+  ['button', 'input', 'tabs', 'badge', 'tile-link'].forEach(function (n) {
+    if (!document.querySelector('link[href*="/components/css/' + n + '.css"]')) document.write('<link rel="stylesheet" href="/components/css/' + n + '.css">');
+  });
+  if (!window.ECO_TABS) document.write('<script src="/components/js/tabs.js"><\/script>');
+</script>
 <style>
 /* ══ SEARCH PANEL (Figma Desktop/Mobile - Search, 2026-11-05) ══
      md+: dropdown under header search field. xs/sm: full-screen overlay. */
