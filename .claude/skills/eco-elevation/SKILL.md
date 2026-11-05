@@ -46,7 +46,7 @@ Each level consists of two layers: a soft main shadow + a sharp contour shadow (
 |---|---|---|---|
 | `elevation-b-20` | `var(--shadow-elevation-b-20)` | 20% | Subtle separation, surfaces only slightly above their surroundings. Data and variant tables, address and contact cards, inline system notifications, compact badges. Avoid for menus, drawers, modals. |
 | `elevation-b-40` | `var(--shadow-elevation-b-40)` | 40% | Compact floating guidance. Tooltips; limited use on sticky table headers and compact map/header controls. Use a higher level for menus, toasts, dialogs. |
-| `elevation-b-60` | `var(--shadow-elevation-b-60)` | 60% | Clear mid-level separation. Headers, main navigation, search surfaces, notifications, overflow surfaces. Use b-80/b-100 when the surface must dominate the layer stack. |
+| `elevation-b-60` | `var(--shadow-elevation-b-60)` | 60% | Clear mid-level separation. Headers, main navigation, search surfaces, notifications, overflow surfaces. Use b-80/b-100 when the surface must dominate the layer stack. The live search panel (`mypages/partials/search-panel.html`) uses b-100 (user decision 2026-11-05): it opens on top of the header, and the drawer's side shadow is too faint there. |
 | `elevation-b-80` | `var(--shadow-elevation-b-80)` | 80% | High-priority transient surfaces. Menus, dropdowns, exposed dropdowns, toast notifications, mobile navigation layers. Avoid for modals and horizontally entering drawers. |
 | `elevation-b-100` | `var(--shadow-elevation-b-100)` | 100% | Strongest general bottom elevation. Modal notifications, cookie settings, other blocking dialogs. Use the designated drawer styles for side drawers. |
 

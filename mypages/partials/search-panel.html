@@ -66,7 +66,7 @@
   .sp__foot .btn { width: 100%; }
 
   @media (min-width: 769px) {
-    .sp { inset: auto; width: auto; background: var(--color-background-primary); box-shadow: var(--elevation-drawer-right); }   /* same shadow as an open drawer */
+    .sp { inset: auto; width: auto; background: var(--color-background-primary); box-shadow: var(--elevation-b-100); }   /* user decision 2026-11-05: elevation-b-100 (eco-elevation lists search surfaces at b-60; this panel opens over the header); the scrim behind is the drawer's */
     .sp-scrim { position: fixed; inset: 0; z-index: 119; background: rgba(0, 0, 0, 0.2); opacity: 0; pointer-events: none; transition: opacity var(--duration-medium-2) var(--ease-standard); }   /* same scrim as .drawer-overlay */
     .sp-scrim.is-open { opacity: 1; pointer-events: all; }
     .sp__bar { background: var(--color-background-primary); border-bottom: 0; }   /* Figma Desktop - Search: the field is the top of the white panel, 8px around it */
