@@ -203,15 +203,23 @@ DIMG = '/images/ah-group-card-design-%s.webp'
 FIG_AH = 'https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id='
 
 
-def anat(name, alt, pins, c=None, narrow=True):
-    pn = ''.join('<span class="badge-number sb-pin" style="left:%s%%;top:%s%%">%s</span>' % (x, y, l) for l, x, y in pins)
-    return '<div class="ds-figs ds-figs--one"><figure class="ds-fig%s"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="%s" alt="%s" loading="lazy" />%s</div></div>%s</figure></div>' % (' ah-narrow' if narrow else '', DIMG % name, alt, pn, cap(c))
+def anat(id_, name, label):
+    """Anatomy figure with side markers (DK.callouts, as on the Hero banner Design page); the markers are placed by JS_EX."""
+    return '<div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout hb-anat" id="%s" role="img" aria-label="%s"><div class="ds-callout__art"><img id="%s-img" src="%s" alt="" /></div></div></figure></div>' % (id_, label, id_, DIMG % name)
 
 
-D = []
-D.append(('anatomy', '<h2 class="ds-h2">Anatomy</h2>' + desc('A card is built from an image holder and a footer. Every part except the image is optional. The numbers match the list below.') +
-          anat('anatomy', 'Anatomy of an Article Highlight card: 1 image, 2 badge, 3 preheadline, 4 title, 5 supporting text, 6 list, 7 supporting text 2, 8 links, 9 date, 10 action link or button', [('1', 93, 22), ('2', 14, 4.4), ('3', 96, 44.5), ('4', 96, 48), ('5', 96, 53), ('6', 96, 63), ('7', 96, 76), ('8', 96, 86.7), ('9', 96, 92), ('10', 96, 95.5)], 'Figma: ' + fig_link(FIG_AH + '24811-111461', 'Article Highlight Card Prototypes for Anatomy', 'large')) +
-          '<ul class="hb-legend">' + ''.join('<li><span class="badge-number badge-number--md" aria-hidden="true">%s</span><p class="ds-desc"><strong>%s.</strong> %s</p></li>' % x for x in [
+def legend(items):
+    return '<ul class="hb-legend">' + ''.join('<li><span class="badge-number badge-number--md" aria-hidden="true">%s</span><p class="ds-desc"><strong>%s.</strong> %s</p></li>' % x for x in items) + '</ul>'
+
+
+def figref(url, text):
+    return desc('Figma: ' + fig_link(url, text, 'large') + '.')
+
+
+E = []
+E.append(('anatomy', '<h2 class="ds-h2">Anatomy</h2>' + desc('A card is built from an image holder and a footer. Every part except the image is optional. Figma: ' + fig_link(FIG_AH + '24811-111461', 'Article Highlight Card Prototypes for Anatomy', 'large') + '.') +
+          anat('an-card', 'anatomy', 'Anatomy of an Article Highlight card: 1 image, 2 badge, 3 preheadline, 4 title, 5 supporting text, 6 list, 7 supporting text 2, 8 links, 9 date, 10 action link or button') +
+          legend([
               ('1', 'Image', 'The image, a color or a video, with an optional overlay, brand elements and logo.'),
               ('2', 'Badge', 'A short label on the image, for example “Nyhet”.'),
               ('3', 'Preheadline', 'Also called eyebrow. It gives context.'),
@@ -221,22 +229,44 @@ D.append(('anatomy', '<h2 class="ds-h2">Anatomy</h2>' + desc('A card is built fr
               ('7', 'Supporting text 2', 'Body text after the list.'),
               ('8', 'Links', 'Extra links, with or without icons, stacked or divided.'),
               ('9', 'Date', 'A date or another short, related note.'),
-              ('10', 'Action link or button', 'The call to action of the card.')]) + '</ul>' +
-         '<h3 class="ds-h3 ds-group" id="brand-elements">Brand elements</h3>' + desc('Brand elements sit on the image, never in the footer. They are part of the picture, so they follow the image when it is cropped. The two examples below show a campaign concept and a discount with a brand logo.') +
-         anat('brand-powerdeal', 'A Power Deal image: 1 Power Deal logo, 2 Power Deal border', [('1', 6, 20), ('2', 72, 9), ('2', 40, 93)], 'Power Deal. Figma: ' + fig_link(FIG_AH + '24811-112608', 'Brand Elements 1', 'large')) +
-         '<ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>Power Deal logo.</strong> The logo of the Power Deal concept.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">2</span><p class="ds-desc"><strong>Power Deal border.</strong> The graphic stripes at the top and bottom edge. Use it together with the logo.</p></li></ul>' +
-         anat('brand-discount', 'An image with a discount and a brand logo: 1 discount, 2 brand logo', [('1', 28, 33), ('2', 79, 79)], 'Discount and brand logo. Figma: ' + fig_link(FIG_AH + '24811-112612', 'Brand Elements 2', 'large')) +
-         '<ul class="hb-legend"><li><span class="badge-number badge-number--md" aria-hidden="true">1</span><p class="ds-desc"><strong>Discount.</strong> A large, red campaign message, for example a percentage.</p></li><li><span class="badge-number badge-number--md" aria-hidden="true">2</span><p class="ds-desc"><strong>Brand logo.</strong> For brand identity. It sits bottom right.</p></li></ul>'))
+              ('10', 'Action link or button', 'The call to action of the card.')]) +
+          '<h3 class="ds-h3 ds-group" id="brand-elements">Brand elements</h3>' + desc('Brand elements sit on the image, never in the footer. They are part of the picture, so they follow the image when it is cropped. The two examples show a campaign concept and a discount with a brand logo.') +
+          anat('an-pd', 'brand-powerdeal', 'Anatomy of a Power Deal image: 1 Power Deal logo, 2 Power Deal border') +
+          legend([('1', 'Power Deal logo', 'The logo of the Power Deal concept.'), ('2', 'Power Deal border', 'The graphic stripes at the top and bottom edge. Use it together with the logo.')]) +
+          figref(FIG_AH + '24811-112608', 'Brand Elements 1') +
+          anat('an-disc', 'brand-discount', 'Anatomy of a discount image: 1 discount, 2 brand logo') +
+          legend([('1', 'Discount', 'A large, red campaign message, for example a percentage.'), ('2', 'Brand logo', 'For brand identity. It sits bottom right.')]) +
+          figref(FIG_AH + '24811-112612', 'Brand Elements 2')))
 
-D.append(('variants', '<h2 class="ds-h2">Variants</h2>' + desc('A card can be used in many ways, depending on how the settings are combined. The grid shows Large cards (left) and Small cards (right) with the same content, in four setups with and without footer padding, border and badge. See ' + a('ah-group-card-widget-storyblok.html#footer', '6. Footer') + ' for the settings. Figma: ' + fig_link(FIG_AH + '549-27485', 'AH Highlight Card Variants', 'large') + '.') +
+E.append(('variants', '<h2 class="ds-h2">Variants</h2>' + desc('A card can be used in many ways, depending on how the settings are combined. The grid shows Large cards (left) and Small cards (right) with the same content, in four setups with and without footer padding, border and badge. See ' + a('ah-group-card-widget-storyblok.html#footer', '6. Card footer') + ' for the settings. Figma: ' + fig_link(FIG_AH + '549-27485', 'AH Highlight Card Variants', 'large') + '.') +
           '<div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="%s" alt="Four rows of cards. Each row shows two Large and two Small cards with an image, a preheadline, a title, a supporting text and a text link" loading="lazy" /></div></div></figure></div>' % (DIMG % 'variants')))
+
+E.append(('usage', '<h2 class="ds-h2">Usage</h2>' + desc('Guidance taken from the settings of the widget. See the ' + a('ah-group-card-widget-storyblok.html', 'Storyblok tab') + ' for each field.') +
+          '<h3 class="ds-h3 ds-group">Do</h3>' + li(['Use Footer Padding, Footer Border and Card Size in the same way on every card in a group or a concept.', 'Use Card Size Small in a layout with many cards.', 'Use the action link in the first place; keep the button for the one action that must stand out.', 'Keep a card that leads to an article or a campaign direct: a short title and little text.', 'Use Full Stroke Border when the image could blend into the page background.']) +
+          '<h3 class="ds-h3 ds-group">Do not</h3>' + li(['Mix cards with and without Footer Padding in one group.', 'Use long lists in a card. Cards in a row get the same height, so one tall card makes the others tall.', 'Turn on Active Card and add extra links on the same card.', 'Put brand elements in the footer. They belong on the image.'])))
+
+JS_EX = r"""
+  function box(img, W, H, x, y) { return function () { var r = img.getBoundingClientRect(); return { left: r.left + r.width * x / W, top: r.top + r.height * y / H, width: 0, height: 0 }; }; }
+  function col(img) { return function (r) { return r.left - (img.getBoundingClientRect().left - 36); }; }   /* every badge in a figure sits in one column, 24px gap between badge and picture */
+  function colR(img) { return function (r) { return img.getBoundingClientRect().right + 36 - (r.left + r.width); }; }
+  function figs() {
+    var a = $('#an-card-img'), p = $('#an-pd-img'), d = $('#an-disc-img');
+    var AW = 589, AH = 816, BW = 589, BH = 331, ys = [165, 36, 363, 393, 435, 515, 620, 707, 751, 779], xs = [10, 25, 25, 25, 25, 25, 25, 25, 25, 25];
+    DK.callouts($('#an-card'), ys.map(function (y, i) { return { n: String(i + 1), box: box(a, AW, AH, xs[i], y), side: 'left', len: col(a) }; }));
+    DK.callouts($('#an-pd'), [{ n: '1', box: box(p, BW, BH, 50, 80), side: 'left', len: col(p) }, { n: '2', box: box(p, BW, BH, 300, 8), side: 'left', len: col(p) }, { n: '2', box: box(p, BW, BH, 200, 322), side: 'left', len: col(p) }]);
+    DK.callouts($('#an-disc'), [{ n: '1', box: box(d, BW, BH, 190, 170), side: 'left', len: col(d) }, { n: '2', box: box(d, BW, BH, 520, 285), side: 'right', len: colR(d) }]);
+  }
+  var imgs = $$('.hb-anat img'), left = imgs.length;
+  imgs.forEach(function (i) { if (i.complete) left--; else i.addEventListener('load', function () { if (--left === 0) figs(); }); });
+  if (left === 0) figs();
+"""
 
 C = dict(
     slug=SLUG, title='Article Highlight Group Card', eyebrow='Components · Cards',
     lead='Cards that promote articles, campaigns and brands, placed in a grid or in a carousel. A card can have an image, logos and graphics, badges, text, links and a button.',
     select_menu=False, css=['badge', 'button', 'divider', 'inline-link'], style=STYLE,
     pages=[
-        dict(kind='design', suffix='', label='Design', lead='The anatomy of the card, the brand elements and the ways to combine the settings into variants. Figma: ' + fig_link(FIG_AH + '549-27485', 'Variants') + ', ' + fig_link(FIG_AH + '24811-111461', 'Anatomy') + '.', secs=D),
+        dict(kind='ex', suffix='', label='Examples & Guidelines', lead='The anatomy of the card, the brand elements, the variants and when to use them.', secs=E, js=JS_EX),
         dict(kind='sb', suffix='-storyblok', label='Storyblok', lead='How an editor adds and sets up the AH Group widget (Article Highlight Group) in Storyblok, and the settings of the AH Group Card. The numbers on the screenshots match the numbers in the headings.', secs=S),
     ])
 

@@ -2672,7 +2672,7 @@
       "file_type": "code",
       "norm_label": "init()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L188"
+      "source_location": "L189"
     },
     {
       "id": "components_js_tabs_pagenav",
@@ -2900,7 +2900,7 @@
       "file_type": "code",
       "norm_label": "glide()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L145"
+      "source_location": "L146"
     },
     {
       "id": "components_js_tabs_swipe_max",
@@ -2912,7 +2912,7 @@
       "file_type": "code",
       "norm_label": "max()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L137"
+      "source_location": "L138"
     },
     {
       "id": "components_js_tabs_swipe_release",
@@ -2924,7 +2924,7 @@
       "file_type": "code",
       "norm_label": "release()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L174"
+      "source_location": "L175"
     },
     {
       "id": "components_js_tabs_swipe_render",
@@ -2936,7 +2936,7 @@
       "file_type": "code",
       "norm_label": "render()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L138"
+      "source_location": "L139"
     },
     {
       "id": "components_js_tabs_swipe_soft",
@@ -2948,7 +2948,7 @@
       "file_type": "code",
       "norm_label": "soft()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L143"
+      "source_location": "L144"
     },
     {
       "id": "components_js_tabs_swipe_stop",
@@ -2960,7 +2960,7 @@
       "file_type": "code",
       "norm_label": "stop()",
       "source_file": "components/js/tabs.js",
-      "source_location": "L144"
+      "source_location": "L145"
     },
     {
       "id": "components_js_tabs_token",
@@ -19995,7 +19995,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L196",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
@@ -20007,7 +20007,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L199",
+      "source_location": "L201",
       "weight": 1.0
     },
     {
@@ -20019,7 +20019,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L206",
+      "source_location": "L208",
       "weight": 1.0
     },
     {
@@ -20031,24 +20031,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L207",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
       "source": "components_js_tabs_init",
       "target": "components_js_tabs_pagenav",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "components/js/tabs.js",
-      "source_location": "L212",
-      "weight": 1.0
-    },
-    {
-      "source": "components_js_tabs_init",
-      "target": "components_js_tabs_swipe",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -20067,7 +20055,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L219",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -20259,7 +20247,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L154",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -20271,7 +20259,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L180",
+      "source_location": "L181",
       "weight": 1.0
     },
     {
@@ -20283,7 +20271,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L181",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -23655,7 +23643,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L138",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -23667,7 +23655,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L143",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -23679,7 +23667,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/js/tabs.js",
-      "source_location": "L144",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -27722,7 +27710,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/js/tabs.js",
-      "source_location": "L188",
+      "source_location": "L189",
       "weight": 1.0
     },
     {
@@ -27854,7 +27842,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/js/tabs.js",
-      "source_location": "L137",
+      "source_location": "L138",
       "weight": 1.0
     },
     {
@@ -27865,7 +27853,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/js/tabs.js",
-      "source_location": "L145",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -34573,6 +34561,18 @@
       "weight": 1.0
     },
     {
+      "source": "components_js_tabs_init",
+      "target": "components_js_tabs_swipe",
+      "relation": "indirect_call",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "argument",
+      "source_file": "components/js/tabs.js",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
       "source": "components_js_tabs_pagenav",
       "target": "components_js_tabs_pagenav_onscroll",
       "relation": "indirect_call",
@@ -34605,7 +34605,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "components/js/tabs.js",
-      "source_location": "L183",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -34617,7 +34617,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "components/js/tabs.js",
-      "source_location": "L180",
+      "source_location": "L181",
       "weight": 1.0
     },
     {
@@ -34629,7 +34629,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "components/js/tabs.js",
-      "source_location": "L140",
+      "source_location": "L141",
       "weight": 1.0
     },
     {

@@ -5,6 +5,10 @@
      sida som använder den — redigera ENDAST här, ändringen slår
      igenom automatiskt i alla sidor som inkluderar filen.
 
+     Utseendet (CSS) ligger i /components/css/header.css, som denna partial
+     länkar. Redigera headerns CSS ENDAST där, aldrig i en sidas <style>.
+     Sökpanelen (partials/search-panel.html) laddas sist i denna fil.
+
      Inkluderas för närvarande i:
        - /index.html
        - /template.html
@@ -18,6 +22,7 @@
        - /mypages/addressbook.html
 ════════════════════════════════════════════════════════════ -->
 
+<link rel="stylesheet" href="/components/css/header.css">   <!-- the header styling: single source, was copied into every page -->
 <link rel="stylesheet" href="/components/css/input.css">
 <style>
   /* Header search = ECO input (components/css/input.css, skill eco-input). These lines only turn off the old per-page

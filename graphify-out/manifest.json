@@ -24,9 +24,9 @@
     "semantic_hash": "b35fdae09cd0b4f417e3b6b4401500ff"
   },
   "CLAUDE.md": {
-    "mtime": 1793884853.7549841,
-    "seen": 1793884875.8638191,
-    "ast_hash": "d1beebc37cbc834936dc090d9696c800",
+    "mtime": 1793914263.6108804,
+    "seen": 1793914272.6981828,
+    "ast_hash": "639870bf81c7024662ff073d6703d6b9",
     "semantic_hash": ""
   },
   "README.md": {
@@ -36,33 +36,33 @@
     "semantic_hash": "da37a2e50692bbc364167b9c925b8c18"
   },
   "e-handelspartner.html": {
-    "mtime": 1793883122.8856566,
-    "seen": 1793884636.846966,
-    "ast_hash": "05e1488b42413ea7aa093706acbd162b",
+    "mtime": 1793914189.9222286,
+    "seen": 1793914272.698192,
+    "ast_hash": "b64e8ef6c94e1a3d172d235b12835bab",
     "semantic_hash": ""
   },
   "feature-comparison-roles.html": {
-    "mtime": 1793883122.8922215,
-    "seen": 1793884636.847161,
-    "ast_hash": "dba7b4c1f21a9c991b0265142bb4a9aa",
+    "mtime": 1793914190.0127056,
+    "seen": 1793914272.698389,
+    "ast_hash": "806de8cbb60b2ae0dceec4735c8a9783",
     "semantic_hash": ""
   },
   "feature-comparison-roles_backup.html": {
-    "mtime": 1793883122.8824942,
-    "seen": 1793884636.847162,
-    "ast_hash": "682f0864ec497e929c2bff3d65f9b63d",
+    "mtime": 1793914189.8775034,
+    "seen": 1793914272.698389,
+    "ast_hash": "90b228c6fd2698be8ec9a425b506d543",
     "semantic_hash": ""
   },
   "feature-comparison.html": {
-    "mtime": 1793883122.8776221,
-    "seen": 1793884636.847163,
-    "ast_hash": "cf8393990528df7fae11bc78b31860d9",
+    "mtime": 1793914189.7887347,
+    "seen": 1793914272.69839,
+    "ast_hash": "40eacecb3f24b9d2b19607b2f3ecbf43",
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1793883122.8808568,
-    "seen": 1793884636.8471968,
-    "ast_hash": "6c8719ec7765a7d7136f39641a1e73bd",
+    "mtime": 1793914189.8504026,
+    "seen": 1793914272.698428,
+    "ast_hash": "94d1564668af065e4bcf5793a37a8f07",
     "semantic_hash": ""
   },
   "mypages/partials/footer.html": {
@@ -72,9 +72,9 @@
     "semantic_hash": "c78956d32d7f7dc603d046a02c2c666a"
   },
   "mypages/partials/header.html": {
-    "mtime": 1793876234.6095457,
-    "seen": 1793876268.609879,
-    "ast_hash": "3457039bbab81465f9a2b379d941fa5f",
+    "mtime": 1793914263.6746547,
+    "seen": 1793914272.698439,
+    "ast_hash": "17254ac6dd0f3e3335af14126f9d4503",
     "semantic_hash": ""
   },
   "mypages/partials/main-menu.html": {
@@ -84,27 +84,27 @@
     "semantic_hash": "737f28fd415c6c5cc01f830c6137519b"
   },
   "reviews.html": {
-    "mtime": 1793883122.8906415,
-    "seen": 1793884636.847209,
-    "ast_hash": "dd010a89726a77c04cd45e4e2803dfa4",
+    "mtime": 1793914189.979483,
+    "seen": 1793914272.698445,
+    "ast_hash": "c90cad1680dbf094e7ed9db4ba09438a",
     "semantic_hash": ""
   },
   "reviews_backup_1.html": {
-    "mtime": 1793883122.8797328,
-    "seen": 1793884636.84721,
-    "ast_hash": "51f91ed89afa69606011909e8be18716",
+    "mtime": 1793914189.828362,
+    "seen": 1793914272.698446,
+    "ast_hash": "d6a422819fce17d0c1daa5c9874b96ab",
     "semantic_hash": ""
   },
   "reviews_backup_2.html": {
-    "mtime": 1793883122.8938873,
-    "seen": 1793884636.8472111,
-    "ast_hash": "c8437f6eef746a08992acf789c79e068",
+    "mtime": 1793914190.0398855,
+    "seen": 1793914272.698446,
+    "ast_hash": "7576942e2b67a0f6cc62cb144e270d03",
     "semantic_hash": ""
   },
   "template.html": {
-    "mtime": 1793883122.888333,
-    "seen": 1793884636.847213,
-    "ast_hash": "3ed3040bfbdd62c8d4bd9f644e545081",
+    "mtime": 1793914189.9360476,
+    "seen": 1793914272.698449,
+    "ast_hash": "c4c7c292c0bf143e54d8efd31dd86d49",
     "semantic_hash": ""
   },
   ".claude/skills/links-guide/SKILL.md": {
@@ -126,9 +126,9 @@
     "semantic_hash": "edef9947f0673e5a282a4d2c02d369ae"
   },
   "mypages/addressbook.html": {
-    "mtime": 1793883122.9050674,
-    "seen": 1793884636.8471968,
-    "ast_hash": "730ef71a4b2711ac7cbc227602b96e27",
+    "mtime": 1793914190.1367433,
+    "seen": 1793914272.6984289,
+    "ast_hash": "e23b5ae7034e271fa641db4959f47bf1",
     "semantic_hash": ""
   },
   "mypages/cookie-banner.html": {
@@ -144,9 +144,9 @@
     "semantic_hash": "3cf1057ea0c9a2aff08ce6af5ab2b760"
   },
   "mypages/dashboard_test.html": {
-    "mtime": 1793883122.8976762,
-    "seen": 1793884636.8472,
-    "ast_hash": "c2698ae9e9edb365fcc65bcfe744f737",
+    "mtime": 1793914190.0764034,
+    "seen": 1793914272.698434,
+    "ast_hash": "78f83ad09488dc4c97380e2debc06888",
     "semantic_hash": ""
   },
   "mypages/partials/account-nav-drawer.html": {
@@ -210,10 +210,10 @@
     "semantic_hash": ""
   },
   ".claude/skills/eco-elevation/SKILL.md": {
-    "mtime": 1792662620.9488082,
-    "seen": 1792673809.9189062,
-    "ast_hash": "3870b403e8e296ae24bfdae21c011209",
-    "semantic_hash": "3870b403e8e296ae24bfdae21c011209"
+    "mtime": 1793888849.6769767,
+    "seen": 1793914272.698155,
+    "ast_hash": "8a93ceed76c610103a31c722baf79467",
+    "semantic_hash": ""
   },
   ".claude/skills/eco-inline-link/SKILL.md": {
     "mtime": 1793714005.4797227,
@@ -228,9 +228,9 @@
     "semantic_hash": "c351769994d6d57772a0d532ff8675ef"
   },
   ".claude/skills/eco-input/SKILL.md": {
-    "mtime": 1793876255.3031607,
-    "seen": 1793876268.609601,
-    "ast_hash": "27e34de9a3efa860ad66c904bdce9ee9",
+    "mtime": 1793886171.4486158,
+    "seen": 1793914272.6981592,
+    "ast_hash": "9aba09a6b4fae4fee1647ed196c1f956",
     "semantic_hash": ""
   },
   ".claude/skills/eco-modal-ecom/SKILL.md": {
@@ -324,27 +324,27 @@
     "semantic_hash": "09fc81aef67d494c01957ac06e42fcf3"
   },
   "mypages/mypages-template.html": {
-    "mtime": 1793883122.8959227,
-    "seen": 1793884636.847203,
-    "ast_hash": "391f7e771d4beaac29b43b8a97ed92f8",
+    "mtime": 1793914190.0539756,
+    "seen": 1793914272.6984372,
+    "ast_hash": "db65f1c5e82a55c20d95cc1caa469ba4",
     "semantic_hash": ""
   },
   "mypages/users-dashboard.html": {
-    "mtime": 1793883122.9220254,
-    "seen": 1793884636.8472068,
-    "ast_hash": "93f87b2a0a9317a94d43d92d76b0459c",
+    "mtime": 1793914190.1550817,
+    "seen": 1793914272.698443,
+    "ast_hash": "e973e8be942ef25f8cd2ba06e264ed3d",
     "semantic_hash": ""
   },
   "mypages/users.html": {
-    "mtime": 1793883122.9036627,
-    "seen": 1793884636.847208,
-    "ast_hash": "1205bb40068c369920b16a489292eaeb",
+    "mtime": 1793914190.1151094,
+    "seen": 1793914272.698443,
+    "ast_hash": "a609c6641f986643cb17110db0450ae7",
     "semantic_hash": ""
   },
   "mypages/users_V1.html": {
-    "mtime": 1793883122.8994853,
-    "seen": 1793884636.847208,
-    "ast_hash": "ef3a9d2cf4ae456a4b042319c6f0b482",
+    "mtime": 1793914190.0940046,
+    "seen": 1793914272.6984441,
+    "ast_hash": "d6660771d404b3f8678aea77678be143",
     "semantic_hash": ""
   },
   "tokens/_test.html": {
@@ -726,9 +726,9 @@
     "semantic_hash": "ca00af269a722211f54e18d24dcb41e0"
   },
   "components/js/tabs.js": {
-    "mtime": 1793884830.9007807,
-    "seen": 1793884875.8636758,
-    "ast_hash": "4bc3ab96d6948940abb1f79bed4c69f8",
+    "mtime": 1793884947.2053766,
+    "seen": 1793914272.698039,
+    "ast_hash": "79b0fdca7d6efc689483b85e7d31c5c6",
     "semantic_hash": ""
   },
   ".claude/skills/eco-tabs/SKILL.md": {
@@ -786,9 +786,9 @@
     "semantic_hash": "a04487ba4a9cd23e3584b962a7177836"
   },
   "hero-erbjudandedagar.html": {
-    "mtime": 1793883122.8843126,
-    "seen": 1793884636.8471959,
-    "ast_hash": "c145a0c5415a9ae341a32c8638929a4f",
+    "mtime": 1793914189.8913355,
+    "seen": 1793914272.698427,
+    "ast_hash": "608d2747227b713a8bc5da8a0bf4fe3b",
     "semantic_hash": ""
   },
   "eco-design-system/components/badge-basic-code.html": {
@@ -1596,9 +1596,9 @@
     "semantic_hash": "e49975074ceb0fac4600bdf3f1d0e46d"
   },
   "sticky-cta-example.html": {
-    "mtime": 1793883122.8785625,
-    "seen": 1793884636.847212,
-    "ast_hash": "63bb9f6e42baaa32526b20753c8f0510",
+    "mtime": 1793914189.8024225,
+    "seen": 1793914272.698448,
+    "ast_hash": "27ebb8f5547c4861e185198a86a6d527",
     "semantic_hash": ""
   },
   "eco-design-system/gen/bc.py": {
@@ -2496,15 +2496,15 @@
     "semantic_hash": ""
   },
   "eco-design-system/gen/gen_ah_group_card_widget.py": {
-    "mtime": 1793869925.7931523,
-    "seen": 1793875135.195477,
-    "ast_hash": "ecf58c480129636f704c8f35624aa963",
+    "mtime": 1793914044.79122,
+    "seen": 1793914272.6980538,
+    "ast_hash": "a5942481a0f5b593a747d1901b9a047e",
     "semantic_hash": ""
   },
   "eco-design-system/components/ah-group-card-widget-storyblok.html": {
-    "mtime": 1793869925.861728,
-    "seen": 1793875135.195638,
-    "ast_hash": "40f73dd3fc16e722444769af986ba32b",
+    "mtime": 1793914044.9033659,
+    "seen": 1793914272.6982138,
+    "ast_hash": "7d7761c22e8ad649e7717cd4a2a06dcc",
     "semantic_hash": ""
   },
   "eco-design-system/gen/ah_pins.py": {
@@ -2718,9 +2718,9 @@
     "semantic_hash": ""
   },
   "components/icon-library/icon-library-data.js": {
-    "mtime": 1793707675.9542024,
-    "seen": 1793708796.274972,
-    "ast_hash": "1b854b8c43c70ba58c109bf4f9f325af",
+    "mtime": 1793887892.9088912,
+    "seen": 1793914272.698025,
+    "ast_hash": "f44b321dd26374597d414827979646f6",
     "semantic_hash": ""
   },
   "components/js/icon-library.js": {
@@ -2778,9 +2778,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/gen/icons-material.txt": {
-    "mtime": 1793707641.7571578,
-    "seen": 1793708796.275296,
-    "ast_hash": "136bfd8bfc0ef8a4548f831fa26c17f6",
+    "mtime": 1793887892.8111932,
+    "seen": 1793914272.698349,
+    "ast_hash": "f314a04c28421ec78defe44b148ca6e0",
     "semantic_hash": ""
   },
   ".claude/skills/eco-prototype-guide/SKILL.md": {
@@ -2790,15 +2790,21 @@
     "semantic_hash": ""
   },
   "eco-design-system/components/ah-group-card-widget.html": {
-    "mtime": 1793869925.8573058,
-    "seen": 1793875135.195638,
-    "ast_hash": "b63c0ca18f9c5c8979565bff781639ce",
+    "mtime": 1793914044.8970056,
+    "seen": 1793914272.698215,
+    "ast_hash": "f4d8632c6d63f18e65c97f0f89079708",
     "semantic_hash": ""
   },
   "search.html": {
-    "mtime": 1793884831.0109205,
-    "seen": 1793884875.864078,
-    "ast_hash": "24dc502a8b5a98f4195322c05f9f9972",
+    "mtime": 1793914189.9501588,
+    "seen": 1793914272.698447,
+    "ast_hash": "d5070bdae8230900ade9068b86230db5",
+    "semantic_hash": ""
+  },
+  "mypages/partials/search-panel.html": {
+    "mtime": 1793889172.066441,
+    "seen": 1793914272.698441,
+    "ast_hash": "473aa9367fa3605d4a5aec3ca4b31d13",
     "semantic_hash": ""
   }
 }

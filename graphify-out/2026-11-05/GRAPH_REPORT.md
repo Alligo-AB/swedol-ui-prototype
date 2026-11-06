@@ -1,12 +1,12 @@
 # Graph Report - swedol-ui-prototype  (2026-11-05)
 
 ## Corpus Check
-- 180 files · ~2,284,140 words
+- 180 files · ~2,284,156 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
 - 1472 nodes · 2413 edges · 122 communities (92 shown, 21 thin omitted)
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 118 edges (avg confidence: 0.83)
+- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 119 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
@@ -586,10 +586,10 @@ Nodes (18): 0. Understand the task — and which starting point you have, 10. Ru
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `CLAUDE.md (project design guidelines)` connect `CLAUDE.md (project design guidelines)` to `eco-add-component skill`, `Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)`, `eco-button skill`, `eco-card-animation/SKILL.md`, `eco-doc-page skill (docs page structure)`, `Page templates (template.html, mypages-template.html)`, `eco-tabs/SKILL.md`, `Table (ECO Design System) — first version`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Why does `eco-doc-page skill (docs page structure)` connect `eco-doc-page skill (docs page structure)` to `eco-add-component skill`, `Component pages: template and three-page split`, `Foundation pages`, `Building blocks, spacing and cards`, `eco-card-animation/SKILL.md`, `Header art`, `CLAUDE.md (project design guidelines)`, `Component families: what is specific to each`, `storyblok-widgets.md`, `file-map.md`, `history.md`, `eco-tabs/SKILL.md`, `Table (ECO Design System) — first version`, `Docs shell: navigation, hub, footer, frame`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Why does `CLAUDE.md (project design guidelines)` connect `CLAUDE.md (project design guidelines)` to `eco-add-component skill`, `Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)`, `eco-button skill`, `eco-card-animation/SKILL.md`, `eco-doc-page skill (docs page structure)`, `Page templates (template.html, mypages-template.html)`, `eco-tabs/SKILL.md`, `Table (ECO Design System) — first version`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Why does `dismiss()` connect `notifications.js` to `doc-kit.js`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **What connects `ARROW`, `G`, `PAGE` to the rest of the system?**
