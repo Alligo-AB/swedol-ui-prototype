@@ -169,7 +169,7 @@ lib_cats = '<h2 class="ds-h2">Categories</h2>' + desc('Icons are grouped in two 
 lib = [('search-the-library', lib_s, False), ('categories', lib_cats)]
 
 # ================================================================ Add an icon
-add_1 = '<h2 class="ds-h2">Step 1: Find an icon</h2>' + desc('Material Symbols consolidates over 2,500 glyphs in a single font file with a wide range of design variants.') + \
+add_1 = '<h2 class="ds-h2">Step 1: Find an icon</h2>' + desc('Material Symbols consolidates over 3,700 glyphs in a single font file with a wide range of design variants.') + \
     desc('Get started by finding the icon on the <a class="inline-link inline-link--large inline-link--secondary" href="https://fonts.google.com/icons" target="_blank" rel="noopener">Google Fonts icon site</a> or in the Figma app. Check the ' + link_large('icon-library.html', 'Library') + ' first: the icon may already exist.') + \
     desc('If your needs are not met by Material Symbols, reach out to the Design Systems team about custom solutions.')
 add_2 = '<h2 class="ds-h2">Step 2: Add the icon to our Figma kit</h2>' + desc('All of our icons are stored in <a class="inline-link inline-link--large inline-link--secondary" href="' + FIGMA + '" target="_blank" rel="noopener">our ALLIGO ECO Design System Figma file</a>, in the section “Icons”. Designers with edit access in our Figma account can add and edit icons.') + \
