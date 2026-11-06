@@ -28,7 +28,7 @@
   .sp__camera { display: none; }
   @media (max-width: 639px) { .sp__camera { display: flex; } }   /* Figma: camera only on xs */
 
-  .sp__suggest { display: flex; gap: 8px; padding: 8px 16px 0;   /* + the 8px under the search field = 16px between field and tiles */ overflow-x: auto; flex-shrink: 0; scrollbar-width: none; }
+  .sp__suggest { display: flex; gap: 8px; padding: 16px 16px 0;   /* xs/sm: 16px here, md+ below uses 8px (the bar's own bottom padding adds the rest) */ overflow-x: auto; flex-shrink: 0; scrollbar-width: none; }
   .sp__suggest::-webkit-scrollbar { display: none; }
   .sp__suggest .tile-link { flex-shrink: 0; }
   /* swipe: the row has class swipe-row (tabs.css + tabs.js: glide + rubber band like the tab bars) */
