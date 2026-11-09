@@ -1217,10 +1217,8 @@
     }
     .icon-btn.icon-btn--close .ms { font-size: 20px; color: var(--color-icon-primary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
     .icon-btn.icon-btn--close:hover { background: var(--color-surface-opacity-black-05); }
-    .delete-modal__btn-confirm, .bankid-modal__open-btn { flex: 1; }
-    .delete-modal__btn-cancel, .bankid-modal__cancel { flex-shrink: 0; }
-    .bankid-modal__open-btn { gap: 8px; }
-    .bankid-modal__open-btn img { width: 20px; height: 20px; object-fit: contain; }
+    .delete-modal__btn-confirm { flex: 1; }
+    .delete-modal__btn-cancel { flex-shrink: 0; }
 
     /* OK — Secondary xs */
 
@@ -3245,47 +3243,7 @@
     @media (min-width: 769px) { .upload-skip-btn { font-size: 17px; line-height: 24px; } }
     .upload-skip-btn:hover { color: var(--color-text-primary); }
 
-    /* ── BankID signing modal ─────────────────────────── */
-    .bankid-modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 10000;
-      opacity: 0; pointer-events: none;
-      transition: opacity var(--duration-medium-2) var(--ease-standard);
-    }
-    .bankid-modal-overlay.is-open { opacity: 1; pointer-events: all; }
-    .bankid-modal {
-      position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, calc(-50% + 12px));
-      z-index: 10001; background: #fff; width: 440px;
-      max-width: calc(100vw - 32px); padding: 24px;
-      box-shadow: var(--elevation-b-100);
-      display: flex; flex-direction: column;
-      opacity: 0; pointer-events: none;
-      transition: opacity var(--duration-medium-2) var(--ease-decelerate-emphasized),
-                  transform var(--duration-medium-2) var(--ease-decelerate-emphasized);
-    }
-    .bankid-modal.is-open { opacity: 1; pointer-events: all; transform: translate(-50%, -50%); }
-    .bankid-modal__header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
-    .bankid-modal__title {
-      flex: 1; font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: 0px;
-      color: #000; font-feature-settings: 'ss02' 1, 'ss03' 1; padding-top: 2px;
-    }
-    .bankid-modal__body {
-      display: flex; flex-direction: column; align-items: center; gap: 16px;
-      text-align: center; padding-bottom: 32px;
-    }
-    .bankid-logo-large { width: 72px; height: 72px; object-fit: contain; }
-    .bankid-modal__desc {
-      font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px;
-      color: var(--color-text-secondary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) { .bankid-modal__desc { font-size: 17px; line-height: 24px; } }
-    .bankid-modal__desc strong { font-weight: 600; color: var(--color-text-primary); }
-    .bankid-modal__footer { display: flex; gap: 8px; align-items: center; }
-    .bankid-waiting {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 16px; padding: 8px 0 32px; text-align: center;
-    }
+    /* BankID spinner: used by the signing modal (#sign-modal) */
     .bankid-spinner {
       width: 36px; height: 36px;
       border: 3px solid var(--color-border-primary);
@@ -3293,23 +3251,8 @@
       border-radius: 50%; animation: upload-spin 0.8s linear infinite;
     }
     @keyframes upload-spin { to { transform: rotate(360deg); } }
-    .bankid-waiting__label {
-      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
-      line-height: 20px; letter-spacing: 0.36px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .bankid-waiting__cancel-link {
-      background: transparent; border: none; cursor: pointer;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
-      text-decoration: underline; letter-spacing: 0.28px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; padding: 0;
-    }
-    .bankid-waiting__cancel-link:hover { color: var(--color-text-primary); }
     @media (max-width: 768px) {
       .upload-dropzone { padding: 24px 16px; }
-      .bankid-modal { padding: 16px; }
-      .bankid-modal__title { font-size: 18px; line-height: 22px; }
       .upload-drawer-desc,
       .inline-link--medium,
       .upload-file-chip__name,
@@ -6219,7 +6162,6 @@
     /* ── Upload users ───────────────────────────────── */
     var uploadData = [];
     var uploadHasStore = false;
-    var bankIdTimer = null;
 
     var FAKE_UPLOAD_USERS = [
       { name: 'Sara Lindberg',    email: 'sara.lindberg@exempel.se',    role: 'Standard',      store: true  },
@@ -6324,38 +6266,19 @@
       }, 380);
     }
 
+    /* Store permission on import is signed in the shared BankID modal (#sign-modal, window.signWithBankId) */
     function openBankIdModal() {
+      var count = uploadData.length;
       var storeCount = uploadData.filter(function(u) { return u.store; }).length;
-      document.getElementById('bankid-user-count').textContent = uploadData.length;
-      document.getElementById('bankid-store-count').textContent = storeCount;
-      document.getElementById('bankid-state-init').style.display = '';
-      document.getElementById('bankid-state-waiting').style.display = 'none';
-      document.getElementById('bankid-modal-overlay').classList.add('is-open');
-      document.getElementById('bankid-modal').classList.add('is-open');
-    }
-
-    function closeBankIdModal() {
-      clearTimeout(bankIdTimer);
-      document.getElementById('bankid-modal-overlay').classList.remove('is-open');
-      document.getElementById('bankid-modal').classList.remove('is-open');
-    }
-
-    function startBankIdSigning() {
-      document.getElementById('bankid-state-init').style.display = 'none';
-      document.getElementById('bankid-state-waiting').style.display = '';
-      bankIdTimer = setTimeout(function() {
-        var count = uploadData.length;
-        closeBankIdModal();
-        closeUploadDrawer();
-        setTimeout(function() {
-          showUploadToast('success', count + ' användare importerade', 'Butiksbehörighet aktiverad och signerad med Mobile BankID.');
-        }, 380);
-      }, 3000);
-    }
-
-    function cancelBankIdSigning() {
-      clearTimeout(bankIdTimer);
-      closeBankIdModal();
+      window.signWithBankId({
+        text: 'Du importerar ' + count + ' användare varav ' + storeCount + ' med butiksbehörighet. Signera med BankID för att aktivera butiksbehörigheten.',
+        onSigned: function () {
+          closeUploadDrawer();
+          setTimeout(function() {
+            showUploadToast('success', count + ' användare importerade', 'Butiksbehörighet aktiverad och signerad med Mobilt BankID.');
+          }, 380);
+        }
+      });
     }
 
     function showUploadToast(type, title, message) {
@@ -6425,12 +6348,10 @@
       document.getElementById('help-drawer-panel').classList.remove('is-open');
     }
 
-    /* Escape closes BankID modal, upload drawer, or help drawer */
+    /* Escape closes upload drawer or help drawer (the BankID modal handles its own Escape first) */
     document.addEventListener('keydown', function(e) {
       if (e.key !== 'Escape') return;
-      if (document.getElementById('bankid-modal').classList.contains('is-open')) {
-        cancelBankIdSigning();
-      } else if (document.getElementById('upload-drawer-panel').classList.contains('is-open')) {
+      if (document.getElementById('upload-drawer-panel').classList.contains('is-open')) {
         closeUploadDrawer();
       } else if (document.getElementById('help-drawer-panel').classList.contains('is-open')) {
         closeHelpDrawer();
@@ -6489,7 +6410,7 @@
           <span class="ms">info</span>
           <p class="upload-bankid-notice__text">
             <strong>Signering krävs:</strong>
-            <span id="upload-store-count">0</span> av <span id="upload-total-count">0</span> användare har butiksbehörighet och behöver signeras med Mobile BankID innan de kan aktiveras i butiken.
+            <span id="upload-store-count">0</span> av <span id="upload-total-count">0</span> användare har butiksbehörighet och behöver signeras med Mobilt BankID innan de kan aktiveras i butiken.
           </p>
         </div>
 
@@ -6655,48 +6576,6 @@
 
   </div><!-- /help-drawer-panel -->
 
-  <!-- ── BankID signing modal ───────────────────────── -->
-  <div id="bankid-modal-overlay" class="bankid-modal-overlay" onclick="closeBankIdModal()"></div>
-  <div id="bankid-modal" class="bankid-modal" role="dialog" aria-modal="true" aria-labelledby="bankid-modal-title">
-
-    <!-- State 1: Initiate signing -->
-    <div id="bankid-state-init">
-      <div class="bankid-modal__header">
-        <h2 class="bankid-modal__title" id="bankid-modal-title">Signera med Mobile BankID</h2>
-        <button class="icon-btn icon-btn--close bankid-modal__close" onclick="closeBankIdModal()" aria-label="Stäng">
-          <span class="ms">close</span>
-        </button>
-      </div>
-      <div class="bankid-modal__body">
-        <img class="bankid-logo-large" src="/images/BankId.svg" alt="Mobile BankID" />
-        <p class="bankid-modal__desc">
-          Du importerar <strong id="bankid-user-count">0</strong> användare varav <strong id="bankid-store-count">0</strong> med butiksbehörighet.<br><br>
-          Öppna BankID-appen på din mobil och signera för att bekräfta import och aktivera butiksbehörigheten.
-        </p>
-      </div>
-      <div class="bankid-modal__footer">
-        <button class="btn btn--blank bankid-modal__cancel" onclick="closeBankIdModal()"><span class="btn__label">Avbryt</span></button>
-        <button class="btn btn--primary bankid-modal__open-btn" onclick="startBankIdSigning()">
-          <img src="/images/BankId.svg" alt="" aria-hidden="true" />
-          <span class="btn__label">Öppna BankID</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- State 2: Waiting for signing -->
-    <div id="bankid-state-waiting" style="display:none">
-      <div class="bankid-modal__header">
-        <h2 class="bankid-modal__title">Väntar på signering</h2>
-      </div>
-      <div class="bankid-waiting">
-        <div class="bankid-spinner"></div>
-        <p class="bankid-waiting__label">Öppna BankID-appen och signera.<br>Sidan uppdateras automatiskt.</p>
-        <button class="bankid-waiting__cancel-link" onclick="cancelBankIdSigning()">Avbryt signering</button>
-      </div>
-    </div>
-
-  </div><!-- /bankid-modal -->
-
   <!-- Delete confirmation modal -->
   <div id="delete-modal-overlay" class="delete-modal-overlay"></div>
   <div id="delete-modal" class="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
@@ -6719,6 +6598,232 @@
       </div>
     </div>
   </div>
+
+  <!-- BankID signing modal (Figma UI Design - My Account 4931:81295, intro step dropped 2026-11-09).
+       One modal for every BankID signing on this page: window.signWithBankId({ text, onSigned }).
+       Used by the step-up guard below ("Inställningar för saldo", "Lägg till användare", "Redigera", "Ta bort")
+       and by the CSV import (store permission). Reuses the page's ECO modal classes (delete-modal*), size Large.
+       Steps: qr → waiting → done | expired. -->
+  <style>
+    @media (min-width: 640px) {   /* Large; height limited to the screen, the panel scrolls (eco-modal-ecom) */
+      .sign-modal { width: 576px; max-height: calc(100dvh - var(--dimension-spacing-space-32)); overflow-y: auto; }
+    }
+    @media (min-width: 769px) { .sign-modal { width: 705px; } }
+    @media (max-width: 639px) {   /* xs Large: fills the screen, buttons at the bottom */
+      .sign-modal { top: 0; left: 0; transform: none; width: 100%; max-width: none; height: 100dvh; max-height: none; }
+      .sign-modal .delete-modal__container, .sign-modal .delete-modal__header-body { flex: 1; }
+    }
+    .sign-modal [data-step] { display: none; width: 100%; flex-direction: column; flex: 1; }
+    .sign-modal[data-current="qr"] [data-step="qr"], .sign-modal[data-current="waiting"] [data-step="waiting"],
+    .sign-modal[data-current="done"] [data-step="done"], .sign-modal[data-current="expired"] [data-step="expired"] { display: flex; }
+    .sign-modal .delete-modal__footer { flex: none; flex-direction: row; }
+    /* Modal buttons are always 32px (eco-modal-ecom): Small below 769px, XSmall from 769px. Needed because the header partial
+       loads components/css/button.css after this page, and its default .btn is Large (48px). Covers the delete modal too. */
+    .delete-modal .btn { --btn-h: 32px; --btn-pad: var(--dimension-spacing-space-4); --btn-tx: 6px; --btn-fs: 14px; --btn-lh: 14px; --btn-ls: 0.42px; --btn-ff: normal; }
+    @media (min-width: 769px) { .delete-modal .btn { --btn-pad: 6px; --btn-tx: var(--dimension-spacing-space-4); --btn-ls: 0.56px; --btn-ff: 'ss02' 1, 'ss03' 1; } }
+    .sign-modal__primary { flex: 1; gap: var(--dimension-spacing-space-4); }
+    .sign-modal__primary img { width: 20px; height: 20px; }
+    /* Desktop shows the QR first. Mobile Base Styling (≤768px) and touch screens (a phone held sideways is 812px wide)
+       put "Öppna BankID" first: you cannot scan your own screen */
+    .sign-only-mobile { display: none !important; }
+    @media (max-width: 768px), (pointer: coarse) { .sign-only-mobile { display: inline-flex !important; } p.sign-only-mobile { display: block !important; } .sign-only-desktop { display: none !important; } }
+    .sign-qr {
+      margin-top: var(--dimension-spacing-space-16); background: var(--color-surface-02);
+      display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16);
+      padding: var(--dimension-spacing-space-24) var(--dimension-spacing-space-16);
+    }
+    .sign-qr__code {
+      background: var(--color-surface-raised-primary); border: 0; padding: var(--dimension-spacing-space-12); cursor: pointer; line-height: 0;
+      outline: 2px solid transparent; outline-offset: 2px;
+    }
+    body.keyboard-nav .sign-qr__code:focus { outline-color: var(--color-border-focus); }
+    .sign-qr__code svg { width: 160px; height: 160px; display: block; }
+    .sign-qr__code rect { fill: var(--color-icon-primary); }
+    .sign-modal__center { text-align: center; margin-top: var(--dimension-spacing-space-16); }
+    .sign-modal__center + .sign-modal__center { margin-top: 0; }
+    .sign-qr__time, .sign-qr__hint {
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px; line-height: 20px; letter-spacing: 0.36px;
+      color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .sign-qr__time { font-variant-numeric: tabular-nums; }
+    .sign-qr__hint { text-align: center; margin-top: var(--dimension-spacing-space-8); }
+    .sign-modal__status { display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16); padding: var(--dimension-spacing-space-24) 0; text-align: center; }
+    .sign-modal__status .ms { font-size: 48px; color: var(--color-surface-success-default); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 48; }
+    .sign-modal .delete-modal__body .inline-link { font-size: inherit; line-height: inherit; }
+    .sign-modal__live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  </style>
+  <div id="sign-modal-overlay" class="delete-modal-overlay"></div>
+  <div id="sign-modal" class="delete-modal sign-modal" role="dialog" aria-modal="true" aria-labelledby="sign-modal-title" aria-describedby="sign-modal-text" data-current="qr" tabindex="-1">
+    <p class="sign-modal__live" id="sign-modal-live" aria-live="polite"></p>
+    <div class="delete-modal__container">
+      <div class="delete-modal__header-body">
+        <div class="delete-modal__header">
+          <div class="delete-modal__header-text">
+            <h2 class="delete-modal__title" id="sign-modal-title">Signera med Mobilt BankID</h2>
+          </div>
+          <button class="icon-btn icon-btn--close" data-sign="cancel" aria-label="Stäng"><span class="ms">close</span></button>
+        </div>
+
+        <div data-step="qr">
+          <p class="delete-modal__body" id="sign-modal-text"></p>
+          <div class="sign-qr">
+            <button type="button" class="sign-qr__code" data-sign="scan" aria-label="QR-kod för BankID. Prototyp: klicka för att simulera skanning"></button>
+            <span class="sign-qr__time">Giltig i <span id="sign-qr-time">3:00</span></span>
+          </div>
+          <p class="delete-modal__body sign-modal__center sign-only-desktop">Starta BankID-appen på din mobil och tryck på ”Skanna QR-kod”.</p>
+          <p class="delete-modal__body sign-modal__center sign-only-desktop">Har du BankID på den här enheten? <a href="#" class="inline-link" data-sign="scan">Öppna BankID</a></p>
+          <p class="delete-modal__body sign-modal__center sign-only-mobile">Har du BankID på en annan enhet? Starta appen där och skanna QR-koden.</p>
+          <p class="sign-qr__hint">Prototyp: klicka på QR-koden för att simulera att du skannar.</p>
+        </div>
+
+        <div data-step="waiting">
+          <div class="sign-modal__status">
+            <div class="bankid-spinner" aria-hidden="true"></div>
+            <p class="delete-modal__body">Skriv in din säkerhetskod i BankID-appen och välj ”Identifiera”.</p>
+          </div>
+        </div>
+
+        <div data-step="done">
+          <div class="sign-modal__status">
+            <span class="ms" aria-hidden="true">check_circle</span>
+            <p class="delete-modal__body">Klart! Du är identifierad.</p>
+          </div>
+        </div>
+
+        <div data-step="expired">
+          <p class="delete-modal__body">Du hann inte signera innan QR-koden slutade gälla. Försök igen.</p>
+        </div>
+      </div>
+
+      <div class="delete-modal__footer" data-step="qr">
+        <button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt</span></button>
+        <button class="btn btn--primary sign-modal__primary sign-only-mobile" data-sign="scan"><img src="/images/BankId.svg" alt="" aria-hidden="true"><span class="btn__label">Öppna BankID</span></button>
+      </div>
+      <div class="delete-modal__footer" data-step="waiting"><button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt</span></button></div>
+      <div class="delete-modal__footer" data-step="expired">
+        <button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt</span></button>
+        <button class="btn btn--primary sign-modal__primary" data-sign="restart"><span class="btn__label">Försök igen</span></button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var TTL = 180;   /* seconds the QR order is valid */
+      var LIVE = { qr: '', waiting: 'Väntar på signering i BankID-appen.', done: 'Klart! Du är identifierad.', expired: 'QR-koden har slutat gälla.' };
+      var m = document.getElementById('sign-modal'), ov = document.getElementById('sign-modal-overlay');
+      var code = m.querySelector('.sign-qr__code'), timeEl = document.getElementById('sign-qr-time');
+      var live = document.getElementById('sign-modal-live'), textEl = document.getElementById('sign-modal-text');
+      var cfg = null, tick = null, wait = null, exitTimer = null;
+      var isOpen = function () { return m.classList.contains('is-open') && !m.classList.contains('is-leaving'); };
+
+      /* Fake QR: 25×25 modules with the three finder squares, new pattern every second like BankID's animated QR */
+      function drawQr() {
+        var n = 25, r = '';
+        function finder(x, y) { return (x < 7 && y < 7) || (x >= n - 7 && y < 7) || (x < 7 && y >= n - 7); }
+        function finderOn(x, y) { var a = x < 7 ? x : x - (n - 7), b = y < 7 ? y : y - (n - 7);
+          return a === 0 || a === 6 || b === 0 || b === 6 || (a > 1 && a < 5 && b > 1 && b < 5); }
+        for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) {
+          var on = finder(x, y) ? finderOn(x, y) : (x === 7 || y === 7 || x === n - 8 || y === n - 8) ? false : Math.random() < 0.5;
+          if (on) r += '<rect x="' + x + '" y="' + y + '" width="1" height="1"/>';
+        }
+        code.innerHTML = '<svg viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true">' + r + '</svg>';
+      }
+
+      function stopTimers() { clearInterval(tick); clearTimeout(wait); tick = wait = null; }
+      function step(s) {
+        m.setAttribute('data-current', s);
+        live.textContent = LIVE[s];
+        stopTimers();
+        if (s === 'qr') {
+          var left = TTL; drawQr(); timeEl.textContent = '3:00';
+          tick = setInterval(function () {
+            left--; drawQr();
+            timeEl.textContent = Math.floor(left / 60) + ':' + ('0' + left % 60).slice(-2);
+            if (left <= 0) step('expired');
+          }, 1000);
+        }
+        if (s === 'waiting') wait = setTimeout(function () { step('done'); }, 2500);
+        if (s === 'done') wait = setTimeout(function () {
+          var c = cfg; close(true, function () { if (c && c.onSigned) c.onSigned(); });   /* run the action once the modal is gone */
+        }, 1000);
+        /* focus the main action: Öppna BankID on mobile, the QR code on desktop, else the first button */
+        var f = ['.sign-modal__primary', '.sign-qr__code', '.btn'].map(function (q) {
+          return Array.prototype.filter.call(m.querySelectorAll('[data-step="' + s + '"] ' + q), function (x) { return x.offsetParent !== null; })[0];
+        }).filter(Boolean)[0];
+        (f || m).focus();
+      }
+
+      /* Public: open the modal. o.text = why signing is needed, o.onSigned = what to do after signing. */
+      window.signWithBankId = function (o) {
+        clearTimeout(exitTimer);   /* reopened during the exit animation: cancel it */
+        cfg = { text: o.text, onSigned: o.onSigned, opener: document.activeElement };
+        textEl.textContent = o.text || 'Du behöver signera med BankID för att fortsätta.';
+        ov.classList.remove('is-leaving'); m.classList.remove('is-leaving');
+        ov.classList.add('is-open'); m.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        m.scrollTop = 0;
+        step('qr');
+      };
+
+      function close(signed, then) {
+        if (!isOpen()) return;
+        stopTimers();
+        var c = cfg; cfg = null;
+        document.body.style.overflow = '';
+        function done() {
+          ov.classList.remove('is-open', 'is-leaving'); m.classList.remove('is-open', 'is-leaving');
+          if (then) then();
+        }
+        if (!signed && c && c.opener && c.opener.focus) c.opener.focus();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return done();
+        ov.classList.add('is-leaving'); m.classList.add('is-leaving');
+        /* timer, not animationend: animationend never fires in a background tab, which left the modal stuck */
+        exitTimer = setTimeout(done, (parseFloat(getComputedStyle(m).animationDuration) || 0) * 1000 + 20);
+      }
+
+      m.addEventListener('click', function (e) {
+        var a = e.target.closest('[data-sign]'); if (!a) return;
+        e.preventDefault();
+        var k = a.getAttribute('data-sign');
+        if (k === 'cancel') close();
+        else if (k === 'restart') step('qr');
+        else if (k === 'scan') step('waiting');
+      });
+      ov.addEventListener('click', function () { close(); });
+      /* Capture phase + stop: the page's own Escape handler would also close the drawer underneath */
+      document.addEventListener('keydown', function (e) {
+        if (!isOpen()) return;
+        if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); close(); return; }
+        if (e.key !== 'Tab') return;   /* keep focus inside the modal */
+        var f = Array.prototype.filter.call(m.querySelectorAll('button, a[href]'), function (x) { return x.offsetParent !== null; });
+        if (!f.length) return;
+        if (e.shiftKey && (document.activeElement === f[0] || document.activeElement === m)) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }, true);
+
+      /* Step-up guard: every action that changes users or balance asks for BankID first. One capture listener,
+         so rows and cards added later are covered too. ponytail: signing lasts until page reload; a real session would expire. */
+      var GUARDED = [
+        ['.action-btn[aria-label="Inställningar för saldo"]', 'ändra inställningarna för saldo'],
+        ['.action-btn[aria-label="Lägg till användare"]', 'lägga till användare'],
+        ['.btn-row-action[aria-label="Redigera"], .user-card__action-btn--edit', 'redigera användare'],
+        ['.btn-row-action[aria-label="Ta bort"], .user-card__action-btn--delete', 'ta bort användare']
+      ];
+      var verified = false;
+      document.addEventListener('click', function (e) {
+        if (verified) return;
+        for (var i = 0; i < GUARDED.length; i++) {
+          var b = e.target.closest(GUARDED[i][0]); if (!b) continue;
+          e.preventDefault(); e.stopImmediatePropagation();
+          window.signWithBankId({
+            text: 'Du behöver signera med BankID för att ' + GUARDED[i][1] + '.',
+            onSigned: function () { verified = true; b.click(); }
+          });
+          return;
+        }
+      }, true);
+    })();
+  </script>
 
 <script src="/components/js/tooltip.js"></script>
 </body>

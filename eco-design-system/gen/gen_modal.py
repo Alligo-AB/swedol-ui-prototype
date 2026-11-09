@@ -23,7 +23,7 @@ playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose size, label and 
     bp_field('pg-l-bp') + btn_group('pg-l-sz', 'Size', 'data-pg="size"', [('small', 'Small', True), ('large', 'Large', False)]) + \
     btn_group('pg-l-lb', 'Label', 'data-pg="label"', [('off', 'None', True), ('on', 'Label', False)]) + \
     txt_field('pg-title', 'Title', 'Delete this address?', 'Title') + txt_field('pg-body', 'Body', 'The address is removed from your address book. You cannot undo this.', 'Body') + \
-    txt_field('pg-cancel', 'Cancel button', 'Cancel', 'Cancel button') + txt_field('pg-ok', 'Primary button', 'Delete', 'Primary button') + motion_note('The fade in and out') + \
+    txt_field('pg-cancel', 'Cancel button', 'Cancel', 'Cancel button') + txt_field('pg-ok', 'Confirm button', 'Delete address', 'Confirm button') + motion_note('The fade in and out') + \
     '<button type="button" class="btn btn--primary btn--sm" id="pg-open" style="align-self:flex-start"><span class="btn__label">Open modal</span></button>' + \
     '</div></div><p class="pg-note" id="pg-log" aria-live="polite"></p><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
 
@@ -38,8 +38,8 @@ usage = '<h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3>
     bullets(['Confirm a destructive action, such as deleting an account or an address', 'Ask for a choice that the user must make before going on', 'Show crucial information the user must not miss, such as updated terms']) + \
     '<h3 class="ds-h3 ds-group">When not to use</h3><h3 class="ds-h3">For a decision, not for feedback</h3>' + desc('A modal stops the user. Feedback on something that has already happened does not need that: use a Toast.') + \
     pair('fig-do-1', 'Do use a modal for a decision the user must make.', 'fig-dont-1', 'Do not use a modal for feedback. Use a Toast instead.', 'modal-preview') + \
-    '<h3 class="ds-h3">Name the action</h3>' + desc('The primary button says what will happen: “Delete”, not “OK”. The cancel button says how to back out.') + \
-    pair('fig-do-2', 'Do name the action on the button.', 'fig-dont-2', 'Do not use a vague label such as “OK”.', 'modal-preview') + \
+    '<h3 class="ds-h3">Name the action</h3>' + desc('The title asks the question and ends with a question mark: “Delete this address?”. The body says what happens, and that it cannot be undone when that is true. The confirm button names the action in two words, a verb and a noun, with no question mark: “Delete address”, not “OK” or “Delete?”. The cancel button is Blank and says “Cancel”.') + desc('For a destructive action (delete, remove) the confirm button is <strong>Destructive</strong> (<code>destructive: true</code>), not Primary.') + \
+    pair('fig-do-2', 'Do name the action: verb + noun, Destructive for a deletion.', 'fig-dont-2', 'Do not use a vague label such as “OK”.', 'modal-preview') + \
     '<h3 class="ds-h3 ds-group">Quick reference</h3>' + \
     which([['needs a confirmation or a choice before the user can continue', 'Modal (this page)'], ['confirms what happened, briefly', lk('toast.html', 'Toast')], ['is status information in page context', lk('inline.html', 'Inline')], ['concerns the whole page or system', lk('banner.html', 'Banner')]]) + \
     rules(['Ask one clear question and give one primary action.', 'Name the action on the button: “Delete”, not “OK”.', 'Close on ×, ESC and a click on the overlay, every time.', 'Move focus into the dialog and back to the opener on close.', 'Start with Small; use Large when the task needs more work area, at every breakpoint.'],
@@ -149,7 +149,7 @@ c_basic = '<h2 class="ds-h2">Basic Usage</h2>' + desc('Link the shared files onc
     ['1. Link', '<code>&lt;link rel="stylesheet" href="/eco-design-system/notifications.css"&gt;</code> and <code>&lt;script src="/eco-design-system/notifications.js"&gt;&lt;/script&gt;</code>. Link <code>button.css</code> first.'], ['2. Open', 'Call <code>ECO_N.openModal({ size, title, body, cancel, confirm })</code>. The script adds the overlay, the focus trap, the scroll lock and the three ways to close.'],
     ['3. React', '<code>onConfirm</code> runs when the primary button is pressed; <code>onClose(reason)</code> runs on every close.']])
 c_modal = '<h2 class="ds-h2">Modal</h2><div id="recipes"></div>'
-c_api = '<h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Settings of openModal</h3>' + table(['Setting', 'Use'], [['<code>size</code>', '<code>small</code> (default) or <code>large</code>.'], ['<code>label</code>', 'Optional uppercase label above the title.'], ['<code>title</code>, <code>body</code>', 'The title and the body text.'], ['<code>cancel</code>, <code>confirm</code>', 'The button labels. Defaults: Cancel, Confirm.'], ['<code>onConfirm</code>', 'Runs when the primary button is pressed.'], ['<code>onClose(reason)</code>', 'Reason: <code>close</code>, <code>esc</code>, <code>overlay</code>, <code>cancel</code> or <code>confirm</code>.']]) + \
+c_api = '<h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Settings of openModal</h3>' + table(['Setting', 'Use'], [['<code>size</code>', '<code>small</code> (default) or <code>large</code>.'], ['<code>label</code>', 'Optional uppercase label above the title.'], ['<code>title</code>, <code>body</code>', 'The title and the body text.'], ['<code>cancel</code>, <code>confirm</code>', 'The button labels. Defaults: Cancel, Confirm. Confirm label: verb + noun, no question mark (“Delete address”).'], ['<code>destructive</code>', '<code>true</code> makes the confirm button Destructive instead of Primary. Use it for a deletion or removal.'], ['<code>onConfirm</code>', 'Runs when the primary button is pressed.'], ['<code>onClose(reason)</code>', 'Reason: <code>close</code>, <code>esc</code>, <code>overlay</code>, <code>cancel</code> or <code>confirm</code>.']]) + \
     '<h3 class="ds-h3 ds-group">Custom properties</h3>' + table(['Name', 'Use'], [['<code>--modal-in-ease</code>, <code>--modal-in-duration</code>', 'Enter. Defaults: <code>ease-decelerate-emphasized</code>, <code>duration-fast-4</code>.'], ['<code>--modal-out-ease</code>, <code>--modal-out-duration</code>', 'Exit. Defaults: <code>ease-accelerate-generic</code>, <code>duration-fast-3</code>. Set on <code>&lt;html&gt;</code>.']]) + \
     '<h3 class="ds-h3 ds-group">Things to know</h3>' + bullets(['<code>openModal</code> returns <code>{ close, el }</code>.', 'Page scroll is locked with <code>body.has-modal</code>. <code>onClose</code> and the focus return run at once; the dialog is removed after the fade out.', 'Buttons inside the modal are always 32px high, also when <code>button.css</code> is on the page.', 'Do not open a modal from a modal.'])
 c_css = '<h2 class="ds-h2">CSS / Tailwind</h2>' + desc('The component is one CSS file and one script, shared by every notification. Link them, never copy them. The code below is read from the files the page links, so it is always what you see.') + '<div id="files"></div>'
@@ -165,7 +165,7 @@ JS_SAMPLE = JS_PRE + r'''
 JS_EX = JS_SAMPLE + r'''
   /* Playground */
   var pg = { size: 'small', label: 'off' };
-  function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value }; }
+  function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value, destructive: /^(delete|remove)\b/i.test($('#pg-ok').value) }; }
   function renderPg() { var o = pgOpts(); clear($('#pg-host')).appendChild(sample(o)); $('#pg-code').textContent = H.modal(o); }
   DK.wire(pg, renderPg);
   ['#pg-title', '#pg-body', '#pg-cancel', '#pg-ok'].forEach(function (s) { $(s).addEventListener('input', renderPg); });
@@ -176,7 +176,7 @@ JS_EX = JS_SAMPLE + r'''
   function closed(r) { log.textContent = 'Closed with: ' + ({ close: 'the × button', esc: 'the ESC key', overlay: 'a click on the overlay', cancel: 'Cancel', confirm: 'the primary button' }[r] || r) + '.'; }
   var SC = [
     { t: 'Confirm a deletion', d: 'Small. A destructive action: the user must confirm. Confirming shows a toast.', run: function () {
-        N.openModal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders, addresses and saved lists are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account', onClose: closed,
+        N.openModal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders, addresses and saved lists are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account', destructive: true, onClose: closed,
           onConfirm: function () { setTimeout(function () { N.showToast({ status: 'success', emphasis: 'weak', text: 'Your account was deleted.', autoHide: 4000 }); }, 200); } }); } },
     { t: 'Cart has changed', d: 'Small. Important information the user must not miss before checkout.', run: function () {
         N.openModal({ size: 'small', label: 'Cart', title: 'Your cart has changed', body: 'Two items in your cart changed price or availability since you added them. Review the changes before you continue to checkout.', cancel: 'Back to cart', confirm: 'Continue to checkout', onClose: closed }); } },
@@ -191,9 +191,9 @@ JS_EX = JS_SAMPLE + r'''
   });
 
   /* Usage figures */
-  clear($('#fig-do-1')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'Cancel', confirm: 'Delete' }));
+  clear($('#fig-do-1')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book. You cannot undo this.', cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
   clear($('#fig-dont-1')).appendChild(sample({ size: 'small', title: 'Settings saved', body: 'Your changes were saved.', cancel: 'Cancel', confirm: 'OK' }));
-  clear($('#fig-do-2')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'Cancel', confirm: 'Delete' }));
+  clear($('#fig-do-2')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book. You cannot undo this.', cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
   clear($('#fig-dont-2')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'No', confirm: 'OK' }));
 
   /* Anatomy */
@@ -210,11 +210,11 @@ JS_EX = JS_SAMPLE + r'''
   ]);
 
   /* Variants and sizes */
-  clear($('#v-nolabel')).appendChild(sample({ size: 'small', title: SIZES[0][2], body: SIZES[0][3], cancel: 'Cancel', confirm: 'Delete' }));
-  clear($('#v-label')).appendChild(sample({ size: 'small', label: 'Address book', title: SIZES[0][2], body: SIZES[0][3], cancel: 'Cancel', confirm: 'Delete' }));
+  clear($('#v-nolabel')).appendChild(sample({ size: 'small', title: SIZES[0][2], body: SIZES[0][3], cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
+  clear($('#v-label')).appendChild(sample({ size: 'small', label: 'Address book', title: SIZES[0][2], body: SIZES[0][3], cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
   SIZES.forEach(function (s, i) { clear($('#v-s-' + s[0])).appendChild(sample({ size: s[0], label: '', title: s[2], body: s[3], cancel: 'Cancel', confirm: 'Confirm' })); });
   DK.motion({ anchor: 'playground', parts: [{ title: 'Enter', prefix: 'modal-in', rec: { ease: 'decelerate-emphasized', dur: 'fast-4' } }, { title: 'Exit', prefix: 'modal-out', rec: { ease: 'accelerate-generic', dur: 'fast-3' }, exit: true }], collapse: false, role: 'exit', showLabel: 'Open modal', hint: 'The modal opens over the page. Press Open modal, then close it with the ×, ESC or the overlay to see the motion.',
-    why: 'The overlay fades; the panel fades and moves 48px, up in and down out. It enters with decelerate emphasized (200 ms) and leaves with accelerate (150 ms): closing is faster than opening (eco-motion: element enters / element disappears).', show: function () { N.openModal({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'Cancel', confirm: 'Delete' }); } });
+    why: 'The overlay fades; the panel fades and moves 48px, up in and down out. It enters with decelerate emphasized (200 ms) and leaves with accelerate (150 ms): closing is faster than opening (eco-motion: element enters / element disappears).', show: function () { N.openModal({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book. You cannot undo this.', cancel: 'Cancel', confirm: 'Delete address', destructive: true }); } });
 '''  + JS_MOTION_FIX + r'''
   DK.bp(); renderPg();
 '''
@@ -238,8 +238,8 @@ JS_SPEC = JS_SAMPLE + r'''
 
 JS_CODE = JS_PRE + r'''
   DK.recipes($('#recipes'), [
-    ['Markup', H.modal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders and addresses are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account' })],
-    ['Open it from script', "var dialog = ECO_N.openModal({\n  size: 'small',                 // small | large\n  label: 'Account',              // optional\n  title: 'Delete your account?',\n  body: 'This cannot be undone.',\n  cancel: 'Cancel',\n  confirm: 'Delete account',\n  onConfirm: deleteAccount,\n  onClose: function (reason) {}  // close | esc | overlay | cancel | confirm\n});"]]);
+    ['Markup', H.modal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders and addresses are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account', destructive: true })],
+    ['Open it from script', "var dialog = ECO_N.openModal({\n  size: 'small',                 // small | large\n  label: 'Account',              // optional\n  title: 'Delete your account?',\n  body: 'This cannot be undone.',\n  cancel: 'Cancel',\n  confirm: 'Delete account',\n  destructive: true,             // Destructive button for a deletion\n  onConfirm: deleteAccount,\n  onClose: function (reason) {}  // close | esc | overlay | cancel | confirm\n});"]]);
   DK.printFile($('#files'), '../notifications.css', [['CSS: Modal', ['modal']], ['CSS: shared close button and buttons', ['base']]])
     .then(function () { return DK.printFile($('#files'), '../notifications.js', [['JavaScript: openModal', ['runtime']]]); });
 '''

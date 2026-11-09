@@ -8111,7 +8111,7 @@
       "node_kind": "heading",
       "norm_label": "documentation",
       "source_file": ".claude/skills/selection-guide/SKILL.md",
-      "source_location": "L56"
+      "source_location": "L58"
     },
     {
       "id": "claude_skills_selection_guide_skill_example_reference_2026_11_08",
@@ -8123,7 +8123,7 @@
       "node_kind": "heading",
       "norm_label": "example (reference, 2026-11-08)",
       "source_file": ".claude/skills/selection-guide/SKILL.md",
-      "source_location": "L52"
+      "source_location": "L54"
     },
     {
       "id": "claude_skills_selection_guide_skill_the_rule",
@@ -27896,7 +27896,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/selection-guide/SKILL.md",
-      "source_location": "L52",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -27907,7 +27907,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/selection-guide/SKILL.md",
-      "source_location": "L56",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
@@ -47881,5 +47881,5 @@
       "source_file": "mypages/users.html"
     }
   ],
-  "built_at_commit": "d59db38dbd29f0257346d3895ed2c6bc6a1bdb37"
+  "built_at_commit": "98f1f56680744f6923cbaad1821233d37f70b094"
 }

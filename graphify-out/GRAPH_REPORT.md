@@ -1,7 +1,7 @@
-# Graph Report - swedol-ui-prototype  (2026-11-08)
+# Graph Report - swedol-ui-prototype  (2026-11-09)
 
 ## Corpus Check
-- 182 files · ~2,287,677 words
+- 182 files · ~2,289,511 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d59db38d`
+- Built from commit: `98f1f566`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -605,9 +605,9 @@ Nodes (6): Choosing a selection control (ECO Design System), Conditions that alw
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `eco-doc-page skill (docs page structure)` connect `eco-doc-page skill (docs page structure)` to `Component pages: template and three-page split`, `Foundation pages`, `Building blocks, spacing and cards`, `eco-card-animation/SKILL.md`, `Header art`, `CLAUDE.md (project design guidelines)`, `Component families: what is specific to each`, `storyblok-widgets.md`, `eco-tabs/SKILL.md`, `file-map.md`, `history.md`, `Table (ECO Design System) — first version`, `eco-add-component skill`, `Docs shell: navigation, hub, footer, frame`?**
-  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **Why does `CLAUDE.md (project design guidelines)` connect `CLAUDE.md (project design guidelines)` to `Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)`, `eco-button skill`, `eco-card-animation/SKILL.md`, `eco-doc-page skill (docs page structure)`, `Page templates (template.html, mypages-template.html)`, `eco-tabs/SKILL.md`, `Table (ECO Design System) — first version`, `eco-add-component skill`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Why does `eco-add-component skill` connect `eco-add-component skill` to `Adding a component to the design system`, `eco-doc-page skill (docs page structure)`, `Divider (ECO Design System)`, `eco-button skill`?**
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **What connects `ARROW`, `G`, `PAGE` to the rest of the system?**

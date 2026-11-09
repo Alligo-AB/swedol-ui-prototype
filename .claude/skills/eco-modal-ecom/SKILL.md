@@ -36,7 +36,18 @@ The modal comes in **two sizes to choose between: Small and Large**. Choose by t
 - **Desktop (XLarge, Large, Medium breakpoints):** Small is compact, Large is a wider work area; height by content, limited by the available screen height.
 - **Tablet (Small breakpoint):** same rules, width adapts to the available area, both sizes keep side margins.
 - **Mobile (XSmall, below 640px):** Small has height by content and a **max width of 440px**; it is centered with at least 16px side margin on each side, and on narrower screens the width adapts to the available space (343px on a 375px viewport; 343px is not a fixed width). Large is a full-screen presentation; long content scrolls and the layout works with the keyboard open.
-- **Common layout rules:** Small and Large have no fixed heights; avoid unnecessary empty space (except the full-screen view on mobile). Limit the height to the available screen area and allow scroll. Content and actions must be reachable in landscape and with the keyboard open. A short dialog must not be full width and vertically centered at once: a centered dialog uses side margins; a full-width bottom sheet is a separate presentation pattern (not part of this component). Clear title, button labels that name the action (Cancel, Delete). The footer is not sticky: when content is taller than the screen the whole panel scrolls.
+- **Common layout rules:** Small and Large have no fixed heights; avoid unnecessary empty space (except the full-screen view on mobile). Limit the height to the available screen area and allow scroll. Content and actions must be reachable in landscape and with the keyboard open. A short dialog must not be full width and vertically centered at once: a centered dialog uses side margins; a full-width bottom sheet is a separate presentation pattern (not part of this component). Clear title, button labels that name the action (see **Copy for a confirmation** below). The footer is not sticky: when content is taller than the screen the whole panel scrolls.
+
+### Example: BankID signing (2026-11-09)
+
+`mypages/users.html` (`#sign-modal`, `window.signWithBankId({ text, onSigned })`): Large modal that opens straight on the QR step; steps (QR, waiting, done, expired) swap inside the same panel via `data-current`. Lessons that apply to every modal: limit the height from 640px (`max-height: calc(100dvh - 32px)`, panel scrolls) or it is cut off on a phone held sideways; remove the panel after the exit with a timer, not `animationend` (it never fires in a background tab, and a reopen during the exit left the modal invisible); run the follow-up action after the exit so two overlays never stack; catch Escape in the capture phase when a drawer lies underneath. On a phone the main action is "Öppna BankID", not the QR code. Details in `CLAUDE.md`.
+
+### Copy for a confirmation (rule, 2026-11-09)
+
+- **Title:** the question, ending with a question mark. `Delete this address?`
+- **Message:** what happens, plus "You cannot undo this." when true. `The address is removed from your address book. You cannot undo this.`
+- **Button 1 (Blank):** `Cancel`.
+- **Button 2:** two words, **verb + noun**, **no question mark**: `Delete address` (not `Delete`, `OK`, `Yes` or `Delete address?`). For a deletion/removal it is **Destructive** (`btn--destructive`; `ECO_N.openModal({ …, destructive: true })`), otherwise Primary.
 
 ### Sizes and widths per breakpoint
 
@@ -257,6 +268,7 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
   <div class="modal__footer">
     <button type="button" class="btn btn--blank" onclick="closeModal()"><span class="btn__label">Cancel</span></button>
     <button type="button" class="btn btn--primary"><span class="btn__label">Confirm</span></button>
+    <!-- deletion: class="btn btn--destructive", label verb + noun, e.g. Delete address -->
   </div>
 </div>
 ```

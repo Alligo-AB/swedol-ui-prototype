@@ -128,7 +128,7 @@
     var title = el('h2', 'modal__title', o.title); title.id = id; ht.appendChild(title);
     var x = closeBtn(); head.appendChild(ht); head.appendChild(x); content.appendChild(head);
     content.appendChild(el('p', 'modal__body', o.body || ''));
-    var foot = el('div', 'modal__footer'), cancel = button({ label: o.cancel || 'Cancel' }, 'btn--blank'), ok = button({ label: o.confirm || 'Confirm' }, 'btn--primary');
+    var foot = el('div', 'modal__footer'), cancel = button({ label: o.cancel || 'Cancel' }, 'btn--blank'), ok = button({ label: o.confirm || 'Confirm' }, o.destructive ? 'btn--destructive' : 'btn--primary');
     foot.appendChild(cancel); foot.appendChild(ok); m.appendChild(content); m.appendChild(foot);
     var closed = false;
     function close(reason) {
@@ -249,9 +249,9 @@
       (act ? '        <div class="inline-notification__actions">\n' + ((o.primary || o.secondary) ? '          <div class="inline-notification__btns">\n' + (o.secondary ? '            ' + B('secondary', o.secondary) + '\n' : '') + (o.primary ? '            ' + B('primary', o.primary) + '\n' : '') + '          </div>\n' : '') + LK(links(o), 'inline-notification__links', '          ', 'button', 'small') + '        </div>\n' : '') + '      </div>\n    </div>\n  </div>\n</div>';
   }
 
-  /* o: { size, label, title, body, cancel, confirm } (markup of the open dialog; the overlay is separate) */
+  /* o: { size, label, title, body, cancel, confirm, destructive } (markup of the open dialog; the overlay is separate) */
   function modal(o) {
-    return '<div class="modal-overlay" data-close-modal></div>\n<div class="modal modal--' + (o.size || 'small') + '" role="dialog" aria-modal="true" aria-labelledby="modal-title">\n  <div class="modal__content">\n    <div class="modal__header">\n      <div class="modal__header-text">\n' + (o.label ? '        <p class="modal__label">' + e(o.label) + '</p>\n' : '') + '        <h2 class="modal__title" id="modal-title">' + e(o.title) + '</h2>\n      </div>\n      ' + X() + '\n    </div>\n    <p class="modal__body">' + e(o.body) + '</p>\n  </div>\n  <div class="modal__footer">\n    ' + B('blank', o.cancel || 'Cancel') + '\n    ' + B('primary', o.confirm || 'Confirm') + '\n  </div>\n</div>';
+    return '<div class="modal-overlay" data-close-modal></div>\n<div class="modal modal--' + (o.size || 'small') + '" role="dialog" aria-modal="true" aria-labelledby="modal-title">\n  <div class="modal__content">\n    <div class="modal__header">\n      <div class="modal__header-text">\n' + (o.label ? '        <p class="modal__label">' + e(o.label) + '</p>\n' : '') + '        <h2 class="modal__title" id="modal-title">' + e(o.title) + '</h2>\n      </div>\n      ' + X() + '\n    </div>\n    <p class="modal__body">' + e(o.body) + '</p>\n  </div>\n  <div class="modal__footer">\n    ' + B('blank', o.cancel || 'Cancel') + '\n    ' + B(o.destructive ? 'destructive' : 'primary', o.confirm || 'Confirm') + '\n  </div>\n</div>';
   }
   w.ECO_N = w.ECO_N || {}; w.ECO_N.html = { toast: toast, ecom: ecom, banner: banner, inline: inline, modal: modal };
 })(window);
