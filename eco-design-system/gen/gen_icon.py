@@ -198,7 +198,7 @@ JS_EX = r'''
   pgName.addEventListener('input', renderPg);
   DK.seg($('[data-pg-style]'), function (v) { st.style = v; renderPg(); });
   DK.seg($('[data-pg-color]'), function (v) { st.color = v; renderPg(); });
-  DK.seg($('#pg-size'), function (v) { st.size = v; renderPg(); });
+  DK.seg($('[data-pg="size"]'), function (v) { st.size = v; renderPg(); });
   renderPg();
   if (L) {
     $('#v-outline').innerHTML = L.outline.slice(0, 12).map(function (a) { return '<div class="ic-cell">' + ic('icon--lg', a[1]) + '<code>' + a[0] + '</code></div>'; }).join('');

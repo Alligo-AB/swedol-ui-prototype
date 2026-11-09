@@ -101,7 +101,7 @@
       if (g) $$('.list-item[role="radio"]', g).forEach(function (x) { x.setAttribute('aria-checked', 'false'); x.tabIndex = -1; });
       li.setAttribute('aria-checked', 'true'); li.tabIndex = 0;
     } else li.setAttribute('aria-checked', String(li.getAttribute('aria-checked') !== 'true'));
-    if (li.id === 'pg-item') { var c = li.getAttribute('aria-checked') === 'true'; pg.sel = c ? 'yes' : 'no'; var sd = $('#pg-sel'); if (sd) { sd.value = pg.sel; sd.dispatchEvent(new Event('change')); } $('#pg-code').textContent = markup(pg); }
+    if (li.id === 'pg-item') { var c = li.getAttribute('aria-checked') === 'true'; pg.sel = c ? 'yes' : 'no'; var sd = $('[data-pg="sel"] input[value="' + pg.sel + '"]'); if (sd) sd.checked = true; $('#pg-code').textContent = markup(pg); }
   }
   document.addEventListener('click', function (e) { toggle(e.target.closest('.list-item[role]')); });
   document.addEventListener('keydown', function (e) {

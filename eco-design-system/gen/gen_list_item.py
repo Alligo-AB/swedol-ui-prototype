@@ -145,7 +145,7 @@ code = [('basic-usage', c_basic), ('list-item', c_li), ('api', c_api), ('css-tai
 
 # ---------------------------------------------------------------- scripts
 TOGGLE_OLD = '$$(\'[data-pg="sel"] button\').forEach(function (b) { b.setAttribute(\'aria-pressed\', String(b.dataset.v === pg.sel)); });'
-TOGGLE_NEW = "var sd = $('#pg-sel'); if (sd) { sd.value = pg.sel; sd.dispatchEvent(new Event('change')); }"   # the Row control is an eco-select now, not a button group
+TOGGLE_NEW = 'var sd = $(\'[data-pg="sel"] input[value="\' + pg.sel + \'"]\'); if (sd) sd.checked = true;'   # the Row control is radio buttons (selection-guide, 2026-11-08)
 _old = old_js('list-item', "  var SW = '#1651aa';", "  function item(o)")
 assert TOGGLE_OLD in _old
 LI_JS = "  var uid = 0;\n" + _old.replace(TOGGLE_OLD, TOGGLE_NEW) + r'''

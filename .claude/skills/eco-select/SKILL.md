@@ -5,6 +5,8 @@ description: Use when building or reviewing select fields/dropdowns — sizes, s
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
+> **Not sure this is the right control?** Read `selection-guide` first: it picks between Radio button, Checkbox, Chip, Select, Switch and Pill Segment Control by one or several choices and the number and length of the options (rule 2026-11-08).
+
 ## Select – Sizes & States (ECO Design System)
 
 Select is used to let the user choose one option from a list. The component's size and states follow the same system as input fields.

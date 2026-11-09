@@ -65,21 +65,12 @@ CO_JS = r'''
 playground = '<h2 class="ds-h2">Playground</h2>' + desc('One row. Click the header to open and close it. Choose the size, the theme, the state and the parts of the header and the row and its code update.') + \
     '<div class="ds-playground"><div class="ds-stage" id="pg-stage"><div id="pg-host" class="co-lines" style="width:100%"></div></div><div class="ds-controls">' + \
     bp_field('pg-l-bp') + btn_group('pg-l-size', 'Size', 'data-pg="size"', [('large', 'Large', True), ('small', 'Small', False)]) + \
-    btn_group('pg-l-box', 'Boxed', 'data-pg="boxed"', [('no', 'No', True), ('yes', 'Yes', False)]) + \
-    btn_group('pg-l-fill', 'Header background', 'data-pg="fill"', [('no', 'None', True), ('yes', 'Grey', False)]) + \
-    btn_group('pg-l-top', 'Top divider', 'data-pg="top"', [('off', 'Off', True), ('on', 'On', False)]) + \
-    btn_group('pg-l-bot', 'Bottom divider', 'data-pg="bottom"', [('on', 'On', True), ('off', 'Off', False)]) + \
     btn_group('pg-l-theme', 'Theme', 'data-pg="theme"', [('light', 'Light', True), ('dark', 'Dark', False)]) + \
     btn_group('pg-l-state', 'State', 'data-pg="state"', [('enabled', 'Enabled', True), ('hover', 'Hover', False), ('disabled', 'Disabled', False)]) + \
-    btn_group('pg-l-open', 'Row', 'data-pg="open"', [('closed', 'Closed', True), ('open', 'Open', False)]) + \
     '<div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-title">Title</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-title" value="Title" placeholder="Title" /></div></div></div>' + \
     '<div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-info">Descriptive text</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-info" value="Descriptive text" placeholder="Descriptive text" /></div></div></div>' + \
-    btn_group('pg-l-help', 'Helper text', 'data-pg="helper"', [('off', 'None', True), ('on', 'Text', False)]) + \
-    btn_group('pg-l-ico', 'Leading icon', 'data-pg="icon"', [('off', 'None', True), ('on', 'Icon', False)]) + \
-    btn_group('pg-l-ie', 'Trailing icon', 'data-pg="iconend"', [('off', 'None', True), ('on', 'Icon', False)]) + \
-    btn_group('pg-l-sw', 'Toggle switch', 'data-pg="sw"', [('off', 'None', True), ('on', 'Switch', False)]) + \
-    btn_group('pg-l-bd', 'Number badge', 'data-pg="badge"', [('off', 'None', True), ('on', '1', False)]) + \
-    btn_group('pg-l-ch', 'Chevron', 'data-pg="chevron"', [('on', 'Show', True), ('off', 'Hide', False)]) + \
+    sw_group('pg-l-row', 'Row', [('open', 'Open', False, 'open', 'closed'), ('boxed', 'Boxed', False, 'yes', 'no'), ('top', 'Top divider', False, 'on', 'off'), ('bottom', 'Bottom divider', True, 'on', 'off')]) + \
+    sw_group('pg-l-head', 'Header', [('fill', 'Grey background', False, 'yes', 'no'), ('helper', 'Helper text', False, 'on', 'off'), ('icon', 'Leading icon', False, 'on', 'off'), ('iconend', 'Trailing icon', False, 'on', 'off'), ('sw', 'Toggle switch', False, 'on', 'off'), ('badge', 'Number badge', False, 'on', 'off'), ('chevron', 'Chevron', True, 'on', 'off')]) + \
     '<p class="pg-note" id="pg-warn" role="status" style="margin:0" hidden></p><p class="pg-note" style="margin:0">The animation is set in <a href="#motion" class="inline-link inline-link--small inline-link--tertiary">Motion</a>.</p>' + \
     '</div></div><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
 
@@ -239,13 +230,12 @@ code = [('basic-usage', c_basic), ('collapsible', c_co), ('api', c_api), ('css-t
 # ---------------------------------------------------------------- scripts
 JS_EX = CO_JS + r'''
   var st = { size: 'large', boxed: 'no', fill: 'no', top: 'off', bottom: 'on', theme: 'light', state: 'enabled', open: 'closed', helper: 'off', icon: 'off', iconend: 'off', sw: 'off', badge: 'off', chevron: 'on' };
-  function sync(key) { $$('[data-pg="' + key + '"] button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === st[key])); }); }
   function opts() {
     return { title: $('#pg-title').value, info: $('#pg-info').value, helper: st.helper === 'on' ? 'Description or helper text' : '', size: st.size, boxed: st.boxed === 'yes', filled: st.fill === 'yes', topLine: st.top === 'on', noBottomLine: st.bottom === 'off', dark: st.theme === 'dark', disabled: st.state === 'disabled', hover: st.state === 'hover',
       open: st.open === 'open', icon: st.icon === 'on' ? 'tune' : '', iconEnd: st.iconend === 'on' ? 'tune' : '', sw: st.sw === 'on', badge: st.badge === 'on', chevron: st.chevron === 'on' };
   }
   function renderPg() {
-    $$('[data-pg="top"] button, [data-pg="bottom"] button').forEach(function (b) { b.disabled = st.boxed === 'yes'; });
+    $$('input[data-pg="top"], input[data-pg="bottom"]').forEach(function (b) { b.disabled = st.boxed === 'yes'; });
     $('#pg-stage').classList.toggle('ds-stage--dark', st.theme === 'dark');
     var o = opts(); o.host = clear($('#pg-host')); row(o);
     var warn = $('#pg-warn'); warn.hidden = !(st.sw === 'on' && st.chevron === 'on');

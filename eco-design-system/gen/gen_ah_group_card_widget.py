@@ -10,6 +10,88 @@ from ah_pins import AH_PINS
 SLUG = 'ah-group-card-widget'
 
 STYLE = HERO_STYLE + r'''
+    /* legend, Figma link, next example: 16px / 32px below 769px, 24px / 48px from 769px */
+    .ds-prose > .hb-legend:has(+ .ds-desc) { margin-bottom: 0; }
+    .ds-prose > .hb-legend + .ds-desc { margin-top: var(--dimension-spacing-space-16); }
+    .ds-prose > .hb-legend + .ds-desc + .ds-figs { margin-top: var(--dimension-spacing-space-32); }
+    @media (min-width: 769px) {
+      .ds-prose > .hb-legend + .ds-desc { margin-top: var(--dimension-spacing-space-24); }
+      .ds-prose > .hb-legend + .ds-desc + .ds-figs { margin-top: var(--dimension-spacing-space-48); }
+    }
+    /* Specifications figure: the card footer (Figma 24811-111461). Padding 16px below 640px, 24px from 640px; the Breakpoint toggle forces it (body[data-bp]) */
+    .ahm-foot { width: 280px; display: flex; flex-direction: column; align-items: flex-start; padding: var(--dimension-spacing-space-16); background: var(--color-background-primary); color: var(--color-text-primary); }
+    @media (min-width: 640px) { .ahm-foot { padding: var(--dimension-spacing-space-24); } }
+    body[data-bp="mobile"] .ahm-foot { padding: var(--dimension-spacing-space-16); }
+    body[data-bp="desktop"] .ahm-foot { padding: var(--dimension-spacing-space-24); }
+    .ahm-pre { font-size: 16px; line-height: 16px; letter-spacing: 0.64px; font-weight: 500; text-transform: uppercase; color: var(--color-text-tertiary); padding-bottom: var(--dimension-spacing-space-8); }   /* alt-label-md */
+    .ahm-title { font-size: 24px; line-height: 28px; font-weight: 600; padding-bottom: var(--dimension-spacing-space-8); }   /* title-lg */
+    .ahm-body { margin: 0; font-size: 17px; line-height: 24px; letter-spacing: 0.32px; padding-bottom: var(--dimension-spacing-space-24); }   /* body-md */
+    .ahm-link { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }
+    .ahm-link .mo-ic { font-size: 20px; }
+    .ahm-foot--flush { padding: var(--dimension-spacing-space-8) 0 0; }   /* Footer Padding off: only the space above the preheadline */
+    @media (min-width: 640px) { .ahm-foot--flush { padding: var(--dimension-spacing-space-12) 0 0; } }
+    @media (min-width: 769px) { .ahm-foot--flush { padding: var(--dimension-spacing-space-16) 0 0; } }
+    body[data-bp="mobile"] .ahm-foot--flush { padding: var(--dimension-spacing-space-8) 0 0; }
+    body[data-bp="desktop"] .ahm-foot--flush { padding: var(--dimension-spacing-space-16) 0 0; }
+    .ahm-blk { display: block; width: 280px; background: var(--color-background-primary); color: var(--color-text-primary); }
+    .ahm-blk.ahm-pre { color: var(--color-text-tertiary); }
+    .ahm-blk.ahm-date { color: var(--color-text-secondary); }
+    .ahm-body--gap { padding-bottom: var(--dimension-spacing-space-16); }   /* to the list: 16px; Large card desktop 20px (Figma 20161-55854; no spacing token for 20) */
+    @media (min-width: 769px) { .ahm-body--lg { padding-bottom: 20px; } }
+    body[data-bp="mobile"] .ahm-body--lg { padding-bottom: var(--dimension-spacing-space-16); }
+    body[data-bp="desktop"] .ahm-body--lg { padding-bottom: 20px; }
+    .ahm-li { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); font-size: 17px; line-height: 24px; letter-spacing: 0.32px; padding-bottom: var(--dimension-spacing-space-8); }   /* body-md */
+    .ahm-li .mo-ic { font-size: 20px; margin-top: 2px; }
+    .ahm-group { padding-bottom: var(--dimension-spacing-space-16); }   /* space above the action link: Small card 16 / 24 from 640px; Large card 16 / 24 / 32 from 769px */
+    @media (min-width: 640px) { .ahm-group { padding-bottom: var(--dimension-spacing-space-24); } }
+    @media (min-width: 769px) { .ahm-group--lg { padding-bottom: var(--dimension-spacing-space-32); } }
+    body[data-bp="mobile"] .ahm-group { padding-bottom: var(--dimension-spacing-space-16); }
+    body[data-bp="desktop"] .ahm-group { padding-bottom: var(--dimension-spacing-space-24); }
+    body[data-bp="desktop"] .ahm-group--lg { padding-bottom: var(--dimension-spacing-space-32); }
+    .ahm-date { padding-bottom: var(--dimension-spacing-space-8); }
+    .ahw { margin-bottom: var(--dimension-spacing-space-16); }
+    .ahw-list { margin: var(--dimension-spacing-space-4) 0 0; padding-left: var(--dimension-spacing-space-16); }
+    /* Footer layout figure (Figma 20161-55854). Mobile first: Small-XSmall values, desktop (769px+) per card size; body[data-bp] forces them */
+    .ahl { width: 260px; display: flex; flex-direction: column; align-items: stretch; background: var(--color-background-primary); color: var(--color-text-primary); margin-right: 40px; }
+    .ahl .ahl-obj { display: block; margin: 0; }
+    .ahl-pre { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); padding-bottom: var(--dimension-spacing-space-8); font-size: 14px; line-height: 14px; letter-spacing: 0.56px; font-weight: 500; text-transform: uppercase; color: var(--color-text-tertiary); }   /* alt-label-md */
+    .ahl-divider { width: 1px; height: 14px; background: var(--color-border-primary); }
+    .ahl-title { padding-bottom: var(--dimension-spacing-space-8); font-weight: 600; }
+    .ahl--lg .ahl-title { font-size: 22px; line-height: 24px; }   /* headline-sm */
+    .ahl--sm .ahl-title { font-size: 20px; line-height: 24px; }   /* title-lg */
+    .ahl-txt, .ahl-list, .ahl-link, .ahl-stack, .ahl-divided { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md */
+    .ahl-gap { padding-bottom: var(--dimension-spacing-space-16); }
+    .ahl-end { padding-bottom: var(--dimension-spacing-space-16); }   /* space above the date: 16px XSmall, 24px Small, 24 / 32px desktop */
+    @media (min-width: 640px) { body:not([data-bp="mobile"]) .ahl-end { padding-bottom: var(--dimension-spacing-space-24); } }
+    body[data-bp="desktop"] .ahl-end { padding-bottom: var(--dimension-spacing-space-24); }
+    .ahl-list { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .ahl-list span { display: flex; align-items: baseline; gap: var(--dimension-spacing-space-8); }
+    .ahl-list span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex: none; transform: translateY(-3px); }   /* bullet, size from Figma's 6px prefix */
+    .ahl-stack { display: flex; flex-direction: column; align-items: flex-start; gap: var(--dimension-spacing-space-12); }
+    .ahl-divided { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-12) var(--dimension-spacing-space-8); }
+    .ahl-sep { width: 1px; height: 16px; background: var(--color-surface-20); }
+    .ahl-link { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); }
+    .ahl-link .mo-ic { font-size: 20px; }
+    .ahl-date { padding-bottom: var(--dimension-spacing-space-8); font-size: 14px; line-height: 14px; letter-spacing: 0.56px; font-weight: 500; text-transform: uppercase; color: var(--color-text-secondary); }   /* alt-label-md */
+    @media (min-width: 769px) {
+      body:not([data-bp="mobile"]) .ahl--lg { width: 335px; } body:not([data-bp="mobile"]) .ahl--sm { width: 284px; }   /* content widths of the Figma variants */
+      body:not([data-bp="mobile"]) .ahl-pre,body:not([data-bp="mobile"]) .ahl-date { font-size: 16px; line-height: 16px; letter-spacing: 0.64px; } body:not([data-bp="mobile"]) .ahl-divider { height: 16px; }
+      body:not([data-bp="mobile"]) .ahl--lg .ahl-title { font-size: 28px; line-height: 32px; } body:not([data-bp="mobile"]) .ahl--sm .ahl-title { font-size: 24px; line-height: 28px; }
+      body:not([data-bp="mobile"]) .ahl--lg :is(.ahl-txt, .ahl-list, .ahl-link, .ahl-stack, .ahl-divided) { font-size: 20px; line-height: 28px; letter-spacing: 0.18px; }   /* body-lg */
+      body:not([data-bp="mobile"]) .ahl--sm :is(.ahl-txt, .ahl-list, .ahl-link, .ahl-stack, .ahl-divided) { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }   /* body-md */
+      body:not([data-bp="mobile"]) .ahl--lg .ahl-gap { padding-bottom: 20px; }   /* Figma gap 20, no spacing token for 20 */
+      body:not([data-bp="mobile"]) .ahl--lg .ahl-end { padding-bottom: var(--dimension-spacing-space-32); }
+      body:not([data-bp="mobile"]) .ahl--lg .ahl-link { gap: var(--dimension-spacing-space-8); } body:not([data-bp="mobile"]) .ahl--lg .ahl-link .mo-ic { font-size: 24px; }
+    }
+    body[data-bp="desktop"] .ahl--lg { width: 335px; } body[data-bp="desktop"] .ahl--sm { width: 284px; }   /* content widths of the Figma variants */
+    body[data-bp="desktop"] .ahl-pre,body[data-bp="desktop"] .ahl-date { font-size: 16px; line-height: 16px; letter-spacing: 0.64px; } body[data-bp="desktop"] .ahl-divider { height: 16px; }
+    body[data-bp="desktop"] .ahl--lg .ahl-title { font-size: 28px; line-height: 32px; } body[data-bp="desktop"] .ahl--sm .ahl-title { font-size: 24px; line-height: 28px; }
+    body[data-bp="desktop"] .ahl--lg :is(.ahl-txt, .ahl-list, .ahl-link, .ahl-stack, .ahl-divided) { font-size: 20px; line-height: 28px; letter-spacing: 0.18px; }   /* body-lg */
+    body[data-bp="desktop"] .ahl--sm :is(.ahl-txt, .ahl-list, .ahl-link, .ahl-stack, .ahl-divided) { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }   /* body-md */
+    body[data-bp="desktop"] .ahl--lg .ahl-gap { padding-bottom: 20px; }   /* Figma gap 20, no spacing token for 20 */
+    body[data-bp="desktop"] .ahl--lg .ahl-end { padding-bottom: var(--dimension-spacing-space-32); }
+    body[data-bp="desktop"] .ahl--lg .ahl-link { gap: var(--dimension-spacing-space-8); } body[data-bp="desktop"] .ahl--lg .ahl-link .mo-ic { font-size: 24px; }
+    .ahm-badge { display: inline-flex; align-items: center; padding: var(--dimension-spacing-space-4) 5px; background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); color: var(--color-text-primary); font-size: 16px; line-height: 16px; letter-spacing: 0.16px; font-weight: 600; text-transform: uppercase; }   /* 5px side padding: Figma Stand Alone Card Badge, no spacing token for 5 */
     .ah-narrow { max-width: 480px; }   /* a cropped settings panel is shown at its own size, not stretched over the page width */
     .ds-figs--one .ah-narrow .sb-shot img { width: 100%; }
     .ah-pair .sb-stage { height: 100%; }
@@ -72,7 +154,7 @@ def h3(id_, t):
 
 
 def a(href, t):
-    return '<a class="inline-link inline-link--large inline-link--secondary" href="%s">%s</a>' % (href, t)
+    return '<a class="inline-link inline-link--secondary" href="%s">%s</a>' % (href, t)
 
 
 S = []
@@ -197,7 +279,7 @@ S.append(('carousel', '<h2 class="ds-h2">9. Carousel</h2>' + desc('Choose <stron
 
 
 # ======================================================================================
-# DESIGN (the main page of the set): anatomy, brand elements, variants. Pictures from Figma (images/ah-group-card-design-*.webp)
+# DESIGN (the main page of the set): anatomy, brand elements, usage. Pictures from Figma (images/ah-group-card-design-*.webp)
 # ======================================================================================
 DIMG = '/images/ah-group-card-design-%s.webp'
 FIG_AH = 'https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id='
@@ -218,30 +300,28 @@ def figref(url, text):
 
 E = []
 E.append(('anatomy', '<h2 class="ds-h2">Anatomy</h2>' + desc('A card is built from an image holder and a footer. Every part except the image is optional. Figma: ' + fig_link(FIG_AH + '24811-111461', 'Article Highlight Card Prototypes for Anatomy', 'large') + '.') +
-          anat('an-card', 'anatomy', 'Anatomy of an Article Highlight card: 1 image, 2 badge, 3 preheadline, 4 title, 5 supporting text, 6 list, 7 supporting text 2, 8 links, 9 date, 10 action link or button') +
+          anat('an-card', 'anatomy', 'Anatomy of an Article Highlight card: 1 image, 2 overlay, 3 badge, 4 preheadline, 5 title, 6 supporting text, 7 list, 8 supporting text 2, 9 links, 10 date, 11 action link or button') +
           legend([
-              ('1', 'Image', 'The image, a color or a video, with an optional overlay, brand elements and logo.'),
-              ('2', 'Badge', 'A short label on the image, for example “Nyhet”.'),
-              ('3', 'Preheadline', 'Also called eyebrow. It gives context.'),
-              ('4', 'Title', 'The headline of the card.'),
-              ('5', 'Supporting text 1', 'Body text before the list.'),
-              ('6', 'Bulletlist', 'Bullet, numbered or checkmark list.'),
-              ('7', 'Supporting text 2', 'Body text after the list.'),
-              ('8', 'Links', 'Extra links, with or without icons, stacked or divided.'),
-              ('9', 'Date', 'A date or another short, related note.'),
-              ('10', 'Action link or button', 'The call to action of the card.')]) +
+              ('1', 'Image', 'The image, a color or a video, with optional brand elements and logo See ' + a('ah-group-card-widget-storyblok.html#image', '4. Image') + '.'),
+              ('2', 'Overlay', 'An optional dark layer over the whole image or one side of it, so text and graphics stand out. See ' + a('ah-group-card-widget-storyblok.html#overlay', '5a. Overlay') + '.'),
+              ('3', 'Badge', 'A short label on the image, for example “Nyhet” See ' + a('ah-group-card-widget-storyblok.html#news-badge', '5e. News Badge') + '.'),
+              ('4', 'Preheadline', 'Also called eyebrow. It gives context See ' + a('ah-group-card-widget-storyblok.html#preheadline', '7a. Preheadline') + '.'),
+              ('5', 'Title', 'The headline of the card See ' + a('ah-group-card-widget-storyblok.html#title', '7b. Title') + '.'),
+              ('6', 'Supporting text 1', 'Body text before the list See ' + a('ah-group-card-widget-storyblok.html#supporting-text-1', '7c. Supporting Text 1 and 2') + '.'),
+              ('7', 'Bulletlist', 'Bullet, numbered or checkmark list See ' + a('ah-group-card-widget-storyblok.html#bulletlist', '7d. Bulletlist') + '.'),
+              ('8', 'Supporting text 2', 'Body text after the list See ' + a('ah-group-card-widget-storyblok.html#supporting-text-1', '7c. Supporting Text 1 and 2') + '.'),
+              ('9', 'Links', 'Extra links, with or without icons, stacked or divided See ' + a('ah-group-card-widget-storyblok.html#links', '7e. Links') + '.'),
+              ('10', 'Date', 'A date or another short, related note See ' + a('ah-group-card-widget-storyblok.html#date', '7f. Date') + '.'),
+              ('11', 'Action link or button', 'The call to action of the card See ' + a('ah-group-card-widget-storyblok.html#button', '8. Background and button') + '.')]) +
           '<h3 class="ds-h3 ds-group" id="brand-elements">Brand elements</h3>' + desc('Brand elements sit on the image, never in the footer. They are part of the picture, so they follow the image when it is cropped. The two examples show a campaign concept and a discount with a brand logo.') +
           anat('an-pd', 'brand-powerdeal', 'Anatomy of a Power Deal image: 1 Power Deal logo, 2 Power Deal border') +
-          legend([('1', 'Power Deal logo', 'The logo of the Power Deal concept.'), ('2', 'Power Deal border', 'The graphic stripes at the top and bottom edge. Use it together with the logo.')]) +
-          figref(FIG_AH + '24811-112608', 'Brand Elements 1') +
-          anat('an-disc', 'brand-discount', 'Anatomy of a discount image: 1 discount, 2 brand logo') +
-          legend([('1', 'Discount', 'A large, red campaign message, for example a percentage.'), ('2', 'Brand logo', 'For brand identity. It sits bottom right.')]) +
-          figref(FIG_AH + '24811-112612', 'Brand Elements 2')))
+          legend([('1', 'Power Deal logo', 'The logo of the Power Deal concept See ' + a('ah-group-card-widget-storyblok.html#power-deal', '5d. Power Deal') + '.'), ('2', 'Power Deal border', 'The graphic stripes at the top and bottom edge. Use it together with the logo See ' + a('ah-group-card-widget-storyblok.html#power-deal', '5d. Power Deal') + '.')]) +
+          figref(FIG_AH + '24811-112608', 'Power Deal Concept') +
+          anat('an-disc', 'brand-discount', 'Anatomy of an image with graphic elements: 1 main graphic, 2 corner graphic') +
+          legend([('1', 'Main graphic', 'A large graphic in the middle of the image, for example a campaign message such as a percentage, or a logo.'), ('2', 'Corner graphic', 'A smaller graphic bottom right, for example a brand logo or another graphic See ' + a('ah-group-card-widget-storyblok.html#brand-logo', '5c. Brand Logo') + '.')]) +
+          figref(FIG_AH + '24811-112612', 'Graphic Elements')))
 
-E.append(('variants', '<h2 class="ds-h2">Variants</h2>' + desc('A card can be used in many ways, depending on how the settings are combined. The grid shows Large cards (left) and Small cards (right) with the same content, in four setups with and without footer padding, border and badge. See ' + a('ah-group-card-widget-storyblok.html#footer', '6. Card footer') + ' for the settings. Figma: ' + fig_link(FIG_AH + '549-27485', 'AH Highlight Card Variants', 'large') + '.') +
-          '<div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage sb-stage"><div class="sb-shot"><img src="%s" alt="Four rows of cards. Each row shows two Large and two Small cards with an image, a preheadline, a title, a supporting text and a text link" loading="lazy" /></div></div></figure></div>' % (DIMG % 'variants')))
-
-E.append(('usage', '<h2 class="ds-h2">Usage</h2>' + desc('Guidance taken from the settings of the widget. See the ' + a('ah-group-card-widget-storyblok.html', 'Storyblok tab') + ' for each field.') +
+E.append(('usage', '<h2 class="ds-h2">Usage</h2>' + desc('A card can be used in many ways, depending on how the settings are combined. Guidance taken from the settings of the widget. See the ' + a('ah-group-card-widget-storyblok.html', 'Storyblok tab') + ' for each field.') +
           '<h3 class="ds-h3 ds-group">Do</h3>' + li(['Use Footer Padding, Footer Border and Card Size in the same way on every card in a group or a concept.', 'Use Card Size Small in a layout with many cards.', 'Use the action link in the first place; keep the button for the one action that must stand out.', 'Keep a card that leads to an article or a campaign direct: a short title and little text.', 'Use Full Stroke Border when the image could blend into the page background.']) +
           '<h3 class="ds-h3 ds-group">Do not</h3>' + li(['Mix cards with and without Footer Padding in one group.', 'Use long lists in a card. Cards in a row get the same height, so one tall card makes the others tall.', 'Turn on Active Card and add extra links on the same card.', 'Put brand elements in the footer. They belong on the image.'])))
 
@@ -251,7 +331,7 @@ JS_EX = r"""
   function colR(img) { return function (r) { return img.getBoundingClientRect().right + 36 - (r.left + r.width); }; }
   function figs() {
     var a = $('#an-card-img'), p = $('#an-pd-img'), d = $('#an-disc-img');
-    var AW = 589, AH = 816, BW = 589, BH = 331, ys = [165, 36, 363, 393, 435, 515, 620, 707, 751, 779], xs = [10, 25, 25, 25, 25, 25, 25, 25, 25, 25];
+    var AW = 589, AH = 816, BW = 589, BH = 331, ys = [165, 270, 36, 363, 393, 435, 515, 620, 707, 751, 779], xs = [10, 40, 25, 25, 25, 25, 25, 25, 25, 25, 25];   /* 2 = overlay: the dark left side of the image */
     DK.callouts($('#an-card'), ys.map(function (y, i) { return { n: String(i + 1), box: box(a, AW, AH, xs[i], y), side: 'left', len: col(a) }; }));
     DK.callouts($('#an-pd'), [{ n: '1', box: box(p, BW, BH, 50, 80), side: 'left', len: col(p) }, { n: '2', box: box(p, BW, BH, 300, 8), side: 'left', len: col(p) }, { n: '2', box: box(p, BW, BH, 200, 322), side: 'left', len: col(p) }]);
     DK.callouts($('#an-disc'), [{ n: '1', box: box(d, BW, BH, 190, 170), side: 'left', len: col(d) }, { n: '2', box: box(d, BW, BH, 520, 285), side: 'right', len: colR(d) }]);
@@ -261,12 +341,140 @@ JS_EX = r"""
   if (left === 0) figs();
 """
 
+# SPECIFICATIONS: measures from the Figma frames (24811-111461 card, 24811-112608 Power Deal, 24811-112612 Graphic Elements) and the
+# size/breakpoint matrix the user sent 2026-11-06. The values measured on UAT were checked against Figma by the user (2026-11-06) and match.
+P = []
+P.append(('card', '<h2 class="ds-h2">Card</h2>' + desc('The card is an image holder with a footer below it. Figma: ' + fig_link(FIG_AH + '24811-111461', 'Article Highlight Card', 'large') + ' (589px wide).') +
+          table(['Part', 'Value'], [
+              ['Image', 'Full width, aspect ratio 16:9 (589×331px in Figma)'],
+              ['Background', '--color-background-primary'],
+              ['Footer border (half stroke)', '1px --color-border-primary on the left, right and bottom of the footer'],
+              ['Card border (full stroke)', '1px --color-border-primary around the whole card (setting Full Stroke Border)'],
+              ['Corners', 'Sharp, no radius'],
+          ])))
+
+MARKS = ('<i class="measure__pad measure__pad--t"></i><i class="measure__pad measure__pad--b"></i><i class="measure__pad measure__pad--l"></i><i class="measure__pad measure__pad--r"></i>'
+            '<b class="measure__dim measure__dim--v measure__dim--t"><span></span></b><b class="measure__dim measure__dim--v measure__dim--b"><span></span></b><b class="measure__dim measure__dim--h measure__dim--l"><span></span></b><b class="measure__dim measure__dim--h measure__dim--r"><span></span></b>')
+
+
+def mitem(n, name, subject):
+    """One item of a measurement figure: subject is the real markup with class measure__subject; measure.js reads its padding."""
+    return '<div class="measure__item"><span class="measure__name">%d · %s</span><div class="measure__obj">%s%s</div></div>' % (n, name, subject, MARKS)
+
+
+def mfig(label, items, cap):
+    return ('<div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-fig__stage--flush" style="padding:0;min-height:0"><div class="measure" role="img" aria-label="%s">%s</div></div>'
+            '<figcaption class="ds-fig__cap">%s</figcaption></figure></div>') % (label, ''.join(items), cap)
+
+
+FOOT_INNER = ('<span class="ahm-pre">Preheadline</span><span class="ahm-title">Title</span><p class="ahm-body">Supporting text that gives a sense of length.</p>'
+              '<span class="ahm-link">Action link <span class="mo-ic" aria-hidden="true">chevron_right</span></span>')
+BP_TOOL = toolbar([('mb-l', 'Breakpoint', 'data-bp-toggle', BP_BUTTONS, ' data-bp-force')])
+CAP_BP = ' Change the Breakpoint at the top of the section to see the mobile values.'
+
+def warning(title, items):
+    """Weak Warning inline notification (eco-inline-notification, notifications.css): a deviation in the build that the developers must fix."""
+    body = '<span class="inline-notification__title">%s</span>' % title + '<ul class="ahw-list">' + ''.join('<li>%s</li>' % i for i in items) + '</ul>'
+    return ('<div class="inline-notification inline-notification--warning inline-notification--weak ahw" role="note"><div class="inline-notification__base"><div class="inline-notification__left-border"></div>'
+            '<div class="inline-notification__container"><div class="inline-notification__inner"><div class="inline-notification__header">'
+            '<span class="material-symbols-outlined inline-notification__icon" aria-hidden="true">warning</span><div class="inline-notification__text">%s</div>'
+            '</div></div></div></div></div>') % body
+
+
+def lobj(cls, inner):
+    """One block of the footer layout figure: the block is the subject, its padding-bottom is the space to the next block (as in Figma)."""
+    return '<div class="measure__obj ahl-obj"><div class="%s measure__subject">%s</div>%s</div>' % (cls, inner, MARKS)
+
+
+def layout(size):
+    ch = '<span class="mo-ic" aria-hidden="true">chevron_right</span>'
+    return ('<div class="ahl ahl--%s">' % size +
+            lobj('ahl-pre', '<span>Preheadline</span><i class="ahl-divider" aria-hidden="true"></i><span>Preheadline</span>') +
+            lobj('ahl-title', 'Title') +
+            lobj('ahl-txt ahl-gap', 'Supporting text.') +
+            lobj('ahl-list ahl-gap', '<span>List item level 1</span><span>Item</span><span>Item</span>') +
+            lobj('ahl-txt ahl-gap', 'Supporting text.') +
+            lobj('ahl-stack ahl-gap', '<span class="ahl-link">Text link ' + ch + '</span><span class="ahl-link">Text link ' + ch + '</span>') +
+            lobj('ahl-divided ahl-end', '<span class="ahl-link">Text link ' + ch + '</span><i class="ahl-sep" aria-hidden="true"></i><span class="ahl-link">Text link ' + ch + '</span>') +
+            lobj('ahl-date', 'Date') +
+            '<div class="ahl-link ahl-last">Text link ' + ch + '</div></div>')
+
+
+P.append(('measurements', '<h2 class="ds-h2">Measurements</h2><h3 class="ds-h3 ds-group">Dimensions</h3>' + desc('The footer padding: the space between the edge of the footer and its content. It is the same for both card sizes. All numbers in the figures are read from the parts themselves.') +
+          BP_TOOL +
+          mfig('Footer padding, with and without the setting Footer Padding', [
+              mitem(1, 'Footer Padding on', '<div class="ahm-foot measure__subject">' + FOOT_INNER + '</div>'),
+              mitem(2, 'Footer Padding off', '<div class="ahm-foot ahm-foot--flush measure__subject">' + FOOT_INNER + '</div>')],
+              'The card footer at true size. Without Footer Padding only the space above the preheadline is left.' + CAP_BP) +
+          table(['Footer Padding', 'Large (1024px+)', 'Medium (769–1023px)', 'Small (640–768px)', 'XSmall (0–639px)'], [
+              ['On, all four sides', '24px', '24px', '24px', '16px'],
+              ['Off, above the preheadline', '16px', '16px', '12px', '8px'],
+              ['Off, sides and bottom', '0', '0', '0', '0'],
+          ]) + desc('The same for the Large and the Small card, per ' + a(BP, 'breakpoint') + '.') +
+          '<h3 class="ds-h3 ds-group">Footer layout</h3>' + warning('Deviations on UAT (2026-11-07)', ['Date: the letter spacing is 0.2px. Figma and alt-label-md say 0.64px on desktop and 0.56px on mobile.', 'Space above the date at XSmall: 16px on UAT and in the size matrix, 24px in the Figma component (Small-XSmall). The page shows 16px until the right value is decided.']) + desc('The whole footer with every part turned on, per card size, with the type and the space below each part. Figma: ' + fig_link(FIG_AH + '24857-13630', 'Article Highlight Group Card font settings', 'large') + '. The footer padding is left out here (see above).') +
+          mfig('Footer layout of the Large and the Small card', ['<div class="measure__item"><span class="measure__name">%d · %s</span>%s</div>' % (i + 1, t, layout(z)) for i, (t, z) in enumerate([('Large card', 'lg'), ('Small card', 'sm')])], 'Type and spacing at true size.' + CAP_BP) +
+          '<h3 class="ds-h3 ds-group">Spacing</h3>' + desc('Space between the parts of the footer. Each part carries the space below it, as in Figma: ' + fig_link(FIG_AH + '24857-13630', 'Article Highlight Group Card font settings', 'large') + '. The figure uses the type of the Small card.') +
+          mfig('Space below each part of the card footer', [
+              mitem(1, 'Preheadline', '<span class="ahm-blk ahm-pre measure__subject">Preheadline</span>'),
+              mitem(2, 'Title', '<span class="ahm-blk ahm-title measure__subject">Title</span>'),
+              mitem(3, 'Supporting text, Small card', '<p class="ahm-blk ahm-body ahm-body--gap measure__subject">Supporting text before a list.</p>'),
+              mitem(4, 'Supporting text, Large card', '<p class="ahm-blk ahm-body ahm-body--gap ahm-body--lg measure__subject">Supporting text before a list.</p>'),
+              mitem(5, 'List item', '<span class="ahm-blk ahm-li measure__subject"><span class="mo-ic" aria-hidden="true">check</span>List item</span>'),
+              mitem(6, 'Text group, Small card', '<p class="ahm-blk ahm-body ahm-group measure__subject">The last text before the action link.</p>'),
+              mitem(7, 'Text group, Large card', '<p class="ahm-blk ahm-body ahm-group ahm-group--lg measure__subject">The last text before the action link.</p>'),
+              mitem(8, 'Date', '<span class="ahm-blk ahm-pre ahm-date measure__subject">Date</span>')],
+              'The shaded area below each part is the space to the next part.' + CAP_BP) +
+          table(['Between', 'Space'], [
+              ['Preheadline and title', '8px'],
+              ['Two preheadlines', '8px, with a 1px divider (border-primary) as high as the text: 16px desktop, 14px mobile'],
+              ['Title and supporting text', '8px'],
+              ['Supporting text, list, supporting text 2 and links', 'Large card 20px desktop; Small card 16px; both 16px mobile'],
+              ['List items', '8px; bullet to text 8px'],
+              ['Stacked links', '12px between links'],
+              ['Divided links', '8px between links in a row, 12px between rows; divider 1×16px surface-20'],
+              ['Link icon', 'Large card desktop: 24px, 8px to the text; otherwise 20px, 4px to the text'],
+              ['Date and action link or button', '8px'],
+              ['Button', 'The ECO ' + a('button.html', 'Button') + ', Primary, Small (40px desktop, 32px mobile); its own measures are on the Button page'],
+          ]) +
+          '<h3 class="ds-h3">Space above the date, action link or button</h3>' + desc('The space below the last text: above the date when there is one, otherwise above the action link or the button. From the size matrix in Figma.') +
+          table(['Card size', 'Large (1024px+)', 'Medium (769–1023px)', 'Small (640–768px)', 'XSmall (0–639px)'], [
+              ['Large', '32px', '32px', '24px', '16px'],
+              ['Small', '24px', '24px', '24px', '16px'],
+          ]) + desc('Cards in a row get the same height, so the action link moves to the bottom of the card and the space above it can be larger.') +
+          '<h3 class="ds-h3 ds-group">Badge</h3>' + desc('The badge on the image.') +
+          mfig('Padding of the badge', [mitem(1, 'Badge', '<span class="ahm-badge measure__subject">Nyhet</span>')], 'The badge at true size. It sits 24px from the top and left edge of the image.') ))
+
+P.append(('typography', '<h2 class="ds-h2">Typography</h2>' + desc('Text styles in the footer per card size. The styles change size at 769px (see ' + a('../foundations/typography.html', 'Typography') + '). Figma: ' + fig_link(FIG_AH + '24857-13630', 'Article Highlight Group Card font settings', 'large') + ' (component ' + fig_link(FIG_AH + '20161-55854', 'Card / Base / Content', 'large') + ').') +
+          table(['Part', 'Large card', 'Small card', 'Color'], [
+              ['Preheadline', 'alt-label-md, uppercase (16/16, 14/14 mobile)', 'alt-label-md, uppercase (16/16, 14/14 mobile)', '--color-text-tertiary'],
+              ['Title', 'headline-sm (28/32, 22/24 mobile)', 'title-lg (24/28, 20/24 mobile)', '--color-text-primary'],
+              ['Supporting text, list, links', 'body-lg 20/28 desktop, body-md 16/22 mobile', 'body-md (17/24, 16/22 mobile)', '--color-text-primary'],
+              ['Date', 'alt-label-md, uppercase (16/16, 14/14 mobile), letter spacing 0.64px (0.56px mobile)', 'alt-label-md, uppercase (16/16, 14/14 mobile), letter spacing 0.64px (0.56px mobile)', '--color-text-secondary'],
+              ['Action link', 'As the supporting text, chevron 20px', 'As the supporting text, chevron 20px', '--color-text-primary'],
+          ])))
+
+P.append(('image-elements', '<h2 class="ds-h2">Image elements</h2>' + desc('Position and size of what sits on the image. Figma: ' + fig_link(FIG_AH + '24811-112608', 'Power Deal Concept', 'large') + ' and ' + fig_link(FIG_AH + '24811-112612', 'Graphic Elements', 'large') + '. Sizes are for a 589px wide card.') +
+          table(['Element', 'Position', 'Size and style'], [
+              ['Badge', '24px from the top and left', 'Padding 4px 5px, --color-surface-raised-primary, elevation-b-20, text 16/16 bold uppercase'],
+              ['News badge', '16px from the top and right', '80×80px'],
+              ['Overlay (Left)', 'Over the whole image', 'Black gradient, 60% at the left edge, 40% at 42%, transparent at 84%'],
+              ['Power Deal logo', '32px from the left, 54px from the top', '143×72px'],
+              ['Power Deal border', 'Top left and bottom right edge', '22px high'],
+              ['Main graphic', 'Centred', '236×118px'],
+              ['Corner graphic (brand logo)', 'About 24px from the bottom and right', '99×48px'],
+          ])))
+
+JS_SPEC = r"""
+  DK.bp(function () { if (window.ECO_MEASURE) ECO_MEASURE.init(); });
+"""
+
 C = dict(
     slug=SLUG, title='Article Highlight Group Card', eyebrow='Components · Cards',
     lead='Cards that promote articles, campaigns and brands, placed in a grid or in a carousel. A card can have an image, logos and graphics, badges, text, links and a button.',
-    select_menu=False, css=['badge', 'button', 'divider', 'inline-link'], style=STYLE,
+    select_menu=False, css=['badge', 'button', 'divider', 'inline-link'], pre_css=['../notifications.css?v=22'], style=STYLE,
     pages=[
-        dict(kind='ex', suffix='', label='Examples & Guidelines', lead='The anatomy of the card, the brand elements, the variants and when to use them.', secs=E, js=JS_EX),
+        dict(kind='ex', suffix='', label='Examples & Guidelines', lead='The anatomy of the card, the brand elements and when to use them.', secs=E, js=JS_EX),
+        dict(kind='spec', suffix='-specifications', label='Specifications', lead='Measures of the card, the footer, the text and the elements on the image, per card size and breakpoint, from Figma.', secs=P, js=JS_SPEC),
         dict(kind='sb', suffix='-storyblok', label='Storyblok', lead='How an editor adds and sets up the AH Group widget (Article Highlight Group) in Storyblok, and the settings of the AH Group Card. The numbers on the screenshots match the numbers in the headings.', secs=S),
     ])
 

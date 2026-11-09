@@ -5,6 +5,8 @@ description: Use when building or reviewing checkboxes — light mode (standard 
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
+> **Not sure this is the right control?** Read `selection-guide` first: it picks between Radio button, Checkbox, Chip, Select, Switch and Pill Segment Control by one or several choices and the number and length of the options (rule 2026-11-08).
+
 ## Checkbox Styling (ECO Design System)
 
 Checkboxes follow the ECO Design System spec: total area **24×24px**, visible box **16×16px**.

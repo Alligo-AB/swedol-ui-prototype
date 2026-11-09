@@ -74,7 +74,7 @@ Read this before you decide a piece is "new". Every row is a finished component 
 |---|---|
 | A button, icon button, or a row of 2–4 toggle options | `eco-button` (button group: section "Button group") |
 | A text field, multi-line text, a dropdown | `eco-input`, `eco-textarea`, `eco-select`; an icon-name field: `eco-icon-picker` |
-| Yes/no, one-of-many, on/off, a value on a scale | `eco-checkbox`, `eco-radio`, `eco-switch`, `eco-range` |
+| Yes/no, one-of-many, several-of-many, on/off, a value on a scale (decide the control first) | `selection-guide` → `eco-radio`, `eco-checkbox`, `eco-chip`, `eco-select`, `eco-switch`; a scale: `eco-range` |
 | Switch between 2–4 views of the same content | `eco-pill-segment-control` |
 | Tabs: sub-navigation, content sections (primary/secondary), e.g. My Pages account nav, or a section nav for a whole page (`tab-bar--page`) | `eco-tabs` |
 | A link (decide the type first) | `links-guide` → `eco-inline-link`, `eco-action-link`, `eco-tile-link` |

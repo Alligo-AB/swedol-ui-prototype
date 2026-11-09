@@ -14,6 +14,8 @@
   /* Segmented toggle: aria-pressed group, fn(value) on change */
   function seg(g, fn) {
     if (g.tagName === 'SELECT') { g.addEventListener('change', function () { fn(g.value); }); return; }
+    if (g.getAttribute('role') === 'radiogroup') { g.addEventListener('change', function (e) { if (e.target.type === 'radio') fn(e.target.value); }); return; }   /* playground radios (build.py radio_group) */
+    if (g.type === 'checkbox') { g.addEventListener('change', function () { fn(g.checked ? (g.dataset.on || 'on') : (g.dataset.off || 'off')); }); return; }   /* playground switch (build.py sw_group) */
     g.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b || b.disabled) return;
       $$('button', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });

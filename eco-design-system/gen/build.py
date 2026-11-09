@@ -129,8 +129,9 @@ def emit(c):
         if os.path.exists(p) and '--force' not in sys.argv:   # the pages are the real files: never overwrite a hand-edited page by accident
             print('exists, skipped (use --force to overwrite):', p)
             continue
+        import playground_rule   # selection rule for playground controls (skill selection-guide); late import: it imports build
         with open(p, 'w') as f:
-            f.write(page(c, kind))
+            f.write(playground_rule.apply(page(c, kind)))
         print('wrote', p)
 
 
@@ -139,6 +140,22 @@ def btn_group(label_id, label, attr, buttons, extra=''):
     """buttons: [(value, text, pressed)]"""
     b = ''.join('<button type="button" data-v="%s" aria-pressed="%s">%s</button>' % (v, 'true' if p else 'false', t) for v, t, p in buttons)
     return '<div class="ds-field"><span class="form-label form-label--sm" id="%s">%s</span><div class="btn-group" role="group" aria-labelledby="%s" %s%s>%s</div></div>' % (label_id, label, label_id, attr, extra, b)
+
+
+def sw_group(label_id, label, items):
+    """Playground on/off settings as Small switches (selection-guide: on/off that takes effect at once = switch).
+    items: [(key, text, checked, on_value, off_value)]; each switch writes state[key] = on_value / off_value via DK.wire."""
+    s = ''.join('<label class="form-switch-item form-switch-item--sm"><input type="checkbox" role="switch" data-pg="%s" data-on="%s" data-off="%s"%s><span>%s</span></label>' % (k, on, off, ' checked' if c else '', t) for k, t, c, on, off in items)
+    if label is None or len(items) == 1:   # a lone switch: its own text is the label, no heading
+        return '<div class="ds-field"><div class="ds-switches">%s</div></div>' % s
+    return '<div class="ds-field"><span class="form-label form-label--sm" id="%s">%s</span><div class="ds-switches" role="group" aria-labelledby="%s">%s</div></div>' % (label_id, label, label_id, s)
+
+
+def radio_group(label_id, label, key, options, checked):
+    """Playground choice with long labels as Small radio buttons (selection-guide: one choice, 2-7 options, all visible).
+    options: [(value, text)]; DK.wire writes state[key] = value. Needs css 'radio'."""
+    r = ''.join('<label class="form-radio-item form-radio-item--sm"><input type="radio" name="%s" value="%s"%s><span>%s</span></label>' % (label_id, v, ' checked' if v == checked else '', t) for v, t in options)
+    return '<div class="ds-field"><span class="form-label form-label--sm" id="%s">%s</span><div class="form-radio-group ds-radios" role="radiogroup" aria-labelledby="%s" data-pg="%s">%s</div></div>' % (label_id, label, label_id, key, r)
 
 
 BP_BUTTONS = [('auto', 'Window', True), ('desktop', 'Desktop', False), ('mobile', 'Mobile', False)]
