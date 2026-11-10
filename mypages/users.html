@@ -6342,7 +6342,11 @@
     .sign-qr__hint { text-align: center; margin-top: var(--dimension-spacing-space-8); }
     .sign-modal__status { display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16); padding: var(--dimension-spacing-space-24) 0; text-align: center; }
     .sign-modal__status .ms { font-size: 48px; color: var(--color-surface-success-default); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 48; }
+    /* Expired: filled warning in warning yellow (Figma 4947:16794, Material/Fill/300/warning, color/surface-warning-default) */
+    .sign-modal__status--warning .ms { color: var(--color-surface-warning-default); }
     .sign-modal .delete-modal__body .inline-link { font-size: inherit; line-height: inherit; }
+    /* BankID logo in the top-left corner, above the title (header-text column, 8px gap) */
+    .sign-modal__logo { display: block; width: 24px; height: 24px; color: var(--color-icon-primary); }
     .sign-modal__live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   </style>
   <div id="sign-modal-overlay" class="delete-modal-overlay"></div>
@@ -6352,6 +6356,7 @@
       <div class="delete-modal__header-body">
         <div class="delete-modal__header">
           <div class="delete-modal__header-text">
+            <svg class="sign-modal__logo" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" role="img" aria-label="BankID"><path d="M8.1106 12.4526L8.99121 6.66081C8.6443 6.66081 8.05056 6.66081 8.05056 6.66081C7.61026 6.66081 7.04321 6.40324 6.87643 5.92987C6.82306 5.76976 6.6963 5.21982 7.42347 4.68381C7.68365 4.49585 7.85043 4.28701 7.88378 4.1269C7.91714 3.95983 7.87711 3.81365 7.7637 3.70227C7.60359 3.54216 7.29004 3.45166 6.88977 3.45166C6.21598 3.45166 5.74232 3.85541 5.69562 4.14779C5.66227 4.36359 5.82238 4.53762 5.96247 4.649C6.38276 4.97618 6.48283 5.44955 6.22265 5.89507C5.9558 6.35451 5.3754 6.65385 4.75498 6.66081C4.75498 6.66081 4.14123 6.66081 3.79432 6.66081C3.71427 7.22467 2.40671 15.8706 2.30664 16.5528H7.49685C7.54355 16.2534 7.78371 14.6175 8.1106 12.4526Z"/><path d="M2.02628 18.5571H4.1544C5.06169 18.5571 5.28184 19.0375 5.21513 19.476C5.16176 19.831 4.92826 20.0956 4.52799 20.2696C5.035 20.4715 5.23514 20.7847 5.16176 21.279C5.06836 21.8985 4.55468 22.358 3.88088 22.358H1.45923L2.02628 18.5571ZM3.43391 20.1304C3.84753 20.1304 4.04099 19.9007 4.08102 19.6292C4.12105 19.3368 3.99429 19.1349 3.58068 19.1349H3.21376L3.06699 20.1304H3.43391ZM3.20709 21.7663C3.63405 21.7663 3.88088 21.5853 3.94092 21.2163C3.98762 20.8961 3.81417 20.7082 3.40055 20.7082H2.98694L2.82683 21.7732H3.20709V21.7663Z"/><path d="M8.1438 22.3859C7.59009 22.4277 7.32324 22.3651 7.18981 22.1144C6.89628 22.3024 6.56939 22.3999 6.22248 22.3999C5.59539 22.3999 5.37524 22.0588 5.43528 21.6829C5.46197 21.5019 5.56203 21.3278 5.72214 21.1816C6.06905 20.8684 6.92296 20.8266 7.25652 20.5899C7.28321 20.3254 7.18314 20.2279 6.86959 20.2279C6.50268 20.2279 6.1958 20.3532 5.66877 20.7292L5.79553 19.866C6.24917 19.5249 6.68947 19.3647 7.19648 19.3647C7.84359 19.3647 8.41732 19.6432 8.31058 20.3811L8.18382 21.2164C8.13713 21.5088 8.15047 21.5993 8.46402 21.6063L8.1438 22.3859ZM7.18314 21.0703C6.88961 21.2652 6.34257 21.2304 6.28253 21.6341C6.25584 21.8221 6.36925 21.9613 6.54937 21.9613C6.72283 21.9613 6.93631 21.8847 7.10976 21.7594C7.09642 21.6898 7.10309 21.6202 7.1231 21.4879L7.18314 21.0703Z"/><path d="M9.17777 19.4135H10.2852L10.2252 19.7963C10.5787 19.4831 10.8456 19.3647 11.1925 19.3647C11.8129 19.3647 12.0998 19.7615 11.9997 20.4089L11.7128 22.3511H10.6054L10.8456 20.7431C10.8923 20.4507 10.8055 20.3115 10.5921 20.3115C10.4186 20.3115 10.2585 20.4089 10.1051 20.6247L9.85156 22.3442H8.74414L9.17777 19.4135Z"/><path d="M12.8671 18.5571H13.9745L13.6943 20.4227L14.7551 19.4134H16.1227L14.7617 20.6664L15.8558 22.351H14.4615L13.621 20.9866H13.6076L13.4075 22.3441H12.3L12.8671 18.5571Z"/><path d="M16.783 18.5571H18.0572L17.4969 22.351H16.2227L16.783 18.5571Z"/><path d="M18.6776 18.5571H20.4989C21.9065 18.5571 22.3135 19.6222 22.18 20.5063C22.0533 21.3695 21.3995 22.351 20.1653 22.351H18.1106L18.6776 18.5571ZM19.8585 21.4461C20.4789 21.4461 20.8191 21.1258 20.9192 20.4506C20.9926 19.9494 20.8458 19.4551 20.1587 19.4551H19.8184L19.5249 21.4461H19.8585Z"/><path d="M15.0887 1.59985H9.78503L9.07788 6.28479H9.9785C10.4722 6.28479 10.9392 6.04811 11.1393 5.70701C11.206 5.59563 11.2327 5.49817 11.2327 5.40767C11.2327 5.21275 11.1059 5.06657 10.9792 4.96911C10.6323 4.69762 10.5589 4.41221 10.5589 4.21033C10.5589 4.16856 10.5589 4.13376 10.5656 4.09895C10.6389 3.6047 11.2794 3.06868 12.1266 3.06868C12.6336 3.06868 13.0206 3.19399 13.2541 3.42371C13.4609 3.62558 13.5409 3.911 13.4809 4.21033C13.4075 4.56536 13.0673 4.85773 12.8738 5.00392C12.3601 5.37983 12.4268 5.70701 12.4602 5.80446C12.5669 6.09684 12.9739 6.28479 13.2874 6.28479H14.6617C14.6617 6.28479 14.6617 6.28479 14.6617 6.29175C16.5296 6.30568 17.5303 7.20368 17.2168 9.29206C16.9232 11.2343 15.4956 12.0696 13.7944 12.0835L13.1206 16.5666H14.1147C18.3109 16.5666 21.7399 13.7542 22.4137 9.31295C23.2476 3.79962 19.8919 1.59985 15.0887 1.59985Z"/></svg>
             <h2 class="delete-modal__title" id="sign-modal-title">Signera med Mobilt BankID</h2>
           </div>
           <button class="icon-btn icon-btn--close" data-sign="cancel" aria-label="Stäng"><span class="ms">close</span></button>
@@ -6384,17 +6389,20 @@
         </div>
 
         <div data-step="expired">
-          <p class="delete-modal__body">Du hann inte signera innan QR-koden slutade gälla. Försök igen.</p>
+          <div class="sign-modal__status sign-modal__status--warning">
+            <span class="ms" aria-hidden="true">warning</span>
+            <p class="delete-modal__body">Du hann inte signera innan QR-koden slutade gälla. Försök igen.</p>
+          </div>
         </div>
       </div>
 
       <div class="delete-modal__footer" data-step="qr">
-        <button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt</span></button>
+        <button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt inloggning</span></button>
         <button class="btn btn--primary sign-modal__primary sign-only-mobile" data-sign="scan"><img src="/images/BankId.svg" alt="" aria-hidden="true"><span class="btn__label">Öppna BankID</span></button>
       </div>
-      <div class="delete-modal__footer" data-step="waiting"><button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt</span></button></div>
+      <div class="delete-modal__footer" data-step="waiting"><button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt inloggning</span></button></div>
       <div class="delete-modal__footer" data-step="expired">
-        <button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt</span></button>
+        <button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt inloggning</span></button>
         <button class="btn btn--primary sign-modal__primary" data-sign="restart"><span class="btn__label">Försök igen</span></button>
       </div>
     </div>
