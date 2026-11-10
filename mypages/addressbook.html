@@ -3792,6 +3792,8 @@
 
 
   </style>
+  <link rel="stylesheet" href="/eco-design-system/notifications.css">
+  <script src="/eco-design-system/notifications.js" defer></script>
 </head>
 <body>
 
@@ -4795,67 +4797,17 @@
         document.body.classList.remove('has-impersonation-banner');
       }
 
+      /* ── Logout confirmation: ECO Toast, Warning, Weak, actionable (eco-design-system/notifications.js) ── */
       function showLogoutConfirmToast(name) {
-        var w       = window.innerWidth;
-        var isXs    = w <= 639;
-        var isMobile = w <= 768;
-        var isSmMd  = !isXs && w <= 1023;
-        var topVal  = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var rightVal = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var bodyLh  = isMobile ? '22px' : '24px';
-        var dismissed = false;
-
-        function dismiss() {
-          if (dismissed) return;
-          dismissed = true;
-          t.style.animation = isXs
-            ? 'toast-slide-out-top var(--duration-medium-2) var(--ease-accelerate-generic) forwards'
-            : 'toast-slide-out var(--duration-medium-2) var(--ease-accelerate-generic) forwards';
-          setTimeout(function(){ t.remove(); }, 300);
-        }
-        function confirmLogout() { dismiss(); closeImpersonation(); }
-
-        var t = document.createElement('div');
-        t.setAttribute('role', 'alertdialog');
-        t.style.cssText = [
-          'position:fixed',
-          'z-index:9999',
-          isXs ? 'top:0;left:0;right:0;width:100vw' : ('top:' + topVal + ';right:' + rightVal + ';width:375px'),
-          'box-shadow:0px 8px 16px 0px rgba(0,0,0,0.10),0px 0px 1px 0px rgba(0,0,0,0.05)',
-          'animation:' + (isXs
-            ? 'toast-slide-in-top var(--duration-medium-2) var(--ease-decelerate-emphasized) forwards'
-            : 'toast-slide-in var(--duration-medium-2) var(--ease-decelerate-emphasized) forwards'),
-          "font-family:\'Breuer Condensed\',Arial,sans-serif"
-        ].join(';');
-
-        t.innerHTML = [
-          '<div style="background:#fff;border-left:2px solid #fac000;display:flex;flex-direction:column;width:100%;">',
-            '<div style="display:flex;gap:8px;align-items:flex-start;padding:16px;width:100%;box-sizing:border-box;">',
-              '<span class="ms ms--24" style="color:#fac000;font-variation-settings:\'FILL\' 1,\'wght\' 300,\'GRAD\' 0,\'opsz\' 24;flex-shrink:0;margin-top:1px;">warning</span>',
-              '<div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;">',
-                '<p style="font-size:16px;font-weight:600;line-height:18px;letter-spacing:0px;color:#000;padding-top:2px;">LOGGA UT</p>',
-                '<p style="font-size:16px;font-weight:400;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;">',
-                  'Är du säker att du vill logga ut som användare <strong style="font-weight:600;">' + escHtml(name) + '</strong>?',
-                '</p>',
-                '<p style="font-size:16px;font-weight:600;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;margin-top:8px;">',
-                  'Du kommer fortfarande att vara inloggad som Administratör.',
-                '</p>',
-              '</div>',
-              '<button aria-label="Stäng" id="logout-toast-close" style="flex-shrink:0;background:transparent;border:none;cursor:pointer;padding:2px;font-size:20px;color:#000;display:inline-flex;">',
-                '<span class="ms">close</span>',
-              '</button>',
-            '</div>',
-            '<div style="padding:0 16px 16px 48px;display:flex;gap:8px;align-items:center;box-sizing:border-box;">',
-              '<button id="logout-toast-ok" class="btn btn--secondary logout-toast__btn-secondary"><span class="btn__label">OK</span></button>',
-              '<button id="logout-toast-cancel" class="btn btn--primary logout-toast__btn-primary"><span class="btn__label">ABRYT</span></button>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        t.querySelector('#logout-toast-close').addEventListener('click', dismiss);
-        t.querySelector('#logout-toast-ok').addEventListener('click', confirmLogout);
-        t.querySelector('#logout-toast-cancel').addEventListener('click', dismiss);
-        document.body.appendChild(t);
+        window.ECO_N.showToast({
+          status: 'warning',
+          title: 'Logga ut som ' + name + '?',
+          text: 'Du är fortfarande inloggad som Administratör.',
+          actions: {
+            secondary: { label: 'Avbryt' },
+            primary: { label: 'Logga ut', onClick: function () { closeImpersonation(); } }
+          }
+        });
       }
 
       document.getElementById('impersonation-banner-logout').addEventListener('click', function() {

@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="/components/css/tabs.css">
   <script src="/components/js/tabs.js"></script>
   <link rel="stylesheet" href="/components/css/tooltip.css">
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/checkbox.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
@@ -2341,20 +2345,7 @@
     .form-row { display: flex; gap: 24px; }
     .form-row .form-field { flex: 1; min-width: 0; }
 
-    .form-label {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;            /* Desktop Large: label-md */
-      font-weight: 600;
-      color: var(--color-text-primary);
-      text-transform: uppercase;
-      letter-spacing: 0.48px;
-      line-height: 16px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      white-space: nowrap;
-    }
+    .form-label { display: flex; align-items: center; gap: 2px; white-space: nowrap; } /* type from input.css; flex for the (Valfritt) suffix */
     .form-label__req { color: var(--color-text-danger-default); }
     .form-label__optional {
       font-family: 'Breuer Condensed', Arial, sans-serif;
@@ -2367,216 +2358,8 @@
       color: var(--color-text-primary);
     }
 
-    /* Input wrapper — provides focus ring via ::after */
-    .input-wrap {
-      position: relative;
-    }
-    .input-wrap::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border: 2px solid var(--color-border-focus);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-    }
-    .input-wrap:focus-within::after { opacity: 0; }
-    body.keyboard-nav :focus-within::after { opacity: 1; }
-
-    .form-input,
-    .form-select {
-      height: 48px;               /* Desktop Large */
-      border: 1px solid var(--color-border-input-default);
-      background: var(--color-surface-raised-primary, #ffffff);
-      padding: 8px 12px;          /* space-8 vert, space-12 horiz */
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;            /* body-md Desktop */
-      font-weight: 400;
-      line-height: 22px;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-      outline: none;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    @media (min-width: 769px) { .form-input,
-    .form-select { font-size: 17px; line-height: 24px; } }
-    .form-input::placeholder { color: var(--color-text-tertiary); }
-
-    /* Hover */
-    .form-input:hover, .form-select:hover { border-color: var(--color-border-dark); }
-
-    /* Active — has value (placeholder not shown) */
-    .form-input:not(:placeholder-shown) {
-      border-color: var(--color-border-selected);
-      color: var(--color-text-primary);
-    }
-
-    /* Focus — selected border on click or keyboard; blue ring only on keyboard (via body.keyboard-nav) */
-    .form-input:focus { border-color: var(--color-border-selected); }
-
-    /* Error */
-    .form-input--error { border-color: var(--color-border-danger-default) !important; }
-
-    /* Success */
-    .form-input--success { border-color: var(--color-border-success-default) !important; }
-
-    /* Disabled */
-    .form-input:disabled {
-      background: var(--color-surface-raised-secondary, #f6f6f6);
-      border-color: var(--color-border-disabled);
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-    }
-
-    .form-select {
-      appearance: none;
-      cursor: pointer;
-      padding-right: 40px;            /* utrymme för dropdown-pil */
-    }
-
-    /* Focus — selected border on click or keyboard */
-    .form-select:focus { border-color: var(--color-border-selected); }
-
-    /* Active — icke-default alternativ valt (JS-togglad klass på wrappern) */
-    .form-select-wrap.is-active .form-select { border-color: var(--color-border-selected); }
-
-    /* Error */
-    .form-select--error { border-color: var(--color-border-danger-default) !important; }
-
-    /* Success */
-    .form-select--success { border-color: var(--color-border-success-default) !important; }
-
-    /* Disabled */
-    .form-select:disabled {
-      background: var(--color-surface-raised-secondary, #f6f6f6);
-      border-color: var(--color-border-disabled);
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-    }
-
-    .form-select-wrap { position: relative; }
-    .form-select-arrow {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      font-size: 24px;
-      line-height: 1;
-      color: var(--color-text-primary);
-    }
-    .form-select:disabled ~ .form-select-arrow {
-      color: var(--color-text-disabled);
-    }
-
-    .form-helper {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;            /* body-sm */
-      font-weight: 400;
-      color: var(--color-text-tertiary);
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .form-helper--error {
-      color: var(--color-text-danger-default);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .form-helper--success  { color: var(--color-text-success-default); }
-    .form-helper--disabled { color: var(--color-text-disabled); }
-
-    .form-checkboxes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 24px;
-      margin-top: 4px;
-      margin-bottom: 4px;
-    }
-    .form-checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-    .form-checkbox-item input[type="checkbox"],
-    .check-icon input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      border: 1.5px solid var(--color-border-selected);
-      background: var(--color-background-primary);
-      cursor: pointer;
-      flex-shrink: 0;
-      /* 4px margin on all sides: 16px box + 4+4 = 24px total incl. space for focus ring */
-      margin: 4px;
-    }
-    .form-checkbox-item input[type="checkbox"]:hover {
-      border-width: 2px;
-    }
-    .form-checkbox-item input[type="checkbox"]:focus-visible {
-      /* 2px gap (outline-offset) + 2px ring = 4px — fills the margin exactly → 24px total */
-      outline: 2px solid var(--color-border-focus);
-      outline-offset: 2px;
-    }
-    .form-checkbox-item input[type="checkbox"]:checked,
-    .check-icon input[type="checkbox"]:checked {
-      background-color: var(--color-surface-100);
-      border-color: var(--color-border-selected);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item input[type="checkbox"]:checked:hover:not(:disabled),
-    .check-icon input[type="checkbox"]:checked:hover:not(:disabled) {
-      background-color: var(--color-text-disabled, #939595);
-      border-color: var(--color-text-disabled, #939595);
-    }
-    .form-checkbox-item input[type="checkbox"]:indeterminate {
-      background-color: var(--color-surface-100);
-      border-color: var(--color-border-selected);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item input[type="checkbox"]:disabled,
-    .check-icon input[type="checkbox"]:disabled {
-      border-color: var(--color-border-disabled);
-      background-color: var(--color-background-primary);
-      cursor: not-allowed;
-    }
-    .form-checkbox-item input[type="checkbox"]:disabled:checked,
-    .check-icon input[type="checkbox"]:disabled:checked {
-      background-color: var(--color-surface-disabled, #e5e5e5);
-      border-color: var(--color-surface-disabled, #e5e5e5);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='%23939595' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item:has(input:disabled) {
-      cursor: not-allowed;
-    }
-    .form-checkbox-item span {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      white-space: nowrap;
-    }
-    @media (min-width: 769px) { .form-checkbox-item span { font-size: 17px; line-height: 24px; } }
-    .form-checkbox-item:has(input:disabled) span {
-      color: var(--color-text-disabled);
-    }
+    /* Checkbox group layout (page): items come from components/css/checkbox.css */
+    .form-checkboxes { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 4px; margin-bottom: 4px; }
 
     /* ── Responsive (mobile-first) ───────────────────────── */
 
@@ -2675,33 +2458,11 @@
       .menu-level2__header { padding: 16px 24px; }
       .menu-level2__title { font-size: 16px; line-height: 16px; letter-spacing: 0.32px; } /* label-lg Mobil */
 
-      /* Labels — label-md Mobile: 14px/14px, 0.42px */
-      .form-label {
-        font-size: 14px;
-        line-height: 14px;
-        letter-spacing: 0.42px;
-      }
       /* Optional suffix — body-md Mobile: 14px/14px, 0.42px */
       .form-label__optional {
         font-size: 14px;
         line-height: 14px;
         letter-spacing: 0.42px;
-      }
-
-      /* Inputs & selects — Large Mobile: 40px, 8px padding, body-md mobile 16px/22px */
-      .form-input,
-      .form-select {
-        height: 40px;
-        padding: 8px;
-        line-height: 22px;
-      }
-      .form-select { padding-right: 40px; }   /* keep room for arrow */
-
-      /* Checkbox label text — body-md Mobile: 16px/22px */
-      .form-checkbox-item span {
-        font-size: 16px;
-        line-height: 22px;
-        letter-spacing: 0.32px;
       }
 
       /* form-row stays stacked on mobile, except name row */
@@ -3145,6 +2906,8 @@
 
 
   </style>
+  <link rel="stylesheet" href="/eco-design-system/notifications.css">
+  <script src="/eco-design-system/notifications.js" defer></script>
 </head>
 <body>
 
@@ -3640,7 +3403,7 @@
             <option>Standard</option>
             <option>Administratör</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Här väljer du vilken roll du vill att din användare ska ha. Standard är den vanliga användarrollen.</span>
       </div>
@@ -3668,13 +3431,13 @@
         <div class="form-field">
           <label class="form-label" for="drawer-fornamn">Förnamn</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" placeholder=" " /></div>
           </div>
         </div>
         <div class="form-field">
           <label class="form-label" for="drawer-efternamn">Efternamn</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" placeholder=" " /></div>
           </div>
         </div>
       </div>
@@ -3683,7 +3446,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-epost">Epost</label>
         <div class="input-wrap">
-          <input class="form-input" type="email" id="drawer-epost" autocomplete="email" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="email" id="drawer-epost" autocomplete="email" placeholder=" " /></div>
         </div>
       </div>
 
@@ -3691,7 +3454,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-mobil"><span>Mobilnummer</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " /></div>
         </div>
       </div>
 
@@ -3699,7 +3462,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-anstallning"><span>Anställnings nr</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-anstallning" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-anstallning" placeholder=" " /></div>
         </div>
       </div>
 
@@ -3707,7 +3470,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-kost"><span>Kostnadsställe</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-kost" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-kost" placeholder=" " /></div>
         </div>
       </div>
 
@@ -3715,7 +3478,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-adress"><span>Adressnummer</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-adress" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-adress" placeholder=" " /></div>
         </div>
       </div>
 
@@ -3727,7 +3490,7 @@
             <option>Inaktiv</option>
             <option>Aktiv</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Inaktiv är standardvärdet. Välj aktiv om ni använder budget.</span>
       </div>
@@ -3739,7 +3502,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-arsbudget">Årsbudget</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-arsbudget" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-arsbudget" placeholder=" " /></div>
           </div>
         </div>
 
@@ -3747,7 +3510,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-saldo">Nuvarande saldo</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-saldo" value="0.00 kr" disabled />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-saldo" value="0.00 kr" disabled /></div>
           </div>
           <span class="form-helper form-helper--disabled" id="drawer-saldo-helper">Nuvarande saldo: 0.00 kr</span>
         </div>
@@ -3756,7 +3519,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-lagg-saldo">Lägg till saldo</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-lagg-saldo" placeholder=" " /></div>
           </div>
         </div>
 
@@ -3830,7 +3593,7 @@
             <option value="11">November</option>
             <option value="12">December</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Här väljer du vilken månad som ska gälla som start för överflyttningen.</span>
       </div>
@@ -3843,7 +3606,7 @@
             <option value="aktiv" >Ja</option>
             <option value="avaktivera" selected>Nej</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Välj om kvarvarande saldo ska följa med till nästkommande budgetår.</span>
       </div>
@@ -5538,84 +5301,17 @@
         return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
       }
 
-      /* ── Logout confirmation toast ── */
+      /* ── Logout confirmation: ECO Toast, Warning, Weak, actionable (eco-design-system/notifications.js) ── */
       function showLogoutConfirmToast(name) {
-        var w       = window.innerWidth;
-        var isXs    = w <= 639;
-        var isMobile = w <= 768;
-        var isSmMd  = !isXs && w <= 1023;
-        var topVal  = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var rightVal = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var bodyLh  = isMobile ? '22px' : '24px';
-        /* Desktop xs buttons: 6px padding, label-sm 14px/0.56px
-           Mobile sm buttons:  6px padding, label-md 14px/0.42px (mobile) */
-        var dismissed = false;
-
-        function dismiss() {
-          if (dismissed) return;
-          dismissed = true;
-          t.style.animation = isXs
-            ? 'toast-slide-out-top var(--duration-medium-2) var(--ease-accelerate-generic) forwards'
-            : 'toast-slide-out var(--duration-medium-2) var(--ease-accelerate-generic) forwards';
-          setTimeout(function(){ t.remove(); }, 300);
-        }
-        function confirmLogout() {
-          dismiss();
-          closeImpersonation();
-        }
-
-        var t = document.createElement('div');
-        t.setAttribute('role', 'alertdialog');
-        t.setAttribute('aria-modal', 'false');
-        t.style.cssText = [
-          'position:fixed',
-          'z-index:9999',
-          isXs ? 'top:0;left:0;right:0;width:100vw' : ('top:' + topVal + ';right:' + rightVal + ';width:375px'),
-          'box-shadow:0px 8px 16px 0px rgba(0,0,0,0.10),0px 0px 1px 0px rgba(0,0,0,0.05)',
-          'animation:' + (isXs
-            ? 'toast-slide-in-top var(--duration-medium-2) var(--ease-decelerate-emphasized) forwards'
-            : 'toast-slide-in var(--duration-medium-2) var(--ease-decelerate-emphasized) forwards'),
-          'font-family:\'Breuer Condensed\',Arial,sans-serif',
-          'font-feature-settings:\'ss02\' 1,\'ss03\' 1'
-        ].join(';');
-
-        t.innerHTML = [
-          '<div style="background:#fff;border-left:2px solid #fac000;display:flex;flex-direction:column;width:100%;">',
-            '<div style="display:flex;gap:8px;align-items:flex-start;padding:16px;width:100%;box-sizing:border-box;">',
-              /* Warning icon — warning, filled */
-              '<span class="ms ms--24" style="color:#fac000;font-variation-settings:\'FILL\' 1,\'wght\' 300,\'GRAD\' 0,\'opsz\' 24;flex-shrink:0;margin-top:1px;">warning</span>',
-              '<div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;">',
-                /* Title */
-                '<p style="font-size:16px;font-weight:600;line-height:18px;letter-spacing:0px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1;padding-top:2px;">LOGGA UT</p>',
-                /* Body line 1 */
-                '<p style="font-size:16px;font-weight:400;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;">',
-                  'Är du säker att du vill logga ut som användare <strong style="font-weight:600;">' + escHtml(name) + '</strong>?',
-                '</p>',
-                /* Body line 2 */
-                '<p style="font-size:16px;font-weight:600;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;margin-top:8px;">',
-                  'Du kommer fortfarande att vara inloggad som Administratör.',
-                '</p>',
-              '</div>',
-              /* Close × — Blank xs på ljus bakgrund */
-              '<button aria-label="Stäng" class="icon-btn icon-btn--close logout-toast__close" id="logout-toast-close">',
-                '<span class="ms">close</span>',
-              '</button>',
-            '</div>',
-            /* Action group — indented 32px from left (icon 24px + gap 8px) */
-            '<div style="padding:0 16px 16px 48px;display:flex;gap:8px;align-items:center;box-sizing:border-box;">',
-              /* OK — Secondary xs */
-              '<button id="logout-toast-ok" class="btn btn--secondary logout-toast__btn-secondary"><span class="btn__label">OK</span></button>',
-              /* ABRYT — Primary xs */
-              '<button id="logout-toast-cancel" class="btn btn--primary logout-toast__btn-primary"><span class="btn__label">ABRYT</span></button>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        t.querySelector('#logout-toast-close').addEventListener('click', dismiss);
-        t.querySelector('#logout-toast-ok').addEventListener('click', confirmLogout);
-        t.querySelector('#logout-toast-cancel').addEventListener('click', dismiss);
-
-        document.body.appendChild(t);
+        window.ECO_N.showToast({
+          status: 'warning',
+          title: 'Logga ut som ' + name + '?',
+          text: 'Du är fortfarande inloggad som Administratör.',
+          actions: {
+            secondary: { label: 'Avbryt' },
+            primary: { label: 'Logga ut', onClick: function () { closeImpersonation(); } }
+          }
+        });
       }
 
       /* ── Impersonation banner ── */
@@ -5714,5 +5410,6 @@
   </div>
 
 <script src="/components/js/tooltip.js"></script>
+<script src="/components/js/select-menu.js"></script>
 </body>
 </html>

@@ -73,6 +73,10 @@
     if (open && open.sel === sel) close(); else openMenu(sel, true);
   }, { passive: false });
   window.addEventListener('resize', function () { close(); });
+  /* Escape closes only the menu: caught in the capture phase so a drawer or modal around the select does not close too */
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && open) { e.preventDefault(); e.stopPropagation(); close(true); }
+  }, true);
   document.addEventListener('keydown', function (e) {
     var t = e.target;
     if (open && open.menu.contains(t)) {
@@ -83,7 +87,6 @@
       else if (e.key === 'Home') { e.preventDefault(); items[0].focus(); }
       else if (e.key === 'End') { e.preventDefault(); items[items.length - 1].focus(); }
       else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (t.getAttribute('aria-disabled') !== 'true') choose(t); }
-      else if (e.key === 'Escape') { e.preventDefault(); close(true); }
       else if (e.key === 'Tab') close();
     } else if (t.classList && t.classList.contains('form-select') && !t.disabled && /^(Enter| |ArrowDown|ArrowUp)$/.test(e.key)) {
       e.preventDefault(); openMenu(t);

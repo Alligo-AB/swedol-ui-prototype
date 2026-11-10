@@ -162,7 +162,7 @@ Button hover: `background: var(--color-surface-opacity-black-05)` (the Blank / i
 
 ---
 
-> **CSS:** `components/css/input.css` is the live, tested stylesheet (mobile-first, desktop from 769px). It puts the border, fill and height on an **`.input-box`** that holds the left icon, the `.form-input` and the right-hand icons in one flex row; states are `.input-box:hover`, `:focus-within` / `[data-state="active"]` (Active), `.input-box--error` / `--success` and `:has(.form-input:disabled)`; the focus ring stays on `.input-wrap::after`. Where the HTML below and the CSS differ, follow the CSS file.
+> **CSS:** `components/css/input.css` is the live, tested stylesheet (mobile-first, desktop from 769px). It puts the border, fill and height on an **`.input-box`** that holds the left icon, the `.form-input` and the right-hand icons in one flex row; states are `.input-box:hover`, `:focus-within` / `[data-state="active"]` (Active), `.input-box--error` / `--success` and `:has(.form-input:disabled)`; the focus ring stays on `.input-wrap::after`. Where the HTML below and the CSS differ, follow the CSS file. **Markup is required (2026-11-10):** always `.input-wrap > .input-box > input.form-input`. The `.form-input` rules in `input.css` are scoped to `.input-box .form-input`, because the header partial loads `input.css` on every page; a bare `.form-input` reset stripped the border from old page fields without `.input-box` (seen on `mypages/users_V1.html`). Old pages that still have `input.form-input` directly in `.input-wrap` keep their own page CSS until migrated.
 
 ### CSS
 
