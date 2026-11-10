@@ -42,6 +42,10 @@ The modal comes in **two sizes to choose between: Small and Large**. Choose by t
 
 `mypages/users.html` (`#sign-modal`, `window.signWithBankId({ text, onSigned })`): Large modal that opens straight on the QR step; steps (QR, waiting, done, expired) swap inside the same panel via `data-current`. Lessons that apply to every modal: limit the height from 640px (`max-height: calc(100dvh - 32px)`, panel scrolls) or it is cut off on a phone held sideways; remove the panel after the exit with a timer, not `animationend` (it never fires in a background tab, and a reopen during the exit left the modal invisible); run the follow-up action after the exit so two overlays never stack; catch Escape in the capture phase when a drawer lies underneath. On a phone the main action is "Öppna BankID", not the QR code. Details in `CLAUDE.md`.
 
+### Footer with only a cancel button (2026-11-10)
+
+When a step has no Primary (for example a waiting state), the lone Blank cancel button sits on the **right** of the footer, where the confirm button normally ends (`justify-content: flex-end`; in Figma the Button Group slot aligned right). With a Primary the order stays Blank left, Primary filling the rest. Reference: `#sign-modal` in `mypages/users.html`.
+
 ### Copy for a confirmation (rule, 2026-11-09)
 
 - **Title:** the question, ending with a question mark. `Delete this address?`

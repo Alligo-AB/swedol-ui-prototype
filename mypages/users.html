@@ -6312,7 +6312,7 @@
     .sign-modal [data-step] { display: none; width: 100%; flex-direction: column; flex: 1; }
     .sign-modal[data-current="qr"] [data-step="qr"], .sign-modal[data-current="waiting"] [data-step="waiting"],
     .sign-modal[data-current="done"] [data-step="done"], .sign-modal[data-current="expired"] [data-step="expired"] { display: flex; }
-    .sign-modal .delete-modal__footer { flex: none; flex-direction: row; }
+    .sign-modal .delete-modal__footer { flex: none; flex-direction: row; justify-content: flex-end; }   /* lone "Avbryt inloggning" (no Primary) sits on the right; a Primary fills the rest of the row anyway */
     /* Modal button sizes (32px below 769px, 40px from 769px) come from eco-design-system/notifications.css (.delete-modal). */
     .sign-modal__primary { flex: 1; gap: var(--dimension-spacing-space-4); }
     .sign-modal__primary img { width: 20px; height: 20px; }
