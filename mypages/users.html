@@ -6290,7 +6290,7 @@
       </div>
       <div class="delete-modal__footer">
         <button class="btn btn--blank delete-modal__btn-cancel" id="delete-modal-cancel"><span class="btn__label">Avbryt</span></button>
-        <button class="btn btn--primary delete-modal__btn-confirm" id="delete-modal-confirm"><span class="btn__label">Radera användare</span></button>
+        <button class="btn btn--destructive delete-modal__btn-confirm" id="delete-modal-confirm"><span class="btn__label">Radera användare</span></button>
       </div>
     </div>
   </div>
@@ -6313,10 +6313,7 @@
     .sign-modal[data-current="qr"] [data-step="qr"], .sign-modal[data-current="waiting"] [data-step="waiting"],
     .sign-modal[data-current="done"] [data-step="done"], .sign-modal[data-current="expired"] [data-step="expired"] { display: flex; }
     .sign-modal .delete-modal__footer { flex: none; flex-direction: row; }
-    /* Modal buttons are always 32px (eco-modal-ecom): Small below 769px, XSmall from 769px. Needed because the header partial
-       loads components/css/button.css after this page, and its default .btn is Large (48px). Covers the delete modal too. */
-    .delete-modal .btn { --btn-h: 32px; --btn-pad: var(--dimension-spacing-space-4); --btn-tx: 6px; --btn-fs: 14px; --btn-lh: 14px; --btn-ls: 0.42px; --btn-ff: normal; }
-    @media (min-width: 769px) { .delete-modal .btn { --btn-pad: 6px; --btn-tx: var(--dimension-spacing-space-4); --btn-ls: 0.56px; --btn-ff: 'ss02' 1, 'ss03' 1; } }
+    /* Modal button sizes (32px below 769px, 40px from 769px) come from eco-design-system/notifications.css (.delete-modal). */
     .sign-modal__primary { flex: 1; gap: var(--dimension-spacing-space-4); }
     .sign-modal__primary img { width: 20px; height: 20px; }
     /* Desktop shows the QR first. Mobile Base Styling (≤768px) and touch screens (a phone held sideways is 812px wide)

@@ -5,7 +5,7 @@ description: Use when building a modal (E-Com Modal) that requires confirmation 
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
-> **Buttons and ×:** buttons and the close button follow `eco-button` (see `notifications-guide`, "Buttons and the close button"): `btn btn--primary|secondary|blank` with `<span class="btn__label">`, always 32px (XSmall from 769px, Small below), and the × is `icon-btn icon-btn--close` (`icon-btn--close-inverted` on dark/solid surfaces). Live CSS: `eco-design-system/notifications.css`.
+> **Buttons and ×:** buttons and the close button follow `eco-button` (see `notifications-guide`, "Buttons and the close button"): `btn btn--primary|secondary|blank` with `<span class="btn__label">`, 40px from 769px (Small, Figma 13377:48335, 2026-11-10) and 32px below; the confirm button (Primary or Destructive) always fills the row, never left-aligned, and the × is `icon-btn icon-btn--close` (`icon-btn--close-inverted` on dark/solid surfaces). Live CSS: `eco-design-system/notifications.css`.
 
 ## Notification – E-Com Modal (ECO Design System)
 
@@ -102,18 +102,18 @@ Body text
 ### Buttons per breakpoint
 
 The buttons in the modal **always** follow the ECO Design System button sizes:
-- **Desktop (lg-md, ≥769px):** button size **xs** → `height: 32px`, `padding: 6px`, `label-sm` 14px, 0.56px
-- **Tablet + Mobile (sm-xs, ≤768px):** button size **sm** → `height: 32px`, `padding: 6px`, `label-md` 14px, 0.48px
+- **Desktop (lg-md, ≥769px):** button size **Small** → `height: 40px`, `padding: 8px`, label inset 8px, `label-md` 16px/16px, 0.48px (Figma 13377:48335, updated 2026-11-10; was 32px XSmall)
+- **Tablet + Mobile (sm-xs, ≤768px):** button size **Small** → `height: 32px`, `padding: 4px`, label inset 6px, `label-md` 14px, 0.42px
 
-Both variants (Cancel and Primary) are **always 32px tall** — regardless of breakpoint and button variant.
+Cancel (Blank) keeps its own width; the confirm button (Primary or Destructive) has `flex: 1` and fills the rest of the row at every breakpoint. **Never** leave the buttons left-aligned at their own width (rule 2026-11-10).
 
 | | Desktop (`md:` 769px+) | Tablet + Mobile (`sm-xs` ≤768px) |
 |---|---|---|
 | Modal padding | `24px` | Tablet: `24px` / Mobile xs: `16px` |
 | Button group top gap | `pt-32px` | `pt-24px` |
-| Button height (both) | `32px` (xs button) | `32px` (sm button) |
-| Button padding (both) | `6px` | `6px` |
-| Button letter-spacing | `0.56px` (label-sm) | `0.48px` (label-md) |
+| Button height (both) | `40px` (Small) | `32px` (Small) |
+| Button padding (both) | `8px` | `4px` |
+| Button letter-spacing | `0.48px` (label-md 16px) | `0.42px` (label-md 14px) |
 
 ---
 
@@ -246,7 +246,8 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 
 
 /* Buttons and ×: eco-button classes (.btn, .icon-btn.icon-btn--close); live CSS in eco-design-system/notifications.css */
-.modal__footer .btn--primary { flex: 1; }
+.modal__footer .btn:last-child { flex: 1; }   /* confirm (Primary or Destructive) fills the row */
+@media (min-width: 769px) { .modal .btn { --btn-h: 40px; } }   /* Small; full values in notifications.css */
 ```
 
 ### HTML example (Small, Desktop)

@@ -73,11 +73,16 @@
 
 /* A button inside a notification is always 32px high, whatever else is on the page: scoped, so it also beats the size classes of button.css when that file
    loads after this one (it does on the doc pages, where a bare .btn is Large). */
-:is(.toast, .ecom-toast, .modal, .banner-notification, .inline-notification) .btn {
+:is(.toast, .ecom-toast, .modal, .delete-modal, .bankid-modal, .banner-notification, .inline-notification) .btn {
   --btn-h: 32px; --btn-pad: var(--dimension-spacing-space-4); --btn-tx: 6px; --btn-icon: 24px; --btn-fs: 14px; --btn-lh: 14px; --btn-ls: 0.42px; --btn-ff: normal;
 }
 @media (min-width: 769px) {
-  :is(.toast, .ecom-toast, .modal, .banner-notification, .inline-notification) .btn { --btn-pad: 6px; --btn-tx: var(--dimension-spacing-space-4); --btn-ls: 0.56px; --btn-ff: 'ss02' 1, 'ss03' 1; }
+  :is(.toast, .ecom-toast, .modal, .delete-modal, .bankid-modal, .banner-notification, .inline-notification) .btn { --btn-pad: 6px; --btn-tx: var(--dimension-spacing-space-4); --btn-ls: 0.56px; --btn-ff: 'ss02' 1, 'ss03' 1; }
+}
+/* Modal from 769px: Small button, 40px (Figma 13377:48335, 2026-11-10); 32px below 769px stays.
+   .delete-modal / .bankid-modal: the page-local modal copies on My Pages (users, users_V1, users-dashboard, addressbook) use the same sizes. */
+@media (min-width: 769px) {
+  :is(.modal, .delete-modal, .bankid-modal) .btn { --btn-h: 40px; --btn-pad: var(--dimension-spacing-space-8); --btn-tx: var(--dimension-spacing-space-8); --btn-fs: 16px; --btn-lh: 16px; --btn-ls: 0.48px; --btn-ff: normal; }
 }
 
 /* Close: Blank icon button, 24px box with a 20px icon. Inverted on dark and solid surfaces. */
@@ -238,7 +243,7 @@ body.keyboard-nav .btn:focus, body.keyboard-nav .icon-btn:focus, body.keyboard-n
   color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
 }
 .modal__footer { display: flex; gap: var(--dimension-spacing-space-8); align-items: center; padding-top: var(--dimension-spacing-space-24); width: 100%; }
-.modal__footer .btn--primary { flex: 1; }
+.modal__footer .btn:last-child { flex: 1; }   /* the confirm button (Primary or Destructive) fills the row; never left-aligned */
 /* Tablet: large is 576px */
 @media (min-width: 640px) {
   .modal { padding: var(--dimension-spacing-space-24); width: 440px; }

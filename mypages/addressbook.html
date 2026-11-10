@@ -3257,7 +3257,7 @@
 
     /* ── BankID signing modal ─────────────────────────── */
     .bankid-modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 10000;
+      position: fixed; inset: 0; background: var(--color-surface-opacity-black-20); z-index: 10000;
       opacity: 0; pointer-events: none;
       transition: opacity var(--duration-medium-2) var(--ease-standard);
     }
@@ -3265,33 +3265,17 @@
     .bankid-modal {
       position: fixed; top: 50%; left: 50%;
       transform: translate(-50%, calc(-50% + 12px));
-      z-index: 10001; background: #fff; width: 440px;
-      max-width: calc(100vw - 32px); padding: 24px;
-      box-shadow: var(--elevation-b-100);
+      z-index: 10001; background: var(--color-surface-raised-primary); width: 440px;
+      max-width: calc(100vw - var(--dimension-spacing-space-32)); padding: var(--dimension-spacing-space-24);
+      box-shadow: var(--shadow-elevation-b-100);
       display: flex; flex-direction: column;
       opacity: 0; pointer-events: none;
       transition: opacity var(--duration-medium-2) var(--ease-decelerate-emphasized),
                   transform var(--duration-medium-2) var(--ease-decelerate-emphasized);
     }
     .bankid-modal.is-open { opacity: 1; pointer-events: all; transform: translate(-50%, -50%); }
-    .bankid-modal__header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
-    .bankid-modal__title {
-      flex: 1; font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: 0px;
-      color: #000; font-feature-settings: 'ss02' 1, 'ss03' 1; padding-top: 2px;
-    }
-    .bankid-modal__body {
-      display: flex; flex-direction: column; align-items: center; gap: 16px;
-      text-align: center; padding-bottom: 32px;
-    }
-    .bankid-logo-large { width: 72px; height: 72px; object-fit: contain; }
-    .bankid-modal__desc {
-      font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px;
-      color: var(--color-text-secondary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) { .bankid-modal__desc { font-size: 17px; line-height: 24px; } }
-    .bankid-modal__desc strong { font-weight: 600; color: var(--color-text-primary); }
-    .bankid-modal__footer { display: flex; gap: 8px; align-items: center; }
+    @media (max-width: 639px) { .bankid-modal { padding: var(--dimension-spacing-space-16); } }   /* as .modal: 16px on xs, 24px from 640px */
+    /* Header, title, body and footer: ECO modal classes (.modal__*) from eco-design-system/notifications.css */
     .bankid-waiting {
       display: flex; flex-direction: column; align-items: center;
       gap: 16px; padding: 8px 0 32px; text-align: center;
@@ -3318,8 +3302,6 @@
     .bankid-waiting__cancel-link:hover { color: var(--color-text-primary); }
     @media (max-width: 768px) {
       .upload-dropzone { padding: 24px 16px; }
-      .bankid-modal { padding: 16px; }
-      .bankid-modal__title { font-size: 18px; line-height: 22px; }
       .upload-drawer-desc,
       .inline-link--medium,
       .upload-file-chip__name,
@@ -4133,25 +4115,25 @@
   <!-- ── Billing BankID modal ──────────────────────────────── -->
   <div id="billing-bankid-modal-overlay" class="bankid-modal-overlay" onclick="closeBillingBankIdModal()"></div>
   <div id="billing-bankid-modal" class="bankid-modal" role="dialog" aria-modal="true" aria-labelledby="billing-bankid-modal-title">
-    <div class="bankid-modal__header">
-      <div class="bankid-modal__header-text">
-        <h2 class="bankid-modal__title" id="billing-bankid-modal-title">Signera adressändring</h2>
+    <div class="modal__header">
+      <div class="modal__header-text">
+        <h2 class="modal__title" id="billing-bankid-modal-title">Signera adressändring</h2>
       </div>
       <button class="icon-btn icon-btn--close bankid-modal__close" onclick="closeBillingBankIdModal()" aria-label="Stäng">
         <span class="ms">close</span>
       </button>
     </div>
     <div id="billing-bankid-init">
-      <p class="bankid-modal__body">För att redigera faktureringsadressen behöver du signera med Mobile BankID. Öppna din BankID-app och följ anvisningarna.</p>
-      <div class="bankid-modal__footer">
-        <button class="bankid-modal__btn-cancel" onclick="closeBillingBankIdModal()">Avbryt</button>
-        <button class="bankid-modal__btn-primary" onclick="startBillingBankIdSigning()">Öppna BankID</button>
+      <p class="modal__body">För att redigera faktureringsadressen behöver du signera med Mobile BankID. Öppna din BankID-app och följ anvisningarna.</p>
+      <div class="modal__footer">
+        <button class="btn btn--blank bankid-modal__cancel" onclick="closeBillingBankIdModal()"><span class="btn__label">Avbryt</span></button>
+        <button class="btn btn--primary bankid-modal__open-btn" onclick="startBillingBankIdSigning()"><span class="btn__label">Öppna BankID</span></button>
       </div>
     </div>
     <div id="billing-bankid-waiting" style="display:none;">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px 0 8px;">
+      <div class="bankid-waiting">
         <div class="billing-spinner"></div>
-        <p style="font-family:'Breuer Condensed',Arial,sans-serif;font-size:16px;font-weight:400;line-height:24px;letter-spacing:0.32px;color:#737373;text-align:center;">Väntar på BankID...</p>
+        <p class="modal__body">Väntar på BankID...</p>
       </div>
     </div>
   </div>
@@ -4311,7 +4293,7 @@
       </div>
       <div class="delete-modal__footer">
         <button class="btn btn--blank delete-modal__btn-cancel" id="delete-addr-modal-cancel"><span class="btn__label">Avbryt</span></button>
-        <button class="btn btn--primary delete-modal__btn-confirm" id="delete-addr-modal-confirm"><span class="btn__label">Ta bort</span></button>
+        <button class="btn btn--destructive delete-modal__btn-confirm" id="delete-addr-modal-confirm"><span class="btn__label">Ta bort adress</span></button>
       </div>
     </div>
   </div>
