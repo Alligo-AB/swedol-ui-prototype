@@ -1,0 +1,41 @@
+/* ECO component CSS: Picker Stepper. Skill: eco-picker-stepper.
+   Figma ECO Design System 1612:111715 (sizes), 1609:63554 (value states), button 1601:54900 / 1602:54423.
+   Link it, do not copy it: <link rel="stylesheet" href="/components/css/picker-stepper.css">  Behaviour: /components/js/picker-stepper.js
+   A minus button, a value cell (number, optional unit under it) and a plus button, all square cells of one size.
+   Sizes (cell): Large 40px, 48px from 769px (default) · Medium 32px, 40px from 769px (--md) · Small 32px (--sm).
+   The unit shows where Figma has it: Large at every width, Medium from 769px, never on Small.
+   Tokens only. Mobile-first, desktop from 769px. The unit text size is a confirmed snowflake (SNOWFLAKES.md, 1).
+   [data-state="…"] selectors only serve forced-state demos on docs pages. */
+.picker-stepper { --ps-size: 40px; --ps-unit-fs: 10px; --ps-unit-ls: 0.3px; --ps-unit-bottom: var(--dimension-spacing-space-2);
+  display: inline-flex; align-items: flex-start; flex-shrink: 0; background: var(--color-surface-00); }
+.picker-stepper--md, .picker-stepper--sm { --ps-size: 32px; }
+
+/* Buttons */
+.picker-stepper__btn { width: var(--ps-size); height: var(--ps-size); flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin: 0; padding: 0;
+  background: var(--color-surface-00); border: 1px solid var(--color-border-primary); color: var(--color-icon-primary); cursor: pointer; touch-action: manipulation; }
+.picker-stepper__btn .icon { --icon-size: 20px; --icon-opsz: 20; color: inherit; }
+.picker-stepper__btn:disabled { border-color: var(--color-border-disabled); color: var(--color-text-disabled); cursor: default; }   /* Figma disabled icon #939595 = text-disabled; no icon-disabled token */
+.picker-stepper__btn:focus-visible { position: relative; z-index: 1; outline: 2px solid var(--color-border-focus); outline-offset: 0; }
+
+/* Value cell */
+.picker-stepper__value { position: relative; width: var(--ps-size); height: var(--ps-size); flex-shrink: 0; background: var(--color-surface-00); border-block: 1px solid var(--color-border-primary); }
+.picker-stepper__input { display: block; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; text-align: center; appearance: textfield; -moz-appearance: textfield;
+  font-family: inherit; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }   /* 16/22 at every width (Figma) */
+.picker-stepper__input::-webkit-outer-spin-button, .picker-stepper__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.picker-stepper__input:focus { outline: none; }
+.picker-stepper__unit { position: absolute; left: 0; right: 0; bottom: var(--ps-unit-bottom); text-align: center; white-space: nowrap; pointer-events: none;
+  font-size: var(--ps-unit-fs); line-height: var(--ps-unit-fs); letter-spacing: var(--ps-unit-ls); color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.picker-stepper--md .picker-stepper__unit, .picker-stepper--sm .picker-stepper__unit { display: none; }
+
+/* Value states. Hover: border-hover on all four sides (the side lines cover the buttons' borders). Focus: 2px border-focus outside the cell. */
+.picker-stepper__value:is(:hover, [data-state="hover"]) { z-index: 1; border-color: var(--color-border-hover); box-shadow: -1px 0 0 var(--color-border-hover), 1px 0 0 var(--color-border-hover); }
+.picker-stepper__value:is(:focus-within, [data-state="focus"]) { z-index: 1; border-color: var(--color-border-secondary); box-shadow: none; outline: 2px solid var(--color-border-focus); outline-offset: 0; }
+.picker-stepper__value:has(.picker-stepper__input:disabled) { border-color: var(--color-border-disabled); box-shadow: none; }
+.picker-stepper__input:disabled, .picker-stepper__input:disabled + .picker-stepper__unit { color: var(--color-text-disabled); }
+
+@media (min-width: 769px) {
+  .picker-stepper { --ps-size: 48px; --ps-unit-fs: 11px; --ps-unit-ls: 0.33px; --ps-unit-bottom: 3px; }   /* 3px: centres the 11px text in Figma's 17px unit box; no token */
+  .picker-stepper--md { --ps-size: 40px; --ps-unit-fs: 10px; --ps-unit-ls: 0.3px; --ps-unit-bottom: var(--dimension-spacing-space-2); }
+  .picker-stepper--sm { --ps-size: 32px; }
+  .picker-stepper--md .picker-stepper__unit { display: block; }
+}

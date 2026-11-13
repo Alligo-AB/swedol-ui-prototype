@@ -80,6 +80,9 @@ Read this before you decide a piece is "new". Every row is a finished component 
 | A link (decide the type first) | `links-guide` → `eco-inline-link`, `eco-action-link`, `eco-tile-link` |
 | Where am I / go back up | `eco-breadcrumb` |
 | Load more items into a list | `eco-pagination` |
+| A quantity the user steps up or down (beside add to cart) | `eco-picker-stepper` |
+| A row that opens a drawer (shows the chosen value, or leads to more content) | `eco-drawer-link` |
+| A rating shown as stars (product, review), with score and review count | `eco-rating-stars` |
 | A status label or role name (read-only) | `eco-badge` |
 | The active filters above a result list (each with a remove ×) | `eco-tag` |
 | Filters the user selects and unselects, or entered values as removable items | `eco-chip` |

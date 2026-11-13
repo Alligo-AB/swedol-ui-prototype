@@ -1,0 +1,107 @@
+/* ECO component CSS: Gallery (product images). Figma ECO Design System 913:28312
+   (XLarge-Large-Medium enabled 7613:530817 and hover 7613:530833, Small 5005:290496, XSmall 913:28313).
+   Link it, do not copy it: <link rel="stylesheet" href="/components/css/gallery.css">  Behaviour: /components/js/gallery.js
+   One image at a time in a sideways track (native scroll snap, so touch swipe works without script).
+   Below 769px: indicator dots under the image. From 769px: a thumbnail row (states enabled, hover, active: Figma 1727:52282), and previous/next buttons that slide in on hover or keyboard focus.
+   Needs button.css (the two buttons), badge.css (dots), icon.css and tabs.css + tabs.js (.swipe-row on the thumbnail row).
+   Tokens only. Mobile-first. No skill or docs page yet. */
+.gallery { position: relative; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); min-width: 0; }
+.gallery__stage { position: relative; }
+
+/* Track and slides */
+.gallery__track { display: flex; align-items: center; gap: var(--dimension-spacing-space-16); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.gallery__track::-webkit-scrollbar { display: none; }
+.gallery__track.is-dragging { scroll-snap-type: none; scroll-behavior: auto; cursor: grabbing; user-select: none; }   /* mouse drag (gallery.js): the image follows the pointer */
+.gallery__track.is-dragging .gallery__slide { cursor: grabbing; }
+.gallery__track:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+.gallery__slide { position: relative; flex: 0 0 100%; aspect-ratio: 1 / 1; margin: 0; overflow: hidden; scroll-snap-align: start; }   /* no background colour: the gallery sits on the page colour (user decision 2026-11-13) */
+.gallery__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.gallery__slide--contain .gallery__img { object-fit: contain; }
+.gallery__slide--video { aspect-ratio: 556 / 345; }   /* Figma video frame, centred in the row */
+
+/* Play button on a video (Figma Media / Playbutton): 80px on the slide, 32px on a thumbnail */
+.media-play { position: absolute; left: 50%; top: 50%; width: 80px; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); pointer-events: none; }
+.media-play--sm { width: 32px; }
+.media-play__oval { position: absolute; inset: 0; width: 100%; height: 100%; }
+.media-play__triangle { position: absolute; left: 53.7%; top: 50%; width: 32.75%; height: auto; transform: translate(-50%, -50%) rotate(90deg); }   /* Figma inset 33.73% 31.92% 33.66% 39.31% */
+
+/* Brand logo on the image */
+.gallery__brand { position: absolute; left: 0; top: 0; z-index: 1; display: flex; padding: var(--dimension-spacing-space-4); background: color-mix(in srgb, var(--color-surface-00) 80%, transparent); }   /* Figma white 80% */
+.gallery__brand img { display: block; height: 24px; width: auto; }
+
+/* Previous / next: Primary Inverted Large icon buttons, from 769px. Hidden at rest; when the pointer is over the image they slide in
+   from their own side: next at once, previous only after the image has changed once (.is-moved, set by gallery.js).
+   Surface 50% of surface-00, 100% when the pointer is on the button; the icon is always 100%. (User decision 2026-11-12.) */
+.gallery__nav.btn { display: none; position: absolute; top: 50%; z-index: 1; --gallery-nav-x: var(--dimension-spacing-space-16); transform: translate(var(--gallery-nav-x), -50%);
+  --gallery-nav-bg: var(--color-surface-00); --btn-bg: color-mix(in srgb, var(--gallery-nav-bg) 50%, transparent); --btn-hover: transparent;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--duration-medium-2) var(--ease-decelerate-generic), transform var(--duration-medium-2) var(--ease-decelerate-generic), background-color var(--duration-fast-3) var(--ease-standard); }
+.gallery__nav--prev.btn { left: var(--dimension-spacing-space-16); --gallery-nav-x: calc(-1 * var(--dimension-spacing-space-16)); }
+.gallery__nav--next.btn { right: var(--dimension-spacing-space-16); }
+
+/* Indicator dots (below 769px) */
+.gallery__dots { display: flex; justify-content: center; gap: var(--dimension-spacing-space-8); }
+.gallery__dots .is-active { background: var(--color-surface-100); }
+
+/* Thumbnails (from 769px): eight fit the row, the rest scroll */
+.gallery__thumbs { display: none; gap: var(--dimension-spacing-space-4); }
+.gallery__thumb { position: relative; flex: 0 0 calc((100% - 7 * var(--dimension-spacing-space-4)) / 8); aspect-ratio: 1 / 1; box-sizing: border-box; margin: 0; padding: var(--dimension-spacing-space-4);
+  background: none; border: 0; cursor: pointer; touch-action: manipulation;
+  transition: background-color var(--duration-fast-3) var(--ease-standard), box-shadow var(--duration-fast-3) var(--ease-standard); }
+/* States (Figma Base/Thumbnail 1727:52282). The frame is an inset shadow, so the 4px inset never changes. */
+.gallery__thumb:is(:hover, [data-state="hover"]) { background: var(--color-surface-05); box-shadow: inset 0 0 0 1px var(--color-border-hover); }
+.gallery__thumb:is(:hover, [data-state="hover"]) .media-play__oval { visibility: hidden; }   /* Figma: the video thumbnail shows only the triangle on hover */
+.gallery__thumb[aria-current="true"] { background: none; box-shadow: inset 0 0 0 2px var(--color-border-selected); }   /* Active wins over hover */
+.gallery__thumb[aria-current="true"] .media-play__oval { visibility: visible; }
+.gallery__thumb:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: -2px; }   /* inside: the row clips what sticks out */
+.gallery__thumb-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.gallery__thumb-img--contain { object-fit: contain; }
+
+@media (prefers-reduced-motion: reduce) { .gallery__track { scroll-behavior: auto; } .gallery__nav.btn { transition: none; } }
+
+@media (min-width: 769px) {
+  .gallery__brand { padding: var(--dimension-spacing-space-8); }
+  .gallery__brand img { height: 48px; }
+  .gallery__nav.btn { display: inline-flex; }
+  .gallery__stage:hover .gallery__nav--next.btn, .gallery.is-moved .gallery__stage:hover .gallery__nav--prev.btn, .gallery__nav.btn:focus-visible { opacity: 1; pointer-events: auto; transform: translate(0, -50%); }
+  .gallery__nav.btn:hover { --btn-bg: var(--gallery-nav-bg); }
+  .gallery__dots { display: none; }
+  .gallery__thumbs { display: flex; justify-content: safe center; }   /* fewer than eight thumbnails sit centred under the image; a row that overflows starts at the left (user request 2026-11-13) */
+}
+
+/* ── Expanded Gallery (Figma ECO 2651:81251: XLarge-Large-Medium 2651:81218, Small 7910:4439, XSmall 7922:15496) ──
+   A full-screen <dialog> that gallery.js builds from the page gallery's own images; it opens when the image is pressed.
+   Native dialog: focus stays inside, Esc closes, the page behind is inert. White surface, the whole image shown (contain).
+   Below 769px: image centred, dots at the bottom. From 769px: thumbnail row at the bottom, previous/next slide in on hover as on the page gallery. */
+.gallery__slide--zoom { cursor: zoom-in; }
+dialog.gallery-x { position: fixed; inset: 0; box-sizing: border-box; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0;
+  padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-16) var(--dimension-spacing-space-32);
+  background: var(--color-surface-00); color: var(--color-text-primary); overscroll-behavior: contain; }
+dialog.gallery-x[open] { display: flex; flex-direction: column; animation: gallery-x-in var(--duration-medium-2) var(--ease-decelerate-generic); }
+dialog.gallery-x::backdrop { background: var(--color-surface-00); }
+@keyframes gallery-x-in { from { opacity: 0; } }
+:root:has(dialog.gallery-x[open]) { overflow: hidden; }   /* the page behind does not scroll */
+.gallery-x__close.btn { position: absolute; top: var(--dimension-spacing-space-16); right: var(--dimension-spacing-space-16); z-index: 2; --btn-h: 40px; }   /* Blank icon button, 40px at every width (Figma Base/Header close) */
+
+.gallery--expanded { flex: 1 1 auto; min-height: 0; }
+.gallery--expanded .gallery__stage { flex: 1 1 auto; min-height: 0; display: flex; }
+.gallery--expanded .gallery__track { flex: 1 1 auto; min-width: 0; align-items: stretch; }
+.gallery--expanded .gallery__slide, .gallery--expanded .gallery__slide--video { aspect-ratio: auto; height: 100%; background: none; cursor: auto; }
+.gallery--expanded .gallery__img { object-fit: contain; }
+.gallery--expanded .gallery__brand { display: none; }
+.gallery--expanded .gallery__thumbs { flex-shrink: 0; justify-content: safe center; }   /* centred on the canvas; safe: a row that overflows still starts at the left */
+.gallery--expanded .gallery__thumb { flex-basis: 67px; }   /* 67px: Figma 66.9, the thumbnail size of the 556px page gallery; no token */
+/* Previous / next here: Primary Large icon buttons (gallery.js swaps the class): black surface at 50%, 100% on the button's hover; same slide-in as the page gallery */
+.gallery--expanded .gallery__nav.btn { --gallery-nav-bg: var(--color-surface-action-1); }
+
+@media (prefers-reduced-motion: reduce) { dialog.gallery-x[open] { animation: none; } }
+
+@media (min-width: 769px) {
+  dialog.gallery-x { padding: var(--dimension-spacing-space-48) var(--dimension-spacing-space-48) var(--dimension-spacing-space-32); }
+  .gallery-x__close.btn { top: var(--dimension-spacing-space-24); right: var(--dimension-spacing-space-24); }
+  .gallery--expanded { gap: var(--dimension-spacing-space-56); }   /* Figma: 55px between image and thumbnail row */
+  /* here the whole canvas is the hover area, not only the image */
+  dialog.gallery-x:hover .gallery__nav--next.btn, dialog.gallery-x:hover .gallery.is-moved .gallery__nav--prev.btn { opacity: 1; pointer-events: auto; transform: translate(0, -50%); }
+  .gallery--expanded .gallery__nav--prev.btn { left: calc(-1 * var(--dimension-spacing-space-16)); }    /* 32px from the screen edge */
+  .gallery--expanded .gallery__nav--next.btn { right: calc(-1 * var(--dimension-spacing-space-16)); }
+}

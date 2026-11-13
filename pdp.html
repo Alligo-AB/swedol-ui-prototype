@@ -1,0 +1,3849 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carpenter soul hantverksbyxa stretch svart – Björnkläder | Swedol</title>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <!-- ECO component CSS, shared with the docs pages (see skills eco-button, eco-input, …). Link it, do not copy it. -->
+  <!-- notifications.css sets a global .btn (32px); it is linked before button.css so page buttons keep their own size -->
+  <link rel="stylesheet" href="/eco-design-system/notifications.css">
+  <link rel="stylesheet" href="/components/css/button.css">
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/textarea.css">
+  <link rel="stylesheet" href="/components/css/checkbox.css">
+  <link rel="stylesheet" href="/components/css/radio.css">
+  <link rel="stylesheet" href="/components/css/switch.css">
+  <link rel="stylesheet" href="/components/css/list-item.css">
+  <link rel="stylesheet" href="/components/css/chip.css">
+  <link rel="stylesheet" href="/components/css/icon.css">
+  <link rel="stylesheet" href="/components/css/divider.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/collapsible.css">
+  <link rel="stylesheet" href="/components/css/tooltip.css">
+  <link rel="stylesheet" href="/components/css/pagination.css">
+  <link rel="stylesheet" href="/components/css/rating-stars.css">
+  <link rel="stylesheet" href="/components/css/picker-stepper.css">
+  <link rel="stylesheet" href="/components/css/drawer-link.css">
+  <link rel="stylesheet" href="/components/css/gallery.css">
+  <link rel="stylesheet" href="/components/css/inline-link.css">
+  <link rel="stylesheet" href="/components/css/badge.css">
+  <link rel="stylesheet" href="/components/css/tag.css">
+  <link rel="stylesheet" href="/components/css/action-link.css">
+  <link rel="stylesheet" href="/components/css/tile-link.css">
+  <link rel="stylesheet" href="/components/css/breadcrumb.css">
+  <link rel="stylesheet" href="/components/css/pill-segment-control.css">
+  <link rel="stylesheet" href="/components/css/role-tier.css">
+  <link rel="stylesheet" href="/components/css/table.css">
+  <link rel="stylesheet" href="/components/css/section.css">
+  <link rel="stylesheet" href="/components/css/spacing.css">
+  <link rel="stylesheet" href="/components/css/tabs.css">
+  <script src="/components/js/collapsible.js"></script>
+  <script src="/components/js/tooltip.js"></script>
+  <script src="/components/js/chip.js" defer></script>
+  <script src="/components/js/pagination.js"></script>
+  <script src="/components/js/pill-segment-control.js"></script>
+  <script src="/components/js/tabs.js"></script>
+  <script src="/components/js/picker-stepper.js" defer></script>
+  <script src="/components/js/gallery.js" defer></script>
+  <script src="/eco-design-system/notifications.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+    /* ── Material Symbols base class ──────────────────────────── */
+    .ms {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .ms--24 { font-size: 24px; }
+    .ms--filled { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .ms--white  { color: #fff; }
+    .ms--grey   { color: #939595; }
+    .ms--muted  { color: #ccc; }
+
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Global button focus ring — outline mäter alltid från yttre border-kanten,
+       oavsett om knappen har border eller ej (till skillnad från ::after med inset) */
+    button { position: relative; outline: 2px solid transparent; outline-offset: 2px; transition: outline-color var(--duration-fast-2) var(--ease-standard); }
+    body.keyboard-nav button:focus { outline-color: #455efb; }
+
+    body {
+      font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;   /* as the live swedol.se body: without it text renders heavier on macOS */
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      background: var(--color-background-primary);
+      color: var(--color-text-primary);
+      min-width: 320px;
+    }
+
+    /* ── Design Tokens ────────────────────────────────────────── */
+    :root {
+      /* Legacy primitives (kept for compatibility) */
+      --brand:             #c7d300;
+      --black:             #000;
+      --white:             #fff;
+      --grey-90:           #222;
+      --grey-20:           #939595;
+      --grey-15:           #dad9d7;
+      --grey-10:           #e5e5e5;
+      --text-secondary:    #4f4f4f;
+      --surface-secondary: #f6f6f6;
+      --danger:            #d90000;
+
+      /* Spacing & layout */
+      --px-page: 16px;   /* xs – mobile */
+      --max-w:   1200px;
+      --px-full: max(var(--px-page), calc((100vw - var(--max-w)) / 2));
+
+      /* ── Semantic Color Tokens ──────────────────────────────── */
+      /* Accent */
+      --color-accent-default: #c7d300;
+      --color-accent-light:   #f4f6cc;
+      --color-accent-dark:    #8b9400;
+
+      /* Text */
+      --color-text-primary:             #000000;
+      --color-text-primary-inverted:    #ffffff;
+      --color-text-secondary:           #4f4f4f;
+      --color-text-secondary-inverted:  rgba(255,255,255,0.78);
+      --color-text-tertiary:            #737373;
+      --color-text-tertiary-inverted:   #999999;
+      --color-text-action-primary:      #000000;
+      --color-text-action-primary-inverted: #ffffff;
+      --color-text-action-primary-inverted-hover: rgba(255,255,255,0.78);
+      --color-text-disabled:            #939595;
+      --color-text-danger-default:      #eb0000;
+      --color-text-success-default:             #17730d;
+      --color-text-information-default: #164ddc;
+
+      /* Background */
+      --color-background-primary:   #ffffff;
+      --color-background-secondary: #f6f6f6;
+
+      /* Surface – neutrals */
+      --color-surface-02:  #fafafa;
+      --color-surface-05:  #f6f6f6;
+      --color-surface-10:  #e5e5e5;
+      --color-surface-15:  #dad9d7;
+      --color-surface-20:  #cccccc;
+      --color-surface-40:  #939595;
+      --color-surface-50:  #737373;
+      --color-surface-60:  #595959;
+      --color-surface-70:  #4f4f4f;
+      --color-surface-80:  #333333;
+      --color-surface-90:  #222222;
+      --color-surface-100: #000000;
+      --color-surface-raised-primary:   #ffffff;
+      --color-surface-raised-secondary: #f6f6f6;
+      --color-surface-disabled:         #e5e5e5;
+      --color-surface-navigation-hover: #fafafa;
+
+      /* Surface – semantic status */
+      --color-surface-danger-default:       #d90000;
+      --color-surface-danger-weak:          #ffbdc0;
+      --color-surface-danger-weaker:        #ffebeb;
+      --color-surface-success-default:      #248616;
+      --color-surface-success-weak:         #daf6d0;
+      --color-surface-success-weaker:       #edffe7;
+      --color-surface-warning-default:      #fac000;
+      --color-surface-warning-weak:         #ffe167;
+      --color-surface-warning-weaker:       #fff5c2;
+      --color-surface-information-default:  #0066ff;
+      --color-surface-information-weak:     #d0e9ff;
+      --color-surface-information-weaker:   #e2f1ff;
+
+      /* Surface – opacity */
+      --color-surface-opacity-black-05: rgba(0,0,0,0.05);
+      --color-surface-opacity-black-10: rgba(0,0,0,0.10);
+      --color-surface-opacity-black-20: rgba(0,0,0,0.20);
+      --color-surface-opacity-black-50: rgba(0,0,0,0.50);
+      --color-surface-opacity-white-20: rgba(255,255,255,0.20);
+
+      /* Border */
+      --color-border-primary:       #e5e5e5;
+      --color-border-secondary:     #f6f6f6;
+      --color-border-tertiary:      #dad9d7;
+      --color-border-dark:          #333333;
+      --color-border-selected:      #000000;
+      --color-border-hover:         #333333;
+      --color-border-disabled:      #dad9d7;
+      --color-border-input-default: #939595;
+      --color-border-focus:         #455efb;
+      --color-border-action-1:      #000000;
+      --color-border-action-2:      #ffffff;
+      --color-border-action-3:      rgba(0,0,0,0.10);
+      --color-border-information-weak: #d0e9ff;
+      --color-border-success-weak:     #daf6d0;
+      --color-border-warning-weak:     #ffe167;
+      --color-border-danger-weak:      #ffbdc0;
+
+      /* ── Elevation / Shadows ────────────────────────────────── */
+      --elevation-b-20:  0px 1px 3px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-b-40:  0px 2px 4px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-b-60:  0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-b-80:  0px 8px 16px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-b-100: 0px 16px 24px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-t-60:  0px -4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-t-80:  0px -8px 16px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+      --elevation-drawer-left:  25px 0px 25px 0px rgba(0,0,0,0.03);
+      --elevation-drawer-right: -25px 0px 25px 0px rgba(0,0,0,0.03);
+
+      /* ── Motion – Easing ────────────────────────────────────── */
+      --ease-decelerate-generic:    cubic-bezier(.16,.38,.58,1);
+      --ease-decelerate-emphasized: cubic-bezier(.16,0,.16,1);
+      --ease-accelerate-generic:    cubic-bezier(.36,.09,1,.58);
+      --ease-standard:              cubic-bezier(.35,0,.35,1);
+
+      /* ── Motion – Duration ──────────────────────────────────── */
+      --duration-fast-1:   50ms;
+      --duration-fast-2:   100ms;
+      --duration-fast-3:   150ms;
+      --duration-fast-4:   200ms;
+      --duration-medium-1: 250ms;
+      --duration-medium-2: 300ms;
+      --duration-medium-3: 350ms;
+      --duration-medium-4: 400ms;
+      --duration-slow-1:   450ms;
+      --duration-slow-2:   500ms;
+      --duration-slow-3:   550ms;
+      --duration-slow-4:   600ms;
+    }
+
+    @media (min-width: 640px) {   /* sm – tablet */
+      :root { --px-page: 32px; }
+    }
+
+    @media (min-width: 1024px) {  /* lg – desktop */
+      :root { --px-page: 40px; }
+    }
+
+    /* ── Typography ───────────────────────────────────────────── */
+    .font-bold   { font-weight: 600; }
+    .font-regular{ font-weight: 400; }
+    .uppercase   { text-transform: uppercase; }
+    .tracking-sm { letter-spacing: 0.32px; }
+
+    /* ── Utilities ────────────────────────────────────────────── */
+    .flex        { display: flex; }
+    .flex-col    { flex-direction: column; }
+    .items-center{ align-items: center; }
+    .items-start { align-items: flex-start; }
+    .justify-between { justify-content: space-between; }
+    .justify-center  { justify-content: center; }
+    .gap-4  { gap: 4px; }
+    .gap-8  { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .gap-24 { gap: 24px; }
+    .shrink-0 { flex-shrink: 0; }
+    .flex-1   { flex: 1; }
+    .w-full   { width: 100%; }
+    .relative { position: relative; }
+
+    /* ── Page wrapper ─────────────────────────────────────── */
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       HEADER (black top bar)
+    ══════════════════════════════════════════════════════════ */
+    
+    
+    
+
+    /* Top row: logo + search + user icons */
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    body.keyboard-nav :focus-within::after { opacity: 1; }
+    
+    
+    
+    
+    
+    
+    .search-scan-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .search-scan-btn:hover { background: var(--color-surface-opacity-black-05); }
+    .search-scan-btn .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      box-sizing: border-box;
+    }
+    .icon-btn .ms { color: var(--color-text-primary-inverted); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .icon-btn:hover { background: var(--color-surface-opacity-white-20); }
+    .icon-btn--sm {
+      width: 32px;
+      height: 32px;
+      padding: 6px;
+    }
+    .icon-btn--sm .ms { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .icon-btn--sm:hover { background: var(--color-surface-opacity-black-05); }
+
+    .badge {
+      position: absolute;
+      top: 4px;
+      right: 2px;
+      background: var(--color-surface-danger-default);
+      color: var(--color-text-primary-inverted);
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 14px;
+      letter-spacing: 0.56px;
+      text-transform: uppercase;
+      border-radius: 100px;
+      min-width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      box-sizing: border-box;
+    }
+    .badge--white {
+      background: var(--color-surface-raised-primary);
+      color: var(--black);
+    }
+
+    
+    
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 100px;
+      border: 1px solid var(--grey-90);
+      background: var(--grey-20);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    
+    
+
+    /* Bottom row: main nav */
+    
+
+    
+    
+    
+    
+
+    /* Nav overflow more-button */
+    
+    
+    
+    
+    /* focus-visible hanteras globalt på button-elementet */
+
+    /* Nav overflow dropdown */
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+    /* ══════════════════════════════════════════════════════════
+       ACCOUNT NAV (white bar with tabs)
+    ══════════════════════════════════════════════════════════ */
+    .account-nav {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px var(--px-full);
+      border-bottom: 1px solid var(--color-border-primary);
+    }
+
+    .account-nav__profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar--lg {
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      border: 1px solid var(--grey-90);
+      background: var(--grey-20);
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: var(--elevation-b-40);
+    }
+    .avatar--lg img { width: 100%; height: 100%; object-fit: cover; }
+    /* legacy My Pages .tab-bar rule removed (2026-11-05): it overrode components/css/tabs.css (overflow hidden, 48px high, centred) */
+    .tab-item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      height: 48px;
+    }
+    .tab-item__label {
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18px;
+      color: var(--black);
+      white-space: nowrap;
+      line-height: 18px;
+    }
+    .tab-item--active .tab-item__label {
+      color: var(--black);
+    }
+    .tab-item:not(.tab-item--active) .tab-item__label {
+      color: var(--black);
+    }
+    .tab-item:not(.tab-item--active):hover .tab-item__label {
+      color: var(--color-text-tertiary);
+    }
+
+    /* Tab overflow more-button */
+    .tab-more {
+      display: none;
+      align-items: center;
+      flex-shrink: 0;
+      height: 48px;
+      margin-left: 24px;
+    }
+    .tab-more--visible { display: flex; }
+    /* focus-visible hanteras globalt på button-elementet */
+
+    /* Dropdown menu */
+    .tab-more__menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      height: 40px;
+      padding: 0 16px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0.36px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      color: var(--color-text-primary);
+      cursor: pointer;
+      white-space: nowrap;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--color-border-secondary);
+    }
+    .tab-more__menu-item:last-child { border-bottom: none; }
+    .tab-more__menu-item:hover { background: var(--color-surface-02); }
+    .tab-more__menu-item__check {
+      font-family: 'Material Symbols Outlined';
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      color: var(--color-text-primary);
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .company-logo {
+      width: 80px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .divider-v {
+      width: 1px;
+      height: 24px;
+      background: var(--grey-15);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════════════════════════════ */
+    .main-content {
+      padding: 24px var(--px-page) 0; /* xs + sm: 24px top */
+      background: var(--color-background-secondary);
+    }
+
+    /* Mobile: headline-lg (28px/32px) */
+    .page-title {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 32px;
+      color: var(--color-text-primary);
+      margin-bottom: 8px;
+    }
+
+    /* Mobile: body-lg (18px/24px) */
+    .page-preamble {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 24px;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-bottom: 24px; /* xs + sm */
+    }
+
+    /* Desktop: headline-lg (36px/40px) and body-lg (20px/28px) */
+    @media (min-width: 769px) {
+      .page-title { font-size: 36px; line-height: 40px; }
+      .page-preamble { font-size: 20px; line-height: 28px; }
+    }
+
+    /* Account stats */
+    /* TOTALT — spreads content top/bottom */
+    /* Middle column: two compact cards stacked */
+    /* SAKNAR WEBBKOPPLING */
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .search-input {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-background-primary);
+      border: 1px solid var(--color-border-input-default);
+      padding: 0 8px;
+      height: 40px;              /* Desktop Small */
+      width: min(384px, 100%);
+      transition: border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .search-input::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 2px solid var(--color-border-focus);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-fast-2) var(--ease-standard);
+    }
+    .search-input .ms {
+      color: var(--black);
+      font-size: 20px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .search-input input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 14px;            /* body-sm Desktop Small */
+      font-weight: 400;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      color: var(--color-text-primary);
+      letter-spacing: 0.36px;
+      line-height: 20px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .search-input input::placeholder { color: var(--color-text-tertiary); }
+    .search-input:hover { border-color: var(--color-border-dark); }
+    .search-input.is-active,
+    .search-input:focus-within { border-color: var(--color-border-selected); }
+    .search-input:focus-within::after { opacity: 0; }
+    body.keyboard-nav :focus-within::after { opacity: 1; }
+    .search-input:focus-within .search-clear { /* controlled by JS */ }
+    .search-clear {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 0;
+    }
+    .search-clear .ms {
+      font-size: 20px;
+      color: var(--color-text-tertiary);
+      font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+    .search-input-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--color-border-tertiary);
+      flex-shrink: 0;
+    }
+
+    .action-btns {
+      display: flex;
+      gap: 8px;
+    }
+    .action-btn {
+      width: 40px;
+      height: 40px;
+      background: var(--black);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .action-btn .ms {
+      color: white;
+      font-size: 24px;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .action-btn:hover {
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, var(--color-surface-action-1) 0%, var(--color-surface-action-1) 100%);
+    }
+
+    /* Tooltip */
+    /* Bottom: tooltip below element, beak at top pointing up */
+    /* Top: tooltip above element, beak at bottom pointing down */
+    /* Fixed tooltip for table row buttons — rendered on body, decoupled from scroll container */
+    .row-tooltip {
+      position: fixed;
+      z-index: 9999;
+      visibility: hidden;   /* hidden but always in layout — so offsetWidth/Height are always valid */
+      background: rgba(0,0,0,0.9);
+      color: var(--color-text-primary-inverted);
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.36px;
+      white-space: nowrap;
+      pointer-events: none;
+      padding: 8px 12px;
+      box-shadow: 0px 2px 4px rgba(0,0,0,0.10), 0px 0px 1px rgba(0,0,0,0.05);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .row-tooltip__beak {
+      position: absolute;
+      width: 0;
+      height: 0;
+      /* All border properties set by JS per placement — top/left/right variants differ */
+    }
+
+    /* Table */
+    .users-table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: var(--elevation-b-20);
+    }
+
+    /* Sticky Namn-kolumn */
+    .users-table th:first-child,
+    .users-table td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+    }
+    .users-table thead th:first-child {
+      background: var(--color-accent-light);
+    }
+    .users-table tbody tr td:first-child       { background: var(--color-background-primary); }
+    .users-table tbody tr:nth-child(even) td:first-child { background: var(--surface-secondary); }
+
+    /* Webb — sista synliga kolumn, padding-right = overlay (96px) */
+    .users-table th[data-col="webb"],
+    .users-table td[data-col="webb"] {
+      padding-right: 64px;
+    }
+
+    /* Sticky åtgärdskolumn — padding-right:16px täcker gapet mot tabellkanten */
+
+    /* Vänsterskugga på sticky åtgärdskolumn */
+
+    /* Sticky spacer — dold (behöver ingen visad bredd, bakgrunden täcks av col-action) */
+
+
+    /* Skugga på sticky Namn-kolumn via ::after */
+    .users-table th:first-child,
+    .users-table td:first-child {
+      overflow: visible;
+    }
+    .users-table th:first-child::after,
+    .users-table td:first-child::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -12px;
+      bottom: 0;
+      width: 12px;
+      background: linear-gradient(to right, rgba(0,0,0,0.10), rgba(0,0,0,0.05) 40%, transparent);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-fast-3) var(--ease-standard);
+    }
+    /* Visa skugga när tabellen har horisontellt overflow */
+
+    /* Cursor-indikator när tabellen har horisontellt overflow */
+
+    .users-table thead tr {
+      background: var(--color-accent-light);
+    }
+    .users-table th {
+      padding: 0 16px;
+      height: 56px;
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: 600;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-align: left;
+      padding-left: 16px;
+      color: var(--black);
+      letter-spacing: 0.28px;
+      text-transform: none;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .users-table th:first-child { padding-left: 16px; }
+
+    /* Namn tar allt kvarvarande utrymme → pressar övriga kolumner mot höger */
+    .users-table th[data-col="namn"] { width: 100%; }
+    .users-table td:first-child { width: 100%; }
+
+    /* Övriga kolumner krymper till innehållsbredd */
+    .users-table th:not([data-col="namn"]),
+    .users-table td:not(:first-child) {
+      width: 1px;
+      white-space: nowrap;
+    }
+
+    .sort-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .sort-icon .ms {
+      font-size: 16px;
+      color: var(--black);
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+
+    .users-table tbody tr { background: var(--color-background-primary); }
+    .users-table tbody tr:nth-child(even) { background: var(--surface-secondary); }
+
+    .users-table td {
+      padding: 0 16px;
+      height: 56px;
+      font-size: 16px;
+      line-height: 16px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      color: var(--black);
+      vertical-align: middle;
+    }
+    .users-table td:first-child { padding-left: 16px; }
+
+    /* Blank xs row-action button — btn--blank btn--xs */
+    .btn-row-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 0;
+      height: 32px;            /* btn--xs */
+      padding: 6px;            /* btn--xs */
+      background: transparent; /* btn--blank */
+      color: var(--color-text-primary);          /* text-primary */
+      border: none;
+      cursor: pointer;
+      transition: background-image var(--duration-fast-3) var(--ease-standard);
+    }
+    .btn-row-action:hover {
+      background: var(--color-surface-opacity-black-05); /* surface-opacity-black-05 — Blank hover per Figma */
+    }
+    /* focus-visible hanteras globalt på button-elementet */
+
+    /* Row action overlay */
+    .row-action-wrap {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .row-action-overlay {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      background: var(--color-background-primary); /* #ffffff */
+      box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05); /* elevation-b-60 */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-fast-3) var(--ease-standard);
+      z-index: 10;
+    }
+    .row-action-wrap:hover .row-action-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .users-table tbody tr:nth-child(even) .row-action-overlay {
+      background: var(--surface-secondary); /* #f6f6f6 */
+    }
+
+    /* ── Mobile / Tablet User Cards (xs + sm, max-width: 768px) ─── */
+
+    /* Data section: shared grid + expand button */
+
+    /* Two-column grid shared by Roll row and expanded detail rows */
+
+    /* Animated expand/collapse wrapper — spans full grid width */
+
+    /* Inner expanded grid — min-height:0 required for 0fr to collapse fully */
+
+    /* ── Logout confirm toast – knappar ─────────────────────── */
+    /* Stäng × — Blank på ljus bakgrund */
+    /* ── Buttons: .btn comes from /components/css/button.css (eco-button). Only the Close icon button needs the page-local override below ── */
+    body.keyboard-nav .btn:focus, body.keyboard-nav .icon-btn.icon-btn--close:focus { outline-color: var(--color-border-focus); }
+    /* Close: Blank icon button. This page already has a header .icon-btn, so the rules are doubled up (.icon-btn.icon-btn--close) to win over it. */
+    .icon-btn.icon-btn--close {
+      width: 24px; height: 24px; padding: var(--dimension-spacing-space-2); background: transparent; display: inline-flex; align-items: center; justify-content: center;
+      outline: 2px solid transparent; outline-offset: 2px; transition: outline-color var(--duration-fast-2) var(--ease-standard);
+    }
+    .icon-btn.icon-btn--close .ms { font-size: 20px; color: var(--color-icon-primary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .icon-btn.icon-btn--close:hover { background: var(--color-surface-opacity-black-05); }
+
+    /* OK — Secondary xs */
+
+    /* ABRYT — Primary xs */
+
+    @keyframes toast-slide-in {
+      from { transform: translateX(calc(100% + 40px)); }
+      to   { transform: translateX(0); }
+    }
+    @keyframes toast-slide-out {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(100% + 40px)); }
+    }
+    @keyframes toast-slide-in-top {
+      from { transform: translateY(-100%); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes toast-slide-out-top {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-100%); }
+    }
+
+    /* ── Impersonation banner — Type: Banner, Emphasis: System Extra Strong, Status: Informational ── */
+
+    /* Outer wrapper: fixed bottom, slides up when active */
+    .impersonation-banner-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 101;
+      transform: translateY(-100%);
+      transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
+      pointer-events: none;
+    }
+    .impersonation-banner-wrap.is-visible {
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Placeholder — reserves space so content is pushed down */
+    .impersonation-banner-placeholder {
+      display: none;
+      height: 40px;   /* matches min-height of banner body (mobile) */
+      flex-shrink: 0;
+    }
+    @media (min-width: 769px) {
+      .impersonation-banner-placeholder { height: 48px; }
+    }
+
+    /* When banner is active, show placeholder and shift sticky header down */
+    body.has-impersonation-banner .impersonation-banner-placeholder {
+      display: block;
+    }
+    
+    
+
+    /* Inner banner */
+    .impersonation-banner {
+      width: 100%;
+      background: var(--color-surface-information-default); /* #0066ff */
+      box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+    }
+
+    /* Body: icon + message-group, left-aligned with LOGGA UT pushed right */
+    .impersonation-banner__body {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      padding: 8px 16px;
+      min-height: 40px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    @media (min-width: 769px) {
+      .impersonation-banner__body { min-height: 48px; }
+    }
+
+    .impersonation-banner__icon {
+      font-size: 24px;
+      font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      color: var(--color-text-primary-inverted);
+      flex-shrink: 0;
+    }
+
+    /* Text left, LOGGA UT pushed to the right */
+    .impersonation-banner__text-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      gap: 16px;
+    }
+
+    .impersonation-banner__text {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.36px;
+      color: var(--color-text-primary-inverted);
+      white-space: nowrap;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+
+    .impersonation-banner__title {
+      font-weight: 600;
+      letter-spacing: 0.56px;
+      text-transform: uppercase;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+
+    /* LOGGA UT: text-action-primary-inverted, body-sm--bold-underline */
+    .impersonation-banner__link {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0.36px;
+      color: var(--color-text-action-primary-inverted); /* #fff */
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      transition: color var(--duration-fast-3) var(--ease-standard);
+    }
+    .impersonation-banner__link:hover {
+      color: var(--color-text-action-primary-inverted-hover);
+      text-decoration: none;
+    }
+
+
+    /* Mobile/Tablet (≤768px) */
+    @media (max-width: 768px) {
+      .impersonation-banner__body {
+        padding: 8px 16px;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .impersonation-banner__text-group {
+        align-items: flex-start;
+        gap: 16px;             /* 16px gap text↔länk på mobil */
+        width: 100%;           /* sträck ut så LOGGA UT kan pushas till höger */
+        justify-content: space-between;
+        padding-top: 2px;      /* centrera första textraden (20px lh) mot ikonen (24px) */
+      }
+      .impersonation-banner__text {
+        white-space: normal;   /* text radbryts på mobil */
+        flex: 1;
+      }
+      .impersonation-banner__link {
+        flex-shrink: 0;
+      }
+    }
+
+    /* ── Delete confirmation modal ───────────────────────────── */
+
+    /* lg-md (≥769px): centered modal, 440px, padding 24px */
+
+    /* sm (640–768px): centered modal, 440px, padding 24px */
+
+    /* xs (<640px): full viewport, pinned top:0 left:0 */
+
+    /* Inner container */
+
+    /* Header + Body — flex:1 on xs to push footer down */
+
+    /* Header row */
+
+    /* title-md: 20px/24px desktop — 18px/22px tablet+mobile */
+
+    /* focus-visible hanteras globalt på button-elementet */
+
+    /* body-md: 16px/24px desktop — 16px/22px tablet+mobile */
+
+    /* Button group: pt-32px desktop — pt-24px tablet+mobile */
+
+    /* Shared button base */
+    /* sm-xs: label-md 14px 0.48px */
+    /* focus-visible hanteras globalt på button-elementet */
+
+    /* Avbryt — Secondary: transparent, border 1px solid #000 */
+
+    /* Confirm — Primary: bg #000, flex:1 */
+
+    .user-name { margin-bottom: 4px; }
+    .user-name {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 16px;
+      color: var(--black);
+    }
+    .user-email {
+      font-size: 14px;
+      line-height: 14px;
+      color: var(--text-secondary);
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 400;
+    }
+    .user-email:hover {
+      text-decoration: none;
+    }
+
+    .check-icon {
+      display: table-cell;
+      text-align: left;
+      vertical-align: middle;
+    }
+    .check-icon input[type="checkbox"] {
+      margin: 4px;
+    }
+
+    /* Pagination */
+    .show-more-btn {
+      border: 1px solid var(--black);
+      background: none;
+      width: 100%;
+      padding: 12px 8px;
+      font-size: 18px;
+      font-weight: 600;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18px;
+      line-height: 18px;
+      color: var(--black);
+      cursor: pointer;
+      text-align: center;
+    }
+    .show-more-btn:hover { background: var(--color-surface-opacity-black-05); color: var(--black); }
+
+    /* ══════════════════════════════════════════════════════════
+       FAVOURITE STORE SECTION
+    ══════════════════════════════════════════════════════════ */
+    /* .page-divider: /components/css/section.css */
+
+    /* ══════════════════════════════════════════════════════════
+       CONTACT SECTION
+    ══════════════════════════════════════════════════════════ */
+
+    .avatars-group {
+      display: flex;
+      padding-top: 16px;
+    }
+    .avatars-group .avatar--lg {
+      width: 48px;
+      height: 48px;
+      border-radius: 100px;
+      border: 2px solid var(--white);
+      overflow: hidden;
+      margin-right: -8px;
+      box-shadow: var(--elevation-b-40);
+      flex-shrink: 0;
+    }
+    .avatars-group .avatar--lg:last-child { margin-right: 0; }
+    .avatars-group .avatar--lg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ══════════════════════════════════════════════════════════
+       CTA BANNER
+    ══════════════════════════════════════════════════════════ */
+    /* xs/mobile default */
+    .cta-banner {
+      background: var(--color-background-primary);
+      border-top: 1px solid var(--color-border-primary);
+      padding: 32px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+      text-align: left;
+    }
+    .cta-banner__text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      width: 100%;
+    }
+    .cta-banner__title {
+      font-size: 28px;       /* headline-lg Mobile */
+      font-weight: 600;
+      color: var(--color-text-primary);
+      line-height: 32px;
+      letter-spacing: 0;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .cta-banner__sub {
+      font-size: 18px;       /* body-lg Mobile */
+      font-weight: 400;
+      color: var(--color-text-primary);
+      line-height: 24px;
+      letter-spacing: 0;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .cta-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      width: 100%;
+    }
+    .btn-blank {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: var(--color-text-action-primary);
+      height: 40px;          /* Mobile md: 40px */
+      padding: 8px;
+      font-size: 16px;       /* label-lg Mobile */
+      font-weight: 600;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.32px;
+      line-height: 16px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      white-space: nowrap;
+    }
+    .btn-blank:hover { background: var(--color-surface-opacity-black-05); }
+    .btn-primary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-surface-100);
+      border: none;
+      color: var(--color-text-primary-inverted);
+      height: 40px;          /* Mobile md: 40px */
+      padding: 8px;
+      font-size: 16px;       /* label-lg Mobile */
+      font-weight: 600;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.32px;
+      line-height: 16px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background-image: linear-gradient(90deg, var(--color-surface-opacity-white-20), var(--color-surface-opacity-white-20)),
+                        linear-gradient(90deg, var(--color-surface-100), var(--color-surface-100));
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════════ */
+    .site-footer {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .footer-top {
+      display: flex;
+      gap: 40px;
+      align-items: stretch;
+      padding: 32px 16px 40px;
+      background: var(--color-surface-90);
+    }
+    .footer-top__col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-top__divider {
+      width: 1px;
+      background: var(--color-surface-80);
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+
+    /* Newsletter */
+    .newsletter__title {
+      font-size: 36px;
+      font-weight: 600;
+      text-transform: uppercase;
+      line-height: 36px;
+      color: var(--white);
+    }
+    .newsletter__desc {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 22px;
+      letter-spacing: 0.32px;
+    }
+    @media (min-width: 769px) { .newsletter__desc { font-size: 17px; line-height: 24px; } }
+    .newsletter__input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .newsletter__input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--color-surface-raised-primary, #ffffff);
+      border: 1px solid var(--color-border-input-default);
+      height: 32px;               /* Mobile Small (xs + sm) */
+      padding: 8px;
+      box-sizing: border-box;
+      transition: border-color var(--duration-fast-3) var(--ease-standard);
+    }
+    .newsletter__input-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 2px solid var(--color-border-focus);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--duration-fast-2) var(--ease-standard);
+    }
+    .newsletter__input-wrap:hover { border-color: var(--color-border-dark); }
+    .newsletter__input-wrap.is-active,
+    .newsletter__input-wrap:focus-within { border-color: var(--color-border-selected); }
+    .newsletter__input-wrap:focus-within::after { opacity: 0; }
+    body.keyboard-nav :focus-within::after { opacity: 1; }
+    .newsletter__input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--color-text-primary);
+      font-size: 16px;            /* body-md Mobile Large */
+      font-weight: 400;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      letter-spacing: 0.32px;
+      line-height: 22px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .newsletter__input::placeholder { color: var(--color-text-tertiary); }
+    .newsletter__input:not(:placeholder-shown) ~ * { /* sibling visibility hook */ }
+    .newsletter__clear {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 0;
+      display: none;
+      flex-shrink: 0;
+    }
+    .newsletter__clear .ms { font-size: 20px; color: var(--color-text-tertiary); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .newsletter__btn {
+      background: var(--brand);
+      color: var(--black);
+      border: none;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.48px;
+      line-height: 16px;
+    }
+    .newsletter__btn:hover { opacity: 0.9; }
+
+    /* Customer service */
+    .cs__title {
+      font-size: 36px;
+      font-weight: 600;
+      text-transform: uppercase;
+      line-height: 36px;
+      color: var(--white);
+    }
+    .cs__desc {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 22px;
+      letter-spacing: 0.32px;
+    }
+    @media (min-width: 769px) { .cs__desc { font-size: 17px; line-height: 24px; } }
+    .cs__bullets {
+      display: flex;
+      gap: 24px;
+    }
+    .cs__bullet-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cs__bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .cs__bullet-dot {
+      width: 6px;
+      height: 15px;
+      flex-shrink: 0;
+      margin-top: 0px;
+    }
+    .cs__bullet-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 24px;
+      letter-spacing: 0.32px;
+    }
+    .cs__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.48px;
+      line-height: 16px;
+      text-decoration: none;
+    }
+    .cs__btn:hover { background: var(--color-surface-10); }
+    .cs__btn .ms { font-size: 24px; color: var(--black); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      padding: 48px var(--px-full) 64px;
+    }
+    .footer-divider {
+      background: var(--color-surface-100);
+      padding: 0 var(--px-full);
+    }
+    .footer-divider__line {
+      height: 1px;
+      background: var(--color-surface-80);
+    }
+    .footer-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-col__heading {
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18px;
+      line-height: 18px;
+      color: var(--color-text-tertiary-inverted);
+    }
+    .footer-col__links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .footer-col__links li a {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-text-primary-inverted);
+      text-decoration: none;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) { .footer-col__links li a { font-size: 17px; line-height: 24px; } }
+    .footer-col__links li a:hover { text-decoration: underline; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px var(--px-full);
+    }
+    .footer-bottom__trustmarks {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .trustmark-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .trustmark-group__label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 18px;
+      white-space: nowrap;
+    }
+    .trustmark-group__items {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      height: 32px;
+    }
+    .trustmark-badge {
+      width: 48px;
+      height: 32px;
+      border: 1px solid var(--color-surface-80);
+      border-radius: 4px;
+      background: var(--white);
+      padding: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trustmark-badge > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .trustmark-badge__inner {
+      background: var(--white);
+      padding: 8px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .trustmark-badge__inner--mc { padding: 3.5px 7px; }
+    .trustmark-badge__inner img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+    .trustmark-badge--klarna { background: #ffb3c7; }
+    .trustmark-badge--trygg { border-color: var(--color-surface-90); }
+
+    .footer-bottom__social {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .social-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text-secondary-inverted);
+      white-space: nowrap;
+    }
+    .social-icons {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--color-surface-90);
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .social-icon img { width: 24px; height: 24px; object-fit: contain; }
+    .social-icon:hover { border-color: var(--color-text-primary-inverted); }
+
+    .footer-copyright {
+      background: var(--color-surface-100);
+      padding: 32px var(--px-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-copyright__inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 16px;
+    }
+    .footer-copyright__logo {
+      width: 80px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .footer-copyright__logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .footer-copyright__text {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 20px;
+      letter-spacing: 0.36px;
+      white-space: nowrap;
+    }
+    /* ── Drawer ───────────────────────────────────────────── */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--duration-medium-2) var(--ease-standard);
+    }
+    .drawer-overlay.is-open { opacity: 1; pointer-events: all; }
+
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(500px, 100%);
+      height: 100vh;
+      background: var(--color-surface-raised-primary);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
+      overflow: hidden;
+    }
+    .drawer-panel.is-open { transform: translateX(0); box-shadow: var(--elevation-drawer-right); }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      padding: 24px 32px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: box-shadow var(--duration-fast-3) var(--ease-standard);
+    }
+    .drawer-header--elevated {
+      box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+    }
+    .drawer-header__content { flex: 1; padding: 4px 0; }
+    .drawer-title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 26px;             /* display-sm Desktop */
+      font-weight: 600;
+      line-height: 26px;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .drawer-close-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      padding: 8px;
+    }
+    .drawer-close-btn:hover { background: var(--color-surface-opacity-black-05); }
+    .drawer-close-btn .ms { font-size: 24px; color: var(--color-text-primary); }
+
+    .drawer-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .drawer-footer {
+      padding: 24px 32px;
+      background: var(--color-surface-raised-primary);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0px -4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
+    }
+    .drawer-save-btn {
+      width: 100%;
+      background: var(--color-surface-100);
+      color: var(--color-text-primary-inverted);
+      border: none;
+      height: 40px; /* btn--sm desktop */
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px; /* space-8 */
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.48px;
+      line-height: 16px;
+      cursor: pointer;
+      transition: background-color var(--duration-fast-3) var(--ease-standard),
+                  background-image var(--duration-fast-3) var(--ease-standard);
+    }
+    .drawer-save-btn__bankid-icon {
+      width: 24px;
+      height: 24px;
+      display: none;
+      flex-shrink: 0;
+    }
+    .drawer-save-btn.has-bankid .drawer-save-btn__bankid-icon {
+      display: block;
+    }
+    .drawer-save-btn:disabled .drawer-save-btn__bankid-icon {
+      filter: brightness(0.576); /* --color-text-disabled: #939595 = 147/255 */
+    }
+
+    .drawer-save-btn:hover:not(:disabled) {
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.2)), linear-gradient(90deg, var(--color-surface-action-1), var(--color-surface-action-1));
+    }
+    .drawer-save-btn:disabled {
+      background: var(--color-surface-disabled, #e5e5e5);
+      color: var(--color-text-disabled, #939595);
+      cursor: not-allowed;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       HUVUDMENY-DRAWER (ECO Design System)
+       Nivå 1 glider in från vänster; Nivå 2 glider in från höger
+       inuti samma drawer-container.
+    ══════════════════════════════════════════════════════════ */
+    .drawer-panel--left { left: 0; right: auto; transform: translateX(-100%); }
+    .drawer-panel--left.is-open { transform: translateX(0); box-shadow: var(--elevation-drawer-left); }
+
+    .menu-level {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--color-surface-raised-primary);
+      transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized);
+      overflow: hidden;
+    }
+    .menu-level--2 { transform: translateX(100%); z-index: 2; }
+    .menu-level--2.is-active { transform: translateX(0); }
+    /* Nivå 2 trycker undan föregående nivå — den glider ut åt vänster samtidigt */
+    .menu-level--pushed { transform: translateX(-100%); }
+
+    .menu-drawer__logo { width: 100px; height: 20px; object-fit: contain; display: block; }
+
+    .menu-drawer__content {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 24px;
+    }
+    .menu-main-nav,
+    .menu-meta-nav,
+    .menu-level2-list { display: flex; flex-direction: column; }
+    .menu-main-nav { padding-top: 8px; }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 32px 8px 24px;   /* Mobil/Tablet */
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+    }
+    .menu-item:hover { background: var(--color-surface-navigation-hover); }
+    @media (min-width: 769px) {
+      .menu-item { padding-left: 32px; padding-right: 40px; } /* Desktop */
+    }
+    .menu-item__icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .menu-item__icon .ms { font-size: 28px; color: var(--color-text-tertiary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .menu-item__icon img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
+    .menu-item__label { flex: 1; min-width: 0; color: var(--color-text-primary); }
+    .menu-item__chevron { font-size: 24px; color: var(--color-text-primary); flex-shrink: 0; }
+
+    .menu-item--lg { height: 48px; padding-top: 0; padding-bottom: 0; }
+    .menu-item--lg .menu-item__label {
+      font-size: 20px;      /* Mobil/Tablet */
+      font-weight: 600;
+      line-height: 20px;
+      text-transform: uppercase;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    @media (min-width: 769px) {
+      .menu-item--lg .menu-item__label { font-size: 24px; line-height: 24px; } /* Desktop */
+    }
+
+    .menu-item--sm { padding-top: 4px; padding-bottom: 4px; }         /* Meta nav (utan ikon) */
+    .menu-item--sm:has(.menu-item__icon) { padding-top: 8px; padding-bottom: 8px; } /* Nivå 2-listor (med ikon) */
+    .menu-item--sm .menu-item__label {
+      padding: 5px 0;        /* inre "Text"-wrapper i Figma, utöver radens egen padding */
+      font-size: 16px;       /* body-md */
+      font-weight: 400;
+      line-height: 22px;     /* body-md Mobil */
+      letter-spacing: 0.32px;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) {
+      .menu-item--sm .menu-item__label { line-height: 24px; } /* body-md Desktop */
+    }
+
+    .menu-store-select {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 56px;           /* Mobil/Tablet */
+      padding: 16px 32px 16px 24px;
+      flex-shrink: 0;
+      cursor: pointer;
+      background: var(--color-surface-raised-primary);
+      border: none;
+      border-top: 1px solid var(--color-border-secondary);
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+    .menu-store-select:hover { background: var(--color-surface-navigation-hover); }
+    .menu-store-select .ms { font-size: 24px; color: var(--color-text-primary); flex-shrink: 0; }
+    .menu-store-select__left {
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+    }
+    .menu-store-select__right {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .menu-store-select__label {
+      flex: 1;
+      min-width: 0;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    @media (min-width: 769px) {
+      .menu-store-select { height: 72px; padding: 24px 40px 24px 32px; }
+      .menu-store-select__label { line-height: 24px; }
+    }
+
+    /* Nivå 2 — header med tillbaka-länk + titel */
+    .menu-level2__header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 32px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: box-shadow var(--duration-fast-3) var(--ease-standard);
+    }
+    .menu-level2__nav-row { display: flex; align-items: center; justify-content: space-between; }
+    .menu-level2__title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 18px;
+      letter-spacing: 0.18px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+
+    /* Action Link: components/css/action-link.css (the page-local copy was removed 2026-11-12) */
+
+    /* ══════════════════════════════════════════════════════════
+       MALL-PLATSHÅLLARE — enbart för template.html, ej en riktig
+       designsystem-komponent. Visar tydligt var sidans CONTENT
+       ska in, avgränsat från header ovanför och footer/CTA nedanför.
+    ══════════════════════════════════════════════════════════ */
+    .template-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 280px;
+      width: 100%;
+      padding: 40px 24px;
+      border: 2px dashed var(--color-accent-dark);
+      background: var(--color-accent-light);
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .template-placeholder__icon {
+      font-size: 40px;
+      color: var(--color-accent-dark);
+    }
+    .template-placeholder__title {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.18px;
+      color: var(--color-text-primary);
+    }
+    .template-placeholder__desc {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: 0.32px;
+      color: var(--color-text-secondary);
+      max-width: 420px;
+    }
+    @media (min-width: 769px) { .template-placeholder__desc { font-size: 17px; line-height: 24px; } }
+
+    /* Form fields: .form-field, .form-label, .form-helper, .input-wrap, .form-input, .form-select, checkbox and radio come from /components/css/*.css. Page-local extras: */
+    .form-field--pt { padding-top: 0; }
+    .form-row { display: flex; gap: 24px; }
+    .form-row .form-field { flex: 1; min-width: 0; }
+    .form-label__req { color: var(--color-text-danger-default); }
+    .form-label__optional {
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      font-size: 16px;       /* body-md Desktop */
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0.32px;
+      text-transform: none;
+      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+      color: var(--color-text-primary);
+    }
+    .form-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    /* ── Responsive (mobile-first) ───────────────────────── */
+
+    /* xs default – mobile base styles */
+    
+    
+    
+
+    .account-nav { padding-top: 16px; padding-bottom: 16px; }
+    .avatar--lg { width: 24px; height: 24px; }
+    .account-nav__profile { gap: 8px; }
+    
+
+    .filter-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .search-input { width: 100%; }
+
+    .users-table { display: block; overflow-x: auto; }
+
+    /* Footer xs/mobile overrides */
+    .footer-top { flex-direction: column; }
+    .footer-top__divider { display: none; }
+    .newsletter__title { font-size: 28px; line-height: 28px; margin-bottom: -8px; }
+    .cs__title { font-size: 28px; line-height: 28px; }
+    .newsletter__btn { height: 32px; padding: 4px 6px; font-size: 14px; line-height: 14px; letter-spacing: 0.42px; }
+    .cs__btn { padding: 4px 6px; font-size: 14px; line-height: 14px; letter-spacing: 0.42px; }
+
+    /* Footer links — accordion on mobile */
+    .footer-links { flex-direction: column; flex-wrap: nowrap; padding: 0 16px; gap: 0; }
+    .footer-col { flex: none; width: 100%; border-bottom: 1px solid var(--color-border-dark); gap: 0; }
+    .footer-col.is-open { border-bottom: none; }
+    .footer-col__heading {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 24px 0;
+      background: none; border: none; cursor: pointer;
+      font-size: 18px; font-weight: 600; line-height: 22px; letter-spacing: 0px;
+      font-family: 'Breuer Condensed', Arial, sans-serif;
+      text-transform: uppercase; color: var(--color-text-primary-inverted); text-align: left;
+      font-feature-settings: 'ss02' 1, 'ss03' 1;
+    }
+    .footer-col__expand {
+      font-size: 24px; flex-shrink: 0;
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      transition: transform var(--duration-fast-4) var(--ease-standard);
+    }
+    .footer-col.is-open .footer-col__expand { transform: rotate(180deg); }
+    .footer-col:hover .footer-col__heading { color: var(--color-text-action-primary-inverted-hover); }
+    .footer-col__links {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--duration-fast-4) var(--ease-standard);
+    }
+    .footer-col.is-open .footer-col__links {
+      border-bottom: 1px solid var(--color-surface-80);
+      padding-bottom: 32px;
+    }
+
+    /* Footer divider, bottom & copyright */
+    .footer-divider { padding: 0; }
+    .footer-divider__line { background: var(--color-surface-70); }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 32px; padding: 32px 16px 24px; }
+    .footer-copyright { padding: 24px 16px; }
+
+    .form-row { flex-direction: column; }
+    .form-row--name { flex-direction: row; }
+
+    /* xs/sm (max-width: 768px) – mobile: drawer component overrides */
+    @media (max-width: 768px) {
+      /* Header */
+      .drawer-header { padding: 16px 24px; }
+      .drawer-title {
+        font-size: 22px;       /* display-sm Mobile */
+        line-height: 22px;
+      }
+
+      /* Content & footer spacing */
+      .drawer-content { padding: 0 24px 24px; gap: 16px; }
+      .drawer-footer { padding: 16px 24px; }
+
+      /* Save button — mobile lg: 48px, padding 12px */
+      .drawer-save-btn { padding: 12px 16px; }
+
+      /* Huvudmeny-drawer — nivå 2 header */
+      .menu-level2__header { padding: 16px 24px; }
+      .menu-level2__title { font-size: 16px; line-height: 16px; letter-spacing: 0.32px; } /* label-lg Mobil */
+
+      /* Labels — label-md Mobile: 14px/14px, 0.42px */
+      .form-label {
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: 0.42px;
+      }
+      /* Optional suffix — body-md Mobile: 14px/14px, 0.42px */
+      .form-label__optional {
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: 0.42px;
+      }
+
+      /* Inputs & selects — Large Mobile: 40px, 8px padding, body-md mobile 16px/22px */
+      .form-input,
+      .form-select {
+        height: 40px;
+        padding: 8px;
+        line-height: 22px;
+      }
+      .form-select { padding-right: 40px; }   /* keep room for arrow */
+
+      /* Checkbox label text — body-md Mobile: 16px/22px */
+      .form-checkbox-item span {
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: 0.32px;
+      }
+
+      /* form-row stays stacked on mobile, except name row */
+      .form-row { flex-direction: column; gap: 16px; }
+      .form-row--name { flex-direction: row; gap: 16px; }
+    }
+
+    /* sm (min-width: 640px) – tablet */
+    @media (min-width: 640px) { /* sm: section bottom 48px */
+      .page-preamble { margin-bottom: 32px; }
+
+      /* CTA banner — centered, 32px horizontal padding */
+      .cta-banner { padding: 48px 32px 48px; align-items: center; text-align: center; }
+      .cta-banner__text { align-items: center; }
+      .cta-buttons { width: auto; }
+      .btn-blank, .btn-primary { flex: none; }
+
+      /* Footer top — row layout with vertical divider */
+      .footer-top { flex-direction: row; padding: 40px 32px 48px; }
+      .footer-top__divider { display: block; }
+
+      /* Footer links — still accordion, 32px horizontal padding */
+      .footer-links { padding: 0 32px; }
+
+      /* Footer divider — padded to align with content */
+      .footer-divider { padding: 0 32px; background: var(--color-surface-100); }
+
+      /* Footer bottom — row layout */
+      .footer-bottom { flex-direction: row; align-items: flex-start; padding: 32px; gap: 0; justify-content: space-between; flex-wrap: wrap; row-gap: 40px; }
+
+      /* Copyright */
+      .footer-copyright { padding: 24px 120px; }
+    }
+
+    /* md (min-width: 769px) – desktop small: restore desktop layout */
+    @media (min-width: 769px) { /* md: section bottom 64px */
+      .main-content { padding-top: 40px; } /* md+: restore original top padding */
+      .page-preamble { margin-bottom: 40px; }
+
+      /* Restore desktop header, hide mobile header */
+      
+      
+      
+
+      
+      
+      
+
+      .account-nav { padding-top: 24px; padding-bottom: 24px; }
+      .avatar--lg { width: 40px; height: 40px; }
+      .account-nav__profile { gap: 12px; }
+      
+
+      .filter-bar { flex-direction: row; align-items: center; gap: 0; }
+      .search-input { width: min(384px, 100%); }
+
+      .users-table { display: table; overflow-x: visible; }
+
+      /* Restore desktop CTA banner */
+      .cta-banner { padding: 56px var(--px-full) 64px; align-items: center; text-align: center; }
+      .cta-banner__text { align-items: center; width: auto; }
+      .cta-banner__title { font-size: 36px; line-height: 40px; }
+      .cta-banner__sub { font-size: 20px; line-height: 28px; }
+      .cta-buttons { flex-direction: row; gap: 12px; width: auto; }
+      .btn-blank { flex: none; height: auto; padding: 15px 20px; font-size: 18px; letter-spacing: 0.18px; line-height: 18px; white-space: nowrap; color: var(--color-text-action-primary); }
+      .btn-primary { flex: none; height: auto; padding: 15px 20px; font-size: 18px; letter-spacing: 0.18px; line-height: 18px; white-space: nowrap; background: var(--color-surface-100); color: var(--color-text-primary-inverted); }
+
+      /* Restore desktop footer */
+      .footer-top { flex-direction: row; padding: 48px var(--px-full); border-bottom: 1px solid var(--color-surface-80); }
+      .footer-top__divider { width: 1px; height: auto; align-self: stretch; }
+      .newsletter__title { font-size: 36px; line-height: 36px; margin-bottom: 0; }
+      .cs__title { font-size: 36px; line-height: 36px; }
+      .newsletter__input-wrap { height: 40px; }
+      .newsletter__btn { height: auto; padding: 12px 16px; font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
+      .cs__btn { padding: 12px 16px; font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
+
+      /* Footer links — static columns on desktop */
+      .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 24px; padding: 48px var(--px-full) 64px; }
+      .footer-col { flex: 1; width: auto; border-bottom: none; gap: 16px; }
+      .footer-col__heading {
+        display: flex; padding: 0; cursor: default; pointer-events: none;
+        font-size: 18px; line-height: 18px; letter-spacing: 0.18px;
+        color: var(--color-text-tertiary-inverted); justify-content: flex-start;
+      }
+      .footer-col__expand { display: none; }
+      .footer-col__links { display: flex; padding: 0; max-height: none; overflow: visible; }
+
+      /* Footer divider, bottom & copyright */
+      .footer-divider { padding: 0 var(--px-full); background: var(--color-surface-100); }
+      .footer-divider__line { background: var(--color-surface-80); }
+      .footer-bottom { flex-direction: row; align-items: center; gap: 0; padding: 0 var(--px-full) 40px; }
+      .footer-copyright { padding: 32px var(--px-full); }
+
+      .cta-buttons { flex-direction: row; }
+      .form-row { flex-direction: row; }
+    }
+
+    @media (min-width: 1024px) { /* lg + xl: section padding 72px/80px */
+      .cta-banner { padding: 72px var(--px-full) 80px; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       SITE-HEADER SM (3-row mobile layout, xs + sm)
+    ══════════════════════════════════════════════════════════ */
+    
+
+    /* ── Row 1: icons | logo | account + cart + menu ── */
+    
+    
+
+    /* Push bar2 + bar3 down so they don't hide under the fixed bar1 */
+    
+    
+    
+    
+    
+    
+
+    /* Icon buttons – 20px icon, space-12 padding = 44px */
+    
+    /* 24px icon, space-12 padding = 48px */
+    
+    
+    
+    
+
+    /* Badge on icon buttons */
+    
+
+    /* Account button: avatar + name + sub */
+    
+    
+    
+    
+    
+
+    /* Hamburger menu button */
+    
+    
+    
+
+    /* ── Row 2: search bar ── */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    /* ── Row 3: store nav ── */
+    
+    
+    
+    
+    
+    
+    
+
+    /* ── Show/hide at breakpoints ── */
+    
+
+    /* ── xs + sm (max-width: 768px): show cards, hide desktop table ── */
+
+    /* ── xs only (max-width: 639px) – mobile overrides ── */
+    @media (max-width: 639px) {
+      /* Bar1: 56px (8px padding + 40px buttons) */
+      
+      
+      
+
+      /* Icon buttons → mobile medium (8px padding, 24px icon = 40px) */
+      
+      
+      
+      
+
+      /* Bar1: collapse account btn to avatar-only */
+      
+      
+
+      /* Bar2: hide location button */
+      
+
+      /* Bar3: left-align store button, label-sm (12px) text */
+      
+      
+      
+
+      /* CTA banner: center text */
+      .cta-banner__text { align-items: center; text-align: center; }
+    }
+
+    /* ── Col-hidden utility ─────────────────────────────── */
+
+    /* ── Column settings drawer ─────────────────────────── */
+
+
+
+    /* ══════════════════════════════════════════════════════════
+       ACCOUNT NAV DRAWER
+    ══════════════════════════════════════════════════════════ */
+    /* Flyttad till partials/account-nav-drawer.html (CSS + HTML + JS, inkluderas via JS längre ner på sidan) */
+
+    /* ── Upload users drawer ─────────────────────────── */
+
+    /* ── BankID signing modal ─────────────────────────── */
+    @keyframes upload-spin { to { transform: rotate(360deg); } }
+
+    /* ── Help guide drawer ───────────────────────────────── */
+    .page-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .page-title-row .page-title { margin-bottom: 0; }
+
+
+    /* ══════════════════════════════════════════════════════════
+       PDP (product detail page) — page-local layout
+       Figma file gAuhhKQVftqFTly8D9ACp0 (UI – PLP & PDP 1.0):
+       Desktop 5096:357024, Desktop Small 5656:276211,
+       Tablet 3578:416563, Mobile 6701:352980.
+       Top info section 2665:542997 (Desktop 2665:542955,
+       Tablet 3581:444795, Mobile 2665:542973).
+    ══════════════════════════════════════════════════════════ */
+    /* The breadcrumb container carries the space above the product (Figma: Prod Info starts right under it) */
+    .section.pdp-section { padding-top: 0; }
+    .pdp { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--dimension-spacing-space-16); }
+    .pdp__info { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); min-width: 0; }
+    @media (min-width: 769px) {
+      /* Desktop Small: media 420 / gap 32 / info 507 */
+      .pdp { grid-template-columns: minmax(0, 420fr) minmax(0, 507fr); gap: var(--dimension-spacing-space-32); align-items: start; }
+      .pdp__info { gap: var(--dimension-spacing-space-32); }
+      /* The gallery stays in view while the info column scrolls (Desktop Small, Desktop, Desktop XL; user request 2026-11-13). 81px = the sticky header's height from 769px (measured); 24px of air below it. */
+      .pdp__media { position: sticky; top: calc(81px + var(--dimension-spacing-space-24)); }
+    }
+    @media (min-width: 1024px) {
+      /* Desktop: media 556 / gap 48 / info 596 */
+      .pdp { grid-template-columns: minmax(0, 556fr) minmax(0, 596fr); gap: var(--dimension-spacing-space-48); }
+    }
+    .pdp__media { min-width: 0; }
+
+    /* -- Top info section ------------------------------------- */
+    .pdp-top { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); }
+    .pdp-top__main { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    /* Mobile: badges above the brand (12px). Desktop: brand left, badges right. */
+    .pdp-top__head { display: flex; flex-direction: column-reverse; align-items: flex-start; gap: var(--dimension-spacing-space-12); }
+    .pdp-top__badges { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-2) var(--dimension-spacing-space-4); }
+    .pdp-top__brand { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; font-weight: 500; text-transform: uppercase; } /* alt-label-md */
+    .pdp-top__title:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .pdp-top__title { font-size: 22px; line-height: 24px; font-weight: 600; letter-spacing: 0; color: var(--color-text-primary); margin: 0; font-feature-settings: 'ss02' 1, 'ss03' 1; } /* headline-sm */
+    /* Price: headline-lg (28/32, 36/40 from 769px). User decision 2026-11-11; Figma mobile shows 36/40. */
+    .pdp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--dimension-spacing-space-4); margin: 0; }
+    .pdp-price__value { font-size: 28px; line-height: 32px; font-weight: 600; color: var(--color-text-price-customer); white-space: nowrap; }
+    .pdp-price__vat { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-sm */
+    .pdp-artnr { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-4) var(--dimension-spacing-space-8); }
+    /* Article numbers: Badge/Basic look, but a button that copies the number and confirms with an E-Com toast (Informational).
+       One-off for this page (user decision 2026-11-11): eco-badge itself stays non-interactive. */
+    .pdp-artnr__copy { border: 0; cursor: pointer; font-family: inherit; touch-action: manipulation; }
+    .pdp-artnr__copy--plain { background: var(--color-surface-raised-primary); color: var(--color-text-primary); }
+    .pdp-artnr__copy:first-child { margin-right: var(--dimension-spacing-space-4); }
+    .pdp-artnr__class { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 500; color: var(--color-text-primary); } /* label-sm */
+    @media (min-width: 769px) {
+      .pdp-top__head { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
+      .pdp-top__brand { font-size: 18px; line-height: 18px; letter-spacing: 0.36px; } /* alt-label-lg */
+      .pdp-top__badges { gap: var(--dimension-spacing-space-4); }
+      .pdp-top__title { font-size: 28px; line-height: 32px; }
+      .pdp-price__value { font-size: 36px; line-height: 40px; }
+      .pdp-artnr__class { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+    }
+
+    /* -- Action section (Figma 2119:350237; desktop instance 5096:357033, mobile 6701:352988) --
+       ECO components used: Picker Stepper (eco-picker-stepper, Large) and Drawer Link (eco-drawer-link, Boxed), plus button, action link, badge dot, divider.
+       Click & Collect section (.pdp-stock): part of the Action section, Desktop 2113:351202, Tablet 3581:444519, Mobile 13901:372059.
+       Confirmed snowflakes are listed in SNOWFLAKES.md (repo root). */
+    .pdp-action { background: var(--color-surface-raised-secondary); padding: var(--dimension-spacing-space-16); display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); }
+    .pdp-action__group { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); }
+    .pdp-action__select { display: flex; flex-direction: column; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
+    .pdp-action .icon { color: inherit; }
+    /* Contract assortment line */
+    .pdp-contract { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-sm */
+    .pdp-contract .inline-link { font: inherit; letter-spacing: inherit; color: inherit; }
+    /* body-sm below 769px on a Medium action link (Figma mobile) */
+    @media (max-width: 768px) { .pdp-al-sm-mobile.action-link--medium { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; } }
+    /* Add to cart row */
+    .pdp-buy { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
+    .pdp-buy__cta { flex: 1 0 0; min-width: 0; display: flex; gap: var(--dimension-spacing-space-4); }
+    .pdp-buy__cta .btn--primary { flex: 1 0 0; min-width: 0; }
+    .pdp-fav[aria-pressed="true"] .btn__icon { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    /* Availability */
+    .pdp-stock { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .pdp-stock__head { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .pdp-stock__head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 var(--dimension-spacing-space-8); }
+    .pdp-stock__title { margin: 0; font-size: 14px; line-height: 14px; letter-spacing: 0.42px; font-weight: 600; text-transform: uppercase; color: var(--color-text-tertiary); } /* label-md */
+    .pdp-stock__checked { margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-sm */
+    .pdp-stock__block { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-12); }
+    .pdp-stock__info { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); }
+    /* One line when it fits (Figma tablet + desktop); on xs the link wraps to its own line, right-aligned */
+    .pdp-stock__store-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-2) var(--dimension-spacing-space-8); }
+    .pdp-stock__store-row > .action-link { margin-left: auto; flex-shrink: 0; }
+    .pdp-stock__store { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
+    .pdp-stock__name { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); margin: 0; font-size: 16px; line-height: 18px; font-weight: 600; letter-spacing: 0; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; } /* title-sm */
+    .pdp-stock__sep.divider--vertical { height: var(--dimension-spacing-space-16); align-self: flex-start; margin-top: var(--dimension-spacing-space-4); flex-shrink: 0; }
+    .pdp-stock__text, .pdp-stock__status { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-md */
+    .pdp-stock__statuses { list-style: none; margin: 0; padding: 0 0 0 var(--dimension-spacing-space-32); display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); }
+    .pdp-stock__status { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
+    .pdp-stock__status .badge-dot { margin-top: 6px; } /* 6px: Figma, centres the 10px dot on the first line; no token */
+    .pdp-stock__banner { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-8); padding: var(--dimension-spacing-space-8); background: color-mix(in srgb, var(--color-surface-00) 60%, transparent); /* 60% of surface-00 (user decision 2026-11-11) */ }
+    .pdp-stock__banner p { margin: 0; flex: 1 1 0; min-width: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-sm */
+    .pdp-stock__banner strong { font-weight: 600; color: var(--color-text-primary); }
+    @media (min-width: 769px) {
+      .pdp-action { padding: var(--dimension-spacing-space-24); gap: var(--dimension-spacing-space-24); }
+      .pdp-contract { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; align-items: center; } /* body-md */
+      .pdp-stock__title { font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
+      .pdp-buy__cta { gap: var(--dimension-spacing-space-8); }
+      .pdp-stock { gap: var(--dimension-spacing-space-12); }
+      .pdp-stock__head { gap: var(--dimension-spacing-space-8); }
+      .pdp-stock__text, .pdp-stock__status { font-size: 17px; line-height: 24px; }
+    }
+
+    /* ── Bottom info (Figma 2665:546411; Desktop 1930:345588, Mobile 2665:545811) ──
+       Drawer links: components/css/drawer-link.css (Plain). Links: action-link.css, inline-link.css. Divider: divider.css. */
+    .pdp-bottom { display: flex; flex-direction: column; }
+    .pdp-about { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); padding-bottom: var(--dimension-spacing-space-24); }
+    .pdp-about__title { margin: 0; font-size: 14px; line-height: 14px; letter-spacing: 0.42px; font-weight: 600; text-transform: uppercase; color: var(--color-text-primary); } /* label-md */
+    .pdp-about__text { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-md */
+    .pdp-about__text .inline-link { color: inherit; }
+    .pdp-certs { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-16); padding-bottom: var(--dimension-spacing-space-24); }
+    .pdp-certs__sheet { color: var(--color-text-primary); }
+    .pdp-certs .divider--vertical { align-self: auto; height: 32px; } /* 32px: Figma, the logo height */
+    .pdp-certs__list { display: contents; }
+    .pdp-certs__list li { display: flex; list-style: none; }
+    .pdp-certs__list img { display: block; height: 32px; width: auto; } /* 32px: Figma logo height, no token */
+    .pdp-links { display: flex; flex-direction: column; }
+    .pdp-contact { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-16); padding-top: var(--dimension-spacing-space-24); }
+    .pdp-contact__title { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; font-weight: 500; text-transform: uppercase; color: var(--color-text-primary); } /* alt-label-md */
+    .pdp-contact .action-link { color: var(--color-text-primary); }
+    .pdp-warning { margin-top: var(--dimension-spacing-space-24); padding: var(--dimension-spacing-space-24); display: flex; flex-direction: column; gap: var(--dimension-spacing-space-12); background: var(--color-surface-00); border: 1px solid var(--color-border-primary); }
+    .pdp-warning__title { margin: 0; font-size: 18px; line-height: 22px; font-weight: 600; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; } /* title-md */
+    .pdp-warning__list { margin: 0; }
+    .pdp-warning__row { display: flex; padding-block: var(--dimension-spacing-space-24); border-bottom: 1px solid var(--color-border-primary); font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-md */
+    .pdp-warning__row:first-child { padding-top: var(--dimension-spacing-space-8); }
+    .pdp-warning__row dt { flex: 0 0 52px; } /* 52px: Figma code column, no token */
+    .pdp-warning__row dd { margin: 0; flex: 1 1 0; min-width: 0; }
+    .pdp-warning__signs { display: flex; gap: var(--dimension-spacing-space-8); padding-top: var(--dimension-spacing-space-12); } /* with the 12px gap above: Figma 24px */
+    .pdp-warning__signs img { display: block; width: 56px; height: 56px; } /* space-56 size, Figma */
+    @media (min-width: 769px) {
+      .pdp-about__title { font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
+      .pdp-about__text, .pdp-warning__row { font-size: 17px; line-height: 24px; }
+      .pdp-contact { padding-left: var(--dimension-spacing-space-4); }
+      .pdp-contact__title { font-size: 16px; line-height: 16px; letter-spacing: 0.64px; }
+      .pdp-warning__title { font-size: 20px; line-height: 24px; }
+    }
+
+    /* ── Related products carousel (Figma "PDP / Accessories" 2081:370906) ──
+       Sideways row: .swipe-row (tabs.css + tabs.js). Card button: btn--secondary btn--xs. Stars: rating-stars--sm. */
+    .pdp-rel { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); min-width: 0; background: var(--color-surface-00); border-block: 1px solid var(--color-border-primary); transition: background-color var(--duration-fast-3) var(--ease-standard); }
+    @media (hover: hover) { .pdp-rel:hover { background: var(--color-surface-navigation-hover); } }   /* Figma State=Hover */
+    .pdp-rel + .pdp-links > .drawer-link--plain:first-child { border-top: 0; }   /* one line between the carousel and the first row */
+    .pdp-rel__head { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); width: 100%; margin: 0; padding: var(--dimension-spacing-space-24) 0 0; background: none; border: 0; color: var(--color-text-primary); font-family: inherit; text-align: left; cursor: pointer; touch-action: manipulation; }
+    .pdp-rel__head:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .pdp-rel__title { flex: 1 1 0; min-width: 0; padding-block: var(--dimension-spacing-space-2); font-size: 16px; line-height: 16px; letter-spacing: 0.32px; font-weight: 600; text-transform: uppercase; font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* label-lg */
+    .pdp-rel__body { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); padding-bottom: var(--dimension-spacing-space-16); min-width: 0; }
+    .pdp-rel .carousel__track { gap: var(--dimension-spacing-space-8); }
+    .carousel__track:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .carousel__nav.btn { display: none; }
+    /* Scroll bar (Figma ECO Horizontal Scroll Bar - States 2021:59827). The page script sizes and moves the bar, and lets the pointer drag it.
+       Default: track 2px surface-disabled, bar 2px. Hover: track 4px surface-10, bar 4px. Active (pressed/dragged): track 4px surface-15, bar 6px.
+       Bar radius 4px / 6px: Figma, round ends on a thin line; no radius token. */
+    .carousel__bar { position: relative; height: 12px; cursor: pointer; touch-action: none; }
+    .carousel__bar::before, .carousel__thumb { content: ''; position: absolute; top: 50%; height: 2px; transform: translateY(-50%); transition: height var(--duration-fast-3) var(--ease-standard), background-color var(--duration-fast-3) var(--ease-standard); }
+    .carousel__bar::before { left: 0; right: 0; background: var(--color-surface-disabled); }
+    .carousel__thumb { left: 0; width: 100%; background: var(--color-surface-100); border-radius: 4px; }
+    @media (hover: hover) {
+      .carousel__bar:hover::before { height: 4px; background: var(--color-surface-10); }
+      .carousel__bar:hover .carousel__thumb { height: 4px; }
+    }
+    .carousel__bar.is-active::before { height: 4px; background: var(--color-surface-15); }
+    .carousel__bar.is-active .carousel__thumb { height: 6px; border-radius: 6px; }
+    .carousel__bar[hidden] { display: none; }
+    /* Card (Figma "PDP / Tillbehör / Base Items"): 200px wide, 191px from 769px (three fit the 588px column) */
+    .pdp-acc { flex: 0 0 200px; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: var(--dimension-spacing-space-8); padding: var(--dimension-spacing-space-16); background: var(--color-surface-00); border: 1px solid var(--color-border-primary); }
+    .pdp-acc__top { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-12); min-width: 0; }
+    .pdp-acc__img { display: block; width: 56px; height: 56px; object-fit: contain; }   /* space-56 */
+    .pdp-acc__info { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); min-width: 0; }
+    .pdp-acc__brand { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 500; text-transform: uppercase; color: var(--color-surface-60); }   /* Figma binds surface/neutral-strong (#595959) to this text: flag, no text token with this value */
+    .pdp-acc__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px; line-height: 22px; font-weight: 600; }
+    .pdp-acc__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-4) var(--dimension-spacing-space-12); }
+    .pdp-acc__artnr { font-size: 12px; line-height: 12px; letter-spacing: 0.24px; color: var(--color-surface-60); }
+    .pdp-acc__artnr b { font-weight: 400; color: var(--color-text-primary); }
+    .pdp-acc__buy { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .pdp-acc__row { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
+    .pdp-acc__price { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-weight: 600; color: var(--color-text-price-customer); white-space: nowrap; }
+    .pdp-acc__price small { font-size: 12px; letter-spacing: 0.24px; font-weight: 400; color: var(--color-text-secondary); }
+    .pdp-acc__old { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); font-size: 12px; line-height: 20px; letter-spacing: 0.24px; color: var(--color-text-tertiary); }
+    .pdp-acc__old .icon { color: var(--color-text-primary); }
+    .pdp-acc__stock { display: flex; align-items: center; gap: var(--dimension-spacing-space-4); font-size: 12px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); white-space: nowrap; }
+    .pdp-acc .btn { width: 100%; }
+    @media (min-width: 769px) {
+      .pdp-rel__head { padding: var(--dimension-spacing-space-24) var(--dimension-spacing-space-4) 0 var(--dimension-spacing-space-8); }
+      .pdp-rel__head .icon--sm { --icon-size: 24px; --icon-opsz: 24; }
+      .pdp-rel__title { font-size: 18px; line-height: 18px; letter-spacing: 0.18px; }
+      .pdp-rel__body { padding-bottom: var(--dimension-spacing-space-24); }
+      .pdp-acc { flex-basis: 191px; }   /* 191px: Figma, no token */
+      .pdp-acc__name { line-height: 24px; }
+      /* Previous / next: Primary Small icon buttons, shown while the pointer is on the block (Figma hover) or on keyboard focus; 20px outside the edge (Figma, no token).
+         Figma shows only next; previous mirrors it and shows once the row has moved (user request 2026-11-12). */
+      .carousel__nav.btn { display: inline-flex; position: absolute; top: 50%; z-index: 1; transform: translateY(-50%); opacity: 0; pointer-events: none; transition: opacity var(--duration-fast-3) var(--ease-standard); }
+      .carousel__nav--prev.btn { left: -20px; }
+      .carousel__nav--next.btn { right: -20px; }
+      [data-carousel]:hover .carousel__nav.btn, .carousel__nav.btn:focus-visible { opacity: 1; pointer-events: auto; }
+      .carousel__nav.btn[hidden] { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .pdp-rel, .carousel__nav.btn, .carousel__bar::before, .carousel__thumb { transition: none; } }
+
+    /* ── Product carousel (Figma ECO "Carousel / Product Card Carousel" 2007:65107) ──
+       Tabs: tabs.css (Secondary, Medium). Row: .swipe-row. Scroll bar and previous/next: the .carousel__* rules above. Page-local until the Product Card is an ECO skill. */
+    .carousel__stage { position: relative; min-width: 0; }
+    .carousel__track { display: flex; align-items: stretch; margin: 0; padding: 0; list-style: none; }
+    .pc { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); min-width: 0; }
+    .pc__main { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); min-width: 0; }
+    .pc__head { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+    .pc__tabs { display: flex; justify-content: center; min-width: 0; margin-bottom: var(--dimension-spacing-space-12); }   /* 12px + the 4px head gap: Figma 16px */
+    .pc__tabs .tab-bar { max-width: 100%; }
+    .pc__title-row { display: flex; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
+    .pc__title { margin: 0; font-size: 22px; line-height: 22px; font-weight: 600; text-transform: uppercase; color: var(--color-text-primary); }   /* display-sm */
+    .pc__all { flex-shrink: 0; text-transform: uppercase; color: var(--color-text-primary); }
+    .pc__sub { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }   /* body-md */
+    .pc__track { gap: var(--dimension-spacing-space-8); }
+    /* Product Card (Figma "Product Card States"): 240px wide, 282px from 769px, a quarter of the row from 1024px */
+    .pcard { flex: 0 0 240px; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; background: var(--color-surface-00); border: 1px solid var(--color-border-primary); --pcard-pad: var(--dimension-spacing-space-16); }
+    .pcard__media { position: relative; padding: var(--pcard-pad) var(--pcard-pad) 0; }
+    .pcard__img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: contain; }
+    .pcard__badges { position: absolute; left: var(--pcard-pad); top: var(--pcard-pad); z-index: 1; }
+    .pcard__actions { position: absolute; right: var(--pcard-pad); top: var(--pcard-pad); z-index: 1; display: flex; gap: var(--dimension-spacing-space-12); }
+    .pcard__act { display: flex; margin: 0; padding: 0; border: 0; background: color-mix(in srgb, var(--color-surface-00) 50%, transparent); color: var(--color-text-primary); cursor: pointer; touch-action: manipulation; }   /* Figma: 20px icon button on white 50% */
+    .pcard__act:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .pcard__act.is-on .icon { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .pcard__tags { position: absolute; left: var(--pcard-pad); bottom: 0; display: flex; gap: var(--dimension-spacing-space-4); }
+    .pcard__info { display: flex; flex-direction: column; padding: var(--dimension-spacing-space-8) var(--pcard-pad) 0; min-width: 0; }
+    .pcard__brand { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 500; text-transform: uppercase; color: var(--color-text-secondary); }
+    .pcard__name { margin-top: var(--dimension-spacing-space-4); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 18px; line-height: 22px; font-weight: 600; }   /* title-md */
+    .pcard__meta { margin-top: var(--dimension-spacing-space-2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-2) var(--dimension-spacing-space-12); }
+    .pcard__artnr { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }   /* body-sm */
+    .pcard__foot { margin-top: auto; display: flex; flex-direction: column; padding: var(--dimension-spacing-space-8) var(--pcard-pad) var(--pcard-pad); }
+    .pcard__price b { font-size: 20px; line-height: 24px; font-weight: 600; color: var(--color-text-price-customer); }
+    .pcard__price small { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .pcard__old { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); font-size: 14px; line-height: 20px; letter-spacing: 0.28px; color: var(--color-text-tertiary); }
+    .pcard__old .icon { color: var(--color-text-primary); }
+    .pcard__status { margin: var(--dimension-spacing-space-8) 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); }
+    .pcard__status li { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); white-space: nowrap; }
+    .pcard__status li.is-in { color: var(--color-text-secondary); }
+    .pcard .btn { width: 100%; }
+    @media (max-width: 768px) {   /* below 769px the row runs to the screen edge (Figma Mobile and Tablet) */
+      .pc__track { margin-inline: calc(-1 * var(--px-full)); padding-inline: var(--px-full); scroll-padding-inline: var(--px-full); }
+    }
+    @media (min-width: 769px) {
+      .pc { gap: var(--dimension-spacing-space-32); }
+      .pc__title { font-size: 26px; line-height: 26px; }
+      .pc__sub { font-size: 17px; line-height: 24px; }
+      .pc__track { gap: var(--dimension-spacing-space-24); }
+      .pcard { flex-basis: 282px; --pcard-pad: var(--dimension-spacing-space-24); }   /* 282px: Figma, a quarter of the 1200px row */
+      .pcard__brand { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+      .pcard__name { font-size: 20px; line-height: 24px; }
+      .pcard__price small { display: block; }
+    }
+    @media (min-width: 1024px) { .pcard { flex-basis: calc((100% - 3 * var(--dimension-spacing-space-24)) / 4); } }
+
+    /* ── Varianter: variant table (Figma PDP Desktop 5096:357024 > Varianter 5768:458881) ──
+       Built like .users-table on mypages/users.html: sticky first and last column with a shadow when content runs under them,
+       drag to scroll with a grab cursor, 56px rows, accent-light header, white and grey rows, 16px/16px text.
+       Colours from tokens (users.html uses its own legacy variables). Page-local. */
+    .pv { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); min-width: 0; }
+    .pv__head { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .pv__title { margin: 0; font-size: 22px; line-height: 22px; font-weight: 600; text-transform: uppercase; color: var(--color-text-primary); }   /* display-sm */
+    .pv__filter { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
+    .pv__search { flex: 1 1 100%; }
+    .pv__filter .btn--system { display: none; }   /* below 769px one "Visa filter" button instead (Figma Mobile 6701:352995) */
+    .pv__filter-btn { flex: 1 1 100%; }
+    .pv__search .input-box { height: 40px; }   /* Figma Mobile: input 40px high (the Small input is 32px below 769px) */
+    #varianter { scroll-margin-top: 56px; }   /* exactly the sticky header's height, so the section starts right under it: 56px xs, 64px sm, 81px from 769px (measured) */
+    @media (min-width: 640px) { #varianter { scroll-margin-top: 64px; } }
+    .pv-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    .pv-wrap { display: none; overflow-x: auto; box-shadow: var(--shadow-elevation-b-20); }   /* table from 769px, cards below */
+    .pv-wrap:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .pv-wrap.has-overflow { cursor: grab; }
+    .pv-wrap.is-grabbing, .pv-wrap.is-grabbing * { cursor: grabbing !important; }
+    .pv-wrap.is-grabbing { user-select: none; }
+    .pv-table { width: 100%; border-collapse: collapse; }
+    .pv-table th, .pv-table td { padding: 0 16px; height: 56px; text-align: left; vertical-align: middle; white-space: nowrap; font-size: 16px; line-height: 16px; color: var(--color-text-primary); }
+    .pv-table th { font-weight: 600; letter-spacing: 0.28px; }
+    .pv-table thead tr { background: var(--color-accent-light); }
+    .pv-table tbody tr { background: var(--color-surface-00); }
+    .pv-table tbody tr:nth-child(even) { background: var(--color-surface-05); }
+    .pv-table th:first-child, .pv-table td:first-child { padding-left: var(--dimension-spacing-space-24); }   /* outer padding 24px (user request 2026-11-13); inner cells keep 16px */
+    .pv-table th.col-action, .pv-table td.col-action { padding-right: var(--dimension-spacing-space-24); }
+    .pv-table th[data-col="storlek"] { width: 20%; }
+    .pv-table th[data-col="tillganglighet"] { width: 80%; }
+    .pv-table th[data-col="pris"], .pv-table th:first-child, .pv-table th.col-action { width: 1px; }
+    .pv-table td[data-col="pris"] { text-align: right; }
+    .pv-empty td { height: 112px; text-align: center; color: var(--color-text-secondary); }
+
+    /* Sticky first column (variant) and last column (buy), each with a soft shadow when content runs under it */
+    .pv-table th:first-child, .pv-table td:first-child { position: sticky; left: 0; z-index: 1; overflow: visible; }
+    .pv-table th.col-action, .pv-table td.col-action { position: sticky; right: 0; z-index: 2; overflow: visible; }
+    .pv-table thead th:first-child, .pv-table thead th.col-action { background: var(--color-accent-light); }
+    .pv-table tbody td:first-child, .pv-table tbody td.col-action { background: var(--color-surface-00); }
+    .pv-table tbody tr:nth-child(even) td:first-child, .pv-table tbody tr:nth-child(even) td.col-action { background: var(--color-surface-05); }
+    .pv-table th:first-child::after, .pv-table td:first-child::after, .pv-table th.col-action::before, .pv-table td.col-action::before {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 12px; z-index: 2; pointer-events: none; opacity: 0;
+      transition: opacity var(--duration-fast-3) var(--ease-standard); }
+    .pv-table th:first-child::after, .pv-table td:first-child::after { right: -12px; background: linear-gradient(to right, rgba(0,0,0,0.10), rgba(0,0,0,0.05) 40%, transparent); }   /* as users.html */
+    .pv-table th.col-action::before, .pv-table td.col-action::before { left: -12px; background: linear-gradient(to left, rgba(0,0,0,0.10), rgba(0,0,0,0.05) 40%, transparent); }
+    .pv-wrap.has-left-overflow .pv-table th:first-child::after, .pv-wrap.has-left-overflow .pv-table td:first-child::after,
+    .pv-wrap.has-right-overflow .pv-table th.col-action::before, .pv-wrap.has-right-overflow .pv-table td.col-action::before { opacity: 1; }
+
+    /* Selected variant (the one chosen above): 1px frame, drawn as inset shadows so the cells keep their size (Figma row 2) */
+    .pv-table tr[aria-current="true"] td { box-shadow: inset 0 1px 0 0 var(--color-border-selected), inset 0 -1px 0 0 var(--color-border-selected); }
+    .pv-table tr[aria-current="true"] td:first-child { box-shadow: inset 0 1px 0 0 var(--color-border-selected), inset 0 -1px 0 0 var(--color-border-selected), inset 1px 0 0 0 var(--color-border-selected); }
+    .pv-table tr[aria-current="true"] td.col-action { box-shadow: inset 0 1px 0 0 var(--color-border-selected), inset 0 -1px 0 0 var(--color-border-selected), inset -1px 0 0 0 var(--color-border-selected); }
+
+    .pv-sort { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); margin: 0; padding: 0; background: none; border: 0; color: inherit; font: inherit; letter-spacing: inherit; cursor: pointer; }
+    .pv-sort:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .pv-sort .icon { --icon-size: 16px; --icon-opsz: 20; color: inherit; }
+    .pv-var { display: flex; align-items: center; gap: var(--dimension-spacing-space-32); }
+    .pv-var__lead { display: flex; align-items: center; gap: var(--dimension-spacing-space-16); }
+    .pv-var__contract { display: flex; align-items: center; gap: var(--dimension-spacing-space-4); }
+    .pv-var__icon { width: 20px; height: 20px; flex: none; }
+    .pv-var__slot { flex: none; width: 40px; }   /* 40px: Figma image size; the header label "Variant" sits over the image */
+    .pv-var__img { display: block; width: 40px; height: 40px; object-fit: contain; background: var(--color-surface-00); }
+    /* .pv-var__link, .pdp-acc__name, .pcard__name, .pdp-top__brand are Inline Links (components/css/inline-link.css): colour, underline, hover and focus come from there */
+
+    .pv-stock { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }   /* body-sm */
+    .pv-stock > span { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
+    .pv-price { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); }
+    .pv-price s { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; color: var(--color-text-secondary); }
+    .pv-price b { font-size: 16px; line-height: 24px; font-weight: 600; color: var(--color-text-price-customer); }
+    .pv-buy { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
+    .pv-buy__btns { display: flex; gap: var(--dimension-spacing-space-4); }
+    .pv-fav[aria-pressed="true"] .btn__icon { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    @media (min-width: 769px) {
+      #varianter { scroll-margin-top: 81px; }
+      .pv__title { font-size: 26px; line-height: 26px; }
+      .pv__search { flex: 0 0 205px; }   /* 205px: Figma, no token */
+      .pv__filter .btn--system { display: inline-flex; flex: 0 0 auto; }
+      .pv__filter-btn { display: none; }
+      .pv-wrap { display: block; }
+      .pv__search .input-box { height: 40px; }
+    }
+
+    /* Variant cards below 769px (Figma Mobile "Table / Base / Variant - Table Row - Mobile" 6701:352997): 16px padding and gaps, white and grey cards, selected card framed */
+    .pv-cards { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); margin: 0; padding: 0; list-style: none; }
+    .pv-cards__empty { padding: var(--dimension-spacing-space-32) 0; text-align: center; color: var(--color-text-secondary); }
+    .pv-card { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); padding: var(--dimension-spacing-space-16); background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-secondary); box-shadow: var(--shadow-elevation-b-20); }
+    .pv-card:nth-child(even) { background: var(--color-surface-05); }
+    .pv-card[aria-current="true"] { border-color: var(--color-border-selected); }
+    .pv-card__head { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); min-height: 40px; }
+    .pv-card__art { flex: 1 1 0; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--dimension-spacing-space-8); font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+    .pv-card__label { font-weight: 600; letter-spacing: 0; color: var(--color-text-secondary); }
+    .pv-card__data, .pv-card__title { color: var(--color-text-primary); }
+    .pv-card__head .pv-var__contract { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+    .pv-card__data { display: flex; gap: var(--dimension-spacing-space-8); margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }   /* body-md; Figma shows eight placeholder Title / Value rows */
+    .pv-card__data dt { font-weight: 600; letter-spacing: 0; }
+    .pv-card__data dd { margin: 0; }
+    .pv-card__stock { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .pv-card__title { margin: 0; font-size: 16px; line-height: 18px; font-weight: 600; }   /* title-sm */
+    .pv-card .pv-stock > span { align-items: flex-start; }
+    .pv-card .pv-stock .badge-dot { flex: none; margin-top: 7px; }   /* 7px: centres the 6px dot on the first 20px line (Figma pt 8) */
+    .pv-card__buy { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-12); }
+    .pv-card .pv-price { flex-wrap: wrap; gap: 0 var(--dimension-spacing-space-4); min-width: 0; }
+    .pv-card .pv-price b { line-height: 22px; }
+    .pv-card .pv-buy__btns { gap: var(--dimension-spacing-space-2); }
+    @media (min-width: 769px) { .pv-cards { display: none; } }   /* after the base rule above, which would win otherwise */
+    @media (prefers-reduced-motion: reduce) { .pv-table th::after, .pv-table td::after, .pv-table th::before, .pv-table td::before { transition: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- ══ SITE HEADER (global partial) ═══════════════════════════
+       Innehåll: mypages/partials/header.html — enda källan (single
+       source of truth). Redigera ENDAST där; ändringen slår igenom
+       automatiskt i alla sidor som inkluderar partialen (för
+       närvarande template.html och mypages/mypages-template.html).
+  ════════════════════════════════════════════════════════════ -->
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'mypages/partials/header.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+<div class="page">
+
+<!-- ══ BREADCRUMB ════════════════════════════════════════════════
+     Valfri — ta bort om sidan ligger direkt under Hem eller om
+     navigeringen redan täcks av tabbar/tillbaka-länk (se CLAUDE.md
+     "Används INTE när"). Om den behålls: justera brödsmulorna efter
+     sidans faktiska hierarki. Zero-padding-regeln för nästa element
+     sköts automatiskt av .breadcrumb + .section--first ovan.
+════════════════════════════════════════════════════════════════ -->
+<nav class="breadcrumb" aria-label="Brödsmulor">
+  <div class="breadcrumb__bar">
+    <a href="#" class="breadcrumb-item">Hem</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#" class="breadcrumb-item">Kläder och Skydd</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#" class="breadcrumb-item">Arbetskläder</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#" class="breadcrumb-item">Arbetsbyxor</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#" class="breadcrumb-item">Hantverksbyxor</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Carpenter soul hantverksbyxa stretch svart</span>
+  </div>
+</nav>
+
+</div><!-- /.page — breadcrumben är enda innehållet som ska vara
+     breddbegränsad. Sections nedan är fullbreddsblock (se CLAUDE.md
+     Section: "modulärt, återanvändbart fullbreddsblock") och ligger
+     därför UTANFÖR .page — de centrerar sitt eget innehåll via
+     --px-full, precis som index.html. -->
+
+<!-- ══ CONTENT ═══════════════════════════════════════════════════
+     Byggs upp av en eller flera Section-block (ECO Design System).
+     Denna sektion är sidans första — .section--first ger reducerad
+     top-padding. Lägg till fler <section class="section"> vid behov
+     och använd .section--secondary för grå bakgrundsyta (växelvis
+     kontrast). Se docs länkade i CSS-kommentaren ovan.
+════════════════════════════════════════════════════════════════ -->
+<section class="section section--first pdp-section">
+  <div class="pdp">
+
+    <!-- ── MEDIA: Gallery (Figma ECO 913:28312) ─────────────── -->
+    <div class="pdp__media">
+      <div class="gallery" role="group" aria-label="Produktbilder">
+        <div class="gallery__stage">
+          <div class="gallery__track" tabindex="0" aria-label="Produktbilder, 6 bilder">
+            <figure class="gallery__slide gallery__slide--contain" aria-label="Bild 1 av 6">
+              <img class="gallery__img" src="/images/pdp-gallery-front.png" alt="Carpenter soul hantverksbyxa stretch svart, framifrån" width="650" height="1000">
+            </figure>
+            <figure class="gallery__slide gallery__slide--video" aria-label="Bild 2 av 6">
+              <img class="gallery__img" src="/images/pdp-gallery-video.jpg" alt="Video: hantverksbyxan i arbete" width="1112" height="1112" loading="lazy">
+              <span class="media-play" aria-hidden="true"><img class="media-play__oval" src="/images/media-play-oval.svg" alt=""><img class="media-play__triangle" src="/images/media-play-triangle.svg" alt=""></span>
+            </figure>
+            <figure class="gallery__slide gallery__slide--contain" aria-label="Bild 3 av 6">
+              <img class="gallery__img" src="/images/pdp-gallery-kneepads.png" alt="Knäskydd som passar byxan" width="1112" height="1112" loading="lazy">
+            </figure>
+            <figure class="gallery__slide" aria-label="Bild 4 av 6">
+              <img class="gallery__img" src="/images/pdp-gallery-detail-1.jpg" alt="Detalj: ficka med dragkedja" width="1112" height="1112" loading="lazy">
+            </figure>
+            <figure class="gallery__slide" aria-label="Bild 5 av 6">
+              <img class="gallery__img" src="/images/pdp-gallery-detail-2.jpg" alt="Detalj: sömmar och nitar" width="1112" height="1112" loading="lazy">
+            </figure>
+            <figure class="gallery__slide" aria-label="Bild 6 av 6">
+              <img class="gallery__img" src="/images/pdp-gallery-detail-3.jpg" alt="Detalj: knappar i midjan" width="685" height="1000" loading="lazy">
+            </figure>
+          </div>
+          <span class="gallery__brand"><img src="/images/bjornklader-logo.svg" alt="Björnkläder" width="100" height="48"></span>
+          <button type="button" class="btn btn--primary-inverted btn--lg btn--icon gallery__nav gallery__nav--prev" data-gallery="prev" aria-label="Föregående bild"><span class="btn__icon" aria-hidden="true">chevron_left</span></button>
+          <button type="button" class="btn btn--primary-inverted btn--lg btn--icon gallery__nav gallery__nav--next" data-gallery="next" aria-label="Nästa bild"><span class="btn__icon" aria-hidden="true">chevron_right</span></button>
+        </div>
+        <div class="gallery__dots" aria-hidden="true">
+          <span class="badge-dot badge-dot--sm badge-dot--neutral is-active"></span>
+          <span class="badge-dot badge-dot--sm badge-dot--neutral"></span>
+          <span class="badge-dot badge-dot--sm badge-dot--neutral"></span>
+          <span class="badge-dot badge-dot--sm badge-dot--neutral"></span>
+          <span class="badge-dot badge-dot--sm badge-dot--neutral"></span>
+          <span class="badge-dot badge-dot--sm badge-dot--neutral"></span>
+        </div>
+        <div class="gallery__thumbs swipe-row">
+          <button type="button" class="gallery__thumb" aria-label="Visa bild 1 av 6" aria-current="true"><img class="gallery__thumb-img gallery__thumb-img--contain" src="/images/pdp-gallery-front.png" alt=""></button>
+          <button type="button" class="gallery__thumb" aria-label="Visa bild 2 av 6"><img class="gallery__thumb-img" src="/images/pdp-gallery-video.jpg" alt=""><span class="media-play media-play--sm" aria-hidden="true"><img class="media-play__oval" src="/images/media-play-oval.svg" alt=""><img class="media-play__triangle" src="/images/media-play-triangle.svg" alt=""></span></button>
+          <button type="button" class="gallery__thumb" aria-label="Visa bild 3 av 6"><img class="gallery__thumb-img" src="/images/pdp-gallery-kneepads.png" alt=""></button>
+          <button type="button" class="gallery__thumb" aria-label="Visa bild 4 av 6"><img class="gallery__thumb-img" src="/images/pdp-gallery-detail-1.jpg" alt=""></button>
+          <button type="button" class="gallery__thumb" aria-label="Visa bild 5 av 6"><img class="gallery__thumb-img" src="/images/pdp-gallery-detail-2.jpg" alt=""></button>
+          <button type="button" class="gallery__thumb" aria-label="Visa bild 6 av 6"><img class="gallery__thumb-img" src="/images/pdp-gallery-detail-3.jpg" alt=""></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pdp__info">
+
+      <!-- ── TOP INFO SECTION (Figma 2665:542997) ───────────── -->
+      <div class="pdp-top">
+        <div class="pdp-top__main">
+          <div class="pdp-top__head">
+            <a href="#" class="inline-link inline-link--reverse inline-link--secondary pdp-top__brand">Björnkläder</a>
+            <div class="pdp-top__badges">
+              <span class="badge-promo badge-promo--product"><svg class="badge-promo__icon" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M4.9271 13.2428L3.76835 11.3183L1.57965 10.8238L1.78334 8.59338L0.3 6.92147L1.78334 5.24955L1.57965 3.01911L3.76835 2.52466L4.9271 0.600098L6.98768 1.48321L9.04826 0.600098L10.207 2.52466L12.3957 3.01911L12.192 5.24955L13.6754 6.92147L12.192 8.59338L12.3957 10.8238L10.207 11.3183L9.04826 13.2428L6.98768 12.3597L4.9271 13.2428ZM5.43404 11.658L6.98768 10.9966L8.54132 11.658L9.40702 10.2065L11.0477 9.83591L10.9038 8.17286L12.0041 6.92147L10.9038 5.67008L11.0477 4.00702L9.40702 3.63643L8.54132 2.18496L6.98768 2.84631L5.43404 2.18496L4.56834 3.63643L2.92764 3.99191L3.07154 5.67008L1.97126 6.92147L3.08665 8.17286L2.92764 9.85103L4.56834 10.2216L5.43404 11.658ZM6.21694 9.13744L9.8535 5.51599L9.03939 4.70911L6.21694 7.51645L4.93597 6.24336L4.12187 7.05748L6.21694 9.13744Z"/></svg>Standardsortiment</span>
+              <span class="badge-promo badge-promo--product"><svg class="badge-promo__icon" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M6.26432 9.28715L9.78747 5.77511L8.94955 4.93719L6.26432 7.60785L5.06658 6.42469L4.22868 7.26261L6.26432 9.28715ZM3.21038 12.0872C2.87751 12.0872 2.59256 11.9686 2.35552 11.7316C2.11847 11.4945 1.99995 11.2096 1.99995 10.8767V3.26043C1.99995 2.92756 2.11847 2.64261 2.35552 2.40557C2.59256 2.16853 2.87751 2.05001 3.21038 2.05001H5.58904C5.68309 1.74398 5.85989 1.49247 6.11944 1.29549C6.37897 1.0985 6.67867 1.00001 7.01853 1.00001C7.35839 1.00001 7.65808 1.0985 7.91762 1.29549C8.17716 1.49247 8.35396 1.74398 8.44802 2.05001H10.8267C11.1595 2.05001 11.4445 2.16853 11.6815 2.40557C11.9186 2.64261 12.0371 2.92756 12.0371 3.26043V10.8767C12.0371 11.2096 11.9186 11.4945 11.6815 11.7316C11.4445 11.9686 11.1595 12.0872 10.8267 12.0872H3.21038ZM3.21038 10.8767H10.8267V3.26043H3.21038V10.8767ZM7.01853 2.89647C7.1277 2.89647 7.21798 2.86078 7.28936 2.7894C7.36074 2.71802 7.39643 2.62775 7.39643 2.51857C7.39643 2.4094 7.36074 2.31913 7.28936 2.24775C7.21798 2.17637 7.1277 2.14068 7.01853 2.14068C6.90936 2.14068 6.81908 2.17637 6.7477 2.24775C6.67632 2.31913 6.64063 2.4094 6.64063 2.51857C6.64063 2.62775 6.67632 2.71802 6.7477 2.7894C6.81908 2.86078 6.90936 2.89647 7.01853 2.89647Z"/></svg>Avtalssortiment</span>
+            </div>
+          </div>
+          <h1 class="pdp-top__title" id="pdp-title" tabindex="-1">Carpenter soul hantverksbyxa stretch svart</h1>
+          <div class="rating-stars rating-stars--sm-mobile">
+            <span class="rating-stars__stars" role="img" aria-label="Betyg 4 av 5">
+              <svg class="rating-stars__star" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.02959 16L4.89941 9.88791L0 6.39528H6.08284L8 0L9.91716 6.39528H16L11.1006 9.88791L12.9704 16L8 12.2242L3.02959 16Z"/></svg>
+              <svg class="rating-stars__star" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.02959 16L4.89941 9.88791L0 6.39528H6.08284L8 0L9.91716 6.39528H16L11.1006 9.88791L12.9704 16L8 12.2242L3.02959 16Z"/></svg>
+              <svg class="rating-stars__star" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.02959 16L4.89941 9.88791L0 6.39528H6.08284L8 0L9.91716 6.39528H16L11.1006 9.88791L12.9704 16L8 12.2242L3.02959 16Z"/></svg>
+              <svg class="rating-stars__star" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.02959 16L4.89941 9.88791L0 6.39528H6.08284L8 0L9.91716 6.39528H16L11.1006 9.88791L12.9704 16L8 12.2242L3.02959 16Z"/></svg>
+              <svg class="rating-stars__star rating-stars__star--empty" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.02959 16L4.89941 9.88791L0 6.39528H6.08284L8 0L9.91716 6.39528H16L11.1006 9.88791L12.9704 16L8 12.2242L3.02959 16Z"/></svg>
+            </span>
+            <a href="#" class="inline-link rating-stars__count" aria-label="200 recensioner">200</a>
+          </div>
+          <p class="pdp-price">
+            <span class="pdp-price__value">886,79 kr</span>
+            <span class="pdp-price__vat">exkl. moms</span>
+          </p>
+          <p class="pv-sr" id="pdp-variant-live" aria-live="polite"></p>
+        </div>
+        <div class="pdp-artnr">
+          <button type="button" class="badge-basic badge-basic--neutral-dark badge-basic--strong pdp-artnr__copy" data-copy="275072599-144" data-copy-name="Artikelnummer" data-tooltip="Kopiera artikelnummer" aria-label="Kopiera artikelnummer">Art.nr: 275072599-144<span class="badge-basic__icon" aria-hidden="true">content_copy</span></button>
+          <span class="pdp-artnr__class">IV</span>
+          <button type="button" class="badge-basic pdp-artnr__copy--plain pdp-artnr__copy" data-copy="7311451655842" data-copy-name="EAN" data-tooltip="Kopiera EAN" aria-label="Kopiera EAN">EAN: 7311451655842<span class="badge-basic__icon" aria-hidden="true">content_copy</span></button>
+          <button type="button" class="badge-basic pdp-artnr__copy--plain pdp-artnr__copy" data-copy="60011351A7" data-copy-name="Leverantörsnummer" data-tooltip="Kopiera leverantörsnummer" aria-label="Kopiera leverantörsnummer">Lev.nr: 60011351A7<span class="badge-basic__icon" aria-hidden="true">content_copy</span></button>
+        </div>
+      </div>
+
+      <!-- ── ACTION SECTION (Figma 2119:350237) ─────────────── -->
+      <div class="pdp-action">
+        <div class="pdp-action__group">
+          <p class="pdp-contract">
+            <svg class="icon icon--sm" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8.92252 13.1844L13.9556 8.16714L12.7586 6.97012L8.92252 10.7854L7.21146 9.09512L6.01446 10.2921L8.92252 13.1844ZM4.55975 17.1844C4.08423 17.1844 3.67715 17.015 3.33852 16.6764C2.99989 16.3378 2.83057 15.9307 2.83057 15.4552V4.57475C2.83057 4.09922 2.99989 3.69214 3.33852 3.35352C3.67715 3.01489 4.08423 2.84558 4.55975 2.84558H7.95784C8.0922 2.40839 8.34477 2.04909 8.71555 1.76769C9.08631 1.48628 9.51445 1.34558 9.99996 1.34558C10.4855 1.34558 10.9136 1.48628 11.2844 1.76769C11.6552 2.04909 11.9077 2.40839 12.0421 2.84558H15.4402C15.9157 2.84558 16.3228 3.01489 16.6614 3.35352C17 3.69214 17.1694 4.09922 17.1694 4.57475V15.4552C17.1694 15.9307 17 16.3378 16.6614 16.6764C16.3228 17.015 15.9157 17.1844 15.4402 17.1844H4.55975ZM4.55975 15.4552H15.4402V4.57475H4.55975V15.4552ZM9.99996 4.05481C10.1559 4.05481 10.2849 4.00382 10.3869 3.90185C10.4888 3.79988 10.5398 3.67091 10.5398 3.51496C10.5398 3.359 10.4888 3.23003 10.3869 3.12806C10.2849 3.02609 10.1559 2.9751 9.99996 2.9751C9.844 2.9751 9.71504 3.02609 9.61307 3.12806C9.51109 3.23003 9.46011 3.359 9.46011 3.51496C9.46011 3.67091 9.51109 3.79988 9.61307 3.90185C9.71504 4.00382 9.844 4.05481 9.99996 4.05481Z"/></svg>
+            <span>Vald produktvariant ingår i de här <a href="#" class="inline-link">avtalssortimenten</a>.</span>
+          </p>
+
+          <div class="pdp-action__select">
+            <div class="drawer-link">
+              <div class="drawer-link__head">
+                <span class="drawer-link__label" id="pdp-size-label">Storlek</span>
+                <a href="#" class="action-link action-link--small drawer-link__link" target="_blank" rel="noopener">
+                  <span class="action-link__icon" aria-hidden="true">straighten</span>
+                  <span class="action-link__label">Storleksguide</span>
+                  <span class="action-link__icon" aria-hidden="true">open_in_new</span>
+                </a>
+              </div>
+              <!-- Opens the size drawer (Figma "Drawer Desktop - Sizes" 5096:357067): not built yet -->
+              <button type="button" class="drawer-link__row" aria-labelledby="pdp-size-label pdp-size-value" aria-haspopup="dialog">
+                <span class="drawer-link__value" id="pdp-size-value">C44 - 275072599-44</span>
+                <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+              </button>
+            </div>
+            <a href="#varianter" class="action-link action-link--medium pdp-al-sm-mobile">
+              <span class="action-link__icon" aria-hidden="true">table</span>
+              <span class="action-link__label">Visa alla varianter i tabell</span>
+              <svg class="icon icon--sm" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10.5417 3.41675L10.5417 14.5178L11.9454 13.1059L12.7115 13.872L10 16.5834L7.28857 13.872L8.05462 13.1059L9.45837 14.5178L9.45837 3.41675L10.5417 3.41675Z"/></svg>
+            </a>
+          </div>
+
+          <div class="pdp-buy">
+            <div class="picker-stepper" role="group" aria-label="Antal">
+              <button type="button" class="picker-stepper__btn" data-step="-1" aria-label="Minska antal" disabled><span class="icon icon--sm" aria-hidden="true">remove</span></button>
+              <div class="picker-stepper__value">
+                <input class="picker-stepper__input" type="text" inputmode="numeric" pattern="[0-9]*" value="1" min="1" aria-label="Antal, styck" autocomplete="off">
+                <span class="picker-stepper__unit" aria-hidden="true">st</span>
+              </div>
+              <button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"><span class="icon icon--sm" aria-hidden="true">add</span></button>
+            </div>
+            <div class="pdp-buy__cta">
+              <button type="button" class="btn btn--primary btn--md" id="pdp-add"><span class="btn__label">Lägg i varukorgen</span></button>
+              <button type="button" class="btn btn--blank btn--md btn--icon pdp-fav" aria-pressed="false" aria-label="Lägg till i favoriter" data-tooltip="Lägg till i favoriter"><span class="btn__icon" aria-hidden="true">favorite</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pdp-stock">
+          <div class="pdp-stock__head">
+            <div class="pdp-stock__head-row">
+              <h2 class="pdp-stock__title">Tillgänglighet</h2>
+              <p class="pdp-stock__checked">Senast kontrollerad: Idag kl 09:10</p>
+            </div>
+            <hr class="divider divider--tertiary">
+          </div>
+
+          <div class="pdp-stock__block">
+            <div class="pdp-stock__info">
+              <h3 class="pdp-stock__name"><span class="icon" aria-hidden="true">package_2</span>Webb</h3>
+              <ul class="pdp-stock__statuses">
+                <li class="pdp-stock__status" id="pdp-web-status"><span class="badge-dot badge-dot--success" aria-hidden="true"></span><span>100 st i lager (Normal leverans 1-2 arbetsdagar)</span></li>
+              </ul>
+            </div>
+            <hr class="divider">
+          </div>
+
+          <div class="pdp-stock__block">
+            <div class="pdp-stock__info">
+              <div class="pdp-stock__store-row">
+                <div class="pdp-stock__store">
+                  <h3 class="pdp-stock__name"><span class="icon" aria-hidden="true">store</span>Borås</h3>
+                  <span class="divider divider--tertiary divider--vertical pdp-stock__sep" aria-hidden="true"></span>
+                  <p class="pdp-stock__text">Öppet idag: Kl. 06:30 - 17:00</p>
+                </div>
+                <!-- Opens the store drawer: not built yet -->
+                <a href="#" class="action-link action-link--medium">
+                  <span class="action-link__label">Tillgänglig i 12 butiker</span>
+                  <span class="action-link__icon" aria-hidden="true">chevron_right</span>
+                </a>
+              </div>
+              <ul class="pdp-stock__statuses" id="pdp-store-status">
+                <li class="pdp-stock__status"><span class="badge-dot badge-dot--success" aria-hidden="true"></span><span>100 st i lager</span></li>
+                <li class="pdp-stock__status"><span class="badge-dot badge-dot--success" aria-hidden="true"></span><span>Köp &amp; Hämta - Tillgänglig i butik inom 6-7 arbetsdagar</span></li>
+              </ul>
+            </div>
+            <div class="pdp-stock__banner">
+              <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.6058 19.1L20.1402 23.6443L21.6443 22.1402L17.1 17.6058L20.3845 16.5192L12 14L14.5193 22.3845L15.6058 19.1Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6.30775 21.5C5.80258 21.5 5.375 21.325 5.025 20.975C4.675 20.625 4.5 20.1974 4.5 19.6923V8.30775C4.5 7.80258 4.675 7.375 5.025 7.025C5.375 6.675 5.80258 6.5 6.30775 6.5H8.25V6.25C8.25 5.21417 8.616 4.33017 9.348 3.598C10.0802 2.866 10.9642 2.5 12 2.5C13.0358 2.5 13.9198 2.866 14.652 3.598C15.384 4.33017 15.75 5.21417 15.75 6.25V6.5H17.6923C18.1974 6.5 18.625 6.675 18.975 7.025C19.325 7.375 19.5 7.80258 19.5 8.30775V14.6923H18V8.30775C18 8.23075 17.9679 8.16025 17.9038 8.09625C17.8398 8.03208 17.7692 8 17.6923 8H15.75V10.25C15.75 10.4628 15.6782 10.641 15.5345 10.7845C15.391 10.9282 15.2128 11 15 11C14.7872 11 14.609 10.9282 14.4655 10.7845C14.3218 10.641 14.25 10.4628 14.25 10.25V8H9.75V10.25C9.75 10.4628 9.67817 10.641 9.5345 10.7845C9.391 10.9282 9.21283 11 9 11C8.78717 11 8.609 10.9282 8.4655 10.7845C8.32183 10.641 8.25 10.4628 8.25 10.25V8H6.30775C6.23075 8 6.16025 8.03208 6.09625 8.09625C6.03208 8.16025 6 8.23075 6 8.30775V19.6923C6 19.7693 6.03208 19.8398 6.09625 19.9038C6.16025 19.9679 6.23075 20 6.30775 20H12.6923V21.5H6.30775ZM14.25 6.5H9.75V6.25C9.75 5.62317 9.96825 5.09142 10.4048 4.65475C10.8413 4.21825 11.373 4 12 4C12.627 4 13.1588 4.21825 13.5953 4.65475C14.0317 5.09142 14.25 5.62317 14.25 6.25V6.5Z"/></svg>
+              <p id="pdp-banner-text">Via tjänsten Köp &amp; Hämta kan du lägga en order direkt mot önskad butik. <strong>100 i butik</strong>, kan hämtas idag innan kl 17.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ── BOTTOM INFO SECTION (Figma 2665:546411: Desktop 1930:345588, Tablet 3581:445991, Mobile 2665:545811) ──
+           Built: Om produkten, Produktblad + a few certificate logos (user: not all), drawer links, contact, warning.
+           Not built: the drawers the rows open, the accessories carousel (2081:370908, later step), USP list and Good-to-know badges (hidden in Figma). -->
+      <div class="pdp-bottom">
+        <div class="pdp-about">
+          <h2 class="pdp-about__title">Om produkten</h2>
+          <p class="pdp-about__text">Hantverksbyxa från svenska varumärket Björnkläder. Tillverkad av 80% bomull och 20% polyester med polyamidförstärkningar. Oeko-Tex certifierad. <a href="#" class="inline-link">Läs mer om produkten</a></p>
+        </div>
+        <div class="pdp-certs">
+          <a href="#" class="action-link action-link--medium pdp-certs__sheet">
+            <span class="action-link__icon" aria-hidden="true">picture_as_pdf</span>
+            <span class="action-link__label">Produktblad</span>
+            <span class="action-link__icon" aria-hidden="true">file_download</span>
+          </a>
+          <span class="divider divider--tertiary divider--vertical" aria-hidden="true"></span>
+          <ul class="pdp-certs__list">
+            <li><img src="/images/pdp-cert-iso-flame.jpg" alt="Skydd mot värme och flamma" loading="lazy"></li>
+            <li><img src="/images/pdp-cert-oeko-tex.jpg" alt="Oeko-Tex Standard 100" loading="lazy"></li>
+            <li><img src="/images/pdp-cert-svanen.png" alt="Svanenmärkt" loading="lazy"></li>
+            <li><img src="/images/pdp-cert-wash-60.jpg" alt="Tvätt 60 grader" loading="lazy"></li>
+          </ul>
+        </div>
+        <!-- Related products (Figma "PDP / Accessories" 2081:370906: Desktop 2081:370866, hover 2081:370886, Mobile 2665:544793). Cards are rendered by the page script (mock data). -->
+        <section class="pdp-rel" data-carousel aria-labelledby="pdp-rel-title">
+          <button type="button" class="pdp-rel__head" aria-haspopup="dialog">
+            <span class="icon" aria-hidden="true">construction</span>
+            <span class="pdp-rel__title" id="pdp-rel-title">Relaterade produkter (5)</span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <div class="pdp-rel__body">
+            <div class="carousel__stage">
+              <ul class="carousel__track swipe-row" id="pdp-rel-track" tabindex="0" aria-label="Relaterade produkter"></ul>
+              <button type="button" class="btn btn--primary btn--sm btn--icon carousel__nav carousel__nav--prev" id="pdp-rel-prev" aria-label="Visa föregående produkter" hidden><span class="btn__icon" aria-hidden="true">chevron_left</span></button>
+              <button type="button" class="btn btn--primary btn--sm btn--icon carousel__nav carousel__nav--next" id="pdp-rel-next" aria-label="Visa fler produkter"><span class="btn__icon" aria-hidden="true">chevron_right</span></button>
+            </div>
+            <div class="carousel__bar" aria-hidden="true"><span class="carousel__thumb" id="pdp-rel-thumb"></span></div>
+          </div>
+        </section>
+        <div class="pdp-links">
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">menu_book</span>
+              <span class="drawer-link__title">Produktinformation</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">description</span>
+              <span class="drawer-link__title">Specifikationer</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">content_paste</span>
+              <span class="drawer-link__title">Dokument</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">verified</span>
+              <span class="drawer-link__title">Certifieringar</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">laundry</span>
+              <span class="drawer-link__title">Tvättråd</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">assignment_turned_in</span>
+              <span class="drawer-link__title">Avtalssortiment</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">health_and_safety</span>
+              <span class="drawer-link__title">Säkerhetsdatablad</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">nest_eco_leaf</span>
+              <span class="drawer-link__title">Miljöinformation</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">payments</span>
+              <span class="drawer-link__title">Köp och fraktinformation</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+          <button type="button" class="drawer-link drawer-link--plain" aria-haspopup="dialog">
+            <span class="drawer-link__lead">
+              <span class="icon icon--sm" aria-hidden="true">support_agent</span>
+              <span class="drawer-link__title">Fråga oss</span>
+            </span>
+            <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+          </button>
+        </div>
+        <div class="pdp-contact">
+          <span class="pdp-contact__title">Behöver du hjälp?</span>
+          <a href="mailto:kundservice@swedol.se" class="action-link action-link--medium">
+            <span class="action-link__icon" aria-hidden="true">mail</span>
+            <span class="action-link__label">Skicka E-post till oss</span>
+          </a>
+          <a href="tel:+4620712010" class="action-link action-link--medium">
+            <span class="action-link__icon" aria-hidden="true">mobile</span>
+            <span class="action-link__label">020-71 20 10</span>
+          </a>
+        </div>
+        <div class="pdp-warning">
+          <h2 class="pdp-warning__title">Varning</h2>
+          <dl class="pdp-warning__list">
+            <div class="pdp-warning__row"><dt>H302</dt><dd>Skadligt vid förtäring.</dd></div>
+            <div class="pdp-warning__row"><dt>H319</dt><dd>Orsakar allvarlig ögonirritation.</dd></div>
+            <div class="pdp-warning__row"><dt>H373</dt><dd>Kan orsaka organskador genom lång eller upprepad exponering.</dd></div>
+          </dl>
+          <div class="pdp-warning__signs">
+            <img src="/images/pdp-ghs-health.png" alt="Faropiktogram: hälsofara" loading="lazy">
+            <img src="/images/pdp-ghs-warning.png" alt="Faropiktogram: skadlig" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCT CAROUSEL (Figma ECO "Carousel / Product Card Carousel" 2007:65107: Desktop 2007:64999, hover 2007:65053, Mobile 2250:78042) ══
+     Cards are rendered by the page script (mock data). Tab labels, titles and texts are placeholders. -->
+<section class="section section--secondary">
+  <div class="pc" id="pdp-pc" data-carousel>
+    <div class="pc__main">
+      <div class="pc__head">
+        <div class="pc__tabs">
+          <div class="tab-bar tab-bar--secondary tab-bar--md" role="tablist" aria-label="Produktlistor">
+            <button class="tab tab--active" role="tab" aria-selected="true" data-title="Liknande produkter" data-sub="Andra byxor i samma kategori."><span class="tab__label">Liknande</span></button>
+            <button class="tab" role="tab" aria-selected="false" tabindex="-1" data-title="Köps ofta tillsammans" data-sub="Produkter som andra kunder har köpt ihop med den här."><span class="tab__label">Köps ofta ihop</span></button>
+            <button class="tab" role="tab" aria-selected="false" tabindex="-1" data-title="Senast visade" data-sub="Produkter du har tittat på tidigare."><span class="tab__label">Senast visade</span></button>
+          </div>
+        </div>
+        <div class="pc__title-row">
+          <h2 class="pc__title">Liknande produkter</h2>
+          <a href="#" class="action-link action-link--large pc__all">
+            <span class="action-link__label">Visa alla</span>
+            <span class="action-link__icon" aria-hidden="true">chevron_right</span>
+          </a>
+        </div>
+        <p class="pc__sub">Andra byxor i samma kategori.</p>
+      </div>
+      <div class="carousel__stage">
+        <ul class="carousel__track swipe-row pc__track" tabindex="0" aria-label="Produkter"></ul>
+        <button type="button" class="btn btn--primary btn--sm btn--icon carousel__nav carousel__nav--prev" aria-label="Visa föregående produkter" hidden><span class="btn__icon" aria-hidden="true">chevron_left</span></button>
+        <button type="button" class="btn btn--primary btn--sm btn--icon carousel__nav carousel__nav--next" aria-label="Visa fler produkter"><span class="btn__icon" aria-hidden="true">chevron_right</span></button>
+      </div>
+    </div>
+    <div class="carousel__bar" aria-hidden="true"><span class="carousel__thumb"></span></div>
+  </div>
+</section>
+
+<!-- ══ VARIANTER (Figma PDP Desktop 5096:357024 > Varianter 5768:458881; Mobile 6701:352990 not built) ══
+     Table built like .users-table on mypages/users.html. Rows are rendered by the page script (mock data). -->
+<section class="section" id="varianter" aria-labelledby="pv-title">
+  <div class="pv">
+    <div class="pv__head">
+      <h2 class="pv__title" id="pv-title">Varianter</h2>
+      <div class="pv__filter">
+        <div class="input-wrap pv__search">
+          <div class="input-box input-box--sm">
+            <span class="input-icon" aria-hidden="true">search</span>
+            <input class="form-input" id="pv-q" type="text" inputmode="search" autocomplete="off" placeholder="Sök på artikelnr, storlek, längd" aria-label="Sök bland varianterna" />
+          </div>
+        </div>
+        <button type="button" class="btn btn--system btn--sm" aria-haspopup="dialog"><span class="btn__label">Storlek</span></button>
+        <button type="button" class="btn btn--system btn--sm" aria-haspopup="dialog"><span class="btn__label">Längd</span></button>
+        <button type="button" class="btn btn--primary btn--md pv__filter-btn" aria-haspopup="dialog"><span class="btn__icon" aria-hidden="true">tune</span><span class="btn__label">Visa filter</span></button>
+      </div>
+    </div>
+    <ul class="pv-cards" id="pv-cards" aria-label="Varianter"></ul>
+    <div class="pv-wrap" id="pv-wrap" tabindex="0" role="region" aria-label="Varianter, tabell som kan rullas i sidled">
+      <table class="pv-table">
+        <thead>
+          <tr>
+            <th scope="col" data-col="variant">
+              <div class="pv-var">
+                <span class="pv-var__lead">
+                  <span class="pv-var__contract" aria-hidden="true" style="visibility:hidden"><svg class="pv-var__icon" viewBox="0 0 20 20" fill="currentColor"></svg>2</span>
+                  <span class="pv-var__slot">Variant</span>
+                </span>
+                <button type="button" class="pv-sort" data-sort="art">Artikelnummer <span class="icon" aria-hidden="true">unfold_more</span></button>
+              </div>
+            </th>
+            <th scope="col" data-col="storlek"><button type="button" class="pv-sort" data-sort="size">Storlek <span class="icon" aria-hidden="true">unfold_more</span></button></th>
+            <th scope="col" data-col="tillganglighet"><button type="button" class="pv-sort" data-sort="stock">Tillgänglighet <span class="icon" aria-hidden="true">unfold_more</span></button></th>
+            <th scope="col" data-col="pris"><button type="button" class="pv-sort" data-sort="price">Pris <span class="icon" aria-hidden="true">unfold_more</span></button></th>
+            <th scope="col" class="col-action"><span class="pv-sr">Köp och favorit</span></th>
+          </tr>
+        </thead>
+        <tbody id="pv-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+  <!-- ══ SITE FOOTER (global partial) ═══════════════════════════
+       Innehåll: mypages/partials/footer.html — enda källan (single
+       source of truth). Redigera ENDAST där; ändringen slår igenom
+       automatiskt i alla sidor som inkluderar partialen (för
+       närvarande template.html och mypages/mypages-template.html).
+  ════════════════════════════════════════════════════════════ -->
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'mypages/partials/footer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <div class="nav-more__menu" id="nav-more-menu" hidden></div>
+
+  <!-- ══ MAIN MENU DRAWER (global partial) ═══════════════════════
+       Innehåll: mypages/partials/main-menu.html — enda källan
+       (single source of truth). Redigera ENDAST där; ändringen
+       slår igenom automatiskt i alla sidor som inkluderar
+       partialen (template.html, reviews.html och
+       mypages/mypages-template.html).
+  ════════════════════════════════════════════════════════════ -->
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'mypages/partials/main-menu.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <!-- ══ ACCOUNT NAV DRAWER (global partial) ═══════════════════
+       Innehåll: mypages/partials/account-nav-drawer.html — enda källan
+       (single source of truth). Redigera ENDAST där; ändringen
+       slår igenom automatiskt i alla sidor som inkluderar partialen.
+  ════════════════════════════════════════════════════════════ -->
+  <script>
+    document.write((function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'mypages/partials/account-nav-drawer.html?v=' + Date.now(), false);
+      xhr.send(null);
+      return xhr.responseText;
+    })());
+  </script>
+
+  <script>
+    (function() {
+      const bar1 = document.querySelector('.sh-sm__bar1');
+      const bar3 = document.querySelector('.sh-sm__bar3');
+      if (!bar1 || !bar3) return;
+      const bar2 = document.querySelector('.sh-sm__bar2');
+
+      let observer;
+      function createObserver() {
+        if (observer) observer.disconnect();
+        const h = bar1.offsetHeight;
+        observer = new IntersectionObserver(function(entries) {
+          const hidden = !entries[0].isIntersecting;
+          bar1.classList.toggle('sh-sm__bar1--accented', hidden);
+          if (bar2) bar2.classList.toggle('sh-sm__bar2--bar3-hidden', hidden);
+        }, { rootMargin: '-' + h + 'px 0px 0px 0px', threshold: 0 });
+        observer.observe(bar3);
+      }
+      createObserver();
+      window.addEventListener('resize', createObserver);
+    })();
+
+    /* ── sm header: sh-sm__bar2 scroll-reveal ───────────────────
+       Samma beteende som site-header__nav: scrollar upp 100px → visas,
+       scrollar ned → döljs, nära toppen → naturligt läge.
+       Det gröna strecket följer bar2: visas på bar2 när den är synlig
+       och tas bort från bar1 (och vice versa). */
+    (function() {
+      const bar2 = document.querySelector('.sh-sm__bar2');
+      const bar1 = document.querySelector('.sh-sm__bar1');
+      const bar3 = document.querySelector('.sh-sm__bar3');
+      if (!bar2) return;
+
+      const THRESHOLD = 100;
+      const placeholder = document.createElement('div');
+      bar2.after(placeholder);
+
+      let lastY         = window.scrollY;
+      let scrollUpAccum = 0;
+      let isFixed       = false;
+      let bar2H         = 0;
+
+      function measure() { bar2H = bar2.offsetHeight; }
+      measure();
+
+      function showBar2() {
+        bar2.classList.add('sh-sm__bar2--visible');
+        // Grönt streck på bar2 — ta bort från bar1
+        if (bar1) bar1.classList.remove('sh-sm__bar1--accented');
+      }
+
+      function hideBar2() {
+        bar2.classList.remove('sh-sm__bar2--visible');
+        // Grönt streck tillbaka på bar1 om bar3 har scrollat förbi
+        if (bar1 && bar3 && bar3.getBoundingClientRect().bottom <= bar1.offsetHeight) {
+          bar1.classList.add('sh-sm__bar1--accented');
+        }
+      }
+
+      function setFixed() {
+        if (isFixed) return;
+        placeholder.style.height = bar2H + 'px';
+        bar2.classList.add('sh-sm__bar2--fixed');
+        isFixed = true;
+      }
+
+      function setNatural() {
+        if (!isFixed) return;
+        hideBar2();
+        bar2.classList.remove('sh-sm__bar2--fixed');
+        placeholder.style.height = '0';
+        scrollUpAccum = 0;
+        isFixed = false;
+      }
+
+      window.addEventListener('scroll', function() {
+        if (window.innerWidth > 768) { setNatural(); return; }
+
+        const y     = window.scrollY;
+        const delta = lastY - y; // positiv = scrollar uppåt
+
+        if (y < bar2H) {
+          setNatural();
+        } else if (delta < 0) {
+          // Scrollar nedåt — dölj
+          scrollUpAccum = 0;
+          if (!isFixed) setFixed();
+          hideBar2();
+        } else {
+          // Scrollar uppåt — ackumulera
+          if (!isFixed) setFixed();
+          scrollUpAccum += delta;
+          if (scrollUpAccum >= THRESHOLD) showBar2();
+        }
+
+        lastY = y;
+      }, { passive: true });
+
+      window.addEventListener('resize', function() {
+        measure();
+        if (window.innerWidth > 768) setNatural();
+      });
+    })();
+
+    /* ── Keyboard vs mouse focus tracking ────────────────────── */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') document.body.classList.add('keyboard-nav');
+    });
+    document.addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
+    document.addEventListener('touchstart', () => document.body.classList.remove('keyboard-nav'), { passive: true });
+
+    // ── Tab overflow menu ──────────────────────────────────────
+    (function() {
+      const tabBar   = document.querySelector('.tab-bar');
+      const tabMore  = document.getElementById('tab-more');
+      const moreBtn  = document.getElementById('tab-more-btn');
+      const moreMenu = document.getElementById('tab-more-menu');
+      if (!tabBar || !tabMore || !moreMenu) return;
+
+      const allItems = Array.from(tabBar.querySelectorAll('.tab-item'));
+
+      function closeMenu() {
+        moreMenu.hidden = true;
+        moreBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      function updateOverflow() {
+        // Reset: show all items, hide more button
+        allItems.forEach(i => i.style.display = '');
+        tabMore.classList.remove('tab-more--visible');
+        closeMenu();
+
+        const hiddenSet = new Set();
+
+        function checkAndHide() {
+          const br = tabBar.getBoundingClientRect();
+          const visible = allItems.filter(i => !hiddenSet.has(i));
+          for (let i = visible.length - 1; i >= 0; i--) {
+            const r = visible[i].getBoundingClientRect();
+            if (r.right > br.right) {
+              hiddenSet.add(visible[i]);
+              visible[i].style.display = 'none';
+              return true;
+            }
+          }
+          return false;
+        }
+
+        let guard = allItems.length;
+        while (checkAndHide() && guard-- > 0) {}
+
+        if (hiddenSet.size > 0) {
+          tabMore.classList.add('tab-more--visible');
+          // Andra passet: tab-more tar nu plats, kolla om fler måste döljas
+          let guard2 = allItems.length;
+          while (checkAndHide() && guard2-- > 0) {}
+
+          const hiddenItems = allItems.filter(i => hiddenSet.has(i));
+          moreMenu.innerHTML = hiddenItems.map(item => {
+            const label    = item.querySelector('.tab-item__label').textContent;
+            const isActive = item.classList.contains('tab-item--active');
+            const check    = isActive ? `<span class="tab-more__menu-item__check">check_circle</span>` : '';
+            return `<div class="tab-more__menu-item">${label}${check}</div>`;
+          }).join('');
+        }
+      }
+
+      moreBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!moreMenu.hidden) {
+          closeMenu();
+        } else {
+          const btnRect = moreBtn.getBoundingClientRect();
+          moreMenu.style.top   = (btnRect.bottom + 2) + 'px';
+          moreMenu.style.right = 'auto';
+          moreMenu.style.left  = (btnRect.right - 152) + 'px';
+          moreMenu.hidden = false;
+          moreBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      document.addEventListener('click', e => { if (!tabMore.contains(e.target)) closeMenu(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+      requestAnimationFrame(updateOverflow);
+      document.fonts.ready.then(updateOverflow);
+      window.addEventListener('resize', updateOverflow);
+    })();
+
+    /* ── Nav overflow ────────────────────────────────────────── */
+    (function() {
+      const navLinks = document.querySelector('.nav-links');
+      const navMore  = document.getElementById('nav-more');
+      const navBtn   = document.getElementById('nav-more-btn');
+      const navMenu  = document.getElementById('nav-more-menu');
+      const navBar   = document.querySelector('.site-header__nav');
+      if (!navLinks || !navMore || !navMenu) return;
+
+      const allItems = Array.from(navLinks.querySelectorAll('a'));
+
+      function closeNavMenu() {
+        navMenu.hidden = true;
+        navBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      function updateNavOverflow() {
+        // Mobile: restore all, no overflow menu
+        if (window.innerWidth < 769) {
+          allItems.forEach(i => i.style.display = '');
+          navMore.classList.remove('nav-more--visible');
+          closeNavMenu();
+          return;
+        }
+
+        allItems.forEach(i => i.style.display = '');
+        navMore.classList.remove('nav-more--visible');
+        closeNavMenu();
+        const hiddenSet = new Set();
+
+        function checkAndHide() {
+          const br = navLinks.getBoundingClientRect();
+          const visible = allItems.filter(i => !hiddenSet.has(i));
+          for (let i = visible.length - 1; i >= 0; i--) {
+            const r = visible[i].getBoundingClientRect();
+            if (r.right > br.right) {
+              hiddenSet.add(visible[i]);
+              visible[i].style.display = 'none';
+              return true;
+            }
+          }
+          return false;
+        }
+
+        let guard = allItems.length;
+        while (checkAndHide() && guard-- > 0) {}
+
+        if (hiddenSet.size > 0) {
+          navMore.classList.add('nav-more--visible');
+          // Second pass: nav-more now takes space, re-check for new overflow
+          let guard2 = allItems.length;
+          while (checkAndHide() && guard2-- > 0) {}
+
+          // Klona hela noden (inte bara href/textContent) så eventuella
+          // onclick-handlers (t.ex. Produktsortiment-länken) följer med.
+          const hiddenItems = allItems.filter(i => hiddenSet.has(i));
+          navMenu.innerHTML = '';
+          hiddenItems.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.classList.add('nav-more__menu-item');
+            navMenu.appendChild(clone);
+          });
+        }
+      }
+
+      navBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!navMenu.hidden) {
+          closeNavMenu();
+        } else {
+          const btnRect = navBtn.getBoundingClientRect();
+          const navBottom = navBar ? navBar.getBoundingClientRect().bottom : btnRect.bottom;
+          navMenu.style.top   = navBottom + 'px';
+          navMenu.style.right = 'auto';
+          navMenu.style.left  = (btnRect.right - 152) + 'px';
+          navMenu.hidden = false;
+          navBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+
+      document.addEventListener('click', e => { if (!navMore.contains(e.target)) closeNavMenu(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNavMenu(); });
+
+      requestAnimationFrame(updateNavOverflow);
+      document.fonts.ready.then(updateNavOverflow);
+      window.addEventListener('resize', updateNavOverflow);
+    })();
+
+    function handleNewsletterInput(value) {
+      document.getElementById('newsletter-clear-btn').style.display = value ? 'block' : 'none';
+    }
+
+    function handleHeaderSearch(query) {
+      const scanBtn = document.getElementById('header-scan-btn');
+      const clearBtn = document.getElementById('header-clear-btn');
+      const searchWrap = document.querySelector('.site-header__search');
+      if (query) {
+        scanBtn.style.display = 'none';
+        clearBtn.style.display = 'flex';
+        searchWrap.classList.add('is-active');
+      } else {
+        scanBtn.style.display = 'flex';
+        clearBtn.style.display = 'none';
+        searchWrap.classList.remove('is-active');
+      }
+    }
+
+    function filterUsers(query) {
+      document.getElementById('search-clear-btn').style.display = query ? 'block' : 'none';
+      document.querySelector('.search-input').classList.toggle('is-active', !!query);
+      const q = query.trim().toLowerCase();
+      const rows = document.querySelectorAll('.users-table tbody tr');
+      rows.forEach(row => {
+        const name = row.querySelector('.user-name')?.textContent.toLowerCase() || '';
+        const email = row.querySelector('.user-email')?.textContent.toLowerCase() || '';
+        row.style.display = (!q || name.includes(q) || email.includes(q)) ? '' : 'none';
+      });
+    }
+
+    function toggleFooterCol(col) {
+      const links = col.querySelector('.footer-col__links');
+      const isOpen = col.classList.contains('is-open');
+      col.classList.toggle('is-open');
+      links.style.maxHeight = isOpen ? null : links.scrollHeight + 'px';
+    }
+
+    const siteHeaderTop = document.querySelector('.site-header__top');
+    const siteHeader    = document.querySelector('.site-header');
+
+    // Placeholder keeps layout height when nav goes fixed
+    const navPlaceholder = document.createElement('div');
+    siteHeader.after(navPlaceholder);
+
+    let lastY        = window.scrollY;
+    let scrollUpAccum = 0;
+    const THRESHOLD  = 100;
+    let isFixed      = false;
+
+    function setFixed(topBarH, navH) {
+      if (isFixed) return;
+      navPlaceholder.style.height = navH + 'px';
+      siteHeader.style.top = topBarH + 'px';
+      siteHeader.classList.add('site-header--fixed');
+      isFixed = true;
+    }
+
+    function setNatural() {
+      if (!isFixed) return;
+      siteHeader.classList.remove('site-header--fixed', 'site-header--visible');
+      siteHeader.style.top = '';
+      navPlaceholder.style.height = '0';
+      isFixed = false;
+    }
+
+    function updateBorder() {
+      const navVisible = !isFixed || siteHeader.classList.contains('site-header--visible');
+      siteHeaderTop.style.borderBottomColor = navVisible ? '#232500' : '#c7d300';
+    }
+
+    // Init --header-top-h for sticky banner
+    document.documentElement.style.setProperty('--header-top-h', siteHeaderTop.offsetHeight + 'px');
+    window.addEventListener('resize', function() {
+      document.documentElement.style.setProperty('--header-top-h', siteHeaderTop.offsetHeight + 'px');
+    });
+
+    window.addEventListener('scroll', () => {
+      const y       = window.scrollY;
+      const topBarH = siteHeaderTop.offsetHeight;
+      const navH    = isFixed ? 48 : siteHeader.offsetHeight;
+      const delta   = lastY - y; // positive = scrolling up
+
+      if (y <= topBarH + navH) {
+        // Back near top — restore natural flow
+        setNatural();
+        scrollUpAccum = 0;
+      } else if (delta < 0) {
+        // Scrolling down — hide nav
+        scrollUpAccum = 0;
+        siteHeader.classList.remove('site-header--visible');
+      } else {
+        // Scrolling up — accumulate distance
+        scrollUpAccum += delta;
+        setFixed(topBarH, navH);
+        if (scrollUpAccum >= THRESHOLD) {
+          siteHeader.classList.add('site-header--visible');
+        }
+      }
+
+      updateBorder();
+      lastY = y;
+    }, { passive: true });
+
+
+    /* ── Huvudmeny-drawer ─────────────────────────────────────── */
+    function openMainMenuDrawer() {
+      var panel = document.getElementById('main-menu-panel');
+      void panel.offsetWidth; // flush stängt läge så slide-in alltid startar
+      document.getElementById('main-menu-overlay').classList.add('is-open');
+      panel.classList.add('is-open');
+      // Scroll-lås först efter transitionen startat — på mobil ändrar overflow:hidden
+      // viewporten och kan annars få slide-in att hoppa över (visas utan animation)
+      requestAnimationFrame(function() { if (panel.classList.contains('is-open')) document.body.style.overflow = 'hidden'; });
+    }
+
+    function closeMainMenuDrawer() {
+      document.getElementById('main-menu-overlay').classList.remove('is-open');
+      document.getElementById('main-menu-panel').classList.remove('is-open');
+      document.body.style.overflow = '';
+      // Återställ till nivå 1 efter att stäng-animationen är klar
+      setTimeout(function() {
+        document.getElementById('menu-level-2').classList.remove('is-active');
+        document.getElementById('menu-level-1').classList.remove('menu-level--pushed');
+      }, 350);
+    }
+
+    function openMenuLevel2(title) {
+      if (title) document.getElementById('menu-level-2-title').textContent = title;
+      document.getElementById('menu-level-2').classList.add('is-active');
+      document.getElementById('menu-level-1').classList.add('menu-level--pushed');
+    }
+
+    function closeMenuLevel2() {
+      document.getElementById('menu-level-2').classList.remove('is-active');
+      document.getElementById('menu-level-1').classList.remove('menu-level--pushed');
+    }
+
+    // Öppnar huvudmeny-draweren direkt på nivå 2 (Produktsortiment) — utan att
+    // nivå 1 syns eller animeras emellan. Används av "Produktsortiment"-länken
+    // i globala toppmenyn.
+    function openProductPickerDrawer() {
+      var level1 = document.getElementById('menu-level-1');
+      var level2 = document.getElementById('menu-level-2');
+      var title  = document.getElementById('menu-level-2-title');
+      if (!level1 || !level2) return;
+
+      if (title) title.textContent = 'Produktsortiment';
+
+      // Stäng av transition tillfälligt så nivå-växlingen sker direkt (ingen
+      // synlig slide) — draweren ska visa Produktsortiment redan vid öppning.
+      level1.style.transition = 'none';
+      level2.style.transition = 'none';
+      level1.classList.add('menu-level--pushed');
+      level2.classList.add('is-active');
+      void level1.offsetHeight; // tvinga reflow innan transition återställs
+      level1.style.transition = '';
+      level2.style.transition = '';
+
+      openMainMenuDrawer();
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key !== 'Escape') return;
+      var mainMenuPanel = document.getElementById('main-menu-panel');
+      if (!mainMenuPanel || !mainMenuPanel.classList.contains('is-open')) return;
+      if (document.getElementById('menu-level-2').classList.contains('is-active')) {
+        closeMenuLevel2();
+      } else {
+        closeMainMenuDrawer();
+      }
+    });
+
+    // Huvudmeny-drawer har två nivåer, var och en med egen header + scrollbart innehåll
+    [
+      ['#menu-level-1 .drawer-header', '#menu-level-1 .menu-drawer__content'],
+      ['#menu-level-2-header', '#menu-level-2-content']
+    ].forEach(function(pair) {
+      var header  = document.querySelector(pair[0]);
+      var content = document.querySelector(pair[1]);
+      if (!header || !content) return;
+      content.addEventListener('scroll', function() {
+        header.classList.toggle('drawer-header--elevated', content.scrollTop > 0);
+      });
+    });
+
+    /* openAccountNavDrawer / closeAccountNavDrawer / syncAccountNavDrawerActive samt footer-skuggans scroll-logik ligger nu i partials/account-nav-drawer.html */
+  </script>
+
+  <script>
+    /* PDP: add to cart, confirmed with an E-Com toast (Add to cart) */
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('#pdp-add') || !window.ECO_N) return;
+      ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa stretch svart', text: 'har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', secondary: { label: 'Välj tillbehör' }, primary: { label: 'Till varukorgen' } });
+    });
+    /* PDP: favourite toggle, confirmed with an E-Com toast (Informational) */
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('.pdp-fav'); if (!b) return;
+      var on = b.getAttribute('aria-pressed') !== 'true', label = on ? 'Ta bort från favoriter' : 'Lägg till i favoriter';
+      b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', label); b.dataset.tooltip = label;
+      if (window.ECO_N) ECO_N.showEcomToast({ variant: 'info', name: 'Carpenter soul hantverksbyxa stretch svart', text: on ? 'har lagts till i dina favoriter.' : 'har tagits bort från dina favoriter.' });
+    });
+    /* PDP: copy an article number, confirm with an E-Com toast (Informational) */
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('.pdp-artnr__copy'); if (!b) return;
+      var done = function () { if (window.ECO_N) ECO_N.showEcomToast({ variant: 'info', name: b.dataset.copyName, text: 'kopierades till urklipp.' }); };
+      if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(done, done); else done();
+    });
+  
+    /* Carousel behaviour shared by the carousels on this page: [data-carousel] with .carousel__track (.swipe-row), .carousel__bar > .carousel__thumb
+       and .carousel__nav--prev / --next. Returns sync(); call it after the cards change. */
+    function pdpCarousel(root) {
+      var track = root.querySelector('.carousel__track'), thumb = root.querySelector('.carousel__thumb'), next = root.querySelector('.carousel__nav--next'), prev = root.querySelector('.carousel__nav--prev');
+      if (window.ECO_TABS) ECO_TABS.swipe(track);
+      function sync() {
+        var max = track.scrollWidth - track.clientWidth, share = track.clientWidth / track.scrollWidth;
+        thumb.parentNode.hidden = max <= 0;
+        thumb.style.width = share * 100 + '%';
+        thumb.style.left = (max > 0 ? track.scrollLeft / max : 0) * (1 - share) * 100 + '%';
+        next.hidden = max <= 0 || track.scrollLeft >= max - 1;
+        prev.hidden = track.scrollLeft <= 1;
+      }
+      track.addEventListener('scroll', sync); window.addEventListener('resize', sync); sync();
+      /* Scroll bar: press or drag it to move the row (Figma state Active) */
+      var bar = thumb.parentNode, grab = null;
+      function drag(e) {
+        var r = bar.getBoundingClientRect(), tw = thumb.offsetWidth, room = r.width - tw;
+        track.scrollLeft = room > 0 ? Math.max(0, Math.min(1, (e.clientX - r.left - grab) / room)) * (track.scrollWidth - track.clientWidth) : 0;
+      }
+      bar.addEventListener('pointerdown', function (e) {
+        if (e.button) return;
+        var t = thumb.getBoundingClientRect();
+        grab = e.clientX >= t.left && e.clientX <= t.right ? e.clientX - t.left : t.width / 2;   /* on the bar: keep the grip; on the track: centre the bar there */
+        bar.setPointerCapture(e.pointerId); bar.classList.add('is-active'); drag(e);
+      });
+      bar.addEventListener('pointermove', function (e) { if (grab !== null) drag(e); });
+      function drop() { grab = null; bar.classList.remove('is-active'); }
+      bar.addEventListener('pointerup', drop); bar.addEventListener('pointercancel', drop);
+      function step(dir) { track.scrollBy({ left: dir * (track.firstElementChild.offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0)), behavior: 'smooth' }); }
+      next.addEventListener('click', function () { step(1); }); prev.addEventListener('click', function () { step(-1); });
+      return sync;
+    }
+
+    /* Related products carousel: mock cards */
+    (function () {
+      var track = document.getElementById('pdp-rel-track');
+      if (!track) return;
+      var star = '<svg class="rating-stars__star" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.02959 16L4.89941 9.88791L0 6.39528H6.08284L8 0L9.91716 6.39528H16L11.1006 9.88791L12.9704 16L8 12.2242L3.02959 16Z"/></svg>';
+      var items = [{ old: '53,00 kr' }, { variants: true }, {}, {}, { variants: true }];
+      track.innerHTML = items.map(function (it) {
+        return '<li class="pdp-acc"><div class="pdp-acc__top"><img class="pdp-acc__img" src="/images/pdp-acc-pocket.png" alt="" loading="lazy">' +
+          '<div class="pdp-acc__info"><span class="pdp-acc__brand">Björnkläder</span><a href="#" class="inline-link inline-link--reverse inline-link--bold pdp-acc__name">Carpenter soul pocket, dragkedja</a>' +
+          '<div class="pdp-acc__meta"><span class="pdp-acc__artnr">Art.nr: <b>275072599-146</b></span>' +
+          '<div class="rating-stars rating-stars--sm"><span class="rating-stars__stars" role="img" aria-label="Betyg 4 av 5">' + star + star + star + star + star.replace('rating-stars__star"', 'rating-stars__star rating-stars__star--empty"') + '</span>' +
+          '<span class="rating-stars__meta"><a href="#" class="inline-link rating-stars__count" aria-label="200 recensioner">200</a></span></div></div></div></div>' +
+          '<div class="pdp-acc__buy"><div class="pdp-acc__row"><div><div class="pdp-acc__price">196,00 kr <small>exkl.moms</small></div>' +
+          (it.old ? '<div class="pdp-acc__old"><s>' + it.old + '</s><span class="icon icon--sm" aria-hidden="true">info</span></div>' : '') +
+          '</div><div class="pdp-acc__stock"><span class="badge-dot badge-dot--sm badge-dot--success" aria-hidden="true"></span>25 i lager</div></div>' +
+          (it.variants ? '<button type="button" class="btn btn--secondary btn--xs"><span class="btn__label">Visa varianter</span><span class="btn__icon" aria-hidden="true">chevron_right</span></button>'
+                       : '<button type="button" class="btn btn--secondary btn--xs" data-acc-add><span class="btn__label">Lägg i varukorg</span></button>') +
+          '</div></li>';
+      }).join('');
+      pdpCarousel(track.closest('[data-carousel]'));
+      track.addEventListener('click', function (e) {
+        if (e.target.closest('[data-acc-add]') && window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul pocket, dragkedja', text: 'har lagts i varukorgen.', img: '/images/pdp-acc-pocket.png', primary: { label: 'Till varukorgen' } });
+      });
+    })();
+  
+    /* Product carousel (Figma ECO "Carousel / Product Card Carousel" 2007:65107): mock cards, one list per tab */
+    (function () {
+      var root = document.getElementById('pdp-pc'); if (!root) return;
+      var track = root.querySelector('.carousel__track');
+      var star = '<svg class="rating-stars__star" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.02959 16L4.89941 9.88791L0 6.39528H6.08284L8 0L9.91716 6.39528H16L11.1006 9.88791L12.9704 16L8 12.2242L3.02959 16Z"/></svg>';
+      var tag = function (label, path) { return '<span class="badge-promo badge-promo--product" role="img" aria-label="' + label + '"><svg class="badge-promo__icon" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="' + path + '"/></svg></span>'; };
+      var STD = tag('Standardsortiment', 'M4.9271 13.2428L3.76835 11.3183L1.57965 10.8238L1.78334 8.59338L0.3 6.92147L1.78334 5.24955L1.57965 3.01911L3.76835 2.52466L4.9271 0.600098L6.98768 1.48321L9.04826 0.600098L10.207 2.52466L12.3957 3.01911L12.192 5.24955L13.6754 6.92147L12.192 8.59338L12.3957 10.8238L10.207 11.3183L9.04826 13.2428L6.98768 12.3597L4.9271 13.2428ZM5.43404 11.658L6.98768 10.9966L8.54132 11.658L9.40702 10.2065L11.0477 9.83591L10.9038 8.17286L12.0041 6.92147L10.9038 5.67008L11.0477 4.00702L9.40702 3.63643L8.54132 2.18496L6.98768 2.84631L5.43404 2.18496L4.56834 3.63643L2.92764 3.99191L3.07154 5.67008L1.97126 6.92147L3.08665 8.17286L2.92764 9.85103L4.56834 10.2216L5.43404 11.658ZM6.21694 9.13744L9.8535 5.51599L9.03939 4.70911L6.21694 7.51645L4.93597 6.24336L4.12187 7.05748L6.21694 9.13744Z'), AVT = tag('Avtalssortiment', 'M6.26432 9.28715L9.78747 5.77511L8.94955 4.93719L6.26432 7.60785L5.06658 6.42469L4.22868 7.26261L6.26432 9.28715ZM3.21038 12.0872C2.87751 12.0872 2.59256 11.9686 2.35552 11.7316C2.11847 11.4945 1.99995 11.2096 1.99995 10.8767V3.26043C1.99995 2.92756 2.11847 2.64261 2.35552 2.40557C2.59256 2.16853 2.87751 2.05001 3.21038 2.05001H5.58904C5.68309 1.74398 5.85989 1.49247 6.11944 1.29549C6.37897 1.0985 6.67867 1.00001 7.01853 1.00001C7.35839 1.00001 7.65808 1.0985 7.91762 1.29549C8.17716 1.49247 8.35396 1.74398 8.44802 2.05001H10.8267C11.1595 2.05001 11.4445 2.16853 11.6815 2.40557C11.9186 2.64261 12.0371 2.92756 12.0371 3.26043V10.8767C12.0371 11.2096 11.9186 11.4945 11.6815 11.7316C11.4445 11.9686 11.1595 12.0872 10.8267 12.0872H3.21038ZM3.21038 10.8767H10.8267V3.26043H3.21038V10.8767ZM7.01853 2.89647C7.1277 2.89647 7.21798 2.86078 7.28936 2.7894C7.36074 2.71802 7.39643 2.62775 7.39643 2.51857C7.39643 2.4094 7.36074 2.31913 7.28936 2.24775C7.21798 2.17637 7.1277 2.14068 7.01853 2.14068C6.90936 2.14068 6.81908 2.17637 6.7477 2.24775C6.67632 2.31913 6.64063 2.4094 6.64063 2.51857C6.64063 2.62775 6.67632 2.71802 6.7477 2.7894C6.81908 2.86078 6.90936 2.89647 7.01853 2.89647Z');
+      var items = [
+        { sale: 1, std: 1, avt: 1, stock: 1 }, { sale: 1, std: 1, avt: 1, stock: 1 }, { sale: 1, out: 1, avt: 1 }, { sale: 1, out: 1, avt: 1 },
+        { std: 1, stock: 1 }, { sale: 1, std: 1 }, { avt: 1, stock: 1 }, { sale: 1, out: 1, std: 1 }
+      ];
+      function card(it) {
+        return '<li class="pcard"><div class="pcard__media">' +
+          '<div class="pcard__badges badge-promo-group">' + (it.sale ? '<span class="badge-promo">30% rabatt</span>' : '') + (it.out ? '<span class="badge-promo badge-promo--closing">Utförsäljning</span>' : '') + '</div>' +
+          '<div class="pcard__actions"><button type="button" class="pcard__act" aria-label="Jämför" data-tooltip="Jämför"><span class="icon icon--sm" aria-hidden="true">compare_arrows</span></button>' +
+          '<button type="button" class="pcard__act" aria-pressed="false" aria-label="Lägg till i favoriter" data-tooltip="Lägg till i favoriter"><span class="icon icon--sm" aria-hidden="true">favorite</span></button></div>' +
+          '<img class="pcard__img" src="/images/pdp-gallery-front.png" alt="" loading="lazy">' +
+          '<div class="pcard__tags">' + (it.std ? STD : '') + (it.avt ? AVT : '') + '</div></div>' +
+          '<div class="pcard__info"><span class="pcard__brand">Björnkläder</span><a href="#" class="inline-link inline-link--reverse inline-link--bold pcard__name">Carpenter soul hantverksbyxa</a>' +
+          '<div class="pcard__meta"><span class="pcard__artnr">Art.nr: VE-32917</span>' +
+          '<div class="rating-stars rating-stars--sm"><span class="rating-stars__stars" role="img" aria-label="Betyg 4 av 5">' + star + star + star + star + star.replace('rating-stars__star"', 'rating-stars__star rating-stars__star--empty"') + '</span>' +
+          '<span class="rating-stars__meta"><a href="#" class="inline-link rating-stars__count" aria-label="200 recensioner">200</a><span class="icon icon--xs" aria-hidden="true">info</span></span></div></div></div>' +
+          '<div class="pcard__foot"><div class="pcard__price"><b>53,00 kr</b> <small>exkl.moms</small></div>' +
+          '<div class="pcard__old"><s>63,00 kr</s><span class="icon icon--sm" aria-hidden="true">info</span></div>' +
+          '<ul class="pcard__status">' + (it.stock ? '<li class="is-in"><span class="badge-dot badge-dot--md badge-dot--success" aria-hidden="true"></span>20 i lager</li>'
+                                                  : '<li><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Finns i flera varianter</li>') +
+          '<li><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Välj butik för butikssaldo</li></ul>' +
+          (it.stock ? '<button type="button" class="btn btn--primary btn--sm" data-pc-add><span class="btn__label">Lägg i varukorg</span></button>'
+                    : '<button type="button" class="btn btn--primary btn--sm"><span class="btn__label">Visa 9 varianter</span><span class="btn__icon" aria-hidden="true">chevron_right</span></button>') +
+          '</div></li>';
+      }
+      function render(shift) { track.innerHTML = items.slice(shift).concat(items.slice(0, shift)).map(card).join(''); track.scrollLeft = 0; }
+      render(0);
+      var sync = pdpCarousel(root);
+      var tabs = [].slice.call(root.querySelectorAll('.pc__tabs .tab')), title = root.querySelector('.pc__title'), sub = root.querySelector('.pc__sub');
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { title.textContent = t.dataset.title; sub.textContent = t.dataset.sub; render(i * 2); sync(); });
+      });
+      track.addEventListener('click', function (e) {
+        var fav = e.target.closest('.pcard__act[aria-pressed]');
+        if (fav) { var on = fav.getAttribute('aria-pressed') !== 'true'; fav.setAttribute('aria-pressed', on); fav.classList.toggle('is-on', on); }
+        if (e.target.closest('[data-pc-add]') && window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa', text: 'har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', primary: { label: 'Till varukorgen' } });
+      });
+    })();
+  
+    /* "Visa alla varianter i tabell": scroll so the section's top edge lands exactly under the sticky header (its scroll-margin-top).
+       Done in script, not left to the browser's anchor jump, and checked again afterwards in case images or fonts moved the layout. */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href="#varianter"]'), sec = document.getElementById('varianter'); if (!a || !sec) return;
+      e.preventDefault();
+      var smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function target() { return sec.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(sec).scrollMarginTop) || 0); }
+      window.scrollTo({ top: target(), behavior: smooth ? 'smooth' : 'auto' });
+      history.replaceState(null, '', location.search + '#varianter');
+      var last = -1, still = 0;   /* when the scroll has stopped, correct once if the layout moved meanwhile */
+      (function settle() {
+        if (Math.abs(window.scrollY - last) < 0.5) {
+          if (++still > 2) { var t = target(); if (Math.abs(t - window.scrollY) > 1) window.scrollTo({ top: t, behavior: 'auto' }); return; }
+        } else still = 0;
+        last = window.scrollY; setTimeout(settle, 100);
+      })();
+    });
+
+    /* Varianter: mock rows, search, sort, and the overflow behaviour of .users-table (shadows, drag to scroll) */
+    (function () {
+      var wrap = document.getElementById('pv-wrap'), body = document.getElementById('pv-body'), cards = document.getElementById('pv-cards'); if (!wrap) return;
+      var ICON = '<svg class="pv-var__icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8.92252 13.1844L13.9556 8.16714L12.7586 6.97012L8.92252 10.7854L7.21146 9.09512L6.01446 10.2921L8.92252 13.1844ZM4.55975 17.1844C4.08423 17.1844 3.67715 17.015 3.33852 16.6764C2.99989 16.3378 2.83057 15.9307 2.83057 15.4552V4.57475C2.83057 4.09922 2.99989 3.69214 3.33852 3.35352C3.67715 3.01489 4.08423 2.84558 4.55975 2.84558H7.95784C8.0922 2.40839 8.34477 2.04909 8.71555 1.76769C9.08631 1.48628 9.51445 1.34558 9.99996 1.34558C10.4855 1.34558 10.9136 1.48628 11.2844 1.76769C11.6552 2.04909 11.9077 2.40839 12.0421 2.84558H15.4402C15.9157 2.84558 16.3228 3.01489 16.6614 3.35352C17 3.69214 17.1694 4.09922 17.1694 4.57475V15.4552C17.1694 15.9307 17 16.3378 16.6614 16.6764C16.3228 17.015 15.9157 17.1844 15.4402 17.1844H4.55975ZM4.55975 15.4552H15.4402V4.57475H4.55975V15.4552ZM9.99996 4.05481C10.1559 4.05481 10.2849 4.00382 10.3869 3.90185C10.4888 3.79988 10.5398 3.67091 10.5398 3.51496C10.5398 3.359 10.4888 3.23003 10.3869 3.12806C10.2849 3.02609 10.1559 2.9751 9.99996 2.9751C9.844 2.9751 9.71504 3.02609 9.61307 3.12806C9.51109 3.23003 9.46011 3.359 9.46011 3.51496C9.46011 3.67091 9.51109 3.79988 9.61307 3.90185C9.71504 4.00382 9.844 4.05481 9.99996 4.05481Z"/></svg>';
+      var WEB_OUT = 'Ej i lager (Beräknad inleverans 24-10-02 skickas dagen efter)', STORE_SUP = 'Leverantörslager (Normal leverans 6-7 arbetsdagar)';
+      /* Mock data: the live page lists only the article numbers per variant (swedol.se, fetched 2026-11-13); EAN, supplier number, price and stock are made up, varied per variant */
+      var STOCK = [0, 100, 0, 25, 0, 8, 0, 0, 60, 0], BORAS = [0, 100, 12, 0, 40, 0, 5, 0, 0, 20];
+      var rows = [42, 44, 46, 48, 50, 52, 54, 56, 58, 60].map(function (n, i) {
+        var r = { size: 'C' + n, art: '275072599-' + n, ean: '73114516558' + n, lev: '60011351A' + (6 + i), price: i < 6 ? 886.79 : 896.79, old: '1 670,00 kr', web: WEB_OUT, store: STORE_SUP, webOk: 1, storeOk: 1, stock: STOCK[i], boras: BORAS[i] };
+        if (i === 0) r.web = 'Ej i lager (Bekräftad inleverans 24-10-02 skickas dagen efter)';
+        if (r.stock) r.web = r.stock + ' i lager';
+        if (i === 1) { r.store = 'Ej i lager'; r.storeOk = 0; r.current = 1; }
+        return r;
+      });
+      function kr(n) { return n.toFixed(2).replace('.', ',') + ' kr'; }
+      var sortKey = null, sortDir = 1, query = '';
+      function row(r) {
+        return '<tr data-art="' + r.art + '"' + (r.current ? ' aria-current="true"' : '') + '><td><div class="pv-var"><span class="pv-var__lead">' +
+          '<span class="pv-var__contract">' + ICON + '<a href="?variant=' + r.art + '" class="inline-link inline-link--medium pv-var__link" aria-label="2 avtal, ' + r.size + '">2</a></span>' +
+          '<span class="pv-var__slot"><img class="pv-var__img" src="/images/pdp-gallery-front.png" alt="" loading="lazy"></span></span>' +
+          '<a href="?variant=' + r.art + '" class="inline-link inline-link--medium pv-var__link">' + r.art + '</a></div></td>' +
+          '<td data-col="storlek">' + r.size + '</td>' +
+          '<td data-col="tillganglighet"><div class="pv-stock"><span><span class="badge-dot badge-dot--sm badge-dot--success" aria-hidden="true"></span>Webb: ' + r.web + '</span>' +
+          '<span><span class="badge-dot badge-dot--sm badge-dot--' + (r.storeOk ? 'success' : 'danger') + '" aria-hidden="true"></span>Butik: ' + r.store + '</span></div></td>' +
+          '<td data-col="pris"><span class="pv-price"><s>' + r.old + '</s><b>' + kr(r.price) + '</b></span></td>' +
+          '<td class="col-action">' + buy(r) + '</td></tr>';
+      }
+      /* quantity, add to cart, favourite: one block for the table cell and the mobile card */
+      function buy(r) {
+        return '<div class="pv-buy">' +
+          '<div class="picker-stepper picker-stepper--sm" role="group" aria-label="Antal"><button type="button" class="picker-stepper__btn" data-step="-1" aria-label="Minska antal" disabled><span class="icon icon--sm" aria-hidden="true">remove</span></button>' +
+          '<div class="picker-stepper__value"><input class="picker-stepper__input" type="text" inputmode="numeric" pattern="[0-9]*" value="1" min="1" aria-label="Antal, styck" autocomplete="off"></div>' +
+          '<button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"><span class="icon icon--sm" aria-hidden="true">add</span></button></div>' +
+          '<div class="pv-buy__btns"><button type="button" class="btn btn--primary btn--xs btn--icon" data-pv-add="' + r.size + '" aria-label="Lägg i varukorg, ' + r.size + '" data-tooltip="Lägg i varukorg"><span class="btn__icon" aria-hidden="true">add_shopping_cart</span></button>' +
+          '<button type="button" class="btn btn--blank btn--xs btn--icon pv-fav" data-pv-fav="' + r.size + '" aria-pressed="false" aria-label="Lägg till i favoriter, ' + r.size + '" data-tooltip="Lägg till i favoriter"><span class="btn__icon" aria-hidden="true">favorite</span></button></div></div>';
+      }
+      /* Mobile and tablet (below 769px): one card per variant (Figma Mobile 6701:352997) */
+      function card(r) {
+        var dot = function (ok) { return '<span class="badge-dot badge-dot--sm badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
+        return '<li class="pv-card" data-art="' + r.art + '"' + (r.current ? ' aria-current="true"' : '') + '>' +
+          '<div class="pv-card__head"><img class="pv-var__img" src="/images/pdp-gallery-front.png" alt="" loading="lazy">' +
+          '<div class="pv-card__art"><span class="pv-card__label">Artikelnummer</span><a href="?variant=' + r.art + '" class="inline-link inline-link--medium pv-var__link">' + r.art + '</a></div>' +
+          '<span class="pv-var__contract">' + ICON + '<a href="?variant=' + r.art + '" class="inline-link inline-link--medium pv-var__link" aria-label="2 avtal, ' + r.size + '">2</a></span></div>' +
+          '<div class="divider" aria-hidden="true"></div>' +
+          '<dl class="pv-card__data"><dt>Storlek</dt><dd>' + r.size + '</dd></dl>' +
+          '<div class="pv-card__stock"><h3 class="pv-card__title">Tillgänglighet</h3><div class="pv-stock"><span>' + dot(1) + 'Webb: ' + r.web + '</span><span>' + dot(r.storeOk) + 'Butik: ' + r.store + '</span></div></div>' +
+          '<div class="divider" aria-hidden="true"></div>' +
+          '<div class="pv-card__buy"><span class="pv-price"><b>' + kr(r.price) + '</b><s>' + r.old + '</s></span>' + buy(r) + '</div></li>';
+      }
+      function render() {
+        var q = query.trim().toLowerCase();
+        var list = rows.filter(function (r) { return !q || (r.art + ' ' + r.size).toLowerCase().indexOf(q) > -1; });
+        if (sortKey) list.sort(function (a, b) { var x = a[sortKey], y = b[sortKey]; return sortDir * (typeof x === 'number' ? x - y : String(x).localeCompare(String(y), 'sv', { numeric: true })); });
+        body.innerHTML = list.length ? list.map(row).join('') : '<tr class="pv-empty"><td colspan="5">Inga varianter matchar sökningen.</td></tr>';
+        cards.innerHTML = list.length ? list.map(card).join('') : '<li class="pv-cards__empty">Inga varianter matchar sökningen.</li>';
+        if (window.ECO_PICKER_STEPPER) { ECO_PICKER_STEPPER.init(body); ECO_PICKER_STEPPER.init(cards); }
+        update();
+      }
+      document.getElementById('pv-q').addEventListener('input', function (e) { query = e.target.value; render(); });
+      wrap.querySelectorAll('.pv-sort').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var k = b.dataset.sort; sortDir = sortKey === k ? -sortDir : 1; sortKey = k;
+          wrap.querySelectorAll('th').forEach(function (th) { th.removeAttribute('aria-sort'); });
+          wrap.querySelectorAll('.pv-sort .icon').forEach(function (i) { i.textContent = 'unfold_more'; });
+          b.closest('th').setAttribute('aria-sort', sortDir > 0 ? 'ascending' : 'descending'); b.querySelector('.icon').textContent = sortDir > 0 ? 'arrow_upward' : 'arrow_downward';
+          render();
+        });
+      });
+      /* Choose a variant: the page top shows it (article number badge, size row), the row gets the frame, the page scrolls up. The link's href is ?variant=<art>, read on load. */
+      function select(r, scroll) {
+        rows.forEach(function (x) { x.current = x === r; });
+        var q = function (sel) { return document.querySelector(sel); };
+        function badge(name, label, value) { var el = q('.pdp-artnr__copy[data-copy-name="' + name + '"]'); if (el) { el.dataset.copy = value; el.firstChild.nodeValue = label + value; } }
+        badge('Artikelnummer', 'Art.nr: ', r.art); badge('EAN', 'EAN: ', r.ean); badge('Leverantörsnummer', 'Lev.nr: ', r.lev);
+        if (q('.pdp-price__value')) q('.pdp-price__value').textContent = kr(r.price);
+        if (q('#pdp-size-value')) q('#pdp-size-value').textContent = r.size + ' - ' + r.art;
+        var dot = function (ok) { return '<span class="badge-dot badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
+        if (q('#pdp-web-status')) q('#pdp-web-status').innerHTML = dot(1) + '<span>' + (r.stock ? r.stock + ' st i lager (Normal leverans 1-2 arbetsdagar)' : r.web) + '</span>';
+        if (q('#pdp-store-status')) q('#pdp-store-status').innerHTML = '<li class="pdp-stock__status">' + dot(r.boras) + '<span>' + (r.boras ? r.boras + ' st i lager' : 'Ej i lager') + '</span></li>' +
+          '<li class="pdp-stock__status">' + dot(1) + '<span>' + (r.boras ? 'Köp &amp; Hämta - Hämta idag innan kl 17.00' : 'Köp &amp; Hämta - Tillgänglig i butik inom 6-7 arbetsdagar') + '</span></li>';
+        if (q('#pdp-banner-text')) q('#pdp-banner-text').innerHTML = 'Via tjänsten Köp &amp; Hämta kan du lägga en order direkt mot önskad butik. ' + (r.boras ? '<strong>' + r.boras + ' i butik</strong>, kan hämtas idag innan kl 17.00' : '<strong>0 i butik</strong>, tillgänglig i butik inom 6-7 arbetsdagar');
+        if (q('#pdp-variant-live')) q('#pdp-variant-live').textContent = 'Variant ' + r.size + ' vald, artikelnummer ' + r.art;
+        render();
+        if (scroll) {
+          window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+          if (q('#pdp-title')) q('#pdp-title').focus({ preventScroll: true });   /* keyboard users land on the heading, not in the table */
+        }
+      }
+      function onClick(e) {
+        var pick = e.target.closest('.pv-var__link');
+        if (pick) {
+          e.preventDefault();
+          var r = rows.filter(function (x) { return x.art === pick.closest('[data-art]').dataset.art; })[0];
+          if (r) { select(r, true); history.replaceState(null, '', '?variant=' + r.art); }
+          return;
+        }
+        var add = e.target.closest('[data-pv-add]'), fav = e.target.closest('[data-pv-fav]');
+        if (add && window.ECO_N) {
+          var qty = add.closest('.pv-buy').querySelector('.picker-stepper__input').value;
+          ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa stretch svart, ' + add.dataset.pvAdd, text: qty + ' st har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', primary: { label: 'Till varukorgen' } });
+        }
+        if (fav) {
+          var on = fav.getAttribute('aria-pressed') !== 'true', label = (on ? 'Ta bort från favoriter, ' : 'Lägg till i favoriter, ') + fav.dataset.pvFav;
+          fav.setAttribute('aria-pressed', on); fav.setAttribute('aria-label', label); fav.dataset.tooltip = on ? 'Ta bort från favoriter' : 'Lägg till i favoriter';
+          if (window.ECO_N) ECO_N.showEcomToast({ variant: 'info', name: 'Carpenter soul hantverksbyxa stretch svart, ' + fav.dataset.pvFav, text: on ? 'har lagts till i dina favoriter.' : 'har tagits bort från dina favoriter.' });
+        }
+      }
+      body.addEventListener('click', onClick); cards.addEventListener('click', onClick);
+
+      /* Shadows on the sticky columns (as users.html): left when scrolled, right while more content lies under the buy column */
+      function update() {
+        var ov = wrap.scrollWidth > wrap.clientWidth, max = wrap.scrollWidth - wrap.clientWidth;
+        wrap.classList.toggle('has-overflow', ov);
+        wrap.classList.toggle('has-left-overflow', ov && wrap.scrollLeft > 0);
+        wrap.classList.toggle('has-right-overflow', ov && wrap.scrollLeft < max - 1);
+      }
+      wrap.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); window.addEventListener('load', update);
+      if (window.ResizeObserver) new ResizeObserver(update).observe(wrap.firstElementChild);   /* the table changes size when images, fonts or rows change */
+      /* Drag to scroll (as users.html): not from buttons, inputs or links */
+      var drag = false, x0, s0;
+      wrap.addEventListener('mousedown', function (e) {
+        if (e.button || e.target.closest('button, input, a, label')) return;
+        drag = true; x0 = e.pageX; s0 = wrap.scrollLeft; wrap.classList.add('is-grabbing'); e.preventDefault();
+      });
+      document.addEventListener('mousemove', function (e) { if (drag) { wrap.scrollLeft = s0 - (e.pageX - x0); update(); } });
+      document.addEventListener('mouseup', function () { if (drag) { drag = false; wrap.classList.remove('is-grabbing'); } });
+      var fromUrl = new URLSearchParams(location.search).get('variant'), first = rows.filter(function (x) { return x.art === fromUrl; })[0];
+      select(first || rows.filter(function (x) { return x.current; })[0]);   /* the top of the page starts on the same variant as the table */
+    })();
+  </script>
+</body>
+</html>

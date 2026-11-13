@@ -1,0 +1,40 @@
+/* ECO component CSS: Rating Stars. Skill: eco-rating-stars. Figma ECO Design System 891:32372.
+   Link it, do not copy it: <link rel="stylesheet" href="/components/css/rating-stars.css">
+   Parts, left to right: score ("4.4 / 5", optional), five stars (inline SVG, the Figma drawing),
+   review-count link (.inline-link, optional), info icon (.icon icon--xs, optional).
+   Sizes: Medium 16px (default), Small 12px (--sm), Large 20px (--lg), XLarge 24px (--xl, from 769px in Figma).
+   --sm-mobile: Small below 769px, the chosen size from 769px (PDP Top info).
+   Tokens only. Mobile-first, desktop from 769px. Star sizes 12/16/20/24 are the Figma sizes (no token). */
+.rating-stars { --rs-size: 16px; --rs-pad: var(--dimension-spacing-space-8); display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-2) 0; }
+.rating-stars--sm { --rs-size: 12px; --rs-pad: var(--dimension-spacing-space-4); gap: 0; }
+.rating-stars--lg { --rs-size: 20px; }
+.rating-stars--xl { --rs-size: 24px; }
+
+/* Score: title-sm (Medium, Large), title-lg (XLarge), label-sm uppercase (Small) */
+.rating-stars__score { padding-right: var(--rs-pad); font-size: 16px; line-height: 18px; font-weight: 600; letter-spacing: 0; color: var(--color-text-primary); white-space: nowrap; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.rating-stars__score-max { color: var(--color-text-disabled); }
+.rating-stars--xl .rating-stars__score { font-size: 20px; line-height: 24px; }
+.rating-stars--sm .rating-stars__score { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; }
+
+/* Stars */
+.rating-stars__stars { display: inline-flex; align-items: center; gap: 1px; padding-right: var(--rs-pad); }
+.rating-stars__star { width: var(--rs-size); height: var(--rs-size); flex-shrink: 0; fill: var(--color-surface-warning-default); }
+.rating-stars__star--empty { fill: var(--color-surface-10); }
+
+/* Review count + info icon */
+.rating-stars__meta { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); }
+.rating-stars__count.inline-link { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-action-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }   /* body-md */
+.rating-stars--sm .rating-stars__count.inline-link { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }   /* body-sm */
+
+@media (max-width: 768px) {
+  .rating-stars--sm-mobile { --rs-size: 12px; --rs-pad: var(--dimension-spacing-space-4); gap: 0; }
+  .rating-stars--sm-mobile .rating-stars__score { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; }
+  .rating-stars--sm-mobile .rating-stars__count.inline-link { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
+}
+@media (min-width: 769px) {
+  .rating-stars--sm { gap: var(--dimension-spacing-space-2) 0; }
+  .rating-stars--xl .rating-stars__score { font-size: 24px; line-height: 28px; }
+  .rating-stars--sm .rating-stars__score { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
+  .rating-stars__count.inline-link { font-size: 17px; line-height: 24px; }
+  .rating-stars--sm .rating-stars__count.inline-link { font-size: 14px; line-height: 20px; }
+}
