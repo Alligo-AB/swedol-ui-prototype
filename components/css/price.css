@@ -1,0 +1,60 @@
+/* ECO component CSS: Price. Skill: eco-price.
+   Figma ECO Design System 454:38091 (Price: Product page, Card, Card w EPRED, Mini Cart), 303:17153 (Table price), 2474:492811 (small accessory card), checked 2026-11-13.
+   Link it, do not copy it: <link rel="stylesheet" href="/components/css/price.css">
+   A price (value, "exkl.moms", optional "Från", old price with info icon, campaign note). One markup, the placement is a class:
+   price--page · price--card (--stack = Card w EPRED, "exkl.moms" under the price) · price--mini · price--table · price--compact.
+   The price level is a colour class: none = text-primary (not logged in), price--customer (logged in, text-price-customer), price--sale (discount, text-price-guest).
+   Mobile-first, desktop from 769px. Tokens only. Bold is 600 in CSS (Figma 700). */
+.price { --price-color: var(--color-text-primary); --price-gap: 0px; --price-extra-gap: var(--dimension-spacing-space-8);
+  display: flex; flex-direction: column; align-items: flex-start; gap: var(--price-gap); margin: 0; min-width: 0;
+  font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+.price--customer { --price-color: var(--color-text-price-customer); }
+.price--sale { --price-color: var(--color-text-price-guest); }
+
+/* Parts */
+.price__main { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--dimension-spacing-space-4); min-width: 0; }
+.price__from { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+.price__value { font-weight: 600; color: var(--price-color); white-space: nowrap; font-feature-settings: 'ss02' 1, 'ss03' 1; }
+.price__vat { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); white-space: nowrap; }
+.price__extra { display: flex; flex-direction: column; align-items: flex-start; gap: var(--price-extra-gap); width: 100%; }
+.price__row { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); flex-wrap: wrap; }   /* old price + discount badge side by side (Product page) */
+.price__old { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); white-space: nowrap; }
+.price__old s { text-decoration: line-through; }
+.price__old .icon { color: var(--color-text-primary); }   /* info icon, 20px (icon--sm) */
+.price__note { margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }   /* "Kampanj t.o.m …" */
+
+/* Card: title-md 18/22, 20/24 from 769px; "exkl.moms" on the same row, --stack puts it under the price */
+.price--card .price__value { font-size: 18px; line-height: 22px; }
+.price--stack .price__main { flex-direction: column; align-items: flex-start; gap: 0; }
+
+/* Product page: headline-lg 28/32, 36/40 from 769px; old price body-lg 18/24, 20/28 from 769px */
+.price--page { --price-gap: var(--dimension-spacing-space-2); --price-extra-gap: var(--dimension-spacing-space-4); }
+.price--page .price__value { font-size: 28px; line-height: 32px; }
+.price--page .price__vat { letter-spacing: 0.28px; color: var(--color-text-secondary); }
+.price--page .price__old { font-size: 18px; line-height: 24px; letter-spacing: 0.18px; }
+.price--page .price__note { letter-spacing: 0.28px; }
+
+/* Mini cart: one row, old price first, body-md regular 16/22, 17/24 from 769px */
+.price--mini { flex-direction: row; align-items: baseline; gap: var(--dimension-spacing-space-8); font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+.price--mini .price__value { font-weight: 400; }
+.price--mini .price__old { font-size: inherit; line-height: inherit; letter-spacing: inherit; }
+
+/* Table and table card: one row, old price (body-sm, text-secondary) beside the bold value (body-md 16/22, 17/24 from 769px) */
+.price--table { display: inline-flex; flex-direction: row; align-items: center; gap: 0 var(--dimension-spacing-space-4); white-space: nowrap; }   /* inline-flex: a table cell can right-align it; a card that is narrow may add flex-wrap: wrap */
+.price--table .price__value { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+.price--table .price__old { color: var(--color-text-secondary); }
+
+/* Compact (small accessory card, Figma 2474:492811): 14/20 bold, "exkl.moms" 12/20 */
+.price--compact .price__main { display: block; }
+.price--compact .price__value { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; }
+.price--compact .price__vat { font-size: 12px; letter-spacing: 0.24px; color: var(--color-text-secondary); }
+.price--compact .price__old { font-size: 12px; letter-spacing: 0.24px; }
+
+@media (min-width: 769px) {
+  .price--card .price__value { font-size: 20px; line-height: 24px; }
+  .price--page .price__value { font-size: 36px; line-height: 40px; }
+  .price--page .price__vat, .price--page .price__note { letter-spacing: 0.36px; }
+  .price--page .price__old { font-size: 20px; line-height: 28px; letter-spacing: 0; }
+  .price--mini { font-size: 17px; line-height: 24px; }
+  .price--table .price__value { font-size: 17px; line-height: 24px; }
+}

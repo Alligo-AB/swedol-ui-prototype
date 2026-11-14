@@ -81,6 +81,7 @@ Read this before you decide a piece is "new". Every row is a finished component 
 | Where am I / go back up | `eco-breadcrumb` |
 | Load more items into a list | `eco-pagination` |
 | A quantity the user steps up or down (beside add to cart) | `eco-picker-stepper` |
+| A price (card, product page, mini cart, table) | `eco-price` |
 | A row that opens a drawer (shows the chosen value, or leads to more content) | `eco-drawer-link` |
 | A rating shown as stars (product, review), with score and review count | `eco-rating-stars` |
 | A status label or role name (read-only) | `eco-badge` |

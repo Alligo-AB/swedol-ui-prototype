@@ -7,7 +7,7 @@ description: Use when the user sets a small whole number by stepping it up or do
 
 ## Picker Stepper (ECO Design System)
 
-**Figma** (file `42MgqJjV9vfplwQnrUB62r`, checked 2026-11-12): sizes `1612:111715`, value states `1609:63554`, button `1601:54900` (enabled) / `1602:54423` (disabled).
+**Figma** (file `42MgqJjV9vfplwQnrUB62r`, checked 2026-11-13): sizes `1612:111715`, value states `1609:63554`, button states `1601:54899` (enabled, hover, focus, disabled).
 **CSS:** `components/css/picker-stepper.css`. **JS:** `components/js/picker-stepper.js`. **Docs page:** none yet (ask before adding one). **First use:** `pdp.html` (Action section).
 
 ### When to use
@@ -37,7 +37,7 @@ Icons are 20px at every size. The cell border (1px) is inside the cell size.
 
 | Part | Value | Note |
 |---|---|---|
-| Number | 16px/22px, 0.32px, `text-primary` | the same at every width (Figma), not body-md's 17/24 on desktop |
+| Number | body-md: 16px/22px below 769px, 17px/24px from 769px, 0.32px, `text-primary` | updated 2026-11-13 (was 16/22 at every width) |
 | Unit | 11px/11px, 0.33px (Large from 769px); 10px/10px, 0.3px (elsewhere) | **confirmed snowflake**, `SNOWFLAKES.md` no. 1: not a type style |
 
 The unit sits at the bottom of the value cell, centred: 3px from the bottom edge on Large from 769px, `space-2` elsewhere.
@@ -47,6 +47,7 @@ The unit sits at the bottom of the value cell, centred: 3px from the bottom edge
 | Part | State | Background | Border | Content |
 |---|---|---|---|---|
 | Button | Enabled | `surface-00` | 1px `border-primary` | icon `icon-primary` |
+| Button | Hover | `surface-00` | 1px `border-hover` | icon `icon-primary` |
 | Button | Disabled | `surface-00` | 1px `border-disabled` | icon `text-disabled` |
 | Button | Focus (keyboard) | – | 2px `border-focus` outline | – |
 | Value | Enabled | `surface-00` | top and bottom 1px `border-primary` | `text-primary` |
@@ -101,7 +102,6 @@ Delegated, so steppers added later work. A click on a button changes the value b
 
 - **Border color differs between Figma files:** the ECO component has `border-primary`; the instance in the PDP file (`gAuhhKQVftqFTly8D9ACp0`, Action section) shows `border-input-default`. The CSS follows the ECO component.
 - **Disabled icon:** Figma `#939595`. There is no `icon-disabled` token; the CSS uses `text-disabled` (same value).
-- **Button hover:** Figma has no hover state for the buttons (only for the value cell). None is built.
 - **Button focus:** not in Figma. The CSS uses the 2px `border-focus` outline other ECO controls use.
-- **Number on desktop:** 16/22 in Figma, while body-md is 17/24 from 769px. The CSS follows Figma.
+- **Picker Select** (Figma `1612:91259`, a select with `arrow_drop_down`, Large/Medium 48px (40px below 769px), Small 40px (32px)) exists in Figma but is **not built**: ask before making it a component.
 - **Minimum width:** the PDP instance sets a minimum width of 144px on the Large desktop stepper, which is its natural width (3 × 48px). No rule is needed.

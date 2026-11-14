@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="/components/css/pagination.css">
   <link rel="stylesheet" href="/components/css/rating-stars.css">
   <link rel="stylesheet" href="/components/css/picker-stepper.css">
+  <link rel="stylesheet" href="/components/css/price.css">
   <link rel="stylesheet" href="/components/css/drawer-link.css">
   <link rel="stylesheet" href="/components/css/gallery.css">
   <link rel="stylesheet" href="/components/css/inline-link.css">
@@ -2283,10 +2284,6 @@
     .pdp-top__brand { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; font-weight: 500; text-transform: uppercase; } /* alt-label-md */
     .pdp-top__title:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
     .pdp-top__title { font-size: 22px; line-height: 24px; font-weight: 600; letter-spacing: 0; color: var(--color-text-primary); margin: 0; font-feature-settings: 'ss02' 1, 'ss03' 1; } /* headline-sm */
-    /* Price: headline-lg (28/32, 36/40 from 769px). User decision 2026-11-11; Figma mobile shows 36/40. */
-    .pdp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--dimension-spacing-space-4); margin: 0; }
-    .pdp-price__value { font-size: 28px; line-height: 32px; font-weight: 600; color: var(--color-text-price-customer); white-space: nowrap; }
-    .pdp-price__vat { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-sm */
     .pdp-artnr { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-4) var(--dimension-spacing-space-8); }
     /* Article numbers: Badge/Basic look, but a button that copies the number and confirms with an E-Com toast (Informational).
        One-off for this page (user decision 2026-11-11): eco-badge itself stays non-interactive. */
@@ -2299,7 +2296,6 @@
       .pdp-top__brand { font-size: 18px; line-height: 18px; letter-spacing: 0.36px; } /* alt-label-lg */
       .pdp-top__badges { gap: var(--dimension-spacing-space-4); }
       .pdp-top__title { font-size: 28px; line-height: 32px; }
-      .pdp-price__value { font-size: 36px; line-height: 40px; }
       .pdp-artnr__class { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
     }
 
@@ -2424,10 +2420,6 @@
     .pdp-acc__artnr b { font-weight: 400; color: var(--color-text-primary); }
     .pdp-acc__buy { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
     .pdp-acc__row { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
-    .pdp-acc__price { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; font-weight: 600; color: var(--color-text-price-customer); white-space: nowrap; }
-    .pdp-acc__price small { font-size: 12px; letter-spacing: 0.24px; font-weight: 400; color: var(--color-text-secondary); }
-    .pdp-acc__old { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); font-size: 12px; line-height: 20px; letter-spacing: 0.24px; color: var(--color-text-tertiary); }
-    .pdp-acc__old .icon { color: var(--color-text-primary); }
     .pdp-acc__stock { display: flex; align-items: center; gap: var(--dimension-spacing-space-4); font-size: 12px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); white-space: nowrap; }
     .pdp-acc .btn { width: 100%; }
     @media (min-width: 769px) {
@@ -2477,14 +2469,15 @@
     .pcard__meta { margin-top: var(--dimension-spacing-space-2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-2) var(--dimension-spacing-space-12); }
     .pcard__artnr { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }   /* body-sm */
     .pcard__foot { margin-top: auto; display: flex; flex-direction: column; padding: var(--dimension-spacing-space-8) var(--pcard-pad) var(--pcard-pad); }
-    .pcard__price b { font-size: 20px; line-height: 24px; font-weight: 600; color: var(--color-text-price-customer); }
-    .pcard__price small { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
-    .pcard__old { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); font-size: 14px; line-height: 20px; letter-spacing: 0.28px; color: var(--color-text-tertiary); }
-    .pcard__old .icon { color: var(--color-text-primary); }
     .pcard__status { margin: var(--dimension-spacing-space-8) 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); }
     .pcard__status li { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); white-space: nowrap; }
     .pcard__status li.is-in { color: var(--color-text-secondary); }
     .pcard .btn { width: 100%; }
+    /* Whole card is the link (click handler below); hover = border-hover, no underline on the title */
+    .pcard, .pdp-acc { cursor: pointer; }
+    .pcard:hover, .pdp-acc:hover { border-color: var(--color-border-hover); }
+    .pcard__name:hover, .pdp-acc__name:hover { text-decoration: none; }
+    .pcard:hover .btn:not(:disabled)::before, .pdp-acc:hover .btn:not(:disabled)::before { opacity: 1; }   /* the card is one target: its button shows the hover layer too */
     @media (max-width: 768px) {   /* below 769px the row runs to the screen edge (Figma Mobile and Tablet) */
       .pc__track { margin-inline: calc(-1 * var(--px-full)); padding-inline: var(--px-full); scroll-padding-inline: var(--px-full); }
     }
@@ -2496,7 +2489,6 @@
       .pcard { flex-basis: 282px; --pcard-pad: var(--dimension-spacing-space-24); }   /* 282px: Figma, a quarter of the 1200px row */
       .pcard__brand { font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
       .pcard__name { font-size: 20px; line-height: 24px; }
-      .pcard__price small { display: block; }
     }
     @media (min-width: 1024px) { .pcard { flex-basis: calc((100% - 3 * var(--dimension-spacing-space-24)) / 4); } }
 
@@ -2522,8 +2514,8 @@
     .pv-wrap.is-grabbing, .pv-wrap.is-grabbing * { cursor: grabbing !important; }
     .pv-wrap.is-grabbing { user-select: none; }
     .pv-table { width: 100%; border-collapse: collapse; }
-    .pv-table th, .pv-table td { padding: 0 16px; height: 56px; text-align: left; vertical-align: middle; white-space: nowrap; font-size: 16px; line-height: 16px; color: var(--color-text-primary); }
-    .pv-table th { font-weight: 600; letter-spacing: 0.28px; }
+    .pv-table th, .pv-table td { padding: 0 16px; height: 56px; text-align: left; vertical-align: middle; white-space: nowrap; font-size: 17px; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary); }   /* body-md desktop 17/24 (Figma 8956:340151; was 16/16) */
+    .pv-table th { font-weight: 600; }
     .pv-table thead tr { background: var(--color-accent-light); }
     .pv-table tbody tr { background: var(--color-surface-00); }
     .pv-table tbody tr:nth-child(even) { background: var(--color-surface-05); }
@@ -2567,9 +2559,6 @@
 
     .pv-stock { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }   /* body-sm */
     .pv-stock > span { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
-    .pv-price { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); }
-    .pv-price s { font-size: 14px; line-height: 20px; letter-spacing: 0.28px; color: var(--color-text-secondary); }
-    .pv-price b { font-size: 16px; line-height: 24px; font-weight: 600; color: var(--color-text-price-customer); }
     .pv-buy { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
     .pv-buy__btns { display: flex; gap: var(--dimension-spacing-space-4); }
     .pv-fav[aria-pressed="true"] .btn__icon { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
@@ -2598,12 +2587,11 @@
     .pv-card__data dt { font-weight: 600; letter-spacing: 0; }
     .pv-card__data dd { margin: 0; }
     .pv-card__stock { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .pv-card .price--table { flex-wrap: wrap; min-width: 0; }
     .pv-card__title { margin: 0; font-size: 16px; line-height: 18px; font-weight: 600; }   /* title-sm */
     .pv-card .pv-stock > span { align-items: flex-start; }
     .pv-card .pv-stock .badge-dot { flex: none; margin-top: 7px; }   /* 7px: centres the 6px dot on the first 20px line (Figma pt 8) */
     .pv-card__buy { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-12); }
-    .pv-card .pv-price { flex-wrap: wrap; gap: 0 var(--dimension-spacing-space-4); min-width: 0; }
-    .pv-card .pv-price b { line-height: 22px; }
     .pv-card .pv-buy__btns { gap: var(--dimension-spacing-space-2); }
     @media (min-width: 769px) { .pv-cards { display: none; } }   /* after the base rule above, which would win otherwise */
     @media (prefers-reduced-motion: reduce) { .pv-table th::after, .pv-table td::after, .pv-table th::before, .pv-table td::before { transition: none; } }
@@ -2738,9 +2726,8 @@
             </span>
             <a href="#" class="inline-link rating-stars__count" aria-label="200 recensioner">200</a>
           </div>
-          <p class="pdp-price">
-            <span class="pdp-price__value">886,79 kr</span>
-            <span class="pdp-price__vat">exkl. moms</span>
+          <p class="price price--page price--customer">
+            <span class="price__main"><span class="price__value">886,79 kr</span> <span class="price__vat">exkl. moms</span></span>
           </p>
           <p class="pv-sr" id="pdp-variant-live" aria-live="polite"></p>
         </div>
@@ -3639,8 +3626,8 @@
           '<div class="pdp-acc__meta"><span class="pdp-acc__artnr">Art.nr: <b>275072599-146</b></span>' +
           '<div class="rating-stars rating-stars--sm"><span class="rating-stars__stars" role="img" aria-label="Betyg 4 av 5">' + star + star + star + star + star.replace('rating-stars__star"', 'rating-stars__star rating-stars__star--empty"') + '</span>' +
           '<span class="rating-stars__meta"><a href="#" class="inline-link rating-stars__count" aria-label="200 recensioner">200</a></span></div></div></div></div>' +
-          '<div class="pdp-acc__buy"><div class="pdp-acc__row"><div><div class="pdp-acc__price">196,00 kr <small>exkl.moms</small></div>' +
-          (it.old ? '<div class="pdp-acc__old"><s>' + it.old + '</s><span class="icon icon--sm" aria-hidden="true">info</span></div>' : '') +
+          '<div class="pdp-acc__buy"><div class="pdp-acc__row"><div><p class="price price--compact price--customer"><span class="price__main"><span class="price__value">196,00 kr</span> <span class="price__vat">exkl.moms</span></span>' +
+          (it.old ? '<span class="price__extra"><span class="price__old"><s>' + it.old + '</s><span class="icon icon--sm" aria-hidden="true">info</span></span></span>' : '') + '</p>' +
           '</div><div class="pdp-acc__stock"><span class="badge-dot badge-dot--sm badge-dot--success" aria-hidden="true"></span>25 i lager</div></div>' +
           (it.variants ? '<button type="button" class="btn btn--secondary btn--xs"><span class="btn__label">Visa varianter</span><span class="btn__icon" aria-hidden="true">chevron_right</span></button>'
                        : '<button type="button" class="btn btn--secondary btn--xs" data-acc-add><span class="btn__label">Lägg i varukorg</span></button>') +
@@ -3659,28 +3646,33 @@
       var star = '<svg class="rating-stars__star" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.02959 16L4.89941 9.88791L0 6.39528H6.08284L8 0L9.91716 6.39528H16L11.1006 9.88791L12.9704 16L8 12.2242L3.02959 16Z"/></svg>';
       var tag = function (label, path) { return '<span class="badge-promo badge-promo--product" role="img" aria-label="' + label + '"><svg class="badge-promo__icon" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="' + path + '"/></svg></span>'; };
       var STD = tag('Standardsortiment', 'M4.9271 13.2428L3.76835 11.3183L1.57965 10.8238L1.78334 8.59338L0.3 6.92147L1.78334 5.24955L1.57965 3.01911L3.76835 2.52466L4.9271 0.600098L6.98768 1.48321L9.04826 0.600098L10.207 2.52466L12.3957 3.01911L12.192 5.24955L13.6754 6.92147L12.192 8.59338L12.3957 10.8238L10.207 11.3183L9.04826 13.2428L6.98768 12.3597L4.9271 13.2428ZM5.43404 11.658L6.98768 10.9966L8.54132 11.658L9.40702 10.2065L11.0477 9.83591L10.9038 8.17286L12.0041 6.92147L10.9038 5.67008L11.0477 4.00702L9.40702 3.63643L8.54132 2.18496L6.98768 2.84631L5.43404 2.18496L4.56834 3.63643L2.92764 3.99191L3.07154 5.67008L1.97126 6.92147L3.08665 8.17286L2.92764 9.85103L4.56834 10.2216L5.43404 11.658ZM6.21694 9.13744L9.8535 5.51599L9.03939 4.70911L6.21694 7.51645L4.93597 6.24336L4.12187 7.05748L6.21694 9.13744Z'), AVT = tag('Avtalssortiment', 'M6.26432 9.28715L9.78747 5.77511L8.94955 4.93719L6.26432 7.60785L5.06658 6.42469L4.22868 7.26261L6.26432 9.28715ZM3.21038 12.0872C2.87751 12.0872 2.59256 11.9686 2.35552 11.7316C2.11847 11.4945 1.99995 11.2096 1.99995 10.8767V3.26043C1.99995 2.92756 2.11847 2.64261 2.35552 2.40557C2.59256 2.16853 2.87751 2.05001 3.21038 2.05001H5.58904C5.68309 1.74398 5.85989 1.49247 6.11944 1.29549C6.37897 1.0985 6.67867 1.00001 7.01853 1.00001C7.35839 1.00001 7.65808 1.0985 7.91762 1.29549C8.17716 1.49247 8.35396 1.74398 8.44802 2.05001H10.8267C11.1595 2.05001 11.4445 2.16853 11.6815 2.40557C11.9186 2.64261 12.0371 2.92756 12.0371 3.26043V10.8767C12.0371 11.2096 11.9186 11.4945 11.6815 11.7316C11.4445 11.9686 11.1595 12.0872 10.8267 12.0872H3.21038ZM3.21038 10.8767H10.8267V3.26043H3.21038V10.8767ZM7.01853 2.89647C7.1277 2.89647 7.21798 2.86078 7.28936 2.7894C7.36074 2.71802 7.39643 2.62775 7.39643 2.51857C7.39643 2.4094 7.36074 2.31913 7.28936 2.24775C7.21798 2.17637 7.1277 2.14068 7.01853 2.14068C6.90936 2.14068 6.81908 2.17637 6.7477 2.24775C6.67632 2.31913 6.64063 2.4094 6.64063 2.51857C6.64063 2.62775 6.67632 2.71802 6.7477 2.7894C6.81908 2.86078 6.90936 2.89647 7.01853 2.89647Z');
+      /* Data and pictures from "Liknande produkter" on swedol.se (hantverksbyxa-stretch-soul-275-0-svart, fetched 2026-11-13); price is mock (the live page shows none to guests) */
       var items = [
-        { sale: 1, std: 1, avt: 1, stock: 1 }, { sale: 1, std: 1, avt: 1, stock: 1 }, { sale: 1, out: 1, avt: 1 }, { sale: 1, out: 1, avt: 1 },
-        { std: 1, stock: 1 }, { sale: 1, std: 1 }, { avt: 1, stock: 1 }, { sale: 1, out: 1, std: 1 }
+        { brand: 'Björnkläder', name: 'Hantverksbyxa stretch Soul Karma 246-0 svart', art: '246075399', img: '246075399' },
+        { brand: 'Björnkläder', name: 'Hantverksbyxa Classic 250-0 svart', art: '250070499', img: '250070499_1' },
+        { brand: 'Björnkläder', name: 'Hantverksbyxa stretch Nordic 292-0 svart', art: '292070899', img: '292070899_1_2' },
+        { brand: 'Gesto', name: 'Hantverksbyxa stretch Elevate G530 svart', art: '1253099', img: '1253099_1_2' },
+        { brand: 'Björnkläder', name: 'Hantverksbyxa Shift 693-0 svart', art: '693072499', img: '693072499' },
+        { brand: 'Björnkläder', name: 'Hantverksbxya Soul stålblå', art: '275072567', img: '275072567', out: 1 },
+        { brand: 'Björnkläder', name: 'Hantverksbyxa stretch Soul 275-0 marin', art: '275072569', img: '275072569_3' },
+        { brand: 'Gesto', name: 'Skyddssko Balder 2.0 S3S', art: '124743', img: '124743_1' }
       ];
       function card(it) {
         return '<li class="pcard"><div class="pcard__media">' +
-          '<div class="pcard__badges badge-promo-group">' + (it.sale ? '<span class="badge-promo">30% rabatt</span>' : '') + (it.out ? '<span class="badge-promo badge-promo--closing">Utförsäljning</span>' : '') + '</div>' +
+          '<div class="pcard__badges badge-promo-group">' + (it.out ? '<span class="badge-promo badge-promo--closing">Utförsäljning</span>' : '') + '</div>' +
           '<div class="pcard__actions"><button type="button" class="pcard__act" aria-label="Jämför" data-tooltip="Jämför"><span class="icon icon--sm" aria-hidden="true">compare_arrows</span></button>' +
           '<button type="button" class="pcard__act" aria-pressed="false" aria-label="Lägg till i favoriter" data-tooltip="Lägg till i favoriter"><span class="icon icon--sm" aria-hidden="true">favorite</span></button></div>' +
-          '<img class="pcard__img" src="/images/pdp-gallery-front.png" alt="" loading="lazy">' +
-          '<div class="pcard__tags">' + (it.std ? STD : '') + (it.avt ? AVT : '') + '</div></div>' +
-          '<div class="pcard__info"><span class="pcard__brand">Björnkläder</span><a href="#" class="inline-link inline-link--reverse inline-link--bold pcard__name">Carpenter soul hantverksbyxa</a>' +
-          '<div class="pcard__meta"><span class="pcard__artnr">Art.nr: VE-32917</span>' +
+          '<img class="pcard__img" src="/images/pdp-pc-' + it.img + '.jpg" alt="" loading="lazy">' +
+          '<div class="pcard__tags">' + STD + '</div></div>' +
+          '<div class="pcard__info"><span class="pcard__brand">' + it.brand + '</span><a href="#" class="inline-link inline-link--reverse inline-link--bold pcard__name">' + it.name + '</a>' +
+          '<div class="pcard__meta"><span class="pcard__artnr">Art.nr: ' + it.art + '</span>' +
           '<div class="rating-stars rating-stars--sm"><span class="rating-stars__stars" role="img" aria-label="Betyg 4 av 5">' + star + star + star + star + star.replace('rating-stars__star"', 'rating-stars__star rating-stars__star--empty"') + '</span>' +
           '<span class="rating-stars__meta"><a href="#" class="inline-link rating-stars__count" aria-label="200 recensioner">200</a><span class="icon icon--xs" aria-hidden="true">info</span></span></div></div></div>' +
-          '<div class="pcard__foot"><div class="pcard__price"><b>53,00 kr</b> <small>exkl.moms</small></div>' +
-          '<div class="pcard__old"><s>63,00 kr</s><span class="icon icon--sm" aria-hidden="true">info</span></div>' +
-          '<ul class="pcard__status">' + (it.stock ? '<li class="is-in"><span class="badge-dot badge-dot--md badge-dot--success" aria-hidden="true"></span>20 i lager</li>'
-                                                  : '<li><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Finns i flera varianter</li>') +
+          '<div class="pcard__foot"><p class="price price--card price--customer"><span class="price__main"><span class="price__value">53,00 kr</span> <span class="price__vat">exkl.moms</span></span>' +
+          '<span class="price__extra"><span class="price__old"><s>63,00 kr</s><span class="icon icon--sm" aria-hidden="true">info</span></span></span></p>' +
+          '<ul class="pcard__status">' + ('<li><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Finns i flera varianter</li>') +
           '<li><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Välj butik för butikssaldo</li></ul>' +
-          (it.stock ? '<button type="button" class="btn btn--primary btn--sm" data-pc-add><span class="btn__label">Lägg i varukorg</span></button>'
-                    : '<button type="button" class="btn btn--primary btn--sm"><span class="btn__label">Visa 9 varianter</span><span class="btn__icon" aria-hidden="true">chevron_right</span></button>') +
+          ('<button type="button" class="btn btn--primary btn--sm"><span class="btn__label">Visa varianter</span><span class="btn__icon" aria-hidden="true">chevron_right</span></button>') +
           '</div></li>';
       }
       function render(shift) { track.innerHTML = items.slice(shift).concat(items.slice(0, shift)).map(card).join(''); track.scrollLeft = 0; }
@@ -3697,6 +3689,13 @@
       });
     })();
   
+    /* Carousel cards: a click anywhere on the card (not on a button or link) follows the title link */
+    document.addEventListener('click', function (e) {
+      var card = e.target.closest('.pcard, .pdp-acc');
+      if (!card || e.target.closest('a, button')) return;
+      var l = card.querySelector('.pcard__name, .pdp-acc__name'); if (l) l.click();
+    });
+
     /* "Visa alla varianter i tabell": scroll so the section's top edge lands exactly under the sticky header (its scroll-margin-top).
        Done in script, not left to the browser's anchor jump, and checked again afterwards in case images or fonts moved the layout. */
     document.addEventListener('click', function (e) {
@@ -3739,7 +3738,7 @@
           '<td data-col="storlek">' + r.size + '</td>' +
           '<td data-col="tillganglighet"><div class="pv-stock"><span><span class="badge-dot badge-dot--sm badge-dot--success" aria-hidden="true"></span>Webb: ' + r.web + '</span>' +
           '<span><span class="badge-dot badge-dot--sm badge-dot--' + (r.storeOk ? 'success' : 'danger') + '" aria-hidden="true"></span>Butik: ' + r.store + '</span></div></td>' +
-          '<td data-col="pris"><span class="pv-price"><s>' + r.old + '</s><b>' + kr(r.price) + '</b></span></td>' +
+          '<td data-col="pris"><span class="price price--table price--customer"><span class="price__old"><s>' + r.old + '</s></span><span class="price__value">' + kr(r.price) + '</span></span></td>' +
           '<td class="col-action">' + buy(r) + '</td></tr>';
       }
       /* quantity, add to cart, favourite: one block for the table cell and the mobile card */
@@ -3762,7 +3761,7 @@
           '<dl class="pv-card__data"><dt>Storlek</dt><dd>' + r.size + '</dd></dl>' +
           '<div class="pv-card__stock"><h3 class="pv-card__title">Tillgänglighet</h3><div class="pv-stock"><span>' + dot(1) + 'Webb: ' + r.web + '</span><span>' + dot(r.storeOk) + 'Butik: ' + r.store + '</span></div></div>' +
           '<div class="divider" aria-hidden="true"></div>' +
-          '<div class="pv-card__buy"><span class="pv-price"><b>' + kr(r.price) + '</b><s>' + r.old + '</s></span>' + buy(r) + '</div></li>';
+          '<div class="pv-card__buy"><span class="price price--table price--customer"><span class="price__value">' + kr(r.price) + '</span><span class="price__old"><s>' + r.old + '</s></span></span>' + buy(r) + '</div></li>';
       }
       function render() {
         var q = query.trim().toLowerCase();
@@ -3789,7 +3788,7 @@
         var q = function (sel) { return document.querySelector(sel); };
         function badge(name, label, value) { var el = q('.pdp-artnr__copy[data-copy-name="' + name + '"]'); if (el) { el.dataset.copy = value; el.firstChild.nodeValue = label + value; } }
         badge('Artikelnummer', 'Art.nr: ', r.art); badge('EAN', 'EAN: ', r.ean); badge('Leverantörsnummer', 'Lev.nr: ', r.lev);
-        if (q('.pdp-price__value')) q('.pdp-price__value').textContent = kr(r.price);
+        if (q('.price--page .price__value')) q('.price--page .price__value').textContent = kr(r.price);
         if (q('#pdp-size-value')) q('#pdp-size-value').textContent = r.size + ' - ' + r.art;
         var dot = function (ok) { return '<span class="badge-dot badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
         if (q('#pdp-web-status')) q('#pdp-web-status').innerHTML = dot(1) + '<span>' + (r.stock ? r.stock + ' st i lager (Normal leverans 1-2 arbetsdagar)' : r.web) + '</span>';

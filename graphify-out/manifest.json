@@ -24,9 +24,9 @@
     "semantic_hash": "b35fdae09cd0b4f417e3b6b4401500ff"
   },
   "CLAUDE.md": {
-    "mtime": 1794561388.0424032,
-    "seen": 1794561391.264231,
-    "ast_hash": "8642e0a6d9b2c276245b0612d99540d3",
+    "mtime": 1794581309.1630502,
+    "seen": 1794581319.948492,
+    "ast_hash": "59362e36763de129e088160c2f40484d",
     "semantic_hash": ""
   },
   "README.md": {
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "template.html": {
-    "mtime": 1794561388.0405264,
-    "seen": 1794561391.2645,
-    "ast_hash": "53bcc3a0f3b6342f77480895277e2510",
+    "mtime": 1794581265.262013,
+    "seen": 1794581319.9488032,
+    "ast_hash": "921bb1b19d96a8271eb42fb58d5d166b",
     "semantic_hash": ""
   },
   ".claude/skills/links-guide/SKILL.md": {
@@ -324,9 +324,9 @@
     "semantic_hash": "09fc81aef67d494c01957ac06e42fcf3"
   },
   "mypages/mypages-template.html": {
-    "mtime": 1794561388.0415637,
-    "seen": 1794561391.264487,
-    "ast_hash": "e63225209a51c72c6a3f3d14f7f9880b",
+    "mtime": 1794581265.2875564,
+    "seen": 1794581319.948781,
+    "ast_hash": "b5bd00515131449ccede3b7040b4335c",
     "semantic_hash": ""
   },
   "mypages/users-dashboard.html": {
@@ -2784,9 +2784,9 @@
     "semantic_hash": ""
   },
   ".claude/skills/eco-prototype-guide/SKILL.md": {
-    "mtime": 1794466874.4924214,
-    "seen": 1794492515.78754,
-    "ast_hash": "cacda7f8c1217bd9789ac0cbe0d20e23",
+    "mtime": 1794581309.1638029,
+    "seen": 1794581319.948473,
+    "ast_hash": "888e5b792f39382227ad704123bc1a38",
     "semantic_hash": ""
   },
   "eco-design-system/components/ah-group-card-widget.html": {
@@ -2826,9 +2826,9 @@
     "semantic_hash": ""
   },
   "pdp.html": {
-    "mtime": 1794561388.0396185,
-    "seen": 1794561391.2644951,
-    "ast_hash": "11953347c2cdfc6494ea3cd62324a694",
+    "mtime": 1794581282.6047266,
+    "seen": 1794581319.94879,
+    "ast_hash": "bf6e9a446de1f8bceee07cca5630b2e2",
     "semantic_hash": ""
   },
   "components/js/gallery.js": {
@@ -2850,9 +2850,9 @@
     "semantic_hash": ""
   },
   ".claude/skills/eco-picker-stepper/SKILL.md": {
-    "mtime": 1794466858.3895316,
-    "seen": 1794492515.7875378,
-    "ast_hash": "f14ffd053e71caad0fe5234de8d8188d",
+    "mtime": 1794580186.4265075,
+    "seen": 1794580287.529123,
+    "ast_hash": "a9b6f44402ef93c936dabcc815099619",
     "semantic_hash": ""
   },
   ".claude/skills/eco-rating-stars/SKILL.md": {
@@ -2865,6 +2865,12 @@
     "mtime": 1794466874.493908,
     "seen": 1794492515.787561,
     "ast_hash": "523a1abfd6fe826d425365af5ded0e79",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-price/SKILL.md": {
+    "mtime": 1794581309.0960646,
+    "seen": 1794581319.948471,
+    "ast_hash": "122ce4590483f7e3946b60d8b4523dbf",
     "semantic_hash": ""
   }
 }
