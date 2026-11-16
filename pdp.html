@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/components/css/switch.css">
   <link rel="stylesheet" href="/components/css/list-item.css">
   <link rel="stylesheet" href="/components/css/chip.css">
+  <link rel="stylesheet" href="/components/css/icon-button-compact.css">
   <link rel="stylesheet" href="/components/css/icon.css">
   <link rel="stylesheet" href="/components/css/divider.css">
   <link rel="stylesheet" href="/components/css/menu.css">
@@ -2226,6 +2227,78 @@
 
     /* ── Col-hidden utility ─────────────────────────────── */
 
+    /* ── Store status + Store info drawer (Figma UI---1.1: status 3009:96108 / 4503:39437 / mobile 4588:28224, 5042:51207; info 4561:26255 / 4588:27379;
+       flows 4574:19070, 3009:96670). One 500px panel (.drawer-panel) holds two views; opening the info view slides the list out left and the info in from the right. ── */
+    .sd { overflow: hidden; }
+    .sd-view { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--color-surface-raised-primary); will-change: transform;
+      transition: transform var(--duration-medium-4) var(--ease-standard), opacity var(--duration-medium-4) var(--ease-standard), visibility 0s linear var(--duration-medium-4); }
+    /* the two views move as one: the list drifts out 30% and fades while the info slides in (in-out easing, no hard start); the hidden one leaves the tab order */
+    .sd-view--list { transform: translateX(0); opacity: 1; visibility: visible; transition-delay: 0s; }
+    .sd-view--info { transform: translateX(100%); visibility: hidden; }
+    .sd.is-info .sd-view--list { transform: translateX(-30%); opacity: 0; visibility: hidden; transition-delay: 0s, 0s, var(--duration-medium-4); }
+    .sd.is-info .sd-view--info { transform: translateX(0); visibility: visible; transition-delay: 0s; }
+    @media (prefers-reduced-motion: reduce) { .sd-view { transition-duration: 0s !important; transition-delay: 0s !important; } }
+    .sd-view .drawer-content { gap: 0; }
+    .sd-sub { margin: 0; font: 400 16px/22px 'Breuer Condensed', Arial, sans-serif; color: var(--color-text-primary); letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+    .sd-sub strong { font-weight: 600; }
+    .sd-search { margin-bottom: var(--dimension-spacing-space-16); }
+    .sd-toggle { margin-bottom: var(--dimension-spacing-space-16); }
+    .sd-sort { margin-bottom: var(--dimension-spacing-space-24); }
+    .sd-note { margin: 0 0 var(--dimension-spacing-space-16); font: 400 14px/20px 'Breuer Condensed', Arial, sans-serif; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .sd-note strong { font-weight: 600; }
+    .sd-list { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); margin: 0; padding: 0; list-style: none; }
+    .sd-empty { margin: 0; padding: var(--dimension-spacing-space-16) 0; }
+    .sd-card { position: relative; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); padding: var(--dimension-spacing-space-16); cursor: pointer;
+      background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary); }
+    .sd-card:hover { border-color: var(--color-border-hover); }
+    .sd-card.is-selected:hover { border-color: var(--color-border-selected); }   /* selected keeps its frame */
+    .sd-card.is-selected { border-color: var(--color-border-selected); box-shadow: inset 0 0 0 1px var(--color-border-selected); }   /* pre-selected store: 2px frame (Figma 4503:39437) */
+    .sd-card__head { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
+    .sd-card__name { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); flex: 1; min-width: 0; margin: 0; font: 600 16px/22px 'Breuer Condensed', Arial, sans-serif; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }
+    .sd-card__name .ms, .sd-title .ms { font-size: 24px; font-weight: 300; font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }   /* selected store: filled icon */
+    .sd-card__km { font: 400 14px/20px 'Breuer Condensed', Arial, sans-serif; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .sd-card__status { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); margin: 0; font: 400 16px/24px 'Breuer Condensed', Arial, sans-serif; letter-spacing: 0.32px; color: var(--color-text-primary); }
+    .sd-card__addr { margin: 0; font: 400 16px/24px 'Breuer Condensed', Arial, sans-serif; letter-spacing: 0.32px; color: var(--color-text-tertiary); }
+    .sd-sep { height: 1px; margin: var(--dimension-spacing-space-4) 0; background: var(--color-border-primary); }
+    /* Info view: values from Figma 4561:26255 (desktop) and 4588:27379 (mobile) */
+    .sd-info__sec { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .sd-info__sec--top { gap: var(--dimension-spacing-space-16); }
+    .sd-info__body { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-24); }
+    .sd-info h3 { margin: 0; font: 600 18px/22px 'Breuer Condensed', Arial, sans-serif; letter-spacing: 0; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* title-md */
+    .sd-info h3.sd-info__h-sm { font-size: 16px; line-height: 18px; }   /* title-sm */
+    .sd-info__open { display: flex; gap: var(--dimension-spacing-space-8); align-items: center; }
+    .sd-info__links { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }   /* 12px: no spacing token at this size; 8px from 769px */
+    .sd-info__links .action-link { max-width: 100%; }
+    #sd-i-hours { display: flex; flex-direction: column; gap: 4px; }   /* 2px from 769px */
+    .sd-info__row { display: flex; gap: var(--dimension-spacing-space-16); }
+    .sd-info__row span:first-child { width: 80px; }
+    .sd-info__row--wide span:first-child { width: auto; }
+    .sd-info__welcome { margin: 0; font-style: italic; }
+    #sd-back { font-weight: 600; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; text-transform: uppercase; padding: var(--dimension-spacing-space-8) 0; }   /* body-sm bold, 40px row with the close button */
+    .sd-title { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); font: 600 22px/24px 'Breuer Condensed', Arial, sans-serif; letter-spacing: 0; color: var(--color-text-primary); margin: 0; font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* headline-sm */
+    #sd-i-svc { border-top: 1px solid var(--color-border-primary); }
+    .sd-svc-ico { display: block; width: 24px; height: 24px; flex-shrink: 0; }
+    .sd-info .collapsible-item__label { font-size: 16px; line-height: 22px; letter-spacing: 0; }   /* Figma: 16/22 mobile, 16/24 from 769px (not the Large 18/22 -> 20/24) */
+    .sd-info .collapsible-item__content p + p { margin-top: var(--dimension-spacing-space-16); }
+    .sd-info .collapsible-item__content .action-link { margin-top: var(--dimension-spacing-space-16); }
+    .sd-footer { display: flex; gap: var(--dimension-spacing-space-8); }
+    .sd-footer .btn { flex: 1 1 0; min-width: 0; }
+    .sd-head-info { flex-direction: column; align-items: stretch; gap: var(--dimension-spacing-space-12, 12px); }
+    .sd-head-info__nav { display: flex; align-items: center; justify-content: space-between; }
+    @media (max-width: 768px) {
+      .sd-view .drawer-content { padding: 0 24px 24px; }
+      .sd-view .drawer-header { padding: 16px 24px; }
+    }
+    @media (min-width: 769px) {
+      .sd-sub, .sd-card__status, .sd-card__addr { font-size: 17px; line-height: 24px; }
+      .sd-info h3 { font-size: 20px; line-height: 24px; }
+      .sd-info h3.sd-info__h-sm { font-size: 16px; line-height: 18px; }
+      .sd-info__links { gap: var(--dimension-spacing-space-8); }
+      #sd-i-hours { gap: 2px; }
+      .sd-title { font-size: 28px; line-height: 32px; }
+      .sd-info .collapsible-item__label { line-height: 24px; }
+    }
+
     /* ── Column settings drawer ─────────────────────────── */
 
 
@@ -2267,7 +2340,9 @@
       .pdp { grid-template-columns: minmax(0, 420fr) minmax(0, 507fr); gap: var(--dimension-spacing-space-32); align-items: start; }
       .pdp__info { gap: var(--dimension-spacing-space-32); }
       /* The gallery stays in view while the info column scrolls (Desktop Small, Desktop, Desktop XL; user request 2026-11-13). 81px = the sticky header's height from 769px (measured); 24px of air below it. */
-      .pdp__media { position: sticky; top: calc(81px + var(--dimension-spacing-space-24)); }
+      .pdp__media { position: sticky; top: calc(81px + var(--dimension-spacing-space-24)); transition: top var(--duration-fast-4) var(--ease-standard); }
+      /* Scrolling up shows the fixed header with the menu bar (129px measured): keep the 24px of air below it. */
+      body:has(.site-header--visible) .pdp__media { top: calc(129px + var(--dimension-spacing-space-24)); }
     }
     @media (min-width: 1024px) {
       /* Desktop: media 556 / gap 48 / info 596 */
@@ -2307,6 +2382,16 @@
     .pdp-action__group { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); }
     .pdp-action__select { display: flex; flex-direction: column; align-items: flex-start; gap: var(--dimension-spacing-space-8); }
     .pdp-action .icon { color: inherit; }
+    /* Fler alternativ: label + chosen colour row without frame + image tiles (Figma 1213:137642: tiles 56px on desktop, 40px below; the ECO tile is 48px from 769px, so 56px is page-local) */
+    .drawer-link__value.is-empty { color: var(--color-text-tertiary); }
+    .pdp-alt { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+    .pdp-alt__head { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); width: 100%; margin: 0; padding: 0; border: 0; background: transparent; text-align: left; font: inherit; color: inherit; cursor: pointer; touch-action: manipulation; }
+    .pdp-alt__head:is(:hover, :focus-visible) .drawer-link__label { text-decoration: underline; text-underline-offset: 2px; }
+    .pdp-alt__head:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+    .pdp-alt__row { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); padding-right: var(--dimension-spacing-space-8); font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+    .pdp-alt__tiles { display: flex; flex-wrap: wrap; gap: var(--dimension-spacing-space-4); }
+    @media (max-width: 768px) { .pdp-alt .form-checkbox-tile--image input:not(:checked) + .form-checkbox-tile__box { border-color: var(--color-border-secondary); } .pdp-alt .form-checkbox-tile--image:hover input:not(:checked) + .form-checkbox-tile__box { border-color: var(--color-border-hover); } }   /* Figma Checkbox Image 1223:32032: Mobile Enabled = border-secondary, Desktop Enabled = border-primary */
+    @media (min-width: 769px) { .pdp-alt .form-checkbox-tile--image .form-checkbox-tile__box { width: 56px; height: 56px; } }
     /* Contract assortment line */
     .pdp-contract { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; } /* body-sm */
     .pdp-contract .inline-link { font: inherit; letter-spacing: inherit; color: inherit; }
@@ -2340,6 +2425,7 @@
     .pdp-stock__banner strong { font-weight: 600; color: var(--color-text-primary); }
     @media (min-width: 769px) {
       .pdp-action { padding: var(--dimension-spacing-space-24); gap: var(--dimension-spacing-space-24); }
+      .pdp-alt__row { font-size: 17px; line-height: 24px; }
       .pdp-contract { font-size: 17px; line-height: 24px; letter-spacing: 0.32px; align-items: center; } /* body-md */
       .pdp-stock__title { font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
       .pdp-buy__cta { gap: var(--dimension-spacing-space-8); }
@@ -2450,31 +2536,34 @@
     .pc__tabs .tab-bar { max-width: 100%; }
     .pc__title-row { display: flex; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
     .pc__title { margin: 0; font-size: 22px; line-height: 22px; font-weight: 600; text-transform: uppercase; color: var(--color-text-primary); }   /* display-sm */
-    .pc__all { flex-shrink: 0; text-transform: uppercase; color: var(--color-text-primary); }
+    .pc__all { flex-shrink: 0; text-transform: uppercase; color: var(--color-text-primary); }   /* Figma Carousel Title + Link (2021:59816): Action Link Large, Bold, Primary = text-primary, label "VISA ALLA" in capitals; size 18/24 below 769px and 20/28 from 769px come from action-link--large */
     .pc__sub { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }   /* body-md */
     .pc__track { gap: var(--dimension-spacing-space-8); }
     /* Product Card (Figma "Product Card States"): 240px wide, 282px from 769px, a quarter of the row from 1024px */
     .pcard { flex: 0 0 240px; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; background: var(--color-surface-00); border: 1px solid var(--color-border-primary); --pcard-pad: var(--dimension-spacing-space-16); }
     .pcard__media { position: relative; padding: var(--pcard-pad) var(--pcard-pad) 0; }
+    .pcard__imglink { display: block; }   /* the picture is a link too; the title link is the accessible one */
     .pcard__img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: contain; }
     .pcard__badges { position: absolute; left: var(--pcard-pad); top: var(--pcard-pad); z-index: 1; }
     .pcard__actions { position: absolute; right: var(--pcard-pad); top: var(--pcard-pad); z-index: 1; display: flex; gap: var(--dimension-spacing-space-12); }
-    .pcard__act { display: flex; margin: 0; padding: 0; border: 0; background: color-mix(in srgb, var(--color-surface-00) 50%, transparent); color: var(--color-text-primary); cursor: pointer; touch-action: manipulation; }   /* Figma: 20px icon button on white 50% */
-    .pcard__act:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
-    .pcard__act.is-on .icon { font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
+    .pcard__act { background: color-mix(in srgb, var(--color-surface-00) 50%, transparent); }   /* Compact Icon Button (icon-button-compact.css) on white 50% (Figma product card) */
     .pcard__tags { position: absolute; left: var(--pcard-pad); bottom: 0; display: flex; gap: var(--dimension-spacing-space-4); }
     .pcard__info { display: flex; flex-direction: column; padding: var(--dimension-spacing-space-8) var(--pcard-pad) 0; min-width: 0; }
     .pcard__brand { font-size: 12px; line-height: 12px; letter-spacing: 0.48px; font-weight: 500; text-transform: uppercase; color: var(--color-text-secondary); }
-    .pcard__name { margin-top: var(--dimension-spacing-space-4); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 18px; line-height: 22px; font-weight: 600; }   /* title-md */
+    .pcard__name { margin-top: var(--dimension-spacing-space-4); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 18px; line-height: 22px; font-weight: 600; }   /* title-md */
     .pcard__meta { margin-top: var(--dimension-spacing-space-2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-2) var(--dimension-spacing-space-12); }
     .pcard__artnr { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }   /* body-sm */
-    .pcard__foot { margin-top: auto; display: flex; flex-direction: column; padding: var(--dimension-spacing-space-8) var(--pcard-pad) var(--pcard-pad); }
-    .pcard__status { margin: var(--dimension-spacing-space-8) 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); }
+    .pcard__foot { margin-top: auto; display: flex; flex-direction: column; padding: var(--dimension-spacing-space-16) var(--pcard-pad) var(--pcard-pad); }   /* live swedol.se, measured 2026-11-15: 16px art.nr to price, 12px old price to stock */
+    .pcard__pricerow { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
+    .pcard__pricebox { min-width: 0; }
+    .pcard__eprel { flex: none; display: flex; flex-direction: column; align-items: flex-end; }   /* only on a product with an energy label (Figma: Show EPREL); omitted from the markup otherwise */
+    .pcard__eprel img { display: block; }
+    .pcard__eprel-link { padding-top: var(--dimension-spacing-space-8); font-size: 12px; line-height: 12px; letter-spacing: 0.24px; }
+    .pcard__status { margin: var(--dimension-spacing-space-12) 0 var(--dimension-spacing-space-8); padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-2); }
     .pcard__status li { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); white-space: nowrap; }
     .pcard__status li.is-in { color: var(--color-text-secondary); }
     .pcard .btn { width: 100%; }
     /* Whole card is the link (click handler below); hover = border-hover, no underline on the title */
-    .pcard, .pdp-acc { cursor: pointer; }
     .pcard:hover, .pdp-acc:hover { border-color: var(--color-border-hover); }
     .pcard__name:hover, .pdp-acc__name:hover { text-decoration: none; }
     .pcard:hover .btn:not(:disabled)::before, .pdp-acc:hover .btn:not(:disabled)::before { opacity: 1; }   /* the card is one target: its button shows the hover layer too */
@@ -2665,7 +2754,7 @@
             </figure>
             <figure class="gallery__slide gallery__slide--video" aria-label="Bild 2 av 6">
               <img class="gallery__img" src="/images/pdp-gallery-video.jpg" alt="Video: hantverksbyxan i arbete" width="1112" height="1112" loading="lazy">
-              <span class="media-play" aria-hidden="true"><img class="media-play__oval" src="/images/media-play-oval.svg" alt=""><img class="media-play__triangle" src="/images/media-play-triangle.svg" alt=""></span>
+              <span class="media-play" role="button" tabindex="0" aria-label="Spela video"><img class="media-play__oval" src="/images/media-play-oval.svg" alt=""><img class="media-play__triangle" src="/images/media-play-triangle.svg" alt=""></span>
             </figure>
             <figure class="gallery__slide gallery__slide--contain" aria-label="Bild 3 av 6">
               <img class="gallery__img" src="/images/pdp-gallery-kneepads.png" alt="Knäskydd som passar byxan" width="1112" height="1112" loading="lazy">
@@ -2727,7 +2816,11 @@
             <a href="#" class="inline-link rating-stars__count" aria-label="200 recensioner">200</a>
           </div>
           <p class="price price--page price--customer">
-            <span class="price__main"><span class="price__value">886,79 kr</span> <span class="price__vat">exkl. moms</span></span>
+            <span class="price__main"><span class="price__from" id="pdp-price-from" hidden>Från</span> <span class="price__value">886,79 kr</span> <span class="price__vat">exkl. moms</span></span>
+            <span class="price__extra" id="pdp-price-extra" hidden>
+              <span class="price__row"><span class="price__old"><s id="pdp-price-old"></s><span class="icon icon--sm" aria-hidden="true">info</span></span><span class="badge-promo-group" id="pdp-price-badges"><span class="badge-promo" id="pdp-price-off">30% rabatt</span><span class="badge-promo badge-promo--closing" id="pdp-price-closing" hidden>Utförsäljning</span></span></span>
+              <span class="price__note" id="pdp-price-note"></span>
+            </span>
           </p>
           <p class="pv-sr" id="pdp-variant-live" aria-live="polite"></p>
         </div>
@@ -2746,6 +2839,22 @@
             <svg class="icon icon--sm" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8.92252 13.1844L13.9556 8.16714L12.7586 6.97012L8.92252 10.7854L7.21146 9.09512L6.01446 10.2921L8.92252 13.1844ZM4.55975 17.1844C4.08423 17.1844 3.67715 17.015 3.33852 16.6764C2.99989 16.3378 2.83057 15.9307 2.83057 15.4552V4.57475C2.83057 4.09922 2.99989 3.69214 3.33852 3.35352C3.67715 3.01489 4.08423 2.84558 4.55975 2.84558H7.95784C8.0922 2.40839 8.34477 2.04909 8.71555 1.76769C9.08631 1.48628 9.51445 1.34558 9.99996 1.34558C10.4855 1.34558 10.9136 1.48628 11.2844 1.76769C11.6552 2.04909 11.9077 2.40839 12.0421 2.84558H15.4402C15.9157 2.84558 16.3228 3.01489 16.6614 3.35352C17 3.69214 17.1694 4.09922 17.1694 4.57475V15.4552C17.1694 15.9307 17 16.3378 16.6614 16.6764C16.3228 17.015 15.9157 17.1844 15.4402 17.1844H4.55975ZM4.55975 15.4552H15.4402V4.57475H4.55975V15.4552ZM9.99996 4.05481C10.1559 4.05481 10.2849 4.00382 10.3869 3.90185C10.4888 3.79988 10.5398 3.67091 10.5398 3.51496C10.5398 3.359 10.4888 3.23003 10.3869 3.12806C10.2849 3.02609 10.1559 2.9751 9.99996 2.9751C9.844 2.9751 9.71504 3.02609 9.61307 3.12806C9.51109 3.23003 9.46011 3.359 9.46011 3.51496C9.46011 3.67091 9.51109 3.79988 9.61307 3.90185C9.71504 4.00382 9.844 4.05481 9.99996 4.05481Z"/></svg>
             <span>Vald produktvariant ingår i de här <a href="#" class="inline-link">avtalssortimenten</a>.</span>
           </p>
+
+          <!-- Fler alternativ / Go to alternative model (Figma UI---1.1 Desktop 1213:137642, Tablet 1719:55199, Mobile 1709:42550). Mock: Svart = this product (275072599), Blå = 275072567 on swedol.se -->
+          <div class="pdp-alt" role="radiogroup" aria-labelledby="pdp-alt-label">
+            <!-- The whole head opens the colour drawer (not built); hover underlines the label -->
+            <button type="button" class="pdp-alt__head" aria-haspopup="dialog" aria-label="Alla färgalternativ">
+              <span class="drawer-link__label" id="pdp-alt-label">Fler alternativ</span>
+              <span class="pdp-alt__row">
+                <span class="drawer-link__value" id="pdp-alt-value">Svart</span>
+                <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
+              </span>
+            </button>
+            <div class="pdp-alt__tiles">
+              <label class="form-checkbox-tile form-checkbox-tile--image"><input type="radio" name="pdp-alt" value="Svart" checked aria-label="Svart" data-img="/images/pdp-gallery-front.png" data-title="Carpenter soul hantverksbyxa stretch svart" data-poster="/images/pdp-gallery-video.jpg"><span class="form-checkbox-tile__box"><img src="/images/pdp-alt-svart.jpg" alt=""></span></label>
+              <label class="form-checkbox-tile form-checkbox-tile--image"><input type="radio" name="pdp-alt" value="Blå" aria-label="Blå" data-img="/images/pdp-gallery-bla-1.jpg" data-title="Hantverksbyxa Soul stålblå" data-video="BJjrThmXYSg" data-poster="/images/pdp-video-bla.jpg"><span class="form-checkbox-tile__box"><img src="/images/pdp-alt-bla.jpg" alt=""></span></label>
+            </div>
+          </div>
 
           <div class="pdp-action__select">
             <div class="drawer-link">
@@ -2809,12 +2918,11 @@
             <div class="pdp-stock__info">
               <div class="pdp-stock__store-row">
                 <div class="pdp-stock__store">
-                  <h3 class="pdp-stock__name"><span class="icon" aria-hidden="true">store</span>Borås</h3>
+                  <h3 class="pdp-stock__name"><span class="icon icon--fill" aria-hidden="true">store</span>Borås</h3>
                   <span class="divider divider--tertiary divider--vertical pdp-stock__sep" aria-hidden="true"></span>
                   <p class="pdp-stock__text">Öppet idag: Kl. 06:30 - 17:00</p>
                 </div>
-                <!-- Opens the store drawer: not built yet -->
-                <a href="#" class="action-link action-link--medium">
+                <a href="#" class="action-link action-link--medium" id="pdp-stores-link" aria-haspopup="dialog" aria-controls="sd">
                   <span class="action-link__label">Tillgänglig i 12 butiker</span>
                   <span class="action-link__icon" aria-hidden="true">chevron_right</span>
                 </a>
@@ -2985,7 +3093,7 @@
         </div>
         <div class="pc__title-row">
           <h2 class="pc__title">Liknande produkter</h2>
-          <a href="#" class="action-link action-link--large pc__all">
+          <a href="#" class="action-link action-link--large action-link--bold pc__all">
             <span class="action-link__label">Visa alla</span>
             <span class="action-link__icon" aria-hidden="true">chevron_right</span>
           </a>
@@ -3061,6 +3169,69 @@
       return xhr.responseText;
     })());
   </script>
+
+  <!-- ══ STORE STATUS + STORE INFO DRAWER (Figma 3009:96108 / 4561:26255, mobile 5042:51207 / 4588:27379) ══ -->
+  <div class="drawer-overlay" id="sd-overlay"></div>
+  <div class="drawer-panel sd" id="sd" role="dialog" aria-modal="true" aria-labelledby="sd-title" aria-hidden="true">
+    <section class="sd-view sd-view--list" id="sd-list-view">
+      <div class="drawer-header">
+        <div class="drawer-header__content"><h2 class="drawer-title" id="sd-title">Produktstatus i butik</h2></div>
+        <button type="button" class="drawer-close-btn" data-sd-close aria-label="Stäng"><span class="ms">close</span></button>
+      </div>
+      <div class="drawer-content" id="sd-list-scroll">
+        <div class="input-wrap sd-search">
+          <div class="input-box input-box--search">
+            <span class="input-icon input-icon--lg" aria-hidden="true">search</span>
+            <input class="form-input" type="text" id="sd-search" autocomplete="off" placeholder="Sök på postnummer eller stad" aria-label="Sök på postnummer eller stad" />
+            <div class="input-actions">
+              <button type="button" class="input-actions__btn input-actions__clear" aria-label="Rensa sökning" id="sd-clear"><span class="input-icon input-icon--fill">cancel</span></button>
+              <span class="input-actions__divider"></span>
+              <button type="button" class="input-actions__btn" id="sd-geo" aria-label="Använd min position"><span class="input-icon">location_on</span></button>
+            </div>
+          </div>
+        </div>
+        <label class="form-switch-item form-switch-item--sm sd-toggle"><input type="checkbox" role="switch" id="sd-instock" checked><span>Visar varuhus med produkt i lager</span></label>
+        <p class="sd-sub sd-sort" id="sd-sort"></p>
+        <p class="sd-note">Beställ innan kl 14:45 för uthämtning kostnadsfritt följande vardag i önskad butik. <strong>Önskad butik för uthämtning väljer du i kassan.</strong></p>
+        <ul class="sd-list" id="sd-cards"></ul>
+      </div>
+    </section>
+    <section class="sd-view sd-view--info sd-info" id="sd-info-view" aria-label="Butiksinformation">
+      <div class="drawer-header sd-head-info">
+        <div class="sd-head-info__nav">
+          <button type="button" class="action-link action-link--small" id="sd-back"><span class="action-link__icon" aria-hidden="true">chevron_left</span><span class="action-link__label">Tillbaka</span></button>
+          <button type="button" class="drawer-close-btn" data-sd-close aria-label="Stäng"><span class="ms">close</span></button>
+        </div>
+        <h2 class="sd-title" id="sd-i-name"></h2>
+      </div>
+      <div class="drawer-content" id="sd-info-scroll">
+        <div class="sd-info__body">
+          <div class="sd-info__sec sd-info__sec--top">
+            <div class="sd-info__open" id="sd-i-open"></div>
+            <div class="sd-info__links">
+              <a class="action-link action-link--medium" id="sd-i-addr" href="#" target="_blank" rel="noopener"><span class="action-link__icon" aria-hidden="true">location_on</span><span class="action-link__label"></span><span class="action-link__icon" aria-hidden="true">chevron_right</span></a>
+              <a class="action-link action-link--medium" id="sd-i-tel" href="#"><span class="action-link__icon" aria-hidden="true">smartphone</span><span class="action-link__label"></span><span class="action-link__icon" aria-hidden="true">chevron_right</span></a>
+              <a class="action-link action-link--medium" id="sd-i-mail" href="#"><span class="action-link__icon" aria-hidden="true">mail</span><span class="action-link__label"></span><span class="action-link__icon" aria-hidden="true">chevron_right</span></a>
+            </div>
+          </div>
+          <div><a href="#" class="btn btn--system btn--xs"><span class="btn__icon" aria-hidden="true">flag</span><span class="btn__label">Till butikssidan</span></a></div>
+          <div class="sd-info__sec"><h3>Öppettider</h3>
+            <div class="sd-sub" id="sd-i-hours"></div></div>
+          <div class="sd-info__sec"><h3>Avvikande öppettider</h3>
+            <div class="sd-sub"><div class="sd-info__row sd-info__row--wide"><span>Påskafton 19/4</span><span>08:30 - 15:00</span></div></div></div>
+          <div class="sd-info__sec"><h3 class="sd-info__h-sm">Butikens GLN-nummer</h3>
+            <div><button type="button" class="badge-basic badge-basic--neutral-dark badge-basic--strong badge-basic--uppercase" id="sd-i-gln" style="border:0;cursor:pointer"><span id="sd-i-gln-t"></span><span class="ms" style="font-size:14px" aria-hidden="true">content_copy</span></button></div></div>
+          <div class="sd-info__sec" id="sd-i-svc-sec"><h3>Tjänster i butik</h3>
+            <div id="sd-i-svc"></div></div>
+          <p class="sd-sub sd-info__welcome">Välkommen till butiken, vi bjuder på kaffe och utmärkt service!</p>
+        </div>
+      </div>
+      <div class="drawer-footer sd-footer">
+        <a class="btn btn--secondary btn--md" id="sd-i-dir" href="#" target="_blank" rel="noopener"><span class="btn__icon" aria-hidden="true">directions</span><span class="btn__label">Få vägbeskrivning</span></a>
+        <button type="button" class="btn btn--primary btn--md" id="sd-i-pick"><span class="btn__icon" aria-hidden="true">store</span><span class="btn__label">Välj som favorit</span></button>
+      </div>
+    </section>
+  </div>
 
   <div class="nav-more__menu" id="nav-more-menu" hidden></div>
 
@@ -3563,7 +3734,7 @@
   <script>
     /* PDP: add to cart, confirmed with an E-Com toast (Add to cart) */
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('#pdp-add') || !window.ECO_N) return;
+      if (!e.target.closest('#pdp-add') || !window.ECO_N || document.body.classList.contains('pdp-none')) return;
       ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa stretch svart', text: 'har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', secondary: { label: 'Välj tillbehör' }, primary: { label: 'Till varukorgen' } });
     });
     /* PDP: favourite toggle, confirmed with an E-Com toast (Informational) */
@@ -3648,7 +3819,7 @@
       var STD = tag('Standardsortiment', 'M4.9271 13.2428L3.76835 11.3183L1.57965 10.8238L1.78334 8.59338L0.3 6.92147L1.78334 5.24955L1.57965 3.01911L3.76835 2.52466L4.9271 0.600098L6.98768 1.48321L9.04826 0.600098L10.207 2.52466L12.3957 3.01911L12.192 5.24955L13.6754 6.92147L12.192 8.59338L12.3957 10.8238L10.207 11.3183L9.04826 13.2428L6.98768 12.3597L4.9271 13.2428ZM5.43404 11.658L6.98768 10.9966L8.54132 11.658L9.40702 10.2065L11.0477 9.83591L10.9038 8.17286L12.0041 6.92147L10.9038 5.67008L11.0477 4.00702L9.40702 3.63643L8.54132 2.18496L6.98768 2.84631L5.43404 2.18496L4.56834 3.63643L2.92764 3.99191L3.07154 5.67008L1.97126 6.92147L3.08665 8.17286L2.92764 9.85103L4.56834 10.2216L5.43404 11.658ZM6.21694 9.13744L9.8535 5.51599L9.03939 4.70911L6.21694 7.51645L4.93597 6.24336L4.12187 7.05748L6.21694 9.13744Z'), AVT = tag('Avtalssortiment', 'M6.26432 9.28715L9.78747 5.77511L8.94955 4.93719L6.26432 7.60785L5.06658 6.42469L4.22868 7.26261L6.26432 9.28715ZM3.21038 12.0872C2.87751 12.0872 2.59256 11.9686 2.35552 11.7316C2.11847 11.4945 1.99995 11.2096 1.99995 10.8767V3.26043C1.99995 2.92756 2.11847 2.64261 2.35552 2.40557C2.59256 2.16853 2.87751 2.05001 3.21038 2.05001H5.58904C5.68309 1.74398 5.85989 1.49247 6.11944 1.29549C6.37897 1.0985 6.67867 1.00001 7.01853 1.00001C7.35839 1.00001 7.65808 1.0985 7.91762 1.29549C8.17716 1.49247 8.35396 1.74398 8.44802 2.05001H10.8267C11.1595 2.05001 11.4445 2.16853 11.6815 2.40557C11.9186 2.64261 12.0371 2.92756 12.0371 3.26043V10.8767C12.0371 11.2096 11.9186 11.4945 11.6815 11.7316C11.4445 11.9686 11.1595 12.0872 10.8267 12.0872H3.21038ZM3.21038 10.8767H10.8267V3.26043H3.21038V10.8767ZM7.01853 2.89647C7.1277 2.89647 7.21798 2.86078 7.28936 2.7894C7.36074 2.71802 7.39643 2.62775 7.39643 2.51857C7.39643 2.4094 7.36074 2.31913 7.28936 2.24775C7.21798 2.17637 7.1277 2.14068 7.01853 2.14068C6.90936 2.14068 6.81908 2.17637 6.7477 2.24775C6.67632 2.31913 6.64063 2.4094 6.64063 2.51857C6.64063 2.62775 6.67632 2.71802 6.7477 2.7894C6.81908 2.86078 6.90936 2.89647 7.01853 2.89647Z');
       /* Data and pictures from "Liknande produkter" on swedol.se (hantverksbyxa-stretch-soul-275-0-svart, fetched 2026-11-13); price is mock (the live page shows none to guests) */
       var items = [
-        { brand: 'Björnkläder', name: 'Hantverksbyxa stretch Soul Karma 246-0 svart', art: '246075399', img: '246075399' },
+        { brand: 'Björnkläder', name: 'Hantverksbyxa stretch Soul Karma 246-0 svart', art: '246075399', img: '246075399' /* eprel: true shows the energy label + Produktblad; hidden for now */ },
         { brand: 'Björnkläder', name: 'Hantverksbyxa Classic 250-0 svart', art: '250070499', img: '250070499_1' },
         { brand: 'Björnkläder', name: 'Hantverksbyxa stretch Nordic 292-0 svart', art: '292070899', img: '292070899_1_2' },
         { brand: 'Gesto', name: 'Hantverksbyxa stretch Elevate G530 svart', art: '1253099', img: '1253099_1_2' },
@@ -3660,18 +3831,19 @@
       function card(it) {
         return '<li class="pcard"><div class="pcard__media">' +
           '<div class="pcard__badges badge-promo-group">' + (it.out ? '<span class="badge-promo badge-promo--closing">Utförsäljning</span>' : '') + '</div>' +
-          '<div class="pcard__actions"><button type="button" class="pcard__act" aria-label="Jämför" data-tooltip="Jämför"><span class="icon icon--sm" aria-hidden="true">compare_arrows</span></button>' +
-          '<button type="button" class="pcard__act" aria-pressed="false" aria-label="Lägg till i favoriter" data-tooltip="Lägg till i favoriter"><span class="icon icon--sm" aria-hidden="true">favorite</span></button></div>' +
-          '<img class="pcard__img" src="/images/pdp-pc-' + it.img + '.jpg" alt="" loading="lazy">' +
+          '<div class="pcard__actions"><button type="button" class="icon-btn-compact pcard__act" hidden aria-pressed="false" aria-label="Jämför" data-tooltip="Jämför"><span class="icon icon--sm icon-btn-compact__off" aria-hidden="true">compare_arrows</span><svg class="icon icon--sm icon-btn-compact__on" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 19.6501L6.95 18.5751L9.775 15.7501H2.25V14.2501H9.775L6.95 11.4251L8 10.3501L12.65 15.0001L8 19.6501ZM16 13.6501L11.35 9.0001L16 4.3501L17.05 5.4251L14.225 8.2501H21.75V9.7501H14.225L17.05 12.5751L16 13.6501Z"/><path d="M22 20.0001C22 22.2093 20.2091 24.0001 18 24.0001C15.7909 24.0001 14 22.2093 14 20.0001C14 17.791 15.7909 16.0001 18 16.0001C20.2091 16.0001 22 17.791 22 20.0001Z"/><path d="M17.1347 22.0001L15.3333 20.2465L15.9235 19.6747L17.1347 20.8377L20.0765 18.0001L20.6667 18.5813L17.1347 22.0001Z" fill="white"/></svg></button>' +
+          '<button type="button" class="icon-btn-compact icon-btn-compact--fill-hover pcard__act" aria-pressed="false" aria-label="Lägg till i favoriter" data-tooltip="Lägg till i favoriter"><span class="icon icon--sm" aria-hidden="true">favorite</span></button></div>' +
+          '<a href="#" class="pcard__imglink" tabindex="-1" aria-hidden="true"><img class="pcard__img" src="/images/pdp-pc-' + it.img + '.jpg" alt="" loading="lazy"></a>' +
           '<div class="pcard__tags">' + STD + '</div></div>' +
           '<div class="pcard__info"><span class="pcard__brand">' + it.brand + '</span><a href="#" class="inline-link inline-link--reverse inline-link--bold pcard__name">' + it.name + '</a>' +
           '<div class="pcard__meta"><span class="pcard__artnr">Art.nr: ' + it.art + '</span>' +
           '<div class="rating-stars rating-stars--sm"><span class="rating-stars__stars" role="img" aria-label="Betyg 4 av 5">' + star + star + star + star + star.replace('rating-stars__star"', 'rating-stars__star rating-stars__star--empty"') + '</span>' +
           '<span class="rating-stars__meta"><a href="#" class="inline-link rating-stars__count" aria-label="200 recensioner">200</a><span class="icon icon--xs" aria-hidden="true">info</span></span></div></div></div>' +
-          '<div class="pcard__foot"><p class="price price--card price--customer"><span class="price__main"><span class="price__value">53,00 kr</span> <span class="price__vat">exkl.moms</span></span>' +
+          '<div class="pcard__foot"><div class="pcard__pricerow"><div class="pcard__pricebox"><p class="price price--card price--customer"><span class="price__main"><span class="price__value">53,00 kr</span> <span class="price__vat">exkl.moms</span></span>' +
           '<span class="price__extra"><span class="price__old"><s>63,00 kr</s><span class="icon icon--sm" aria-hidden="true">info</span></span></span></p>' +
           '<ul class="pcard__status">' + ('<li><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Finns i flera varianter</li>') +
-          '<li><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Välj butik för butikssaldo</li></ul>' +
+          '<li><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Välj butik för butikssaldo</li></ul></div>' +
+          (it.eprel ? '<div class="pcard__eprel"><img src="/images/eprel-class-d.svg" width="51" height="28" alt="Energiklass D"><a href="#" class="inline-link inline-link--secondary pcard__eprel-link">Produktblad</a></div>' : '') + '</div>' +
           ('<button type="button" class="btn btn--primary btn--sm"><span class="btn__label">Visa varianter</span><span class="btn__icon" aria-hidden="true">chevron_right</span></button>') +
           '</div></li>';
       }
@@ -3724,10 +3896,16 @@
       var rows = [42, 44, 46, 48, 50, 52, 54, 56, 58, 60].map(function (n, i) {
         var r = { size: 'C' + n, art: '275072599-' + n, ean: '73114516558' + n, lev: '60011351A' + (6 + i), price: i < 6 ? 886.79 : 896.79, old: '1 670,00 kr', web: WEB_OUT, store: STORE_SUP, webOk: 1, storeOk: 1, stock: STOCK[i], boras: BORAS[i] };
         if (i === 0) r.web = 'Ej i lager (Bekräftad inleverans 24-10-02 skickas dagen efter)';
+        if (i === 4) { r.price = 620.75; r.old = '886,79 kr'; r.sale = { old: '886,79 kr', note: 'Kampanj t.o.m 2026-12-31', badge: true, closing: true };   /* state 4: old price + 30% + Utförsäljning */ }   /* C50: the discounted example (30% off) */
+        if (i === 6) { r.price = 620.75; r.old = '886,79 kr'; r.sale = { old: '886,79 kr', note: 'Kampanj t.o.m 2026-12-31', badge: true }; }   /* state 3: old price + 30% */
+        if (i === 2) { r.price = 620.75; r.old = '886,79 kr'; r.sale = { old: '886,79 kr', note: 'Kampanj t.o.m 2026-12-31' }; }   /* state 2: old price only; state 1 = every other variant */
         if (r.stock) r.web = r.stock + ' i lager';
         if (i === 1) { r.store = 'Ej i lager'; r.storeOk = 0; r.current = 1; }
         return r;
       });
+      /* Mock tiered prices (staffling) for the sticky add-to-cart: 10+ st -5%, 50+ st -10% on variants without a campaign price */
+      rows.forEach(function (r) { if (!r.sale) r.tiers = [{ from: 10, price: Math.round(r.price * 95) / 100 }, { from: 50, price: Math.round(r.price * 90) / 100 }]; });
+      window.PDP_VARIANTS = rows;
       function kr(n) { return n.toFixed(2).replace('.', ',') + ' kr'; }
       var sortKey = null, sortDir = 1, query = '';
       function row(r) {
@@ -3786,9 +3964,18 @@
       function select(r, scroll) {
         rows.forEach(function (x) { x.current = x === r; });
         var q = function (sel) { return document.querySelector(sel); };
+        document.body.classList.remove('pdp-none');
+        if (q('#pdp-price-from')) q('#pdp-price-from').hidden = true;
+        if (q('.pdp-artnr')) q('.pdp-artnr').hidden = false;
+        if (q('#pdp-add')) q('#pdp-add .btn__label').textContent = 'Lägg i varukorgen';
+        if (q('#pdp-size-value')) q('#pdp-size-value').classList.remove('is-empty');
         function badge(name, label, value) { var el = q('.pdp-artnr__copy[data-copy-name="' + name + '"]'); if (el) { el.dataset.copy = value; el.firstChild.nodeValue = label + value; } }
         badge('Artikelnummer', 'Art.nr: ', r.art); badge('EAN', 'EAN: ', r.ean); badge('Leverantörsnummer', 'Lev.nr: ', r.lev);
         if (q('.price--page .price__value')) q('.price--page .price__value').textContent = kr(r.price);
+        if (q('#pdp-price-extra')) {   /* discounted variant: old price, badge and campaign note under the price */
+          q('#pdp-price-extra').hidden = !r.sale;
+          if (r.sale) { q('#pdp-price-old').textContent = r.sale.old; q('#pdp-price-note').textContent = r.sale.note; q('#pdp-price-off').hidden = !r.sale.badge; q('#pdp-price-closing').hidden = !r.sale.closing; q('#pdp-price-badges').hidden = !r.sale.badge && !r.sale.closing; }
+        }
         if (q('#pdp-size-value')) q('#pdp-size-value').textContent = r.size + ' - ' + r.art;
         var dot = function (ok) { return '<span class="badge-dot badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
         if (q('#pdp-web-status')) q('#pdp-web-status').innerHTML = dot(1) + '<span>' + (r.stock ? r.stock + ' st i lager (Normal leverans 1-2 arbetsdagar)' : r.web) + '</span>';
@@ -3802,6 +3989,25 @@
           if (q('#pdp-title')) q('#pdp-title').focus({ preventScroll: true });   /* keyboard users land on the heading, not in the table */
         }
       }
+      /* No variant chosen (?variant=none): "Från" + lowest price, no article numbers, empty size row, the buy button asks for a size */
+      function selectNone() {
+        var q = function (sel) { return document.querySelector(sel); };
+        rows.forEach(function (x) { x.current = false; });
+        document.body.classList.add('pdp-none');
+        q('#pdp-price-from').hidden = false; q('.price--page .price__value').textContent = kr(Math.min.apply(null, rows.map(function (x) { return x.price; })));
+        q('#pdp-price-extra').hidden = true;
+        q('.pdp-artnr').hidden = true;
+        q('#pdp-size-value').textContent = 'Välj storlek'; q('#pdp-size-value').classList.add('is-empty');
+        q('#pdp-add .btn__label').textContent = 'Välj storlek';
+        q('#pdp-web-status').innerHTML = '<span>Välj storlek för att se lagersaldo.</span>';
+        q('#pdp-store-status').innerHTML = '';
+        render();
+      }
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('#pdp-add') || !document.body.classList.contains('pdp-none')) return;
+        var row = document.querySelector('.pdp-action__select .drawer-link__row');
+        if (row) { row.scrollIntoView({ block: 'center', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); row.focus({ preventScroll: true }); }
+      });
       function onClick(e) {
         var pick = e.target.closest('.pv-var__link');
         if (pick) {
@@ -3841,7 +4047,374 @@
       document.addEventListener('mousemove', function (e) { if (drag) { wrap.scrollLeft = s0 - (e.pageX - x0); update(); } });
       document.addEventListener('mouseup', function () { if (drag) { drag = false; wrap.classList.remove('is-grabbing'); } });
       var fromUrl = new URLSearchParams(location.search).get('variant'), first = rows.filter(function (x) { return x.art === fromUrl; })[0];
-      select(first || rows.filter(function (x) { return x.current; })[0]);   /* the top of the page starts on the same variant as the table */
+      if (fromUrl === 'none') selectNone(); else select(first || rows.filter(function (x) { return x.current; })[0]);   /* the top of the page starts on the same variant as the table */
+    })();
+  </script>
+  <script>
+    /* Store status + store info drawer. Mock data: 12 stores, km from Borås (the store in the header = pre-selected). */
+    (function () {
+      var S = [['Arlandastad','Voltgatan 9, Arlandastad, 195 60, Stockholms län',59.65,17.93,2],['Arninge','Leverantörsvägen 17, Täby, 187 66, Stockholms län',59.46,18.13,2],
+        ['Borås','Göteborgsvägen 185, Borås, 504 63, Västra Götalands län',57.72,12.94,100],['Borlänge','Mästargatan 7, Borlänge, 781 71, Dalarna',60.48,15.43,2],
+        ['Bromma','Ranhammarsvägen 12, Bromma, 168 67, Stockholms län',59.34,17.94,2],['Eskilstuna','Kungsgatan 42, Eskilstuna, 632 20, Södermanlands län',59.37,16.51,0],
+        ['Göteborg Backa','Exportgatan 22, Göteborg, 422 46, Västra Götalands län',57.75,11.95,14],['Jönköping','Elmiavägen 3, Jönköping, 553 10, Jönköpings län',57.78,14.16,5],
+        ['Linköping','Västra Svedengatan 2, Linköping, 582 73, Östergötlands län',58.41,15.62,0],['Malmö Fosie','Jägershillsgatan 18, Malmö, 213 75, Skåne län',55.56,13.04,7],
+        ['Solna','Hemvärnsgatan 18, Solna, 171 54, Stockholms län',59.37,18.0,3],['Uppsala','Boländerna 14, Uppsala, 754 50, Uppsala län',59.86,17.64,3],['Örebro','Bergsmansvägen 4, Örebro, 703 61, Örebro län',59.27,15.21,0]]
+        .map(function (a, i) { return { id: i, name: a[0], addr: a[1], lat: a[2], lon: a[3], stock: a[4], sat: i % 3 === 0 ? 'Stängt' : '09:00 - 13:00', svc: ['sfkt', 'sf', 'skt', 'sfkt', 'st', 'sfkt', 'sk', 'sfkt', 'sf', 'sfkt', 'st', 'sfkt', 'skt'][i] }; });
+      /* services in store (mock): icon = Material Symbol, no custom drawing in the icon library yet */
+      var SVC = { s: ['hose-crimping', 'Slangpressning i butik', ['Swedol hjälper dig med slangpressning i butik. Vi åtgärdar slitna eller trasiga slangar för att minska säkerhetsrisker. Med en avancerad maskinpark pressar vi slangar i olika material och mått.', 'Du hittar även kopplingar, ventiler och tillbehör hos oss – snabbt, säkert och professionellt!'], 'slangpressning'],   /* texts from Figma 4580:20285; the other three are placeholders */
+        f: ['foot-scan', 'Fotskanning i butik', ['Vi mäter dina fötter i butiken så att du hittar skyddsskor som passar just dig.'], 'fotskanning'],
+        t: ['clothing-print', 'Klädtryck i butik', ['Vi trycker företagets logotyp på arbetskläder direkt i butiken.'], 'klädtryck'],
+        k: ['chain-workshop', 'Kättingverkstad i butik', ['Vi tillverkar och reparerar kättingar och lyftslingor i butiken.'], 'kättingverkstad'] };   /* icons: images/svc-*.svg, ECO Custom/Service/*_brand Medium (24px) */
+      var ME = { lat: 58.0, lon: 13.5 };   /* mock position for the geolocator */
+      var km = function (a, b) { var r = Math.PI / 180, d = Math.sin((b.lat - a.lat) * r / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin((b.lon - a.lon) * r / 2) ** 2; return 2 * 6371 * Math.asin(Math.sqrt(d)) * 1.2; };
+      var sel = S[2], geo = false, el = function (id) { return document.getElementById(id); }, sd = el('sd'), opener = null;
+      var q = el('sd-search'), tog = el('sd-instock'), box = el('sd-cards');
+      var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+      var dot = function (ok) { return '<span class="badge-dot badge-dot--md badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
+      var fmt = function (n) { return n < 10 ? String(Math.round(n * 10) / 10).replace('.', ',') : Math.round(n); };
+      function render() {
+        /* the Borås stock follows the variant shown at the top of the page */
+        var b = document.querySelector('#pdp-store-status .pdp-stock__status span:last-child'); if (b) S[2].stock = parseInt(b.textContent, 10) || 0;
+        var term = q.value.trim(), t = term.toLowerCase(), anchor, label;
+        if (geo) { anchor = ME; label = 'Din nuvarande plats'; }
+        else if (t) { anchor = S.filter(function (x) { return (x.name + ' ' + x.addr).toLowerCase().indexOf(t) > -1; })[0] || null; label = term; }
+        else if (sel) { anchor = sel; label = sel.name; }
+        var list = S.filter(function (x) { return !tog.checked || x.stock > 0 || x === sel || x === anchor; });
+        var d = function (x) { return anchor ? (x === anchor ? 0 : km(anchor, x)) : 0; };
+        if (anchor) list.sort(function (x, y) { return (!t && !geo && sel) ? (x === sel ? -1 : y === sel ? 1 : d(x) - d(y)) : d(x) - d(y); });
+        else list.sort(function (x, y) { return x.name.localeCompare(y.name, 'sv'); });
+        el('sd-sort').innerHTML = anchor ? 'Butiker sorteras efter avstånd till <strong>"' + esc(label) + '"</strong>' : t ? 'Inga butiker matchade "' + esc(term) + '". Butiker sorteras i alfabetisk ordning.' : 'Ingen butik vald. Butiker sorteras i alfabetisk ordning.';
+        box.innerHTML = list.length ? list.map(function (x, i) {
+          var on = x === sel, dist = anchor && anchor !== x && d(x) ? ' <span class="sd-card__km">· ' + fmt(d(x)) + ' km bort</span>' : '';
+          return '<li class="sd-card' + (on ? ' is-selected' : '') + '" data-id="' + x.id + '" tabindex="0" role="button" aria-pressed="' + on + '" aria-label="' + (on ? 'Vald butik ' : 'Välj butik ') + esc(x.name) + '">' +
+            '<div class="sd-card__head"><h3 class="sd-card__name">' + (on ? '<span class="ms" aria-hidden="true">store</span>' : '') + esc(x.name) + dist + '</h3>' +
+            '<a href="#" class="action-link action-link--medium" data-info="' + x.id + '"><span class="action-link__label">Butiksinformation</span><span class="action-link__icon" aria-hidden="true">chevron_right</span></a></div>' +
+            '<p class="sd-card__status">' + dot(x.stock) + (x.stock ? 'Butik - ' + x.stock + ' i lager' : 'Ej i lager') + '</p>' +
+            '<p class="sd-card__status">' + dot(1) + 'Köp &amp; hämta - Tillgänglig</p>' +
+            '<p class="sd-card__addr">' + esc(x.addr) + '</p></li>' + (on && i === 0 && list.length > 1 ? '<li class="sd-sep" role="presentation"></li>' : '');
+        }).join('') : '<li class="sd-sub sd-empty">Inga butiker hittades.</li>';
+      }
+      function setStore(s) {
+        sel = s;
+        document.querySelectorAll('.store-btn > span:not(.ms):not(.store-btn__text-regular), .sh-sm__store-btn__bold').forEach(function (n) { n.innerHTML = esc(s.name) + ',&nbsp;'; });
+        var h = document.querySelector('.pdp-stock__store .pdp-stock__name'); if (h && h.lastChild) h.lastChild.textContent = s.name;
+        var a = el('pdp-stores-link'); if (a) a.querySelector('.action-link__label').textContent = 'Tillgänglig i ' + S.filter(function (x) { return x.stock > 0; }).length + ' butiker';
+        render();
+      }
+      function lock(on) { var de = document.documentElement; if (on) { var sw = innerWidth - de.clientWidth; de.style.overflow = 'hidden'; document.body.style.paddingRight = sw ? sw + 'px' : ''; } else { de.style.overflow = ''; document.body.style.paddingRight = ''; } }   /* page does not scroll behind the drawer; padding keeps the layout from jumping */
+      function open() { lock(true); opener = document.activeElement; sd.classList.remove('is-info'); render(); el('sd-overlay').classList.add('is-open'); sd.classList.add('is-open'); sd.setAttribute('aria-hidden', 'false'); setTimeout(function () { sd.querySelector('.sd-view--list .drawer-close-btn').focus(); }, 0); }
+      function close() { lock(false); el('sd-overlay').classList.remove('is-open'); sd.classList.remove('is-open'); sd.setAttribute('aria-hidden', 'true'); if (opener && opener.focus) opener.focus(); }
+      var cur = null;
+      function info(s) {
+        cur = s; var slug = s.name.toLowerCase().replace(/[^a-zåäö]+/g, '-');
+        el('sd-i-name').innerHTML = (s === sel ? '<span class="ms" aria-hidden="true">store</span>' : '') + esc(s.name);
+        var ad = el('sd-i-addr'); ad.querySelector('.action-link__label').textContent = s.addr; ad.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.addr);
+        el('sd-i-tel').href = 'tel:033442680'; el('sd-i-tel').querySelector('.action-link__label').textContent = '033-44 26 80';
+        var mail = 'info.' + s.name.toLowerCase().replace(/\s+/g, '') + '@swedol.se'; el('sd-i-mail').href = 'mailto:' + mail; el('sd-i-mail').querySelector('.action-link__label').textContent = mail;
+        el('sd-i-gln-t').textContent = 'GLN: 275072599-' + (144 + s.id); el('sd-i-dir').href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(s.addr);
+        var day = (new Date().getDay() + 6) % 7, today = day < 5 ? '06:30 - 17:00' : day === 5 ? s.sat : 'Stängt';
+        el('sd-i-open').innerHTML = today === 'Stängt' ? '<h3>Stängt idag</h3>' : '<h3>Öppet idag</h3><h3>' + today + '</h3>';
+        el('sd-i-hours').innerHTML = [['Mån - Fre', '06:30 - 17:00'], ['Lör', s.sat], ['Sön', 'Stängt']].map(function (r) { return '<div class="sd-info__row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('');
+        el('sd-i-svc-sec').hidden = !s.svc;
+        el('sd-i-svc').innerHTML = 'sftk'.split('').filter(function (k) { return s.svc.indexOf(k) > -1; }).map(function (k, n) { var v = SVC[k], id = 'sd-svc-' + n;
+          return '<div class="collapsible-wrap"><button type="button" class="collapsible-item" onclick="toggleCollapsible(this)" aria-expanded="false" aria-controls="' + id + '"><span class="collapsible-item__left"><img class="sd-svc-ico" src="/images/svc-' + v[0] + '.svg" alt="" width="24" height="24"><span class="collapsible-item__label">' + v[1] + '</span></span><span class="collapsible-item__end"><span class="ms collapsible-item__chevron" aria-hidden="true">expand_more</span></span></button>' +
+            '<div class="collapsible-item__content" id="' + id + '">' + v[2].map(function (t) { return '<p class="sd-sub">' + t + '</p>'; }).join('') + '<a href="#" class="action-link action-link--medium"><span class="action-link__label">Läs mer om ' + v[3] + '</span><span class="action-link__icon" aria-hidden="true">chevron_right</span></a></div></div>'; }).join('');
+        el('sd-i-pick').disabled = s === sel;
+        sd.classList.add('is-info'); setTimeout(function () { el('sd-back').focus(); }, 0);
+      }
+      document.addEventListener('click', function (e) {
+        if (e.target.closest('#pdp-stores-link')) { e.preventDefault(); open(); return; }
+        if (e.target.closest('#sd-overlay, [data-sd-close]')) { close(); return; }
+        if (e.target.closest('#sd-back')) { sd.classList.remove('is-info'); return; }
+        var inf = e.target.closest('[data-info]'); if (inf) { e.preventDefault(); e.stopPropagation(); info(S[inf.dataset.info]); return; }
+        var card = e.target.closest('.sd-card'); if (card && sd.contains(card)) { setStore(S[card.dataset.id]); close(); return; }
+        if (e.target.closest('#sd-i-pick')) { if (cur && cur !== sel) { setStore(cur); if (window.ECO_N) ECO_N.showEcomToast({ variant: 'info', name: cur.name, text: 'är nu din butik.' }); } sd.classList.remove('is-info'); return; }
+        if (e.target.closest('#sd-i-gln')) { var t = el('sd-i-gln-t').textContent.replace('GLN: ', ''); if (navigator.clipboard) navigator.clipboard.writeText(t); if (window.ECO_N) ECO_N.showEcomToast({ variant: 'info', name: 'GLN-numret', text: 'kopierades till urklipp.' }); }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (!sd.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.stopImmediatePropagation(); sd.classList.contains('is-info') ? sd.classList.remove('is-info') : close(); }
+        var card = e.target.closest && e.target.closest('.sd-card'); if (card && (e.key === 'Enter' || e.key === ' ') && !e.target.closest('a')) { e.preventDefault(); setStore(S[card.dataset.id]); close(); }
+      }, true);
+      q.addEventListener('input', function () { geo = false; render(); });
+      el('sd-geo').addEventListener('click', function () { geo = true; q.value = 'Din nuvarande plats'; render(); });
+      q.addEventListener('input', function () {}); tog.addEventListener('change', render);
+      el('sd-clear').addEventListener('click', function () { q.value = ''; geo = false; render(); q.focus(); });
+      [['sd-list-scroll', '.sd-view--list'], ['sd-info-scroll', '.sd-view--info']].forEach(function (p) {
+        var c = el(p[0]), h = sd.querySelector(p[1] + ' .drawer-header'), f = sd.querySelector(p[1] + ' .drawer-footer');
+        c.addEventListener('scroll', function () { h.classList.toggle('drawer-header--elevated', c.scrollTop > 0); });
+      });
+      render();
+    })();
+  </script>
+  <!-- ── STICKY ADD TO CART (AE-3264, proposal 1). Shows when #pdp-add has scrolled out above the viewport. ── -->
+  <style>
+    .sticky-atc { position: fixed; z-index: 90; left: 0; right: 0; bottom: 0; background: var(--color-surface-raised-secondary); border-top: 1px solid var(--color-border-primary); box-shadow: var(--shadow-elevation-t-60);
+      transform: translateY(100%); visibility: hidden; transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized), visibility 0s linear var(--duration-medium-3); }
+    .sticky-atc.is-on { transform: none; visibility: visible; transition-delay: 0s; }
+    .sticky-atc__in { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "img id price" "buy buy buy"; align-items: center; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-12); padding: var(--dimension-spacing-space-12) var(--dimension-spacing-space-16); max-width: 1280px; margin: 0 auto; }
+    .sticky-atc__img { grid-area: img; width: 40px; height: 48px; object-fit: contain; }
+    .sticky-atc__id { grid-area: id; min-width: 0; }
+    .sticky-atc__name { margin: 0; font-size: 16px; line-height: 18px; font-weight: 600; color: var(--color-text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-feature-settings: 'ss02' 1, 'ss03' 1; } /* title-sm */
+    .sticky-atc__var { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); margin: 2px 0 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); white-space: nowrap; overflow: hidden; } /* body-sm */
+    .sticky-atc__var > span { overflow: hidden; text-overflow: ellipsis; }
+    .sticky-atc__avail, .sticky-atc__more { display: none; }
+    .sticky-atc__var .badge-dot { flex: none; }
+    .sticky-atc__price { grid-area: price; display: flex; flex-direction: column; align-items: flex-end; color: var(--color-text-price-customer); white-space: nowrap; }
+    .sticky-atc__old { display: flex; align-items: center; gap: var(--dimension-spacing-space-4); font-size: 14px; line-height: 16px; color: var(--color-text-secondary); }
+    .sticky-atc__old[hidden] { display: none; }
+    .sticky-atc__old .icon { color: var(--color-text-secondary); }
+    .sticky-atc__price b { display: block; font-size: 20px; line-height: 24px; font-weight: 600; }
+    .sticky-atc__price b.is-roll { animation: sa-roll var(--duration-medium-3) var(--ease-decelerate-emphasized); }
+    @keyframes sa-roll { from { transform: translateY(60%); opacity: 0; } to { transform: none; opacity: 1; } }
+    .sticky-atc__price small { font-size: 14px; line-height: 16px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    /* campaign: price + "exkl. moms" on one line, old price + badge under them */
+    .sticky-atc__price.has-old { display: grid; grid-template-columns: auto auto; justify-content: end; align-items: baseline; column-gap: var(--dimension-spacing-space-4); }
+    .sticky-atc__price.has-old b { grid-area: 1 / 1; }
+    .sticky-atc__price.has-old small { grid-area: 1 / 2; }
+    .sticky-atc__price.has-old .sticky-atc__old { grid-area: 2 / 1 / 2 / 3; justify-self: end; }
+    @media (max-width: 639px) { .sticky-atc__price.has-old { justify-content: start; } .sticky-atc__price.has-old .sticky-atc__old { justify-self: start; } }
+    .sticky-atc__buy { grid-area: buy; display: flex; gap: var(--dimension-spacing-space-8); }
+    .sticky-atc__buy .btn--primary { flex: 1 0 0; min-width: 0; }
+    .sticky-atc__ok { display: none; align-items: center; gap: var(--dimension-spacing-space-4); }
+    .sticky-atc.is-added .sticky-atc__ok { display: inline-flex; }
+    .sticky-atc.is-added .sticky-atc__lbl { display: none; }
+    .sticky-atc__cart { display: none; }
+    body.has-sticky-atc { padding-bottom: var(--sa-h, 0px); }
+    /* xs (below 640px): the buy button is an icon button (user request 2026-11-15); price moves down beside stepper + button */
+    @media (max-width: 639px) {
+      .sticky-atc__in { grid-template-areas: "img id id" "price price buy"; }
+      .sticky-atc__price { align-items: flex-start; }
+      .sticky-atc__buy .btn--primary { flex: 0 0 auto; width: var(--btn-h); padding: 0; }
+      .sticky-atc__cart { display: inline-flex; }
+      .sticky-atc__buy .btn__label { display: none; }   /* the label's 16px inset would push the icon off centre */
+      .sticky-atc.is-added .sticky-atc__cart { display: none; }
+      .sticky-atc.is-added .sticky-atc__buy .btn__label { display: inline-flex; padding: 0; }
+      .sticky-atc__oktx { display: none; }
+    }
+    @media (min-width: 769px) {
+      /* desktop: size on line 2, stock for web and store on line 3, store link + campaign/tier note on line 4 (Bauhaus-style availability, user 2026-11-15) */
+      .sticky-atc__var .sa-mo { display: none; }
+      .sticky-atc__avail { display: flex; gap: var(--dimension-spacing-space-16); margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); white-space: nowrap; overflow: hidden; }
+      .sticky-atc__avail > span { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-8); overflow: hidden; text-overflow: ellipsis; }
+      .sticky-atc__more { display: flex; align-items: center; gap: var(--dimension-spacing-space-12); margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); white-space: nowrap; overflow: hidden; }
+      .sticky-atc__more:empty { display: none; }
+      .sticky-atc__in { grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "img id price buy"; gap: var(--dimension-spacing-space-16) var(--dimension-spacing-space-24); padding: var(--dimension-spacing-space-12) var(--dimension-spacing-space-32); }
+      .sticky-atc__price b { font-size: 24px; line-height: 28px; }
+      .sticky-atc__buy .btn--primary { flex: 0 0 auto; min-width: 200px; }
+    }
+    @media (min-width: 1024px) { .sticky-atc__in { padding-inline: var(--dimension-spacing-space-40); } }
+    /* Variant 2, lean (?sticky=2): no thumbnail or name; mobile = buttons on top, size + store link left and price right below (Bauhaus-style); desktop = one row without thumbnail and name */
+    .sticky-atc--lean .sticky-atc__img, .sticky-atc--lean .sticky-atc__name, .sticky-atc--lean .badge-promo-group { display: none; }  /* the info icon stays */
+    .sticky-atc--lean .sticky-atc__in { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "buy buy" "id price"; }
+    .sticky-atc--lean .sticky-atc__id { display: flex; align-items: center; flex-wrap: wrap; gap: 0 var(--dimension-spacing-space-12); }
+    .sticky-atc--lean .sticky-atc__var { margin: 0; }
+    .sticky-atc--lean .sticky-atc__var > :not(:first-child), .sticky-atc--lean #sa-note { display: none; }
+    .sticky-atc--lean .sticky-atc__more { display: flex; margin: 0; }
+    .sticky-atc--lean .sticky-atc__price { align-items: flex-end; }
+    .sticky-atc--lean .sticky-atc__price.has-old { justify-content: end; }
+    .sticky-atc--lean .sticky-atc__price.has-old .sticky-atc__old { justify-self: end; }
+    .sticky-atc--lean .sticky-atc__buy .btn--primary { flex: 1 0 0; width: auto; padding: 0 var(--btn-pad); }
+    .sticky-atc--lean .sticky-atc__cart { display: none; }
+    .sticky-atc--lean .sticky-atc__buy .btn__label { display: inline-flex; }
+    .sticky-atc--lean:not(.is-added) .sticky-atc__ok, .sticky-atc--lean.is-added .sticky-atc__lbl { display: none; }
+    .sticky-atc--lean.is-added .sticky-atc__ok, .sticky-atc--lean:not(.is-added) .sticky-atc__lbl { display: inline-flex; }
+    .sticky-atc--lean.is-added .sticky-atc__oktx { display: inline; }
+    @media (min-width: 769px) {
+      .sticky-atc--lean .sticky-atc__in { grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "id price buy"; }
+      .sticky-atc--lean .sticky-atc__id { display: block; }
+      .sticky-atc--lean .sticky-atc__var { margin: 2px 0 0; }
+      .sticky-atc--lean #sa-note { display: inline; }
+      .sticky-atc--lean .sticky-atc__buy .btn--primary { flex: 0 0 auto; min-width: 200px; }
+    }
+    .sticky-atc [hidden], #pdp-price-badges [hidden], #pdp-price-badges[hidden] { display: none !important; }
+    /* prototype switcher, remove when one variant is chosen */
+    .sa-switch { position: fixed; z-index: 91; right: 0; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; background: var(--color-surface-100); color: var(--color-text-primary-inverted); font-size: 12px; line-height: 14px; }
+    .sa-switch span { padding: 8px 10px 4px; text-transform: uppercase; letter-spacing: .4px; color: var(--color-text-tertiary-inverted); }
+    .sa-switch button { all: unset; cursor: pointer; padding: 10px; text-align: center; font-weight: 600; }
+    .sa-switch button[aria-pressed="true"] { background: var(--color-surface-00); color: var(--color-text-primary); }
+    .sa-switch button:focus-visible { outline: 2px solid var(--color-border-selected); outline-offset: -2px; }
+    @media (prefers-reduced-motion: reduce) { .sticky-atc { transition: none; } .sticky-atc__price b.is-roll { animation: none; } }
+  </style>
+
+  <div class="sticky-atc" id="sticky-atc" role="region" aria-label="Snabbköp" aria-hidden="true" inert>
+    <div class="sticky-atc__in">
+      <img class="sticky-atc__img" src="/images/pdp-gallery-front.png" alt="" width="40" height="48">
+      <div class="sticky-atc__id">
+        <p class="sticky-atc__name">Carpenter soul hantverksbyxa stretch svart</p>
+        <p class="sticky-atc__var" id="sa-var"></p>
+        <p class="sticky-atc__avail" id="sa-avail"></p>
+        <p class="sticky-atc__more"><a href="#" class="action-link action-link--small" id="sa-stores"><span class="action-link__label">Se tillgänglighet i butiker</span><span class="action-link__icon" aria-hidden="true">chevron_right</span></a><span id="sa-note"></span></p>
+      </div>
+      <div class="sticky-atc__price" aria-live="polite">
+        <span class="sticky-atc__old" id="sa-old" hidden><s id="sa-old-v"></s><span class="icon icon--sm" id="sa-old-i" aria-hidden="true">info</span><span class="badge-promo-group"><span class="badge-promo" id="sa-off"></span><span class="badge-promo badge-promo--closing" id="sa-closing" hidden>Utförsäljning</span></span></span>
+        <b id="sa-price"></b>
+        <small>exkl. moms</small>
+              </div>
+      <div class="sticky-atc__buy">
+        <div class="picker-stepper" role="group" aria-label="Antal">
+          <button type="button" class="picker-stepper__btn" data-step="-1" aria-label="Minska antal" disabled><span class="icon icon--sm" aria-hidden="true">remove</span></button>
+          <div class="picker-stepper__value">
+            <input class="picker-stepper__input" id="sa-qty" type="text" inputmode="numeric" pattern="[0-9]*" value="1" min="1" aria-label="Antal, styck" autocomplete="off">
+            <span class="picker-stepper__unit" aria-hidden="true">st</span>
+          </div>
+          <button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"><span class="icon icon--sm" aria-hidden="true">add</span></button>
+        </div>
+        <button type="button" class="btn btn--primary btn--md" id="sa-add" aria-label="Lägg i varukorgen"><span class="btn__icon sticky-atc__cart" aria-hidden="true">add_shopping_cart</span><span class="btn__label"><span class="sticky-atc__lbl">Lägg i varukorgen</span><span class="sticky-atc__ok"><span class="icon icon--sm" aria-hidden="true">check</span><span class="sticky-atc__oktx">Tillagd</span></span></span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sa-switch" role="group" aria-label="Variant av sticky-knapp (prototyp)"><span>Variant</span><button type="button" data-v="1" aria-pressed="true">1</button><button type="button" data-v="2" aria-pressed="false">2</button></div>
+
+  <script>
+    (function () {
+      var sa = document.getElementById('sticky-atc'), main = document.getElementById('pdp-add'), q = function (s) { return document.querySelector(s); }, byId = function (i) { return document.getElementById(i); };
+      if (!sa || !main) return;
+      function setV(v) {
+        sa.classList.toggle('sticky-atc--lean', v === '2');
+        document.querySelectorAll('.sa-switch button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === v); });
+        try { var u = new URL(location.href); u.searchParams.set('sticky', v); history.replaceState(null, '', u); } catch (e) {}
+        if (window.sync) window.sync(); else if (typeof measure === 'function') measure();
+      }
+      document.querySelector('.sa-switch').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) setV(b.dataset.v); });
+      setV((/[?&]sticky=([12])/.exec(location.search) || [0, '1'])[1]);
+      var mainQty = q('.pdp-buy .picker-stepper__input'), saQty = byId('sa-qty'), price = byId('sa-price'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var kr = function (n) { return n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' kr'; };
+      function measure() { document.body.style.setProperty('--sa-h', sa.offsetHeight + 'px'); }
+      var lastPrice = '';
+      /* The page top and the variant table are the source: the current variant comes from PDP_VARIANTS (set by the table script), the rest is text on the page. */
+      function sync() {
+        var rows = window.PDP_VARIANTS || [], cur = rows.filter(function (r) { return r.current; })[0], qty = parseInt(saQty.value, 10) || 1;
+        var size = (q('#pdp-size-value') || {}).textContent || '', none = !cur || !size.trim() || /^välj/i.test(size.trim());
+        var unit = none ? Math.min.apply(null, rows.map(function (r) { return r.sale ? r.price : r.price; })) : cur.price, tier = null, next = null;
+        if (!none && cur.tiers) { cur.tiers.forEach(function (t) { if (qty >= t.from) tier = t; else if (!next) next = t; }); if (tier) unit = tier.price; }
+        var parts = [], dot = '', note = '', avail = '';
+        if (none) parts.push('<span>Välj storlek för att köpa</span>');
+        else {
+          parts.push('<span>Storlek ' + cur.size + '</span>');
+          var ok = cur.stock > 0; dot = '<span class="badge-dot badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>';
+          parts.push('<span class="sa-mo">' + dot + '</span><span class="sa-mo">' + (ok ? cur.stock + ' st i lager' : 'Ej i lager online') + '</span>');
+          if (cur.sale) note = cur.sale.note; else if (next) note = 'Köp ' + next.from + '+ st: ' + kr(next.price) + '/st';
+          if (note) parts.push('<span class="sa-mo">' + note + '</span>');
+          var store = ((q('.pdp-stock__store .pdp-stock__name') || {}).textContent || 'butik').trim(), sdot = function (o) { return '<span class="badge-dot badge-dot--' + (o ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
+          avail = '<span>' + dot + (ok ? cur.stock + ' st i lager online' : 'Ej i lager online') + '</span><span>' + sdot(cur.boras) + (cur.boras ? cur.boras + ' st i ' + store : 'Ej i lager i ' + store) + '</span>';
+        }
+        byId('sa-var').innerHTML = parts.join(''); byId('sa-avail').innerHTML = avail; byId('sa-note').textContent = note;
+        var shown = (none ? 'Från ' : '') + kr(unit);
+        if (shown !== lastPrice) { price.textContent = shown; lastPrice = shown; if (!reduce) { price.classList.remove('is-roll'); void price.offsetWidth; price.classList.add('is-roll'); } }
+        var sale = !none && cur.sale; byId('sa-old').hidden = !sale; byId('sa-old').parentNode.classList.toggle('has-old', !!sale);
+        if (sale) { byId('sa-old-v').textContent = cur.sale.old; byId('sa-old-i').dataset.tooltip = cur.sale.note; byId('sa-off').hidden = !cur.sale.badge; byId('sa-closing').hidden = !cur.sale.closing; byId('sa-off').parentNode.hidden = !cur.sale.badge && !cur.sale.closing; byId('sa-off').textContent = Math.round((1 - cur.price / parseFloat(cur.sale.old.replace(/\s/g, '').replace(',', '.'))) * 100) + '% rabatt'; }
+        var lbl = none ? 'Välj variant' : 'Lägg i varukorgen'; sa.querySelector('.sticky-atc__lbl').textContent = lbl; byId('sa-add').setAttribute('aria-label', lbl); sa.dataset.none = none ? '1' : '';
+        measure();
+      }
+      new MutationObserver(sync).observe(q('.pdp__info'), { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden'] });
+      sync();
+      /* Show when the page's own button is not in view; hide when it is. */
+      function toggle() {
+        /* Visible = inside the viewport, between the sticky header and (while the bar is up) the bar; the bar shows whenever the page's own button is not visible, above or below (AE-3264). */
+        var r = main.getBoundingClientRect(), h = document.querySelector('.site-header'), top = h ? Math.max(0, h.getBoundingClientRect().bottom) : 0, bottom = innerHeight - (sa.classList.contains('is-on') ? sa.offsetHeight : 0);
+        var on = !(r.bottom > top && r.top < bottom); if (on === sa.classList.contains('is-on')) return;
+        sa.classList.toggle('is-on', on); sa.toggleAttribute('inert', !on); sa.setAttribute('aria-hidden', !on); document.body.classList.toggle('has-sticky-atc', on); measure();
+      }
+      addEventListener('scroll', toggle, { passive: true }); addEventListener('resize', function () { toggle(); measure(); }); addEventListener('load', toggle); toggle();   /* load: images and fonts move the button after first paint */
+      /* Quantity sync both ways (the stepper script clamps; the loop stops when both values are equal), and a new quantity can change the tier price. */
+      document.addEventListener('change', function (e) {
+        var from = e.target === mainQty ? mainQty : e.target === saQty ? saQty : null; if (!from) return;
+        var to = from === mainQty ? saQty : mainQty; if (to.value !== from.value) { to.value = from.value; to.dispatchEvent(new Event('change', { bubbles: true })); }
+        sync();
+      });
+      byId('sa-stores').addEventListener('click', function (e) { e.preventDefault(); var l = q('#pdp-stores-link'); if (l) l.click(); });
+      byId('sa-add').addEventListener('click', function () {
+        if (sa.dataset.none) { var t = q('.pdp-action__select'); if (t) t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); return; }
+        if (window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa stretch svart', text: saQty.value + ' st har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', primary: { label: 'Till varukorgen' } });
+        sa.classList.add('is-added'); setTimeout(function () { sa.classList.remove('is-added'); }, 1600);
+      });
+    })();
+  </script>
+  <!-- Video modal (swedol.se: dark scrim, 16:9 player, close button beside the player) -->
+  <dialog class="pdp-video" id="pdp-video" aria-label="Produktvideo">
+    <div class="pdp-video__frame">
+      <div class="pdp-video__box"></div>
+      <button type="button" class="btn btn--primary btn--md btn--icon pdp-video__close" aria-label="Stäng video"><span class="btn__icon" aria-hidden="true">close</span></button>
+    </div>
+  </dialog>
+  <style>
+    dialog.pdp-video { position: fixed; inset: 0; box-sizing: border-box; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: var(--dimension-spacing-space-16); border: 0; background: transparent; overflow: visible; }
+    dialog.pdp-video[open] { display: flex; align-items: center; justify-content: center; animation: pdpv-in var(--duration-medium-2) var(--ease-decelerate-generic); }
+    dialog.pdp-video::backdrop { background: color-mix(in srgb, var(--color-surface-100) 80%, transparent); }
+    @keyframes pdpv-in { from { opacity: 0; } }
+    :root:has(dialog.pdp-video[open]) { overflow: hidden; }
+    .pdp-video__frame { position: relative; width: min(1430px, 100%); display: flex; flex-direction: column; align-items: flex-end; gap: var(--dimension-spacing-space-8); }
+    .pdp-video__box { width: 100%; aspect-ratio: 16 / 9; background: var(--color-surface-100); }
+    .pdp-video__box iframe { display: block; width: 100%; height: 100%; border: 0; }
+    .pdp-video__close.btn { order: -1; }
+    @media (min-width: 1024px) {
+      dialog.pdp-video { padding: var(--dimension-spacing-space-32) calc(var(--dimension-spacing-space-48) + var(--dimension-spacing-space-16)) var(--dimension-spacing-space-32) var(--dimension-spacing-space-48); }
+      .pdp-video__close.btn { position: absolute; top: 0; left: 100%; order: 0; }   /* beside the player, as on swedol.se */
+    }
+    @media (prefers-reduced-motion: reduce) { dialog.pdp-video[open] { animation: none; } }
+  </style>
+  <script>
+    /* Fler alternativ: hover previews the colour name, click switches to that colour's product (mock: name, front image, breadcrumb; variants and prices stay) */
+    (function () {
+      var inputs = [].slice.call(document.querySelectorAll('input[name="pdp-alt"]')), val = document.getElementById('pdp-alt-value'), cur = inputs.filter(function (i) { return i.checked; })[0], FRONT = '/images/pdp-gallery-front.png', now = FRONT, poster = '/images/pdp-gallery-video.jpg';
+      var ORIGT = document.getElementById('pdp-title').textContent, ORIGP = '/images/pdp-gallery-video.jpg', gal0 = document.querySelector('.pdp__media .gallery'), galTpl = gal0.cloneNode(true);
+      /* The gallery of a colour: Svart = the original; Blå keeps the video and the knee pads, swaps the front image and shows Blå's second photo instead of the three black detail images */
+      function buildGallery(i) {
+        var g = galTpl.cloneNode(true), sl = [].slice.call(g.querySelectorAll('.gallery__track > .gallery__slide')), th = [].slice.call(g.querySelectorAll('.gallery__thumb')), dt = [].slice.call(g.querySelectorAll('.gallery__dots > *'));
+        g.classList.remove('is-moved');
+        if (i.value === 'Blå') {
+          var s4 = sl[3].querySelector('img'); s4.src = '/images/pdp-gallery-bla-2.jpg'; s4.alt = 'Hantverksbyxa Soul stålblå, bakifrån'; s4.removeAttribute('width'); s4.removeAttribute('height'); sl[3].classList.add('gallery__slide--contain');
+          th[3].querySelector('img').src = '/images/pdp-gallery-bla-2.jpg'; th[3].querySelector('img').classList.add('gallery__thumb-img--contain');
+          [4, 5].forEach(function (k) { sl[k].remove(); th[k].remove(); dt[k].remove(); });
+          sl = sl.slice(0, 4); th = th.slice(0, 4);
+        }
+        g.querySelector('.gallery__track').setAttribute('aria-label', 'Produktbilder, ' + sl.length + ' bilder');
+        sl.forEach(function (f, k) { f.setAttribute('aria-label', 'Bild ' + (k + 1) + ' av ' + sl.length); });
+        th.forEach(function (f, k) { f.setAttribute('aria-label', 'Visa bild ' + (k + 1) + ' av ' + th.length); f.toggleAttribute('aria-current', k === 0); if (k === 0) f.setAttribute('aria-current', 'true'); });
+        dt.forEach(function (d, k) { d.classList.toggle('is-active', k === 0); });
+        g.querySelectorAll('img[src="' + FRONT + '"]').forEach(function (im) { im.src = i.dataset.img; });
+        g.querySelectorAll('img[src="' + ORIGP + '"]').forEach(function (im) { im.src = i.dataset.poster; });
+        g.querySelectorAll('.gallery__img').forEach(function (im) { im.alt = im.alt.replace(ORIGT, i.dataset.title); });
+        g.querySelectorAll('.gallery__slide--video').forEach(function (v) { if (i.dataset.video) v.dataset.yt = i.dataset.video; else delete v.dataset.yt; });
+        gal0.replaceWith(g); gal0 = g; window.ECO_GALLERY.init(g.parentNode);
+      }
+      function apply(i) {
+        var oldImg = now; now = i.dataset.img; poster = i.dataset.poster;
+        document.querySelectorAll('img[src="' + oldImg + '"]').forEach(function (im) { im.src = now; });   /* variant table, sticky bar */
+        var t = i.dataset.title;
+        ['#pdp-title', '.breadcrumb-item--active', '.sticky-atc__name'].forEach(function (sel) { var el = document.querySelector(sel); if (el) el.textContent = t; });
+        buildGallery(i);
+        val.textContent = i.value; cur = i;
+        try { var u = new URL(location.href); u.searchParams.set('color', i.value); history.replaceState(null, '', u); } catch (e) {}
+      }
+      inputs.forEach(function (i) {
+        var lab = i.closest('label');
+        lab.addEventListener('mouseenter', function () { val.textContent = i.value; });
+        lab.addEventListener('mouseleave', function () { val.textContent = cur.value; });
+        i.addEventListener('focus', function () { val.textContent = i.value; });
+        i.addEventListener('blur', function () { val.textContent = cur.value; });
+        i.addEventListener('change', function () { apply(i); });
+      });
+      /* YouTube video slide (page gallery and expanded gallery): a click opens the video modal and plays; only the Blå product has a video in the mock */
+      var vd = document.getElementById('pdp-video'), vbox = vd.querySelector('.pdp-video__box');
+      function closeVideo() { if (vd.open) vd.close(); }
+      vd.addEventListener('close', function () { vbox.innerHTML = ''; });
+      vd.addEventListener('click', function (e) { if (e.target === vd) closeVideo(); });   /* the scrim closes it */
+      vd.querySelector('.pdp-video__close').addEventListener('click', closeVideo);
+      function playVideo(e) {
+        var pl = e.target.closest('.gallery__slide--video[data-yt] .media-play');   /* only the play button plays; the image opens the expanded gallery */
+        if (!pl) return;
+        var sl = pl.closest('.gallery__slide--video');
+        e.preventDefault(); e.stopPropagation();
+        vbox.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + sl.dataset.yt + '?autoplay=1&rel=0" title="Produktvideo" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+        vd.showModal();
+      }
+      document.addEventListener('click', playVideo, true);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') playVideo(e); }, true);
+      var want = new URLSearchParams(location.search).get('color'), w = inputs.filter(function (i) { return i.value === want; })[0];
+      if (w && w !== cur) { w.checked = true; window.addEventListener('load', function () { apply(w); }); }
     })();
   </script>
 </body>

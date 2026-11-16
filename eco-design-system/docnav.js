@@ -21,7 +21,7 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
       label: 'Components', icon: 'palette',
       overview: { id: 'components-overview', t: 'Component Overview', href: D + 'components-overview.html' },
       groups: [
-        { title: 'Actions', items: [c('button', 'Button'), c('button-group', 'Button group')] },
+        { title: 'Actions', items: [c('button', 'Button'), c('button-group', 'Button group'), c('icon-button-compact', 'Compact icon button')] },
         { title: 'Form', items: [c('checkbox', 'Checkbox'), c('chip', 'Chip'), c('input', 'Input'), c('textarea', 'Text area'), c('radio', 'Radio button'), c('select', 'Select'), c('switch', 'Switch'), c('tabs', 'Tabs'), c('segment-control', 'Pill segment control'), c('range', 'Range'), c('icon-picker', 'Icon picker')] },
         { title: 'Notifications', items: [c('notifications', 'Notifications', { children: [c('toast', 'Toast'), c('toast-ecom', 'E-Com Toast'), c('modal', 'Modal'), c('banner', 'Banner'), c('inline', 'Inline notification')] })] },
         { title: 'Menus, lists and dividers', items: [c('menu', 'Menu'), c('list-item', 'List Item'), c('divider', 'Divider')] },

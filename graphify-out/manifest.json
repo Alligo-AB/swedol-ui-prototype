@@ -24,9 +24,9 @@
     "semantic_hash": "b35fdae09cd0b4f417e3b6b4401500ff"
   },
   "CLAUDE.md": {
-    "mtime": 1794581309.1630502,
-    "seen": 1794581319.948492,
-    "ast_hash": "59362e36763de129e088160c2f40484d",
+    "mtime": 1794746776.2242599,
+    "seen": 1794747433.4715729,
+    "ast_hash": "5d85b3c4db030e0df0debab9acee0108",
     "semantic_hash": ""
   },
   "README.md": {
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "template.html": {
-    "mtime": 1794581265.262013,
-    "seen": 1794581319.9488032,
-    "ast_hash": "921bb1b19d96a8271eb42fb58d5d166b",
+    "mtime": 1794746762.80947,
+    "seen": 1794747433.4718442,
+    "ast_hash": "b67f2f940b916045dbeba682251277b5",
     "semantic_hash": ""
   },
   ".claude/skills/links-guide/SKILL.md": {
@@ -186,9 +186,9 @@
     "semantic_hash": "3d6dbd58407de83c51835a9657aeee6b"
   },
   ".claude/skills/eco-button/SKILL.md": {
-    "mtime": 1793776338.452298,
-    "seen": 1793875135.1955578,
-    "ast_hash": "b0bbb9281f7d7c1b27cf99c64e0c2b81",
+    "mtime": 1794746779.919627,
+    "seen": 1794747433.4715211,
+    "ast_hash": "659e1190e3bd1be0ef2fdef1130e695e",
     "semantic_hash": ""
   },
   ".claude/skills/eco-checkbox/SKILL.md": {
@@ -324,9 +324,9 @@
     "semantic_hash": "09fc81aef67d494c01957ac06e42fcf3"
   },
   "mypages/mypages-template.html": {
-    "mtime": 1794581265.2875564,
-    "seen": 1794581319.948781,
-    "ast_hash": "b5bd00515131449ccede3b7040b4335c",
+    "mtime": 1794746762.8110592,
+    "seen": 1794747433.471831,
+    "ast_hash": "67546a2b8c3bbad6ac3e46cc05a9dc24",
     "semantic_hash": ""
   },
   "mypages/users-dashboard.html": {
@@ -744,9 +744,9 @@
     "semantic_hash": ""
   },
   "eco-design-system/docnav.js": {
-    "mtime": 1793945386.5424564,
-    "seen": 1793965766.171683,
-    "ast_hash": "0a4c781e94249d5a74f124473327c565",
+    "mtime": 1794747411.9854097,
+    "seen": 1794747433.4713979,
+    "ast_hash": "29c3bd9ac6578b4cdcbee604a7d24759",
     "semantic_hash": ""
   },
   "eco-design-system/toc.js": {
@@ -756,9 +756,9 @@
     "semantic_hash": "06ff44b8369a43c3ef46a1777b692213"
   },
   "eco-design-system/components-overview.html": {
-    "mtime": 1793869931.8890476,
-    "seen": 1793875135.195634,
-    "ast_hash": "6176be3ab719f6cac094776e911ddf45",
+    "mtime": 1794747423.2551026,
+    "seen": 1794747433.471603,
+    "ast_hash": "e66d80921d5a1415b64b8b9bf00b7b03",
     "semantic_hash": ""
   },
   "eco-design-system/components/tooltip-code.html": {
@@ -2826,9 +2826,9 @@
     "semantic_hash": ""
   },
   "pdp.html": {
-    "mtime": 1794581282.6047266,
-    "seen": 1794581319.94879,
-    "ast_hash": "bf6e9a446de1f8bceee07cca5630b2e2",
+    "mtime": 1794747336.6072993,
+    "seen": 1794747433.471839,
+    "ast_hash": "2ddca7d93e9c5ef085ca3875e5a2d136",
     "semantic_hash": ""
   },
   "components/js/gallery.js": {
@@ -2868,9 +2868,39 @@
     "semantic_hash": ""
   },
   ".claude/skills/eco-price/SKILL.md": {
-    "mtime": 1794581309.0960646,
-    "seen": 1794581319.948471,
-    "ast_hash": "122ce4590483f7e3946b60d8b4523dbf",
+    "mtime": 1794736609.2106905,
+    "seen": 1794736634.849043,
+    "ast_hash": "1c78f7dbb6718f9d42d7a6f8517063ca",
+    "semantic_hash": ""
+  },
+  "eco-design-system/gen/gen_icon_button_compact.py": {
+    "mtime": 1794747411.9842236,
+    "seen": 1794747433.471427,
+    "ast_hash": "3dce9e2bfc708c80eaa69b7fb85df95e",
+    "semantic_hash": ""
+  },
+  ".claude/skills/eco-icon-button-compact/SKILL.md": {
+    "mtime": 1794746776.1643708,
+    "seen": 1794747433.47154,
+    "ast_hash": "c97d6df2b6803ed53e1ba7a86867502b",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/icon-button-compact-code.html": {
+    "mtime": 1794747412.0840132,
+    "seen": 1794747433.471661,
+    "ast_hash": "d06d8bb22996162970691bb0108d45c5",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/icon-button-compact-specifications.html": {
+    "mtime": 1794747412.0834234,
+    "seen": 1794747433.471662,
+    "ast_hash": "76d48f6e84ee23ca9779243efa573ab5",
+    "semantic_hash": ""
+  },
+  "eco-design-system/components/icon-button-compact.html": {
+    "mtime": 1794747412.082747,
+    "seen": 1794747433.471663,
+    "ast_hash": "cd9be5783a6553a4987978283b3afb4a",
     "semantic_hash": ""
   }
 }

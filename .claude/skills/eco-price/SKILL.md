@@ -1,13 +1,13 @@
 ---
 name: eco-price
-description: Use when showing a price — on a product page, product card, small accessory card, mini cart, variant table or table card. Value with "exkl.moms", optional "Från", old price with info icon, campaign note and discount badge. Placements (page, card, card with stacked VAT, mini cart, table, compact) and price levels (not logged in, logged in, discount) by class. Not for a discount or status marker on its own (use eco-badge).
+description: Use when showing a price — on a product page, product card, small accessory card, mini cart, variant table or table card. Value with "exkl.moms", optional "Från", old price with info icon, campaign note and discount badge. Placements (page, card, mini cart, table, compact) and price levels (not logged in, logged in, discount) by class. Not for a discount or status marker on its own (use eco-badge).
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
 ## Price (ECO Design System)
 
-**Figma** (file `42MgqJjV9vfplwQnrUB62r`, checked 2026-11-13): Price `454:38091` (Product page, Card, Card w EPRED, Mini Cart × price level × breakpoint), Table price `303:17153`; small accessory card in the PDP file `gAuhhKQVftqFTly8D9ACp0` `2474:492811`.
+**Figma** (file `42MgqJjV9vfplwQnrUB62r`, checked 2026-11-15): Price `454:38091` (Product page, Card, Mini Cart × price level × breakpoint; the Card w EPRED variants were removed in the 2026-11-15 update), Table price `303:17153`; small accessory card in the PDP file `gAuhhKQVftqFTly8D9ACp0` `2474:492811`.
 **CSS:** `components/css/price.css`. **Docs page:** none yet (ask before adding). **First use:** `pdp.html` (price at the top, product cards, accessory cards, variant table and cards).
 
 ### When to use
@@ -20,9 +20,8 @@ Every price the user sees. Never write a page-local price rule: link `price.css`
 
 | Class | Placement | Value | "exkl.moms" | Old price |
 |---|---|---|---|---|
-| `price--page` | Product page | headline-lg 28/32, 36/40 from 769px | body-sm 14/20, 0.28px (0.36px from 769px), `text-secondary` | body-lg 18/24, 20/28 from 769px |
+| `price--page` | Product page | headline-lg 28/32, 36/40 from 769px | body-sm 14/20, 0.36px, `text-secondary` | body-lg 18/24, 20/28 from 769px |
 | `price--card` | Product card | title-md 18/22, 20/24 from 769px | body-sm 14/20, 0.36px, `text-tertiary`, same row | body-sm 14/20 |
-| `price--card price--stack` | Card w EPRED | as card | under the price | as card |
 | `price--mini` | Mini cart | body-md regular 16/22, 17/24 from 769px, one row, old price first | – | as value, strike |
 | `price--table` | Variant table, table card | body-md bold 16/22, 17/24 from 769px, one row, old price first (card: value first) | – | body-sm 14/20, `text-secondary` |
 | `price--compact` | Small accessory card | 14/20 bold, 0.28px | 12/20, 0.24px, `text-secondary` | 12/20 |
@@ -63,7 +62,8 @@ Optional "Från": `<span class="price__from">Från</span>` first in `.price__mai
 5. Tokens only. Breakpoint test at ~375px, ~700px (must look like mobile) and 1024px+ with `getComputedStyle`.
 
 ### Flags for design
-- **Price level × placement:** Figma has more levels (My account with Old Price, My Account with Discount) and "Card w EPRED" layouts than are built; they are the same classes combined (`price--customer` + old price). "Card w EPRED" is `price--stack`.
+- **Price level × placement:** Figma has more levels (My account with Old Price, My Account with Discount) than are built; they are the same classes combined (`price--customer` + old price). The Card w EPRED variants (stacked "exkl.moms") were removed from Figma 2026-11-15, so `price--stack` is gone.
 - **Product page old price:** 20/28 desktop and 18/24 mobile are taken from the frames; the Figma code uses body-lg for mobile and literal 20/28 for desktop (no token).
+- **Mobile card price:** the code of the Small-XSmall Card Discount variant shows 20/24, but the frame heights (22 not logged in, 71 discount vs 24 and 73 on desktop) show a 22px line, so the card value is 18/22 below 769px as title-md.
 - **Mini cart** and **Table price** at Small-XSmall in Figma wrap differently per variant; only the one-row version is built.
 - **Not logged in on the PDP:** Figma shows black, the prototype uses customer teal for every price (PDP rule).

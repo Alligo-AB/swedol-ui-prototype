@@ -22,6 +22,11 @@
 /* Play button on a video (Figma Media / Playbutton): 80px on the slide, 32px on a thumbnail */
 .media-play { position: absolute; left: 50%; top: 50%; width: 80px; aspect-ratio: 1 / 1; transform: translate(-50%, -50%); pointer-events: none; }
 .media-play--sm { width: 32px; }
+/* Hover on the play button only: the 80% black circle turns 100% black (a solid circle behind the 80% oval; the oval image itself cannot go above its own 80%) */
+.media-play::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--color-surface-100); opacity: 0; transition: opacity var(--duration-fast-3) var(--ease-standard); }
+.gallery__slide--video .media-play:hover::before { opacity: 1; }
+.gallery__slide--video .media-play { pointer-events: auto; cursor: pointer; }   /* on a slide the play button is its own target (plays); on a thumbnail it stays inert */
+.gallery__slide--video .media-play:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; border-radius: 50%; }
 .media-play__oval { position: absolute; inset: 0; width: 100%; height: 100%; }
 .media-play__triangle { position: absolute; left: 53.7%; top: 50%; width: 32.75%; height: auto; transform: translate(-50%, -50%) rotate(90deg); }   /* Figma inset 33.73% 31.92% 33.66% 39.31% */
 
@@ -74,6 +79,7 @@
    Native dialog: focus stays inside, Esc closes, the page behind is inert. White surface, the whole image shown (contain).
    Below 769px: image centred, dots at the bottom. From 769px: thumbnail row at the bottom, previous/next slide in on hover as on the page gallery. */
 .gallery__slide--zoom { cursor: zoom-in; }
+.gallery:not(.gallery--expanded):not([data-gallery-expand="off"]) .gallery__track:not(.is-dragging) .gallery__slide { cursor: zoom-in; }   /* the image opens the expanded gallery; the play button on a video slide keeps its pointer */
 dialog.gallery-x { position: fixed; inset: 0; box-sizing: border-box; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0;
   padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-16) var(--dimension-spacing-space-32);
   background: var(--color-surface-00); color: var(--color-text-primary); overscroll-behavior: contain; }

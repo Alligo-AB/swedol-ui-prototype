@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compact Icon Button: Code – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/icon.css">
+  <link rel="stylesheet" href="../../components/css/icon-button-compact.css">
+  <script src="../../components/js/tabs.js"></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-states { display: grid; gap: 24px 32px; grid-template-columns: repeat(2, max-content); align-items: center; justify-content: center; }
+    @media (min-width: 769px) { .pg-states { grid-template-columns: repeat(4, max-content); } }
+    .pg-cell { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .pg-cell > span:first-child { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ibc-row { display: flex; flex-wrap: wrap; gap: 24px 32px; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="icon-button-compact.html" class="breadcrumb-item">Compact Icon Button</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Code</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Actions</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span><span class="badge-basic badge-basic--large badge-basic--warning badge-basic--weak">In progress</span></div>
+    <h1 class="ds-title">Compact Icon Button</h1>
+    <p class="ds-lead">A compact icon button is a <strong>frameless, icon-only button</strong> as big as its icon (20px or 24px), for places too small for a regular icon button.</p><p class="ds-lead">How to add a compact icon button to a page. The file is <code>components/css/icon-button-compact.css</code>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Compact Icon Button"><a class="tab" href="icon-button-compact.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" href="icon-button-compact-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" aria-current="page" href="icon-button-compact-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="basic-usage"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Basic Usage</h2><p class="ds-desc">Link the shared file once per page. Never copy the rules into a page.</p><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Step</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">1. Link</th><td><code>&lt;link rel="stylesheet" href="/components/css/icon-button-compact.css"&gt;</code> (and <code>icon.css</code>). Both templates already have them.</td></tr><tr><th scope="row">2. Button</th><td>A <code>button.icon-btn-compact</code> with <code>aria-label</code> and an <code>icon</code> span.</td></tr><tr><th scope="row">3. Toggle</th><td>Add <code>aria-pressed="false"</code> and flip it in your script.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="compact-icon-button"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Compact Icon Button</h2><p class="ds-desc">Copy the markup you need.</p><div id="recipes"></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="api"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">API</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Class / attribute</th><th scope="col">Use</th></tr></thead><tbody><tr><th scope="row"><code>icon-btn-compact</code></th><td>The button.</td></tr><tr><th scope="row"><code>icon--sm</code> / <code>icon--md</code></th><td>On the icon: 20px or 24px.</td></tr><tr><th scope="row"><code>icon-btn-compact--fill-hover</code></th><td>The icon turns solid on hover (favourite).</td></tr><tr><th scope="row"><code>icon-btn-compact--surface-hover</code></th><td>A surface on hover instead of a grey icon (close). 24px.</td></tr><tr><th scope="row"><code>icon-btn-compact--inverted</code></th><td>On a dark surface.</td></tr><tr><th scope="row"><code>icon-btn-compact__off</code> / <code>__on</code></th><td>Icon for the enabled and for the selected state.</td></tr><tr><th scope="row"><code>aria-pressed</code>, <code>.is-on</code></th><td>Selected state.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="css-tailwind"><div class="ds-page ds-inner"><h2 class="ds-h2">CSS / Tailwind</h2><p class="ds-desc">The component is one CSS file, shared by every page. Link it, never copy it. The CSS below is read from the file the page links.</p><div class="ds-code"><div class="ds-code__bar"><span>CSS (components/css/icon-button-compact.css)</span><button type="button" class="mo-copy" data-copy="css-code" aria-label="Copy"><span class="mo-ic" aria-hidden="true">content_copy</span></button></div><pre id="css-code"></pre></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.recipes($('#recipes'), [
+    ['Action', '<button type="button" class="icon-btn-compact" aria-label="Edit" data-tooltip="Edit">\n  <span class="icon icon--sm" aria-hidden="true">edit</span>\n</button>'],
+    ['Favourite (toggle)', '<button type="button" class="icon-btn-compact icon-btn-compact--fill-hover" aria-pressed="false" aria-label="Add to favourites" data-tooltip="Add to favourites">\n  <span class="icon icon--sm" aria-hidden="true">favorite</span>\n</button>\n<script>\n  document.addEventListener(\'click\', function (e) {\n    var b = e.target.closest(\'.icon-btn-compact[aria-pressed]\');\n    if (b) b.setAttribute(\'aria-pressed\', b.getAttribute(\'aria-pressed\') !== \'true\');\n  });\n<\/script>'],
+    ['Compare (own icon when selected)', '<button type="button" class="icon-btn-compact" aria-pressed="false" aria-label="Compare" data-tooltip="Compare">\n  <span class="icon icon--sm icon-btn-compact__off" aria-hidden="true">compare_arrows</span>\n  <svg class="icon icon--sm icon-btn-compact__on" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">…compare_added_custom…</svg>\n</button>']
+  ]);
+  DK.printCss($('#css-code'), 'icon-button-compact', [[/^ {4}/gm, '']]);
+
+})();
+</script>
+<script src="../tailwind-note.js"></script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/tooltip.js"></script>
+</body>
+</html>

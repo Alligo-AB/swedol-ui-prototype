@@ -247,8 +247,8 @@
 }
 .store-btn .ms {
   color: var(--color-text-primary-inverted);
-  font-size: 20px;
-  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+  font-size: 24px;
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;   /* the store in the header is the selected one: filled icon, 24px */
 }
 .store-btn__text-regular { font-weight: 400; letter-spacing: 0.56px; }
 body.has-impersonation-banner .site-header__top {
@@ -509,7 +509,7 @@ body.has-impersonation-banner .site-header__top {
 .sh-sm__store-btn .ms {
   color: var(--color-text-primary-inverted);
   font-size: 20px;
-  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 20;   /* selected store: filled, 20px */
 }
 .sh-sm__store-btn__text {
   display: flex;
