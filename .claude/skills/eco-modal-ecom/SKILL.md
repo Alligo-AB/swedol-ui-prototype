@@ -49,7 +49,9 @@ The rule is about the **effect**, not the label. `destructive: true` is set on p
 - **Destructive:** removes data or access and the user cannot undo it themselves (delete address, remove user, clear cart, close account, revoke access). Almost always Small.
 - **Primary:** can be undone but has a consequence the user should see first (change store, leave without saving).
 - **No modal:** low-risk action that can be undone at once (remove from cart, archive an order): do it and show a Toast with Undo. A modal is for when the user must see a consequence first (change store: prices and stock change). Exceptions that do get a Primary modal: a bulk action ("Archive 40 orders?") or one that hides the item from other users on the account.
-- **Serious** (account, permissions): Destructive plus an extra step (BankID).
+- **Removal with content inside** (a list and its products): Destructive in a **Drawer** with a confirmation checkbox ("Ja, jag vill ta bort…", error "Bekräfta att du vill radera." until ticked), as "Radera lista" in the favourites lists. Focus on the checkbox.
+- **Serious** (account, permissions): Destructive plus BankID.
+- A Destructive button lives only on a confirmation surface (Modal or Drawer), never in a Toast, Banner or Inline notification.
 - **Focus on open:** Destructive focuses **Cancel**, never the confirm button (`notifications.js`: `(o.destructive ? cancel : m).focus()`); Primary focuses the dialog.
 - **Body** says what is removed and the consequence, not only "Are you sure?".
 
