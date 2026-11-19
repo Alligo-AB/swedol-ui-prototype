@@ -42,6 +42,19 @@ The modal comes in **two sizes to choose between: Small and Large**. Choose by t
 
 `mypages/users.html` (`#sign-modal`, `window.signWithBankId({ text, onSigned })`): Large modal that opens straight on the QR step; steps (QR, waiting, done, expired) swap inside the same panel via `data-current`. Lessons that apply to every modal: limit the height from 640px (`max-height: calc(100dvh - 32px)`, panel scrolls) or it is cut off on a phone held sideways; remove the panel after the exit with a timer, not `animationend` (it never fires in a background tab, and a reopen during the exit left the modal invisible); run the follow-up action after the exit so two overlays never stack; catch Escape in the capture phase when a drawer lies underneath. On a phone the main action is "Öppna BankID", not the QR code. Details in `CLAUDE.md`.
 
+### Destructive or Primary (rule, 2026-11-19)
+
+The rule is about the **effect**, not the label. `destructive: true` is set on purpose, never derived from the word.
+
+- **Destructive:** removes data or access and the user cannot undo it themselves (delete address, remove user, clear cart, close account, revoke access). Almost always Small.
+- **Primary:** can be undone but has a consequence the user should see first (change store, leave without saving).
+- **No modal:** low-risk action that can be undone at once (remove from cart, archive an order): do it and show a Toast with Undo. A modal is for when the user must see a consequence first (change store: prices and stock change). Exceptions that do get a Primary modal: a bulk action ("Archive 40 orders?") or one that hides the item from other users on the account.
+- **Serious** (account, permissions): Destructive plus an extra step (BankID).
+- **Focus on open:** Destructive focuses **Cancel**, never the confirm button (`notifications.js`: `(o.destructive ? cancel : m).focus()`); Primary focuses the dialog.
+- **Body** says what is removed and the consequence, not only "Are you sure?".
+
+Docs: `components/modal.html` (Usage > Destructive or Primary, Behavior > Focus), `modal-specifications.html` (Behavior, Accessibility).
+
 ### Footer with only a cancel button (2026-11-10)
 
 When a step has no Primary (for example a waiting state), the lone Blank cancel button sits on the **right** of the footer, where the confirm button normally ends (`justify-content: flex-end`; in Figma the Button Group slot aligned right). With a Primary the order stays Blank left, Primary filling the rest. Reference: `#sign-modal` in `mypages/users.html`.

@@ -155,7 +155,7 @@
     cancel.addEventListener('click', function () { close('cancel'); });
     ok.addEventListener('click', function () { if (o.onConfirm) o.onConfirm(); close('confirm'); });
     document.addEventListener('keydown', key);
-    document.body.classList.add('has-modal'); document.body.appendChild(ov); document.body.appendChild(m); m.focus();
+    document.body.classList.add('has-modal'); document.body.appendChild(ov); document.body.appendChild(m); (o.destructive ? cancel : m).focus();   /* destructive: focus Cancel so a stray Enter cannot confirm */
     return { close: close, el: m };
   }
 

@@ -191,8 +191,8 @@ JS_EX = JS_SAMPLE + r'''
     { t: 'Poor connection', d: 'Warning, Weak. A soft error that can be handled locally. Stays until the user dismisses it or carries on.', run: function () { N.showToast({ status: 'warning', emphasis: 'weak', text: 'Poor network connection. Retrying…', actions: { links: [{ label: 'Check connection' }] } }); } },
     { t: 'Upload failed', d: 'Error, Weak, Actionable. A failed action that can be tried again. Stays on screen with a Retry button. Press Retry to see the success toast that follows.', run: function () {
         N.showToast({ status: 'error', emphasis: 'weak', title: 'Upload failed', text: 'Failed to upload attachment.', actions: { primary: { label: 'Retry', onClick: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Attachment uploaded.', autoHide: 4000 }); }, 350); } }, secondary: { label: 'Dismiss' } } }); } },
-    { t: 'Undo a delete', d: 'Informational, Weak, Actionable. A quick undo inside the toast.', run: function () {
-        N.showToast({ status: 'info', emphasis: 'weak', text: 'Address deleted.', autoHide: 6000, actions: { links: [{ label: 'Undo', onClick: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Address restored.', autoHide: 4000 }); }, 350); } }] } }); } }
+    { t: 'Archive an order', d: 'Informational, Weak, Actionable. A low-risk action that can be undone at once: no modal, the toast carries Undo.', run: function () {
+        N.showToast({ status: 'info', emphasis: 'weak', text: 'Order archived.', autoHide: 6000, actions: { links: [{ label: 'Undo', onClick: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Order restored.', autoHide: 4000 }); }, 350); } }] } }); } }
   ];
   SC.forEach(function (s) {
     var row = document.createElement('div'); row.className = 'pg-row';
