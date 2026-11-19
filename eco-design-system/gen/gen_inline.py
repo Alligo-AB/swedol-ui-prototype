@@ -14,11 +14,11 @@ playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose size, status, em
     '<div class="ds-playground"><div class="ds-stage ds-stage--center" style="align-items:stretch"><div id="pg-host" style="width:100%;align-self:center"></div></div><div class="ds-controls">' + \
     btn_group('pg-l-sz', 'Size', 'data-pg="size"', [('large', 'Large', True), ('small', 'Small', False)]) + \
     sel_field('pg-l-st', 'sel-pg-l-st', 'Status', 'status', [('info', 'Informational'), ('success', 'Success'), ('warning', 'Warning'), ('error', 'Error')]) + \
-    btn_group('pg-l-em', 'Emphasis', 'data-pg="emphasis"', [('strong', 'Strong', True), ('weak', 'Weak', False)]).replace('<div class="ds-field">', '<div class="ds-field" id="f-em">', 1) + \
+    btn_group('pg-l-em', 'Emphasis', 'data-pg="emphasis"', [('strong', 'Strong', False), ('weak', 'Weak', True)]).replace('<div class="ds-field">', '<div class="ds-field" id="f-em">', 1) + \
     btn_group('pg-l-ly', 'Layout', 'data-pg="layout"', [('default', 'Default', True), ('actionable', 'Actionable', False)]).replace('<div class="ds-field">', '<div class="ds-field" id="f-ly">', 1) + \
     btn_group('pg-l-ac', 'Actions', 'data-pg="acts"', [('buttons', 'Buttons', True), ('links', 'Inline links', False)]).replace('<div class="ds-field">', '<div class="ds-field" id="pg-acts-f" hidden>', 1) + \
     btn_group('pg-l-ti', 'Title', 'data-pg="title"', [('off', 'None', True), ('on', 'Title', False)]) + btn_group('pg-l-cl', 'Close button', 'data-pg="closable"', [('on', 'Shown', True), ('off', 'Hidden', False)]) + \
-    txt_field('pg-text', 'Text', 'Only 4 left in stock. Delivery in 2–3 days.', 'Text') + icon_field() + \
+    txt_field('pg-text', 'Text', 'In stock. Delivery in 2–3 days.', 'Text') + icon_field() + \
     txt_field('pg-b2', 'Secondary button', 'Change address', 'Secondary button', 'pg-b2-f', True) + txt_field('pg-b1', 'Primary button', 'Continue', 'Primary button', 'pg-b1-f', True) + \
     txt_field('pg-l1', 'Link 1', 'Delivery terms', 'Link 1', 'pg-l1-f', True) + txt_field('pg-l2', 'Link 2', 'Change address', 'Link 2', 'pg-l2-f', True) + \
     motion_note('The animation when the × is clicked') + '<button type="button" class="btn btn--secondary btn--sm" id="pg-reset" style="align-self:flex-start"><span class="btn__label">Show again</span></button>' + \
@@ -153,7 +153,7 @@ JS_SAMPLE = JS_PRE + r'''
 JS_EX = JS_SAMPLE + r'''
   /* Playground */
   var mo;  /* Motion section: re-rendered with the playground selection */
-  var pg = { size: 'large', status: 'info', emphasis: 'strong', layout: 'default', acts: 'buttons', title: 'off', closable: 'on' };
+  var pg = { size: 'large', status: 'info', emphasis: 'weak', layout: 'default', acts: 'buttons', title: 'off', closable: 'on' };
   function pgOpts() {
     var o = { size: pg.size, status: pg.status, emphasis: pg.emphasis, text: $('#pg-text').value, closable: pg.closable === 'on' };
     if (pg.status === 'info' && $('#pg-ic').value.trim()) o.icon = $('#pg-ic').value.trim();
@@ -164,7 +164,20 @@ JS_EX = JS_SAMPLE + r'''
     }
     return o;
   }
+  /* Each status starts with a realistic message; what the user has typed is kept. */
+  var PRE = {
+    info: { ic: 'local_shipping', text: 'In stock. Delivery in 2–3 days.', b2: 'Delivery terms', b1: 'Choose store', l1: 'Delivery terms', l2: 'Pick up in store' },
+    success: { text: 'Your password was changed.', b2: 'Back to account', b1: 'Continue shopping', l1: 'Back to account', l2: 'Continue shopping' },
+    warning: { text: 'That password is easy to guess. Choose something less common.', b2: 'Keep password', b1: 'Change password', l1: 'Show password tips', l2: 'Keep password' },
+    error: { text: 'The payment was declined. Check your card details.', b2: 'Change card', b1: 'Try again', l1: 'Change card', l2: 'Contact support' }
+  }, dirty = {}, lastSt;
+  [['text', '#pg-text'], ['ic', '#pg-ic'], ['b2', '#pg-b2'], ['b1', '#pg-b1'], ['l1', '#pg-l1'], ['l2', '#pg-l2']].forEach(function (p) { $(p[1]).addEventListener('input', function (e) { if (e.isTrusted) dirty[p[0]] = true; }); });
+  function preset() {
+    if (lastSt === pg.status) return; lastSt = pg.status;
+    [['text', '#pg-text'], ['ic', '#pg-ic'], ['b2', '#pg-b2'], ['b1', '#pg-b1'], ['l1', '#pg-l1'], ['l2', '#pg-l2']].forEach(function (p) { if (!dirty[p[0]]) $(p[1]).value = PRE[pg.status][p[0]] || ''; });
+  }
   function renderPg() {
+    preset();
     if (mo) mo.render();
     var small = pg.size === 'small';
     $('#f-ly').hidden = small; $('#f-ic').hidden = pg.status !== 'info';
