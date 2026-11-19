@@ -1,0 +1,584 @@
+# Graph Report - swedol-ui-prototype  (2026-11-06)
+
+## Corpus Check
+- 180 files · ~2,281,128 words
+- Verdict: corpus is large enough that graph structure adds value.
+
+## Summary
+- 1478 nodes · 2420 edges · 116 communities (89 shown, 18 thin omitted)
+- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 121 edges (avg confidence: 0.83)
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `d59db38d`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
+
+## Community Hubs (Navigation)
+- input.css
+- eco-add-component skill
+- js/tabs.js
+- Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)
+- docnav.js
+- Three-page component doc structure (Examples / Specifications / Code)
+- build.py
+- eco-button skill
+- Public page template (Regular Page)
+- notifications.js
+- kernel.js
+- doc-kit.js
+- crop_ah_group_card.py
+- eco-card-animation/SKILL.md
+- notif.py
+- compose-helpers.py
+- CLAUDE.md (project design guidelines)
+- eco-doc-page skill (docs page structure)
+- gen_ah_group_card_widget.py
+- Radio component
+- generate-tokens.py
+- button-pair.js
+- Design review: implementation vs. Figma + ECO
+- List Item (ECO Design System)
+- Tabs (ECO Design System)
+- attach
+- Table (ECO Design System) — first version
+- 🟠 Major
+- Role Tier Card component
+- Docs shell: navigation, hub, footer, frame
+- Switch (ECO Design System)
+- Text Area (ECO Design System)
+- modal.js
+- eco-pill-segment-control skill
+- toast-ecom.js
+- Old ECO Libraries Web Page (Storybook)
+- bc.py
+- hero_switch.py
+- hero_switch_iso.py
+- toc.js
+- Old ECO DS page: Introduction for Developers
+- gen_button.py
+- radio.js
+- card-check.mjs
+- Pagination component
+- switch.js
+- Feature comparison with role tiers page
+- Modal component
+- link_large
+- hero_button_iso.py
+- gen_links_guide.py
+- toast.js
+- make-eco.mjs
+- Feedback: Do not change table structure
+- upload-jira-images.sh
+- eco-collapsible skill
+- color-kit.js
+- run
+- eco-badge skill
+- patterns-overview.html docs page
+- banner.js
+- hero_scene_lib.py
+- eco-switch skill
+- Divider (ECO Design System)
+- eco-chip/SKILL.md
+- Radio button (ECO Design System)
+- gen_colors.py
+- Toast docs page (old source)
+- Welcome email (Valkommen till Swedol)
+- tokens/_test.html (unused placeholder)
+- Figma sync list (code ahead of Figma)
+- button-group.js
+- select.js
+- hairline/icon-picker.js
+- input.js
+- checkbox.js
+- hairline/range.js
+- Resources overview page
+- eco-icon-picker skill
+- hairline/tabs.js
+- pill.js
+- textarea.js
+- docs.css
+- build-docs.mjs
+- layout-kit.js
+- inline-notification.js
+- eco-icon/SKILL.md
+- Adding a component to the design system
+- middleware.js
+- Component pages: template and three-page split
+- eco-tag/SKILL.md
+- page
+- gen_tag.py
+- gen_chip.py
+- icon-library.js
+- Foundation pages
+- Building blocks, spacing and cards
+- Reference: dark category cards (Pick a category)
+- Reference: dark centered hero with stats
+- open
+- Header art
+- css-template.md
+- Component families: what is specific to each
+- storyblok-widgets.md
+- gen_icon.py
+- gen_layout.py
+- Workflow
+
+## God Nodes (most connected - your core abstractions)
+1. `input.css` - 39 edges
+2. `select.css` - 37 edges
+3. `badge.css` - 35 edges
+4. `tabs.css` - 32 edges
+5. `button.css` - 30 edges
+6. `divider.css` - 30 edges
+7. `eco-doc-page skill (docs page structure)` - 30 edges
+8. `Three-page component doc structure (Examples / Specifications / Code)` - 24 edges
+9. `docs.css` - 22 edges
+10. `CLAUDE.md (project design guidelines)` - 20 edges
+
+## Surprising Connections (you probably didn't know these)
+- `Recensioner page` --semantically_similar_to--> `Recensioner backup 1`  [INFERRED] [semantically similar]
+  reviews.html → reviews_backup_1.html
+- `Recensioner page` --semantically_similar_to--> `Recensioner backup 2`  [INFERRED] [semantically similar]
+  reviews.html → reviews_backup_2.html
+- `Sticky CTA example page` --semantically_similar_to--> `Public page template (Regular Page)`  [INFERRED] [semantically similar]
+  sticky-cta-example.html → template.html
+- `Feature comparison page (permission levels)` --semantically_similar_to--> `Feature comparison with role tiers page`  [INFERRED] [semantically similar]
+  feature-comparison.html → feature-comparison-roles.html
+- `Feature comparison with role tiers page` --semantically_similar_to--> `Feature comparison roles (backup)`  [INFERRED] [semantically similar]
+  feature-comparison-roles.html → feature-comparison-roles_backup.html
+
+## Import Cycles
+- None detected.
+
+## Hyperedges (group relationships)
+- **Notification component skills governed by notifications-guide** — claude_skills_eco_banner_notification_skill, claude_skills_eco_inline_notification_skill, claude_skills_eco_modal_ecom_skill, claude_skills_notifications_guide_skill [EXTRACTED 0.85]
+- **ECO Resources section pages** — eco_design_system_resources_overview, eco_design_system_resources_design, eco_design_system_resources_web, eco_design_system_resources_getting_help, eco_design_system_resources_introduction_for_developers, eco_design_system_resources_introduction_for_stakeholders [EXTRACTED 0.95]
+- **ECO Resources section pages** — eco_design_system_resources_overview, eco_design_system_resources_design, eco_design_system_resources_web, eco_design_system_resources_getting_help, eco_design_system_resources_introduction_for_developers, eco_design_system_resources_introduction_for_stakeholders [EXTRACTED 0.95]
+- **Hairline figure pages (button, switch, radio) in clean and ECO variants** — hairline_hairline_button_pair, hairline_hairline_switch, hairline_hairline_radio, hairline_hairline_button_pair_eco, hairline_hairline_switch_eco, hairline_hairline_radio_eco [EXTRACTED 0.95]
+- **Hairline figure pages (button, switch, radio) in clean and ECO variants** — hairline_hairline_button_pair, hairline_hairline_switch, hairline_hairline_radio, hairline_hairline_button_pair_eco, hairline_hairline_switch_eco, hairline_hairline_radio_eco [EXTRACTED 0.95]
+- **menu docs page set** — eco_design_system_components_menu, eco_design_system_components_menu_specifications [EXTRACTED 0.95]
+- **menu docs page set** — eco_design_system_components_menu, eco_design_system_components_menu_specifications [EXTRACTED 0.95]
+- **modal docs page set** — eco_design_system_components_modal, eco_design_system_components_modal_specifications, eco_design_system_components_modal_code [EXTRACTED 0.95]
+- **modal docs page set** — eco_design_system_components_modal, eco_design_system_components_modal_specifications, eco_design_system_components_modal_code [EXTRACTED 0.95]
+- **pagination docs page set** — eco_design_system_components_pagination, eco_design_system_components_pagination_specifications, eco_design_system_components_pagination_code [EXTRACTED 0.95]
+- **pagination docs page set** — eco_design_system_components_pagination, eco_design_system_components_pagination_specifications, eco_design_system_components_pagination_code [EXTRACTED 0.95]
+- **Pill segment control three-page doc set** — eco_design_system_components_segment_control, eco_design_system_components_segment_control_specifications, eco_design_system_components_segment_control_code [EXTRACTED 0.95]
+- **Pill segment control three-page doc set** — eco_design_system_components_segment_control, eco_design_system_components_segment_control_specifications, eco_design_system_components_segment_control_code [EXTRACTED 0.95]
+- **Select three-page doc set** — eco_design_system_components_select, eco_design_system_components_select_specifications, eco_design_system_components_select_code [EXTRACTED 0.95]
+- **Select three-page doc set** — eco_design_system_components_select, eco_design_system_components_select_specifications, eco_design_system_components_select_code [EXTRACTED 0.95]
+- **Switch three-page doc set** — eco_design_system_components_switch, eco_design_system_components_switch_specifications, eco_design_system_components_switch_code [EXTRACTED 0.95]
+- **Switch three-page doc set** — eco_design_system_components_switch, eco_design_system_components_switch_specifications, eco_design_system_components_switch_code [EXTRACTED 0.95]
+- **Badge doc page sets (5 types x 3 pages)** — eco_design_system_components_badge_basic_code, eco_design_system_components_badge_basic_specifications, eco_design_system_components_badge_basic, eco_design_system_components_badge_dot_code, eco_design_system_components_badge_dot_specifications, eco_design_system_components_badge_dot, eco_design_system_components_badge_number_code, eco_design_system_components_badge_number_specifications, eco_design_system_components_badge_number [EXTRACTED 1.00]
+- **Badge doc page sets (5 types x 3 pages)** — eco_design_system_components_badge_basic_code, eco_design_system_components_badge_basic_specifications, eco_design_system_components_badge_basic, eco_design_system_components_badge_dot_code, eco_design_system_components_badge_dot_specifications, eco_design_system_components_badge_dot, eco_design_system_components_badge_number_code, eco_design_system_components_badge_number_specifications, eco_design_system_components_badge_number [EXTRACTED 1.00]
+- **ECO component skills** — claude_skills_eco_breadcrumb_skill, claude_skills_eco_list_item_skill, claude_skills_eco_menu_skill, claude_skills_eco_modal_ecom_skill, claude_skills_eco_pagination_skill, claude_skills_eco_select_skill, claude_skills_eco_tabs_skill [EXTRACTED 1.00]
+- **ECO component skills** — claude_skills_eco_breadcrumb_skill, claude_skills_eco_list_item_skill, claude_skills_eco_menu_skill, claude_skills_eco_modal_ecom_skill, claude_skills_eco_pagination_skill, claude_skills_eco_select_skill, claude_skills_eco_tabs_skill [EXTRACTED 1.00]
+- **Link types decided by links-guide** — c_inline_link_concept, c_action_link, c_tile_link, eco_design_system_components_links_guide [EXTRACTED 1.00]
+- **Link types decided by links-guide** — c_inline_link_concept, c_action_link, c_tile_link, eco_design_system_components_links_guide [EXTRACTED 1.00]
+- **Notification component family** — claude_skills_notifications_guide_skill, claude_skills_eco_toast_system_skill, claude_skills_eco_toast_ecom_skill, claude_skills_eco_banner_notification_skill, claude_skills_eco_inline_notification_skill, claude_skills_eco_modal_ecom_skill [EXTRACTED 1.00]
+- **Old Resources & Help pages sharing one layout** — old_ds_page_structures_category_sources_help_resources_and_help_help_getting_help_overview, old_ds_page_structures_category_sources_help_resources_and_help_libraries_design, old_ds_page_structures_category_sources_help_resources_and_help_libraries_web [EXTRACTED 1.00]
+- **Old Resources & Help pages sharing one layout** — old_ds_page_structures_category_sources_help_resources_and_help_help_getting_help_overview, old_ds_page_structures_category_sources_help_resources_and_help_libraries_design, old_ds_page_structures_category_sources_help_resources_and_help_libraries_web [EXTRACTED 1.00]
+- **Customer personas for design feedback** — docs_personas_fa_jobbet_gjort, docs_personas_effektivitet_och_sakerhet, docs_personas_trygghet_och_inkopsstyrning, docs_personas_readme [EXTRACTED 1.00]
+- **Customer personas for design feedback** — docs_personas_fa_jobbet_gjort, docs_personas_effektivitet_och_sakerhet, docs_personas_trygghet_och_inkopsstyrning, docs_personas_readme [EXTRACTED 1.00]
+- **Shared page frame partials (header, footer, main menu, account nav drawer)** — mypages_partials_header, mypages_partials_footer, mypages_partials_main_menu, mypages_partials_account_nav_drawer [EXTRACTED 1.00]
+- **Shared page frame partials (header, footer, main menu, account nav drawer)** — mypages_partials_header, mypages_partials_footer, mypages_partials_main_menu, mypages_partials_account_nav_drawer [EXTRACTED 1.00]
+- **Specifications pages sharing measure.css/js blueprint figures** — eco_design_system_components_divider_specifications, eco_design_system_components_icon_picker_specifications, eco_design_system_components_inline_link_specifications, eco_design_system_components_inline_specifications, eco_design_system_components_input_specifications, eco_design_system_components_list_item_specifications, c_measure_js [EXTRACTED 1.00]
+- **Specifications pages sharing measure.css/js blueprint figures** — eco_design_system_components_divider_specifications, eco_design_system_components_icon_picker_specifications, eco_design_system_components_inline_link_specifications, eco_design_system_components_inline_specifications, eco_design_system_components_input_specifications, eco_design_system_components_list_item_specifications, c_measure_js [EXTRACTED 1.00]
+- **banner three-page doc set** — eco_design_system_components_banner, eco_design_system_components_banner_specifications, eco_design_system_components_banner_code [EXTRACTED 1.00]
+- **banner three-page doc set** — eco_design_system_components_banner, eco_design_system_components_banner_specifications, eco_design_system_components_banner_code [EXTRACTED 1.00]
+- **button three-page doc set** — eco_design_system_components_button, eco_design_system_components_button_specifications, eco_design_system_components_button_code [EXTRACTED 1.00]
+- **button three-page doc set** — eco_design_system_components_button, eco_design_system_components_button_specifications, eco_design_system_components_button_code [EXTRACTED 1.00]
+- **checkbox three-page doc set** — eco_design_system_components_checkbox, eco_design_system_components_checkbox_specifications, eco_design_system_components_checkbox_code [EXTRACTED 1.00]
+- **checkbox three-page doc set** — eco_design_system_components_checkbox, eco_design_system_components_checkbox_specifications, eco_design_system_components_checkbox_code [EXTRACTED 1.00]
+- **Foundational token skills** — claude_skills_eco_tokens_skill, claude_skills_eco_typography_skill, claude_skills_eco_spacing_skill, claude_skills_eco_colors_skill, claude_skills_eco_elevation_skill [EXTRACTED 1.00]
+- **Form selection controls and their boundaries** — claude_skills_eco_radio_skill, claude_skills_eco_switch_skill, claude_skills_eco_pill_segment_control_skill, claude_skills_eco_checkbox_skill, claude_skills_eco_tabs_skill [INFERRED 0.85]
+- **Old form control docs pages** — eco_design_system_gen_old_source_input, eco_design_system_gen_old_source_textarea, eco_design_system_gen_old_source_select, eco_design_system_gen_old_source_radio, eco_design_system_gen_old_source_switch [INFERRED 0.85]
+- **Old form control docs pages** — eco_design_system_gen_old_source_input, eco_design_system_gen_old_source_textarea, eco_design_system_gen_old_source_select, eco_design_system_gen_old_source_radio, eco_design_system_gen_old_source_switch [INFERRED 0.85]
+- **Old notification docs pages** — eco_design_system_gen_old_source_inline, eco_design_system_gen_old_source_modal, eco_design_system_gen_old_source_notifications, eco_design_system_gen_old_source_toast_ecom [INFERRED 0.85]
+- **Old notification docs pages** — eco_design_system_gen_old_source_inline, eco_design_system_gen_old_source_modal, eco_design_system_gen_old_source_notifications, eco_design_system_gen_old_source_toast_ecom [INFERRED 0.85]
+- **Recensioner page and backups** — reviews, reviews_backup_1, reviews_backup_2 [INFERRED 0.85]
+- **Recensioner page and backups** — reviews, reviews_backup_1, reviews_backup_2 [INFERRED 0.85]
+- **Three-page doc sets in this chunk** — eco_design_system_components_toast, eco_design_system_components_toast_specifications, eco_design_system_components_tooltip, eco_design_system_components_tooltip_code, eco_design_system_components_tooltip_specifications [INFERRED 0.85]
+- **Three-page doc sets in this chunk** — eco_design_system_components_toast, eco_design_system_components_toast_specifications, eco_design_system_components_tooltip, eco_design_system_components_tooltip_code, eco_design_system_components_tooltip_specifications [INFERRED 0.85]
+- **Användare page versions** — mypages_users, mypages_users_v1, mypages_users_dashboard [INFERRED 0.85]
+- **Användare page versions** — mypages_users, mypages_users_v1, mypages_users_dashboard [INFERRED 0.85]
+
+## Communities (116 total, 18 thin omitted)
+
+### Community 0 - "input.css"
+Cohesion: 0.08
+Nodes (61): components/css/collapsible.css, components/js/collapsible.js, Storyblok collapsible widget, badge.css, button.css, divider.css, input.css, menu.css (+53 more)
+
+### Community 1 - "eco-add-component skill"
+Cohesion: 0.15
+Nodes (23): design-review skill, eco-add-component skill, eco-checkbox skill, eco-colors skill, eco-divider skill, eco-input skill, eco-radio skill, eco-section skill (+15 more)
+
+### Community 2 - "js/tabs.js"
+Cohesion: 0.07
+Nodes (47): switch.css, textarea.css, tile-link.css, choose(), close(), holder(), leave(), openMenu() (+39 more)
+
+### Community 3 - "Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)"
+Cohesion: 0.04
+Nodes (45): ECO Design System, Persona feedback protocol (severity, G-xx criteria), Acceptanskriterier (EOS), Behov i uppgiftsform, Exempel på granskning (mall), Frågor att ställa en prototyp som Lars, Kontext, Kort om Lars (+37 more)
+
+### Community 4 - "docnav.js"
+Cohesion: 0.09
+Nodes (32): apply(), bar(), build(), close(), closeDrawer(), closeSearch(), cubic(), esc() (+24 more)
+
+### Community 5 - "Three-page component doc structure (Examples / Specifications / Code)"
+Cohesion: 0.07
+Nodes (34): ECO Badge component (non-interactive status/label/count marker), badge.css shared component CSS, Action link, components/css/divider.css, components/icon-picker/icon-picker.js, Inline link, components/css/inline-link.css, components/css/input.css (+26 more)
+
+### Community 6 - "build.py"
+Cohesion: 0.05
+Nodes (9): bp_field(), btn_group(), bullets(), old_js(), Frame for the three-page component docs (reference: tooltip.html / tooltip-…, buttons: [(value, text, pressed)], Slice of the old page's script: from the line containing `start` up to (not…, A Small eco-select field for a playground (options: [(value, text)], cur = the… (+1 more)
+
+### Community 7 - "eco-button skill"
+Cohesion: 0.15
+Nodes (24): eco-action-link skill, eco-banner-notification skill, eco-button skill, eco-inline-link skill, eco-inline-notification skill, eco-modal-ecom skill (E-Com Modal), eco-motion skill (easing, duration, campaign motion), eco-tile-link skill (+16 more)
+
+### Community 8 - "Public page template (Regular Page)"
+Cohesion: 0.10
+Nodes (30): Site overview (index.html), alligo-design-tokens (unpkg CSS), styles.css (shared page styles), Adressbok page, Cookie Banner page, Cookie Banner page (v1), Min sida dashboard test page, My Pages template (logged-in) (+22 more)
+
+### Community 9 - "notifications.js"
+Cohesion: 0.22
+Nodes (24): B(), banner(), button(), closeBtn(), e(), ecom(), el(), ic() (+16 more)
+
+### Community 10 - "kernel.js"
+Cohesion: 0.11
+Nodes (19): css(), entry(), fade(), fit(), frame(), ghost(), hull(), inject() (+11 more)
+
+### Community 11 - "doc-kit.js"
+Cohesion: 0.13
+Nodes (22): block(), bp(), callouts(), draw(), node(), clear(), codeBox(), esc() (+14 more)
+
+### Community 12 - "crop_ah_group_card.py"
+Cohesion: 0.36
+Nodes (9): _crop(), frac(), load(), prev(), Crop the AhGroupCard_* browser screenshots (images/, full browser windows) into…, panel contact-sheet coordinates (470px wide tile = crop .74W..965W, from .08H), preview contact-sheet coordinates (900px wide tile = crop .02W..76W, from .07H), save() (+1 more)
+
+### Community 13 - "eco-card-animation/SKILL.md"
+Cohesion: 0.09
+Nodes (21): Also on the component page, Open / always ask, Procedure (one component), Reusable pieces (do not rewrite), Techniques learned on Switch (reuse), Hairline card embed (embed.js, hairline-card.css, kernel.js), Hairline animated figure, Archived card visuals (+13 more)
+
+### Community 14 - "notif.py"
+Cohesion: 0.07
+Nodes (12): esc_attr(), fig_one(), items: [(label_id, label, attr, buttons, extra)] -> ds-toolbar, table(), toolbar(), sw(), The Notifications hub (components/notifications.html): one page, no tab bar,…, bp_toolbar() (+4 more)
+
+### Community 15 - "compose-helpers.py"
+Cohesion: 0.13
+Nodes (15): box(), font(), panel(), Add a title strip above an image., sheet(), vbrace(), fig_pair(), AX() (+7 more)
+
+### Community 16 - "CLAUDE.md (project design guidelines)"
+Cohesion: 0.15
+Nodes (14): Checkout leverans - tre forslag (page), CLAUDE.md (project design guidelines), eco-breadcrumb skill (Breadcrumb), eco-pagination skill (load more), eco-role-tier-card skill (Draft), eco-select skill (Select), Design-skill suggestions are proposals, ECO breakpoints (xs/sm/md/lg/xl, md=769px) (+6 more)
+
+### Community 17 - "eco-doc-page skill (docs page structure)"
+Cohesion: 0.10
+Nodes (19): Docs site file map, History: fixes made during conversions, eco-doc-page skill (docs page structure), Building blocks in `docs.css`, Component pages, Controls in a playground are the real components, Foundation pages, Hub (`overview.html`) (+11 more)
+
+### Community 18 - "gen_ah_group_card_widget.py"
+Cohesion: 0.07
+Nodes (31): rules(), anat(), cap(), dont(), half(), img(), mitem(), pair() (+23 more)
+
+### Community 19 - "Radio component"
+Cohesion: 0.18
+Nodes (14): components css menu stylesheet, components css radio stylesheet, components css range stylesheet, components/js/range.js, menu.html docs page, Menu component, menu-specifications.html docs page, radio-code.html docs page (+6 more)
+
+### Community 20 - "generate-tokens.py"
+Cohesion: 0.36
+Nodes (13): extract_declarations(), fallback_value(), main(), normalize_typography_value(), parse_colors(), parse_radius_border(), parse_shadows(), parse_spacing() (+5 more)
+
+### Community 21 - "button-pair.js"
+Cohesion: 0.16
+Nodes (10): ARROW, BOUNCE, BTN, DOWN, G, GW(), label(), mount() (+2 more)
+
+### Community 22 - "Design review: implementation vs. Figma + ECO"
+Cohesion: 0.15
+Nodes (13): 1. Before you start — ask, don't guess, 2. Read the design, 3. Measure the implementation, 4. WCAG check (separate section in the report), 5. Verify before you report, 6. Severity, 7. Report structure, 8. Comparison images (optional) (+5 more)
+
+### Community 23 - "List Item (ECO Design System)"
+Cohesion: 0.08
+Nodes (24): Axes, CSS, Filter list in a drawer (reference: `eco-design-system/tokens.html`, 2026-10-23), Flags (for design), HTML structure, List Item (ECO Design System), Rules, Size model (+16 more)
+
+### Community 24 - "Tabs (ECO Design System)"
+Cohesion: 0.17
+Nodes (12): Anatomy, Choosing Primary or Secondary, Flags for design, HTML structure, On-page navigation (docs), On-page navigation (`tab-bar--page`), Rules, Size model (+4 more)
+
+### Community 25 - "attach"
+Cohesion: 0.35
+Nodes (11): attach(), close(), group(), open(), pick(), render(), show(), loadData() (+3 more)
+
+### Community 26 - "Table (ECO Design System) — first version"
+Cohesion: 0.18
+Nodes (10): CSS template, Dimensions, Flags, Header background, HTML structure, Rules, Surfaces and lines, Table (ECO Design System) — first version (+2 more)
+
+### Community 27 - "🟠 Major"
+Cohesion: 0.04
+Nodes (46): C1 – Large banner layout follows the `version` prop, not the viewport, C2 – Blank button label is white on Warning Strong Large (WCAG 1.4.3), C3 – Status icons render as outline instead of filled, C4 – Close button is 32 px instead of 24 px, which makes banners too tall, 🔴 Critical, Design review: Notification Banner (AE-3540), F1 – Extra blue edge on Large banners, F2 – Tablet Large uses another edge colour (+38 more)
+
+### Community 28 - "Role Tier Card component"
+Cohesion: 0.29
+Nodes (9): components css role tier stylesheet, components css section stylesheet, role-tier-card.html docs page, role-tier-card-code.html docs page, Role Tier Card component, role-tier-card-specifications.html docs page, section-code.html docs page, Section component (+1 more)
+
+### Community 30 - "Docs shell: navigation, hub, footer, frame"
+Cohesion: 0.22
+Nodes (8): Back to top, Contents, Docs shell: navigation, hub, footer, frame, Footer, Framed layout (docs shell, from 961px), Hub (`index.html`, start page, rebuilt 2026-10-27), Links in doc pages, Site navigation: Navigation Rail + Secondary panel (draft, desktop ≥961px only)
+
+### Community 31 - "Switch (ECO Design System)"
+Cohesion: 0.22
+Nodes (9): CSS, Flags for design, HTML structure, Label typography (`eco-typography`), Rules, Size model, States, Switch (ECO Design System) (+1 more)
+
+### Community 32 - "Text Area (ECO Design System)"
+Cohesion: 0.22
+Nodes (9): CSS, Flags, HTML structure, Rules, Size model, States, Text Area (ECO Design System), Typography (+1 more)
+
+### Community 33 - "modal.js"
+Cohesion: 0.24
+Nodes (13): ARROW, BODY, BTN, centred(), cross(), flat(), G, GW() (+5 more)
+
+### Community 34 - "eco-pill-segment-control skill"
+Cohesion: 0.14
+Nodes (13): eco-pill-segment-control skill, CSS template (Large, Primary/Pill — mobile-first), Fluid width at xs only, HTML and JS example, Interaction (sliding pill), Motion, Pill Segment Control (ECO Design System), Sizes (+5 more)
+
+### Community 35 - "toast-ecom.js"
+Cohesion: 0.24
+Nodes (12): ARROW, BTN, centred(), cross(), flat(), G, GW(), label() (+4 more)
+
+### Community 37 - "Old ECO Libraries Web Page (Storybook)"
+Cohesion: 0.36
+Nodes (8): ECO Slack channel as support and feedback route, Resources & Help page layout (left nav groups Libraries/Help/User Guides, hero, right TOC, link cards, prev/next, footer), Storybook docs playground pattern (live code, copy, property controls), Storybook Docs Canvas with Code Snippet and Controls Table, Storybook Alt Label Docs Page (Sidebar, Canvas, Controls), Old ECO Getting Help Overview Page, Old ECO Libraries Design Page (Figma), Old ECO Libraries Web Page (Storybook)
+
+### Community 39 - "hero_switch.py"
+Cohesion: 0.36
+Nodes (4): call(), dim_h(), dim_v(), flat()
+
+### Community 40 - "hero_switch_iso.py"
+Cohesion: 0.43
+Nodes (7): circ(), dim(), ext(), line(), P(), pill(), a, b: world coordinate range along `along`; off: world coordinate of the…
+
+### Community 42 - "Old ECO DS page: Introduction for Developers"
+Cohesion: 0.67
+Nodes (4): Docs page layout: left rail, sticky contents list, prev/next cards, footer, Storybook and Supernova documentation stack, Old ECO DS page: Introduction for Developers, Old ECO DS page: Introduction for Stakeholders
+
+### Community 43 - "gen_button.py"
+Cohesion: 0.33
+Nodes (3): fig_cls(), pair_cls(), A figure whose stage has an extra class (dark surface).
+
+### Community 44 - "radio.js"
+Cohesion: 0.29
+Nodes (4): ARROW, BX, DOT, mount()
+
+### Community 45 - "card-check.mjs"
+Cohesion: 0.29
+Nodes (6): c, { chromium }, [comp, out = "/tmp/card"], errs, play, require
+
+### Community 46 - "Pagination component"
+Cohesion: 0.47
+Nodes (6): components css pagination stylesheet, components/js/pagination.js, pagination.html docs page, pagination-code.html docs page, Pagination component, pagination-specifications.html docs page
+
+### Community 47 - "switch.js"
+Cohesion: 0.33
+Nodes (3): ARROW, mount(), SW
+
+### Community 48 - "Feature comparison with role tiers page"
+Cohesion: 0.50
+Nodes (5): Role tier comparison (Standard vs Administrator), Feature comparison page (permission levels), Feature comparison with role tiers page, Feature comparison roles (backup), Erbjudandedagar campaign page
+
+### Community 49 - "Modal component"
+Cohesion: 0.60
+Nodes (4): modal-code.html docs page, Modal component, modal-specifications.html docs page, eco design system notifications css stylesheet
+
+### Community 50 - "link_large"
+Cohesion: 0.33
+Nodes (6): link_large(), items: [(url, name, note)], refs(), three_pages(), L(), parts_note()
+
+### Community 51 - "hero_button_iso.py"
+Cohesion: 0.70
+Nodes (4): dim(), ext(), line(), P()
+
+### Community 54 - "toast.js"
+Cohesion: 0.24
+Nodes (10): ARROW, cross(), flat(), G, GW(), label(), mount(), draw() (+2 more)
+
+### Community 55 - "make-eco.mjs"
+Cohesion: 0.40
+Nodes (4): css, dir, eco, page
+
+### Community 56 - "Feedback: Do not change table structure"
+Cohesion: 0.50
+Nodes (4): Feedback: Do not change table structure, Rule: never alter data-table structure (COLS order, column visibility JS), mypages/memory/MEMORY.md index, Rule: do not change data table structure in frontend
+
+### Community 58 - "eco-collapsible skill"
+Cohesion: 0.67
+Nodes (3): eco-collapsible skill, components/css/collapsible.css, components/js/collapsible.js
+
+### Community 59 - "color-kit.js"
+Cohesion: 0.19
+Nodes (18): add(), card(), contrast(), copyBtn(), el(), finish(), fit(), getLive() (+10 more)
+
+### Community 65 - "banner.js"
+Cohesion: 0.24
+Nodes (7): ARROW, G, GW(), label(), mount(), draw(), PAGE
+
+### Community 66 - "hero_scene_lib.py"
+Cohesion: 0.44
+Nodes (4): make(), Shared builder for the header-art scene (see eco-doc-page, Header art).…, k = make(...) tuple; ax_x/ax_y = long axes through the figure's parts; extras =…, scene()
+
+### Community 67 - "eco-switch skill"
+Cohesion: 0.18
+Nodes (12): eco-elevation skill, Native input type=radio, eco-range skill, Flags, Native input type=range, Range (ECO Design System), Rules, States (+4 more)
+
+### Community 69 - "Divider (ECO Design System)"
+Cohesion: 0.22
+Nodes (9): CSS, Divider (ECO Design System), Flags, HTML structure, NOT used when, Rules, Size, Used when (+1 more)
+
+### Community 70 - "eco-chip/SKILL.md"
+Cohesion: 0.20
+Nodes (9): Chip (ECO Design System), CSS / JS, Flags, HTML structure, Rules, Size model, States, Typography (+1 more)
+
+### Community 71 - "Radio button (ECO Design System)"
+Cohesion: 0.25
+Nodes (8): CSS, HTML structure, Label & message typography (`eco-typography`), Radio button (ECO Design System), Rules, Size model, States, When to use
+
+### Community 72 - "gen_colors.py"
+Cohesion: 0.33
+Nodes (3): ramp(), Colors: the first Foundation in the three-page structure (2026-10-22). Overview…, use_fig()
+
+### Community 79 - "Figma sync list (code ahead of Figma)"
+Cohesion: 0.29
+Nodes (6): 1. Tokens to add (Figma variables, then the token package), 2. Text style to add, 3. Patterns to document in Figma (no new token, but needs a Figma example), 4. Decided against (do not add), Figma sync list (code ahead of Figma), Where the rules live in code
+
+### Community 80 - "button-group.js"
+Cohesion: 0.18
+Nodes (9): ARROW, BTN, DOWN, G, GW(), label(), mount(), SNAP (+1 more)
+
+### Community 81 - "select.js"
+Cohesion: 0.23
+Nodes (9): ARROW, check(), flat(), G, GW(), label(), mount(), draw() (+1 more)
+
+### Community 82 - "hairline/icon-picker.js"
+Cohesion: 0.12
+Nodes (15): mount(), draw(), ARROW, CARET, CX, CYS, flat(), G (+7 more)
+
+### Community 83 - "input.js"
+Cohesion: 0.29
+Nodes (8): ARROW, flat(), G, GW(), IBEAM, lay(), mount(), draw()
+
+### Community 84 - "checkbox.js"
+Cohesion: 0.22
+Nodes (5): ARROW, BX, DASH, mount(), TICK
+
+### Community 85 - "hairline/range.js"
+Cohesion: 0.31
+Nodes (7): ARROW, G, GW(), mount(), draw(), text(), VALUES
+
+### Community 86 - "Resources overview page"
+Cohesion: 0.48
+Nodes (7): ECO docs Resources category, Resources: Design (Figma library), Resources: Getting help, Resources: Introduction for Developers, Resources: Introduction for Stakeholders, Resources overview page, Resources: Web (Storybook library)
+
+### Community 87 - "eco-icon-picker skill"
+Cohesion: 0.29
+Nodes (7): eco-icon-picker skill, Behavior (same everywhere), Flags, Icon picker (ECO Design System), Rules, Use it, components/icon-picker/icon-picker.js
+
+### Community 88 - "hairline/tabs.js"
+Cohesion: 0.20
+Nodes (13): ARROW, EX, G, GW(), label(), mount(), hover(), press() (+5 more)
+
+### Community 89 - "pill.js"
+Cohesion: 0.27
+Nodes (10): ARROW, flat(), G, GW(), label(), lw(), mount(), draw() (+2 more)
+
+### Community 90 - "textarea.js"
+Cohesion: 0.27
+Nodes (9): ARROW, CARET, flat(), G, GW(), lay(), LINES, mount() (+1 more)
+
+### Community 91 - "docs.css"
+Cohesion: 0.09
+Nodes (32): action-link.css, inline-link.css, list-item.css, notifications.css, pagination.css, pill-segment-control.css, role-tier.css, init() (+24 more)
+
+### Community 92 - "build-docs.mjs"
+Cohesion: 0.29
+Nodes (5): docs, EXCLUDED, out, root, tokensRel
+
+### Community 93 - "layout-kit.js"
+Cohesion: 0.25
+Nodes (6): el(), fit(), gridFig(), refit(), resolve(), vals()
+
+### Community 94 - "inline-notification.js"
+Cohesion: 0.31
+Nodes (6): ARROW, flat(), G, GW(), lay(), mount()
+
+### Community 95 - "eco-icon/SKILL.md"
+Cohesion: 0.22
+Nodes (8): Color, Flags (for design), Forward and back arrows (2026-11-03, rule for every component), Icon (ECO Design System), Library and naming, Rules, Sizes, Two sources
+
+### Community 96 - "Adding a component to the design system"
+Cohesion: 0.25
+Nodes (8): 1. Gather inputs (ask if missing), 2. Extract from Figma (never from memory or guesswork), 3. Map every value to a token, 4. Write `.claude/skills/eco-<name>/SKILL.md`, 5. Register it, 6. Verify before reporting done, Adding a component to the design system, Don'ts
+
+### Community 99 - "Component pages: template and three-page split"
+Cohesion: 0.25
+Nodes (7): Component pages, Component pages: template and three-page split, Contents, Controls in a playground are the real components, Motion section, Split component pages: Examples & Guidelines / Specifications / Code, Text fields in a playground
+
+### Community 100 - "eco-tag/SKILL.md"
+Cohesion: 0.20
+Nodes (9): CSS, Flags (for design), HTML structure, Rules, Size model, States, Tag (ECO Design System), Typography (+1 more)
+
+### Community 101 - "page"
+Cohesion: 0.24
+Nodes (10): crumbs(), emit(), head(), intro(), page(), PG(), Custom page set (c['pages'], e.g. the Hero banner Storyblok widget docs): dict…, section() (+2 more)
+
+### Community 104 - "icon-library.js"
+Cohesion: 0.48
+Nodes (4): esc(), glyph(), render(), item()
+
+### Community 106 - "Foundation pages"
+Cohesion: 0.33
+Nodes (5): Contents, Foundation pages, Foundation pages, Foundations in the new structure (Colors, 2026-10-22), Layout (2026-10-22)
+
+### Community 107 - "Building blocks, spacing and cards"
+Cohesion: 0.40
+Nodes (4): Building blocks in `docs.css`, Building blocks, spacing and cards, Contents, Spacing and card treatment
+
+### Community 110 - "open"
+Cohesion: 0.48
+Nodes (6): esc(), open(), close(), key(), row(), toggle()
+
+### Community 111 - "Header art"
+Cohesion: 0.50
+Nodes (3): Contents, Header art, Header art: figure + technical drawing (optional, Switch is the reference, 2026-10-18)
+
+### Community 113 - "Component families: what is specific to each"
+Cohesion: 0.50
+Nodes (3): Component families: what is specific to each, Contents, Icon (2026-11-01)
+
+### Community 120 - "gen_layout.py"
+Cohesion: 0.22
+Nodes (5): desc(), fig_link(), figref(), Layout: the second Foundation in the three-page structure (2026-10-22), after…, tgroup()
+
+### Community 122 - "Workflow"
+Cohesion: 0.11
+Nodes (18): 0. Understand the task — and which starting point you have, 10. Run the quality checklist in CLAUDE.md, 1. Ground yourself in what Swedol actually is, 2. Choose the right starting point (for new pages), 3. Map out which components/patterns are needed, 3a. Component map: "I need X → use skill Y", 3b. Structural checklist for product/service/marketing pages (a prompt, not a requirement), 4. Compose with general design quality — but our own building blocks (+10 more)
+
+## Knowledge Gaps
+- **446 isolated node(s):** `ARROW`, `G`, `PAGE`, `BTN`, `SNAP` (+441 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 658 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+
+## Suggested Questions
+_Questions this graph is uniquely positioned to answer:_
+
+- **Why does `CLAUDE.md (project design guidelines)` connect `CLAUDE.md (project design guidelines)` to `eco-pill-segment-control skill`, `Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)`, `eco-button skill`, `eco-card-animation/SKILL.md`, `eco-doc-page skill (docs page structure)`, `Table (ECO Design System) — first version`?**
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+- **Why does `eco-doc-page skill (docs page structure)` connect `eco-doc-page skill (docs page structure)` to `eco-add-component skill`, `eco-pill-segment-control skill`, `Component pages: template and three-page split`, `Foundation pages`, `Building blocks, spacing and cards`, `eco-card-animation/SKILL.md`, `Header art`, `CLAUDE.md (project design guidelines)`, `Component families: what is specific to each`, `storyblok-widgets.md`, `Table (ECO Design System) — first version`, `Docs shell: navigation, hub, footer, frame`?**
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Why does `node()` connect `doc-kit.js` to `notifications.js`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **What connects `ARROW`, `G`, `PAGE` to the rest of the system?**
+  _446 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `input.css` be split into smaller, more focused modules?**
+  _Cohesion score 0.08495049504950496 - nodes in this community are weakly interconnected._
+- **Should `js/tabs.js` be split into smaller, more focused modules?**
+  _Cohesion score 0.07247223845704266 - nodes in this community are weakly interconnected._
+- **Should `Persona 2 – Lars, senior snickare och arbetsledare (kundtyp *Effektivitet och säkerhet*)` be split into smaller, more focused modules?**
+  _Cohesion score 0.041666666666666664 - nodes in this community are weakly interconnected._

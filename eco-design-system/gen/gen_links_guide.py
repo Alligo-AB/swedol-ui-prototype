@@ -34,8 +34,8 @@ overview = '<h2 class="ds-h2">Overview</h2>' + desc('Links take users somewhere:
 
 choose = '<h2 class="ds-h2">Which link type</h2>' + desc('Choose the type by where the link sits first, and by how prominent it must be second.') + \
     '<div class="ds-table-wrap"><table class="ds-table pg-type"><thead><tr><th scope="col">Type</th><th scope="col">Where</th><th scope="col">Underline</th><th scope="col">Icons</th><th scope="col">Example</th></tr></thead><tbody>' + \
-    '<tr><th scope="row">' + inl('inline-link.html', 'Inline link') + '</th><td>Inside a sentence or text block</td><td>On when enabled, off on hover</td><td>Never</td><td>Read more on the ' + IL % 'product page' + '.</td></tr>' + \
-    '<tr><th scope="row">' + inl('action-link.html', 'Action link') + '</th><td>Standalone, not in body text</td><td>Off when enabled, on on hover</td><td>Leading and/or trailing</td><td>' + AL % 'View all products' + '</td></tr>' + \
+    '<tr><th scope="row">' + inl('inline-link.html', 'Inline link') + '</th><td>Inside a sentence or text block</td><td>On when enabled, off on hover</td><td>Never</td><td>Read more on the ' + IL.replace("medium","small") % 'product page' + '.</td></tr>' + \
+    '<tr><th scope="row">' + inl('action-link.html', 'Action link') + '</th><td>Standalone, not in body text</td><td>Off when enabled, on on hover</td><td>Leading and/or trailing</td><td>' + AL.replace("medium","small") % 'View all products' + '</td></tr>' + \
     '<tr><th scope="row">' + inl('tile-link.html', 'Tile link') + '</th><td>Graphical and prominent, like a card or button</td><td>None</td><td>With or without</td><td>' + TL % ('checkroom', 'Work wear') + '</td></tr>' + \
     '</tbody></table></div>' + \
     '<h3 class="ds-h3 ds-group">Which one</h3>' + desc('Ask in this order and take the first yes.') + \

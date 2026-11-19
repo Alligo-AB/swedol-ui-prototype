@@ -31,7 +31,7 @@ overview = '<h2 class="ds-h2">Overview</h2>' + desc('A toast is <strong>short-li
     three_pages(SLUG, 'a toast', 'the values: tokens, sizes, measurements, states and requirements', 'how to show a toast from script and the CSS behind it')
 
 usage = '<h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3>' + desc('Use a toast for a brief message that needs little or no interaction. Use it to:') + \
-    bullets(['Respond to a user action: save, send, delete, copy', 'Report a short system event that does not block the work, such as a background sync', 'Offer a quick way forward, such as <em>Retry</em> after an error or <em>Undo</em> after a delete']) + \
+    bullets(['Respond to a user action: save, send, delete, copy', 'Report a short system event that does not block the work, such as a background sync', 'Offer a quick way forward, such as <em>Retry</em> after an error or <em>Undo</em> after an action that can be undone, such as archiving']) + \
     '<h3 class="ds-h3 ds-group">When not to use</h3><h3 class="ds-h3">For feedback on a click, not a banner</h3>' + desc('A toast belongs to the action the user just took. A banner is for the whole page or system and stays until it is closed.') + \
     pair('fig-do-1', 'Do use a toast for the result of a click.', 'fig-dont-1', 'Do not use a banner for the result of a click. Use a toast instead.') + \
     '<h3 class="ds-h3">Weak is the default</h3>' + desc('Weak is white with the status color in the left edge only. It is right for normal feedback, also for a warning or an error. Strong has a tinted background and is used sparingly. A toast disappears, so never make it louder for something the user must notice: show that as a Banner or near the content. See ' + link_large('notifications.html#emphasis', 'Choosing the emphasis') + '.') + \
@@ -40,10 +40,12 @@ usage = '<h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3>
     pair('fig-do-3', 'Do say what happened in a few words.', 'fig-dont-3', 'Do not put long text in a toast. It is gone before it is read.') + \
     '<h3 class="ds-h3">A toast does not ask</h3>' + desc('A toast reports something that has happened. When the user must confirm or choose before going on, use a Modal.') + \
     pair('fig-do-4', 'Do report what happened, with an undo if it helps.', 'fig-dont-4', 'Do not ask for confirmation in a toast. Use a Modal instead.') + \
+    '<h3 class="ds-h3">No Destructive button</h3>' + desc('A Destructive button belongs on a surface where the user confirms: a Modal or a Drawer. A toast only reports the result afterwards, for example “Address deleted.”') + \
+    pair('fig-do-5', 'Do confirm the result in a toast, after the Modal or Drawer.', 'fig-dont-5', 'Do not put a Destructive button in a toast. Use a Modal or a Drawer.') + \
     '<h3 class="ds-h3 ds-group">Quick reference</h3>' + \
     which([['confirms what the user just did, briefly', 'Toast (this page)'], ['confirms an add to cart or wishlist', lk('toast-ecom.html', 'E-Com Toast')], ['belongs to one section and must stay', lk('inline.html', 'Inline')], ['concerns the whole page or system', lk('banner.html', 'Banner')], ['needs a decision before the user can go on', lk('modal.html', 'Modal')]]) + \
     rules(['Confirm what happened in a few words: “Folder created”.', 'Match the status icon to the status color.', 'Put a Retry button inside an error toast.', 'Run the exit animation on every dismissal.'],
-          ['Use a toast for a single form field. Use the field’s error message.', 'Put a permanent message in a toast. Use Inline or Banner.', 'Ask for confirmation in a toast. Use a Modal.', 'Stack several toasts. One at a time.'])
+          ['Use a toast for a single form field. Use the field’s error message.', 'Put a permanent message in a toast. Use Inline or Banner.', 'Ask for confirmation in a toast. Use a Modal.', 'Put a Destructive button in a toast. It belongs on a confirmation surface: a Modal or a Drawer.', 'Stack several toasts. One at a time.'])
 
 anatomy = '<h2 class="ds-h2">Anatomy</h2><h3 class="ds-h3 ds-group">Toast</h3>' + \
     '<div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage ds-callout" id="t-anat" role="img" aria-label="Anatomy of a toast: 1 status icon, 2 title, 3 text, 4 close, 5 actions, 6 left edge"><div class="ds-callout__art"><div id="a-host"></div></div></div></figure></div>' + \
@@ -191,8 +193,8 @@ JS_EX = JS_SAMPLE + r'''
     { t: 'Poor connection', d: 'Warning, Weak. A soft error that can be handled locally. Stays until the user dismisses it or carries on.', run: function () { N.showToast({ status: 'warning', emphasis: 'weak', text: 'Poor network connection. Retrying…', actions: { links: [{ label: 'Check connection' }] } }); } },
     { t: 'Upload failed', d: 'Error, Weak, Actionable. A failed action that can be tried again. Stays on screen with a Retry button. Press Retry to see the success toast that follows.', run: function () {
         N.showToast({ status: 'error', emphasis: 'weak', title: 'Upload failed', text: 'Failed to upload attachment.', actions: { primary: { label: 'Retry', onClick: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Attachment uploaded.', autoHide: 4000 }); }, 350); } }, secondary: { label: 'Dismiss' } } }); } },
-    { t: 'Undo a delete', d: 'Informational, Weak, Actionable. A quick undo inside the toast.', run: function () {
-        N.showToast({ status: 'info', emphasis: 'weak', text: 'Address deleted.', autoHide: 6000, actions: { links: [{ label: 'Undo', onClick: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Address restored.', autoHide: 4000 }); }, 350); } }] } }); } }
+    { t: 'Archive an order', d: 'Informational, Weak, Actionable. A low-risk action that can be undone at once: no modal, the toast carries Undo.', run: function () {
+        N.showToast({ status: 'info', emphasis: 'weak', text: 'Order archived.', autoHide: 6000, actions: { links: [{ label: 'Undo', onClick: function () { setTimeout(function () { N.showToast({ status: 'success', text: 'Order restored.', autoHide: 4000 }); }, 350); } }] } }); } }
   ];
   SC.forEach(function (s) {
     var row = document.createElement('div'); row.className = 'pg-row';
@@ -209,8 +211,10 @@ JS_EX = JS_SAMPLE + r'''
   clear($('#fig-dont-2')).appendChild(sample({ status: 'success', emphasis: 'strong', text: 'Copied to clipboard.' }));
   clear($('#fig-do-3')).appendChild(sample({ status: 'success', emphasis: 'weak', text: 'Folder created.' }));
   clear($('#fig-dont-3')).appendChild(sample({ status: 'success', emphasis: 'weak', text: 'Your folder was created and is now available to everyone in your organisation. You can change who has access later in the folder settings.' }));
-  clear($('#fig-do-4')).appendChild(sample({ status: 'info', emphasis: 'weak', text: 'Address deleted.', links: ['Undo'] }));
+  clear($('#fig-do-4')).appendChild(sample({ status: 'info', emphasis: 'weak', text: 'Order archived.', links: ['Undo'] }));
   clear($('#fig-dont-4')).appendChild(sample({ status: 'warning', emphasis: 'weak', text: 'Delete this address?', secondary: 'Cancel', primary: 'Delete' }));
+  clear($('#fig-do-5')).appendChild(sample({ status: 'success', emphasis: 'weak', text: 'Address deleted.' }));
+  (function () { var d = sample({ status: 'warning', emphasis: 'weak', text: 'Delete this address?', secondary: 'Cancel', primary: 'Delete address' }); var p = d.querySelector('.btn--primary'); if (p) { p.classList.remove('btn--primary'); p.classList.add('btn--destructive'); } clear($('#fig-dont-5')).appendChild(d); })();
 
   /* Anatomy */
   var at = sample({ status: 'error', emphasis: 'strong', title: 'Upload failed', text: 'Failed to upload attachment.', secondary: 'Details', primary: 'Retry' });

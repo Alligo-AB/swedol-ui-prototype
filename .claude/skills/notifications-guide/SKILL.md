@@ -117,7 +117,7 @@ Any icon in the icon gallery is available for **Informational** notifications (s
 
 ### Buttons and the close button
 
-Buttons in notifications follow `eco-button` (classes `btn btn--primary|secondary|blank`, inverted variants on dark/solid surfaces such as Banner Strong): always 32px high, **XSmall from 769px, Small below** (label-sm 14/14 0.56px, label-md 14/14 0.42px). Label inside `<span class="btn__label">`.
+Buttons in notifications follow `eco-button` (classes `btn btn--primary|secondary|blank`, inverted variants on dark/solid surfaces such as Banner Strong): always 32px high, **XSmall from 769px, Small below**, except the Modal: 40px (Small) from 769px, and its confirm button fills the row (label-sm 14/14 0.56px, label-md 14/14 0.42px). Label inside `<span class="btn__label">`.
 
 The × is the `eco-button` **Close icon button**: `<button class="icon-btn icon-btn--close" aria-label="Close"><span class="btn__icon" aria-hidden="true">close</span></button>`, with `icon-btn--close-inverted` on dark or solid surfaces (Banner Strong, Promotion Dark, E-Com Toast Informational). Hover: `surface-opacity-black-05` (inverted: `surface-opacity-white-20`). The `.toast__close`/`.banner-notification__close` rules in the component skills are older; use the icon-btn classes. Live implementation: `eco-design-system/notifications.css`. The 32px is **scoped to the inside of a notification** (`:is(.toast, .ecom-toast, .modal, .banner-notification, .inline-notification) .btn`), so it also holds when `button.css` loads after `notifications.css` (as on the doc pages, where a bare `.btn` is Large) and a size class such as `btn--md` never changes a notification button.
 

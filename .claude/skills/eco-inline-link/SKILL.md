@@ -1,6 +1,6 @@
 ---
 name: eco-inline-link
-description: Use when building a link inside a sentence or text block — always underlined in the enabled state, never with an icon.
+description: Use when building a link inside a sentence or text block, or standalone in a quiet context (footer, link group) — always underlined in the enabled state, never with an icon.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -21,7 +21,7 @@ An inline link inherits the typography of its surrounding context and signals in
 
 | Property | Inline Link | Action Link |
 |---|---|---|
-| Placement | In body text | Standalone |
+| Placement | In body text, or standalone in a quiet context | Standalone, with more weight |
 | Underline | Enabled: yes. Hover: no (removed) | Enabled: no. Hover: yes (added) |
 | Icons | Never | Always at least one (leading, trailing or both) |
 | `display` | `inline` | `inline-flex` |

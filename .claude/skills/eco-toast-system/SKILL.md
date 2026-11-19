@@ -23,6 +23,7 @@ description: Use when building a system-generated Toast notification — short-l
 - The error message is for a single form field → use `form-helper--error` instead
 - The message is permanent → use an inline notification or a banner
 - The action requires confirmation → use a Modal
+- The action is destructive → a Destructive button never goes in a toast. It belongs on a confirmation surface (Modal or Drawer); the toast may only follow as feedback ("Address deleted.")
 
 ---
 

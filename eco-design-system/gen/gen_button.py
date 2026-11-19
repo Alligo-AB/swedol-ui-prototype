@@ -52,12 +52,12 @@ def txt_field(id_, label, value, ph, extra=''):
 playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose a variant, size, content and state and the button and its code update. The inverted variants are shown on a dark surface here so they are easy to see; choose them by context, visibility and contrast, not by background color alone. The button in the stage is live: click it, or press Tab to see the focus ring.') + \
     '<div class="ds-playground"><div class="ds-stage ds-stage--center" id="pg-stage"><div id="pg-host"></div></div><div class="ds-controls">' + \
     sel_field('pg-l-var', 'pg-variants', 'Variant', 'variant') + bp_field('pg-l-bp') + \
-    btn_group('pg-l-size', 'Size', 'data-pg="size"', [('lg', 'Large', True), ('md', 'Medium', False), ('sm', 'Small', False), ('xs', 'XSmall', False)]) + \
-    sel_field('pg-l-con', 'sel-pg-l-con', 'Content', 'content', [('label', 'Label'), ('lead', 'Icon + label'), ('trail', 'Label + icon'), ('both', 'Icon + label + icon'), ('icon', 'Icon only')]) + \
+    radio_group('pg-l-size', 'Size', 'size', [('lg', 'Large'), ('md', 'Medium'), ('sm', 'Small'), ('xs', 'XSmall')], 'lg') + \
+    radio_group('pg-l-con', 'Content', 'content', [('label', 'Label'), ('lead', 'Icon + label'), ('trail', 'Label + icon'), ('both', 'Icon + label + icon'), ('icon', 'Icon only')], 'label') + \
     btn_group('pg-l-bd', 'Badge', 'data-pg="badge"', [('none', 'None', True), ('number', 'Number', False), ('dot', 'Dot', False)]) + \
     txt_field('pg-count', 'Badge number (over 99 shows 99+)', '1', 'Badge number', ' inputmode="numeric" maxlength="5"') + \
-    btn_group('pg-l-st', 'State', 'data-pg="state"', [('enabled', 'Enabled', True), ('hover', 'Hover', False), ('focus', 'Focus', False), ('disabled', 'Disabled', False)]) + \
-    btn_group('pg-l-sel', 'Selected (System only)', 'data-pg="pressed"', [('off', 'Off', True), ('on', 'On', False)]) + \
+    radio_group('pg-l-st', 'State', 'state', [('enabled', 'Enabled'), ('hover', 'Hover'), ('focus', 'Focus'), ('disabled', 'Disabled')], 'enabled') + \
+    sw_group('pg-l-sel', None, [('pressed', 'Selected (System only)', False, 'on', 'off')]) + \
     txt_field('pg-label', 'Label (not for icon only)', 'Button label', 'Label') + \
     '<p class="ds-swatch__meta" id="pg-status" aria-live="polite"></p></div></div><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
 
@@ -362,7 +362,7 @@ C = dict(
     lead_ex='Every example on this page is the real component, not a picture. Click, hover and press Tab to try it. Figma: ' + FIGS + '.',
     lead_spec='Tokens, sizes, measurements, states and requirements. Values come from the live token package and from Figma: ' + FIGS + '.',
     lead_code='How to add a button to a page. The file is <code>components/css/button.css</code>.',
-    css=['menu'], head_extra='\n  <link rel="stylesheet" href="../notifications.css?v=16">', style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)
+    css=['menu', 'radio', 'switch'], head_extra='\n  <link rel="stylesheet" href="../notifications.css?v=16">', style=STYLE, ex=ex, spec=spec, code=code, js_ex=JS_EX, js_spec=JS_SPEC, js_code=JS_CODE)
 
 if __name__ == '__main__':
     emit(C)

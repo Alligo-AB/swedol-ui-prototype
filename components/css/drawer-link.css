@@ -1,0 +1,43 @@
+/* ECO component CSS: Drawer Link. Skill: eco-drawer-link. Figma ECO Design System 3245:111390.
+   Link it, do not copy it: <link rel="stylesheet" href="/components/css/drawer-link.css">
+   A row that opens a drawer. Two variants:
+   Boxed (default): a label, an optional Action link beside it, and a white framed row with the chosen value and a chevron.
+   Plain (--plain): one full-width row with an icon, an uppercase label and a chevron, a line above and below.
+   Needs icon.css (chevron, leading icon) and action-link.css (the optional link). Tokens only. Mobile-first, desktop from 769px.
+   [data-state="hover"] only serves forced-state demos on docs pages. */
+
+/* ── Boxed ─────────────────────────────────────────────────── */
+.drawer-link { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); width: 100%; }
+.drawer-link__head { display: flex; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-8); }
+.drawer-link__label { font-size: 14px; line-height: 14px; letter-spacing: 0.42px; font-weight: 600; text-transform: uppercase; color: var(--color-text-primary); }   /* label-md */
+.drawer-link__link.action-link { color: var(--color-text-secondary); }
+.drawer-link__row { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); width: 100%; margin: 0; box-sizing: border-box;
+  padding: var(--dimension-spacing-space-8) var(--dimension-spacing-space-8) var(--dimension-spacing-space-8) var(--dimension-spacing-space-16);   /* Figma 9px includes the 1px border: 40px row */
+  background: var(--color-surface-00); border: 1px solid var(--color-border-primary); color: var(--color-text-primary); text-align: left; text-decoration: none; cursor: pointer; touch-action: manipulation;
+  font-family: inherit; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;   /* body-md */
+  transition: border-color var(--duration-fast-3) var(--ease-standard), color var(--duration-fast-3) var(--ease-standard); }
+.drawer-link__value { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.drawer-link__row .icon { --icon-size: 20px; --icon-opsz: 20; color: inherit; }
+.drawer-link__row:is(:hover, [data-state="hover"]) { border-color: var(--color-border-hover); }
+.drawer-link__row:is(:hover, [data-state="hover"]) .drawer-link__value { color: var(--color-text-tertiary); }
+.drawer-link__row:focus-visible, .drawer-link--plain:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+
+/* ── Plain: the element itself is the row (<button> or <a>) ── */
+.drawer-link--plain { flex-direction: row; align-items: center; gap: var(--dimension-spacing-space-12); margin: 0; box-sizing: border-box;
+  padding: 22px 0;   /* 22px: Figma, with the 28px content it gives the 72px row; no token */
+  background: transparent; border: 0; border-block: 1px solid var(--color-border-primary); color: var(--color-text-primary); text-align: left; text-decoration: none; cursor: pointer; touch-action: manipulation;
+  font-family: inherit; transition: background-color var(--duration-fast-3) var(--ease-standard); }
+.drawer-link--plain + .drawer-link--plain { border-top: 0; }   /* stacked rows share one line */
+.drawer-link--plain:is(:hover, [data-state="hover"]) { background: var(--color-surface-navigation-hover); }
+.drawer-link--plain .icon { --icon-size: 20px; --icon-opsz: 20; color: inherit; }
+.drawer-link__lead { flex: 1 1 0; min-width: 0; display: flex; align-items: center; gap: var(--dimension-spacing-space-8); min-height: 28px; }   /* 28px: Figma content height on mobile (20px icon + 2 × 4px) */
+.drawer-link__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px; line-height: 16px; letter-spacing: 0.32px; font-weight: 600; text-transform: uppercase; font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* label-lg */
+
+@media (min-width: 769px) {
+  .drawer-link__label { font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
+  .drawer-link__row { padding-block: calc(var(--dimension-spacing-space-12) - 1px); font-size: 17px; line-height: 24px; }   /* Figma 12px includes the border: 48px row */
+  .drawer-link__row .icon, .drawer-link--plain .icon { --icon-size: 24px; --icon-opsz: 24; }
+  .drawer-link--plain { gap: var(--dimension-spacing-space-16); padding: var(--dimension-spacing-space-24) var(--dimension-spacing-space-4); }
+  .drawer-link__lead { min-height: 24px; }
+  .drawer-link__title { font-size: 18px; line-height: 18px; letter-spacing: 0.18px; }
+}

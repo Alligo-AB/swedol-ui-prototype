@@ -21,11 +21,12 @@ STYLE = STYLE + r'''
 playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose size, label and content and the preview and its code update. Press <strong>Open modal</strong> to open the real one over this page.') + \
     '<div class="ds-playground"><div class="ds-stage ds-stage--center" style="padding:0"><div class="modal-preview" id="pg-host"></div></div><div class="ds-controls">' + \
     bp_field('pg-l-bp') + btn_group('pg-l-sz', 'Size', 'data-pg="size"', [('small', 'Small', True), ('large', 'Large', False)]) + \
+    btn_group('pg-l-vr', 'Variant', 'data-pg="variant"', [('primary', 'Primary', False), ('destructive', 'Destructive', True)]) + \
     btn_group('pg-l-lb', 'Label', 'data-pg="label"', [('off', 'None', True), ('on', 'Label', False)]) + \
     txt_field('pg-title', 'Title', 'Delete this address?', 'Title') + txt_field('pg-body', 'Body', 'The address is removed from your address book. You cannot undo this.', 'Body') + \
-    txt_field('pg-cancel', 'Cancel button', 'Cancel', 'Cancel button') + txt_field('pg-ok', 'Primary button', 'Delete', 'Primary button') + motion_note('The fade in and out') + \
+    txt_field('pg-cancel', 'Cancel button', 'Cancel', 'Cancel button') + txt_field('pg-ok', 'Confirm button', 'Delete address', 'Confirm button') + motion_note('The fade in and out') + \
     '<button type="button" class="btn btn--primary btn--sm" id="pg-open" style="align-self:flex-start"><span class="btn__label">Open modal</span></button>' + \
-    '</div></div><p class="pg-note" id="pg-log" aria-live="polite"></p><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
+    '<p class="pg-note" id="pg-size-note" aria-live="polite" hidden></p></div></div><p class="pg-note" id="pg-log" aria-live="polite"></p><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
 
 action = '<h2 class="ds-h2">In action</h2>' + desc('Three situations that really need a decision. The line under the list tells you how the last modal was closed, because a modal must close in all of these ways: the ×, the ESC key and a click on the overlay.') + \
     '<div class="ds-stage" id="scenarios"></div><p class="pg-note" id="log" aria-live="polite">No modal opened yet.</p>'
@@ -38,11 +39,16 @@ usage = '<h2 class="ds-h2">Usage</h2><h3 class="ds-h3 ds-group">When to use</h3>
     bullets(['Confirm a destructive action, such as deleting an account or an address', 'Ask for a choice that the user must make before going on', 'Show crucial information the user must not miss, such as updated terms']) + \
     '<h3 class="ds-h3 ds-group">When not to use</h3><h3 class="ds-h3">For a decision, not for feedback</h3>' + desc('A modal stops the user. Feedback on something that has already happened does not need that: use a Toast.') + \
     pair('fig-do-1', 'Do use a modal for a decision the user must make.', 'fig-dont-1', 'Do not use a modal for feedback. Use a Toast instead.', 'modal-preview') + \
-    '<h3 class="ds-h3">Name the action</h3>' + desc('The primary button says what will happen: “Delete”, not “OK”. The cancel button says how to back out.') + \
-    pair('fig-do-2', 'Do name the action on the button.', 'fig-dont-2', 'Do not use a vague label such as “OK”.', 'modal-preview') + \
+    '<h3 class="ds-h3">Name the action</h3>' + desc('The title asks the question and ends with a question mark: “Delete this address?”. The body says what happens, and that it cannot be undone when that is true. The confirm button names the action in two words, a verb and a noun, with no question mark: “Delete address”, not “OK” or “Delete?”. The cancel button is Blank and says “Cancel”.') + desc('For a destructive action (delete, remove) the confirm button is <strong>Destructive</strong> (<code>destructive: true</code>), not Primary.') + \
+    pair('fig-do-2', 'Do name the action: verb + noun, Destructive for a deletion.', 'fig-dont-2', 'Do not use a vague label such as “OK”.', 'modal-preview') + \
+    '<h3 class="ds-h3">Destructive or Primary</h3>' + desc('The rule is about the <strong>effect</strong> of the action, not the word on the button. Set <code>destructive: true</code> on purpose; never derive it from the label.') + \
+    bullets(['<strong>Destructive</strong> when the action removes data or access and the user cannot undo it themselves: delete an address, remove a user, clear the cart, close an account, revoke access.', '<strong>Primary</strong> when the action can be undone but has a consequence the user should see first: change store, leave a page without saving.', '<strong>No modal</strong> when an action is low risk and can be undone at once (remove from cart, archive an order): do it, then show a ' + link_large('toast.html', 'Toast') + ' with an Undo action. Keep the modal for what cannot be undone or affects other people (users, permissions, account).', 'The body says what is removed and the consequence: “The address is removed from your address book. You cannot undo this.” Not only “Are you sure?”.', 'A Destructive confirmation is almost always <strong>Small</strong>.']) + \
+    table(['Situation', 'Variant', 'Focus on open', 'Example'], [['Removal that cannot be undone', 'Destructive', 'Cancel', 'Delete address'], ['Action that can be undone', 'Primary', 'The dialog', 'Change store'], ['Low-risk, undone at once', 'No modal: Toast with Undo', '–', 'Remove from cart, Archive order'], ['Removal with content inside (a list and its products)', 'Destructive in a Drawer, with a confirmation checkbox', 'The checkbox', 'Delete list'], ['Serious (account, permissions)', 'Destructive plus BankID', 'Cancel', 'Delete account']]) + \
+    pair('fig-do-3', 'Do use Destructive when the deletion cannot be undone.', 'fig-dont-3', 'Do not use Primary for a deletion. It looks like a safe action.', 'modal-preview') + \
+    pair('fig-do-4', 'Do use Primary for an action that can be undone.', 'fig-dont-4', 'Do not use Destructive for an action that can be undone.', 'modal-preview') + \
     '<h3 class="ds-h3 ds-group">Quick reference</h3>' + \
-    which([['needs a confirmation or a choice before the user can continue', 'Modal (this page)'], ['confirms what happened, briefly', lk('toast.html', 'Toast')], ['is status information in page context', lk('inline.html', 'Inline')], ['concerns the whole page or system', lk('banner.html', 'Banner')]]) + \
-    rules(['Ask one clear question and give one primary action.', 'Name the action on the button: “Delete”, not “OK”.', 'Close on ×, ESC and a click on the overlay, every time.', 'Move focus into the dialog and back to the opener on close.', 'Start with Small; use Large when the task needs more work area, at every breakpoint.'],
+    which([['needs a confirmation or a choice before the user can continue', 'Modal (this page)'], ['confirms what happened, briefly', lk('toast.html', 'Toast')], ['is status information in page context', lk('inline.html', 'Inline')], ['concerns the whole page or system', lk('banner.html', 'Banner')], ['is a low-risk removal the user can undo at once', lk('toast.html', 'Toast') + ' with Undo']]) + \
+    rules(['Ask one clear question and give one primary action.', 'Name the action on the button: “Delete address”, not “OK”.', 'Close on ×, ESC and a click on the overlay, every time.', 'Move focus into the dialog and back to the opener on close.', 'Start with Small; use Large when the task needs more work area, at every breakpoint.'],
           ['Use a modal for feedback. Use a Toast.', 'Use it for status in page context. Use Inline.', 'Open one on page load.', 'Open a modal from a modal.', 'Use Large only because the screen is large or narrow, or the text is long.'])
 
 anatomy = '<h2 class="ds-h2">Anatomy</h2><h3 class="ds-h3 ds-group">Modal</h3>' + \
@@ -82,13 +88,13 @@ sizes = '<h2 class="ds-h2">Sizes</h2>' + desc('The modal comes in two sizes to c
     bullets(['Small and Large do not have fixed heights. Avoid unnecessary empty space, except in the full-screen view on mobile.', 'Limit the height to the available screen area and allow scroll when the content does not fit.', 'Make sure the content and the actions can be reached in landscape orientation and when the keyboard is open.', 'A short dialog must not fill the whole screen width and at the same time be vertically centered. A centered dialog uses side margins; a full-width bottom sheet is a separate presentation pattern, not a Small modal.', 'Use a clear title and button labels that name the action, such as Cancel and Delete.']) + \
     note('The footer is not sticky: when the content is taller than the screen, the whole panel scrolls, buttons included. On a full-screen Large with short content the buttons sit at the bottom of the screen.')
 
-layout = '<h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-group">Alignment</h3>' + desc('The label and the title sit on the left with the × on the right, top-aligned. The buttons are on one row at the bottom: Cancel on the left, and the Primary button fills the rest.') + \
+layout = '<h2 class="ds-h2">Layout &amp; Appearance</h2><h3 class="ds-h3 ds-group">Alignment</h3>' + desc('The label and the title sit on the left with the × on the right, top-aligned. The buttons are on one row at the bottom: Cancel on the left, and the confirm button (Primary or Destructive) fills the rest. The buttons are never left-aligned at their own width.') + \
     '<h3 class="ds-h3 ds-group">Placement</h3>' + desc('Desktop and tablet: the modal is centered in the window over a dimmed overlay. Mobile (below 640px): Small stays a centered card with side margins; Large is not centered, they fill the whole screen. See the table and the layout rules under <a class="inline-link inline-link--large inline-link--secondary" href="#sizes">Sizes</a>.') + \
     '<h3 class="ds-h3 ds-group">Width</h3>' + desc('Small 440px (on mobile too: max width 440px, never closer than 16px to the screen edges, so 343px on a 375px viewport). Large 705px on desktop, 576px on tablet, full screen on mobile.') + \
     '<h3 class="ds-h3 ds-group">Appearance</h3>' + desc('A white panel with the highest shadow, over a 20% black overlay. Token names and values are under ' + sec_link(SLUG, 'design-tokens', 'Design Tokens') + ' in Specifications.')
 
 behavior = '<h2 class="ds-h2">Behavior</h2><h3 class="ds-h3 ds-group">Dismissal</h3>' + desc('A modal always closes in three ways: the ×, the ESC key and a click on the overlay. A click inside the panel does not close it.') + \
-    '<h3 class="ds-h3 ds-group">Focus</h3>' + desc('When the modal opens, focus moves into the dialog and the page scroll is locked. Tab and Shift+Tab stay inside the dialog. On close, focus returns to the button that opened it.') + \
+    '<h3 class="ds-h3 ds-group">Focus</h3>' + desc('When the modal opens, focus moves into the dialog and the page scroll is locked. Tab and Shift+Tab stay inside the dialog. On close, focus returns to the button that opened it.') + desc('<strong>Destructive:</strong> initial focus goes to <strong>Cancel</strong>, never to the confirm button, so a stray Enter cannot delete anything. For a Primary modal focus goes to the dialog.') + \
     '<h3 class="ds-h3 ds-group">On mobile (XSmall)</h3>' + desc('Small is a centered card that keeps at least 16px to the screen edges and has the height of its content; if the content grows beyond the screen, the card gets a maximum height and scrolls inside. Large fills the screen: the content scrolls, the buttons stay pinned to the bottom, and the layout has to work in landscape and when the keyboard is open. The choice between them is under <a class="inline-link inline-link--large inline-link--secondary" href="#sizes">Sizes</a>.') + \
     '<h3 class="ds-h3 ds-group">Hover and focus</h3>' + desc('Buttons and the × take focus with a visible ring, on keyboard use only. All values are under ' + sec_link(SLUG, 'behavior', 'Behavior') + ' in Specifications.') + \
     '<h3 class="ds-h3 ds-group">Motion</h3>' + desc('The overlay fades; the panel fades and moves 48px, up when it comes in (200ms, decelerate emphasized) and down when it leaves (150ms, accelerate): a modal closes faster than it opens. Try other values under <a class="inline-link inline-link--large inline-link--secondary" href="#motion">Motion</a> above, and see ' + sec_link(SLUG, 'motion', 'Motion') + ' in Specifications. With reduced motion there is no fade.')
@@ -123,7 +129,7 @@ st_elev = '<h2 class="ds-h2">Elevation</h2>' + table(['Part', 'Token', 'Value'],
 
 st_typo = '<h2 class="ds-h2">Typography and spacing</h2>' + table(['Element', 'Desktop (769px+)', 'Tablet and mobile'], [
     ['Label', '<code>alt-label-sm</code> 14/14, 0.56px, 500, uppercase', '12/12, 0.48px'], ['Title', '<code>title-md</code> 20/24, bold', '18/22, bold'], ['Body', '<code>body-md</code> 17/24, 0.32px', '16/22, 0.32px'],
-    ['Buttons', '32px high, <code>label-sm</code> 14px, 0.56px', '32px high, 14px, 0.42px'], ['Space above buttons', '32px', '24px'], ['Gap label to title, header to body', '8px', '8px']])
+    ['Buttons', '40px high (Small), <code>label-md</code> 16px, 0.48px', '32px high, 14px, 0.42px'], ['Space above buttons', '32px', '24px'], ['Gap label to title, header to body', '8px', '8px']])
 
 st_struct = '<h2 class="ds-h2">Structure</h2><h3 class="ds-h3 ds-group">Elements</h3>' + table(['Element', 'Class', 'Notes'], [
     ['Overlay', '<code>modal-overlay</code>', 'Fixed, covers the page.'], ['Panel', '<code>modal modal--small|large</code>', '<code>role="dialog"</code>, <code>aria-modal="true"</code>, <code>aria-labelledby</code>.'], ['Header', '<code>modal__header</code>, <code>modal__header-text</code>', 'Label, title and the ×.'],
@@ -135,11 +141,11 @@ st_motion = '<h2 class="ds-h2">Motion</h2>' + table(['Motion', 'Property', 'Dura
     note('A short move (48px) with the fade, no scale. <strong>Why 48px, and why no token:</strong> the move is short (a small share of the view), so it uses the Fast durations of <code>eco-motion</code>; 48px is a <strong>trial</strong> (24px was the first value): it is a clear lift, and still a short move, so the Fast durations apply. The value is <code>space-48</code>, an existing spacing token, written in the keyframes. There is no distance token and no custom property for it: Carbon, Adobe Spectrum and Atlassian keep duration and easing as the motion tokens and leave the travel distance to the component (Atlassian puts it inside a per-component token such as <code>motion.modal.enterModal</code>). Add a shared distance scale only if a second component needs the same move. The panel uses <code>translate</code>, not <code>transform</code>, so the centering is untouched. The exit is shorter than the enter and accelerates, as when an element disappears (eco-motion); Material, Carbon and Atlassian also close faster than they open. The script adds <code>is-leaving</code> and removes the dialog when the animation has run. Reduced motion: no fade, removed at once. Compare other values in the live Motion section on <a class="inline-link inline-link--medium inline-link--secondary" href="modal.html#motion">Examples &amp; Guidelines</a>.')
 
 st_behavior = '<h2 class="ds-h2">Behavior</h2>' + table(['Input', 'Result'], [
-    ['Click ×', 'Closes the modal.'], ['ESC', 'Closes the modal.'], ['Click the overlay', 'Closes the modal. A click inside the panel does not.'], ['Open', 'Focus moves into the dialog. Page scroll is locked (<code>body.has-modal</code>).'], ['Tab / Shift+Tab', 'Stays inside the dialog.'],
+    ['Click ×', 'Closes the modal.'], ['ESC', 'Closes the modal.'], ['Click the overlay', 'Closes the modal. A click inside the panel does not.'], ['Open (Destructive)', 'Focus moves to Cancel, not to the confirm button.'], ['Open', 'Focus moves into the dialog. Page scroll is locked (<code>body.has-modal</code>).'], ['Tab / Shift+Tab', 'Stays inside the dialog.'],
     ['Close', 'Focus returns to the button that opened it.'], ['Markup', '<code>role="dialog"</code>, <code>aria-modal="true"</code>, <code>aria-labelledby</code> pointing at the title.']])
 
 st_access = '<h2 class="ds-h2">Accessibility Requirements</h2>' + table(['Topic', 'Requirement'], [
-    ['Markup', '<code>role="dialog"</code>, <code>aria-modal="true"</code>, <code>aria-labelledby</code> pointing at the title.'], ['Focus', 'Moves into the dialog on open, is trapped inside it and returns to the opener on close (WCAG 2.4.3). The ring is 2px, <code>border-focus</code> (WCAG 2.4.7).'],
+    ['Markup', '<code>role="dialog"</code>, <code>aria-modal="true"</code>, <code>aria-labelledby</code> pointing at the title.'], ['Focus', 'Moves into the dialog on open (to Cancel when the confirm button is Destructive), is trapped inside it and returns to the opener on close (WCAG 2.4.3). The ring is 2px, <code>border-focus</code> (WCAG 2.4.7).'],
     ['Close', 'Three ways, always: ×, ESC and the overlay.'], ['Scroll', 'The page behind does not scroll while the modal is open.'], ['Reduced motion', 'No fade under <code>prefers-reduced-motion: reduce</code>.']])
 
 spec = [('design-tokens', st_tok), ('sizes', st_sizes), ('measurements', st_meas), ('elevation', st_elev), ('typography', st_typo), ('structure', st_struct), ('motion', st_motion), ('behavior', st_behavior), ('accessibility-requirements', st_access)]
@@ -149,7 +155,7 @@ c_basic = '<h2 class="ds-h2">Basic Usage</h2>' + desc('Link the shared files onc
     ['1. Link', '<code>&lt;link rel="stylesheet" href="/eco-design-system/notifications.css"&gt;</code> and <code>&lt;script src="/eco-design-system/notifications.js"&gt;&lt;/script&gt;</code>. Link <code>button.css</code> first.'], ['2. Open', 'Call <code>ECO_N.openModal({ size, title, body, cancel, confirm })</code>. The script adds the overlay, the focus trap, the scroll lock and the three ways to close.'],
     ['3. React', '<code>onConfirm</code> runs when the primary button is pressed; <code>onClose(reason)</code> runs on every close.']])
 c_modal = '<h2 class="ds-h2">Modal</h2><div id="recipes"></div>'
-c_api = '<h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Settings of openModal</h3>' + table(['Setting', 'Use'], [['<code>size</code>', '<code>small</code> (default) or <code>large</code>.'], ['<code>label</code>', 'Optional uppercase label above the title.'], ['<code>title</code>, <code>body</code>', 'The title and the body text.'], ['<code>cancel</code>, <code>confirm</code>', 'The button labels. Defaults: Cancel, Confirm.'], ['<code>onConfirm</code>', 'Runs when the primary button is pressed.'], ['<code>onClose(reason)</code>', 'Reason: <code>close</code>, <code>esc</code>, <code>overlay</code>, <code>cancel</code> or <code>confirm</code>.']]) + \
+c_api = '<h2 class="ds-h2">API</h2><h3 class="ds-h3 ds-group">Settings of openModal</h3>' + table(['Setting', 'Use'], [['<code>size</code>', '<code>small</code> (default) or <code>large</code>.'], ['<code>label</code>', 'Optional uppercase label above the title.'], ['<code>title</code>, <code>body</code>', 'The title and the body text.'], ['<code>cancel</code>, <code>confirm</code>', 'The button labels. Defaults: Cancel, Confirm. Confirm label: verb + noun, no question mark (“Delete address”).'], ['<code>destructive</code>', '<code>true</code> makes the confirm button Destructive instead of Primary. Use it for a deletion or removal.'], ['<code>onConfirm</code>', 'Runs when the primary button is pressed.'], ['<code>onClose(reason)</code>', 'Reason: <code>close</code>, <code>esc</code>, <code>overlay</code>, <code>cancel</code> or <code>confirm</code>.']]) + \
     '<h3 class="ds-h3 ds-group">Custom properties</h3>' + table(['Name', 'Use'], [['<code>--modal-in-ease</code>, <code>--modal-in-duration</code>', 'Enter. Defaults: <code>ease-decelerate-emphasized</code>, <code>duration-fast-4</code>.'], ['<code>--modal-out-ease</code>, <code>--modal-out-duration</code>', 'Exit. Defaults: <code>ease-accelerate-generic</code>, <code>duration-fast-3</code>. Set on <code>&lt;html&gt;</code>.']]) + \
     '<h3 class="ds-h3 ds-group">Things to know</h3>' + bullets(['<code>openModal</code> returns <code>{ close, el }</code>.', 'Page scroll is locked with <code>body.has-modal</code>. <code>onClose</code> and the focus return run at once; the dialog is removed after the fade out.', 'Buttons inside the modal are always 32px high, also when <code>button.css</code> is on the page.', 'Do not open a modal from a modal.'])
 c_css = '<h2 class="ds-h2">CSS / Tailwind</h2>' + desc('The component is one CSS file and one script, shared by every notification. Link them, never copy them. The code below is read from the files the page links, so it is always what you see.') + '<div id="files"></div>'
@@ -164,10 +170,27 @@ JS_SAMPLE = JS_PRE + r'''
 
 JS_EX = JS_SAMPLE + r'''
   /* Playground */
-  var pg = { size: 'small', label: 'off' };
-  function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value }; }
-  function renderPg() { var o = pgOpts(); clear($('#pg-host')).appendChild(sample(o)); $('#pg-code').textContent = H.modal(o); }
+  var pg = { size: 'small', label: 'off', variant: 'destructive' };
+  function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value, destructive: pg.variant === 'destructive' }; }
+  var PG_TXT = {
+    small: { primary: ['Clear your cart?', 'All products are removed from your cart.', 'Clear cart'], destructive: ['Delete this address?', 'The address is removed from your address book. You cannot undo this.', 'Delete address'] },
+    large: { primary: [SIZES[1][2], SIZES[1][3], 'Accept'], destructive: ['Delete your account?', 'Your orders, addresses, saved lists and invoices are deleted. Open orders are cancelled and your company users lose access to My Pages. You cannot undo this, and we cannot restore the data afterwards.', 'Delete account'] } };
+  var pgLast = 'small';
+  var PG_LARGE_NOTE = '<b>Large</b> is for tasks that need a work area: long text to read, a choice or input. Desktop: 705px wide, centered. Tablet (640–768px): 576px wide, centered. Mobile (below 640px): fills the whole screen (100dvh), the content scrolls and the buttons are pinned to the bottom. Choose <b>Mobile</b> under Breakpoint to see it.';
+  var PG_LARGE_DESTR = ' <b>Tip:</b> a Destructive confirmation is almost always <b>Small</b>. Use Large + Destructive only when the user needs a lot of text to understand what is removed.';
+  function pgLoad() { var t = PG_TXT[pg.size][pg.variant]; $('#pg-title').value = t[0]; $('#pg-body').value = t[1]; $('#pg-ok').value = t[2]; $('#pg-cancel').value = pg.size === 'large' && pg.variant === 'primary' ? 'Read later' : 'Cancel'; }
+  function renderPg() {
+    if (pg.size !== pgLast) {   /* Large starts as Primary, Small as Destructive (the default) */
+      pgLast = pg.size; pg.variant = pg.size === 'large' ? 'primary' : 'destructive';
+      document.querySelector('input[name="pg-l-vr"][value="' + pg.variant + '"]').checked = true; pgLoad();
+    }   /* a size change loads that size’s sample content */
+    var o = pgOpts(), n = $('#pg-size-note');
+    $('#pg-host').classList.toggle('modal-preview--screen', pg.size === 'large');
+    n.innerHTML = PG_LARGE_NOTE + (pg.variant === 'destructive' ? PG_LARGE_DESTR : ''); n.hidden = pg.size !== 'large';
+    clear($('#pg-host')).appendChild(sample(o)); $('#pg-code').textContent = H.modal(o);
+  }
   DK.wire(pg, renderPg);
+  $$('input[name="pg-l-vr"]').forEach(function (r) { r.addEventListener('change', function () { pg.variant = r.value; pgLoad(); renderPg(); }); });
   ['#pg-title', '#pg-body', '#pg-cancel', '#pg-ok'].forEach(function (s) { $(s).addEventListener('input', renderPg); });
   $('#pg-open').addEventListener('click', function () { var o = pgOpts(); o.onClose = function (r) { $('#pg-log').textContent = 'Closed with: ' + r + '.'; }; N.openModal(o); });
 
@@ -176,7 +199,7 @@ JS_EX = JS_SAMPLE + r'''
   function closed(r) { log.textContent = 'Closed with: ' + ({ close: 'the × button', esc: 'the ESC key', overlay: 'a click on the overlay', cancel: 'Cancel', confirm: 'the primary button' }[r] || r) + '.'; }
   var SC = [
     { t: 'Confirm a deletion', d: 'Small. A destructive action: the user must confirm. Confirming shows a toast.', run: function () {
-        N.openModal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders, addresses and saved lists are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account', onClose: closed,
+        N.openModal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders, addresses and saved lists are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account', destructive: true, onClose: closed,
           onConfirm: function () { setTimeout(function () { N.showToast({ status: 'success', emphasis: 'weak', text: 'Your account was deleted.', autoHide: 4000 }); }, 200); } }); } },
     { t: 'Cart has changed', d: 'Small. Important information the user must not miss before checkout.', run: function () {
         N.openModal({ size: 'small', label: 'Cart', title: 'Your cart has changed', body: 'Two items in your cart changed price or availability since you added them. Review the changes before you continue to checkout.', cancel: 'Back to cart', confirm: 'Continue to checkout', onClose: closed }); } },
@@ -191,10 +214,14 @@ JS_EX = JS_SAMPLE + r'''
   });
 
   /* Usage figures */
-  clear($('#fig-do-1')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'Cancel', confirm: 'Delete' }));
+  clear($('#fig-do-1')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book. You cannot undo this.', cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
   clear($('#fig-dont-1')).appendChild(sample({ size: 'small', title: 'Settings saved', body: 'Your changes were saved.', cancel: 'Cancel', confirm: 'OK' }));
-  clear($('#fig-do-2')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'Cancel', confirm: 'Delete' }));
+  clear($('#fig-do-2')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book. You cannot undo this.', cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
   clear($('#fig-dont-2')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'No', confirm: 'OK' }));
+  clear($('#fig-do-3')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book. You cannot undo this.', cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
+  clear($('#fig-dont-3')).appendChild(sample({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book. You cannot undo this.', cancel: 'Cancel', confirm: 'Delete address' }));
+  clear($('#fig-do-4')).appendChild(sample({ size: 'small', title: 'Change store?', body: 'Prices and stock in your cart update to the new store. You can change back at any time.', cancel: 'Cancel', confirm: 'Change store' }));
+  clear($('#fig-dont-4')).appendChild(sample({ size: 'small', title: 'Change store?', body: 'Prices and stock in your cart update to the new store. You can change back at any time.', cancel: 'Cancel', confirm: 'Change store', destructive: true }));
 
   /* Anatomy */
   var am = sample({ size: 'small', label: 'Label (optional)', title: 'Title', body: 'Body text explains what the user decides.', cancel: 'Cancel', confirm: 'Confirm' });
@@ -210,11 +237,11 @@ JS_EX = JS_SAMPLE + r'''
   ]);
 
   /* Variants and sizes */
-  clear($('#v-nolabel')).appendChild(sample({ size: 'small', title: SIZES[0][2], body: SIZES[0][3], cancel: 'Cancel', confirm: 'Delete' }));
-  clear($('#v-label')).appendChild(sample({ size: 'small', label: 'Address book', title: SIZES[0][2], body: SIZES[0][3], cancel: 'Cancel', confirm: 'Delete' }));
+  clear($('#v-nolabel')).appendChild(sample({ size: 'small', title: SIZES[0][2], body: SIZES[0][3], cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
+  clear($('#v-label')).appendChild(sample({ size: 'small', label: 'Address book', title: SIZES[0][2], body: SIZES[0][3], cancel: 'Cancel', confirm: 'Delete address', destructive: true }));
   SIZES.forEach(function (s, i) { clear($('#v-s-' + s[0])).appendChild(sample({ size: s[0], label: '', title: s[2], body: s[3], cancel: 'Cancel', confirm: 'Confirm' })); });
   DK.motion({ anchor: 'playground', parts: [{ title: 'Enter', prefix: 'modal-in', rec: { ease: 'decelerate-emphasized', dur: 'fast-4' } }, { title: 'Exit', prefix: 'modal-out', rec: { ease: 'accelerate-generic', dur: 'fast-3' }, exit: true }], collapse: false, role: 'exit', showLabel: 'Open modal', hint: 'The modal opens over the page. Press Open modal, then close it with the ×, ESC or the overlay to see the motion.',
-    why: 'The overlay fades; the panel fades and moves 48px, up in and down out. It enters with decelerate emphasized (200 ms) and leaves with accelerate (150 ms): closing is faster than opening (eco-motion: element enters / element disappears).', show: function () { N.openModal({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book.', cancel: 'Cancel', confirm: 'Delete' }); } });
+    why: 'The overlay fades; the panel fades and moves 48px, up in and down out. It enters with decelerate emphasized (200 ms) and leaves with accelerate (150 ms): closing is faster than opening (eco-motion: element enters / element disappears).', show: function () { N.openModal({ size: 'small', title: 'Delete this address?', body: 'The address is removed from your address book. You cannot undo this.', cancel: 'Cancel', confirm: 'Delete address', destructive: true }); } });
 '''  + JS_MOTION_FIX + r'''
   DK.bp(); renderPg();
 '''
@@ -238,8 +265,8 @@ JS_SPEC = JS_SAMPLE + r'''
 
 JS_CODE = JS_PRE + r'''
   DK.recipes($('#recipes'), [
-    ['Markup', H.modal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders and addresses are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account' })],
-    ['Open it from script', "var dialog = ECO_N.openModal({\n  size: 'small',                 // small | large\n  label: 'Account',              // optional\n  title: 'Delete your account?',\n  body: 'This cannot be undone.',\n  cancel: 'Cancel',\n  confirm: 'Delete account',\n  onConfirm: deleteAccount,\n  onClose: function (reason) {}  // close | esc | overlay | cancel | confirm\n});"]]);
+    ['Markup', H.modal({ size: 'small', label: 'Account', title: 'Delete your account?', body: 'Your orders and addresses are deleted. This cannot be undone.', cancel: 'Cancel', confirm: 'Delete account', destructive: true })],
+    ['Open it from script', "var dialog = ECO_N.openModal({\n  size: 'small',                 // small | large\n  label: 'Account',              // optional\n  title: 'Delete your account?',\n  body: 'This cannot be undone.',\n  cancel: 'Cancel',\n  confirm: 'Delete account',\n  destructive: true,             // Destructive button for a deletion\n  onConfirm: deleteAccount,\n  onClose: function (reason) {}  // close | esc | overlay | cancel | confirm\n});"]]);
   DK.printFile($('#files'), '../notifications.css', [['CSS: Modal', ['modal']], ['CSS: shared close button and buttons', ['base']]])
     .then(function () { return DK.printFile($('#files'), '../notifications.js', [['JavaScript: openModal', ['runtime']]]); });
 '''

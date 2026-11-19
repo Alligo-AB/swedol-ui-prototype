@@ -11,6 +11,10 @@
   <script src="/components/js/tabs.js"></script>
   <link rel="stylesheet" href="/components/css/inline-link.css">
   <link rel="stylesheet" href="/components/css/tooltip.css">
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/checkbox.css">
   <link rel="stylesheet" href="../styles.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
@@ -220,116 +224,35 @@
     /* ══════════════════════════════════════════════════════════
        HEADER (black top bar)
     ══════════════════════════════════════════════════════════ */
-    .site-header {
-      background: var(--black);
-    }
-    .site-header--fixed {
-      position: fixed;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      transform: translateY(-100%);
-      transition: transform var(--duration-fast-4) var(--ease-standard);
-    }
-    .site-header--fixed.site-header--visible {
-      transform: translateY(0);
-    }
+    
+    
+    
 
     /* Top row: logo + search + user icons */
     /* Tooltips (components/css/tooltip.css) stay below the sticky header (z-index 99/100) */
     :root { --tooltip-z: 98; }
     @media (min-width: 769px) { :root { --tooltip-safe-top: 81px; } }   /* the sticky header's height: tooltip.js counts room above from below it */
-    .site-header__top {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px var(--px-full);
-      background: var(--black);
-      border-bottom: 1px solid #232500;
-      box-shadow: var(--elevation-b-80);
-      transition: none;
-    }
+    
 
-    .site-header__menu-btn {
-      width: 48px;
-      height: 48px;
-      padding: 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
-    .site-header__menu-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .site-header__menu-btn .ms { color: var(--color-accent-default); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    
+    
+    
 
-    .site-header__logo {
-      width: 119px;
-      height: 22.777px;
-      flex-shrink: 0;
-    }
-    .site-header__logo svg { width: 100%; height: 100%; }
+    
+    
 
-    .site-header__search {
-      flex: 1;
-      position: relative;
-      background: var(--color-background-secondary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      height: 48px;
-      border: 1px solid transparent;
-      box-sizing: border-box;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .site-header__search::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border: 2px solid var(--color-border-focus);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-    }
-    .site-header__search:hover { border-color: var(--color-border-dark); }
-    .site-header__search.is-active,
-    .site-header__search:focus-within { border-color: var(--color-border-selected); }
-    .site-header__search:focus-within::after { opacity: 0; }
+    
+    
+    
+    
+    
     body.keyboard-nav :focus-within::after { opacity: 1; }
-    .site-header__search .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; flex-shrink: 0; }
-    .site-header__search input {
-      flex: 1;
-      background: none;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-weight: 400;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) { .site-header__search input { font-size: 17px; line-height: 24px; } }
-    .site-header__search input::placeholder { color: var(--color-text-tertiary); }
-    .site-header__search-right {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-    .site-header__search-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--color-border-tertiary);
-    }
+    
+    
+    
+    
+    
+    
     .search-scan-btn {
       background: none;
       border: none;
@@ -344,11 +267,7 @@
     .search-scan-btn:hover { background: var(--color-surface-opacity-black-05); }
     .search-scan-btn .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
 
-    .site-header__right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    
 
     .icon-btn {
       background: none;
@@ -400,21 +319,8 @@
       color: var(--black);
     }
 
-    .account-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 48px;
-      padding: 0 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      text-align: left;
-      line-height: normal;
-      box-sizing: border-box;
-    }
-    .account-info:hover { background: var(--color-surface-opacity-white-20); }
+    
+    
     .avatar {
       width: 24px;
       height: 24px;
@@ -426,138 +332,35 @@
     }
     .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    .account-info__name {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-text-primary-inverted);
-      line-height: 24px;
-      white-space: nowrap;
-    }
-    .account-info__sub {
-      font-size: 14px;
-      color: var(--color-text-secondary-inverted);
-      letter-spacing: 0.4px;
-      white-space: nowrap;
-    }
+    
+    
 
     /* Bottom row: main nav */
-    .site-header__nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 var(--px-full);
-      height: 48px;
-      background: var(--black);
-      border-bottom: 1px solid var(--brand);
-      box-shadow: var(--elevation-b-60);
-    }
+    
 
-    .nav-links-wrap {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      min-width: 0;
-    }
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      flex: 1;
-      min-width: 0;
-    }
-    .nav-links a {
-      color: var(--color-text-primary-inverted);
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.2px;
-      line-height: 20px;
-      padding: 14px 0;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .nav-links a:hover { opacity: 0.8; }
+    
+    
+    
+    
 
     /* Nav overflow more-button */
-    .nav-more {
-      display: none;
-      align-items: center;
-      flex-shrink: 0;
-      margin-left: 24px;
-    }
-    .nav-more--visible { display: flex; }
-    .nav-more__btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      height: 40px;
-      width: 40px;
-      padding: 8px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: var(--color-text-primary-inverted);
-    }
-    .nav-more__btn:hover { background: var(--color-surface-opacity-white-20); }
+    
+    
+    
+    
     /* focus-visible hanteras globalt på button-elementet */
 
     /* Nav overflow dropdown */
-    .nav-more__menu {
-      position: fixed;
-      background: #fff;
-      box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
-      width: 152px;
-      z-index: 500;
-    }
-    .nav-more__menu[hidden] { display: none; }
-    .nav-more__menu-item {
-      display: flex;
-      align-items: center;
-      height: 40px;
-      padding: 0 16px;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-      color: var(--color-text-primary);
-      text-decoration: none;
-      white-space: nowrap;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--color-border-secondary);
-      cursor: pointer;
-    }
-    .nav-more__menu-item:last-child { border-bottom: none; }
-    .nav-more__menu-item:hover { background: var(--color-surface-02); }
+    
+    
+    
+    
+    
 
-    .store-btn {
-      background: var(--black);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      gap: 4px;
-      color: var(--color-text-primary-inverted);
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.56px;
-      line-height: 14px;
-    }
-    .store-btn:hover {
-      background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
-    }
-    .store-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .store-btn__text-regular { font-weight: 400; letter-spacing: 0.56px; }
+    
+    
+    
+    
 
     /* ══════════════════════════════════════════════════════════
        ACCOUNT NAV (white bar with tabs)
@@ -853,7 +656,7 @@
     }
     .stat-card__bar-fill--info { background: #0066ff; }
     @media (max-width: 768px) {
-      .account-stats { flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: flex-start; width: 100%; }
+      .account-stats { flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: stretch; width: 100%; }
       .stat-card--totalt { flex: 1 0 calc(50% - 4px); max-width: calc(50% - 4px); order: 1; }
       .stat-card--info-card { flex: 1 0 calc(50% - 4px); max-width: calc(50% - 4px); order: 2; }
       .stat-card-group { flex: 1 0 100%; flex-direction: row; order: 3; }
@@ -1418,10 +1221,8 @@
     }
     .icon-btn.icon-btn--close .ms { font-size: 20px; color: var(--color-icon-primary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20; }
     .icon-btn.icon-btn--close:hover { background: var(--color-surface-opacity-black-05); }
-    .delete-modal__btn-confirm, .bankid-modal__open-btn { flex: 1; }
-    .delete-modal__btn-cancel, .bankid-modal__cancel { flex-shrink: 0; }
-    .bankid-modal__open-btn { gap: 8px; }
-    .bankid-modal__open-btn img { width: 20px; height: 20px; object-fit: contain; }
+    .delete-modal__btn-confirm { flex: 1; }
+    .delete-modal__btn-cancel { flex-shrink: 0; }
 
     /* OK — Secondary xs */
 
@@ -1476,12 +1277,8 @@
     body.has-impersonation-banner .impersonation-banner-placeholder {
       display: block;
     }
-    body.has-impersonation-banner .site-header__top {
-      top: 40px;
-    }
-    @media (min-width: 769px) {
-      body.has-impersonation-banner .site-header__top { top: 48px; }
-    }
+    
+    
 
     /* Inner banner */
     .impersonation-banner {
@@ -2375,7 +2172,7 @@
     .footer-links {
       display: flex;
       gap: 24px;
-      padding: 48px var(--px-full) 56px;
+      padding: 48px var(--px-full) 64px;
     }
     .footer-divider {
       background: var(--color-surface-100);
@@ -2669,20 +2466,7 @@
     .form-row { display: flex; gap: 24px; }
     .form-row .form-field { flex: 1; min-width: 0; }
 
-    .form-label {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;            /* Desktop Large: label-md */
-      font-weight: 600;
-      color: var(--color-text-primary);
-      text-transform: uppercase;
-      letter-spacing: 0.48px;
-      line-height: 16px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      white-space: nowrap;
-    }
+    .form-label { display: flex; align-items: center; gap: 2px; white-space: nowrap; } /* type from input.css; flex for the (Valfritt) suffix */
     .form-label__req { color: var(--color-text-danger-default); }
     .form-label__optional {
       font-family: 'Breuer Condensed', Arial, sans-serif;
@@ -2695,223 +2479,15 @@
       color: var(--color-text-primary);
     }
 
-    /* Input wrapper — provides focus ring via ::after */
-    .input-wrap {
-      position: relative;
-    }
-    .input-wrap::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border: 2px solid var(--color-border-focus);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-    }
-    .input-wrap:focus-within::after { opacity: 0; }
-    body.keyboard-nav :focus-within::after { opacity: 1; }
-
-    .form-input,
-    .form-select {
-      height: 48px;               /* Desktop Large */
-      border: 1px solid var(--color-border-input-default);
-      background: var(--color-surface-raised-primary, #ffffff);
-      padding: 8px 12px;          /* space-8 vert, space-12 horiz */
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;            /* body-md Desktop */
-      font-weight: 400;
-      line-height: 22px;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-      outline: none;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    @media (min-width: 769px) { .form-input,
-    .form-select { font-size: 17px; line-height: 24px; } }
-    .form-input::placeholder { color: var(--color-text-tertiary); }
-
-    /* Hover */
-    .form-input:hover, .form-select:hover { border-color: var(--color-border-dark); }
-
-    /* Active — has value (placeholder not shown) */
-    .form-input:not(:placeholder-shown) {
-      border-color: var(--color-border-selected);
-      color: var(--color-text-primary);
-    }
-
-    /* Focus — selected border on click or keyboard; blue ring only on keyboard (via body.keyboard-nav) */
-    .form-input:focus { border-color: var(--color-border-selected); }
-
-    /* Error */
-    .form-input--error { border-color: var(--color-border-danger-default) !important; }
-
-    /* Success */
-    .form-input--success { border-color: var(--color-border-success-default) !important; }
-
-    /* Disabled */
-    .form-input:disabled {
-      background: var(--color-surface-raised-secondary, #f6f6f6);
-      border-color: var(--color-border-disabled);
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-    }
-
-    .form-select {
-      appearance: none;
-      cursor: pointer;
-      padding-right: 40px;            /* utrymme för dropdown-pil */
-    }
-
-    /* Focus — selected border on click or keyboard */
-    .form-select:focus { border-color: var(--color-border-selected); }
-
-    /* Active — icke-default alternativ valt (JS-togglad klass på wrappern) */
-    .form-select-wrap.is-active .form-select { border-color: var(--color-border-selected); }
-
-    /* Error */
-    .form-select--error { border-color: var(--color-border-danger-default) !important; }
-
-    /* Success */
-    .form-select--success { border-color: var(--color-border-success-default) !important; }
-
-    /* Disabled */
-    .form-select:disabled {
-      background: var(--color-surface-raised-secondary, #f6f6f6);
-      border-color: var(--color-border-disabled);
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-    }
-
-    .form-select-wrap { position: relative; }
-    .form-select-arrow {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      font-size: 24px;
-      line-height: 1;
-      color: var(--color-text-primary);
-    }
-    .form-select:disabled ~ .form-select-arrow {
-      color: var(--color-text-disabled);
-    }
-
-    .form-helper {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;            /* body-sm */
-      font-weight: 400;
-      color: var(--color-text-tertiary);
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .form-helper--error {
-      color: var(--color-text-danger-default);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .form-helper--success  { color: var(--color-text-success-default); }
-    .form-helper--disabled { color: var(--color-text-disabled); }
-
-    .form-checkboxes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 24px;
-      margin-top: 4px;
-      margin-bottom: 4px;
-    }
-    .form-checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-    .form-checkbox-item input[type="checkbox"],
-    .check-icon input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      border: 1.5px solid var(--color-border-selected);
-      background: var(--color-background-primary);
-      cursor: pointer;
-      flex-shrink: 0;
-      /* 4px margin on all sides: 16px box + 4+4 = 24px total incl. space for focus ring */
-      margin: 4px;
-    }
-    .form-checkbox-item input[type="checkbox"]:hover {
-      border-width: 2px;
-    }
-    .form-checkbox-item input[type="checkbox"]:focus-visible {
-      /* 2px gap (outline-offset) + 2px ring = 4px — fills the margin exactly → 24px total */
-      outline: 2px solid var(--color-border-focus);
-      outline-offset: 2px;
-    }
-    .form-checkbox-item input[type="checkbox"]:checked,
-    .check-icon input[type="checkbox"]:checked {
-      background-color: var(--color-surface-100);
-      border-color: var(--color-border-selected);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item input[type="checkbox"]:checked:hover:not(:disabled),
-    .check-icon input[type="checkbox"]:checked:hover:not(:disabled) {
-      background-color: var(--color-text-disabled, #939595);
-      border-color: var(--color-text-disabled, #939595);
-    }
-    .form-checkbox-item input[type="checkbox"]:indeterminate {
-      background-color: var(--color-surface-100);
-      border-color: var(--color-border-selected);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item input[type="checkbox"]:disabled,
-    .check-icon input[type="checkbox"]:disabled {
-      border-color: var(--color-border-disabled);
-      background-color: var(--color-background-primary);
-      cursor: not-allowed;
-    }
-    .form-checkbox-item input[type="checkbox"]:disabled:checked,
-    .check-icon input[type="checkbox"]:disabled:checked {
-      background-color: var(--color-surface-disabled, #e5e5e5);
-      border-color: var(--color-surface-disabled, #e5e5e5);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='%23939595' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item:has(input:disabled) {
-      cursor: not-allowed;
-    }
-    .form-checkbox-item span {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      white-space: nowrap;
-    }
-    @media (min-width: 769px) { .form-checkbox-item span { font-size: 17px; line-height: 24px; } }
-    .form-checkbox-item:has(input:disabled) span {
-      color: var(--color-text-disabled);
-    }
+    /* Checkbox group layout (page): items come from components/css/checkbox.css */
+    .form-checkboxes { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 4px; margin-bottom: 4px; }
 
     /* ── Responsive (mobile-first) ───────────────────────── */
 
     /* xs default – mobile base styles */
-    .site-header__nav { overflow-x: auto; gap: 16px; scrollbar-width: none; }
-    .site-header__nav::-webkit-scrollbar { display: none; }
-    .site-header__right { gap: 0; }
+    
+    
+    
 
     .account-nav { padding-top: 16px; padding-bottom: 16px; }
     .tab-bar-wrap { display: none; }
@@ -2919,7 +2495,7 @@
     .account-nav__profile { gap: 8px; }
     .account-nav__name { line-height: 22px; }
     .account-nav__sub { font-size: 14px; letter-spacing: 0.4px; }
-    .account-info__name, .account-info__sub { display: none; }
+    
 
     .filter-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
     .search-input { width: 100%; }
@@ -2999,33 +2575,11 @@
       /* Save button — mobile lg: 48px, padding 12px */
       .drawer-save-btn { padding: 12px 16px; }
 
-      /* Labels — label-md Mobile: 14px/14px, 0.42px */
-      .form-label {
-        font-size: 14px;
-        line-height: 14px;
-        letter-spacing: 0.42px;
-      }
       /* Optional suffix — body-md Mobile: 14px/14px, 0.42px */
       .form-label__optional {
         font-size: 14px;
         line-height: 14px;
         letter-spacing: 0.42px;
-      }
-
-      /* Inputs & selects — Large Mobile: 40px, 8px padding, body-md mobile 16px/22px */
-      .form-input,
-      .form-select {
-        height: 40px;
-        padding: 8px;
-        line-height: 22px;
-      }
-      .form-select { padding-right: 40px; }   /* keep room for arrow */
-
-      /* Checkbox label text — body-md Mobile: 16px/22px */
-      .form-checkbox-item span {
-        font-size: 16px;
-        line-height: 22px;
-        letter-spacing: 0.32px;
       }
 
       /* form-row stays stacked on mobile, except name row */
@@ -3068,13 +2622,13 @@
       .page-preamble { margin-bottom: 40px; }
 
       /* Restore desktop header, hide mobile header */
-      .site-header__sm { display: none; }
-      .site-header__top { display: flex; }
-      .site-header { display: block; }
+      
+      
+      
 
-      .site-header__nav { overflow-x: hidden; gap: 0; }
-      .nav-links { overflow: hidden; }
-      .site-header__right { gap: 8px; }
+      
+      
+      
 
       .account-nav { padding-top: 24px; padding-bottom: 24px; }
       .tab-bar-wrap { display: flex; }
@@ -3082,7 +2636,7 @@
       .account-nav__profile { gap: 12px; }
       .account-nav__name { line-height: 24px; }
       .account-nav__sub { font-size: 16px; letter-spacing: 0.32px; }
-      .account-info__name, .account-info__sub { display: block; }
+      
 
       .filter-bar { flex-direction: row; align-items: center; gap: 0; }
       .search-input { width: min(384px, 100%); }
@@ -3118,7 +2672,7 @@
       .cs__btn { padding: 12px 16px; font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
 
       /* Footer links — static columns on desktop */
-      .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 24px; padding: 48px var(--px-full) 56px; }
+      .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 24px; padding: 48px var(--px-full) 64px; }
       .footer-col { flex: 1; width: auto; border-bottom: none; gap: 16px; }
       .footer-col__heading {
         display: flex; padding: 0; cursor: default; pointer-events: none;
@@ -3131,7 +2685,7 @@
       /* Footer divider, bottom & copyright */
       .footer-divider { padding: 0 var(--px-full); background: var(--color-surface-100); }
       .footer-divider__line { background: var(--color-surface-80); }
-      .footer-bottom { flex-direction: row; align-items: center; gap: 0; padding: 40px var(--px-full); }
+      .footer-bottom { flex-direction: row; align-items: center; gap: 0; padding: 0 var(--px-full) 40px; }
       .footer-copyright { padding: 32px var(--px-full); }
 
       .cta-buttons { flex-direction: row; }
@@ -3146,279 +2700,71 @@
     /* ══════════════════════════════════════════════════════════
        SITE-HEADER SM (3-row mobile layout, xs + sm)
     ══════════════════════════════════════════════════════════ */
-    .site-header__sm {
-      display: none;
-      flex-direction: column;
-      background: var(--black);
-    }
+    
 
     /* ── Row 1: icons | logo | account + cart + menu ── */
-    .sh-sm__bar1 {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      height: 64px;
-      padding: 0 8px;
-      background: var(--black);
-      border-bottom: 1px solid transparent;
-      box-shadow: var(--elevation-b-80);
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .sh-sm__bar1--accented {
-      border-bottom-color: var(--brand);
-    }
+    
+    
 
     /* Push bar2 + bar3 down so they don't hide under the fixed bar1 */
-    .site-header__sm { padding-top: 64px; }
-    .sh-sm__bar1-left,
-    .sh-sm__bar1-right {
-      display: flex;
-      align-items: center;
-      flex: 1;
-    }
-    .sh-sm__bar1-right { justify-content: flex-end; }
-    .sh-sm__bar1-center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      pointer-events: none;
-    }
-    .sh-sm__logo { width: 76px; height: 14.555px; flex-shrink: 0; }
-    .sh-sm__logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    
+    
+    
+    
+    
+    
 
     /* Icon buttons – 20px icon, space-12 padding = 44px */
-    .sh-sm__icon-btn {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-      position: relative;
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
+    
     /* 24px icon, space-12 padding = 48px */
-    .sh-sm__icon-btn--24 { width: 48px; height: 48px; }
-    .sh-sm__icon-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__icon-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .sh-sm__icon-btn--24 .ms {
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
+    
+    
+    
+    
 
     /* Badge on icon buttons */
-    .sh-sm__icon-btn .badge {
-      top: 4px;
-      right: 2px;
-    }
+    
 
     /* Account button: avatar + name + sub */
-    .sh-sm__account-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 48px;
-      padding: 0 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      flex-shrink: 1;
-      min-width: 0;
-    }
-    .sh-sm__account-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__account-info { display: flex; flex-direction: column; gap: 0; min-width: 0; }
-    .sh-sm__account-name {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-text-primary-inverted);
-      line-height: 22px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    .sh-sm__account-sub {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--color-text-secondary-inverted);
-      line-height: normal;
-      white-space: nowrap;
-      letter-spacing: 0.4px;
-    }
+    
+    
+    
+    
+    
 
     /* Hamburger menu button */
-    .sh-sm__menu-btn {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .sh-sm__menu-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__menu-btn .ms {
-      color: var(--brand);
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
+    
+    
+    
 
     /* ── Row 2: search bar ── */
-    .sh-sm__bar2 {
-      background: #111;
-      padding: 0 8px;
-      transition: transform var(--duration-fast-4) var(--ease-standard);
-    }
-    .sh-sm__bar2--fixed {
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      transform: translateY(-100%);
-    }
-    .sh-sm__bar2--fixed.sh-sm__bar2--visible {
-      transform: translateY(0);
-      border-bottom: 1px solid var(--brand);
-    }
-    .sh-sm__bar2--fixed.sh-sm__bar2--bar3-hidden {
-      padding-bottom: 8px;
-    }
-    .sh-sm__search {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 40px;
-      background: var(--color-surface-raised-secondary);
-      border: 1px solid var(--color-border-input-default);
-      padding: 0 8px;
-      box-sizing: border-box;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .sh-sm__search:hover { border-color: var(--color-border-dark); }
-    .sh-sm__search:focus-within { border-color: var(--color-border-selected); }
-    .sh-sm__search > .ms {
-      color: var(--black);
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-      flex-shrink: 0;
-    }
-    .sh-sm__search input {
-      flex: 1;
-      min-width: 0;
-      background: none;
-      border: none;
-      outline: none;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-text-secondary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .sh-sm__search input::placeholder { color: var(--color-text-secondary); }
-    .sh-sm__search-right {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-      padding-left: 6px;
-    }
-    .sh-sm__search-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--color-border-tertiary);
-      flex-shrink: 0;
-    }
-    .sh-sm__search-action {
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      padding: 6px;
-      box-sizing: border-box;
-    }
-    .sh-sm__search-action:hover { background: var(--color-surface-opacity-black-05); }
-    .sh-sm__search-action .ms {
-      color: var(--black);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Row 3: store nav ── */
-    .sh-sm__bar3 {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      height: 40px;
-      background: var(--black);
-      border-bottom: 1px solid var(--brand);
-      padding: 0 8px;
-    }
-    .sh-sm__store-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      height: 40px;
-      padding: 4px;
-      color: var(--color-text-primary-inverted);
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.42px;
-      line-height: 14px;
-      white-space: nowrap;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .sh-sm__store-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__store-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .sh-sm__store-btn__text {
-      display: flex;
-      align-items: center;
-      padding: 5px 6px;
-      gap: 0;
-    }
-    .sh-sm__store-btn__bold { font-weight: 600; letter-spacing: 0.42px; }
-    .sh-sm__store-btn__regular { font-weight: 400; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Show/hide at breakpoints ── */
-    @media (max-width: 768px) {
-      .site-header__sm { display: flex; }
-      .site-header__top { display: none; }
-      .site-header { display: none; }
-    }
+    
 
     /* ── xs + sm (max-width: 768px): show cards, hide desktop table ── */
     @media (max-width: 768px) {
@@ -3429,27 +2775,27 @@
     /* ── xs only (max-width: 639px) – mobile overrides ── */
     @media (max-width: 639px) {
       /* Bar1: 56px (8px padding + 40px buttons) */
-      .sh-sm__bar1 { height: 56px; padding: 8px; }
-      .site-header__sm { padding-top: 56px; }
-      .sh-sm__bar2--fixed { top: 56px; }
+      
+      
+      
 
       /* Icon buttons → mobile medium (8px padding, 24px icon = 40px) */
-      .sh-sm__icon-btn { width: 40px; height: 40px; }
-      .sh-sm__icon-btn--24 { width: 40px; height: 40px; }
-      .sh-sm__icon-btn .ms { font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-      .sh-sm__menu-btn { width: 40px; height: 40px; }
+      
+      
+      
+      
 
       /* Bar1: collapse account btn to avatar-only */
-      .sh-sm__account-info { display: none; }
-      .sh-sm__account-btn { height: 40px; padding: 8px; gap: 0; flex-shrink: 0; }
+      
+      
 
       /* Bar2: hide location button */
-      .sh-sm__location-btn { display: none; }
+      
 
       /* Bar3: left-align store button, label-sm (12px) text */
-      .sh-sm__bar3 { justify-content: flex-start; }
-      .sh-sm__store-btn { font-size: 12px; letter-spacing: 0.48px; }
-      .sh-sm__store-btn__bold { letter-spacing: 0.48px; }
+      
+      
+      
 
       /* CTA banner: center text */
       .cta-banner__text { align-items: center; text-align: center; }
@@ -3658,47 +3004,7 @@
     @media (min-width: 769px) { .upload-skip-btn { font-size: 17px; line-height: 24px; } }
     .upload-skip-btn:hover { color: var(--color-text-primary); }
 
-    /* ── BankID signing modal ─────────────────────────── */
-    .bankid-modal-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 10000;
-      opacity: 0; pointer-events: none;
-      transition: opacity var(--duration-medium-2) var(--ease-standard);
-    }
-    .bankid-modal-overlay.is-open { opacity: 1; pointer-events: all; }
-    .bankid-modal {
-      position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, calc(-50% + 12px));
-      z-index: 10001; background: #fff; width: 440px;
-      max-width: calc(100vw - 32px); padding: 24px;
-      box-shadow: var(--elevation-b-100);
-      display: flex; flex-direction: column;
-      opacity: 0; pointer-events: none;
-      transition: opacity var(--duration-medium-2) var(--ease-decelerate-emphasized),
-                  transform var(--duration-medium-2) var(--ease-decelerate-emphasized);
-    }
-    .bankid-modal.is-open { opacity: 1; pointer-events: all; transform: translate(-50%, -50%); }
-    .bankid-modal__header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
-    .bankid-modal__title {
-      flex: 1; font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: 0px;
-      color: #000; font-feature-settings: 'ss02' 1, 'ss03' 1; padding-top: 2px;
-    }
-    .bankid-modal__body {
-      display: flex; flex-direction: column; align-items: center; gap: 16px;
-      text-align: center; padding-bottom: 32px;
-    }
-    .bankid-logo-large { width: 72px; height: 72px; object-fit: contain; }
-    .bankid-modal__desc {
-      font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px;
-      color: var(--color-text-secondary);
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) { .bankid-modal__desc { font-size: 17px; line-height: 24px; } }
-    .bankid-modal__desc strong { font-weight: 600; color: var(--color-text-primary); }
-    .bankid-modal__footer { display: flex; gap: 8px; align-items: center; }
-    .bankid-waiting {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 16px; padding: 8px 0 32px; text-align: center;
-    }
+    /* BankID spinner: used by the signing modal (#sign-modal) */
     .bankid-spinner {
       width: 36px; height: 36px;
       border: 3px solid var(--color-border-primary);
@@ -3706,23 +3012,8 @@
       border-radius: 50%; animation: upload-spin 0.8s linear infinite;
     }
     @keyframes upload-spin { to { transform: rotate(360deg); } }
-    .bankid-waiting__label {
-      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
-      line-height: 20px; letter-spacing: 0.36px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .bankid-waiting__cancel-link {
-      background: transparent; border: none; cursor: pointer;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px; font-weight: 400; color: var(--color-text-tertiary);
-      text-decoration: underline; letter-spacing: 0.28px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; padding: 0;
-    }
-    .bankid-waiting__cancel-link:hover { color: var(--color-text-primary); }
     @media (max-width: 768px) {
       .upload-dropzone { padding: 24px 16px; }
-      .bankid-modal { padding: 16px; }
-      .bankid-modal__title { font-size: 18px; line-height: 22px; }
       .upload-drawer-desc,
       .inline-link--medium,
       .upload-file-chip__name,
@@ -4012,6 +3303,8 @@
     .action-link--bold { font-weight: 600; }
 
   </style>
+  <link rel="stylesheet" href="/eco-design-system/notifications.css">
+  <script src="/eco-design-system/notifications.js" defer></script>
 </head>
 <body>
 
@@ -4577,7 +3870,7 @@
             <option>Standard</option>
             <option>Administratör</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Här väljer du vilken roll du vill att din användare ska ha. Standard är den vanliga användarrollen.</span>
       </div>
@@ -4605,13 +3898,13 @@
         <div class="form-field">
           <label class="form-label" for="drawer-fornamn">Förnamn</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" placeholder=" " /></div>
           </div>
         </div>
         <div class="form-field">
           <label class="form-label" for="drawer-efternamn">Efternamn</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" placeholder=" " /></div>
           </div>
         </div>
       </div>
@@ -4620,7 +3913,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-epost">Epost</label>
         <div class="input-wrap">
-          <input class="form-input" type="email" id="drawer-epost" autocomplete="email" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="email" id="drawer-epost" autocomplete="email" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4628,7 +3921,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-mobil"><span>Mobilnummer</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4636,7 +3929,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-anstallning"><span>Anställnings nr</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-anstallning" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-anstallning" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4644,7 +3937,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-kost"><span>Kostnadsställe</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-kost" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-kost" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4652,7 +3945,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-adress"><span>Adressnummer</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-adress" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-adress" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4664,7 +3957,7 @@
             <option>Inaktiv</option>
             <option>Aktiv</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Inaktiv är standardvärdet. Välj aktiv om ni använder budget.</span>
       </div>
@@ -4676,7 +3969,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-arsbudget">Årsbudget</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-arsbudget" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-arsbudget" placeholder=" " /></div>
           </div>
         </div>
 
@@ -4684,7 +3977,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-saldo">Nuvarande saldo</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-saldo" value="0.00 kr" disabled />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-saldo" value="0.00 kr" disabled /></div>
           </div>
           <span class="form-helper form-helper--disabled" id="drawer-saldo-helper">Nuvarande saldo: 0.00 kr</span>
         </div>
@@ -4693,7 +3986,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-lagg-saldo">Lägg till saldo</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-lagg-saldo" placeholder=" " /></div>
           </div>
         </div>
 
@@ -4767,7 +4060,7 @@
             <option value="11">November</option>
             <option value="12">December</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Här väljer du vilken månad som ska gälla som start för överflyttningen.</span>
       </div>
@@ -4780,7 +4073,7 @@
             <option value="aktiv" >Ja</option>
             <option value="avaktivera" selected>Nej</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Välj om kvarvarande saldo ska följa med till nästkommande budgetår.</span>
       </div>
@@ -6402,84 +5695,17 @@
         return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
       }
 
-      /* ── Logout confirmation toast ── */
+      /* ── Logout confirmation: ECO Toast, Warning, Weak, actionable (eco-design-system/notifications.js) ── */
       function showLogoutConfirmToast(name) {
-        var w       = window.innerWidth;
-        var isXs    = w <= 639;
-        var isMobile = w <= 768;
-        var isSmMd  = !isXs && w <= 1023;
-        var topVal  = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var rightVal = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var bodyLh  = isMobile ? '22px' : '24px';
-        /* Desktop xs buttons: 6px padding, label-sm 14px/0.56px
-           Mobile sm buttons:  6px padding, label-md 14px/0.42px (mobile) */
-        var dismissed = false;
-
-        function dismiss() {
-          if (dismissed) return;
-          dismissed = true;
-          t.style.animation = isXs
-            ? 'toast-slide-out-top var(--duration-medium-2) var(--ease-accelerate-generic) forwards'
-            : 'toast-slide-out var(--duration-medium-2) var(--ease-accelerate-generic) forwards';
-          setTimeout(function(){ t.remove(); }, 300);
-        }
-        function confirmLogout() {
-          dismiss();
-          closeImpersonation();
-        }
-
-        var t = document.createElement('div');
-        t.setAttribute('role', 'alertdialog');
-        t.setAttribute('aria-modal', 'false');
-        t.style.cssText = [
-          'position:fixed',
-          'z-index:9999',
-          isXs ? 'top:0;left:0;right:0;width:100vw' : ('top:' + topVal + ';right:' + rightVal + ';width:375px'),
-          'box-shadow:0px 8px 16px 0px rgba(0,0,0,0.10),0px 0px 1px 0px rgba(0,0,0,0.05)',
-          'animation:' + (isXs
-            ? 'toast-slide-in-top var(--duration-medium-2) var(--ease-decelerate-emphasized) forwards'
-            : 'toast-slide-in var(--duration-medium-2) var(--ease-decelerate-emphasized) forwards'),
-          'font-family:\'Breuer Condensed\',Arial,sans-serif',
-          'font-feature-settings:\'ss02\' 1,\'ss03\' 1'
-        ].join(';');
-
-        t.innerHTML = [
-          '<div style="background:#fff;border-left:2px solid #fac000;display:flex;flex-direction:column;width:100%;">',
-            '<div style="display:flex;gap:8px;align-items:flex-start;padding:16px;width:100%;box-sizing:border-box;">',
-              /* Warning icon — warning, filled */
-              '<span class="ms ms--24" style="color:#fac000;font-variation-settings:\'FILL\' 1,\'wght\' 300,\'GRAD\' 0,\'opsz\' 24;flex-shrink:0;margin-top:1px;">warning</span>',
-              '<div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;">',
-                /* Title */
-                '<p style="font-size:16px;font-weight:600;line-height:18px;letter-spacing:0px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1;padding-top:2px;">LOGGA UT</p>',
-                /* Body line 1 */
-                '<p style="font-size:16px;font-weight:400;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;">',
-                  'Är du säker att du vill logga ut som användare <strong style="font-weight:600;">' + escHtml(name) + '</strong>?',
-                '</p>',
-                /* Body line 2 */
-                '<p style="font-size:16px;font-weight:600;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;margin-top:8px;">',
-                  'Du kommer fortfarande att vara inloggad som Administratör.',
-                '</p>',
-              '</div>',
-              /* Close × — Blank xs på ljus bakgrund */
-              '<button aria-label="Stäng" class="icon-btn icon-btn--close logout-toast__close" id="logout-toast-close">',
-                '<span class="ms">close</span>',
-              '</button>',
-            '</div>',
-            /* Action group — indented 32px from left (icon 24px + gap 8px) */
-            '<div style="padding:0 16px 16px 48px;display:flex;gap:8px;align-items:center;box-sizing:border-box;">',
-              /* OK — Secondary xs */
-              '<button id="logout-toast-ok" class="btn btn--secondary logout-toast__btn-secondary"><span class="btn__label">OK</span></button>',
-              /* ABRYT — Primary xs */
-              '<button id="logout-toast-cancel" class="btn btn--primary logout-toast__btn-primary"><span class="btn__label">ABRYT</span></button>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        t.querySelector('#logout-toast-close').addEventListener('click', dismiss);
-        t.querySelector('#logout-toast-ok').addEventListener('click', confirmLogout);
-        t.querySelector('#logout-toast-cancel').addEventListener('click', dismiss);
-
-        document.body.appendChild(t);
+        window.ECO_N.showToast({
+          status: 'warning',
+          title: 'Logga ut som ' + name + '?',
+          text: 'Du är fortfarande inloggad som Administratör.',
+          actions: {
+            secondary: { label: 'Avbryt' },
+            primary: { label: 'Logga ut', onClick: function () { closeImpersonation(); } }
+          }
+        });
       }
 
       /* ── Impersonation banner ── */
@@ -6632,7 +5858,6 @@
     /* ── Upload users ───────────────────────────────── */
     var uploadData = [];
     var uploadHasStore = false;
-    var bankIdTimer = null;
 
     var FAKE_UPLOAD_USERS = [
       { name: 'Sara Lindberg',    email: 'sara.lindberg@exempel.se',    role: 'Standard',      store: true  },
@@ -6737,38 +5962,19 @@
       }, 380);
     }
 
+    /* Store permission on import is signed in the shared BankID modal (#sign-modal, window.signWithBankId) */
     function openBankIdModal() {
+      var count = uploadData.length;
       var storeCount = uploadData.filter(function(u) { return u.store; }).length;
-      document.getElementById('bankid-user-count').textContent = uploadData.length;
-      document.getElementById('bankid-store-count').textContent = storeCount;
-      document.getElementById('bankid-state-init').style.display = '';
-      document.getElementById('bankid-state-waiting').style.display = 'none';
-      document.getElementById('bankid-modal-overlay').classList.add('is-open');
-      document.getElementById('bankid-modal').classList.add('is-open');
-    }
-
-    function closeBankIdModal() {
-      clearTimeout(bankIdTimer);
-      document.getElementById('bankid-modal-overlay').classList.remove('is-open');
-      document.getElementById('bankid-modal').classList.remove('is-open');
-    }
-
-    function startBankIdSigning() {
-      document.getElementById('bankid-state-init').style.display = 'none';
-      document.getElementById('bankid-state-waiting').style.display = '';
-      bankIdTimer = setTimeout(function() {
-        var count = uploadData.length;
-        closeBankIdModal();
-        closeUploadDrawer();
-        setTimeout(function() {
-          showUploadToast('success', count + ' användare importerade', 'Butiksbehörighet aktiverad och signerad med Mobile BankID.');
-        }, 380);
-      }, 3000);
-    }
-
-    function cancelBankIdSigning() {
-      clearTimeout(bankIdTimer);
-      closeBankIdModal();
+      window.signWithBankId({
+        text: 'Du importerar ' + count + ' användare varav ' + storeCount + ' med butiksbehörighet. Signera med BankID för att aktivera butiksbehörigheten.',
+        onSigned: function () {
+          closeUploadDrawer();
+          setTimeout(function() {
+            showUploadToast('success', count + ' användare importerade', 'Butiksbehörighet aktiverad och signerad med Mobilt BankID.');
+          }, 380);
+        }
+      });
     }
 
     function showUploadToast(type, title, message) {
@@ -6838,12 +6044,10 @@
       document.getElementById('help-drawer-panel').classList.remove('is-open');
     }
 
-    /* Escape closes BankID modal, upload drawer, or help drawer */
+    /* Escape closes upload drawer or help drawer (the BankID modal handles its own Escape first) */
     document.addEventListener('keydown', function(e) {
       if (e.key !== 'Escape') return;
-      if (document.getElementById('bankid-modal').classList.contains('is-open')) {
-        cancelBankIdSigning();
-      } else if (document.getElementById('upload-drawer-panel').classList.contains('is-open')) {
+      if (document.getElementById('upload-drawer-panel').classList.contains('is-open')) {
         closeUploadDrawer();
       } else if (document.getElementById('help-drawer-panel').classList.contains('is-open')) {
         closeHelpDrawer();
@@ -6902,7 +6106,7 @@
           <span class="ms">info</span>
           <p class="upload-bankid-notice__text">
             <strong>Signering krävs:</strong>
-            <span id="upload-store-count">0</span> av <span id="upload-total-count">0</span> användare har butiksbehörighet och behöver signeras med Mobile BankID innan de kan aktiveras i butiken.
+            <span id="upload-store-count">0</span> av <span id="upload-total-count">0</span> användare har butiksbehörighet och behöver signeras med Mobilt BankID innan de kan aktiveras i butiken.
           </p>
         </div>
 
@@ -7068,48 +6272,6 @@
 
   </div><!-- /help-drawer-panel -->
 
-  <!-- ── BankID signing modal ───────────────────────── -->
-  <div id="bankid-modal-overlay" class="bankid-modal-overlay" onclick="closeBankIdModal()"></div>
-  <div id="bankid-modal" class="bankid-modal" role="dialog" aria-modal="true" aria-labelledby="bankid-modal-title">
-
-    <!-- State 1: Initiate signing -->
-    <div id="bankid-state-init">
-      <div class="bankid-modal__header">
-        <h2 class="bankid-modal__title" id="bankid-modal-title">Signera med Mobile BankID</h2>
-        <button class="icon-btn icon-btn--close bankid-modal__close" onclick="closeBankIdModal()" aria-label="Stäng">
-          <span class="ms">close</span>
-        </button>
-      </div>
-      <div class="bankid-modal__body">
-        <img class="bankid-logo-large" src="/images/BankId.svg" alt="Mobile BankID" />
-        <p class="bankid-modal__desc">
-          Du importerar <strong id="bankid-user-count">0</strong> användare varav <strong id="bankid-store-count">0</strong> med butiksbehörighet.<br><br>
-          Öppna BankID-appen på din mobil och signera för att bekräfta import och aktivera butiksbehörigheten.
-        </p>
-      </div>
-      <div class="bankid-modal__footer">
-        <button class="btn btn--blank bankid-modal__cancel" onclick="closeBankIdModal()"><span class="btn__label">Avbryt</span></button>
-        <button class="btn btn--primary bankid-modal__open-btn" onclick="startBankIdSigning()">
-          <img src="/images/BankId.svg" alt="" aria-hidden="true" />
-          <span class="btn__label">Öppna BankID</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- State 2: Waiting for signing -->
-    <div id="bankid-state-waiting" style="display:none">
-      <div class="bankid-modal__header">
-        <h2 class="bankid-modal__title">Väntar på signering</h2>
-      </div>
-      <div class="bankid-waiting">
-        <div class="bankid-spinner"></div>
-        <p class="bankid-waiting__label">Öppna BankID-appen och signera.<br>Sidan uppdateras automatiskt.</p>
-        <button class="bankid-waiting__cancel-link" onclick="cancelBankIdSigning()">Avbryt signering</button>
-      </div>
-    </div>
-
-  </div><!-- /bankid-modal -->
-
   <!-- Delete confirmation modal -->
   <div id="delete-modal-overlay" class="delete-modal-overlay"></div>
   <div id="delete-modal" class="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
@@ -7128,11 +6290,243 @@
       </div>
       <div class="delete-modal__footer">
         <button class="btn btn--blank delete-modal__btn-cancel" id="delete-modal-cancel"><span class="btn__label">Avbryt</span></button>
-        <button class="btn btn--primary delete-modal__btn-confirm" id="delete-modal-confirm"><span class="btn__label">Radera användare</span></button>
+        <button class="btn btn--destructive delete-modal__btn-confirm" id="delete-modal-confirm"><span class="btn__label">Radera användare</span></button>
       </div>
     </div>
   </div>
 
+  <!-- BankID signing modal (Figma UI Design - My Account 4931:81295, intro step dropped 2026-11-09).
+       One modal for every BankID signing on this page: window.signWithBankId({ text, onSigned }).
+       Used by the step-up guard below ("Inställningar för saldo", "Lägg till användare", "Redigera", "Ta bort")
+       and by the CSV import (store permission). Reuses the page's ECO modal classes (delete-modal*), size Large.
+       Steps: qr → waiting → done | expired. -->
+  <style>
+    @media (min-width: 640px) {   /* Large; height limited to the screen, the panel scrolls (eco-modal-ecom) */
+      .sign-modal { width: 576px; max-height: calc(100dvh - var(--dimension-spacing-space-32)); overflow-y: auto; }
+    }
+    @media (min-width: 769px) { .sign-modal { width: 705px; } }
+    @media (max-width: 639px) {   /* xs Large: fills the screen, buttons at the bottom */
+      .sign-modal { top: 0; left: 0; transform: none; width: 100%; max-width: none; height: 100dvh; max-height: none; }
+      .sign-modal .delete-modal__container, .sign-modal .delete-modal__header-body { flex: 1; }
+    }
+    .sign-modal [data-step] { display: none; width: 100%; flex-direction: column; flex: 1; }
+    .sign-modal[data-current="qr"] [data-step="qr"], .sign-modal[data-current="waiting"] [data-step="waiting"],
+    .sign-modal[data-current="done"] [data-step="done"], .sign-modal[data-current="expired"] [data-step="expired"] { display: flex; }
+    .sign-modal .delete-modal__footer { flex: none; flex-direction: row; justify-content: flex-end; }   /* lone "Avbryt inloggning" (no Primary) sits on the right; a Primary fills the rest of the row anyway */
+    /* Modal button sizes (32px below 769px, 40px from 769px) come from eco-design-system/notifications.css (.delete-modal). */
+    .sign-modal__primary { flex: 1; gap: var(--dimension-spacing-space-4); }
+    .sign-modal__primary img { width: 20px; height: 20px; }
+    /* Desktop shows the QR first. Mobile Base Styling (≤768px) and touch screens (a phone held sideways is 812px wide)
+       put "Öppna BankID" first: you cannot scan your own screen */
+    .sign-only-mobile { display: none !important; }
+    @media (max-width: 768px), (pointer: coarse) { .sign-only-mobile { display: inline-flex !important; } p.sign-only-mobile { display: block !important; } .sign-only-desktop { display: none !important; } }
+    .sign-qr {
+      margin-top: var(--dimension-spacing-space-16); background: var(--color-surface-02);
+      display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16);
+      padding: var(--dimension-spacing-space-24) var(--dimension-spacing-space-16);
+    }
+    .sign-qr__code {
+      background: var(--color-surface-raised-primary); border: 0; padding: var(--dimension-spacing-space-12); cursor: pointer; line-height: 0;
+      outline: 2px solid transparent; outline-offset: 2px;
+    }
+    body.keyboard-nav .sign-qr__code:focus { outline-color: var(--color-border-focus); }
+    .sign-qr__code svg { width: 160px; height: 160px; display: block; }
+    .sign-qr__code rect { fill: var(--color-icon-primary); }
+    .sign-modal__center { text-align: center; margin-top: var(--dimension-spacing-space-16); }
+    .sign-modal__center + .sign-modal__center { margin-top: 0; }
+    .sign-qr__time, .sign-qr__hint {
+      font-family: 'Breuer Condensed', Arial, sans-serif; font-size: 14px; line-height: 20px; letter-spacing: 0.36px;
+      color: var(--color-text-tertiary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
+    }
+    .sign-qr__time { font-variant-numeric: tabular-nums; }
+    .sign-qr__hint { text-align: center; margin-top: var(--dimension-spacing-space-8); }
+    .sign-modal__status { display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16); padding: var(--dimension-spacing-space-24) 0; text-align: center; }
+    .sign-modal__status .ms { font-size: 48px; color: var(--color-surface-success-default); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 48; }
+    /* Expired: filled warning in warning yellow (Figma 4947:16794, Material/Fill/300/warning, color/surface-warning-default) */
+    .sign-modal__status--warning .ms { color: var(--color-surface-warning-default); }
+    .sign-modal .delete-modal__body .inline-link { font-size: inherit; line-height: inherit; }
+    /* BankID logo in the top-left corner, above the title (header-text column, 8px gap) */
+    .sign-modal__logo { display: block; width: 24px; height: 24px; color: var(--color-icon-primary); }
+    .sign-modal__live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  </style>
+  <div id="sign-modal-overlay" class="delete-modal-overlay"></div>
+  <div id="sign-modal" class="delete-modal sign-modal" role="dialog" aria-modal="true" aria-labelledby="sign-modal-title" aria-describedby="sign-modal-text" data-current="qr" tabindex="-1">
+    <p class="sign-modal__live" id="sign-modal-live" aria-live="polite"></p>
+    <div class="delete-modal__container">
+      <div class="delete-modal__header-body">
+        <div class="delete-modal__header">
+          <div class="delete-modal__header-text">
+            <svg class="sign-modal__logo" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" role="img" aria-label="BankID"><path d="M8.1106 12.4526L8.99121 6.66081C8.6443 6.66081 8.05056 6.66081 8.05056 6.66081C7.61026 6.66081 7.04321 6.40324 6.87643 5.92987C6.82306 5.76976 6.6963 5.21982 7.42347 4.68381C7.68365 4.49585 7.85043 4.28701 7.88378 4.1269C7.91714 3.95983 7.87711 3.81365 7.7637 3.70227C7.60359 3.54216 7.29004 3.45166 6.88977 3.45166C6.21598 3.45166 5.74232 3.85541 5.69562 4.14779C5.66227 4.36359 5.82238 4.53762 5.96247 4.649C6.38276 4.97618 6.48283 5.44955 6.22265 5.89507C5.9558 6.35451 5.3754 6.65385 4.75498 6.66081C4.75498 6.66081 4.14123 6.66081 3.79432 6.66081C3.71427 7.22467 2.40671 15.8706 2.30664 16.5528H7.49685C7.54355 16.2534 7.78371 14.6175 8.1106 12.4526Z"/><path d="M2.02628 18.5571H4.1544C5.06169 18.5571 5.28184 19.0375 5.21513 19.476C5.16176 19.831 4.92826 20.0956 4.52799 20.2696C5.035 20.4715 5.23514 20.7847 5.16176 21.279C5.06836 21.8985 4.55468 22.358 3.88088 22.358H1.45923L2.02628 18.5571ZM3.43391 20.1304C3.84753 20.1304 4.04099 19.9007 4.08102 19.6292C4.12105 19.3368 3.99429 19.1349 3.58068 19.1349H3.21376L3.06699 20.1304H3.43391ZM3.20709 21.7663C3.63405 21.7663 3.88088 21.5853 3.94092 21.2163C3.98762 20.8961 3.81417 20.7082 3.40055 20.7082H2.98694L2.82683 21.7732H3.20709V21.7663Z"/><path d="M8.1438 22.3859C7.59009 22.4277 7.32324 22.3651 7.18981 22.1144C6.89628 22.3024 6.56939 22.3999 6.22248 22.3999C5.59539 22.3999 5.37524 22.0588 5.43528 21.6829C5.46197 21.5019 5.56203 21.3278 5.72214 21.1816C6.06905 20.8684 6.92296 20.8266 7.25652 20.5899C7.28321 20.3254 7.18314 20.2279 6.86959 20.2279C6.50268 20.2279 6.1958 20.3532 5.66877 20.7292L5.79553 19.866C6.24917 19.5249 6.68947 19.3647 7.19648 19.3647C7.84359 19.3647 8.41732 19.6432 8.31058 20.3811L8.18382 21.2164C8.13713 21.5088 8.15047 21.5993 8.46402 21.6063L8.1438 22.3859ZM7.18314 21.0703C6.88961 21.2652 6.34257 21.2304 6.28253 21.6341C6.25584 21.8221 6.36925 21.9613 6.54937 21.9613C6.72283 21.9613 6.93631 21.8847 7.10976 21.7594C7.09642 21.6898 7.10309 21.6202 7.1231 21.4879L7.18314 21.0703Z"/><path d="M9.17777 19.4135H10.2852L10.2252 19.7963C10.5787 19.4831 10.8456 19.3647 11.1925 19.3647C11.8129 19.3647 12.0998 19.7615 11.9997 20.4089L11.7128 22.3511H10.6054L10.8456 20.7431C10.8923 20.4507 10.8055 20.3115 10.5921 20.3115C10.4186 20.3115 10.2585 20.4089 10.1051 20.6247L9.85156 22.3442H8.74414L9.17777 19.4135Z"/><path d="M12.8671 18.5571H13.9745L13.6943 20.4227L14.7551 19.4134H16.1227L14.7617 20.6664L15.8558 22.351H14.4615L13.621 20.9866H13.6076L13.4075 22.3441H12.3L12.8671 18.5571Z"/><path d="M16.783 18.5571H18.0572L17.4969 22.351H16.2227L16.783 18.5571Z"/><path d="M18.6776 18.5571H20.4989C21.9065 18.5571 22.3135 19.6222 22.18 20.5063C22.0533 21.3695 21.3995 22.351 20.1653 22.351H18.1106L18.6776 18.5571ZM19.8585 21.4461C20.4789 21.4461 20.8191 21.1258 20.9192 20.4506C20.9926 19.9494 20.8458 19.4551 20.1587 19.4551H19.8184L19.5249 21.4461H19.8585Z"/><path d="M15.0887 1.59985H9.78503L9.07788 6.28479H9.9785C10.4722 6.28479 10.9392 6.04811 11.1393 5.70701C11.206 5.59563 11.2327 5.49817 11.2327 5.40767C11.2327 5.21275 11.1059 5.06657 10.9792 4.96911C10.6323 4.69762 10.5589 4.41221 10.5589 4.21033C10.5589 4.16856 10.5589 4.13376 10.5656 4.09895C10.6389 3.6047 11.2794 3.06868 12.1266 3.06868C12.6336 3.06868 13.0206 3.19399 13.2541 3.42371C13.4609 3.62558 13.5409 3.911 13.4809 4.21033C13.4075 4.56536 13.0673 4.85773 12.8738 5.00392C12.3601 5.37983 12.4268 5.70701 12.4602 5.80446C12.5669 6.09684 12.9739 6.28479 13.2874 6.28479H14.6617C14.6617 6.28479 14.6617 6.28479 14.6617 6.29175C16.5296 6.30568 17.5303 7.20368 17.2168 9.29206C16.9232 11.2343 15.4956 12.0696 13.7944 12.0835L13.1206 16.5666H14.1147C18.3109 16.5666 21.7399 13.7542 22.4137 9.31295C23.2476 3.79962 19.8919 1.59985 15.0887 1.59985Z"/></svg>
+            <h2 class="delete-modal__title" id="sign-modal-title">Signera med Mobilt BankID</h2>
+          </div>
+          <button class="icon-btn icon-btn--close" data-sign="cancel" aria-label="Stäng"><span class="ms">close</span></button>
+        </div>
+
+        <div data-step="qr">
+          <p class="delete-modal__body" id="sign-modal-text"></p>
+          <div class="sign-qr">
+            <button type="button" class="sign-qr__code" data-sign="scan" aria-label="QR-kod för BankID. Prototyp: klicka för att simulera skanning"></button>
+            <span class="sign-qr__time">Giltig i <span id="sign-qr-time">3:00</span></span>
+          </div>
+          <p class="delete-modal__body sign-modal__center sign-only-desktop">Starta BankID-appen på din mobil och tryck på ”Skanna QR-kod”.</p>
+          <p class="delete-modal__body sign-modal__center sign-only-desktop">Har du BankID på den här enheten? <a href="#" class="inline-link" data-sign="scan">Öppna BankID</a></p>
+          <p class="delete-modal__body sign-modal__center sign-only-mobile">Har du BankID på en annan enhet? Starta appen där och skanna QR-koden.</p>
+          <p class="sign-qr__hint">Prototyp: klicka på QR-koden för att simulera att du skannar.</p>
+        </div>
+
+        <div data-step="waiting">
+          <div class="sign-modal__status">
+            <div class="bankid-spinner" aria-hidden="true"></div>
+            <p class="delete-modal__body">Skriv in din säkerhetskod i BankID-appen och välj ”Identifiera”.</p>
+          </div>
+        </div>
+
+        <div data-step="done">
+          <div class="sign-modal__status">
+            <span class="ms" aria-hidden="true">check_circle</span>
+            <p class="delete-modal__body">Klart! Du är identifierad.</p>
+          </div>
+        </div>
+
+        <div data-step="expired">
+          <div class="sign-modal__status sign-modal__status--warning">
+            <span class="ms" aria-hidden="true">warning</span>
+            <p class="delete-modal__body">Du hann inte signera innan QR-koden slutade gälla. Försök igen.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="delete-modal__footer" data-step="qr">
+        <button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt inloggning</span></button>
+        <button class="btn btn--primary sign-modal__primary sign-only-mobile" data-sign="scan"><img src="/images/BankId.svg" alt="" aria-hidden="true"><span class="btn__label">Öppna BankID</span></button>
+      </div>
+      <div class="delete-modal__footer" data-step="waiting"><button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt inloggning</span></button></div>
+      <div class="delete-modal__footer" data-step="expired">
+        <button class="btn btn--blank" data-sign="cancel"><span class="btn__label">Avbryt inloggning</span></button>
+        <button class="btn btn--primary sign-modal__primary" data-sign="restart"><span class="btn__label">Försök igen</span></button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var TTL = 180;   /* seconds the QR order is valid */
+      var LIVE = { qr: '', waiting: 'Väntar på signering i BankID-appen.', done: 'Klart! Du är identifierad.', expired: 'QR-koden har slutat gälla.' };
+      var m = document.getElementById('sign-modal'), ov = document.getElementById('sign-modal-overlay');
+      var code = m.querySelector('.sign-qr__code'), timeEl = document.getElementById('sign-qr-time');
+      var live = document.getElementById('sign-modal-live'), textEl = document.getElementById('sign-modal-text');
+      var cfg = null, tick = null, wait = null, exitTimer = null;
+      var isOpen = function () { return m.classList.contains('is-open') && !m.classList.contains('is-leaving'); };
+
+      /* Fake QR: 25×25 modules with the three finder squares, new pattern every second like BankID's animated QR */
+      function drawQr() {
+        var n = 25, r = '';
+        function finder(x, y) { return (x < 7 && y < 7) || (x >= n - 7 && y < 7) || (x < 7 && y >= n - 7); }
+        function finderOn(x, y) { var a = x < 7 ? x : x - (n - 7), b = y < 7 ? y : y - (n - 7);
+          return a === 0 || a === 6 || b === 0 || b === 6 || (a > 1 && a < 5 && b > 1 && b < 5); }
+        for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) {
+          var on = finder(x, y) ? finderOn(x, y) : (x === 7 || y === 7 || x === n - 8 || y === n - 8) ? false : Math.random() < 0.5;
+          if (on) r += '<rect x="' + x + '" y="' + y + '" width="1" height="1"/>';
+        }
+        code.innerHTML = '<svg viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true">' + r + '</svg>';
+      }
+
+      function stopTimers() { clearInterval(tick); clearTimeout(wait); tick = wait = null; }
+      function step(s) {
+        m.setAttribute('data-current', s);
+        live.textContent = LIVE[s];
+        stopTimers();
+        if (s === 'qr') {
+          var left = TTL; drawQr(); timeEl.textContent = '3:00';
+          tick = setInterval(function () {
+            left--; drawQr();
+            timeEl.textContent = Math.floor(left / 60) + ':' + ('0' + left % 60).slice(-2);
+            if (left <= 0) step('expired');
+          }, 1000);
+        }
+        if (s === 'waiting') wait = setTimeout(function () { step('done'); }, 2500);
+        if (s === 'done') wait = setTimeout(function () {
+          var c = cfg; close(true, function () { if (c && c.onSigned) c.onSigned(); });   /* run the action once the modal is gone */
+        }, 1000);
+        /* focus the main action: Öppna BankID on mobile, the QR code on desktop, else the first button */
+        var f = ['.sign-modal__primary', '.sign-qr__code', '.btn'].map(function (q) {
+          return Array.prototype.filter.call(m.querySelectorAll('[data-step="' + s + '"] ' + q), function (x) { return x.offsetParent !== null; })[0];
+        }).filter(Boolean)[0];
+        (f || m).focus();
+      }
+
+      /* Public: open the modal. o.text = why signing is needed, o.onSigned = what to do after signing. */
+      window.signWithBankId = function (o) {
+        clearTimeout(exitTimer);   /* reopened during the exit animation: cancel it */
+        cfg = { text: o.text, onSigned: o.onSigned, opener: document.activeElement };
+        textEl.textContent = o.text || 'Du behöver signera med BankID för att fortsätta.';
+        ov.classList.remove('is-leaving'); m.classList.remove('is-leaving');
+        ov.classList.add('is-open'); m.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        m.scrollTop = 0;
+        step('qr');
+      };
+
+      function close(signed, then) {
+        if (!isOpen()) return;
+        stopTimers();
+        var c = cfg; cfg = null;
+        document.body.style.overflow = '';
+        function done() {
+          ov.classList.remove('is-open', 'is-leaving'); m.classList.remove('is-open', 'is-leaving');
+          if (then) then();
+        }
+        if (!signed && c && c.opener && c.opener.focus) c.opener.focus();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return done();
+        ov.classList.add('is-leaving'); m.classList.add('is-leaving');
+        /* timer, not animationend: animationend never fires in a background tab, which left the modal stuck */
+        exitTimer = setTimeout(done, (parseFloat(getComputedStyle(m).animationDuration) || 0) * 1000 + 20);
+      }
+
+      m.addEventListener('click', function (e) {
+        var a = e.target.closest('[data-sign]'); if (!a) return;
+        e.preventDefault();
+        var k = a.getAttribute('data-sign');
+        if (k === 'cancel') close();
+        else if (k === 'restart') step('qr');
+        else if (k === 'scan') step('waiting');
+      });
+      ov.addEventListener('click', function () { close(); });
+      /* Capture phase + stop: the page's own Escape handler would also close the drawer underneath */
+      document.addEventListener('keydown', function (e) {
+        if (!isOpen()) return;
+        if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); close(); return; }
+        if (e.key !== 'Tab') return;   /* keep focus inside the modal */
+        var f = Array.prototype.filter.call(m.querySelectorAll('button, a[href]'), function (x) { return x.offsetParent !== null; });
+        if (!f.length) return;
+        if (e.shiftKey && (document.activeElement === f[0] || document.activeElement === m)) { e.preventDefault(); f[f.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+      }, true);
+
+      /* Step-up guard: every action that changes users or balance asks for BankID first. One capture listener,
+         so rows and cards added later are covered too. ponytail: signing lasts until page reload; a real session would expire. */
+      var GUARDED = [
+        ['.action-btn[aria-label="Inställningar för saldo"]', 'ändra inställningarna för saldo'],
+        ['.action-btn[aria-label="Lägg till användare"]', 'lägga till användare'],
+        ['.btn-row-action[aria-label="Redigera"], .user-card__action-btn--edit', 'redigera användare'],
+        ['.btn-row-action[aria-label="Ta bort"], .user-card__action-btn--delete', 'ta bort användare']
+      ];
+      var verified = false;
+      document.addEventListener('click', function (e) {
+        if (verified) return;
+        for (var i = 0; i < GUARDED.length; i++) {
+          var b = e.target.closest(GUARDED[i][0]); if (!b) continue;
+          e.preventDefault(); e.stopImmediatePropagation();
+          window.signWithBankId({
+            text: 'Du behöver signera med BankID för att ' + GUARDED[i][1] + '.',
+            onSigned: function () { verified = true; b.click(); }
+          });
+          return;
+        }
+      }, true);
+    })();
+  </script>
+
 <script src="/components/js/tooltip.js"></script>
+<script src="/components/js/select-menu.js"></script>
 </body>
 </html>

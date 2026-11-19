@@ -287,3 +287,5 @@ A Tile Link is a compact, tappable surface that navigates to a destination: a br
 
 **States.** Brand (SVG): Enabled is a White container with a subtle border or a Black container with no visible border, content at full contrast. Hover, White: the border appears or darkens (`border-hover`, 1px), the logo is unchanged. Hover, Black: `surface-action-1` plus `surface-opacity-white-20`, the logo is unchanged. Label + icon and Label only: Enabled is a White or Grey container with a subtle border; Hover darkens the border (`border-hover`, 1px) and the label **and the icon** shift to the action hover color (Figma: label and icon are both `#737373` on hover).
 
+
+**Horizontal scroller (2026-11-05).** A row of tile links that goes outside its container (e.g. the search suggestions, `#sp-suggest` in `search.html`) scrolls sideways (`flex-shrink: 0` on each tile) and is swiped by giving the row the class `swipe-row` (`tabs.css` + `tabs.js`: glide and rubber band, see `eco-motion` "Swipe physics"). A drag is not a click. Suggestions are built from the data (brands, category names, words, store cities) and never left empty: with no match the row shows popular terms.

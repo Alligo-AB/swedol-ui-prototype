@@ -9,6 +9,7 @@
   font-family: 'Breuer Condensed', Arial, sans-serif;
   font-weight: 400;
   cursor: pointer;
+  background: none; border: 0; padding: 0; margin: 0;   /* an action link may be a <button> (it acts on the page): no browser button look */
   transition: color var(--duration-fast-3) var(--ease-standard);
 }
 /* Hit area: at least 24px high (WCAG 2.5.8) without changing the drawn size. A Small link is 20px and a Medium link on mobile 22px, so an invisible layer grows the clickable area to 24px. Keep 8px between stacked links so the areas do not overlap. */

@@ -166,7 +166,7 @@ Figma node `328:8378`. Label Breuer Condensed Bold, uppercase, 14/14 + 0.56px de
 | `badge-promo badge-promo--closing` | Closing sale: `surface-100`, white text (`Utförsäljning`), only with a Discount badge | same |
 | `badge-promo badge-promo--product` | Product: `surface-05`, 1px `border-primary`, `text-primary`, icon + text | `4px 5px` · `3px 4px` (+ border) |
 
-Product icons (Material Symbols): `verified` (Standardsortiment), `assignment_turned_in` (Avtalssortiment), `history` (`23 tidigare köp`; icon only shows `23`). `badge-promo-group` puts Discount and Closing sale side by side; `badge-promo-stack` stacks them (Discount on top, left-aligned). Icon-only badges need a label (`aria-label` or hidden text).
+Product icons are the custom icons `verified_500_custom` (Standardsortiment), `assignment_turned_in_500_custom` (Avtalssortiment), `history_500_custom` (`23 tidigare köp`; icon only shows `23`), as inline SVG with the **XSmall (14px) drawing from Figma, `viewBox="0 0 14 14"`**, on every breakpoint (Figma 2026-11-06: both breakpoints use the 14px frame). Never the Material font glyph and never the 24px library path scaled down: Figma draws every custom icon once per size and the small sizes are heavier. `badge-promo-group` puts Discount and Closing sale side by side; `badge-promo-stack` stacks them (Discount on top, left-aligned). Icon-only badges need a label (`aria-label` or hidden text).
 
 ### Badge/Purchase Info (`.badge-purchase`) — e-commerce only
 
