@@ -68,6 +68,9 @@ STYLE = r'''    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0
     .il-n { color: var(--color-text-tertiary); }
     @media (max-width: 768px) { .il-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 16px; } .il-bar .il-cat { flex: 1 1 100%; } }'''
 
+SB_URL = 'https://test-acceptance--67b6063b450f52d85d87d37f.chromatic.com/?path=/story/foundation-icons--library'
+SB_LINK = '<p class="ds-desc"><a class="action-link action-link--medium" href="%s" target="_blank" rel="noopener"><span class="action-link__label">See code in Storybook</span><span class="action-link__icon mo-ic" aria-hidden="true">open_in_new</span></a></p>' % SB_URL
+
 SIZES = [('XXSmall', 'icon--xxs', 12, 20, 'Extra size, reserved for badges and components with restricted space.'),
          ('XSmall', 'icon--xs', 14, 20, 'Extra size, reserved for badges and components with restricted space (for example beside 14px text).'),
          ('Small', 'icon--sm', 20, 20, 'The default inside controls: buttons, inputs, list items and menus.'),
@@ -84,7 +87,7 @@ playground = TIP + '<h2 class="ds-h2">Playground</h2>' + desc('Choose an icon, a
     sel('pg-size-l', 'pg-size', 'Size', 'size', [(c, '%s · %dpx' % (n, p)) for n, c, p, o, u in SIZES], 'icon--lg') + \
     btn_group('pg-color-l', 'Color', 'data-pg-color', [('primary', 'Primary', True), ('inverted', 'Inverted', False)]) + \
     '<p class="pg-note" style="margin:0">Click the name field to search all Material Symbols. Custom icons are in the <a href="icon-library.html" class="inline-link inline-link--small">Library</a>.</p></div></div>' + \
-    '<h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
+    SB_LINK
 
 overview = '<h2 class="ds-h2">Overview</h2>' + desc('Icons symbolize common actions, features and themes in our products. They help a person recognize a function quickly, and they work together with a text label.') + \
     desc('The icon set has two sources. <strong>Material Symbols</strong> is the base: Outlined for the normal state and Fill for the active state. <strong>Custom icons</strong> cover what Material Symbols does not: customized symbols, brand icons for Swedol and Tools, social icons and logos.') + \
@@ -108,7 +111,7 @@ variants = '<h2 class="ds-h2">Variants</h2>' + desc('There are two sources and f
 
 sizes = '<h2 class="ds-h2">Sizes</h2>' + desc('Standard icon sizes are 20px, 24px, 40px and 48px. The extra sizes 12px and 14px are reserved for badges and components with restricted space. Material Symbols uses the optical size that fits: 20 for 12, 14 and 20, then 24, 40 and 48.') + \
     '<div class="ds-figs ds-figs--one"><figure class="ds-fig"><div class="ds-fig__stage"><div class="ic-row">' + ''.join('<div class="ic-cell"><span class="icon %s" aria-hidden="true">local_shipping</span><span>%dpx</span></div>' % (c, p) for n, c, p, o, u in SIZES) + '</div></div></figure></div>' + \
-    table(['Size', 'Class', 'Size in px', 'When'], [[n, '<code>%s</code>' % c, '%d' % p, u] for n, c, p, o, u in SIZES]) + \
+    table(['Size', 'Tailwind', 'Size in px', 'When'], [[n, '<code>text-[%dpx]</code>' % p, '%d' % p, u] for n, c, p, o, u in SIZES]) + \
     note('The first sentence of the description is the Figma guidance. The examples in the table are ours.')
 
 color = '<h2 class="ds-h2">Color</h2>' + desc('An icon is <code>icon-primary</code> on a light surface and <code>icon-inverted</code> on a dark one. Inside a button or a link the icon takes the color of its parent (<code>icon--inherit</code>). Never choose another color.') + \
@@ -148,11 +151,10 @@ st_motion = '<h2 class="ds-h2">Motion</h2>' + note('None. An icon has no motion 
 spec = [('design-tokens', st_tok), ('material-symbols-settings', st_set), ('sizes', st_sizes), ('naming', st_naming), ('icon-item', st_item), ('motion', st_motion), ('accessibility-requirements', st_access)]
 
 # ================================================================ Code
-c_basic = '<h2 class="ds-h2">Basic Usage</h2>' + table(['Step', 'What to do'], [['1. Font', 'The Material Symbols Outlined font (both page templates have it).'], ['2. CSS', '<code>&lt;link rel="stylesheet" href="/components/css/icon.css"&gt;</code>'], ['3. Markup', 'A <code>span.icon</code> with the Material Symbols name as text, or an inline <code>svg.icon</code> for a custom icon.'], ['4. Size and style', 'Add a size class (<code>icon--sm</code>, <code>icon--md</code> …) and <code>icon--fill</code> for the active state.'], ['5. Accessible name', '<code>aria-hidden="true"</code> next to a label. Otherwise name the control that holds the icon.']])
-c_icon = '<h2 class="ds-h2">Icon</h2><div id="recipes"></div>'
-c_api = '<h2 class="ds-h2">API</h2>' + table(['Class', 'Use'], [['<code>icon</code>', 'The icon. 24px, <code>icon-primary</code>, Outline.'], ['<code>icon--xxs</code> … <code>icon--xl</code>', 'Size: 12, 14, 20, 24 (default), 40, 48.'], ['<code>icon--fill</code>', 'Fill style (Material Symbols).'], ['<code>icon--inverted</code>', 'On a dark surface.'], ['<code>icon--inherit</code>', 'Take the color of the parent, for example inside a button.']]) + \
-    '<h3 class="ds-h3 ds-group">Things to know</h3>' + bullets(['A custom icon has <code>fill="currentColor"</code> and no width or height of its own: the size class sets them.', 'Do not set <code>font-size</code> on a font icon. Use a size class so the optical size follows.', 'The icon library data is <code>components/icon-library/icon-library-data.js</code>, generated by <code>eco-design-system/gen/gen_icon.py data</code>. Do not edit it by hand.', 'The library script is <code>components/js/icon-library.js</code>.'])
-c_css = '<h2 class="ds-h2">CSS / Tailwind</h2>' + desc('The file is <code>components/css/icon.css</code>, shared by every page. Link it, never copy it.') + code_box('css-code', 'CSS (components/css/icon.css)')
+c_basic = '<h2 class="ds-h2">Basic Usage</h2>' + desc('Use the Material Symbols name as text inside a span with the icon class, or an inline SVG for a custom icon. Put aria-hidden on an icon next to a label; otherwise name the control that holds the icon.') + SB_LINK
+c_icon = '<h2 class="ds-h2">Icon</h2>' + SB_LINK
+c_api = '<h2 class="ds-h2">API</h2>' + SB_LINK
+c_css = '<h2 class="ds-h2">CSS / Tailwind</h2>' + SB_LINK
 code = [('basic-usage', c_basic), ('icon', c_icon), ('api', c_api), ('css-tailwind', c_css, False)]
 
 # ================================================================ Library
@@ -191,7 +193,6 @@ JS_EX = r'''
     var n = pgName.value.trim() || 'local_shipping';
     pgPrev.textContent = n; pgPrev.className = 'icon ' + st.size + (st.style === 'fill' ? ' icon--fill' : '') + (st.color === 'inverted' ? ' icon--inverted' : '');
     pgStage.classList.toggle('ds-stage--dark', st.color === 'inverted');
-    $('#pg-code').textContent = '<link rel="stylesheet" href="/components/css/icon.css">\n\n<span class="' + pgPrev.className + '" aria-hidden="true">' + n + '</span>';
   }
   pgName.addEventListener('input', renderPg);
   DK.seg($('[data-pg-style]'), function (v) { st.style = v; renderPg(); });
@@ -209,12 +210,6 @@ JS_SPEC = r'''
   DK.tokenTable($('#tok-table tbody'), [['Icon on a light surface', 'Default', 'icon-primary'], ['Icon on a dark surface', 'Inverted', 'icon-inverted'], ['Icon item, hover', 'Name bar', 'surface-navigation-hover'], ['Icon item, hover', 'Surface', 'surface-raised-primary'], ['Icon item, hover', 'Shadow', 'shadow-elevation-b-60'], ['Icon item, focus', 'Ring', 'border-focus']]);
 '''
 JS_CODE = r'''
-  DK.recipes($('#recipes'), [['Material Symbols, Outline', '<span class="icon icon--sm" aria-hidden="true">search</span>'],
-    ['Material Symbols, Fill (the active state)', '<span class="icon icon--md icon--fill" aria-hidden="true">favorite</span>'],
-    ['Custom icon (inline SVG)', '<svg class="icon icon--md" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">\n  <path d="M3.5 11V3.5H11V11H3.5Z…"/>\n</svg>'],
-    ['Icon on a dark surface', '<span class="icon icon--md icon--inverted" aria-hidden="true">menu</span>'],
-    ['Icon button with an accessible name', '<button type="button" class="btn btn--blank btn--icon btn--md" aria-label="Delete">\n  <span class="icon icon--inherit" aria-hidden="true">delete</span>\n</button>']]);
-  DK.printCss && DK.printCss($('#css-code'), 'icon');
 '''
 
 C = dict(
@@ -224,7 +219,7 @@ C = dict(
     pages=[
         dict(kind='ex', suffix='', label='Examples & Guidelines', lead='Every example on this page is the real component, not a picture. Source: Figma Icon Documentation.', secs=ex, js=JS_EX),
         dict(kind='spec', suffix='-specifications', label='Specifications', lead='Material Symbols settings, sizes, naming, color tokens and the icon item.', secs=spec, js=JS_SPEC),
-        dict(kind='code', suffix='-code', label='Code', lead='How to add an icon to a page. The file is <code>components/css/icon.css</code>.', secs=code, js=JS_CODE),
+        dict(kind='code', suffix='-code', label='Code', lead='How to add an icon to a page. The code is in Storybook.', secs=code, js=JS_CODE),
         dict(kind='lib', suffix='-library', label='Library', lead='Search every icon in the system and copy its name. Source: Figma Icon Library.', secs=lib, js=''),
         dict(kind='add', suffix='-add', label='Add an icon', lead='How a designer adds or changes an icon. Source: Figma Add icons to our system.', secs=add, js='')])
 C['body_js'] += ['../../components/js/icon-library.js']
