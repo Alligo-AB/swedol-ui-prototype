@@ -21,6 +21,7 @@ STYLE = STYLE + r'''
 playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose size, label and content and the preview and its code update. Press <strong>Open modal</strong> to open the real one over this page.') + \
     '<div class="ds-playground"><div class="ds-stage ds-stage--center" style="padding:0"><div class="modal-preview" id="pg-host"></div></div><div class="ds-controls">' + \
     bp_field('pg-l-bp') + btn_group('pg-l-sz', 'Size', 'data-pg="size"', [('small', 'Small', True), ('large', 'Large', False)]) + \
+    btn_group('pg-l-vr', 'Variant', 'data-pg="variant"', [('primary', 'Primary', False), ('destructive', 'Destructive', True)]) + \
     btn_group('pg-l-lb', 'Label', 'data-pg="label"', [('off', 'None', True), ('on', 'Label', False)]) + \
     txt_field('pg-title', 'Title', 'Delete this address?', 'Title') + txt_field('pg-body', 'Body', 'The address is removed from your address book. You cannot undo this.', 'Body') + \
     txt_field('pg-cancel', 'Cancel button', 'Cancel', 'Cancel button') + txt_field('pg-ok', 'Confirm button', 'Delete address', 'Confirm button') + motion_note('The fade in and out') + \
@@ -169,10 +170,12 @@ JS_SAMPLE = JS_PRE + r'''
 
 JS_EX = JS_SAMPLE + r'''
   /* Playground */
-  var pg = { size: 'small', label: 'off' };
-  function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value, destructive: /^(delete|remove)\b/i.test($('#pg-ok').value) }; }
+  var pg = { size: 'small', label: 'off', variant: 'destructive' };
+  function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value, destructive: pg.variant === 'destructive' }; }
   function renderPg() { var o = pgOpts(); clear($('#pg-host')).appendChild(sample(o)); $('#pg-code').textContent = H.modal(o); }
   DK.wire(pg, renderPg);
+  var PG_TXT = { primary: ['Clear your cart?', 'All products are removed from your cart.', 'Clear cart'], destructive: ['Delete this address?', 'The address is removed from your address book. You cannot undo this.', 'Delete address'] };
+  $$('input[name="pg-l-vr"]').forEach(function (r) { r.addEventListener('change', function () { var t = PG_TXT[r.value]; $('#pg-title').value = t[0]; $('#pg-body').value = t[1]; $('#pg-ok').value = t[2]; pg.variant = r.value; renderPg(); }); });
   ['#pg-title', '#pg-body', '#pg-cancel', '#pg-ok'].forEach(function (s) { $(s).addEventListener('input', renderPg); });
   $('#pg-open').addEventListener('click', function () { var o = pgOpts(); o.onClose = function (r) { $('#pg-log').textContent = 'Closed with: ' + r + '.'; }; N.openModal(o); });
 
