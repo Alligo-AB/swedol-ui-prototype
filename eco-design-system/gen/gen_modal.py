@@ -26,7 +26,7 @@ playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose size, label and 
     txt_field('pg-title', 'Title', 'Delete this address?', 'Title') + txt_field('pg-body', 'Body', 'The address is removed from your address book. You cannot undo this.', 'Body') + \
     txt_field('pg-cancel', 'Cancel button', 'Cancel', 'Cancel button') + txt_field('pg-ok', 'Confirm button', 'Delete address', 'Confirm button') + motion_note('The fade in and out') + \
     '<button type="button" class="btn btn--primary btn--sm" id="pg-open" style="align-self:flex-start"><span class="btn__label">Open modal</span></button>' + \
-    '</div></div><p class="pg-note" id="pg-log" aria-live="polite"></p><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
+    '<p class="pg-note" id="pg-size-note" aria-live="polite" hidden></p></div></div><p class="pg-note" id="pg-log" aria-live="polite"></p><h3 class="ds-h3">Markup for this selection</h3>' + code_box('pg-code', 'HTML')
 
 action = '<h2 class="ds-h2">In action</h2>' + desc('Three situations that really need a decision. The line under the list tells you how the last modal was closed, because a modal must close in all of these ways: the ×, the ESC key and a click on the overlay.') + \
     '<div class="ds-stage" id="scenarios"></div><p class="pg-note" id="log" aria-live="polite">No modal opened yet.</p>'
@@ -172,10 +172,25 @@ JS_EX = JS_SAMPLE + r'''
   /* Playground */
   var pg = { size: 'small', label: 'off', variant: 'destructive' };
   function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value, destructive: pg.variant === 'destructive' }; }
-  function renderPg() { var o = pgOpts(); clear($('#pg-host')).appendChild(sample(o)); $('#pg-code').textContent = H.modal(o); }
+  var PG_TXT = {
+    small: { primary: ['Clear your cart?', 'All products are removed from your cart.', 'Clear cart'], destructive: ['Delete this address?', 'The address is removed from your address book. You cannot undo this.', 'Delete address'] },
+    large: { primary: [SIZES[1][2], SIZES[1][3], 'Accept'], destructive: ['Delete your account?', 'Your orders, addresses, saved lists and invoices are deleted. Open orders are cancelled and your company users lose access to My Pages. You cannot undo this, and we cannot restore the data afterwards.', 'Delete account'] } };
+  var pgLast = 'small';
+  var PG_LARGE_NOTE = '<b>Large</b> is for tasks that need a work area: long text to read, a choice or input. Desktop: 705px wide, centered. Tablet (640–768px): 576px wide, centered. Mobile (below 640px): fills the whole screen (100dvh), the content scrolls and the buttons are pinned to the bottom. Choose <b>Mobile</b> under Breakpoint to see it.';
+  var PG_LARGE_DESTR = ' <b>Tip:</b> a Destructive confirmation is almost always <b>Small</b>. Use Large + Destructive only when the user needs a lot of text to understand what is removed.';
+  function pgLoad() { var t = PG_TXT[pg.size][pg.variant]; $('#pg-title').value = t[0]; $('#pg-body').value = t[1]; $('#pg-ok').value = t[2]; $('#pg-cancel').value = pg.size === 'large' && pg.variant === 'primary' ? 'Read later' : 'Cancel'; }
+  function renderPg() {
+    if (pg.size !== pgLast) {   /* Large starts as Primary, Small as Destructive (the default) */
+      pgLast = pg.size; pg.variant = pg.size === 'large' ? 'primary' : 'destructive';
+      document.querySelector('input[name="pg-l-vr"][value="' + pg.variant + '"]').checked = true; pgLoad();
+    }   /* a size change loads that size’s sample content */
+    var o = pgOpts(), n = $('#pg-size-note');
+    $('#pg-host').classList.toggle('modal-preview--screen', pg.size === 'large');
+    n.innerHTML = PG_LARGE_NOTE + (pg.variant === 'destructive' ? PG_LARGE_DESTR : ''); n.hidden = pg.size !== 'large';
+    clear($('#pg-host')).appendChild(sample(o)); $('#pg-code').textContent = H.modal(o);
+  }
   DK.wire(pg, renderPg);
-  var PG_TXT = { primary: ['Clear your cart?', 'All products are removed from your cart.', 'Clear cart'], destructive: ['Delete this address?', 'The address is removed from your address book. You cannot undo this.', 'Delete address'] };
-  $$('input[name="pg-l-vr"]').forEach(function (r) { r.addEventListener('change', function () { var t = PG_TXT[r.value]; $('#pg-title').value = t[0]; $('#pg-body').value = t[1]; $('#pg-ok').value = t[2]; pg.variant = r.value; renderPg(); }); });
+  $$('input[name="pg-l-vr"]').forEach(function (r) { r.addEventListener('change', function () { pg.variant = r.value; pgLoad(); renderPg(); }); });
   ['#pg-title', '#pg-body', '#pg-cancel', '#pg-ok'].forEach(function (s) { $(s).addEventListener('input', renderPg); });
   $('#pg-open').addEventListener('click', function () { var o = pgOpts(); o.onClose = function (r) { $('#pg-log').textContent = 'Closed with: ' + r + '.'; }; N.openModal(o); });
 
