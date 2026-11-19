@@ -27,9 +27,9 @@ playground = '<h2 class="ds-h2">Playground</h2>' + desc('Choose size, status, em
 
 action = '<h2 class="ds-h2">In action</h2>' + desc('Two real situations. The notification appears <em>where the work is</em>, replaces the previous one, and stays until the user fixes the problem or closes it.') + \
     '<h3 class="ds-h3 ds-group">Change password (form feedback)</h3>' + desc('Each button submits the form with a different result. The notification replaces the previous one and stays until it is closed.') + \
-    '<div class="ds-stage pg-form-stage" style="flex-direction:column;align-items:stretch;gap:16px"><div class="pg-form__region" id="pw-region" aria-live="polite"></div><div class="pg-btns" id="pw-btns"></div></div>' + \
+    '<div class="ds-stage pg-form-stage" style="display:flex;flex-direction:column;align-items:stretch;gap:16px"><div class="pg-form__region" id="pw-region" aria-live="polite"></div><div class="pg-btns" id="pw-btns"></div></div>' + \
     '<h3 class="ds-h3 ds-group">Quantity (product information)</h3>' + desc('Informational Weak with its own icon. The message follows the quantity.') + \
-    '<div class="ds-stage pg-form-stage" style="flex-direction:column;align-items:stretch;gap:16px"><div class="pg-form__region" id="qty-region" aria-live="polite"></div><div class="pg-btns" id="qty-btns"></div></div>'
+    '<div class="ds-stage pg-form-stage" style="display:flex;flex-direction:column;align-items:stretch;gap:16px"><div class="pg-form__region" id="qty-region" aria-live="polite"></div><div class="pg-btns" id="qty-btns"></div></div>'
 
 overview = '<h2 class="ds-h2">Overview</h2>' + desc('An inline notification gives <strong>feedback right where the user is working</strong>: next to a form, a quantity field or a delivery estimate. It stays in the page until the user acts or the state changes. It never disappears by itself.') + \
     desc('It is a task-generated notification. A brief confirmation belongs in a ' + link_large('toast.html', 'Toast') + ', and a message for the whole page or system in a ' + link_large('banner.html', 'Banner') + '. Not sure it is the right component? Start at the ' + link_large('notifications.html', 'Notifications guide') + '.') + \
