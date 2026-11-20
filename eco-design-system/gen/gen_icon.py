@@ -82,13 +82,13 @@ SIZES = [('XXSmall', 'icon--xxs', 12, 20, 'Extra size, reserved for badges and c
 
 # ================================================================ Examples & Guidelines
 TIP = '<div class="ds-tip"><div class="ds-tip__ic"><span class="mo-ic" aria-hidden="true">lightbulb</span></div><div class="ds-tip__body"><h3 class="ds-h3">Pro tip</h3><p class="ds-desc">Looking for an icon? <a class="inline-link inline-link--large inline-link--secondary" href="icon-library.html">Search the Library</a>. We also have a guide for <a class="inline-link inline-link--large inline-link--secondary" href="icon-add.html">adding a new icon</a>.</p></div></div>'
-playground = TIP + '<h2 class="ds-h2">Playground</h2>' + desc('Choose an icon, a style, a size and a color. The icon is the real component: the same class and size that you copy below.') + \
+playground = TIP + '<h2 class="ds-h2">Playground</h2>' + desc('Choose a style, a size and a color. The icon is the real component: the same class and size that you copy below.') + \
     '<div class="ds-playground"><div class="ds-stage ds-stage--center" id="pg-stage"><span class="icon icon--lg" id="pg-icon-prev" aria-hidden="true">local_shipping</span></div><div class="ds-controls">' + \
-    '<div class="ds-field form-field"><label class="form-label form-label--sm" for="pg-name">Icon name</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" type="text" id="pg-name" value="local_shipping" placeholder="Icon name" data-icon-picker autocomplete="off" /></div></div></div>' + \
+    '' + \
     btn_group('pg-style-l', 'Style', 'data-pg-style', [('outline', 'Outline', True), ('fill', 'Fill', False)]) + \
     sel('pg-size-l', 'pg-size', 'Size', 'size', [(c, '%s · %dpx' % (n, p)) for n, c, p, o, u in SIZES], 'icon--lg') + \
     btn_group('pg-color-l', 'Color', 'data-pg-color', [('primary', 'Primary', True), ('inverted', 'Inverted', False)]) + \
-    '<p class="pg-note" style="margin:0">Click the name field to search all Material Symbols. Custom icons are in the <a href="icon-library.html" class="inline-link inline-link--small">Library</a>.</p></div></div>' + \
+    '<p class="pg-note" style="margin:0">Custom icons are in the <a href="icon-library.html" class="inline-link inline-link--small">Library</a>.</p></div></div>' + \
     SB_LINK
 
 overview = '<h2 class="ds-h2">Overview</h2>' + desc('Icons symbolize common actions, features and themes in our products. They help a person recognize a function quickly, and they work together with a text label.') + \
@@ -189,14 +189,13 @@ add = [('step-1', add_1), ('step-2', add_2), ('step-3', add_3)]
 JS_EX = r'''
   var L = window.ECO_ICON_LIB;
   function ic(cls, name, fill) { return '<span class="icon ' + cls + (fill ? ' icon--fill' : '') + '" aria-hidden="true">' + name + '</span>'; }
-  var pgName = $('#pg-name'), pgStage = $('#pg-stage'), pgPrev = $('#pg-icon-prev');
+  var pgStage = $('#pg-stage'), pgPrev = $('#pg-icon-prev');
   var st = { style: 'outline', size: 'icon--lg', color: 'primary' };
   function renderPg() {
-    var n = pgName.value.trim() || 'local_shipping';
+    var n = 'local_shipping';
     pgPrev.textContent = n; pgPrev.className = 'icon ' + st.size + (st.style === 'fill' ? ' icon--fill' : '') + (st.color === 'inverted' ? ' icon--inverted' : '');
     pgStage.classList.toggle('ds-stage--dark', st.color === 'inverted');
   }
-  pgName.addEventListener('input', renderPg);
   DK.seg($('[data-pg-style]'), function (v) { st.style = v; renderPg(); });
   DK.seg($('[data-pg-color]'), function (v) { st.color = v; renderPg(); });
   DK.seg($('[data-pg="size"]'), function (v) { st.size = v; renderPg(); });
@@ -217,7 +216,7 @@ JS_CODE = r'''
 C = dict(
     slug=SLUG, title='Icon', eyebrow='Components · Layout and content', eyebrow_extra=BADGE, first_plain=True,
     lead='Icons symbolize common actions, features and themes in our products. The set is <strong>Material Symbols</strong> and <strong>custom icons</strong>: customized symbols, brand icons for Swedol and Tools, social icons and logos.',
-    css=['icon', 'chip', 'menu'], head_js=['../../components/js/chip.js'], body_js=['../../components/icon-picker/icon-picker.js', '../../components/icon-library/icon-library-data.js'], style=STYLE,
+    css=['icon', 'chip', 'menu'], head_js=['../../components/js/chip.js'], body_js=['../../components/icon-library/icon-library-data.js'], style=STYLE,
     pages=[
         dict(kind='ex', suffix='', label='Examples & Guidelines', lead='Every example on this page is the real component, not a picture. Source: Figma Icon Documentation.', secs=ex, js=JS_EX),
         dict(kind='spec', suffix='-specifications', label='Specifications', lead='Material Symbols settings, sizes, naming, color tokens and the icon item.', secs=spec, js=JS_SPEC),
