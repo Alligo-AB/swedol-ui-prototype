@@ -69,7 +69,7 @@ STYLE = r'''    .pg-note { font-size: 14px; line-height: 20px; letter-spacing: 0
     @media (max-width: 768px) { .il-grid { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); gap: 16px; } .il-bar .il-cat { flex: 1 1 100%; } }'''
 
 SB_URL = 'https://test-acceptance--67b6063b450f52d85d87d37f.chromatic.com/?path=/story/foundation-icons--library'
-SB_LINK = '<p class="ds-desc"><a class="action-link action-link--medium" href="%s" target="_blank" rel="noopener"><span class="action-link__label">See code in Storybook</span><span class="action-link__icon" aria-hidden="true">open_in_new</span></a></p>' % SB_URL
+SB_LINK = '<p class="ds-desc ds-note"><a class="action-link action-link--medium" href="%s" target="_blank" rel="noopener"><span class="action-link__label">See code in Storybook</span><span class="action-link__icon" aria-hidden="true">open_in_new</span></a></p>' % SB_URL
 
 SIZES = [('XXSmall', 'icon--xxs', 12, 20, 'Extra size, reserved for badges and components with restricted space.'),
          ('XSmall', 'icon--xs', 14, 20, 'Extra size, reserved for badges and components with restricted space (for example beside 14px text).'),
