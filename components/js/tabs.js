@@ -126,7 +126,69 @@
     window.addEventListener('load', function () { setCurrent(pick(), true); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setCurrent(pick(), true); });
   }
+  /* Swipe (touch, pen and mouse): the bar follows the finger, keeps gliding after release (friction) and, at either end,
+     stretches a little and eases back (rubber band), as in the Figma prototype (Tab Bar - States 2991:100351).
+     Own physics instead of native scroll so it feels the same everywhere. A drag over 5px is not a click.
+     Reduced motion: follows the finger, no glide, no bounce. */
+  function swipe(list) {
+    if (list.dataset.swipeInit) return; list.dataset.swipeInit = '1';
+    var K = 0.00018, C = 0.0268, FRICTION = 260, REACH = 72, WALL = 1.1;   /* spring stiffness / damping per ms (C = 2*sqrt(K): critically damped, one soft return, no wobble), glide time constant (ms), furthest stretch past an end (px), top speed when reaching an end (px/ms) */
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)');
+    var raf = 0, pos = 0, vel = 0, x0, p0, drag = false, moved = false, pts = [];
+    function max() { return list.scrollWidth - list.clientWidth; }
+    function render() {
+      var m = max();
+      list.scrollLeft = Math.min(Math.max(pos, 0), m);
+      list.style.setProperty('--tab-over', (pos < 0 ? -pos : pos > m ? m - pos : 0) + 'px');
+    }
+    function soft(x) { return REACH * (1 - Math.exp(-0.5 * x / REACH)); }   /* resistance: starts at half the finger's speed and levels off at REACH */
+    function stop() { cancelAnimationFrame(raf); raf = 0; }
+    function glide() {
+      var last = performance.now();
+      raf = requestAnimationFrame(function step(t) {
+        var dt = Math.min(t - last, 32), m = max(), pos0 = pos; last = t;
+        var was = pos < 0 ? 0 : pos > m ? m : -1;   /* the end it is past, or -1 */
+        if (was >= 0) vel += (-K * (pos - was) - C * vel) * dt;   /* past an end: spring back */
+        else vel *= Math.exp(-dt / FRICTION);                      /* inside: glide */
+        if (was < 0 && ((pos + vel * dt) < 0 || (pos + vel * dt) > m)) vel = Math.max(-WALL, Math.min(WALL, vel));   /* reaching an end: soft landing */
+        pos += vel * dt;
+        if (was >= 0 && ((pos - was) * (pos0 - was) <= 0 || (Math.abs(pos - was) < 0.3 && Math.abs(vel) < 0.01))) { pos = was; vel = 0; render(); raf = 0; return; }
+        render();
+        if (was < 0 && Math.abs(vel) < 0.01) { raf = 0; return; }
+        raf = requestAnimationFrame(step);
+      });
+    }
+    list.addEventListener('pointerdown', function (e) {
+      if (e.button || max() <= 0) return;
+      stop(); pos = list.scrollLeft; x0 = e.clientX; p0 = pos; drag = true; moved = false; pts = [{ t: e.timeStamp, x: e.clientX }];
+    });
+    list.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var dx = e.clientX - x0;
+      if (!moved) { if (Math.abs(dx) < 5) return; moved = true; x0 = e.clientX; dx = 0; list.setPointerCapture(e.pointerId); list.classList.add('is-dragging'); }   /* start from here: no 5px jump */
+      var raw = p0 - dx, m = max();
+      pos = raw < 0 ? -soft(-raw) : raw > m ? m + soft(raw - m) : raw;
+      render();
+      pts.push({ t: e.timeStamp, x: e.clientX });
+      while (pts.length > 2 && e.timeStamp - pts[0].t > 100) pts.shift();
+    });
+    function release() {
+      if (!drag) return; drag = false;
+      if (!moved) return;
+      var a = pts[0], b = pts[pts.length - 1];
+      vel = b.t > a.t ? 0.5 * Math.max(-2.5, Math.min(2.5, (a.x - b.x) / (b.t - a.t))) : 0;   /* half the finger's speed: the bar is short, a full-speed glide would look like a jump */
+      setTimeout(function () { list.classList.remove('is-dragging'); }, 0);
+      if (reduce && reduce.matches) { pos = Math.min(Math.max(pos, 0), max()); render(); return; }
+      glide();
+    }
+    list.addEventListener('pointerup', release);
+    list.addEventListener('pointercancel', release);
+    list.addEventListener('wheel', stop, { passive: true });
+    list.addEventListener('dragstart', function (e) { e.preventDefault(); });   /* links and images start a native drag (and cancel the pointer events) when pressed and moved */
+    list.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopImmediatePropagation(); moved = false; } }, true);
+  }
   function init(root) {
+    (root || document).querySelectorAll('.swipe-row').forEach(swipe);   /* plain rows: no tab logic, only the swipe */
     (root || document).querySelectorAll('.tab-bar').forEach(function (list) {
       if (list.dataset.tabsInit) return;
       list.dataset.tabsInit = '1';
@@ -151,6 +213,8 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
 
       if (list.classList.contains('tab-bar--page')) pageNav(list);
+
+      swipe(list);
 
       if (tablist) {
         list.addEventListener('click', function (e) {
@@ -181,6 +245,6 @@
       }
     });
   }
-  window.ECO_TABS = { init: init };
+  window.ECO_TABS = { init: init, swipe: swipe };   /* swipe(el): the same glide + rubber band on any row that overflows sideways (needs the .is-dragging / --tab-over rules, see tabs.css) */
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { init(); }); else init();
 })();

@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
   <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
   <!-- ECO component CSS, shared with the docs pages (see skills eco-button, eco-input, …). Link it, do not copy it. -->
+  <!-- Notifications (toast, modal, banner, inline): linked BEFORE the component CSS. Its global .btn (32px) must lose to button.css;
+       buttons inside a notification keep their size through the scoped rules in that file. -->
+  <link rel="stylesheet" href="/eco-design-system/notifications.css">
+  <script src="/eco-design-system/notifications.js" defer></script>
   <link rel="stylesheet" href="/components/css/button.css">
   <link rel="stylesheet" href="/components/css/input.css">
   <link rel="stylesheet" href="/components/css/select.css">
@@ -17,12 +21,17 @@
   <link rel="stylesheet" href="/components/css/switch.css">
   <link rel="stylesheet" href="/components/css/list-item.css">
   <link rel="stylesheet" href="/components/css/chip.css">
+  <link rel="stylesheet" href="/components/css/icon-button-compact.css">
   <link rel="stylesheet" href="/components/css/icon.css">
   <link rel="stylesheet" href="/components/css/divider.css">
   <link rel="stylesheet" href="/components/css/menu.css">
   <link rel="stylesheet" href="/components/css/collapsible.css">
   <link rel="stylesheet" href="/components/css/tooltip.css">
   <link rel="stylesheet" href="/components/css/pagination.css">
+  <link rel="stylesheet" href="/components/css/rating-stars.css">
+  <link rel="stylesheet" href="/components/css/picker-stepper.css">
+  <link rel="stylesheet" href="/components/css/price.css">
+  <link rel="stylesheet" href="/components/css/drawer-link.css">
   <link rel="stylesheet" href="/components/css/inline-link.css">
   <link rel="stylesheet" href="/components/css/badge.css">
   <link rel="stylesheet" href="/components/css/tag.css">
@@ -41,6 +50,7 @@
   <script src="/components/js/pagination.js"></script>
   <script src="/components/js/pill-segment-control.js"></script>
   <script src="/components/js/tabs.js"></script>
+  <script src="/components/js/picker-stepper.js" defer></script>
   <link rel="stylesheet" href="styles.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
@@ -79,6 +89,7 @@
 
     body {
       font-family: 'Breuer Condensed', Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;   /* as the live swedol.se body: without it text renders heavier on macOS */
       font-feature-settings: 'ss02' 1, 'ss03' 1;
       background: var(--color-background-primary);
       color: var(--color-text-primary);
@@ -258,113 +269,32 @@
     /* ══════════════════════════════════════════════════════════
        HEADER (black top bar)
     ══════════════════════════════════════════════════════════ */
-    .site-header {
-      background: var(--black);
-    }
-    .site-header--fixed {
-      position: fixed;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      transform: translateY(-100%);
-      transition: transform var(--duration-fast-4) var(--ease-standard);
-    }
-    .site-header--fixed.site-header--visible {
-      transform: translateY(0);
-    }
+    
+    
+    
 
     /* Top row: logo + search + user icons */
-    .site-header__top {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px var(--px-full);
-      background: var(--black);
-      border-bottom: 1px solid #232500;
-      box-shadow: var(--elevation-b-80);
-      transition: none;
-    }
+    
 
-    .site-header__menu-btn {
-      width: 48px;
-      height: 48px;
-      padding: 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
-    .site-header__menu-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .site-header__menu-btn .ms { color: var(--color-accent-default); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    
+    
+    
 
-    .site-header__logo {
-      width: 119px;
-      height: 22.777px;
-      flex-shrink: 0;
-    }
-    .site-header__logo svg { width: 100%; height: 100%; }
+    
+    
 
-    .site-header__search {
-      flex: 1;
-      position: relative;
-      background: var(--color-background-secondary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      height: 48px;
-      border: 1px solid transparent;
-      box-sizing: border-box;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .site-header__search::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border: 2px solid var(--color-border-focus);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-    }
-    .site-header__search:hover { border-color: var(--color-border-dark); }
-    .site-header__search.is-active,
-    .site-header__search:focus-within { border-color: var(--color-border-selected); }
-    .site-header__search:focus-within::after { opacity: 0; }
+    
+    
+    
+    
+    
     body.keyboard-nav :focus-within::after { opacity: 1; }
-    .site-header__search .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; flex-shrink: 0; }
-    .site-header__search input {
-      flex: 1;
-      background: none;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-weight: 400;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) { .site-header__search input { font-size: 17px; line-height: 24px; } }
-    .site-header__search input::placeholder { color: var(--color-text-tertiary); }
-    .site-header__search-right {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-    .site-header__search-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--color-border-tertiary);
-    }
+    
+    
+    
+    
+    
+    
     .search-scan-btn {
       background: none;
       border: none;
@@ -379,11 +309,7 @@
     .search-scan-btn:hover { background: var(--color-surface-opacity-black-05); }
     .search-scan-btn .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
 
-    .site-header__right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    
 
     .icon-btn {
       background: none;
@@ -435,21 +361,8 @@
       color: var(--black);
     }
 
-    .account-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 48px;
-      padding: 0 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      text-align: left;
-      line-height: normal;
-      box-sizing: border-box;
-    }
-    .account-info:hover { background: var(--color-surface-opacity-white-20); }
+    
+    
     .avatar {
       width: 24px;
       height: 24px;
@@ -461,138 +374,35 @@
     }
     .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    .account-info__name {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-text-primary-inverted);
-      line-height: 24px;
-      white-space: nowrap;
-    }
-    .account-info__sub {
-      font-size: 14px;
-      color: var(--color-text-secondary-inverted);
-      letter-spacing: 0.4px;
-      white-space: nowrap;
-    }
+    
+    
 
     /* Bottom row: main nav */
-    .site-header__nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 var(--px-full);
-      height: 48px;
-      background: var(--black);
-      border-bottom: 1px solid var(--brand);
-      box-shadow: var(--elevation-b-60);
-    }
+    
 
-    .nav-links-wrap {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      min-width: 0;
-    }
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      flex: 1;
-      min-width: 0;
-    }
-    .nav-links a {
-      color: var(--color-text-primary-inverted);
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.2px;
-      line-height: 20px;
-      padding: 14px 0;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .nav-links a:hover { opacity: 0.8; }
+    
+    
+    
+    
 
     /* Nav overflow more-button */
-    .nav-more {
-      display: none;
-      align-items: center;
-      flex-shrink: 0;
-      margin-left: 24px;
-    }
-    .nav-more--visible { display: flex; }
-    .nav-more__btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      height: 40px;
-      width: 40px;
-      padding: 8px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: var(--color-text-primary-inverted);
-    }
-    .nav-more__btn:hover { background: var(--color-surface-opacity-white-20); }
+    
+    
+    
+    
     /* focus-visible hanteras globalt på button-elementet */
 
     /* Nav overflow dropdown */
-    .nav-more__menu {
-      position: fixed;
-      background: var(--color-surface-raised-primary);
-      box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
-      width: 152px;
-      z-index: 500;
-    }
-    .nav-more__menu[hidden] { display: none; }
-    .nav-more__menu-item {
-      display: flex;
-      align-items: center;
-      height: 40px;
-      padding: 0 16px;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-      color: var(--color-text-primary);
-      text-decoration: none;
-      white-space: nowrap;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--color-border-secondary);
-      cursor: pointer;
-    }
-    .nav-more__menu-item:last-child { border-bottom: none; }
-    .nav-more__menu-item:hover { background: var(--color-surface-02); }
+    
+    
+    
+    
+    
 
-    .store-btn {
-      background: var(--black);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      gap: 4px;
-      color: var(--color-text-primary-inverted);
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.56px;
-      line-height: 14px;
-    }
-    .store-btn:hover {
-      background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, var(--color-surface-action-1) 0%, var(--color-surface-action-1) 100%);
-    }
-    .store-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .store-btn__text-regular { font-weight: 400; letter-spacing: 0.56px; }
+    
+    
+    
+    
 
     /* ══════════════════════════════════════════════════════════
        ACCOUNT NAV (white bar with tabs)
@@ -622,16 +432,7 @@
       box-shadow: var(--elevation-b-40);
     }
     .avatar--lg img { width: 100%; height: 100%; object-fit: cover; }
-    .tab-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      height: 48px;
-      overflow: hidden;
-      flex: 1;
-      min-width: 0;
-    }
+    /* legacy My Pages .tab-bar rule removed (2026-11-05): it overrode components/css/tabs.css (overflow hidden, 48px high, centred) */
     .tab-item {
       display: flex;
       align-items: center;
@@ -1117,12 +918,8 @@
     body.has-impersonation-banner .impersonation-banner-placeholder {
       display: block;
     }
-    body.has-impersonation-banner .site-header__top {
-      top: 40px;
-    }
-    @media (min-width: 769px) {
-      body.has-impersonation-banner .site-header__top { top: 48px; }
-    }
+    
+    
 
     /* Inner banner */
     .impersonation-banner {
@@ -1603,7 +1400,7 @@
     .footer-links {
       display: flex;
       gap: 24px;
-      padding: 48px var(--px-full) 56px;
+      padding: 48px var(--px-full) 64px;
     }
     .footer-divider {
       background: var(--color-surface-100);
@@ -2049,42 +1846,7 @@
       font-feature-settings: 'ss02' 1, 'ss03' 1;
     }
 
-    /* -- Action Link (generic — används av tillbaka-länken i drawer-headers) -- */
-    .action-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      text-decoration: none;
-      color: var(--color-text-primary);
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 22px;
-      letter-spacing: 0.32px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-      transition: color var(--duration-fast-3) var(--ease-standard);
-    }
-    /* text-decoration på en flex-container målas ut per flex-item (inkl. ikonen) —
-       understrykningen läggs därför på textspanet, aldrig på containern/ikonen. */
-    .action-link:hover { color: var(--color-text-tertiary); }
-    .action-link:hover .action-link__label { text-decoration: underline; }
-    .action-link .ms { font-size: 20px; }
-    @media (min-width: 769px) {
-      .action-link { line-height: 24px; }
-    }
-    /* Small — t.ex. tillbaka-länk i drawer-headers */
-    .action-link--small {
-      font-size: 14px;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      gap: 4px;
-    }
-    .action-link--small .ms { font-size: 20px; }
-    .action-link--bold { font-weight: 600; }
+    /* Action Link: components/css/action-link.css (the page-local copy was removed 2026-11-12) */
 
     /* ══════════════════════════════════════════════════════════
        MALL-PLATSHÅLLARE — enbart för template.html, ej en riktig
@@ -2153,14 +1915,14 @@
     /* ── Responsive (mobile-first) ───────────────────────── */
 
     /* xs default – mobile base styles */
-    .site-header__nav { overflow-x: auto; gap: 16px; scrollbar-width: none; }
-    .site-header__nav::-webkit-scrollbar { display: none; }
-    .site-header__right { gap: 0; }
+    
+    
+    
 
     .account-nav { padding-top: 16px; padding-bottom: 16px; }
     .avatar--lg { width: 24px; height: 24px; }
     .account-nav__profile { gap: 8px; }
-    .account-info__name, .account-info__sub { display: none; }
+    
 
     .filter-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
     .search-input { width: 100%; }
@@ -2301,18 +2063,18 @@
       .page-preamble { margin-bottom: 40px; }
 
       /* Restore desktop header, hide mobile header */
-      .site-header__sm { display: none; }
-      .site-header__top { display: flex; }
-      .site-header { display: block; }
+      
+      
+      
 
-      .site-header__nav { overflow-x: hidden; gap: 0; }
-      .nav-links { overflow: hidden; }
-      .site-header__right { gap: 8px; }
+      
+      
+      
 
       .account-nav { padding-top: 24px; padding-bottom: 24px; }
       .avatar--lg { width: 40px; height: 40px; }
       .account-nav__profile { gap: 12px; }
-      .account-info__name, .account-info__sub { display: block; }
+      
 
       .filter-bar { flex-direction: row; align-items: center; gap: 0; }
       .search-input { width: min(384px, 100%); }
@@ -2338,7 +2100,7 @@
       .cs__btn { padding: 12px 16px; font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
 
       /* Footer links — static columns on desktop */
-      .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 24px; padding: 48px var(--px-full) 56px; }
+      .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 24px; padding: 48px var(--px-full) 64px; }
       .footer-col { flex: 1; width: auto; border-bottom: none; gap: 16px; }
       .footer-col__heading {
         display: flex; padding: 0; cursor: default; pointer-events: none;
@@ -2351,7 +2113,7 @@
       /* Footer divider, bottom & copyright */
       .footer-divider { padding: 0 var(--px-full); background: var(--color-surface-100); }
       .footer-divider__line { background: var(--color-surface-80); }
-      .footer-bottom { flex-direction: row; align-items: center; gap: 0; padding: 40px var(--px-full); }
+      .footer-bottom { flex-direction: row; align-items: center; gap: 0; padding: 0 var(--px-full) 40px; }
       .footer-copyright { padding: 32px var(--px-full); }
 
       .cta-buttons { flex-direction: row; }
@@ -2365,306 +2127,98 @@
     /* ══════════════════════════════════════════════════════════
        SITE-HEADER SM (3-row mobile layout, xs + sm)
     ══════════════════════════════════════════════════════════ */
-    .site-header__sm {
-      display: none;
-      flex-direction: column;
-      background: var(--black);
-    }
+    
 
     /* ── Row 1: icons | logo | account + cart + menu ── */
-    .sh-sm__bar1 {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      height: 64px;
-      padding: 0 8px;
-      background: var(--black);
-      border-bottom: 1px solid transparent;
-      box-shadow: var(--elevation-b-80);
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .sh-sm__bar1--accented {
-      border-bottom-color: var(--brand);
-    }
+    
+    
 
     /* Push bar2 + bar3 down so they don't hide under the fixed bar1 */
-    .site-header__sm { padding-top: 64px; }
-    .sh-sm__bar1-left,
-    .sh-sm__bar1-right {
-      display: flex;
-      align-items: center;
-      flex: 1;
-    }
-    .sh-sm__bar1-right { justify-content: flex-end; }
-    .sh-sm__bar1-center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      pointer-events: none;
-    }
-    .sh-sm__logo { width: 76px; height: 14.555px; flex-shrink: 0; }
-    .sh-sm__logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    
+    
+    
+    
+    
+    
 
     /* Icon buttons – 20px icon, space-12 padding = 44px */
-    .sh-sm__icon-btn {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-      position: relative;
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
+    
     /* 24px icon, space-12 padding = 48px */
-    .sh-sm__icon-btn--24 { width: 48px; height: 48px; }
-    .sh-sm__icon-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__icon-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .sh-sm__icon-btn--24 .ms {
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
+    
+    
+    
+    
 
     /* Badge on icon buttons */
-    .sh-sm__icon-btn .badge {
-      top: 4px;
-      right: 2px;
-    }
+    
 
     /* Account button: avatar + name + sub */
-    .sh-sm__account-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 48px;
-      padding: 0 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      flex-shrink: 1;
-      min-width: 0;
-    }
-    .sh-sm__account-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__account-info { display: flex; flex-direction: column; gap: 0; min-width: 0; }
-    .sh-sm__account-name {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-text-primary-inverted);
-      line-height: 22px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    .sh-sm__account-sub {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--color-text-secondary-inverted);
-      line-height: normal;
-      white-space: nowrap;
-      letter-spacing: 0.4px;
-    }
+    
+    
+    
+    
+    
 
     /* Hamburger menu button */
-    .sh-sm__menu-btn {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .sh-sm__menu-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__menu-btn .ms {
-      color: var(--brand);
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
+    
+    
+    
 
     /* ── Row 2: search bar ── */
-    .sh-sm__bar2 {
-      background: #111;
-      padding: 0 8px;
-      transition: transform var(--duration-fast-4) var(--ease-standard);
-    }
-    .sh-sm__bar2--fixed {
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      transform: translateY(-100%);
-    }
-    .sh-sm__bar2--fixed.sh-sm__bar2--visible {
-      transform: translateY(0);
-      border-bottom: 1px solid var(--brand);
-    }
-    .sh-sm__bar2--fixed.sh-sm__bar2--bar3-hidden {
-      padding-bottom: 8px;
-    }
-    .sh-sm__search {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 40px;
-      background: var(--color-surface-raised-secondary);
-      border: 1px solid var(--color-border-input-default);
-      padding: 0 8px;
-      box-sizing: border-box;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .sh-sm__search:hover { border-color: var(--color-border-dark); }
-    .sh-sm__search:focus-within { border-color: var(--color-border-selected); }
-    .sh-sm__search > .ms {
-      color: var(--black);
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-      flex-shrink: 0;
-    }
-    .sh-sm__search input {
-      flex: 1;
-      min-width: 0;
-      background: none;
-      border: none;
-      outline: none;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-text-secondary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .sh-sm__search input::placeholder { color: var(--color-text-secondary); }
-    .sh-sm__search-right {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-      padding-left: 6px;
-    }
-    .sh-sm__search-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--color-border-tertiary);
-      flex-shrink: 0;
-    }
-    .sh-sm__search-action {
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      padding: 6px;
-      box-sizing: border-box;
-    }
-    .sh-sm__search-action:hover { background: var(--color-surface-opacity-black-05); }
-    .sh-sm__search-action .ms {
-      color: var(--black);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Row 3: store nav ── */
-    .sh-sm__bar3 {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      height: 40px;
-      background: var(--black);
-      border-bottom: 1px solid var(--brand);
-      padding: 0 8px;
-    }
-    .sh-sm__store-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      height: 40px;
-      padding: 4px;
-      color: var(--color-text-primary-inverted);
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.42px;
-      line-height: 14px;
-      white-space: nowrap;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .sh-sm__store-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__store-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .sh-sm__store-btn__text {
-      display: flex;
-      align-items: center;
-      padding: 5px 6px;
-      gap: 0;
-    }
-    .sh-sm__store-btn__bold { font-weight: 600; letter-spacing: 0.42px; }
-    .sh-sm__store-btn__regular { font-weight: 400; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Show/hide at breakpoints ── */
-    @media (max-width: 768px) {
-      .site-header__sm { display: flex; }
-      .site-header__top { display: none; }
-      .site-header { display: none; }
-    }
+    
 
     /* ── xs + sm (max-width: 768px): show cards, hide desktop table ── */
 
     /* ── xs only (max-width: 639px) – mobile overrides ── */
     @media (max-width: 639px) {
       /* Bar1: 56px (8px padding + 40px buttons) */
-      .sh-sm__bar1 { height: 56px; padding: 8px; }
-      .site-header__sm { padding-top: 56px; }
-      .sh-sm__bar2--fixed { top: 56px; }
+      
+      
+      
 
       /* Icon buttons → mobile medium (8px padding, 24px icon = 40px) */
-      .sh-sm__icon-btn { width: 40px; height: 40px; }
-      .sh-sm__icon-btn--24 { width: 40px; height: 40px; }
-      .sh-sm__icon-btn .ms { font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-      .sh-sm__menu-btn { width: 40px; height: 40px; }
+      
+      
+      
+      
 
       /* Bar1: collapse account btn to avatar-only */
-      .sh-sm__account-info { display: none; }
-      .sh-sm__account-btn { height: 40px; padding: 8px; gap: 0; flex-shrink: 0; }
+      
+      
 
       /* Bar2: hide location button */
-      .sh-sm__location-btn { display: none; }
+      
 
       /* Bar3: left-align store button, label-sm (12px) text */
-      .sh-sm__bar3 { justify-content: flex-start; }
-      .sh-sm__store-btn { font-size: 12px; letter-spacing: 0.48px; }
-      .sh-sm__store-btn__bold { letter-spacing: 0.48px; }
+      
+      
+      
 
       /* CTA banner: center text */
       .cta-banner__text { align-items: center; text-align: center; }

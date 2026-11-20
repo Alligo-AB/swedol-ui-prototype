@@ -5,7 +5,7 @@ description: Use when building a modal (E-Com Modal) that requires confirmation 
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
-> **Buttons and ×:** buttons and the close button follow `eco-button` (see `notifications-guide`, "Buttons and the close button"): `btn btn--primary|secondary|blank` with `<span class="btn__label">`, always 32px (XSmall from 769px, Small below), and the × is `icon-btn icon-btn--close` (`icon-btn--close-inverted` on dark/solid surfaces). Live CSS: `eco-design-system/notifications.css`.
+> **Buttons and ×:** buttons and the close button follow `eco-button` (see `notifications-guide`, "Buttons and the close button"): `btn btn--primary|secondary|blank` with `<span class="btn__label">`, 40px from 769px (Small, Figma 13377:48335, 2026-11-10) and 32px below; the confirm button (Primary or Destructive) always fills the row, never left-aligned, and the × is `icon-btn icon-btn--close` (`icon-btn--close-inverted` on dark/solid surfaces). Live CSS: `eco-design-system/notifications.css`.
 
 ## Notification – E-Com Modal (ECO Design System)
 
@@ -36,7 +36,37 @@ The modal comes in **two sizes to choose between: Small and Large**. Choose by t
 - **Desktop (XLarge, Large, Medium breakpoints):** Small is compact, Large is a wider work area; height by content, limited by the available screen height.
 - **Tablet (Small breakpoint):** same rules, width adapts to the available area, both sizes keep side margins.
 - **Mobile (XSmall, below 640px):** Small has height by content and a **max width of 440px**; it is centered with at least 16px side margin on each side, and on narrower screens the width adapts to the available space (343px on a 375px viewport; 343px is not a fixed width). Large is a full-screen presentation; long content scrolls and the layout works with the keyboard open.
-- **Common layout rules:** Small and Large have no fixed heights; avoid unnecessary empty space (except the full-screen view on mobile). Limit the height to the available screen area and allow scroll. Content and actions must be reachable in landscape and with the keyboard open. A short dialog must not be full width and vertically centered at once: a centered dialog uses side margins; a full-width bottom sheet is a separate presentation pattern (not part of this component). Clear title, button labels that name the action (Cancel, Delete). The footer is not sticky: when content is taller than the screen the whole panel scrolls.
+- **Common layout rules:** Small and Large have no fixed heights; avoid unnecessary empty space (except the full-screen view on mobile). Limit the height to the available screen area and allow scroll. Content and actions must be reachable in landscape and with the keyboard open. A short dialog must not be full width and vertically centered at once: a centered dialog uses side margins; a full-width bottom sheet is a separate presentation pattern (not part of this component). Clear title, button labels that name the action (see **Copy for a confirmation** below). The footer is not sticky: when content is taller than the screen the whole panel scrolls.
+
+### Example: BankID signing (2026-11-09)
+
+`mypages/users.html` (`#sign-modal`, `window.signWithBankId({ text, onSigned })`): Large modal that opens straight on the QR step; steps (QR, waiting, done, expired) swap inside the same panel via `data-current`. Lessons that apply to every modal: limit the height from 640px (`max-height: calc(100dvh - 32px)`, panel scrolls) or it is cut off on a phone held sideways; remove the panel after the exit with a timer, not `animationend` (it never fires in a background tab, and a reopen during the exit left the modal invisible); run the follow-up action after the exit so two overlays never stack; catch Escape in the capture phase when a drawer lies underneath. On a phone the main action is "Öppna BankID", not the QR code. Details in `CLAUDE.md`.
+
+### Destructive or Primary (rule, 2026-11-19)
+
+The rule is about the **effect**, not the label. `destructive: true` is set on purpose, never derived from the word.
+
+- **Destructive:** removes data or access and the user cannot undo it themselves (delete address, remove user, clear cart, close account, revoke access). Almost always Small.
+- **Primary:** can be undone but has a consequence the user should see first (change store, leave without saving).
+- **No modal:** low-risk action that can be undone at once (remove from cart, archive an order): do it and show a Toast with Undo. A modal is for when the user must see a consequence first (change store: prices and stock change). Exceptions that do get a Primary modal: a bulk action ("Archive 40 orders?") or one that hides the item from other users on the account.
+- **Removal with content inside** (a list and its products): Destructive in a **Drawer** with a confirmation checkbox ("Ja, jag vill ta bort…", error "Bekräfta att du vill radera." until ticked), as "Radera lista" in the favourites lists. Focus on the checkbox.
+- **Serious** (account, permissions): Destructive plus BankID.
+- A Destructive button lives only on a confirmation surface (Modal or Drawer), never in a Toast, Banner or Inline notification.
+- **Focus on open:** Destructive focuses **Cancel**, never the confirm button (`notifications.js`: `(o.destructive ? cancel : m).focus()`); Primary focuses the dialog.
+- **Body** says what is removed and the consequence, not only "Are you sure?".
+
+Docs: `components/modal.html` (Usage > Destructive or Primary, Behavior > Focus), `modal-specifications.html` (Behavior, Accessibility).
+
+### Footer with only a cancel button (2026-11-10)
+
+When a step has no Primary (for example a waiting state), the lone Blank cancel button sits on the **right** of the footer, where the confirm button normally ends (`justify-content: flex-end`; in Figma the Button Group slot aligned right). With a Primary the order stays Blank left, Primary filling the rest. Reference: `#sign-modal` in `mypages/users.html`.
+
+### Copy for a confirmation (rule, 2026-11-09)
+
+- **Title:** the question, ending with a question mark. `Delete this address?`
+- **Message:** what happens, plus "You cannot undo this." when true. `The address is removed from your address book. You cannot undo this.`
+- **Button 1 (Blank):** `Cancel`.
+- **Button 2:** two words, **verb + noun**, **no question mark**: `Delete address` (not `Delete`, `OK`, `Yes` or `Delete address?`). For a deletion/removal it is **Destructive** (`btn--destructive`; `ECO_N.openModal({ …, destructive: true })`), otherwise Primary.
 
 ### Sizes and widths per breakpoint
 
@@ -91,18 +121,18 @@ Body text
 ### Buttons per breakpoint
 
 The buttons in the modal **always** follow the ECO Design System button sizes:
-- **Desktop (lg-md, ≥769px):** button size **xs** → `height: 32px`, `padding: 6px`, `label-sm` 14px, 0.56px
-- **Tablet + Mobile (sm-xs, ≤768px):** button size **sm** → `height: 32px`, `padding: 6px`, `label-md` 14px, 0.48px
+- **Desktop (lg-md, ≥769px):** button size **Small** → `height: 40px`, `padding: 8px`, label inset 8px, `label-md` 16px/16px, 0.48px (Figma 13377:48335, updated 2026-11-10; was 32px XSmall)
+- **Tablet + Mobile (sm-xs, ≤768px):** button size **Small** → `height: 32px`, `padding: 4px`, label inset 6px, `label-md` 14px, 0.42px
 
-Both variants (Cancel and Primary) are **always 32px tall** — regardless of breakpoint and button variant.
+Cancel (Blank) keeps its own width; the confirm button (Primary or Destructive) has `flex: 1` and fills the rest of the row at every breakpoint. **Never** leave the buttons left-aligned at their own width (rule 2026-11-10).
 
 | | Desktop (`md:` 769px+) | Tablet + Mobile (`sm-xs` ≤768px) |
 |---|---|---|
 | Modal padding | `24px` | Tablet: `24px` / Mobile xs: `16px` |
 | Button group top gap | `pt-32px` | `pt-24px` |
-| Button height (both) | `32px` (xs button) | `32px` (sm button) |
-| Button padding (both) | `6px` | `6px` |
-| Button letter-spacing | `0.56px` (label-sm) | `0.48px` (label-md) |
+| Button height (both) | `40px` (Small) | `32px` (Small) |
+| Button padding (both) | `8px` | `4px` |
+| Button letter-spacing | `0.48px` (label-md 16px) | `0.42px` (label-md 14px) |
 
 ---
 
@@ -235,7 +265,8 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
 
 
 /* Buttons and ×: eco-button classes (.btn, .icon-btn.icon-btn--close); live CSS in eco-design-system/notifications.css */
-.modal__footer .btn--primary { flex: 1; }
+.modal__footer .btn:last-child { flex: 1; }   /* confirm (Primary or Destructive) fills the row */
+@media (min-width: 769px) { .modal .btn { --btn-h: 40px; } }   /* Small; full values in notifications.css */
 ```
 
 ### HTML example (Small, Desktop)
@@ -257,6 +288,7 @@ Both variants (Cancel and Primary) are **always 32px tall** — regardless of br
   <div class="modal__footer">
     <button type="button" class="btn btn--blank" onclick="closeModal()"><span class="btn__label">Cancel</span></button>
     <button type="button" class="btn btn--primary"><span class="btn__label">Confirm</span></button>
+    <!-- deletion: class="btn btn--destructive", label verb + noun, e.g. Delete address -->
   </div>
 </div>
 ```

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compact Icon Button: Specifications – ECO Design System</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="../docs.css">
+  <link rel="stylesheet" href="../docnav.css">
+  <link rel="stylesheet" href="../../components/css/badge.css">
+  <link rel="stylesheet" href="../../components/css/divider.css">
+  <link rel="stylesheet" href="../../components/css/input.css">
+  <link rel="stylesheet" href="../../components/css/button-group.css">
+  <link rel="stylesheet" href="../../components/css/button.css">
+  <link rel="stylesheet" href="../../components/css/select.css">
+  <link rel="stylesheet" href="../../components/css/tabs.css">
+  <link rel="stylesheet" href="../../components/css/icon.css">
+  <link rel="stylesheet" href="../../components/css/icon-button-compact.css">
+  <link rel="stylesheet" href="../../components/css/measure.css">
+  <script src="../../components/js/tabs.js"></script>
+  <script src="../../components/js/measure.js" defer></script>
+  <style>
+    /* page-local: layout and state forcing for the demo only; no component or token values */
+    .pg-states { display: grid; gap: 24px 32px; grid-template-columns: repeat(2, max-content); align-items: center; justify-content: center; }
+    @media (min-width: 769px) { .pg-states { grid-template-columns: repeat(4, max-content); } }
+    .pg-cell { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .pg-cell > span:first-child { font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-tertiary); }
+    .ibc-row { display: flex; flex-wrap: wrap; gap: 24px 32px; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body data-ds="component">
+<script src="../docnav.js"></script>
+<div class="ds-page">
+  <nav class="breadcrumb" aria-label="Breadcrumbs">
+    <div class="breadcrumb__bar"><a href="../../index.html" class="breadcrumb-item">Home</a><span class="breadcrumb-sep">/</span><a href="../index.html" class="breadcrumb-item">ECO Design System</a><span class="breadcrumb-sep">/</span><a href="../components-overview.html" class="breadcrumb-item">Components</a><span class="breadcrumb-sep">/</span><a href="icon-button-compact.html" class="breadcrumb-item">Compact Icon Button</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-item breadcrumb-item--active" aria-current="page">Specifications</span></div>
+  </nav>
+</div>
+
+<section class="ds-section ds-section--first">
+  <div class="ds-page ds-inner">
+    <div class="ds-eyebrow-row"><span class="ds-eyebrow">Components · Actions</span><span class="badge-basic badge-basic--large badge-basic--success badge-basic--weak">Live</span><span class="badge-basic badge-basic--large badge-basic--warning badge-basic--weak">In progress</span></div>
+    <h1 class="ds-title">Compact Icon Button</h1>
+    <p class="ds-lead">A compact icon button is a <strong>frameless, icon-only button</strong> as big as its icon (20px or 24px), for places too small for a regular icon button.</p><p class="ds-lead">Sizes, tokens, states and requirements. Values come from the live token package and from Figma: <a class="inline-link inline-link--xlarge" href="https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23990-132193" target="_blank" rel="noopener">Compact Icon Button</a>.</p></div>
+</section>
+<div class="ds-tabs"><nav class="tab-bar tab-bar--primary" aria-label="Compact Icon Button"><a class="tab" href="icon-button-compact.html"><span class="tab__label">Examples &amp; Guidelines</span></a><a class="tab" aria-current="page" href="icon-button-compact-specifications.html"><span class="tab__label">Specifications</span></a><a class="tab" href="icon-button-compact-code.html"><span class="tab__label">Code</span></a></nav></div>
+
+<div class="ds-doc" data-subnav="tabs">
+<section class="ds-section" id="design-tokens"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Design Tokens</h2><p class="ds-desc">Resolved from the live token package.</p><div class="ds-table-wrap"><table class="ds-table" id="tok-table"><thead><tr><th scope="col">Part</th><th scope="col">Use</th><th scope="col">Token</th><th scope="col">Value</th></tr></thead><tbody></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="sizes"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Sizes</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Size</th><th scope="col">Icon class</th><th scope="col">Button size</th></tr></thead><tbody><tr><th scope="row">Small</th><td><code>icon--sm</code></td><td>20 × 20px</td></tr><tr><th scope="row">Large</th><td><code>icon--md</code></td><td>24 × 24px</td></tr></tbody></table></div><p class="ds-desc ds-note">No padding, border or background. The size is the same on every breakpoint. The click area equals the icon (20px is below the 24px minimum of WCAG 2.5.8; Figma has no larger area, so keep 12px between buttons).</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="states"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">States</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">State</th><th scope="col">Icon</th><th scope="col">Color</th></tr></thead><tbody><tr><th scope="row">Enabled</th><td>Outline</td><td><code>text-action-primary</code></td></tr><tr><th scope="row">Hover</th><td>Outline (solid on a favourite)</td><td><code>text-action-primary-hover</code>; favourite: <code>text-action-primary</code></td></tr><tr><th scope="row">Selected</th><td>Solid (compare: <code>compare_added_custom</code>; favourite to list: <code>edit</code>)</td><td><code>text-action-primary</code></td></tr><tr><th scope="row">Selected hover</th><td>Solid</td><td><code>text-action-primary-hover</code></td></tr><tr><th scope="row">Hover, <code>--surface-hover</code> (close)</th><td>Same</td><td><code>icon-primary</code> on <code>surface-opacity-black-05</code>; inverted: <code>icon-inverted</code> on <code>surface-opacity-white-20</code></td></tr><tr><th scope="row">Focus (keyboard)</th><td>Same</td><td>Plus a 2px <code>border-focus</code> ring, 2px out</td></tr></tbody></table></div><p class="ds-desc ds-note">Figma has no disabled state. Hide a button that cannot be used.</p></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="structure"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Structure</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Element</th><th scope="col">Class</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Button</th><td><code>icon-btn-compact</code></td><td>A <code>&lt;button type="button"&gt;</code> with <code>aria-label</code>. A toggle: add <code>aria-pressed</code>.</td></tr><tr><th scope="row">Icon</th><td><code>icon icon--sm</code> / <code>icon--md</code></td><td>Material Symbols (<code>components/css/icon.css</code>), <code>aria-hidden</code>.</td></tr><tr><th scope="row">Fill on hover</th><td><code>icon-btn-compact--fill-hover</code></td><td>Favourite: the outline icon turns solid on hover.</td></tr><tr><th scope="row">Surface on hover</th><td><code>icon-btn-compact--surface-hover</code></td><td>Close: 2px padding (24px), 5% black surface on hover, the icon keeps its colour. Add <code>icon-btn-compact--inverted</code> on a dark surface (white icon, 20% white surface).</td></tr><tr><th scope="row">Own icon when selected</th><td><code>icon-btn-compact__off</code> + <code>icon-btn-compact__on</code></td><td>Compare (custom SVG) and favourite to list (<code>edit</code>): both icons in the button; the second shows when selected.</td></tr></tbody></table></div></div></section>
+<div class="ds-sep"><hr class="divider" /></div>
+<section class="ds-section" id="accessibility-requirements"><div class="ds-page ds-inner ds-prose"><h2 class="ds-h2">Accessibility Requirements</h2><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col">Topic</th><th scope="col">Requirement</th></tr></thead><tbody><tr><th scope="row">Role</th><td>A native <code>&lt;button&gt;</code>. A toggle has <code>aria-pressed="true|false"</code>.</td></tr><tr><th scope="row">Name</th><td><code>aria-label</code> (there is no text), plus a tooltip.</td></tr><tr><th scope="row">Focus</th><td>Visible ring on <code>:focus-visible</code> (WCAG 2.4.7).</td></tr><tr><th scope="row">Target size</th><td>The icon (20px or 24px). Keep 12px between buttons.</td></tr><tr><th scope="row">Selected</th><td>Never only the icon: <code>aria-pressed</code> also says it.</td></tr></tbody></table></div></div></section>
+</div>
+
+<script src="../doc-kit.js"></script>
+<script src="../../components/js/select-menu.js"></script>
+<script>
+(function () {
+  var $ = DK.$, $$ = DK.$$, clear = DK.clear, esc = DK.esc;
+
+  DK.tokenTable($('#tok-table tbody'), [
+    ['Icon', 'Enabled, selected', 'text-action-primary'], ['Icon', 'Hover, selected hover', 'text-action-primary-hover'], ['Surface', 'Hover, close', 'surface-opacity-black-05'], ['Surface', 'Hover, close inverted', 'surface-opacity-white-20'], ['Icon', 'Close, close inverted', 'icon-primary, icon-inverted'], ['Focus ring', 'Keyboard focus', 'border-focus']]);
+
+})();
+</script>
+<script src="../toc.js"></script>
+<script src="../subnav.js"></script>
+<script src="../../components/js/tooltip.js"></script>
+</body>
+</html>

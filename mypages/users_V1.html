@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="/components/css/tabs.css">
   <script src="/components/js/tabs.js"></script>
   <link rel="stylesheet" href="/components/css/tooltip.css">
+  <link rel="stylesheet" href="/components/css/input.css">
+  <link rel="stylesheet" href="/components/css/select.css">
+  <link rel="stylesheet" href="/components/css/menu.css">
+  <link rel="stylesheet" href="/components/css/checkbox.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
@@ -218,116 +222,35 @@
     /* ══════════════════════════════════════════════════════════
        HEADER (black top bar)
     ══════════════════════════════════════════════════════════ */
-    .site-header {
-      background: var(--black);
-    }
-    .site-header--fixed {
-      position: fixed;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      transform: translateY(-100%);
-      transition: transform var(--duration-fast-4) var(--ease-standard);
-    }
-    .site-header--fixed.site-header--visible {
-      transform: translateY(0);
-    }
+    
+    
+    
 
     /* Top row: logo + search + user icons */
     /* Tooltips (components/css/tooltip.css) stay below the sticky header (z-index 99/100) */
     :root { --tooltip-z: 98; }
     @media (min-width: 769px) { :root { --tooltip-safe-top: 81px; } }   /* the sticky header's height: tooltip.js counts room above from below it */
-    .site-header__top {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px var(--px-full);
-      background: var(--black);
-      border-bottom: 1px solid #232500;
-      box-shadow: var(--elevation-b-80);
-      transition: none;
-    }
+    
 
-    .site-header__menu-btn {
-      width: 48px;
-      height: 48px;
-      padding: 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
-    .site-header__menu-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .site-header__menu-btn .ms { color: var(--color-accent-default); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    
+    
+    
 
-    .site-header__logo {
-      width: 119px;
-      height: 22.777px;
-      flex-shrink: 0;
-    }
-    .site-header__logo svg { width: 100%; height: 100%; }
+    
+    
 
-    .site-header__search {
-      flex: 1;
-      position: relative;
-      background: var(--color-background-secondary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      height: 48px;
-      border: 1px solid transparent;
-      box-sizing: border-box;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .site-header__search::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border: 2px solid var(--color-border-focus);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-    }
-    .site-header__search:hover { border-color: var(--color-border-dark); }
-    .site-header__search.is-active,
-    .site-header__search:focus-within { border-color: var(--color-border-selected); }
-    .site-header__search:focus-within::after { opacity: 0; }
+    
+    
+    
+    
+    
     body.keyboard-nav :focus-within::after { opacity: 1; }
-    .site-header__search .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; flex-shrink: 0; }
-    .site-header__search input {
-      flex: 1;
-      background: none;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-weight: 400;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    @media (min-width: 769px) { .site-header__search input { font-size: 17px; line-height: 24px; } }
-    .site-header__search input::placeholder { color: var(--color-text-tertiary); }
-    .site-header__search-right {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-    .site-header__search-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--color-border-tertiary);
-    }
+    
+    
+    
+    
+    
+    
     .search-scan-btn {
       background: none;
       border: none;
@@ -342,11 +265,7 @@
     .search-scan-btn:hover { background: var(--color-surface-opacity-black-05); }
     .search-scan-btn .ms { color: var(--black); font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
 
-    .site-header__right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    
 
     .icon-btn {
       background: none;
@@ -398,21 +317,8 @@
       color: var(--black);
     }
 
-    .account-info {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 48px;
-      padding: 0 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      text-align: left;
-      line-height: normal;
-      box-sizing: border-box;
-    }
-    .account-info:hover { background: var(--color-surface-opacity-white-20); }
+    
+    
     .avatar {
       width: 24px;
       height: 24px;
@@ -424,138 +330,35 @@
     }
     .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    .account-info__name {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-text-primary-inverted);
-      line-height: 24px;
-      white-space: nowrap;
-    }
-    .account-info__sub {
-      font-size: 14px;
-      color: var(--color-text-secondary-inverted);
-      letter-spacing: 0.4px;
-      white-space: nowrap;
-    }
+    
+    
 
     /* Bottom row: main nav */
-    .site-header__nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 var(--px-full);
-      height: 48px;
-      background: var(--black);
-      border-bottom: 1px solid var(--brand);
-      box-shadow: var(--elevation-b-60);
-    }
+    
 
-    .nav-links-wrap {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      min-width: 0;
-    }
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      flex: 1;
-      min-width: 0;
-    }
-    .nav-links a {
-      color: var(--color-text-primary-inverted);
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.2px;
-      line-height: 20px;
-      padding: 14px 0;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .nav-links a:hover { opacity: 0.8; }
+    
+    
+    
+    
 
     /* Nav overflow more-button */
-    .nav-more {
-      display: none;
-      align-items: center;
-      flex-shrink: 0;
-      margin-left: 24px;
-    }
-    .nav-more--visible { display: flex; }
-    .nav-more__btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      height: 40px;
-      width: 40px;
-      padding: 8px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: var(--color-text-primary-inverted);
-    }
-    .nav-more__btn:hover { background: var(--color-surface-opacity-white-20); }
+    
+    
+    
+    
     /* focus-visible hanteras globalt på button-elementet */
 
     /* Nav overflow dropdown */
-    .nav-more__menu {
-      position: fixed;
-      background: #fff;
-      box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.10), 0px 0px 1px 0px rgba(0,0,0,0.05);
-      width: 152px;
-      z-index: 500;
-    }
-    .nav-more__menu[hidden] { display: none; }
-    .nav-more__menu-item {
-      display: flex;
-      align-items: center;
-      height: 40px;
-      padding: 0 16px;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-      color: var(--color-text-primary);
-      text-decoration: none;
-      white-space: nowrap;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--color-border-secondary);
-      cursor: pointer;
-    }
-    .nav-more__menu-item:last-child { border-bottom: none; }
-    .nav-more__menu-item:hover { background: var(--color-surface-02); }
+    
+    
+    
+    
+    
 
-    .store-btn {
-      background: var(--black);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      gap: 4px;
-      color: var(--color-text-primary-inverted);
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.56px;
-      line-height: 14px;
-    }
-    .store-btn:hover {
-      background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%), linear-gradient(90deg, #000 0%, #000 100%);
-    }
-    .store-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .store-btn__text-regular { font-weight: 400; letter-spacing: 0.56px; }
+    
+    
+    
+    
 
     /* ══════════════════════════════════════════════════════════
        ACCOUNT NAV (white bar with tabs)
@@ -1353,12 +1156,8 @@
     body.has-impersonation-banner .impersonation-banner-placeholder {
       display: block;
     }
-    body.has-impersonation-banner .site-header__top {
-      top: 40px;
-    }
-    @media (min-width: 769px) {
-      body.has-impersonation-banner .site-header__top { top: 48px; }
-    }
+    
+    
 
     /* Inner banner */
     .impersonation-banner {
@@ -2252,7 +2051,7 @@
     .footer-links {
       display: flex;
       gap: 24px;
-      padding: 48px var(--px-full) 56px;
+      padding: 48px var(--px-full) 64px;
     }
     .footer-divider {
       background: var(--color-surface-100);
@@ -2546,20 +2345,7 @@
     .form-row { display: flex; gap: 24px; }
     .form-row .form-field { flex: 1; min-width: 0; }
 
-    .form-label {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;            /* Desktop Large: label-md */
-      font-weight: 600;
-      color: var(--color-text-primary);
-      text-transform: uppercase;
-      letter-spacing: 0.48px;
-      line-height: 16px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      white-space: nowrap;
-    }
+    .form-label { display: flex; align-items: center; gap: 2px; white-space: nowrap; } /* type from input.css; flex for the (Valfritt) suffix */
     .form-label__req { color: var(--color-text-danger-default); }
     .form-label__optional {
       font-family: 'Breuer Condensed', Arial, sans-serif;
@@ -2572,223 +2358,15 @@
       color: var(--color-text-primary);
     }
 
-    /* Input wrapper — provides focus ring via ::after */
-    .input-wrap {
-      position: relative;
-    }
-    .input-wrap::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border: 2px solid var(--color-border-focus);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--duration-fast-2) var(--ease-standard);
-    }
-    .input-wrap:focus-within::after { opacity: 0; }
-    body.keyboard-nav :focus-within::after { opacity: 1; }
-
-    .form-input,
-    .form-select {
-      height: 48px;               /* Desktop Large */
-      border: 1px solid var(--color-border-input-default);
-      background: var(--color-surface-raised-primary, #ffffff);
-      padding: 8px 12px;          /* space-8 vert, space-12 horiz */
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;            /* body-md Desktop */
-      font-weight: 400;
-      line-height: 22px;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-      outline: none;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    @media (min-width: 769px) { .form-input,
-    .form-select { font-size: 17px; line-height: 24px; } }
-    .form-input::placeholder { color: var(--color-text-tertiary); }
-
-    /* Hover */
-    .form-input:hover, .form-select:hover { border-color: var(--color-border-dark); }
-
-    /* Active — has value (placeholder not shown) */
-    .form-input:not(:placeholder-shown) {
-      border-color: var(--color-border-selected);
-      color: var(--color-text-primary);
-    }
-
-    /* Focus — selected border on click or keyboard; blue ring only on keyboard (via body.keyboard-nav) */
-    .form-input:focus { border-color: var(--color-border-selected); }
-
-    /* Error */
-    .form-input--error { border-color: var(--color-border-danger-default) !important; }
-
-    /* Success */
-    .form-input--success { border-color: var(--color-border-success-default) !important; }
-
-    /* Disabled */
-    .form-input:disabled {
-      background: var(--color-surface-raised-secondary, #f6f6f6);
-      border-color: var(--color-border-disabled);
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-    }
-
-    .form-select {
-      appearance: none;
-      cursor: pointer;
-      padding-right: 40px;            /* utrymme för dropdown-pil */
-    }
-
-    /* Focus — selected border on click or keyboard */
-    .form-select:focus { border-color: var(--color-border-selected); }
-
-    /* Active — icke-default alternativ valt (JS-togglad klass på wrappern) */
-    .form-select-wrap.is-active .form-select { border-color: var(--color-border-selected); }
-
-    /* Error */
-    .form-select--error { border-color: var(--color-border-danger-default) !important; }
-
-    /* Success */
-    .form-select--success { border-color: var(--color-border-success-default) !important; }
-
-    /* Disabled */
-    .form-select:disabled {
-      background: var(--color-surface-raised-secondary, #f6f6f6);
-      border-color: var(--color-border-disabled);
-      color: var(--color-text-disabled);
-      cursor: not-allowed;
-    }
-
-    .form-select-wrap { position: relative; }
-    .form-select-arrow {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      font-size: 24px;
-      line-height: 1;
-      color: var(--color-text-primary);
-    }
-    .form-select:disabled ~ .form-select-arrow {
-      color: var(--color-text-disabled);
-    }
-
-    .form-helper {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;            /* body-sm */
-      font-weight: 400;
-      color: var(--color-text-tertiary);
-      line-height: 20px;
-      letter-spacing: 0.36px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .form-helper--error {
-      color: var(--color-text-danger-default);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .form-helper--success  { color: var(--color-text-success-default); }
-    .form-helper--disabled { color: var(--color-text-disabled); }
-
-    .form-checkboxes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 24px;
-      margin-top: 4px;
-      margin-bottom: 4px;
-    }
-    .form-checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-    .form-checkbox-item input[type="checkbox"],
-    .check-icon input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      border: 1.5px solid var(--color-border-selected);
-      background: var(--color-background-primary);
-      cursor: pointer;
-      flex-shrink: 0;
-      /* 4px margin on all sides: 16px box + 4+4 = 24px total incl. space for focus ring */
-      margin: 4px;
-    }
-    .form-checkbox-item input[type="checkbox"]:hover {
-      border-width: 2px;
-    }
-    .form-checkbox-item input[type="checkbox"]:focus-visible {
-      /* 2px gap (outline-offset) + 2px ring = 4px — fills the margin exactly → 24px total */
-      outline: 2px solid var(--color-border-focus);
-      outline-offset: 2px;
-    }
-    .form-checkbox-item input[type="checkbox"]:checked,
-    .check-icon input[type="checkbox"]:checked {
-      background-color: var(--color-surface-100);
-      border-color: var(--color-border-selected);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item input[type="checkbox"]:checked:hover:not(:disabled),
-    .check-icon input[type="checkbox"]:checked:hover:not(:disabled) {
-      background-color: var(--color-text-disabled, #939595);
-      border-color: var(--color-text-disabled, #939595);
-    }
-    .form-checkbox-item input[type="checkbox"]:indeterminate {
-      background-color: var(--color-surface-100);
-      border-color: var(--color-border-selected);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cline x1='3' y1='8' x2='13' y2='8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item input[type="checkbox"]:disabled,
-    .check-icon input[type="checkbox"]:disabled {
-      border-color: var(--color-border-disabled);
-      background-color: var(--color-background-primary);
-      cursor: not-allowed;
-    }
-    .form-checkbox-item input[type="checkbox"]:disabled:checked,
-    .check-icon input[type="checkbox"]:disabled:checked {
-      background-color: var(--color-surface-disabled, #e5e5e5);
-      border-color: var(--color-surface-disabled, #e5e5e5);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5L6 11.5L13 4' stroke='%23939595' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 14px 14px;
-    }
-    .form-checkbox-item:has(input:disabled) {
-      cursor: not-allowed;
-    }
-    .form-checkbox-item span {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-text-primary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      white-space: nowrap;
-    }
-    @media (min-width: 769px) { .form-checkbox-item span { font-size: 17px; line-height: 24px; } }
-    .form-checkbox-item:has(input:disabled) span {
-      color: var(--color-text-disabled);
-    }
+    /* Checkbox group layout (page): items come from components/css/checkbox.css */
+    .form-checkboxes { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 4px; margin-bottom: 4px; }
 
     /* ── Responsive (mobile-first) ───────────────────────── */
 
     /* xs default – mobile base styles */
-    .site-header__nav { overflow-x: auto; gap: 16px; scrollbar-width: none; }
-    .site-header__nav::-webkit-scrollbar { display: none; }
-    .site-header__right { gap: 0; }
+    
+    
+    
 
     .account-nav { padding-top: 16px; padding-bottom: 16px; }
     .tab-bar-wrap { display: none; }
@@ -2796,7 +2374,7 @@
     .account-nav__profile { gap: 8px; }
     .account-nav__name { line-height: 22px; }
     .account-nav__sub { font-size: 14px; letter-spacing: 0.4px; }
-    .account-info__name, .account-info__sub { display: none; }
+    
 
     .filter-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
     .search-input { width: 100%; }
@@ -2880,33 +2458,11 @@
       .menu-level2__header { padding: 16px 24px; }
       .menu-level2__title { font-size: 16px; line-height: 16px; letter-spacing: 0.32px; } /* label-lg Mobil */
 
-      /* Labels — label-md Mobile: 14px/14px, 0.42px */
-      .form-label {
-        font-size: 14px;
-        line-height: 14px;
-        letter-spacing: 0.42px;
-      }
       /* Optional suffix — body-md Mobile: 14px/14px, 0.42px */
       .form-label__optional {
         font-size: 14px;
         line-height: 14px;
         letter-spacing: 0.42px;
-      }
-
-      /* Inputs & selects — Large Mobile: 40px, 8px padding, body-md mobile 16px/22px */
-      .form-input,
-      .form-select {
-        height: 40px;
-        padding: 8px;
-        line-height: 22px;
-      }
-      .form-select { padding-right: 40px; }   /* keep room for arrow */
-
-      /* Checkbox label text — body-md Mobile: 16px/22px */
-      .form-checkbox-item span {
-        font-size: 16px;
-        line-height: 22px;
-        letter-spacing: 0.32px;
       }
 
       /* form-row stays stacked on mobile, except name row */
@@ -2949,13 +2505,13 @@
       .page-preamble { margin-bottom: 40px; }
 
       /* Restore desktop header, hide mobile header */
-      .site-header__sm { display: none; }
-      .site-header__top { display: flex; }
-      .site-header { display: block; }
+      
+      
+      
 
-      .site-header__nav { overflow-x: hidden; gap: 0; }
-      .nav-links { overflow: hidden; }
-      .site-header__right { gap: 8px; }
+      
+      
+      
 
       .account-nav { padding-top: 24px; padding-bottom: 24px; }
       .tab-bar-wrap { display: flex; }
@@ -2963,7 +2519,7 @@
       .account-nav__profile { gap: 12px; }
       .account-nav__name { line-height: 24px; }
       .account-nav__sub { font-size: 16px; letter-spacing: 0.32px; }
-      .account-info__name, .account-info__sub { display: block; }
+      
 
       .filter-bar { flex-direction: row; align-items: center; gap: 0; }
       .search-input { width: min(384px, 100%); }
@@ -2999,7 +2555,7 @@
       .cs__btn { padding: 12px 16px; font-size: 16px; line-height: 16px; letter-spacing: 0.48px; }
 
       /* Footer links — static columns on desktop */
-      .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 24px; padding: 48px var(--px-full) 56px; }
+      .footer-links { flex-direction: row; flex-wrap: nowrap; gap: 24px; padding: 48px var(--px-full) 64px; }
       .footer-col { flex: 1; width: auto; border-bottom: none; gap: 16px; }
       .footer-col__heading {
         display: flex; padding: 0; cursor: default; pointer-events: none;
@@ -3012,7 +2568,7 @@
       /* Footer divider, bottom & copyright */
       .footer-divider { padding: 0 var(--px-full); background: var(--color-surface-100); }
       .footer-divider__line { background: var(--color-surface-80); }
-      .footer-bottom { flex-direction: row; align-items: center; gap: 0; padding: 40px var(--px-full); }
+      .footer-bottom { flex-direction: row; align-items: center; gap: 0; padding: 0 var(--px-full) 40px; }
       .footer-copyright { padding: 32px var(--px-full); }
 
       .cta-buttons { flex-direction: row; }
@@ -3027,279 +2583,71 @@
     /* ══════════════════════════════════════════════════════════
        SITE-HEADER SM (3-row mobile layout, xs + sm)
     ══════════════════════════════════════════════════════════ */
-    .site-header__sm {
-      display: none;
-      flex-direction: column;
-      background: var(--black);
-    }
+    
 
     /* ── Row 1: icons | logo | account + cart + menu ── */
-    .sh-sm__bar1 {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      height: 64px;
-      padding: 0 8px;
-      background: var(--black);
-      border-bottom: 1px solid transparent;
-      box-shadow: var(--elevation-b-80);
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .sh-sm__bar1--accented {
-      border-bottom-color: var(--brand);
-    }
+    
+    
 
     /* Push bar2 + bar3 down so they don't hide under the fixed bar1 */
-    .site-header__sm { padding-top: 64px; }
-    .sh-sm__bar1-left,
-    .sh-sm__bar1-right {
-      display: flex;
-      align-items: center;
-      flex: 1;
-    }
-    .sh-sm__bar1-right { justify-content: flex-end; }
-    .sh-sm__bar1-center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      pointer-events: none;
-    }
-    .sh-sm__logo { width: 76px; height: 14.555px; flex-shrink: 0; }
-    .sh-sm__logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    
+    
+    
+    
+    
+    
 
     /* Icon buttons – 20px icon, space-12 padding = 44px */
-    .sh-sm__icon-btn {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-      position: relative;
-      flex-shrink: 0;
-      box-sizing: border-box;
-    }
+    
     /* 24px icon, space-12 padding = 48px */
-    .sh-sm__icon-btn--24 { width: 48px; height: 48px; }
-    .sh-sm__icon-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__icon-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .sh-sm__icon-btn--24 .ms {
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
+    
+    
+    
+    
 
     /* Badge on icon buttons */
-    .sh-sm__icon-btn .badge {
-      top: 4px;
-      right: 2px;
-    }
+    
 
     /* Account button: avatar + name + sub */
-    .sh-sm__account-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 48px;
-      padding: 0 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      flex-shrink: 1;
-      min-width: 0;
-    }
-    .sh-sm__account-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__account-info { display: flex; flex-direction: column; gap: 0; min-width: 0; }
-    .sh-sm__account-name {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--color-text-primary-inverted);
-      line-height: 22px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-feature-settings: 'ss02' 1, 'ss03' 1;
-    }
-    .sh-sm__account-sub {
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--color-text-secondary-inverted);
-      line-height: normal;
-      white-space: nowrap;
-      letter-spacing: 0.4px;
-    }
+    
+    
+    
+    
+    
 
     /* Hamburger menu button */
-    .sh-sm__menu-btn {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .sh-sm__menu-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__menu-btn .ms {
-      color: var(--brand);
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
+    
+    
+    
 
     /* ── Row 2: search bar ── */
-    .sh-sm__bar2 {
-      background: #111;
-      padding: 0 8px;
-      transition: transform var(--duration-fast-4) var(--ease-standard);
-    }
-    .sh-sm__bar2--fixed {
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      transform: translateY(-100%);
-    }
-    .sh-sm__bar2--fixed.sh-sm__bar2--visible {
-      transform: translateY(0);
-      border-bottom: 1px solid var(--brand);
-    }
-    .sh-sm__bar2--fixed.sh-sm__bar2--bar3-hidden {
-      padding-bottom: 8px;
-    }
-    .sh-sm__search {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 40px;
-      background: var(--color-surface-raised-secondary);
-      border: 1px solid var(--color-border-input-default);
-      padding: 0 8px;
-      box-sizing: border-box;
-      transition: border-color var(--duration-fast-3) var(--ease-standard);
-    }
-    .sh-sm__search:hover { border-color: var(--color-border-dark); }
-    .sh-sm__search:focus-within { border-color: var(--color-border-selected); }
-    .sh-sm__search > .ms {
-      color: var(--black);
-      font-size: 24px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-      flex-shrink: 0;
-    }
-    .sh-sm__search input {
-      flex: 1;
-      min-width: 0;
-      background: none;
-      border: none;
-      outline: none;
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-text-secondary);
-      letter-spacing: 0.32px;
-      line-height: 22px;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .sh-sm__search input::placeholder { color: var(--color-text-secondary); }
-    .sh-sm__search-right {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-      padding-left: 6px;
-    }
-    .sh-sm__search-divider {
-      width: 1px;
-      height: 16px;
-      background: var(--color-border-tertiary);
-      flex-shrink: 0;
-    }
-    .sh-sm__search-action {
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      padding: 6px;
-      box-sizing: border-box;
-    }
-    .sh-sm__search-action:hover { background: var(--color-surface-opacity-black-05); }
-    .sh-sm__search-action .ms {
-      color: var(--black);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Row 3: store nav ── */
-    .sh-sm__bar3 {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      height: 40px;
-      background: var(--black);
-      border-bottom: 1px solid var(--brand);
-      padding: 0 8px;
-    }
-    .sh-sm__store-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      height: 40px;
-      padding: 4px;
-      color: var(--color-text-primary-inverted);
-      font-family: 'Breuer Condensed', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.42px;
-      line-height: 14px;
-      white-space: nowrap;
-      font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
-    }
-    .sh-sm__store-btn:hover { background: var(--color-surface-opacity-white-20); }
-    .sh-sm__store-btn .ms {
-      color: var(--color-text-primary-inverted);
-      font-size: 20px;
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
-    }
-    .sh-sm__store-btn__text {
-      display: flex;
-      align-items: center;
-      padding: 5px 6px;
-      gap: 0;
-    }
-    .sh-sm__store-btn__bold { font-weight: 600; letter-spacing: 0.42px; }
-    .sh-sm__store-btn__regular { font-weight: 400; letter-spacing: 0.28px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Show/hide at breakpoints ── */
-    @media (max-width: 768px) {
-      .site-header__sm { display: flex; }
-      .site-header__top { display: none; }
-      .site-header { display: none; }
-    }
+    
 
     /* ── xs + sm (max-width: 768px): show cards, hide desktop table ── */
     @media (max-width: 768px) {
@@ -3310,27 +2658,27 @@
     /* ── xs only (max-width: 639px) – mobile overrides ── */
     @media (max-width: 639px) {
       /* Bar1: 56px (8px padding + 40px buttons) */
-      .sh-sm__bar1 { height: 56px; padding: 8px; }
-      .site-header__sm { padding-top: 56px; }
-      .sh-sm__bar2--fixed { top: 56px; }
+      
+      
+      
 
       /* Icon buttons → mobile medium (8px padding, 24px icon = 40px) */
-      .sh-sm__icon-btn { width: 40px; height: 40px; }
-      .sh-sm__icon-btn--24 { width: 40px; height: 40px; }
-      .sh-sm__icon-btn .ms { font-size: 24px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-      .sh-sm__menu-btn { width: 40px; height: 40px; }
+      
+      
+      
+      
 
       /* Bar1: collapse account btn to avatar-only */
-      .sh-sm__account-info { display: none; }
-      .sh-sm__account-btn { height: 40px; padding: 8px; gap: 0; flex-shrink: 0; }
+      
+      
 
       /* Bar2: hide location button */
-      .sh-sm__location-btn { display: none; }
+      
 
       /* Bar3: left-align store button, label-sm (12px) text */
-      .sh-sm__bar3 { justify-content: flex-start; }
-      .sh-sm__store-btn { font-size: 12px; letter-spacing: 0.48px; }
-      .sh-sm__store-btn__bold { letter-spacing: 0.48px; }
+      
+      
+      
 
       /* CTA banner: center text */
       .cta-banner__text { align-items: center; text-align: center; }
@@ -3558,6 +2906,8 @@
 
 
   </style>
+  <link rel="stylesheet" href="/eco-design-system/notifications.css">
+  <script src="/eco-design-system/notifications.js" defer></script>
 </head>
 <body>
 
@@ -4053,7 +3403,7 @@
             <option>Standard</option>
             <option>Administratör</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Här väljer du vilken roll du vill att din användare ska ha. Standard är den vanliga användarrollen.</span>
       </div>
@@ -4081,13 +3431,13 @@
         <div class="form-field">
           <label class="form-label" for="drawer-fornamn">Förnamn</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-fornamn" autocomplete="given-name" placeholder=" " /></div>
           </div>
         </div>
         <div class="form-field">
           <label class="form-label" for="drawer-efternamn">Efternamn</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-efternamn" autocomplete="family-name" placeholder=" " /></div>
           </div>
         </div>
       </div>
@@ -4096,7 +3446,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-epost">Epost</label>
         <div class="input-wrap">
-          <input class="form-input" type="email" id="drawer-epost" autocomplete="email" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="email" id="drawer-epost" autocomplete="email" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4104,7 +3454,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-mobil"><span>Mobilnummer</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="tel" id="drawer-mobil" autocomplete="tel" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4112,7 +3462,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-anstallning"><span>Anställnings nr</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-anstallning" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-anstallning" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4120,7 +3470,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-kost"><span>Kostnadsställe</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-kost" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-kost" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4128,7 +3478,7 @@
       <div class="form-field">
         <label class="form-label" for="drawer-adress"><span>Adressnummer</span> <span class="form-label__optional">(Valfritt)</span></label>
         <div class="input-wrap">
-          <input class="form-input" type="text" id="drawer-adress" placeholder=" " />
+          <div class="input-box"><input class="form-input" type="text" id="drawer-adress" placeholder=" " /></div>
         </div>
       </div>
 
@@ -4140,7 +3490,7 @@
             <option>Inaktiv</option>
             <option>Aktiv</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Inaktiv är standardvärdet. Välj aktiv om ni använder budget.</span>
       </div>
@@ -4152,7 +3502,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-arsbudget">Årsbudget</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-arsbudget" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-arsbudget" placeholder=" " /></div>
           </div>
         </div>
 
@@ -4160,7 +3510,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-saldo">Nuvarande saldo</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-saldo" value="0.00 kr" disabled />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-saldo" value="0.00 kr" disabled /></div>
           </div>
           <span class="form-helper form-helper--disabled" id="drawer-saldo-helper">Nuvarande saldo: 0.00 kr</span>
         </div>
@@ -4169,7 +3519,7 @@
         <div class="form-field">
           <label class="form-label" for="drawer-lagg-saldo">Lägg till saldo</label>
           <div class="input-wrap">
-            <input class="form-input" type="text" id="drawer-lagg-saldo" placeholder=" " />
+            <div class="input-box"><input class="form-input" type="text" id="drawer-lagg-saldo" placeholder=" " /></div>
           </div>
         </div>
 
@@ -4243,7 +3593,7 @@
             <option value="11">November</option>
             <option value="12">December</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Här väljer du vilken månad som ska gälla som start för överflyttningen.</span>
       </div>
@@ -4256,7 +3606,7 @@
             <option value="aktiv" >Ja</option>
             <option value="avaktivera" selected>Nej</option>
           </select>
-          <span class="ms form-select-arrow">arrow_drop_down</span>
+          <span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span>
         </div>
         <span class="form-helper">Välj om kvarvarande saldo ska följa med till nästkommande budgetår.</span>
       </div>
@@ -5951,84 +5301,17 @@
         return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
       }
 
-      /* ── Logout confirmation toast ── */
+      /* ── Logout confirmation: ECO Toast, Warning, Weak, actionable (eco-design-system/notifications.js) ── */
       function showLogoutConfirmToast(name) {
-        var w       = window.innerWidth;
-        var isXs    = w <= 639;
-        var isMobile = w <= 768;
-        var isSmMd  = !isXs && w <= 1023;
-        var topVal  = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var rightVal = isXs ? '0' : (isSmMd ? '32px' : '40px');
-        var bodyLh  = isMobile ? '22px' : '24px';
-        /* Desktop xs buttons: 6px padding, label-sm 14px/0.56px
-           Mobile sm buttons:  6px padding, label-md 14px/0.42px (mobile) */
-        var dismissed = false;
-
-        function dismiss() {
-          if (dismissed) return;
-          dismissed = true;
-          t.style.animation = isXs
-            ? 'toast-slide-out-top var(--duration-medium-2) var(--ease-accelerate-generic) forwards'
-            : 'toast-slide-out var(--duration-medium-2) var(--ease-accelerate-generic) forwards';
-          setTimeout(function(){ t.remove(); }, 300);
-        }
-        function confirmLogout() {
-          dismiss();
-          closeImpersonation();
-        }
-
-        var t = document.createElement('div');
-        t.setAttribute('role', 'alertdialog');
-        t.setAttribute('aria-modal', 'false');
-        t.style.cssText = [
-          'position:fixed',
-          'z-index:9999',
-          isXs ? 'top:0;left:0;right:0;width:100vw' : ('top:' + topVal + ';right:' + rightVal + ';width:375px'),
-          'box-shadow:0px 8px 16px 0px rgba(0,0,0,0.10),0px 0px 1px 0px rgba(0,0,0,0.05)',
-          'animation:' + (isXs
-            ? 'toast-slide-in-top var(--duration-medium-2) var(--ease-decelerate-emphasized) forwards'
-            : 'toast-slide-in var(--duration-medium-2) var(--ease-decelerate-emphasized) forwards'),
-          'font-family:\'Breuer Condensed\',Arial,sans-serif',
-          'font-feature-settings:\'ss02\' 1,\'ss03\' 1'
-        ].join(';');
-
-        t.innerHTML = [
-          '<div style="background:#fff;border-left:2px solid #fac000;display:flex;flex-direction:column;width:100%;">',
-            '<div style="display:flex;gap:8px;align-items:flex-start;padding:16px;width:100%;box-sizing:border-box;">',
-              /* Warning icon — warning, filled */
-              '<span class="ms ms--24" style="color:#fac000;font-variation-settings:\'FILL\' 1,\'wght\' 300,\'GRAD\' 0,\'opsz\' 24;flex-shrink:0;margin-top:1px;">warning</span>',
-              '<div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;">',
-                /* Title */
-                '<p style="font-size:16px;font-weight:600;line-height:18px;letter-spacing:0px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1;padding-top:2px;">LOGGA UT</p>',
-                /* Body line 1 */
-                '<p style="font-size:16px;font-weight:400;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;">',
-                  'Är du säker att du vill logga ut som användare <strong style="font-weight:600;">' + escHtml(name) + '</strong>?',
-                '</p>',
-                /* Body line 2 */
-                '<p style="font-size:16px;font-weight:600;line-height:' + bodyLh + ';letter-spacing:0.32px;color:#000;font-feature-settings:\'ss02\' 1,\'ss03\' 1,\'ss06\' 1;margin-top:8px;">',
-                  'Du kommer fortfarande att vara inloggad som Administratör.',
-                '</p>',
-              '</div>',
-              /* Close × — Blank xs på ljus bakgrund */
-              '<button aria-label="Stäng" class="icon-btn icon-btn--close logout-toast__close" id="logout-toast-close">',
-                '<span class="ms">close</span>',
-              '</button>',
-            '</div>',
-            /* Action group — indented 32px from left (icon 24px + gap 8px) */
-            '<div style="padding:0 16px 16px 48px;display:flex;gap:8px;align-items:center;box-sizing:border-box;">',
-              /* OK — Secondary xs */
-              '<button id="logout-toast-ok" class="btn btn--secondary logout-toast__btn-secondary"><span class="btn__label">OK</span></button>',
-              /* ABRYT — Primary xs */
-              '<button id="logout-toast-cancel" class="btn btn--primary logout-toast__btn-primary"><span class="btn__label">ABRYT</span></button>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        t.querySelector('#logout-toast-close').addEventListener('click', dismiss);
-        t.querySelector('#logout-toast-ok').addEventListener('click', confirmLogout);
-        t.querySelector('#logout-toast-cancel').addEventListener('click', dismiss);
-
-        document.body.appendChild(t);
+        window.ECO_N.showToast({
+          status: 'warning',
+          title: 'Logga ut som ' + name + '?',
+          text: 'Du är fortfarande inloggad som Administratör.',
+          actions: {
+            secondary: { label: 'Avbryt' },
+            primary: { label: 'Logga ut', onClick: function () { closeImpersonation(); } }
+          }
+        });
       }
 
       /* ── Impersonation banner ── */
@@ -6121,11 +5404,12 @@
       </div>
       <div class="delete-modal__footer">
         <button class="btn btn--blank delete-modal__btn-cancel" id="delete-modal-cancel"><span class="btn__label">Avbryt</span></button>
-        <button class="btn btn--primary delete-modal__btn-confirm" id="delete-modal-confirm"><span class="btn__label">Radera användare</span></button>
+        <button class="btn btn--destructive delete-modal__btn-confirm" id="delete-modal-confirm"><span class="btn__label">Radera användare</span></button>
       </div>
     </div>
   </div>
 
 <script src="/components/js/tooltip.js"></script>
+<script src="/components/js/select-menu.js"></script>
 </body>
 </html>

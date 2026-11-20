@@ -203,6 +203,12 @@ Reference studied 2026-10-17: unitedcarriers.com (campaign site: scroll-driven h
 
 ---
 
+### Swipe physics (tab bars, 2026-11-05)
+
+A scrollable bar that is swiped (`components/js/tabs.js`) follows the pointer 1:1, glides on after release and, at either end, stretches and eases back (rubber band), as in the Figma prototype (Tab Bar - States 2991:100351). It is physics, not a curve plus duration, so **no `eco-motion` token covers it**: friction time constant 260 ms, release speed ×0.5, stretch at most 72px with soft resistance, spring `K = 0.00018`, critically damped (`C = 2·sqrt(K)`, one soft return of about 0.6 s, no wobble), top speed into an end 1.1 px/ms. Off under `prefers-reduced-motion` (follows the pointer only). Reuse the same constants for any other swipeable strip (chips, a carousel of tiles) instead of inventing new ones; if physics tokens are wanted, they are added here first.
+
+**Any sideways-overflowing row (2026-11-05):** give the row the class `swipe-row` (`components/css/tabs.css`: `touch-action: pan-y`, the `--tab-over` rubber-band `translate` on its children, the grabbing cursor, `overflow-x: auto` and a hidden scrollbar). `tabs.js` swipes every `.swipe-row` on load; for a row added later call `ECO_TABS.init(root)` or `ECO_TABS.swipe(el)`. Tab bars get the same through `.tab-bar`. Used on the search panel's suggestion tile links (`#sp-suggest` in `search.html`). Never write a second swipe script and never copy the rules; constants stay in `tabs.js`.
+
 ### Choosing motion in docs
 
 Component docs pages that animate get a live **Motion** section (easing, duration, collapse, recommended default marked `*`, warnings for choices that clash with these rules). See `eco-doc-page`, "Motion section".

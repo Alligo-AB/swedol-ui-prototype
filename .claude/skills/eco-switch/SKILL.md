@@ -5,6 +5,8 @@ description: Use when building or reviewing a switch (toggle switch) — an imme
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
+> **Not sure this is the right control?** Read `selection-guide` first: it picks between Radio button, Checkbox, Chip, Select, Switch and Pill Segment Control by one or several choices and the number and length of the options (rule 2026-11-08).
+
 ## Switch (ECO Design System)
 
 **Figma:** `❖ Form Elements` → Toggle Switch (node `278:9676`, Size × State × Switch × Breakpoint × Mode) · usage info frame `12137:385340`.

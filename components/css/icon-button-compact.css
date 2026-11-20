@@ -1,0 +1,40 @@
+/* ECO component CSS: Compact Icon Button. Skill: eco-icon-button-compact.
+   Figma ECO Design System section "Compact Icon Button" 23990:132193 (sets compare, add_card_favourite, add_favourite_to_list, list_selected, edit, location_on, cancel_filled, qr_code_scanner, close), checked 2026-11-15.
+   Link it, do not copy it: <link rel="stylesheet" href="/components/css/icon-button-compact.css">
+   A frameless icon-only button as big as its icon (Small 20px, Large 24px), for places too small for a regular icon button (product card, table row, input field, list row). Not for the 40/48px `btn--icon` of eco-button.
+   Markup: <button type="button" class="icon-btn-compact" aria-label="…"><span class="icon icon--sm" aria-hidden="true">favorite</span></button>
+   Large: icon--md in the button. Toggle (favourite, compare): aria-pressed="true" (or .is-on) = Selected; the page script flips it.
+   Tokens only. Same on every breakpoint. [data-state] selectors only serve the docs pages' forced-state demos. */
+.icon-btn-compact {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent;
+  color: var(--color-text-action-primary); font: inherit; line-height: 0; cursor: pointer; touch-action: manipulation;
+  outline: 2px solid transparent; outline-offset: 2px;   /* focus ring as eco-button: 2px gap + 2px line */
+  transition: color var(--duration-fast-2, 100ms) var(--ease-standard, ease);
+}
+.icon-btn-compact[hidden] { display: none; }
+.icon-btn-compact .icon { color: inherit; }
+
+/* Own icon for the Selected state (compare: compare_arrows becomes the custom compare_added_custom): put both in the button, the first as __off, the second as __on */
+.icon-btn-compact .icon-btn-compact__on { display: none; }   /* two classes: icon.css (loaded later) sets display on .icon */
+.icon-btn-compact:is([aria-pressed="true"], .is-on, [data-state="selected"], [data-state="selected-hover"]) .icon-btn-compact__on { display: inline-block; }
+.icon-btn-compact:is([aria-pressed="true"], .is-on, [data-state="selected"], [data-state="selected-hover"]) .icon-btn-compact__off { display: none; }
+
+/* Hover: the icon takes text-action-primary-hover (Figma Selected Hover) */
+.icon-btn-compact:is(:hover, [data-state="hover"], [data-state="selected-hover"]) { color: var(--color-text-action-primary-hover); }
+
+/* Fill on hover (favourite): the outline icon turns solid, colour stays primary (Figma add_card_favourite Hover) */
+.icon-btn-compact--fill-hover:is(:hover, [data-state="hover"]):not([aria-pressed="true"], .is-on) { color: var(--color-text-action-primary); }
+.icon-btn-compact--fill-hover:is(:hover, [data-state="hover"]) .icon { --icon-fill: 1; }
+
+/* Selected: solid icon. Selected hover keeps the solid icon and takes the hover colour (from the rule above) */
+.icon-btn-compact:is([aria-pressed="true"], .is-on, [data-state="selected"], [data-state="selected-hover"]) .icon { --icon-fill: 1; }
+
+/* Surface on hover (close, Figma Compact Icon Button/close): 2px around a 20px icon = 24px, a surface appears on hover and the icon keeps its colour */
+.icon-btn-compact--surface-hover { padding: 2px; color: var(--color-icon-primary); transition: background-color var(--duration-fast-2, 100ms) var(--ease-standard, ease); }
+.icon-btn-compact--surface-hover:is(:hover, [data-state="hover"]) { color: var(--color-icon-primary); background: var(--color-surface-opacity-black-05); }
+/* On a dark surface: white icon, white 20% surface on hover */
+.icon-btn-compact--inverted { color: var(--color-icon-inverted); }
+.icon-btn-compact--inverted:is(:hover, [data-state="hover"]) { color: var(--color-icon-inverted); background: var(--color-surface-opacity-white-20); }
+
+.icon-btn-compact:focus-visible { outline-color: var(--color-border-focus); }

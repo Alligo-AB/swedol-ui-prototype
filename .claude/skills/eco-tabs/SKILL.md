@@ -67,7 +67,7 @@ Secondary tabs can navigate a whole page, as the on-page tab bar of the docs doe
 | Modifier | Effect |
 |---|---|
 | `.tab-bar--primary` | 24px gap between tabs (`--dimension-spacing-space-24`); indicator spans the label only; active line 3px |
-| `.tab-bar--secondary` | no gap, each tab has 16px side padding (`--dimension-spacing-space-16`), indicator spans label + padding; active line 2px |
+| `.tab-bar--secondary` | no gap, each tab has 16px side padding (`--dimension-spacing-space-16`; side padding by size, mobile: **Large 16, Medium 12, Small 8**; from 769px Large and Medium 16, Small 8; Figma mobile (Small-XSmall) 2914:93704, 2880:92158, 3524:131494; desktop (Large-Medium) 2885:93678, 2166:63990, 2515:77816; **Small: 8px**, `--dimension-spacing-space-8`, mobile and desktop), indicator spans label + padding; active line 2px |
 | `.tab-bar--md` / `.tab-bar--sm` | size Medium / Small. Default (no class) = Large |
 | `.tab-bar--on-grey` | Background Colored = True: hover line `--color-surface-40` instead of `--color-surface-10` |
 | `.tab--icon-only` | icon only, indicator under the icon; dot sits at the icon's top right |
@@ -142,7 +142,7 @@ Icon only: `<button class="tab tab--icon-only" role="tab" aria-label="Settings">
 2. Tokens only (`var(--…)`), no hex/px for colour or spacing (CLAUDE.md rule 6). Mobile-first; the switch is at `769px`, `sm` looks like mobile.
 3. Tabs are `<button role="tab">` (content tabs) or `<a>` (navigation). Never a `div` with a click handler. Keep exactly one active tab.
 4. Secondary tabs go below primary tabs, never above.
-5. Prefer scrollable tabs (the bar scrolls sideways, scrollbar hidden) over wrapping or hiding tabs. Keep the active tab in view (`tabs.js` does `scrollIntoView`).
+5. Prefer scrollable tabs (the bar scrolls sideways, scrollbar hidden) over wrapping or hiding tabs. Swipe (touch, pen, mouse) is handled by `tabs.js` with its own physics, as in the Figma prototype (screen recording 2026-11-05): the bar follows the finger, glides on after release at half the release speed (friction, 260 ms time constant) and at either end stretches (soft resistance, at most 72px) and eases back in about 0.6 s with one critically damped return, no wobble; speed when reaching an end is capped at 1.1 px/ms. Off under `prefers-reduced-motion` (follows the finger only). `.tab-bar { touch-action: pan-y }`; the stretch is the CSS var `--tab-over`, applied as `translate` on the children. A drag over 5px is not a click. **The spring and friction constants are not `eco-motion` tokens** (no physics tokens exist). Figma "Tab Bar - States" 2991:100351. Keep the active tab in view (`tabs.js` does `scrollIntoView`). The same swipe can be put on any row that overflows sideways (e.g. tile links) with the class `swipe-row` (or `ECO_TABS.swipe(el)`), see `eco-motion` "Swipe physics".
 6. Icon-only tabs need an `aria-label`. Status dot/number needs a text alternative where the meaning is not clear from context.
 7. Test at ~375px, ~700px and ≥1024px with `getComputedStyle`, and with real hover and keyboard (Tab, arrows).
 

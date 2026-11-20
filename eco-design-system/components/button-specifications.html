@@ -92,7 +92,7 @@
     ['primary-inverted', 'Primary inverted', true], ['secondary-inverted', 'Secondary inverted', true], ['blank-inverted', 'Blank inverted', true]
   ];
   var SIZE_NAME = { lg: 'Large', md: 'Medium', sm: 'Small', xs: 'XSmall' };
-  var ICON = { lead: 'shopping_cart', trail: 'arrow_forward', icon: 'shopping_cart' };
+  var ICON = { lead: 'shopping_cart', trail: 'chevron_right', icon: 'shopping_cart' };
   function isInv(v) { return /inverted/.test(v); }
   /* The badge shows the count, and "99+" for anything over 99 (no value, or 0, shows 1 here so the preview is never empty) */
   function badgeText(v) { if (v === '99+') return v; var n = parseInt(String(v == null ? '' : v).replace(/[^0-9]/g, ''), 10); return isNaN(n) || n < 1 ? '1' : n > 99 ? '99+' : String(n); }

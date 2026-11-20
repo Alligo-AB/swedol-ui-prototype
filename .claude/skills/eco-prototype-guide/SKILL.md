@@ -1,5 +1,5 @@
 ---
-name: prototype-guide
+name: eco-prototype-guide
 description: Use BEFORE and DURING work on any new prototype, page, product/service page, UI/UX flow, or functionality for Swedol — whether the task starts from a Figma prototype, a loose brainstorm/spec, or a one-line brief like "make a nice page"/"design X"/"build functionality for Y". This is the entry point that ties general web-design quality (hierarchy, layout, copy, interaction, micro-animation, structured critique) to the ECO Design System rules in CLAUDE.md and the component skills. Read this BEFORE choosing a starting point/template and BEFORE building individual components.
 ---
 
@@ -68,18 +68,22 @@ Go through the intended interface piece by piece and match every part against th
 
 #### 3a. Component map: "I need X → use skill Y"
 
-Read this before you decide a piece is "new". Every row is a finished component with a docs page in `eco-design-system/components/` and shared CSS/JS in `components/`. The templates already link the CSS. **Keep this map in sync by hand:** the step "add to `prototype-guide` map" in `eco-add-component` does it when a component is added. The full list with descriptions is in `CLAUDE.md` → skills index.
+Read this before you decide a piece is "new". Every row is a finished component with a docs page in `eco-design-system/components/` and shared CSS/JS in `components/`. The templates already link the CSS. **Keep this map in sync by hand:** the step "add to `eco-prototype-guide` map" in `eco-add-component` does it when a component is added. The full list with descriptions is in `CLAUDE.md` → skills index.
 
 | I need… | Use |
 |---|---|
 | A button, icon button, or a row of 2–4 toggle options | `eco-button` (button group: section "Button group") |
 | A text field, multi-line text, a dropdown | `eco-input`, `eco-textarea`, `eco-select`; an icon-name field: `eco-icon-picker` |
-| Yes/no, one-of-many, on/off, a value on a scale | `eco-checkbox`, `eco-radio`, `eco-switch`, `eco-range` |
+| Yes/no, one-of-many, several-of-many, on/off, a value on a scale (decide the control first) | `selection-guide` → `eco-radio`, `eco-checkbox`, `eco-chip`, `eco-select`, `eco-switch`; a scale: `eco-range` |
 | Switch between 2–4 views of the same content | `eco-pill-segment-control` |
 | Tabs: sub-navigation, content sections (primary/secondary), e.g. My Pages account nav, or a section nav for a whole page (`tab-bar--page`) | `eco-tabs` |
 | A link (decide the type first) | `links-guide` → `eco-inline-link`, `eco-action-link`, `eco-tile-link` |
 | Where am I / go back up | `eco-breadcrumb` |
 | Load more items into a list | `eco-pagination` |
+| A quantity the user steps up or down (beside add to cart) | `eco-picker-stepper` |
+| A price (card, product page, mini cart, table) | `eco-price` |
+| A row that opens a drawer (shows the chosen value, or leads to more content) | `eco-drawer-link` |
+| A rating shown as stars (product, review), with score and review count | `eco-rating-stars` |
 | A status label or role name (read-only) | `eco-badge` |
 | The active filters above a result list (each with a remove ×) | `eco-tag` |
 | Filters the user selects and unselects, or entered values as removable items | `eco-chip` |

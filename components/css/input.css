@@ -28,7 +28,9 @@
     }
     .input-box--sm, .input-box--xs { height: 32px; padding-right: 6px; } /* 6px: literal, no token */
 
-    .form-input {
+    /* Scoped to .input-box: header partial loads this file on every page, and a bare .form-input reset
+       stripped the border from older page fields (input directly in .input-wrap, no .input-box). */
+    .input-box .form-input {
       flex: 1; min-width: 0; height: 100%; padding: 0; border: 0; outline: 0; border-radius: 0; background: transparent;
       font-family: 'Breuer Condensed', sans-serif; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1;
       font-size: 16px; font-weight: 400; line-height: 22px; letter-spacing: 0.32px; /* body-md (mobile) */
@@ -74,6 +76,13 @@
     .input-box:not(:has(.form-input:not(:placeholder-shown))) :is(.input-actions__clear, .input-actions__divider) { display: none; } /* clear only with a value */
     .input-box:has(.form-input:disabled) .input-actions__btn { cursor: not-allowed; color: var(--color-text-disabled); background: transparent; }
 
+    /* Header search (Figma Header Components > Base / Search Input, 2026-11-05): the same input on a grey fill with no border while
+       enabled, placeholder and typed text as in every input (enabled text-tertiary, active text-primary), divider always visible before the action icons (scan, camera; location on xs). */
+    .input-box--search { background: var(--color-surface-raised-secondary); border-color: transparent; }
+    .input-box--search:is(:hover, [data-state="hover"]) { border-color: var(--color-border-hover); }
+    .input-box--search:is(:focus-within, [data-state="active"]) { border-color: var(--color-border-selected); background: var(--color-surface-raised-primary); }
+    .input-box.input-box--search:not(:has(.form-input:not(:placeholder-shown))) .input-actions__divider { display: block; }
+
     /* Message */
     .form-helper {
       display: flex; align-items: center; gap: var(--dimension-spacing-space-4);
@@ -96,6 +105,6 @@
       .input-box--xs .input-actions { margin-left: var(--dimension-spacing-space-16); }
       .input-box--sm .input-actions__btn { padding: 6px; }                                /* Small is a Button on desktop */
       .input-box--sm .input-actions__btn:hover { background: var(--color-surface-opacity-black-05); color: var(--color-text-action-primary); }
-      .form-input { font-size: 17px; line-height: 24px; }                                 /* body-md */
+      .input-box .form-input { font-size: 17px; line-height: 24px; }                      /* body-md */
       .input-box--sm .form-input, .input-box--xs .form-input { font-size: 14px; line-height: 20px; }
     }

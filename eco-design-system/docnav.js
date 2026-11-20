@@ -21,14 +21,14 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
       label: 'Components', icon: 'palette',
       overview: { id: 'components-overview', t: 'Component Overview', href: D + 'components-overview.html' },
       groups: [
-        { title: 'Actions', items: [c('button', 'Button'), c('button-group', 'Button group')] },
+        { title: 'Actions', items: [c('button', 'Button'), c('button-group', 'Button group'), c('icon-button-compact', 'Compact icon button')] },
         { title: 'Form', items: [c('checkbox', 'Checkbox'), c('chip', 'Chip'), c('input', 'Input'), c('textarea', 'Text area'), c('radio', 'Radio button'), c('select', 'Select'), c('switch', 'Switch'), c('tabs', 'Tabs'), c('segment-control', 'Pill segment control'), c('range', 'Range'), c('icon-picker', 'Icon picker')] },
         { title: 'Notifications', items: [c('notifications', 'Notifications', { children: [c('toast', 'Toast'), c('toast-ecom', 'E-Com Toast'), c('modal', 'Modal'), c('banner', 'Banner'), c('inline', 'Inline notification')] })] },
         { title: 'Menus, lists and dividers', items: [c('menu', 'Menu'), c('list-item', 'List Item'), c('divider', 'Divider')] },
         { title: 'Links', items: [c('links-guide', 'Links', { children: [c('inline-link', 'Inline link'), c('action-link', 'Action link'), c('tile-link', 'Tile link')] })] },
-        { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic'), c('badge-dot', 'Dot'), c('badge-number', 'Number'), c('badge-product-discount', 'Product & Discount'), c('badge-purchase-info', 'Purchase Info')] }), c('breadcrumb', 'Breadcrumb', { children: [c('breadcrumb-base', 'Base')] }), c('pagination', 'Pagination'), c('tag', 'Tag'), c('tooltip', 'Tooltip')] },
+        { title: 'Status and navigation', items: [c('badge', 'Badge', { children: [c('badge-basic', 'Basic badge'), c('badge-dot', 'Dot badge'), c('badge-number', 'Number badge'), c('badge-product-discount', 'Product & Discount badge'), c('badge-purchase-info', 'Purchase Info badge')] }), c('breadcrumb', 'Breadcrumb', { children: [c('breadcrumb-base', 'Base')] }), c('pagination', 'Pagination'), c('tag', 'Tag'), c('tooltip', 'Tooltip')] },
         { title: 'Layout and content', items: [c('section', 'Section'), c('collapsible', 'Collapsible'), c('icon', 'Icon')] },
-        { title: 'Cards', items: [c('cards', 'Cards', { children: [c('ah-group-card-widget-storyblok', 'Article Highlight Group Card', { sb: true }), c('ah-single-row-card-widget', 'Article Highlight Single Row Card')] })] },
+        { title: 'Cards', items: [c('cards', 'Cards', { children: [c('ah-group-card-widget', 'Article Highlight Group Card'), c('ah-single-row-card-widget', 'Article Highlight Single Row Card')] })] },
         { title: 'Patterns', items: [c('patterns-overview', 'Patterns overview'), c('breadcrumb-bar', 'Breadcrumb Bar'), c('hero-banner-widget', 'Hero banner'), { id: 'splash-card-carousel', t: 'Splash card carousel', soon: true }] },
         { title: 'Storyblok widget', items: [c('hero-banner-widget-storyblok', 'Hero banner widget', { sb: true }), c('ah-group-card-widget-storyblok', 'AH Group widget', { sb: true }), c('ah-single-row-card-widget-storyblok', 'AH Single Row widget', { sb: true }), c('collapsible-storyblok', 'Collapsible', { sb: true })] },
         { title: 'Drafts', items: [c('role-tier-card', 'Role tier card')] }
@@ -272,12 +272,12 @@ document.documentElement.classList.add('ds-frame');   // framed layout on every 
       '<div class="dn-lv dn-lv1">' +
         cats.map(function (k) {
           if (NAV[k].direct) return '<a class="dn-mrow" href="' + NAV[k].overview.href + '"' + (cur && cur.cat === k ? ' aria-current="true"' : '') + '><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">' + NAV[k].icon + '</span><span class="dn-mrow__t">' + NAV[k].label + '</span></a>';
-          return '<button class="dn-mrow" type="button" data-cat="' + k + '"' + (cur && cur.cat === k ? ' aria-current="true"' : '') + '><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">' + NAV[k].icon + '</span><span class="dn-mrow__t">' + NAV[k].label + '</span><span class="dn-ms dn-ms--sm" aria-hidden="true">arrow_right_alt</span></button>';
+          return '<button class="dn-mrow" type="button" data-cat="' + k + '"' + (cur && cur.cat === k ? ' aria-current="true"' : '') + '><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">' + NAV[k].icon + '</span><span class="dn-mrow__t">' + NAV[k].label + '</span><span class="dn-ms dn-ms--sm" aria-hidden="true">chevron_right</span></button>';
         }).join('') +
         '<div class="dn-lv1__gap"></div>' +
         '<div class="dn-lv1__tools"><button class="dn-mrow" type="button" data-search><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">search</span><span class="dn-mrow__t">Sök</span></button><hr><button class="dn-dark" type="button" data-dark disabled><span class="dn-ms" aria-hidden="true">dark_mode</span><span>Dark mode</span></button></div>' +
       '</div>' +
-      '<div class="dn-lv dn-lv2"><button class="dn-mrow dn-back" type="button"><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">arrow_back</span><span class="dn-mrow__t">Main menu</span></button><div class="dn-lv2__body"></div></div>' +
+      '<div class="dn-lv dn-lv2"><button class="dn-mrow dn-back" type="button"><span class="dn-ms dn-ms--sm dn-mrow__ico" aria-hidden="true">chevron_left</span><span class="dn-mrow__t">Main menu</span></button><div class="dn-lv2__body"></div></div>' +
     '</nav>';
   while (bar.firstChild) wrap.appendChild(bar.firstChild);
 

@@ -5,6 +5,8 @@ description: Use when building or reviewing a segmented control (pill toggle) fo
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
 
+> **Not sure this is the right control?** Read `selection-guide` first: it picks between Radio button, Checkbox, Chip, Select, Switch and Pill Segment Control by one or several choices and the number and length of the options (rule 2026-11-08).
+
 ## Pill Segment Control (ECO Design System)
 
 **Figma:** https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System?node-id=23144-268049
