@@ -127,7 +127,8 @@ span.badge-basic__icon {
 
 /* Badge/Product and Badge/Discount (Figma node 328:8378): e-commerce only. Label: Breuer Condensed Bold, uppercase, 12/12 mobile,
    14/14 desktop (label-sm). Discount = red; "Closing sale" is a second, black badge beside it (or under it: .badge-promo-stack).
-   Product (Standard assortment, Agreed assortment, Previously purchased) = light grey with a 1px border and a 14px icon. */
+   Product (Standard assortment, Agreed assortment, Previously purchased) = light grey with a 1px border and a 14px icon.
+   Small (.badge-promo--sm, Discount and Closing sale): 12/12 with 3px 5px padding = 18px high from 769px (the default is 22px there); not for Product. */
 .badge-promo {
   display: inline-flex;
   align-items: center;
@@ -154,6 +155,7 @@ svg.badge-promo__icon { fill: currentColor; }   /* Figma: custom icons verified 
 @media (min-width: 769px) {
   .badge-promo { padding: 4px 5px; font-size: 14px; line-height: 14px; letter-spacing: 0.56px; }
   .badge-promo--product { padding: 4px 5px; }
+  .badge-promo--sm { padding: 3px 5px; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; }   /* Small (Figma 25276:76303): 18px high; desktop only, below 769px it is the same as the default */
 }
 
 /* Badge/Purchase Info (Figma "Good buy" 459:19071 and "Good to know" 4518:196348): a badge with a beak (arrow) pointing at an explanation.
