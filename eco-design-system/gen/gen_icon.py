@@ -9,7 +9,7 @@ from build import *
 
 SLUG = 'icon'
 FIGMA = 'https://www.figma.com/design/42MgqJjV9vfplwQnrUB62r/ECO-Design-System'
-BADGE = '<span class="badge-basic badge-basic--warning badge-basic--weak" title="The library categories and the size examples are proposals.">In progress</span>'
+BADGE = ''
 
 
 # ---------------------------------------------------------------- data

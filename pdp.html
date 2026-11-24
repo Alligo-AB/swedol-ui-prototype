@@ -2281,6 +2281,18 @@
     .sd-info .collapsible-item__label { font-size: 16px; line-height: 22px; letter-spacing: 0; }   /* Figma: 16/22 mobile, 16/24 from 769px (not the Large 18/22 -> 20/24) */
     .sd-info .collapsible-item__content p + p { margin-top: var(--dimension-spacing-space-16); }
     .sd-info .collapsible-item__content .action-link { margin-top: var(--dimension-spacing-space-16); }
+    /* ── Size drawer (Figma Drawer Desktop - Sizes 1930:345788, mobile 162:36613): heading row + one framed row per variant; selected = 2px frame; no footer ── */
+    .sz-head { display: flex; justify-content: space-between; margin: 0 0 var(--dimension-spacing-space-16); font: 600 14px/14px 'Breuer Condensed', Arial, sans-serif; letter-spacing: 0.48px; text-transform: uppercase; color: var(--color-text-tertiary); }   /* label-md 14/14, 16/16 from 769px */
+    .sz-list { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); margin: 0; padding: 0; list-style: none; }
+    .sz-row { display: flex; align-items: center; justify-content: space-between; gap: var(--dimension-spacing-space-8); width: 100%; padding: var(--dimension-spacing-space-16); cursor: pointer; text-align: left;
+      background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary); font: 400 16px/22px 'Breuer Condensed', Arial, sans-serif; letter-spacing: 0.32px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; color: var(--color-text-secondary); }
+    .sz-row b { font-weight: 600; color: var(--color-text-primary); }
+    .sz-row:hover { border-color: var(--color-border-hover); }
+    .sz-row--color { padding-block: 15px; }   /* 80px row incl. 1px borders (Figma) */
+    .sz-row--color img { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }   /* swatch 48px, name right-aligned (Figma Picker - Color) */
+    .sz-row--color.is-selected span { color: var(--color-text-primary); }
+    .sz-row.is-selected, .sz-row.is-selected:hover { border-color: var(--color-border-selected); box-shadow: inset 0 0 0 1px var(--color-border-selected); }
+    @media (min-width: 769px) { .sz-head { font-size: 16px; line-height: 16px; } }
     .sd-footer { display: flex; gap: var(--dimension-spacing-space-8); }
     .sd-footer .btn { flex: 1 1 0; min-width: 0; }
     .sd-head-info { flex-direction: column; align-items: stretch; gap: var(--dimension-spacing-space-12, 12px); }
@@ -2842,8 +2854,8 @@
 
           <!-- Fler alternativ / Go to alternative model (Figma UI---1.1 Desktop 1213:137642, Tablet 1719:55199, Mobile 1709:42550). Mock: Svart = this product (275072599), Blå = 275072567 on swedol.se -->
           <div class="pdp-alt" role="radiogroup" aria-labelledby="pdp-alt-label">
-            <!-- The whole head opens the colour drawer (not built); hover underlines the label -->
-            <button type="button" class="pdp-alt__head" aria-haspopup="dialog" aria-label="Alla färgalternativ">
+            <!-- The whole head opens the colour drawer #cz (Figma Drawer Desktop - colors 1282:36848, mobile 8400:79677); hover underlines the label -->
+            <button type="button" class="pdp-alt__head" id="pdp-alt-open" aria-haspopup="dialog" aria-label="Alla färgalternativ">
               <span class="drawer-link__label" id="pdp-alt-label">Fler alternativ</span>
               <span class="pdp-alt__row">
                 <span class="drawer-link__value" id="pdp-alt-value">Svart</span>
@@ -2866,8 +2878,8 @@
                   <span class="action-link__icon" aria-hidden="true">open_in_new</span>
                 </a>
               </div>
-              <!-- Opens the size drawer (Figma "Drawer Desktop - Sizes" 5096:357067): not built yet -->
-              <button type="button" class="drawer-link__row" aria-labelledby="pdp-size-label pdp-size-value" aria-haspopup="dialog">
+              <!-- Opens the size drawer #sz (Figma Drawer Desktop - Sizes 1930:345788, mobile 162:36613) -->
+              <button type="button" class="drawer-link__row" id="pdp-size-open" aria-labelledby="pdp-size-label pdp-size-value" aria-haspopup="dialog">
                 <span class="drawer-link__value" id="pdp-size-value">C44 - 275072599-44</span>
                 <span class="icon icon--sm" aria-hidden="true">chevron_right</span>
               </button>
@@ -2922,7 +2934,7 @@
                   <span class="divider divider--tertiary divider--vertical pdp-stock__sep" aria-hidden="true"></span>
                   <p class="pdp-stock__text">Öppet idag: Kl. 06:30 - 17:00</p>
                 </div>
-                <a href="#" class="action-link action-link--medium" id="pdp-stores-link" aria-haspopup="dialog" aria-controls="sd">
+                <a href="#" class="action-link action-link--medium action-link--weight-medium" id="pdp-stores-link" aria-haspopup="dialog" aria-controls="sd">
                   <span class="action-link__label">Tillgänglig i 12 butiker</span>
                   <span class="action-link__icon" aria-hidden="true">chevron_right</span>
                 </a>
@@ -3168,6 +3180,79 @@
       xhr.send(null);
       return xhr.responseText;
     })());
+  </script>
+
+  <!-- ══ COLOUR DRAWER (Figma Drawer Desktop - colors 1282:36848, mobile 8400:79677, states 1271:64070) ══ -->
+  <div class="drawer-overlay" id="cz-overlay"></div>
+  <div class="drawer-panel" id="cz" role="dialog" aria-modal="true" aria-labelledby="cz-title" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-header__content"><h2 class="drawer-title" id="cz-title">Alternativ</h2></div>
+      <button type="button" class="drawer-close-btn" data-cz-close aria-label="Stäng"><span class="ms">close</span></button>
+    </div>
+    <div class="drawer-content" id="cz-scroll" style="gap:0">
+      <ul class="sz-list" id="cz-list"></ul>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var cz = document.getElementById('cz'), list = document.getElementById('cz-list'), opener = null;
+      function inputs() { return [].slice.call(document.querySelectorAll('input[name="pdp-alt"]')); }
+      function render() {
+        list.innerHTML = inputs().map(function (i) {
+          return '<li><button type="button" class="sz-row sz-row--color' + (i.checked ? ' is-selected' : '') + '" data-color="' + i.value + '"' + (i.checked ? ' aria-current="true"' : '') + '><img src="' + i.closest('label').querySelector('img').getAttribute('src') + '" alt=""><span>' + i.value + '</span></button></li>';
+        }).join('');
+      }
+      function lock(on) { var de = document.documentElement; if (on) { var sw = innerWidth - de.clientWidth; de.style.overflow = 'hidden'; document.body.style.paddingRight = sw ? sw + 'px' : ''; } else { de.style.overflow = ''; document.body.style.paddingRight = ''; } }
+      function open() { lock(true); opener = document.activeElement; render(); document.getElementById('cz-overlay').classList.add('is-open'); cz.classList.add('is-open'); cz.setAttribute('aria-hidden', 'false'); setTimeout(function () { (list.querySelector('.is-selected') || cz.querySelector('.drawer-close-btn')).focus(); }, 0); }
+      function close() { lock(false); document.getElementById('cz-overlay').classList.remove('is-open'); cz.classList.remove('is-open'); cz.setAttribute('aria-hidden', 'true'); if (opener && opener.focus) opener.focus(); }
+      document.addEventListener('click', function (e) {
+        if (e.target.closest('#pdp-alt-open')) { open(); return; }
+        if (e.target.closest('#cz-overlay, [data-cz-close]')) { close(); return; }
+        var b = e.target.closest('.sz-row--color'); if (b && cz.contains(b)) {
+          close();
+          var i = inputs().filter(function (x) { return x.value === b.dataset.color; })[0];
+          if (i && !i.checked) { i.checked = true; i.dispatchEvent(new Event('change', { bubbles: true })); }   /* same path as clicking the tile */
+        }
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && cz.classList.contains('is-open')) { e.stopImmediatePropagation(); close(); } }, true);
+      var c = document.getElementById('cz-scroll'), h = cz.querySelector('.drawer-header');
+      c.addEventListener('scroll', function () { h.classList.toggle('drawer-header--elevated', c.scrollTop > 0); });
+    })();
+  </script>
+
+  <!-- ══ SIZE DRAWER (Figma Drawer Desktop - Sizes 1930:345788, mobile 162:36613) ══ -->
+  <div class="drawer-overlay" id="sz-overlay"></div>
+  <div class="drawer-panel" id="sz" role="dialog" aria-modal="true" aria-labelledby="sz-title" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-header__content"><h2 class="drawer-title" id="sz-title">Välj din storlek</h2></div>
+      <button type="button" class="drawer-close-btn" data-sz-close aria-label="Stäng"><span class="ms">close</span></button>
+    </div>
+    <div class="drawer-content" id="sz-scroll" style="gap:0">
+      <div class="sz-head"><span>Storlek</span><span>Artikelnummer</span></div>
+      <ul class="sz-list" id="sz-list"></ul>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var sz = document.getElementById('sz'), list = document.getElementById('sz-list'), opener = null;
+      function render() {
+        var rows = window.PDP_VARIANTS || [];
+        list.innerHTML = rows.map(function (r) {
+          return '<li><button type="button" class="sz-row' + (r.current ? ' is-selected' : '') + '" data-art="' + r.art + '"' + (r.current ? ' aria-current="true"' : '') + '><b>' + r.size + '</b><span>' + r.art + '</span></button></li>';
+        }).join('');
+      }
+      function lock(on) { var de = document.documentElement; if (on) { var sw = innerWidth - de.clientWidth; de.style.overflow = 'hidden'; document.body.style.paddingRight = sw ? sw + 'px' : ''; } else { de.style.overflow = ''; document.body.style.paddingRight = ''; } }
+      function open() { lock(true); opener = document.activeElement; render(); document.getElementById('sz-overlay').classList.add('is-open'); sz.classList.add('is-open'); sz.setAttribute('aria-hidden', 'false'); setTimeout(function () { (list.querySelector('.is-selected') || sz.querySelector('.drawer-close-btn')).focus(); }, 0); }
+      function close() { lock(false); document.getElementById('sz-overlay').classList.remove('is-open'); sz.classList.remove('is-open'); sz.setAttribute('aria-hidden', 'true'); if (opener && opener.focus) opener.focus(); }
+      document.addEventListener('click', function (e) {
+        if (e.target.closest('#pdp-size-open')) { open(); return; }
+        if (e.target.closest('#sz-overlay, [data-sz-close]')) { close(); return; }
+        var b = e.target.closest('.sz-row'); if (b && sz.contains(b)) { close(); if (window.PDP_SELECT) PDP_SELECT(b.dataset.art); }
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && sz.classList.contains('is-open')) { e.stopImmediatePropagation(); close(); } }, true);
+      var c = document.getElementById('sz-scroll'), h = sz.querySelector('.drawer-header');
+      c.addEventListener('scroll', function () { h.classList.toggle('drawer-header--elevated', c.scrollTop > 0); });
+    })();
   </script>
 
   <!-- ══ STORE STATUS + STORE INFO DRAWER (Figma 3009:96108 / 4561:26255, mobile 5042:51207 / 4588:27379) ══ -->
@@ -3989,6 +4074,7 @@
           if (q('#pdp-title')) q('#pdp-title').focus({ preventScroll: true });   /* keyboard users land on the heading, not in the table */
         }
       }
+      window.PDP_SELECT = function (art) { var r = rows.filter(function (x) { return x.art === art; })[0]; if (r) { select(r, false); history.replaceState(null, '', '?variant=' + r.art); } };   /* used by the size drawer */
       /* No variant chosen (?variant=none): "Från" + lowest price, no article numbers, empty size row, the buy button asks for a size */
       function selectNone() {
         var q = function (sel) { return document.querySelector(sel); };
