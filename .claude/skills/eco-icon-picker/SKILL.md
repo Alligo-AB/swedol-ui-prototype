@@ -1,6 +1,6 @@
 ---
 name: eco-icon-picker
-description: Use when a field must hold a Material Symbols icon name (icon for a banner, notification, menu item, tile, category, button content in a prototype, back-office form or docs playground) — click/Tab into the field and a panel opens on top of it with instant search over all ~6,100 icons, Recent and Popular. Not for showing an icon (use the `material-symbols-outlined` span) and not for choosing between a few fixed options (use eco-select or eco-radio).
+description: Use when a field must hold a Material Symbols icon name (icon for a banner, notification, menu item, tile, category, button content in a prototype, back-office form or docs playground) — click/Tab into the field and a panel opens on top of it with instant search over all about 4,250 icons, Recent and Popular. Not for showing an icon (use the `material-symbols-outlined` span) and not for choosing between a few fixed options (use eco-select or eco-radio).
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, breakpoints and the quality checklist that always applies on top of this spec.
