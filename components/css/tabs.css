@@ -91,6 +91,11 @@
 .tab-bar[data-slide] .tab.tab--arriving::after { display: block; background: var(--tab-ind-hover); transform: scaleY(1); }
 /* Page change: tabs.js sets html.tabs-arrive while the head is parsed, so the new current tab shows grey (not its active colour) before the script has run */
 html.tabs-arrive .tab-bar .tab[aria-current]::after { display: block; background: var(--tab-ind-hover); transform: scaleY(1); }
+/* Secondary: the hover line is as high as the active line (2px), not the primary 3px */
+.tab-bar--secondary .tab:is(:hover, [data-state="hover"]):not(.tab--active, [aria-selected="true"], [aria-current])::after,
+.tab-bar--secondary .tab--pending:not(.tab--active, [aria-selected="true"], [aria-current])::after,
+.tab-bar--secondary.tab-bar[data-slide] .tab.tab--arriving::after,
+html.tabs-arrive .tab-bar--secondary.tab-bar .tab[aria-current]::after { transform: scaleY(0.6667); }
 @media (prefers-reduced-motion: reduce) { .tab-bar__indicator.is-ready { transition: none; } }
 
 /* Icon only: the line sits under the icon; gap 12px on desktop Large/Medium, else 8px */

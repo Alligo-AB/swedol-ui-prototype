@@ -173,7 +173,7 @@ JS_EX = JS_SAMPLE + r'''
   var pg = { size: 'small', label: 'off', variant: 'destructive' };
   function pgOpts() { return { size: pg.size, label: pg.label === 'on' ? 'Address book' : '', title: $('#pg-title').value, body: $('#pg-body').value, cancel: $('#pg-cancel').value, confirm: $('#pg-ok').value, destructive: pg.variant === 'destructive' }; }
   var PG_TXT = {
-    small: { primary: ['Clear your cart?', 'All products are removed from your cart.', 'Clear cart'], destructive: ['Delete this address?', 'The address is removed from your address book. You cannot undo this.', 'Delete address'] },
+    small: { primary: ['Change store?', 'Your cart is moved to the new store. Prices and stock may change.', 'Change store'], destructive: ['Delete this address?', 'The address is removed from your address book. You cannot undo this.', 'Delete address'] },
     large: { primary: [SIZES[1][2], SIZES[1][3], 'Accept'], destructive: ['Delete your account?', 'Your orders, addresses, saved lists and invoices are deleted. Open orders are cancelled and your company users lose access to My Pages. You cannot undo this, and we cannot restore the data afterwards.', 'Delete account'] } };
   var pgLast = 'small';
   var PG_LARGE_NOTE = '<b>Large</b> is for tasks that need a work area: long text to read, a choice or input. Desktop: 705px wide, centered. Tablet (640–768px): 576px wide, centered. Mobile (below 640px): fills the whole screen (100dvh), the content scrolls and the buttons are pinned to the bottom. Choose <b>Mobile</b> under Breakpoint to see it.';

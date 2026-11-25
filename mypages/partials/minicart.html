@@ -1,0 +1,213 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     GLOBAL PARTIAL — Mini cart drawer (Varukorg)
+     Enda källan för minicart: CSS, markup och JS. Hör till headern, så header.html laddar
+     in den här partialen själv (synkron XHR, sist i header.html, efter search-panel):
+     varje sida som har headern har också minicart. Header-knapparna med aria-label="Kundvagn"
+     öppnar den, badgen på dem följer antalet.
+     Figma ECO Design System: Desktop 25247:113997, Mobile 1313:50093,
+     Details expanded Desktop 25229:62052, Mobile 25229:62137.
+     API: window.ECO_MINICART = { items, setQty, remove, clear, patch (cart page), open, close, add({ id, name, desc, img, price, old, qty, max }) -> { added, inCart, capped }, count(), qty(id) }
+     Startar tom. sessionStorage ('eco-minicart'). Priser exkl. moms, moms 25 %.
+═══════════════════════════════════════════════════════════════ -->
+<script>
+  /* Link the component CSS only when the page does not have it already (a link added here would come after the page's own <style>). */
+  ['button', 'picker-stepper', 'switch', 'action-link', 'icon', 'price', 'icon-button-compact'].forEach(function (n) {
+    if (!document.querySelector('link[href*="/components/css/' + n + '.css"]')) document.write('<link rel="stylesheet" href="/components/css/' + n + '.css">');
+  });
+  if (!window.ECO_PICKER_STEPPER) document.write('<script src="/components/js/picker-stepper.js"><\/script>');
+</script>
+<style>
+/* ══ MINI CART (Figma 25247:113997 / 1313:50093) — Drawers rule: 500px panel, header 24/32 (16/24 below 769px), footer 24/32 (16/24) ══ */
+  .mc-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity var(--duration-medium-2) var(--ease-standard); }
+  .mc-overlay.is-open { opacity: 1; pointer-events: all; }
+  .mc { position: fixed; top: 0; right: 0; z-index: 1001; width: min(500px, 100%); height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden;
+    background: var(--color-surface-raised-primary); transform: translateX(100%); visibility: hidden;
+    transition: transform var(--duration-medium-3) var(--ease-decelerate-emphasized), visibility 0s linear var(--duration-medium-3); }
+  .mc.is-open { transform: translateX(0); visibility: visible; box-shadow: var(--shadow-elevation-drawer-right); transition-delay: 0s; }
+
+  .mc__head { position: relative; z-index: 1; flex-shrink: 0; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); padding: 16px 24px; transition: box-shadow var(--duration-fast-3) var(--ease-standard); }
+  .mc__head.is-elevated { box-shadow: var(--shadow-elevation-b-60); }
+  .mc__title-row { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
+  .mc__title { flex: 1; min-width: 0; margin: 0; display: flex; align-items: center; gap: var(--dimension-spacing-space-8);
+    font-size: 22px; line-height: 22px; font-weight: 600; text-transform: uppercase; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* display-sm */
+  .mc__title .icon { --icon-size: 20px; --icon-opsz: 20; flex-shrink: 0; }
+  .mc__close { flex-shrink: 0; width: 40px; height: 40px; margin: 0 -8px 0 0; padding: 8px; display: flex; align-items: center; justify-content: center; border: 0; background: none; color: var(--color-icon-primary); cursor: pointer; }
+  .mc__close:hover { background: var(--color-surface-opacity-black-05); }
+  .mc__close:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 0; }
+  .mc__vat { color: var(--color-text-tertiary); }
+
+  .mc__body { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 24px 24px; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); }
+  /* Scrollbar as Figma Vertical Scroll Bar - States (1313:50092): 16px track surface-02 with border-primary sides, 8px bar surface-30 radius 4px; sits at the drawer edge, the 32px padding stays between it and the items */
+  .mc__body::-webkit-scrollbar { width: 16px; }
+  .mc__body::-webkit-scrollbar-track { background: var(--color-surface-02); border-inline: 1px solid var(--color-border-primary); }
+  .mc__body::-webkit-scrollbar-thumb { background: var(--color-surface-30); background-clip: content-box; border: 4px solid transparent; border-radius: 8px; }   /* 4px transparent border = 8px visible bar */
+  @supports not selector(::-webkit-scrollbar) { .mc__body { scrollbar-width: thin; scrollbar-color: var(--color-surface-30) var(--color-surface-02); } }
+  .mc__empty { margin: 0; padding: var(--dimension-spacing-space-32) 0; text-align: center; font-size: 16px; line-height: 22px; color: var(--color-text-secondary); }
+  .mc__empty[hidden], .mc__foot[hidden] { display: none; }
+
+  #mc-items { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); }
+  .mc-item { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); border-bottom: 1px solid var(--color-border-primary); }
+  .mc-item__top { display: flex; align-items: flex-start; gap: 12px; }   /* 12px: Figma, no spacing token */
+  .mc-item__main { flex: 1; min-width: 0; display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-16); }
+  .mc-item__img { width: 40px; height: 40px; flex-shrink: 0; object-fit: contain; }
+  .mc-item__text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .mc-item__name { margin: 0; font-size: 16px; line-height: 18px; font-weight: 600; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* title-sm */
+  .mc-item__desc { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }   /* body-md */
+  .mc .picker-stepper { --ps-size: 40px; --ps-unit-fs: 10px; --ps-unit-ls: 0.3px; --ps-unit-bottom: var(--dimension-spacing-space-2); }   /* Figma: 40px cells at every width, unit "st" always shown */
+  .mc .picker-stepper .picker-stepper__unit { display: block; }
+  .mc-item__bottom { display: flex; align-items: center; gap: 28px; padding: 0 0 var(--dimension-spacing-space-16) 56px; }   /* 56 = image 40 + gap 16; 28px: Figma */
+  .mc .price--mini .price__old { color: var(--color-text-tertiary); }
+  .mc-item__sum { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: flex-end; }
+  .mc-item__total { flex: 1; text-align: right; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-weight: 600; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+  .mc-item__del { display: flex; padding: 4px 8px 6px; }   /* Figma: 20px icon, 8px sides */
+
+  .mc__foot { position: relative; z-index: 1; flex-shrink: 0; padding: 16px 24px; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); background: var(--color-surface-raised-primary); transition: box-shadow var(--duration-fast-3) var(--ease-standard); }
+  .mc__foot.is-elevated { box-shadow: var(--shadow-elevation-t-60); }   /* only while content continues below the footer edge */
+  .mc__sums { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--duration-medium-2) var(--ease-standard); }
+  .mc__sums.is-open { grid-template-rows: 1fr; }
+  .mc__sums > div { overflow: hidden; }
+  .mc__sums ul { margin: 0; padding: 0 0 var(--dimension-spacing-space-12); list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-4); }
+  .mc__line { display: flex; align-items: flex-end; gap: var(--dimension-spacing-space-8); font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+  .mc__line > :first-child { flex: 1; min-width: 0; }
+  .mc__line > :last-child { white-space: nowrap; }
+  .mc__line--disc > :last-child { color: var(--color-text-price-guest); }
+  .mc__total { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); color: var(--color-text-primary); font-size: 20px; line-height: 26px; font-weight: 600; font-feature-settings: 'ss02' 1, 'ss03' 1; }   /* body-xl bold */
+  .mc__total-l { flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
+  .mc__total-v { white-space: nowrap; }
+  .mc__toggle .icon { transition: transform var(--duration-fast-3) var(--ease-standard); }
+  .mc__toggle[aria-expanded="true"] .icon { transform: rotate(180deg); }
+  .mc__disc { padding-bottom: var(--dimension-spacing-space-8); margin-top: var(--dimension-spacing-space-4); }
+  .mc__btns { display: flex; gap: var(--dimension-spacing-space-8); }
+  .mc__btns .btn { flex: 1; min-width: 0; --btn-h: 40px; --btn-fs: 16px; --btn-lh: 16px; --btn-ls: 0.32px; }   /* Figma xs/sm: Medium label-lg, 40px */
+  @media (prefers-reduced-motion: reduce) { .mc, .mc-overlay, .mc__sums, .mc__toggle .icon { transition: none; } }
+
+  @media (min-width: 769px) {
+    .mc__head { padding: 24px 32px; }
+    .mc__title { font-size: 26px; line-height: 26px; }
+    .mc__title .icon { --icon-size: 24px; --icon-opsz: 24; }
+    .mc__close { margin-right: -8px; }
+    .mc__body { padding: 24px 32px 32px; }
+    .mc-item__name { font-size: 17px; line-height: 20px; }
+    .mc-item__desc, .mc-item__total, .mc__line { font-size: 17px; line-height: 24px; }
+    .mc .price--mini { font-size: 17px; line-height: 24px; }
+    .mc__foot { padding: 24px 32px; }
+    .mc__total { font-size: 24px; line-height: 32px; }
+    .mc__btns .btn { --btn-fs: 16px; --btn-lh: 16px; --btn-ls: 0.48px; }   /* Figma md+: Small label-md, 40px */
+  }
+</style>
+
+<div class="mc-overlay" id="mc-overlay"></div>
+<aside class="mc" id="mc" role="dialog" aria-modal="true" aria-labelledby="mc-title" aria-hidden="true">
+  <div class="mc__head">
+    <div class="mc__title-row">
+      <h2 class="mc__title" id="mc-title"><span class="icon" aria-hidden="true">shopping_cart</span><span>Varukorg (<span id="mc-count">0</span>)</span></h2>
+      <button type="button" class="mc__close" data-mc-close aria-label="Stäng"><span class="icon" aria-hidden="true">close</span></button>
+    </div>
+    <label class="form-switch-item form-switch-item--xs mc__vat"><input type="checkbox" role="switch" id="mc-vat"><span>Visa priser inklusive moms</span></label>
+  </div>
+  <div class="mc__body" id="mc-body">
+    <p class="mc__empty" id="mc-empty" hidden>Din varukorg är tom.</p>
+    <div id="mc-items"></div>
+  </div>
+  <div class="mc__foot" id="mc-foot">
+    <div>
+      <div class="mc__sums" id="mc-sums"><div><ul>
+        <li class="mc__line"><span>Summa varukorg</span><span id="mc-sub"></span></li>
+        <li class="mc__line"><span>Frakt</span><span id="mc-ship"></span></li>
+        <li class="mc__line"><span>Moms</span><span id="mc-vatv"></span></li>
+      </ul></div></div>
+      <div class="mc__total">
+        <div class="mc__total-l"><span>Ordertotal</span>
+          <button type="button" class="action-link action-link--small mc__toggle" id="mc-toggle" aria-expanded="false" aria-controls="mc-sums"><span class="action-link__label" id="mc-toggle-l">Visa detaljer</span><span class="icon icon--sm action-link__icon" aria-hidden="true">expand_more</span></button>
+        </div>
+        <span class="mc__total-v" id="mc-total"></span>
+      </div>
+      <div class="mc__line mc__line--disc mc__disc" id="mc-disc"><span>Sammanlagd rabatt</span><span id="mc-discv"></span></div>
+    </div>
+    <div class="mc__btns">
+      <a class="btn btn--secondary btn--sm" href="/cart.html"><span class="btn__label">Visa varukorg</span></a>
+      <a class="btn btn--primary btn--sm" href="/checkout.html"><span class="btn__label">Gå till kassan</span><span class="icon btn__icon" aria-hidden="true">chevron_right</span></a>
+    </div>
+  </div>
+</aside>
+
+<script>
+(function () {
+  var KEY = 'eco-minicart-v2', VAT = 0.25, SHIP = 99;
+  var items; try { items = JSON.parse(sessionStorage.getItem(KEY)); } catch (e) {}
+  if (!Array.isArray(items)) items = [];   /* starts empty */
+
+  var $ = function (id) { return document.getElementById(id); };
+  var mc = $('mc'), opener = null, inclVat = false;
+  function kr(n) { return n.toLocaleString('sv-SE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\s/g, ' ') + ' kr'; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function count() { return items.reduce(function (n, i) { return n + i.qty; }, 0); }
+  function save() { try { sessionStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} document.dispatchEvent(new CustomEvent('eco-cart-change')); }
+
+  function render() {
+    var f = inclVat ? 1 + VAT : 1, sub = 0, disc = 0;
+    $('mc-items').innerHTML = items.map(function (i, n) {
+      sub += i.price * i.qty; if (i.old) disc += (i.old - i.price) * i.qty;
+      var sale = i.old && i.old > i.price;
+      return '<div class="mc-item" data-i="' + n + '"><div class="mc-item__top"><div class="mc-item__main"><img class="mc-item__img" src="' + esc(i.img) + '" alt="">' +
+        '<div class="mc-item__text"><p class="mc-item__name">' + esc(i.name) + '</p><p class="mc-item__desc">' + esc(i.desc) + '</p></div></div>' +
+        '<div class="picker-stepper" role="group" aria-label="Antal, ' + esc(i.name) + '"><button type="button" class="picker-stepper__btn" data-step="-1" aria-label="Minska antal"' + (i.qty <= 1 ? ' disabled' : '') + '><span class="icon icon--sm" aria-hidden="true">remove</span></button>' +
+        '<div class="picker-stepper__value"><input class="picker-stepper__input" type="text" inputmode="numeric" pattern="[0-9]*" value="' + i.qty + '" min="1" max="' + (i.max || 999) + '" aria-label="Antal, styck" autocomplete="off"><span class="picker-stepper__unit" aria-hidden="true">st</span></div>' +
+        '<button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"><span class="icon icon--sm" aria-hidden="true">add</span></button></div></div>' +
+        '<div class="mc-item__bottom"><div class="price price--mini' + (sale ? ' price--sale' : '') + '">' + (sale ? '<span class="price__old"><s>' + kr(i.old * f) + '</s></span>' : '') + '<span class="price__value">' + kr(i.price * f) + '</span></div>' +
+        '<div class="mc-item__sum"><span class="mc-item__total">' + kr(i.price * i.qty * f) + '</span><button type="button" class="icon-btn-compact mc-item__del" data-del aria-label="Ta bort ' + esc(i.name) + '"><span class="icon icon--sm" aria-hidden="true">delete</span></button></div></div></div>';
+    }).join('');
+    var ship = items.length ? SHIP : 0, vat = (sub + ship) * VAT;
+    $('mc-count').textContent = count();
+    $('mc-empty').hidden = items.length > 0; $('mc-foot').hidden = items.length === 0;
+    $('mc-sub').textContent = kr(sub); $('mc-ship').textContent = kr(ship); $('mc-vatv').textContent = kr(vat);
+    $('mc-total').textContent = kr(sub + ship + vat);
+    $('mc-disc').hidden = disc <= 0; $('mc-discv').textContent = kr(disc);
+    document.querySelectorAll('.icon-btn[aria-label="Kundvagn"] .badge, .sh-sm__icon-btn[aria-label="Kundvagn"] .badge').forEach(function (b) { b.textContent = count(); b.style.display = count() ? '' : 'none'; });
+    save(); shade();
+  }
+  function shade() { var b = $('mc-body'); $('mc-foot').classList.toggle('is-elevated', b.scrollHeight - b.scrollTop - b.clientHeight > 1); }
+
+  function lock(on) { var de = document.documentElement; if (on) { var sw = innerWidth - de.clientWidth; de.style.overflow = 'hidden'; document.body.style.paddingRight = sw ? sw + 'px' : ''; } else { de.style.overflow = ''; document.body.style.paddingRight = ''; } }
+  function open() { if (mc.classList.contains('is-open')) return; opener = document.activeElement; render(); lock(true); $('mc-overlay').classList.add('is-open'); mc.classList.add('is-open'); mc.setAttribute('aria-hidden', 'false'); shade(); setTimeout(function () { mc.querySelector('.mc__close').focus(); }, 0); }
+  function close() { if (!mc.classList.contains('is-open')) return; lock(false); $('mc-overlay').classList.remove('is-open'); mc.classList.remove('is-open'); mc.setAttribute('aria-hidden', 'true'); if (opener && opener.focus) opener.focus(); }
+  /* add({ id, name, desc, img, price, old, qty, max }): max = the most the buyer may have in the cart (stock limit); the quantity is cut to what is left.
+     Returns { added, inCart, capped } so the page can say so. */
+  function add(o) {
+    var q = Math.max(1, parseInt(o.qty, 10) || 1), hit = items.filter(function (i) { return i.id === o.id; })[0], max = o.max > 0 ? o.max : 0, have = hit ? hit.qty : 0, capped = false;
+    if (max && have + q > max) { q = Math.max(0, max - have); capped = true; }
+    var extra = {}; Object.keys(o).forEach(function (k) { if (['id', 'name', 'desc', 'img', 'price', 'old', 'qty', 'max'].indexOf(k) < 0) extra[k] = o[k]; });   /* cart-page fields: sku, size, stock, stock2, note, split, store ... */
+    if (q > 0) { if (hit) { hit.qty += q; hit.max = max || hit.max; Object.assign(hit, extra); } else items.push(Object.assign({ id: o.id, name: o.name, desc: o.desc || '', img: o.img || '', price: o.price || 0, old: o.old || 0, qty: q, max: max }, extra)); }
+    render();
+    return { added: q, inCart: have + q, capped: capped };
+  }
+  function qtyOf(id) { var h = items.filter(function (i) { return i.id === id; })[0]; return h ? h.qty : 0; }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[aria-label="Kundvagn"]')) { e.preventDefault(); if (!window.ECO_CART_PAGE) open(); return; }   /* cart page: already here */
+    if (e.target.closest('#mc-overlay, [data-mc-close]')) { close(); return; }
+    if (e.target.closest('#mc-toggle')) { var t = $('mc-toggle'), on = t.getAttribute('aria-expanded') !== 'true'; t.setAttribute('aria-expanded', on); $('mc-sums').classList.toggle('is-open', on); $('mc-toggle-l').textContent = on ? 'Dölj detaljer' : 'Visa detaljer'; setTimeout(shade, 300); return; }
+    var del = e.target.closest('[data-del]'); if (del && mc.contains(del)) { items.splice(+del.closest('.mc-item').dataset.i, 1); render(); }
+  });
+  document.addEventListener('change', function (e) {
+    if (e.target.id === 'mc-vat') { inclVat = e.target.checked; render(); return; }
+    if (e.target.matches('#mc .picker-stepper__input')) { var it = items[+e.target.closest('.mc-item').dataset.i]; if (it) { it.qty = parseInt(e.target.value, 10) || 1; render(); } }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!mc.classList.contains('is-open')) return;
+    if (e.key === 'Escape') { e.stopImmediatePropagation(); close(); return; }
+    if (e.key === 'Tab') { var f = [].filter.call(mc.querySelectorAll('button, a[href], input'), function (x) { return !x.disabled && x.offsetParent !== null; }); if (!f.length) return; var a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
+  }, true);
+  $('mc-body').addEventListener('scroll', shade);
+  addEventListener('resize', shade);
+  $('mc-body').addEventListener('scroll', function () { $('mc-body').previousElementSibling.classList.toggle('is-elevated', $('mc-body').scrollTop > 0); });
+
+  /* items(): live list for the cart page; setQty / remove / clear change it and re-render (fires 'eco-cart-change' on document). */
+  function setQty(id, q) { var h = items.filter(function (i) { return i.id === id; })[0]; if (!h) return; h.qty = Math.max(1, Math.min(h.max || 999, q)); render(); }
+  function remove(id) { items = items.filter(function (i) { return i.id !== id; }); render(); }
+  function clear() { items = []; render(); }
+  function patch(id, o) { var h = items.filter(function (i) { return i.id === id; })[0]; if (h) { Object.assign(h, o); render(); } }
+  window.ECO_MINICART = { open: open, close: close, add: add, count: count, qty: qtyOf, items: function () { return items; }, setQty: setQty, remove: remove, clear: clear, patch: patch };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render); else render();
+})();
+</script>

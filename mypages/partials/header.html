@@ -216,3 +216,13 @@
     return xhr.responseText;
   })());
 </script>
+
+<!-- Mini cart drawer (part of the header): same loading as the search panel. -->
+<script>
+  document.write((function () {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/mypages/partials/minicart.html?v=' + Date.now(), false);
+    xhr.send(null);
+    return xhr.responseText;
+  })());
+</script>
