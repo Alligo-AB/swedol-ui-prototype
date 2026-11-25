@@ -3817,10 +3817,20 @@
   </script>
 
   <script>
+    /* PDP: add to cart -> mini cart (mypages/partials/minicart.html) + E-Com toast whose button opens the drawer.
+       o: { name, text, img, qty, size (variant size, e.g. C46), el (card element to read the price from), secondary } */
+    window.pdpAddToCart = function (o) {
+      var num = function (t) { var v = parseFloat(String(t || '').replace(/[^\d,]/g, '').replace(',', '.')); return isNaN(v) ? 0 : v; };
+      var rows = window.PDP_VARIANTS || [], r = o.size ? rows.filter(function (x) { return x.size === o.size; })[0] : rows.filter(function (x) { return x.current; })[0];
+      var price = r ? r.price : 0, old = r && r.sale ? num(r.sale.old) : 0, desc = r ? 'Art.nr ' + r.art : '';
+      if (o.el) { var pv = o.el.querySelector('.price__value'), po = o.el.querySelector('.price__old s, .price__old'); price = num(pv && pv.textContent); old = num(po && po.textContent); desc = ''; }
+      if (window.ECO_MINICART) ECO_MINICART.add({ id: o.name + '|' + (r ? r.art : ''), name: o.name, desc: desc, img: o.img, price: price, old: old, qty: o.qty });
+      if (window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: o.name, text: (o.qty ? o.qty + ' st ' : '') + 'har lagts i varukorgen.', img: o.img, secondary: o.secondary, primary: { label: 'Till varukorgen', onClick: function () { location.href = '/cart.html'; } } });
+    };
     /* PDP: add to cart, confirmed with an E-Com toast (Add to cart) */
     document.addEventListener('click', function (e) {
       if (!e.target.closest('#pdp-add') || !window.ECO_N || document.body.classList.contains('pdp-none')) return;
-      ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa stretch svart', text: 'har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', secondary: { label: 'Välj tillbehör' }, primary: { label: 'Till varukorgen' } });
+      pdpAddToCart({ name: 'Carpenter soul hantverksbyxa stretch svart', qty: parseInt((document.querySelector('.pdp-buy .picker-stepper__input') || {}).value, 10) || 1, img: '/images/pdp-gallery-front.png', secondary: { label: 'Välj tillbehör' } });
     });
     /* PDP: favourite toggle, confirmed with an E-Com toast (Informational) */
     document.addEventListener('click', function (e) {
@@ -3891,7 +3901,7 @@
       }).join('');
       pdpCarousel(track.closest('[data-carousel]'));
       track.addEventListener('click', function (e) {
-        if (e.target.closest('[data-acc-add]') && window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul pocket, dragkedja', text: 'har lagts i varukorgen.', img: '/images/pdp-acc-pocket.png', primary: { label: 'Till varukorgen' } });
+        if (e.target.closest('[data-acc-add]')) pdpAddToCart({ name: 'Carpenter soul pocket, dragkedja', qty: 1, img: '/images/pdp-acc-pocket.png', el: e.target.closest('.pdp-acc') });
       });
     })();
   
@@ -3942,7 +3952,7 @@
       track.addEventListener('click', function (e) {
         var fav = e.target.closest('.pcard__act[aria-pressed]');
         if (fav) { var on = fav.getAttribute('aria-pressed') !== 'true'; fav.setAttribute('aria-pressed', on); fav.classList.toggle('is-on', on); }
-        if (e.target.closest('[data-pc-add]') && window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa', text: 'har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', primary: { label: 'Till varukorgen' } });
+        if (e.target.closest('[data-pc-add]')) pdpAddToCart({ name: 'Carpenter soul hantverksbyxa', qty: 1, img: '/images/pdp-gallery-front.png', el: e.target.closest('.pcard') });
       });
     })();
   
@@ -4104,7 +4114,7 @@
         var add = e.target.closest('[data-pv-add]'), fav = e.target.closest('[data-pv-fav]');
         if (add && window.ECO_N) {
           var qty = add.closest('.pv-buy').querySelector('.picker-stepper__input').value;
-          ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa stretch svart, ' + add.dataset.pvAdd, text: qty + ' st har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', primary: { label: 'Till varukorgen' } });
+          pdpAddToCart({ name: 'Carpenter soul hantverksbyxa stretch svart, ' + add.dataset.pvAdd, size: add.dataset.pvAdd, qty: parseInt(qty, 10) || 1, img: '/images/pdp-gallery-front.png' });
         }
         if (fav) {
           var on = fav.getAttribute('aria-pressed') !== 'true', label = (on ? 'Ta bort från favoriter, ' : 'Lägg till i favoriter, ') + fav.dataset.pvFav;
@@ -4492,7 +4502,7 @@
       });
       [byId('sx-add'), byId('sm-add'), byId('md-add')].forEach(function (b) { b.addEventListener('click', function () {
         if (sa.dataset.none) { var t = q('.pdp-action__select'); if (t) t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); return; }
-        if (window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: 'Carpenter soul hantverksbyxa stretch svart', text: (b === byId('sx-add') ? sxQty : b === byId('sm-add') ? smQty : mdQty).value + ' st har lagts i varukorgen.', img: '/images/pdp-gallery-front.png', primary: { label: 'Till varukorgen' } });
+        pdpAddToCart({ name: 'Carpenter soul hantverksbyxa stretch svart', qty: parseInt((b === byId('sx-add') ? sxQty : b === byId('sm-add') ? smQty : mdQty).value, 10) || 1, img: '/images/pdp-gallery-front.png' });
         sa.classList.add('is-added'); sync(); setTimeout(function () { sa.classList.remove('is-added'); sync(); }, 1600);
       }); });
     })();
