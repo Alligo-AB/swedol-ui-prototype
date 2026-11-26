@@ -2,6 +2,7 @@
    Delegated, so steppers added later work too. Limits come from the input: min (default 1), max (default none), step (default 1).
    After every change the input fires a bubbling "change" event; read input.value there. */
 (function () {
+  if (window.ECO_PICKER_STEPPER) return;   /* loaded twice (the page and the mini cart partial both add it): a second copy doubled every step */
   function limits(input) {
     var min = parseInt(input.getAttribute('min'), 10), max = parseInt(input.getAttribute('max'), 10), step = parseInt(input.getAttribute('step'), 10);
     return { min: isNaN(min) ? 1 : min, max: isNaN(max) ? Infinity : max, step: isNaN(step) || step < 1 ? 1 : step };
