@@ -209,6 +209,10 @@ A scrollable bar that is swiped (`components/js/tabs.js`) follows the pointer 1:
 
 **Any sideways-overflowing row (2026-11-05):** give the row the class `swipe-row` (`components/css/tabs.css`: `touch-action: pan-y`, the `--tab-over` rubber-band `translate` on its children, the grabbing cursor, `overflow-x: auto` and a hidden scrollbar). `tabs.js` swipes every `.swipe-row` on load; for a row added later call `ECO_TABS.init(root)` or `ECO_TABS.swipe(el)`. Tab bars get the same through `.tab-bar`. Used on the search panel's suggestion tile links (`#sp-suggest` in `search.html`). Never write a second swipe script and never copy the rules; constants stay in `tabs.js`.
 
+### Finding where to animate
+
+To find animation opportunities in a page or flow (state changes that jump) and propose them, use `eco-motion-scout`; it picks patterns and this file supplies the tokens.
+
 ### Choosing motion in docs
 
 Component docs pages that animate get a live **Motion** section (easing, duration, collapse, recommended default marked `*`, warnings for choices that clash with these rules). See `eco-doc-page`, "Motion section".

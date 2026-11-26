@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Varukorg – förslag fri frakt (temporär)</title>
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/fonts.css">
+  <link rel="stylesheet" href="https://unpkg.com/alligo-design-tokens@latest/dist/css/index.css">
+  <link rel="stylesheet" href="/components/css/button.css">
+  <link rel="stylesheet" href="/components/css/icon.css">
+  <link rel="stylesheet" href="/components/css/badge.css">
+  <link rel="stylesheet" href="/components/css/price.css">
+  <link rel="stylesheet" href="/components/css/action-link.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+    /* Temporary proposal sheet for the free-shipping block in the cart summary. Tokens only. Delete when one is chosen. */
+    body { margin: 0; padding: 32px; background: var(--color-surface-raised-secondary); font-family: 'Breuer Condensed', sans-serif; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+    h1 { margin: 0 0 24px; font-size: 26px; line-height: 26px; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(6, 282px); gap: 32px; align-items: start; }
+    .col h2 { margin: 0 0 4px; font-size: 20px; line-height: 24px; }
+    .col > p { margin: 0 0 16px; font-size: 14px; line-height: 20px; color: var(--color-text-tertiary); }
+    .lbl { margin: 16px 0 8px; font-size: 12px; line-height: 12px; letter-spacing: 0.48px; text-transform: uppercase; font-weight: 600; color: var(--color-text-secondary); }
+    .card { background: var(--color-surface-raised-primary); box-shadow: var(--shadow-elevation-b-20); padding: 16px 16px 0; }
+    .lines { margin: 0; padding: 0 0 16px; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .lines li { display: flex; justify-content: space-between; font-size: 17px; line-height: 24px; letter-spacing: 0.32px; }
+    .total { display: flex; justify-content: space-between; align-items: flex-end; padding: 24px 0; border-top: 1px solid var(--color-border-primary); font-size: 24px; line-height: 28px; font-weight: 600; }
+    .go { margin: 0 -16px; }
+    .go .btn { width: 100%; --btn-h: 72px; --btn-fs: 18px; --btn-lh: 18px; --btn-ls: 0.18px; }
+    .old { padding-bottom: 8px; border-bottom: 1px solid var(--color-border-primary); margin-bottom: 8px; }
+    .old i { display: block; height: 2px; background: var(--color-surface-05); margin-bottom: 8px; position: relative; }
+    .old i::after { content: ''; position: absolute; inset: 0 30% 0 0; background: var(--color-surface-success-default); }
+    .old p { margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }
+    .old b { font-weight: 600; }
+
+    /* shared pieces */
+    .t-md { font-size: 18px; line-height: 22px; font-weight: 600; margin: 0; }
+    .num { font-weight: 600; }
+    .bar { height: 8px; background: var(--color-surface-05); position: relative; }
+    .bar i { position: absolute; inset: 0 auto 0 0; background: var(--color-surface-success-default); }
+    .ic { color: inherit; }
+
+    /* 1: fraktkort */
+    .p1 { display: flex; flex-direction: column; gap: 12px; padding: 16px; margin-bottom: 16px; background: var(--color-surface-information-weaker); border: 1px solid var(--color-border-information-weak); }
+    .p1__head { display: flex; gap: 12px; align-items: flex-start; }
+    .p1__head .icon { flex: none; }
+    .p1__meta { display: flex; justify-content: space-between; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .p1--done { background: var(--color-surface-success-weaker); border-color: var(--color-border-success-weak, var(--color-border-primary)); }
+    .p1--done .icon { color: var(--color-text-success-default); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+    /* 2: milstolpe-spår */
+    .p2 { padding: 8px 0 24px; margin-bottom: 8px; border-bottom: 1px solid var(--color-border-primary); }
+    .p2 .t-md { margin-bottom: 20px; }
+    .p2__track { position: relative; height: 32px; display: flex; align-items: center; }
+    .p2__track .bar { flex: 1; }
+    .p2__marker { position: absolute; top: 0; width: 32px; height: 32px; margin-left: -16px; background: var(--color-surface-action-1); color: var(--color-text-action-primary-inverted); display: flex; align-items: center; justify-content: center; }
+    .p2__marker .icon { color: inherit; }
+    .p2__ends { display: flex; justify-content: space-between; margin-top: 8px; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
+    .p2--done .p2__marker { background: var(--color-surface-success-default); }
+    .p2__done { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+
+    /* 3: merförsäljning */
+    .p3__sugg { margin: 0 0 16px; }
+    .p3__sugg h3 { margin: 0 0 8px; font-size: 16px; line-height: 22px; font-weight: 600; }
+    .p3__row { display: flex; flex-direction: column; gap: 8px; }
+    .mini { display: flex; align-items: center; gap: 12px; padding: 8px; background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary); }
+    .mini img { flex: none; width: 56px; height: 56px; object-fit: contain; }
+    .mini__t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .mini b { font-size: 14px; line-height: 18px; font-weight: 600; }
+    .mini small { font-size: 12px; line-height: 16px; color: var(--color-text-secondary); }
+    .mini .btn { flex: none; }
+
+    /* 4: ikon + bar + text (efter referensen) */
+    .p4 { display: flex; gap: 16px; align-items: center; padding: 0 0 16px; margin-bottom: 16px; border-bottom: 1px solid var(--color-border-primary); }
+    .p4__ic { flex: none; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--color-surface-action-1); color: var(--color-text-action-primary-inverted); }
+    .p4__ic .icon { color: inherit; }
+    .p4__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+    .p4__body p { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; }
+    .p4__body b { font-weight: 600; }
+    .p4--done .p4__ic { background: var(--color-surface-success-default); }
+    .p4__top { display: flex; align-items: center; gap: 8px; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--color-border-primary); }
+    .p4__top .icon { color: var(--color-text-success-default); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    /* 5: variant 4 + merförsäljning, bar i accentfärg */
+    .p5 .bar i { background: var(--color-accent-default); }
+    .p5 .p4__ic { background: var(--color-surface-action-1); }
+    .p5 .p4 { margin-bottom: 0; border-bottom: 0; padding-bottom: 16px; }
+    .p5 .p3__sugg { padding-top: 16px; border-top: 1px solid var(--color-border-primary); }
+  </style>
+</head>
+<body>
+  <h1>Varukorg – fri frakt, fem förslag</h1>
+  <div class="grid">
+
+    <div class="col">
+      <h2>Idag</h2><p>Tunn linje och en mening.</p>
+      <div class="lbl">Saknas 300,50 kr</div>
+      <div class="card"><div class="old"><i></i><p>Psst, Handla för ytterligare <b>300,50 SEK</b> och få <b>FRAKTFRI</b> leverans till ditt ombud.</p></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>99,00 kr</span></li></ul>
+        <div class="total"><span>Totalt</span><span>10 750,48 kr</span></div><div class="go"><button class="btn btn--primary">Fortsätt till kassan</button></div></div>
+    </div>
+
+    <div class="col">
+      <h2>1. Fraktkort</h2><p>Egen ruta, belopp stort, tjock bar.</p>
+      <div class="lbl">Saknas 300,50 kr</div>
+      <div class="card">
+        <div class="p1"><div class="p1__head"><span class="icon">local_shipping</span><p class="t-md">Handla för <span class="num">300,50 kr</span> till – få <span class="num">fri frakt</span></p></div>
+          <div class="bar"><i style="width:70%"></i></div><div class="p1__meta"><span>70 % på väg</span><span>Gräns 1 000 kr</span></div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>99,00 kr</span></li></ul>
+        <div class="total"><span>Totalt</span><span>10 750,48 kr</span></div><div class="go"><button class="btn btn--primary">Fortsätt till kassan</button></div></div>
+      <div class="lbl">Fri frakt nådd</div>
+      <div class="card"><div class="p1 p1--done"><div class="p1__head"><span class="icon">check_circle</span><p class="t-md">Fri frakt ingår i din order</p></div>
+          <div class="bar"><i style="width:100%"></i></div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>Fri frakt</span></li></ul></div>
+    </div>
+
+    <div class="col">
+      <h2>2. Milstolpe-spår</h2><p>Truck-markör rör sig längs baren.</p>
+      <div class="lbl">Saknas 300,50 kr</div>
+      <div class="card">
+        <div class="p2"><p class="t-md">Bara <span class="num">300,50 kr</span> kvar till fri frakt</p>
+          <div class="p2__track"><div class="bar"><i style="width:70%"></i></div><span class="p2__marker" style="left:70%"><span class="icon">local_shipping</span></span></div>
+          <div class="p2__ends"><span>0 kr</span><span>1 000 kr · Fri frakt</span></div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>99,00 kr</span></li></ul>
+        <div class="total"><span>Totalt</span><span>10 750,48 kr</span></div><div class="go"><button class="btn btn--primary">Fortsätt till kassan</button></div></div>
+      <div class="lbl">Fri frakt nådd</div>
+      <div class="card">
+        <div class="p2 p2--done"><div class="p2__done"><span class="badge-basic badge-basic--success badge-basic--weaker">Fri frakt</span><p class="t-md">Du fick fri frakt</p></div>
+          <div class="p2__track"><div class="bar"><i style="width:100%"></i></div><span class="p2__marker" style="left:100%"><span class="icon">check</span></span></div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>Fri frakt</span></li></ul></div>
+    </div>
+
+    <div class="col">
+      <h2>3. Merförsäljning</h2><p>Som 1, plus förslag som täcker beloppet.</p>
+      <div class="lbl">Saknas 300,50 kr</div>
+      <div class="card">
+        <div class="p1"><div class="p1__head"><span class="icon">local_shipping</span><p class="t-md">Handla för <span class="num">300,50 kr</span> till – få <span class="num">fri frakt</span></p></div>
+          <div class="bar"><i style="width:70%"></i></div></div>
+        <div class="p3__sugg"><h3>Passar bra till din order</h3>
+          <div class="p3__row">
+            <div class="mini"><img src="/images/pdp-alt-svart.jpg" alt=""><div class="mini__t"><b>Knäskydd Pro</b><small>Art.nr 1253099</small><span class="num">329,00 kr</span></div><button class="btn btn--secondary btn--xs"><span class="btn__label">Lägg till</span></button></div>
+            <div class="mini"><img src="/images/pdp-alt-bla.jpg" alt=""><div class="mini__t"><b>Arbetshandske</b><small>Art.nr 1253100</small><span class="num">315,00 kr</span></div><button class="btn btn--secondary btn--xs"><span class="btn__label">Lägg till</span></button></div>
+          </div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>99,00 kr</span></li></ul>
+        <div class="total"><span>Totalt</span><span>10 750,48 kr</span></div><div class="go"><button class="btn btn--primary">Fortsätt till kassan</button></div></div>
+    </div>
+
+    <div class="col">
+      <h2>4. Ikon + bar</h2><p>Efter referensen: truck-ruta, bar, en rad text.</p>
+      <div class="lbl">Saknas 300,50 kr</div>
+      <div class="card">
+        <div class="p4"><span class="p4__ic"><span class="icon">local_shipping</span></span>
+          <div class="p4__body"><div class="bar"><i style="width:70%"></i></div><p>Handla för <b>300,50 kr</b> till och få <b>FRI FRAKT</b></p></div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>99,00 kr</span></li></ul>
+        <div class="total"><span>Totalt</span><span>10 750,48 kr</span></div><div class="go"><button class="btn btn--primary">Fortsätt till kassan</button></div></div>
+      <div class="lbl">Fri frakt nådd</div>
+      <div class="card">
+        <div class="p4 p4--done"><span class="p4__ic"><span class="icon">local_shipping</span></span>
+          <div class="p4__body"><div class="bar"><i style="width:100%"></i></div><p>Snyggt! Du har fått <b>FRI FRAKT</b></p></div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>Fri frakt</span></li></ul></div>
+    </div>
+
+    <div class="col p5">
+      <h2>5. Ikon + bar + förslag</h2><p>4 och 3 ihop, baren i accentfärgen.</p>
+      <div class="lbl">Saknas 300,50 kr</div>
+      <div class="card">
+        <div class="p4"><span class="p4__ic"><span class="icon">local_shipping</span></span>
+          <div class="p4__body"><div class="bar"><i style="width:70%"></i></div><p>Handla för <b>300,50 kr</b> till och få <b>FRI FRAKT</b></p></div></div>
+        <div class="p3__sugg"><h3>Passar bra till din order</h3>
+          <div class="p3__row">
+            <div class="mini"><img src="/images/pdp-alt-svart.jpg" alt=""><div class="mini__t"><b>Knäskydd Pro</b><small>Art.nr 1253099</small><span class="num">329,00 kr</span></div><button class="btn btn--secondary btn--xs"><span class="btn__label">Lägg till</span></button></div>
+            <div class="mini"><img src="/images/pdp-alt-bla.jpg" alt=""><div class="mini__t"><b>Arbetshandske</b><small>Art.nr 1253100</small><span class="num">315,00 kr</span></div><button class="btn btn--secondary btn--xs"><span class="btn__label">Lägg till</span></button></div>
+          </div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>99,00 kr</span></li></ul>
+        <div class="total"><span>Totalt</span><span>10 750,48 kr</span></div><div class="go"><button class="btn btn--primary">Fortsätt till kassan</button></div></div>
+      <div class="lbl">Fri frakt nådd</div>
+      <div class="card">
+        <div class="p4 p4--done"><span class="p4__ic"><span class="icon">local_shipping</span></span>
+          <div class="p4__body"><div class="bar"><i style="width:100%"></i></div><p>Snyggt! Du har fått <b>FRI FRAKT</b></p></div></div>
+        <ul class="lines"><li><span>Summa varukorg</span><span>10 651,48 kr</span></li><li><span>Frakt</span><span>Fri frakt</span></li></ul></div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 ---
 name: eco-pagination
-description: Use when building a "load more" pattern for progressively loading more results into a list (reviews, products, order history) — not numbered page navigation.
+description: Use when building a "load more" pattern for progressively loading more results into a list (reviews, products, order history) — not numbered page navigation. This is the DEFAULT for every show-more at the bottom of a list, table or PLP; never write a page-local copy.
 ---
 
 > Part of the design system in swedol-ui-prototype. See `CLAUDE.md` for tech stack, template rules, breakpoints, and the quality checklist that always applies on top of this spec.
@@ -89,3 +89,5 @@ The counter and progress bar are updated with `updatePagination(key, visible, to
 
 ---
 6. **Accessibility (2026-10-19):** the counter is a polite live region (`aria-live="polite"`) so the new count is announced; the bar repeats the counter, so it is `aria-hidden="true"`. A button that becomes disabled loses focus: after the last load, move focus to the first new item.
+7. **XLarge (2026-11-26):** Figma has no XLarge frame; the 1440px frame `Breakpoint-lg` (`11614:537672`) is the XL measure: 190px wide, 40px above, 80px below (the section's own padding), counter 17/24, button 48px. A page may keep its own spacing at the smaller breakpoints (`cart.html` does, as `.pagination.cart-more`); never copy the component into the page.
+8. **Default everywhere (2026-11-26, user decision):** this component is the default for every "show more" pattern (tables, PLP, lists, order history), because it usually sits last on a page above the footer and so uses the section's own bottom padding (rule 1). A page may only adjust spacing and button size/label at the smaller breakpoints when its own Figma frames say so; `cart.html` is the reference (Figma Cart - Checkout 1789:10765 Large, 1789:10867 Medium, 1789:6294 Small, 1786:54349 XSmall: 24px above, 32px below (40px XSmall), button XSmall-Small `btn--sm`, Small `btn--md`, Md/Lg `btn--sm`, XL `btn--md`, label "Visa fler" except Small and XL "Visa fler resultat"). Never copy the component into the page. Open: `reviews.html` and its backups still have the old `.pagination__btn`.

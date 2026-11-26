@@ -3824,8 +3824,11 @@
       var rows = window.PDP_VARIANTS || [], r = o.size ? rows.filter(function (x) { return x.size === o.size; })[0] : rows.filter(function (x) { return x.current; })[0];
       var price = r ? r.price : 0, old = r && r.sale ? num(r.sale.old) : 0, desc = r ? 'Art.nr ' + r.art : '';
       if (o.el) { var pv = o.el.querySelector('.price__value'), po = o.el.querySelector('.price__old s, .price__old'); price = num(pv && pv.textContent); old = num(po && po.textContent); desc = ''; }
-      if (window.ECO_MINICART) ECO_MINICART.add({ id: o.name + '|' + (r ? r.art : ''), name: o.name, desc: desc, img: o.img, price: price, old: old, qty: o.qty });
-      if (window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: o.name, text: (o.qty ? o.qty + ' st ' : '') + 'har lagts i varukorgen.', img: o.img, secondary: o.secondary, primary: { label: 'Till varukorgen', onClick: function () { location.href = '/cart.html'; } } });
+      var item = { id: o.name + '|' + (r ? r.art : ''), name: o.name, desc: desc, img: o.img, price: price, old: old, qty: o.qty };
+      if (r && !o.el) Object.assign(item, { sku: r.art, size: r.size }, r.cart);   /* scenario fields for the cart page (see SCEN) */
+      var res = window.ECO_MINICART ? ECO_MINICART.add(item) : null;
+      if (res && res.capped && !res.added) { if (window.ECO_N) ECO_N.showEcomToast({ variant: 'info', name: o.name, text: 'finns redan i max antal (' + item.max + ' st) i varukorgen.' }); return; }
+      if (window.ECO_N) ECO_N.showEcomToast({ variant: 'cart', name: o.name, text: (res && res.capped ? 'Högsta antal är ' + item.max + ' st. ' : '') + (o.qty ? o.qty + ' st ' : '') + 'har lagts i varukorgen.', img: o.img, secondary: o.secondary, primary: { label: 'Till varukorgen', onClick: function () { location.href = '/cart.html'; } } });
     };
     /* PDP: add to cart, confirmed with an E-Com toast (Add to cart) */
     document.addEventListener('click', function (e) {
@@ -3987,14 +3990,32 @@
       var ICON = '<svg class="pv-var__icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8.92252 13.1844L13.9556 8.16714L12.7586 6.97012L8.92252 10.7854L7.21146 9.09512L6.01446 10.2921L8.92252 13.1844ZM4.55975 17.1844C4.08423 17.1844 3.67715 17.015 3.33852 16.6764C2.99989 16.3378 2.83057 15.9307 2.83057 15.4552V4.57475C2.83057 4.09922 2.99989 3.69214 3.33852 3.35352C3.67715 3.01489 4.08423 2.84558 4.55975 2.84558H7.95784C8.0922 2.40839 8.34477 2.04909 8.71555 1.76769C9.08631 1.48628 9.51445 1.34558 9.99996 1.34558C10.4855 1.34558 10.9136 1.48628 11.2844 1.76769C11.6552 2.04909 11.9077 2.40839 12.0421 2.84558H15.4402C15.9157 2.84558 16.3228 3.01489 16.6614 3.35352C17 3.69214 17.1694 4.09922 17.1694 4.57475V15.4552C17.1694 15.9307 17 16.3378 16.6614 16.6764C16.3228 17.015 15.9157 17.1844 15.4402 17.1844H4.55975ZM4.55975 15.4552H15.4402V4.57475H4.55975V15.4552ZM9.99996 4.05481C10.1559 4.05481 10.2849 4.00382 10.3869 3.90185C10.4888 3.79988 10.5398 3.67091 10.5398 3.51496C10.5398 3.359 10.4888 3.23003 10.3869 3.12806C10.2849 3.02609 10.1559 2.9751 9.99996 2.9751C9.844 2.9751 9.71504 3.02609 9.61307 3.12806C9.51109 3.23003 9.46011 3.359 9.46011 3.51496C9.46011 3.67091 9.51109 3.79988 9.61307 3.90185C9.71504 4.00382 9.844 4.05481 9.99996 4.05481Z"/></svg>';
       var WEB_OUT = 'Ej i lager (Beräknad inleverans 24-10-02 skickas dagen efter)', STORE_SUP = 'Leverantörslager (Normal leverans 6-7 arbetsdagar)';
       /* Mock data: the live page lists only the article numbers per variant (swedol.se, fetched 2026-11-13); EAN, supplier number, price and stock are made up, varied per variant */
-      var STOCK = [0, 100, 0, 25, 0, 8, 0, 0, 60, 0], BORAS = [0, 100, 12, 0, 40, 0, 5, 0, 0, 20];
-      var rows = [42, 44, 46, 48, 50, 52, 54, 56, 58, 60].map(function (n, i) {
+      var STOCK = [0, 100, 0, 25, 0, 8, 0, 0, 60, 0, 3, 0], BORAS = [0, 100, 12, 0, 40, 0, 5, 0, 0, 20, 0, 0];
+      /* Cart scenarios per size (rows C42-C48 keep their price states and badges; only the stock side differs). `cart` = extra item fields the cart page renders:
+         stock/stock2 { text, state ok|warn|none }, note (+ noteKind 'warning'), split { n, days }, closingN, max. Try them: add several sizes, open /cart.html. */
+      var SCEN = {
+        C42: { cart: { stock: { text: 'Ej i lager (Bekräftad inleverans 24-10-02)', state: 'warn' } } },
+        C44: { cart: { stock: { text: '100 st i lager', state: 'ok' } } },
+        C46: { web: 'Ej i lager (Skickas från leverantör, 6-7 arbetsdagar)', cart: { stock: { text: 'Leverantörslager (Normal leverans 6-7 arbetsdagar)', state: 'warn' }, note: 'Skickas direkt från extern leverantör.' } },
+        C48: { cart: { stock: { text: '25 st i lager', state: 'ok' }, closingN: 5 } },
+        C50: { web: 'Ej i lager, ingen inleverans planerad', cart: { stock: { text: 'Ej i lager', state: 'none' }, note: 'Ingen inleverans planerad. Kontakta kundservice för alternativ.', noteKind: 'warning' } },
+        C52: { cart: { stock: { text: '8 st i lager', state: 'ok' }, stock2: { text: 'Resterande från leverantör (6-7 arbetsdagar)', state: 'warn' }, split: { n: 8, days: '6-7 arbetsdagar' } } },
+        C54: { web: 'Ej i lager', cart: { stock: { text: 'Ej i lager (Beräknad inleverans 24-10-02)', state: 'warn' }, max: 3 } },
+        C56: { web: 'Beställningsvara (Leverans 2-3 veckor)', cart: { stock: { text: 'Beställningsvara (Leverans 2-3 veckor)', state: 'warn' }, note: 'Beställningsvara. Kan inte returneras.', noteKind: 'warning' } },
+        C58: { cart: { stock: { text: '60 st i lager', state: 'ok' }, stock2: { text: 'Hämta i butik idag innan kl 17.00', state: 'ok' } } },
+        C60: { web: 'Ej i lager', cart: { stock: { text: 'Ej i lager', state: 'none' }, max: 1 } },
+        C62: { cart: { stock: { text: '3 st i lager', state: 'warn' }, closingN: 3, max: 3 } },
+        C64: { web: 'Ej i lager (Specialorder)', cart: { stock: { text: 'Specialorder (Leverans 4-6 veckor)', state: 'warn' }, note: 'Specialorder. Tillverkas på beställning.' } }
+      };
+      var rows = [42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64].map(function (n, i) {
         var r = { size: 'C' + n, art: '275072599-' + n, ean: '73114516558' + n, lev: '60011351A' + (6 + i), price: i < 6 ? 886.79 : 896.79, old: '1 670,00 kr', web: WEB_OUT, store: STORE_SUP, webOk: 1, storeOk: 1, stock: STOCK[i], boras: BORAS[i] };
         if (i === 0) r.web = 'Ej i lager (Bekräftad inleverans 24-10-02 skickas dagen efter)';
         /* the four top rows show the four price states: C42 plain, C44 old price, C46 + 30%, C48 + Utförsäljning */
         if (i >= 1 && i <= 3) { r.price = 620.75; r.old = '886,79 kr'; r.sale = { old: '886,79 kr', note: 'Kampanj t.o.m 2026-12-31', lowest: '886,79 kr' }; if (i >= 2) r.sale.badge = true; if (i === 3) r.sale.closing = true; }
         if (r.stock) r.web = r.stock + ' i lager';
         if (i === 1) { r.store = 'Ej i lager'; r.storeOk = 0; r.current = 1; }
+        var sc = SCEN[r.size]; if (sc) { if (sc.web) r.web = sc.web; r.cart = sc.cart; }
+        var st = (r.cart || {}).stock || {}; r.webDot = { ok: 'success', warn: 'warning' }[st.state] || 'danger'; r.soldOut = st.state === 'none';   /* Webb dot and buy button follow the scenario; plain 'Ej i lager' with no date = Tillfälligt slut */
         return r;
       });
       /* Mock tiered prices (staffling) for the sticky add-to-cart: 10+ st -5%, 50+ st -10% on variants without a campaign price */
@@ -4008,7 +4029,7 @@
           '<span class="pv-var__slot"><img class="pv-var__img" src="/images/pdp-gallery-front.png" alt="" loading="lazy"></span></span>' +
           '<a href="?variant=' + r.art + '" class="inline-link inline-link--medium pv-var__link">' + r.art + '</a></div></td>' +
           '<td data-col="storlek">' + r.size + '</td>' +
-          '<td data-col="tillganglighet"><div class="pv-stock"><span><span class="badge-dot badge-dot--sm badge-dot--success" aria-hidden="true"></span>Webb: ' + r.web + '</span>' +
+          '<td data-col="tillganglighet"><div class="pv-stock"><span><span class="badge-dot badge-dot--sm badge-dot--' + r.webDot + '" aria-hidden="true"></span>Webb: ' + r.web + '</span>' +
           '<span><span class="badge-dot badge-dot--sm badge-dot--' + (r.storeOk ? 'success' : 'danger') + '" aria-hidden="true"></span>Butik: ' + r.store + '</span></div></td>' +
           '<td data-col="pris"><span class="price price--table price--customer"><span class="price__old"><s>' + r.old + '</s></span><span class="price__value">' + kr(r.price) + '</span></span></td>' +
           '<td class="col-action">' + buy(r) + '</td></tr>';
@@ -4019,7 +4040,7 @@
           '<div class="picker-stepper picker-stepper--sm" role="group" aria-label="Antal"><button type="button" class="picker-stepper__btn" data-step="-1" aria-label="Minska antal" disabled><span class="icon icon--sm" aria-hidden="true">remove</span></button>' +
           '<div class="picker-stepper__value"><input class="picker-stepper__input" type="text" inputmode="numeric" pattern="[0-9]*" value="1" min="1" aria-label="Antal, styck" autocomplete="off"></div>' +
           '<button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"><span class="icon icon--sm" aria-hidden="true">add</span></button></div>' +
-          '<div class="pv-buy__btns"><button type="button" class="btn btn--primary btn--xs btn--icon" data-pv-add="' + r.size + '" aria-label="Lägg i varukorg, ' + r.size + '" data-tooltip="Lägg i varukorg"><span class="btn__icon" aria-hidden="true">add_shopping_cart</span></button>' +
+          '<div class="pv-buy__btns"><button type="button" class="btn btn--primary btn--xs btn--icon" data-pv-add="' + r.size + '"' + (r.soldOut ? ' disabled' : '') + ' aria-label="Lägg i varukorg, ' + r.size + '" data-tooltip="Lägg i varukorg"><span class="btn__icon" aria-hidden="true">add_shopping_cart</span></button>' +
           '<button type="button" class="btn btn--blank btn--xs btn--icon pv-fav" data-pv-fav="' + r.size + '" aria-pressed="false" aria-label="Lägg till i favoriter, ' + r.size + '" data-tooltip="Lägg till i favoriter"><span class="btn__icon" aria-hidden="true">favorite</span></button></div></div>';
       }
       /* Mobile and tablet (below 769px): one card per variant (Figma Mobile 6701:352997) */
@@ -4031,7 +4052,7 @@
           '<span class="pv-var__contract">' + ICON + '<a href="?variant=' + r.art + '" class="inline-link inline-link--medium pv-var__link" aria-label="2 avtal, ' + r.size + '">2</a></span></div>' +
           '<div class="divider" aria-hidden="true"></div>' +
           '<dl class="pv-card__data"><dt>Storlek</dt><dd>' + r.size + '</dd></dl>' +
-          '<div class="pv-card__stock"><h3 class="pv-card__title">Tillgänglighet</h3><div class="pv-stock"><span>' + dot(1) + 'Webb: ' + r.web + '</span><span>' + dot(r.storeOk) + 'Butik: ' + r.store + '</span></div></div>' +
+          '<div class="pv-card__stock"><h3 class="pv-card__title">Tillgänglighet</h3><div class="pv-stock"><span><span class="badge-dot badge-dot--sm badge-dot--' + r.webDot + '" aria-hidden="true"></span>Webb: ' + r.web + '</span><span>' + dot(r.storeOk) + 'Butik: ' + r.store + '</span></div></div>' +
           '<div class="divider" aria-hidden="true"></div>' +
           '<div class="pv-card__buy"><span class="price price--table price--customer"><span class="price__value">' + kr(r.price) + '</span><span class="price__old"><s>' + r.old + '</s></span></span>' + buy(r) + '</div></li>';
       }
@@ -4061,7 +4082,7 @@
         document.body.classList.remove('pdp-none');
         if (q('#pdp-price-from')) q('#pdp-price-from').hidden = true;
         if (q('.pdp-artnr')) q('.pdp-artnr').hidden = false;
-        if (q('#pdp-add')) { q('#pdp-add .btn__label').textContent = 'Lägg i varukorgen'; q('#pdp-add').disabled = false; }
+        if (q('#pdp-add')) { q('#pdp-add .btn__label').textContent = r.soldOut ? 'Tillfälligt slut' : 'Lägg i varukorgen'; q('#pdp-add').disabled = !!r.soldOut; }
         if (q('#pdp-size-value')) q('#pdp-size-value').classList.remove('is-empty');
         function badge(name, label, value) { var el = q('.pdp-artnr__copy[data-copy-name="' + name + '"]'); if (el) { el.dataset.copy = value; el.firstChild.nodeValue = label + value; } }
         badge('Artikelnummer', 'Art.nr: ', r.art); badge('EAN', 'EAN: ', r.ean); badge('Leverantörsnummer', 'Lev.nr: ', r.lev);
@@ -4072,7 +4093,7 @@
         }
         if (q('#pdp-size-value')) q('#pdp-size-value').textContent = r.size + ' - ' + r.art;
         var dot = function (ok) { return '<span class="badge-dot badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
-        if (q('#pdp-web-status')) q('#pdp-web-status').innerHTML = dot(1) + '<span>' + (r.stock ? r.stock + ' st i lager (Normal leverans 1-2 arbetsdagar)' : r.web) + '</span>';
+        if (q('#pdp-web-status')) q('#pdp-web-status').innerHTML = '<span class="badge-dot badge-dot--' + r.webDot + '" aria-hidden="true"></span><span>' + (r.stock ? r.stock + ' st i lager (Normal leverans 1-2 arbetsdagar)' : r.web) + '</span>';
         if (q('#pdp-store-status')) q('#pdp-store-status').innerHTML = '<li class="pdp-stock__status">' + dot(r.boras) + '<span>' + (r.boras ? r.boras + ' st i lager' : 'Ej i lager') + '</span></li>' +
           '<li class="pdp-stock__status">' + dot(1) + '<span>' + (r.boras ? 'Köp &amp; Hämta - Hämta idag innan kl 17.00' : 'Köp &amp; Hämta - Tillgänglig i butik inom 6-7 arbetsdagar') + '</span></li>';
         if (q('#pdp-banner-text')) q('#pdp-banner-text').innerHTML = 'Via tjänsten Köp &amp; Hämta kan du lägga en order direkt mot önskad butik. ' + (r.boras ? '<strong>' + r.boras + ' i butik</strong>, kan hämtas idag innan kl 17.00' : '<strong>0 i butik</strong>, tillgänglig i butik inom 6-7 arbetsdagar');
@@ -4444,10 +4465,10 @@
         byId('sx-tier').hidden = !tierTxt; byId('sx-tier').textContent = tierTxt;
         var storeN = ((q('#pdp-stores-link .action-link__label') || {}).textContent || '').trim(), sn = ((q('.pdp-stock__store .pdp-stock__name') || {}).lastChild || {}).textContent || 'Borås', dt = function (o) { return '<span class="badge-dot badge-dot--md badge-dot--' + o + '" aria-hidden="true"></span>'; };
         if (none_) byId('sx-stock').innerHTML = '<li>' + dt('neutral') + '<a href="#" class="inline-link inline-link--small inline-link--secondary" id="sx-pick">Välj produktvariant för att se lagerstatus</a></li>';
-        else byId('sx-stock').innerHTML = '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager') + '</span></li>';
+        else byId('sx-stock').innerHTML = '<li>' + dt(cur.webDot) + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : cur.web) + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager') + '</span></li>';
         byId('sx-size').hidden = none_; byId('sx-size').textContent = none_ ? '' : 'Storlek ' + cur.size;
         byId('sx-stores-label').textContent = none_ ? 'Välj butik' : (storeN || 'Se tillgänglighet i butiker');
-        var sxb = byId('sx-add'); sxb.disabled = none_; sxb.querySelector('.btn__label').textContent = none_ ? 'Välj variant' : (sa.classList.contains('is-added') ? 'Tillagd ✓' : 'Lägg i varukorgen');
+        var sxb = byId('sx-add'); sxb.disabled = none_ || !!cur.soldOut; sxb.querySelector('.btn__label').textContent = none_ ? 'Välj variant' : cur.soldOut ? 'Tillfälligt slut' : (sa.classList.contains('is-added') ? 'Tillagd ✓' : 'Lägg i varukorgen');
         /* sm block (640-768px) */
         var sm = byId('sa-sm'); sm.toggleAttribute('data-none', none_);
         byId('sm-from').hidden = !none_; byId('sm-price').textContent = kr(unit);
@@ -4456,10 +4477,10 @@
         byId('sm-tier').hidden = !tierTxt; byId('sm-tier').textContent = tierTxt;
         byId('sm-badges').hidden = !showB; if (showB) { byId('sm-off').hidden = !cur.sale.badge; byId('sm-off').textContent = offTxt; byId('sm-closing').hidden = !cur.sale.closing; }
         if (none_) byId('sm-stock').innerHTML = '<li>' + dt('neutral') + '<a href="#" class="inline-link inline-link--small inline-link--secondary" id="sm-pick">Välj produktvariant för att se lagerstatus</a></li>';
-        else byId('sm-stock').innerHTML = '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager') + '</span></li>';
+        else byId('sm-stock').innerHTML = '<li>' + dt(cur.webDot) + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : cur.web) + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager') + '</span></li>';
         byId('sm-size').textContent = none_ ? '' : 'Storlek ' + cur.size; byId('sm-div').hidden = none_;
         byId('sm-stores-label').textContent = none_ ? 'Välj butik' : (storeN || 'Se tillgänglighet i butiker');
-        var smb = byId('sm-add'); smb.disabled = none_; smb.querySelector('.btn__label').textContent = none_ ? 'Välj variant' : (sa.classList.contains('is-added') ? 'Tillagd ✓' : 'Lägg i varukorgen');
+        var smb = byId('sm-add'); smb.disabled = none_ || !!cur.soldOut; smb.querySelector('.btn__label').textContent = none_ ? 'Välj variant' : cur.soldOut ? 'Tillfälligt slut' : (sa.classList.contains('is-added') ? 'Tillagd ✓' : 'Lägg i varukorgen');
         /* md block (769-1023px) */
         var md = byId('sa-md'), hasSale = !none_ && !!sale;
         byId('md-pricecol').classList.toggle('has-sale', hasSale);
@@ -4470,9 +4491,9 @@
         byId('md-tier').hidden = !tierTxt; byId('md-tier-text').textContent = tierTxt;
         byId('md-size').textContent = none_ ? '' : 'Storlek ' + cur.size; byId('md-div').hidden = none_;
         if (none_) byId('md-stock').innerHTML = '<li>' + dt('neutral') + '<a href="#" class="inline-link inline-link--small inline-link--secondary" id="md-pick">Välj produktvariant för att se lagerstatus</a></li>';
-        else byId('md-stock').innerHTML = '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager') + '</span></li>';
+        else byId('md-stock').innerHTML = '<li>' + dt(cur.webDot) + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : cur.web) + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager') + '</span></li>';
         byId('md-stores-label').textContent = none_ ? 'Välj butik' : (storeN || 'Se tillgänglighet i butiker');
-        var mdb = byId('md-add'); mdb.disabled = none_; mdb.querySelector('.btn__label').textContent = none_ ? 'Välj variant' : (sa.classList.contains('is-added') ? 'Tillagd ✓' : 'Lägg i varukorgen');
+        var mdb = byId('md-add'); mdb.disabled = none_ || !!cur.soldOut; mdb.querySelector('.btn__label').textContent = none_ ? 'Välj variant' : cur.soldOut ? 'Tillfälligt slut' : (sa.classList.contains('is-added') ? 'Tillagd ✓' : 'Lägg i varukorgen');
         measure();
       }
       new MutationObserver(sync).observe(q('.pdp__info'), { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden'] });

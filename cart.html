@@ -2268,9 +2268,9 @@
   .cart-empty[hidden], .cart-card__table[hidden], .cart-sum[hidden] { display: none; }
 
   /* Table header (Figma Table Header Desktop: 56px, accent-light) and the shared column grid of header and rows */
-  .cart-head, .cart-row__line { display: grid; grid-template-columns: minmax(0, 1fr) 77px 53px 77px 120px 105px; align-items: center; }
+  .cart-head, .cart-row__line { display: grid; grid-template-columns: minmax(0, 1fr) 81px 74px 77px 120px 105px; align-items: center; }   /* 81/74: label + sort icon (65/58px) plus 16px before the next label; the values start where their label starts */
   .cart-head { min-height: 56px; background: var(--color-accent-light); }
-  .cart-head > :first-child { padding-left: var(--dimension-spacing-space-16); }
+  .cart-head > :first-child { padding-left: 96px; }   /* 80px image + 16px: "Produkter" starts where the product names start */
   .cart-sort { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-4); padding: 0; border: 0; background: none; cursor: pointer; font: inherit; font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: 0.32px; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; white-space: nowrap; }
   .cart-sort .icon { --icon-size: 16px; --icon-opsz: 20; color: var(--color-icon-secondary); }
   .cart-sort:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
@@ -2290,31 +2290,57 @@
   .cart-row__sum { display: flex; align-items: center; gap: var(--dimension-spacing-space-8); }
   .cart-row__sum b { font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-weight: 600; color: var(--color-text-primary); white-space: nowrap; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
   .cart-row__stock { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-4) var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
-  .cart-row__stock .badge-basic { color: var(--color-text-primary); }
+  .cart-row__stock .inline-notification { flex: 1 0 100%; }   /* Strong inline notification exactly as eco-inline-notification (incl. its elevation), full width of the text column (user 2026-11-26) */
   .cart-row__stock-s { display: inline-flex; align-items: center; gap: var(--dimension-spacing-space-8); }
-  .cart-row__foot { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--dimension-spacing-space-16); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+  /* Foot (Figma Product Item Row v2, Size + Comment + Buttons): Storlek, then "Kommentar: …" 8px below; the Radmärkning link (closed) or the × (open) sits on the right, bottom-aligned with the last line. */
+  .cart-row__foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; column-gap: var(--dimension-spacing-space-16); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
   .cart-row__foot p { margin: 0; }
-  .cart-row__mark { padding-right: var(--dimension-spacing-space-4); }   /* Figma: 6px */
-  .cart-row__mark .action-link { color: var(--color-text-secondary); }
+  .cart-row__size { grid-area: 1 / 1; }
+  .cart-row__cm { grid-area: 2 / 1; }
+  @media (min-width: 769px) { .cart-row__foot .cart-row__cm { margin-top: var(--dimension-spacing-space-8); } }   /* beats .cart-row__foot p; below 769px the comment has its own row spacing */
+  .cart-row__mark { grid-area: 1 / 2 / 3 / 3; align-self: end; display: flex; padding-right: 6px; }   /* 6px: Figma, no spacing token; flex so the inline button adds no line-box height */
+  .cart-row__mark .action-link:not(:is(:hover, :focus-visible)) { color: var(--color-text-primary); }   /* Figma: text-primary; hover/focus colour comes from action-link.css (the × has hover too) */
   .cart-row__mark[hidden] { display: none; }
-  .cart-row__form { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); }
-  .cart-row__form[hidden] { display: none; }
-  .cart-row__form-line { display: flex; align-items: flex-end; height: 8px; }   /* Figma Arrow border: line with a small notch under the Radmärkning link */
+  .cart-row__mark .action-link__icon { color: inherit; }   /* .icon (loaded later) sets black: the icon follows the link colour, hover included (action-link.css) */
+  /* Closed "Radmärkning ✎" turns into the × (Figma Open states): the label folds away to the right edge (grid 1fr to 0fr, gap to 0) while the pencil spins out and the × spins in */
+  .cart-row__mark [data-mark] { transition: color var(--duration-fast-3) var(--ease-standard), gap var(--duration-fast-4) var(--ease-standard); }
+  .cm-lbl { display: grid; grid-template-columns: 1fr; opacity: 1; transition: grid-template-columns var(--duration-fast-4) var(--ease-standard), opacity var(--duration-fast-3) var(--ease-standard); }
+  .cm-lbl > .action-link__label { min-width: 0; overflow: hidden; white-space: nowrap; }
+  .cm-ic { position: relative; display: block; flex: none; width: 20px; height: 20px; }
+  .cm-ic .action-link__icon { position: absolute; inset: 0; transition: transform var(--duration-fast-4) var(--ease-standard), opacity var(--duration-fast-3) var(--ease-standard), color var(--duration-fast-3) var(--ease-standard); }
+  .cm-ic__x { opacity: 0; transform: rotate(90deg) scale(0.5); }
+  [data-mark][aria-expanded="true"] { gap: 0; }
+  [data-mark][aria-expanded="true"] .cm-lbl { grid-template-columns: 0fr; opacity: 0; }
+  [data-mark][aria-expanded="true"] .cm-ic__edit { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+  [data-mark][aria-expanded="true"] .cm-ic__x { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .cart-row__mark [data-mark], .cm-lbl, .cm-ic .action-link__icon { transition: none; } }
+  /* Form: 16px below the foot (body gap 8 + 8), arrow border (line with a notch under the ×/link), then field + Spara (Figma Form) */
+  /* Opens like the Collapsible: the height eases from 0 (grid rows 0fr to 1fr, so no fixed max-height can go stale), duration/easing as collapsible.css; hidden from Tab and screen readers while closed */
+  .cart-row__form { display: grid; grid-template-rows: 0fr; visibility: hidden; margin-top: calc(var(--dimension-spacing-space-8) * -1);   /* cancels the body gap while closed */
+    transition: grid-template-rows var(--duration-fast-4) var(--ease-standard), margin-top var(--duration-fast-4) var(--ease-standard), visibility 0s linear var(--duration-fast-4); }
+  .cart-row__form.is-open { grid-template-rows: 1fr; visibility: visible; margin-top: 0; transition-delay: 0s; }
+  .cart-row__form-in { min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); padding-inline: 4px; margin-inline: -4px; }   /* 4px side room so the focus ring is not clipped; no vertical padding, it would keep the closed form open */
+  @media (max-width: 768px) { .cart-row__form { margin-top: 0; } .cart-row__form .cart-row__form-line { margin-top: var(--dimension-spacing-space-16); } }
+  @media (prefers-reduced-motion: reduce) { .cart-row__form { transition: none; } }
+  .cart-row__form-line { display: flex; align-items: flex-end; height: 8px; margin-top: var(--dimension-spacing-space-8); }
   .cart-row__form-line i { flex: 1; height: 1px; background: var(--color-border-primary); }
-  .cart-row__form-line svg { flex: none; display: block; }
-  .cart-row__form-row { display: flex; align-items: flex-end; gap: var(--dimension-spacing-space-4); max-width: 702px; }   /* Figma: 702px, 4px between field and button */
-  .cart-row__form-row .input-wrap { flex: 1; min-width: 0; }
-  .cart-row__form-row .btn { flex: none; margin-bottom: 24px; }   /* aligned with the field, not the hint under it */
+  .cart-row__form-line svg { flex: none; display: block; margin-left: -0.6069px; }   /* Figma Arrow border: 21.6069 × 8, drawn 0.6px past the 21px slot on the left */
+  .cart-row__form-row { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-4); }   /* Figma: 4px between field and Spara; the field fills the column */
+  .cart-row__form-row .form-field { flex: 1; min-width: 0; }
+  .cart-row__form-row .btn { flex: none; margin-top: 16px; }   /* Spara lines up with the field top: label 12px + 4px (mobile) */
+  @media (min-width: 769px) { .cart-row__form-row .btn { margin-top: 18px; } }   /* label 14px + 4px (desktop) */
 
-  .cart-more { display: flex; flex-direction: column; align-items: center; gap: var(--dimension-spacing-space-16); padding: var(--dimension-spacing-space-48) 0 var(--dimension-spacing-space-16); }
-  .cart-more p { margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
-  .cart-more__bar { width: 124px; height: 2px; background: var(--color-surface-disabled); }
-  .cart-more__fill { height: 100%; background: var(--color-surface-100); }
+  /* "Visa fler" is the shared Pagination (components/css/pagination.css, Figma 11614:537671). XL follows that frame as is (40px above, the section's own 80px below).
+     Below 1281px the cart's own frames apply (Figma Cart - Checkout 1789:10765 Large, 1789:10867 Medium, 1789:6294 Small, 1786:54349 XSmall):
+     24px above; 32px below (40px on XSmall). The button size and label change per breakpoint, see the script below and .pg-long / .pg-short. */
+  .pagination.cart-more { margin-top: var(--dimension-spacing-space-24); padding-bottom: var(--dimension-spacing-space-40); }
+  .cart-more .pg-long { display: none; }
+  @media (min-width: 640px) { .pagination.cart-more { padding-bottom: var(--dimension-spacing-space-32); } }
+  @media (min-width: 640px) and (max-width: 768px), (min-width: 1281px) { .cart-more .pg-long { display: inline; } .cart-more .pg-short { display: none; } }   /* "Visa fler resultat" on Small and XL, "Visa fler" otherwise (Figma) */
   .cart-more[hidden] { display: none; }
 
   /* Order summary (Figma Sticky Container 912:13726): 282px, sticky, white card + black full-width button + trustmarks */
   .cart-sum { margin-top: var(--dimension-spacing-space-24); }
-  .cart-sum__ship { display: none; }   /* free-shipping bar only beside the list (XL) */
   /* more_horiz drawer (Drawers rule: 500px panel, header 16/24 → 24/32, content 0 24 24 → 0 32 32) */
   .cd-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transition: opacity var(--duration-medium-2) var(--ease-standard); }
   .cd-overlay.is-open { opacity: 1; pointer-events: all; }
@@ -2342,11 +2368,28 @@
   .cart-sum__card, .cart-sum__go { box-shadow: var(--shadow-elevation-b-20); }   /* Figma update 2026-11-25: white surfaces carry elevation-b-20 */
   .cart-sum__card { background: var(--color-surface-raised-primary); padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-16) 0; }
   .cart-sum__lines { padding-top: var(--dimension-spacing-space-8); }
-  .cart-sum__ship { padding-bottom: var(--dimension-spacing-space-8); border-bottom: 1px solid var(--color-border-primary); margin-bottom: var(--dimension-spacing-space-8); flex-direction: column; gap: var(--dimension-spacing-space-12); }
-  .cart-sum__bar { height: 2px; background: var(--color-surface-05); }
-  .cart-sum__bar i { display: block; height: 100%; width: 0; background: var(--color-surface-success-default); transition: width var(--duration-medium-2) var(--ease-standard); }
-  .cart-sum__ship p { margin: 0 0 var(--dimension-spacing-space-8); font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
-  .cart-sum__ship b { font-weight: 600; }
+  /* Free shipping (proposal 5, 2026-11-26): truck square + bar in the accent colour + one line of text; below it, while shipping is not free yet, two horizontal suggestions that cover the missing amount */
+  .cart-sum__ship { display: flex; flex-direction: column; padding-bottom: var(--dimension-spacing-space-16); border-bottom: 1px solid var(--color-border-primary); margin-bottom: var(--dimension-spacing-space-16); }
+  .cart-ship { display: flex; align-items: center; gap: var(--dimension-spacing-space-16); }
+  .cart-ship__ic { flex: none; display: flex; color: var(--color-text-primary); }   /* no box: the cart icon while the limit is not reached, the truck when shipping is free */
+  .cart-ship__ic .icon { color: inherit; }
+  .cart-ship__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+  .cart-sum__bar { height: 8px; background: var(--color-surface-05); }
+  .cart-sum__bar i { display: block; height: 100%; width: 0; background: var(--color-surface-information-default); transition: width var(--duration-medium-2) var(--ease-standard), background-color var(--duration-medium-2) var(--ease-standard); }   /* blue while shipping is not free yet, accent when it is */
+  .cart-sum__bar i.is-done { background: var(--color-accent-default); }
+  .cart-ship__body p { margin: 0; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+  .cart-ship__body b { font-weight: 600; white-space: nowrap; }   /* "FRI FRAKT" and the amount never split over two lines */
+  .cart-ship__sugg { margin-top: var(--dimension-spacing-space-24); }   /* no line between the bar and the suggestions */
+  .cart-ship__sugg[hidden] { display: none; }
+  .cart-ship__sugg h3 { margin: 0 0 var(--dimension-spacing-space-8); font-size: 16px; line-height: 22px; font-weight: 600; }
+  .cart-ship__list { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+  .cart-mini { display: flex; align-items: center; gap: var(--dimension-spacing-space-12); padding: var(--dimension-spacing-space-8); background: var(--color-surface-raised-primary); border: 1px solid var(--color-border-primary); }
+  .cart-mini img { flex: none; width: 56px; height: 56px; object-fit: contain; }
+  .cart-mini__t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+  .cart-mini__t b { font-size: 14px; line-height: 18px; font-weight: 600; }
+  .cart-mini__t small { font-size: 12px; line-height: 16px; color: var(--color-text-secondary); }
+  .cart-mini__t span { font-size: 14px; line-height: 18px; font-weight: 600; }
+  .cart-mini .btn { flex: none; }
   .cart-sum__lines { margin: 0; padding: 0 0 var(--dimension-spacing-space-16); list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
   .cart-sum__line { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--dimension-spacing-space-8); font-size: 17px; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
   .cart-sum__line[hidden] { display: none; }
@@ -2354,7 +2397,7 @@
   .cart-sum__total { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--dimension-spacing-space-8); padding: var(--dimension-spacing-space-24) 0; border-top: 1px solid var(--color-border-primary); border-bottom: 1px solid var(--color-border-primary); font-size: 24px; line-height: 28px; font-weight: 600; color: var(--color-text-action-primary); font-feature-settings: 'ss02' 1, 'ss03' 1; }
   .cart-sum__code .collapsible-wrap { border-bottom: 0; }
   .cart-sum__code .collapsible-item { padding-inline: 0; }
-  .cart-code { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-8); padding-bottom: var(--dimension-spacing-space-16); }
+  .cart-code { display: flex; align-items: flex-start; gap: var(--dimension-spacing-space-8); padding-bottom: var(--dimension-spacing-space-24); }
   .cart-code .input-wrap { flex: 1; min-width: 0; }
   .cart-code .btn { flex: none; }
   .cart-sum__go { display: flex; width: 100%; }
@@ -2371,38 +2414,48 @@
 
   /* xs: no table header; every row is a small card (Figma XSmall 1:67611) */
   @media (max-width: 639px) {
-    .cart-head { display: none; }
     .cart-card { padding-inline: 0; padding-top: 0; }
     .cart-card__intro { margin: 0; padding: 0 var(--px-full) var(--dimension-spacing-space-24); background: var(--color-surface-raised-secondary); }
     .cart-card__count { font-size: 20px; line-height: 28px; }   /* title-lg-ish: Figma 20/28 */
     #cart-rows { padding-inline: var(--px-full); }
-    .cart-row { gap: var(--dimension-spacing-space-24); }
-    .cart-row__img { width: 40px; height: 40px; }
-    .cart-row__body { display: grid; grid-template-columns: auto auto auto 1fr; column-gap: var(--dimension-spacing-space-16); row-gap: 0; align-content: start; }
-    .cart-row__line, .cart-row__foot, .cart-row__sum { display: contents; }
-    .cart-row__name { grid-area: 1 / 1 / 2 / -1; padding: 0 0 var(--dimension-spacing-space-8); }
-    .cart-row__stock { grid-area: 2 / 1 / 3 / -1; max-width: none; padding-bottom: var(--dimension-spacing-space-8); }
-    .cart-row__size { grid-area: 3 / 1 / 4 / -1; padding-bottom: var(--dimension-spacing-space-16); }
+  }
+  /* xs and sm (below 769px, Mobile Base Styling): no table header, every row is stacked (Figma Mobile 960:16938 and Tablet 960:19771) */
+  @media (max-width: 768px) {
+    .cart-head { display: none; }
+    /* The row is the grid (image 48px + 16px, Figma Mobile): the body, line, foot and sum dissolve into it so the comment line and the form can span the whole row width */
+    .cart-row { display: grid; grid-template-columns: 48px auto auto auto 1fr; column-gap: var(--dimension-spacing-space-16); row-gap: 0; align-content: start; }
+    .cart-row__img { width: 48px; height: 48px; grid-area: 1 / 1 / 6 / 2; align-self: start; }
+    .cart-row__body, .cart-row__line, .cart-row__foot, .cart-row__sum { display: contents; }
+    .cart-row__name { grid-area: 1 / 2 / 2 / -1; padding: 0 0 var(--dimension-spacing-space-8); }
+    .cart-row__stock { grid-area: 2 / 2 / 3 / -1; max-width: none; padding-bottom: var(--dimension-spacing-space-8); }
+    .cart-row__size { grid-area: 3 / 2 / 4 / -1; padding-bottom: var(--dimension-spacing-space-16); }
     .cart-row__num { grid-row: 4; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); padding-bottom: var(--dimension-spacing-space-16); font-size: 16px; line-height: 22px; }
     .cart-row__num::before { content: attr(data-l); font-weight: 600; font-feature-settings: 'ss02' 1, 'ss03' 1; }
-    .cart-row__num[data-l="Org.pris"] { grid-column: 1; } .cart-row__num[data-l="Rabatt"] { grid-column: 2; } .cart-row__num[data-l="A Pris"] { grid-column: 3; }
-    .cart-row__qty { grid-area: 5 / 1 / 6 / 3; padding: 0; }
-    .cart-row__sum b { grid-area: 5 / 3; align-self: center; }
-    .cart-row__sum .icon-btn-compact { grid-area: 5 / 4; justify-self: end; align-self: center; }
-    .cart-row__mark { grid-area: 6 / 1 / 7 / -1; justify-self: end; padding: var(--dimension-spacing-space-16) 0 0; }
-    .cart-more { padding-top: var(--dimension-spacing-space-32); }
+    .cart-row__num[data-l="Org.pris"] { grid-column: 2; } .cart-row__num[data-l="Rabatt"] { grid-column: 3; } .cart-row__num[data-l="A Pris"] { grid-column: 4; }
+    .cart-row__qty { grid-area: 5 / 2 / 6 / 4; padding: 0; }
+    .cart-row__sum b { grid-area: 5 / 4; align-self: center; }
+    .cart-row__sum .icon-btn-compact { grid-area: 5 / 5; justify-self: end; align-self: center; }
+    /* comment line: "Kommentar: …" left, Radmärkning link / × right, 24px below the price row (Figma Product + info + Price + Comment gap) */
+    .cart-row__cm { grid-area: 6 / 1 / 7 / 4; margin: 0; padding-top: var(--dimension-spacing-space-24); }
+    .cart-row__mark { grid-area: 6 / 4 / 7 / -1; justify-self: end; align-self: start; padding-top: var(--dimension-spacing-space-24); }
+    .cart-row__form { grid-area: 7 / 1 / 8 / -1; }
   }
-  @media (min-width: 640px) { .cart-row__stock { max-width: max(140px, calc(100% - 456px)); } .cart-row__stock { flex-wrap: wrap; } .cart-row__num::before { content: none; } }
-  @media (min-width: 640px) { .cart-sum__card { padding: var(--dimension-spacing-space-24) var(--dimension-spacing-space-24) 0; } .cart-sticky { left: var(--px-full); right: var(--px-full); bottom: var(--dimension-spacing-space-32); } .cart-more { padding-top: var(--dimension-spacing-space-32); } }
+  @media (min-width: 769px) { .cart-row__stock { max-width: none; } .cart-row__stock-s { flex: 0 0 100%; max-width: max(140px, calc(100% - 481px)); } .cart-row__stock { flex-wrap: wrap; } .cart-row__num::before { content: none; } }
+  @media (min-width: 640px) { .cart-sum__card { padding: var(--dimension-spacing-space-24) var(--dimension-spacing-space-24) 0; } .cart-sticky { left: var(--px-full); right: var(--px-full); bottom: var(--dimension-spacing-space-32); } }
   /* sm (640-768px): the list is a card inset by the page margin (32px), 24px inside, like the summary card */
   @media (min-width: 640px) and (max-width: 768px) { .cart-card { margin-inline: 0; padding: var(--dimension-spacing-space-24); } }
   @media (min-width: 1281px) {
-    .cart { grid-template-columns: minmax(0, 1fr) 282px; gap: var(--dimension-spacing-space-32); }
+    .cart { grid-template-columns: minmax(0, 1fr) 282px; gap: 0 var(--dimension-spacing-space-32); }
+    /* the summary sticks only within row 1 (the table card), so it never scrolls past the table's bottom edge into "Visa fler resultat" */
+    .cart__main { display: contents; }
+    .cart-card { grid-column: 1; grid-row: 1; }
+    .cart-more { grid-column: 1; grid-row: 2; }
+    .cart-sum { grid-column: 2; grid-row: 1; }
     .cart-card { margin-inline: 0; padding: var(--dimension-spacing-space-24) var(--dimension-spacing-space-24) 0; }
-    .cart-more { padding-top: var(--dimension-spacing-space-48); }
-    .cart-sum { position: sticky; top: 105px; margin-top: 0; }   /* header 81px + 24px */
+    .pagination.cart-more { margin-top: var(--dimension-spacing-space-40); padding-bottom: 0; }   /* Figma XL: pt 40, pb 80 = the section */
+    .cart-sum { margin-top: 0; align-self: stretch; }   /* stretches over row 1 (the table card): sticky limit = this box, Chrome ignores the grid area */
+    .cart-sum__stick { position: sticky; top: 105px; }   /* header 81px + 24px */
     .cart-sum__card { padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-16) 0; }
-    .cart-sum__ship { display: flex; }
     .cart-sum__go .btn { --btn-h: 72px; --btn-fs: 18px; --btn-lh: 18px; --btn-ls: 0.18px; }   /* Figma XL: 72px, label-lg */
     .cart-sticky { display: none; }
   }
@@ -2458,17 +2511,21 @@
         <div id="cart-rows"></div>
       </div>
     </div>
-    <div class="cart-more" id="cart-showmore" hidden>
-          <p id="cart-shown"></p>
-          <div class="cart-more__bar"><div class="cart-more__fill" id="cart-fill"></div></div>
-          <button type="button" class="btn btn--secondary btn--md" id="cart-showmore-btn"><span class="btn__label">Visa fler resultat</span></button>
-        </div>
+    <div class="pagination cart-more" id="cart-showmore" hidden>
+      <div class="pagination__info">
+        <p class="pagination__count" id="cart-shown" aria-live="polite"></p>
+        <div class="pagination__progress" aria-hidden="true"><div class="pagination__progress-bar" id="cart-fill"></div></div>
+      </div>
+      <button type="button" class="btn btn--secondary btn--md" id="cart-showmore-btn"><span class="btn__label"><span class="pg-long">Visa fler resultat</span><span class="pg-short">Visa fler</span></span></button>
+    </div>
     </div>
     <aside class="cart-sum" id="cart-sum" aria-label="Ordersammanfattning">
+      <div class="cart-sum__stick">
       <div class="cart-sum__card">
         <div class="cart-sum__ship">
-          <div class="cart-sum__bar"><i id="cart-ship-bar"></i></div>
-          <p id="cart-ship-text"></p>
+          <div class="cart-ship"><span class="cart-ship__ic"><span class="icon" id="cart-ship-ic" aria-hidden="true">add_shopping_cart</span></span>
+            <div class="cart-ship__body"><div class="cart-sum__bar" role="progressbar" aria-label="Framsteg mot fri frakt" aria-valuemin="0" aria-valuemax="100"><i id="cart-ship-bar"></i></div><p id="cart-ship-text"></p></div></div>
+          <div class="cart-ship__sugg" id="cart-ship-sugg" hidden><h3>Passar bra till din order</h3><div class="cart-ship__list" id="cart-ship-list"></div></div>
         </div>
         <ul class="cart-sum__lines">
           <li class="cart-sum__line"><span>Summa varukorg</span><span id="cs-sub"></span></li>
@@ -2490,6 +2547,7 @@
       </div>
       <div class="cart-sum__go"><a class="btn btn--primary btn--lg" id="cart-go" href="/checkout.html"><span class="btn__label">Fortsätt till kassan</span><span class="icon btn__icon" aria-hidden="true">chevron_right</span></a></div>
       <div class="cart-sum__trust" aria-label="Betalsätt"><span class="is-klarna"><img src="/images/klarna.svg" alt="Klarna"></span><span><img src="/images/visa.svg" alt="Visa"></span><span><img src="/images/mastercard.svg" alt="Mastercard"></span><span><img src="/images/trygg-e-handel.png" alt="Trygg E-handel"></span><span><img src="/images/3d-secure.png" alt="3D Secure"></span></div>
+      </div>
     </aside>
   </div>
 </section>
@@ -2523,7 +2581,7 @@
   function kr(n) { return n.toLocaleString('sv-SE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\s/g, ' ') + ' kr'; }
   function num(n) { return n.toLocaleString('sv-SE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/\s/g, ' '); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  var NOTCH = '<svg width="21" height="8" viewBox="0 0 21 8" fill="none" aria-hidden="true"><path d="M0 7.5h6l4.5-7 4.5 7h6" stroke="var(--color-border-primary)"/></svg>';
+  var NOTCH = '<svg width="21.6069" height="8" viewBox="0 0 21.6069 8" fill="none" aria-hidden="true"><path d="M0 7.5H1.10691L10.7215 1L20.3362 7.5H21.5935" stroke="var(--color-border-primary)"/></svg>';
 
   /* demo: ?demo=1 fills the cart with five rows like the Figma frame (only when the cart is empty) */
   if (/[?&]demo=1/.test(location.search) && !C().items().length) {
@@ -2542,40 +2600,73 @@
 
   /* stock line + notes: the same wording the PDP scenarios use; the supplier split and the closing limit follow the quantity in the cart */
   function status(st) { return '<span class="cart-row__stock-s"><span class="badge-dot badge-dot--md badge-dot--' + (st.state === 'ok' ? 'success' : st.state === 'warn' ? 'warning' : 'neutral') + '"></span>' + esc(st.text) + '</span>'; }
-  function badge(text, kind) { return '<span class="badge-basic badge-basic--' + (kind === 'warning' ? 'warning' : 'info') + ' badge-basic--weaker"><span class="icon icon--xs" aria-hidden="true">' + (kind === 'warning' ? 'warning' : 'info') + '</span>' + esc(text) + '</span>'; }
+  function badge(text, kind, strong) { var st = kind === 'warning' ? 'warning' : 'info'; return '<div class="inline-notification inline-notification--' + st + ' inline-notification--small inline-notification--' + (strong ? 'strong' : 'weak') + '" role="status"><div class="inline-notification__base"><div class="inline-notification__left-border"></div><div class="inline-notification__container"><div class="inline-notification__inner"><div class="inline-notification__header"><span class="material-symbols-outlined inline-notification__icon" aria-hidden="true">' + st + '</span><p class="inline-notification__text">' + esc(text) + '</p></div></div></div></div></div>'; }
   function notes(i) {
     var out = '';
     if (i.note) out += badge(i.note, i.noteKind);
     if (i.split && i.qty > i.split.n) out += badge(i.split.n + ' st skickas från webblagret, ' + (i.qty - i.split.n) + ' st beställs från leverantör (' + i.split.days + ').', 'info');
-    if (i.closingN && i.qty >= i.closingN) out += badge('Utgående: bara ' + i.closingN + ' st kvar online.', 'warning');
-    if (i.max && i.qty >= i.max && !i.split) out += badge('Högsta antal att köpa online är ' + i.max + ' st.', 'warning');
+    if (i.closingN && i.qty >= i.closingN) out += badge('Utgående: bara ' + i.closingN + ' st kvar online.', 'warning', true);
+    if (i.max && i.qty >= i.max && !i.split) out += badge('Högsta antal att köpa online är ' + i.max + ' st.', 'warning', true);
     return out;
   }
   function row(r) {
-    var i = r.i, st = i.stock || { text: 'I lager', state: 'ok' }, size = i.size || (i.desc || '').replace(/^Storlek:?\s*/i, '');
+    var i = r.i, art = i.sku || String(i.id).split('|').pop() /* ids are 'name|art': only the article number is shown */, st = i.stock || { text: 'I lager', state: 'ok' }, size = i.size || (i.desc || '').replace(/^Storlek:?\s*/i, '');
     return '<article class="cart-row" data-id="' + esc(i.id) + '"><img class="cart-row__img" src="' + esc(i.img) + '" alt="">' +
       '<div class="cart-row__body"><div class="cart-row__line">' +
-        '<div class="cart-row__name"><p class="cart-row__title">' + esc(i.name) + '</p><p class="cart-row__art">Art.nr: <b>' + esc(i.sku || i.id) + '</b></p></div>' +
+        '<div class="cart-row__name"><p class="cart-row__title">' + esc(i.name) + '</p>' + (art ? '<p class="cart-row__art">Art.nr: <b>' + esc(art) + '</b></p>' : '') + '</div>' +
         '<span class="cart-row__num" data-l="Org.pris">' + num(r.old) + '</span><span class="cart-row__num" data-l="Rabatt">' + (r.disc ? r.disc + '%' : '–') + '</span><span class="cart-row__num" data-l="A Pris">' + num(i.price) + '</span>' +
         '<div class="cart-row__qty"><div class="picker-stepper picker-stepper--sm" role="group" aria-label="Antal, ' + esc(i.name) + '"><button type="button" class="picker-stepper__btn" data-step="-1" aria-label="Minska antal"' + (i.qty <= 1 ? ' disabled' : '') + '><span class="icon icon--sm" aria-hidden="true">remove</span></button><div class="picker-stepper__value"><input class="picker-stepper__input" type="text" inputmode="numeric" pattern="[0-9]*" value="' + i.qty + '" min="1" max="' + (i.max || 999) + '" aria-label="Antal, styck" autocomplete="off"><span class="picker-stepper__unit" aria-hidden="true">st</span></div><button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"><span class="icon icon--sm" aria-hidden="true">add</span></button></div></div>' +
         '<div class="cart-row__sum"><b>' + kr(i.price * i.qty) + '</b><button type="button" class="icon-btn-compact" data-del aria-label="Ta bort ' + esc(i.name) + '"><span class="icon icon--sm" aria-hidden="true">delete</span></button></div>' +
       '</div>' +
       '<div class="cart-row__stock">' + status(st) + (i.stock2 ? status(i.stock2) : '') + notes(i) + '</div>' +
-      '<div class="cart-row__foot"><div class="cart-row__size">' + (size ? '<p>Storlek: ' + esc(size) + '</p>' : '') + (i.comment ? '<p>Radmärkning: ' + esc(i.comment) + '</p>' : '') + '</div>' +
-        '<div class="cart-row__mark"><button type="button" class="action-link action-link--small" data-mark aria-expanded="false"><span class="action-link__label">Radmärkning</span><span class="icon icon--sm action-link__icon" aria-hidden="true">edit</span></button></div></div>' +
-      '<div class="cart-row__form" hidden><div class="cart-row__form-line"><i></i>' + NOTCH + '<i style="flex:0 0 5px"></i></div>' +
-        '<div class="cart-row__form-row"><div class="input-wrap"><label class="input-label">Radmärkning</label><div class="input-box input-box--sm"><input class="form-input" type="text" data-comment value="' + esc(i.comment || '') + '" placeholder="Ange radmärkning" aria-label="Radmärkning" autocomplete="off"></div><p class="input-message">Eventuella instruktioner, till exempel tryck mm.</p></div>' +
-        '<button type="button" class="btn btn--primary btn--sm" data-save disabled><span class="btn__label">Spara</span></button></div></div>' +
+      '<div class="cart-row__foot">' + (size ? '<p class="cart-row__size">Storlek: ' + esc(size) + '</p>' : '') + (i.comment ? '<p class="cart-row__cm">Kommentar: ' + esc(i.comment) + '</p>' : '') +
+        '<div class="cart-row__mark"><button type="button" class="action-link action-link--small" data-mark aria-expanded="false" aria-label="Radmärkning"><span class="cm-lbl"><span class="action-link__label">Radmärkning</span></span><span class="cm-ic" aria-hidden="true"><span class="icon icon--sm action-link__icon cm-ic__edit">edit</span><span class="icon icon--sm action-link__icon cm-ic__x">close</span></span></button></div></div>' +
+      '<div class="cart-row__form"><div class="cart-row__form-in"><div class="cart-row__form-line"><i></i>' + NOTCH + '<i style="flex:0 0 5px"></i></div>' +
+        '<div class="cart-row__form-row"><div class="form-field"><label class="form-label form-label--sm" for="cm-' + esc(i.id) + '">Radmärkning</label><div class="input-wrap"><div class="input-box input-box--sm"><input class="form-input" id="cm-' + esc(i.id) + '" type="text" data-comment value="' + esc(i.comment || '') + '" placeholder="Ange radmärkning" autocomplete="off"></div></div><p class="form-helper">Eventuella instruktioner, till exempel tryck mm.</p></div>' +
+        '<button type="button" class="btn btn--primary btn--sm" data-save disabled><span class="btn__label">Spara</span></button></div></div></div>' +
       '</div></article>';
   }
+
+  /* open/close the Radmärkning form: closed = "Radmärkning ✎" link, open = only the × (Figma Open states) */
+  function setMark(r, open) {
+    var b = r.querySelector('[data-mark]');
+    r.querySelector('.cart-row__form').classList.toggle('is-open', open);
+    b.setAttribute('aria-expanded', open); b.setAttribute('aria-label', open ? 'Stäng radmärkning' : 'Radmärkning');
+  }
+
+  /* suggestions that cover the missing amount (mock accessories, prices ex. VAT): cheapest items that reach the limit first, then the most expensive ones */
+  var SUGG = [
+    { name: 'Knäskydd Pro', art: '1253099', price: 329, img: '/images/pdp-acc-pocket.png' },
+    { name: 'Arbetshandske', art: '1253100', price: 315, img: '/images/pdp-alt-bla.jpg' },
+    { name: 'Hörselkåpa', art: '1253101', price: 249, img: '/images/pdp-alt-svart.jpg' },
+    { name: 'Ficklampa', art: '1253102', price: 459, img: '/images/pdp-acc-pocket.png' }
+  ];
+  function renderSugg(left) {
+    var box = $('cart-ship-sugg'); if (!left) { box.hidden = true; return; }
+    var inCart = {}; C().items().forEach(function (i) { inCart[i.sku || String(i.id).split('|').pop()] = 1; });
+    var pool = SUGG.filter(function (p) { return !inCart[p.art]; });
+    var cover = pool.filter(function (p) { return p.price >= left; }).sort(function (a, b) { return a.price - b.price; });
+    var rest = pool.filter(function (p) { return p.price < left; }).sort(function (a, b) { return b.price - a.price; });
+    var pick = cover.concat(rest).slice(0, 2);
+    box.hidden = !pick.length;
+    $('cart-ship-list').innerHTML = pick.map(function (p) {
+      return '<div class="cart-mini"><img src="' + esc(p.img) + '" alt=""><div class="cart-mini__t"><b>' + esc(p.name) + '</b><small>Art.nr ' + esc(p.art) + '</small><span>' + kr(p.price) + '</span></div><button type="button" class="btn btn--secondary btn--xs" data-sugg="' + esc(p.art) + '"><span class="btn__label">Lägg till</span></button></div>';
+    }).join('');
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-sugg]'); if (!b) return;
+    var p = SUGG.filter(function (x) { return x.art === b.dataset.sugg; })[0]; if (!p) return;
+    C().add({ id: p.name + '|' + p.art, name: p.name, desc: 'Art.nr ' + p.art, img: p.img, price: p.price, old: 0, qty: 1, sku: p.art });
+    toast(p.name, 'Lades i varukorgen');
+  });
 
   function render() {
     var all = view(), n = C().items().length, units = C().count();
     $('cart-empty').hidden = n > 0; $('cart-table').hidden = n === 0; $('cart-sum').hidden = n === 0;
     $('cart-count').textContent = 'Du har ' + units + (units === 1 ? ' produkt' : ' produkter') + ' i din varukorg';
-    var keep = {}; document.querySelectorAll('.cart-row__form:not([hidden])').forEach(function (f) { keep[f.closest('.cart-row').dataset.id] = 1; });
+    var keep = {}; document.querySelectorAll('.cart-row__form.is-open').forEach(function (f) { keep[f.closest('.cart-row').dataset.id] = 1; });
     $('cart-rows').innerHTML = all.slice(0, shown).map(row).join('');
-    document.querySelectorAll('.cart-row').forEach(function (r) { if (keep[r.dataset.id]) { r.querySelector('.cart-row__form').hidden = false; r.querySelector('[data-mark]').setAttribute('aria-expanded', 'true'); } });
+    document.querySelectorAll('.cart-row').forEach(function (r) { if (keep[r.dataset.id]) setMark(r, true); });
     $('cart-showmore').hidden = all.length <= PAGE;
     var vis = Math.min(shown, all.length);
     $('cart-shown').textContent = 'Visar ' + vis + ' av ' + all.length + ' produkter'; $('cart-fill').style.width = (all.length ? vis / all.length * 100 : 0) + '%';
@@ -2588,7 +2679,11 @@
     $('cs-sub').textContent = kr(gross); var pd = gross ? Math.round((1 - (net + cd) / gross) * 100) : 0; $('cs-disc-li').hidden = pd <= 0; $('cs-disc').textContent = pd + '%';
     $('cs-ship').textContent = ship ? kr(ship) : 'Fri frakt'; $('cs-vat').textContent = kr(vat); $('cs-total').textContent = kr(net + ship + vat);
     $('cart-ship-bar').style.width = Math.min(100, net / FREE_FROM * 100) + '%';
-    $('cart-ship-text').innerHTML = left ? 'Psst, Handla för ytterligare <b>' + num(left).replace(/,00$/, ',00') + ' SEK</b> och få <b>FRAKTFRI</b> leverans till ditt ombud.' : 'Du får <b>FRAKTFRI</b> leverans till ditt ombud.';
+    $('cart-ship-bar').parentNode.setAttribute('aria-valuenow', Math.round(Math.min(100, net / FREE_FROM * 100)));
+    $('cart-ship-text').innerHTML = left ? 'Handla för <b>' + kr(left) + '</b> till och få <b>FRI FRAKT</b>' : 'Snyggt! Du har fått <b>FRI FRAKT</b>';
+    $('cart-ship-bar').classList.toggle('is-done', !left);
+    $('cart-ship-ic').textContent = left ? 'add_shopping_cart' : 'local_shipping';
+    renderSugg(left);
   }
 
   /* quantity: the shared Picker Stepper script handles +/- and typing, then fires change; remove and radmärkning are ours */
@@ -2602,9 +2697,9 @@
     r.querySelector('[data-save]').disabled = e.target.value.trim() === ((it && it.comment) || '');
   });
   document.addEventListener('click', function (e) {
-    var b = e.target.closest('.cart-row [data-save]'); if (b) { var r = b.closest('.cart-row'); r.querySelector('.cart-row__form').hidden = true; C().patch(r.dataset.id, { comment: r.querySelector('[data-comment]').value.trim() }); return; }
+    var b = e.target.closest('.cart-row [data-save]'); if (b) { var r = b.closest('.cart-row'), f = r.querySelector('.cart-row__form'), txt = r.querySelector('[data-comment]').value.trim(); setMark(r, false); setTimeout(function () { C().patch(r.dataset.id, { comment: txt }); }, parseFloat(getComputedStyle(f).transitionDuration) * 1000 || 0); return; }   /* the form closes first, then the row re-renders with the saved comment */
     b = e.target.closest('.cart-row [data-del]'); if (b) { C().remove(b.closest('.cart-row').dataset.id); return; }
-    b = e.target.closest('[data-mark]'); if (b) { var f = b.closest('.cart-row').querySelector('.cart-row__form'); f.hidden = !f.hidden; b.setAttribute('aria-expanded', !f.hidden); if (!f.hidden) f.querySelector('input').focus(); return; }
+    b = e.target.closest('[data-mark]'); if (b) { var row = b.closest('.cart-row'); setMark(row, !row.querySelector('.cart-row__form').classList.contains('is-open')); if (b.getAttribute('aria-expanded') === 'true') row.querySelector('[data-comment]').focus({ preventScroll: true }); return; }
     b = e.target.closest('.cart-sort'); if (b) { sortDir = sortKey === b.dataset.sort ? -sortDir : 1; sortKey = b.dataset.sort; render(); return; }
     if (e.target.closest('#cart-showmore-btn')) { shown += PAGE; render(); }
   });
@@ -2655,6 +2750,13 @@
     addEventListener('resize', sync); document.addEventListener('eco-cart-change', sync);
   }
 })();
+
+  /* Pagination button size per Figma cart frame: XS = Small (mobile), Sm = Medium (mobile), Md/Lg = Small (desktop), XL = Medium (desktop) */
+  (function () {
+    var b = document.getElementById('cart-showmore-btn'); if (!b) return;
+    function size() { var w = innerWidth; b.classList.remove('btn--sm', 'btn--md'); b.classList.add(w < 640 ? 'btn--sm' : w < 769 ? 'btn--md' : w < 1281 ? 'btn--sm' : 'btn--md'); }
+    size(); addEventListener('resize', size);
+  })();
 </script>
 
 
