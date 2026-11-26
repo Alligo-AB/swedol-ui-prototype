@@ -176,3 +176,5 @@ Link the shared stylesheet. Never copy its rules into a page, and never write a 
 `components/css/tooltip.css` is the single source for this component. Mobile-first, desktop from 769px, `var(--…)` only. To change the component, edit that file.
 
 ---
+
+**Wrapped text fits the box (2026-11-26):** the global tooltip (`data-tooltip`, `components/js/tooltip.js`) shrinks its width to the widest wrapped line plus the padding, so a text that wraps at the 280px maximum no longer leaves a wider right padding than left (measured 16/16 at Small).

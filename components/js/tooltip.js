@@ -67,12 +67,16 @@
     if (anchored) el.style.anchorName = '--tooltip-global';
     else t.classList.add('tooltip--manual');
     if (!t.matches(':popover-open')) t.showPopover();
+    /* A wrapped text leaves the box at its maximum width, so the right padding looks bigger than the left. Shrink the box to the widest line + the padding (Figma: 8px 16px / 12px 16px around the text). */
+    var rg = document.createRange(); rg.selectNodeContents(t);
+    var fit = Math.ceil(rg.getBoundingClientRect().width) + parseFloat(getComputedStyle(t).paddingLeft) * 2;
+    if (fit < t.offsetWidth) t.style.width = fit + 'px';
     var r = el.getBoundingClientRect();
     if (anchored) { if (needsFlip(r, bottom, t.offsetHeight)) t.classList.add('tooltip--flip'); alignSide(t, r); }
     else { /* no anchor positioning: centered on the element, kept inside the viewport, on the roomier side */
       var flip = needsFlip(r, bottom, t.offsetHeight), below = bottom !== flip;
       var left = Math.max(8, Math.min(r.left + r.width / 2 - t.offsetWidth / 2, innerWidth - t.offsetWidth - 8));
-      t.style.cssText = 'position:fixed;transform:none;right:auto;bottom:auto;left:' + left + 'px;top:' + (below ? r.bottom + 10 : r.top - t.offsetHeight - 10) + 'px';
+      t.style.cssText += ';position:fixed;transform:none;right:auto;bottom:auto;left:' + left + 'px;top:' + (below ? r.bottom + 10 : r.top - t.offsetHeight - 10) + 'px';
     }
   }
   function hide() {

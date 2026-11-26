@@ -59,6 +59,12 @@
   .mc .price--mini .price__old { color: var(--color-text-tertiary); }
   .mc-item__sum { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: flex-end; }
   .mc-item__total { flex: 1; text-align: right; font-size: 16px; line-height: 22px; letter-spacing: 0.32px; font-weight: 600; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
+  .mc-item__warn { display: grid; grid-template-rows: 1fr; padding: 0 0 var(--dimension-spacing-space-16) 56px; }   /* aligned with the price row */
+  .mc-item__warn > .inline-notification { min-height: 0; overflow: hidden; }
+  .mc-item__warn.is-new { animation: mc-warn-in var(--duration-fast-4) var(--ease-standard); }   /* warning folds open when it first appears */
+  .mc-item.is-flash { animation: mc-flash var(--duration-medium-3) var(--ease-standard); }   /* row blinks when the quantity hits the limit or is cut */
+  @keyframes mc-warn-in { from { grid-template-rows: 0fr; padding-bottom: 0; opacity: 0; } to { grid-template-rows: 1fr; padding-bottom: var(--dimension-spacing-space-16); opacity: 1; } }
+  @keyframes mc-flash { from { background-color: var(--color-surface-warning-weaker); } to { background-color: transparent; } }
   .mc-item__del { display: flex; padding: 4px 8px 6px; }   /* Figma: 20px icon, 8px sides */
 
   .mc__foot { position: relative; z-index: 1; flex-shrink: 0; padding: 16px 24px; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-16); background: var(--color-surface-raised-primary); transition: box-shadow var(--duration-fast-3) var(--ease-standard); }
@@ -79,7 +85,7 @@
   .mc__disc { padding-bottom: var(--dimension-spacing-space-8); margin-top: var(--dimension-spacing-space-4); }
   .mc__btns { display: flex; gap: var(--dimension-spacing-space-8); }
   .mc__btns .btn { flex: 1; min-width: 0; --btn-h: 40px; --btn-fs: 16px; --btn-lh: 16px; --btn-ls: 0.32px; }   /* Figma xs/sm: Medium label-lg, 40px */
-  @media (prefers-reduced-motion: reduce) { .mc, .mc-overlay, .mc__sums, .mc__toggle .icon { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .mc, .mc-overlay, .mc__sums, .mc__toggle .icon { transition: none; } .mc-item__warn.is-new, .mc-item.is-flash { animation: none; } }
 
   @media (min-width: 769px) {
     .mc__head { padding: 24px 32px; }
@@ -144,19 +150,24 @@
   function count() { return items.reduce(function (n, i) { return n + i.qty; }, 0); }
   function save() { try { sessionStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} document.dispatchEvent(new CustomEvent('eco-cart-change')); }
 
+  var warned = {}, flashId = null;   /* which rows already show the limit warning; row to blink after a cut */
   function render() {
     var f = inclVat ? 1 + VAT : 1, sub = 0, disc = 0;
     $('mc-items').innerHTML = items.map(function (i, n) {
       sub += i.price * i.qty; if (i.old) disc += (i.old - i.price) * i.qty;
       var sale = i.old && i.old > i.price;
-      return '<div class="mc-item" data-i="' + n + '"><div class="mc-item__top"><div class="mc-item__main"><img class="mc-item__img" src="' + esc(i.img) + '" alt="">' +
+      var lim = i.closingN && i.qty >= i.closingN ? 'Utgående: bara ' + i.closingN + ' st kvar online.' : i.max && i.qty >= i.max && !i.split ? 'Högsta antal att köpa online är ' + i.max + ' st.' : '';   /* only what changes the next step; stock lines and notes stay on the cart page */
+      var isNew = lim && !warned[i.id], flash = isNew || flashId === i.id; warned[i.id] = !!lim;
+      var warn = lim ? '<div class="inline-notification inline-notification--warning inline-notification--small inline-notification--weak" role="status"><div class="inline-notification__base"><div class="inline-notification__left-border"></div><div class="inline-notification__container"><div class="inline-notification__inner"><div class="inline-notification__header"><span class="material-symbols-outlined inline-notification__icon" aria-hidden="true">warning</span><p class="inline-notification__text">' + esc(lim) + '</p></div></div></div></div></div>' : '';
+      return '<div class="mc-item' + (flash ? ' is-flash' : '') + '" data-i="' + n + '"><div class="mc-item__top"><div class="mc-item__main"><img class="mc-item__img" src="' + esc(i.img) + '" alt="">' +
         '<div class="mc-item__text"><p class="mc-item__name">' + esc(i.name) + '</p><p class="mc-item__desc">' + esc(i.desc) + '</p></div></div>' +
         '<div class="picker-stepper" role="group" aria-label="Antal, ' + esc(i.name) + '"><button type="button" class="picker-stepper__btn" data-step="-1" aria-label="Minska antal"' + (i.qty <= 1 ? ' disabled' : '') + '><span class="icon icon--sm" aria-hidden="true">remove</span></button>' +
         '<div class="picker-stepper__value"><input class="picker-stepper__input" type="text" inputmode="numeric" pattern="[0-9]*" value="' + i.qty + '" min="1" max="' + (i.max || 999) + '" aria-label="Antal, styck" autocomplete="off"><span class="picker-stepper__unit" aria-hidden="true">st</span></div>' +
-        '<button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"><span class="icon icon--sm" aria-hidden="true">add</span></button></div></div>' +
+        '<button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"' + (lim ? ' disabled' : '') + '><span class="icon icon--sm" aria-hidden="true">add</span></button></div></div>' +
         '<div class="mc-item__bottom"><div class="price price--mini' + (sale ? ' price--sale' : '') + '">' + (sale ? '<span class="price__old"><s>' + kr(i.old * f) + '</s></span>' : '') + '<span class="price__value">' + kr(i.price * f) + '</span></div>' +
-        '<div class="mc-item__sum"><span class="mc-item__total">' + kr(i.price * i.qty * f) + '</span><button type="button" class="icon-btn-compact mc-item__del" data-del aria-label="Ta bort ' + esc(i.name) + '"><span class="icon icon--sm" aria-hidden="true">delete</span></button></div></div></div>';
+        '<div class="mc-item__sum"><span class="mc-item__total">' + kr(i.price * i.qty * f) + '</span><button type="button" class="icon-btn-compact mc-item__del" data-del aria-label="Ta bort ' + esc(i.name) + '"><span class="icon icon--sm" aria-hidden="true">delete</span></button></div></div>' + (warn ? '<div class="mc-item__warn' + (isNew ? ' is-new' : '') + '">' + warn + '</div>' : '') + '</div>';
     }).join('');
+    flashId = null;
     var ship = items.length ? SHIP : 0, vat = (sub + ship) * VAT;
     $('mc-count').textContent = count();
     $('mc-empty').hidden = items.length > 0; $('mc-foot').hidden = items.length === 0;
@@ -178,6 +189,7 @@
     if (max && have + q > max) { q = Math.max(0, max - have); capped = true; }
     var extra = {}; Object.keys(o).forEach(function (k) { if (['id', 'name', 'desc', 'img', 'price', 'old', 'qty', 'max'].indexOf(k) < 0) extra[k] = o[k]; });   /* cart-page fields: sku, size, stock, stock2, note, split, store ... */
     if (q > 0) { if (hit) { hit.qty += q; hit.max = max || hit.max; Object.assign(hit, extra); } else items.push(Object.assign({ id: o.id, name: o.name, desc: o.desc || '', img: o.img || '', price: o.price || 0, old: o.old || 0, qty: q, max: max }, extra)); }
+    if (capped && hit) flashId = o.id;
     render();
     return { added: q, inCart: have + q, capped: capped };
   }
