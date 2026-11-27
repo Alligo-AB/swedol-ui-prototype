@@ -218,7 +218,7 @@
   function setQty(id, q) { var h = items.filter(function (i) { return i.id === id; })[0]; if (!h) return; h.qty = Math.max(1, Math.min(h.max || 999, q)); render(); }
   function remove(id) { items = items.filter(function (i) { return i.id !== id; }); render(); }
   function clear() { items = []; render(); }
-  function patch(id, o) { var h = items.filter(function (i) { return i.id === id; })[0]; if (h) { Object.assign(h, o); render(); } }
+  function patch(id, o) { var h = items.filter(function (i) { return i.id === id; })[0]; if (h) { Object.assign(h, o); render(); save(); } }
   window.ECO_MINICART = { open: open, close: close, add: add, count: count, qty: qtyOf, items: function () { return items; }, setQty: setQty, remove: remove, clear: clear, patch: patch };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render); else render();
 })();

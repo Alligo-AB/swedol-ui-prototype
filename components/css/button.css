@@ -54,7 +54,7 @@
     .btn--system[aria-pressed="true"] { --btn-bg: var(--color-surface-opacity-black-12); }  /* System selected */
 
     /* ── Hover: a layer on the base color that dissolves in (100ms, ease-standard, as in Figma) ── */
-    .btn:is(:hover, [data-state="hover"]):not(:disabled)::before { opacity: 1; }
+    .btn:is(:hover, [data-state="hover"]):not(:disabled):not([aria-disabled="true"])::before { opacity: 1; }
     .btn--system { --btn-hover: var(--color-surface-opacity-black-12); }
     .btn--system[aria-pressed="true"] { --btn-hover: var(--color-surface-opacity-white-0); }   /* already black-12: nothing on top */
     .btn--system:is(:hover, [data-state="hover"]):not(:disabled) { --btn-line: var(--color-border-hover); }
@@ -64,11 +64,11 @@
     .btn[data-state="focus"] { outline-color: var(--color-border-focus); }
 
     /* ── Disabled ── */
-    .btn:disabled {
+    .btn:disabled, .btn[aria-disabled="true"] {   /* aria-disabled: stays focusable and explains itself (cart checkout) */
       --btn-bg: var(--color-surface-disabled); --btn-fg: var(--color-text-disabled); --btn-line: transparent;
       cursor: not-allowed;
     }
-    .btn--secondary:disabled, .btn--secondary-inverted:disabled, .btn--system:disabled { --btn-bg: var(--color-surface-opacity-white-0); --btn-line: var(--color-border-disabled); }
+    .btn--secondary:disabled, .btn--secondary-inverted:disabled, .btn--system:disabled, .btn--secondary[aria-disabled="true"], .btn--system[aria-disabled="true"] { --btn-bg: var(--color-surface-opacity-white-0); --btn-line: var(--color-border-disabled); }
     .btn--blank:disabled, .btn--blank-inverted:disabled { --btn-bg: var(--color-surface-opacity-white-0); }
 
     /* ── Sizes, mobile first (every size sets every property, so the 769px block can replace them one by one) ── */

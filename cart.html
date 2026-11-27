@@ -44,6 +44,7 @@
   <link rel="stylesheet" href="/components/css/section.css">
   <link rel="stylesheet" href="/components/css/spacing.css">
   <link rel="stylesheet" href="/components/css/tabs.css">
+  <script src="/components/js/select-menu.js"></script>
   <script src="/components/js/collapsible.js"></script>
   <script src="/components/js/tooltip.js"></script>
   <script src="/components/js/chip.js" defer></script>
@@ -2276,6 +2277,11 @@
   .cart-sort:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
   .cart-head--plain .cart-sort { cursor: default; }
 
+  /* "Gå till raden": the row is marked so it stands out among many (2026-11-27) */
+  .cart-row { transition: background-color var(--duration-medium-2) var(--ease-standard), box-shadow var(--duration-medium-2) var(--ease-standard); }
+  .cart-row.is-blocked { --blk: color-mix(in srgb, var(--color-surface-warning-default) 5%, transparent); background: var(--blk); background-clip: content-box; padding-inline: var(--dimension-spacing-space-16); }   /* stays while the row can not be bought: 5% of the warning yellow */
+  .cart-row.is-flag { background: var(--color-surface-warning-weaker); background-clip: content-box; padding-inline: var(--dimension-spacing-space-16); outline: 2px solid var(--color-border-warning-default); outline-offset: -2px; }
+  @media (prefers-reduced-motion: reduce) { .cart-row { transition: none; } }
   .cart-row { display: flex; gap: var(--dimension-spacing-space-16); padding: var(--dimension-spacing-space-24) 0; border-bottom: 1px solid var(--color-border-primary); }
   @media (min-width: 640px) { #cart-rows > .cart-row:last-child { border-bottom: 0; } }
   .cart-row__img { width: 80px; height: 80px; flex: none; object-fit: contain; }
@@ -2363,11 +2369,22 @@
   @media (prefers-reduced-motion: reduce) { .cd, .cd-overlay { transition: none; } }
   .cart-sticky { position: fixed; left: var(--px-full); right: var(--px-full); bottom: var(--dimension-spacing-space-16); z-index: 90; box-shadow: var(--shadow-elevation-b-20); }
   .cart-sticky[hidden] { display: none; }
+  /* Checkout blocker (2026-11-27): rows that can be neither picked up nor shipped stop the checkout; the notice grows in above the button */
+  .cart-block { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transform: translateY(8px); transition: grid-template-rows var(--duration-medium-2) var(--ease-decelerate-emphasized), opacity var(--duration-medium-2) var(--ease-standard), transform var(--duration-medium-2) var(--ease-decelerate-emphasized), visibility 0s linear var(--duration-medium-2); }
+  .cart-block.is-on { grid-template-rows: 1fr; opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }   /* no air between notice and button */
+  .cart-block > div { overflow: hidden; min-height: 0; }
+  .cart-block .inline-notification { width: 100%; }
+  .cart-block__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-12); }
+  .cart-block .inline-notification__inner { padding: var(--dimension-spacing-space-16); }   /* 16px all round (12px was too tight, 2026-11-27) */
+  .cart-block .inline-notification__header { gap: var(--dimension-spacing-space-12); }
+  .cart-block__body .inline-notification__text { margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; }   /* body-sm: the summary is narrow */
+  .cart-block__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--dimension-spacing-space-8) var(--dimension-spacing-space-24); margin: 0; padding: 0; font-size: 14px; line-height: 20px; }   /* links start where the text starts */
+  .cart-block:focus-visible, .cart-block [tabindex="-1"]:focus-visible { outline: 2px solid var(--color-border-focus); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .cart-block, .cart-block.is-on { transition: none; transform: none; } }
   .cart-sticky .btn { width: 100%; }
   .cart-sum__go .btn__icon, .cart-sticky .btn__icon { color: inherit; }   /* .icon (loaded later) sets its own colour: black on the black button */
   .cart-sum__card, .cart-sum__go { box-shadow: var(--shadow-elevation-b-20); }   /* Figma update 2026-11-25: white surfaces carry elevation-b-20 */
   .cart-sum__card { background: var(--color-surface-raised-primary); padding: var(--dimension-spacing-space-16) var(--dimension-spacing-space-16) 0; }
-  .cart-sum__lines { padding-top: var(--dimension-spacing-space-8); }
   /* Free shipping (proposal 5, 2026-11-26): truck square + bar in the accent colour + one line of text; below it, while shipping is not free yet, two horizontal suggestions that cover the missing amount */
   .cart-sum__ship { display: flex; flex-direction: column; padding-bottom: var(--dimension-spacing-space-16); border-bottom: 1px solid var(--color-border-primary); margin-bottom: var(--dimension-spacing-space-16); }
   .cart-ship { display: flex; align-items: center; gap: var(--dimension-spacing-space-16); }
@@ -2390,7 +2407,7 @@
   .cart-mini__t small { font-size: 12px; line-height: 16px; color: var(--color-text-secondary); }
   .cart-mini__t span { font-size: 14px; line-height: 18px; font-weight: 600; }
   .cart-mini .btn { flex: none; }
-  .cart-sum__lines { margin: 0; padding: 0 0 var(--dimension-spacing-space-16); list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
+  .cart-sum__lines { margin: 0; padding: var(--dimension-spacing-space-16) 0 var(--dimension-spacing-space-16);   /* 16px between the divider above and "Summa varukorg" (2026-11-27) */ list-style: none; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); }
   .cart-sum__line { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--dimension-spacing-space-8); font-size: 17px; line-height: 24px; letter-spacing: 0.32px; color: var(--color-text-primary); font-feature-settings: 'ss02' 1, 'ss03' 1, 'ss06' 1; }
   .cart-sum__line[hidden] { display: none; }
   .cart-sum__line > :last-child { white-space: nowrap; text-align: right; }
@@ -2459,6 +2476,21 @@
     .cart-sum__go .btn { --btn-h: 72px; --btn-fs: 18px; --btn-lh: 18px; --btn-ls: 0.18px; }   /* Figma XL: 72px, label-lg */
     .cart-sticky { display: none; }
   }
+  /* Köp & Hämta (2026-11-27): per-row choice (home delivery / pickup) and the pickup store in the summary */
+  /* motion: count roll in "Åtgärda N varor" and soft swap of the Hemleverans/Hämta block (2026-11-27) */
+  .cart-roll { display: inline-block; position: relative; overflow: hidden; vertical-align: top; height: 1lh; line-height: inherit; }   /* same height as the label's line so the digit sits level with the text */
+  .cart-roll > span { display: block; }
+  .cart-roll.is-rolling > span { animation: cart-roll-up var(--duration-medium-2) var(--ease-standard) both; }
+  @keyframes cart-roll-up { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+  .cart-row__ful.is-swap { animation: cart-ful-swap var(--duration-medium-2) var(--ease-decelerate-emphasized) both; }
+  @keyframes cart-ful-swap { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .cart-roll.is-rolling > span, .cart-row__ful.is-swap { animation: none; } }
+  .cart-row__ful { flex: 1 0 100%; display: flex; flex-direction: column; gap: var(--dimension-spacing-space-8); margin-top: var(--dimension-spacing-space-8); }
+  .cart-row__ful .form-radio-message { margin: 0; }
+  .cart-sum__ship[hidden] { display: none; }
+  .cart-sum__pick { display: flex; flex-direction: column; gap: var(--dimension-spacing-space-12); padding: var(--dimension-spacing-space-16) 0; border-bottom: 1px solid var(--color-border-primary); }
+  .cart-sum__pick[hidden] { display: none; }
+  .cart-sum__pick p { margin: 0; font-size: 14px; line-height: 20px; letter-spacing: 0.36px; color: var(--color-text-secondary); }
   @media (prefers-reduced-motion: reduce) { .cart-sum__bar i { transition: none; } }
   </style>
 </head>
@@ -2527,6 +2559,10 @@
             <div class="cart-ship__body"><div class="cart-sum__bar" role="progressbar" aria-label="Framsteg mot fri frakt" aria-valuemin="0" aria-valuemax="100"><i id="cart-ship-bar"></i></div><p id="cart-ship-text"></p></div></div>
           <div class="cart-ship__sugg" id="cart-ship-sugg" hidden><h3>Passar bra till din order</h3><div class="cart-ship__list" id="cart-ship-list"></div></div>
         </div>
+        <div class="cart-sum__pick" id="cart-pick" hidden>
+          <div class="form-field"><label class="form-label form-label--sm" for="cart-store">Hämtbutik</label><div class="input-wrap"><select class="form-select form-select--sm" id="cart-store"></select><span class="form-select-arrow" aria-hidden="true">arrow_drop_down</span></div></div>
+          <p id="cart-split"></p>
+        </div>
         <ul class="cart-sum__lines">
           <li class="cart-sum__line"><span>Summa varukorg</span><span id="cs-sub"></span></li>
           <li class="cart-sum__line" id="cs-disc-li"><span>Rabatt</span><span id="cs-disc"></span></li>
@@ -2545,6 +2581,7 @@
           </div>
         </div>
       </div>
+      <div class="cart-block" id="cart-block" role="alert"><div id="cart-block-in"></div></div>
       <div class="cart-sum__go"><a class="btn btn--primary btn--lg" id="cart-go" href="/checkout.html"><span class="btn__label">Fortsätt till kassan</span><span class="icon btn__icon" aria-hidden="true">chevron_right</span></a></div>
       <div class="cart-sum__trust" aria-label="Betalsätt"><span class="is-klarna"><img src="/images/klarna.svg" alt="Klarna"></span><span><img src="/images/visa.svg" alt="Visa"></span><span><img src="/images/mastercard.svg" alt="Mastercard"></span><span><img src="/images/trygg-e-handel.png" alt="Trygg E-handel"></span><span><img src="/images/3d-secure.png" alt="3D Secure"></span></div>
       </div>
@@ -2568,7 +2605,7 @@
     </div>
   </div>
 </aside>
-<div class="cart-sticky" id="cart-sticky" hidden><a class="btn btn--primary btn--lg" href="/checkout.html"><span class="btn__label">Fortsätt till kassan</span><span class="icon btn__icon" aria-hidden="true">chevron_right</span></a></div>
+<div class="cart-sticky" id="cart-sticky" hidden><a class="btn btn--primary btn--lg" id="cart-sticky-go" href="/checkout.html"><span class="btn__label">Fortsätt till kassan</span><span class="icon btn__icon" aria-hidden="true">chevron_right</span></a></div>
 <script>
 (function () {
   /* Cart page: renders ECO_MINICART.items(), the one cart state. Item fields beyond the mini cart (all optional):
@@ -2603,22 +2640,51 @@
   function badge(text, kind, strong) { var st = kind === 'warning' ? 'warning' : 'info'; return '<div class="inline-notification inline-notification--' + st + ' inline-notification--small inline-notification--' + (strong ? 'strong' : 'weak') + '" role="status"><div class="inline-notification__base"><div class="inline-notification__left-border"></div><div class="inline-notification__container"><div class="inline-notification__inner"><div class="inline-notification__header"><span class="material-symbols-outlined inline-notification__icon" aria-hidden="true">' + st + '</span><p class="inline-notification__text">' + esc(text) + '</p></div></div></div></div></div>'; }
   function notes(i) {
     var out = '';
+    if (i.flipped && i.flipped === storeName() && fulOf(i) === 'home') out += badge('Kan inte hämtas i ' + i.flipped + ', levereras hem i stället. Välj en annan butik eller behåll hemleverans.', 'warning');
+    if (i.pick && fulOf(i) === 'none') out += badge('Utgått och slut i ' + storeName() + ': går inte att köpa med hämtning och inte att skicka hem. Välj en annan butik.', 'warning', true);
     if (i.note) out += badge(i.note, i.noteKind);
     if (i.split && i.qty > i.split.n) out += badge(i.split.n + ' st skickas från webblagret, ' + (i.qty - i.split.n) + ' st beställs från leverantör (' + i.split.days + ').', 'info');
     if (i.closingN && i.qty >= i.closingN) out += badge('Utgående: bara ' + i.closingN + ' st kvar online.', 'warning', true);
     if (i.max && i.qty >= i.max && !i.split) out += badge('Högsta antal att köpa online är ' + i.max + ' st.', 'warning', true);
     return out;
   }
+  /* Köp & Hämta: stock per store comes with the item (item.pick, from the PDP); the store is one for the whole cart (user 2026-11-27) */
+  var STORE = ''; try { STORE = sessionStorage.getItem('eco-pickup-store') || ''; } catch (e) {}
+  function storeName() { if (STORE) return STORE; var h = C().items().filter(function (i) { return i.store; })[0]; return h ? h.store : 'Borås'; }
+  function pickInfo(i) {
+    var p = i.pick; if (!p || !p.map) return null;
+    var st = p.map[storeName()] || 0, n = p.webN >= i.qty ? '1-2' : '6-7';
+    if (p.drop) return { ok: 0, line: 'Skickas direkt från leverantör, går inte att hämta i butik.' };
+    if (p.gone) return st >= i.qty ? { ok: 1, line: 'Hämtas idag innan kl 17.00 (' + st + ' st i butik)' } : st ? { ok: 1, line: 'Bara ' + st + ' st kvar i butik, ingen påfyllning.', warn: 1 } : { ok: 0, line: 'Slut i ' + storeName() + ' och utgått.' };
+    if (st >= i.qty) return { ok: 1, line: 'Hämtas idag innan kl 17.00 (' + st + ' st i butik)' };
+    if (st) return { ok: 1, line: st + ' st hämtas idag, resten inom ' + n + ' arbetsdagar', warn: 1 };
+    return { ok: 1, line: 'Tillgänglig i butik inom ' + n + ' arbetsdagar', warn: 1 };
+  }
+  function fulOf(i) {
+    var pi = pickInfo(i); if (!pi) return 'home';
+    if (i.pick.gone && !pi.ok) return 'none';   /* gone from the web and not in this store: can neither be picked up nor shipped */
+    if (i.pick.storeOnly || i.pick.gone) return 'pickup';   /* gone from the web: only the store can sell it */
+    if (i.fulfil) return i.fulfil === 'pickup' && !pi.ok ? 'home' : i.fulfil;
+    return pi.ok && (i.pick.map[storeName()] || 0) > 0 ? 'pickup' : 'home';
+  }
+  function fulBlock(i, n) {
+    var pi = pickInfo(i); if (!pi) return '';
+    var f = fulOf(i), nm = 'ful-' + n, so = i.pick.storeOnly || i.pick.gone;
+    function opt(v, label, msg, dis) { return '<div class="form-radio-field"><label class="form-radio-item form-radio-item--sm"><input type="radio" name="' + nm + '" value="' + v + '"' + (f === v ? ' checked' : '') + (dis ? ' disabled' : '') + '><span>' + esc(label) + '</span></label><p class="form-radio-message">' + esc(msg) + '</p></div>'; }
+    return '<div class="cart-row__ful" role="radiogroup" aria-label="Leveranssätt">' +
+      opt('home', 'Hemleverans', so ? (f === 'none' ? 'Utgått, går inte att skicka hem.' : 'Finns bara att hämta i butik.') : 'Fri frakt vid köp över ' + num(FREE_FROM).replace(',00', '') + ' kr.', so) +
+      opt('pickup', 'Hämta i butik (' + storeName() + ')', pi.line + (pi.ok ? ' Kostnadsfritt.' : ''), !pi.ok) + '</div>';
+  }
   function row(r) {
     var i = r.i, art = i.sku || String(i.id).split('|').pop() /* ids are 'name|art': only the article number is shown */, st = i.stock || { text: 'I lager', state: 'ok' }, size = i.size || (i.desc || '').replace(/^Storlek:?\s*/i, '');
-    return '<article class="cart-row" data-id="' + esc(i.id) + '"><img class="cart-row__img" src="' + esc(i.img) + '" alt="">' +
+    return '<article class="cart-row' + (i.pick && fulOf(i) === 'none' ? ' is-blocked' : '') + '" data-id="' + esc(i.id) + '"><img class="cart-row__img" src="' + esc(i.img) + '" alt="">' +
       '<div class="cart-row__body"><div class="cart-row__line">' +
         '<div class="cart-row__name"><p class="cart-row__title">' + esc(i.name) + '</p>' + (art ? '<p class="cart-row__art">Art.nr: <b>' + esc(art) + '</b></p>' : '') + '</div>' +
         '<span class="cart-row__num" data-l="Org.pris">' + num(r.old) + '</span><span class="cart-row__num" data-l="Rabatt">' + (r.disc ? r.disc + '%' : '–') + '</span><span class="cart-row__num" data-l="A Pris">' + num(i.price) + '</span>' +
         '<div class="cart-row__qty"><div class="picker-stepper picker-stepper--sm" role="group" aria-label="Antal, ' + esc(i.name) + '"><button type="button" class="picker-stepper__btn" data-step="-1" aria-label="Minska antal"' + (i.qty <= 1 ? ' disabled' : '') + '><span class="icon icon--sm" aria-hidden="true">remove</span></button><div class="picker-stepper__value"><input class="picker-stepper__input" type="text" inputmode="numeric" pattern="[0-9]*" value="' + i.qty + '" min="1" max="' + (i.max || 999) + '" aria-label="Antal, styck" autocomplete="off"><span class="picker-stepper__unit" aria-hidden="true">st</span></div><button type="button" class="picker-stepper__btn" data-step="1" aria-label="Öka antal"><span class="icon icon--sm" aria-hidden="true">add</span></button></div></div>' +
         '<div class="cart-row__sum"><b>' + kr(i.price * i.qty) + '</b><button type="button" class="icon-btn-compact" data-del aria-label="Ta bort ' + esc(i.name) + '"><span class="icon icon--sm" aria-hidden="true">delete</span></button></div>' +
       '</div>' +
-      '<div class="cart-row__stock">' + status(st) + (i.stock2 ? status(i.stock2) : '') + notes(i) + '</div>' +
+      '<div class="cart-row__stock">' + status(st) + (i.stock2 && !i.pick ? status(i.stock2) : '') + notes(i) + fulBlock(i, r.n) + '</div>' +
       '<div class="cart-row__foot">' + (size ? '<p class="cart-row__size">Storlek: ' + esc(size) + '</p>' : '') + (i.comment ? '<p class="cart-row__cm">Kommentar: ' + esc(i.comment) + '</p>' : '') +
         '<div class="cart-row__mark"><button type="button" class="action-link action-link--small" data-mark aria-expanded="false" aria-label="Radmärkning"><span class="cm-lbl"><span class="action-link__label">Radmärkning</span></span><span class="cm-ic" aria-hidden="true"><span class="icon icon--sm action-link__icon cm-ic__edit">edit</span><span class="icon icon--sm action-link__icon cm-ic__x">close</span></span></button></div></div>' +
       '<div class="cart-row__form"><div class="cart-row__form-in"><div class="cart-row__form-line"><i></i>' + NOTCH + '<i style="flex:0 0 5px"></i></div>' +
@@ -2665,7 +2731,9 @@
     $('cart-empty').hidden = n > 0; $('cart-table').hidden = n === 0; $('cart-sum').hidden = n === 0;
     $('cart-count').textContent = 'Du har ' + units + (units === 1 ? ' produkt' : ' produkter') + ' i din varukorg';
     var keep = {}; document.querySelectorAll('.cart-row__form.is-open').forEach(function (f) { keep[f.closest('.cart-row').dataset.id] = 1; });
+    var fsig = {}; document.querySelectorAll('.cart-row').forEach(function (r) { var f = r.querySelector('.cart-row__ful'); if (f) fsig[r.dataset.id] = f.textContent + '|' + (f.querySelector('input:checked') || {}).value; });
     $('cart-rows').innerHTML = all.slice(0, shown).map(row).join('');
+    document.querySelectorAll('.cart-row').forEach(function (r) { var f = r.querySelector('.cart-row__ful'); if (f && r.dataset.id in fsig && fsig[r.dataset.id] !== f.textContent + '|' + (f.querySelector('input:checked') || {}).value) f.classList.add('is-swap'); });
     document.querySelectorAll('.cart-row').forEach(function (r) { if (keep[r.dataset.id]) setMark(r, true); });
     $('cart-showmore').hidden = all.length <= PAGE;
     var vis = Math.min(shown, all.length);
@@ -2673,21 +2741,60 @@
     $('cart-showmore-btn').disabled = vis >= all.length;
     document.querySelectorAll('.cart-sort').forEach(function (b) { var on = b.dataset.sort === sortKey; b.querySelector('.icon').textContent = on ? (sortDir > 0 ? 'arrow_upward' : 'arrow_downward') : 'unfold_more'; });
     /* summary */
-    var gross = 0, net = 0; C().items().forEach(function (i) { gross += (i.old > i.price ? i.old : i.price) * i.qty; net += i.price * i.qty; });
-    var cd = code ? net * code.pct / 100 : 0; net -= cd; $('cs-code-li').hidden = !code; if (code) $('cs-code-v').textContent = code.code + ' -' + code.pct + '%';
-    var ship = net >= FREE_FROM || !n ? 0 : SHIP, vat = (net + ship) * VAT, left = Math.max(0, FREE_FROM - net);
+    var gross = 0, net = 0, homeNet = 0, homeN = 0, pickN = 0, canPick = 0; C().items().forEach(function (i) { gross += (i.old > i.price ? i.old : i.price) * i.qty; net += i.price * i.qty; if (i.pick) canPick++; var fo = fulOf(i); if (fo === 'pickup') pickN++; else if (fo === 'home') { homeN++; homeNet += i.price * i.qty; } });
+    var cd = code ? net * code.pct / 100 : 0; net -= cd; homeNet -= code ? homeNet * code.pct / 100 : 0; $('cs-code-li').hidden = !code; if (code) $('cs-code-v').textContent = code.code + ' -' + code.pct + '%';
+    var ship = homeNet >= FREE_FROM || !homeN ? 0 : SHIP, vat = (net + ship) * VAT, left = Math.max(0, FREE_FROM - homeNet);
     $('cs-sub').textContent = kr(gross); var pd = gross ? Math.round((1 - (net + cd) / gross) * 100) : 0; $('cs-disc-li').hidden = pd <= 0; $('cs-disc').textContent = pd + '%';
-    $('cs-ship').textContent = ship ? kr(ship) : 'Fri frakt'; $('cs-vat').textContent = kr(vat); $('cs-total').textContent = kr(net + ship + vat);
-    $('cart-ship-bar').style.width = Math.min(100, net / FREE_FROM * 100) + '%';
-    $('cart-ship-bar').parentNode.setAttribute('aria-valuenow', Math.round(Math.min(100, net / FREE_FROM * 100)));
+    $('cs-ship').textContent = ship ? kr(ship) : homeN ? 'Fri frakt' : 'Ingen frakt'; $('cs-vat').textContent = kr(vat); $('cs-total').textContent = kr(net + ship + vat);
+    $('cart-ship-bar').style.width = Math.min(100, homeNet / FREE_FROM * 100) + '%';
+    $('cart-ship-bar').parentNode.setAttribute('aria-valuenow', Math.round(Math.min(100, homeNet / FREE_FROM * 100)));
+    document.querySelector('.cart-sum__ship').hidden = !homeN;   /* nothing is shipped: no free-shipping bar */
+    var pk = $('cart-pick'); pk.hidden = !canPick;
+    if (canPick) {
+      var sel = $('cart-store'), names = Object.keys(C().items().filter(function (i) { return i.pick; })[0].pick.map).sort(function (a, b) { return a.localeCompare(b, 'sv'); });
+      if (sel.options.length !== names.length) sel.innerHTML = names.map(function (s) { return '<option>' + esc(s) + '</option>'; }).join('');
+      sel.value = storeName();
+      $('cart-split').textContent = (homeN ? homeN + (homeN === 1 ? ' vara levereras hem. ' : ' varor levereras hem. ') : '') + (pickN ? pickN + (pickN === 1 ? ' vara hämtas' : ' varor hämtas') + ' i ' + storeName() + ', kostnadsfritt.' : 'Ingen vara hämtas i butik.');
+    }
     $('cart-ship-text').innerHTML = left ? 'Handla för <b>' + kr(left) + '</b> till och få <b>FRI FRAKT</b>' : 'Snyggt! Du har fått <b>FRI FRAKT</b>';
     $('cart-ship-bar').classList.toggle('is-done', !left);
     $('cart-ship-ic').textContent = left ? 'add_shopping_cart' : 'local_shipping';
     renderSugg(left);
+    /* checkout blocker: only a row that can be neither picked up nor shipped (fulfilment 'none') stops the checkout */
+    var bl = C().items().filter(function (i) { return i.pick && fulOf(i) === 'none'; }), nb = bl.length, bx = $('cart-block'), go = $('cart-go'), sg = $('cart-sticky-go');
+    if (nb) $('cart-block-in').innerHTML = '<div class="inline-notification inline-notification--warning inline-notification--strong"><div class="inline-notification__base"><div class="inline-notification__left-border"></div><div class="inline-notification__container"><div class="inline-notification__inner"><div class="inline-notification__header"><span class="material-symbols-outlined inline-notification__icon" aria-hidden="true">warning</span><div class="cart-block__body"><p class="inline-notification__text">' + nb + (nb === 1 ? ' vara går' : ' varor går') + ' inte att köpa med hämtning i ' + esc(storeName()) + ' och kan inte skickas hem. Byt butik eller ta bort ' + (nb === 1 ? 'varan' : 'varorna') + ' för att gå vidare.</p><p class="cart-block__acts"><a href="#cart-store" class="inline-link inline-link--small" data-fix="store">Byt hämtbutik</a><a href="#" class="inline-link inline-link--small" data-fix="row">Gå till ' + (nb === 1 ? 'raden' : 'första raden') + '</a></p></div></div></div></div></div></div>';
+    bx.classList.toggle('is-on', nb > 0);
+    if (nb) go.setAttribute('aria-disabled', 'true'); else go.removeAttribute('aria-disabled');
+    if (sg) { var lb = sg.querySelector('.btn__label'), pn = +lb.dataset.n || 0;
+      if (nb) { var calm2 = matchMedia('(prefers-reduced-motion: reduce)').matches; var cur = lb.querySelector('.cart-roll'); if (!cur || pn !== nb) { var oldN = pn; lb.dataset.n = nb; lb.innerHTML = 'Åtgärda <span class="cart-roll">' + (oldN && oldN !== nb && !calm2 && cur ? '<span>' + oldN + '</span><span>' + nb + '</span>' : '<span>' + nb + '</span>') + '</span>' + (nb === 1 ? ' vara' : ' varor'); var rl = lb.querySelector('.cart-roll'); if (rl.children.length === 2) { void rl.offsetWidth; rl.classList.add('is-rolling'); } } }
+      else { lb.dataset.n = ''; lb.textContent = 'Fortsätt till kassan'; } sg.querySelector('.btn__icon').textContent = nb ? 'arrow_upward' : 'chevron_right'; sg.setAttribute('href', nb ? '#cart-block' : '/checkout.html'); sg.dataset.fix = nb ? 'block' : ''; }
   }
 
   /* quantity: the shared Picker Stepper script handles +/- and typing, then fires change; remove and radmärkning are ours */
+  /* blocker links: choose another store / jump to the first blocked row; the disabled checkout button explains itself instead of doing nothing */
+  document.addEventListener('click', function (e) {
+    var f = e.target.closest('[data-fix], #cart-go[aria-disabled="true"]'); if (!f) return;
+    e.preventDefault(); var k = f.dataset.fix || 'block', calm = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    if (k === 'store') { var s = $('cart-store'); s.scrollIntoView({ block: 'center', behavior: calm }); s.focus({ preventScroll: true }); return; }
+    if (k === 'row') {
+      var all = view(), idx = -1; all.forEach(function (r, n) { if (idx < 0 && r.i.pick && fulOf(r.i) === 'none') idx = n; });
+      if (idx >= shown) { shown = idx + 1; render(); }
+      var rw = document.querySelector('.cart-row[data-id="' + (all[idx] ? all[idx].i.id : '').replace(/"/g, '\\"') + '"]'); if (rw) { rw.scrollIntoView({ block: 'center', behavior: calm }); rw.setAttribute('tabindex', '-1'); rw.focus({ preventScroll: true }); rw.classList.add('is-flag'); setTimeout(function () { rw.classList.remove('is-flag'); }, 4000); }
+      return;
+    }
+    var bx = $('cart-block'); bx.scrollIntoView({ block: 'center', behavior: calm });   /* sticky bar and the disabled button: show the reason */
+  });
   document.addEventListener('change', function (e) {
+    if (e.target.id === 'cart-store') {
+      var was = {}; C().items().forEach(function (i) { was[i.id] = fulOf(i); });
+      STORE = e.target.value; try { sessionStorage.setItem('eco-pickup-store', STORE); } catch (x) {}
+      var moved = C().items().filter(function (i) { return was[i.id] === 'pickup' && fulOf(i) !== 'pickup'; }), nn = moved.filter(function (i) { return fulOf(i) === 'none'; }).length, hh = moved.length - nn;
+      C().items().forEach(function (i) { i.flipped = moved.indexOf(i) > -1 ? STORE : ''; });   /* the row says why it changed (notes()) until the user touches it */
+      render();
+      if (moved.length && window.ECO_N) ECO_N.showToast({ status: 'warning', title: 'Leveranssätt ändrat', text: (hh ? hh + (hh === 1 ? ' vara' : ' varor') + ' kan inte hämtas i ' + STORE + ' och levereras hem i stället. ' : '') + (nn ? nn + (nn === 1 ? ' vara' : ' varor') + ' går inte att köpa med hämtning i ' + STORE + ' eller skicka hem. Välj en annan butik.' : '') });
+      return;
+    }
+    var fr = e.target.closest('.cart-row'); if (fr && e.target.matches('input[name^="ful-"]')) { C().patch(fr.dataset.id, { fulfil: e.target.value, flipped: '' }); return; }
     var r = e.target.closest('.cart-row'); if (!r) return;
     if (e.target.matches('.picker-stepper__input')) { C().setQty(r.dataset.id, parseInt(e.target.value, 10) || 1); return; }
   });

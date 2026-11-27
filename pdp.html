@@ -4009,12 +4009,12 @@
       /* Mock data: the live page lists only the article numbers per variant (swedol.se, fetched 2026-11-13); EAN, supplier number, price and stock are made up, varied per variant */
       var STOCK = [0, 100, 0, 25, 0, 8, 0, 0, 60, 0, 0, 0, 10320, 0], BORAS = [0, 100, 12, 0, 40, 0, 5, 0, 0, 20, 12, 3, 0, 0];   /* C62-C68 are extra rows for more stock scenarios; each variant gets its own scenario in "Stock scenarios" (VS) */
       var rows = [42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68].map(function (n, i) {
-        var r = { size: 'C' + n, art: '275072599-' + n, ean: '73114516558' + n, lev: '60011351A' + (6 + i), price: i < 6 ? 886.79 : 896.79, old: '1 670,00 kr', web: WEB_OUT, store: STORE_SUP, webOk: 1, storeOk: 1, stock: STOCK[i], boras: BORAS[i] };
+        var r = { size: 'C' + n, art: '275072599-' + n, ean: '73114516558' + n, lev: '60011351A' + (6 + i), price: i < 6 ? 886.79 : 896.79, old: '1 670,00 kr', web: WEB_OUT, store: STORE_SUP, webOk: 1, storeOk: 1, stock: STOCK[i], b0: BORAS[i], get boras() { return window.PDP_STOCK_AT ? PDP_STOCK_AT(window.PDP_STORE, this) : this.b0; } };   /* b0 = Borås stock (seed); boras = stock in the SELECTED store, one source with the store drawer (PDP_STOCK_AT) */
         if (i === 0) r.web = 'Ej i lager (Bekräftad inleverans 24-10-02 skickas dagen efter)';
         /* the four top rows show the four price states: C42 plain, C44 old price, C46 + 30%, C48 + Utförsäljning */
         if (i >= 1 && i <= 3) { r.price = 620.75; r.old = '886,79 kr'; r.sale = { old: '886,79 kr', note: 'Kampanj t.o.m 2026-12-31', lowest: '886,79 kr' }; if (i >= 2) r.sale.badge = true; if (i === 3) r.sale.closing = true; }
         if (r.stock) r.web = r.stock + ' i lager';
-        if (i === 1) { r.store = 'Ej i lager, men kan finnas i annan butik'; r.storeOk = 0; r.current = 1; }
+        if (i === 1) r.current = 1;
         return r;
       });
       /* Mock tiered prices (staffling) for the sticky add-to-cart: 10+ st -5%, 50+ st -10% on variants without a campaign price */
@@ -4025,7 +4025,7 @@
       /* web + store lines of a variant; with a stock scenario (see "Stock scenarios") every variant shows the scenario's stock, so the table agrees with the page top */
       function stockHtml(r, kind) {
         var rs = window.PDP_ROWSTOCK && PDP_ROWSTOCK(r), dt = function (ok) { return '<span class="badge-dot badge-dot--sm badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
-        var web = rs ? rs.web : { ok: 1, label: 'Webb', text: r.web }, store = rs ? rs.store : { ok: r.storeOk, label: 'Butik', text: r.store };
+        var web = rs ? rs.web : { ok: 1, label: 'Webb', text: r.web }, store = rs ? rs.store : { ok: r.boras > 0, label: 'Butik', text: r.boras ? r.boras + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(r) : 'Ej i lager') };
         return (web.hide ? '' : '<span>' + dt(web.ok) + web.label + ': ' + web.text + '</span>') + (store.hide ? '' : '<span>' + dt(store.ok) + store.label + ': ' + store.text + '</span>');
       }
       window.PDP_RENDER = function () { render(); };
@@ -4101,11 +4101,13 @@
         if (q('#pdp-size-value')) q('#pdp-size-value').textContent = r.size + ' - ' + r.art;
         var dot = function (ok) { return '<span class="badge-dot badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
         if (q('#pdp-web-status')) q('#pdp-web-status').innerHTML = dot(1) + '<span>' + (r.stock ? r.stock + ' st i lager (Normal leverans 1-2 arbetsdagar)' : r.web) + '</span>';
-        if (q('#pdp-store-status')) q('#pdp-store-status').innerHTML = '<li class="pdp-stock__status">' + dot(r.boras) + '<span>' + (r.boras ? r.boras + ' st i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li>' +
-          '<li class="pdp-stock__status">' + dot(1) + '<span>' + (r.boras ? 'Köp &amp; Hämta - Hämta idag innan kl 17.00' : 'Köp &amp; Hämta - Tillgänglig i butik inom 6-7 arbetsdagar') + '</span></li>';
-        if (q('#pdp-banner-text')) q('#pdp-banner-text').innerHTML = 'Via tjänsten Köp &amp; Hämta kan du lägga en order direkt mot önskad butik. ' + (r.boras ? '<strong>' + r.boras + ' i butik</strong>, kan hämtas idag innan kl 17.00' : '<strong>0 i butik</strong>, tillgänglig i butik inom 6-7 arbetsdagar');
+        var kh = window.PDP_KH ? PDP_KH(r.boras, r) : { ok: 1, banner: '', line: r.boras ? 'Köp &amp; Hämta - Tillgänglig' : 'Köp &amp; Hämta - Tillgänglig i butik inom 6-7 arbetsdagar' };
+        if (q('#pdp-store-status')) q('#pdp-store-status').innerHTML = '<li class="pdp-stock__status">' + dot(r.boras) + '<span>' + (r.boras ? r.boras + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(r) : 'Ej i lager')) + '</span></li>' +
+          '<li class="pdp-stock__status">' + dot(kh.ok) + '<span>' + kh.line + '</span></li>';
+        if (q('#pdp-banner-text') && kh.banner) q('#pdp-banner-text').innerHTML = kh.banner;
         if (window.PDP_SYNC_SCN) PDP_SYNC_SCN();
         if (window.PDP_APPLY_SCN) PDP_APPLY_SCN();
+        if (window.PDP_STORES_REFRESH) PDP_STORES_REFRESH();
         if (q('#pdp-variant-live')) q('#pdp-variant-live').textContent = 'Variant ' + r.size + ' vald, artikelnummer ' + r.art;
         render();
         if (scroll) {
@@ -4179,13 +4181,16 @@
   <script>
     /* Store status + store info drawer. Mock data: 12 stores, km from Borås (the store in the header = pre-selected). */
     (function () {
+      /* opening hours: a few profiles, several stores share one (mock) */
+      var HRS = { A: { wk: '06:30 - 17:00', sat: '09:00 - 13:00', sun: 'Stängt' }, B: { wk: '07:00 - 18:00', sat: 'Stängt', sun: 'Stängt' }, C: { wk: '06:30 - 17:00', sat: 'Stängt', sun: 'Stängt' }, D: { wk: '07:00 - 17:00', sat: '09:00 - 14:00', sun: '10:00 - 14:00' } };
+      var HRS_OF = { 'Arlandastad': 'D', 'Arninge': 'D', 'Bromma': 'D', 'Solna': 'D', 'Uppsala': 'A', 'Borås': 'A', 'Göteborg Backa': 'A', 'Jönköping': 'B', 'Linköping': 'B', 'Örebro': 'B', 'Malmö Fosie': 'C', 'Eskilstuna': 'C', 'Borlänge': 'C' };
       var S = [['Arlandastad','Voltgatan 9, Arlandastad, 195 60, Stockholms län',59.65,17.93,2],['Arninge','Leverantörsvägen 17, Täby, 187 66, Stockholms län',59.46,18.13,2],
         ['Borås','Göteborgsvägen 185, Borås, 504 63, Västra Götalands län',57.72,12.94,100],['Borlänge','Mästargatan 7, Borlänge, 781 71, Dalarna',60.48,15.43,2],
         ['Bromma','Ranhammarsvägen 12, Bromma, 168 67, Stockholms län',59.34,17.94,2],['Eskilstuna','Kungsgatan 42, Eskilstuna, 632 20, Södermanlands län',59.37,16.51,0],
         ['Göteborg Backa','Exportgatan 22, Göteborg, 422 46, Västra Götalands län',57.75,11.95,14],['Jönköping','Elmiavägen 3, Jönköping, 553 10, Jönköpings län',57.78,14.16,5],
         ['Linköping','Västra Svedengatan 2, Linköping, 582 73, Östergötlands län',58.41,15.62,0],['Malmö Fosie','Jägershillsgatan 18, Malmö, 213 75, Skåne län',55.56,13.04,7],
         ['Solna','Hemvärnsgatan 18, Solna, 171 54, Stockholms län',59.37,18.0,3],['Uppsala','Boländerna 14, Uppsala, 754 50, Uppsala län',59.86,17.64,3],['Örebro','Bergsmansvägen 4, Örebro, 703 61, Örebro län',59.27,15.21,0]]
-        .map(function (a, i) { return { id: i, name: a[0], addr: a[1], lat: a[2], lon: a[3], stock: a[4], sat: i % 3 === 0 ? 'Stängt' : '09:00 - 13:00', svc: ['sfkt', 'sf', 'skt', 'sfkt', 'st', 'sfkt', 'sk', 'sfkt', 'sf', 'sfkt', 'st', 'sfkt', 'skt'][i] }; });
+        .map(function (a, i) { return { id: i, name: a[0], addr: a[1], lat: a[2], lon: a[3], stock: a[4], hrs: HRS[HRS_OF[a[0]] || 'A'], svc: ['sfkt', 'sf', 'skt', 'sfkt', 'st', 'sfkt', 'sk', 'sfkt', 'sf', 'sfkt', 'st', 'sfkt', 'skt'][i] }; });
       /* services in store (mock): icon = Material Symbol, no custom drawing in the icon library yet */
       var SVC = { s: ['hose-crimping', 'Slangpressning i butik', ['Swedol hjälper dig med slangpressning i butik. Vi åtgärdar slitna eller trasiga slangar för att minska säkerhetsrisker. Med en avancerad maskinpark pressar vi slangar i olika material och mått.', 'Du hittar även kopplingar, ventiler och tillbehör hos oss – snabbt, säkert och professionellt!'], 'slangpressning'],   /* texts from Figma 4580:20285; the other three are placeholders */
         f: ['foot-scan', 'Fotskanning i butik', ['Vi mäter dina fötter i butiken så att du hittar skyddsskor som passar just dig.'], 'fotskanning'],
@@ -4198,9 +4203,23 @@
       var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
       var dot = function (ok) { return '<span class="badge-dot badge-dot--md badge-dot--' + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
       var fmt = function (n) { return n < 10 ? String(Math.round(n * 10) / 10).replace('.', ',') : Math.round(n); };
+      /* One stock source for drawer, table, sticky and page top: stockAt(store, variant row). Borås = the row's seed, other stores = fixed mock per store and variant (some are 0). */
+      var row = function () { return (window.PDP_VARIANTS || []).filter(function (r) { return r.current; })[0]; };
+      function stockAt(x, r) { if (!r) return 0; if (x.name === 'Borås') { var sb = window.PDP_BORAS_SCN ? PDP_BORAS_SCN(r) : null; return sb == null ? r.b0 : sb; }   /* Borås follows the variant's scenario figure (Figma matrix), so drawer, page and cart agree */ var n = parseInt(r.size.slice(1), 10); return (x.id * 5 + n) % 7 < 2 ? 0 : 1 + (x.id * 7 + n * 3) % 14; }
+      function hoursToday(x) { var d = (new Date().getDay() + 6) % 7; return d < 5 ? x.hrs.wk : d === 5 ? x.hrs.sat : x.hrs.sun; }
+      window.PDP_HOURS_TEXT = function (x) { var t = hoursToday(x); return t === 'Stängt' ? 'Stängt idag' : 'Öppet idag: Kl. ' + t; };
+      window.PDP_STORE = sel; window.PDP_STOCK_AT = stockAt;
+      window.PDP_NOSTOCK = function (r) { r = r || row(); var n = S.filter(function (x) { return x !== window.PDP_STORE && stockAt(x, r) > 0; }).length; return n ? 'Ej i lager, finns i ' + n + (n === 1 ? ' annan butik' : ' andra butiker') : 'Ej i lager'; };
+      function refreshStock() {
+        var r = row(); S.forEach(function (x) { x.stock = stockAt(x, r); });
+        if (window.PDP_STORE_STOCK) sel.stock = PDP_STORE_STOCK();   /* selected store also follows ?store= and the scenarios */
+        var a = el('pdp-stores-link'); if (a && r) a.querySelector('.action-link__label').textContent = 'Tillgänglig i ' + S.filter(function (x) { return x.stock > 0; }).length + ' butiker';
+      }
+      window.PDP_STORES_REFRESH = refreshStock;
+      window.PDP_STOCK_MAP = function (r) { var m = {}; S.forEach(function (x) { m[x.name] = stockAt(x, r); }); return m; };   /* stock per store for one variant: the cart page picks up from it */
+      refreshStock();
       function render() {
-        /* the Borås stock follows the variant shown at the top of the page */
-        S[2].stock = window.PDP_STORE_STOCK ? PDP_STORE_STOCK() : 0;
+        refreshStock();
         var term = q.value.trim(), t = term.toLowerCase(), anchor, label;
         if (geo) { anchor = ME; label = 'Din nuvarande plats'; }
         else if (t) { anchor = S.filter(function (x) { return (x.name + ' ' + x.addr).toLowerCase().indexOf(t) > -1; })[0] || null; label = term; }
@@ -4212,21 +4231,23 @@
         else list.sort(function (x, y) { return x.name.localeCompare(y.name, 'sv'); });
         el('sd-sort').innerHTML = anchor ? 'Butiker sorteras efter avstånd till <strong>"' + esc(label) + '"</strong>' : t ? 'Inga butiker matchade "' + esc(term) + '". Butiker sorteras i alfabetisk ordning.' : 'Ingen butik vald. Butiker sorteras i alfabetisk ordning.';
         box.innerHTML = list.length ? list.map(function (x, i) {
+          var kx = window.PDP_KH ? PDP_KH(x.stock, row()) : { ok: 1, line: 'Köp &amp; hämta - Tillgänglig' };
           var on = x === sel, dist = anchor && anchor !== x && d(x) ? ' <span class="sd-card__km">· ' + fmt(d(x)) + ' km bort</span>' : '';
           return '<li class="sd-card' + (on ? ' is-selected' : '') + '" data-id="' + x.id + '" tabindex="0" role="button" aria-pressed="' + on + '" aria-label="' + (on ? 'Vald butik ' : 'Välj butik ') + esc(x.name) + '">' +
             '<div class="sd-card__head"><h3 class="sd-card__name">' + (on ? '<span class="ms" aria-hidden="true">store</span>' : '') + esc(x.name) + dist + '</h3>' +
             '<a href="#" class="action-link action-link--medium" data-info="' + x.id + '"><span class="action-link__label">Butiksinformation</span><span class="action-link__icon" aria-hidden="true">chevron_right</span></a></div>' +
             (none ? '<p class="sd-card__status"><span class="badge-dot badge-dot--md badge-dot--neutral" aria-hidden="true"></span>Välj produktvariant för att se lagerstatus</p>' :
               '<p class="sd-card__status">' + dot(x.stock) + (x.stock ? 'Butik - ' + x.stock + ' i lager' : 'Ej i lager') + '</p>' +
-              '<p class="sd-card__status">' + dot(1) + 'Köp &amp; hämta - Tillgänglig</p>') +
+              '<p class="sd-card__status">' + dot(kx.ok) + kx.line.replace('Hämta', 'hämta') + '</p>') +
             '<p class="sd-card__addr">' + esc(x.addr) + '</p></li>' + (on && i === 0 && list.length > 1 ? '<li class="sd-sep" role="presentation"></li>' : '');
         }).join('') : '<li class="sd-sub sd-empty">Inga butiker hittades.</li>';
       }
       function setStore(s) {
         sel = s;
         document.querySelectorAll('.store-btn > span:not(.ms):not(.store-btn__text-regular), .sh-sm__store-btn__bold').forEach(function (n) { n.innerHTML = esc(s.name) + ',&nbsp;'; });
-        var h = document.querySelector('.pdp-stock__store .pdp-stock__name'); if (h && h.lastChild) h.lastChild.textContent = s.name;
-        var a = el('pdp-stores-link'); if (a) a.querySelector('.action-link__label').textContent = 'Tillgänglig i ' + S.filter(function (x) { return x.stock > 0; }).length + ' butiker';
+        var h = document.querySelector('.pdp-stock__store .pdp-stock__name'); if (h && h.lastChild) h.lastChild.textContent = s.name; var ht = document.querySelector('.pdp-stock__store .pdp-stock__text'); if (ht && !document.body.classList.contains('pdp-storeonly')) ht.textContent = PDP_HOURS_TEXT(s);
+        window.PDP_STORE = s; try { sessionStorage.setItem('eco-pickup-store', s.name); } catch (e) {}
+        var cr = row(); if (cr && window.PDP_SELECT) PDP_SELECT(cr.art);   /* table, sticky and page top re-read the stock of the new store */
         render();
       }
       function lock(on) { var de = document.documentElement; if (on) { var sw = innerWidth - de.clientWidth; de.style.overflow = 'hidden'; document.body.style.paddingRight = sw ? sw + 'px' : ''; } else { de.style.overflow = ''; document.body.style.paddingRight = ''; } }   /* page does not scroll behind the drawer; padding keeps the layout from jumping */
@@ -4240,9 +4261,9 @@
         el('sd-i-tel').href = 'tel:033442680'; el('sd-i-tel').querySelector('.action-link__label').textContent = '033-44 26 80';
         var mail = 'info.' + s.name.toLowerCase().replace(/\s+/g, '') + '@swedol.se'; el('sd-i-mail').href = 'mailto:' + mail; el('sd-i-mail').querySelector('.action-link__label').textContent = mail;
         el('sd-i-gln-t').textContent = 'GLN: 275072599-' + (144 + s.id); el('sd-i-dir').href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(s.addr);
-        var day = (new Date().getDay() + 6) % 7, today = day < 5 ? '06:30 - 17:00' : day === 5 ? s.sat : 'Stängt';
+        var today = hoursToday(s);
         el('sd-i-open').innerHTML = today === 'Stängt' ? '<h3>Stängt idag</h3>' : '<h3>Öppet idag</h3><h3>' + today + '</h3>';
-        el('sd-i-hours').innerHTML = [['Mån - Fre', '06:30 - 17:00'], ['Lör', s.sat], ['Sön', 'Stängt']].map(function (r) { return '<div class="sd-info__row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('');
+        el('sd-i-hours').innerHTML = [['Mån - Fre', s.hrs.wk], ['Lör', s.hrs.sat], ['Sön', s.hrs.sun]].map(function (r) { return '<div class="sd-info__row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('');
         el('sd-i-svc-sec').hidden = !s.svc;
         el('sd-i-svc').innerHTML = 'sftk'.split('').filter(function (k) { return s.svc.indexOf(k) > -1; }).map(function (k, n) { var v = SVC[k], id = 'sd-svc-' + n;
           return '<div class="collapsible-wrap"><button type="button" class="collapsible-item" onclick="toggleCollapsible(this)" aria-expanded="false" aria-controls="' + id + '"><span class="collapsible-item__left"><img class="sd-svc-ico" src="/images/svc-' + v[0] + '.svg" alt="" width="24" height="24"><span class="collapsible-item__label">' + v[1] + '</span></span><span class="collapsible-item__end"><span class="ms collapsible-item__chevron" aria-hidden="true">expand_more</span></span></button>' +
@@ -4481,7 +4502,7 @@
         if (tiersEl && tiersEl.hidden !== !tiersHtml) tiersEl.hidden = !tiersHtml;
         var storeN = ((q('#pdp-stores-link .action-link__label') || {}).textContent || '').trim(), sn = ((q('.pdp-stock__store .pdp-stock__name') || {}).lastChild || {}).textContent || 'Borås', dt = function (o) { return '<span class="badge-dot badge-dot--md badge-dot--' + o + '" aria-hidden="true"></span>'; };
         if (none_) byId('sx-stock').innerHTML = '<li>' + dt('neutral') + '<a href="#" class="inline-link inline-link--small inline-link--secondary" id="sx-pick">Välj produktvariant för att se lagerstatus</a></li>';
-        else byId('sx-stock').innerHTML = window.PDP_LINES ? PDP_LINES(cur, sn, dt) : '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li>';
+        else byId('sx-stock').innerHTML = window.PDP_LINES ? PDP_LINES(cur, sn, dt) : '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(cur) : 'Ej i lager')) + '</span></li>';
         byId('sx-size').hidden = none_; byId('sx-size').textContent = none_ ? '' : 'Storlek ' + cur.size;
         byId('sx-stores-label').textContent = none_ ? 'Välj butik' : (storeN || 'Se tillgänglighet i butiker');
         var sxb = byId('sx-add'); sxb.disabled = none_; sxb.querySelector('.btn__label').textContent = none_ ? 'Välj variant' : (sa.classList.contains('is-added') ? 'Tillagd ✓' : 'Lägg i varukorgen');
@@ -4493,7 +4514,7 @@
         byId('sm-tier').hidden = !tierTxt; byId('sm-tier').textContent = tierTxt;
         byId('sm-badges').hidden = !showB; if (showB) { byId('sm-off').hidden = !cur.sale.badge; byId('sm-off').textContent = offTxt; byId('sm-closing').hidden = !cur.sale.closing; }
         if (none_) byId('sm-stock').innerHTML = '<li>' + dt('neutral') + '<a href="#" class="inline-link inline-link--small inline-link--secondary" id="sm-pick">Välj produktvariant för att se lagerstatus</a></li>';
-        else { var h_ = window.PDP_LINES ? PDP_LINES(cur, sn, dt) : '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li>'; var sp_ = window.PDP_SPLIT ? PDP_SPLIT(h_) : { main: h_, note: '' }; byId('sm-stock').innerHTML = sp_.main; byId('sm-note').innerHTML = sp_.note; byId('sm-note').hidden = !sp_.note; }
+        else { var h_ = window.PDP_LINES ? PDP_LINES(cur, sn, dt) : '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(cur) : 'Ej i lager')) + '</span></li>'; var sp_ = window.PDP_SPLIT ? PDP_SPLIT(h_) : { main: h_, note: '' }; byId('sm-stock').innerHTML = sp_.main; byId('sm-note').innerHTML = sp_.note; byId('sm-note').hidden = !sp_.note; }
  if (none_) byId('sm-note').hidden = true;
         byId('sm-size').textContent = none_ ? '' : 'Storlek ' + cur.size; byId('sm-div').hidden = none_;
         byId('sm-stores-label').textContent = none_ ? 'Välj butik' : (storeN || 'Se tillgänglighet i butiker');
@@ -4508,7 +4529,7 @@
         byId('md-tier').hidden = !tierTxt; byId('md-tier-text').textContent = tierTxt;
         byId('md-size').textContent = none_ ? '' : 'Storlek ' + cur.size; byId('md-div').hidden = none_;
         if (none_) byId('md-stock').innerHTML = '<li>' + dt('neutral') + '<a href="#" class="inline-link inline-link--small inline-link--secondary" id="md-pick">Välj produktvariant för att se lagerstatus</a></li>';
-        else { var h_ = window.PDP_LINES ? PDP_LINES(cur, sn, dt) : '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li>'; var sp_ = window.PDP_SPLIT ? PDP_SPLIT(h_) : { main: h_, note: '' }; byId('md-stock').innerHTML = sp_.main; byId('md-note').innerHTML = sp_.note; byId('md-note').hidden = !sp_.note; }
+        else { var h_ = window.PDP_LINES ? PDP_LINES(cur, sn, dt) : '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(cur) : 'Ej i lager')) + '</span></li>'; var sp_ = window.PDP_SPLIT ? PDP_SPLIT(h_) : { main: h_, note: '' }; byId('md-stock').innerHTML = sp_.main; byId('md-note').innerHTML = sp_.note; byId('md-note').hidden = !sp_.note; }
  if (none_) byId('md-note').hidden = true;
         byId('md-stores-label').textContent = none_ ? 'Välj butik' : (storeN || 'Se tillgänglighet i butiker');
         var mdb = byId('md-add'); mdb.disabled = none_; mdb.querySelector('.btn__label').textContent = none_ ? 'Välj variant' : (sa.classList.contains('is-added') ? 'Tillagd ✓' : 'Lägg i varukorgen');
@@ -4604,15 +4625,15 @@
       var dot = function (ok, md) { return '<span class="badge-dot badge-dot--' + (md ? 'md badge-dot--' : '') + (ok ? 'success' : 'danger') + '" aria-hidden="true"></span>'; };
       function web() { return scn && scn.web; }
       /* the most the buyer may order */
-      function maxQty() {
+      function maxQty(r) {
         if (!scn) return Infinity; var w = scn.web;
         if (w.drop || w.ksl) return 999;
-        if (scn.closing) return w.n > 0 ? w.n : 1;
+        if (scn.closing) return w.n > 0 ? w.n : (storeStock(r) > 0 && !compact() ? storeStock(r) : 1);
         if (w.n > 0) return scn.sup ? 999 : w.n;
         return 999;   /* Normalartikel with no stock may still be ordered (Figma: the button stays on) */
       }
       /* button state: only a closing item that is gone from the web stock cannot be bought online */
-      function btn() { return scn && scn.btnOn ? null : scn && scn.storeOnly ? { disabled: false, label: 'Butiksartikel', store: 1 } : scn && (scn.btnOff || (scn.closing && scn.web.n === 0)) ? { disabled: true, label: scn.btnLabel || 'Utgått' } : null; }
+      function btn(r) { return scn && scn.btnOn ? null : scn && scn.storeOnly ? { disabled: false, label: 'Butiksartikel', store: 1 } : scn && (scn.btnOff || (scn.closing && scn.web.n === 0 && !(storeStock(r) > 0 && !compact())))   /* gone from the web but in the chosen store: can be bought for pickup there (user 2026-11-27, differs from Figma) */ ? { disabled: true, label: scn.btnLabel || 'Utgått' } : null; }
       /* quantity message: { kind, text } or null */
       function qnote(n) {
         if (!scn || scn.storeOnly) return null; var w = scn.web;
@@ -4628,12 +4649,12 @@
         return '<div class="inline-notification inline-notification--' + st + ' inline-notification--' + (strong ? 'strong' : 'weak') + '" role="status"><div class="inline-notification__base"><div class="inline-notification__left-border"></div><div class="inline-notification__container"><div class="inline-notification__inner"><div class="inline-notification__header"><span class="material-symbols-outlined inline-notification__icon' + (icon && st === 'info' ? ' icon-outline' : '') + '" aria-hidden="true">' + (icon && st === 'info' ? icon : st) + '</span><p class="inline-notification__text">' + String(html).replace(/<\/?strong>/g, '') + '</p></div></div></div></div></div>';
       }
       function lines(cur, sn, dt) {
-        var base = function () { return '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li>'; };
+        var base = function () { return '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li><li>' + dt(cur.boras ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (cur.boras ? cur.boras + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(cur) : 'Ej i lager')) + '</span></li>'; };
         if (!scn && !smode) return base();
-        if (!scn) { var cb = compact() ? '<li>' + dt('success') + '<span>Butik: finns i 12 butiker</span></li>' : '<li>' + dt(storeStock() ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (storeStock() ? storeStock() + ' st i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li>'; return '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li>' + (smode === 'hide' ? '' : cb); }
+        if (!scn) { var cb = compact() ? '<li>' + dt('success') + '<span>Butik: finns i 12 butiker</span></li>' : '<li>' + dt(storeStock() ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (storeStock() ? storeStock() + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(cur) : 'Ej i lager')) + '</span></li>'; return '<li>' + dt(cur.stock > 0 ? 'success' : 'danger') + '<span>Webb: ' + (cur.stock > 0 ? cur.stock + ' st i lager' : 'Ej i lager') + '</span></li>' + (smode === 'hide' ? '' : cb); }
         if (scn.storeOnly && compact()) { var wk = scn.web; return (wk.ksl ? '<li>' + dt(wk.n > 0 ? 'success' : 'danger') + '<span>Kundunikt lager: ' + wk.short + '</span></li>' : '') + '<li class="sa-note">' + dt('info') + '<span>Butiksartikel, endast till butik</span></li>' + (smode === 'hide' ? '' : '<li>' + dt('success') + '<span>Butik: finns i 12 butiker</span></li>'); }
         var w = scn.web, b = storeStock(), out = w.hide ? '' : '<li>' + dt(w.n > 0 || w.drop || w.ok ? 'success' : 'danger') + '<span>' + (w.ksl ? 'Kundunikt lager: ' : 'Webb: ') + w.short + '</span></li>';
-        if (smode !== 'hide') out += compact() ? '<li>' + dt('success') + '<span>Butik: finns i 12 butiker</span></li>' : '<li>' + dt(b ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (b ? b + ' st i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li>';
+        if (smode !== 'hide') out += compact() ? '<li>' + dt('success') + '<span>Butik: finns i 12 butiker</span></li>' : '<li>' + dt(b ? 'success' : 'danger') + '<span>' + sn.trim() + ': ' + (b ? b + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(cur) : 'Ej i lager')) + '</span></li>';
         var first = function (h) { return String(h).replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').split(/(?<=\.)\s/)[0]; };
         if (scn.hazard) out += '<li class="sa-note">' + dt('warning') + '<span>' + scn.hazard.replace(/\.$/, '') + '</span></li>';
         else if (scn.pre) out += '<li class="sa-note">' + dt('info') + '<span>' + first(typeof scn.pre === 'string' ? scn.pre : scn.pre.text) + '</span></li>';
@@ -4641,9 +4662,10 @@
         return out;
       }
       /* variant table + mobile cards: the add-to-cart button follows the scenario like the page button (off / "Butiksartikel" opens the store list / quantity limit) */
+      window.PDP_BORAS_SCN = function (r) { var sc = withScn(r, function () { return scn; }); return sc && sc.boras != null ? sc.boras : null; };
       window.PDP_ROWBTN = function (r) {
         return withScn(r, function () {
-          if (!scn) return null; var st = btn(), m = maxQty();
+          if (!scn) return null; var st = btn(r), m = maxQty(r);
           return { disabled: !!(st && st.disabled), store: !!(st && st.store), label: st ? (st.store ? 'Butiksartikel, välj butik' : st.label) : 'Lägg i varukorg', max: isFinite(m) && m < 999 ? m : 0 };
         });
       };
@@ -4653,7 +4675,7 @@
         if (!scn && !smode) return null;
         var w = scn ? scn.web : { n: r.stock, ok: 1, short: r.stock ? r.stock + ' st i lager' : 'Ej i lager' }, sb = scn || smode ? storeStock(r) : r.boras;
         return { web: { ok: w.n > 0 || w.drop || w.ok, label: w.ksl ? 'Kundunikt lager' : 'Webb', text: w.short, hide: !!w.hide },
-                 store: { ok: compact() || sb > 0, label: 'Butik', text: compact() ? 'finns i 12 butiker' : sb ? sb + ' st i lager' : 'Ej i lager, men kan finnas i annan butik', hide: smode === 'hide' } };
+                 store: { ok: compact() || sb > 0, label: 'Butik', text: compact() ? 'finns i 12 butiker' : sb ? sb + ' st i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK(r) : 'Ej i lager'), hide: smode === 'hide' } };
       }
       /* sticky sm/md: the note stays in the stock list (line 1) and its text wraps onto more lines when the bar is narrow (user decision 2026-11-25; the tried version with the note on its own line is gone). Kept as a function so the sync code needs no change. */
       window.PDP_SPLIT = function (html) { return { main: html, note: '' }; };
@@ -4668,15 +4690,16 @@
       /* Store dimension (Figma store matrix: No store selected / 100 in store / 0 in store): ?store=none|b2b|hide|s0|s100, default = the variant's own Borås stock */
       var smode = new URLSearchParams(location.search).get('store') || '';
       function curRow() { return (window.PDP_VARIANTS || []).filter(function (r) { return r.current; })[0]; }
-      function storeStock(r) { if (smode === 's0') return 0; if (smode === 's100') return 100; if (scn && scn.boras != null) return scn.boras; var c = r || curRow(); return c ? c.boras : 0; }
+      function storeStock(r) { if (smode === 's0') return 0; if (smode === 's100') return 100; if (scn && scn.boras != null && (!window.PDP_STORE || PDP_STORE.name === 'Borås')) return scn.boras;   /* the scenario's store figure is for the default store (Borås); another chosen store uses its own stock */ var c = r || curRow(); return c ? c.boras : 0; }
       function compact() { return smode === 'none' || smode === 'b2b' || !!(scn && scn.storeOnly && smode !== 's100'); }
-      function khParts(sb) {
+      function khParts(sb, row) {
         var w = scn ? scn.web : null, base = 'Via tjänsten Köp &amp; Hämta kan du lägga en order direkt mot önskad butik.';
         if (w && w.drop) return { ok: 0, line: 'Köp &amp; Hämta - Ej tillgänglig', banner: 'Köp och hämta ej tillgänglig. Produkten skickas direkt från leverantörslager.' };
         if (sb > 0) return { ok: 1, line: 'Köp &amp; Hämta - Tillgänglig', banner: base + ' <strong>' + sb + ' i butik</strong>, kan hämtas idag innan kl 17.00' };
         if (scn && (scn.closing || scn.btnOff) && w.n === 0) return { ok: 0, line: 'Köp &amp; Hämta - Ej tillgänglig', banner: 'Köp och hämta ej tillgänglig i vald butik.' };
-        return { ok: 1, line: 'Köp &amp; Hämta - Tillgänglig i butik inom ' + (w && w.n > 0 ? '1-2' : '6-7') + ' arbetsdagar', banner: base };
+        return { ok: 1, line: 'Köp &amp; Hämta - Tillgänglig i butik inom ' + ((w ? w.n : row && row.stock) > 0 ? '1-2' : '6-7') + ' arbetsdagar', banner: base };
       }
+      window.PDP_KH = function (sb, row) { return khParts(sb, row); };   /* Köp & Hämta line + banner for a store stock; drawer cards and page top share it */
       function applyStore(none, storeBlock) {
         var on = !none && (scn || smode) && storeBlock, nm = q('.pdp-stock__store .pdp-stock__name'), tx = q('.pdp-stock__store .pdp-stock__text'), lk = q('#pdp-stores-link .action-link__label'), li = q('#pdp-stores-link'), sub = q('#pdp-store-sub');
         if (nm && tx && lk && !nm.dataset.o) { nm.dataset.o = nm.innerHTML; tx.dataset.o = tx.textContent; lk.dataset.o = lk.textContent; }
@@ -4685,7 +4708,7 @@
         if (!sub && storeBlock) { sub = document.createElement('p'); sub.id = 'pdp-store-sub'; sub.className = 'pdp-stock__checked pdp-stock__sub'; sub.hidden = true; q('#pdp-store-status').after(sub); }
         if (nm && tx && lk) {
           if (cp) { nm.innerHTML = '<span class="icon icon--fill" aria-hidden="true">store</span>Butik'; tx.textContent = 'Produkten finns tillgänglig i 12 butiker.'; lk.textContent = 'Välj butik'; }
-          else if (nm.dataset.o) { nm.innerHTML = nm.dataset.o; tx.textContent = tx.dataset.o; lk.textContent = lk.dataset.o; }
+          else if (nm.dataset.o) { nm.innerHTML = nm.dataset.o; tx.textContent = window.PDP_STORE && window.PDP_HOURS_TEXT ? PDP_HOURS_TEXT(PDP_STORE) : tx.dataset.o; lk.textContent = lk.dataset.o; if (window.PDP_STORE && nm.lastChild) nm.lastChild.textContent = PDP_STORE.name; if (window.PDP_STORES_REFRESH) PDP_STORES_REFRESH(); }   /* the saved original is Borås: put the chosen store and the store count back */
         }
         var ic = li && li.querySelector('[data-so]');
         if (cp && li && !ic) { ic = document.createElement('span'); ic.className = 'action-link__icon'; ic.setAttribute('aria-hidden', 'true'); ic.dataset.so = '1'; ic.textContent = 'download'; li.insertBefore(ic, li.firstChild); } else if (ic && !cp) ic.remove();
@@ -4693,8 +4716,8 @@
         if (!on) return;
         if (storeBlock) storeBlock.hidden = smode === 'hide';
         if (!cp) {
-          var kh = khParts(sb);
-          q('#pdp-store-status').innerHTML = '<li class="pdp-stock__status">' + dot(sb > 0) + '<span>' + (sb ? sb + ' i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li><li class="pdp-stock__status">' + dot(kh.ok) + '<span>' + kh.line + '</span></li>';
+          var kh = khParts(sb, curRow());
+          q('#pdp-store-status').innerHTML = '<li class="pdp-stock__status">' + dot(sb > 0) + '<span>' + (sb ? sb + ' i lager' : (window.PDP_NOSTOCK ? PDP_NOSTOCK() : 'Ej i lager')) + '</span></li><li class="pdp-stock__status">' + dot(kh.ok) + '<span>' + kh.line + '</span></li>';
           if (q('#pdp-banner-text')) q('#pdp-banner-text').innerHTML = kh.banner;
         }
       }
@@ -4727,17 +4750,19 @@
         sn = sn.trim() || 'Borås';
         if (w) { if (!w.hide) m.stock = { text: strip(w.text), state: w.n > 0 || w.drop || w.ok ? 'ok' : (scn.closing || scn.btnOff) ? 'warn' : 'none' }; }
         else if (r) m.stock = r.stock > 0 ? { text: r.stock + ' i lager - Utleverans: nästa arbetsdag', state: 'ok' } : { text: 'Ej i lager', state: 'none' };
-        if (smode !== 'hide' && !compact() && (scn || smode)) { var kh = khParts(sb); m.stock2 = { text: strip(kh.line) + ' (' + sn + ')', state: kh.ok ? 'ok' : 'none' }; }
+        if (smode !== 'hide' && !compact() && (scn || smode)) { var kh = khParts(sb, r); m.stock2 = { text: strip(kh.line) + ' (' + sn + ')', state: kh.ok ? 'ok' : 'none' }; }
         else if (compact() && smode !== 'hide') m.storeHint = true;   /* no store chosen: the cart says so and sends the choice to checkout */
         var pre = scn ? (scn.hazard || (typeof scn.pre === 'string' ? scn.pre : scn.pre && scn.pre.text)) : '';
         if (pre) m.note = strip(pre).split(/(?<=\.)\s/)[0];
         if (scn && scn.hazard) m.noteKind = 'warning';
         if (scn && scn.sup && w && w.n > 0) m.split = { n: w.n, days: scn.sup.days };
         if (scn && scn.closing && w && w.n > 0) m.closingN = w.n;
+        if (window.PDP_STORE) sn = PDP_STORE.name;
         m.store = sn;
+        if (r && window.PDP_STOCK_MAP && smode !== 'hide') { var mp = PDP_STOCK_MAP(r); mp[sn] = sb; m.pick = { map: mp, webN: w ? w.n : r.stock, drop: !!(w && w.drop), gone: !!(scn && scn.closing && w && w.n === 0), storeOnly: !!(scn && scn.storeOnly) }; }   /* Köp & Hämta: the cart chooses home delivery or pickup per row from this */
         return m;
       }
-      window.PDP_MAXQ = function (r) { return withScn(r || curRow(), function () { var m = scn && (r || !document.body.classList.contains('pdp-none')) ? maxQty() : Infinity; return isFinite(m) && m < 999 ? m : 0; }); };
+      window.PDP_MAXQ = function (r) { return withScn(r || curRow(), function () { var m = scn && (r || !document.body.classList.contains('pdp-none')) ? maxQty(r || undefined) : Infinity; return isFinite(m) && m < 999 ? m : 0; }); };
       /* typing more than the limit: the stepper clamps silently, so say it (capture phase: runs before the stepper script) */
       document.addEventListener('change', function (e) {
         var t = e.target; if (!e.isTrusted || !(t.matches && t.matches('.pdp-buy .picker-stepper__input, #sticky-atc .picker-stepper__input, .pv-buy .picker-stepper__input'))) return;   /* only what the user typed: the sync between the fields re-sends the value with scripted events, which gave one toast per field */
