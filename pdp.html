@@ -4104,6 +4104,7 @@
         if (q('#pdp-store-status')) q('#pdp-store-status').innerHTML = '<li class="pdp-stock__status">' + dot(r.boras) + '<span>' + (r.boras ? r.boras + ' st i lager' : 'Ej i lager, men kan finnas i annan butik') + '</span></li>' +
           '<li class="pdp-stock__status">' + dot(1) + '<span>' + (r.boras ? 'Köp &amp; Hämta - Hämta idag innan kl 17.00' : 'Köp &amp; Hämta - Tillgänglig i butik inom 6-7 arbetsdagar') + '</span></li>';
         if (q('#pdp-banner-text')) q('#pdp-banner-text').innerHTML = 'Via tjänsten Köp &amp; Hämta kan du lägga en order direkt mot önskad butik. ' + (r.boras ? '<strong>' + r.boras + ' i butik</strong>, kan hämtas idag innan kl 17.00' : '<strong>0 i butik</strong>, tillgänglig i butik inom 6-7 arbetsdagar');
+        if (window.PDP_SYNC_SCN) PDP_SYNC_SCN();
         if (window.PDP_APPLY_SCN) PDP_APPLY_SCN();
         if (q('#pdp-variant-live')) q('#pdp-variant-live').textContent = 'Variant ' + r.size + ' vald, artikelnummer ' + r.art;
         render();
@@ -4777,12 +4778,15 @@
         else { if (e.target.value) u.searchParams.set('scenario', e.target.value); u.searchParams.set('variant', (curRow() || window.PDP_VARIANTS[1]).art); }
         location.href = u.href;
       });
+      /* a variant chosen in the table, cards or size drawer updates the dropdown (no reload); choosing a variant ends a forced scenario (?scenario=): the variant's own scenario applies again */
+      window.PDP_SYNC_SCN = function () { key = ''; var r = curRow(); sw.querySelector('select').value = (r && VS[r.size]) || ''; };
       var SM = { '': 'Butik: vald, variantens lager', 's100': 'Butik: vald, i lager', 's0': 'Butik: vald, slut', 'none': 'Butik: ingen vald', 'b2b': 'Butik: företag, förbestämd', 'hide': 'Butik: dold (inloggad kund)' };
       var sw2 = document.createElement('select'); sw2.setAttribute('aria-label', 'Butiksläge'); sw2.innerHTML = Object.keys(SM).map(function (k) { return '<option value="' + k + '"' + (k === smode ? ' selected' : '') + '>' + SM[k] + '</option>'; }).join('');
       sw2.addEventListener('change', function (e) { var u = new URL(location.href); if (e.target.value) u.searchParams.set('store', e.target.value); else u.searchParams.delete('store'); u.searchParams.set('variant', (window.PDP_VARIANTS.filter(function (r) { return r.current; })[0] || window.PDP_VARIANTS[1]).art); location.href = u.href; });
       sw.appendChild(sw2);
       document.body.appendChild(sw);
       apply();
+      if (!key) { var r0 = curRow(); if (r0) sw.querySelector('select').value = VS[r0.size] || ''; }   /* variant from ?variant= on load */
       if (window.PDP_RENDER) PDP_RENDER();   /* the variant table and cards read the scenario */
       if (mainQty()) mainQty().dispatchEvent(new Event('change', { bubbles: true }));   /* the sticky bar reads the scenario */
     })();
